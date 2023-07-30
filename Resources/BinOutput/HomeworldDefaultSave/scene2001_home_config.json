@@ -1,105 +1,105 @@
 {
-    "KFHBFNPDJBE": [
+    "homeBlockLists": [
         {
-            "FGIJCELCGFI": 1,
-            "BEAPOFELABD": [
+            "blockId": 1,
+            "furnitures": [
                 {
-                    "ENHNGKJBJAB": 3750102,
-                    "NGIEEIOLPPO": {
-                        "_x": 800.5,
-                        "_y": 318.1564025878906,
-                        "_z": 124.0
+                    "id": 3750102,
+                    "pos": {
+                        "x": 800.5,
+                        "y": 318.1564025878906,
+                        "z": 124.0
                     },
-                    "HEOCEHKEBFM": {
-                        "_y": 188.15536499023438
+                    "rot": {
+                        "y": 188.15536499023438
                     },
-                    "EBKJPIEAJKB": 0
+                    "parentFurnitureIndex": 0
                 }
             ],
-            "OAMAFGAEPLH": [
+            "weekendDjinnInfoList": [
                 {
                     "pos": {
-                        "_x": 792.0,
-                        "_y": 316.70001220703125,
-                        "_z": 192.0
+                        "x": 792.0,
+                        "y": 316.70001220703125,
+                        "z": 192.0
                     },
                     "rot": {
-                        "_y": 176.0
+                        "y": 176.0
                     }
                 }
             ]
         },
         {
-            "FGIJCELCGFI": 2,
-            "OAMAFGAEPLH": [
+            "blockId": 2,
+            "weekendDjinnInfoList": [
                 {
                     "pos": {
-                        "_x": 740.0,
-                        "_y": 341.0,
-                        "_z": 311.0
+                        "x": 740.0,
+                        "y": 341.0,
+                        "z": 311.0
                     },
                     "rot": {
-                        "_y": 31.0
+                        "y": 31.0
                     }
                 }
             ]
         },
         {
-            "FGIJCELCGFI": 3,
-            "OAMAFGAEPLH": [
+            "blockId": 3,
+            "weekendDjinnInfoList": [
                 {
                     "pos": {
-                        "_x": 673.0,
-                        "_y": 411.6000061035156,
-                        "_z": 551.0
+                        "x": 673.0,
+                        "y": 411.6000061035156,
+                        "z": 551.0
                     },
                     "rot": {
-                        "_y": 36.0
+                        "y": 36.0
                     }
                 }
             ]
         },
         {
-            "FGIJCELCGFI": 4,
-            "OAMAFGAEPLH": [
+            "blockId": 4,
+            "weekendDjinnInfoList": [
                 {
                     "pos": {
-                        "_x": 256.0,
-                        "_y": 524.2000122070312,
-                        "_z": 766.0
+                        "x": 256.0,
+                        "y": 524.2000122070312,
+                        "z": 766.0
                     },
                     "rot": {
-                        "_y": -55.0
+                        "y": -55.0
                     }
                 }
             ]
         }
     ],
-    "FEDAOJMDBHN": true,
-    "IJNPADKGNKE": {
-        "_x": 798.4270629882812,
-        "_y": 319.326416015625,
-        "_z": 108.68922424316406
+    "isSetBornPos": true,
+    "bornPos": {
+        "x": 798.4270629882812,
+        "y": 319.326416015625,
+        "z": 108.68922424316406
     },
-    "IPIIGEMFLHK": {
-        "_y": 188.15536499023438
+    "bornRot": {
+        "y": 188.15536499023438
     },
-    "KNHCJKHCOAN": {
-        "ENHNGKJBJAB": 3750102,
-        "NGIEEIOLPPO": {
-            "_x": 800.5,
-            "_y": 318.1564025878906,
-            "_z": 124.0
+    "mainhouse": {
+        "id": 3750102,
+        "pos": {
+            "x": 800.5,
+            "y": 318.1564025878906,
+            "z": 124.0
         },
-        "HEOCEHKEBFM": {
-            "_y": 188.15536499023438
+        "rot": {
+            "y": 188.15536499023438
         },
-        "EBKJPIEAJKB": 1
+        "parentFurnitureIndex": 1
     },
-    "HHOLBNPIHEM": {
-        "_x": 795.6785278320312,
-        "_y": 319.6763916015625,
-        "_z": 110.16404724121094
+    "djinPos": {
+        "x": 795.6785278320312,
+        "y": 319.6763916015625,
+        "z": 110.16404724121094
     },
-    "GLBBIJLNNEE": 2
+    "tmpVersion": 2
 }
