@@ -1,8 +1,8 @@
 const path = require("path");
 const fs = require("fs");
 
-const get_excel = path.join(__dirname, "AllExcel/3.7");
-const found_excel = path.join(__dirname, "FoundExcel/3.7");
+const get_excel = path.join(__dirname, "AllExcel/4.0");
+const found_excel = path.join(__dirname, "FoundExcel/4.0");
 
 fs.readdir(get_excel, function (err, files) {
   if (err) {

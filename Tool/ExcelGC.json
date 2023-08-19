@@ -24,7 +24,7 @@
   },
   {
     "name": "StatuePromoteExcelConfigData.json",
-    "comment": "Levelup City Implementation (by Phong940253)"
+    "comment": "Levelup City Implementation (by Phong940253), miss 4.0"
   },
   {
     "name": "TrialAvatarActivityExcelConfigData.json",
@@ -64,7 +64,7 @@
   },
   {
     "name": "DropTableExcelConfigData.json",
-    "comment": "(NoSuchFileException), use folder Server, it's not in original repo"
+    "comment": "(NoSuchFileException), use folder Server, it's not in original repo, miss 4.0"
   },
   {
     "name": "GatherExcelConfigData.json",
@@ -72,7 +72,7 @@
   },
   {
     "name": "DropSubTableExcelConfigData.json",
-    "comment": "why miss? use 3.6 data"
+    "comment": "why miss? use 3.6 data, idk why need copy manual"
   },
   {
     "name": "HomeWorldBgmExcelConfigData.json",
@@ -84,7 +84,15 @@
   },
   {
     "name": "DropMaterialExcelConfigData.json",
-    "comment": "(NoSuchFileException), use folder Server, it's not in original repo"
+    "comment": "(NoSuchFileException), use folder Server, it's not in original repo, miss 4.0"
+  },
+  {
+    "name": "CombineBonusExcelConfigData.json",
+    "comment": "4.0, idk why not found"
+  },
+  {
+    "name": "MonsterAffixExcelConfigData.json",
+    "comment": "4.0, idk why not found"
   },
   {
     "name": "AvatarSkillExcelConfigData.json",
