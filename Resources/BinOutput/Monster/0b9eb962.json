@@ -480,10 +480,10 @@
       "resistTauntLevel": "Monster_TauntLevel_4",
       "auxScoreChangeTargetCD": 0.10000000149011612,
       "abilityGlobalValueScoreSystem": {
-        "enable": true,
         "weight": 9999,
         "max": 2.0,
         "compareOperation": "Greater",
+        "enable": true,
         "caredGlobalValueName": "_MONSTER_PLANELURKER_SUMMONHOUNDTAG_"
       }
     },
@@ -535,6 +535,7 @@
         },
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Alert"],
         "skillQueryingTime": 3.5,
         "flagTargetReachable": "10",
@@ -552,6 +553,7 @@
         "cd": 15.0,
         "cdUpperRange": 5.0,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["FireEnergy"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "11",
@@ -567,6 +569,7 @@
           "pickRangeMin": 25.0
         },
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["FireEnergy"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "11",
@@ -583,6 +586,7 @@
           "pickRangeYMin": 5.0
         },
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["FireEnergy"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "11",
@@ -601,6 +605,7 @@
         "initialCD": 20.0,
         "publicCDGroup": "",
         "skillGroupCDID": 4,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["FireEnergy"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "11",
@@ -620,6 +625,7 @@
         "cdUpperRange": 5.0,
         "initialCD": 20.0,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["FireEnergy"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "11",
@@ -638,6 +644,7 @@
         "cd": 17.5,
         "cdUpperRange": 5.0,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Swap"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "10",
@@ -655,6 +662,7 @@
         "initialCD": 3.0,
         "publicCDGroup": "",
         "HOMLKLFDOKH": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["SummonHoundBS", "SummonHound"],
         "skillQueryingTime": 4.0,
         "flagTargetReachable": "10",
@@ -673,6 +681,7 @@
         "cd": 17.5,
         "cdUpperRange": 5.0,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["OnGroundChargeBS", "OnGroundCharge"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "10",
@@ -692,6 +701,7 @@
         "initialCD": 20.0,
         "publicCDGroup": "",
         "skillGroupCDID": 2,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RockBreath"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "10",
@@ -711,6 +721,7 @@
         "initialCD": 20.0,
         "publicCDGroup": "",
         "skillGroupCDID": 2,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RockBreath", "Swap"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "10",
@@ -730,6 +741,7 @@
         "initialCD": 20.0,
         "publicCDGroup": "",
         "skillGroupCDID": 2,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RockBreath"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "10",
@@ -749,6 +761,7 @@
         "initialCD": 20.0,
         "publicCDGroup": "",
         "skillGroupCDID": 4,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RockBreath"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "10",
@@ -769,6 +782,7 @@
         "initialCD": 25.0,
         "initialCDUpperRange": 7.5,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "DeathTornadoBS",
           "DeathTornadoLoop",
@@ -793,6 +807,7 @@
         "initialCD": 57.5,
         "initialCDUpperRange": 5.0,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "DeathTornadoBS",
           "DeathTornadoLoop",
@@ -819,6 +834,7 @@
         "initialCDUpperRange": 5.0,
         "publicCDGroup": "",
         "skillGroupCDID": 3,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ElementalBurst"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "10",
@@ -839,6 +855,7 @@
         "initialCD": 10.0,
         "publicCDGroup": "",
         "skillGroupCDID": 3,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ElementalBurst"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "10",
@@ -857,6 +874,7 @@
         "cdUpperRange": 5.0,
         "initialCD": 5.0,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ElementalBurst"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "10",
@@ -875,6 +893,7 @@
         "cdUpperRange": 15.0,
         "initialCD": 10.0,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ElementalBurst"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "10",
@@ -891,6 +910,7 @@
         "cdUpperRange": 15.0,
         "initialCD": 999999.0,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Weak"],
         "skillQueryingTime": 2.5,
         "flagTargetReachable": "10",
@@ -900,14 +920,19 @@
       }
     },
     "skillGCD": 0.5,
-    "returnToBornTactic": {
-      "enable": true,
-      "defaultSetting": {
-        "speedLevel": 0,
-        "fadeoutBeginTime": 1.0,
-        "fadeoutEndTime": 5.75
+    "combatFixedMoveTactic": [
+      {
+        "$type": "GJGILIGEJMO",
+        "enable": true,
+        "defaultSetting": {
+          "speedLevel": 0,
+          "fadeoutBeginTime": 1.0,
+          "fadeoutEndTime": 5.75,
+          "FCFLCFFJKLO": "",
+          "BKCOJDIDEGN": ""
+        }
       }
-    }
+    ]
   },
   "inputKeys": [
     {
@@ -963,27 +988,28 @@
     },
     "JBMEJFICKCK": true,
     "NPDGPNFCOPI": false,
-    "GLHELMHJCDA": true
+    "GLHELMHJCDA": true,
+    "LPAKBBIADNC": "RootNode"
   },
   "cameraAdjust": {
     "default": {
       "$type": "LEACENCFDHG",
       "priority": 1.0,
       "LHHABPAOPNK": 10.0,
-      "JJGKEGBHGJL": 65.0,
-      "BBBIJABMHLH": 1.0,
-      "NANMFGHBACH": 52.5,
-      "FMLELPIHIPP": 8.0,
-      "PNHBKGDJCNJ": -5.0,
-      "JFIDJKPKEBP": false,
-      "NAOGLDNJPDH": 30.0,
-      "IHCMGDDAOFJ": 20.0,
-      "FNNDCOJEGEB": 25.0,
-      "AECBNPJEMGK": 30.0,
-      "DKPAJDPNFAL": 55.0,
-      "OPLKFDAMLCP": 60.0,
-      "BEEPGHCGFAN": "CircleR10",
-      "GFKCBMBABDO": "CircleR65"
+      "OEFDKGHGFOF": 65.0,
+      "NHCPBJMKJFD": 1.0,
+      "FHGOFJGGPPH": 52.5,
+      "LFPMADFBMMD": 8.0,
+      "PNPIIBEIKLC": -5.0,
+      "FFBIAKHMFCM": false,
+      "AABCBFLFOOC": 30.0,
+      "FCEMCMPDACC": 20.0,
+      "FMIFMBHNLGN": 25.0,
+      "EHPJLOAAGGD": 30.0,
+      "GBIIHFCMCNA": 55.0,
+      "EPJDLHHOCFF": 60.0,
+      "KDLPBJIAALA": "CircleR10",
+      "KLHLNABBJME": "CircleR65"
     }
   }
 }

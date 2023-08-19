@@ -21,7 +21,7 @@
   },
   "dither": {
     "normalBetweenCamera": {},
-    "NELMACAHAGD": true
+    "HEANNOHJJJI": true
   },
   "combat": {
     "property": {
@@ -91,7 +91,7 @@
     "animEvents": {
       "LaSignora_Harbinger_LashAtkNear": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
             "$type": "ConfigBornBySelf",
@@ -115,9 +115,10 @@
             "damagePercentage": 0.5,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Fire",
-            "bonusCriticalHurt": 30.0,
+            "bonusCritical": 30.0,
             "strikeType": "Blunt",
-            "enBreak": 5000.0
+            "enBreak": 5000.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -128,7 +129,7 @@
       },
       "LaSignora_Harbinger_LashAtkFar": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
             "$type": "ConfigBornBySelf",
@@ -152,9 +153,10 @@
             "damagePercentage": 0.5,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Fire",
-            "bonusCriticalHurt": 30.0,
+            "bonusCritical": 30.0,
             "strikeType": "Blunt",
-            "enBreak": 5000.0
+            "enBreak": 5000.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -183,9 +185,10 @@
             "damagePercentage": 0.5,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Fire",
-            "bonusCriticalHurt": 30.0,
+            "bonusCritical": 30.0,
             "strikeType": "Blunt",
-            "enBreak": 5000.0
+            "enBreak": 5000.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -217,9 +220,10 @@
             "damagePercentage": 0.5,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Fire",
-            "bonusCriticalHurt": 30.0,
+            "bonusCritical": 30.0,
             "strikeType": "Blunt",
-            "enBreak": 5000.0
+            "enBreak": 5000.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -240,9 +244,9 @@
               "y": 0.0,
               "z": -4.5
             },
-            "FACALEEMIKJ": {
-              "$type": "FFCGNDPOEGG",
-              "JMADJAJODCO": {
+            "GDHMBIJKMEF": {
+              "$type": "CDPGFBADOIA",
+              "PKNBBHPAKCG": {
                 "x": 0.0,
                 "y": 30.0,
                 "z": 0.0
@@ -262,9 +266,10 @@
             "damagePercentage": 0.5,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Fire",
-            "bonusCriticalHurt": 30.0,
+            "bonusCritical": 30.0,
             "strikeType": "Blunt",
-            "enBreak": 5000.0
+            "enBreak": 5000.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -284,9 +289,9 @@
               "y": 0.0,
               "z": -1.5
             },
-            "FACALEEMIKJ": {
-              "$type": "FFCGNDPOEGG",
-              "JMADJAJODCO": {
+            "GDHMBIJKMEF": {
+              "$type": "CDPGFBADOIA",
+              "PKNBBHPAKCG": {
                 "x": 0.0,
                 "y": -30.0,
                 "z": 0.0
@@ -306,9 +311,10 @@
             "damagePercentage": 0.5,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Fire",
-            "bonusCriticalHurt": 30.0,
+            "bonusCritical": 30.0,
             "strikeType": "Blunt",
-            "enBreak": 5000.0
+            "enBreak": 5000.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -778,6 +784,7 @@
         },
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "LashAtkBSN",
           "LashAtkBSLRN",
@@ -799,6 +806,7 @@
         },
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "LashAtkBSN",
           "LashAtkBSLRN",
@@ -823,6 +831,7 @@
         "cdUpperRange": 7.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["LashImpulseF", "LashImpulseAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -841,6 +850,7 @@
         "cdUpperRange": 5.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["LashImpulseB", "LashImpulseAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -862,6 +872,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 240,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["LashAtkTwice", "LashAtkTwiceAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -884,6 +895,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 240,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["LashAtkTwice", "LashAtkTwiceAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -904,6 +916,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 240,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["LashAtkTwice", "LashAtkTwiceAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -923,6 +936,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 300,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["FrameWave"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -942,6 +956,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 300,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["FrameWave"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -963,6 +978,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 310,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["EarthShake", "EarthShakeAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -985,6 +1001,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 310,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["EarthShake", "EarthShakeAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1005,6 +1022,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 310,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["EarthShake", "EarthShakeAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1024,6 +1042,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 320,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RushMoveBS", "RushMove", "RushMoveAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1042,6 +1061,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 330,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RushMoveBS", "RushMove", "RushMoveAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1060,6 +1080,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 330,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RushMoveBS", "RushMove", "RushMoveAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1080,6 +1101,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 320,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RushMoveBS", "RushMove", "RushMoveAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1100,6 +1122,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 330,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RushMoveBS", "RushMove", "RushMoveAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1117,6 +1140,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 330,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RushMoveBS", "RushMove", "RushMoveAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1136,6 +1160,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 400,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["FuryBS", "Fury", "FuryAS", "FrameSeeker"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1156,6 +1181,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 400,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["FuryBS", "Fury", "FuryAS", "FrameSeeker"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1174,6 +1200,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 400,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["FuryBS", "Fury", "FuryAS", "FrameSeeker"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1193,6 +1220,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 400,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "RushMoveBS",
           "RushMove",
@@ -1221,6 +1249,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 400,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "RushMoveBS",
           "RushMove",
@@ -1247,6 +1276,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 400,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "RushMoveBS",
           "RushMove",
@@ -1274,6 +1304,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 450,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["MagmaCurtain", "FrameSeeker"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -1294,6 +1325,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 450,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "RushMoveBS",
           "RushMove",
@@ -1319,6 +1351,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 500,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "TornadoBS",
           "TornadoLoopBS",
@@ -1345,6 +1378,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 500,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "TornadoBS",
           "TornadoLoopBS",
@@ -1369,6 +1403,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 500,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "TornadoBS",
           "TornadoLoopBS",
@@ -1394,6 +1429,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 500,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "RushMoveBS",
           "RushMove",
@@ -1423,6 +1459,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 500,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "RushMoveBS",
           "RushMove",
@@ -1450,6 +1487,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 500,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "RushMoveBS",
           "RushMove",
@@ -1467,9 +1505,12 @@
       }
     },
     "skillGCD": 3.0,
-    "returnToBornTactic": {
-      "enable": true
-    }
+    "combatFixedMoveTactic": [
+      {
+        "$type": "GJGILIGEJMO",
+        "enable": true
+      }
+    ]
   },
   "inputKeys": [
     {
@@ -1544,6 +1585,7 @@
       ]
     },
     "NPIIMMNHGIM": "None",
-    "GLHELMHJCDA": true
+    "GLHELMHJCDA": true,
+    "LPAKBBIADNC": "RootNode"
   }
 }

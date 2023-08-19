@@ -16,8 +16,8 @@
   "headControl": {
     "$type": "CCPANGHECMF",
     "useHeadControl": true,
-    "FENNMBOFDEC": 35.0,
-    "NOLJNGPPCHB": 10.0,
+    "BADCMJGBCHM": 35.0,
+    "AIOGIMNHIGK": 10.0,
     "DOKDABBOIFA": ["NormalIdle", "NormalMove/WalkL", "NormalMove/WalkR"]
   },
   "model": {
@@ -55,7 +55,7 @@
       "JFGNMBLBJEO": true,
       "NMDIGLHJOIH": true,
       "HOFJPBPLDIJ": true,
-      "FHOHJGMDDFG": false
+      "PEFOGLJDMPN": false
     },
     "animEvents": {
       "Monster_Shougun_MultiAtk01_Pole": {
@@ -81,9 +81,10 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 60.0
+            "enBreak": 60.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -116,9 +117,10 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 60.0
+            "enBreak": 60.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -151,9 +153,10 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 999999.0
+            "enBreak": 999999.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -196,9 +199,10 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Blunt",
-            "enBreak": 100.0
+            "enBreak": 100.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -242,9 +246,10 @@
             "damagePercentage": 0.25,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 100.0
+            "enBreak": 100.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -287,9 +292,10 @@
             "damagePercentage": 0.25,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 200.0
+            "enBreak": 200.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -310,10 +316,10 @@
       },
       "Monster_Shougun_RushAtk01": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
-            "$type": "OPOAHPBLGFG",
+            "$type": "EOGLEDIIGHF",
             "offset": {
               "x": 0.0,
               "y": 1.5,
@@ -334,9 +340,10 @@
             "damagePercentage": 0.08299999684095383,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 60.0
+            "enBreak": 60.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -369,9 +376,10 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 60.0
+            "enBreak": 60.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -404,9 +412,10 @@
             "damagePercentage": 0.25,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 200.0
+            "enBreak": 200.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -448,9 +457,10 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Blunt",
-            "enBreak": 999999.0
+            "enBreak": 999999.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -493,9 +503,10 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 100.0
+            "enBreak": 100.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -529,9 +540,10 @@
             "damagePercentage": 0.3330000042915344,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 200.0
+            "enBreak": 200.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -575,9 +587,10 @@
             "damagePercentage": 0.08299999684095383,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 50.0
+            "enBreak": 50.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -588,18 +601,18 @@
       },
       "Monster_Shougun_NormalAtk02_Tachi": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
-            "$type": "OPOAHPBLGFG",
+            "$type": "EOGLEDIIGHF",
             "offset": {
               "x": -0.02500000037252903,
               "y": 0.0,
               "z": 0.0
             },
-            "FACALEEMIKJ": {
-              "$type": "NJPCBGIJLLM",
-              "JMADJAJODCO": {
+            "GDHMBIJKMEF": {
+              "$type": "DFEHJKCDGHN",
+              "PKNBBHPAKCG": {
                 "x": 0.0,
                 "y": -5.0,
                 "z": 0.0
@@ -620,9 +633,10 @@
             "damagePercentage": 0.08299999684095383,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 60.0
+            "enBreak": 60.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -633,10 +647,10 @@
       },
       "Monster_Shougun_NormalAtk03_Tachi": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
-            "$type": "OPOAHPBLGFG",
+            "$type": "EOGLEDIIGHF",
             "offset": {
               "x": 0.0,
               "y": 2.0,
@@ -657,16 +671,17 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 100.0
+            "enBreak": 100.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
             "hitImpulseType": "LV3",
             "overrideHitImpulse": {
               "hitLevel": "Heavy",
-              "IDBIEBFJKNL": 1000.0,
+              "BLHKKKALNDK": 1000.0,
               "hitImpulseY": 0.0
             },
             "hitHaltTimeScale": 0.009999999776482582
@@ -685,18 +700,18 @@
       },
       "Monster_Shougun_NormalAtk04_Tachi": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
-            "$type": "OPOAHPBLGFG",
+            "$type": "EOGLEDIIGHF",
             "offset": {
               "x": -1.75,
               "y": 1.5,
               "z": -2.0
             },
-            "FACALEEMIKJ": {
-              "$type": "NJPCBGIJLLM",
-              "JMADJAJODCO": {
+            "GDHMBIJKMEF": {
+              "$type": "DFEHJKCDGHN",
+              "PKNBBHPAKCG": {
                 "x": 0.0,
                 "y": 45.0,
                 "z": 0.0
@@ -717,16 +732,17 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 200.0
+            "enBreak": 200.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
             "hitImpulseType": "",
             "overrideHitImpulse": {
               "hitLevel": "Air",
-              "IDBIEBFJKNL": 1000.0,
+              "BLHKKKALNDK": 1000.0,
               "hitImpulseY": 360.0
             },
             "hitHaltTimeScale": 0.009999999776482582
@@ -745,7 +761,7 @@
       },
       "Monster_Shougun_NormalAtk04_Rush_Tachi": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
             "$type": "ConfigBornBySelf",
@@ -769,16 +785,17 @@
             "damagePercentage": 0.08299999684095383,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 999999.0
+            "enBreak": 999999.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
             "hitImpulseType": "",
             "overrideHitImpulse": {
               "hitLevel": "Air",
-              "IDBIEBFJKNL": 1000.0,
+              "BLHKKKALNDK": 1000.0,
               "hitImpulseY": 480.0
             },
             "retreatType": "ByHitDirection",
@@ -788,10 +805,10 @@
       },
       "Monster_Shougun_NormalAtk05_Tachi": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
-            "$type": "OPOAHPBLGFG",
+            "$type": "EOGLEDIIGHF",
             "offset": {
               "x": 0.0,
               "y": 2.5,
@@ -812,9 +829,10 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 200.0
+            "enBreak": 200.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -836,10 +854,10 @@
       },
       "Monster_Shougun_NormalAtk05_Rush_Tachi": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
-            "$type": "OPOAHPBLGFG",
+            "$type": "EOGLEDIIGHF",
             "offset": {
               "x": 0.0,
               "y": 1.0,
@@ -860,9 +878,10 @@
             "damagePercentage": 0.08299999684095383,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 200.0
+            "enBreak": 200.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -895,9 +914,10 @@
             "damagePercentage": 0.5,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 200.0
+            "enBreak": 200.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -939,9 +959,10 @@
             "damagePercentage": 0.08299999684095383,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 999999.0
+            "enBreak": 999999.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -974,9 +995,10 @@
             "damagePercentage": 0.5830000042915344,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 999999.0
+            "enBreak": 999999.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -1018,9 +1040,10 @@
             "damagePercentage": 0.08299999684095383,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 50.0
+            "enBreak": 50.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -1032,10 +1055,10 @@
       },
       "Monster_Shougun_Dodge02_Tachi": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
-            "$type": "OPOAHPBLGFG",
+            "$type": "EOGLEDIIGHF",
             "offset": {
               "x": 0.0,
               "y": 1.5,
@@ -1056,9 +1079,10 @@
             "damagePercentage": 0.08299999684095383,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Slash",
-            "enBreak": 100.0
+            "enBreak": 100.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -1091,9 +1115,10 @@
             "damagePercentage": 0.3330000042915344,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 200.0
+            "enBreak": 200.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -1114,10 +1139,10 @@
       },
       "Monster_Shougun_DefendAtk_Tachi_01": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
-            "$type": "OPOAHPBLGFG",
+            "$type": "EOGLEDIIGHF",
             "offset": {
               "x": 0.0,
               "y": 1.5,
@@ -1138,16 +1163,17 @@
             "damagePercentage": 0.3330000042915344,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Blunt",
-            "enBreak": 999999.0
+            "enBreak": 999999.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
             "hitImpulseType": "",
             "overrideHitImpulse": {
               "hitLevel": "Air",
-              "IDBIEBFJKNL": 0.0,
+              "BLHKKKALNDK": 0.0,
               "hitImpulseY": 600.0
             },
             "hitHaltTimeScale": 0.009999999776482582
@@ -1166,10 +1192,10 @@
       },
       "Monster_Shougun_DefendAtk_Tachi_02": {
         "attackPattern": {
-          "$type": "CCFPHKOOMAK",
+          "$type": "GGBJACPDDCM",
           "triggerType": "TriggerNoRepeat",
           "born": {
-            "$type": "OPOAHPBLGFG",
+            "$type": "EOGLEDIIGHF",
             "offset": {
               "x": 0.0,
               "y": 1.5,
@@ -1190,9 +1216,10 @@
             "damagePercentage": 0.08299999684095383,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Blunt",
-            "enBreak": 50.0
+            "enBreak": 50.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -1224,9 +1251,10 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Blunt",
-            "enBreak": 999999.0
+            "enBreak": 999999.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -1270,9 +1298,10 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 100.0
+            "enBreak": 100.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -1292,9 +1321,9 @@
               "y": 0.0,
               "z": 0.0
             },
-            "FACALEEMIKJ": {
-              "$type": "NJPCBGIJLLM",
-              "JMADJAJODCO": {
+            "GDHMBIJKMEF": {
+              "$type": "DFEHJKCDGHN",
+              "PKNBBHPAKCG": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
@@ -1313,9 +1342,10 @@
             "damagePercentage": 0.25,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 100.0
+            "enBreak": 100.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -1335,10 +1365,10 @@
               "y": 0.0,
               "z": 0.0
             },
-            "FACALEEMIKJ": {
-              "$type": "ALFGOPJFCJK",
+            "GDHMBIJKMEF": {
+              "$type": "CAMHJDKCEOP",
               "attachPointName": "RushAtkDIR",
-              "LGGCKHEMLBD": "Self"
+              "BKOJLOPLKJE": "Self"
             }
           },
           "height": 3.0,
@@ -1353,9 +1383,10 @@
             "damagePercentage": 0.16599999368190765,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 100.0
+            "enBreak": 100.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -1386,9 +1417,9 @@
               "y": 0.0,
               "z": 4.0
             },
-            "FACALEEMIKJ": {
-              "$type": "NJPCBGIJLLM",
-              "JMADJAJODCO": {
+            "GDHMBIJKMEF": {
+              "$type": "DFEHJKCDGHN",
+              "PKNBBHPAKCG": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
@@ -1405,9 +1436,10 @@
             "damagePercentage": 0.08299999684095383,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 50.0
+            "enBreak": 50.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -1427,9 +1459,9 @@
               "y": 0.0,
               "z": 4.0
             },
-            "FACALEEMIKJ": {
-              "$type": "NJPCBGIJLLM",
-              "JMADJAJODCO": {
+            "GDHMBIJKMEF": {
+              "$type": "DFEHJKCDGHN",
+              "PKNBBHPAKCG": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
@@ -1446,9 +1478,10 @@
             "damagePercentage": 0.3330000042915344,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 200.0
+            "enBreak": 200.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -1490,9 +1523,10 @@
             "damagePercentage": 0.5,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Electric",
-            "bonusCriticalHurt": 25.0,
+            "bonusCritical": 25.0,
             "strikeType": "Slash",
-            "enBreak": 200.0
+            "enBreak": 200.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -2764,6 +2798,7 @@
         "cdUpperRange": 2.5,
         "publicCDGroup": "",
         "skillGroupCDID": 1,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["MultiAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -2778,12 +2813,13 @@
           "maxTargetAngleXZ": 90.0,
           "pickRangeMin": 7.5,
           "SkillAnchorRangeMax": 25.0,
-          "EDKNFNFEDAH": 27.5
+          "HHHELCLGPJO": 27.5
         },
         "cd": 22.5,
         "cdUpperRange": 5.0,
         "publicCDGroup": "",
         "skillGroupCDID": 1,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Blink", "MultiAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -2798,7 +2834,7 @@
           "maxTargetAngleXZ": 90.0,
           "pickRangeMin": 7.5,
           "SkillAnchorRangeMax": 25.0,
-          "EDKNFNFEDAH": 27.5
+          "HHHELCLGPJO": 27.5
         },
         "cd": 35.0,
         "cdUpperRange": 15.0,
@@ -2806,6 +2842,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 1,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Blink", "MultiAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -2825,6 +2862,7 @@
         "cd": 5.0,
         "cdUpperRange": 2.5,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ExtraAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -2844,6 +2882,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 4,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Blink"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -2862,6 +2901,7 @@
         "cdUpperRange": 7.5,
         "publicCDGroup": "",
         "skillGroupCDID": 4,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Blink"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -2883,6 +2923,7 @@
         "ignoreGCD": true,
         "triggerGCD": false,
         "skillGroupCDID": 4,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Blink"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -2903,6 +2944,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 4,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Blink"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -2922,6 +2964,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "HOMLKLFDOKH": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ReturnToBorn"],
         "flagTargetReachable": "11",
         "flagSelfOnTemplateCollider": "11",
@@ -2942,6 +2985,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 5,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["BackAtk", "BackAtkR"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -2962,6 +3006,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 5,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["BackAtk", "BackAtkR"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -2982,6 +3027,7 @@
         "cd": 10.0,
         "cdUpperRange": 7.5,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RushAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -2999,6 +3045,7 @@
         "cdUpperRange": 5.0,
         "publicCDGroup": "",
         "skillGroupCDID": 2,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["AreaAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3013,7 +3060,7 @@
           "maxTargetAngleXZ": 90.0,
           "pickRangeMin": 9.0,
           "SkillAnchorRangeMax": 25.0,
-          "EDKNFNFEDAH": 27.5
+          "HHHELCLGPJO": 27.5
         },
         "cd": 17.5,
         "cdUpperRange": 7.5,
@@ -3021,6 +3068,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 2,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Blink", "AreaAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3042,6 +3090,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 7,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ElectricBurst"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3064,6 +3113,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 7,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ReturnToBorn", "ElectricBurst"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3085,6 +3135,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 32,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ElectricBurst"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3107,6 +3158,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 32,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ReturnToBorn", "ElectricBurst"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3128,6 +3180,7 @@
         "initialCDUpperRange": 2.5,
         "publicCDGroup": "",
         "skillGroupCDID": 19,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["CreateElectricEye"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3150,6 +3203,7 @@
         "initialCDUpperRange": 2.5,
         "publicCDGroup": "",
         "skillGroupCDID": 19,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ReturnToBorn", "CreateElectricEye"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3171,6 +3225,7 @@
         "initialCDUpperRange": 5.0,
         "publicCDGroup": "",
         "skillGroupCDID": 30,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["CreateElectricEye"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3193,6 +3248,7 @@
         "initialCDUpperRange": 5.0,
         "publicCDGroup": "",
         "skillGroupCDID": 30,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ReturnToBorn", "CreateElectricEye"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3214,6 +3270,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ChangeWeaponToTachi"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3232,6 +3289,7 @@
         "ignoreGCD": true,
         "triggerGCD": false,
         "HOMLKLFDOKH": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ChangeWeaponToTachi"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3253,6 +3311,7 @@
         "ignoreGCD": true,
         "triggerGCD": false,
         "HOMLKLFDOKH": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Transform"],
         "skillQueryingTime": 5.0,
         "flagTargetReachable": "10",
@@ -3273,6 +3332,7 @@
         "ignoreGCD": true,
         "triggerGCD": false,
         "HOMLKLFDOKH": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Transform"],
         "skillQueryingTime": 5.0,
         "flagTargetReachable": "10",
@@ -3292,6 +3352,7 @@
         "cdUpperRange": 2.5,
         "publicCDGroup": "",
         "skillGroupCDID": 1,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "NormalAtk_Combo01_Tachi",
           "NormalAtk_Combo02_Tachi",
@@ -3317,6 +3378,7 @@
         "initialCDUpperRange": 2.5,
         "publicCDGroup": "",
         "skillGroupCDID": 20,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["EchoMist"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3339,6 +3401,7 @@
         "initialCDUpperRange": 2.5,
         "publicCDGroup": "",
         "skillGroupCDID": 20,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["EchoMist", "ReturnToBorn_Tachi"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3360,6 +3423,7 @@
         "initialCDUpperRange": 5.0,
         "publicCDGroup": "",
         "skillGroupCDID": 31,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["EchoMist"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3382,6 +3446,7 @@
         "initialCDUpperRange": 5.0,
         "publicCDGroup": "",
         "skillGroupCDID": 31,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["EchoMist", "ReturnToBorn_Tachi"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3400,6 +3465,7 @@
         "cdUpperRange": 2.5,
         "publicCDGroup": "",
         "skillGroupCDID": 9,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["BackAtkR_Tachi", "BackAtkL_Tachi"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3419,6 +3485,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 9,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["BackAtkR_Tachi", "BackAtkL_Tachi"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3439,6 +3506,7 @@
         "cdUpperRange": 5.0,
         "publicCDGroup": "",
         "skillGroupCDID": 10,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Laido"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3460,6 +3528,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 10,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Laido"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3475,13 +3544,14 @@
           "maxTargetAngleXZ": 90.0,
           "pickRangeMin": 10.0,
           "pickRangeMax": 17.5,
-          "EDKNFNFEDAH": 27.5
+          "HHHELCLGPJO": 27.5
         },
         "cd": 12.5,
         "cdUpperRange": 5.0,
         "initialCD": 10.0,
         "publicCDGroup": "",
         "skillGroupCDID": 16,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Blink_Tachi"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3498,7 +3568,7 @@
           "maxTargetAngleXZ": 90.0,
           "pickRangeMin": 10.0,
           "pickRangeMax": 17.5,
-          "EDKNFNFEDAH": 27.5
+          "HHHELCLGPJO": 27.5
         },
         "cd": 22.5,
         "cdUpperRange": 7.5,
@@ -3506,6 +3576,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 16,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Blink_Tachi"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3521,13 +3592,14 @@
           "needReInitCD": true,
           "maxTargetAngleXZ": 90.0,
           "pickRangeMin": 17.5,
-          "EDKNFNFEDAH": 27.5
+          "HHHELCLGPJO": 27.5
         },
         "cd": 5.0,
         "cdUpperRange": 5.0,
         "initialCD": 5.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Blink_Tachi"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3547,6 +3619,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "HOMLKLFDOKH": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ReturnToBorn_Tachi"],
         "flagTargetReachable": "11",
         "flagSelfOnTemplateCollider": "11",
@@ -3561,11 +3634,12 @@
           "needReInitCD": true,
           "maxTargetAngleXZ": 90.0,
           "pickRangeMin": 6.5,
-          "EDKNFNFEDAH": 27.5
+          "HHHELCLGPJO": 27.5
         },
         "cd": 7.5,
         "cdUpperRange": 7.5,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["SwordArt"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3588,6 +3662,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 14,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["BurstAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3611,6 +3686,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 14,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ReturnToBorn_Tachi", "BurstAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3633,6 +3709,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 33,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["BurstAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3656,6 +3733,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 33,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ReturnToBorn_Tachi", "BurstAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3676,6 +3754,7 @@
         "cdUpperRange": 7.5,
         "publicCDGroup": "",
         "skillGroupCDID": 15,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Dodge"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3697,6 +3776,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 15,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Dodge"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3718,6 +3798,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ChangeWeaponToPole"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3735,6 +3816,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["ChangeWeaponToPole"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3750,6 +3832,7 @@
         "cd": 5.0,
         "cdUpperRange": 5.0,
         "publicCDGroup": "",
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Mitakenarukami_MultiAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3766,6 +3849,7 @@
         "cdUpperRange": 5.0,
         "publicCDGroup": "",
         "skillGroupCDID": 27,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Laido", "Mitakenarukami_BladeWave"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3787,6 +3871,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 35,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "Mitakenarukami_DodgeF",
           "Mitakenarukami_MultiAtk",
@@ -3810,6 +3895,7 @@
         "cdUpperRange": 5.0,
         "publicCDGroup": "",
         "ignoreGCD": true,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Mitakenarukami_SwapAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3832,6 +3918,7 @@
         "initialCDUpperRange": 5.0,
         "publicCDGroup": "",
         "skillGroupCDID": 24,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Mitakenarukami_SlamAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3854,6 +3941,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "skillGroupCDID": 24,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "Mitakenarukami_DodgeB",
           "Mitakenarukami_SlamAtk",
@@ -3878,6 +3966,7 @@
         "initialCDUpperRange": 10.0,
         "publicCDGroup": "",
         "skillGroupCDID": 25,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Mitakenarukami_RushAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3897,6 +3986,7 @@
         "initialCDUpperRange": 10.0,
         "publicCDGroup": "",
         "skillGroupCDID": 27,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Mitakenarukami_BladeWave"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3915,6 +4005,7 @@
         "initialCDUpperRange": 10.0,
         "publicCDGroup": "",
         "skillGroupCDID": 24,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Mitakenarukami_ElectricCage"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -3934,6 +4025,7 @@
         "initialCDUpperRange": 5.0,
         "publicCDGroup": "",
         "HOMLKLFDOKH": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "Mitakenarukami_ReturnToBorn",
           "Mitakenarukami_BurstAtk01"
@@ -3956,6 +4048,7 @@
         "initialCDUpperRange": 2.5,
         "publicCDGroup": "",
         "HOMLKLFDOKH": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "Mitakenarukami_ReturnToBorn",
           "Mitakenarukami_BurstAtk02"
@@ -3979,6 +4072,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "HOMLKLFDOKH": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Mitakenarukami_ReturnToBorn"],
         "flagTargetReachable": "11",
         "flagSelfOnTemplateCollider": "11",
@@ -4000,6 +4094,7 @@
         "ignoreGCD": true,
         "triggerGCD": false,
         "skillGroupCDID": 22,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Turn"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -4019,6 +4114,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "HOMLKLFDOKH": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Mitakenarukami_WeakBS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -4027,27 +4123,31 @@
       }
     },
     "skillGCD": 2.75,
-    "facingMoveTactic": {
-      "enable": true,
-      "condition": {
-        "pose": [101, 201]
-      },
-      "defaultSetting": {
-        "rangeMin": 0.0,
-        "rangeMax": 50.0,
-        "restTimeMin": 0.0,
-        "restTimeMax": 0.0,
-        "facingMoveTurnInterval": 999.0,
-        "obstacleDetectRange": 5.0,
-        "facingMoveWeight": {
-          "stop": 0.0,
-          "forward": 0.0,
-          "back": 0.0
+    "combatFixedMoveTactic": [
+      {
+        "$type": "KIMPOLMEFNK",
+        "enable": true,
+        "condition": {
+          "pose": [101, 201]
         },
-        "EPEIFIFAKFH": "1111",
-        "PIHLHALNJIO": "1111"
+        "defaultSetting": {
+          "rangeMin": 0.0,
+          "rangeMax": 50.0,
+          "restTimeMin": 0.0,
+          "restTimeMax": 0.0,
+          "facingMoveTurnInterval": 999.0,
+          "obstacleDetectRange": 5.0,
+          "facingMoveWeight": {
+            "stop": 0.0,
+            "forward": 0.0,
+            "back": 0.0
+          },
+          "EPEIFIFAKFH": "1111",
+          "PIHLHALNJIO": "1111",
+          "FCFLCFFJKLO": ""
+        }
       }
-    }
+    ]
   },
   "inputKeys": [
     {
@@ -4102,64 +4202,65 @@
       "includeForces": ["FixedRushMoveType", "RushMoveType"]
     },
     "NDDNHKDJBIJ": "LeftRight",
-    "NPIIMMNHGIM": "None"
+    "NPIIMMNHGIM": "None",
+    "LPAKBBIADNC": "RootNode"
   },
   "cameraAdjust": {
     "default": {
       "$type": "LEACENCFDHG",
       "priority": 1.0,
       "LHHABPAOPNK": 150.0,
-      "JJGKEGBHGJL": 150.0,
-      "NANMFGHBACH": 45.0,
-      "FMLELPIHIPP": 6.0,
-      "PNHBKGDJCNJ": 10.0,
-      "JFIDJKPKEBP": false,
-      "NAOGLDNJPDH": 20.0,
-      "IHCMGDDAOFJ": 30.0,
-      "FNNDCOJEGEB": 50.0,
-      "AECBNPJEMGK": 50.0,
-      "DKPAJDPNFAL": 150.0,
-      "OPLKFDAMLCP": 150.0,
-      "BEEPGHCGFAN": "CircleR150",
-      "GFKCBMBABDO": "CircleR150"
+      "OEFDKGHGFOF": 150.0,
+      "FHGOFJGGPPH": 45.0,
+      "LFPMADFBMMD": 6.0,
+      "PNPIIBEIKLC": 10.0,
+      "FFBIAKHMFCM": false,
+      "AABCBFLFOOC": 20.0,
+      "FCEMCMPDACC": 30.0,
+      "FMIFMBHNLGN": 50.0,
+      "EHPJLOAAGGD": 50.0,
+      "GBIIHFCMCNA": 150.0,
+      "EPJDLHHOCFF": 150.0,
+      "KDLPBJIAALA": "CircleR150",
+      "KLHLNABBJME": "CircleR150"
     },
     "Mitakenarukami": {
       "$type": "LEACENCFDHG",
       "priority": 1.0,
       "LHHABPAOPNK": 150.0,
-      "JJGKEGBHGJL": 150.0,
-      "BBBIJABMHLH": 0.25,
-      "NANMFGHBACH": 47.5,
-      "FMLELPIHIPP": 7.0,
-      "PNHBKGDJCNJ": 5.0,
-      "JFIDJKPKEBP": false,
-      "NAOGLDNJPDH": 25.0,
-      "IHCMGDDAOFJ": 30.0,
-      "FNNDCOJEGEB": 50.0,
-      "AECBNPJEMGK": 50.0,
-      "DKPAJDPNFAL": 150.0,
-      "OPLKFDAMLCP": 150.0,
-      "BEEPGHCGFAN": "CircleR150",
-      "GFKCBMBABDO": "CircleR150"
+      "OEFDKGHGFOF": 150.0,
+      "NHCPBJMKJFD": 0.25,
+      "FHGOFJGGPPH": 47.5,
+      "LFPMADFBMMD": 7.0,
+      "PNPIIBEIKLC": 5.0,
+      "FFBIAKHMFCM": false,
+      "AABCBFLFOOC": 25.0,
+      "FCEMCMPDACC": 30.0,
+      "FMIFMBHNLGN": 50.0,
+      "EHPJLOAAGGD": 50.0,
+      "GBIIHFCMCNA": 150.0,
+      "EPJDLHHOCFF": 150.0,
+      "KDLPBJIAALA": "CircleR150",
+      "KLHLNABBJME": "CircleR150"
     },
     "Mitakenarukami_BurstAtk02": {
       "$type": "LEACENCFDHG",
       "priority": 1.0,
       "LHHABPAOPNK": 150.0,
-      "JJGKEGBHGJL": 150.0,
-      "BBBIJABMHLH": 0.5,
-      "NANMFGHBACH": 50.0,
-      "FMLELPIHIPP": 11.0,
-      "PNHBKGDJCNJ": 2.5,
-      "JFIDJKPKEBP": false,
-      "NAOGLDNJPDH": 25.0,
-      "IHCMGDDAOFJ": 30.0,
-      "FNNDCOJEGEB": 50.0,
-      "AECBNPJEMGK": 50.0,
-      "DKPAJDPNFAL": 150.0,
-      "OPLKFDAMLCP": 150.0,
-      "BEEPGHCGFAN": "CircleR150",
-      "GFKCBMBABDO": "CircleR150"
+      "OEFDKGHGFOF": 150.0,
+      "NHCPBJMKJFD": 0.5,
+      "FHGOFJGGPPH": 50.0,
+      "LFPMADFBMMD": 11.0,
+      "PNPIIBEIKLC": 2.5,
+      "FFBIAKHMFCM": false,
+      "AABCBFLFOOC": 25.0,
+      "FCEMCMPDACC": 30.0,
+      "FMIFMBHNLGN": 50.0,
+      "EHPJLOAAGGD": 50.0,
+      "GBIIHFCMCNA": 150.0,
+      "EPJDLHHOCFF": 150.0,
+      "KDLPBJIAALA": "CircleR150",
+      "KLHLNABBJME": "CircleR150"
     }
   }
 }

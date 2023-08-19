@@ -69,9 +69,10 @@
             "damagePercentage": 0.5,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Ice",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Blunt",
-            "enBreak": 100.0
+            "enBreak": 100.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -110,9 +111,10 @@
             "damagePercentage": 0.25,
             "MKLAMNDEDGB": 0.0,
             "elementType": "Ice",
-            "bonusCriticalHurt": 50.0,
+            "bonusCritical": 50.0,
             "strikeType": "Default",
-            "enBreak": 100.0
+            "enBreak": 100.0,
+            "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
@@ -521,6 +523,7 @@
         "publicCDGroup": "",
         "ignoreGCD": true,
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["Alert"],
         "skillQueryingTime": 3.0,
         "flagTargetReachable": "10",
@@ -540,6 +543,7 @@
         "cdUpperRange": 5.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["MeleeAtk01"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -558,6 +562,7 @@
         "cdUpperRange": 10.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["MeleeAtk02"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -575,6 +580,7 @@
         "cdUpperRange": 10.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["MeleeAtk03"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -593,6 +599,7 @@
         "cdUpperRange": 3.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": [
           "RangeAtk01BS",
           "RangeAtk01L",
@@ -618,6 +625,7 @@
         "initialCDUpperRange": 10.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RangeAtk02"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -639,6 +647,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 320,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RangeAtk03", "RangeAtk03AS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -658,6 +667,7 @@
         "publicCDGroup": "",
         "triggerGCD": false,
         "skillGroupCDID": 320,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["RangeAtk03", "RangeAtk03AS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -679,6 +689,7 @@
         "initialCDUpperRange": 5.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["WrapAtk"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -698,6 +709,7 @@
         "initialCDUpperRange": 10.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["BlinkBS", "Blink", "BlinkAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -713,6 +725,7 @@
         },
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["BlinkBS", "Blink", "BlinkAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -733,6 +746,7 @@
         "initialCDUpperRange": 20.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["BlinkBS", "BlinkAtk", "BlinkAtkAS"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -753,6 +767,7 @@
         "initialCD": 10.0,
         "publicCDGroup": "",
         "triggerGCD": false,
+        "CLEPNIDJOLN": "",
         "stateIDs": ["CocoonBaneChisel"],
         "flagTargetReachable": "10",
         "flagSelfOnTemplateCollider": "01",
@@ -761,30 +776,35 @@
       }
     },
     "skillGCD": 3.0,
-    "returnToBornTactic": {
-      "enable": true
-    },
-    "facingMoveTactic": {
-      "enable": true,
-      "condition": {
-        "pose": [101, 111, 121, 131, 201, 211, 221, 231]
-      },
-      "defaultSetting": {
-        "rangeMin": 0.0,
-        "rangeMax": 50.0,
-        "restTimeMin": 0.0,
-        "restTimeMax": 0.0,
-        "facingMoveTurnInterval": 999.0,
-        "obstacleDetectRange": 5.0,
-        "facingMoveWeight": {
-          "stop": 0.0,
-          "forward": 0.0,
-          "back": 0.0
+    "combatFixedMoveTactic": [
+      {
+        "$type": "KIMPOLMEFNK",
+        "enable": true,
+        "condition": {
+          "pose": [101, 111, 121, 131, 201, 211, 221, 231]
         },
-        "EPEIFIFAKFH": "1111",
-        "PIHLHALNJIO": "1111"
+        "defaultSetting": {
+          "rangeMin": 0.0,
+          "rangeMax": 50.0,
+          "restTimeMin": 0.0,
+          "restTimeMax": 0.0,
+          "facingMoveTurnInterval": 999.0,
+          "obstacleDetectRange": 5.0,
+          "facingMoveWeight": {
+            "stop": 0.0,
+            "forward": 0.0,
+            "back": 0.0
+          },
+          "EPEIFIFAKFH": "1111",
+          "PIHLHALNJIO": "1111",
+          "FCFLCFFJKLO": ""
+        }
+      },
+      {
+        "$type": "GJGILIGEJMO",
+        "enable": true
       }
-    }
+    ]
   },
   "inputKeys": [
     {
@@ -845,6 +865,7 @@
     },
     "NDDNHKDJBIJ": "LeftRight",
     "NPIIMMNHGIM": "Walk",
-    "GLHELMHJCDA": true
+    "GLHELMHJCDA": true,
+    "LPAKBBIADNC": "RootNode"
   }
 }
