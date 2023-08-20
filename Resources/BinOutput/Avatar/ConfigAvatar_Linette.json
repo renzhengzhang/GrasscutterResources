@@ -5,8 +5,8 @@
       "mesh": "EffectMesh"
     },
     "mass": 10.0,
-    "height": 1.5835000276565552,
-    "modelHeight": 1.5529999732971191,
+    "height": 1.57479989528656,
+    "modelHeight": 1.559999942779541,
     "affectedByWorld": true,
     "checkInSurface": true
   },
@@ -76,12 +76,12 @@
             "$type": "ConfigBornBySelf",
             "offset": {
               "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": -0.10000000149011612,
-              "PJCOKIGCJOK": 1.0
+              "LKHJADIPBFL": -0.30000001192092896,
+              "PJCOKIGCJOK": 0.30000001192092896
             }
           },
-          "height": 1.5,
-          "DCMPFCIBIPA": 1.5
+          "height": 2.0,
+          "DCMPFCIBIPA": 2.0
         },
         "attackInfo": {
           "attackTag": "NormalAttack_01",
@@ -93,55 +93,7 @@
             "bonusCritical": 25.0,
             "overrideByWeapon": true,
             "strikeType": "Slash",
-            "enBreak": 51.029998779296875,
-            "attackType": "Melee",
-            "FKGFPFNOJMN": 0.0
-          },
-          "hitPattern": {
-            "onHitEffectName": "default",
-            "hitImpulseType": "LV3",
-            "hitHaltTime": 0.029999999329447746,
-            "hitHaltTimeScale": 0.009999999776482582,
-            "canBeDefenceHalt": true
-          },
-          "cameraShake": {
-            "shakeType": "CustomVector",
-            "shakeRange": 0.11999999731779099,
-            "shakeTime": 0.11999999731779099,
-            "shakeDistance": 30.0,
-            "shakeDir": {
-              "x": -1.0,
-              "y": 1.0
-            }
-          }
-        }
-      },
-      "ATK02": {
-        "attackPattern": {
-          "$type": "ConfigAttackCircle",
-          "triggerType": "TriggerNoRepeat",
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": -0.10000000149011612,
-              "PJCOKIGCJOK": 0.6000000238418579
-            }
-          },
-          "height": 1.600000023841858,
-          "DCMPFCIBIPA": 1.5
-        },
-        "attackInfo": {
-          "attackTag": "NormalAttack_02",
-          "attenuationTag": "NormalAttack",
-          "attenuationGroup": "default",
-          "attackProperty": {
-            "HBIOLEEGHPD": 0.0,
-            "CCNJGLPMIEP": 0.0,
-            "bonusCritical": 25.0,
-            "overrideByWeapon": true,
-            "strikeType": "Slash",
-            "enBreak": 46.619998931884766,
+            "enBreak": 46.057498931884766,
             "attackType": "Melee",
             "FKGFPFNOJMN": 0.0
           },
@@ -155,16 +107,16 @@
           "cameraShake": {
             "shakeType": "CustomVector",
             "shakeRange": 0.07999999821186066,
-            "shakeTime": 0.05999999865889549,
+            "shakeTime": 0.07999999821186066,
             "shakeDistance": 30.0,
             "shakeDir": {
-              "x": -0.5,
-              "y": -1.0
+              "x": -1.0,
+              "y": 0.10000000149011612
             }
           }
         }
       },
-      "ATK03": {
+      "ATK02": {
         "attackPattern": {
           "$type": "ConfigAttackBox",
           "triggerType": "TriggerNoRepeat",
@@ -172,14 +124,65 @@
             "$type": "ConfigBornBySelf",
             "offset": {
               "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.2000000476837158,
-              "PJCOKIGCJOK": -0.20000000298023224
+              "LKHJADIPBFL": 0.800000011920929,
+              "PJCOKIGCJOK": -0.30000001192092896
             }
           },
           "size": {
-            "IBKBLDAJIMA": 6.0,
-            "LKHJADIPBFL": 2.5,
-            "PJCOKIGCJOK": 3.299999952316284
+            "IBKBLDAJIMA": 1.7999999523162842,
+            "LKHJADIPBFL": 2.5999999046325684,
+            "PJCOKIGCJOK": 2.799999952316284
+          }
+        },
+        "attackInfo": {
+          "attackTag": "NormalAttack_02",
+          "attenuationTag": "NormalAttack",
+          "attenuationGroup": "default",
+          "attackProperty": {
+            "HBIOLEEGHPD": 0.0,
+            "CCNJGLPMIEP": 0.0,
+            "bonusCritical": 25.0,
+            "overrideByWeapon": true,
+            "strikeType": "Slash",
+            "enBreak": 40.210201263427734,
+            "attackType": "Melee",
+            "FKGFPFNOJMN": 0.0
+          },
+          "hitPattern": {
+            "onHitEffectName": "default",
+            "hitImpulseType": "LV3",
+            "hitHaltTime": 0.029999999329447746,
+            "hitHaltTimeScale": 0.009999999776482582,
+            "canBeDefenceHalt": true
+          },
+          "cameraShake": {
+            "shakeType": "CustomVector",
+            "shakeRange": 0.07999999821186066,
+            "shakeTime": 0.07999999821186066,
+            "shakeDistance": 30.0,
+            "shakeDir": {
+              "x": 0.15000000596046448,
+              "y": 1.0
+            }
+          }
+        }
+      },
+      "ATK03_1": {
+        "attackPattern": {
+          "$type": "ConfigAttackBox",
+          "triggerType": "TriggerNoRepeat",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "IBKBLDAJIMA": 0.0,
+              "LKHJADIPBFL": 0.800000011920929,
+              "PJCOKIGCJOK": 0.0
+            }
+          },
+          "size": {
+            "IBKBLDAJIMA": 1.5,
+            "LKHJADIPBFL": 2.200000047683716,
+            "PJCOKIGCJOK": 2.5
           }
         },
         "attackInfo": {
@@ -192,45 +195,85 @@
             "bonusCritical": 25.0,
             "overrideByWeapon": true,
             "strikeType": "Slash",
-            "enBreak": 62.099998474121094,
+            "enBreak": 27.0,
             "attackType": "Melee",
-            "HFLMOAAADBL": 0.0,
-            "FFIFBJOCJMM": 0.0,
             "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
             "hitImpulseType": "LV3",
-            "retreatType": "ByAttackerForward",
             "hitHaltTime": 0.05999999865889549,
             "hitHaltTimeScale": 0.009999999776482582,
             "canBeDefenceHalt": true
           },
           "cameraShake": {
             "shakeType": "CustomVector",
-            "shakeRange": 0.23999999463558197,
+            "shakeRange": 0.11999999731779099,
             "shakeTime": 0.07999999821186066,
             "shakeDistance": 30.0,
             "shakeDir": {
-              "y": -1.0
+              "x": -1.0,
+              "y": 0.4000000059604645
             }
           }
         }
       },
-      "ATK04": {
+      "ATK03_2": {
         "attackPattern": {
-          "$type": "ConfigAttackCircle",
+          "$type": "ConfigAttackBox",
           "triggerType": "TriggerNoRepeat",
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
               "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": -0.10000000149011612,
-              "PJCOKIGCJOK": 1.2000000476837158
+              "LKHJADIPBFL": 0.800000011920929,
+              "PJCOKIGCJOK": 0.0
             }
           },
-          "height": 2.0,
-          "DCMPFCIBIPA": 2.200000047683716
+          "size": {
+            "IBKBLDAJIMA": 1.5,
+            "LKHJADIPBFL": 2.200000047683716,
+            "PJCOKIGCJOK": 2.5
+          }
+        },
+        "attackInfo": {
+          "attackTag": "NormalAttack_03",
+          "attenuationTag": "NormalAttack",
+          "attenuationGroup": "default",
+          "attackProperty": {
+            "HBIOLEEGHPD": 0.0,
+            "CCNJGLPMIEP": 0.0,
+            "bonusCritical": 25.0,
+            "overrideByWeapon": true,
+            "strikeType": "Slash",
+            "enBreak": 27.0,
+            "attackType": "Melee",
+            "FKGFPFNOJMN": 0.0
+          },
+          "hitPattern": {
+            "onHitEffectName": "default",
+            "hitImpulseType": "LV2"
+          },
+          "cameraShake": {}
+        }
+      },
+      "ATK04": {
+        "attackPattern": {
+          "$type": "ConfigAttackBox",
+          "triggerType": "TriggerNoRepeat",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "IBKBLDAJIMA": 0.0,
+              "LKHJADIPBFL": 0.800000011920929,
+              "PJCOKIGCJOK": 0.0
+            }
+          },
+          "size": {
+            "IBKBLDAJIMA": 2.200000047683716,
+            "LKHJADIPBFL": 3.0,
+            "PJCOKIGCJOK": 2.5
+          }
         },
         "attackInfo": {
           "attackTag": "NormalAttack_04",
@@ -242,27 +285,22 @@
             "bonusCritical": 25.0,
             "overrideByWeapon": true,
             "strikeType": "Slash",
-            "enBreak": 79.6500015258789,
+            "enBreak": 67.64219665527344,
             "attackType": "Melee",
-            "HFLMOAAADBL": 0.0,
-            "FFIFBJOCJMM": 0.0,
             "FKGFPFNOJMN": 0.0
           },
           "hitPattern": {
             "onHitEffectName": "default",
-            "hitImpulseType": "LV5",
-            "retreatType": "ByAttackerForward",
-            "hitHaltTime": 0.10000000149011612,
-            "hitHaltTimeScale": 0.009999999776482582,
-            "canBeDefenceHalt": true
+            "hitImpulseType": "LV4"
           },
           "cameraShake": {
             "shakeType": "CustomVector",
-            "shakeRange": 0.23999999463558197,
-            "shakeTime": 0.11999999731779099,
+            "shakeRange": 0.11999999731779099,
+            "shakeTime": 0.07999999821186066,
             "shakeDistance": 30.0,
             "shakeDir": {
-              "x": 1.0
+              "x": -1.0,
+              "y": 0.4000000059604645
             }
           }
         }
@@ -276,10 +314,11 @@
             "offset": {
               "IBKBLDAJIMA": 0.0,
               "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "PJCOKIGCJOK": 0.800000011920929
             }
           },
-          "DCMPFCIBIPA": 2.799999952316284
+          "height": 2.5,
+          "DCMPFCIBIPA": 2.200000047683716
         },
         "attackInfo": {
           "attackTag": "ExtraAttack",
@@ -313,10 +352,11 @@
             "offset": {
               "IBKBLDAJIMA": 0.0,
               "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "PJCOKIGCJOK": 0.800000011920929
             }
           },
-          "DCMPFCIBIPA": 2.799999952316284
+          "height": 2.5,
+          "DCMPFCIBIPA": 2.200000047683716
         },
         "attackInfo": {
           "attackTag": "ExtraAttack",
@@ -336,16 +376,13 @@
           },
           "hitPattern": {
             "onHitEffectName": "default",
-            "hitImpulseType": "LV5",
-            "retreatType": "ByAttackerForward",
-            "hitHaltTime": 0.10000000149011612,
-            "hitHaltTimeScale": 0.009999999776482582,
-            "canBeDefenceHalt": true
+            "hitImpulseType": "LV6",
+            "hitHaltTimeScale": 0.009999999776482582
           },
           "cameraShake": {
             "shakeType": "CustomVector",
             "shakeRange": 0.36000001430511475,
-            "shakeTime": 0.15000000596046448,
+            "shakeTime": 0.11999999731779099,
             "shakeDistance": 30.0,
             "shakeDir": {
               "x": -1.0
@@ -365,70 +402,75 @@
       "equip03": "WeaponL"
     }
   },
-  "ANOALKCGPIG": [
-    {
-      "sheathPoint": "PRIVATE_SubEquip_Mask",
-      "dissolveSheathFadeDelay": 0.07500000298023224,
-      "dissolveSheathFadeTime": 2.0999999046325684,
-      "name": "subEquip02",
-      "IIKEHINGEME": "WeaponR",
-      "configID": 50010010
-    }
-  ],
   "abilities": [
     {
-      "abilityID": "Avatar_Shinobu_ExtraAttack",
-      "abilityName": "Avatar_Shinobu_ExtraAttack",
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_ExtraAttack",
       "abilityOverride": ""
     },
     {
-      "abilityID": "Avatar_Shinobu_NormalAttack_Handler",
-      "abilityName": "Avatar_Shinobu_NormalAttack_Handler",
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_ArkheGrade",
       "abilityOverride": ""
     },
     {
-      "abilityID": "Avatar_Shinobu_ElementalArt_Init",
-      "abilityName": "Avatar_Shinobu_ElementalArt_Init",
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_ElementalArt",
       "abilityOverride": ""
     },
     {
-      "abilityID": "Avatar_Shinobu_ElementalArt",
-      "abilityName": "Avatar_Shinobu_ElementalArt",
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_ElementalArt_Short_Strike",
       "abilityOverride": ""
     },
     {
-      "abilityID": "Avatar_Shinobu_ElementalBurst",
-      "abilityName": "Avatar_Shinobu_ElementalBurst",
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_ElementalArt_Executed",
       "abilityOverride": ""
     },
     {
-      "abilityID": "Avatar_Shinobu_ElementalBurst_Init",
-      "abilityName": "Avatar_Shinobu_ElementalBurst_Init",
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_ElementalArt_Executed_Strike",
       "abilityOverride": ""
     },
     {
-      "abilityID": "Avatar_Shinobu_FallingAnthem",
-      "abilityName": "Avatar_Shinobu_FallingAnthem",
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_ElementalArt_RushMove",
       "abilityOverride": ""
     },
     {
-      "abilityID": "Shinobu_Show01_AttachEffect",
-      "abilityName": "Shinobu_Show01_AttachEffect",
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_ElementalBurst",
       "abilityOverride": ""
     },
     {
-      "abilityID": "Avatar_Shinobu_NormalAttack_DamageHandler",
-      "abilityName": "Avatar_Shinobu_NormalAttack_DamageHandler",
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_ElementalBurst_Strike",
       "abilityOverride": ""
     },
     {
-      "abilityID": "Avatar_Shinobu_ElementalArt_TickLogic",
-      "abilityName": "Avatar_Shinobu_ElementalArt_TickLogic",
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_PermanentSkill_1",
       "abilityOverride": ""
     },
     {
-      "abilityID": "Shinobu_Onkill_KillArtGadget",
-      "abilityName": "Shinobu_Onkill_KillArtGadget",
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_Constellation_6",
+      "abilityOverride": ""
+    },
+    {
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_FallingAnthem",
+      "abilityOverride": ""
+    },
+    {
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_NormalAttack_DamageHandler",
+      "abilityOverride": ""
+    },
+    {
+      "abilityID": "",
+      "abilityName": "Avatar_Linette_Show_01",
       "abilityOverride": ""
     }
   ],
@@ -459,57 +501,57 @@
             "ShowUp": ["Audio_Girl_Showup"],
             "WalkToRun": [
               "Audio_Girl_WalkToRun",
-              "Audio_Girl_Foley_Twice_Shinobu"
+              "Audio_Girl_Foley_Twice_Linette"
             ],
             "Walk": [
               "Ani_WalkSprint01",
               "Audio_Girl_Walk",
               "WalkStepOnWater",
-              "Audio_Girl_Foley_Walk_Shinobu"
+              "Audio_Girl_Foley_Walk_Linette"
             ],
             "RunToWalk": [
               "Audio_Girl_RunToWalk",
-              "Audio_Girl_Foley_Twice_Shinobu"
+              "Audio_Girl_Foley_Twice_Linette"
             ],
             "Run": [
               "Ani_Run01",
               "Audio_Girl_Run",
-              "Audio_Girl_Foley_Run_Shinobu"
+              "Audio_Girl_Foley_Run_Linette"
             ],
             "RunToIdle": [
               "Audio_Girl_RunToIdle",
-              "Audio_Girl_Foley_RunToIdle_Shinobu"
+              "Audio_Girl_Foley_RunToIdle_Linette"
             ],
             "WalkToIdle": ["Audio_Girl_WalkToIdle"],
             "RunningTurn": [],
             "SprintToRun": [
               "Audio_Girl_SprintToRun",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ],
             "SprintToIdle": [
               "Audio_Girl_SprintToIdle",
               "Emo_Girl_Sprint_AS",
-              "Audio_Girl_Foley_SprintToIdle_Shinobu"
+              "Audio_Girl_Foley_SprintToIdle_Linette"
             ],
             "FallOnGround": [
               "Audio_Girl_FallOnGround",
-              "Audio_Girl_Foley_Twice_Shinobu"
+              "Audio_Girl_Foley_Twice_Linette"
             ],
             "FallOnGroundLit": [
               "Audio_Girl_FallOnGroundLit",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ],
             "FallToGroundRun": [
               "Audio_Girl_FallToGroundRun",
-              "Audio_Girl_Foley_Twice_Shinobu"
+              "Audio_Girl_Foley_Twice_Linette"
             ],
             "FallToGroundRunHard": [
               "Audio_Girl_FallToGroundRunHard",
-              "Audio_Girl_Foley_Twice_Shinobu"
+              "Audio_Girl_Foley_Twice_Linette"
             ],
             "FallToGroundSprint": [
               "Audio_Girl_FallToGroundSprint",
-              "Audio_Girl_Foley_Twice_Shinobu"
+              "Audio_Girl_Foley_Twice_Linette"
             ]
           },
           "canDoSkill": true,
@@ -530,7 +572,7 @@
               "Audio_Girl_RunToSprint",
               "SprintBS_Invincible",
               "Emo_Girl_Sprint_BS",
-              "Audio_Girl_Foley_SprintBS_Shinobu"
+              "Audio_Girl_Foley_SprintBS_Linette"
             ]
           },
           "canDoSkill": true,
@@ -556,7 +598,7 @@
               "Ani_WalkSprint01",
               "Audio_Girl_Sprint",
               "Emo_Girl_Sprint_Loop",
-              "Audio_Girl_Foley_Twice_Shinobu"
+              "Audio_Girl_Foley_Twice_Linette"
             ]
           },
           "canDoSkill": true,
@@ -577,7 +619,7 @@
             "CrouchMove": ["Audio_Girl_CrouchMove"],
             "CrouchRoll": [
               "Audio_Girl_CrouchRoll",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ]
           },
           "canDoSkill": true,
@@ -597,7 +639,7 @@
           "animatorStates": {
             "CrouchToStandby": [
               "Audio_Girl_CrouchToStandby",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ]
           },
           "resetAnimatorTriggerOnEnter": ["DoSkill"],
@@ -620,25 +662,25 @@
             "ClimbMove0": [
               "ClimbStep",
               "Audio_Girl_Climb",
-              "Audio_Girl_Foley_Climb_Shinobu"
+              "Audio_Girl_Foley_Climb_Linette"
             ],
             "ClimbMove1": [
               "ClimbStep",
               "Audio_Girl_Climb",
-              "Audio_Girl_Foley_Twice_Shinobu"
+              "Audio_Girl_Foley_Twice_Linette"
             ],
             "ClimbIdle": [],
             "ClimbJump": [
               "Audio_Girl_ClimbDash",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ],
             "JumpUpWallForStandby": [
               "Audio_Girl_JumpUpWallStandby",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ],
             "Standby2ClimbB": [
               "Audio_Girl_Standby2ClimbB",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ]
           },
           "resetAnimatorTriggerOnEnter": ["DoSkill"],
@@ -652,7 +694,7 @@
             "JumpWallReady": [],
             "Standby2ClimbA": [
               "Audio_Girl_Standby2ClimbA",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ]
           },
           "resetAnimatorTriggerOnEnter": ["DoSkill"],
@@ -662,7 +704,7 @@
         "Upstairs": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
-            "Upstairs": ["Audio_Girl_Upstairs", "Audio_Girl_Foley_Once_Shinobu"]
+            "Upstairs": ["Audio_Girl_Upstairs", "Audio_Girl_Foley_Once_Linette"]
           },
           "resetAnimatorTriggerOnEnter": ["DoSkill"],
           "setAnimatorBoolean": [
@@ -676,8 +718,8 @@
         "Slip": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
-            "SlipFaceWall": ["Audio_Girl_Foley_ThreeTimes_Shinobu"],
-            "SlipBackWall": ["Audio_Girl_Foley_ThreeTimes_Shinobu"]
+            "SlipFaceWall": ["Audio_Girl_Foley_ThreeTimes_Linette"],
+            "SlipBackWall": ["Audio_Girl_Foley_ThreeTimes_Linette"]
           },
           "resetAnimatorTriggerOnEnter": ["DoSkill"],
           "animatorTriggerOnLanded": "",
@@ -702,11 +744,11 @@
         "Fly": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
-            "Fly": ["Audio_Girl_Fly", "Audio_Girl_Foley_Once_Shinobu"],
+            "Fly": ["Audio_Girl_Fly", "Audio_Girl_Foley_Once_Linette"],
             "FlyStart": [
               "Audio_Girl_FlyStart",
               "FlyStart_Weapon",
-              "Audio_Girl_Foley_FlyStart_Shinobu"
+              "Audio_Girl_Foley_FlyStart_Linette"
             ]
           },
           "canDoSkill": true,
@@ -723,12 +765,12 @@
         "Jump": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
-            "Jump": ["Audio_Girl_Jump", "Audio_Girl_Foley_Jump_Shinobu"],
-            "JumpForRun": ["Audio_Girl_Jump", "Audio_Girl_Foley_Once_Shinobu"],
-            "JumpForWalk": ["Audio_Girl_Jump", "Audio_Girl_Foley_Once_Shinobu"],
+            "Jump": ["Audio_Girl_Jump", "Audio_Girl_Foley_Jump_Linette"],
+            "JumpForRun": ["Audio_Girl_Jump", "Audio_Girl_Foley_Once_Linette"],
+            "JumpForWalk": ["Audio_Girl_Jump", "Audio_Girl_Foley_Once_Linette"],
             "JumpForSprint": [
               "Audio_Girl_Jump",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ]
           },
           "canDoSkill": true,
@@ -745,15 +787,15 @@
         "Fall": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
-            "JumpOffWall": ["Audio_Girl_Jump", "Audio_Girl_Foley_Once_Shinobu"],
+            "JumpOffWall": ["Audio_Girl_Jump", "Audio_Girl_Foley_Once_Linette"],
             "SwimJump": [
               "Audio_Girl_SwimJump",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ],
-            "SwimJumpDrop": ["Audio_Girl_Foley_ThreeTimes_Shinobu"],
+            "SwimJumpDrop": ["Audio_Girl_Foley_ThreeTimes_Linette"],
             "DropDown": [
               "Audio_Girl_DropDown",
-              "Audio_Girl_Foley_ThreeTimes_Shinobu"
+              "Audio_Girl_Foley_ThreeTimes_Linette"
             ],
             "DropDownLit": [],
             "WalkDropDownLit": []
@@ -791,11 +833,11 @@
               "Girl_Sword_Putaway_RunBS",
               "Audio_Girl_WalkToRun"
             ],
-            "WalkWeapon": ["Audio_Girl_Walk", "Audio_Girl_Foley_Twice_Shinobu"],
+            "WalkWeapon": ["Audio_Girl_Walk", "Audio_Girl_Foley_Twice_Linette"],
             "RunToWalkWeapon": ["Audio_Girl_RunToWalk"],
-            "RunWeapon": ["Audio_Girl_Run", "Audio_Girl_Foley_Twice_Shinobu"],
-            "RunToIdleWeapon": ["Audio_Girl_Foley_Twice_Shinobu"],
-            "WalkToIdleWeapon": ["Audio_Girl_Foley_Twice_Shinobu"],
+            "RunWeapon": ["Audio_Girl_Run", "Audio_Girl_Foley_Twice_Linette"],
+            "RunToIdleWeapon": ["Audio_Girl_Foley_Twice_Linette"],
+            "WalkToIdleWeapon": ["Audio_Girl_Foley_Twice_Linette"],
             "RunningTurnWeapon": [],
             "FallOnGroundWeapon": ["Audio_Girl_FallOnGround"],
             "FallOnGroundLitWeapon": ["Audio_Girl_FallOnGroundLit"],
@@ -820,17 +862,17 @@
             "StandbyPutaway": [
               "Girl_Sword_Putaway_Standby",
               "Audio_Girl_Sword_StandbyPutAway",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ],
             "WalkPutaway": [
               "Girl_Sword_Putaway_Walk",
               "Audio_Girl_Sword_WalkPutAway",
-              "Audio_Girl_Foley_Twice_Shinobu"
+              "Audio_Girl_Foley_Twice_Linette"
             ],
             "RunPutaway": [
               "Girl_Sword_Putaway_Run",
               "Audio_Girl_Sword_RunPutAway",
-              "Audio_Girl_Foley_Twice_Shinobu"
+              "Audio_Girl_Foley_Twice_Linette"
             ],
             "RunToSprintWeapon": [
               "Girl_Sword_Putaway_Sprint",
@@ -870,14 +912,14 @@
         "JumpWeapon": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
-            "JumpWeapon": ["Audio_Girl_Jump", "Audio_Girl_Foley_Once_Shinobu"],
+            "JumpWeapon": ["Audio_Girl_Jump", "Audio_Girl_Foley_Once_Linette"],
             "JumpForRunWeapon": [
               "Audio_Girl_Jump",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ],
             "JumpForWalkWeapon": [
               "Audio_Girl_Jump",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ]
           },
           "canDoSkill": true,
@@ -897,7 +939,7 @@
           "animatorStates": {
             "DropDownWeapon": [
               "Audio_Girl_DropDown",
-              "Audio_Girl_Foley_ThreeTimes_Shinobu"
+              "Audio_Girl_Foley_ThreeTimes_Linette"
             ],
             "DropDownLitWeapon": [],
             "WalkDropDownLitWeapon": []
@@ -915,8 +957,8 @@
         "BeHit": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
-            "Hit_L": ["Audio_Girl_Hit_L", "Audio_Girl_Foley_Once_Shinobu"],
-            "Hit_H": ["Audio_Girl_Hit_H", "Audio_Girl_Foley_Once_Shinobu"]
+            "Hit_L": ["Audio_Girl_Hit_L", "Audio_Girl_Foley_Once_Linette"],
+            "Hit_H": ["Audio_Girl_Hit_H", "Audio_Girl_Foley_Once_Linette"]
           },
           "moveType": "combatMove",
           "resetAnimatorTriggerOnEnter": ["BeHit", "HitAir2HitDrop"],
@@ -931,7 +973,7 @@
           "animatorStates": {
             "Hit_Throw_Ground": [
               "BeHitAir_Weapon",
-              "Audio_Girl_Hit_Throw_Ground_Shinobu"
+              "Audio_Girl_Hit_Throw_Ground_Linette"
             ]
           },
           "moveType": "combatMove",
@@ -953,12 +995,12 @@
             "Hit_Throw": [
               "Audio_Girl_Hit_Throw",
               "BeHitAir_Weapon",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ],
             "Hit_ThrowAir": ["Audio_Girl_Hit_ThrowAir", "BeHitAir_Weapon"],
             "Struggle": [
               "BeHitAir_Weapon",
-              "Audio_Girl_Foley_ThreeTimes_Shinobu"
+              "Audio_Girl_Foley_ThreeTimes_Linette"
             ]
           },
           "moveType": "combatAir",
@@ -978,7 +1020,7 @@
             "NormalDie": [
               "Die",
               "Audio_Girl_Death",
-              "Audio_Girl_Foley_Once_Shinobu"
+              "Audio_Girl_Foley_Once_Linette"
             ],
             "SwimDie": ["Swim_Die", "Audio_Girl_SwimDie"],
             "HitGroundDie": ["Die", "Audio_Girl_Death"]
@@ -997,11 +1039,11 @@
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "Attack01": [
-              "Shinobu_Attack01",
+              "Linette_Attack01",
               "SetComboCount1",
               "Interaction_Bad",
-              "Audio_Girl_Sword_Shinobu_Attack01",
-              "Emo_Girl_Sword_Shinobu_NormalAttack01"
+              "Audio_Girl_Sword_Linette_Attack01",
+              "Emo_Girl_Sword_Linette_NormalAttack01"
             ]
           },
           "moveType": "combatMove",
@@ -1012,25 +1054,26 @@
               "name": "&CanCancelSkill"
             },
             {
+              "name": "&CanUseExecuted"
+            },
+            {
               "name": "&CanUseExtra"
             }
           ],
           "cameraType": "combatNormal",
           "canChangeAvatar": [{}],
           "animatorTriggerOnLanded": "",
-          "battouOnStart": true,
-          "sheatheOnEnd": true,
-          "ALDKGJJEGPA": true
+          "battouOnStart": true
         },
         "Attack02": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "Attack02": [
-              "Shinobu_Attack02",
+              "Linette_Attack02",
               "SetComboCount2",
               "Interaction_Bad",
-              "Audio_Girl_Sword_Shinobu_Attack02",
-              "Emo_Girl_Sword_Shinobu_NormalAttack02"
+              "Audio_Girl_Sword_Linette_Attack02",
+              "Emo_Girl_Sword_Linette_NormalAttack02"
             ]
           },
           "moveType": "combatMove",
@@ -1041,30 +1084,26 @@
               "name": "&CanCancelSkill"
             },
             {
+              "name": "&CanUseExecuted"
+            },
+            {
               "name": "&CanUseExtra"
             }
           ],
           "cameraType": "combatNormal",
           "canChangeAvatar": [{}],
-          "equipReattach": [
-            {
-              "equip": "equip01",
-              "targetPoint": "CatalystR"
-            }
-          ],
           "animatorTriggerOnLanded": "",
-          "battouOnStart": true,
-          "ALDKGJJEGPA": true
+          "battouOnStart": true
         },
         "Attack03": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "Attack03": [
-              "Shinobu_Attack03",
+              "Linette_Attack03",
               "SetComboCount3",
               "Interaction_Bad",
-              "Audio_Girl_Sword_Shinobu_Attack03",
-              "Emo_Girl_Sword_Shinobu_NormalAttack03"
+              "Audio_Girl_Sword_Linette_Attack03",
+              "Emo_Girl_Sword_Linette_NormalAttack03"
             ]
           },
           "moveType": "combatMove",
@@ -1075,25 +1114,26 @@
               "name": "&CanCancelSkill"
             },
             {
+              "name": "&CanUseExecuted"
+            },
+            {
               "name": "&CanUseExtra"
             }
           ],
           "cameraType": "combatNormal",
           "canChangeAvatar": [{}],
           "animatorTriggerOnLanded": "",
-          "sheatheOnStart": true,
-          "sheatheOnEnd": true,
-          "ALDKGJJEGPA": true
+          "battouOnStart": true
         },
         "Attack04": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "Attack04": [
-              "Shinobu_Attack04",
+              "Linette_Attack04",
               "SetComboCount4",
               "Interaction_Bad",
-              "Audio_Girl_Sword_Shinobu_Attack04",
-              "Emo_Girl_Sword_Shinobu_NormalAttack04"
+              "Audio_Girl_Sword_Linette_Attack04",
+              "Emo_Girl_Sword_Linette_NormalAttack04"
             ]
           },
           "moveType": "combatMove",
@@ -1104,23 +1144,25 @@
               "name": "&CanCancelSkill"
             },
             {
+              "name": "&CanUseExecuted"
+            },
+            {
               "name": "&CanUseExtra"
             }
           ],
           "cameraType": "combatNormal",
           "canChangeAvatar": [{}],
           "animatorTriggerOnLanded": "",
-          "battouOnStart": true,
-          "sheatheOnEnd": true
+          "battouOnStart": true
         },
         "ExtraAttack": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "ExtraAttack": [
-              "Shinobu_ExtraAttack",
+              "Linette_ExtraAttack",
               "Interaction_Bad",
-              "Audio_Girl_Sword_Shinobu_ExtraAttack",
-              "Emo_Girl_Sword_Shinobu_ExtraAttack"
+              "Audio_Girl_Sword_Linette_ExtraAttack",
+              "Emo_Girl_Sword_Linette_ExtraAttack"
             ]
           },
           "moveType": "combatMove",
@@ -1128,6 +1170,9 @@
           "setAnimatorBoolean": [
             {
               "name": "&CanCancelSkill"
+            },
+            {
+              "name": "&CanUseExecuted"
             }
           ],
           "cameraType": "combatNormal",
@@ -1139,9 +1184,8 @@
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "ExtraAttack_AS": [
-              "Shinobu_ExtraAttack_AS",
-              "Audio_Girl_Sword_Shinobu_ExtraAttack_AS",
-              "Emo_Girl_Sword_Shinobu_ExtraAttack_AS"
+              "Audio_Girl_Sword_Linette_ExtraAttack_AS",
+              "Emo_Girl_Sword_Linette_ExtraAttack_AS"
             ]
           },
           "moveType": "combatMove",
@@ -1150,71 +1194,198 @@
           "setAnimatorBoolean": [
             {
               "name": "&CanCancelSkill"
+            },
+            {
+              "name": "&CanUseExecuted"
             }
           ],
           "cameraType": "combatNormal",
           "canChangeAvatar": [{}],
-          "animatorTriggerOnLanded": "",
-          "battouOnStart": true,
-          "sheatheOnEnd": true
+          "animatorTriggerOnLanded": ""
         },
-        "Shinobu_ElementalArt": {
+        "Linette_ElementalArt_BS": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
-            "Shinobu_ElementalArt": [
-              "Shinobu_ElementalArt",
-              "Interaction_Bad",
-              "Emo_Girl_Sword_Shinobu_Skill_ElementalArt",
-              "Audio_Girl_Sword_Shinobu_ElementalArt"
+            "Linette_ElementalArt_BS": [
+              "Linette_ElementalArt_BS",
+              "Interaction_Good",
+              "Audio_Girl_Sword_Linette_ElementalArt_BS",
+              "Emo_Girl_Sword_Linette_Skill_ElementalArt_BS"
             ]
           },
-          "moveType": "combatMove",
-          "addEndure": 0.6000000238418579,
-          "resetAnimatorTriggerOnExit": ["BeHit"],
-          "cameraType": "combatNormal",
-          "jumpCancelStart": 0.21400000154972076,
-          "sprintCancelStart": 0.21400000154972076,
+          "moveType": "combatSkillMove",
+          "addEndure": 0.20000000298023224,
+          "resetAnimatorTriggerOnExit": ["BeHit", "DoSkill", "Jump"],
+          "jumpCancelEnd": -1.0,
+          "sprintCancelEnd": -1.0,
           "animatorTriggerOnLanded": "",
           "sheatheOnStart": true
         },
-        "Shinobu_ElementalArt_AS": {
+        "Linette_ElementalArt_Hold_BS": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
-            "Shinobu_ElementalArt_AS": [
-              "Emo_Girl_Sword_Shinobu_Skill_ElementalArt_AS",
-              "Audio_Girl_Sword_Shinobu_ElementalArt_AS"
+            "Linette_ElementalArt_Hold_BS": [
+              "Audio_Girl_Sword_Linette_ElementalArt_Hold_BS",
+              "Emo_Girl_Sword_Linette_Skill_ElementalArt_BS_1"
             ]
           },
-          "moveType": "combatMove",
+          "moveType": "combatSkillMove",
+          "addEndure": 0.20000000298023224,
+          "resetAnimatorTriggerOnExit": ["BeHit", "DoSkill", "Jump"],
+          "cameraParam": {
+            "radiusSpringRatio": 6.0
+          },
+          "jumpCancelEnd": -1.0,
+          "sprintCancelEnd": -1.0,
+          "animatorTriggerOnLanded": ""
+        },
+        "Linette_ElementalArt_Hold": {
+          "$type": "ConfigAvatarStateIDInfo",
+          "animatorStates": {
+            "Linette_ElementalArt_Hold": [
+              "Audio_Girl_Sword_Linette_ElementalArt_Hold",
+              "Emo_Girl_Sword_Linette_Skill_ElementalArt_Loop"
+            ]
+          },
+          "moveType": "combatSkillMove",
           "canDoSkill": true,
+          "addEndure": 0.20000000298023224,
+          "resetAnimatorTriggerOnExit": ["BeHit", "DoSkill", "Jump"],
+          "cameraParam": {
+            "radiusSpringRatio": 4.0
+          },
+          "animatorTriggerOnLanded": ""
+        },
+        "Linette_ElementalArt_Hold_Strike": {
+          "$type": "ConfigAvatarStateIDInfo",
+          "animatorStates": {
+            "Linette_ElementalArt_Hold_Strike": [
+              "Linette_ElementalArt_Hold_Strike",
+              "Audio_Girl_Sword_Linette_ElementalArt_Hold_Strike"
+            ]
+          },
+          "moveType": "combatSkillMove",
+          "canDoSkill": true,
+          "canDoSkillStart": 0.800000011920929,
+          "addEndure": 0.20000000298023224,
+          "resetAnimatorTriggerOnExit": ["BeHit"],
+          "setAnimatorBoolean": [
+            {
+              "name": "&CanCancelSkill",
+              "normalizeStart": 0.800000011920929
+            },
+            {
+              "name": "&CanUseSkill",
+              "normalizeStart": 0.800000011920929
+            }
+          ],
+          "canChangeAvatar": [
+            {
+              "normalizeStart": 0.800000011920929
+            }
+          ],
+          "jumpCancelStart": 0.800000011920929,
+          "sprintCancelStart": 0.800000011920929,
+          "animatorTriggerOnLanded": "",
+          "battouOnStart": true,
+          "BOAAECLACEB": 0.3190000057220459,
+          "MMDKLCCCOPG": true
+        },
+        "Linette_ElementalArt_Hold_Strike_AS": {
+          "$type": "ConfigAvatarStateIDInfo",
+          "animatorStates": {
+            "Linette_ElementalArt_Hold_Strike_AS": [
+              "Audio_Girl_Sword_Linette_ElementalArt_Hold_Strike_AS",
+              "Emo_Girl_Sword_Linette_Skill_ElementalArt_Strike_AS"
+            ]
+          },
+          "moveType": "combatSkillMove",
+          "canDoSkill": true,
+          "addEndure": 0.6000000238418579,
           "resetAnimatorTriggerOnExit": ["BeHit", "DoSkill", "Jump"],
           "setAnimatorBoolean": [
             {
-              "name": "&CanUseSkill",
-              "normalizeStart": 0.05000000074505806
+              "name": "&CanCancelSkill"
+            },
+            {
+              "name": "&CanUseSkill"
             }
           ],
-          "cameraType": "combatNormal",
+          "canChangeAvatar": [{}],
+          "animatorTriggerOnLanded": ""
+        },
+        "Linette_ElementalArt_Strike": {
+          "$type": "ConfigAvatarStateIDInfo",
+          "animatorStates": {
+            "Linette_ElementalArt_Strike": [
+              "Linette_ElementalArt_Strike",
+              "Emo_Girl_Sword_Ayaka_SprintSkill_AS",
+              "Audio_Girl_Sword_Linette_ElementalArt_Strike",
+              "Emo_Girl_Sword_Linette_Skill_ElementalArt_Strike"
+            ]
+          },
+          "moveType": "combatSkillMove",
+          "canDoSkill": true,
+          "canDoSkillStart": 0.800000011920929,
+          "addEndure": 0.20000000298023224,
+          "resetAnimatorTriggerOnExit": ["BeHit"],
+          "setAnimatorBoolean": [
+            {
+              "name": "&CanCancelSkill",
+              "normalizeStart": 0.800000011920929
+            },
+            {
+              "name": "&CanUseSkill",
+              "normalizeStart": 0.800000011920929
+            }
+          ],
           "canChangeAvatar": [
             {
-              "normalizeStart": 0.05000000074505806
+              "normalizeStart": 0.800000011920929
             }
           ],
+          "jumpCancelStart": 0.800000011920929,
+          "sprintCancelStart": 0.800000011920929,
           "animatorTriggerOnLanded": "",
-          "sheatheOnStart": true
+          "battouOnStart": true,
+          "BOAAECLACEB": 0.31700000166893005
+        },
+        "Linette_ElementalArt_Strike_AS": {
+          "$type": "ConfigAvatarStateIDInfo",
+          "animatorStates": {
+            "Linette_ElementalArt_Strike_AS": [
+              "Audio_Girl_Sword_Linette_ElementalArt_Strike_AS",
+              "Emo_Girl_Sword_Linette_Skill_ElementalArt_Strike_AS"
+            ]
+          },
+          "moveType": "combatSkillMove",
+          "canDoSkill": true,
+          "addEndure": 0.6000000238418579,
+          "resetAnimatorTriggerOnExit": ["BeHit", "DoSkill", "Jump"],
+          "setAnimatorBoolean": [
+            {
+              "name": "&CanCancelSkill"
+            },
+            {
+              "name": "&CanUseSkill"
+            }
+          ],
+          "canChangeAvatar": [{}],
+          "animatorTriggerOnLanded": ""
         },
         "ElementalBurst": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "ElementalBurst": [
-              "Shinobu_ElementalBurst",
+              "Linette_ElementalBurst",
               "Interaction_Bad",
-              "Audio_Girl_Sword_Shinobu_ElementalBurst"
+              "Audio_Girl_Sword_Linette_ElementalBurst",
+              "Emo_Girl_Sword_Linette_Skill_ElementalBurst"
             ]
           },
           "moveType": "combatMove",
           "addEndure": 0.0,
-          "resetAnimatorTriggerOnExit": ["BeHit", "DoSkill", "Jump"],
+          "resetAnimatorTriggerOnExit": ["BeHit"],
           "cameraType": "combatNormal",
           "jumpCancelEnd": -1.0,
           "sprintCancelEnd": -1.0,
@@ -1225,8 +1396,8 @@
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "ElementalBurst_AS": [
-              "Shinobu_ElementalBurst_AS",
-              "Audio_Girl_Sword_Shinobu_ElementalBurst_AS"
+              "Audio_Girl_Sword_Linette_ElementalBurst_AS",
+              "Emo_Girl_Sword_Linette_Skill_ElementalBurst_AS"
             ]
           },
           "moveType": "combatMove",
@@ -1234,18 +1405,20 @@
           "resetAnimatorTriggerOnExit": ["BeHit", "DoSkill", "Jump"],
           "setAnimatorBoolean": [
             {
+              "name": "&CanCancelSkill",
+              "normalizeStart": 0.10000000149011612
+            },
+            {
               "name": "&CanUseSkill",
-              "normalizeStart": 0.05700000002980232
+              "normalizeStart": 0.10000000149011612
+            },
+            {
+              "name": "&CanUseExecuted",
+              "normalizeStart": 0.10000000149011612
             }
           ],
           "cameraType": "combatNormal",
-          "canChangeAvatar": [
-            {
-              "normalizeStart": 0.05700000002980232
-            }
-          ],
-          "jumpCancelStart": 0.05700000002980232,
-          "sprintCancelStart": 0.05700000002980232,
+          "canChangeAvatar": [{}],
           "animatorTriggerOnLanded": "",
           "sheatheOnEnd": true
         },
@@ -1253,7 +1426,7 @@
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "FallingAnthem_BS_1": [
-              "Audio_Girl_Sword_Shinobu_FallingAnthem_BS_1",
+              "Audio_Girl_Sword_Linette_FallingAnthem_BS_1",
               "Emo_Girl_Sword_FallingAttack_BS_01"
             ],
             "FallingAnthem_BS_2": ["Emo_Girl_Sword_FallingAttack_BS_02"]
@@ -1296,9 +1469,9 @@
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "FallingAnthem_AS_1": [
-              "Shinobu_FallingAnthem_Strike",
+              "Linette_FallingAnthem_Strike",
               "Interaction_Bad",
-              "Audio_Girl_Sword_Shinobu_FallingAnthem_AS_1",
+              "Audio_Girl_Sword_Linette_FallingAnthem_AS_1",
               "Emo_Girl_Sword_FallingAttack_AS_01"
             ]
           },
@@ -1325,7 +1498,7 @@
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "FallingAnthem_AS_2": [
-              "Audio_Girl_Sword_Shinobu_FallingAnthem_AS_2",
+              "Audio_Girl_Sword_Linette_FallingAnthem_AS_2",
               "Emo_Girl_Sword_FallingAttack_AS_02"
             ]
           },
@@ -1351,9 +1524,9 @@
         "Sit": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
-            "SitDown": ["Audio_Girl_SitDown", "Audio_Girl_Sit_Shinobu"],
+            "SitDown": ["Audio_Girl_SitDown", "Audio_Girl_Sit_Linette"],
             "SitLoop": [],
-            "SitUp": ["Audio_Girl_SitDown", "Audio_Girl_Sit_Shinobu"]
+            "SitUp": ["Audio_Girl_SitDown", "Audio_Girl_Sit_Linette"]
           },
           "moveType": "performMove",
           "massRatio": 100.0,
@@ -1364,9 +1537,9 @@
         "SitB": {
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
-            "SitBDown": ["Audio_Girl_SitDown", "Audio_Girl_Sit_Shinobu"],
+            "SitBDown": ["Audio_Girl_SitDown", "Audio_Girl_Sit_Linette"],
             "SitBLoop": [],
-            "SitBUp": ["Audio_Girl_SitDown", "Audio_Girl_Sit_Shinobu"]
+            "SitBUp": ["Audio_Girl_SitDown", "Audio_Girl_Sit_Linette"]
           },
           "moveType": "performMove",
           "massRatio": 100.0,
@@ -1378,13 +1551,21 @@
           "$type": "ConfigAvatarStateIDInfo",
           "animatorStates": {
             "StandbyVoice": ["Audio_Girl_StandbyVoice"],
-            "StandbyShow_01": [
-              "Manekin_Shinobu_Show01",
-              "Audio_Girl_Sword_Shinobu_StandbyShow_01"
+            "StandbyShow_01_BS": [
+              "Manekin_Linette_Show01",
+              "Audio_Girl_Sword_Linette_StandbyShow_01_BS"
+            ],
+            "StandbyShow_01_Loop": [
+              "Manekin_Linette_Show01_Loop",
+              "Audio_Girl_Sword_Linette_StandbyShow_01_Loop"
+            ],
+            "StandbyShow_01_AS": [
+              "Manekin_Linette_Show01_AS",
+              "Audio_Girl_Sword_Linette_StandbyShow_01_AS"
             ],
             "StandbyShow_02": [
-              "Manekin_Shinobu_Show02",
-              "Audio_Girl_Sword_Shinobu_StandbyShow_02"
+              "Manekin_Linette_Show02",
+              "Audio_Girl_Sword_Linette_StandbyShow_02"
             ]
           },
           "moveType": "performMove",
@@ -1869,7 +2050,7 @@
     },
     "diveLayer": {
       "$type": "ConfigNormalStateLayer",
-      "layerIndex": 5,
+      "layerIndex": 6,
       "layerIndexName": "DiveLayer"
     }
   },
@@ -1904,21 +2085,15 @@
           }
         },
         {
-          "currentStateName": "CrouchIdle",
+          "currentStateName": "SwimJumpToWater",
           "audioEvent": {
-            "text": "Play_sfx_char_foley_cloth_middle"
+            "text": "Stop_sfx_char_swim_dive"
           }
         },
         {
           "currentStateName": "SwimDash",
           "audioEvent": {
             "text": "Play_sfx_char_swim_dash"
-          }
-        },
-        {
-          "currentStateName": "SwimJumpToWater",
-          "audioEvent": {
-            "text": "Stop_sfx_char_swim_dive"
           }
         },
         {
@@ -1932,7 +2107,7 @@
           "audioEvent": {
             "text": "Play_sfx_char_dive_dash_lp"
           },
-          "otherStateNames": ["DiveDashBS"],
+          "otherStateNames": ["DiveDashBS", "Dive_Out_DashFBS"],
           "usage": "InSet"
         },
         {
@@ -1964,31 +2139,35 @@
         {
           "currentStateName": "Attack01",
           "audioEvent": {
-            "text": "Stop_sfx_char_shinobu_1HSword_attack"
-          }
+            "text": "Stop_sfx_char_linette_1HSword_attack01"
+          },
+          "otherStateNames": ["Attack02"],
+          "usage": "Except"
         },
         {
           "currentStateName": "Attack02",
           "audioEvent": {
-            "text": "Stop_sfx_char_shinobu_1HSword_attack"
-          }
+            "text": "Stop_sfx_char_linette_1HSword_attack02"
+          },
+          "otherStateNames": ["Attack03"],
+          "usage": "Except"
         },
         {
           "currentStateName": "Attack03",
           "audioEvent": {
-            "text": "Stop_sfx_char_shinobu_1HSword_attack"
+            "text": "Stop_sfx_char_linette_1HSword_attack03"
           }
         },
         {
           "currentStateName": "Attack04",
           "audioEvent": {
-            "text": "Stop_sfx_char_shinobu_1HSword_attack"
+            "text": "Stop_sfx_char_linette_1HSword_attack04"
           }
         },
         {
           "currentStateName": "ExtraAttack",
           "audioEvent": {
-            "text": "Stop_sfx_char_shinobu_1HSword_extraAtk"
+            "text": "Stop_sfx_char_linette_1HSword_extraAttack"
           },
           "otherStateNames": ["ExtraAttack_AS"],
           "usage": "Except"
@@ -1996,33 +2175,39 @@
         {
           "currentStateName": "ExtraAttack_AS",
           "audioEvent": {
-            "text": "Stop_sfx_char_shinobu_1HSword_extraAtk_AS"
+            "text": "Stop_sfx_char_linette_1HSword_extraAttack_AS"
           }
         },
         {
-          "currentStateName": "Shinobu_ElementalBurst",
+          "currentStateName": "ElementalArt_AS",
           "audioEvent": {
-            "text": "Stop_sfx_char_shinobu_1HSword_elementalBurst"
-          },
-          "otherStateNames": ["ElementalBurst_AS"],
-          "usage": "Except"
+            "text": "Stop_sfx_char_linette_elementalArt_AS"
+          }
         },
         {
-          "currentStateName": "Shinobu_ElementalBurst_AS",
+          "currentStateName": "ElementalBurst_AS",
           "audioEvent": {
-            "text": "Stop_sfx_char_shinobu_1HSword_elementalBurst_AS"
+            "text": "Stop_sfx_char_linette_elementalBurst_AS"
           }
         },
         {
           "currentStateName": "StandbyShow_01",
           "audioEvent": {
-            "text": "Stop_sfx_char_shinobu_standbyShow_01"
+            "text": "Stop_sfx_standbyShow_linette_01"
           }
+        },
+        {
+          "currentStateName": "StandbyShow_01_Loop",
+          "audioEvent": {
+            "text": "Stop_sfx_standbyShow_linette_01_02"
+          },
+          "otherStateNames": ["StandbyShow_01_AS"],
+          "usage": "Except"
         },
         {
           "currentStateName": "StandbyShow_02",
           "audioEvent": {
-            "text": "Stop_sfx_char_shinobu_standbyShow_02"
+            "text": "Stop_sfx_standbyShow_linette_02"
           }
         },
         {
@@ -2240,9 +2425,9 @@
           "usage": "InSet"
         },
         {
-          "currentStateName": "SlipBackWall",
+          "currentStateName": "SwimMove",
           "audioEvent": {
-            "text": "Stop_sfx_char_slipWall"
+            "text": "Stop_sfx_char_swim"
           }
         },
         {
@@ -2252,9 +2437,21 @@
           }
         },
         {
-          "currentStateName": "SwimMove",
+          "currentStateName": "SlipBackWall",
           "audioEvent": {
-            "text": "Stop_sfx_char_swim"
+            "text": "Stop_sfx_char_slipWall"
+          }
+        },
+        {
+          "currentStateName": "SlipBackWall",
+          "audioEvent": {
+            "text": "Stop_sfx_char_drop"
+          }
+        },
+        {
+          "currentStateName": "SlipFaceWall",
+          "audioEvent": {
+            "text": "Stop_sfx_char_drop"
           }
         },
         {
@@ -2335,7 +2532,7 @@
             "lower": 34.0
           },
           "eventName": {
-            "text": "Play_vo_char_explore_idle"
+            "text": ""
           }
         },
         "Walk": {
@@ -2396,19 +2593,19 @@
           "usage": "InSet"
         },
         {
-          "currentStateName": "CombatDive",
-          "audioEvent": {
-            "text": "Play_sfx_char_dive_move_swim_idle"
-          },
-          "otherStateNames": ["Dive"],
-          "usage": "Except"
-        },
-        {
           "currentStateName": "Dive",
           "audioEvent": {
             "text": "Play_sfx_char_dive_move_swim_idle"
           },
           "otherStateNames": ["CombatDive"],
+          "usage": "Except"
+        },
+        {
+          "currentStateName": "CombatDive",
+          "audioEvent": {
+            "text": "Play_sfx_char_dive_move_swim_idle"
+          },
+          "otherStateNames": ["Dive"],
           "usage": "Except"
         }
       ],
@@ -2444,7 +2641,7 @@
       ]
     },
     "voiceSwitch": {
-      "text": "Switch_Shinobu"
+      "text": "Switch_Lynette"
     },
     "bodyTypeSwitch": {
       "text": "Switch_Girl"
@@ -2533,7 +2730,13 @@
     "standby": {
       "minTime": 10.0,
       "maxTime": 20.0,
-      "performIDs": [201, 201, 202, 200, 200]
+      "performIDs": [202, 200, 200],
+      "ADBBCFFMDFH": [
+        {
+          "id": 201,
+          "time": 5.0
+        }
+      ]
     }
   }
 }
