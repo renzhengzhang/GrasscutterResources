@@ -1,10 +1,10 @@
 # Grasscutter Resources
-> <em>Resource Anime Game v3.7</em><br/>
+> <em>Resource Anime Game v4.0</em><br/>
 
-- ExcelBinOutput - 3.7 Dimbreath (except `QuestExcelConfigData` 3.6?)
-- BinOutput - 3.7 Dimbreath
+- ExcelBinOutput - 4.0 Dimbreath (except quest stuff)
+- BinOutput - 4.0 Dimbreath
 - Scripts - 3.3-3.6 GIO & (3.7-?) Manual by Community (like hiro) ***for natural spawn and many other things***
-- TextMap - 3.7 Dimbreath ***for language translations items,etc are used for gm-books***
+- TextMap - 4.0 Dimbreath ***for language translations items,etc are used for gm-books***
 - QuestEncryptionKeys - 3.7 GI-cutscenes ***Used for cutscenes that require a key***
 
 ## What is difference between GIO and GC?
