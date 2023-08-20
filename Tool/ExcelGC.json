@@ -55,6 +55,18 @@
     "comment": "Original GC DEV"
   },
   {
+    "name": "GivingExcelConfigData.json",
+    "comment": "Original GC DEV 4.0"
+  },
+  {
+    "name": "GivingGroupExcelConfigData.json",
+    "comment": "Original GC DEV 4.0"
+  },
+  {
+    "name": "BargainExcelConfigData.json",
+    "comment": "Original GC DEV 4.0"
+  },
+  {
     "name": "ReliquaryAffixExcelConfigData.json",
     "comment": "maybe need fix"
   },
