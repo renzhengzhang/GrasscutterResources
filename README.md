@@ -1,11 +1,11 @@
 # Grasscutter Resources
 > <em>Resource Anime Game v4.0</em><br/>
 
-- ExcelBinOutput - 4.0 Dimbreath (except quest stuff)
+- ExcelBinOutput - 4.0 Dimbreath
 - BinOutput - 4.0 Dimbreath
-- Scripts - 3.3-3.6 GIO & (3.7-?) Manual by Community (like hiro) ***for natural spawn and many other things***
+- Scripts - 3.6 GIO & (3.7-?) Manual by Community (like hiro) ***for natural spawn and many other things***
 - TextMap - 4.0 Dimbreath ***for language translations items,etc are used for gm-books***
-- QuestEncryptionKeys - 3.7 GI-cutscenes ***Used for cutscenes that require a key***
+- QuestEncryptionKeys - 4.0 GI-cutscenes ***Used for cutscenes that require a key***
 
 ## What is difference between GIO and GC?
 - GIO is a leaked full file from official server which was released last month (maybe 28/10/2022) which is available from CBT1-4.0 so it's possible that version 3.3+ some animations/characters are still in beta (aka beta old) so data won't be accurate anymore if it's already release because of the many revisions.
@@ -14,7 +14,7 @@
 ## Learn LUA
  How Dungeons work:
 - [Spire of Solitary Enlightenment - LV 4](Resources/Scripts/Scene/40653/scene40653_group240653001.lua)
-## Required LUA files
+## Required lua files
 - Quest/Share/*
 - Scene/{sceneId}/scene{sceneId}_block{this.id}.lua
 - Scene/{sceneId}/scene{sceneId}_dummy_points.lua
@@ -45,9 +45,9 @@
 Because there are a lot of useless files, so I made a separate repo: [GIO](https://gitlab.com/YuukiPS/GIO-Resources) and Grasscutter Version are needed for Grasscutter only and [Anime Game](https://gitlab.com/YuukiPS/GS-Resources) is full version dump.
 
 ## Problem Not finished yet:
-- Make Quest 3.0 work with modified QuestExcelConfigData which you can get from BinOutput/Quest/*.json. [use binout instead of excelconfig](https://github.com/Hartie95/Grasscutter/commit/0284de81563d30afb81733d7a3523a97419eb977)
+- Make Quest 2.8 work with modified QuestExcelConfigData which you can get from BinOutput/Quest/*.json. [use binout instead of excelconfig](https://github.com/Hartie95/Grasscutter/commit/0284de81563d30afb81733d7a3523a97419eb977)
 - [Missing Scripts](https://github.com/Hartie95/Grasscutter/wiki/missing-scripts) should have been resolved by using latest GIO Data from "Script/Common" folder so let's wait for latest update from him ;).
-- Quest should have worked automatically continued when quest was completed (if using [Hartie95 fork](https://github.com/Hartie95/Grasscutter/wiki/The-Outlander-Who-Caught-the-Wind-(Prologue-Act-1))) (Not working in version 3.0+ due to lack of data. need manual skip,start,next)
+- Quest should have worked automatically continued when quest was completed (if using [Hartie95 fork](https://github.com/Hartie95/Grasscutter/wiki/The-Outlander-Who-Caught-the-Wind-(Prologue-Act-1))) (Not working in version 2.8+ due to lack of data. need manual skip,start,next)
 - Natural Spawn for new area version 3.6 is no longer accurate using data from gio there are lots of monsters sunk in ground and buried treasure. maybe you really should just dump current live version.
 
 ## Problem Solved:
