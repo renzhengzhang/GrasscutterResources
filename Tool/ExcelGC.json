@@ -67,6 +67,18 @@
     "comment": "Original GC DEV 4.0"
   },
   {
+    "name": "SceneTagConfigData.json",
+    "comment": "scene tag, (abf362d) by Snoobii Yeo"
+  },
+  {
+    "name": "MapLayerExcelConfigData.json",
+    "comment": "Multi Map layer by Snoobii Yeo"
+  },
+  {
+    "name": "MapLayerGroupExcelConfigData.json",
+    "comment": "Multi Map layer by Snoobii Yeo"
+  },
+  {
     "name": "ReliquaryAffixExcelConfigData.json",
     "comment": "maybe need fix"
   },
