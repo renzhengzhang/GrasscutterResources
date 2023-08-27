@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155003004
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	duration = 20,
 	group_id = 155003004,
 	collectable_sum = 8,
@@ -12,7 +12,7 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local gameplayStateFuncitons = 
+gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -34,16 +34,16 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -98,9 +98,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -111,9 +111,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -156,7 +156,7 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================

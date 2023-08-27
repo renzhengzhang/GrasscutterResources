@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309294
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -74,9 +74,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -86,31 +86,31 @@ function action_EVENT_QUEST_START_294005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "quest_finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "quest_finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "quest" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "quest", 1, 133309673) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_294007(context, evt)
 	if evt.param1 ~= 294007 then return false end
-	
+
 	-- 判断变量"quest_finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "quest_finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -121,6 +121,6 @@ function action_EVENT_ENTER_REGION_294007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

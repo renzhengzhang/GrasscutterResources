@@ -3,12 +3,12 @@
 ||	owner: 		luyao.huang
 ||	description:	2.8社交活动-跳楼挑战
 ||	LogName:	SocialActivity_DownHill
-||	Protection:	
+||	Protection:
 =======================================]]--
 
 ------
 
-local local_defs = 
+local_defs =
 {
     --激流纹章
     coin_id = 70380240,
@@ -20,9 +20,9 @@ local local_defs =
     dive_reminder = 60010448
 }
 
-local gadget_config_id_map = {}
+gadget_config_id_map = {}
 
-local Tri = {
+Tri = {
     [1] = { name = "monster_die_before_leave_scene", config_id = 9000001, event = EventType.EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE, source = "", condition = "", action = "action_monster_die_before_leave_scene", trigger_count = 0},
     [2] = { name = "any_gadget_die", config_id = 9000002, event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_any_gadget_die", trigger_count = 0},
     [3] = { name = "enter_region", config_id = 9000003, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0, forbid_guest = false},
@@ -58,11 +58,11 @@ function action_monster_die_before_leave_scene(context,evt)
     LF_Gallery_Update(context,"MONSTER_DIE")
 
     --先看看chain上有没有需要加载的下一位的suite。如果有，直接加载，不考虑进入下一个stage
-    local monster_suite_id = LF_Get_Suite_By_Config_Id(evt.param1,false)
+    monster_suite_id = LF_Get_Suite_By_Config_Id(evt.param1,false)
     if LF_Try_Create_Next_Chain_Suite(context,monster_suite_id) then
         return 0
     end
-    
+
     --如果chain上没有要加载的下一个suite，则看是否可以进入下一个stage
     if LF_Is_Monster_In_List_All_Killed(context,LF_Get_Stage_Monsters(context,LF_Get_Current_Stage(context))) then
         ScriptLib.PrintContextLog(context,"## [SocialActivity_DownHill] action_any_monster_die: 怪物全部死完")
@@ -77,14 +77,14 @@ end
 function action_any_gadget_die(context,evt)
 
     --吃掉机制球
-    local cid = evt.param1
-    local gid = gadget_config_id_map[cid]
+    cid = evt.param1
+    gid = gadget_config_id_map[cid]
 
-    local level_change_variable = LF_Get_Mechanism_Ball_Level_Variable(evt.param1)
+    level_change_variable = LF_Get_Mechanism_Ball_Level_Variable(evt.param1)
     --这里强判一下机制球的gadget id了，应该不会变动
     if gid == local_defs.mechanism_ball_id and level_change_variable ~= nil then
         ScriptLib.PrintContextLog(context,"## [SocialActivity_DownHill] action_any_gadget_die: 死的是机制球")
-        
+
         LF_Change_Level_By_Mechanism_Ball(context,level_change_variable)
     end
     --吃掉金币
@@ -109,14 +109,14 @@ function action_enter_region(context,evt)
         else
             if LF_Get_Current_Stage(context) ~= 0 then
                 --其他阶段时，进入region直接传回当前存档点
-                local start_point = LF_Get_Point_Config(context,LF_Get_Stage_Revive_Point(LF_Get_Current_Stage(context)))
+                start_point = LF_Get_Point_Config(context,LF_Get_Stage_Revive_Point(LF_Get_Current_Stage(context)))
                 if start_point ~= nil then
                     ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = start_point.pos, radius = 0, rot = start_point.rot})
                 end
             end
         end
     end
-    
+
     return 0
 end
 
@@ -150,7 +150,7 @@ end
 --特殊阶段转换事件
 function LF_Special_State_Change(context)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_DownHill] LF_Special_State_Change: 特殊阶段转换逻辑")
-    
+
     --根据LD的需求，隔X个stage，清理前面所有stage的内容
     for i = 1, LF_Get_Current_Stage(context)-local_defs.clear_stage_interval do
         LF_Clear_Specific_Stage(context,i)
@@ -169,7 +169,7 @@ function LF_Special_Play_Finish(context,is_success)
     if is_success then
         LF_Update_Exhibition(context,-2,"Activity_IslandParty_Downhill_Success",1)
     end
-    
+
 end
 
 
@@ -209,21 +209,21 @@ function LF_Gallery_Update(context,command)
 
     if command == "START_PLAY" then
         ScriptLib.PrintContextLog(context,"## [SocialActivity_DownHill] LF_Gallery_Update: "..#monsters)
-        local param_table = {["total_kill_monster_count"] = 0, ["max_kill_monster_count"] = #monsters }
+        param_table = {["total_kill_monster_count"] = 0, ["max_kill_monster_count"] = #monsters }
         LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end
 
     if command == "MONSTER_DIE" then
-        local total_die_monster_count = ScriptLib.GetGroupVariableValue(context,"total_die_monster_count")
-        local param_table = {["total_kill_monster_count"] = total_die_monster_count}
+        total_die_monster_count = ScriptLib.GetGroupVariableValue(context,"total_die_monster_count")
+        param_table = {["total_kill_monster_count"] = total_die_monster_count}
         LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end
 
     if command == "COIN" then
-        local coin = ScriptLib.GetGroupVariableValue(context,"coin_num")
-        local param_table = {["coin"] = coin}
+        coin = ScriptLib.GetGroupVariableValue(context,"coin_num")
+        param_table = {["coin"] = coin}
         LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end

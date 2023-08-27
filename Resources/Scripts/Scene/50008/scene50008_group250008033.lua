@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250008033
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -88,24 +88,24 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_79(context, evt)
-	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "num")
-	local c_num = c_num_1 +1
+	c_num_1 = ScriptLib.GetGroupVariableValue(context, "num")
+	c_num = c_num_1 +1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "num", c_num) then
 	  return -1
 	end
-	
+
 	if c_num == 11 then
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 250008034, suite = 2 }) then
 			return -1
 		end
-	
+
 	end
 	return 0
 end

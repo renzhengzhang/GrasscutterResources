@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210218
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -81,9 +81,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -95,9 +95,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -161,9 +161,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -179,12 +179,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_218007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"active_count"为4
 	if ScriptLib.GetGroupVariableValue(context, "active_count") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -192,10 +192,10 @@ end
 function action_EVENT_VARIABLE_CHANGE_218007(context, evt)
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210218, 3)
-	
+
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133210218, 3, FlowSuiteOperatePolicy.COMPLETE)
-	
+
 	return 0
 end
 
@@ -204,7 +204,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_218009(context, evt)
 	if 218005 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -215,25 +215,25 @@ function action_EVENT_GADGET_STATE_CHANGE_218009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7216502") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_218010(context, evt)
 	if evt.param1 ~= 218010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -244,19 +244,19 @@ function action_EVENT_ENTER_REGION_218010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_218012(context, evt)
 	if evt.param1 ~= 218012 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -267,7 +267,7 @@ function action_EVENT_ENTER_REGION_218012(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -275,24 +275,24 @@ end
 function action_EVENT_QUEST_START_218014(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210218, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_218019(context, evt)
 	if evt.param1 ~= 218019 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"SeelieMove1"为0
 	if ScriptLib.GetGroupVariableValue(context, "SeelieMove1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -303,30 +303,30 @@ function action_EVENT_ENTER_REGION_218019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "SeelieMove1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "SeelieMove1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_218020(context, evt)
 	if evt.param1 ~= 218020 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"SeelieMove2"为0
 	if ScriptLib.GetGroupVariableValue(context, "SeelieMove2") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -337,30 +337,30 @@ function action_EVENT_ENTER_REGION_218020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "SeelieMove2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "SeelieMove2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_218021(context, evt)
 	if evt.param1 ~= 218021 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"SeelieMove3"为0
 	if ScriptLib.GetGroupVariableValue(context, "SeelieMove3") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -371,30 +371,30 @@ function action_EVENT_ENTER_REGION_218021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "SeelieMove3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "SeelieMove3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_218022(context, evt)
 	if evt.param1 ~= 218022 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"SeelieMove4"为0
 	if ScriptLib.GetGroupVariableValue(context, "SeelieMove4") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -405,33 +405,33 @@ function action_EVENT_ENTER_REGION_218022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "SeelieMove4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "SeelieMove4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_218023(context, evt)
 	-- 判断是gadgetid 为 218015的移动平台，是否到达了321000104 的路线中的 6 点
-	
+
 	if 218015 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 321000104 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -442,34 +442,34 @@ function action_EVENT_PLATFORM_REACH_POINT_218023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 218004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 218004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_218024(context, evt)
 	-- 判断是gadgetid 为 218016的移动平台，是否到达了321000105 的路线中的 5 点
-	
+
 	if 218016 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 321000105 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 5 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -480,34 +480,34 @@ function action_EVENT_PLATFORM_REACH_POINT_218024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 218001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 218001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_218025(context, evt)
 	-- 判断是gadgetid 为 218017的移动平台，是否到达了321000106 的路线中的 10 点
-	
+
 	if 218017 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 321000106 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 10 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -518,34 +518,34 @@ function action_EVENT_PLATFORM_REACH_POINT_218025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 218003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 218003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_218026(context, evt)
 	-- 判断是gadgetid 为 218018的移动平台，是否到达了321000107 的路线中的 8 点
-	
+
 	if 218018 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 321000107 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 8 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -556,14 +556,14 @@ function action_EVENT_PLATFORM_REACH_POINT_218026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 218002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 218002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -574,6 +574,6 @@ function action_EVENT_QUEST_START_218027(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

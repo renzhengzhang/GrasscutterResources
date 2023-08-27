@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220134056
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
 
 			is_movable = 1,
-		
-			patterns = 
+
+			patterns =
 			{
 					--形态1
-					[1] = 
+					[1] =
 					{
 							[56001] = {connect =56002 , point_array = 55, point_id = {1}} ,
 							[56002] = {connect =56003 , point_array = 56, point_id = {1}} ,
@@ -22,9 +22,9 @@ local        defs = {
 							[56007] = {connect =0 , point_array = 61, point_id = {1}} ,
 							[56008] = {connect =0 , point_array = 62, point_id = {1}} ,
 					},
-		
+
 					--形态1
-					[2] = 
+					[2] =
 					{
 							[56001] = {connect =56003 , point_array = 55, point_id = {2}} ,
 							[56002] = {connect =56001 , point_array = 56, point_id = {2}} ,
@@ -36,7 +36,7 @@ local        defs = {
 							[56008] = {connect =0 , point_array = 62, point_id = {2}} ,
 					},
 
-					[3] = 
+					[3] =
 					{
 							[56001] = {connect =56002 , point_array = 55, point_id = {3}} ,
 							[56002] = {connect =56003 , point_array = 56, point_id = {3}} ,
@@ -48,7 +48,7 @@ local        defs = {
 							[56008] = {connect =0 , point_array = 62, point_id = {3}} ,
 					},
 
-					[4] = 
+					[4] =
 					{
 							[56001] = {connect =56002 , point_array = 55, point_id = {4}} ,
 							[56002] = {connect =0 , point_array = 56, point_id = {4}} ,
@@ -62,14 +62,14 @@ local        defs = {
 
 
 			},
-			
-		
+
+
 		}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -109,9 +109,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -122,9 +122,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -140,9 +140,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -151,7 +151,7 @@ function condition_EVENT_GROUP_LOAD_56009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "form") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -162,7 +162,7 @@ function action_EVENT_GROUP_LOAD_56009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -172,7 +172,7 @@ function condition_EVENT_GROUP_LOAD_56010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "form") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -183,7 +183,7 @@ function action_EVENT_GROUP_LOAD_56010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_GROUP_LOAD_56011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "form") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_GROUP_LOAD_56011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

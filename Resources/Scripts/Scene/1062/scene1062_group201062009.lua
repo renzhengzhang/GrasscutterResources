@@ -1,23 +1,23 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201062009
 }
 
 -- DEFS_MISCS
-local EnterConfigID = 9010
+EnterConfigID = 9010
 
-local thunderFloorTimer = {5}
+thunderFloorTimer = {5}
 
-local floorList = {9001,9002,9003,9007,9008,9009}
+floorList = {9001,9002,9003,9007,9008,9009}
 
-local randomNumMin = 2
+randomNumMin = 2
 
-local randomNumMax = 5
+randomNumMax = 5
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -87,20 +87,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9010(context, evt)
 	if evt.param1 ~= 9010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 

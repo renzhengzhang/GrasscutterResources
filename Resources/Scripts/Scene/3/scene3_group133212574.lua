@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133212574
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -76,9 +76,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -87,8 +87,8 @@ function condition_EVENT_ANY_MONSTER_DIE_574003(context, evt)
 	if evt.param1 ~= 574004 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -99,20 +99,20 @@ function action_EVENT_ANY_MONSTER_DIE_574003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133212574, "spawnCountDown") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133212574, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -121,9 +121,9 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_574008(context, evt)
 	if evt.param1 == 574004 and evt.param3 < 70 then
 		return true
 	end
-	
+
 	return false
-	
+
 end
 
 -- 触发操作
@@ -136,9 +136,9 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_574008(context, evt)
 		ScriptLib.CreateMonster(context, { config_id = 574007, delay_time = 0 })
 		ScriptLib.CreateMonster(context, { config_id = 574010, delay_time = 0 })
 		ScriptLib.ShowReminder(context, 400092)
-	
+
 	return 0
-	
+
 end
 
 -- 触发条件
@@ -146,17 +146,17 @@ function condition_EVENT_TIME_AXIS_PASS_574009(context, evt)
 	if "spawnCountDown" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_574009(context, evt)
 		ScriptLib.CreateMonster(context, { config_id = 574005, delay_time = 0 })
-		
+
 		ScriptLib.CreateMonster(context, { config_id = 574006, delay_time = 0 })
 		ScriptLib.CreateMonster(context, { config_id = 574007, delay_time = 0 })
 		ScriptLib.CreateMonster(context, { config_id = 574010, delay_time = 0 })
-	
+
 	return 0
 end

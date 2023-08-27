@@ -3,20 +3,20 @@
 ||	owner: 		luyao.huang
 ||	description:	2.8怪物潮优化性能测试
 ||	LogName:	MonsterTidePerformanceTest
-||	Protection:	
+||	Protection:
 =======================================]]--
 --miscs
-local local_defs = {
+local_defs = {
     monster_tide_index = 1,
     worktop_option = 30110,
 
 }
 
-local Tri = {
+Tri = {
     { config_id = 40000000, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     { config_id = 40000001, name = "select_option", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
     { config_id = 40000002, name = "variable_change", event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change", trigger_count = 0},
-    
+
 }
 
 function Initialize()
@@ -81,7 +81,7 @@ end
 --辅助方法---------------------------------------------------------
 ------------------------------------------------------------------
 function LF_Init_Play(context)
-    
+
     ScriptLib.CreateGadget(context,{config_id = defs.worktop_id})
     ScriptLib.SetGroupGadgetStateByConfigId(context, base_info.group_id, defs.worktop_id, 0)
     ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, defs.worktop_id, {local_defs.worktop_option})
@@ -92,9 +92,9 @@ function LF_Start_Play(context)
     ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, defs.worktop_id, local_defs.worktop_option)
     ScriptLib.SetGroupGadgetStateByConfigId(context, base_info.group_id, defs.worktop_id, GadgetState.GearStop)
 
-    local is_optimize_tide = ScriptLib.GetGroupVariableValue(context,"GM_Optimize_Tide")
-    local is_light_tide = ScriptLib.GetGroupVariableValue(context,"GM_Light_Tide")
-    local tide_monster_list = {}
+    is_optimize_tide = ScriptLib.GetGroupVariableValue(context,"GM_Optimize_Tide")
+    is_light_tide = ScriptLib.GetGroupVariableValue(context,"GM_Light_Tide")
+    tide_monster_list = {}
     if is_optimize_tide == 1 then
         tide_monster_list = optimize_monster_list
         ScriptLib.PrintContextLog(context,"## [MonsterTidePerformanceTest]LF_Start_Play：加载客户端优化逻辑怪物潮")
@@ -111,12 +111,12 @@ end
 
 
 function LF_Stop_Play(context)
-    
+
     ScriptLib.KillMonsterTide(context, base_info.group_id, local_defs.monster_tide_index)
 end
 
 function LF_Get_All_Monster_In_Group(context)
-    local monster_list = {}
+    monster_list = {}
     for i = 1, #monsters do
         table.insert(monster_list,monsters[i].config_id)
     end

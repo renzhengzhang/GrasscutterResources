@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220145001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -119,23 +119,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_1007(context, evt)
 	-- 判断是gadgetid 1003 option_id 91
 	if 1003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 91 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -146,38 +146,38 @@ function action_EVENT_SELECT_OPTION_1007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将configid为 1003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220145001, 3)
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=449.3602, y=149.2858, z=495.1671}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=449.3602, y=149.2858, z=495.1671}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=449.3602, y=149.2858, z=495.1671}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"KeyNum"为3
 	if ScriptLib.GetGroupVariableValue(context, "KeyNum") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -185,7 +185,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_1020(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220145007, 2)
-	
+
 	return 0
 end
 
@@ -193,14 +193,14 @@ end
 function condition_EVENT_SELECT_OPTION_1031(context, evt)
 	-- 判断是gadgetid 1010 option_id 91
 	if 1010 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 91 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -211,32 +211,32 @@ function action_EVENT_SELECT_OPTION_1031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStart)
-	
+
 	ScriptLib.SetGadgetStateByConfigId(context, 1002, GadgetState.GearStart)
-	
+
 	ScriptLib.SetGadgetStateByConfigId(context, 1004, GadgetState.GearStart)
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=461.0726, y=114.3255, z=506.3117}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-	local pos = {x=461.0726, y=114.3255, z=506.3117}
-	local pos_follow = {x=438.21, y=121.03, z=524.16}
+	pos = {x=461.0726, y=114.3255, z=506.3117}
+	pos_follow = {x=438.21, y=121.03, z=524.16}
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
-	                                                      is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false, 
+	                                                      is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      disable_protect = 1, blend_type = 1, blend_duration = 0,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
 	end
-	
+
 	-- 将configid为 1010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
-	
-	
+		end
+
+
+
 	return 0
 end
 
@@ -245,7 +245,7 @@ function condition_EVENT_ANY_GADGET_DIE_1032(context, evt)
 	if 1021 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -256,6 +256,6 @@ function action_EVENT_ANY_GADGET_DIE_1032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

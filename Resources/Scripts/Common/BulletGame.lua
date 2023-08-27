@@ -1,4 +1,4 @@
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		--["Group_Load"] = { config_id = 8000001, name = "Group_Load", event= EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_on_group_load", trigger_count = 0 },
 		["TimeAxis_Event"] = { config_id = 7000001, name = "TimeAxis_Event", event= EventType.EVENT_TIME_AXIS_PASS, source = "BulletGameTimmer", condition = "", action = "action_trigger_timeacis", trigger_count = 0 },
@@ -66,7 +66,7 @@ end
 
 function Achivement( context )
 	-- 结算，被命中N次以下的玩家获得加分
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(UidList) do
 
 		ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "collect_energy_6005", v, 5 * ScriptLib.GetSceneMultiStagePlayUidValue(context,235800001, 1, "get_random_flora", v))
@@ -92,9 +92,9 @@ function action_trigger_timeacis( context,evt)
 	-- 触发时间轴
 	ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : TIMER IS TRIGGERED")
 
-	local activeStage = ScriptLib.GetGroupTempValue(context, "activeStage", {})
+	activeStage = ScriptLib.GetGroupTempValue(context, "activeStage", {})
 
-	local bulletTypeList = BulletStep[activeStage].list
+	bulletTypeList = BulletStep[activeStage].list
 
 	ChangeBulletType(context, bulletTypeList)
 	RandomFlora(context,random_flower_sum.min, random_flower_sum.max)
@@ -106,7 +106,7 @@ function RandomFlora( context, minNum, maxNum )
 	-- 随机抽取suit中的蓝色风之花创建
 
 	ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : RandomFlora IS Create")
-	local GadgetList = {}
+	GadgetList = {}
 
 	for i,v in ipairs(suites[flower_suite_index].gadgets) do
 		table.insert(GadgetList,v)
@@ -116,7 +116,7 @@ function RandomFlora( context, minNum, maxNum )
 	randomNum = math.random(minNum, maxNum)
 
 	for i=1,randomNum do
-		local configIndex = math.random(#GadgetList)
+		configIndex = math.random(#GadgetList)
 		ScriptLib.CreateGadget(context, { config_id = GadgetList[configIndex] })
 		table.remove(GadgetList,configIndex)
 	end
@@ -137,9 +137,9 @@ function ChangeBulletType(context, bulletTypeList)
 	math.randomseed(ScriptLib.GetServerTime(context))
 	randomWeight = math.random(100)
 
-	local TargetType = 0
+	TargetType = 0
 
-	local Times = ScriptLib.GetGroupTempValue(context, "Times", {})
+	Times = ScriptLib.GetGroupTempValue(context, "Times", {})
 
 	--ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Times Is -> "..Times)
 
@@ -161,9 +161,9 @@ function ChangeBulletType(context, bulletTypeList)
 
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, BulletConfigId, "SGV_BulletType", TargetType)
 
-	-- local CurType =ScriptLib.GetGadgetAbilityFloatValue(context, GroupId, BulletConfigId, "WINDFLORA_BULLETTYPE")
+	-- CurType =ScriptLib.GetGadgetAbilityFloatValue(context, GroupId, BulletConfigId, "WINDFLORA_BULLETTYPE")
 
-	-- local DeltType = TargetType - CurType
+	-- DeltType = TargetType - CurType
 	-- ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Bullet DeltType Is -> "..math.ceil(DeltType))
 
 	-- ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : SET BULLETTYPE ALREADY ->"..ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {BulletConfigId}, "WINDFLORA_BULLETTYPE", math.ceil(DeltType)))

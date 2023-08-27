@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133213100
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -102,9 +102,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -112,7 +112,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_100003(context, evt)
 	if 100002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -123,31 +123,31 @@ function action_EVENT_GADGET_STATE_CHANGE_100003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133213100, suite = 4 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 调用提示id为 1110386 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110386) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_100004(context, evt)
 	if evt.param1 ~= 100004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -155,19 +155,19 @@ end
 function action_EVENT_ENTER_REGION_100004(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213100, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_100006(context, evt)
 	if evt.param1 ~= 100006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -178,7 +178,7 @@ function action_EVENT_ENTER_REGION_100006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_100007(context, evt)
 	if 100001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -198,7 +198,7 @@ function action_EVENT_GADGET_STATE_CHANGE_100007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_GADGET_CREATE_100008(context, evt)
 	if 100001 ~= evt.param1 or GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -218,6 +218,6 @@ function action_EVENT_GADGET_CREATE_100008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

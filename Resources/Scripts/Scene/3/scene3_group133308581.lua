@@ -1,15 +1,15 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308581
 }
 
 -- DEFS_MISCS
-local markList = {581004}
+markList = {581004}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -99,20 +99,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_581009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"redblue"为0
 	if ScriptLib.GetGroupVariableValue(context, "redblue") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -123,61 +123,61 @@ function action_EVENT_VARIABLE_CHANGE_581009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581002的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581002 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581008 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_581010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"redblue"为1
 	if ScriptLib.GetGroupVariableValue(context, "redblue") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -188,49 +188,49 @@ function action_EVENT_VARIABLE_CHANGE_581010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581007的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581007 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581008的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581008 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581004 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -240,7 +240,7 @@ function condition_EVENT_GROUP_LOAD_581011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "redblue") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -251,49 +251,49 @@ function action_EVENT_GROUP_LOAD_581011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581002的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581002 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581008 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -303,7 +303,7 @@ function condition_EVENT_GROUP_LOAD_581012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "redblue") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -314,49 +314,49 @@ function action_EVENT_GROUP_LOAD_581012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581007的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581007 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为581008的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581008 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308581, EntityType.GADGET, 581004 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 

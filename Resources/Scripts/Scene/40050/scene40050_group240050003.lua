@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240050003
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -76,9 +76,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -86,12 +86,12 @@ function condition_EVENT_GADGET_CREATE_3003(context, evt)
 	if 3005 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"open"为0
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -102,7 +102,7 @@ function action_EVENT_GADGET_CREATE_3003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -110,14 +110,14 @@ end
 function condition_EVENT_SELECT_OPTION_3004(context, evt)
 	-- 判断是gadgetid 3005 option_id 7
 	if 3005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -127,25 +127,25 @@ function action_EVENT_SELECT_OPTION_3004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 3002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 240050003 ；指定config：3005；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240050003, 3005, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "open" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "open", 1, 240050003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101223
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_Teleport_1 = 223001,
 	gadget_Teleport_2 = 223002,
 	pointarray_1 = 110100043,
@@ -13,19 +13,20 @@ local defs = {
 }
 
 -- DEFS_MISCS
-connectInfo = 
+connectInfo =
 {
 {defs.gadget_Teleport_1,defs.gadget_Teleport_2,defs.pointarray_1,10},
-{defs.gadget_Teleport_2,defs.gadget_Teleport_1,defs.pointarray_1,10}		
+{defs.gadget_Teleport_2,defs.gadget_Teleport_1,defs.pointarray_1,10}
+
 }
 
 staticForwardSet = {1,2,3,4,5}
 staticBackwardSet = {5,4,3,2,1}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -60,9 +61,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +74,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -91,26 +92,26 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_223003(context, evt)
 	if evt.param1 ~= 223003 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_223003(context, evt)
-		local state = ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs.gadget_Teleport_2)
+		state = ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs.gadget_Teleport_2)
 		if state == 0 then
 			return -1
 		elseif state == 201 then
@@ -122,18 +123,18 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_223004(context, evt)
 	if evt.param1 ~= 223004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_223004(context, evt)
-		local state = ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs.gadget_Teleport_2)
+		state = ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs.gadget_Teleport_2)
 		if state == 0 then
 			return -1
 		elseif state == 201 then
@@ -148,13 +149,13 @@ function action_EVENT_GROUP_LOAD_223005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 223001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 223002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 223002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

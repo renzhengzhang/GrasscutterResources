@@ -15,7 +15,7 @@
 --[[
 
 	-- Trigger变量
-	local defs = {
+	defs = {
 		group_id = 245002013,
 		challenge_group_id = 245002001,
 		close_cd = 5,
@@ -25,7 +25,7 @@
 	-- DEFS_MISCS
 	-- 特殊机关
 	-- 关卡1光桥专用，且只会放一组
-	local specialGears = 
+	specialGears =
 	{
 		-- operatorConfigId
 		[1001] = {operatorEffectConfigId = 1002, bridgeConfigId = 1003},
@@ -35,9 +35,9 @@
 
 -- 打印日志
 function PrintLog(context, content)
-	local print = 1
-	if print > 0 then 
-		local log = "## [TowerDefence_SpecialGears_V3.0] TD_V3: "..content
+	print = 1
+	if print > 0 then
+		log = "## [TowerDefence_SpecialGears_V3.0] TD_V3: "..content
 		ScriptLib.PrintContextLog(context, log)
 	end
 end
@@ -45,7 +45,7 @@ end
 -- 初始化Group
 function LF_Initialize_Group(triggers, suites)
 
-	local extraTriggers = 
+	extraTriggers =
 	{
 		{ config_id = 40000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0},
 		{ config_id = 40000002, name = "GADGET_CREATE", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_GADGET_CREATE", trigger_count = 0 },
@@ -78,12 +78,12 @@ function action_EVENT_GROUP_LOAD(context, evt)
 	return 0
 end
 
--- 
+--
 function action_GADGET_CREATE(context, evt)
 
 	-- 初始化所有操作台（其实只有一个）
 	for operatorConfigId, info in pairs(specialGears) do
-		if evt.param1 == operatorConfigId then 
+		if evt.param1 == operatorConfigId then
 			ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, operatorConfigId, {4007})
 		end
 	end
@@ -96,10 +96,10 @@ function action_EVENT_SELECT_OPTION(context, evt)
 
 	if evt.param2 ~= 4007 then return 0 end
 
-	local operatorConfigId = evt.param1
+	operatorConfigId = evt.param1
 
 	-- 记录总次数
-	-- local times = ScriptLib.GetGroupVariableValue(context, "operateTimes")
+	-- times = ScriptLib.GetGroupVariableValue(context, "operateTimes")
 	-- times = times + 1
 	-- ScriptLib.SetGroupVariableValue(context, "operateTimes", times)
 	-- ScriptLib.SetGroupVariableValue(context, "Operator"..times, operatorConfigId)
@@ -110,26 +110,26 @@ function action_EVENT_SELECT_OPTION(context, evt)
 	-- 操作台激活
 	ScriptLib.SetGadgetStateByConfigId(context, operatorConfigId, 201)
 
-	if specialGears[operatorConfigId] == nil then 
+	if specialGears[operatorConfigId] == nil then
 		return 0
 	end
 
 	-- 光桥
-	local bridgeConfigId = specialGears[operatorConfigId].bridgeConfigId
+	bridgeConfigId = specialGears[operatorConfigId].bridgeConfigId
 	ScriptLib.SetGadgetStateByConfigId(context, bridgeConfigId, 0)
 
 	-- 特效
-	local effectConfigId = specialGears[operatorConfigId].operatorEffectConfigId
+	effectConfigId = specialGears[operatorConfigId].operatorEffectConfigId
 	ScriptLib.KillEntityByConfigId(context, {group_id = defs.group_id, config_id = effectConfigId})
 	-- ScriptLib.KillEntityByConfigId(context, {defs.group_id, effectConfigId, EntityType.GADGET})
 
 	-- TIMER_CLOSE
 	ScriptLib.CreateGroupTimerEvent(context, defs.group_id, "close", defs.close_cd)
-	
+
 	-- TIMER_RESET
-	local resetCd = defs.reset_cd
-	local card_picked = ScriptLib.GetGroupVariableValueByGroup(context, "CardPicked_GearCoolDown", defs.challenge_group_id)
-	if card_picked > 0 then 
+	resetCd = defs.reset_cd
+	card_picked = ScriptLib.GetGroupVariableValueByGroup(context, "CardPicked_GearCoolDown", defs.challenge_group_id)
+	if card_picked > 0 then
 		resetCd = resetCd * 0.5
 	end
 	ScriptLib.CreateGroupTimerEvent(context, defs.group_id, "reset", resetCd)
@@ -140,13 +140,13 @@ end
 -- 计时器1（改变光桥状态）
 function action_EVENT_TIMER_EVENT_CLOSE(context, evt)
 
-	-- local closePointer = ScriptLib.GetGroupVariableValue(context, "closePointer")
+	-- closePointer = ScriptLib.GetGroupVariableValue(context, "closePointer")
 	-- closePointer = closePointer + 1
 	-- ScriptLib.SetGroupVariableValue(context, "closePointer", closePointer)
-	--local operator = ScriptLib.GetGroupVariableValue(context, "Operator"..closePointer)
+	--operator = ScriptLib.GetGroupVariableValue(context, "Operator"..closePointer)
 
 
-	local operator = 0
+	operator = 0
 	for operatorConfigId, info in pairs(specialGears) do
 		operator = operatorConfigId
 	end
@@ -157,7 +157,7 @@ function action_EVENT_TIMER_EVENT_CLOSE(context, evt)
 	ScriptLib.SetGadgetStateByConfigId(context, operator, 202)
 
 	-- 光桥
-	local bridge = specialGears[operator].bridgeConfigId
+	bridge = specialGears[operator].bridgeConfigId
 	ScriptLib.SetGadgetStateByConfigId(context, bridge, 201)
 
 	return 0
@@ -166,13 +166,13 @@ end
 -- 计时器2（重置操作台）
 function action_EVENT_TIMER_EVENT_RESET(context, evt)
 
-	-- local resetPointer = ScriptLib.GetGroupVariableValue(context, "resetPointer")
+	-- resetPointer = ScriptLib.GetGroupVariableValue(context, "resetPointer")
 	-- resetPointer = resetPointer + 1
 	-- ScriptLib.SetGroupVariableValue(context, "resetPointer", resetPointer)
 
-	-- local operator = ScriptLib.GetGroupVariableValue(context, "Operator"..resetPointer)
+	-- operator = ScriptLib.GetGroupVariableValue(context, "Operator"..resetPointer)
 
-	local operator = 0
+	operator = 0
 	for operatorConfigId, info in pairs(specialGears) do
 		operator = operatorConfigId
 	end

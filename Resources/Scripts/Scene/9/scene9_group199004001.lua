@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199004001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -83,9 +83,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -94,7 +94,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1001(context, evt)
 	if 1002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -105,7 +105,7 @@ function action_EVENT_GADGET_STATE_CHANGE_1001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -116,13 +116,13 @@ function action_EVENT_QUEST_FINISH_1004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建id为1005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -130,14 +130,14 @@ end
 function condition_EVENT_SELECT_OPTION_1006(context, evt)
 	-- 判断是gadgetid 1005 option_id 1
 	if 1005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -147,20 +147,20 @@ function action_EVENT_SELECT_OPTION_1006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "option" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "option", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 199004001 ；指定config：1005；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 199004001, 1005, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -170,7 +170,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1010(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -181,19 +181,19 @@ function action_EVENT_ANY_MONSTER_DIE_1010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q7902508finish") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 199004001, 1005, {1}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_QUEST_FINISH_1014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -214,7 +214,7 @@ function condition_EVENT_QUEST_START_1015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "option") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -225,13 +225,13 @@ function action_EVENT_QUEST_START_1015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 199004001, 1005, {1}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -242,7 +242,7 @@ function action_EVENT_QUEST_START_1016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -252,7 +252,7 @@ function condition_EVENT_GROUP_LOAD_1017(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "option", 199004001) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -263,6 +263,6 @@ function action_EVENT_GROUP_LOAD_1017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309170
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	interactOptionID = 430,
 	gadget_fireTorch = 170002,
 	gadget_fireBase1 = 170001,
@@ -18,9 +18,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -107,7 +107,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_170007(context, evt)
 	if 170002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -118,29 +118,29 @@ function action_EVENT_GADGET_STATE_CHANGE_170007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "spark" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "spark", 1, 133309435) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 31004, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-2321.26, y=193.6415, z=5740.729}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-2321.26, y=193.6415, z=5740.729}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-2321.26, y=193.6415, z=5740.729}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -149,7 +149,7 @@ function condition_EVENT_GROUP_LOAD_170008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133309170, 170002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -160,7 +160,7 @@ function action_EVENT_GROUP_LOAD_170008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -169,7 +169,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_170009(context, evt)
 	if 170001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -180,13 +180,13 @@ function action_EVENT_GADGET_STATE_CHANGE_170009(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 7022, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_170010(context, evt)
 	if 170004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_GADGET_STATE_CHANGE_170010(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155006063
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -85,20 +85,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_63005(context, evt)
 	if evt.param1 ~= 63005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -108,17 +108,17 @@ function action_EVENT_ENTER_REGION_63005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 63004, GadgetState.ChestLocked) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 155006063, 2)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 1002, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -128,7 +128,7 @@ function condition_EVENT_ANY_MONSTER_DIE_63006(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -138,14 +138,14 @@ function action_EVENT_ANY_MONSTER_DIE_63006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 63004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 1002, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_63007(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 155006063, 63004) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -165,13 +165,13 @@ function action_EVENT_GADGET_STATE_CHANGE_63007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "gameplayState" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 1, 155006177) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -181,15 +181,15 @@ function condition_EVENT_GROUP_LOAD_63008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "chestopened") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_63008(context, evt)
-		if ScriptLib.GetGroupVariableValueByGroup(context,  "gameplayState", 155006177) == 0 then 
+		if ScriptLib.GetGroupVariableValueByGroup(context,  "gameplayState", 155006177) == 0 then
 			ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 1, 155006177)
 		end
 		return 0
-	
+
 end

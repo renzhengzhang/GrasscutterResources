@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133007230
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_id = 133007230,
 	battle_radius = 15,
 	battle_time = 120,
@@ -17,9 +17,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -117,19 +117,19 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_302(context, evt)
-	if evt.param1 ~= defs.seal_model then 
+	if evt.param1 ~= defs.seal_model then
 		return false
 	end
 	if evt.param2 ~= 24 then
 		return false
-	end 
+	end
 	return true
 end
 
@@ -181,7 +181,7 @@ function action_EVENT_GROUP_LOAD_318(context, evt)
 		ScriptLib.SetGroupVariableValue(context, "Temp_Point_Value", 3)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.seal_model, GadgetState.Action02)
 	end
-	local qf = ScriptLib.GetGroupVariableValue(context, "Quest_Flag")
+	qf = ScriptLib.GetGroupVariableValue(context, "Quest_Flag")
 	if qf == 1 then
 		ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
 		if ScriptLib.GetGroupVariableValue(context, "first_touch_done") == 1 then
@@ -193,13 +193,13 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_230001(context, evt)
-	if evt.param1 ~= 230001 then 
-		return false 
+	if evt.param1 ~= 230001 then
+		return false
 	end
 	if 1 == ScriptLib.GetGroupVariableValue(context, "first_touch_done") then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -222,17 +222,17 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_230005(context, evt)
-	local state_info = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.seal_model)
+	state_info = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.seal_model)
 	if 1 == ScriptLib.GetGroupVariableValue(context, "seal_battle_done") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.seal_id, state_info)
-	else 
+	else
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.seal_id, GadgetState.GearAction2)
 	end
 	if state_info == GadgetState.Default then
 		ScriptLib.SetGroupVariableValue(context, "Point_Value", 0)
 		ScriptLib.SetGroupVariableValue(context, "Temp_Point_Value", 0)
 	end
-	local p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
+	p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
 	if p_value ~= 7 then
 		-- 重置临时数据
 		ScriptLib.SetGroupVariableValue(context, "Temp_Point_Value", p_value)
@@ -251,11 +251,11 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_230006(context, evt)
-	local t_p_value = 0
+	t_p_value = 0
 	if evt.param2 == defs.light_1 or evt.param2 == defs.light_2 or evt.param2 == defs.light_3 then
 		-- 光柱触发信息令封印激活玩家身上的子弹
 		if evt.param1 == GadgetState.GearStart then
-			local cur_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.seal_id)
+			cur_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.seal_id)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.seal_id, GadgetState.ChestTrap)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.seal_id, cur_state)
 			-- 记录光柱触碰状况
@@ -265,14 +265,14 @@ function action_EVENT_GADGET_STATE_CHANGE_230006(context, evt)
 				t_p_value = 2
 			elseif evt.param2 == defs.light_3 then
 				t_p_value = 4
-			end	
+			end
 			ScriptLib.ChangeGroupVariableValue(context, "Temp_Point_Value", t_p_value)
 			return 0
 		end
-	elseif evt.param2 == defs.seal_id then 
+	elseif evt.param2 == defs.seal_id then
 		if evt.param1 == GadgetState.ChestLocked or evt.param3 == GadgetState.ChestLocked then
 			-- 玩家出界，group数据清理
-			local p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
+			p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
 			-- 重置临时数据
 			ScriptLib.SetGroupVariableValue(context, "Temp_Point_Value", p_value)
 			if p_value%2 == 0 then

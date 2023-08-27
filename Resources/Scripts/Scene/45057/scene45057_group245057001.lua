@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 245057001
 }
 
@@ -30,48 +30,48 @@ synchronizer = 1089,
     }
 
 room_infos = {
-         {        
-                room_cur = 1, 
-                room_next = 2, 
+         {
+                room_cur = 1,
+                room_next = 2,
                 wall_connect = 1013, --到下一个房间的空气墙
                 region_enter = 0, --弱网拦截用的
-                region_wall_enter = 0, --弱网拦截用的空气墙 
+                region_wall_enter = 0, --弱网拦截用的空气墙
                 region_self = 1109,      --记录处于所属房间region
                 point_safe = 1031 --传送安全点的configID
          },
-         {        
-                room_cur = 2, 
-                room_next = 3, 
+         {
+                room_cur = 2,
+                room_next = 3,
                 wall_connect = 1015, --到下一个房间的空气墙
                 region_enter =1047, --弱网拦截用的
-                region_wall_enter = 1014, --弱网拦截用的空气墙 
+                region_wall_enter = 1014, --弱网拦截用的空气墙
                 region_self = 1110,      --记录处于所属房间region
                 point_safe = 1044 --传送安全点的configID
          },
-         {        
-                room_cur = 3, 
-                room_next = 4, 
+         {
+                room_cur = 3,
+                room_next = 4,
                 wall_connect = 1017, --到下一个房间的空气墙
                 region_enter = 1048, --弱网拦截用的
-                region_wall_enter = 1016, --弱网拦截用的空气墙 
+                region_wall_enter = 1016, --弱网拦截用的空气墙
                 region_self = 1111,      --记录处于所属房间region
                 point_safe = 1045 --传送安全点的configID
-         },		
-         {        
-                room_cur = 4, 
-                room_next = 0, 
+         },
+         {
+                room_cur = 4,
+                room_next = 0,
                 wall_connect = 0, --到下一个房间的空气墙
                 region_enter = 1049, --弱网拦截用的
-                region_wall_enter = 1018, --弱网拦截用的空气墙 
+                region_wall_enter = 1018, --弱网拦截用的空气墙
                 region_self = 1112,      --记录处于所属房间region
                 point_safe = 1046 --传送安全点的configID
-         },	 
+         },
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -228,9 +228,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -241,9 +241,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -313,20 +313,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1087(context, evt)
 	if evt.param1 ~= 1087 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -337,22 +337,22 @@ function action_EVENT_ENTER_REGION_1087(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 245057001, 5)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1088(context, evt)
 	if evt.param1 ~= 1088 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -360,22 +360,22 @@ end
 function action_EVENT_ENTER_REGION_1088(context, evt)
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 245057001, 5)
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 245057001, 6)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1090(context, evt)
 	if evt.param1 ~= 1090 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -383,7 +383,7 @@ end
 function action_EVENT_ENTER_REGION_1090(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 245057001, 6)
-	
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133108020
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -86,18 +86,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_20003(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133108020) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -108,70 +108,70 @@ function action_EVENT_ANY_MONSTER_DIE_20003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 4002, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 将configid为 20004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 20004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 20006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 20006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 20007 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 20007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 20008 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 20008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 20009 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 20009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 20010 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 20010, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 20011 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 20011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_20012(context, evt)
 	if evt.param1 ~= 20012 then return false end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_20012(context, evt)
 	   	if context.uid~=0 then
-			local small_region={}
-			local big_region={}
+			small_region={}
+			big_region={}
 			for i=1,#regions do
 				if regions[i].config_id==20012 then
 					small_region=regions[i]
@@ -182,7 +182,7 @@ function action_EVENT_ENTER_REGION_20012(context, evt)
 			end
 			ScriptLib.TrySetPlayerEyePoint(context, small_region, big_region, 0, {0})
 		end
-	
+
 	return 0
 end
 
@@ -197,7 +197,7 @@ function action_EVENT_LEAVE_REGION_20013(context, evt)
 	     	if context.uid~=0 then
 			ScriptLib.ClearPlayerEyePoint(context, 20012)
 		end
-	
+
 	return 0
 end
 

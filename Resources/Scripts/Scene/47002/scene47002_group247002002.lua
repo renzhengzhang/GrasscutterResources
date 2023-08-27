@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 247002002
 }
 
 -- DEFS_MISCS
-local RegionID = 2003
-local QuestID = 0
-local GroupID = 247002002
-local RoomDoorConfigID = 0
-local DestinationConfigID = 0
+RegionID = 2003
+QuestID = 0
+GroupID = 247002002
+RoomDoorConfigID = 0
+DestinationConfigID = 0
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -79,9 +79,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -91,7 +91,7 @@ function action_EVENT_QUEST_START_2005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -102,7 +102,7 @@ function action_EVENT_QUEST_FINISH_2006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 

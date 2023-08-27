@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001166
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 209
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -94,9 +94,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -104,7 +104,7 @@ function condition_EVENT_ANY_GADGET_DIE_202(context, evt)
 	if 2347 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -115,13 +115,13 @@ function action_EVENT_ANY_GADGET_DIE_202(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 延迟15秒后,向groupId为：133001166的对象,请求一次调用,并将string参数："spirit_1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133001166, "spirit_1", 15) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -132,7 +132,7 @@ function action_EVENT_TIMER_EVENT_203(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -143,7 +143,7 @@ function action_EVENT_TIMER_EVENT_205(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -152,7 +152,7 @@ function condition_EVENT_ANY_GADGET_DIE_206(context, evt)
 	if 2349 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -163,13 +163,13 @@ function action_EVENT_ANY_GADGET_DIE_206(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 延迟15秒后,向groupId为：133001166的对象,请求一次调用,并将string参数："spirit_2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133001166, "spirit_2", 15) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -180,7 +180,7 @@ function action_EVENT_TIMER_EVENT_208(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_ANY_GADGET_DIE_210(context, evt)
 	if 2351 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -208,12 +208,12 @@ function action_EVENT_ANY_GADGET_DIE_210(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 延迟15秒后,向groupId为：133001166的对象,请求一次调用,并将string参数："spirit_3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133001166, "spirit_3", 15) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

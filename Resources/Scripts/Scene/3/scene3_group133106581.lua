@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133106581
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,9 +114,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -124,7 +124,7 @@ function condition_EVENT_ANY_GADGET_DIE_581008(context, evt)
 	if 581001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -132,7 +132,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_581008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106581, 2)
-	
+
 	return 0
 end
 
@@ -141,7 +141,7 @@ function condition_EVENT_ANY_GADGET_DIE_581009(context, evt)
 	if 581002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -149,7 +149,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_581009(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106581, 3)
-	
+
 	return 0
 end
 
@@ -159,8 +159,8 @@ function condition_EVENT_ANY_MONSTER_DIE_581010(context, evt)
 	if evt.param1 ~= 581003 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -168,17 +168,17 @@ end
 function action_EVENT_ANY_MONSTER_DIE_581010(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106581, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_581011(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133106581) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -186,6 +186,6 @@ end
 function action_EVENT_ANY_MONSTER_DIE_581011(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106581, 5)
-	
+
 	return 0
 end

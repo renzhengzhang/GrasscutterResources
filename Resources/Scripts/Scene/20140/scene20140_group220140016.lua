@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220140016
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
 
                 --本Group中发射器gadget的configID，最多3个,
                 fireMachineList = {
@@ -29,7 +29,7 @@ local        defs = {
                 --定义左右旋转的步长,key为传递装置configID，value为GadgetState
                 horizon_steps = {
                         [16005] = {0, 102, 103, 104},
-                        [16010] = {0, 102, 103, 104},	        
+                        [16010] = {0, 102, 103, 104},
 
                 },
 
@@ -38,15 +38,15 @@ local        defs = {
                         [16005] = {0, 302, 303, 304},
                         [16010] = {0, 302, 303, 304},
 
- 	        
+
                 },
               serve_items = {16002}
         }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -86,9 +86,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -99,9 +99,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -126,19 +126,19 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_16004(context, evt)
 	if evt.param1 == 16003 then
 		ScriptLib.SetGroupVariableValue(context, "isLock_1", 0)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,16002, GadgetState.GearStart)
 	end
-	
+
 	return 0
 end
 
@@ -148,12 +148,12 @@ function condition_EVENT_GROUP_LOAD_16006(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "temp", 220140016) ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"load"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "load", 220140003) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -161,7 +161,7 @@ end
 function action_EVENT_GROUP_LOAD_16006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140016, 2)
-	
+
 	return 0
 end
 
@@ -169,24 +169,24 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_16013(context, evt)
 	if evt.param2 == 16012 and ScriptLib.GetGadgetStateByConfigId(context, 0, 16012) == 201 then
 		ScriptLib.SetGroupVariableValueByGroup(context, "option1", 1, 220140003)
-		
+
 		ScriptLib.SetGroupVariableValueByGroup(context, "unlock", 1, 220140017)
-		
+
 		ScriptLib.SetGroupVariableValueByGroup(context, "isLock_1", 0, 220140017)
-		
+
 		ScriptLib.SetGroupVariableValue(context, "temp", 1)
-		
+
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
-		
+
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 220140017, 17002, GadgetState.Default)
-		
+
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 220140017, 17003, GadgetState.GearStart)
-		
+
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140017, config_id=17012, entity_type=EntityType.GADGET})
-		
+
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140017, config_id=17013, entity_type=EntityType.GADGET})
 	end
-	
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220131014
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -83,20 +83,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_14005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"GH1"为2
 	if ScriptLib.GetGroupVariableValue(context, "GH1") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -107,34 +107,34 @@ function action_EVENT_VARIABLE_CHANGE_14005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Stage" 的变量设置为 4
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Stage", 4, 220131016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Start" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Start", 1, 220131011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 改变指定group组220131010中， configid为10003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220131010, 10003, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131015, 2)
-	
+
 	-- 将本组内变量名为 "Stage" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Stage", 2, 220131019) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -143,7 +143,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_14006(context, evt)
 	if 14001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -154,7 +154,7 @@ function action_EVENT_GADGET_STATE_CHANGE_14006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -163,7 +163,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_14007(context, evt)
 	if 14002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -174,6 +174,6 @@ function action_EVENT_GADGET_STATE_CHANGE_14007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

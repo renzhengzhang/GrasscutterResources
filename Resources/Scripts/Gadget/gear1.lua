@@ -1,31 +1,31 @@
 
 -- 机关初始化配置
 -- 初始状态
-local state_ = GadgetState.GearStart
+state_ = GadgetState.GearStart
 -- 启动元素
-local start_elem_type_ = ElementType.Fire
+start_elem_type_ = ElementType.Fire
 -- 最大启动值
-local max_start_value_ = 0
+max_start_value_ = 0
 -- 启动持续时间
-local start_last_time_ = 16
+start_last_time_ = 16
 -- 停止元素
-local stop_elem_type_ = ElementType.Ice
+stop_elem_type_ = ElementType.Ice
 -- 最大停止值
-local max_stop_value_ = 1
+max_stop_value_ = 1
 -- 停止持续时间
-local stop_last_time_ = 2
+stop_last_time_ = 2
 --冰冻状态额外持续的时间
-local frozen_time = 4
+frozen_time = 4
 
 -- 机关被攻击
 --[[
 function OnBeHurt(context, element_type)
 	-- 获取机关当前状态
-	local state = ScriptLib.GetGadgetState(context)
+	state = ScriptLib.GetGadgetState(context)
 	if state == GadgetState.Default then
 		if element_type == start_elem_type then
 			-- 获取原有的启动值
-			local start_value = ScriptLib.GetGearStartValue(context)
+			start_value = ScriptLib.GetGearStartValue(context)
 			start_value = start_value + 1
 			if start_value >= max_start_value_ then
 				-- 在Default状态下，启动值超过最大启动值，则转换为GearStart状态
@@ -39,7 +39,7 @@ function OnBeHurt(context, element_type)
 		--待机状态的机关也会进入停止状态
 		elseif stop_elem_type_ ~= ElementType.None and element_type == stop_elem_type_ then
 			-- 获取原有的停止值
-			local stop_value = ScriptLib.GetGearStopValue(context)
+			stop_value = ScriptLib.GetGearStopValue(context)
 			stop_value = stop_value + 1
 			if stop_value >= max_stop_value_ then
 				-- 在Default状态下，停止值超过最大停止值，则转换为GearStop状态
@@ -54,7 +54,7 @@ function OnBeHurt(context, element_type)
 	elseif state == GadgetState.GearStart then
 		if stop_elem_type_ ~= ElementType.None and element_type == stop_elem_type_ then
 			-- 获取原有的停止值
-			local stop_value = ScriptLib.GetGearStopValue(context)
+			stop_value = ScriptLib.GetGearStopValue(context)
 			stop_value = stop_value + 1
 			if stop_value >= max_stop_value_ then
 				-- 在GearStart状态下，停止值超过最大停止值，则转换为GearStop状态
@@ -78,11 +78,11 @@ end
 --移除喷火机关的default状态
 function OnBeHurt(context, element_type, strike_type, is_host)
 	-- 获取机关当前状态
-	local state = ScriptLib.GetGadgetState(context)
+	state = ScriptLib.GetGadgetState(context)
 	if state == GadgetState.GearStart then
 		if stop_elem_type_ ~= ElementType.None and element_type == stop_elem_type_ then
 			-- 获取原有的停止值
-			local stop_value = ScriptLib.GetGearStopValue(context)
+			stop_value = ScriptLib.GetGearStopValue(context)
 			stop_value = stop_value + 1
 			if stop_value >= max_stop_value_ then
 				-- 在GearStart状态下，停止值超过最大停止值，则转换为GearStop状态
@@ -106,16 +106,16 @@ end
 -- 定时器回调
 function OnTimer(context, now)
 	-- 获取机关当前状态
-	local state = ScriptLib.GetGadgetState(context)
+	state = ScriptLib.GetGadgetState(context)
 	if state == GadgetState.Default then
-		local start_value = ScriptLib.GetGearStartValue(context)
+		start_value = ScriptLib.GetGearStartValue(context)
 		if start_value >= max_start_value_ then
 			-- 在Default状态下，启动值超过最大启动值，则转换为GearStart状态
 			ScriptLib.SetGadgetState(context, GadgetState.GearStart)
 		end
 	elseif state == GadgetState.GearStart then
 		-- 获取当前状态的开始时间
-		local state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
+		state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
 		if now >= state_begin_time + start_last_time_ then
 			-- 如果启动时间超过启动持续时间，则转换为GearStop状态
 			ScriptLib.SetGadgetState(context, GadgetState.GearStop)
@@ -124,7 +124,7 @@ function OnTimer(context, now)
 		end
 	elseif state == GadgetState.GearStop then
 		-- 获取当前状态的开始时间
-		local state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
+		state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
 		if now >= state_begin_time + stop_last_time_ + frozen_time then
 			-- 如果停止时间超过停止持续时间，则转换为Default状态
 			ScriptLib.SetGadgetState(context, GadgetState.Default)
@@ -138,10 +138,10 @@ end
 -- 定时器回调
 function OnTimer(context, now)
 	-- 获取机关当前状态
-	local state = ScriptLib.GetGadgetState(context)
+	state = ScriptLib.GetGadgetState(context)
 	if state == GadgetState.GearStart then
 		-- 获取当前状态的开始时间
-		local state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
+		state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
 		if now >= state_begin_time + start_last_time_ then
 			-- 如果启动时间超过启动持续时间，则转换为GearStop状态
 			ScriptLib.SetGadgetState(context, GadgetState.GearStop)
@@ -150,7 +150,7 @@ function OnTimer(context, now)
 		end
 	elseif state == GadgetState.GearStop then
 		-- 获取当前状态的开始时间
-		local state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
+		state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
 		if now >= state_begin_time + stop_last_time_ + frozen_time then
 			-- 如果停止时间超过停止持续时间，则转换为Start状态
 			ScriptLib.SetGadgetState(context, GadgetState.GearStart)

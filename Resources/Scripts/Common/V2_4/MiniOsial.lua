@@ -1,12 +1,12 @@
-local watcher_2_condition = defs.round
-local watcher4time = defs.interval_time_1
-local watcher5time = defs.interval_time_2
-local watcher6time = defs.interval_time_3
-local temp_Variables = {
+watcher_2_condition = defs.round
+watcher4time = defs.interval_time_1
+watcher5time = defs.interval_time_2
+watcher6time = defs.interval_time_3
+temp_Variables = {
 	{ config_id=50000001,name = "Finish_Game_Play", value = 0, no_refresh = false },
 }
 
-local temp_Tirgger = {
+temp_Tirgger = {
 	{event = EventType.EVENT_VARIABLE_CHANGE, source = "Finish_Game_Play", condition = "", action = "action_EVENT_VARIABLE_CHANGE",trigger_count = 0},
 	{event = EventType.EVENT_ANY_MONSTER_LIVE, source = "", condition = "", action = "action_EVENT_ANY_MONSTER_LIVE",trigger_count = 0},
 	{event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_EVENT_TIME_AXIS_PASS",trigger_count = 0},
@@ -22,7 +22,7 @@ function action_EVENT_SELECT_OPTION(context,evt)
     ScriptLib.SetGroupTempValue(context,"watcher_5_complete",0,{})
     ScriptLib.SetGroupTempValue(context,"watcher_6_complete",0,{})
     ScriptLib.SetGroupTempValue(context,"round",0,{})
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    uid_list = ScriptLib.GetSceneUidList(context)
     for i = 1 , #uid_list do
         ScriptLib.SetGroupTempValue(context,"watcher_3_attacked_"..uid_list[i],0,{})
     end
@@ -46,7 +46,7 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
     ScriptLib.PrintContextLog(context,"action_EVENT_VARIABLE_CHANGE".. "[evt.source_name] = " .. evt.source_name)
 
     if evt.source_name == "Finish_Game_Play" then
-        local uid_list = ScriptLib.GetSceneUidList(context)
+        uid_list = ScriptLib.GetSceneUidList(context)
         for i = 1 , #uid_list do
             ScriptLib.AddExhibitionAccumulableData(context,uid_list[i],"Activity_MiniOsial_Watcher_1",1)    --[[watcher1]]
             ScriptLib.PrintContextLog(context,uid_list[i].. ":watcher1")
@@ -62,10 +62,10 @@ end
 --ScriptLib.GetMonsterIdByEntityId(context, entity_id)：根据实体ID获取怪物ID（monster_id)。
 --========================以下为LF
 function LF_cal_watcher_2(context)
-    local _round = ScriptLib.GetGroupTempValue(context,"round",{})
+    _round = ScriptLib.GetGroupTempValue(context,"round",{})
     ScriptLib.PrintContextLog(context,"LF_cal_watcher_2[round]=".._round)
     if _round < watcher_2_condition then
-        local uid_list = ScriptLib.GetSceneUidList(context)
+        uid_list = ScriptLib.GetSceneUidList(context)
         for i = 1 , #uid_list do
             ScriptLib.AddExhibitionAccumulableData(context,uid_list[i],"Activity_MiniOsial_Watcher_2",1)    --[[watcher2]]
             ScriptLib.PrintContextLog(context,uid_list[i].. ":watcher2")
@@ -75,7 +75,7 @@ function LF_cal_watcher_2(context)
 end
 function LF_cal_watcher_3(context)
     ScriptLib.PrintContextLog(context,"LF_cal_watcher_3")
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    uid_list = ScriptLib.GetSceneUidList(context)
     for i = 1 , #uid_list do
         if ScriptLib.GetGroupTempValue(context,"watcher_3_attacked_"..uid_list[i],{}) ~= 1 then
             ScriptLib.AddExhibitionAccumulableData(context,uid_list[i],"Activity_MiniOsial_Watcher_3",1)    --[[watcher3]]
@@ -90,7 +90,7 @@ function LF_cal_watcher_456(context)
     ScriptLib.PrintContextLog(context,"LF_cal_watcher_456")
     for key = 4,6 do
         if ScriptLib.GetGroupTempValue(context,"watcher_".. key .. "_complete",{}) == 1 then
-            local uid_list = ScriptLib.GetSceneUidList(context)
+            uid_list = ScriptLib.GetSceneUidList(context)
             for i = 1 , #uid_list do
                 ScriptLib.AddExhibitionAccumulableData(context,uid_list[i],"Activity_MiniOsial_Watcher_"..key,1)    --[[watcher456]]
                 ScriptLib.PrintContextLog(context,uid_list[i].. ":watcher"..key)

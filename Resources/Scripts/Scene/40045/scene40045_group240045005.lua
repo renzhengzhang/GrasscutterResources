@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240045005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -84,9 +84,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -96,13 +96,13 @@ function action_EVENT_TIMER_EVENT_5008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 改变指定group组240045005中， configid为5003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045005, 5003, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -112,7 +112,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5009(context, evt)
 	if 5001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -122,8 +122,8 @@ function action_EVENT_GADGET_STATE_CHANGE_5009(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045005, 5004, GadgetState.Action01) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -133,7 +133,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5010(context, evt)
 	if 5001 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -143,8 +143,8 @@ function action_EVENT_GADGET_STATE_CHANGE_5010(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045005, 5006, GadgetState.Action01) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5011(context, evt)
 	if 5001 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 or GadgetState.GearStop ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -164,14 +164,14 @@ function action_EVENT_GADGET_STATE_CHANGE_5011(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045005, 5005, GadgetState.Action01) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟1.5秒后,向groupId为：240045005的对象,请求一次调用,并将string参数："time1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 240045005, "time1", 1.5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -179,14 +179,14 @@ end
 function condition_EVENT_SELECT_OPTION_5012(context, evt)
 	-- 判断是gadgetid 5007 option_id 1
 	if 5007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -196,71 +196,71 @@ function action_EVENT_SELECT_OPTION_5012(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045005, 5001, GadgetState.GearAction2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240045005中， configid为5003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045005, 5003, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 240045006, 6)
-	
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240045006, 7)
-	
+
 	-- 改变指定group组240045005中， configid为5006的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045005, 5006, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240045005中， configid为5005的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045005, 5005, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240045005中， configid为5004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045005, 5004, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 240045005 ；指定config：5007；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240045005, 5007, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 240045006, 1)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 240045006, 2)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 240045006, 3)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 240045006, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 240045006, 5)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"point"为3
 	if ScriptLib.GetGroupVariableValue(context, "point") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -268,19 +268,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_5013(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240045006, 6)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5016(context, evt)
 	if evt.param1 ~= 5016 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -291,7 +291,7 @@ function action_EVENT_ENTER_REGION_5016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -299,14 +299,14 @@ end
 function condition_EVENT_SELECT_OPTION_5017(context, evt)
 	-- 判断是gadgetid 5015 option_id 24
 	if 5015 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 24 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -316,19 +316,19 @@ function action_EVENT_SELECT_OPTION_5017(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045005, 5014, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 240045005 ；指定config：5015；物件身上指定option：24；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240045005, 5015, 24) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 改变指定group组240045005中， configid为5015的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045005, 5015, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

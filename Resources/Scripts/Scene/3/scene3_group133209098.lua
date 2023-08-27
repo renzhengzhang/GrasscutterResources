@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133209098
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -81,9 +81,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -91,7 +91,7 @@ function condition_EVENT_GADGET_CREATE_98003(context, evt)
 	if 98002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -102,7 +102,7 @@ function action_EVENT_GADGET_CREATE_98003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -110,14 +110,14 @@ end
 function condition_EVENT_SELECT_OPTION_98004(context, evt)
 	-- 判断是gadgetid 98002 option_id 68
 	if 98002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 68 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -128,37 +128,37 @@ function action_EVENT_SELECT_OPTION_98004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "check3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "check3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133209098, EntityType.GADGET, 98001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133209098, EntityType.GADGET, 98006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 删除指定group： 133209098 ；指定config：98002；物件身上指定option：68；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209098, 98002, 68) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133209098, EntityType.GADGET, 98002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -168,7 +168,7 @@ function condition_EVENT_GROUP_LOAD_98005(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "check3", 133209098) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -179,6 +179,6 @@ function action_EVENT_GROUP_LOAD_98005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

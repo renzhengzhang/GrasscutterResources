@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133107941
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -94,9 +94,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -104,7 +104,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_941011(context, evt)
 	if 941001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -115,7 +115,7 @@ function action_EVENT_GADGET_STATE_CHANGE_941011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -124,7 +124,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_941012(context, evt)
 	if 941002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -135,7 +135,7 @@ function action_EVENT_GADGET_STATE_CHANGE_941012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -144,7 +144,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_941013(context, evt)
 	if 941003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -155,7 +155,7 @@ function action_EVENT_GADGET_STATE_CHANGE_941013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -164,7 +164,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_941014(context, evt)
 	if 941004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -175,7 +175,7 @@ function action_EVENT_GADGET_STATE_CHANGE_941014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -184,7 +184,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_941015(context, evt)
 	if 941005 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -195,7 +195,7 @@ function action_EVENT_GADGET_STATE_CHANGE_941015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -204,7 +204,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_941016(context, evt)
 	if 941006 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -215,7 +215,7 @@ function action_EVENT_GADGET_STATE_CHANGE_941016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -224,7 +224,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_941017(context, evt)
 	if 941007 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -235,7 +235,7 @@ function action_EVENT_GADGET_STATE_CHANGE_941017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -244,7 +244,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_941018(context, evt)
 	if 941008 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -255,7 +255,7 @@ function action_EVENT_GADGET_STATE_CHANGE_941018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -264,7 +264,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_941019(context, evt)
 	if 941009 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -275,7 +275,7 @@ function action_EVENT_GADGET_STATE_CHANGE_941019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -284,7 +284,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_941020(context, evt)
 	if 941010 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -295,6 +295,6 @@ function action_EVENT_GADGET_STATE_CHANGE_941020(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

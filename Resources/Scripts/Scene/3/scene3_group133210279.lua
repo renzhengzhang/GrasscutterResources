@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210279
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -82,9 +82,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -157,9 +157,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -168,8 +168,8 @@ function condition_EVENT_ANY_MONSTER_DIE_279009(context, evt)
 	if evt.param2 ~= 1 then
 	    return false
 	 end
-	
-	
+
+
 	return true
 end
 
@@ -177,10 +177,10 @@ end
 function action_EVENT_ANY_MONSTER_DIE_279009(context, evt)
 		-- 添加某个flowSuite里的要素，不会更改当前场上已存在的物件/怪物状态
 	  ScriptLib.AddExtraFlowSuite(context, 133210279, 3, FlowSuiteOperatePolicy.DEFAULT)
-	
+
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210279, 3)
-	
+
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_279010(context, evt)
 	if 279006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -200,27 +200,27 @@ function action_EVENT_GADGET_STATE_CHANGE_279010(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 279008 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 279006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210279, 4)
-	
+
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133210279, 4, FlowSuiteOperatePolicy.COMPLETE)
-	
+
 	return 0
 end
 
@@ -229,7 +229,7 @@ function condition_EVENT_GADGET_CREATE_279014(context, evt)
 	if 279006 ~= evt.param1 or GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -240,7 +240,7 @@ function action_EVENT_GADGET_CREATE_279014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -248,14 +248,14 @@ end
 function condition_EVENT_SELECT_OPTION_279015(context, evt)
 	-- 判断是gadgetid 279006 option_id 61
 	if 279006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 61 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -266,33 +266,33 @@ function action_EVENT_SELECT_OPTION_279015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 6016, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 279008 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 279006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210279, 4)
-	
+
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133210279, 4, FlowSuiteOperatePolicy.COMPLETE)
-	
+
 	return 0
 end
 
@@ -301,7 +301,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_279016(context, evt)
 	if 279007 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -309,7 +309,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_279016(context, evt)
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210279, 5)
-	
+
 	return 0
 end
 
@@ -320,11 +320,11 @@ function action_EVENT_ENTER_REGION_279017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210279, 2)
-	
+
 	return 0
 end
 
@@ -332,6 +332,6 @@ end
 function action_EVENT_GROUP_LOAD_279020(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210279, 2)
-	
+
 	return 0
 end

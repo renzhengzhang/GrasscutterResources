@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133223096
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -101,20 +101,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_96002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"puzzle_progress"为2
 	if ScriptLib.GetGroupVariableValue(context, "puzzle_progress") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -125,19 +125,19 @@ function action_EVENT_VARIABLE_CHANGE_96002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_96003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"puzzle_progress"为3
 	if ScriptLib.GetGroupVariableValue(context, "puzzle_progress") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -145,7 +145,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_96003(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133223096, 3)
-	
+
 	return 0
 end
 
@@ -155,7 +155,7 @@ function condition_EVENT_ANY_MONSTER_DIE_96007(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -166,7 +166,7 @@ function action_EVENT_ANY_MONSTER_DIE_96007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -176,7 +176,7 @@ function condition_EVENT_GROUP_LOAD_96009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "puzzle_progress") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -187,6 +187,6 @@ function action_EVENT_GROUP_LOAD_96009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

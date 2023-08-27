@@ -13,7 +13,7 @@
 =======================================================================================]]
 
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["GadgetStateChange"] = { config_id = 80000004, name = "GadgetStateChange", event= EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_GadgetStateChange", trigger_count = 0 },
 	}

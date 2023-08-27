@@ -4,7 +4,7 @@
 ||  owner:      weiwei.sun
 ||  description:    物件交付接口返回值是列表。提供一个将列表第一位ID设为GroupVariable的功能，供关卡编辑器使用
 ||  LogName:    ## [HandleGivingResult]
-||  Protection: 
+||  Protection:
 =======================================]]
 
 --[[
@@ -14,10 +14,10 @@
 交付可取回 - 102
 ]]
 
-local cfg = {
+cfg = {
     can_return = 1,--是否可取回
 }
-local giving_Triggers = {
+giving_Triggers = {
     { config_id = 8800001, name = "Gadget_Giving_Finished", event = EventType.EVENT_GADGET_GIVING_FINISHED, source = "", condition = "", action = "action_Gadget_Giving_Finished", trigger_count = 0 },
     { config_id = 8800002, name = "Gadget_Giving_TakeBack", event = EventType.EVENT_GADGET_GIVING_TAKEBACK, source = "", condition = "", action = "action_Gadget_Giving_TakeBack", trigger_count = 0 },
 }
@@ -35,7 +35,7 @@ end
 --evt.param1: 交付Gadget的config_id
 --evt.param2: 使用的giving_id
 function action_Gadget_Giving_Finished(context, evt)
-    
+
     ScriptLib.PrintContextLog(context, "## [HandleGivingResult] Gadget_Giving_Finished. gadget@"..evt.param1.." giving_id@"..evt.param2)
 
     if cfg.can_return == 1 then
@@ -43,8 +43,8 @@ function action_Gadget_Giving_Finished(context, evt)
     else
         ScriptLib.SetGadgetStateByConfigId(context, evt.param1, 101)
     end
-    
-    local item_list = ScriptLib.GetGivingItemList(context, evt.param2)
+
+    item_list = ScriptLib.GetGivingItemList(context, evt.param2)
     if nil ~= item_list and 0 ~= #item_list then
         ScriptLib.SetGroupVariableValue(context, "given_item", item_list[1])
     else
@@ -52,7 +52,7 @@ function action_Gadget_Giving_Finished(context, evt)
     end
 
     --星空投影灯逻辑
-    if nil ~= defs.control then 
+    if nil ~= defs.control then
         LF_HandleStarProjector(context, 1)
     end
     --埋点
@@ -70,7 +70,7 @@ function action_Gadget_Giving_TakeBack(context, evt)
 
 
     --星空投影灯逻辑
-    if nil ~= defs.control then 
+    if nil ~= defs.control then
         LF_HandleStarProjector(context, 0)
     end
     --埋点
@@ -81,7 +81,7 @@ end
 --当星空投影仪ability准备好时，SLC请求设置亮点
 function SLC_HandleGivingResult_Init(context)
      --星空投影灯逻辑
-    if nil ~= defs.control then 
+    if nil ~= defs.control then
         if 102 == ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, defs.control.giving_gadget) then
             LF_HandleStarProjector(context, 1)
             ScriptLib.PrintContextLog(context, "## [HandleGivingResult] SLC_HandleGivingResult_Init. giving_gadget@"..defs.control.giving_gadget.." is_on: 1")
@@ -94,7 +94,7 @@ function SLC_HandleGivingResult_Init(context)
 end
 
 function LF_HandleStarProjector(context, is_on)
-    local match = defs.control
+    match = defs.control
     ScriptLib.ExecuteGroupLua(context, match.group_id, "EX_SetStarProjectorSGV", { match.config_id, match.light_index, is_on})
     return 0
 end

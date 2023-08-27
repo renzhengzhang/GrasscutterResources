@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220151005
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	elevatorOptionID = 491,
 	gadget_elevatorID = 5001,
 	finalMovePoints = {1,2,3,4,5,6,7,8}
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -94,9 +94,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -143,89 +143,89 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"success1"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "success1", 220151005) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_5003(context, evt)
 	-- 前往A6点1
-	
+
 	SetElevator_finalMove(context,6,1)
-	
+
 	ScriptLib.SetGroupVariableValue(context, "IsBlockMoveMode", 1)
-	
-	ScriptLib.BeginCameraSceneLookWithTemplate(context, 3,{look_configid=0, look_pos = {x = -143,y = 6,z = 77},  follow_type =2, follow_pos = {x=-125,y=18,z=61},is_broadcast =false, delay = 0, }) 
-	
-	
+
+	ScriptLib.BeginCameraSceneLookWithTemplate(context, 3,{look_configid=0, look_pos = {x = -143,y = 6,z = 77},  follow_type =2, follow_pos = {x=-125,y=18,z=61},is_broadcast =false, delay = 0, })
+
+
 	return 0
-	
+
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_5005(context, evt)
 	-- 判断是gadgetid 为 5001的移动平台，是否到达了6 的点集中的 8 点
-	
+
 	if 5001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 8 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"IsArrive_Flower"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IsArrive_Flower", 220151010) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_ARRIVAL_5005(context, evt)
 	ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=679.7, y=58, z=424.5}, radius = 2, rot = {x=0, y=315, z=0},is_skip_ui=false})
-		
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"IsReminder"为0
 	if ScriptLib.GetGroupVariableValue(context, "IsReminder") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"CurMovePoint"为1
 	if ScriptLib.GetGroupVariableValue(context, "CurMovePoint") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"IsInL2"为1
 	if ScriptLib.GetGroupVariableValue(context, "IsInL2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -233,25 +233,25 @@ end
 function action_EVENT_VARIABLE_CHANGE_5006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220151005, 2)
-	
+
 	-- 针对当前group内变量名为 "IsReminder" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "IsReminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5008(context, evt)
 	if evt.param1 ~= 5008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -262,20 +262,20 @@ function action_EVENT_ENTER_REGION_5008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5009(context, evt)
 	if evt.param1 ~= 5009 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -286,7 +286,7 @@ function action_EVENT_ENTER_REGION_5009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -296,7 +296,7 @@ function condition_EVENT_LEAVE_REGION_5010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IsInL2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -307,27 +307,27 @@ function action_EVENT_LEAVE_REGION_5010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_5011(context, evt)
 	-- 判断是gadgetid 为 5001的移动平台，是否到达了6 的点集中的 3 点
-	
+
 	if 5001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -337,34 +337,34 @@ function action_EVENT_PLATFORM_ARRIVAL_5011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5013, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 5014 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_5012(context, evt)
 	-- 判断是gadgetid 为 5001的移动平台，是否到达了6 的点集中的 5 点
-	
+
 	if 5001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 5 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -374,74 +374,74 @@ function action_EVENT_PLATFORM_ARRIVAL_5012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5015, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 5016 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5016, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220151005, EntityType.GADGET, 5013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220151005, EntityType.GADGET, 5014 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_5017(context, evt)
 	-- 判断是gadgetid 为 5001的移动平台，是否到达了6 的点集中的 1 点
-	
+
 	if 5001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_ARRIVAL_5017(context, evt)
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, 5001, "SGV_ShineEffect", 1)
-	
-		
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_5018(context, evt)
 	-- 判断是gadgetid 为 5001的移动平台，是否到达了6 的点集中的 2 点
-	
+
 	if 5001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -452,7 +452,7 @@ function action_EVENT_PLATFORM_ARRIVAL_5018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -461,7 +461,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5019(context, evt)
 	if 5001 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -472,7 +472,7 @@ function action_EVENT_GADGET_STATE_CHANGE_5019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -481,12 +481,12 @@ function condition_EVENT_GADGET_CREATE_5020(context, evt)
 	if 5001 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"success"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "success", 220151002) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -494,34 +494,34 @@ end
 function action_EVENT_GADGET_CREATE_5020(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220151005, 3)
-	
+
 	-- 前往A6点1
-	
+
 	SetElevator_finalMove(context,6,1)
-	
+
 	ScriptLib.SetGroupVariableValue(context, "IsBlockMoveMode", 1)
-	
+
 	return 0
-	
+
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_5022(context, evt)
 	-- 判断是gadgetid 为 5001的移动平台，是否到达了6 的点集中的 1 点
-	
+
 	if 5001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -531,8 +531,8 @@ function action_EVENT_PLATFORM_ARRIVAL_5022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5021, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -541,7 +541,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5023(context, evt)
 	if 5001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -551,14 +551,14 @@ function action_EVENT_GADGET_STATE_CHANGE_5023(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 5004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -567,7 +567,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5024(context, evt)
 	if 5001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -577,14 +577,14 @@ function action_EVENT_GADGET_STATE_CHANGE_5024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 5004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

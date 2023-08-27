@@ -1,26 +1,26 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133304104
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	lensRegion = 104007
 }
 
 -- DEFS_MISCS
-local defs_miscs = 
+defs_miscs =
 {
     -- 死域观测站透镜的config id
-    lensConfigId = 104001,   
-lnlConfigId = 104004, 
+    lensConfigId = 104001,
+lnlConfigId = 104004,
 
     resetParam = "rewindSmoke_73089",
 
     hiddenlnlParam = "hiddenlnl_73089",
 
     -- 一个smoke对应一个quest
-    smokeTable = 
+    smokeTable =
     {
         -- 每项格式如下，通常应该只有两项，即一个透镜对应两个黑烟
         --[smoke_id] = {smoke = smoke_config_id, region = region_id, group = group_id, observeQuest = quest_id, finishQuest = quest_id, questParam = "任务定义的进度名"}
@@ -30,9 +30,9 @@ lnlConfigId = 104004,
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -79,9 +79,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -92,9 +92,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -110,20 +110,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"smoke_104002"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_104002") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -134,19 +134,19 @@ function action_EVENT_VARIABLE_CHANGE_104008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"smoke_104003"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_104003") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_VARIABLE_CHANGE_104009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -179,11 +179,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_104010(context, evt)
 	if 2 == 3 and 300 ~= evt.param1 and 301 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if ScriptLib.GetHostQuestState(context,7308901) ~= 2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -194,26 +194,26 @@ function action_EVENT_GADGET_STATE_CHANGE_104010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"smoke_104002"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_104002") == 1 then
 			return true
 	end
-	
+
 	-- 判断变量"smoke_104003"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_104003") == 1 then
 			return true
 	end
-	
+
 	return false
 end
 
@@ -224,19 +224,19 @@ function action_EVENT_VARIABLE_CHANGE_104011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_104012(context, evt)
 	if evt.param1 ~= 104012 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -247,7 +247,7 @@ function action_EVENT_ENTER_REGION_104012(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 

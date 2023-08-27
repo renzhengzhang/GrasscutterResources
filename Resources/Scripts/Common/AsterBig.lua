@@ -1,6 +1,6 @@
 --[[
 setmetatable(_ENV,{__index=function() return{} end})
-local stage_def = {
+stage_def = {
 	[1] = {
 		--根据阶段创建的group,在阶段group中标记
 		[1] = {2,3,4,5},
@@ -23,7 +23,7 @@ local stage_def = {
 }
 
 --根据progress对应的monster_tide,配在主group中
-local tide_defs = {
+tide_defs = {
 	[1] = {
 		[0] = {suite={2,3,4,5},weight={20,20,20,20,20}},
 		[1] = {suite={2,3,4,5},weight={20,20,20,20,20}},
@@ -48,7 +48,7 @@ local tide_defs = {
 }
 
 --monster_tide的启动参数,配在主group中
-local tide_suite_config = {
+tide_suite_config = {
 	[2] = {total=10,min=2,max=4,next=3,delay=10},
 	[3] = {total=10,min=2,max=4,next=4,delay=10},
 	[4] = {total=10,min=2,max=4,next=5,delay=10},
@@ -56,7 +56,7 @@ local tide_suite_config = {
 }
 
 --配在及时group中
-local timer_def = {
+timer_def = {
 	[1] = {
 		--根据时间创建的group
 		[1] = {2,3,4,5},
@@ -78,17 +78,17 @@ local timer_def = {
 	}
 }
 
-local progress_def = {
+progress_def = {
 	["normal"] = {0,1500,3000,4500,6500},
 	["hard"] = {0,1500,3000,4500,6500},
 	["nightmare"] = {0,1500,3000,4500,6500}
 }
 
-local defs = {
+defs = {
 	--group_main
 	gadget_aster = 413001,
 	gadget_reward = 123456,
-	score_ratio = {normal=1,hard=0.75,nightmare=0.5}, 
+	score_ratio = {normal=1,hard=0.75,nightmare=0.5},
 	difficulty_weight = {normal=75,hard=20,nightmare=5},
 	--group_stage
 	--group_clear
@@ -96,7 +96,7 @@ local defs = {
 	clear_delay = 30
 }--]]
 
-local play = {
+play = {
 	PlayType = 2,
 	PlayId = 2,
 	player_energy = "AVATAR_ASTER_SCORE", 	--global_value
@@ -108,12 +108,12 @@ local play = {
 	group_gadget = 133001498,
 	energy_str = "AVATAR_ASTER_SCORE", 		--uid_value
 	difficulty = "difficulty",
-	ratio_energy = {"ASTER_ENERGY_RATIO",2},	
+	ratio_energy = {"ASTER_ENERGY_RATIO",2},
 	ratio_progress = {"ASTER_PROGRESS_RATIO",2},
 	op_radius = 10
 }
 
-local extra_triggers = {
+extra_triggers = {
 	[play.group_main] = {
 		--活动准备阶段
 		["Battle_State"] = { config_id = 8000001, name = "Battle_State", event = EventType.EVENT_SCENE_MP_PLAY_BATTLE_STATE, source = "", condition = "condition_battle_state", action = "action_battle_state", trigger_count = 0 },
@@ -190,7 +190,7 @@ function LF_Initialize_Group(triggers, suites, group_id)
 end
 
 function UpdateAsterInterrupt(context)
-	local u_list = ScriptLib.GetSceneUidList(context)
+	u_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(u_list) do
 		if v == context.uid then
 			ScriptLib.ScenePlayBattleUidOp(context, play.group_main, defs.gadget_aster, {v}, 0, "random_buff_aster", {}, {}, 6, 0)
@@ -200,15 +200,15 @@ function UpdateAsterInterrupt(context)
 end
 
 function UpdateAsterProgress(context)
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
-	local D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
 	ratio = LF_Get_Extra_Energy_Ratio(context, host)
 	--获取玩家当前能量
-	local uid = context.uid
-	local energy = ScriptLib.GetTeamAbilityFloatValue(context, uid, play.energy_str)
-	local progress = math.ceil(energy * ratio)
+	uid = context.uid
+	energy = ScriptLib.GetTeamAbilityFloatValue(context, uid, play.energy_str)
+	progress = math.ceil(energy * ratio)
 	--将当前能量写入uid_value
-	local old_progress = ScriptLib.GetScenePlayBattleUidValue(context, 0, uid, play.energy_str)
+	old_progress = ScriptLib.GetScenePlayBattleUidValue(context, 0, uid, play.energy_str)
 	ScriptLib.PrintContextLog(context, "## uid:"..uid.." | energy:"..progress.." | old_energy:"..old_progress)
 	ScriptLib.SetScenePlayBattleUidValue(context, 0, uid, play.energy_str, old_progress + progress)
 	--通知ability可以清掉自己的能量计数
@@ -220,7 +220,7 @@ function UpdateAsterProgress(context)
 end
 
 function LF_Get_Extra_Energy_Ratio(context, host)
-	local ratio_ = 1
+	ratio_ = 1
 	--if true == LF_Is_Near_Op_Uid(context, host, play.ratio_energy[1]) then
 	if 1 == ScriptLib.GetTeamAbilityFloatValue(context, context.source_entity_id, play.ratio_energy[1]) then
 		ratio_ = play.ratio_energy[2]
@@ -230,7 +230,7 @@ function LF_Get_Extra_Energy_Ratio(context, host)
 end
 
 function LF_Get_Extra_Progress_Ratio(context, host)
-	local ratio_ = 1
+	ratio_ = 1
 	--if true == LF_Is_Near_Op_Uid(context, host, play.ratio_progress[1]) then
 	if 1 == ScriptLib.GetTeamAbilityFloatValue(context, context.source_entity_id, play.ratio_progress[1]) then
 		ratio_ = play.ratio_progress[2]
@@ -240,11 +240,11 @@ function LF_Get_Extra_Progress_Ratio(context, host)
 end
 
 function LF_Is_Near_Op_Uid(context, host, str)
-	local target = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "Op_Uid")
+	target = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "Op_Uid")
 	if target == 0 or 0 == ScriptLib.GetTeamAbilityFloatValue(context, target, str)then
 		return false
 	end
-	local target_Eid = ScriptLib.GetAvatarEntityIdByUid(context, target)
+	target_Eid = ScriptLib.GetAvatarEntityIdByUid(context, target)
 	if target_Eid == 0 then
 		return false
 	end
@@ -252,8 +252,8 @@ function LF_Is_Near_Op_Uid(context, host, str)
 	if target_Eid == context.source_entity_id then
 		return true
 	end
-	local pos1 = ScriptLib.GetPosByEntityId(context, target_Eid)
-	local pos2 = ScriptLib.GetPosByEntityId(context, context.source_entity_id)
+	pos1 = ScriptLib.GetPosByEntityId(context, target_Eid)
+	pos2 = ScriptLib.GetPosByEntityId(context, context.source_entity_id)
 	if play.op_radius < LF_Calculate_Distance(context, pos1, pos2) then
 		return false
 	end
@@ -261,7 +261,7 @@ function LF_Is_Near_Op_Uid(context, host, str)
 end
 
 function LF_Calculate_Distance(context, pos1, pos2)
-	local distance = math.sqrt(math.pow(pos1.x-pos2.x,2)+math.pow(pos1.y-pos2.y,2)+math.pow(pos1.z-pos2.z,2))
+	distance = math.sqrt(math.pow(pos1.x-pos2.x,2)+math.pow(pos1.y-pos2.y,2)+math.pow(pos1.z-pos2.z,2))
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : op_distance -> "..distance)
 	return distance
 end
@@ -271,7 +271,7 @@ function condition_battle_state(context, evt)
 	if defs.group_id == play.group_main then
 		ScriptLib.PrintContextLog(context, "## ASTER_LOG: battle_state : param1->"..evt.param1.." | param2->"..evt.param2.." | param3->"..evt.param3)
 	end
-	if evt.param1 == play.PlayType and evt.param2 == play.PlayId then 
+	if evt.param1 == play.PlayType and evt.param2 == play.PlayId then
 		return true
 	end
 	return false
@@ -305,21 +305,21 @@ function action_battle_stage_change(context, evt)
 	if evt.param2 == evt.param3 then
 		return 0
 	end
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
 	ScriptLib.SetScenePlayBattleUidValue(context, 0, host, "stage_ptr", evt.param2)
 	LF_Uid_Op(context, evt.param2)
 	--阶段转换时一定要停当前tide
 	LF_Modify_Gadget_Group(context, evt.param2)
-	local r = ScriptLib.KillMonsterTide(context, play.group_main, play.monster_tide)
+	r = ScriptLib.KillMonsterTide(context, play.group_main, play.monster_tide)
 	ScriptLib.CancelGroupTimerEvent(context, play.group_main, "next_tide_delay")
-	local s = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "tide_ptr")
+	s = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "tide_ptr")
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : remove_suite_over_stage -> "..s.." | kill_tide_result -> "..r)
 	--清理tide_monster
 	if s ~= 0 then
 		ScriptLib.RemoveExtraGroupSuite(context, play.group_main, s)
 	end
 	--清理stage_monster
-	local prev_stage_suite = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "prev_stage_suite")
+	prev_stage_suite = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "prev_stage_suite")
 	if prev_stage_suite ~= 0 then
 		ScriptLib.RemoveExtraGroupSuite(context, play.group_stage, prev_stage_suite)
 	end
@@ -346,29 +346,29 @@ end
 
 function action_monster_die_before_leave_scene(context, evt)
 	--判断附近玩家,并增加对应分数
-	--local uid_list = ScriptLib.GetSurroundUidList(context, evt.param1, play.radius)
-	local uid_list = ScriptLib.GetSceneUidList(context)
+	--uid_list = ScriptLib.GetSurroundUidList(context, evt.param1, play.radius)
+	uid_list = ScriptLib.GetSceneUidList(context)
 	if #uid_list == 0 then
 		ScriptLib.PrintContextLog(context, "## ASTER_ERR : None Near Players")
 		return -1
 	end
 	--通知客户端执行加分,考虑到客户端可能断线,这个分数服务器自己不记录
-	local score_ = monsters[evt.param1].kill_score
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
-	local ratio_ = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "ratio_ptr")
+	score_ = monsters[evt.param1].kill_score
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	ratio_ = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "ratio_ptr")
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : monster->"..evt.param1.." | score->"..score_.." | ratio->"..ratio_)
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid_list, play.player_energy, score_ * ratio_)
 	return 0
 end
 
 function action_timer_summon(context, evt)
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
-	local D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
-	local timer_ptr = ScriptLib.GetScenePlayBattleUidValue(context, 0, host,"timer_ptr")
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
+	timer_ptr = ScriptLib.GetScenePlayBattleUidValue(context, 0, host,"timer_ptr")
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : timer_event \"aster_timer\" -> "..defs.aster_timer[timer_ptr])
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : cur_timer_ptr -> "..timer_ptr)
 	math.randomseed(ScriptLib.GetServerTime(context) + timer_ptr)
-	local Timer = timer_def[D][timer_ptr][math.random(1,#timer_def[D][timer_ptr])]
+	Timer = timer_def[D][timer_ptr][math.random(1,#timer_def[D][timer_ptr])]
 	if #suites[Timer].monsters > 0 then
 		ScriptLib.ShowTemplateReminder(context, 110, {0,0})
 	end
@@ -389,11 +389,11 @@ function action_timer_summon(context, evt)
 end
 
 function action_monster_tide_over(context, evt)
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : Monster_Tide_Over : tide_index->"..evt.source_name.." | status->"..evt.param2)
-	local tide_ptr = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "tide_ptr")
+	tide_ptr = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "tide_ptr")
 	--自动结束,计算下一个tide,如果只有一个会选自己
-	local new_tide_ptr = tide_suite_config[tide_ptr].next
+	new_tide_ptr = tide_suite_config[tide_ptr].next
 	if new_tide_ptr == nil then
 		ScriptLib.PrintContextLog(context, "## ASTER_ERR : INVALID_CIRCLE_TIDE_PTR -> "..tide_ptr)
 		return -1
@@ -404,9 +404,9 @@ function action_monster_tide_over(context, evt)
 end
 
 function action_timer_delay(context, evt)
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
 	--继续创建下个tide
-	local tide_ptr = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "tide_ptr")
+	tide_ptr = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "tide_ptr")
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : timer_delay_tide -> "..tide_ptr)
 	ScriptLib.AutoMonsterTide(context, play.monster_tide, play.group_main, suites[tide_ptr].monsters, tide_suite_config[tide_ptr].total, tide_suite_config[tide_ptr].min, tide_suite_config[tide_ptr].max)
 	return 0
@@ -425,8 +425,8 @@ function condition_any_monster_die(context, evt)
 end
 
 function action_any_monster_die(context, evt)
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
-	local stage = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "stage_ptr")
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	stage = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "stage_ptr")
 	ScriptLib.ExecuteGroupLua(context, play.group_main, "LF_Modify_Monster_Tide", {stage,host})
 	return 0
 end
@@ -446,8 +446,8 @@ end
 function LF_Battle_Ready(context, evt)
 	--ScriptLib.PrintContextLog(context, "## ASTER_LOG : LF_Battle_Ready")
 	--随机难度
-	local D_str = LF_Random_Play_Difficulty(context, evt)
-	local D_num = 0
+	D_str = LF_Random_Play_Difficulty(context, evt)
+	D_num = 0
 	if D_str == "normal" then
 		D_num = 1
 	elseif D_str == "hard" then
@@ -483,7 +483,7 @@ function LF_Battle_Start(context, evt)
 --正式开始
 	if defs.group_id == play.group_main then
 		--启动起始tide
-		local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+		host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
 		LF_Modify_Gadget_Group(context, 0)
 		LF_Modify_Monster_Tide(context, context, 0, host, 0)
 	elseif defs.group_id == play.group_timer then
@@ -503,11 +503,11 @@ function LF_Battle_Win(context, evt)
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : LF_Battle_Win")
 	if defs.group_id == play.group_main then
 		ScriptLib.KillMonsterTide(context, play.group_main, play.monster_tide)
-		local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
-		local circle = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "circle_ptr")
+		host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+		circle = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "circle_ptr")
 		ScriptLib.KillExtraGroupSuite(context, play.group_gadget, circle)
 		ScriptLib.CancelGroupTimerEvent(context, play.group_main, "next_tide_delay")
-		local s = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "tide_ptr")
+		s = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "tide_ptr")
 		ScriptLib.RemoveExtraGroupSuite(context, play.group_main, s)
 		ScriptLib.CreateScenePlayGeneralRewardGadget(context, {group_id = play.group_main, config_id = defs.gadget_reward})
 		ScriptLib.SetGadgetEnableInteract(context, play.group_main, defs.gadget_aster, true)
@@ -525,12 +525,12 @@ end
 function LF_Battle_Lose(context, evt)
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : LF_Battle_Lose")
 	if defs.group_id == play.group_main then
-		local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
-		local circle = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "circle_ptr")
+		host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+		circle = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "circle_ptr")
 		ScriptLib.KillExtraGroupSuite(context, play.group_gadget, circle)
 		ScriptLib.CancelGroupTimerEvent(context, play.group_main, "next_tide_delay")
 		ScriptLib.KillMonsterTide(context, play.group_main, play.monster_tide)
-		local s = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "tide_ptr")
+		s = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "tide_ptr")
 		ScriptLib.RemoveExtraGroupSuite(context, play.group_main, s)
 		ScriptLib.SetGadgetEnableInteract(context, play.group_main, defs.gadget_aster, true)
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_aster, 0)
@@ -546,11 +546,11 @@ end
 
 function LF_Find_Stage_Suite(context, prev_context, param1, param2, param3)
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : Find_Stage_Suite : stage->"..param1.." | host->"..param2)
-	local stage = param1
-	local host = param2
-	local D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
+	stage = param1
+	host = param2
+	D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
 	--用于定义阶段转换,影响stage对应group的逻辑
-	local stage_suite_arr = stage_def[D][stage]
+	stage_suite_arr = stage_def[D][stage]
 
 	if stage_suite_arr == nil or #stage_suite_arr == 0 then
 		ScriptLib.PrintContextLog(context, "## ASTER_LOG : None Stage Suite")
@@ -558,17 +558,17 @@ function LF_Find_Stage_Suite(context, prev_context, param1, param2, param3)
 		return 0
 	else
 		math.randomseed(ScriptLib.GetServerTime(context) + stage)
-		local stage_suite = stage_suite_arr[math.random(1,#stage_suite_arr)]
+		stage_suite = stage_suite_arr[math.random(1,#stage_suite_arr)]
 		ScriptLib.ExecuteGroupLua(context, play.group_main, "LF_Handle_Stage_Change", {stage,stage_suite})
 	end
 	return 0
 end
 
 function LF_Modify_Monster_Tide(context, prev_context, param1, param2, param3)
-	local stage = param1
-	local host = param2
+	stage = param1
+	host = param2
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : modify_monster_tide : cur_stage->"..stage)
-	local D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
+	D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : show difficulty ->"..D)
 	if #tide_defs[D][stage].suite == 0 then
 		ScriptLib.PrintContextLog(context, "## ASTER_ERR : no_monster_tide_begin")
@@ -577,7 +577,7 @@ function LF_Modify_Monster_Tide(context, prev_context, param1, param2, param3)
 		ScriptLib.PrintContextLog(context, "## ASTER_ERR : Invalid Monster Tide Config")
 		return -1
 	end
-	local tide_ptr = LF_Handle_Random_Weight(context, stage, tide_defs[D], "suite")
+	tide_ptr = LF_Handle_Random_Weight(context, stage, tide_defs[D], "suite")
 	--根据tide预设值创建tide
 	if tide_ptr > 0 then
 		ScriptLib.SetScenePlayBattleUidValue(context, 0, host, "tide_ptr", tide_ptr)
@@ -590,7 +590,7 @@ end
 
 function LF_Handle_Random_Weight(context, stage, table, name)
 	math.randomseed(ScriptLib.GetServerTime(context) + stage)
-	local weight_sum = 0
+	weight_sum = 0
 	for i,v in ipairs(table[stage].weight) do
 		weight_sum = weight_sum + v
 	end
@@ -598,7 +598,7 @@ function LF_Handle_Random_Weight(context, stage, table, name)
 		ScriptLib.PrintContextLog(context, "## ASTER_ERR : Weight Is Zero")
 		return -1
 	end
-	local weight_ran = math.random(1,weight_sum)
+	weight_ran = math.random(1,weight_sum)
 	for i,v in ipairs(table[stage].weight) do
 		weight_ran = weight_ran - v
 		if weight_ran <= 0 then
@@ -610,7 +610,7 @@ end
 
 function LF_Attach_Ability(context, evt, num, str)
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : LF_Attach_Ability")
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
 	ScriptLib.SetScenePlayBattlePlayTeamEntityGadgetId(context, play.group_main, 70370000 + num)
 	ScriptLib.SetScenePlayBattleUidValue(context, 0, host, "ratio_ptr", defs.score_ratio[str])
 	return 0
@@ -618,7 +618,7 @@ end
 
 function LF_Random_Play_Difficulty(context, evt)
 	---[[
-	local M = ScriptLib.GetGroupVariableValue(context, "GM_Mode")
+	M = ScriptLib.GetGroupVariableValue(context, "GM_Mode")
 	if M == 1 then
 		return "normal"
 	elseif M == 2 then
@@ -632,12 +632,12 @@ function LF_Random_Play_Difficulty(context, evt)
 	if 1 == ScriptLib.GetScenePlayBattleType(context, play.group_main) then
 		return "easy"
 	end
-	local max_difficulty = 0
+	max_difficulty = 0
 	for k,v in pairs(defs.difficulty_weight) do
 		max_difficulty = max_difficulty + v
 	end
 	math.randomseed(ScriptLib.GetServerTime(context) + evt.param1 + evt.param2)
-	local ran_difficulty = math.random(1,max_difficulty)
+	ran_difficulty = math.random(1,max_difficulty)
 	for k,v in pairs(defs.difficulty_weight) do
 		ran_difficulty = ran_difficulty - v
 		if ran_difficulty <= 0 then
@@ -648,7 +648,7 @@ function LF_Random_Play_Difficulty(context, evt)
 end
 
 function LF_Set_Battle_Difficulty(context, evt, difficulty)
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG ： Set_Initial_Difficulty->"..difficulty)
 	--ScriptLib.ShowTemplateReminder(context, 100 + difficulty, {0,0})
 	ScriptLib.SetScenePlayBattleUidValue(context, 0, host, play.difficulty, difficulty)
@@ -656,15 +656,15 @@ function LF_Set_Battle_Difficulty(context, evt, difficulty)
 end
 
 function LF_Handle_Stage_Change(context, prev_context, param1, param2, param3)
-	local stage = param1
-	local suite = param2
+	stage = param1
+	suite = param2
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : handle_stage_change : stage->"..stage.." | suite->"..suite)
 	--处理progress阶段转换的逻辑
 	if #suites[suite].monsters == 0 then
 		ScriptLib.PrintContextLog(context, "## ASTER_ERR : Invalid Monster Suite->"..suite)
 		return -1
 	end
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
 	ScriptLib.AddExtraGroupSuite(context, play.group_stage, suite)
 	ScriptLib.SetScenePlayBattleUidValue(context, 0, host, "prev_stage_suite", suite)
 	--ScriptLib.ShowTemplateReminder(context, 109, {0,0})
@@ -673,9 +673,9 @@ end
 
 function LF_Uid_Op(context, stage)
 	--用于处理点名逻辑
-	local buff_type = LF_Get_Uid_Op_Buff(context, stage)
-	local uid_list = LF_Get_Uid_Op_Target(context, buff_type)
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	buff_type = LF_Get_Uid_Op_Buff(context, stage)
+	uid_list = LF_Get_Uid_Op_Target(context, buff_type)
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
 	--[[if #uid_list == 0 then
 		ScriptLib.PrintContextLog(context, "## ASTER_ERR : Invalid Op Uid List")
 		return -1
@@ -691,12 +691,12 @@ function LF_Uid_Op(context, stage)
 end
 
 function LF_Init_Uid_Op_Buff(context, evt)
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
-	local D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
 	--初始化点名buff栈,栈的深度要掐头去尾
-	local buff_stack = 0
+	buff_stack = 0
 	for i,v in ipairs(buff_def[D]) do
-		local buff_ = LF_Handle_Random_Weight(context, i, buff_def[D], "buff")
+		buff_ = LF_Handle_Random_Weight(context, i, buff_def[D], "buff")
 		buff_stack = buff_stack + math.pow(10,i-1)*buff_
 	end
 	if buff_stack > 0 then
@@ -709,25 +709,25 @@ function LF_Init_Uid_Op_Buff(context, evt)
 end
 
 function LF_Get_Uid_Op_Buff(context, stage)
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
-	local buff_stack = ScriptLib.GetScenePlayBattleUidValue(context, 0, host,"buff_stack")
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	buff_stack = ScriptLib.GetScenePlayBattleUidValue(context, 0, host,"buff_stack")
 	return buff_stack//math.pow(10,stage-1)%10
 end
 
 function LF_Get_Uid_Op_Target(context, buff_type)
 	--点名返回的目标
-	local user = ScriptLib.GetSceneUidList(context)
-	local list = {}
+	user = ScriptLib.GetSceneUidList(context)
+	list = {}
 	math.randomseed(ScriptLib.GetServerTime(context) + buff_type)
 	--if buff_type == 1 or buff_type == 2 then
-	list[1] = user[math.random(1,#user)] 
+	list[1] = user[math.random(1,#user)]
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : uid_op_target -> "..list[1])
 	--end
 	return list
 end
 
 function LF_Set_Timer(context, evt)
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : set_timer \"aster_timer\"-> "..defs.aster_timer[1])
 	ScriptLib.CreateGroupTimerEvent(context, play.group_timer, "aster_timer", defs.aster_timer[1])
 	ScriptLib.SetScenePlayBattleUidValue(context, 0, host,"timer_ptr", 1)
@@ -736,21 +736,21 @@ end
 
 function LF_Modify_Gadget_Group(context, stage)
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : modify_gadget_group | stage -> "..stage)
-	local host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
-	local D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
+	host = ScriptLib.GetScenePlayBattleHostUid(context, 0)
+	D = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, play.difficulty)
 	if circle_type_defs[D] == 1 then
 		--交分台锁位置
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_aster, 202)
 	elseif circle_type_defs[D] == 2 then
 		--交分台换位置
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_aster, 201)
-	end	
+	end
 	if stage == 0 then
 		ScriptLib.SetScenePlayBattleUidValue(context, 0, host, "circle_ptr", tide_defs[D][stage].circle)
-		ScriptLib.AddExtraGroupSuite(context, play.group_gadget, tide_defs[D][stage].circle)	
+		ScriptLib.AddExtraGroupSuite(context, play.group_gadget, tide_defs[D][stage].circle)
 	elseif circle_type_defs[D] == 1 then
 		ScriptLib.SetScenePlayBattleUidValue(context, 0, host, "circle_ptr", tide_defs[D][stage].circle)
-		local prev_stage = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "prev_stage")
+		prev_stage = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "prev_stage")
 		ScriptLib.KillExtraGroupSuite(context, play.group_gadget, tide_defs[D][prev_stage].circle)
 		ScriptLib.AddExtraGroupSuite(context, play.group_gadget, tide_defs[D][stage].circle)
 	end

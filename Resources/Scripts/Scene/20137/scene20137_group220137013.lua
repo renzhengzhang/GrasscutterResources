@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220137013
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -39,9 +39,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -70,23 +70,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_OBSERVATION_POINT_NOTIFY_13003(context, evt)
 	if 13001 == evt.param1 and 205 == evt.param2 then
 		ScriptLib.SetGadgetStateByConfigId(context,13002, GadgetState.GearStart)
-		
+
 		ScriptLib.AddQuestProgress(context, "4007116")
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,13001, GadgetState.ChestOpened)
-		
+
 		ScriptLib.SetGroupVariableValueByGroup(context, "towerPosition", 1, 220137005)
 	end
-	
+
 	return 0
 end
 
@@ -95,7 +95,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13005(context, evt)
 	if 13002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -106,6 +106,6 @@ function action_EVENT_GADGET_STATE_CHANGE_13005(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end

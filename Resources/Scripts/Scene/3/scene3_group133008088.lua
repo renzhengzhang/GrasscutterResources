@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008088
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -98,7 +98,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_88006(context, evt)
 	if 88001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -109,7 +109,7 @@ function action_EVENT_GADGET_STATE_CHANGE_88006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -118,7 +118,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_88007(context, evt)
 	if 88002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -129,7 +129,7 @@ function action_EVENT_GADGET_STATE_CHANGE_88007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_88008(context, evt)
 	if 88003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -149,7 +149,7 @@ function action_EVENT_GADGET_STATE_CHANGE_88008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -158,7 +158,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_88009(context, evt)
 	if 88004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -169,19 +169,19 @@ function action_EVENT_GADGET_STATE_CHANGE_88009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_88010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"index"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "index", 133008088) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -192,19 +192,19 @@ function action_EVENT_VARIABLE_CHANGE_88010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_88011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"index"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "index", 133008088) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -215,19 +215,19 @@ function action_EVENT_VARIABLE_CHANGE_88011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_88012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"index"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "index", 133008088) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -238,19 +238,19 @@ function action_EVENT_VARIABLE_CHANGE_88012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_88013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"index"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "index", 133008088) ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -261,6 +261,6 @@ function action_EVENT_VARIABLE_CHANGE_88013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end

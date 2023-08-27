@@ -3,7 +3,7 @@
 
 ]]--
 
-local light_stones_initial={
+light_stones_initial={
 	[1]=defs.gadget_1,
 	[2]=defs.gadget_2,
 	[3]=defs.gadget_3,
@@ -11,7 +11,7 @@ local light_stones_initial={
 	[5]=defs.gadget_5
 }
 
-local extraTriggers={
+extraTriggers={
 	 { config_id = 8000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
 }
 
@@ -28,18 +28,18 @@ end
 function action_group_load(context, evt)
 	if ScriptLib.GetGroupVariableValue(context,"successed")~=0 then
 		for i=1,#light_stones_initial do
-			if light_stones_initial[i] ~= 0 then 
+			if light_stones_initial[i] ~= 0 then
 				ScriptLib.SetGadgetStateByConfigId(context, light_stones_initial[i], GadgetState.GearAction2)
 			end
 		end
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 		return 0
-	end 
+	end
 	return 0
 end
 
 function Generate_Table(light_stones_initial)
-	local outTable={}
+	outTable={}
 	for i=1,#light_stones_initial do
 		if light_stones_initial[i]~=0 then
 			table.insert(outTable,light_stones_initial[i])
@@ -49,11 +49,11 @@ function Generate_Table(light_stones_initial)
 end
 
 function Stone_Behit(context)
-	local light_stones=Generate_Table(light_stones_initial)
+	light_stones=Generate_Table(light_stones_initial)
 	ScriptLib.PrintContextLog(context, "target_entity_id="..context.target_entity_id.." source_entity_id="..context.source_entity_id)
 	if ScriptLib.GetGroupVariableValue(context,"successed") ~=0 then
 		return 0
-	end 
+	end
 	for i=1,#light_stones do
 		if context.target_entity_id==ScriptLib.GetEntityIdByConfigId(context,light_stones[i]) then
 			gadget_level_change(context,light_stones[i])

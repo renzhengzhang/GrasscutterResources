@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199001126
 }
 
@@ -23,15 +23,15 @@ local	defs = {
 		--定义上下俯仰的步长,key为传音花configID，value为旋转角对应的GadgetState
 --GadgetState不可重复
 		vertical_steps = {
-			
+
 
 		}
 	}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -77,9 +77,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -90,9 +90,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -108,9 +108,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -118,7 +118,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_126008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199001126, 126006) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -129,7 +129,7 @@ function action_EVENT_GADGET_STATE_CHANGE_126008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_126011(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 199001126, 126006) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -149,7 +149,7 @@ function action_EVENT_GADGET_STATE_CHANGE_126011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

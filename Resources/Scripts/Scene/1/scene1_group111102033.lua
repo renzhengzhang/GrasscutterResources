@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111102033
 }
 
 -- DEFS_MISCS
-local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-local DeathField ={
+DeathField ={
 	ZoneID = 123,
 	CoreID = 33001,
 	BossID = 33006,
@@ -16,9 +16,9 @@ local DeathField ={
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -72,9 +72,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +85,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -121,23 +121,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_33011(context, evt)
 	-- 判断是gadgetid 33007 option_id 24
 	if 33007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 24 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -147,8 +147,8 @@ function action_EVENT_SELECT_OPTION_33011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

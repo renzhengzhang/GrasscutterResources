@@ -12,7 +12,7 @@
 
 =======================================================================================]]
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Gallery_Start"] = { config_id = 80000001, name = "Gallery_Start", event= EventType.EVENT_GALLERY_START, source = "", condition = "", action = "action_GalleryStart", trigger_count = 0 },
 		["Gallery_Stop"] = { config_id = 80000002, name = "Gallery_Stop", event= EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_GalleryStop", trigger_count = 0 },
@@ -29,14 +29,14 @@ galleryID = 410002
 
 function getRandomSize( context )
 
-	local MAX = 0
-	local defaultSize = {x= 4, y= 4, z= 4}
+	MAX = 0
+	defaultSize = {x= 4, y= 4, z= 4}
 
 	for i,v in ipairs(randomSize) do
 		MAX = MAX + v.weight
 	end
 
-	local randomNum = math.random(0,MAX)
+	randomNum = math.random(0,MAX)
 
 	for i,v in ipairs(randomSize) do
 		if randomNum <= v.weight then
@@ -55,7 +55,7 @@ function action_GroupUnload( context, evt )
 	ScriptLib.SetGroupTempValue(context, "isInGallery", 0, {})
 
 	ScriptLib.PrintContextLog(context, "## HM_LOG : group unload")
-	
+
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 0, boardID, 0)
 
 	--关闭时间轴
@@ -74,7 +74,7 @@ end
 
 
 function Homeworld_Gallery_ShootBalloon( context, param1 )
-	
+
 	if param1 == 1 then
 		ScriptLib.PrintContextLog(context, "## HM_LOG : getScore Low")
 		ScriptLib.UpdatePlayerGalleryScore(context, 410002, {["score"]=lowScore})
@@ -92,8 +92,8 @@ function action_GadgetDie( context,evt )
 		return 0
 	end
 
-	local areaClear = true
-	local areaClear_2 = true
+	areaClear = true
+	areaClear_2 = true
 
 	for i,v in ipairs(suites[suitID].gadgets) do
 		if v ~= evt.param1 and ScriptLib.GetGadgetStateByConfigId(context, 0, v) ~= -1 then
@@ -123,7 +123,7 @@ function action_GadgetDie( context,evt )
 	end
 
 	if areaClear_2 then
-		
+
 		ScriptLib.PrintContextLog(context, "## HM_LOG : TimeAxis_2 Restart")
 		--关闭时间轴
 		ScriptLib.EndTimeAxis(context, "balloonInterval_2")
@@ -150,7 +150,7 @@ function action_GalleryStart( context,evt )
 	ScriptLib.SetGroupTempValue(context, "isInGallery", 1, {})
 
 	ScriptLib.PrintContextLog(context, "## HM_LOG : gallery start")
-	
+
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 0, boardID, 201)
 
 	--开启时间轴
@@ -174,7 +174,7 @@ function action_GalleryStop( context,evt )
 	ScriptLib.SetGroupTempValue(context, "isInGallery", 0, {})
 
 	ScriptLib.PrintContextLog(context, "## HM_LOG : gallery Stop")
-	
+
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 0, boardID, 0)
 
 	--关闭时间轴
@@ -215,7 +215,7 @@ function action_UIInteract( context, evt )
 		--开启一个时间轴
 		ScriptLib.PrintContextLog(context, "## HM_LOG : StateChange Play Start")
 		-- ScriptLib.InitTimeAxis(context, "balloonInterval", intervalTime, true)
-		
+
 		if ScriptLib.StartHomeGallery(context, galleryID, context.uid) == -1 then
 			ScriptLib.SendServerMessageByLuaKey(context, "HOMEOWRLD_DUPLICATE_GALLERY", {context.uid})
 		end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 166001249
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -39,9 +39,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -79,9 +79,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -89,7 +89,7 @@ function condition_EVENT_GADGET_CREATE_249007(context, evt)
 	if 249001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -97,8 +97,8 @@ end
 function action_EVENT_GADGET_CREATE_249007(context, evt)
 	-- 创建标识为"time"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "time", {2}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -107,7 +107,7 @@ function condition_EVENT_TIME_AXIS_PASS_249008(context, evt)
 	if "time" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -118,6 +118,6 @@ function action_EVENT_TIME_AXIS_PASS_249008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

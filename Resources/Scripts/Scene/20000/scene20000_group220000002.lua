@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220000002
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 2001,
 	gadget_id_2 = 2002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -81,9 +81,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -91,7 +91,7 @@ function condition_EVENT_GADGET_CREATE_6(context, evt)
 	if 2003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -102,7 +102,7 @@ function action_EVENT_GADGET_CREATE_6(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -112,7 +112,7 @@ function condition_EVENT_SELECT_OPTION_7(context, evt)
 	if 2003 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -123,19 +123,19 @@ function action_EVENT_SELECT_OPTION_7(context, evt)
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2001, GadgetState.GearStart) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_option")
 			return -1
-		end 
+		end
 		return 0
 	end
-	
+
 	-- 根据不同的选项做不同的操作
 	if 4 == evt.param2 then
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2001, GadgetState.Default) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_option")
 			return -1
-		end 
+		end
 		return 0
 	end
-	
+
 	return 0
 end
 
@@ -144,7 +144,7 @@ function condition_EVENT_GADGET_CREATE_8(context, evt)
 	if 2004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -155,7 +155,7 @@ function action_EVENT_GADGET_CREATE_8(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -165,7 +165,7 @@ function condition_EVENT_SELECT_OPTION_9(context, evt)
 	if 2004 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -176,31 +176,31 @@ function action_EVENT_SELECT_OPTION_9(context, evt)
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2002, GadgetState.GearStart) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_option")
 			return -1
-		end 
+		end
 		return 0
 	end
-	
+
 	-- 根据不同的选项做不同的操作
 	if 4 == evt.param2 then
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2002, GadgetState.Default) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_option")
 			return -1
-		end 
+		end
 		return 0
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12(context, evt)
 	if evt.param1 ~= 12 then return false end
-	
+
 	-- 判断是gadgetid 2003
 	if 2003 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -210,15 +210,15 @@ function action_EVENT_ENTER_REGION_12(context, evt)
 	if defs.gadget_id_2 == evt.param2 then
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.Default) then
 			return -1
-		end 
+		end
 		return -1
 	end
-	
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220000002, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 			return -1
 		end
-		
-	
+
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 230103003
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -142,9 +142,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -152,7 +152,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_3031(context, evt)
 	if 3001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -163,28 +163,28 @@ function action_EVENT_ANY_MONSTER_LIVE_3031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "monster_wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "monster_wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_3032(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230103003) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"monster_wave"为1
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -192,28 +192,28 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3032(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 230103003, 3)
-	
+
 	-- 针对当前group内变量名为 "monster_wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "monster_wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_3033(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230103003) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"monster_wave"为2
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -221,28 +221,28 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3033(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 230103003, 4)
-	
+
 	-- 针对当前group内变量名为 "monster_wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "monster_wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_3034(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230103003) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"monster_wave"为3
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -250,13 +250,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3034(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 230103003, 5)
-	
+
 	-- 针对当前group内变量名为 "monster_wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "monster_wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -266,8 +266,8 @@ function action_EVENT_CHALLENGE_SUCCESS_3035(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 230103001, 1002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -278,28 +278,28 @@ function action_EVENT_CHALLENGE_FAIL_3036(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_3037(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230103003) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"monster_wave"为4
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -307,12 +307,12 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3037(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 230103003, 6)
-	
+
 	-- 针对当前group内变量名为 "monster_wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "monster_wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

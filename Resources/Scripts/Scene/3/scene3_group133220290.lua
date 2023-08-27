@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133220290
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -78,20 +78,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_290001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	--检测当前改变的variable是否在预设区间
 	if 1 > evt.param1 or 4 < evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -102,18 +102,18 @@ function action_EVENT_VARIABLE_CHANGE_290001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_QUEST_START_290002(context, evt)
 	-- 判断变量"slabcount"为1234时
-	local count = ScriptLib.GetGroupVariableValue(context, "slabcount")
+	count = ScriptLib.GetGroupVariableValue(context, "slabcount")
 	if count < 1 and count > 4  then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -124,19 +124,19 @@ function action_EVENT_QUEST_START_290002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_290003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"slabcount"为4
 	if ScriptLib.GetGroupVariableValue(context, "slabcount") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -147,13 +147,13 @@ function action_EVENT_VARIABLE_CHANGE_290003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "fin_7219910") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -163,7 +163,7 @@ function condition_EVENT_QUEST_START_290004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "slabcount") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -174,18 +174,18 @@ function action_EVENT_QUEST_START_290004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_290005(context, evt)
 	-- 判断变量"slabcount"为123时
-	local count = ScriptLib.GetGroupVariableValue(context, "slabcount")
+	count = ScriptLib.GetGroupVariableValue(context, "slabcount")
 	if count < 1 and count >= 4  then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -196,7 +196,7 @@ function action_EVENT_GROUP_LOAD_290005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -206,7 +206,7 @@ function condition_EVENT_GROUP_LOAD_290006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "slabcount") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -217,12 +217,12 @@ function action_EVENT_GROUP_LOAD_290006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "fin_7219910") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

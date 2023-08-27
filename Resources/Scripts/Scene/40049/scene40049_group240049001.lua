@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240049001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -170,18 +170,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_1019(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240049001) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -189,17 +189,17 @@ end
 function action_EVENT_ANY_MONSTER_DIE_1019(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240049001, 5)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_1021(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240049001) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -209,7 +209,7 @@ function action_EVENT_ANY_MONSTER_DIE_1021(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 240049001, {1008,1015,1016,1037}, 4, 3, 3) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -219,7 +219,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1022(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -227,7 +227,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_1022(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240049001, 4)
-	
+
 	return 0
 end
 
@@ -237,7 +237,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1028(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -247,17 +247,17 @@ function action_EVENT_ANY_MONSTER_DIE_1028(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 240049001, {1004,1005,1006,1007}, 4, 2, 2) then
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_1029(context, evt)
-	-- 判断指定group组剩余怪物数量是否是2 
+	-- 判断指定group组剩余怪物数量是否是2
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240049001) ~= 2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -265,20 +265,20 @@ end
 function action_EVENT_ANY_MONSTER_DIE_1029(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240049001, 2)
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240049001, 6)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_1030(context, evt)
-	-- 判断指定group组剩余怪物数量是否是2 
+	-- 判断指定group组剩余怪物数量是否是2
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240049001) ~= 2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -286,17 +286,17 @@ end
 function action_EVENT_ANY_MONSTER_DIE_1030(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240049001, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_1031(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240049001) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -304,7 +304,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_1031(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240049001, 7)
-	
+
 	return 0
 end
 
@@ -313,7 +313,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_1032(context, evt)
 	if 1002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -324,19 +324,19 @@ function action_EVENT_ANY_MONSTER_LIVE_1032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1033(context, evt)
 	if evt.param1 ~= 1033 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -344,7 +344,7 @@ end
 function action_EVENT_ENTER_REGION_1033(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240049001, 8)
-	
+
 	return 0
 end
 
@@ -355,7 +355,7 @@ function action_EVENT_TIMER_EVENT_1034(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -366,19 +366,19 @@ function action_EVENT_CHALLENGE_SUCCESS_1036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为1020的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1020 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "OneTimeDungeon" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "OneTimeDungeon", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -388,7 +388,7 @@ function condition_EVENT_CHALLENGE_FAIL_1039(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Settle", 240049002) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -399,7 +399,7 @@ function action_EVENT_CHALLENGE_FAIL_1039(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -410,6 +410,6 @@ function action_EVENT_DUNGEON_SETTLE_1040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111102794
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -108,9 +108,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -118,7 +118,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_794007(context, evt)
 	if 794002 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -129,7 +129,7 @@ function action_EVENT_GADGET_STATE_CHANGE_794007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -137,14 +137,14 @@ end
 function condition_EVENT_SELECT_OPTION_794008(context, evt)
 	-- 判断是gadgetid 794006 option_id 72
 	if 794006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 72 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -154,56 +154,56 @@ function action_EVENT_SELECT_OPTION_794008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 794011 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794011, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 794012 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794012, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 111102794 ；指定config：794006；物件身上指定option：72；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111102794, 794006, 72) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 111102794 ；指定config：794015；物件身上指定option：72；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111102794, 794015, 72) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 111102794 ；指定config：794016；物件身上指定option：72；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111102794, 794016, 72) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 通知groupid为111102794中,configid为：794001的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 794001, 111102794) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- 通知groupid为111102794中,configid为：794013的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 794013, 111102794) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- 通知groupid为111102794中,configid为：794014的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 794014, 111102794) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -212,27 +212,27 @@ function action_EVENT_ENTER_REGION_794009(context, evt)
 		-- 设置封印圈1的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794002, "SGV_GRASSSEAL_MARK", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794002, "SGV_SEAL_ENABLED", 1)
-	
+
 		-- 设置封印圈2的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794011, "SGV_GRASSSEAL_MARK", 2)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794011, "SGV_SEAL_ENABLED", 1)
-	
+
 		-- 设置封印圈3的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794012, "SGV_GRASSSEAL_MARK", 3)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794012, "SGV_SEAL_ENABLED", 1)
-		
+
 		-- 设置能量桩1的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794003, "SGV_GRASSSEAL_TARGET", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794003, "SGV_GRASSSEAL_ATTACHPOINT", 2)
-	
+
 		-- 设置能量桩2的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794004, "SGV_GRASSSEAL_TARGET", 2)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794004, "SGV_GRASSSEAL_ATTACHPOINT", 3)
-	
+
 		-- 设置能量桩3的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794005, "SGV_GRASSSEAL_TARGET", 3)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794005, "SGV_GRASSSEAL_ATTACHPOINT", 1)
-	
+
 		return 0
 end
 
@@ -241,39 +241,39 @@ function action_EVENT_GROUP_LOAD_794010(context, evt)
 		-- 设置封印圈1的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794002, "SGV_GRASSSEAL_MARK", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794002, "SGV_SEAL_ENABLED", 1)
-	
+
 		-- 设置封印圈2的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794011, "SGV_GRASSSEAL_MARK", 2)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794011, "SGV_SEAL_ENABLED", 1)
-	
+
 		-- 设置封印圈3的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794012, "SGV_GRASSSEAL_MARK", 3)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794012, "SGV_SEAL_ENABLED", 1)
-		
+
 		-- 设置能量桩1的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794003, "SGV_GRASSSEAL_TARGET", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794003, "SGV_GRASSSEAL_ATTACHPOINT", 2)
-	
+
 		-- 设置能量桩2的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794004, "SGV_GRASSSEAL_TARGET", 2)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794004, "SGV_GRASSSEAL_ATTACHPOINT", 3)
-	
+
 		-- 设置能量桩3的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794005, "SGV_GRASSSEAL_TARGET", 3)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 794005, "SGV_GRASSSEAL_ATTACHPOINT", 1)
-	
+
 		return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_794017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"unlockedRingNum"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "unlockedRingNum", 111102794) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -282,7 +282,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_794018(context, evt)
 	if 794011 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -293,7 +293,7 @@ function action_EVENT_GADGET_STATE_CHANGE_794018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -301,14 +301,14 @@ end
 function condition_EVENT_SELECT_OPTION_794019(context, evt)
 	-- 判断是gadgetid 794015 option_id 72
 	if 794015 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 72 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -318,56 +318,56 @@ function action_EVENT_SELECT_OPTION_794019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 794011 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794011, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 794012 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794012, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 111102794 ；指定config：794006；物件身上指定option：72；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111102794, 794006, 72) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 111102794 ；指定config：794015；物件身上指定option：72；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111102794, 794015, 72) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 111102794 ；指定config：794016；物件身上指定option：72；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111102794, 794016, 72) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 通知groupid为111102794中,configid为：794001的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 794001, 111102794) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- 通知groupid为111102794中,configid为：794013的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 794013, 111102794) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- 通知groupid为111102794中,configid为：794014的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 794014, 111102794) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -375,14 +375,14 @@ end
 function condition_EVENT_SELECT_OPTION_794020(context, evt)
 	-- 判断是gadgetid 794016 option_id 72
 	if 794016 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 72 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -392,56 +392,56 @@ function action_EVENT_SELECT_OPTION_794020(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 794011 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794011, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 794012 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794012, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 111102794 ；指定config：794006；物件身上指定option：72；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111102794, 794006, 72) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 111102794 ；指定config：794015；物件身上指定option：72；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111102794, 794015, 72) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 111102794 ；指定config：794016；物件身上指定option：72；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111102794, 794016, 72) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 通知groupid为111102794中,configid为：794001的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 794001, 111102794) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- 通知groupid为111102794中,configid为：794013的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 794013, 111102794) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- 通知groupid为111102794中,configid为：794014的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 794014, 111102794) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -450,7 +450,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_794021(context, evt)
 	if 794012 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -461,7 +461,7 @@ function action_EVENT_GADGET_STATE_CHANGE_794021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -470,15 +470,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_794022(context, evt)
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 111102794, 794003) then
 		return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 111102794, 794004) then
 		return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 111102794, 794005) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -488,38 +488,38 @@ function action_EVENT_GADGET_STATE_CHANGE_794022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 794011 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 794012 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 794012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 111102794, 794006, {72}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 111102794, 794015, {72}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 111102794, 794016, {72}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -529,7 +529,7 @@ function condition_EVENT_ANY_MONSTER_DIE_794024(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -537,6 +537,6 @@ end
 function action_EVENT_ANY_MONSTER_DIE_794024(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111102794, 2)
-	
+
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 235853001
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
     --起始操作台
     starter = 1001 ,
     --起始操作台选项
@@ -32,7 +32,7 @@ tide_cfg = {
 --随机固定顺序怪物潮组合 每次进地城随机取key。
 --key对应value代表依序出现的MonsterTide，小花括号内配置复数个表示同时刷出。
 rand_table = {
-[1] = 
+[1] =
         {
             {1},
             {3},
@@ -41,7 +41,7 @@ rand_table = {
             {5},
 
         },
-        [2] = 
+        [2] =
         {
             {3},
             {1},
@@ -49,7 +49,7 @@ rand_table = {
             {6},
             {2},
         },
-        [3] = 
+        [3] =
         {
             {5},
             {2},
@@ -57,7 +57,7 @@ rand_table = {
             {7},
             {4},
         },
-        [4] = 
+        [4] =
         {
             {4},
             {7},
@@ -86,9 +86,9 @@ move_water = { config_id = 1036 ,point_array = 54 ,point = {1,2} },
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -618,9 +618,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -631,9 +631,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -694,23 +694,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_1102(context, evt)
 	-- 判断是gadgetid 1001 option_id 94
 	if 1001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 94 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -720,14 +720,14 @@ function action_EVENT_SELECT_OPTION_1102(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为1477的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1477 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -737,21 +737,21 @@ function action_EVENT_CHALLENGE_FAIL_1103(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235853001, 1001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 235853001, 1001, {94}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1477 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -762,8 +762,8 @@ function action_EVENT_CHALLENGE_SUCCESS_1478(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133102621
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -82,9 +82,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -95,9 +95,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -142,20 +142,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_621001(context, evt)
 	if evt.param1 ~= 621001 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -166,7 +166,7 @@ function action_EVENT_ENTER_REGION_621001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -174,14 +174,14 @@ end
 function condition_EVENT_SELECT_OPTION_621007(context, evt)
 	-- 判断是gadgetid 621054 option_id 7
 	if 621054 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -189,40 +189,40 @@ end
 function action_EVENT_SELECT_OPTION_621007(context, evt)
 	-- 变量"monstercount"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "monstercount", 0)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133102621, 2)
-	
+
 	-- 创建id为621050的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621050 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将configid为 621016 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621016, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133102621 ；指定config：621054；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133102621, 621054, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 创建编号为666（该挑战的识别id),挑战内容为16的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 666, 16, 133102621, 5, 621050, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	-- 将configid为 621054 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621054, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -231,7 +231,7 @@ function condition_EVENT_GADGET_CREATE_621009(context, evt)
 	if 621054 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -242,7 +242,7 @@ function action_EVENT_GADGET_CREATE_621009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -250,17 +250,17 @@ end
 function condition_EVENT_QUEST_FINISH_621010(context, evt)
 	--检查ID为2102110的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 2102110 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -270,24 +270,24 @@ function action_EVENT_QUEST_FINISH_621010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 31020805 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 31020805) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（2029，203，822），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=2029, y=203, z=822}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=2029, y=203, z=822}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 2,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -297,8 +297,8 @@ function condition_EVENT_ANY_MONSTER_DIE_621012(context, evt)
 	if evt.param1 ~= 621021 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -309,7 +309,7 @@ function action_EVENT_ANY_MONSTER_DIE_621012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -319,8 +319,8 @@ function condition_EVENT_ANY_MONSTER_DIE_621014(context, evt)
 	if evt.param1 ~= 621021 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -331,7 +331,7 @@ function action_EVENT_ANY_MONSTER_DIE_621014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -339,17 +339,17 @@ end
 function condition_EVENT_QUEST_FINISH_621017(context, evt)
 	--检查ID为2102113的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 2102113 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -359,24 +359,24 @@ function action_EVENT_QUEST_FINISH_621017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 31020805 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 31020805) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（2029，203，822），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=2029, y=203, z=822}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=2029, y=203, z=822}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 2,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -386,8 +386,8 @@ function condition_EVENT_ANY_MONSTER_DIE_621018(context, evt)
 	if evt.param1 ~= 621021 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -397,8 +397,8 @@ function action_EVENT_ANY_MONSTER_DIE_621018(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133102716, 761008, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -408,8 +408,8 @@ function condition_EVENT_ANY_MONSTER_DIE_621022(context, evt)
 	if evt.param1 ~= 621021 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -419,14 +419,14 @@ function action_EVENT_ANY_MONSTER_DIE_621022(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133102761, 761008, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 621016 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621016, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -436,8 +436,8 @@ function condition_EVENT_ANY_MONSTER_DIE_621023(context, evt)
 	if evt.param1 ~= 621013 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -448,19 +448,19 @@ function action_EVENT_ANY_MONSTER_DIE_621023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_621024(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"monstercount"为3
 	if ScriptLib.GetGroupVariableValue(context, "monstercount") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -471,14 +471,14 @@ function action_EVENT_VARIABLE_CHANGE_621024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=2029.8,y=188.9,z=822.8}
+	pos = {x=2029.8,y=188.9,z=822.8}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400003, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -488,8 +488,8 @@ function condition_EVENT_ANY_MONSTER_DIE_621025(context, evt)
 	if evt.param1 ~= 621011 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -500,26 +500,26 @@ function action_EVENT_ANY_MONSTER_DIE_621025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟7秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 621019, delay_time = 7 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟15秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 621020, delay_time = 15 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=2029.8,y=188.9,z=822.8}
+	pos = {x=2029.8,y=188.9,z=822.8}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400002, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -529,24 +529,24 @@ function action_EVENT_CHALLENGE_SUCCESS_621026(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621054, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 621016 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621016, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 621050 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 变量"monstercount"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "monstercount", 0)
-	
+
 	return 0
 end
 
@@ -554,32 +554,32 @@ end
 function condition_EVENT_QUEST_FINISH_621027(context, evt)
 	--检查ID为2102130的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 2102130 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_621027(context, evt)
 	-- 触发镜头注目，注目位置为坐标（2087，196，791），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=2087, y=196, z=791}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=2087, y=196, z=791}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -588,7 +588,7 @@ function condition_EVENT_GADGET_CREATE_621029(context, evt)
 	if 621004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -596,13 +596,13 @@ end
 function action_EVENT_GADGET_CREATE_621029(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133102621, 2)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133102621, 3)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133102621, 4)
-	
+
 	return 0
 end
 
@@ -610,32 +610,32 @@ end
 function condition_EVENT_QUEST_FINISH_621037(context, evt)
 	--检查ID为2102128的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 2102128 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_621037(context, evt)
 	-- 触发镜头注目，注目位置为坐标（2087，196，791），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=2087, y=196, z=791}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=2087, y=196, z=791}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -645,8 +645,8 @@ function condition_EVENT_ANY_MONSTER_DIE_621053(context, evt)
 	if evt.param1 ~= 621019 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -657,7 +657,7 @@ function action_EVENT_ANY_MONSTER_DIE_621053(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -667,8 +667,8 @@ function condition_EVENT_ANY_MONSTER_DIE_621055(context, evt)
 	if evt.param1 ~= 621020 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -679,7 +679,7 @@ function action_EVENT_ANY_MONSTER_DIE_621055(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -687,40 +687,40 @@ end
 function action_EVENT_CHALLENGE_FAIL_621057(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133102621, 2)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133102621, 3)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133102621, 4)
-	
+
 	-- 变量"monstercount"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "monstercount", 0)
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133102621, 621054, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 将configid为 621016 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621016, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 621054 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621054, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 621050 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end

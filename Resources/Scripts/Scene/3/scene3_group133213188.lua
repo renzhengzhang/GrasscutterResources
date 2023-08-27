@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133213188
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,9 +114,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -125,7 +125,7 @@ function condition_EVENT_ANY_MONSTER_CAPTURE_AND_DISAPPEAR_188001(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -136,13 +136,13 @@ function action_EVENT_ANY_MONSTER_CAPTURE_AND_DISAPPEAR_188001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133213188, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -152,8 +152,8 @@ function condition_EVENT_ANY_MONSTER_DIE_188002(context, evt)
 	if evt.param2 ~= 0 then
 	    return false
 	 end
-	
-	
+
+
 	return true
 end
 
@@ -164,13 +164,13 @@ function action_EVENT_ANY_MONSTER_DIE_188002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133213188, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -179,7 +179,7 @@ function condition_EVENT_GADGET_CREATE_188006(context, evt)
 	if 188005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -190,7 +190,7 @@ function action_EVENT_GADGET_CREATE_188006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -198,14 +198,14 @@ end
 function condition_EVENT_SELECT_OPTION_188007(context, evt)
 	-- 判断是gadgetid 188005 option_id 35
 	if 188005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 35 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -216,29 +216,29 @@ function action_EVENT_SELECT_OPTION_188007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 -1074245605 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, -1074245605) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-3159.38，200.1922，-3464.604），持续时间为1.5秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-3159.38, y=200.1922, z=-3464.604}
-	  local pos_follow = {x=-1, y=1, z=-3}
+		pos = {x=-3159.38, y=200.1922, z=-3464.604}
+	  pos_follow = {x=-1, y=1, z=-3}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 1.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = true, is_change_play_mode = true,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133213188, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -248,8 +248,8 @@ function condition_EVENT_ANY_MONSTER_DIE_188010(context, evt)
 	if evt.param2 ~= 0 then
 	    return false
 	 end
-	
-	
+
+
 	return true
 end
 
@@ -260,13 +260,13 @@ function action_EVENT_ANY_MONSTER_DIE_188010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133213188, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -276,7 +276,7 @@ function condition_EVENT_ANY_MONSTER_CAPTURE_AND_DISAPPEAR_188011(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -287,13 +287,13 @@ function action_EVENT_ANY_MONSTER_CAPTURE_AND_DISAPPEAR_188011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133213188, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -303,7 +303,7 @@ function condition_EVENT_ANY_MONSTER_CAPTURE_AND_DISAPPEAR_188012(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -314,13 +314,13 @@ function action_EVENT_ANY_MONSTER_CAPTURE_AND_DISAPPEAR_188012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133213188, suite = 4 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -330,8 +330,8 @@ function condition_EVENT_ANY_MONSTER_DIE_188014(context, evt)
 	if evt.param2 ~= 0 then
 	    return false
 	 end
-	
-	
+
+
 	return true
 end
 
@@ -342,12 +342,12 @@ function action_EVENT_ANY_MONSTER_DIE_188014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133213188, suite = 4 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

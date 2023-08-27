@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133223372
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -82,20 +82,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_372006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Decal_Start"为1
 	if ScriptLib.GetGroupVariableValue(context, "Decal_Start") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -106,6 +106,6 @@ function action_EVENT_VARIABLE_CHANGE_372006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end

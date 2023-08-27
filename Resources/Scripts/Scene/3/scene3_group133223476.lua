@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133223476
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -95,42 +95,42 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_476001(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if evt.source_name ~= "feather_count" then
 	  return -1
 	end
-	
+
 	if evt.param1 == 1 then
 	  ScriptLib.CreateGadget(context, { config_id = 476002 })
-	
+
 	end
-	
+
 	if evt.param1 == 2 then
 	  ScriptLib.CreateGadget(context, { config_id = 476002 })
 	  ScriptLib.CreateGadget(context, { config_id = 476003 })
 	end
-	
+
 	if evt.param1 == 3 then
 	  ScriptLib.CreateGadget(context, { config_id = 476002 })
 	  ScriptLib.CreateGadget(context, { config_id = 476003 })
 	  ScriptLib.CreateGadget(context, { config_id = 476004 })
 	end
-	
+
 	if evt.param1 == 4 then
 	  ScriptLib.CreateGadget(context, { config_id = 476002 })
 	  ScriptLib.CreateGadget(context, { config_id = 476003 })
 	  ScriptLib.CreateGadget(context, { config_id = 476004 })
 	  ScriptLib.CreateGadget(context, { config_id = 476005 })
 	end
-	
+
 	if evt.param1 == 0 then
 	  ScriptLib.RefreshGroup(context,{ group_id = 133223476, suite = 2})
 	end
@@ -142,22 +142,22 @@ function action_EVENT_GROUP_LOAD_476006(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "feather_count", 133223476) == 0 then
 	  return 0
 	end
-	
+
 	if ScriptLib.GetGroupVariableValueByGroup(context, "feather_count", 133223476) == 1 then
 	  ScriptLib.CreateGadget(context, { config_id = 476002 })
 	end
-	
+
 	if ScriptLib.GetGroupVariableValueByGroup(context, "feather_count", 133223476) == 2 then
 	  ScriptLib.CreateGadget(context, { config_id = 476002 })
 	  ScriptLib.CreateGadget(context, { config_id = 476003 })
 	end
-	
+
 	if ScriptLib.GetGroupVariableValueByGroup(context, "feather_count", 133223476) == 3 then
 	  ScriptLib.CreateGadget(context, { config_id = 476002 })
 	  ScriptLib.CreateGadget(context, { config_id = 476003 })
 	  ScriptLib.CreateGadget(context, { config_id = 476004 })
 	end
-	
+
 	if ScriptLib.GetGroupVariableValueByGroup(context, "feather_count", 133223476) == 4 then
 	  ScriptLib.CreateGadget(context, { config_id = 476002 })
 	  ScriptLib.CreateGadget(context, { config_id = 476003 })
@@ -174,7 +174,7 @@ function action_EVENT_QUEST_FINISH_476007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -185,7 +185,7 @@ function action_EVENT_QUEST_FINISH_476011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -196,7 +196,7 @@ function action_EVENT_QUEST_FINISH_476012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -207,7 +207,7 @@ function action_EVENT_QUEST_FINISH_476013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -218,12 +218,12 @@ function action_EVENT_QUEST_START_476014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133223476, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133220181
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -107,9 +107,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -120,9 +120,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -219,9 +219,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -229,7 +229,7 @@ function condition_EVENT_GADGET_CREATE_181002(context, evt)
 	if 181035 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -240,7 +240,7 @@ function action_EVENT_GADGET_CREATE_181002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -249,7 +249,7 @@ function condition_EVENT_GADGET_CREATE_181004(context, evt)
 	if 181037 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -260,7 +260,7 @@ function action_EVENT_GADGET_CREATE_181004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -270,7 +270,7 @@ function condition_EVENT_GROUP_LOAD_181005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "win") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -281,7 +281,7 @@ function action_EVENT_GROUP_LOAD_181005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -290,7 +290,7 @@ function condition_EVENT_GADGET_CREATE_181029(context, evt)
 	if 181020 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -301,7 +301,7 @@ function action_EVENT_GADGET_CREATE_181029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -310,7 +310,7 @@ function condition_EVENT_ANY_GADGET_DIE_181046(context, evt)
 	if 181001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -321,13 +321,13 @@ function action_EVENT_ANY_GADGET_DIE_181046(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "win" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "win", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -336,7 +336,7 @@ function condition_EVENT_ANY_GADGET_DIE_181047(context, evt)
 	if 181027 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -346,20 +346,20 @@ function action_EVENT_ANY_GADGET_DIE_181047(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 181001, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_181049(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"step"为2
 	if ScriptLib.GetGroupVariableValue(context, "step") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -369,29 +369,29 @@ function action_EVENT_VARIABLE_CHANGE_181049(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 181001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220181, 8)
-	
+
 	-- 调用提示id为 7210503 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7210503) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_181050(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"step"为3
 	if ScriptLib.GetGroupVariableValue(context, "step") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -401,11 +401,11 @@ function action_EVENT_VARIABLE_CHANGE_181050(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 181001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220181, 9)
-	
+
 	return 0
 end
 
@@ -414,12 +414,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_181051(context, evt)
 	if 181001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"step"为2
 	if ScriptLib.GetGroupVariableValue(context, "step") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -430,25 +430,25 @@ function action_EVENT_GADGET_STATE_CHANGE_181051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7210504 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7210504) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_181052(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"step"为4
 	if ScriptLib.GetGroupVariableValue(context, "step") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -458,11 +458,11 @@ function action_EVENT_VARIABLE_CHANGE_181052(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 181001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220181, 10)
-	
+
 	return 0
 end
 
@@ -471,12 +471,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_181053(context, evt)
 	if 181001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"step"为3
 	if ScriptLib.GetGroupVariableValue(context, "step") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -487,19 +487,19 @@ function action_EVENT_GADGET_STATE_CHANGE_181053(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟5秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 181003, delay_time = 5 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7210505 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7210505) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -508,7 +508,7 @@ function condition_EVENT_ANY_GADGET_DIE_181054(context, evt)
 	if 181038 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -519,7 +519,7 @@ function action_EVENT_ANY_GADGET_DIE_181054(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -528,7 +528,7 @@ function condition_EVENT_ANY_GADGET_DIE_181055(context, evt)
 	if 181039 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -539,7 +539,7 @@ function action_EVENT_ANY_GADGET_DIE_181055(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -548,7 +548,7 @@ function condition_EVENT_ANY_GADGET_DIE_181056(context, evt)
 	if 181040 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -559,7 +559,7 @@ function action_EVENT_ANY_GADGET_DIE_181056(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -570,7 +570,7 @@ function action_EVENT_ANY_MONSTER_DIE_181057(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

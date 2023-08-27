@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133312003
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -97,18 +97,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_3003(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0 
+	-- 判断指定group组剩余gadget数量是否是0
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133312003}) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -119,7 +119,7 @@ function action_EVENT_ANY_GADGET_DIE_3003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -128,7 +128,7 @@ function condition_EVENT_ANY_GADGET_DIE_3008(context, evt)
 	if 3001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -139,7 +139,7 @@ function action_EVENT_ANY_GADGET_DIE_3008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -148,7 +148,7 @@ function condition_EVENT_ANY_GADGET_DIE_3009(context, evt)
 	if 3007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -159,7 +159,7 @@ function action_EVENT_ANY_GADGET_DIE_3009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -168,7 +168,7 @@ function condition_EVENT_ANY_GADGET_DIE_3010(context, evt)
 	if 3006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -179,7 +179,7 @@ function action_EVENT_ANY_GADGET_DIE_3010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -188,7 +188,7 @@ function condition_EVENT_ANY_GADGET_DIE_3011(context, evt)
 	if 3005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -199,7 +199,7 @@ function action_EVENT_ANY_GADGET_DIE_3011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_ANY_GADGET_DIE_3012(context, evt)
 	if 3004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -219,6 +219,6 @@ function action_EVENT_ANY_GADGET_DIE_3012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

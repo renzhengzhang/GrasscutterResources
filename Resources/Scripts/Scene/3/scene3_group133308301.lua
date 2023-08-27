@@ -1,11 +1,11 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308301
 }
 
 -- DEFS_MISCS
 --第一次交互的option，之后切为2
-local optionID = {440}
+optionID = {440}
 
 --常用ID：
 --{431,432} 开/关门
@@ -14,9 +14,9 @@ local optionID = {440}
 --{440} 权限操作台解除物件锁定
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -87,29 +87,29 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_301001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"quest"为1
 	if ScriptLib.GetGroupVariableValue(context, "quest") ~= 1 then
 			return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133308301, 301002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -119,14 +119,14 @@ function action_EVENT_VARIABLE_CHANGE_301001(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 301002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308592, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -134,14 +134,14 @@ end
 function condition_EVENT_SELECT_OPTION_301003(context, evt)
 	-- 判断是gadgetid 301002 option_id 440
 	if 301002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 440 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -151,8 +151,8 @@ function action_EVENT_SELECT_OPTION_301003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 301002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -161,7 +161,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_301004(context, evt)
 	if 301002 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -172,7 +172,7 @@ function action_EVENT_GADGET_STATE_CHANGE_301004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -181,7 +181,7 @@ function condition_EVENT_GROUP_LOAD_301005(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133308301, 301002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -192,7 +192,7 @@ function action_EVENT_GROUP_LOAD_301005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -202,16 +202,16 @@ function condition_EVENT_GROUP_LOAD_301006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"quest"为1
 	if ScriptLib.GetGroupVariableValue(context, "quest") ~= 1 then
 			return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133308301, 301002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -221,8 +221,8 @@ function action_EVENT_GROUP_LOAD_301006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 301002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -233,7 +233,7 @@ function action_EVENT_QUEST_FINISH_301007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

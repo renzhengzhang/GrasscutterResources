@@ -28,7 +28,7 @@ function OnClientExecuteReq(context, param1, param2, param3)
 	if param1 == 106 then
 		ScriptLib.SetGadgetState(context, GadgetState.ChestRock)
 	end
-	local group_id=ScriptLib.GetContextGroupId(context)
+	group_id=ScriptLib.GetContextGroupId(context)
 	if group_id ~= nil and group_id ~= -1 then
 		ScriptLib.SetGadgetEnableInteract(context, ScriptLib.GetContextGroupId(context), ScriptLib.GetContextGadgetConfigId(context), true)
 	end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133213463
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -98,9 +98,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -111,9 +111,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -129,20 +129,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463003(context, evt)
 	if evt.param1 ~= 463003 then return false end
-	
+
 	-- 判断是区域463003
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463003 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -153,25 +153,25 @@ function action_EVENT_ENTER_REGION_463003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463002, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463006(context, evt)
 	if evt.param1 ~= 463006 then return false end
-	
+
 	-- 判断是区域463006
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463006 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -182,25 +182,25 @@ function action_EVENT_ENTER_REGION_463006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463005, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463009(context, evt)
 	if evt.param1 ~= 463009 then return false end
-	
+
 	-- 判断是区域463009
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463009 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -211,25 +211,25 @@ function action_EVENT_ENTER_REGION_463009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463008, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463012(context, evt)
 	if evt.param1 ~= 463012 then return false end
-	
+
 	-- 判断是区域463012
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463012 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -240,25 +240,25 @@ function action_EVENT_ENTER_REGION_463012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463011, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463015(context, evt)
 	if evt.param1 ~= 463015 then return false end
-	
+
 	-- 判断是区域463015
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463015 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -269,25 +269,25 @@ function action_EVENT_ENTER_REGION_463015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463014, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463018(context, evt)
 	if evt.param1 ~= 463018 then return false end
-	
+
 	-- 判断是区域463018
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463018 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -298,25 +298,25 @@ function action_EVENT_ENTER_REGION_463018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463017, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463021(context, evt)
 	if evt.param1 ~= 463021 then return false end
-	
+
 	-- 判断是区域463021
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463021 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -327,25 +327,25 @@ function action_EVENT_ENTER_REGION_463021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463020, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463024(context, evt)
 	if evt.param1 ~= 463024 then return false end
-	
+
 	-- 判断是区域463024
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463024 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -356,25 +356,25 @@ function action_EVENT_ENTER_REGION_463024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463023, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463027(context, evt)
 	if evt.param1 ~= 463027 then return false end
-	
+
 	-- 判断是区域463027
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463027 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -385,25 +385,25 @@ function action_EVENT_ENTER_REGION_463027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463026, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463030(context, evt)
 	if evt.param1 ~= 463030 then return false end
-	
+
 	-- 判断是区域463030
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463030 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -414,25 +414,25 @@ function action_EVENT_ENTER_REGION_463030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463029, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463033(context, evt)
 	if evt.param1 ~= 463033 then return false end
-	
+
 	-- 判断是区域463033
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463033 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -443,25 +443,25 @@ function action_EVENT_ENTER_REGION_463033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463032, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463036(context, evt)
 	if evt.param1 ~= 463036 then return false end
-	
+
 	-- 判断是区域463036
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463036 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -472,25 +472,25 @@ function action_EVENT_ENTER_REGION_463036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463035, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463039(context, evt)
 	if evt.param1 ~= 463039 then return false end
-	
+
 	-- 判断是区域463039
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463039 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -501,25 +501,25 @@ function action_EVENT_ENTER_REGION_463039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463038, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463042(context, evt)
 	if evt.param1 ~= 463042 then return false end
-	
+
 	-- 判断是区域463042
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463042 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -530,25 +530,25 @@ function action_EVENT_ENTER_REGION_463042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463041, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463045(context, evt)
 	if evt.param1 ~= 463045 then return false end
-	
+
 	-- 判断是区域463045
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463045 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -559,25 +559,25 @@ function action_EVENT_ENTER_REGION_463045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463044, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_463048(context, evt)
 	if evt.param1 ~= 463048 then return false end
-	
+
 	-- 判断是区域463048
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 463048 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -588,12 +588,12 @@ function action_EVENT_ENTER_REGION_463048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 463047, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end

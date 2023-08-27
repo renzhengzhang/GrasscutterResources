@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133223407
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -95,7 +95,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_407003(context, evt)
 	if 407002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -106,13 +106,13 @@ function action_EVENT_GADGET_STATE_CHANGE_407003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为407001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 407001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -121,7 +121,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_407006(context, evt)
 	if 407005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -132,13 +132,13 @@ function action_EVENT_GADGET_STATE_CHANGE_407006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为407004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 407004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_407009(context, evt)
 	if 407008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -158,25 +158,25 @@ function action_EVENT_GADGET_STATE_CHANGE_407009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为407007的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 407007 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_407010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"finish_progress"为3
 	if ScriptLib.GetGroupVariableValue(context, "finish_progress") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -187,28 +187,28 @@ function action_EVENT_VARIABLE_CHANGE_407010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 创建id为407011的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 407011 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "progress", 1, 133223503) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133223009, 1)
-	
+
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133223046, 1)
-	
+
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133223101, 1)
-	
+
 	return 0
 end
 
@@ -218,7 +218,7 @@ function condition_EVENT_GROUP_LOAD_407012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish_progress") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -229,6 +229,6 @@ function action_EVENT_GROUP_LOAD_407012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

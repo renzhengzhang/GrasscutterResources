@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133223123
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -102,9 +102,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -115,9 +115,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -178,9 +178,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -189,7 +189,7 @@ function condition_EVENT_GROUP_LOAD_123003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mission_progress") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -200,7 +200,7 @@ function action_EVENT_GROUP_LOAD_123003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -210,8 +210,8 @@ function action_EVENT_QUEST_START_123004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 123002, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -221,11 +221,11 @@ function condition_EVENT_GROUP_REFRESH_123005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mission_progress") ~= 3 then
 			return false
 	end
-	
+
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133223123, 123001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -235,8 +235,8 @@ function action_EVENT_GROUP_REFRESH_123005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 123001, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -246,7 +246,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_123006(context, evt)
 	if 123002 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.Action03 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -257,7 +257,7 @@ function action_EVENT_GADGET_STATE_CHANGE_123006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -266,7 +266,7 @@ function condition_EVENT_GADGET_CREATE_123008(context, evt)
 	if 123007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -277,19 +277,19 @@ function action_EVENT_GADGET_CREATE_123008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_123009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"EnergyBall_Succ_Count"为6
 	if ScriptLib.GetGroupVariableValue(context, "EnergyBall_Succ_Count") ~= 6 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -300,7 +300,7 @@ function action_EVENT_VARIABLE_CHANGE_123009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -311,13 +311,13 @@ function action_EVENT_QUEST_FINISH_123010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133223123, suite = 5 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -327,7 +327,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_123011(context, evt)
 	if 123002 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 or GadgetState.Action01 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -338,46 +338,46 @@ function action_EVENT_GADGET_STATE_CHANGE_123011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_123013(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if evt.source_name ~= "FeatherCount" then
 	  return -1
 	end
-	
+
 	if evt.param1 == 1 then
 	  ScriptLib.CreateGadget(context, { config_id = 123029 })
-	
+
 	end
-	
+
 	if evt.param1 == 2 then
 	  ScriptLib.CreateGadget(context, { config_id = 123029 })
 	  ScriptLib.CreateGadget(context, { config_id = 123030 })
 	end
-	
+
 	if evt.param1 == 3 then
 	  ScriptLib.CreateGadget(context, { config_id = 123029 })
 	  ScriptLib.CreateGadget(context, { config_id = 123030 })
 	  ScriptLib.CreateGadget(context, { config_id = 123031 })
 	end
 	return 0
-	
+
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_123014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FeatherCount"为3
 	if ScriptLib.GetGroupVariableValue(context, "FeatherCount") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -388,19 +388,19 @@ function action_EVENT_VARIABLE_CHANGE_123014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 调用提示id为 721730014 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 721730014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133223495, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -408,14 +408,14 @@ end
 function condition_EVENT_SELECT_OPTION_123016(context, evt)
 	-- 判断是gadgetid 123015 option_id 322
 	if 123015 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 322 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -426,40 +426,40 @@ function action_EVENT_SELECT_OPTION_123016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "mission_progress" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "mission_progress", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 133223123 ；指定config：123015；物件身上指定option：322；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133223123, 123015, 322) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 123029 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 123030 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 123031 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -467,14 +467,14 @@ end
 function condition_EVENT_SELECT_OPTION_123017(context, evt)
 	-- 判断是gadgetid 123007 option_id 321
 	if 123007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 321 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -485,13 +485,13 @@ function action_EVENT_SELECT_OPTION_123017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7222506_finish") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -500,7 +500,7 @@ function condition_EVENT_TIME_AXIS_PASS_123018(context, evt)
 	if "D1_CS_Play" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -510,8 +510,8 @@ function action_EVENT_TIME_AXIS_PASS_123018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 123001, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -521,11 +521,11 @@ function condition_EVENT_GADGET_CREATE_123019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "FeatherCount") ~= 3 then
 			return false
 	end
-	
+
 	if 123015 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -536,7 +536,7 @@ function action_EVENT_GADGET_CREATE_123019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -544,8 +544,8 @@ end
 function action_EVENT_QUEST_FINISH_123020(context, evt)
 	-- 创建标识为"Ball_CS_Finish"，时间节点为{10}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Ball_CS_Finish", {10}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -554,7 +554,7 @@ function condition_EVENT_TIME_AXIS_PASS_123021(context, evt)
 	if "Ball_CS_Finish" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -565,11 +565,11 @@ function action_EVENT_TIME_AXIS_PASS_123021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 停止标识为"Ball_CS_Finish"的时间轴
 	ScriptLib.EndTimeAxis(context, "Ball_CS_Finish")
-	
-	
+
+
 	return 0
 end
 
@@ -579,7 +579,7 @@ function condition_EVENT_GROUP_LOAD_123023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mission_progress") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -590,7 +590,7 @@ function action_EVENT_GROUP_LOAD_123023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -598,8 +598,8 @@ end
 function action_EVENT_QUEST_START_123024(context, evt)
 	-- 创建标识为"Tree_Die"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Tree_Die", {1}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -608,7 +608,7 @@ function condition_EVENT_TIME_AXIS_PASS_123025(context, evt)
 	if "Tree_Die" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -616,14 +616,14 @@ end
 function action_EVENT_TIME_AXIS_PASS_123025(context, evt)
 	-- 停止标识为"Tree_Die"的时间轴
 	ScriptLib.EndTimeAxis(context, "Tree_Die")
-	
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133223123, suite = 4 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -634,7 +634,7 @@ function action_EVENT_QUEST_FINISH_123026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -644,8 +644,8 @@ function action_EVENT_QUEST_START_123027(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 123002, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -655,8 +655,8 @@ function action_EVENT_QUEST_START_123028(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 123002, GadgetState.Action03) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -666,20 +666,20 @@ function action_EVENT_GROUP_REFRESH_123032(context, evt)
 	    ScriptLib.CreateGadget(context, { config_id = 123029 })
 	    return 0
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "FeatherCount") == 2 then
 	    ScriptLib.CreateGadget(context, { config_id = 123029 })
 	    ScriptLib.CreateGadget(context, { config_id = 123030 })
 	    return 0
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "FeatherCount") == 3 then
 	    ScriptLib.CreateGadget(context, { config_id = 123029 })
 	    ScriptLib.CreateGadget(context, { config_id = 123030 })
 	    ScriptLib.CreateGadget(context, { config_id = 123031 })
 	    return 0
 	end
-	
+
 	return 0
 end
 
@@ -687,7 +687,7 @@ end
 function action_EVENT_QUEST_FINISH_123033(context, evt)
 	-- 创建标识为"D1_CS_Play"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "D1_CS_Play", {1}, false)
-	
-	
+
+
 	return 0
 end

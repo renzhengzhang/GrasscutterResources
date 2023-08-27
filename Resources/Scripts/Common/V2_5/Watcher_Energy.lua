@@ -11,13 +11,13 @@
 
 
 =======================================================================================]]
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Option_Down"] = { config_id = 80000002, name = "Option_Down", event= EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_OptionDown", trigger_count = 0, forbid_guest = false },
 	}
 }
 
-local optionID = 700
+optionID = 700
 
 
 function action_OptionDown( context, evt )

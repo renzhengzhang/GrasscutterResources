@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220009011
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 8,
 	gadget_id_2 = 9,
 	gadget_id_3 = 10,
@@ -21,9 +21,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -94,9 +94,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -104,7 +104,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_47(context, evt)
 	if 264 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -114,111 +114,111 @@ function action_EVENT_GADGET_STATE_CHANGE_47(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isoff", 1) then
 	  return -1
 	end
-	
+
 	if 0 ~= ScriptLib.ShowClientGuide(context, "GuideAvatarFlyInWind") then
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "windon1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "windon1", 1) then
 	  return -1
 	end
-	
+
 	-- 解锁目标8
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_1) then
 		return -1
 	end
-	
+
 	-- 解锁目标9
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_2) then
 		return -1
 	end
-	
+
 	-- 解锁目标10
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_3) then
 		return -1
 	end
-	
+
 	-- 解锁目标11
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_4) then
 		return -1
 	end
-	
+
 	-- 解锁目标12
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_5) then
 		return -1
 	end
-	
+
 	-- 解锁目标13
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_6) then
 		return -1
 	end
-	
+
 	-- 解锁目标14
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_7) then
 		return -1
 	end
-	
+
 	-- 解锁目标15
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_8) then
 		return -1
 	end
-	
+
 	-- 解锁目标17
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_9) then
 		return -1
 	end
-	
+
 	-- 解锁目标18
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_10) then
 		return -1
 	end
-	
+
 	-- 解锁目标19
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_11) then
 		return -1
 	end
-	
+
 	-- 解锁目标20
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_12) then
 		return -1
 	end
-	
+
 	-- 解锁目标21
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_13) then
 		return -1
 	end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220009011, monsters = {}, gadgets = {265} }) then
 			return -1
 		end
-	
-	
+
+
 	if ScriptLib.GetGroupVariableValue(context, "windon1") + ScriptLib.GetGroupVariableValue(context, "windon2") > 1 then
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "220009011") then
 	  return -1
 	end
-	
+
 	end
-	
-	
-	
-	
+
+
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_48(context, evt)
 	if evt.param1 ~= 48 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -229,24 +229,24 @@ function action_EVENT_ENTER_REGION_48(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_55(context, evt)
 	if evt.param1 ~= 55 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"isoff"为0
 	if ScriptLib.GetGroupVariableValue(context, "isoff") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -257,45 +257,45 @@ function action_EVENT_ENTER_REGION_55(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建id为265的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 265 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_57(context, evt)
 	if evt.param1 ~= 57 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_57(context, evt)
-	
-	
+
+
 	-- 将本组内变量名为 "windon2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "windon2", 1) then
 	  return -1
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "windon1") + ScriptLib.GetGroupVariableValue(context, "windon2") >1 then
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "220009011") then
 	  return -1
 	end
-	
+
 	end
-	
+
 	return 0
 end

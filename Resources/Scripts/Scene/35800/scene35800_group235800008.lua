@@ -1,20 +1,20 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 235800008
 }
 
 -- DEFS_MISCS
 --Boss主题玩法1
-local BossGroupID = 235800008
+BossGroupID = 235800008
 
-local BossConfigID = 8002
+BossConfigID = 8002
 
-local boss_hp_threshold = 30
+boss_hp_threshold = 30
 
-local ElementFallConfigID = 8004
+ElementFallConfigID = 8004
 
 --四阶段Boss战随机要素列表
-local BossRandomList = {
+BossRandomList = {
         [1] = {
                 [1] = {type = 2, suite_id = {4,5,6,7}},
         },
@@ -38,11 +38,11 @@ local BossRandomList = {
         }
 }
 
-local regionIndex =  8009
+regionIndex =  8009
 
-local wind_force_interval = 30
+wind_force_interval = 30
 
-local bubble_point_array = {
+bubble_point_array = {
     [7059] = {point_array_id = 1, point_id_list = {1,2,3,4,5,6}, route_type = 1},
     [7060] = {point_array_id = 2, point_id_list = {1,2,3,4,5,6}, route_type = 1},
     [7061] = {point_array_id = 3, point_id_list = {1,2,3,4,5,6}, route_type = 1},
@@ -58,9 +58,9 @@ local bubble_point_array = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -101,9 +101,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -114,9 +114,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -186,9 +186,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "WindFlora_Boss_RandomList"

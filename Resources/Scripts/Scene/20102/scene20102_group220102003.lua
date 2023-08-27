@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220102003
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -86,9 +86,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -98,7 +98,7 @@ function action_EVENT_CHALLENGE_FAIL_3006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -107,7 +107,7 @@ function condition_EVENT_GADGET_CREATE_3009(context, evt)
 	if 3008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -118,7 +118,7 @@ function action_EVENT_GADGET_CREATE_3009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -126,14 +126,14 @@ end
 function condition_EVENT_SELECT_OPTION_3010(context, evt)
 	-- 判断是gadgetid 3008 option_id 7
 	if 3008 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -143,31 +143,31 @@ function action_EVENT_SELECT_OPTION_3010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 220102003 ；指定config：3008；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220102003, 3008, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 改变指定group组220102002中， configid为2008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220102002, 2008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建编号为1（该怪物潮的识别id)的怪物潮，创建怪物总数为7，场上怪物最少2只，最多2只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 220102003, {3002,3003,3014,3005,3007,3015,3004}, 7, 2, 2) then
 		return -1
 	end
-	
+
 	-- 创建编号为2（该挑战的识别id),挑战内容为1的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 2, 1, 220102003, 7, 0, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -177,13 +177,13 @@ function action_EVENT_CHALLENGE_SUCCESS_3011(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220102003, 3001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为3024的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 3024 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

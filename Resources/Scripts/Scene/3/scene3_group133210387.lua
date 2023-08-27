@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210387
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -136,28 +136,28 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_START_387001(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210387, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_387004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"GadgetCount"为3
 	if ScriptLib.GetGroupVariableValue(context, "GadgetCount") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -167,33 +167,33 @@ function action_EVENT_VARIABLE_CHANGE_387004(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133210386, 386001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标（-3851.68，199.86，-439.07），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-3851.68, y=199.86, z=-439.07}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-3851.68, y=199.86, z=-439.07}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210387, 3)
-	
+
 	-- 将本组内变量名为 "queststate" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "queststate", 1, 133210211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Reminder" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Reminder", 1, 133210211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -202,7 +202,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_387005(context, evt)
 	if 387003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -213,7 +213,7 @@ function action_EVENT_GADGET_STATE_CHANGE_387005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -222,7 +222,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_387007(context, evt)
 	if 387006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -233,7 +233,7 @@ function action_EVENT_GADGET_STATE_CHANGE_387007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -242,7 +242,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_387009(context, evt)
 	if 387008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -253,7 +253,7 @@ function action_EVENT_GADGET_STATE_CHANGE_387009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -261,6 +261,6 @@ end
 function action_EVENT_QUEST_START_387014(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210387, 2)
-	
+
 	return 0
 end

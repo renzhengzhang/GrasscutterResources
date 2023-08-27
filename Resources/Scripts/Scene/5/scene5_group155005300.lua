@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155005300
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	groupID = 155005300,
 	gadget_gate = 300001,
 	gadget_controller = 300002
@@ -13,18 +13,18 @@ local defs = {
 -- DEFS_MISCS
 function GadgetStateSwitcher(context,gadget_id,state)
 
-	if ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, gadget_id)  == state[1] then 
+	if ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, gadget_id)  == state[1] then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupID, gadget_id, state[2])
-	elseif ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, gadget_id)  == state[2] then 
+	elseif ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, gadget_id)  == state[2] then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupID, gadget_id, state[1])
-	end 
+	end
 
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -100,7 +100,7 @@ function action_EVENT_GROUP_LOAD_300003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -108,14 +108,14 @@ end
 function condition_EVENT_SELECT_OPTION_300004(context, evt)
 	-- 判断是gadgetid 300002 option_id 7
 	if 300002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -127,8 +127,8 @@ function action_EVENT_SELECT_OPTION_300004(context, evt)
 		ScriptLib.DelWorktopOptionByGroupId(context, 155005300, 300002, 7)
 		-- 创建标识为"reset"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 		ScriptLib.InitTimeAxis(context, "reset", {1}, false)
-		
-		
+
+
 		return 0
 end
 
@@ -139,6 +139,6 @@ function action_EVENT_TIME_AXIS_PASS_300005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end

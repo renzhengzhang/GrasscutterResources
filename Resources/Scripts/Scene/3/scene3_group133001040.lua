@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001040
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -141,9 +141,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -154,9 +154,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -271,28 +271,28 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_40001(context, evt)
 	-- 判断是gadgetid 为 40004的移动平台，是否到达了300100391 的路线中的 8 点
-	
+
 	if 40004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100391 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 8 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -303,35 +303,35 @@ function action_EVENT_PLATFORM_REACH_POINT_40001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001040, 8)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_40002(context, evt)
 	-- 判断是gadgetid 为 40004的移动平台，是否到达了300100391 的路线中的 8 点
-	
+
 	if 40004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100391 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 8 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"isO1Available"为1
 	if ScriptLib.GetGroupVariableValue(context, "isO1Available") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -342,7 +342,7 @@ function action_EVENT_PLATFORM_REACH_POINT_40002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -351,7 +351,7 @@ function condition_EVENT_ANY_GADGET_DIE_40003(context, evt)
 	if 40006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -362,24 +362,24 @@ function action_EVENT_ANY_GADGET_DIE_40003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_40007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"hasReachedO1"为1
 	if ScriptLib.GetGroupVariableValue(context, "hasReachedO1") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"isO1Available"为0
 	if ScriptLib.GetGroupVariableValue(context, "isO1Available") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -390,7 +390,7 @@ function action_EVENT_VARIABLE_CHANGE_40007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -399,7 +399,7 @@ function condition_EVENT_GADGET_CREATE_40009(context, evt)
 	if 40005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -410,7 +410,7 @@ function action_EVENT_GADGET_CREATE_40009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -418,14 +418,14 @@ end
 function condition_EVENT_SELECT_OPTION_40010(context, evt)
 	-- 判断是gadgetid 40005 option_id 7
 	if 40005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -436,52 +436,52 @@ function action_EVENT_SELECT_OPTION_40010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 40005 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001040, 4)
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001040, 5)
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001040, 6)
-	
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001040, 7)
-	
+
 	-- 将configid为 40004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 40004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_40012(context, evt)
 	-- 判断是gadgetid 为 40004的移动平台，是否到达了300100391 的路线中的 18 点
-	
+
 	if 40004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100391 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 18 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -489,7 +489,7 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_40012(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001040, 10)
-	
+
 	return 0
 end
 
@@ -498,7 +498,7 @@ function condition_EVENT_ANY_GADGET_DIE_40014(context, evt)
 	if 40004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -509,27 +509,27 @@ function action_EVENT_ANY_GADGET_DIE_40014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_40015(context, evt)
 	-- 判断是gadgetid 为 40004的移动平台，是否到达了300100391 的路线中的 16 点
-	
+
 	if 40004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100391 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 16 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -540,32 +540,32 @@ function action_EVENT_PLATFORM_REACH_POINT_40015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_40016(context, evt)
 	-- 判断是gadgetid 为 40004的移动平台，是否到达了300100391 的路线中的 16 点
-	
+
 	if 40004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100391 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 16 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"isO2Available"为1
 	if ScriptLib.GetGroupVariableValue(context, "isO2Available") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -576,7 +576,7 @@ function action_EVENT_PLATFORM_REACH_POINT_40016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -585,7 +585,7 @@ function condition_EVENT_ANY_GADGET_DIE_40017(context, evt)
 	if 40008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -596,24 +596,24 @@ function action_EVENT_ANY_GADGET_DIE_40017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_40018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"hasReachedO2"为1
 	if ScriptLib.GetGroupVariableValue(context, "hasReachedO2") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"isO2Available"为0
 	if ScriptLib.GetGroupVariableValue(context, "isO2Available") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -624,27 +624,27 @@ function action_EVENT_VARIABLE_CHANGE_40018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_40019(context, evt)
 	-- 判断是gadgetid 为 40004的移动平台，是否到达了300100391 的路线中的 27 点
-	
+
 	if 40004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100391 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 27 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -655,26 +655,26 @@ function action_EVENT_PLATFORM_REACH_POINT_40019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 调用提示id为 70501061 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 70501061) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7050105finish") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 停止移动平台
 	if 0 ~= ScriptLib.StopPlatform(context, 40023) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -683,7 +683,7 @@ function condition_EVENT_ANY_GADGET_DIE_40020(context, evt)
 	if 40033 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -691,24 +691,24 @@ end
 function action_EVENT_ANY_GADGET_DIE_40020(context, evt)
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001040, 12)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_40022(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"hasReachedO1"为1
 	if ScriptLib.GetGroupVariableValue(context, "hasReachedO1") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"isO1Available"为0
 	if ScriptLib.GetGroupVariableValue(context, "isO1Available") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -716,65 +716,65 @@ end
 function action_EVENT_VARIABLE_CHANGE_40022(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001040, 3)
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 40023) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_40024(context, evt)
 	-- 判断是gadgetid 为 40004的移动平台，是否到达了300100391 的路线中的 9 点
-	
+
 	if 40004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100391 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 9 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_40024(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=1500.512,y=241.6388,z=-1389.868}
+	pos = {x=1500.512,y=241.6388,z=-1389.868}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 70501051, pos, 80) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_40034(context, evt)
 	-- 判断是gadgetid 为 40004的移动平台，是否到达了300100391 的路线中的 22 点
-	
+
 	if 40004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100391 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 22 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -785,32 +785,32 @@ function action_EVENT_PLATFORM_REACH_POINT_40034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_40035(context, evt)
 	-- 判断是gadgetid 为 40004的移动平台，是否到达了300100391 的路线中的 22 点
-	
+
 	if 40004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100391 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 22 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"isO3Available"为1
 	if ScriptLib.GetGroupVariableValue(context, "isO3Available") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -821,7 +821,7 @@ function action_EVENT_PLATFORM_REACH_POINT_40035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -830,7 +830,7 @@ function condition_EVENT_ANY_GADGET_DIE_40036(context, evt)
 	if 40033 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -841,24 +841,24 @@ function action_EVENT_ANY_GADGET_DIE_40036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_40037(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"hasReachedO3"为1
 	if ScriptLib.GetGroupVariableValue(context, "hasReachedO3") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"isO3Available"为0
 	if ScriptLib.GetGroupVariableValue(context, "isO3Available") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -869,27 +869,27 @@ function action_EVENT_VARIABLE_CHANGE_40037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_40038(context, evt)
 	-- 判断是gadgetid 为 40023的移动平台，是否到达了300100392 的路线中的 17 点
-	
+
 	if 40023 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100392 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 17 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -900,33 +900,33 @@ function action_EVENT_PLATFORM_REACH_POINT_40038(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 70501063 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 70501063) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_40039(context, evt)
 	-- 判断是gadgetid 为 40004的移动平台，是否到达了300100391 的路线中的 12 点
-	
+
 	if 40004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100391 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 12 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -934,7 +934,7 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_40039(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001040, 9)
-	
+
 	return 0
 end
 
@@ -943,7 +943,7 @@ function condition_EVENT_ANY_GADGET_DIE_40060(context, evt)
 	if 40023 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -954,7 +954,7 @@ function action_EVENT_ANY_GADGET_DIE_40060(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -965,9 +965,9 @@ function action_EVENT_QUEST_START_40061(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001040, 11)
-	
+
 	return 0
 end

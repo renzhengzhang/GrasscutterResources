@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101241
 }
 
@@ -10,9 +10,9 @@ DayAppearGadgets = {}
 NightAppearGadgets = {}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -73,35 +73,35 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_241002(context, evt)
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
-	local is_daynight_gadget = false
+	is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (241001 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
 	  end
 	end
-	
-	if (not is_daynight_gadget) then 
+
+	if (not is_daynight_gadget) then
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1 
+	    return -1
 	end
-	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,241001,202)
 	end
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,241001,302)
 	end
-	
-	
+
+
 	return 0
 end
 

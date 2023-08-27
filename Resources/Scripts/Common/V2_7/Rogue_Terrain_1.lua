@@ -12,23 +12,23 @@
     defs.bridge = 9999 --通往下个房间的光桥
 
 ]]
-local next_group_info = {
+next_group_info = {
     [246201001] = {246201002,2009,2015},
     [246201002] = {246201003,3009,3015},
     [246201003] = {246201004,4007,4015},
     [246201004] = {246201001,1009,1015},
 }
-local last_group_info = {
+last_group_info = {
     [246201001] = {246201004,4007,4015},
     [246201002] = {246201001,1009,1015},
     [246201003] = {246201002,2009,2015},
     [246201004] = {246201003,3009,3015},
 }
 
-local temp_Variables_Rogue_Terrain_1 = {
+temp_Variables_Rogue_Terrain_1 = {
 
 }
-local temp_Tirgger_Rogue_Terrain_1 = {
+temp_Tirgger_Rogue_Terrain_1 = {
     --{event = EventType.EVENT_CHALLENGE_SUCCESS,source = "",condition="",action="action_t1_EVENT_CHALLENGE_SUCCESS",trigger_count=0},
     {event = EventType.EVENT_ROGUE_START_FIGHT,source = "",condition="",action="action_t1_EVENT_ROGUE_START_FIGHT",trigger_count=0},
     {event = EventType.EVENT_ROGUE_OPEN_ACCESS,source = "",condition="",action="action_t1_EVENT_ROGUE_OPEN_ACCESS",trigger_count=0},
@@ -72,7 +72,7 @@ end
 --初始化
 function Initialize_1()
 	--加触发器
-    if temp_Tirgger_Rogue_Terrain_1 ~= nil then 
+    if temp_Tirgger_Rogue_Terrain_1 ~= nil then
         for k,v in pairs(temp_Tirgger_Rogue_Terrain_1) do
             v.name = "temp_Tirgger_1_"..k
             v.config_id = 40100000 + k
@@ -81,7 +81,7 @@ function Initialize_1()
         end
     end
 	--加变量
-    if temp_Variables_Rogue_Terrain_1 ~= nil then 
+    if temp_Variables_Rogue_Terrain_1 ~= nil then
         for k,v in pairs(temp_Variables_Rogue_Terrain_1) do
             table.insert(variables,v)
         end

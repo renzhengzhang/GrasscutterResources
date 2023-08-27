@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101288
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -86,23 +86,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_288001(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 111101288) ~= 0 then
 		return false
 	end
-	
-	-- 判断指定group组剩余怪物数量是否是1 
+
+	-- 判断指定group组剩余怪物数量是否是1
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 111101289) ~= 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -113,14 +113,14 @@ function action_EVENT_ANY_MONSTER_DIE_288001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 111101289, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -128,17 +128,17 @@ end
 function action_EVENT_ENTER_REGION_288011(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101288, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_288012(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 111101288) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -149,6 +149,6 @@ function action_EVENT_ANY_MONSTER_DIE_288012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

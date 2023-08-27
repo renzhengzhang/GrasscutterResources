@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220138010
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -73,25 +73,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_OBSERVATION_POINT_NOTIFY_10003(context, evt)
 	if 10001 == evt.param1 and 204 == evt.param2 then
 		ScriptLib.SetGadgetStateByConfigId(context,10002, GadgetState.GearStart)
-		
+
 		ScriptLib.AddQuestProgress(context, "4007215")
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,10001, GadgetState.GearAction2)
-		
+
 		ScriptLib.KillEntityByConfigId(context, {group_id=220138010, config_id=10006, entity_type=EntityType.GADGET})
-		
+
 		ScriptLib.KillEntityByConfigId(context, {group_id=220138010, config_id=10007, entity_type=EntityType.GADGET})
 	end
-	
+
 	return 0
 end
 
@@ -99,14 +99,14 @@ end
 function action_EVENT_OBSERVATION_POINT_NOTIFY_10004(context, evt)
 	if 10001 == evt.param1 and 0 == evt.param2 then
 		ScriptLib.SetGadgetStateByConfigId(context,10002, GadgetState.Default)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,10001, GadgetState.Default)
-		
+
 		ScriptLib.CreateGadget(context, {config_id=10006})
-		
+
 		ScriptLib.CreateGadget(context, {config_id=10007})
 	end
-	
+
 	return 0
 end
 
@@ -115,7 +115,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10005(context, evt)
 	if 10002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -126,6 +126,6 @@ function action_EVENT_GADGET_STATE_CHANGE_10005(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end

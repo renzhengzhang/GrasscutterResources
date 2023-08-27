@@ -2,13 +2,13 @@
 ||	filename:		||	YeLan_BoxPusher
 ||	owner: 			||	siyu.li
 ||	description: 	||	根据夜兰地城需求增加了路径屏蔽的功能
-||	LogName:		||	
+||	LogName:		||
 ||	Protection:		||	TimeAxisPass检测箱子到达点位
 =======================================]]
 --[[
 设置var: level_start为1以开启推箱子流程
 用var_change接source为"level_finish"即可响应箱子推完的结果
-local defs = {
+defs = {
 	box_gadget_id_1 = 1, 	--可推箱子的gadget_id
 	box_gadget_id_2 = 2, 	--可推箱子的gadget_id
 	config_suites = {1}		--注册逻辑的suite队列
@@ -21,7 +21,7 @@ local defs = {
 }
 
 --地形信息：0-墙面,1-地面,2-空气墙
-local level_map = {
+level_map = {
 	{0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0},
 	{0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,0,0},
 	{1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1},
@@ -30,7 +30,7 @@ local level_map = {
 }
 
 --点阵id信息
-local point_map = {
+point_map = {
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 0, 0, 0},
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 7, 8, 0, 9,10,11,12, 0, 0},
 	{13,14,15,16,17,18,19,20,21,22, 0,23, 0,24,25,26,27},
@@ -39,7 +39,7 @@ local point_map = {
 }
 
 --箱子信息
-local box_config = {
+box_config = {
 	[1] = {config_id = 1001, pos = {x=8,z=3}},
 	[2] = {config_id = 1002, pos = {x=11,z=1}},
 	[3] = {config_id = 1003, pos = {x=12,z=2}},
@@ -47,19 +47,19 @@ local box_config = {
 }
 
 --关卡结算信息
-local level_finish_config = {
+level_finish_config = {
 	box_config_id = {1,3} --box_config中序列
 	target_point_id = {11,22} --点阵id
 }
 
 --路径摘除信息(pont_id)
-local illegal_path = {
+illegal_path = {
 	{1,2},
 	{3,4}
 }
 --]]
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-local Tri = {
+Tri = {
 	{ name = "Group_Load", config_id = 8000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
 	{ name = "Gadget_Create", config_id = 8000002, event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0 },
 	{ name = "Select_Option", config_id = 8000003, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
@@ -70,7 +70,7 @@ local Tri = {
 	{ name = "Level_Start", config_id = 8000007, event = EventType.EVENT_VARIABLE_CHANGE, source = "level_start", condition = "", action = "action_level_start", trigger_count = 0 },
 }
 
---[[local Var = {
+--[[Var = {
 	{ name = "level_start", value = 0 }
 }
 --]]
@@ -101,9 +101,9 @@ function LF_Init_Level(context)
 	ScriptLib.SetGroupTempValue(context, "next_point_z", 0, {})
 	for i,v in ipairs(box_config) do
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, v.config_id)
-		local _ret,R_pos,R_rot = ScriptLib.GetPlatformArrayInfoByPointId(context, defs.point_array_id, point_map[v.pos.z][v.pos.x])
-		local _pos = {x=R_pos.x,y=R_pos.y,z=R_pos.z}
-		local _rot = {x=0,y=0,z=0}
+		_ret,R_pos,R_rot = ScriptLib.GetPlatformArrayInfoByPointId(context, defs.point_array_id, point_map[v.pos.z][v.pos.x])
+		_pos = {x=R_pos.x,y=R_pos.y,z=R_pos.z}
+		_rot = {x=0,y=0,z=0}
 		ScriptLib.CreateGadgetByConfigIdByPos(context, v.config_id, _pos, _rot)
 		ScriptLib.SetPlatformPointArray(context, v.config_id, defs.point_array_id, {point_map[v.pos.z][v.pos.x]}, {})
 		ScriptLib.SetGroupTempValue(context, "box_pos_x_"..i, v.pos.x, {})
@@ -113,7 +113,7 @@ end
 
 function LF_Get_Entity_Pos(context, uid, cid)
 	ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : LF_Get_Entity_Pos")
-	local _eid = 0
+	_eid = 0
 	--转译entityId
 	if uid ~= 0 then
 		_eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
@@ -121,8 +121,8 @@ function LF_Get_Entity_Pos(context, uid, cid)
 		_eid = ScriptLib.GetEntityIdByConfigId(context, cid)
 	end
 	--返回安全值,印象中直接返回_array时table里不干净
-	local _array = ScriptLib.GetPosByEntityId(context, _eid)
-	local _res = {}
+	_array = ScriptLib.GetPosByEntityId(context, _eid)
+	_res = {}
 	if _array.x == 0 and _array.y == 0 and _array.z == 0 then
 		ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : Get Pos Fail !!! | uid="..uid.." | cid="..cid)
 		_res.error = 1
@@ -136,12 +136,12 @@ end
 
 function LF_Get_Push_Direction(context, avatar, target)
 	ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : LF_Get_Push_Direction")
-	local _direction = {x=0,y=0,z=0}
+	_direction = {x=0,y=0,z=0}
 	_direction.x = target.x - avatar.x
 	_direction.y = target.y - avatar.y
 	_direction.z = target.z - avatar.z
-	local _direct = ""
-	local _angle = 0
+	_direct = ""
+	_angle = 0
 	--世界坐标系正X为up,正Z为left
 	if _direction.x == 0 then
 		if _direction.z >= 0 then
@@ -160,7 +160,7 @@ function LF_Get_Push_Direction(context, avatar, target)
 				_direct = "left"
 			else _direct = "right"
 			end
-		end  
+		end
 	end
 	ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : LF_Get_Entity_Pos | _direct = ".._direct)
 	return _direct
@@ -168,9 +168,9 @@ end
 
 function LF_Try_Push_Box(context, config_id, direction)
 	ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : LF_Try_Push_Box | config_id = "..config_id.." | direction = "..direction)
-	local _box = ScriptLib.GetPlatformPointArray(context, config_id)
-	local _box_point = _box[2]
-	local _is_found = false
+	_box = ScriptLib.GetPlatformPointArray(context, config_id)
+	_box_point = _box[2]
+	_is_found = false
 	--以i,j获取当前的坐标
 	for _j,_list in ipairs(point_map) do
 		if _is_found == true then
@@ -180,7 +180,7 @@ function LF_Try_Push_Box(context, config_id, direction)
 			if point == _box_point then
 				--检测地图连通性
 				ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : LF_Try_Push_Box | Point_Map_Pos | x=".._i.." | z=".._j)
-				local _connection = LF_Check_Target_Position(context, _i, _j, direction)
+				_connection = LF_Check_Target_Position(context, _i, _j, direction)
 				if #_connection == 2 then
 					--执行箱子移动
 					LF_Execute_Box_Move(context, config_id, {_i,_j}, _connection)
@@ -194,13 +194,13 @@ end
 
 function LF_Check_Target_Position(context, x, z, forward)
 	ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : LF_Check_Target_Position | x="..x.."|z="..z.."|forward="..forward)
-	local res = {}
-	local _x = x
-	local _z = z
-	local _forward = forward
+	res = {}
+	_x = x
+	_z = z
+	_forward = forward
 	--由于关卡方向与地图方向可能不一致,需要额外做一次旋转
 	--[[if forward == "up" then	_forward = "left"
-		elseif forward == "left" then _forward = "down" 
+		elseif forward == "left" then _forward = "down"
 		elseif forward == "down" then _forward = "right"
 		else _forward = "up"
 	end--]]
@@ -229,8 +229,8 @@ function LF_Check_Target_Position(context, x, z, forward)
 	end
 	--判路径连通
 	if illegal_path ~= nil then
-		local value1 = point_map[z][x]
-		local value2 = point_map[_z][_x]
+		value1 = point_map[z][x]
+		value2 = point_map[_z][_x]
 		for idx,array in ipairs(illegal_path) do
 			if math.max(value1, value2) == math.max(array[1], array[2]) and math.min(value1, value2) == math.min(array[1], array[2]) then
 				ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : Route is Illegal !!".." idx="..idx)
@@ -290,9 +290,9 @@ function LF_Check_Is_Correct_Target_Point(context, box_id, x, z)
 	end
 	for i,v in ipairs(level_finish_config.box_config_id) do
 		if v == box_id then
-			local x_ = ScriptLib.GetGroupTempValue(context, "box_pos_x_"..v, {})
-			local z_ = ScriptLib.GetGroupTempValue(context, "box_pos_z_"..v, {})
-			local is_pos_correct = false
+			x_ = ScriptLib.GetGroupTempValue(context, "box_pos_x_"..v, {})
+			z_ = ScriptLib.GetGroupTempValue(context, "box_pos_z_"..v, {})
+			is_pos_correct = false
 			for m,n in ipairs(level_finish_config.target_point_id) do
 				--对应箱子推到了正确的point决定state
 				if point_map[z_][x_] == n then
@@ -303,7 +303,7 @@ function LF_Check_Is_Correct_Target_Point(context, box_id, x, z)
 			end
 			if is_pos_correct == false then
 				ScriptLib.SetGroupGadgetStateByConfigId(context, 0, box_config[box_id].config_id, 201)
-			end	
+			end
 		end
 	end
 	return true
@@ -315,15 +315,15 @@ function LF_Check_Is_Level_Finish(context)
 	end
 	--判断是否所有箱子都在正确的点
 	for i,v in ipairs(level_finish_config.box_config_id) do
-		local x_ = ScriptLib.GetGroupTempValue(context, "box_pos_x_"..v, {})
-		local z_ = ScriptLib.GetGroupTempValue(context, "box_pos_z_"..v, {})
-		local is_right_pos = false
+		x_ = ScriptLib.GetGroupTempValue(context, "box_pos_x_"..v, {})
+		z_ = ScriptLib.GetGroupTempValue(context, "box_pos_z_"..v, {})
+		is_right_pos = false
 		for m,n in ipairs(level_finish_config.target_point_id) do
 			if point_map[z_][x_] == n then
 				is_right_pos = true
 			end
 		end
-		if is_right_pos == false then	
+		if is_right_pos == false then
 			return false
 		end
 	end
@@ -342,7 +342,7 @@ end
 
 --=====================================
 function action_group_load(context, evt)
-	--local cur_suite = ScriptLib.GetGroupSuite(context, 0)
+	--cur_suite = ScriptLib.GetGroupSuite(context, 0)
 	--if cur_suite ~= init_config.end_suite then
 		LF_Init_Level(context)
 	--end
@@ -350,7 +350,7 @@ function action_group_load(context, evt)
 end
 
 function action_group_refresh(context, evt)
-	--local cur_suite = ScriptLib.GetGroupSuite(context, 0)
+	--cur_suite = ScriptLib.GetGroupSuite(context, 0)
 	--if cur_suite ~= init_config.end_suite then
 		LF_Init_Level(context)
 	--end
@@ -383,22 +383,22 @@ function action_select_option(context, evt)
 		return -1
 	end
 	--获取玩家位置与箱子位置
-	local _avatar_pos = LF_Get_Entity_Pos(context, context.uid, 0)
-	local _box_pos = LF_Get_Entity_Pos(context, 0, evt.param1)
+	_avatar_pos = LF_Get_Entity_Pos(context, context.uid, 0)
+	_box_pos = LF_Get_Entity_Pos(context, 0, evt.param1)
 	if _avatar_pos.error == 1 or _box_pos.error == 1 then
 		ScriptLib.PrintContextLog(context, "YeLan_BoxPusher : Invalid entity pos !!!!")
 		return -1
 	end
 	--计算推动方向
-	local _dir = LF_Get_Push_Direction(context, _avatar_pos, _box_pos)
+	_dir = LF_Get_Push_Direction(context, _avatar_pos, _box_pos)
 	LF_Try_Push_Box(context, evt.param1, _dir)
 	return 0
 end
 
 function action_platform_reach_point(context, evt)
 	--记录下个理论点位
-	local _x = ScriptLib.GetGroupTempValue(context, "next_point_x", {})
-	local _z = ScriptLib.GetGroupTempValue(context, "next_point_z", {})
+	_x = ScriptLib.GetGroupTempValue(context, "next_point_x", {})
+	_z = ScriptLib.GetGroupTempValue(context, "next_point_z", {})
 	if _x == 0 or _z == 0 then
 		return -1
 	end
@@ -427,8 +427,8 @@ function action_time_axis_pass(context, evt)
 		ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : T.A.P fail by state")
 		return -1
 	end--]]
-	local _x = 0
-	local _z = 0
+	_x = 0
+	_z = 0
 	for m,n in ipairs(box_config) do
 		if tostring(n.config_id) == evt.source_name then
 			_x = ScriptLib.GetGroupTempValue(context, "box_pos_x_"..m, {})
@@ -437,9 +437,9 @@ function action_time_axis_pass(context, evt)
 		end
 	end
 	ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : Get Box Protected")
-	local _ret,R_pos,R_rot = ScriptLib.GetPlatformArrayInfoByPointId(context, defs.point_array_id, point_map[_z][_x])
-	local _eid = ScriptLib.GetEntityIdByConfigId(context, tonumber(evt.source_name))
-	local _pos = ScriptLib.GetPosByEntityId(context, _eid)
+	_ret,R_pos,R_rot = ScriptLib.GetPlatformArrayInfoByPointId(context, defs.point_array_id, point_map[_z][_x])
+	_eid = ScriptLib.GetEntityIdByConfigId(context, tonumber(evt.source_name))
+	_pos = ScriptLib.GetPosByEntityId(context, _eid)
 	ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : Get Box Real Pos | ".._pos.x.." | ".._pos.z)
 	ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : Get Box Theory Pos | "..R_pos.x.." | "..R_pos.z)
 	if math.ceil(_pos.x) ~= math.ceil(R_pos.x) or math.ceil(_pos.z) ~= math.ceil(R_pos.z) then

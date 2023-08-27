@@ -16,9 +16,9 @@ function OnClientExecuteReq(context, param1, param2, param3)
 		return 0
 	end
 
-	local groupID = ScriptLib.GetContextGroupId(context)
-	local configID = ScriptLib.GetContextGadgetConfigId(context)
-	local state = ScriptLib.GetGadgetState(context)
+	groupID = ScriptLib.GetContextGroupId(context)
+	configID = ScriptLib.GetContextGadgetConfigId(context)
+	state = ScriptLib.GetGadgetState(context)
 
 	if param2 == nil then
 		ScriptLib.MarkGroupLuaAction(context, "Gadget_".. param1, "", {["group_id"]=groupID,["config_id"]=configID,["state_id"]=state})

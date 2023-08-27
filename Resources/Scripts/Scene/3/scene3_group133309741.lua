@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309741
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_receiver_1 = 741001,
 	gadget_receiver_2 = 741002,
 	gadget_receiver_3 = 0
@@ -19,9 +19,9 @@ defs.receiverList = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -77,9 +77,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -90,9 +90,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -108,9 +108,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -118,7 +118,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_741007(context, evt)
 	if 741001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -129,7 +129,7 @@ function action_EVENT_GADGET_STATE_CHANGE_741007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_741009(context, evt)
 	if 741002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -148,20 +148,20 @@ function action_EVENT_GADGET_STATE_CHANGE_741009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 741003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 741002 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 741002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5020, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -170,7 +170,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_741011(context, evt)
 	if 741006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -180,20 +180,20 @@ function action_EVENT_GADGET_STATE_CHANGE_741011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 741005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_741012(context, evt)
 	if evt.param1 ~= 741012 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_ENTER_REGION_741012(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -213,7 +213,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_741013(context, evt)
 	if 741006 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -223,7 +223,7 @@ function action_EVENT_GADGET_STATE_CHANGE_741013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 741005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

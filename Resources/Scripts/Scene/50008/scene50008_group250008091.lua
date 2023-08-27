@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250008091
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -72,9 +72,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +85,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -112,28 +112,28 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_262(context, evt)
 	-- 判断是gadgetid 为 369的移动平台，是否到达了50008046 的路线中的 3 点
-	
+
 	if 369 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008046 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -143,47 +143,47 @@ function action_EVENT_PLATFORM_REACH_POINT_262(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 368, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 250008091, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 369 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 3, 4) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_263(context, evt)
 	-- 判断是gadgetid 为 369的移动平台，是否到达了50008046 的路线中的 1 点
-	
+
 	if 369 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008046 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -194,33 +194,33 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_263(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 2, 2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_264(context, evt)
 	-- 判断是gadgetid 为 369的移动平台，是否到达了50008046 的路线中的 2 点
-	
+
 	if 369 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008046 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -231,25 +231,25 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_264(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 2, 3) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_265(context, evt)
 	if evt.param1 ~= 265 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -260,40 +260,40 @@ function action_EVENT_ENTER_REGION_265(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 370 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_266(context, evt)
 	-- 判断是gadgetid 为 373的移动平台，是否到达了50008048 的路线中的 3 点
-	
+
 	if 373 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008048 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -303,47 +303,47 @@ function action_EVENT_PLATFORM_REACH_POINT_266(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 372, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 250008091, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 373 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 3, 4) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_267(context, evt)
 	-- 判断是gadgetid 为 373的移动平台，是否到达了50008048 的路线中的 1 点
-	
+
 	if 373 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008048 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -354,33 +354,33 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_267(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 2, 2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_268(context, evt)
 	-- 判断是gadgetid 为 373的移动平台，是否到达了50008048 的路线中的 2 点
-	
+
 	if 373 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008048 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -391,25 +391,25 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_268(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 2, 3) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_269(context, evt)
 	if evt.param1 ~= 269 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -420,40 +420,40 @@ function action_EVENT_ENTER_REGION_269(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 374 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_270(context, evt)
 	-- 判断是gadgetid 为 377的移动平台，是否到达了50008049 的路线中的 3 点
-	
+
 	if 377 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008049 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -463,47 +463,47 @@ function action_EVENT_PLATFORM_REACH_POINT_270(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 376, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 250008091, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 377 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 3, 4) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_271(context, evt)
 	-- 判断是gadgetid 为 377的移动平台，是否到达了50008049 的路线中的 1 点
-	
+
 	if 377 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008049 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -514,33 +514,33 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_271(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 2, 2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_272(context, evt)
 	-- 判断是gadgetid 为 377的移动平台，是否到达了50008049 的路线中的 2 点
-	
+
 	if 377 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008049 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -551,25 +551,25 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_272(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 2, 3) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_273(context, evt)
 	if evt.param1 ~= 273 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -580,40 +580,40 @@ function action_EVENT_ENTER_REGION_273(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 378 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_274(context, evt)
 	-- 判断是gadgetid 为 381的移动平台，是否到达了50008051 的路线中的 3 点
-	
+
 	if 381 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008051 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -623,47 +623,47 @@ function action_EVENT_PLATFORM_REACH_POINT_274(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 380, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 250008091, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 381 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 3, 4) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_275(context, evt)
 	-- 判断是gadgetid 为 381的移动平台，是否到达了50008051 的路线中的 1 点
-	
+
 	if 381 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008051 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -674,33 +674,33 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_275(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 2, 2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_276(context, evt)
 	-- 判断是gadgetid 为 381的移动平台，是否到达了50008051 的路线中的 2 点
-	
+
 	if 381 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008051 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -711,25 +711,25 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_276(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 2, 3) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_277(context, evt)
 	if evt.param1 ~= 277 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -740,32 +740,32 @@ function action_EVENT_ENTER_REGION_277(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 382 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_278(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"solved"为4
 	if ScriptLib.GetGroupVariableValue(context, "solved") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -776,6 +776,6 @@ function action_EVENT_VARIABLE_CHANGE_278(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

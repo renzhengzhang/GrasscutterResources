@@ -1,23 +1,23 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155005072
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	pointarryRot = 500500002,
 	pointarryRott = 500500003
 }
 
 -- DEFS_MISCS
-local EnvControlGadgets = {72003,72004}
-local DayAppearGadgets = {}
-local NightAppearGadgets = {}
+EnvControlGadgets = {72003,72004}
+DayAppearGadgets = {}
+NightAppearGadgets = {}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -101,23 +101,23 @@ function condition_EVENT_GADGET_STATE_CHANGE_72007(context, evt)
 	if 222 ~= ScriptLib.GetGadgetStateByConfigId(context, 155005072, 72003) then
 			return false
 		end
-		
+
 		return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_72007(context, evt)
 		ScriptLib.SetPlatformPointArray(context, 72001, defs.pointarryRot, { 1 }, { route_type = 0,turn_mode=true })
-	
+
 		-- 触发镜头注目，注目位置为坐标（559.38，220.4384，860.4082），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-			local pos = {x=559.38, y=220.4384, z=860.4082}
-		  local pos_follow = {x=0, y=0, z=0}
+			pos = {x=559.38, y=220.4384, z=860.4082}
+		  pos_follow = {x=0, y=0, z=0}
 		    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 		                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 		                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 						ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 		        return -1
-					end 
+					end
 	-- 将本组内变量名为 "Door01" 的变量设置为 1
 		if 0 ~= ScriptLib.SetGroupVariableValue(context, "Door01", 1) then
 		  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
@@ -131,23 +131,23 @@ function condition_EVENT_GADGET_STATE_CHANGE_72008(context, evt)
 	if 322 ~= ScriptLib.GetGadgetStateByConfigId(context, 155005072, 72004) then
 			return false
 		end
-		
+
 		return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_72008(context, evt)
 		ScriptLib.SetPlatformPointArray(context, 72006, defs.pointarryRott, { 1 }, { route_type = 0,turn_mode=true })
-	
+
 			--触发镜头注目，注目位置为坐标（573.9063，220.4384，865.5082），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-				local pos = {x=573.9063, y=220.4384, z=865.5082}
-			  local pos_follow = {x=0, y=0, z=0}
+				pos = {x=573.9063, y=220.4384, z=865.5082}
+			  pos_follow = {x=0, y=0, z=0}
 			    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 			                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 			                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 							ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 			        return -1
-						end 
+						end
 	-- 将本组内变量名为 "Door02" 的变量设置为 1
 		if 0 ~= ScriptLib.SetGroupVariableValue(context, "Door02", 1) then
 		  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
@@ -169,7 +169,7 @@ function condition_EVENT_GROUP_LOAD_72010(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Door01", 155005072) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -185,7 +185,7 @@ function condition_EVENT_GROUP_LOAD_72011(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Door02", 155005072) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 

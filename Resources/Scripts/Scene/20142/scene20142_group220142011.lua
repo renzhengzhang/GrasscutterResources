@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220142011
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -103,7 +103,7 @@ function action_EVENT_LEVEL_TAG_CHANGE_11002(context, evt)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 220142011, 3)
 	end
-	
+
 	return 0
 end
 
@@ -114,7 +114,7 @@ function action_EVENT_GROUP_LOAD_11003(context, evt)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 220142011, 3)
 	end
-	
+
 	return 0
 end
 
@@ -122,7 +122,7 @@ end
 function action_EVENT_QUEST_START_11005(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220142011, 2)
-	
+
 	return 0
 end
 
@@ -133,12 +133,12 @@ function action_EVENT_QUEST_FINISH_11007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220142011, 3)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220142011, 2)
-	
+
 	return 0
 end

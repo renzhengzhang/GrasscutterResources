@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199002116
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -86,9 +86,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -97,12 +97,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_116004(context, evt)
 	if 116001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	-- 判断变量"lifter_pos_mark"为0
 	if ScriptLib.GetGroupVariableValue(context, "lifter_pos_mark") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -111,12 +111,12 @@ function action_EVENT_GADGET_STATE_CHANGE_116004(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 116001, 900200129, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -126,12 +126,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_116005(context, evt)
 	if 116001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	-- 判断变量"lifter_pos_mark"为1
 	if ScriptLib.GetGroupVariableValue(context, "lifter_pos_mark") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -140,32 +140,32 @@ function action_EVENT_GADGET_STATE_CHANGE_116005(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 116001, 900200129, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_116006(context, evt)
 	-- 判断是gadgetid 为 116001的移动平台，是否到达了900200129 的点集中的 2 点
-	
+
 	if 116001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 900200129 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -176,39 +176,39 @@ function action_EVENT_PLATFORM_REACH_POINT_116006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 116002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 116002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 116003 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 116003, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_116007(context, evt)
 	-- 判断是gadgetid 为 116001的移动平台，是否到达了900200129 的点集中的 1 点
-	
+
 	if 116001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 900200129 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -219,19 +219,19 @@ function action_EVENT_PLATFORM_REACH_POINT_116007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 116003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 116003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 116002 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 116002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_116008(context, evt)
 	if 116002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -250,12 +250,12 @@ function action_EVENT_GADGET_STATE_CHANGE_116008(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 116001, 900200129, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -265,7 +265,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_116009(context, evt)
 	if 116003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -274,12 +274,12 @@ function action_EVENT_GADGET_STATE_CHANGE_116009(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 116001, 900200129, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -288,7 +288,7 @@ function condition_EVENT_GADGET_CREATE_116010(context, evt)
 	if 116001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -299,7 +299,7 @@ function action_EVENT_GADGET_CREATE_116010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -309,7 +309,7 @@ function condition_EVENT_GROUP_LOAD_116011(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199002167) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -319,10 +319,10 @@ function action_EVENT_GROUP_LOAD_116011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 116003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 变量"lifter_pos_mark"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "lifter_pos_mark", 0)
-	
+
 	return 0
 end

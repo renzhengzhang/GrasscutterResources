@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220000004
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 4005,
 	gadget_id_2 = 120,
 	gadget_id_3 = 121
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -81,9 +81,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -91,7 +91,7 @@ function condition_EVENT_GADGET_CREATE_13(context, evt)
 	if 4006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -102,7 +102,7 @@ function action_EVENT_GADGET_CREATE_13(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -112,7 +112,7 @@ function condition_EVENT_SELECT_OPTION_14(context, evt)
 	if 4006 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -124,23 +124,23 @@ function action_EVENT_SELECT_OPTION_14(context, evt)
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 13, delay_time = 0 }) then
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 14, delay_time = 0 }) then
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 15, delay_time = 0 }) then
 	  return -1
 	end
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.GearStart) then
 			return -1
-		end 
+		end
 		return 0
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -150,7 +150,7 @@ function condition_EVENT_SELECT_OPTION_15(context, evt)
 	if 4006 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -164,10 +164,10 @@ function action_EVENT_SELECT_OPTION_15(context, evt)
 	end
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.Default) then
 			return -1
-		end 
+		end
 		return 0
 	end
-	
-	
+
+
 	return 0
 end

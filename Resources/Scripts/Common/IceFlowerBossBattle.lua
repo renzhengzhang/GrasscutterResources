@@ -1,4 +1,4 @@
-local play={
+play={
 	group_bigworld = 133002418,
 	group_quest = 133002415,
 	PlayType = 3,
@@ -6,7 +6,7 @@ local play={
 }
 
 
-local extraTriggers={
+extraTriggers={
 	{config_id = 8000001,name = "Any_IceSquare_Die", event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "condition_any_gadget_die", action = "action_any_gadget_die", trigger_count = 0 },
 	{config_id = 8000002,name = "Any_Specialice_Die", event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "condition_any_specialice_die", action = "action_any_specialice_die", trigger_count = 0 },
 	{config_id = 8000003,name = "Monster_Die_Before_Leave_Scene", event = EventType.EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE, source = "", condition = "condition_monster_die_before_leave_scene", action = "action_monster_die_before_leave_scene", trigger_count = 0 },
@@ -29,7 +29,7 @@ local extraTriggers={
 }
 
 
-local repairTriggers={
+repairTriggers={
 	{ config_id = 8000018,name = "Boss_Refresh", event = EventType.EVENT_ANY_MONSTER_LIVE, source = "", condition = "", action = "action_BOSS_REFRESH", trigger_count = 0 },
 }
 
@@ -111,7 +111,7 @@ function action_Gadget_State_Log(context, evt)
 end
 
 function condition_Reset_Gadget_State(context, evt)
-	if evt.param1 == 1 then 
+	if evt.param1 == 1 then
 		return true
 	end
 	return false
@@ -140,7 +140,7 @@ function condition_EVENT_LEAVE_REGION(context, evt)
 		return false
 	end
 	uidList=ScriptLib.GetSceneUidList(context)
-	local count=0
+	count=0
 	for i=1,#uidList do
 		if ScriptLib.IsPlayerAllAvatarDie(context, uidList[i]) or (calculateXZDistanceOfTwoEntity(context,ScriptLib.GetAvatarEntityIdByUid(context, uidList[i]),ScriptLib.GetEntityIdByConfigId(context, defs.bossId))>=25) then
 			count=count+1
@@ -177,8 +177,8 @@ end
 
 function action_EVENT_ENTER_REGION(context, evt)
 	if context.uid~=0 then
-		local small_region={}
-		local big_region={}
+		small_region={}
+		big_region={}
 		for i=1,#regions do
 			if regions[i].config_id==418067 then
 				small_region=regions[i]
@@ -197,7 +197,7 @@ function condition_EVENT_AVATAR_DIE(context, evt)
 		return false
 	end
 	uidList=ScriptLib.GetSceneUidList(context)
-	local count=0
+	count=0
 	for i=1,#uidList do
 		if ScriptLib.IsPlayerAllAvatarDie(context, uidList[i]) or (calculateXZDistanceOfTwoEntity(context,ScriptLib.GetAvatarEntityIdByUid(context, uidList[i]),ScriptLib.GetEntityIdByConfigId(context, defs.bossId))>=25) then
 			count=count+1
@@ -210,9 +210,9 @@ function condition_EVENT_AVATAR_DIE(context, evt)
 end
 
 function calculateXZDistanceOfTwoEntity(context,entity1,entity2)
-	local pos1=ScriptLib.GetPosByEntityId(context, entity1)
-	local pos2=ScriptLib.GetPosByEntityId(context, entity2)
-	local distance=math.sqrt((pos1.x-pos2.x)*(pos1.x-pos2.x)+(pos1.z-pos2.z)*(pos1.z-pos2.z))
+	pos1=ScriptLib.GetPosByEntityId(context, entity1)
+	pos2=ScriptLib.GetPosByEntityId(context, entity2)
+	distance=math.sqrt((pos1.x-pos2.x)*(pos1.x-pos2.x)+(pos1.z-pos2.z)*(pos1.z-pos2.z))
 	return distance
 end
 
@@ -223,7 +223,7 @@ function action_EVENT_LEAVE_REGION(context, evt)
 end
 
 function condition_ice_square_create(context, evt)
-	if evt.param1 == defs.iceSquareId then 
+	if evt.param1 == defs.iceSquareId then
 		return true
 	end
 	return false
@@ -235,7 +235,7 @@ function action_ice_square_create(context, evt)
 end
 
 function condition_first_monster_die(context, evt)
-	if defs.groupId == 133002418 then 
+	if defs.groupId == 133002418 then
 		return true
 	end
 	return false
@@ -266,7 +266,7 @@ function condition_battle_state(context, evt)
 	if defs.groupId == play.group_bigworld then
 		ScriptLib.PrintContextLog(context, "## ICEFLOWERBOSS_LOG: battle_state : param1->"..evt.param1.." | param2->"..evt.param2.." | param3->"..evt.param3)
 	end
-	if evt.param1 == play.PlayType and evt.param2 == play.PlayId then 
+	if evt.param1 == play.PlayType and evt.param2 == play.PlayId then
 		return true
 	end
 	return false
@@ -304,7 +304,7 @@ function condition_monster_die_before_leave_scene(context, evt)
 end
 
 function action_monster_die_before_leave_scene(context, evt)
-	local uid=context.uid
+	uid=context.uid
 	ScriptLib.PrintContextLog(context, "## ICEFLOWERBOSS_LOG : action_monster_die_before_leave_scene uid:"..uid)
 	if uid~=0 and uid ~=nil then
 		ScriptLib.SetScenePlayBattleUidValue(context, 0, uid, "AVATAR_BOSS_KILL", 1)
@@ -326,12 +326,12 @@ function action_any_gadget_die(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "iceCubeAlive", 0)
 	if ScriptLib.GetGroupVariableValue(context, "notCreateIceShieldActivated") ~= 1 then
 		if context.uid ~= 0 then
-			local uid = context.uid
-			local oldCount = ScriptLib.GetScenePlayBattleUidValue(context, 0, uid, "AVATAR_ICESHIELD_KILL_COUNT")
+			uid = context.uid
+			oldCount = ScriptLib.GetScenePlayBattleUidValue(context, 0, uid, "AVATAR_ICESHIELD_KILL_COUNT")
 			ScriptLib.SetScenePlayBattleUidValue(context, 0, uid, "AVATAR_ICESHIELD_KILL_COUNT", oldCount+1)
 		end
 		ScriptLib.KillEntityByConfigId(context, { config_id = defs.targetId })
-		local idx=ScriptLib.GetGroupVariableValue(context, "positionIdx")
+		idx=ScriptLib.GetGroupVariableValue(context, "positionIdx")
 		ScriptLib.CreateGadgetByConfigIdByPos(context, defs.iceShieldId, gadgets[idx].pos,gadgets[idx].rot)
 	end
 	ScriptLib.SetGroupVariableValue(context, "notCreateIceShieldActivated", 0)
@@ -353,12 +353,12 @@ function condition_any_specialice_die(context, evt)
 end
 --特殊冰死亡加uidvalue
 function action_any_specialice_die(context, evt)
-	local configId = evt.param1
-	local uidValue = configId.."_Hit_Uid"
-	local uid = ScriptLib.GetGroupVariableValue(context, uidValue)
+	configId = evt.param1
+	uidValue = configId.."_Hit_Uid"
+	uid = ScriptLib.GetGroupVariableValue(context, uidValue)
 	ScriptLib.PrintContextLog(context, "## ICEFLOWERBOSS_LOG : action_any_specialice_die uid:"..uid)
 	if uid ~= 0 and uid ~=nil then
-		local oldCount = ScriptLib.GetScenePlayBattleUidValue(context, 0, uid, "AVATAR_SPECIALICE_KILL_COUNT")
+		oldCount = ScriptLib.GetScenePlayBattleUidValue(context, 0, uid, "AVATAR_SPECIALICE_KILL_COUNT")
 		ScriptLib.SetScenePlayBattleUidValue(context, 0, uid, "AVATAR_SPECIALICE_KILL_COUNT", oldCount+1)
     end
     if ScriptLib.GetGroupVariableValue(context, "phaseOneIceRevert") ~= 1 then
@@ -386,8 +386,8 @@ function LF_Battle_Ready(context, evt)
 	--ScriptLib.PrintContextLog(context, "## ASTER_LOG : LF_Battle_Ready")
 	--随机难度
 	--[[
-	local D_str = LF_Random_Play_Difficulty(context, evt)
-	local D_num = 0
+	D_str = LF_Random_Play_Difficulty(context, evt)
+	D_num = 0
 	if D_str == "normal" then
 		D_num = 1
 	elseif D_str == "hard" then
@@ -431,8 +431,8 @@ function LF_Battle_Start(context, evt)
 	elseif ScriptLib.GetScenePlayBattleType(context, defs.groupId) ==2 then
 		ScriptLib.AutoMonsterTide(context, 2, defs.groupId, defs.monsterTideTwo, 999, 3, 3)
 	end
-	
-	--ScriptLib.AutoMonsterTide(context, 1, defs.groupId, {defs.monsterOne,defs.monsterTwo}, 999, 1, 1) 
+
+	--ScriptLib.AutoMonsterTide(context, 1, defs.groupId, {defs.monsterOne,defs.monsterTwo}, 999, 1, 1)
 
 	ScriptLib.SetGadgetStateByConfigId(context,defs.specialice1,GadgetState.GearStart)
 	ScriptLib.SetGadgetStateByConfigId(context,defs.specialice2,GadgetState.GearStart)
@@ -463,7 +463,7 @@ function LF_Battle_Win(context, evt)
 	ScriptLib.CreateScenePlayGeneralRewardGadget(context, {group_id = defs.groupId, config_id = defs.rewardGadget})
 	--ScriptLib.CreateGadget(context,{config_id=defs.rewardGadget})
 	ScriptLib.CreateGroupTimerEvent(context, defs.groupId, "transform", 3)
-	--ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=1121, y=286, z=-425}, radius = 2, rot = {x=0, y=180, z=0},is_skip_ui=true}) 
+	--ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=1121, y=286, z=-425}, radius = 2, rot = {x=0, y=180, z=0},is_skip_ui=true})
 	--ScriptLib.SetGadgetEnableInteract(context, defs.groupId, defs.inteeGadget, true)
 	return 0
 end
@@ -485,7 +485,7 @@ function LF_Battle_Lose(context, evt)
 	--ScriptLib.RemoveEntityByConfigId(context, defs.groupId, EntityType.MONSTER, defs.bossId)
 	ScriptLib.RefreshGroup(context,{group_id=defs.groupId,suite=1})
 	ScriptLib.CreateGroupTimerEvent(context, defs.groupId, "transform", 3)
-	--ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=1121, y=286, z=-425}, radius = 2, rot = {x=0, y=180, z=0},is_skip_ui=true}) 
+	--ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=1121, y=286, z=-425}, radius = 2, rot = {x=0, y=180, z=0},is_skip_ui=true})
 	--ScriptLib.SetGadgetEnableInteract(context, defs.groupId, defs.inteeGadget, true)
 	return 0
 end
@@ -508,7 +508,7 @@ function LF_Battle_Stop(context, evt)
 	ScriptLib.RefreshGroup(context,{group_id=defs.groupId,suite=1})
 	--ScriptLib.CreateGroupTimerEvent(context, defs.groupId, "transform", 3)
 	ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=1121, y=286, z=-425}, radius = 2, rot = {x=0, y=180, z=0},is_skip_ui=false})
-	--ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=1121, y=286, z=-425}, radius = 2, rot = {x=0, y=180, z=0},is_skip_ui=true}) 
+	--ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=1121, y=286, z=-425}, radius = 2, rot = {x=0, y=180, z=0},is_skip_ui=true})
 	--ScriptLib.SetGadgetEnableInteract(context, defs.groupId, defs.inteeGadget, true)
 	return 0
 end
@@ -516,7 +516,7 @@ end
 --创建冰立方时同时创建龙血结晶生成器
 function CreateDulinsOreGenerators(context,idx)
 	math.randomseed(ScriptLib.GetServerTime(context))
-	local count=math.random(2,3)
+	count=math.random(2,3)
 	for i=1,count do
 		ScriptLib.CreateGadget(context, { config_id = defs.bloodOrePositions[idx][i] })
 	end
@@ -529,7 +529,7 @@ function CreateIceShield(context)
 	ScriptLib.SetGroupVariableValue(context, "notCreateIceShieldActivated", 0)
 	alive=ScriptLib.GetGroupVariableValue(context, "iceCubeAlive")
 	if alive ~=1 then
-		local newIdx=1
+		newIdx=1
 		math.randomseed(ScriptLib.GetServerTime(context))
 		newIdx=math.random(#defs.randomPositions)
 		for i=1,#gadgets do
@@ -540,12 +540,12 @@ function CreateIceShield(context)
 				ScriptLib.SetGroupVariableValue(context, "iceCubeAlive", 1)
 			end
 		end
-		local count=math.random(2,3)
+		count=math.random(2,3)
 		for j=1,count do
 			ScriptLib.CreateGadget(context, { config_id = defs.bloodOrePositions[newIdx][j] })
 		end
 		--CreateDulinsOreGenerators(context,newIdx)
-	end	
+	end
 	return 0
 end
 
@@ -554,17 +554,17 @@ end
 function CreateNearestIceShield(context)
 	alive=ScriptLib.GetGroupVariableValue(context, "iceCubeAlive")
 	if alive ~=1 then
-		local minOne={angle=180,idx=-1}
-		local vector={}
-		local monsterRotate=ScriptLib.GetRotationByEntityId(context, 24001).y
-		local monsterForward=CalculateMonsterForward(monsterRotate)
-		local monsterPosition=monsters[1].pos
+		minOne={angle=180,idx=-1}
+		vector={}
+		monsterRotate=ScriptLib.GetRotationByEntityId(context, 24001).y
+		monsterForward=CalculateMonsterForward(monsterRotate)
+		monsterPosition=monsters[1].pos
 		for i=1,#defs.randomPositions do
 			for j=1,#gadgets do
 				if gadgets[j].config_id==defs.randomPositions[i] then
 					vector.x=gadgets[j].pos.z-monsterPosition.z
 					vector.y=gadgets[j].pos.x-monsterPosition.x
-					local angle=CalculateRotate(monsterForward.x,monsterForward.y,vector.x,vector.y)
+					angle=CalculateRotate(monsterForward.x,monsterForward.y,vector.x,vector.y)
 					if angle<minOne.angle then
 						minOne.angle=angle
 						minOne.idx=j
@@ -577,11 +577,11 @@ function CreateNearestIceShield(context)
 		ScriptLib.SetGroupVariableValue(context, "positionIdx", minOne.idx)
 		ScriptLib.SetGroupVariableValue(context, "iceCubeAlive", 1)
 		CreateDulinsOreGenerators(minOne.idx)
-	end	
+	end
 end
 
 function CalculateMonsterForward(monsterRotate)
-	local monsterForward={}
+	monsterForward={}
 	monsterForward.x=math.cos(math.rad(monsterRotate))
 	monsterForward.y=math.sin(math.rad(monsterRotate))
 	return monsterForward
@@ -589,8 +589,8 @@ end
 ]]--
 
 function CalculateRotate(x1,y1,x2,y2)
-	local cos=(x1*x2+y1*y2)/(math.sqrt(x1*x1+y1*y1)*math.sqrt(x2*x2+y2*y2))
-	local rotate=math.deg(math.acos(cos))
+	cos=(x1*x2+y1*y2)/(math.sqrt(x1*x1+y1*y1)*math.sqrt(x2*x2+y2*y2))
+	rotate=math.deg(math.acos(cos))
 	return rotate
 end
 
@@ -629,12 +629,12 @@ function StartMonsterTide(context)
 	if ScriptLib.GetGroupVariableValue(context, "MonsterTideCheck") ==0 then
 		if ScriptLib.GetScenePlayBattleType(context, defs.groupId) ==1 then
 			ScriptLib.KillMonsterTide(context, defs.groupId, 1)
-			ScriptLib.AutoMonsterTide(context, 3, defs.groupId, defs.monsterTideOne, 999, 1, 1) 
+			ScriptLib.AutoMonsterTide(context, 3, defs.groupId, defs.monsterTideOne, 999, 1, 1)
 		elseif ScriptLib.GetScenePlayBattleType(context, defs.groupId) ==2 then
 			ScriptLib.KillMonsterTide(context, defs.groupId, 2)
-			ScriptLib.AutoMonsterTide(context, 3, defs.groupId, defs.monsterTideTwo, 999, 1, 1) 
+			ScriptLib.AutoMonsterTide(context, 3, defs.groupId, defs.monsterTideTwo, 999, 1, 1)
 		elseif defs.groupId==133002415 then
-			ScriptLib.AutoMonsterTide(context, 3, defs.groupId, defs.monsterTideOne, 999, 1, 1) 
+			ScriptLib.AutoMonsterTide(context, 3, defs.groupId, defs.monsterTideOne, 999, 1, 1)
 		end
 		ScriptLib.SetGroupVariableValue(context, "MonsterTideCheck", 1)
 	else
@@ -662,8 +662,8 @@ end
 
 function UpdateDulinsBloodPickCount(context)
 	if context.uid~=nil or context.uid~=0 then
-		local uid = context.uid
-		local oldCount = ScriptLib.GetScenePlayBattleUidValue(context, 0, uid, "AVATAR_OREDULINSBLOOD_PICK_COUNT")
+		uid = context.uid
+		oldCount = ScriptLib.GetScenePlayBattleUidValue(context, 0, uid, "AVATAR_OREDULINSBLOOD_PICK_COUNT")
 		ScriptLib.SetScenePlayBattleUidValue(context, 0, uid, "AVATAR_OREDULINSBLOOD_PICK_COUNT", oldCount+1)
 	end
 	return 0

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 243013004
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_1 = 4001,
 	group_1 = 243013004,
 	group_core = 243013005,
@@ -21,9 +21,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -74,7 +74,7 @@ triggers = {
 	{ config_id = 1004002, name = "GADGET_CREATE_4002", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "condition_EVENT_GADGET_CREATE_4002", action = "action_EVENT_GADGET_CREATE_4002" },
 	{ config_id = 1004003, name = "SELECT_OPTION_4003", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "condition_EVENT_SELECT_OPTION_4003", action = "action_EVENT_SELECT_OPTION_4003", trigger_count = 0 },
 	{ config_id = 1004004, name = "VARIABLE_CHANGE_4004", event = EventType.EVENT_VARIABLE_CHANGE, source = "success", condition = "condition_EVENT_VARIABLE_CHANGE_4004", action = "action_EVENT_VARIABLE_CHANGE_4004", trigger_count = 0 },
-	--  
+	--
 	{ config_id = 1004005, name = "CHALLENGE_SUCCESS_4005", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "120", condition = "", action = "" },
 	{ config_id = 1004006, name = "CHALLENGE_FAIL_4006", event = EventType.EVENT_CHALLENGE_FAIL, source = "120", condition = "", action = "action_EVENT_CHALLENGE_FAIL_4006" },
 	{ config_id = 1004008, name = "ANY_MONSTER_DIE_4008", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "condition_EVENT_ANY_MONSTER_DIE_4008", action = "action_EVENT_ANY_MONSTER_DIE_4008", trigger_count = 0 },
@@ -100,9 +100,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -113,9 +113,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -149,9 +149,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -159,7 +159,7 @@ function condition_EVENT_GADGET_CREATE_4002(context, evt)
 	if defs.gadget_1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -170,7 +170,7 @@ function action_EVENT_GADGET_CREATE_4002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -178,67 +178,67 @@ end
 function condition_EVENT_SELECT_OPTION_4003(context, evt)
 	-- 判断是gadgetid 4001 option_id 7
 	if 4001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_4003(context, evt)
 	--向编号999的父挑战挂接子挑战
-	
+
 	ScriptLib.ExecuteGroupLua(context,defs.group_core,"SetKillMonsterTarget" ,{defs.group_1, defs.MonsterCount})
 	ScriptLib.ExecuteGroupLua(context,defs.group_core,"StartSubChallengeKillMonster" ,{defs.challenge1, defs.challenge_kill})
-	
+
 	--开启怪物潮
-	
+
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, defs.group_1, {4009,4016,4017,4018,4019,4020,4021,4022,4023,4024,4025,4026,4027,4028,4029,4030,4031,4032,4033}, 19, 5, 5) then
 		return -1
 	end
-	
-	
+
+
 	-- 删除指定group： 243013004 ；指定config：4001；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, defs.group_1, defs.gadget_1, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 	  return -1
 	end
-	
+
 	-- 将configid为 4001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 	    return -1
-	end 
-	
+	end
+
 	-- 卸载指定gadget
 	if 0 ~= ScriptLib.RemoveEntityByConfigId(context, defs.group_core, EntityType.GADGET, 5009 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 	    return -1
 	end
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"success"为1
 	if ScriptLib.GetGroupVariableValue(context, "success") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"success"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "success", 243013005) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -249,7 +249,7 @@ function action_EVENT_VARIABLE_CHANGE_4004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -259,20 +259,20 @@ function action_EVENT_CHALLENGE_FAIL_4006(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_1, defs.gadget_1, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_1, defs.gadget_1, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = defs.group_1, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -282,7 +282,7 @@ function condition_EVENT_ANY_MONSTER_DIE_4008(context, evt)
 	if 0 >= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -293,10 +293,10 @@ function action_EVENT_ANY_MONSTER_DIE_4008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	    return -1
 	end
-	  
+
 	--通知父挑战积分+1
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "AddChildChallengeScore", {1})
-	  
+
 	return 0
 end
 
@@ -305,7 +305,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_4014(context, evt)
 	if defs.monster_1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -315,7 +315,7 @@ function action_EVENT_ANY_MONSTER_LIVE_4014(context, evt)
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "DefineFatherIndex",{defs.challenge_father})
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "DefineChildChallengeScore",{ 1, 1})
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "AttachChildChallengeFromDiffGroup",{defs.challenge1, 233, 2})
-	
+
 	return 0
 end
 
@@ -323,7 +323,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_4015(context, evt)
 	--发送怪物死亡通知
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "AddMistTrialChildChallengeScore", {1})
-	
+
 	return 0
 end
 
@@ -332,7 +332,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_4034(context, evt)
 	if 19 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -340,7 +340,7 @@ end
 function action_EVENT_MONSTER_TIDE_DIE_4034(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 243013004, 2)
-	
+
 	return 0
 end
 
@@ -350,7 +350,7 @@ function condition_EVENT_ANY_MONSTER_DIE_4041(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -358,7 +358,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_4041(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 243013004, 3)
-	
+
 	return 0
 end
 
@@ -368,8 +368,8 @@ function condition_EVENT_LEAVE_REGION_4042(context, evt)
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= defs.Region1 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -377,13 +377,13 @@ end
 function action_EVENT_LEAVE_REGION_4042(context, evt)
 	--离开区域 挑战失败
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "StopMistTrialChildChallenge", {defs.challenge1,0})
-	
-	
+
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = defs.group_1, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 	        return -1
 	end
-	
+
 	return 0
 end

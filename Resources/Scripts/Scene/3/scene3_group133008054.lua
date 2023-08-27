@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008054
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -109,9 +109,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -119,12 +119,12 @@ function condition_EVENT_ANY_GADGET_DIE_54011(context, evt)
 	if 54008 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"canopen"为0
 	if ScriptLib.GetGroupVariableValue(context, "canopen") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -135,26 +135,26 @@ function action_EVENT_ANY_GADGET_DIE_54011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将本组内变量名为 "canopen" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "canopen", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 30080202 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 30080202) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建id为54017的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 54017 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -163,12 +163,12 @@ function condition_EVENT_ANY_GADGET_DIE_54012(context, evt)
 	if 54009 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"canopen"为0
 	if ScriptLib.GetGroupVariableValue(context, "canopen") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -179,26 +179,26 @@ function action_EVENT_ANY_GADGET_DIE_54012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将本组内变量名为 "canopen" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "canopen", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 30080202 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 30080202) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建id为54017的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 54017 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_GADGET_CREATE_54014(context, evt)
 	if 54013 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -218,7 +218,7 @@ function action_EVENT_GADGET_CREATE_54014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -226,19 +226,19 @@ end
 function condition_EVENT_SELECT_OPTION_54015(context, evt)
 	-- 判断是gadgetid 54013 option_id 24
 	if 54013 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 24 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"canopen"为0
 	if ScriptLib.GetGroupVariableValue(context, "canopen") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -249,7 +249,7 @@ function action_EVENT_SELECT_OPTION_54015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -257,19 +257,19 @@ end
 function condition_EVENT_SELECT_OPTION_54016(context, evt)
 	-- 判断是gadgetid 54013 option_id 24
 	if 54013 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 24 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"canopen"为1
 	if ScriptLib.GetGroupVariableValue(context, "canopen") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -280,42 +280,42 @@ function action_EVENT_SELECT_OPTION_54016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 54013 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133008374, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将configid为 54007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 54007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟1秒后,向groupId为：133008054的对象,请求一次调用,并将string参数："Prison" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008054, "Prison", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（900，290，-551），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=900, y=290, z=-551}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=900, y=290, z=-551}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -325,7 +325,7 @@ function action_EVENT_TIMER_EVENT_54028(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 54002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

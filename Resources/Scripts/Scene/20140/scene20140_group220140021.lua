@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220140021
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
 
                 --本Group中发射器gadget的configID，最多3个,
                 fireMachineList = {
@@ -32,15 +32,15 @@ local        defs = {
 
                 --定义上下俯仰的步长,key为传递装置configID，value为GadgetState
                 vertical_steps = {
- 	        
+
                 },
               serve_items = {21003,21004}
         }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -112,9 +112,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -125,9 +125,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -161,9 +161,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -172,7 +172,7 @@ function condition_EVENT_GROUP_LOAD_21001(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monster") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -180,7 +180,7 @@ end
 function action_EVENT_GROUP_LOAD_21001(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140021, 3)
-	
+
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_TIME_AXIS_PASS_21009(context, evt)
 	if "fire" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -200,14 +200,14 @@ function action_EVENT_TIME_AXIS_PASS_21009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 21003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 21003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -216,7 +216,7 @@ function condition_EVENT_TIME_AXIS_PASS_21010(context, evt)
 	if "fire" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -227,14 +227,14 @@ function action_EVENT_TIME_AXIS_PASS_21010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 21004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 21004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -242,14 +242,14 @@ end
 function condition_EVENT_SELECT_OPTION_21011(context, evt)
 	-- 判断是gadgetid 21007 option_id 602
 	if 21007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 602 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -260,60 +260,60 @@ function action_EVENT_SELECT_OPTION_21011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "plat" 的变量设置为 12
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "plat", 12, 220140004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "temp" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "temp", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "monster" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "isLock_1" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isLock_1", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "isLock_2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isLock_2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"fire"，时间节点为{1,2,3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fire", {1,2,3}, false)
-	
-	
+
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140021, 3)
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=125, y=86.5, z=681.6}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=125, y=86.5, z=681.6}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=125, y=86.5, z=681.6}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220140021, EntityType.GADGET, 21007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -321,16 +321,16 @@ end
 function action_EVENT_GROUP_LOAD_21012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 1 or ScriptLib.GetGroupVariableValue(context, "temp") == 2 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "fire") == 1 and ScriptLib.GetGroupVariableValue(context, "temp") == 1 then
 			ScriptLib.CreateGadget(context, {config_id=21007})
 		end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "temp") == 2 then
 			ScriptLib.SetGadgetStateByConfigId(context,21014, GadgetState.Default)
 		end
 	end
-	
+
 	return 0
 end
 
@@ -339,7 +339,7 @@ function condition_EVENT_TIME_AXIS_PASS_21016(context, evt)
 	if "fire" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -350,26 +350,26 @@ function action_EVENT_TIME_AXIS_PASS_21016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 21014 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 21014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"fire"为1
 	if ScriptLib.GetGroupVariableValue(context, "fire") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -380,7 +380,7 @@ function action_EVENT_VARIABLE_CHANGE_21018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -389,7 +389,7 @@ function action_EVENT_GROUP_LOAD_21022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 2 then
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140021, config_id=21005, entity_type=EntityType.GADGET})
 	end
-	
+
 	return 0
 end
 
@@ -398,7 +398,7 @@ function condition_EVENT_ANY_MONSTER_DIE_21023(context, evt)
 	if 21021 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -409,8 +409,8 @@ function action_EVENT_ANY_MONSTER_DIE_21023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -418,14 +418,14 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_21024(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 21013) == 201 and ScriptLib.GetGadgetStateByConfigId(context, 0, 21017) == 201 and ScriptLib.GetGroupVariableValue(context, "monster") == 2 then
 		ScriptLib.SetGroupVariableValueByGroup(context, "plat", 14, 220140004)
-		
+
 		ScriptLib.SetGroupVariableValue(context, "monster", 3)
-		
+
 		ScriptLib.AddQuestProgress(context, "4006717")
-		
+
 		ScriptLib.CreateGadget(context, {config_id=21025})
 	end
-	
+
 	return 0
 end
 
@@ -434,7 +434,7 @@ function action_EVENT_GROUP_LOAD_21026(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 2 then
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140021, config_id=21006, entity_type=EntityType.GADGET})
 	end
-	
+
 	return 0
 end
 
@@ -443,7 +443,7 @@ function action_EVENT_GROUP_LOAD_21027(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 2 then
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140021, config_id=21015, entity_type=EntityType.GADGET})
 	end
-	
+
 	return 0
 end
 
@@ -452,11 +452,11 @@ function condition_EVENT_QUEST_START_21028(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220140021, 21013) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220140021, 21017) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -467,7 +467,7 @@ function action_EVENT_QUEST_START_21028(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -476,11 +476,11 @@ function condition_EVENT_GROUP_LOAD_21029(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220140021, 21013) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220140021, 21017) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -491,7 +491,7 @@ function action_EVENT_GROUP_LOAD_21029(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -501,12 +501,12 @@ function action_EVENT_GROUP_LOAD_21030(context, evt)
 		if ScriptLib.GetGadgetStateByConfigId(context, 0, 21013) == 201 then
 			ScriptLib.SetGadgetStateByConfigId(context,21013, GadgetState.Default)
 		end
-		
+
 		if ScriptLib.GetGadgetStateByConfigId(context, 0, 21017) == 201 then
 			ScriptLib.SetGadgetStateByConfigId(context,21017, GadgetState.Default)
 		end
 	end
-	
+
 	return 0
 end
 
@@ -515,7 +515,7 @@ function action_EVENT_GROUP_LOAD_21031(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monster") == 2 then
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140021, config_id=21019, entity_type=EntityType.GADGET})
 	end
-	
+
 	return 0
 end
 
@@ -524,7 +524,7 @@ function action_EVENT_GROUP_LOAD_21032(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monster") == 2 then
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140021, config_id=21020, entity_type=EntityType.GADGET})
 	end
-	
+
 	return 0
 end
 
@@ -533,7 +533,7 @@ function condition_EVENT_ANY_MONSTER_DIE_21033(context, evt)
 	if 21021 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -544,26 +544,26 @@ function action_EVENT_ANY_MONSTER_DIE_21033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将configid为 21013 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 21013, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 21017 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 21017, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 21019 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -572,7 +572,7 @@ function action_EVENT_GROUP_LOAD_21034(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monster") == 3 then
 		ScriptLib.SetGadgetStateByConfigId(context,21013, GadgetState.GearStart)
 	end
-	
+
 	return 0
 end
 
@@ -581,7 +581,7 @@ function action_EVENT_GROUP_LOAD_21035(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monster") == 3 then
 		ScriptLib.SetGadgetStateByConfigId(context,21017, GadgetState.GearStart)
 	end
-	
+
 	return 0
 end
 
@@ -590,7 +590,7 @@ function action_EVENT_GROUP_LOAD_21036(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monster") == 3 then
 		ScriptLib.CreateGadget(context, {config_id=21025})
 	end
-	
+
 	return 0
 end
 

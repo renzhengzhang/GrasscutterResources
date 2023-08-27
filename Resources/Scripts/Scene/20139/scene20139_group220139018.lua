@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220139018
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -69,22 +69,22 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_OBSERVATION_POINT_NOTIFY_18004(context, evt)
 	if 18001 == evt.param1 and 405 == evt.param2 then
 		ScriptLib.SetGadgetStateByConfigId(context,18002, GadgetState.GearStart)
-		
+
 		ScriptLib.SetGroupVariableValueByGroup(context, "eyefinish3", 1, 220139022)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,18001, 405)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,18003, GadgetState.GearStart)
 	end
-	
+
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309071
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_receiver_1 = 71002,
 	gadget_receiver_2 = 71003
 }
@@ -17,9 +17,9 @@ defs.receiverList = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -34,7 +34,7 @@ npcs = {
 gadgets = {
 	-- 接收装置#1
 	{ config_id = 71002, gadget_id = 70330281, pos = { x = -2627.118, y = -85.828, z = 5693.898 }, rot = { x = 0.000, y = 45.000, z = 0.000 }, level = 32, persistent = true, vision_level = VisionLevelType.VISION_LEVEL_LITTLE_REMOTE, area_id = 27 },
-	-- LA改完把它移动到标记物处 接收装置#2 
+	-- LA改完把它移动到标记物处 接收装置#2
 	{ config_id = 71003, gadget_id = 70330281, pos = { x = -2609.183, y = -85.828, z = 5674.228 }, rot = { x = 0.000, y = 225.000, z = 0.000 }, level = 32, persistent = true, vision_level = VisionLevelType.VISION_LEVEL_LITTLE_REMOTE, area_id = 27 }
 }
 
@@ -61,9 +61,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -92,20 +92,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_71001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -116,18 +116,18 @@ function action_EVENT_VARIABLE_CHANGE_71001(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_71005(context, evt)
-	
+
 	for _,v in pairs(defs.receiverList) do
 	  if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133309071, v) then
 	    return false
 	  end
-	
+
 	end
 	return true
 end
@@ -139,19 +139,19 @@ function action_EVENT_GADGET_STATE_CHANGE_71005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_71008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -162,7 +162,7 @@ function action_EVENT_VARIABLE_CHANGE_71008(context, evt)
 	  if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133309071, v, GadgetState.GearAction1)then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-	  end 
+	  end
 	end
 	return 0
 end
@@ -170,12 +170,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_71009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -186,19 +186,19 @@ function action_EVENT_VARIABLE_CHANGE_71009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "isFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "isFinished", 1, 133309194) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "isFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "isFinished", 1, 133309195) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_GROUP_LOAD_71010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -219,7 +219,7 @@ function action_EVENT_GROUP_LOAD_71010(context, evt)
 	  if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133309071, v, GadgetState.GearAction1)then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-	  end 
+	  end
 	end
 	return 0
 end

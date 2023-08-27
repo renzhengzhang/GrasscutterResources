@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220137005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -100,9 +100,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -110,7 +110,7 @@ function condition_EVENT_GADGET_CREATE_5004(context, evt)
 	if 5003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -121,7 +121,7 @@ function action_EVENT_GADGET_CREATE_5004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -129,14 +129,14 @@ end
 function condition_EVENT_SELECT_OPTION_5005(context, evt)
 	-- 判断是gadgetid 5003 option_id 195
 	if 5003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 195 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -147,7 +147,7 @@ function action_EVENT_SELECT_OPTION_5005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -156,7 +156,7 @@ function condition_EVENT_GROUP_LOAD_5008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220137013, 13002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -167,23 +167,23 @@ function action_EVENT_GROUP_LOAD_5008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"towerPosition"为1
 	if ScriptLib.GetGroupVariableValue(context, "towerPosition") ~= 1 then
 			return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220137013, 13002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -194,16 +194,16 @@ function action_EVENT_VARIABLE_CHANGE_5009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_5010(context, evt)
 			    if ScriptLib.GetHostQuestState(context,4007118)==2 then
-				ScriptLib.RefreshGroup(context, { group_id = 220137005, suite = 2 }) 
+				ScriptLib.RefreshGroup(context, { group_id = 220137005, suite = 2 })
 				end
-			
+
 			return 0
 end
 
@@ -212,15 +212,15 @@ function condition_EVENT_GROUP_LOAD_5011(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220137013, 13002) then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_5011(context, evt)
 			    if ScriptLib.GetHostQuestState(context,4007118)==3 then
-				ScriptLib.RefreshGroup(context, { group_id = 220137005, suite = 1 }) 
+				ScriptLib.RefreshGroup(context, { group_id = 220137005, suite = 1 })
 				end
-			
+
 			return 0
 end

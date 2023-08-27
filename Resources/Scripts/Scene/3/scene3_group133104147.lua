@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133104147
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	Target_1 = 498,
 	Target_2 = 499,
 	Target_3 = 500,
@@ -20,9 +20,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -108,9 +108,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -119,7 +119,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_254(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -138,19 +138,19 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_255(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isFinished"为0
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_255(context, evt)
-			local targetCount = ScriptLib.GetGroupVariableValue(context, "TargetActive")
-			local fakeCount = ScriptLib.GetGroupVariableValue(context, "FakeActive")
+			targetCount = ScriptLib.GetGroupVariableValue(context, "TargetActive")
+			fakeCount = ScriptLib.GetGroupVariableValue(context, "FakeActive")
 			if targetCount	~= 0 or fakeCount ~=0 then
 				-- 创建id为509的gadget
 				if targetCount + fakeCount >= 3 then
@@ -179,7 +179,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_147001(context, evt)
 	if 509 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -187,19 +187,19 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_147001(context, evt)
 	-- 将本组内变量名为 "isFinished" 的变量设置为 1
 	ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
-	
-	
+
+
 	-- 将configid为 498 的物件更改为状态 GadgetState.GearStart
-	ScriptLib.SetGadgetStateByConfigId(context, 498, GadgetState.GearStart) 
-	ScriptLib.SetGadgetStateByConfigId(context, 499, GadgetState.GearStart) 
-	ScriptLib.SetGadgetStateByConfigId(context, 500, GadgetState.GearStart) 
-	ScriptLib.SetGadgetStateByConfigId(context, 501, GadgetState.GearStart) 
-	ScriptLib.SetGadgetStateByConfigId(context, 502, GadgetState.GearStart) 
-	ScriptLib.SetGadgetStateByConfigId(context, 503, GadgetState.GearStart) 
-	ScriptLib.SetGadgetStateByConfigId(context, 504, GadgetState.GearStart) 
-	ScriptLib.SetGadgetStateByConfigId(context, 505, GadgetState.GearStart) 
-	ScriptLib.SetGadgetStateByConfigId(context, 506, GadgetState.GearStart) 
-	
+	ScriptLib.SetGadgetStateByConfigId(context, 498, GadgetState.GearStart)
+	ScriptLib.SetGadgetStateByConfigId(context, 499, GadgetState.GearStart)
+	ScriptLib.SetGadgetStateByConfigId(context, 500, GadgetState.GearStart)
+	ScriptLib.SetGadgetStateByConfigId(context, 501, GadgetState.GearStart)
+	ScriptLib.SetGadgetStateByConfigId(context, 502, GadgetState.GearStart)
+	ScriptLib.SetGadgetStateByConfigId(context, 503, GadgetState.GearStart)
+	ScriptLib.SetGadgetStateByConfigId(context, 504, GadgetState.GearStart)
+	ScriptLib.SetGadgetStateByConfigId(context, 505, GadgetState.GearStart)
+	ScriptLib.SetGadgetStateByConfigId(context, 506, GadgetState.GearStart)
+
 	return 0
 end
 
@@ -209,14 +209,14 @@ function condition_EVENT_GADGET_CREATE_147002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_147002(context, evt)
-	if evt.param1 == 498 or 
-	evt.param1 == 499 or 
+	if evt.param1 == 498 or
+	evt.param1 == 499 or
 	evt.param1 == 500 or
 	evt.param1 == 501 or
 	evt.param1 == 502 or
@@ -224,9 +224,9 @@ function action_EVENT_GADGET_CREATE_147002(context, evt)
 	evt.param1 == 504 or
 	evt.param1 == 505 or
 	evt.param1 == 506 then
-	
-	ScriptLib.SetGadgetStateByConfigId(context, evt.param1, GadgetState.GearStart) 
-	
+
+	ScriptLib.SetGadgetStateByConfigId(context, evt.param1, GadgetState.GearStart)
+
 	end
 	return 0
 end

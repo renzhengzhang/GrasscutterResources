@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250016018
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -94,18 +94,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_49(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 250016018) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -113,20 +113,20 @@ end
 function action_EVENT_ANY_MONSTER_DIE_49(context, evt)
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250016017, 1)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 250016018, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_111(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 250016018) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -134,9 +134,9 @@ end
 function action_EVENT_ANY_MONSTER_DIE_111(context, evt)
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250016031, 1)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 250016018, 2)
-	
+
 	return 0
 end

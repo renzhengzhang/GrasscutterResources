@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220006007
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 1,
 	gadget_id_2 = 2
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -88,7 +88,7 @@ function condition_EVENT_GADGET_CREATE_24(context, evt)
 	if 84 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -99,7 +99,7 @@ function action_EVENT_GADGET_CREATE_24(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -109,7 +109,7 @@ function condition_EVENT_SELECT_OPTION_25(context, evt)
 	if 84 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -123,13 +123,13 @@ function action_EVENT_SELECT_OPTION_25(context, evt)
 	if 0 ~= ScriptLib.ShowReminder(context, 1030001) then
 		return -1
 	end
-	
-	
+
+
 		return 0
 	end
-	
-	
-	
+
+
+
 end
 
 -- 触发条件
@@ -138,7 +138,7 @@ function condition_EVENT_SELECT_OPTION_27(context, evt)
 	if 84 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -149,10 +149,10 @@ function action_EVENT_SELECT_OPTION_27(context, evt)
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 84, GadgetState.GearStart) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_option")
 			return -1
-		end 
+		end
 		return 0
 	end
-	
+
 	return 0
 end
 
@@ -162,7 +162,7 @@ function condition_EVENT_SELECT_OPTION_33(context, evt)
 	if 84 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -172,6 +172,6 @@ function action_EVENT_SELECT_OPTION_33(context, evt)
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, duration = 3.5, is_force = true, is_broadcast = false }) then
 		return -1
 	end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220134043
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -84,9 +84,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -94,23 +94,23 @@ function condition_EVENT_GADGET_STATE_CHANGE_43006(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220134043, 43001) then
 		return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 220134043, 43004) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220134043, 43005) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220134043, 43002) then
 		return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 220134043, 43003) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -121,19 +121,19 @@ function action_EVENT_GADGET_STATE_CHANGE_43006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_43009(context, evt)
 	if evt.param1 ~= 43009 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -143,26 +143,26 @@ function action_EVENT_ENTER_REGION_43009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 43008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134006中， configid为6012的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134006, 6012, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134007中， configid为7002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134007, 7002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134044中， configid为44007的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134044, 44007, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -172,7 +172,7 @@ function condition_EVENT_LEAVE_REGION_43010(context, evt)
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -182,8 +182,8 @@ function action_EVENT_LEAVE_REGION_43010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 43008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -192,7 +192,7 @@ function condition_EVENT_ANY_GADGET_DIE_43012(context, evt)
 	if 43011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -203,30 +203,30 @@ function action_EVENT_ANY_GADGET_DIE_43012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "kill" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "kill", 1, 220134006) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220134006, EntityType.GADGET, 6012 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220134012, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 220134012, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end

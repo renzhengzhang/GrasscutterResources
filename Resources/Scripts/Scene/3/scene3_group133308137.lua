@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308137
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -74,9 +74,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 使用reminderUI
@@ -92,9 +92,9 @@ end
 -- 触发操作
 function action_EVENT_MONSTER_BATTLE_137005(context, evt)
 	TLA_active_reminder_ui(context, evt, 1000140028)
-	
+
 	ScriptLib.AutoMonsterTide(context, 1, 133308137, {137003,137008}, 4, 1, 2)
-	
+
 	return 0
 end
 
@@ -104,7 +104,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_137006(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 10 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -115,7 +115,7 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_137006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -125,7 +125,7 @@ function condition_EVENT_ANY_MONSTER_DIE_137007(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -136,12 +136,12 @@ function action_EVENT_ANY_MONSTER_DIE_137007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1000140033 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1000140033) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

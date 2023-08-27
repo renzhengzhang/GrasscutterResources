@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220133030
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -39,9 +39,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -81,9 +81,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -91,7 +91,7 @@ function condition_EVENT_GADGET_CREATE_30002(context, evt)
 	if 30001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -102,7 +102,7 @@ function action_EVENT_GADGET_CREATE_30002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -110,14 +110,14 @@ end
 function condition_EVENT_SELECT_OPTION_30003(context, evt)
 	-- 判断是gadgetid 30001 option_id 1
 	if 30001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -125,7 +125,7 @@ end
 function action_EVENT_SELECT_OPTION_30003(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    local t_pos = {x=1062.296, y=-388.4613, z=2108.598}
+	    t_pos = {x=1062.296, y=-388.4613, z=2108.598}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=90, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -134,24 +134,24 @@ function action_EVENT_SELECT_OPTION_30003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_30004(context, evt)
 		    if ScriptLib.GetHostQuestState(context,4006912)==2 then
-			ScriptLib.RefreshGroup(context, { group_id = 220133030, suite = 2 }) 
+			ScriptLib.RefreshGroup(context, { group_id = 220133030, suite = 2 })
 			end
-		
+
 		return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_30005(context, evt)
 		    if ScriptLib.GetHostQuestState(context,4006912)==3 then
-			ScriptLib.RefreshGroup(context, { group_id = 220133030, suite = 1 }) 
+			ScriptLib.RefreshGroup(context, { group_id = 220133030, suite = 1 })
 			end
-		
+
 		return 0
 end

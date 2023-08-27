@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220140017
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
 
                 --本Group中发射器gadget的configID，最多3个,
                 fireMachineList = {
@@ -27,21 +27,21 @@ local        defs = {
                 selectID_vertical = 612,
 
                 --定义左右旋转的步长,key为传递装置configID，value为GadgetState
-                horizon_steps = {	        
+                horizon_steps = {
 
                 },
 
                 --定义上下俯仰的步长,key为传递装置configID，value为GadgetState
                 vertical_steps = {
- 	        
+
                 },
               serve_items = {17003}
         }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -94,9 +94,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -134,9 +134,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -144,7 +144,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_17004(context, evt)
 	if 17002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -155,22 +155,22 @@ function action_EVENT_GADGET_STATE_CHANGE_17004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "temp" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "temp", 1, 220140017) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140017, 2)
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "4006704") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -179,13 +179,13 @@ function action_EVENT_GROUP_LOAD_17009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 1 and ScriptLib.GetGroupVariableValueByGroup(context, "load", 220140003) == 0 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	end
-	
+
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 17002) == 101 and ScriptLib.GetGroupVariableValue(context, "unlock") == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context,17002, GadgetState.Default)
-		
+
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140017, config_id=17012, entity_type=EntityType.GADGET})
 	end
-	
+
 	return 0
 end
 
@@ -194,7 +194,7 @@ function condition_EVENT_QUEST_START_17010(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220140017, 17002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -205,7 +205,7 @@ function action_EVENT_QUEST_START_17010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -214,7 +214,7 @@ function condition_EVENT_GROUP_LOAD_17011(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220140017, 17002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -225,7 +225,7 @@ function action_EVENT_GROUP_LOAD_17011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -235,7 +235,7 @@ function condition_EVENT_GROUP_LOAD_17014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "unlock") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -246,8 +246,8 @@ function action_EVENT_GROUP_LOAD_17014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 

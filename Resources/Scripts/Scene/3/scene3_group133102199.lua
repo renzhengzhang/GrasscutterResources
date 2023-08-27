@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133102199
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -90,9 +90,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -100,7 +100,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_199003(context, evt)
 	if 199002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -108,20 +108,20 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_199003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133102199, 2)
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1331021991") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=1302.883,y=200.0026,z=211.5309}
+	pos = {x=1302.883,y=200.0026,z=211.5309}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110426, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -130,7 +130,7 @@ function condition_EVENT_ANY_MONSTER_DIE_199004(context, evt)
 	if 199001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -141,7 +141,7 @@ function action_EVENT_ANY_MONSTER_DIE_199004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -150,7 +150,7 @@ function condition_EVENT_GADGET_CREATE_199005(context, evt)
 	if 199002 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -161,14 +161,14 @@ function action_EVENT_GADGET_CREATE_199005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=1304.458,y=201.6607,z=210.9731}
+	pos = {x=1304.458,y=201.6607,z=210.9731}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110424, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -176,14 +176,14 @@ end
 function condition_EVENT_SELECT_OPTION_199006(context, evt)
 	-- 判断是gadgetid 199002 option_id 173
 	if 199002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 173 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -193,13 +193,13 @@ function action_EVENT_SELECT_OPTION_199006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 199002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133102199 ；指定config：199002；物件身上指定option：173；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133102199, 199002, 173) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end

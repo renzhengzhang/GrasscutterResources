@@ -6,7 +6,7 @@
 ||	Owner         ||	chao.jin
 ||	Description   ||	2.7 流明石活动 第二天的保护增幅仪活动
 ||	LogName       ||    ##[LumenProtect]
-||	Protection    ||	
+||	Protection    ||
 =====================================================================================================================
 --[[misc
 defs = {
@@ -19,10 +19,10 @@ defs = {
 }
 修改变量challenge_start 来触发挑战开始
 =====================================================================================================================]]
-local LumenProtect_Triggers = {
+LumenProtect_Triggers = {
 	{ config_id = 9100201, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
-	{ config_id = 9100202, name = "challenge_success", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0 }, 
-	{ config_id = 9100203, name = "challenge_fail", event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail", trigger_count = 0 }, 
+	{ config_id = 9100202, name = "challenge_success", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0 },
+	{ config_id = 9100203, name = "challenge_fail", event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail", trigger_count = 0 },
     { config_id = 9100204, name = "variable_change", event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change", trigger_count = 0,},
     { config_id = 9100205, name = "group_will_unload", event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload", trigger_count = 0,},
     { config_id = 9100206, name = "gadget_hp_change", event = EventType.EVENT_SPECIFIC_GADGET_HP_CHANGE, source = tostring(defs.protect_target), condition = "", action = "action_gadget_hp_change", trigger_count = 0,},
@@ -41,11 +41,11 @@ function action_group_load(context, evt)
 end
 
 function action_challenge_success(context, evt)
-	local used_time = defs.challenge_time - evt.param2
-	local gadget_hp = ScriptLib.GetGroupTempValue(context, "ProtectHP", {})
+	used_time = defs.challenge_time - evt.param2
+	gadget_hp = ScriptLib.GetGroupTempValue(context, "ProtectHP", {})
 	--挑战默认流水号
-	local transaction = evt.param_str1
-    local lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
+	transaction = evt.param_str1
+    lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
 	if evt.param1 == 2009001 then
 		ScriptLib.PrintContextLog(context,"##[LumenProtect]:挑战成功，推进进度，清除Group内容，延迟卸载")
 		ScriptLib.TryFinishLuminanceStoneChallengeStage(context, base_info.group_id)
@@ -71,10 +71,10 @@ end
 function action_challenge_fail(context, evt)
 	if evt.param1 == 2009001 then
 		ScriptLib.PrintContextLog(context,"##[LumenProtect]:挑战失败，重置Group内容，让玩家重新挑战")
-		local used_time = defs.challenge_time + 5 - evt.param2
-		local gadget_hp = ScriptLib.GetGroupTempValue(context, "ProtectHP", {})
-    	local lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
-    	local transaction = evt.param_str1
+		used_time = defs.challenge_time + 5 - evt.param2
+		gadget_hp = ScriptLib.GetGroupTempValue(context, "ProtectHP", {})
+    	lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
+    	transaction = evt.param_str1
 		if ScriptLib.IsPlayerAllAvatarDie(context, context.owner_uid) then
             ScriptLib.PrintContextLog(context,"##[LumenProtect]:埋点数据,团灭,流水号"..transaction.."耗时"..used_time.."剩余血量"..gadget_hp.."流明石等级"..lumen_level)
 			ScriptLib.MarkGroupLuaAction(context, "Luminous_challenge_1", transaction, {["end_reason"] = 0,["use_time"]= used_time ,["hp_left"]= gadget_hp,["luminous_level"] = lumen_level})
@@ -97,15 +97,15 @@ function action_challenge_fail(context, evt)
 end
 
 --监听物件变化
-function action_gadget_hp_change(context, evt) 
+function action_gadget_hp_change(context, evt)
 	ScriptLib.PrintContextLog(context,"##[LumenProtect]: 更新物件血量")
 	ScriptLib.SetGroupTempValue(context, "ProtectHP", evt.param3, {})
 	return 0
 end
 
 --玩家脱离战斗区域
-function action_leave_fail_region(context, evt) 
-    if evt.param1 == defs.fail_region then 
+function action_leave_fail_region(context, evt)
+    if evt.param1 == defs.fail_region then
         ScriptLib.PrintContextLog(context,"##[LumenProtect]:玩家脱离战斗区域，手动结束挑战")
         ScriptLib.SetGroupTempValue(context, "END_REASON", 4, {})
         ScriptLib.StopChallenge(context, 1, 0)
@@ -114,27 +114,27 @@ function action_leave_fail_region(context, evt)
 end
 
 --处理光钉状态
-function action_variable_change(context, evt) 
-    if evt.source_name == "pursina_state" then 
-        if evt.param1 == 0 then 
+function action_variable_change(context, evt)
+    if evt.source_name == "pursina_state" then
+        if evt.param1 == 0 then
             ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.pursina, "SGV_PURSINA_ROTATE", 0)
             return 0
         end
-        if evt.param1 == 1 then 
+        if evt.param1 == 1 then
             ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.pursina, "SGV_PURSINA_ROTATE", 1)
             return 0
         end
-        if evt.param1 == 2 then 
+        if evt.param1 == 2 then
             ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.pursina, "SGV_PURSINA_ROTATE", 2)
             return 0
         end
-        if evt.param3 == 3 then 
+        if evt.param3 == 3 then
             ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.pursina, "SGV_PURSINA_ROTATE", 3)
             return 0
         end
     end
     --defs.challenge_time
-    if evt.source_name == "challenge_start" and evt.param1 ~= 0 then 
+    if evt.source_name == "challenge_start" and evt.param1 ~= 0 then
 		ScriptLib.CreateFatherChallenge(context, 1, 2009001, defs.challenge_time+5, {success = 10, fail = 5})
 		ScriptLib.AttachChildChallenge(context, 1,  2009003, 2009003, {defs.challenge_time, base_info.group_id, defs.protect_target, 1},{},{success = 10,fail = 5})
 		ScriptLib.AttachChildChallenge(context, 1,  2009002, 2009002, {defs.challenge_time, base_info.group_id, defs.mons_num, 0},{},{success = 10,fail = 1})
@@ -190,8 +190,8 @@ function LF_ClearGroup(context)
 end
 
 --处理黑泥和黑泥白盒的死亡关系
-function action_gadget_die(context, evt) 
-	if mud_list[evt.param1] ~= nil then 
+function action_gadget_die(context, evt)
+	if mud_list[evt.param1] ~= nil then
 		ScriptLib.PrintContextLog(context,"##[LumenProtect]:黑泥死亡，清除对应白盒")
 		if 0 ~= ScriptLib.GetEntityIdByConfigId(context, mud_list[evt.param1]) then
 			ScriptLib.KillEntityByConfigId(context, { group_id = base_info.group_id, config_id = mud_list[evt.param1], entity_type = EntityType.GADGET })
@@ -202,8 +202,8 @@ function action_gadget_die(context, evt)
 end
 
 --处理BGM物件
-function action_pause_battle_bgm(context, evt) 
-	if evt.param1 == 606056 then 
+function action_pause_battle_bgm(context, evt)
+	if evt.param1 == 606056 then
 		ScriptLib.PrintContextLog(context,"##[LumenProtect]:刷最后一波怪，移除BGM入战物件")
 		if 0 ~= ScriptLib.GetEntityIdByConfigId(context, defs.enemy_gadget) then
 			ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, defs.enemy_gadget)
@@ -229,9 +229,3 @@ function LumenProtect_Initialize()
 end
 
 LumenProtect_Initialize()
-
-
-
-
-
-

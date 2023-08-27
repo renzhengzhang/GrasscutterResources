@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220114001
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
         groupID = 220114001,
         cutSceneID = 201901
 }

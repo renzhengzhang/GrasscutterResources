@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133106549
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	duration = 25,
 	group_id = 133106549,
 	collectable_sum = 8
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -61,9 +61,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -110,9 +110,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -121,29 +121,29 @@ function action_EVENT_CHALLENGE_SUCCESS_549012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 549002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133106549, 2)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133106549, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	-- 创建id为549001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 549001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -153,23 +153,23 @@ function action_EVENT_CHALLENGE_FAIL_549013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 549002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为549003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 549003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133106549, 2)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -178,7 +178,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_549014(context, evt)
 	if 549002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -188,17 +188,17 @@ function action_EVENT_GADGET_STATE_CHANGE_549014(context, evt)
 	if 0 ~= ScriptLib.ActiveChallenge(context, 666, 259, defs.duration, 2, 218, defs.collectable_sum) then
 	return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 1, 1) then
 	return -1
 	end
-	
+
 	return 0
-	
+
 end
 
 -- 触发条件
@@ -206,7 +206,7 @@ function condition_EVENT_GADGET_CREATE_549016(context, evt)
 	if 549003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -217,7 +217,7 @@ function action_EVENT_GADGET_CREATE_549016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -225,14 +225,14 @@ end
 function condition_EVENT_SELECT_OPTION_549017(context, evt)
 	-- 判断是gadgetid 549003 option_id 177
 	if 549003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 177 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -243,24 +243,24 @@ function action_EVENT_SELECT_OPTION_549017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 549002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 549002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标（-575.0302，154.4008，1956.391），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-575.0302, y=154.4008, z=1956.391}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-575.0302, y=154.4008, z=1956.391}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -270,22 +270,22 @@ function action_EVENT_GROUP_LOAD_549018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 549002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为549003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 549003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133106549, 2)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end

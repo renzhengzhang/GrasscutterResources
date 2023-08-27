@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220154001
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	transTarget = 1004,
 	phaseOneBoss = 1001,
 	phaseTwoBoss = 1002,
@@ -14,9 +14,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -71,9 +71,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -111,9 +111,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -121,20 +121,20 @@ function condition_EVENT_ANY_MONSTER_DIE_1003(context, evt)
 	if 1001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_1003(context, evt)
 	    ScriptLib.SetWeatherAreaState(context, 10142, 1)
-	
+
 	    -- 重新生成指定group，指定suite
 	    if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220154001, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 	        return -1
 	    end
-	
+
 	return 0
 end
 
@@ -144,8 +144,8 @@ function condition_EVENT_ANY_MONSTER_DIE_1010(context, evt)
 	if evt.param1 ~= 1002 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -155,8 +155,8 @@ function action_EVENT_ANY_MONSTER_DIE_1010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1009, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -165,7 +165,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1011(context, evt)
 	if 1009 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -176,11 +176,11 @@ function action_EVENT_GADGET_STATE_CHANGE_1011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
-local bossMonsterId=
+bossMonsterId=
 {
 	29070101,
 	29070102,
@@ -189,7 +189,7 @@ local bossMonsterId=
 	29070105
 }
 
-local extraTriggers = 
+extraTriggers =
 {
     { config_id = 40000001, name = "monster_die", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_EVENT_ANY_MONSTER_DIE", trigger_count = 0 },
 	{ config_id = 40000002, name = "time_axis_pass", event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_EVENT_TIME_AXIS_PASS", trigger_count = 0},
@@ -198,7 +198,7 @@ local extraTriggers =
 	{ config_id = 40000005, name = "enter_region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_EVENT_ENTER_REGION", forbid_guest = false,trigger_count = 0 },
 }
 
------- Local Functions -----------
+------ Functions -----------
 function LF_Initialize_Level()
     --- TRIGGER
 	for i, _suite in ipairs(suites) do
@@ -239,27 +239,27 @@ function action_EVENT_TIME_AXIS_PASS(context, evt)
 		ScriptLib.InitTimeAxis(context,"YAxisCheck",{5},true)
 	end
 	if evt.source_name=="ShowReminder" then
-		local uidList=ScriptLib.GetSceneUidList(context)
-		local transUid={}
+		uidList=ScriptLib.GetSceneUidList(context)
+		transUid={}
 		for k,v in pairs(uidList) do
 			if ScriptLib.IsInRegion(context, v, defs.phaseOneRegion)==false then
 				table.insert(transUid,v)
 			end
-		end	
+		end
 		for a,b in pairs(points) do
 			if b.config_id==defs.bossBattleTransPoint then
 				if #transUid>0 then
 					ScriptLib.TransPlayerToPos(context, {uid_list = transUid, pos = b.pos, radius = 2, rot = b.rot})
-				end	
+				end
 			end
-		end	
+		end
 	end
 
 	if evt.source_name=="YAxisCheck" then
-		local uidList=ScriptLib.GetSceneUidList(context)
+		uidList=ScriptLib.GetSceneUidList(context)
 		for a,b in pairs(uidList) do
-			local entity=ScriptLib.GetAvatarEntityIdByUid(context, b)
-			local pos=ScriptLib.GetPosByEntityId(context, entity)
+			entity=ScriptLib.GetAvatarEntityIdByUid(context, b)
+			pos=ScriptLib.GetPosByEntityId(context, entity)
 			if pos.y>= 0 then
 				for k,v in pairs(points) do
 					if v.config_id==defs.transTarget then
@@ -275,12 +275,12 @@ end
 function action_EVENT_MONSTER_BATTLE(context, evt)
 	if evt.param1==defs.phaseOneBoss then
 		--起提示
-		local uidList=ScriptLib.GetSceneUidList(context)
+		uidList=ScriptLib.GetSceneUidList(context)
 		for k,v in pairs(uidList) do
 			if ScriptLib.IsInRegion(context, v, defs.phaseOneRegion)==false then
 				ScriptLib.AssignPlayerShowTemplateReminder(context,214,{param_uid_vec={},param_vec={},uid_vec={v}})
 			end
-		end	
+		end
 		--起时间轴
 		ScriptLib.InitTimeAxis(context,"ShowReminder",{10},true)
 	end
@@ -294,8 +294,8 @@ end
 
 function action_EVENT_ANY_MONSTER_LIVE(context, evt)
 	--进入方法的log
-	local monsterEntityId=ScriptLib.GetEntityIdByConfigId(context, evt.param1)
-    local monsterId=ScriptLib.GetMonsterIdByEntityId(context, monsterEntityId)
+	monsterEntityId=ScriptLib.GetEntityIdByConfigId(context, evt.param1)
+    monsterId=ScriptLib.GetMonsterIdByEntityId(context, monsterEntityId)
 	if LF_IsBossMonster(context,monsterId) then
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, evt.param1, "SGV_MONSTER_NADA", 1)
 	end
@@ -305,7 +305,7 @@ end
 --boss一阶段死亡传到下面去
 function action_EVENT_ANY_MONSTER_DIE(context, evt)
 	if evt.param1==defs.phaseOneBoss then
-		local uidList=ScriptLib.GetSceneUidList(context)
+		uidList=ScriptLib.GetSceneUidList(context)
 		if #uidList<=1 then
 			ScriptLib.PlayCutScene(context, 201520002, 0)
 		end
@@ -315,7 +315,7 @@ function action_EVENT_ANY_MONSTER_DIE(context, evt)
 		--回收所有的reminder
 		for k,v in pairs(uidList) do
 			ScriptLib.RevokePlayerShowTemplateReminder(context, 214, {v})
-		end	
+		end
 	end
 	return 0
 end

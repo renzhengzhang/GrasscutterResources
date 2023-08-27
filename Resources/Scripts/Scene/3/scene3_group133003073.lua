@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133003073
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -93,55 +93,55 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_73007(context, evt)
 	if evt.param1 ~= 73007 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_73007(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=2484.005,y=326.9309,z=-1682.074}
+	pos = {x=2484.005,y=326.9309,z=-1682.074}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110438, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_73008(context, evt)
 	if evt.param1 ~= 73008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_73008(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=2484.005,y=326.9309,z=-1682.074}
+	pos = {x=2484.005,y=326.9309,z=-1682.074}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110452, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end

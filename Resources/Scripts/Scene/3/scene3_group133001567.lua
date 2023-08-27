@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001567
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -104,9 +104,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -115,7 +115,7 @@ function condition_EVENT_ANY_MONSTER_DIE_567010(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -126,19 +126,19 @@ function action_EVENT_ANY_MONSTER_DIE_567010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_567011(context, evt)
 	if evt.param1 ~= 567011 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -146,40 +146,40 @@ end
 function action_EVENT_ENTER_REGION_567011(context, evt)
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001567, 1)
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1330015674") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001567, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_567012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"mine1"为3
 	if ScriptLib.GetGroupVariableValue(context, "mine1") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_567012(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=1724,y=233,z=-1132}
+	pos = {x=1724,y=233,z=-1132}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31021120, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -190,7 +190,7 @@ function action_EVENT_QUEST_START_567013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_ANY_GADGET_DIE_567014(context, evt)
 	if 567003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -210,19 +210,19 @@ function action_EVENT_ANY_GADGET_DIE_567014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1330015672") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133001567, EntityType.GADGET, 567019 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -231,7 +231,7 @@ function condition_EVENT_ANY_GADGET_DIE_567015(context, evt)
 	if 567002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -242,19 +242,19 @@ function action_EVENT_ANY_GADGET_DIE_567015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1330015672") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133001567, EntityType.GADGET, 567018 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -263,7 +263,7 @@ function condition_EVENT_ANY_GADGET_DIE_567016(context, evt)
 	if 567001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -274,18 +274,18 @@ function action_EVENT_ANY_GADGET_DIE_567016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1330015672") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133001567, EntityType.GADGET, 567017 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end

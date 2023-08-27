@@ -1,5 +1,5 @@
 --[[
-local defs = {
+defs = {
     --  进入指定Region获得对应AbilityGroup
     -- AG:AbilityGroup
     GroupID = 133003041,
@@ -20,14 +20,14 @@ local defs = {
     RewardSuit = 7,
 }
 
-local Phase ={
+Phase ={
         [1] = {3,4},
         [2] = {3,4,5},
         [3] = {7},
 }
 --]]
 ---------------------
-local tempTrigger = {
+tempTrigger = {
     { config_id = 2230001, name = "ENTER_REGION_Challenge", event = EventType.EVENT_ENTER_REGION, source = "1",
       condition = "", action = "action_ENTER_REGION_Challenge", trigger_count = 0},
     { config_id = 2230002, name = "LEAVE_REGION_Challenge", event = EventType.EVENT_LEAVE_REGION, source = "1",
@@ -68,7 +68,7 @@ function action_ENTER_REGION_Challenge(context, evt)
     if -1 == CheckChallenge(context) then return 0 end
 
     -- 检查WatcherKey是否合法
-    local startVariable = ScriptLib.GetGroupVariableValue(context,defs.WatchKey)
+    startVariable = ScriptLib.GetGroupVariableValue(context,defs.WatchKey)
     if 0 ~=  CheckWatcherKey(context,startVariable) then
         return 0
     end
@@ -128,8 +128,8 @@ end
 --------私有函数----------
 -- 刷新供奉数量，用于为AbilityGroup提供支持
 function RefreshAllSacrificeNum(context)
-    local uid_list = ScriptLib.GetSceneUidList(context)
-    local sacrificeNum = ScriptLib.GetLunaRiteSacrificeNum(context, defs.AreaID);
+    uid_list = ScriptLib.GetSceneUidList(context)
+    sacrificeNum = ScriptLib.GetLunaRiteSacrificeNum(context, defs.AreaID);
     ScriptLib.PrintContextLog(context, "## TD_MoonlitCamp 触发供奉 : UID_List为：".. arrayToString(uid_list).." //AreaID为 " .. defs.AreaID .." //当前供奉数为 " .. sacrificeNum)
     ScriptLib.SetTeamEntityGlobalFloatValue(context,uid_list, defs.AGKey, sacrificeNum)
     ScriptLib.PrintContextLog(context, "## TD_MoonlitCamp 触发供奉: UID_List为："..arrayToString(uid_list).." //其AbilityGroup的Key刷新了 ")
@@ -138,8 +138,8 @@ end
 
 -- 刷新供奉数量，用于为AbilityGroup提供支持
 function RefreshSacrificeNum(context)
-    local tempUid = context.uid
-    local sacrificeNum = ScriptLib.GetLunaRiteSacrificeNum(context, defs.AreaID);
+    tempUid = context.uid
+    sacrificeNum = ScriptLib.GetLunaRiteSacrificeNum(context, defs.AreaID);
     ScriptLib.PrintContextLog(context, "## TD_MoonlitCamp ABGroup挂起: 对应UID为：".. tempUid.." //AreaID为 " .. defs.AreaID .." //当前供奉数为 " .. sacrificeNum)
     ScriptLib.SetTeamEntityGlobalFloatValue(context,{ tempUid }, defs.AGKey, sacrificeNum)
     ScriptLib.PrintContextLog(context, "## TD_MoonlitCamp ABGroup挂起: 对应UID为："..tempUid.." //其AbilityGroup的Key刷新了 ")
@@ -147,9 +147,9 @@ function RefreshSacrificeNum(context)
 end
 
 function StartNewbie(context)
-    local UidList = ScriptLib.GetSceneUidList(context)
-    local ownerUid = UidList[1]
-    local havePlayed  = ScriptLib.GetExhibitionAccumulableData(context,ownerUid,10501001)
+    UidList = ScriptLib.GetSceneUidList(context)
+    ownerUid = UidList[1]
+    havePlayed  = ScriptLib.GetExhibitionAccumulableData(context,ownerUid,10501001)
 
     if 0 == havePlayed then
         ScriptLib.ShowClientTutorial(context,910,{ownerUid})
@@ -160,7 +160,7 @@ function StartNewbie(context)
 end
 
 function CheckChallenge(context)
-    local haveStartChallenge = ScriptLib.GetGroupTempValue(context, "haveStartChallenge",{})
+    haveStartChallenge = ScriptLib.GetGroupTempValue(context, "haveStartChallenge",{})
     if 1 == haveStartChallenge then
         ScriptLib.PrintContextLog(context, "## TD_MoonlitCamp : 挑战已触发，不再重复触发 ")
         return -1
@@ -183,7 +183,7 @@ function CheckWatcherKey(context,startVariable)
 end
 
 function RefreshPhaseSuit(context)
-    local stage = ScriptLib.GetGroupVariableValue(context, "stage")
+    stage = ScriptLib.GetGroupVariableValue(context, "stage")
 
     if nil == Phase then
         ScriptLib.PrintContextLog(context, "## TD_MoonlitCamp : Group: " .. defs.GroupID .. "没有对应Phase")
@@ -195,7 +195,7 @@ function RefreshPhaseSuit(context)
         return 0
     end
 
-    local needRefreshSuit = Phase[stage]
+    needRefreshSuit = Phase[stage]
 
     ScriptLib.PrintContextLog(context, "## TD_MoonlitCamp : PhaseStage= " .. stage .. "需要刷新的suit为：" .. arrayToString(needRefreshSuit))
 
@@ -208,7 +208,7 @@ end
 
 ---自骏ToolBox：数组转字符串函数---
 function arrayToString(array)
-    local s = "{"
+    s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","
@@ -222,4 +222,3 @@ end
 
 LF_Initialize_Level()
 --- ServerUploadTool Save to [/root/env/data/lua/common/V2_1]  ---
-

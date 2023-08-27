@@ -1,25 +1,25 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133316007
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 133316007,
 	gadget_thunderThelfID = 7001,
 	pointarray_ID = 331600001,
 	maxPointCount = 14,
 	gadget_Reward_1 = 7002,
-	pointInfo = {5,10,14} 
+	pointInfo = {5,10,14}
 }
 
 -- DEFS_MISCS
 function GetNextPath(context)
-	local path = {}
-	local index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
-	local stoppoint = defs.pointInfo[index]
+	path = {}
+	index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
+	stoppoint = defs.pointInfo[index]
 	ScriptLib.PrintLog(context, "stop point : "..stoppoint)
-	local currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
+	currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
 	for i=currentNodeIndex + 1,stoppoint do
 		table.insert(path,i)
 	end
@@ -41,9 +41,9 @@ function MovePlatform(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -91,9 +91,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -105,9 +105,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -153,9 +153,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -164,15 +164,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_7005(context, evt)
 			if defs.gadget_thunderThelfID ~= evt.param1 then
 				return false
 			end
-			local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
-			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state) 
-			if state == 201 then 
+			state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
+			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
+			if state == 201 then
 				return false
 			end
-			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then 
+			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then
 				return false
 			end
-			
+
 			return true
 end
 

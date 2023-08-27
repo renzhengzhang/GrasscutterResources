@@ -1,5 +1,5 @@
 
-local extraTriggers={
+extraTriggers={
   { config_id = 8000001, name = "EVENT_ANY_GADGET_DIE", event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_EVENT_ANY_GADGET_DIE", trigger_count = 0 },
   { config_id = 8000002, name = "EVENT_TIME_AXIS_PASS", event = EventType.EVENT_TIME_AXIS_PASS, source = "WoodenStakeChallenge", condition = "", action = "action_EVENT_TIME_AXIS_PASS", trigger_count = 0 },
   { config_id = 8000003, name = "EVENT_GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
@@ -21,7 +21,7 @@ function action_EVENT_ANY_GADGET_DIE(context, evt)
 		ScriptLib.PrintContextLog(context,"HM_WoodenStakeChallenge uid:"..context.uid)
 		--计数标志加一
 		ScriptLib.ChangeGroupTempValue(context, "uidListIndex", 1, {})
-		local tempIdx=ScriptLib.GetGroupTempValue(context, "uidListIndex", {})
+		tempIdx=ScriptLib.GetGroupTempValue(context, "uidListIndex", {})
 		--存uid
 		ScriptLib.SetGroupTempValue(context, "uid"..tempIdx, context.uid, {})
 	else
@@ -47,10 +47,10 @@ function action_EVENT_ANY_GADGET_DIE(context, evt)
 		--检测是否所有木箱都销毁
 		if ScriptLib.GetGroupTempValue(context, "destoryedStakeNum", {})>=6 then
 			--根据uidListIndex拿取参与击杀的uidList
-			local uidList={}
+			uidList={}
 			for i=1,ScriptLib.GetGroupTempValue(context, "uidListIndex", {}) do
-				local repeated=false
-				local tempUid=ScriptLib.GetGroupTempValue(context, "uid"..i, {})
+				repeated=false
+				tempUid=ScriptLib.GetGroupTempValue(context, "uid"..i, {})
 
 				for j=1,#uidList do
 					if uidList[j]==tempUid then

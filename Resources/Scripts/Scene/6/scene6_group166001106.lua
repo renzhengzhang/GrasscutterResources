@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 166001106
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -106,9 +106,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -116,7 +116,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106002(context, evt)
 	if 106001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -127,19 +127,19 @@ function action_EVENT_GADGET_STATE_CHANGE_106002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7106106") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "mush" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "mush", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -148,7 +148,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106007(context, evt)
 	if 106003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -159,19 +159,19 @@ function action_EVENT_GADGET_STATE_CHANGE_106007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7106106") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "mush" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "mush", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -180,7 +180,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106008(context, evt)
 	if 106004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -191,19 +191,19 @@ function action_EVENT_GADGET_STATE_CHANGE_106008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7106106") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "mush" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "mush", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -212,7 +212,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106009(context, evt)
 	if 106005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -223,19 +223,19 @@ function action_EVENT_GADGET_STATE_CHANGE_106009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7106106") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "mush" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "mush", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -244,7 +244,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106010(context, evt)
 	if 106006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -255,31 +255,31 @@ function action_EVENT_GADGET_STATE_CHANGE_106010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7106106") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "mush" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "mush", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_106011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"mush"为1
 	if ScriptLib.GetGroupVariableValue(context, "mush") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -290,19 +290,19 @@ function action_EVENT_VARIABLE_CHANGE_106011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_106012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"mush"为2
 	if ScriptLib.GetGroupVariableValue(context, "mush") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -313,19 +313,19 @@ function action_EVENT_VARIABLE_CHANGE_106012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_106013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"mush"为3
 	if ScriptLib.GetGroupVariableValue(context, "mush") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -336,19 +336,19 @@ function action_EVENT_VARIABLE_CHANGE_106013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_106014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"mush"为4
 	if ScriptLib.GetGroupVariableValue(context, "mush") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -359,19 +359,19 @@ function action_EVENT_VARIABLE_CHANGE_106014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_106015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"mush"为5
 	if ScriptLib.GetGroupVariableValue(context, "mush") ~= 5 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -382,7 +382,7 @@ function action_EVENT_VARIABLE_CHANGE_106015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -393,12 +393,12 @@ function action_EVENT_ENTER_REGION_106018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 106017, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end

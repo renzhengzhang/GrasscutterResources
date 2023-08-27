@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 166001105
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -78,9 +78,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -88,7 +88,7 @@ function condition_EVENT_ANY_GADGET_DIE_105002(context, evt)
 	if 105001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -99,14 +99,14 @@ function action_EVENT_ANY_GADGET_DIE_105002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 105010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -115,7 +115,7 @@ function condition_EVENT_ANY_GADGET_DIE_105006(context, evt)
 	if 105003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -126,14 +126,14 @@ function action_EVENT_ANY_GADGET_DIE_105006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 105011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -142,7 +142,7 @@ function condition_EVENT_ANY_GADGET_DIE_105007(context, evt)
 	if 105004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -153,26 +153,26 @@ function action_EVENT_ANY_GADGET_DIE_105007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 105005 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_105008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"done"为1
 	if ScriptLib.GetGroupVariableValue(context, "done") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -183,19 +183,19 @@ function action_EVENT_VARIABLE_CHANGE_105008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_105009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"done"为3
 	if ScriptLib.GetGroupVariableValue(context, "done") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -206,19 +206,19 @@ function action_EVENT_VARIABLE_CHANGE_105009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_105012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"done"为2
 	if ScriptLib.GetGroupVariableValue(context, "done") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -229,6 +229,6 @@ function action_EVENT_VARIABLE_CHANGE_105012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

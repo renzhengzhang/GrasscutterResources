@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199002097
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -84,23 +84,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_97007(context, evt)
 	-- 判断是gadgetid 97006 option_id 419
 	if 97006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 419 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -111,70 +111,70 @@ function action_EVENT_SELECT_OPTION_97007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 97003, 900200130, {1,2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 97006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_97008(context, evt)
 	-- 判断是gadgetid 为 97003的移动平台，是否到达了900200130 的点集中的 2 点
-	
+
 	if 97003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 900200130 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_97008(context, evt)
 	ScriptLib.SetGadgetTalkByConfigId(context, 199002097, 97003, 6800353)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_97010(context, evt)
 	-- 判断是gadgetid 为 97003的移动平台，是否到达了900200130 的点集中的 2 点
-	
+
 	if 97003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 900200130 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -184,8 +184,8 @@ function action_EVENT_PLATFORM_REACH_POINT_97010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 97003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_GROUP_LOAD_97011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "TheFishCrow") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -205,15 +205,15 @@ function action_EVENT_GROUP_LOAD_97011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 97003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 97006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -223,13 +223,13 @@ function condition_EVENT_GROUP_LOAD_97012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "TheFishCrow") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_97012(context, evt)
 	ScriptLib.SetGadgetTalkByConfigId(context, 199002097, 97003, 6800353)
-	
+
 	return 0
 end

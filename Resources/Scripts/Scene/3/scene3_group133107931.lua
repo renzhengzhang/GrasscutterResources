@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133107931
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -87,46 +87,46 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_931002(context, evt)
 	if evt.param1 ~= 931002 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"hasKilledMonster"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasKilledMonster") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_931002(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-795，232，440），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-795, y=232, z=440}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-795, y=232, z=440}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 延迟2秒后,向groupId为：133107931的对象,请求一次调用,并将string参数："waitTillCamera" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133107931, "waitTillCamera", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -137,13 +137,13 @@ function action_EVENT_TIMER_EVENT_931003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "WQ7180302") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_931004(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 80 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -164,7 +164,7 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_931004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -174,7 +174,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_931005(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 60 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -185,7 +185,7 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_931005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_931006(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 50 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_931006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -215,7 +215,7 @@ function condition_EVENT_ANY_MONSTER_DIE_931007(context, evt)
 	if 931001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -226,19 +226,19 @@ function action_EVENT_ANY_MONSTER_DIE_931007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：133107931的对象,请求一次调用,并将string参数："waitTillReminder" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133107931, "waitTillReminder", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "hasKilledMonster" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasKilledMonster", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -249,7 +249,7 @@ function action_EVENT_TIMER_EVENT_931008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -260,6 +260,6 @@ function action_EVENT_QUEST_START_931009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

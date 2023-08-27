@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133317046
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
  drum = 46002, --鼓的ConfigID
  interval = 2, --敲鼓的节奏间隔
  reminder_success = 400112, --挑战成功Reminder
@@ -12,12 +12,12 @@ local defs = {
 region_id = 46004, --配置一个敲鼓的区域，
 }
 --敲鼓的节奏， 0空 1普攻 2下落 70900431鼓ID
-local music_staff = {0,1,2, 0, 1,2 ,0,0}
+music_staff = {0,1,2, 0, 1,2 ,0,0}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -81,20 +81,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_46003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	--检测当前改变的variable是否在预设区间
 	if 0 > evt.param1 or 1 < evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -104,8 +104,8 @@ function action_EVENT_VARIABLE_CHANGE_46003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 46001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

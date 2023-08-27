@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001152
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -88,147 +88,147 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_190(context, evt)
 	if evt.param1 ~= 190 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"lock"为0
 	if ScriptLib.GetGroupVariableValue(context, "lock") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_190(context, evt)
 	-- 在0面前， 5 到 10 范围里，15 角度内，刷{780,781}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {780,781}, ranges = { 5, 10 }, angle = 15 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {780,781}, ranges = { 5, 10 }, angle = 15 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	-- 将本组内变量名为 "lock" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "lock", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟3600秒后,向groupId为：133001152的对象,请求一次调用,并将string参数："s_unlock" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133001152, "s_unlock", 3600) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_191(context, evt)
 	if evt.param1 ~= 191 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"lock"为0
 	if ScriptLib.GetGroupVariableValue(context, "lock") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_191(context, evt)
 	-- 在0面前， 5 到 10 范围里，15 角度内，刷{781,779}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {781,779}, ranges = { 5, 10 }, angle = 15 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {781,779}, ranges = { 5, 10 }, angle = 15 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	-- 将本组内变量名为 "lock" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "lock", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟3600秒后,向groupId为：133001152的对象,请求一次调用,并将string参数："s_unlock" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133001152, "s_unlock", 3600) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_262(context, evt)
 	if evt.param1 ~= 262 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_262(context, evt)
 	-- 在0面前， 5 到 10 范围里，15 角度内，刷{781,779,780,1076}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {781,779,780,1076}, ranges = { 5, 10 }, angle = 15 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {781,779,780,1076}, ranges = { 5, 10 }, angle = 15 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_324(context, evt)
 	if evt.param1 ~= 324 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"lock"为0
 	if ScriptLib.GetGroupVariableValue(context, "lock") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_324(context, evt)
 	-- 在0面前， 5 到 10 范围里，15 角度内，刷{780,781}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {780,781}, ranges = { 5, 10 }, angle = 15 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {780,781}, ranges = { 5, 10 }, angle = 15 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	-- 将本组内变量名为 "lock" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "lock", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟3600秒后,向groupId为：133001152的对象,请求一次调用,并将string参数："s_unlock" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133001152, "s_unlock", 3600) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -239,6 +239,6 @@ function action_EVENT_TIMER_EVENT_325(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

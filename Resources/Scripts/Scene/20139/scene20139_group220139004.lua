@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220139004
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -61,9 +61,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -103,9 +103,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -113,7 +113,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4003(context, evt)
 	if 4002 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -123,25 +123,25 @@ function action_EVENT_GADGET_STATE_CHANGE_4003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"CastleToyB"为1
 	if ScriptLib.GetGroupVariableValue(context, "CastleToyB") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"CastleToyC"为0
 	if ScriptLib.GetGroupVariableValue(context, "CastleToyC") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -151,25 +151,25 @@ function action_EVENT_VARIABLE_CHANGE_4004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"CastleToyC"为1
 	if ScriptLib.GetGroupVariableValue(context, "CastleToyC") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"CastleToyB"为0
 	if ScriptLib.GetGroupVariableValue(context, "CastleToyB") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -179,25 +179,25 @@ function action_EVENT_VARIABLE_CHANGE_4005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"CastleToyC"为1
 	if ScriptLib.GetGroupVariableValue(context, "CastleToyC") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"CastleToyB"为1
 	if ScriptLib.GetGroupVariableValue(context, "CastleToyB") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -207,8 +207,8 @@ function action_EVENT_VARIABLE_CHANGE_4006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -216,28 +216,28 @@ end
 function action_EVENT_OBSERVATION_POINT_NOTIFY_4007(context, evt)
 	if 4001 == evt.param1 and 305 == evt.param2 then
 		ScriptLib.ChangeToTargetLevelTag(context, 41)
-		
+
 		ScriptLib.AddQuestProgress(context, "4007310")
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,4001, GadgetState.ChestOpened)
-		
+
 		ScriptLib.SetGroupVariableValue(context, "finish", 1)
-		
+
 		ScriptLib.SetGroupVariableValueByGroup(context, "castle", 1, 220139046)
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -245,26 +245,26 @@ end
 function action_EVENT_VARIABLE_CHANGE_4008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220139004, 2)
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -278,17 +278,17 @@ end
 function condition_EVENT_QUEST_FINISH_4013(context, evt)
 	--检查ID为4007309的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 4007309 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -298,8 +298,8 @@ function action_EVENT_QUEST_FINISH_4013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -308,7 +308,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4014(context, evt)
 	if 4002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -319,7 +319,7 @@ function action_EVENT_GADGET_STATE_CHANGE_4014(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -329,7 +329,7 @@ function condition_EVENT_GROUP_LOAD_4015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -337,14 +337,14 @@ end
 function action_EVENT_GROUP_LOAD_4015(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220139004, 2)
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -354,7 +354,7 @@ function condition_EVENT_QUEST_START_4016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "CastleToyC") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -365,7 +365,7 @@ function action_EVENT_QUEST_START_4016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -375,7 +375,7 @@ function condition_EVENT_QUEST_START_4017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "CastleToyB") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -386,7 +386,7 @@ function action_EVENT_QUEST_START_4017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -396,7 +396,7 @@ function condition_EVENT_GROUP_LOAD_4018(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "CastleToyC") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -407,7 +407,7 @@ function action_EVENT_GROUP_LOAD_4018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -417,7 +417,7 @@ function condition_EVENT_GROUP_LOAD_4019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "CastleToyB") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -428,6 +428,6 @@ function action_EVENT_GROUP_LOAD_4019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

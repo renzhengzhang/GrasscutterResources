@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220131019
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -124,29 +124,29 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_19006(context, evt)
 	-- 创建标识为"T1"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T1", {5}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_19007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Stage"为3
 	if ScriptLib.GetGroupVariableValue(context, "Stage") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -154,7 +154,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_19007(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131019, 3)
-	
+
 	return 0
 end
 
@@ -162,9 +162,9 @@ end
 function action_EVENT_TIME_AXIS_PASS_19016(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131019, 2)
-	
+
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131019, 1)
-	
+
 	return 0
 end

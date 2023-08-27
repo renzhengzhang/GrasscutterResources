@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308224
 }
 
 -- DEFS_MISCS
-local engineerLaserConfigID = 224001
-local turnOption = 435
-local correctState = 0
+engineerLaserConfigID = 224001
+turnOption = 435
+correctState = 0
 
-local markList = {224009}
+markList = {224009}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -65,9 +65,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -78,9 +78,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -96,9 +96,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -106,7 +106,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_224006(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133308224, 224002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -117,13 +117,13 @@ function action_EVENT_GADGET_STATE_CHANGE_224006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 224005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 224005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -133,7 +133,7 @@ function condition_EVENT_GROUP_LOAD_224008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -143,8 +143,8 @@ function action_EVENT_GROUP_LOAD_224008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 224005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_224010(context, evt)
 	if 224001 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -165,7 +165,7 @@ function action_EVENT_GADGET_STATE_CHANGE_224010(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -175,7 +175,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_224011(context, evt)
 	if 224004 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -186,7 +186,7 @@ function action_EVENT_GADGET_STATE_CHANGE_224011(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -194,14 +194,14 @@ end
 function condition_EVENT_SELECT_OPTION_224012(context, evt)
 	-- 判断是gadgetid 0 option_id 0
 	if defs.gadget_engineerLaser ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if turnOption ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -212,7 +212,7 @@ function action_EVENT_SELECT_OPTION_224012(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 

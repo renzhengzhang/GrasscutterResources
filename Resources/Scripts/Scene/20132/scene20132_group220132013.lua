@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220132013
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -75,9 +75,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -88,9 +88,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -115,20 +115,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13002(context, evt)
 	if evt.param1 ~= 13002 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -138,19 +138,19 @@ function action_EVENT_ENTER_REGION_13002(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,203,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13003(context, evt)
 	if evt.param1 ~= 13003 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -160,19 +160,19 @@ function action_EVENT_ENTER_REGION_13003(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,203,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13004(context, evt)
 	if evt.param1 ~= 13004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -182,19 +182,19 @@ function action_EVENT_ENTER_REGION_13004(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,203,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13005(context, evt)
 	if evt.param1 ~= 13005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -204,19 +204,19 @@ function action_EVENT_ENTER_REGION_13005(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,203,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13006(context, evt)
 	if evt.param1 ~= 13006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -226,19 +226,19 @@ function action_EVENT_ENTER_REGION_13006(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,202,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13007(context, evt)
 	if evt.param1 ~= 13007 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -248,19 +248,19 @@ function action_EVENT_ENTER_REGION_13007(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,202,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13008(context, evt)
 	if evt.param1 ~= 13008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -270,19 +270,19 @@ function action_EVENT_ENTER_REGION_13008(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,202,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13009(context, evt)
 	if evt.param1 ~= 13009 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -292,19 +292,19 @@ function action_EVENT_ENTER_REGION_13009(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,202,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13010(context, evt)
 	if evt.param1 ~= 13010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -314,19 +314,19 @@ function action_EVENT_ENTER_REGION_13010(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,202,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13011(context, evt)
 	if evt.param1 ~= 13011 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -336,6 +336,6 @@ function action_EVENT_ENTER_REGION_13011(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,202,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end

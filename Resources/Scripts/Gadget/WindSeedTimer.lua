@@ -1,8 +1,8 @@
-local default_time = 18
+default_time = 18
 
 function OnTimer(context, now)
-	local state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
-	local state = ScriptLib.GetGadgetState(context)
+	state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
+	state = ScriptLib.GetGadgetState(context)
 
 	-- 获取机关当前状态
 	if state == GadgetState.GearStart then
@@ -40,5 +40,3 @@ function OnClientExecuteReq(context, param1, param2, param3)
 		ScriptLib.SetGadgetState(context, GadgetState.Action03)
 	end
 end
-
-

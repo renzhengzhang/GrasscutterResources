@@ -29,11 +29,11 @@ end
 
 -- 能量体被攻击
 function OnBeHurt(context, element_type, strike_type, is_host)
-	local groupId = ScriptLib.GetContextGroupId(context)
-	local configId = ScriptLib.GetContextGadgetConfigId(context)
+	groupId = ScriptLib.GetContextGroupId(context)
+	configId = ScriptLib.GetContextGadgetConfigId(context)
 	if is_host == true then
-		if element_type == ElementType.Wind then	
-			ScriptLib.KillEntityByConfigId(context, { group_id = groupId, config_id = configId, entity_type=EntityType.GADGET }) 
+		if element_type == ElementType.Wind then
+			ScriptLib.KillEntityByConfigId(context, { group_id = groupId, config_id = configId, entity_type=EntityType.GADGET })
 		elseif ScriptLib.GetGadgetStateByConfigId(context, groupId, configId) ~= GadgetState.GearStart then
 			ScriptLib.SetGadgetState(context, GadgetState.GearStart)
 		end

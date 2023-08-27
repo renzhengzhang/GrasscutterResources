@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133212157
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -93,9 +93,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -103,7 +103,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_157005(context, evt)
 	if 157004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -114,13 +114,13 @@ function action_EVENT_GADGET_STATE_CHANGE_157005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7214111_finish") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -129,7 +129,7 @@ function condition_EVENT_GADGET_CREATE_157006(context, evt)
 	if 157003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -140,7 +140,7 @@ function action_EVENT_GADGET_CREATE_157006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -148,14 +148,14 @@ end
 function condition_EVENT_SELECT_OPTION_157007(context, evt)
 	-- 判断是gadgetid 157003 option_id 39
 	if 157003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 39 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -166,13 +166,13 @@ function action_EVENT_SELECT_OPTION_157007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	-- 删除指定group： 133212157 ；指定config：157003；物件身上指定option：39；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133212157, 157003, 39) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -182,7 +182,7 @@ function condition_EVENT_GROUP_LOAD_157009(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "quest_finish", 133212157) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -193,12 +193,12 @@ function action_EVENT_GROUP_LOAD_157009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133212157, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

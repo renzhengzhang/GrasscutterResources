@@ -1,24 +1,24 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133217172
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 133217172,
 	gadget_thunderThelfID = 172001,
 	pointarray_ID = 321700003,
 	maxPointCount = 11,
-	pointInfo = {1,11} 
+	pointInfo = {1,11}
 }
 
 -- DEFS_MISCS
 function GetNextPath(context)
-	local path = {}
-	local index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
-	local stoppoint = defs.pointInfo[index]
+	path = {}
+	index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
+	stoppoint = defs.pointInfo[index]
 	ScriptLib.PrintLog(context, "stop point : "..stoppoint)
-	local currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
+	currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
 	for i=currentNodeIndex + 1,stoppoint do
 		table.insert(path,i)
 	end
@@ -40,9 +40,9 @@ function MovePlatform(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -89,9 +89,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -103,9 +103,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -163,7 +163,7 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================

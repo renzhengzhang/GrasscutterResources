@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220135002
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
               serve_items = {2004 }
         }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -74,9 +74,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -87,9 +87,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -105,38 +105,38 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_2006(context, evt)
 	-- 判断是gadgetid 2005 option_id 7
 	if 2005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_2006(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=100.056, y=102.578, z=40}，持续时间为3.5秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=100.056, y=102.578, z=40}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=100.056, y=102.578, z=40}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -146,7 +146,7 @@ function condition_EVENT_QUEST_START_2007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "turn") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_QUEST_START_2007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -166,7 +166,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2008(context, evt)
 	if 2003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -177,13 +177,13 @@ function action_EVENT_GADGET_STATE_CHANGE_2008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "wind" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wind", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -192,15 +192,15 @@ function action_EVENT_GROUP_LOAD_2009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "turn") == 1 and ScriptLib.GetGroupVariableValue(context, "wind") == 1 then
 		ScriptLib.CreateGadget(context, {config_id=2002})
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "option") == 1 then
 		ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2005, {7})
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "turn") == 0 then
 		ScriptLib.SetPlatformPointArray(context, 2001, 6, {1}, {route_type=RouteType.OneWay, turn_mode=true, record_mode=RouteRecordMode.Reach, speed_level=0, arrive_range=0})
 	end
-	
+
 	return 0
 end
 
@@ -208,30 +208,30 @@ end
 function action_EVENT_SELECT_OPTION_2010(context, evt)
 	if evt.param1 == 2005 and evt.param2 == 7 and ScriptLib.GetGroupVariableValue(context, "turn") == 0 then
 		ScriptLib.SetGroupVariableValueByGroup(context, "room1", 1, 220135003)
-		
+
 		ScriptLib.SetGroupVariableValue(context, "turn", 1)
-		
+
 		ScriptLib.SetPlatformPointArray(context, 2001, 1, {1}, {route_type=RouteType.OneWay, turn_mode=true, record_mode=RouteRecordMode.Prereach, speed_level=0, arrive_range=0})
-		
+
 		ScriptLib.InitTimeAxis(context, "createwind", {3}, false)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,2005, GadgetState.Default)
 	else
 		if evt.param1 == 2005 and evt.param2 == 7 and ScriptLib.GetGroupVariableValue(context, "turn") == 1 then
 			ScriptLib.SetGroupVariableValueByGroup(context, "room1", 0, 220135003)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "turn", 0)
-			
+
 			ScriptLib.SetPlatformPointArray(context, 2001, 1, {2}, {route_type=RouteType.OneWay, turn_mode=true, record_mode=RouteRecordMode.Prereach, speed_level=0, arrive_range=0})
-			
+
 			ScriptLib.KillEntityByConfigId(context, {group_id=220135002, config_id=2002, entity_type=EntityType.GADGET})
-			
+
 			ScriptLib.AddQuestProgress(context, "4006608")
-			
+
 			ScriptLib.SetGadgetStateByConfigId(context,2005, GadgetState.GearStart)
 		end
 	end
-	
+
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_GROUP_LOAD_2012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "turn") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -252,7 +252,7 @@ function action_EVENT_GROUP_LOAD_2012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -261,7 +261,7 @@ function condition_EVENT_TIME_AXIS_PASS_2013(context, evt)
 	if "createwind" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -272,19 +272,19 @@ function action_EVENT_TIME_AXIS_PASS_2013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2016(context, evt)
 	if evt.param1 ~= 2016 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -299,23 +299,23 @@ function action_EVENT_GROUP_LOAD_2017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "turn") == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context,2005, GadgetState.Default)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "turn") == 0 then
 		ScriptLib.SetGadgetStateByConfigId(context,2005, GadgetState.GearStart)
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2018(context, evt)
 	if evt.param1 ~= 2018 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 

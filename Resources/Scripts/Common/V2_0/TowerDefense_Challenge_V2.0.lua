@@ -4,15 +4,15 @@
 --buff没有用到，删除
 --主控
 --默认建造时间
-local delay=30
-local challenge_programme={
+delay=30
+challenge_programme={
 	[1]=tide_defs_01,
 	[2]=tide_defs_02,
 	[3]=tide_defs_03
 }
 --怪物group的ID
-local monster_group=245001003
-local tide_defs_01 ={
+monster_group=245001003
+tide_defs_01 ={
 	  --自适应配置项，delay
 	  --[1] = {delay = 30,guide_routes={1,2},enter={1001,1003},exit={1004},enter_id={7,8},exit_id={9}},
         [1] = {guide_routes={1,2}},
@@ -21,14 +21,14 @@ local tide_defs_01 ={
         [4] = {guide_routes={1,2}},
         [5] = {guide_routes={1,2}},
 },
-local tide_defs_02 ={
+tide_defs_02 ={
         [1] = {guide_routes={1,2}},
         [2] = {guide_routes={1,2}},
         [3] = {guide_routes={1,2}},
         [4] = {guide_routes={1,2}},
         [5] = {guide_routes={1,2}},
 },
-local tide_defs_03 ={
+tide_defs_03 ={
         [1] = {guide_routes={1,2}},
         [2] = {guide_routes={1,2}},
         [3] = {guide_routes={1,2}},
@@ -36,12 +36,12 @@ local tide_defs_03 ={
         [5] = {guide_routes={1,2}},
 }
 
-local routes_start_point={
+routes_start_point={
         [1]={start_point={x=77.129,y=4.623077,z=-50.57449},points={1,2,3,4,5,6,7,8}},
         [2]={start_point={x=64.96883,y=0.5410852,z=-16.04972},points={1,2,3,4,5,6,7,8,9,10}},
 
 }
-local guide_point_pool={1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1016,1017,1018,1019,1020,1021,1022,1023,1024,1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,1037,1038,1039,1040}
+guide_point_pool={1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1016,1017,1018,1019,1020,1021,1022,1023,1024,1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,1037,1038,1039,1040}
 --]]
 
 
@@ -112,13 +112,13 @@ function action_GM_Action(context, evt)
 
 	ScriptLib.SetGroupVariableValue(context, "wave_ptr", 1)
 	--使用GM来随
-	local planNum=evt.param1
+	planNum=evt.param1
 	ScriptLib.PrintContextLog(context, "## TD2.0_LOG : 随到的方案是："..planNum)
 	ScriptLib.SetGroupVariableValue(context, "planNum", planNum)
 	--请求ban_tag_list
 	ScriptLib.ExecuteGroupLua(context, monster_group, "req_ban_tag", {planNum,defs.group_id})
-	local tag=ScriptLib.GetGroupVariableValue(context, "ban_tag_1")
-	local ban_list={}
+	tag=ScriptLib.GetGroupVariableValue(context, "ban_tag_1")
+	ban_list={}
 	if tag<999 then
 		ban_list[1]=tag
 	end
@@ -135,7 +135,7 @@ function action_GM_Action(context, evt)
 	else
 		ScriptLib.PrintContextLog(context, "## TD2.0_LOG : 成功设置muitistage|rounds="..#challenge_programme[planNum])
 	end
-	
+
 	--迭代项
 	ScriptLib.ExecuteGroupLua(context, monster_group, "set_monster_preview", {defs.group_id,planNum})
 	ScriptLib.PrintContextLog(context, "## TD2.0_LOG : 成功设置怪物预览")
@@ -154,8 +154,8 @@ function action_GM_Action(context, evt)
 end
 
 function action_ALL_AVATAR_DIE(context, evt)
-	local uidList=ScriptLib.GetSceneUidList(context)
-	local count=0
+	uidList=ScriptLib.GetSceneUidList(context)
+	count=0
 	for i=1,#uidList do
 		if ScriptLib.IsPlayerAllAvatarDie(context, uidList[i]) then
 			count=count+1
@@ -179,7 +179,7 @@ function action_PICK_CARD(context, evt)
 --牌子效果
 	--立即回复地脉镇石5点耐久度
 	if evt.param2==77 then
-		local hp=ScriptLib.GetGroupVariableValue(context, "escaped_monsters")
+		hp=ScriptLib.GetGroupVariableValue(context, "escaped_monsters")
 		hp=hp-5
 		if hp<0 then
 			hp=0
@@ -190,19 +190,19 @@ function action_PICK_CARD(context, evt)
 	end
 	--每翻一次，下个战斗阶段敌人的血量提升10%
 	if evt.param2==92 then
-		local pickCount=ScriptLib.GetGroupVariableValue(context, "challenge_93")
+		pickCount=ScriptLib.GetGroupVariableValue(context, "challenge_93")
 		pickCount=pickCount+1
 		ScriptLib.SetGroupVariableValue(context, "challenge_93", pickCount)
 	end
 	--每翻一次，下个战斗阶段敌人的防御提升2%
 	if evt.param2==93 then
-		local pickCount=ScriptLib.GetGroupVariableValue(context, "challenge_94")
+		pickCount=ScriptLib.GetGroupVariableValue(context, "challenge_94")
 		pickCount=pickCount+1
 		ScriptLib.SetGroupVariableValue(context, "challenge_94", pickCount)
 	end
 	--每翻一次，下个战斗阶段怪物逃逸值加1
 	if evt.param2==94 then
-		local pickCount=ScriptLib.GetGroupVariableValue(context, "challenge_95")
+		pickCount=ScriptLib.GetGroupVariableValue(context, "challenge_95")
 		pickCount=pickCount+1
 		ScriptLib.SetGroupVariableValue(context, "challenge_95", pickCount)
 	end
@@ -211,7 +211,7 @@ end
 --设置卡牌效果
 function Set_Cards_Effect(context)
 --重置选中次数，获取上轮的选中次数
-	local pickCount=ScriptLib.GetGroupVariableValue(context, "challenge_93")
+	pickCount=ScriptLib.GetGroupVariableValue(context, "challenge_93")
 	ScriptLib.SetGroupVariableValue(context, "challenge_active_93", pickCount)
 	ScriptLib.SetGroupVariableValue(context, "challenge_93", 0)
 	pickCount=ScriptLib.GetGroupVariableValue(context, "challenge_94")
@@ -242,7 +242,7 @@ end
 function action_group_load(context, evt)
     if defs.testMode==1 then
     	return 0
-    end	
+    end
 	if defs.max_escapable_monsters~= nil then
 		ScriptLib.SetGroupVariableValue(context, "max_escapable_monsters", defs.max_escapable_monsters)
 	end
@@ -250,13 +250,13 @@ function action_group_load(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "wave_ptr", 1)
 	--随一套方案出来
 	math.randomseed(ScriptLib.GetServerTime(context))
-	local planNum=math.random(#challenge_programme)
+	planNum=math.random(#challenge_programme)
 	ScriptLib.PrintContextLog(context, "## TD2.0_LOG : 随到的方案是："..planNum)
 	ScriptLib.SetGroupVariableValue(context, "planNum", planNum)
 	--请求ban_tag_list
 	ScriptLib.ExecuteGroupLua(context, monster_group, "req_ban_tag", {planNum,defs.group_id})
-	local tag=ScriptLib.GetGroupVariableValue(context, "ban_tag_1")
-	local ban_list={}
+	tag=ScriptLib.GetGroupVariableValue(context, "ban_tag_1")
+	ban_list={}
 	if tag<999 then
 		ban_list[1]=tag
 	end
@@ -273,7 +273,7 @@ function action_group_load(context, evt)
 	else
 		ScriptLib.PrintContextLog(context, "## TD2.0_LOG : 成功设置muitistage|rounds="..#challenge_programme[planNum])
 	end
-	
+
 	--迭代项
 	ScriptLib.ExecuteGroupLua(context, monster_group, "set_monster_preview", {defs.group_id,planNum})
 	ScriptLib.PrintContextLog(context, "## TD2.0_LOG : 成功设置怪物预览")
@@ -303,14 +303,14 @@ function action_add_route_points(context, evt)
 end
 
 function add_route_guide_points(context)
-	local curPlanNumber=ScriptLib.GetGroupVariableValue(context, "planNum")
-	local curwave=ScriptLib.GetGroupVariableValue(context, "wave_ptr")
+	curPlanNumber=ScriptLib.GetGroupVariableValue(context, "planNum")
+	curwave=ScriptLib.GetGroupVariableValue(context, "wave_ptr")
 	if challenge_programme[curPlanNumber][curwave].guide_routes ==nil then
 		ScriptLib.PrintContextLog(context, "## TD_LOG : Guide Routes Is Nil")
 		return 0
 	end
 	for i=1,#challenge_programme[curPlanNumber][curwave].guide_routes do
-		local idx=ScriptLib.GetGroupVariableValue(context, "route_guide_points_index")
+		idx=ScriptLib.GetGroupVariableValue(context, "route_guide_points_index")
 		if -2==ScriptLib.CreateGadgetByConfigIdByPos(context, guide_point_pool[idx], routes_start_point[challenge_programme[curPlanNumber][curwave].guide_routes[i]].start_point, { x = 0.000, y = 0.000, z = 0.000 }) then
 			ScriptLib.PrintContextLog(context, "## TD_LOG : Guide Points Not Enough")
 			return 0
@@ -340,7 +340,7 @@ function action_REACH_POINT(context,evt)
 end
 
 function del_monster_number(context, prev_context, param1, param2, param3)
-	local new_num=ScriptLib.GetGroupVariableValue(context, "left_monsters")
+	new_num=ScriptLib.GetGroupVariableValue(context, "left_monsters")
 	if new_num==0 then
 		return 0
 	end
@@ -357,9 +357,9 @@ end
 
 --某group结束,进下一阶段
 function tide_done(context, prev_context, param1, param2, param3)
-	local curPlanNumber=ScriptLib.GetGroupVariableValue(context, "planNum")
+	curPlanNumber=ScriptLib.GetGroupVariableValue(context, "planNum")
 	ScriptLib.EndSceneMultiStagePlayStage(context, 999,"battle"..ScriptLib.GetGroupVariableValue(context, "wave_ptr"), true)
-	local wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
+	wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
 	wave=wave+1
 	ScriptLib.SetGroupVariableValue(context, "wave_ptr", wave)
 	ScriptLib.PrintContextLog(context, "## wave = "..wave)
@@ -397,8 +397,8 @@ function monster_escaped(context, prev_context, param1, param2, param3)
 	if ScriptLib.GetGroupVariableValue(context, "GM_Ignore_Monster_Escape") ~=0 then
 		return 0
 	end
-	local max_escapable_monsters=ScriptLib.GetGroupVariableValue(context, "max_escapable_monsters")
-	local escaped_monsters=ScriptLib.GetGroupVariableValue(context, "escaped_monsters")
+	max_escapable_monsters=ScriptLib.GetGroupVariableValue(context, "max_escapable_monsters")
+	escaped_monsters=ScriptLib.GetGroupVariableValue(context, "escaped_monsters")
 	if param1==1 then
 		escaped_monsters=escaped_monsters+1
 		ScriptLib.SetSceneMultiStagePlayValue(context, 999, "escaped_monsters",escaped_monsters, true)

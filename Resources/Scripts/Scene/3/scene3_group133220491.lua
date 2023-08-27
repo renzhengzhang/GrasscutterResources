@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133220491
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 133220491,
 	gadget_1 = 491001,
 	rotation_1 = 0,
@@ -24,9 +24,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -80,9 +80,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -93,9 +93,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -120,20 +120,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_491007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"successed"为1
 	if ScriptLib.GetGroupVariableValue(context, "successed") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -141,31 +141,31 @@ end
 function action_EVENT_VARIABLE_CHANGE_491007(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220491, 2)
-	
+
 	-- 针对当前group内变量名为 "waterdown" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "waterdown", 1, 133220100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "waterdown" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "waterdown", 1, 133220374) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "waterdown" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "waterdown", 1, 133220121) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "waterdown" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "waterdown", 1, 133220486) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -175,7 +175,7 @@ function condition_EVENT_GROUP_LOAD_491017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "successed") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -183,25 +183,25 @@ end
 function action_EVENT_GROUP_LOAD_491017(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220491, 2)
-	
+
 	-- 将本组内变量名为 "waterdown" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "waterdown", 1, 133220374) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "waterdown" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "waterdown", 1, 133220121) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "waterdown" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "waterdown", 1, 133220486) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

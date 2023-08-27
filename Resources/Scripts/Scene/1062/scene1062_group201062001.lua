@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201062001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -100,9 +100,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -110,7 +110,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1004(context, evt)
 	if 1013 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -120,14 +120,14 @@ function action_EVENT_ANY_MONSTER_DIE_1004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062001, 2)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201062012, 2)
-	
+
 	return 0
 end
 
@@ -137,12 +137,12 @@ function condition_EVENT_ANY_MONSTER_DIE_1006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "key") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -153,16 +153,16 @@ function action_EVENT_ANY_MONSTER_DIE_1006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062001, 3)
-	
+
 	-- 调用提示id为 10620101 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 10620101) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -172,20 +172,20 @@ function action_EVENT_CHALLENGE_SUCCESS_1009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062010, 2)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062002, 2)
-	
+
 	-- 将本组内变量名为 "trap" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "trap", 1, 201062007) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -196,10 +196,10 @@ function action_EVENT_CHALLENGE_FAIL_1010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062012, 2)
-	
+
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_1011(context, evt)
 	if 1005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -219,9 +219,9 @@ function action_EVENT_ANY_MONSTER_LIVE_1011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201062010, 1)
-	
+
 	return 0
 end

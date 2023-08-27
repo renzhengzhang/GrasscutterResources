@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133302106
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -98,7 +98,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106001(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302106, 106009) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -109,7 +109,7 @@ function action_EVENT_GADGET_STATE_CHANGE_106001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -118,7 +118,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106002(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302106, 106006) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -129,7 +129,7 @@ function action_EVENT_GADGET_STATE_CHANGE_106002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106003(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302106, 106007) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -149,7 +149,7 @@ function action_EVENT_GADGET_STATE_CHANGE_106003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -158,7 +158,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106004(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302106, 106008) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -169,7 +169,7 @@ function action_EVENT_GADGET_STATE_CHANGE_106004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -178,7 +178,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106012(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302106, 106006) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -189,7 +189,7 @@ function action_EVENT_GADGET_STATE_CHANGE_106012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -198,7 +198,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106013(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302106, 106007) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -209,7 +209,7 @@ function action_EVENT_GADGET_STATE_CHANGE_106013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -218,7 +218,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_106014(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302106, 106008) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -229,6 +229,6 @@ function action_EVENT_GADGET_STATE_CHANGE_106014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133209067
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -78,9 +78,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -88,7 +88,7 @@ function condition_EVENT_GADGET_CREATE_67003(context, evt)
 	if 67002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -99,7 +99,7 @@ function action_EVENT_GADGET_CREATE_67003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -107,14 +107,14 @@ end
 function condition_EVENT_SELECT_OPTION_67004(context, evt)
 	-- 判断是gadgetid 67002 option_id 92
 	if 67002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 92 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -125,18 +125,18 @@ function action_EVENT_SELECT_OPTION_67004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 133209067 ；指定config：67002；物件身上指定option：92；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209067, 67002, 92) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133209067, EntityType.GADGET, 67002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end

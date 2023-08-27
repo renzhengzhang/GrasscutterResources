@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001587
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -77,9 +77,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -90,9 +90,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -135,9 +135,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -145,7 +145,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_587011(context, evt)
 	if 587035 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -153,7 +153,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_587011(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001587, 4)
-	
+
 	return 0
 end
 
@@ -162,7 +162,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_587039(context, evt)
 	if 587006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -170,6 +170,6 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_587039(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001587, 3)
-	
+
 	return 0
 end

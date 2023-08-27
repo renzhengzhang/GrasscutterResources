@@ -6,17 +6,17 @@
 ||	Owner         ||	xudong.sun
 ||	Description   ||	2.8回声海螺，任务版，不播放reminder，只推进任务
 ||	LogName       ||    ## EchoConch_LOG
-||	Protection    ||	
+||	Protection    ||
 =====================================================================================================================
-local questID = 0
-local shadowConfigIDList = {}
+questID = 0
+shadowConfigIDList = {}
 
-local remainMode = 1
+remainMode = 1
 
 =======================================================================================]]
 
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Triger_Interact"] = { config_id = 80000001, name = "Triger_Interact", event= EventType.EVENT_ECHO_SHELL_INTERACT, source = "", condition = "", action = "action_trigger_interact", trigger_count = 0},
 	}

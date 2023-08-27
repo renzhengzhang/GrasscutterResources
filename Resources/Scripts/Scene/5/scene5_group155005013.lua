@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155005013
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155005013,
 	gadget_wall_1 = 13007,
 	gadget_wall_2 = 13009,
@@ -18,17 +18,17 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local EnvControlGadgets = {13012,13013,}
-local DayAppearGadgets = {}
-local NightAppearGadgets = {}
+EnvControlGadgets = {13012,13013,}
+DayAppearGadgets = {}
+NightAppearGadgets = {}
 
 
 MaxSize = 12
-ControllerWallMap = 
+ControllerWallMap =
 {
 	{defs.gadget_controller_1,
 		{
-			{defs.gadget_wall_1,{6,11}}, 
+			{defs.gadget_wall_1,{6,11}},
 		}
 	},
 	{defs.gadget_controller_2,
@@ -41,19 +41,19 @@ ControllerWallMap =
 
 
 --手动填写
-StartWallMap = 
+StartWallMap =
 {
 	{defs.gadget_wall_1,6},
 	{defs.gadget_wall_2,9},
 
 }
 --手动填写
-StartBlockerMap = 
+StartBlockerMap =
 {
 	--gadgetid, 阻挡的pointArrayIndex, gadgetState
 }
 --目标解法
-TargetSolution = 
+TargetSolution =
 {
 	11,10
 }
@@ -64,13 +64,13 @@ TargetSolution =
 	3=宝箱开启
 ]]
 
-local gameplayStateFuncitons = 
+gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
 	end,
 	["1"] = function(context)
-		
+
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 		DayNight_Gadget_Unlock(context,13012)
 		DayNight_Gadget_Unlock(context,13013)
@@ -102,7 +102,7 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -115,9 +115,9 @@ function MovePlatform(context,platform_id,pointarray_id,routelist,routemode,turn
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -184,9 +184,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -197,9 +197,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -224,25 +224,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13001(context, evt)
 	if evt.param1 ~= 13001 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	-- 判断变量"gameplayState"为1
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -253,14 +253,14 @@ function action_EVENT_ENTER_REGION_13001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_13004(context, evt)
 	UpdateGamePlayState(context)
-	
+
 		return 0
 end
 
@@ -270,7 +270,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13005(context, evt)
 	if 13003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -281,17 +281,17 @@ function action_EVENT_GADGET_STATE_CHANGE_13005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_13006(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if evt.param1 == evt.param2 then return -1 end
-	
-			
+
+
 			UpdateGamePlayState(context)
 	return 0
 end
@@ -301,11 +301,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_13008(context, evt)
 	if 222 ~= ScriptLib.GetGadgetStateByConfigId(context, 155005013, 13012) then
 		return false
 	end
-	
-	if 0 ~= ScriptLib.GetGroupVariableValue(context, "isCsPlayed_01") then 
+
+	if 0 ~= ScriptLib.GetGroupVariableValue(context, "isCsPlayed_01") then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -315,14 +315,14 @@ function action_EVENT_GADGET_STATE_CHANGE_13008(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 57, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "isCsPlayed_01" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isCsPlayed_01", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -331,11 +331,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_13010(context, evt)
 	if 222 ~= ScriptLib.GetGadgetStateByConfigId(context, 155005013, 13013) then
 		return false
 	end
-	
-	if 0 ~= ScriptLib.GetGroupVariableValue(context, "isCsPlayed_02") then 
+
+	if 0 ~= ScriptLib.GetGroupVariableValue(context, "isCsPlayed_02") then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -345,26 +345,26 @@ function action_EVENT_GADGET_STATE_CHANGE_13010(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 56, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "isCsPlayed_02" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isCsPlayed_02", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_13011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"has_succeeded"为1
 	if ScriptLib.GetGroupVariableValue(context, "has_succeeded") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -375,7 +375,7 @@ function action_EVENT_VARIABLE_CHANGE_13011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -386,7 +386,7 @@ function action_EVENT_QUEST_START_13014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -397,7 +397,7 @@ function action_EVENT_QUEST_START_13015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -408,7 +408,7 @@ function action_EVENT_QUEST_START_13016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -419,7 +419,7 @@ function action_EVENT_QUEST_START_13017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

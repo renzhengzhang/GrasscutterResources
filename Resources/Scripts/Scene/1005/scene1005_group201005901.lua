@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201005901
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 2,
 	gadget_id_2 = 3
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -75,20 +75,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 41503) == QuestState.UNFINISHED 
-	or ScriptLib.GetQuestState(context, evt.target_eid, 37503) == QuestState.UNFINISHED ) 
+	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 41503) == QuestState.UNFINISHED
+	or ScriptLib.GetQuestState(context, evt.target_eid, 37503) == QuestState.UNFINISHED )
 	and evt.param1 == defs.gadget_id_1 then
 		return true
 	end
 	return false
-	
+
 end
 
 -- 触发条件

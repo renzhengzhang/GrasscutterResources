@@ -1,14 +1,14 @@
 --ServerUploadTool Save to [/root/env/data/lua/common/V2_5]
 --[[
 =====================================================================================================================
-||	Filename 	  ||	RecircleChallenge  
+||	Filename 	  ||	RecircleChallenge
 ||	RelVersion    ||	2.5
 ||	Owner         ||	xudong.sun
 ||	Description   ||	2.5版本，黑色剑气循环挑战
 ||	LogName       ||    ## RC_LOG
 ||	Protection    ||	挑战成功、失败，group卸载时清空怪物；所有玩家出圈时，设置挑战失败
 =====================================================================================================================
--- local defs = {
+-- defs = {
 --         --groupID
 --         groupID = 177006001,
 
@@ -35,7 +35,7 @@
 
 
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Interact_Dwon"] = { config_id = 80000002, name = "Interact_Dwon", event= EventType.EVENT_MICHIAE_INTERACT, source = "", condition = "", action = "action_InteractDwon", trigger_count = 0 },
 		["Challenge_Success"] = { config_id = 80000003, name = "Challenge_Success", event= EventType.EVENT_CHALLENGE_SUCCESS, source = "233", condition = "", action = "action_ChallengeSuccess", trigger_count = 0 },
@@ -46,10 +46,10 @@ local extrTriggers = {
 	}
 }
 
---local challengeID = 0
---local groupID = 1
---local switchGadgetID = 1
-local challengeRange = 50
+--challengeID = 0
+--groupID = 1
+--switchGadgetID = 1
+challengeRange = 50
 
 function LF_GetPointDistance(x1,y1,x2,y2)
 	return math.sqrt(math.pow((y2-y1),2)+math.pow((x2-x1),2))
@@ -58,7 +58,7 @@ end
 function action_LeaveRegion( context, evt)
 
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR })~=0 then
-		return 0 
+		return 0
 	end
 
 	ScriptLib.KillMonsterTide(context, defs.groupID, 1)
@@ -72,7 +72,7 @@ function action_GroupRefresh( context, evt )
 	ScriptLib.PrintContextLog(context,"RC_LOG: Group Refresh")
 
 	ScriptLib.SetGroupTempValue(context, "ChallengeMode", 0, {})
-	
+
 	return 0
 end
 
@@ -81,15 +81,15 @@ function action_GroupUnload( context, evt)
 
 	ScriptLib.SetGroupTempValue(context, "ChallengeMode", 0, {})
 
-	
+
 	if ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs.challenge_gadget) == 202 then
 		return 0
 	end
-	
+
 	ScriptLib.SetGadgetStateByConfigId(context, defs.challenge_gadget, 0)
 
 	ScriptLib.KillMonsterTide(context, defs.groupID, 1)
-	
+
 	return 0
 end
 
@@ -98,7 +98,7 @@ function action_InteractDwon( context, evt )
 	ScriptLib.PrintContextLog(context,"RC_LOG: ChallengeMode = "..ScriptLib.GetGroupTempValue(context, "ChallengeMode", {}))
 
 	if evt.param1 ~= 2 then
-		return 0 
+		return 0
 	end
 
 
@@ -139,7 +139,7 @@ function action_ChallengeFail( context, evt )
 	ScriptLib.SetGadgetStateByConfigId(context, defs.challenge_gadget, 0)
 
 	ScriptLib.KillMonsterTide(context, defs.groupID, 1)
-	
+
 	return 0
 end
 

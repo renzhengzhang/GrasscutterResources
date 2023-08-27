@@ -27,7 +27,7 @@ COLLECTION STATE 1 3 1
 --]]
 -- 数据结构
 --[[
-local ACPlay = {
+ACPlay = {
     MailBoxCid = 87001, 邮箱cid
     OptionCid = 87002, 操作台cid
     PageLevel02 = 2, 可领取邮件为2以上时，邮箱以202显示
@@ -40,21 +40,21 @@ local ACPlay = {
 }
 --]]
 
-local ACDict = {
+ACDict = {
     [0] = { level=0, suite = 1, boxState = 0 },
     [1] = { level=1, suite = 2, boxState = 201 },
     [2] = { level=2, suite = 3, boxState = 202 },
     [3] = { level=3, suite = 4, boxState = 203 },
 }
 
-local AC_Trigger = {
+AC_Trigger = {
     { keyWord = "CheckMail", event = EventType.EVENT_GROUP_LOAD, source = "", trigger_count = 0},
     { keyWord = "ReceiveMail", event = EventType.EVENT_SELECT_OPTION, source = "", trigger_count = 0},
     --{ keyWord = "MailCallBack", event = EventType.EVENT_ARANARA_COLLECTION_COLLECTED, source = "", trigger_count = 0},
 }
 
 function LF_Initialize_Level()
-    local startConfigID = 40020001
+    startConfigID = 40020001
     for _,v in pairs(AC_Trigger) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -70,9 +70,9 @@ function LF_Initialize_Level()
 
     LF_InsertTriggers(AC_Trigger,{})
 
-    local var = { config_id= 40020101, name = "ReceiveMailCount", value = 0, no_refresh = true }
+    var = { config_id= 40020101, name = "ReceiveMailCount", value = 0, no_refresh = true }
     variables[var.name] = var
-    local var = { config_id= 40020102, name = "ReminderProgress", value = 0, no_refresh = true }
+    var = { config_id= 40020102, name = "ReminderProgress", value = 0, no_refresh = true }
     variables[var.name] = var
 
     return 0
@@ -86,7 +86,7 @@ end
 function action_CheckMail(context,evt)
     ScriptLib.PrintContextLog(context, "## TD_AranaraCollection: ## == INITIALIZE 1 == ")
     -- 拿页片数据(state => 0 不可收集 1 可收集 2 已收集 3 已完成
-    local curCollectablePageNum = ScriptLib.GetAranaraCollectableCountByTypeAndState(context,1,1)
+    curCollectablePageNum = ScriptLib.GetAranaraCollectableCountByTypeAndState(context,1,1)
     ScriptLib.PrintContextLog(context, "## TD_AranaraCollection: action_CheckMail curCollectablePageNum：" .. curCollectablePageNum)
     if -1 == curCollectablePageNum then
         ScriptLib.PrintContextLog(context, "## TD_AranaraCollection action_CheckMail")
@@ -129,13 +129,13 @@ function LF_ChangeLevel(context,level)
         return 0
     end
 
-    local levelInfo = ACDict[level]
+    levelInfo = ACDict[level]
 
     --周围布设已相同，刷了Group也没啥用（考虑后续可能还要迭代，暂时保留)
     ScriptLib.RefreshGroup(context, { group_id = base_info.group_id, suite = levelInfo.suite })
     ScriptLib.SetGadgetStateByConfigId(context, ACPlay.MailBoxCid, levelInfo.boxState)
 
-    local msg = "## TD_AranaraCollection : LF_ChangeLevel"
+    msg = "## TD_AranaraCollection : LF_ChangeLevel"
     msg = msg .. "|gotoSuite = " .. levelInfo.suite
     msg = msg .. "|setState = " .. levelInfo.boxState
 
@@ -155,7 +155,7 @@ end
 
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -196,7 +196,7 @@ end
 
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    local s = "{"
+    s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","

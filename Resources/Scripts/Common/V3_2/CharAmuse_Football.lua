@@ -5,12 +5,12 @@
 ||	owner: 		weiwei.sun
 ||	description: 	3.2奇趣秘园 局内逻辑 踢足球
 ||	LogName:	## [CharAmuse_FootBall]
-||	Protection:	
+||	Protection:
 =======================================]]
 --[[
 
 --踢球玩法配置
-local defs = {
+defs = {
 
 	-----全玩法通用配置-----
 
@@ -34,7 +34,7 @@ local defs = {
     -- 如果是琴的关卡，用这套
     Jean = {
         -- 球门和空气墙所在的suite
-        goal_suite =10, 
+        goal_suite =10,
         -- 刷球和空气墙的规则
         setting = {
             -- 单人玩家
@@ -60,14 +60,14 @@ local defs = {
                 {ball_suite = {1,2}, wall_suite = {}},
                 {ball_suite = {3,4}, wall_suite = {2}},
                 {ball_suite = {3,4}, wall_suite = {4}},
-            },   
-       
-        }, 
+            },
+
+        },
     },
 
     -- 如果是可莉&烟绯的关卡，用这套
     Klee = {
-        goal_suite =2, 
+        goal_suite =2,
         setting = {
             [1] = {
                 {ball_suite = {1,2}, wall_suite = {}},
@@ -91,23 +91,23 @@ local defs = {
                 {ball_suite = {1,2}, wall_suite = {}},
                 {ball_suite = {3,4}, wall_suite = {2}},
                 {ball_suite = {3,4}, wall_suite = {4}},
-            },   
-       
-        }, 
+            },
+
+        },
     },
 }
 
 ]]
-local cfg = {
+cfg = {
 	main_group = 251008007,
 	--
-	gallery_match = 
+	gallery_match =
 	{
 		--[1000] = defs.Jean,
 		[28009] = defs.Klee,
 		[28010] = defs.Jean
 	},
-	monter_score = 
+	monter_score =
 	{
 		[20011204] = 1,
 		[20011305] = 5,
@@ -116,7 +116,7 @@ local cfg = {
 	}
 }
 
-local extraTriggers = {
+extraTriggers = {
 	{ config_id = 8000002, name = "Enter_Play_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_Enter_Play_Region", trigger_count = 1, forbid_guest = false},
 	{ config_id = 8000003, name = "TimeAxis_StopGallery", event = EventType.EVENT_TIME_AXIS_PASS, source = "StopGallery", condition = "", action = "action_TimeAxis_StopGallery", trigger_count = 0 },
 	{ config_id = 8000004, name = "Gallery_Stop", event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_Gallery_Stop", trigger_count = 0 },
@@ -144,10 +144,10 @@ function EX_StartGallery(context, prev_context, gallery_id, is_last_level)
 	if nil ~= defs.play_suites then
 		for k,v in pairs(defs.play_suites) do
 			ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v)
-		end	
+		end
 	end
 
-	local uid_list = ScriptLib.GetSceneUidList(context)
+	uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})
 
 	ScriptLib.SetGroupTempValue(context, "is_last_level", is_last_level, {})
@@ -186,7 +186,7 @@ function action_AirWallVariable_Change(context, evt)
 	elseif 0 == evt.param1 and 1 == evt.param2 then
 		for i,v in ipairs(defs.air_wall) do
 			ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, v)
-		end	
+		end
 	end
 	return 0
 end
@@ -197,29 +197,29 @@ function action_Gallery_Stop(context, evt)
 	if nil ~= defs.play_suites then
 		for k,v in pairs(defs.play_suites) do
 			ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, v)
-		end	
+		end
 	end
 
 	LF_ClearRound(context)
 	ScriptLib.EndAllTimeAxis(context)
 
-	if 3 ~= evt.param3 then		
-		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+	if 3 ~= evt.param3 then
+		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		--ScriptLib.InitTimeAxis(context, "StopGallery_Fail", { 3 } , false) 9.21修改 失败不要延时结束
 		ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {1, base_info.group_id})
 	else
-		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
+		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
 		if is_last_level then
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
 			ScriptLib.InitTimeAxis(context, "StopGallery", { 3 } , false)
-		end	
+		end
 	end
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] Gallery stoped. reason@".. evt.param3.." --------------")
 	return 0
 end
 function action_Enter_Play_Region(context, evt)
-	local uid_list = ScriptLib.GetSceneUidList(context)
+	uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] Enter_Play_Region. player_count@"..#uid_list)--这里只是打一下log，LF_AddGoalSuite不涉及人数
 	LF_AddGoalSuite(context)
 	return 0
@@ -227,13 +227,13 @@ end
 
 ---------------------------------------------------------------------------------------------------------------
 function LF_Start_Play(context)
-	
+
 	ScriptLib.SetGroupTempValue(context, "round", 0, {})
 
 	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
 
-	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
-	local target = 0
+	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	target = 0
 	if player_count > 1 then
 		target = ScriptLib.GetCharAmusementGalleryTarget(context, gallery_id, true)
 	else
@@ -268,7 +268,7 @@ function LF_AddGoalSuite(context)
 	ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, defs.Klee.goal_suite)
 	ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, defs.Jean.goal_suite)
 	--添加新的
-	local char_type = LF_GetFootBallCharType(context)
+	char_type = LF_GetFootBallCharType(context)
 	ScriptLib.AddExtraGroupSuite(context, base_info.group_id, char_type.goal_suite)
 	return 0
 end
@@ -296,9 +296,9 @@ function LF_StartRound(context)
 	ScriptLib.SetGroupTempValue(context, "ball_counter", 0, {})
 	ScriptLib.SetGroupTempValue(context, "score_gain", 0, {})
 
-	local char_type = LF_GetFootBallCharType(context)
-	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
-	local setting = char_type.setting[player_count]
+	char_type = LF_GetFootBallCharType(context)
+	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	setting = char_type.setting[player_count]
 
 	if nil == setting then
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] LF_StartRound. Nil setting. player_count@"..player_count)
@@ -307,41 +307,41 @@ function LF_StartRound(context)
 
 	--round++
 	ScriptLib.ChangeGroupTempValue(context, "round", 1, {})
-	local round = ScriptLib.GetGroupTempValue(context, "round", {})
+	round = ScriptLib.GetGroupTempValue(context, "round", {})
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] LF_StartRound. New round@"..round)
 
 	--如果已经到了LD配置尽头，则循环最后一波
 	if round > #char_type.setting[player_count] then
 		round = #char_type.setting[player_count]
-		ScriptLib.SetGroupTempValue(context, "round", round, {}) 
+		ScriptLib.SetGroupTempValue(context, "round", round, {})
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] LF_StartRound. All round finished. Set to final.")
 	end
 
 	--随机球
-	local ball_suite = setting[round].ball_suite
+	ball_suite = setting[round].ball_suite
 	if nil ~= ball_suite and 0 < #ball_suite then
 		math.randomseed(ScriptLib.GetServerTime(context))
-		local rand_index = math.random(#ball_suite)
+		rand_index = math.random(#ball_suite)
 		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, ball_suite[rand_index])
 		ScriptLib.SetGroupTempValue(context, "ball_num", #suites[ball_suite[rand_index]].monsters, {})
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] LF_AddSuiteByFootBallRule. round@"..round.." ball_suite@"..ball_suite[rand_index].." num@"..#suites[ball_suite[rand_index]].monsters)
 	end
 
 	--随机墙
-	local wall_suite = setting[round].wall_suite
+	wall_suite = setting[round].wall_suite
 	if nil ~= wall_suite and 0 < #wall_suite then
 		math.randomseed(ScriptLib.GetServerTime(context) + 99)
-		local rand_index = math.random(#wall_suite)
+		rand_index = math.random(#wall_suite)
 		ScriptLib.SetGroupTempValue(context, "wall_suite_index", rand_index, {})
 		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, wall_suite[rand_index])
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] LF_AddSuiteByFootBallRule. round@"..round.." wall_suite@"..wall_suite[rand_index])
 	end
 
 	--随机buff
-	local stamina_suite = setting[round].stamina_suite
+	stamina_suite = setting[round].stamina_suite
 	if nil ~= stamina_suite and 0 < #stamina_suite then
 		math.randomseed(ScriptLib.GetServerTime(context) + 98)
-		local rand_index = math.random(#stamina_suite)
+		rand_index = math.random(#stamina_suite)
 		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, stamina_suite[rand_index])
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] LF_AddSuiteByFootBallRule. round@"..round.." stamina_suite@"..stamina_suite[rand_index])
 	end
@@ -350,38 +350,38 @@ function LF_StartRound(context)
 end
 
 function LF_ClearRound(context)
-	
-	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
-	local char_type = LF_GetFootBallCharType(context)
-	local setting = char_type.setting[player_count]
-	local round = ScriptLib.GetGroupTempValue(context, "round", {})
+
+	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	char_type = LF_GetFootBallCharType(context)
+	setting = char_type.setting[player_count]
+	round = ScriptLib.GetGroupTempValue(context, "round", {})
 	--移除墙
-	local wall_suite_index = ScriptLib.GetGroupTempValue(context, "wall_suite_index", {})
-	local wall_suites = setting[round].wall_suite
-	local wall_suite = wall_suites[wall_suite_index]
+	wall_suite_index = ScriptLib.GetGroupTempValue(context, "wall_suite_index", {})
+	wall_suites = setting[round].wall_suite
+	wall_suite = wall_suites[wall_suite_index]
 	if nil ~= wall_suite and nil ~= suites[wall_suite] then
 		for i,v in pairs(suites[wall_suite].gadgets) do
 			ScriptLib.KillEntityByConfigId(context, { config_id = v })--kill播放onKill动画
 		end
 	end
 	--移除其他
-	for i = 2, #suites do 
+	for i = 2, #suites do
 
 		if defs.Jean.goal_suite ~= i and defs.Klee.goal_suite ~= i and wall_suite ~= i then
 			ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, i)
 		end
 	end
 	--埋点
-	local score_gain = ScriptLib.GetGroupTempValue(context, "score_gain", {})
-    ScriptLib.MarkGroupLuaAction(context, "CharAmuse_Football", ScriptLib.GetDungeonTransaction(context), {["wave_num"] = round, ["score_gain"] = score_gain}) 
+	score_gain = ScriptLib.GetGroupTempValue(context, "score_gain", {})
+    ScriptLib.MarkGroupLuaAction(context, "CharAmuse_Football", ScriptLib.GetDungeonTransaction(context), {["wave_num"] = round, ["score_gain"] = score_gain})
 	return 0
 end
 
 function LF_GetFootBallCharType(context)
 
-	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
-	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
-	local char_type = {}
+	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	char_type = {}
 
 	if -1 == gallery_id or nil == cfg.gallery_match[gallery_id] then
 		char_type = defs.Jean
@@ -405,7 +405,7 @@ function action_TimeAxis_NewRound(context, evt)
 end
 
 function action_MovingWall_ReachPoint(context, evt)
-	local gadget_id = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
+	gadget_id = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
 	if 70320021 == gadget_id then
 		if 201 == ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 			ScriptLib.SetGadgetStateByConfigId(context, evt.param1, 0)
@@ -417,7 +417,7 @@ function action_MovingWall_ReachPoint(context, evt)
 end
 
 --[[function SLC_CharAmuse_KillSlime(context)
-	local config_id = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id})	
+	config_id = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id})
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] SLC_CharAmuse_KillSlime. source_entity_id@".. context.source_entity_id.. " target_entity_id@".. context.target_entity_id.." GetMonsterConfigId@"..config_id)
 	if nil == cfg.monter_score[monsters[config_id].monster_id] then
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] SLC_CharAmuse_KillSlime. Got unexpected config_id@")
@@ -437,27 +437,27 @@ function LF_HandleMonsterDie(context, config_id)
 		return 0
 	end
 
-	local score = cfg.monter_score[monsters[config_id].monster_id]
+	score = cfg.monter_score[monsters[config_id].monster_id]
 
 	ScriptLib.ChangeGroupTempValue(context, "cur_score", -1*score, {})
 
 	ScriptLib.ChangeGroupTempValue(context, "score_gain", score, {})
 
-	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 	ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["add_score"] = score} )
 	ScriptLib.CharAmusementUpdateScore(context, cfg.main_group, 1, score)--给MultStage更新分数 服务器侧埋点用
-	
+
 	--挑战完成
 	if 0 >= ScriptLib.GetGroupTempValue(context, "cur_score", {}) then
-		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["is_last_level"] = is_last_level, ["is_finish"] = true, ["is_success"] = true } )
 		ScriptLib.StopGallery(context, gallery_id, false)
 		return 0
 	end
 
 	ScriptLib.ChangeGroupTempValue(context, "ball_counter", 1, {})
-	local ball_counter = ScriptLib.GetGroupTempValue(context, "ball_counter", {})
-	local ball_num = ScriptLib.GetGroupTempValue(context, "ball_num", {})
+	ball_counter = ScriptLib.GetGroupTempValue(context, "ball_counter", {})
+	ball_num = ScriptLib.GetGroupTempValue(context, "ball_num", {})
 	if ball_counter >= ball_num then
 		ScriptLib.EndTimeAxis(context, "FootBallClear")
 		if nil ~= defs.refresh_delay then

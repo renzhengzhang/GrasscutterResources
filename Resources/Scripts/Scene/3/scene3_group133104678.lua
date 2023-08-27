@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133104678
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -80,9 +80,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -91,7 +91,7 @@ function condition_EVENT_ANY_MONSTER_DIE_678001(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -102,19 +102,19 @@ function action_EVENT_ANY_MONSTER_DIE_678001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133104678, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "finished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -124,7 +124,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_678002(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 50 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -135,13 +135,13 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_678002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 400005 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -151,12 +151,12 @@ function condition_EVENT_GROUP_LOAD_678003(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "wave1", 133104622) ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"wave2"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "wave2", 133104622) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -164,9 +164,9 @@ end
 function action_EVENT_GROUP_LOAD_678003(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104678, 2)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104678, 2)
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 166001472
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -113,20 +113,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_472003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"door"为1
 	if ScriptLib.GetGroupVariableValue(context, "door") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -134,19 +134,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_472003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001472, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_472005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"chest"为1
 	if ScriptLib.GetGroupVariableValue(context, "chest") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_VARIABLE_CHANGE_472005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -166,16 +166,16 @@ function condition_EVENT_GADGET_STATE_CHANGE_472008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 166001472, 472006) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 166001472, 472007) then
 		return false
 	end
-	
+
 	-- 判断变量"chest"为1
 	if ScriptLib.GetGroupVariableValue(context, "chest") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -185,8 +185,8 @@ function action_EVENT_GADGET_STATE_CHANGE_472008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 472002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_472009(context, evt)
 	if 472002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_GADGET_STATE_CHANGE_472009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -215,7 +215,7 @@ function condition_EVENT_GADGET_CREATE_472011(context, evt)
 	if 472010 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -226,7 +226,7 @@ function action_EVENT_GADGET_CREATE_472011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -234,14 +234,14 @@ end
 function condition_EVENT_SELECT_OPTION_472012(context, evt)
 	-- 判断是gadgetid 472010 option_id 1
 	if 472010 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -252,47 +252,47 @@ function action_EVENT_SELECT_OPTION_472012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 472002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 472002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 472001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 472001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 472010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001472, 3)
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 472004, 600100090) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_472013(context, evt)
 	if evt.param1 ~= 472013 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -303,13 +303,13 @@ function action_EVENT_ENTER_REGION_472013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 472004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -319,33 +319,33 @@ function action_EVENT_PLATFORM_REACH_POINT_472016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 472014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 停止移动平台
 	if 0 ~= ScriptLib.StopPlatform(context, 472004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 472004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 创建id为472015的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 472015 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "chest" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "chest", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -356,7 +356,7 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_472017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -366,7 +366,7 @@ function condition_EVENT_GROUP_LOAD_472018(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "chest") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -377,9 +377,9 @@ function action_EVENT_GROUP_LOAD_472018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001472, 3)
-	
+
 	return 0
 end

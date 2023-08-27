@@ -3,13 +3,13 @@
 --||   Filename      ||    ResidualBright
 --||   RelVersion    ||    V3_4
 --||   Owner         ||    chao-jin
---||   Description   ||    
+--||   Description   ||
 --||   LogName       ||    ##[ResidualBright]
---||   Protection    ||    
+--||   Protection    ||
 --======================================================================================================================
 --Defs & Miscs
 --[[
-local defs = {
+defs = {
 	reset_region = 82001,
 	gadget_id_bright = 70310498,
 }
@@ -18,7 +18,7 @@ local defs = {
 --======================================================================================================================
 --Triggers&Init
 
-local BrightTriggers={
+BrightTriggers={
   	{ config_id = 8000001, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
   	{ config_id = 8000002,name = "leave_region", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_reset_region", forbid_guest = false, trigger_count = 0 },
 --	{ config_id = 8000003, name = "gadget_state_change", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0 },
@@ -82,5 +82,3 @@ function LF_RemoveAllRepeater(context)
 	end
 	return 0
 end
-
-
