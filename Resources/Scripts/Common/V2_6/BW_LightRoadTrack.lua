@@ -3,12 +3,12 @@
 ||	owner: 		chen.chen
 ||	description: 	光路路径节点玩法
 ||	LogName:	## [BW_LightRoadTrack]
-||	Protection:	
+||	Protection:
 =======================================]]--
 
 --defs的静态映射表，因为playbundle只支持gadget_的形式
 --[[
-local nodeTable={
+nodeTable={
 	[1]=defs.gadget_node01,
 	[2]=defs.gadget_node02,
 	[3]=defs.gadget_node03,
@@ -19,7 +19,7 @@ local nodeTable={
   [8]=defs.gadget_node08,
 }
 
-local guideEffTable={
+guideEffTable={
 	[1]=defs.gadget_hint01,
 	[2]=defs.gadget_hint02,
 	[3]=defs.gadget_hint03,
@@ -31,7 +31,7 @@ local guideEffTable={
 }
 ]]--
 
-local extraTriggers={
+extraTriggers={
   { config_id = 40000000, name = "EVENT_GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_event_group_load", trigger_count = 0 },
   { config_id = 40000001, name = "EVENT_GADGET_STATE_CHANGE", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0 },
   { config_id = 40000002, name = "EVENT_ENTER_REGION", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0 ,forbid_guest = true},
@@ -46,11 +46,11 @@ function LF_Initialize_Group(triggers, suites)
 	--玩法状态
 	table.insert(variables, { config_id=50000001,name = "PlayStep", value = 0,no_refresh = true})
 	--为每一个光路路径节点增加一个region
-	local id=30000000
+	id=30000000
 	for i=1,#gadgets do
 		if gadgets[i].gadget_id==70290319 then
-			local configId=gadgets[i].config_id
-			local insertRegion={ config_id = id+configId, shape = RegionShape.SPHERE, radius = 2, pos=gadgets[i].pos, area_id = gadgets[i].area_id }
+			configId=gadgets[i].config_id
+			insertRegion={ config_id = id+configId, shape = RegionShape.SPHERE, radius = 2, pos=gadgets[i].pos, area_id = gadgets[i].area_id }
 			table.insert(regions,insertRegion)
 			table.insert(suites[2].regions,id+configId)
 		end
@@ -66,7 +66,7 @@ PlayStep:
 -----------------------------EventActions-----------------------------------------
 --关卡被加载时根据完成状态恢复group
 function action_event_group_load(context, evt)
-	local playStep=ScriptLib.GetGroupVariableValue(context, "PlayStep")
+	playStep=ScriptLib.GetGroupVariableValue(context, "PlayStep")
 	--进入方法log
 	ScriptLib.PrintContextLog(context,"##[BW_LightRoadTrack] group load with playstep:"..playStep)
 	--如果处于未开始状态，加载suite2
@@ -98,7 +98,7 @@ function action_gadget_state_change(context, evt)
 			for k,v in pairs(guideEffTable) do
 				if v ~=0 then
 					ScriptLib.CreateGadget(context, { config_id = v })
-				end 
+				end
 			end
 			--标志玩法开始
 			ScriptLib.SetGroupVariableValue(context, "PlayStep", 1)
@@ -108,7 +108,7 @@ function action_gadget_state_change(context, evt)
 			for k,v in pairs(guideEffTable) do
 				if v ~=0 then
 					ScriptLib.KillGroupEntity(context, { group_id = 0, gadgets = {v} })
-				end 
+				end
 			end
 			--标志未开始
 			ScriptLib.SetGroupVariableValue(context, "PlayStep", 0)
@@ -127,12 +127,12 @@ function action_enter_region(context, evt)
 		return 0
 	end
 	--判定是否按照步骤开始踩
-	local enterConfigId=evt.param1-30000000
+	enterConfigId=evt.param1-30000000
 	--判断是否踩到的正确的节点
 	--踩了，熄灭，消除流光，并将目标index+1
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 0, enterConfigId, 0)
 	for k,v in pairs(nodeTable) do
-		if v==enterConfigId then 
+		if v==enterConfigId then
 			ScriptLib.KillGroupEntity(context, { group_id = 0, gadgets = {guideEffTable[k]} })
 		end
 	end
@@ -144,7 +144,7 @@ function action_enter_region(context, evt)
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
 		--常亮路径压板
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0, defs.gadget_startpoint, 204)
-	end 
+	end
 	return 0
 end
 

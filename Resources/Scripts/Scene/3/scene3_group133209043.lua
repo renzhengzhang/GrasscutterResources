@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133209043
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -78,9 +78,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -88,7 +88,7 @@ function condition_EVENT_GADGET_CREATE_43002(context, evt)
 	if 43001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -99,7 +99,7 @@ function action_EVENT_GADGET_CREATE_43002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -107,14 +107,14 @@ end
 function condition_EVENT_SELECT_OPTION_43003(context, evt)
 	-- 判断是gadgetid 43001 option_id 75
 	if 43001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 75 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -125,10 +125,10 @@ function action_EVENT_SELECT_OPTION_43003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    local t_pos = {x=-2634.26, y=204.488, z=-3803.538}
+	    t_pos = {x=-2634.26, y=204.488, z=-3803.538}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=-38.088, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -137,6 +137,6 @@ function action_EVENT_SELECT_OPTION_43003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-	
+
 	return 0
 end

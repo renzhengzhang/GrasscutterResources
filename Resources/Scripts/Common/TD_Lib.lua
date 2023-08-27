@@ -1,12 +1,12 @@
 --此方法在两个region坐标接近时调用比较合适
 function TrySetPlayerEyePoint(context, small_region, big_region, opt_type, vision_type_list)
 	--opt_type为1表示需要setVisionType
-	local eid = ScriptLib.GetAvatarEntityIdByUid(context, context.uid)
-	local player_pos = ScriptLib.GetPosByEntityId(context, eid)
-	local small_pos = small_region.pos
-	local big_pos = big_region.pos
+	eid = ScriptLib.GetAvatarEntityIdByUid(context, context.uid)
+	player_pos = ScriptLib.GetPosByEntityId(context, eid)
+	small_pos = small_region.pos
+	big_pos = big_region.pos
 	--在小圈内要处理入圈
-	if Is_In_Region(player_pos, small_region) == true then 
+	if Is_In_Region(player_pos, small_region) == true then
 		ScriptLib.SetPlayerEyePoint(context, small_region.config_id,big_region.config_id)
 		if opt_type == 1 then
 			ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, vision_type_list)
@@ -21,13 +21,13 @@ function TrySetPlayerEyePoint(context, small_region, big_region, opt_type, visio
 end
 
 function Is_In_Region(pos1, region)
-	local X = pos1.x - region.pos.x
-	local Y = pos1.y - region.pos.y
-	local Z = pos1.z - region.pos.z
+	X = pos1.x - region.pos.x
+	Y = pos1.y - region.pos.y
+	Z = pos1.z - region.pos.z
 	if region.shape == RegionShape.SPHERE then
 		if math.sqrt(X*X+Y*Y+Z*Z) <= region.radius then
 			return true
-		else 
+		else
 			return false
 		end
 	elseif region.shape == RegionShape.CUBIC then

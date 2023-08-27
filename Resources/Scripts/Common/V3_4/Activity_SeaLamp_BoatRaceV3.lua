@@ -4,7 +4,7 @@
 --||   Owner         ||    zijun.ma
 --||   Description   ||    收纳浪船挑战船体相关
 --||   LogName       ||    TD_BoatRaceV3
---||   Protection    ||    
+--||   Protection    ||
 --======================================================================================================================
 --=====================================
 -- 测试包
@@ -16,7 +16,7 @@ group SETVAR 133212587 BoatTest 1
 --=====================================
 -- 常量
 --======================================
-local PlayCfg= {
+PlayCfg= {
     ReviveCounter = 10,
     ReviveTimeAxis = {}, -- 根据ReviveCounter自动生成
     AirdropDelay = {2},
@@ -24,7 +24,7 @@ local PlayCfg= {
 }
 
 -- 空投车的行进路线
-local AirdropPointList = {
+AirdropPointList = {
     [1] = {pointArray = 321200054, pointCid = 587006, list = {1,2,3,4}},
     [2] = {pointArray = 321200054, pointCid = 587007, list = {1,2,3,4}},
     [3] = {pointArray = 321200054, pointCid = 587008, list = {1,2,3,4}},
@@ -32,12 +32,12 @@ local AirdropPointList = {
 }
 
 -- 空投的清单
-local AirdropItemList = {
+AirdropItemList = {
     [1] = {1,1,1,2},
     [2] = {2,1,1,1},
 }
 
-local SGVProp = {
+SGVProp = {
     HP = "SGV_BoatV3_HP",
     HPMax = "SGV_BoatV3_HPMax",
     Coin = "SGV_BoatV3_Coin",
@@ -46,7 +46,7 @@ local SGVProp = {
     SkillIdx = "SGV_BoatV3_SkillIndex", -- 对应获得技能序号。0为没有技能
 }
 
-local TempProp = {
+TempProp = {
     NextPoint = "NextPoint",
     DropCoinIdx = "DropCoinIdx",
     DropBombIdx = "DropBombIdx",
@@ -55,13 +55,13 @@ local TempProp = {
 }
 
 -- 需要同时处理多个的Index
-local TempIndexProp = {
+TempIndexProp = {
     AirdropPointListIdx = "AirdropPointListIdx", -- 当前对应的行进路线(关联AirdropPointList)
     AirdropItemListIdx = "AirdropItemListIdx", --当前对应的空投清单(关联AirdropItemList)
     AirdropItemIdx = "AirdropItemIdx", --对应AirdropItemList，获取投放硬币还是炸弹
 }
 
-local ExhibitionProp ={
+ExhibitionProp ={
     CollectCoinNum = "Activity_BoatRaceV3_CollectCoinNum",
     HighestCoinNum = "Activity_BoatRaceV3_HighestCoinNum",
     HighestLiveTime = "Activity_BoatRaceV3_HighestLiveTime",
@@ -75,27 +75,27 @@ local ExhibitionProp ={
     BigCoinNum = "Activity_BoatRaceV3_BigCoinNum",
 }
 
-local PlayerData = {
+PlayerData = {
     [1] = { DeathCoin = 53040101},
     [2] = { DeathCoin = 53040102},
     [3] = { DeathCoin = 53040103},
     [4] = { DeathCoin = 53040104},
 }
 
-local LevelDataName = {
+LevelDataName = {
     DropCoin = "DropCoin",
     DropBomb = "DropBomb",
     AirDrop = "AirDrop",
 }
 
 -- 关卡临时创建CidList
-local LevelData = {
+LevelData = {
     [LevelDataName.DropCoin] = {gadgetid = 70290784,startCid = 53040201, num = 40, tempProp = TempProp.DropCoinIdx, cidList = {}}, -- {53040201，53040202}
     [LevelDataName.DropBomb] = {gadgetid = 70290785,startCid = 53040301, num = 10, tempProp = TempProp.DropBombIdx, cidList = {}},
     [LevelDataName.AirDrop] = {gadgetid = 70290783,startCid = 53040401, num = 4, tempProp = TempProp.AirdropIdx, cidList = {}},
 }
 
-local Tri_BoatRaceV3 = {
+Tri_BoatRaceV3 = {
     { keyWord = "BoatRevive", keyWordType = "1", event = EventType.EVENT_TIME_AXIS_PASS, source = "Revive1", trigger_count = 0},
     { keyWord = "BoatRevive", keyWordType = "2", event = EventType.EVENT_TIME_AXIS_PASS, source = "Revive2", trigger_count = 0},
     { keyWord = "BoatRevive", keyWordType = "3", event = EventType.EVENT_TIME_AXIS_PASS, source = "Revive3", trigger_count = 0},
@@ -115,14 +115,14 @@ function LF_Initialize_BoatRaceV3()
     LF_GenGadget(LevelDataName.DropCoin)
     LF_GenGadget(LevelDataName.DropBomb)
 
-    local var = { config_id= 53049001, name = "BoatTest", value = 0, no_refresh = false }  --Boss战的步骤计数器
+    var = { config_id= 53049001, name = "BoatTest", value = 0, no_refresh = false }  --Boss战的步骤计数器
     variables[var.name] = var
 
     return 0
 end
 
 function LF_GenTrigger(triTable,startCid,insertSuiteList)
-    local startConfigID = startCid
+    startConfigID = startCid
     for _,v in pairs(triTable) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -148,8 +148,8 @@ function LF_InitReviveTimeAxis()
 end
 
 function LF_GenGadget(levelDataName)
-    local levelData = LevelData[levelDataName]
-    local startCid = levelData.startCid
+    levelData = LevelData[levelDataName]
+    startCid = levelData.startCid
     for i = 1,levelData.num do
         gadgets[startCid] = { config_id = startCid, gadget_id = levelData.gadgetid,
                               pos = PlayCfg.SafePos,rot = { x = 0.000, y = 0.000, z = 0.000 },
@@ -162,12 +162,12 @@ function LF_GenGadget(levelDataName)
 end
 
 function LF_AutoGenTri()
-    local keyWord = 0
+    keyWord = 0
     for i = 1,4 do
         keyWord = keyWord + 1
-        local keyWordType = tostring(keyWord)
-        local sourceName = "AirdropStartMove" .. keyWordType
-        local trigger = {keyWord = "AirdropStartMove",keyWordType=keyWordType,event=EventType.EVENT_TIME_AXIS_PASS,source = sourceName, trigger_count = 0}
+        keyWordType = tostring(keyWord)
+        sourceName = "AirdropStartMove" .. keyWordType
+        trigger = {keyWord = "AirdropStartMove",keyWordType=keyWordType,event=EventType.EVENT_TIME_AXIS_PASS,source = sourceName, trigger_count = 0}
         table.insert(Tri_BoatRaceV3, trigger)
     end
     return 0
@@ -193,14 +193,14 @@ end
 
 -- 时间轴控制幽灵计数器
 function action_BoatRevive(context,evt)
-    local playerIndex = LF_GetIndexByKeyName(evt.source_name)
-    local uid = LF_GetPlayerUidByIndex(context,playerIndex)
+    playerIndex = LF_GetIndexByKeyName(evt.source_name)
+    uid = LF_GetPlayerUidByIndex(context,playerIndex)
 
     if 0 == uid then
         return 0
     end
 
-    local curProgress = ScriptLib.GetTeamServerGlobalValue(context, uid, SGVProp.Progress)
+    curProgress = ScriptLib.GetTeamServerGlobalValue(context, uid, SGVProp.Progress)
     curProgress = curProgress - 1
     ScriptLib.SetTeamServerGlobalValue(context, uid, SGVProp.Progress, curProgress)
     if curProgress == 0 then
@@ -213,7 +213,7 @@ end
 -- 空投船管理
 function action_AirdropMove(context,evt)
     -- 是不是空投船
-    local moveCid = evt.param1
+    moveCid = evt.param1
 
     if gadgets[moveCid] == nil then
         return 0
@@ -224,14 +224,14 @@ function action_AirdropMove(context,evt)
     end
 
     -- 空投船逻辑
-    local index = LF_LevelData_GetIndexByCid(LevelDataName.AirDrop,moveCid)
-    local pointListIndex = LF_GetTempIndexProp(context,TempIndexProp.AirdropPointListIdx,index)
-    local pointList = AirdropPointList[pointListIndex]
+    index = LF_LevelData_GetIndexByCid(LevelDataName.AirDrop,moveCid)
+    pointListIndex = LF_GetTempIndexProp(context,TempIndexProp.AirdropPointListIdx,index)
+    pointList = AirdropPointList[pointListIndex]
     if pointList == nil then
         return 0
     end
 
-    local curPointList = pointList.list
+    curPointList = pointList.list
     if curPointList == nil then
         return 0
     end
@@ -248,12 +248,12 @@ end
 
 -- 船体开始运动
 function action_AirdropStartMove(context,evt)
-    local index = LF_GetIndexByString(evt.source_name,"AirdropStartMove")
-    local cid = LF_LevelData_GetCidByIndex(LevelDataName.AirDrop,index)
-    local pointListIdx = LF_GetTempIndexProp(context,TempIndexProp.AirdropPointListIdx,index)
-    local pointList = AirdropPointList[pointListIdx]
+    index = LF_GetIndexByString(evt.source_name,"AirdropStartMove")
+    cid = LF_LevelData_GetCidByIndex(LevelDataName.AirDrop,index)
+    pointListIdx = LF_GetTempIndexProp(context,TempIndexProp.AirdropPointListIdx,index)
+    pointList = AirdropPointList[pointListIdx]
 
-    local msg = "## TD_BoatRaceV3 action_AirdropStartMove"
+    msg = "## TD_BoatRaceV3 action_AirdropStartMove"
     msg = msg .. "|index=" .. tostring(index)
     msg = msg .. "|cid=" .. tostring(cid)
     msg = msg .. "|pointListIdx=" .. tostring(pointListIdx)
@@ -274,11 +274,11 @@ end
 -- 船体出现
 function LF_Airdrop_Appear(context)
     -- 走不重复随机
-    local selectAirdropPointListIndex = LF_Airdrop_SelectAirdropPointList(context)
+    selectAirdropPointListIndex = LF_Airdrop_SelectAirdropPointList(context)
 
-    local selectAirdropPointList = AirdropPointList[selectAirdropPointListIndex]
+    selectAirdropPointList = AirdropPointList[selectAirdropPointListIndex]
 
-    local msg = "## TD_BoatRaceV3 LF_Airdrop_Appear"
+    msg = "## TD_BoatRaceV3 LF_Airdrop_Appear"
     msg = msg .. "|selectAirdropPointListIndex=" .. tostring(selectAirdropPointListIndex)
     ScriptLib.PrintContextLog(context, msg)
 
@@ -286,19 +286,19 @@ function LF_Airdrop_Appear(context)
         return 0
     end
 
-    local selectPointCid = selectAirdropPointList.pointCid
+    selectPointCid = selectAirdropPointList.pointCid
     if selectPointCid == nil then
         return 0
     end
 
-    local selectPointInfo = points[selectPointCid]
+    selectPointInfo = points[selectPointCid]
     if selectPointInfo == nil then
         return 0
     end
 
-    local selectPointPos = selectPointInfo.pos
+    selectPointPos = selectPointInfo.pos
     -- 创建船体（会返回一个Index)
-    local airdropIndex = LF_LevelData_CreateLevelDataGadget(context,LevelDataName.AirDrop,selectPointPos,{x=0,y=0,z=0})
+    airdropIndex = LF_LevelData_CreateLevelDataGadget(context,LevelDataName.AirDrop,selectPointPos,{x=0,y=0,z=0})
 
     if airdropIndex > 0 then
         -- 启动空投船对应的时间轴（延时开始移动)
@@ -306,7 +306,7 @@ function LF_Airdrop_Appear(context)
         -- 存储对应空投船的点阵Index
         LF_SetTempIndexProp(context,TempIndexProp.AirdropPointListIdx,airdropIndex,selectAirdropPointListIndex)
         -- 确认对应空投船的空投清单 AirdropItemListIndex
-        local selectAirdropItemListIdx = LF_Random(context,#AirdropItemList)
+        selectAirdropItemListIdx = LF_Random(context,#AirdropItemList)
         LF_SetTempIndexProp(context,TempIndexProp.AirdropItemListIdx,airdropIndex,selectAirdropItemListIdx)
         -- 初始化ItemIdx
         LF_SetTempIndexProp(context,TempIndexProp.AirdropItemIdx,airdropIndex,1)
@@ -316,14 +316,14 @@ end
 
 -- 随机选择一个未使用的空投车行进路线并标记
 function LF_Airdrop_SelectAirdropPointList(context)
-    local pointListDec = ScriptLib.GetGroupTempValue(context, TempProp.AirdropPointListDec, {})
-    local binArray = LF_DecToBin(pointListDec,#AirdropPointList)
-    local selectIndex = LF_SelectRandomIdxFromDec(context,pointListDec,#AirdropPointList)
+    pointListDec = ScriptLib.GetGroupTempValue(context, TempProp.AirdropPointListDec, {})
+    binArray = LF_DecToBin(pointListDec,#AirdropPointList)
+    selectIndex = LF_SelectRandomIdxFromDec(context,pointListDec,#AirdropPointList)
 
     if selectIndex > 0 then
-        local newPointListDec = LF_ChangeIndexValueFromDec(pointListDec,#AirdropPointList,selectIndex,1)
+        newPointListDec = LF_ChangeIndexValueFromDec(pointListDec,#AirdropPointList,selectIndex,1)
 
-        local msg = "## TD_BoatRaceV3 LF_Airdrop_SelectAirdropPointList"
+        msg = "## TD_BoatRaceV3 LF_Airdrop_SelectAirdropPointList"
         msg = msg .. "|pointListDec=" .. tostring(pointListDec)
         msg = msg .. "|newPointListDec=" .. tostring(newPointListDec)
         msg = msg .. "|binArray=" .. LF_ArrayToString(binArray)
@@ -340,7 +340,7 @@ end
 
 -- 船体消失
 function LF_Airdrop_Disappear(context,index)
-    local cid  = LF_LevelData_GetCidByIndex(LevelDataName.AirDrop,index)
+    cid  = LF_LevelData_GetCidByIndex(LevelDataName.AirDrop,index)
     -- 设置船体消失
     ScriptLib.SetGadgetStateByConfigId(context,cid,201)
     return 0
@@ -349,17 +349,17 @@ end
 -- 空投抛物的LocalFunction
 function LF_Airdrop_Throw(context,index)
     -- 从船体点位创建一个投掷物
-    local cid = LF_LevelData_GetCidByIndex(LevelDataName.AirDrop,index)
-    local entityId = ScriptLib.GetEntityIdByConfigId(context, cid)
-    local curPos = ScriptLib.GetPosByEntityId(context, entityId)
-    
-    local curAirdropItemListIdx = LF_GetTempIndexProp(context,TempIndexProp.AirdropItemListIdx,index)
-    local curAirdropItemIdx = LF_GetTempIndexProp(context,TempIndexProp.AirdropItemIdx,index)
-    local curItemList = AirdropItemList[curAirdropItemListIdx]
-    local curItem = curItemList[curAirdropItemIdx]
+    cid = LF_LevelData_GetCidByIndex(LevelDataName.AirDrop,index)
+    entityId = ScriptLib.GetEntityIdByConfigId(context, cid)
+    curPos = ScriptLib.GetPosByEntityId(context, entityId)
+
+    curAirdropItemListIdx = LF_GetTempIndexProp(context,TempIndexProp.AirdropItemListIdx,index)
+    curAirdropItemIdx = LF_GetTempIndexProp(context,TempIndexProp.AirdropItemIdx,index)
+    curItemList = AirdropItemList[curAirdropItemListIdx]
+    curItem = curItemList[curAirdropItemIdx]
 
     --日志查阅
-    local msg = "## TD_BoatRaceV3 LF_Airdrop_Throw"
+    msg = "## TD_BoatRaceV3 LF_Airdrop_Throw"
     msg = msg .. "|entityId=" .. entityId
     msg = msg .. "|curPos=" .. LF_ArrayToString({ curPos.x,curPos.y,curPos.z })
     msg = msg .. "|index=" .. tostring(index)
@@ -395,9 +395,9 @@ end
 -- 尝试创建一个LevelData对应的物件
 function LF_LevelData_CreateLevelDataGadget(context,levelDataName,pos,rot)
     -- （例如： LevelData[LevelDataName.DropCoin]
-    local levelDataProp = LevelData[levelDataName]
+    levelDataProp = LevelData[levelDataName]
     -- 获取当前最大Index(例如：取DropCoinIdx)
-    local index = ScriptLib.GetGroupTempValue(context, levelDataProp.tempProp, {})
+    index = ScriptLib.GetGroupTempValue(context, levelDataProp.tempProp, {})
     -- 最大Index + 1 (例如：取DropCoinIdx += 1)
     index = index + 1
     if index > levelDataProp.num then
@@ -407,7 +407,7 @@ function LF_LevelData_CreateLevelDataGadget(context,levelDataName,pos,rot)
     end
 
     -- 获取对应Cid
-    local createCid = levelDataProp.startCid + index - 1
+    createCid = levelDataProp.startCid + index - 1
     -- 创建对应Gadget
     ScriptLib.CreateGadgetByConfigIdByPos(context,createCid,{x=pos.x,y=pos.y,z=pos.z},rot)
     -- 更新tempPropIndex(形如DropCoinIdx=> +=1)
@@ -417,7 +417,7 @@ end
 
 -- 根据Index获取对应Cid
 function LF_LevelData_GetCidByIndex(levelDataName,index)
-    local levelDataProp = LevelData[levelDataName]
+    levelDataProp = LevelData[levelDataName]
     if levelDataProp ~= nil then
         if index <= levelDataProp.num then
             return levelDataProp.cidList[index]
@@ -428,9 +428,9 @@ end
 
 -- 根据ConfigID获取对应Index
 function LF_LevelData_GetIndexByCid(levelDataName,cid)
-    local levelDataProp = LevelData[levelDataName]
+    levelDataProp = LevelData[levelDataName]
     if levelDataProp ~= nil then
-        local index = cid - levelDataProp.startCid + 1
+        index = cid - levelDataProp.startCid + 1
         if index <= levelDataProp.num then
             return index
         end
@@ -440,8 +440,8 @@ end
 
 -- 根据字符串解析Index
 function LF_GetIndexByString(str,propName)
-    local indexString = string.gsub(str,propName,"")
-    local index = tonumber(indexString)
+    indexString = string.gsub(str,propName,"")
+    index = tonumber(indexString)
     if index == nil then
         return 0
     end
@@ -450,7 +450,7 @@ end
 
 -- 获取形如"xx01"的tempValue
 function LF_GetTempIndexProp(context,propName,index)
-    local propValue = ScriptLib.GetGroupTempValue(context, propName..tostring(index), {})
+    propValue = ScriptLib.GetGroupTempValue(context, propName..tostring(index), {})
     return propValue
 end
 
@@ -464,8 +464,8 @@ end
 --=====================================
 -- 获取金币
 function SLC_PlayerGetCoin(context,param1)
-    local uid = context.uid
-    local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+    uid = context.uid
+    config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 
     LF_SLCDebug(context,"SLC_PlayerGetCoin")
 
@@ -478,7 +478,7 @@ function SLC_PlayerGetCoin(context,param1)
         return 0
     end
 
-    local msg = "## TD_BoatRaceV3 SLC_PlayerGetCoin"
+    msg = "## TD_BoatRaceV3 SLC_PlayerGetCoin"
     msg = msg .. "|config_id=" .. config_id
     msg = msg .. "|param1=" .. param1
     ScriptLib.PrintContextLog(context, msg)
@@ -494,8 +494,8 @@ end
 function SLC_PlayerDestroyItem(context)
     LF_SLCDebug(context,"SLC_PlayerDestoryItem")
 
-    local uid = context.uid
-    local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+    uid = context.uid
+    config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
     if 0 == config_id then
         return 0
     end
@@ -509,8 +509,8 @@ end
 function SLC_PlayerGetItem(context)
     LF_SLCDebug(context,"SLC_PlayerGetItem")
 
-    local uid = context.uid
-    local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+    uid = context.uid
+    config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
     if 0 == config_id then
         return 0
     end
@@ -530,7 +530,7 @@ end
 function SLC_PlayerUseItem(context)
     LF_SLCDebug(context,"SLC_PlayerUseItem")
 
-    local uid = context.uid
+    uid = context.uid
     ScriptLib.SetTeamServerGlobalValue(context, uid, SGVProp.SkillIdx, 0)
     return 0
 end
@@ -539,9 +539,9 @@ end
 function SLC_PlayerDamage(context)
     LF_SLCDebug(context,"SLC_PlayerDropCoin")
 
-    local uid = context.uid
+    uid = context.uid
     -- 获取对应玩家的HP
-    local hp = ScriptLib.GetTeamServerGlobalValue(context, uid, SGVProp.HP)
+    hp = ScriptLib.GetTeamServerGlobalValue(context, uid, SGVProp.HP)
     hp = math.max(0,hp-1)
     ScriptLib.SetTeamServerGlobalValue(context, uid, SGVProp.HP, hp)
 
@@ -556,7 +556,7 @@ end
 --======================================]]
 -- 初始化玩家序号(作为联机时唯一标记)
 function LF_InitPlayerIndex(context)
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    uid_list = ScriptLib.GetSceneUidList(context)
     for key,uid in pairs(uid_list) do
         LF_SetPlayerProp(context,"Player",uid,key)
         ScriptLib.SetGroupTempValue(context, "UidIndex" .. key,uid, {})
@@ -568,7 +568,7 @@ function LF_GetPlayerUidByIndex(context,Index)
     if index < 1 and index > 4 then
         return 0
     end
-    local uid = ScriptLib.GetGroupTempValue(context, UidIndex..Index, {})
+    uid = ScriptLib.GetGroupTempValue(context, UidIndex..Index, {})
     return uid
 end
 
@@ -596,14 +596,14 @@ end
 
 -- 读取对应玩家的Prop
 function LF_GetPlayerProp(context,uidProp,uid)
-    local index = ScriptLib.GetGroupTempValue(context, uidProp..uid, {})
+    index = ScriptLib.GetGroupTempValue(context, uidProp..uid, {})
     return index
 end
 
 -- 金币效果结算
 function LF_GetCoinNumByGV(context,uid,globalValue,cid)
 
-    local msg = "## TD_BoatRaceV3 LF_GetCoinNumByGV"
+    msg = "## TD_BoatRaceV3 LF_GetCoinNumByGV"
     msg = msg .. "|uid=" .. uid
     msg = msg .. "|globalValue=" .. globalValue
     msg = msg .. "|cid=" .. cid
@@ -624,9 +624,9 @@ function LF_GetCoinNumByGV(context,uid,globalValue,cid)
     end
     if globalValue == 3.0 then
         -- 亡语金币
-        local coinOwnerIndex = gadgets[cid].uidIndex
-        local coinOwnerUid = LF_GetPlayerUidByIndex(context,coinOwnerIndex)
-        local coinNum = LF_GetPlayerProp(context,"DropCoin",coinOwnerUid)
+        coinOwnerIndex = gadgets[cid].uidIndex
+        coinOwnerUid = LF_GetPlayerUidByIndex(context,coinOwnerIndex)
+        coinNum = LF_GetPlayerProp(context,"DropCoin",coinOwnerUid)
         if coinNum > 0 then
             ScriptLib.AddTeamServerGlobalValue(context, uid, SGVProp.Coin, coinNum)
             -- 改变对应金币状态
@@ -639,7 +639,7 @@ end
 -- 道具球效果结算
 function LF_GetItemBall(context,uid)
     -- 此处疑似可能要迭代，不是纯随机
-    local randomSkillIndex = LF_Random(context,3)
+    randomSkillIndex = LF_Random(context,3)
     ScriptLib.PrintContextLog(context, "##TD_BoatRaceV3 | LF_GetItemBall 获取技能道具，当前技能为 ".. randomSkillIndex)
     ScriptLib.SetTeamServerGlobalValue(context, uid, SGVProp.SkillIdx, randomSkillIndex)
     return 0
@@ -647,18 +647,18 @@ end
 
 -- 生命结算流程
 function LF_EnterGhost(context,uid)
-    local avatarEntity=ScriptLib.GetAvatarEntityIdByUid(context,uid)
-    local avatarPos = ScriptLib.GetPosByEntityId(context, avatarEntity)
-    local uidIndex = LF_GetPlayerProp(context,"Player",uid)
+    avatarEntity=ScriptLib.GetAvatarEntityIdByUid(context,uid)
+    avatarPos = ScriptLib.GetPosByEntityId(context, avatarEntity)
+    uidIndex = LF_GetPlayerProp(context,"Player",uid)
     if nil == PlayerData[uidIndex] then
         ScriptLib.PrintContextLog(context,  "##TD_BoatRaceV3 | SLC_PlayerDropCoin" .. "|uidIndex=" .. uidIndex)
         return 0
     end
 
     -- 计算掉落金币数量，并在角色原位置创生金币
-    local coinCid = PlayerData[uidIndex].DeathCoin
-    local coinNum = ScriptLib.GetTeamAbilityFloatValue(context, uid, SGVProp.Coin)
-    local dropCoinNum = math.floor(coinNum/2) -- 掉落一半金币
+    coinCid = PlayerData[uidIndex].DeathCoin
+    coinNum = ScriptLib.GetTeamAbilityFloatValue(context, uid, SGVProp.Coin)
+    dropCoinNum = math.floor(coinNum/2) -- 掉落一半金币
     if dropCoinNum > 0 then
         ScriptLib.SetTeamServerGlobalValue(context, uid, SGVProp.Coin, coinNum-dropCoinNum)
         LF_SetPlayerProp(context,SGVProp.Coin, uid, dropCoinNum)
@@ -680,7 +680,7 @@ end
 --======================================]]
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -720,7 +720,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    local s = "{"
+    s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","
@@ -734,9 +734,9 @@ end
 
 -- 该功能用于从特定二进制数据中获取Index
 function LF_SelectRandomIdxFromDec(context,decValue, len)
-    local dataArray = LF_DecToBin(decValue, len)
-    local selectIndexList = {}
-    local canSelectNum = 0
+    dataArray = LF_DecToBin(decValue, len)
+    selectIndexList = {}
+    canSelectNum = 0
     for i = 1,len do
         if dataArray[i] == 0 then
             table.insert(selectIndexList,i)
@@ -749,10 +749,10 @@ function LF_SelectRandomIdxFromDec(context,decValue, len)
     end
 
     math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-    local selectListIdx = LF_Random(context,canSelectNum)
-    local selectIndex = selectIndexList[selectListIdx]
+    selectListIdx = LF_Random(context,canSelectNum)
+    selectIndex = selectIndexList[selectListIdx]
 
-    local msg = "## TD_BoatRaceV3 LF_SelectRandomIdxFromDec"
+    msg = "## TD_BoatRaceV3 LF_SelectRandomIdxFromDec"
     msg = msg .. "|dataArray=" .. LF_ArrayToString(dataArray)
     msg = msg .. "|selectIndexList=" .. LF_ArrayToString(selectIndexList)
     msg = msg .. "|canSelectNum=" .. tostring(canSelectNum)
@@ -765,13 +765,13 @@ end
 
 -- 对指定dec修改其特定Index的value,value必须在0,1之间
 function LF_ChangeIndexValueFromDec(decValue,len,targetIndex,value)
-    local dataArray = LF_DecToBin(decValue,len)
+    dataArray = LF_DecToBin(decValue,len)
     if value ~= 0 and value ~=1 then
         value = 0
     end
     -- 指定关卡设为完成
     dataArray[targetIndex] = value
-    local changeLevelDec = LF_BinToDec(dataArray)
+    changeLevelDec = LF_BinToDec(dataArray)
 
 
     return changeLevelDec
@@ -779,17 +779,17 @@ end
 
 -- 顺序0,1数组转十进制保存
 function LF_BinToDec(binArray)
-    local decValue = 0
-    local bin = table.concat(binArray)
+    decValue = 0
+    bin = table.concat(binArray)
     decValue = tonumber(bin,2)
     return decValue
 end
 
 -- 十进制转成0,1数组
 function LF_DecToBin(decValue, len)
-    local binArray = {}
-    local value = decValue
-    local bit = len -1
+    binArray = {}
+    value = decValue
+    bit = len -1
     for i = bit,0,-1 do
         binArray[#binArray+1] = math.floor(value/2^i)
         value = value % 2^i
@@ -799,13 +799,13 @@ end
 
 function LF_Random(context,num)
     math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-    local randomIndex = math.random(1,num)
+    randomIndex = math.random(1,num)
     return randomIndex
 end
 
 -- SLC的通用Debug手段
 function LF_SLCDebug(context,functionName)
-    local msg = "##TD_BoatRaceV3|" .. functionName
+    msg = "##TD_BoatRaceV3|" .. functionName
     msg = msg .. "|uid=" .. context.uid
     msg = msg .. "|source=" .. context.source_entity_id
     msg = msg .. "|sourceCid=" .. ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })

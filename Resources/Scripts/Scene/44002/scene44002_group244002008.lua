@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 244002008
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,9 +114,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -125,7 +125,7 @@ function condition_EVENT_ANY_MONSTER_DIE_8008(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -133,7 +133,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_8008(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 244002008, 3)
-	
+
 	return 0
 end
 
@@ -142,7 +142,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_8014(context, evt)
 	if 8001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -153,7 +153,7 @@ function action_EVENT_ANY_MONSTER_LIVE_8014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -163,33 +163,33 @@ function action_EVENT_CHALLENGE_SUCCESS_8015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8021, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 8021 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 改变指定group组244002001中， configid为1020的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1020, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组244002001中， configid为1021的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1021, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 杀死Group内所有gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244002008, kill_policy = GroupKillPolicy.GROUP_KILL_GADGET }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -199,42 +199,42 @@ function action_EVENT_CHALLENGE_FAIL_8016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8021, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 8021 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 改变指定group组244002001中， configid为1020的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1020, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组244002001中， configid为1021的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1021, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 244002007, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 244002008, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 244002009, 4)
-	
+
 	return 0
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_GADGET_CREATE_8019(context, evt)
 	if 8021 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -253,20 +253,20 @@ function action_EVENT_GADGET_CREATE_8019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8021, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_8022(context, evt)
 	if evt.param1 ~= 8022 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -276,13 +276,13 @@ function action_EVENT_ENTER_REGION_8022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8021, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 400028 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400028) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

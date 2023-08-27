@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301435
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	point_camera = 435003,
 	gadget_lookEntity = 435001,
 	look_duration = 5
 }
 
 -- DEFS_MISCS
-local CameraLookSetting = {
+CameraLookSetting = {
     blend_type = 0,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -20,9 +20,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -65,9 +65,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -78,9 +78,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -96,20 +96,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_435002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"camera"为1
 	if ScriptLib.GetGroupVariableValue(context, "camera") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 

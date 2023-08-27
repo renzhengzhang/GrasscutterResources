@@ -1,21 +1,21 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199002029
 }
 
 -- DEFS_MISCS
-local	defs = 
+local	defs =
 {
 	group_id = 199002029,
 	--起始操作台configID
 	start_operator = 29006,
 	--所有演员物件。用于统一设置状态
-	actor_list = 
+	actor_list =
 	{
 		29001, 29002, 29003, 29004, 29005
 	},
 	--行动序列
-	actions = 
+	actions =
 	{
    		[1] = { config_id = 29001, reminder_id = 1111099, point_array = 0, point_id_list = 0, duration = 13},
    		[2] = { config_id = 29002, reminder_id = 1111101, point_array = 900200107, point_id_list = {1,2,3,4,5}, duration = 5},
@@ -33,9 +33,9 @@ local	defs =
 
 	},
 	--断案阶段加载哪些suite。用于放置操作台和聚光灯
-	question_suits =  
+	question_suits =
 	{
-   
+
 		2
 	},
 	--真正的凶手对应哪个操作台config_id
@@ -46,9 +46,9 @@ local	defs =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -103,9 +103,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -116,9 +116,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -152,20 +152,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_29013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"theatre_state"为3
 	if ScriptLib.GetGroupVariableValue(context, "theatre_state") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -175,14 +175,14 @@ function action_EVENT_VARIABLE_CHANGE_29013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 29012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 199002029, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -192,7 +192,7 @@ function condition_EVENT_GROUP_LOAD_29014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "theatre_state") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -202,8 +202,8 @@ function action_EVENT_GROUP_LOAD_29014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 29012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -213,11 +213,11 @@ function action_EVENT_ENTER_REGION_29015(context, evt)
 	else
 		if 0 == ScriptLib.TryRecordActivityPushTips(context, 2014017) then
 			ScriptLib.TryRecordActivityPushTips(context, 2014017)
-			
+
 			ScriptLib.ShowClientTutorial(context, 1187, {})
 		end
 	end
-	
+
 	return 0
 end
 

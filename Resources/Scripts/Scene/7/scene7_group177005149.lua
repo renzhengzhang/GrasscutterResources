@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 177005149
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	pointarray_1 = 700500026,
 	gadget_1 = 149002,
 	gadget_controller_1 = 149006,
@@ -13,9 +13,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -97,20 +97,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_149009(context, evt)
 	if evt.param1 ~= 149009 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -120,7 +120,7 @@ function action_EVENT_ENTER_REGION_149009(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,161,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -129,7 +129,7 @@ function condition_EVENT_GADGET_CREATE_149016(context, evt)
 	if 149006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -140,7 +140,7 @@ function action_EVENT_GADGET_CREATE_149016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -148,14 +148,14 @@ end
 function condition_EVENT_SELECT_OPTION_149021(context, evt)
 	-- 判断是gadgetid 149006 option_id 31
 	if 149006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 31 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -166,22 +166,22 @@ function action_EVENT_SELECT_OPTION_149021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 149002, 700500026, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：177005149的对象,请求一次调用,并将string参数："route1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 177005149, "route1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -192,7 +192,7 @@ function action_EVENT_TIMER_EVENT_149022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -201,7 +201,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_149031(context, evt)
 	if 149004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -212,7 +212,7 @@ function action_EVENT_GADGET_STATE_CHANGE_149031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

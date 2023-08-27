@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008507
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -92,20 +92,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_507002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"is_active"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "is_active", 133008507) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -113,19 +113,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_507002(context, evt)
 		-- 改变指定monster的globalvalue
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {507001}, "_MONSTERAFFIX_AIHITFEELING_LEVELTRIGGER", 1)
-	
+
 	-- 通知groupid为133008507中,configid为：507001的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 507001, 133008507) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133008507, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -135,8 +135,8 @@ function condition_EVENT_ANY_MONSTER_DIE_507006(context, evt)
 	if evt.param1 ~= 507001 and evt.param1 ~= 507008 then
 	    return false
 	end
-	  
-	
+
+
 	return true
 end
 
@@ -147,25 +147,25 @@ function action_EVENT_ANY_MONSTER_DIE_507006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为507004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 507004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为507005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 507005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133008507, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -174,7 +174,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_507007(context, evt)
 	if 507001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -182,14 +182,14 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_507007(context, evt)
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133008507, EntityType.MONSTER, 507001)
-	
-		
-	
+
+
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 507008, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end

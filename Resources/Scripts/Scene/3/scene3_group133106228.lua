@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133106228
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	steps = 2,
 	config_id = 228008,
 	routes = { [1]={route=310600004,points={1,2,3}},  [2]={route=310600004,points={3,4,5}}, },
@@ -12,12 +12,12 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local shootLightMap={[228005]=228013,[228009]=228014}
+shootLightMap={[228005]=228013,[228009]=228014}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -69,9 +69,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -82,9 +82,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -118,9 +118,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -129,7 +129,7 @@ function condition_EVENT_QUEST_START_228002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MoveStep") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -139,14 +139,14 @@ function action_EVENT_QUEST_START_228002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 228005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 228009 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 228009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -156,7 +156,7 @@ function condition_EVENT_PLATFORM_REACH_POINT_228003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MoveStep") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -167,17 +167,17 @@ function action_EVENT_PLATFORM_REACH_POINT_228003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "questFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "questFinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"killlightriver"，时间节点为{3,7}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "killlightriver", {3,7}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -186,7 +186,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_228006(context, evt)
 	if 228005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -197,11 +197,11 @@ function action_EVENT_GADGET_STATE_CHANGE_228006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建标识为"reminder"，时间节点为{20}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "reminder", {20}, true)
-	
-	
+
+
 	return 0
 end
 
@@ -210,7 +210,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_228007(context, evt)
 	if 228005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -221,7 +221,7 @@ function action_EVENT_GADGET_STATE_CHANGE_228007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -230,7 +230,7 @@ function condition_EVENT_TIME_AXIS_PASS_228015(context, evt)
 	if "killlightriver" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -241,7 +241,7 @@ function action_EVENT_TIME_AXIS_PASS_228015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -250,7 +250,7 @@ function condition_EVENT_TIME_AXIS_PASS_228016(context, evt)
 	if "reminder" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -261,7 +261,7 @@ function action_EVENT_TIME_AXIS_PASS_228016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -271,7 +271,7 @@ function condition_EVENT_PLATFORM_REACH_POINT_228017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MoveStep") == 1 or ScriptLib.GetGroupVariableValue(context, "MoveStep") == 2 then
 			return true
 	end
-	
+
 	return false
 end
 
@@ -279,8 +279,8 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_228017(context, evt)
 	-- 停止标识为"reminder"的时间轴
 	ScriptLib.EndTimeAxis(context, "reminder")
-	
-	
+
+
 	return 0
 end
 
@@ -290,7 +290,7 @@ function condition_EVENT_GROUP_LOAD_228018(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "questFinished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -301,13 +301,13 @@ function action_EVENT_GROUP_LOAD_228018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133106492, monsters = {}, gadgets = {492001} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -316,7 +316,7 @@ function action_EVENT_LEAVE_REGION_228019(context, evt)
 	if evt.param1 == 228019 then
 		ScriptLib.EndTimeAxis(context, "reminder")
 	end
-	
+
 	return 0
 end
 
@@ -325,7 +325,7 @@ function condition_EVENT_TIME_AXIS_PASS_228020(context, evt)
 	if "killlightriver" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -336,7 +336,7 @@ function action_EVENT_TIME_AXIS_PASS_228020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 

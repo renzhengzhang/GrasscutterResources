@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 166001199
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -77,25 +77,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_199006(context, evt)
 	if evt.param1 ~= 199006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"done"为0
 	if ScriptLib.GetGroupVariableValue(context, "done") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -106,19 +106,19 @@ function action_EVENT_ENTER_REGION_199006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为199004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 199004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为199005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 199005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -127,7 +127,7 @@ function condition_EVENT_ANY_GADGET_DIE_199007(context, evt)
 	if 199001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -138,7 +138,7 @@ function action_EVENT_ANY_GADGET_DIE_199007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_ANY_GADGET_DIE_199008(context, evt)
 	if 199002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -158,24 +158,24 @@ function action_EVENT_ANY_GADGET_DIE_199008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_199009(context, evt)
 	if evt.param1 ~= 199009 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"done"为1
 	if ScriptLib.GetGroupVariableValue(context, "done") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -186,18 +186,18 @@ function action_EVENT_ENTER_REGION_199009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为199004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 199004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为199005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 199005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
