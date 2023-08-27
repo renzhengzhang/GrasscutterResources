@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250008130
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -95,7 +95,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_130002(context, evt)
 	if 130001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -103,25 +103,25 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_130002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250008130, 2)
-	
+
 	-- 创建编号为888（该挑战的识别id),挑战内容为122的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 888, 122, 60, 4, 666, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_130004(context, evt)
 	if evt.param1 ~= 130004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -130,7 +130,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_130008(context, evt)
 	if 130007 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -138,7 +138,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_130008(context, evt)
 	-- 终止识别id为888的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 888, 0)
-	
+
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_130010(context, evt)
 	if 130009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -155,6 +155,6 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_130010(context, evt)
 	-- 终止识别id为888的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 888, 1)
-	
+
 	return 0
 end

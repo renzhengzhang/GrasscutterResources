@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220133103
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -100,9 +100,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -111,7 +111,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_103005(context, evt)
 	if 103001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -122,11 +122,11 @@ function action_EVENT_GADGET_STATE_CHANGE_103005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建标识为"CloseTime"，时间节点为{8}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "CloseTime", {8}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -135,7 +135,7 @@ function condition_EVENT_LEAVE_REGION_103006(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133103, 103001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -145,14 +145,14 @@ function action_EVENT_LEAVE_REGION_103006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 103001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220133103, EntityType.GADGET, 103002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -161,7 +161,7 @@ function condition_EVENT_GADGET_CREATE_103007(context, evt)
 	if 103001 ~= evt.param1 or GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -171,8 +171,8 @@ function action_EVENT_GADGET_CREATE_103007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 103001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -182,7 +182,7 @@ function condition_EVENT_GROUP_LOAD_103008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "DoorCreated") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -190,7 +190,7 @@ end
 function action_EVENT_GROUP_LOAD_103008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220133103, 2)
-	
+
 	return 0
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_TIME_AXIS_PASS_103009(context, evt)
 	if "CloseTime" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -209,13 +209,13 @@ function action_EVENT_TIME_AXIS_PASS_103009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 103001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220133103, EntityType.GADGET, 103002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end

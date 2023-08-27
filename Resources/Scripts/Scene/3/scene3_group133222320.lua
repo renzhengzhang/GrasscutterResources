@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133222320
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -111,20 +111,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_320003(context, evt)
 	if evt.param1 ~= 320003 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -134,8 +134,8 @@ function action_EVENT_ENTER_REGION_320003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 320001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -144,7 +144,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_320004(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133222320, 320001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -155,11 +155,11 @@ function action_EVENT_GADGET_STATE_CHANGE_320004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"Finish"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Finish", {5}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -169,12 +169,12 @@ function condition_EVENT_GROUP_LOAD_320005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Open") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"Quest"为0
 	if ScriptLib.GetGroupVariableValue(context, "Quest") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -185,7 +185,7 @@ function action_EVENT_GROUP_LOAD_320005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_QUEST_START_320006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Open") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -206,25 +206,25 @@ function action_EVENT_QUEST_START_320006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133222320, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_320007(context, evt)
 	if evt.param1 ~= 320007 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -234,8 +234,8 @@ function action_EVENT_ENTER_REGION_320007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 320002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -245,12 +245,12 @@ function condition_EVENT_GROUP_LOAD_320008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Open") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"Quest"为1
 	if ScriptLib.GetGroupVariableValue(context, "Quest") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -261,7 +261,7 @@ function action_EVENT_GROUP_LOAD_320008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -270,7 +270,7 @@ function condition_EVENT_TIME_AXIS_PASS_320009(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -281,7 +281,7 @@ function action_EVENT_TIME_AXIS_PASS_320009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -291,7 +291,7 @@ function condition_EVENT_GROUP_LOAD_320010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Open") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -302,6 +302,6 @@ function action_EVENT_GROUP_LOAD_320010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

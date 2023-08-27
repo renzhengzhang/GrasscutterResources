@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133106426
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -91,9 +91,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -104,9 +104,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -203,23 +203,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_426004(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133106426) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"AlchemyCamp"为0
 	if ScriptLib.GetGroupVariableValue(context, "AlchemyCamp") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -227,28 +227,28 @@ end
 function action_EVENT_ANY_MONSTER_DIE_426004(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106426, 3)
-	
+
 	-- 调用提示id为 310642602 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310642602) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_426005(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133106426) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"AlchemyCamp"为1
 	if ScriptLib.GetGroupVariableValue(context, "AlchemyCamp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -256,23 +256,23 @@ end
 function action_EVENT_ANY_MONSTER_DIE_426005(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106426, 4)
-	
+
 	-- 调用提示id为 310642604 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310642604) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_426031(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133106426) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -280,13 +280,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_426031(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106426, 9)
-	
+
 	-- 调用提示id为 310642614 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310642614) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -296,7 +296,7 @@ function condition_EVENT_ANY_MONSTER_DIE_426033(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -304,22 +304,22 @@ end
 function action_EVENT_ANY_MONSTER_DIE_426033(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106426, 10)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_426034(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133106426) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"WeaponCamp"为0
 	if ScriptLib.GetGroupVariableValue(context, "WeaponCamp") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -327,28 +327,28 @@ end
 function action_EVENT_ANY_MONSTER_DIE_426034(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106426, 5)
-	
+
 	-- 调用提示id为 310642606 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310642606) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_426035(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133106426) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"WeaponCamp"为1
 	if ScriptLib.GetGroupVariableValue(context, "WeaponCamp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -356,28 +356,28 @@ end
 function action_EVENT_ANY_MONSTER_DIE_426035(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106426, 6)
-	
+
 	-- 调用提示id为 310642608 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310642608) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_426036(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133106426) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"CookingCamp"为0
 	if ScriptLib.GetGroupVariableValue(context, "CookingCamp") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -385,28 +385,28 @@ end
 function action_EVENT_ANY_MONSTER_DIE_426036(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106426, 7)
-	
+
 	-- 调用提示id为 310642610 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310642610) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_426037(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133106426) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"CookingCamp"为1
 	if ScriptLib.GetGroupVariableValue(context, "CookingCamp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -414,13 +414,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_426037(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106426, 8)
-	
+
 	-- 调用提示id为 310642612 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310642612) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -431,13 +431,13 @@ function action_EVENT_MONSTER_BATTLE_426038(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 310642601 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310642601) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -447,7 +447,7 @@ function condition_EVENT_ANY_MONSTER_DIE_426039(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -458,13 +458,13 @@ function action_EVENT_ANY_MONSTER_DIE_426039(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "AllCleared" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "AllCleared", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -475,7 +475,7 @@ function action_EVENT_QUEST_FINISH_426040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -486,7 +486,7 @@ function action_EVENT_QUEST_FINISH_426041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -497,7 +497,7 @@ function action_EVENT_QUEST_FINISH_426042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -508,7 +508,7 @@ function action_EVENT_ANY_MONSTER_DIE_426044(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -518,7 +518,7 @@ function condition_EVENT_GROUP_LOAD_426045(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "AllCleared") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -529,6 +529,6 @@ function action_EVENT_GROUP_LOAD_426045(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

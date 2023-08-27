@@ -3,26 +3,26 @@
 ||  owner:      shuyi.chang
 ||  description:    死域观测站
 ||  LogName:    ## [DeathZoneObservation]
-||  Protection: 
+||  Protection:
 =======================================]]
 
 --[[
-local defs_miscs = 
+defs_miscs =
 {
     -- 死域观测站透镜的config id
-    lensConfigId = 103001,    
+    lensConfigId = 103001,
 
     -- 这个透镜对应的隐藏父任务的回退参数
     resetParam = "rewindSmoke"
 
     -- 兰纳罗的config id
-    lnlConfigId = 103004,    
-        
+    lnlConfigId = 103004,
+
     -- 兰纳罗隐藏任务的回退参数
     hiddenlnlParam = "hiddenlnl",
 
     -- 一个smoke拥有一项
-    smokeTable = 
+    smokeTable =
     {
         -- 每项格式如下，通常应该只有两项，即一个透镜对应两个黑烟
         --[smoke_id] = {smoke = smoke_config_id, maxRegion = region_id, group = group_id, observeQuest = quest_id, finishQuest = quest_id, questParam = "任务前进变量"}
@@ -32,7 +32,7 @@ local defs_miscs =
 }
 --]]
 
-local extraTriggers = 
+extraTriggers =
 {
 	{ config_id = 50000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
     { config_id = 50000002, name = "DEATH_ZONE_OBSERVE", event = EventType.EVENT_DEATH_ZONE_OBSERVE, source = "", condition = "", action = "action_EVENT_DEATH_ZONE_OBSERVE", trigger_count = 0 },
@@ -44,7 +44,7 @@ local extraTriggers =
 
 }
 
-local extraVariables = 
+extraVariables =
 {
     -- 已完成几个黑烟玩法group
 	{ config_id = 50000101, name = "smokeFinishedNum", value = 0, no_refresh = true },
@@ -55,15 +55,15 @@ local extraVariables =
 
 }
 
-local smokeGadgetId = 70310219
-local lnlGadgetId = 70310440
+smokeGadgetId = 70310219
+lnlGadgetId = 70310440
 
-local smokeCount
+smokeCount
 
-local lnlDisappearRmd = 33040007
+lnlDisappearRmd = 33040007
 
 --================================================================
--- Local Functions
+-- Functions
 --================================================================
 function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
 
@@ -84,11 +84,11 @@ function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
         table.insert(variables, extraVariables[i])
     end
 
-    local temp = 0
+    temp = 0
     for k, v in pairs(defs_miscs.smokeTable) do
         temp = temp + 1
         -- 每个smoke给一个group var记录状态，0未观测，1已观测，2已完成
-        local smoke = { config_id = 40000000 + temp, name = "smoke_"..tostring(v.smoke), value = 0, no_refresh = true }
+        smoke = { config_id = 40000000 + temp, name = "smoke_"..tostring(v.smoke), value = 0, no_refresh = true }
         table.insert(variables, smoke)
 
         gadgets[k].mark_flag = 1
@@ -101,7 +101,7 @@ function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
 end
 
 function LF_GetTableLength(t)
-    local count = 0
+    count = 0
     for _ in pairs(t) do count = count + 1 end
     return count
 end
@@ -111,10 +111,10 @@ function LF_SetGlobalValueByGroupVar(context)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] LF_SetGlobalValue is called")
 
     -- SGV不存档所以每次load的时候要手动设回正常值，断线重连同理
-    local curSmokeCount = ScriptLib.GetGroupVariableValue(context, "smokeObservedNum")
+    curSmokeCount = ScriptLib.GetGroupVariableValue(context, "smokeObservedNum")
     ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs_miscs.lensConfigId, "SGV_Cur_Smoke_Count", curSmokeCount)
 
-    local smokeLeftCount = smokeCount - ScriptLib.GetGroupVariableValue(context, "smokeFinishedNum") 
+    smokeLeftCount = smokeCount - ScriptLib.GetGroupVariableValue(context, "smokeFinishedNum")
     ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs_miscs.lensConfigId, "SGV_Smoke_Count", smokeLeftCount)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] smokeFinishedNum = "..ScriptLib.GetGroupVariableValue(context, "smokeFinishedNum")
         ..", smokeCount = "..smokeCount)
@@ -130,14 +130,14 @@ end
 -- function LF_SetSmokeStatus(context, smokeId, status)
 --     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] LF_SetSmokeByStatus is called, smokeId = "..smokeId..", status is set to "..status)
 
---     local variableName = "smoke_"..smokeId
+--     variableName = "smoke_"..smokeId
 --     -- 更改前的黑烟状态
---     local statusBefore = ScriptLib.GetGroupVariableValue(context, variableName)
+--     statusBefore = ScriptLib.GetGroupVariableValue(context, variableName)
 
 --     ScriptLib.SetGroupVariableValue(context, variableName, status)
---     local variableValue = ScriptLib.GetGroupVariableValue(context, variableName)
+--     variableValue = ScriptLib.GetGroupVariableValue(context, variableName)
 
---     local gadgetState = 0
+--     gadgetState = 0
 --     if status == 0 then
 --         -- 还没被观测到，在0
 --         gadgetState = 0
@@ -160,7 +160,7 @@ end
 --         LF_UpdateObservedSmokeCount(context)
 --         LF_SetGlobalValueByGroupVar(context)
 --     end
- 
+
 --     -- 更新此smoke的gadget state
 --     ScriptLib.SetGadgetStateByConfigId(context, smokeId, gadgetState)
 --     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] smoke id = ".. smokeId..", gadget state is set to "..gadgetState..
@@ -171,13 +171,13 @@ end
 function LF_SetSmokeGroupVar(context, smokeId, var)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] LF_SetSmokeGroupVar is called")
 
-    local variableName = "smoke_"..smokeId
+    variableName = "smoke_"..smokeId
     -- 更改前的黑烟状态
-    local statusBefore = ScriptLib.GetGroupVariableValue(context, variableName)
+    statusBefore = ScriptLib.GetGroupVariableValue(context, variableName)
 
     -- 设置group var的唯一时刻
     ScriptLib.SetGroupVariableValue(context, variableName, var)
-    local variableValue = ScriptLib.GetGroupVariableValue(context, variableName)
+    variableValue = ScriptLib.GetGroupVariableValue(context, variableName)
 
     -- 如果设置了group var，肯定需要紧接着修改黑烟gadget state
     LF_SetSmokeStatus_New(context, smokeId, variableValue)
@@ -190,14 +190,14 @@ function LF_SetSmokeGroupVar(context, smokeId, var)
 
 end
 
-    
+
 
 function LF_UpdateObservedSmokeCount(context)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] LF_UpdateObservedSmokeCount is called")
 
     -- 更新目前观测到了的黑烟数量
-    local temp1 = 0
-    local temp2 = 0
+    temp1 = 0
+    temp2 = 0
     for k, v in pairs(defs_miscs.smokeTable)do
         if 1 == ScriptLib.GetGroupVariableValue(context, "smoke_"..k) then
             temp1 = temp1 + 1
@@ -205,11 +205,11 @@ function LF_UpdateObservedSmokeCount(context)
             temp2 = temp2 + 1
         end
     end
-    
+
     ScriptLib.SetGroupVariableValue(context, "smokeObservedNum", temp1)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] group variable smokeObservedNum is set to "..temp1)
-    
-    
+
+
     ScriptLib.SetGroupVariableValue(context, "smokeFinishedNum", temp2)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] group variable smokeFinishedNum is set to "..temp2)
 
@@ -219,7 +219,7 @@ function LF_LoadSmokeGroup(context, smokeId)
     -- 通过任务参数流转任务，让任务动态加载死域group
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] LF_LoadSmokeGroup is called")
 
-    local questParam = defs_miscs.smokeTable[smokeId].questParam
+    questParam = defs_miscs.smokeTable[smokeId].questParam
     ScriptLib.AddQuestProgress(context, questParam)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] gadget id = "..smokeId.." adds progress to quest param = "..questParam)
 end
@@ -228,7 +228,7 @@ function LF_SetCurGroupSmokes(context)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] LF_ResetGroup is called")
 
     -- 查询自己是否是当前组
-    local curGroupId = ScriptLib.GetGroupVariableValueByGroup(context, "curGroupId", 133304143)
+    curGroupId = ScriptLib.GetGroupVariableValueByGroup(context, "curGroupId", 133304143)
 
     if curGroupId == base_info.group_id then
         -- 自己就是当前组，同组的黑烟需要根据group var设置一下
@@ -240,15 +240,15 @@ function LF_SetCurGroupSmokes(context)
     -- 不管是不是当前组，都要按黑烟的group var设置sgv和兰纳罗
     LF_SetGlobalValueByGroupVar(context)
     LF_ResetLNLByGroupVar(context)
-    
+
 end
 
 function LF_ResetLNLByGroupVar(context)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] LF_ResetLNLByGroupVar is called")
 
     -- 根据group变量设置兰纳罗
-    local aranaraObservedNum = ScriptLib.GetGroupVariableValue(context, "aranaraObservedNum")
-    local lnlStatus = 0
+    aranaraObservedNum = ScriptLib.GetGroupVariableValue(context, "aranaraObservedNum")
+    lnlStatus = 0
     if aranaraObservedNum == 1 then
         -- lnl只有一个
         lnlStatus = 2
@@ -263,8 +263,8 @@ end
 --     for k, v in pairs(defs_miscs.smokeTable) do
 --         --检查每个黑烟
 --         -- group var存档，通过group var重置smoke gadget state和任务，任务重置动态group
---         local smokeId = v.smoke
---         local status = ScriptLib.GetGroupVariableValue(context, "smoke_"..smokeId)
+--         smokeId = v.smoke
+--         status = ScriptLib.GetGroupVariableValue(context, "smoke_"..smokeId)
 --         LF_SetSmokeStatus(context, smokeId, status)
 --     end
 -- end
@@ -279,8 +279,8 @@ function LF_KillAllSmokesInGroup(context)
 
     -- -- 把这个透镜group里status = 1的smoke重置回0，任务一起回滚
     -- for k, v in pairs(defs_miscs.smokeTable) do
-    --     local smokeId = k
-    --     local status = ScriptLib.GetGroupVariableValue(context, "smoke_"..smokeId)
+    --     smokeId = k
+    --     status = ScriptLib.GetGroupVariableValue(context, "smoke_"..smokeId)
 
     --     -- 如果smokeStatus = 1已被观测到，则重置回0
     --     if status == 1 then
@@ -291,7 +291,7 @@ function LF_KillAllSmokesInGroup(context)
 
     --     -- 任务尝试回滚，已清除的黑烟任务已经成功，不会参与回滚
     --     ScriptLib.AddQuestProgress(context, defs_miscs.resetParam)
-      
+
     -- end
 
 end
@@ -299,7 +299,7 @@ end
 function LF_SetLNLStatus(context, lnlId, status)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] LF_SetLNLStatus is called")
 
-    local gadgetState = 0
+    gadgetState = 0
     if status == 0 then
         -- 未观测
         gadgetState = 0
@@ -336,7 +336,7 @@ function LF_SetSmokeByGroupVar(context)
 
     -- 接近了一个透镜，需要创建同组黑烟并设置到对应状态
     for k, v in pairs(defs_miscs.smokeTable) do
-        local groupVar = ScriptLib.GetGroupVariableValue(context, "smoke_"..k)
+        groupVar = ScriptLib.GetGroupVariableValue(context, "smoke_"..k)
 
         if groupVar == 0 then
             LF_SetSmokeStatus_New(context, k, 0)
@@ -350,7 +350,7 @@ end
 
 function LF_SetCurSmokeActive(context, smokeId)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] LF_SetCurSmokeActive is called")
-    local groupVar = ScriptLib.GetGroupVariableValue(context, "smoke_"..smokeId)
+    groupVar = ScriptLib.GetGroupVariableValue(context, "smoke_"..smokeId)
     if groupVar == 1 then
         LF_SetSmokeStatus_New(context, smokeId, 1)
     end
@@ -361,8 +361,8 @@ end
 function LF_SetSmokeStatus_New(context, smokeId, status)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] LF_SetSmokeByStatus is called, smokeId = "..smokeId..", status is set to "..status)
 
-    -- 黑烟只有三种表现：gadget state 0, gadget state 201, 不存在gadget(202) 
-    local gadgetState = 0
+    -- 黑烟只有三种表现：gadget state 0, gadget state 201, 不存在gadget(202)
+    gadgetState = 0
     if status == 0 then
         -- 仅透镜可观测
         -- 保底创建，gadget state在0
@@ -395,7 +395,7 @@ function LF_SetCurLensActive(context)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] LF_SetCurLensGroup is called")
 
     -- 查看自己是不是当前lens
-    local before = ScriptLib.GetGroupVariableValueByGroup(context, "curGroupId", 133304143)
+    before = ScriptLib.GetGroupVariableValueByGroup(context, "curGroupId", 133304143)
 
     if before ~= base_info.group_id then
         -- 不是的话把自己设置成当前lens
@@ -408,7 +408,7 @@ function LF_SetCurLensActive(context)
 
     end
 
-    local after = ScriptLib.GetGroupVariableValueByGroup(context, "curGroupId", 133304143)
+    after = ScriptLib.GetGroupVariableValueByGroup(context, "curGroupId", 133304143)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] group 133304143 var curGroupId = "..after)
 
 end
@@ -430,18 +430,18 @@ end
 
 --     -- 不设置group var，只回滚任务
 --     ScriptLib.AddQuestProgress(context, defs_miscs.resetParam)
-    
+
 --     return 0
 -- end
 
 function action_EVENT_ENTER_REGION(context, evt)
     ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] player enters region "..evt.param1)
-    
+
     for k, v in pairs(defs_miscs.smokeTable) do
         if evt.param1 == v.maxRegion then
             -- 玩家进入黑烟区域, 要把这个黑烟加载出来
             LF_SetCurSmokeActive(context, v.smoke)
-            
+
             -- 查看自己是不是当前组，不是的话设置为当前组，并通知上一个当前组删除自己同组的所有黑烟
             LF_SetCurLensActive(context)
 
@@ -480,7 +480,7 @@ end
 function action_EVENT_DEATH_ZONE_OBSERVE(context, evt)
 	ScriptLib.PrintContextLog(context, "## [DeathZoneObservation] lens config id = "..evt.param1..
         ",  observed gadget config id = ".. evt.param2..", group id = "..evt.param3)
-    
+
         if evt.param2 == defs_miscs.lnlConfigId then
             -- 如果是兰纳罗
             LF_SetLNLStatus(context, defs_miscs.lnlConfigId, 2)
@@ -489,8 +489,8 @@ function action_EVENT_DEATH_ZONE_OBSERVE(context, evt)
             -- 如果是黑烟
             -- 尽量不用for loop
             -- 被观测到的黑烟config id
-            local smokeId = evt.param2
-            
+            smokeId = evt.param2
+
             -- 黑烟状态改变
             LF_SetSmokeGroupVar(context, smokeId, 1)
         end
@@ -510,7 +510,7 @@ function action_SMOKE_QUEST_FINISH(context, evt)
 
     -- 某个黑烟对应的玩法group的任务已经完成
     for k, v in pairs(defs_miscs.smokeTable) do
-        if v.finishQuest == evt.param1 then            
+        if v.finishQuest == evt.param1 then
             -- 黑烟可以永久消失了
             LF_SetSmokeGroupVar(context, k, 2)
         end
@@ -561,7 +561,7 @@ function SLC_Lens_Closed_Excited(context)
 
     -- 进这个slc说明本次打开界面的时候透镜一定在激化态，现在关上了，可能需要rmd
     -- 只有兰纳罗还没被发现+透镜已经不在激化态了，才出现这个reminder 33040007
-    if ScriptLib.GetGroupVariableValue(context, "aranaraObservedNum") == 0 
+    if ScriptLib.GetGroupVariableValue(context, "aranaraObservedNum") == 0
         and ScriptLib.GetGadgetStateByConfigId(context, 0, defs_miscs.lensConfigId) ~= 200 then
         ScriptLib.ShowReminder(context, lnlDisappearRmd)
     end
@@ -574,4 +574,3 @@ end
 -- Initialize
 --================================================================
 LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
-

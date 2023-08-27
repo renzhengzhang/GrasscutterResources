@@ -8,14 +8,14 @@
 
 
 
-local battleStartConsole = 1001
-local beastSkillConsole={
+battleStartConsole = 1001
+beastSkillConsole={
 	[1]=1033,
 	[2]=1034,
 	[3]=1035,
 	[4]=1036,
 }
-local gearOptionInfo=
+gearOptionInfo=
 {
 	summonBeastInfo=
 	{
@@ -41,7 +41,7 @@ local gearOptionInfo=
 		[2]=903,
 		[3]=904,
 		[4]=905,
-	}	
+	}
 }
 
 
@@ -49,18 +49,18 @@ local gearOptionInfo=
 
 -- 打印日志
 function PrintLog(context, content)
-	local log = "## [Activity_BattleMushroomMonster] TD: "..content
+	log = "## [Activity_BattleMushroomMonster] TD: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
-local extraTriggers = 
+extraTriggers =
 {
     { config_id = 40000001, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
     { config_id = 40000002, name = "select_option", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_EVENT_SELECT_OPTION", trigger_count = 0 },
     { config_id = 40000003, name = "monster_die", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_EVENT_ANY_MONSTER_DIE", trigger_count = 0 },
 }
 
------- Local Functions -----------
+------ Functions -----------
 function LF_Initialize_Level()
     --- TRIGGER
 	for i, _suite in ipairs(suites) do
@@ -82,10 +82,10 @@ end
 
 function LF_StartAttackChanllenge(context)
 	PrintLog(context, "测试关卡开启")
-	local wave=ScriptLib.GetGroupVariableValue(context,"wave")
-	local strategy=ScriptLib.GetGroupVariableValue(context,"strategy")
-	local index=ScriptLib.GetGroupVariableValue(context,"index")
-	local waveInfo=random_strategy_info[strategy][wave][index]
+	wave=ScriptLib.GetGroupVariableValue(context,"wave")
+	strategy=ScriptLib.GetGroupVariableValue(context,"strategy")
+	index=ScriptLib.GetGroupVariableValue(context,"index")
+	waveInfo=random_strategy_info[strategy][wave][index]
 	--零时测试数据
 	ScriptLib.ActiveChallenge(context, 1, 1, 0, waveInfo.total_count, 0, 0)
 	ScriptLib.AutoPoolMonsterTide(context, 1, base_info.group_id, waveInfo.monster_package,0, {}, {}, {total_count=waveInfo.total_count, min_count=waveInfo.min_count, max_count=waveInfo.max_count,fill_time=0,fill_count=0,is_ordered = true})
@@ -97,8 +97,8 @@ end
 function SLC_MushroomMonsterAlertRefreshSkill(context)
 	PrintLog(context,"蕈兽技能CD重置")
 	--进入惊吓状态
-	local beast = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
-	--local beast = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	beast = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
+	--beast = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, beast, "SGV_Fungus_StartBurst_Immediately",0)
 	for k,v in pairs(beastSkillConsole) do
 		if ScriptLib.GetGroupVariableValue(context, v.."BeastConfigId")==beast then
@@ -110,7 +110,7 @@ end
 --蕈兽放技能
 function SLC_MushroomMonsterAlertDoSkill(context)
 	PrintLog(context,"蕈兽开始释放技能")
-	local beast = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
+	beast = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, beast, "SGV_Fungus_StartBurst_Immediately",1)
 	return 0
 end
@@ -127,14 +127,14 @@ function action_EVENT_GROUP_LOAD(context, evt)
     ScriptLib.SetWorktopOptionsByGroupId(context, 0, battleStartConsole, {gearOptionInfo.challengeInfo.attackChallenge,gearOptionInfo.challengeInfo.defenseChallenge})
 
     --给四个台子增加创建蕈兽的按钮
-    local insertTableValue=function(input)
-    	local output={}
+    insertTableValue=function(input)
+    	output={}
     	for k,v in pairs(input) do
     		table.insert(output,k)
     	end
     	return output
     end
-    local tempTbl=insertTableValue(gearOptionInfo.summonBeastInfo)
+    tempTbl=insertTableValue(gearOptionInfo.summonBeastInfo)
     for i=1,#beastSkillConsole do
     	ScriptLib.SetWorktopOptionsByGroupId(context, 0, beastSkillConsole[i], tempTbl)
     end
@@ -185,8 +185,8 @@ function action_EVENT_SELECT_OPTION(context, evt)
 	--看看是不是要放蕈兽技能
 	for k,v in pairs(gearOptionInfo.beastSillInfo) do
 		if v==evt.param2 then
-			local consoleId=beastSkillConsole[k]
-			local monsterId=ScriptLib.GetGroupVariableValue(context, consoleId.."BeastConfigId")
+			consoleId=beastSkillConsole[k]
+			monsterId=ScriptLib.GetGroupVariableValue(context, consoleId.."BeastConfigId")
 			ScriptLib.SetEntityServerGlobalValueByConfigId(context, monsterId, "SGV_Fungus_StartBurst_Immediately", 1)
 			--起一个时间轴给它设回来，这个先改成用词缀加SLC做
 			return 0

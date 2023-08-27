@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133307139
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_door = 139002,
 	gadget_switch = 139001,
 	group_id = 133307139,
@@ -15,12 +15,12 @@ local defs = {
 
 -- DEFS_MISCS
 --第一次交互的option，之后切为2
-local optionID = {418}
+optionID = {418}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -74,9 +74,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -87,9 +87,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -105,9 +105,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -115,20 +115,20 @@ function condition_EVENT_TIME_AXIS_PASS_139004(context, evt)
 	if "open_door" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_139004(context, evt)
-	
+
 	-- 将configid为 defs.gadget_door 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_door, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
-	
+		end
+
+
 	return 0
 end
 
@@ -137,7 +137,7 @@ function condition_EVENT_GROUP_LOAD_139006(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133307139, 139008) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -147,8 +147,8 @@ function action_EVENT_GROUP_LOAD_139006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 139002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -156,14 +156,14 @@ end
 function condition_EVENT_SELECT_OPTION_139007(context, evt)
 	-- 判断是gadgetid 139008 option_id 418
 	if 139008 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 418 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -173,8 +173,8 @@ function action_EVENT_SELECT_OPTION_139007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 139008, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -183,7 +183,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_139010(context, evt)
 	if 139008 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -194,26 +194,26 @@ function action_EVENT_GADGET_STATE_CHANGE_139010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 创建标识为"open_door"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "open_door", {1}, false)
-	
-	
+
+
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133307046, 2)
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133307141, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 通知场景上的所有玩家播放名字为114 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 114, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -222,7 +222,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_139014(context, evt)
 	if 139008 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -233,7 +233,7 @@ function action_EVENT_GADGET_STATE_CHANGE_139014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

@@ -5,7 +5,7 @@
 ||  owner:      weiwei.sun
 ||  description:    辛焱岛 传音炮逻辑
 ||  LogName:    ## [TransferFlower]
-||  Protection: 
+||  Protection:
 =======================================]]
 
 --[[
@@ -36,7 +36,7 @@ local	defs = {
 
 ]]
 
-local extraTriggers={
+extraTriggers={
   { config_id = 8000001, name = "Select_Option", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_Select_Option", trigger_count = 0 },
   { config_id = 8000002, name = "BigFlower_Var_Change", event = EventType.EVENT_VARIABLE_CHANGE, source = "big_flower", condition = "", action = "action_BigFlower_Var_Change", trigger_count = 0 },
   { config_id = 8000003, name = "Group_Init", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_Group_Init", trigger_count = 1 },
@@ -68,7 +68,7 @@ end
 
 --玩家操作传音花（SLC）
 function SLC_TransferFlower_Turn(context)
-	local cfg_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	cfg_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	for k,v in pairs(defs.horizon_steps) do
 		if k == cfg_id then
 			LF_TurnByStepSLC(context, cfg_id, v)
@@ -85,7 +85,7 @@ function SLC_TransferFlower_Turn(context)
 end
 
 function action_Enter_Guide_Region(context, evt)
-	if evt.param1 ~= defs.guide_region then 
+	if evt.param1 ~= defs.guide_region then
 		return 0
 	end
 	LF_TryShowGuide(context)
@@ -113,8 +113,8 @@ end
 --根据配置的步长切state(SLC用)
 function LF_TurnByStepSLC(context, config_id, step_table)
 
-	local current_state = ScriptLib.GetGadgetStateByConfigId(context, 0, config_id)
-	local current_index = LF_GetIndexInTable(context, current_state, step_table)
+	current_state = ScriptLib.GetGadgetStateByConfigId(context, 0, config_id)
+	current_index = LF_GetIndexInTable(context, current_state, step_table)
 
 	if 0 == current_index then
 		--传音花的state并不在配置table中，告警
@@ -134,11 +134,11 @@ end
 --根据配置的步长切state
 function LF_TurnByStep(context, config_id, step_table)
 
-	for k,v in pairs(step_table) do 
+	for k,v in pairs(step_table) do
 
 		if k == config_id then
-			local current_state = ScriptLib.GetGadgetStateByConfigId(context, 0, config_id)
-			local current_index = LF_GetIndexInTable(context, current_state, v)
+			current_state = ScriptLib.GetGadgetStateByConfigId(context, 0, config_id)
+			current_index = LF_GetIndexInTable(context, current_state, v)
 
 			if 0 == current_index then
 				--传音花的state并不在配置table中，告警
@@ -152,7 +152,7 @@ function LF_TurnByStep(context, config_id, step_table)
 				end
 			end
 			return 0
-		end		
+		end
 		--传进来的configID不是配置的传音花，告警
 		ScriptLib.PrintContextLog(context, "## [TransferFlower] #WARN# LF_HorizonalTurnByStep find config_id failed, check defs. config_id@"..config_id)
 	end
@@ -162,7 +162,7 @@ end
 --当大传音花被打时，如果变量为0，则设为1
 function SLC_TransferFlower_BigFlowerHit(context)
 	--记下本Group内大传音花的configID
-	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	ScriptLib.SetGroupTempValue(context, "big_flower_id", config_id, {})
 	if 0 == ScriptLib.GetGroupVariableValue(context, "big_flower") then
 		ScriptLib.SetGroupVariableValue(context, "big_flower", 1)
@@ -171,7 +171,7 @@ function SLC_TransferFlower_BigFlowerHit(context)
 end
 
 function action_BigFlower_Var_Change(context, evt)
-	local big_flowerID = ScriptLib.GetGroupTempValue(context, "big_flower_id", {})
+	big_flowerID = ScriptLib.GetGroupTempValue(context, "big_flower_id", {})
 	if 0 >= big_flowerID then
 		return 0
 	end
@@ -196,9 +196,9 @@ end
 function LF_TryShowGuide(context)
 	--在NewActivityPushTipsData配置中查找对应id, 并通过lua添加进活动中
 	--重复添加已有push tips返回-1 成功添加返回0
-	local ret = ScriptLib.TryRecordActivityPushTips(context, 2014010)
+	ret = ScriptLib.TryRecordActivityPushTips(context, 2014010)
 	if 0 == ret then
-		local uid = ScriptLib.GetSceneOwnerUid(context)
+		uid = ScriptLib.GetSceneOwnerUid(context)
 		ScriptLib.ShowClientTutorial(context, 1181, {uid})
 	end
 	return 0

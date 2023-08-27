@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 166001122
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -68,9 +68,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -80,7 +80,7 @@ function condition_EVENT_FISHING_QTE_FINISH_122002(context, evt)
 	elseif 0 ~= evt.param1 and 0 ~= 0 then
 	  return false
 	end
-	
+
 	return true
 end
 
@@ -91,7 +91,7 @@ function action_EVENT_FISHING_QTE_FINISH_122002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -101,9 +101,9 @@ function condition_EVENT_FISHING_STOP_122003(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "fishdone", 166001611) > 0 then
 			return true
 	end
-	
+
 	return false
-	
+
 end
 
 -- 触发操作
@@ -113,6 +113,6 @@ function action_EVENT_FISHING_STOP_122003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

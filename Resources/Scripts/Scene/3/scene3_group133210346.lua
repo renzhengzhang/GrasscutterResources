@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210346
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -137,9 +137,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -148,7 +148,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_346005(context, evt)
 	if 346001 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 or GadgetState.Action02 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -159,7 +159,7 @@ function action_EVENT_GADGET_STATE_CHANGE_346005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -169,7 +169,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_346006(context, evt)
 	if 346001 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 or GadgetState.Action01 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -180,11 +180,11 @@ function action_EVENT_GADGET_STATE_CHANGE_346006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"Gadget1"，时间节点为{15}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Gadget1", {15}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -194,7 +194,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_346007(context, evt)
 	if 346002 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 or GadgetState.Action02 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -205,7 +205,7 @@ function action_EVENT_GADGET_STATE_CHANGE_346007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -215,7 +215,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_346008(context, evt)
 	if 346002 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 or GadgetState.Action01 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -226,11 +226,11 @@ function action_EVENT_GADGET_STATE_CHANGE_346008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"Gadget2"，时间节点为{15}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Gadget2", {15}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -240,7 +240,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_346009(context, evt)
 	if 346003 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 or GadgetState.Action02 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -251,7 +251,7 @@ function action_EVENT_GADGET_STATE_CHANGE_346009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -261,7 +261,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_346010(context, evt)
 	if 346003 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 or GadgetState.Action01 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -272,11 +272,11 @@ function action_EVENT_GADGET_STATE_CHANGE_346010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"Gadget3"，时间节点为{15}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Gadget3", {15}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -286,7 +286,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_346011(context, evt)
 	if 346004 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 or GadgetState.Action02 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -297,7 +297,7 @@ function action_EVENT_GADGET_STATE_CHANGE_346011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -307,7 +307,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_346012(context, evt)
 	if 346004 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 or GadgetState.Action01 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -318,23 +318,23 @@ function action_EVENT_GADGET_STATE_CHANGE_346012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"Gadget4"，时间节点为{15}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Gadget4", {15}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_346013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Gadget_Count"为4
 	if ScriptLib.GetGroupVariableValue(context, "Gadget_Count") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -345,16 +345,16 @@ function action_EVENT_VARIABLE_CHANGE_346013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 通知场景上的所有玩家播放名字为321007401 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 321007401, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210346, 3)
-	
+
 	return 0
 end
 
@@ -372,8 +372,8 @@ function action_EVENT_TIME_AXIS_PASS_346014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 346001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -391,8 +391,8 @@ function action_EVENT_TIME_AXIS_PASS_346015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 346002, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -410,8 +410,8 @@ function action_EVENT_TIME_AXIS_PASS_346016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 346003, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -429,8 +429,8 @@ function action_EVENT_TIME_AXIS_PASS_346017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 346004, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -440,7 +440,7 @@ function condition_EVENT_GROUP_LOAD_346018(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "successed", 133210088) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -448,6 +448,6 @@ end
 function action_EVENT_GROUP_LOAD_346018(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210346, 2)
-	
+
 	return 0
 end

@@ -1,23 +1,23 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309372
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_1 = 372001,
 	gadget_2 = 372002,
 	gadget_3 = 372003
 }
 
 -- DEFS_MISCS
-local HourGlass_ConfigIDList = {defs.gadget_1,defs.gadget_2,defs.gadget_3}
-local forceStopGroup = {133309435}
+HourGlass_ConfigIDList = {defs.gadget_1,defs.gadget_2,defs.gadget_3}
+forceStopGroup = {133309435}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -65,9 +65,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -78,9 +78,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -96,24 +96,24 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_372004(context, evt)
 	if evt.param1 ~= 372004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133309372, 372003) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -124,23 +124,23 @@ function action_EVENT_ENTER_REGION_372004(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_372005(context, evt)
 	if evt.param1 ~= 372005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133309372, 372002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -151,23 +151,23 @@ function action_EVENT_ENTER_REGION_372005(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_372007(context, evt)
 	if evt.param1 ~= 372007 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133309372, 372001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -178,19 +178,19 @@ function action_EVENT_ENTER_REGION_372007(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_372008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"HourGlass_Success"为1
 	if ScriptLib.GetGroupVariableValue(context, "HourGlass_Success") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -200,24 +200,24 @@ function action_EVENT_VARIABLE_CHANGE_372008(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133309170, 170001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133309170中， configid为170004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133309170, 170004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标{x=-2395.276, y=193.4921, z=5768.134}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-2395.276, y=193.4921, z=5768.134}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-2395.276, y=193.4921, z=5768.134}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -227,7 +227,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_372009(context, evt)
 	if 372003 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -238,7 +238,7 @@ function action_EVENT_GADGET_STATE_CHANGE_372009(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 

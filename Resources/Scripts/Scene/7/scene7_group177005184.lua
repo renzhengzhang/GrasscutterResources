@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 177005184
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -36,9 +36,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -49,9 +49,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -67,9 +67,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -78,18 +78,18 @@ function action_EVENT_GROUP_LOAD_184001(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "count", 177005175) == 3 then
 			ScriptLib.AddQuestProgress(context, "7227604")
 	end
-	
-	
+
+
 	-- 判断变量"count"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "count", 177006090) == 2 then
 			ScriptLib.AddQuestProgress(context, "7227614")
 	end
-	
+
 	-- 判断变量"count"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "count", 177008091) == 2 then
 			ScriptLib.AddQuestProgress(context, "7227615")
 	end
-	
-	
+
+
 	return 0
 end

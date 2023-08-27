@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 144001159
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	maxPathNode = 4,
 	pointarray_route = 400100008,
 	gadget_bubble = 159002,
@@ -15,9 +15,9 @@ local defs = {
 -- DEFS_MISCS
 function MovePlatform(context)
 	ScriptLib.PrintLog(context, "platform to move")
-	local pathnodeindex = ScriptLib.GetGroupVariableValue(context, "currentPathNode") + 1
+	pathnodeindex = ScriptLib.GetGroupVariableValue(context, "currentPathNode") + 1
 
-	if pathnodeindex > defs.maxPathNode then 
+	if pathnodeindex > defs.maxPathNode then
 		pathnodeindex = defs.maxPathNode
 	end
 
@@ -27,9 +27,9 @@ function MovePlatform(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -80,9 +80,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -93,9 +93,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -129,7 +129,7 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================

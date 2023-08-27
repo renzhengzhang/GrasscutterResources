@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133317050
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -107,9 +107,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -120,9 +120,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -183,9 +183,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -195,19 +195,19 @@ function action_EVENT_ANY_GADGET_DIE_50009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_50010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count_1"为4
 	if ScriptLib.GetGroupVariableValue(context, "count_1") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -215,29 +215,29 @@ end
 function action_EVENT_VARIABLE_CHANGE_50010(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133317050, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标（631.351，315.9202，5789.329），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=631.351, y=315.9202, z=5789.329}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=631.351, y=315.9202, z=5789.329}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_50011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count_2"为12
 	if ScriptLib.GetGroupVariableValue(context, "count_2") ~= 12 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -245,19 +245,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_50011(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133317050, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_50012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count_3"为7
 	if ScriptLib.GetGroupVariableValue(context, "count_3") ~= 7 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -265,19 +265,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_50012(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133317050, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_50013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count_4"为5
 	if ScriptLib.GetGroupVariableValue(context, "count_4") ~= 5 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -285,7 +285,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_50013(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133317050, 5)
-	
+
 	return 0
 end
 
@@ -296,19 +296,19 @@ function action_EVENT_ANY_GADGET_DIE_50063(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_50064(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count_5"为9
 	if ScriptLib.GetGroupVariableValue(context, "count_5") ~= 9 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -316,17 +316,17 @@ end
 function action_EVENT_VARIABLE_CHANGE_50064(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133317050, 6)
-	
+
 	-- 触发镜头注目，注目位置为坐标（640.0622，312.5466，5797.95），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=640.0622, y=312.5466, z=5797.95}
-	  local pos_follow = {x=0, y=10.16, z=0}
+		pos = {x=640.0622, y=312.5466, z=5797.95}
+	  pos_follow = {x=0, y=10.16, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -337,7 +337,7 @@ function action_EVENT_ANY_GADGET_DIE_50065(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -348,7 +348,7 @@ function action_EVENT_ANY_GADGET_DIE_50067(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -359,6 +359,6 @@ function action_EVENT_ANY_GADGET_DIE_50069(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

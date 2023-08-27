@@ -1,39 +1,39 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133307017
 }
 
 -- DEFS_MISCS
 --风扇
-local fans =
+fans =
 {
     17003,
     17004
 }
 --沙堆
-local sandpiles =
+sandpiles =
 {
     17009,
     17010,
-    17011  
+    17011
 }
 --百叶窗
-local shutters =
+shutters =
 {
     17006
 }
 --百叶窗开关
-local shutter_switches =
+shutter_switches =
 {
     17007
 }
 --每个风扇对应点阵
-local FanToPointArray =
+FanToPointArray =
 {
-   
+
 }
 --沙堆风扇方向位置
-local FanToSandpile =
+FanToSandpile =
 {
     [sandpiles[1]] = {fan = fans[1], dir_state = 202, pos = 1},
     [sandpiles[2]] = {fan = fans[2], dir_state = 202, pos = 1},
@@ -41,15 +41,15 @@ local FanToSandpile =
 }
 
 --百叶窗开关和百叶窗对应
-local SwitchToShutter =
+SwitchToShutter =
 {
      [shutter_switches[1]] = shutters[1]
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -109,9 +109,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -122,9 +122,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -140,9 +140,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -150,7 +150,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_17002(context, evt)
 	if 17009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -160,14 +160,14 @@ function action_EVENT_GADGET_STATE_CHANGE_17002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133307017, 17008, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -175,14 +175,14 @@ end
 function condition_EVENT_SELECT_OPTION_17013(context, evt)
 	-- 判断是gadgetid 17008 option_id 7
 	if 17008 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -192,20 +192,20 @@ function action_EVENT_SELECT_OPTION_17013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 17005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133307017 ；指定config：17008；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133307017, 17008, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -214,7 +214,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_17014(context, evt)
 	if 17010 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -224,8 +224,8 @@ function action_EVENT_GADGET_STATE_CHANGE_17014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -234,7 +234,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_17015(context, evt)
 	if 17011 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -244,14 +244,14 @@ function action_EVENT_GADGET_STATE_CHANGE_17015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133307017, 17001, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -259,14 +259,14 @@ end
 function condition_EVENT_SELECT_OPTION_17016(context, evt)
 	-- 判断是gadgetid 17001 option_id 7
 	if 17001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -276,32 +276,32 @@ function action_EVENT_SELECT_OPTION_17016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 17012 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133307019中， configid为19005的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133307019, 19005, GadgetState.GearAction1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133307018中， configid为18004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133307018, 18004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133307017 ；指定config：17001；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133307017, 17001, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 

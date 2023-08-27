@@ -1,6 +1,6 @@
-local GalleryNum = 3
+GalleryNum = 3
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Player_In"] = { config_id = 8000001, name = "Player_In", event= EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_wait_all_player", trigger_count = 0 },
 		--["Buffer_Timer"] = { config_id = 8000002, name = "Buffer_Timer", event= EventType.EVENT_TIMER_EVENT, source = "", condition = "", action = "buffer_timeout", trigger_count = 0 },
@@ -29,8 +29,8 @@ end
 
 function SubController( context, SubSocre, Tag)
     -- 取出要减分数的绝对值
-    local absSubScore = math.abs(SubSocre)
-    local CurScore = ScriptLib.GetFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, context.uid)
+    absSubScore = math.abs(SubSocre)
+    CurScore = ScriptLib.GetFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, context.uid)
 
     if ScriptLib.GetSceneMultiStagePlayUidValue(context,235800001, 1, Tag, context.uid) == 0 then
         ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, Tag, context.uid, 0)
@@ -127,7 +127,7 @@ end
 
 function EndPlayStage( context, prev_context, is_success, GroupID)
 
-	local CurRound = ScriptLib.GetGroupTempValue(context, "CurRound", {})
+	CurRound = ScriptLib.GetGroupTempValue(context, "CurRound", {})
 
 	ScriptLib.ExecuteGroupLua(context, GroupID, "StopReTransCheck", {})
 
@@ -137,7 +137,7 @@ function EndPlayStage( context, prev_context, is_success, GroupID)
 	else
 		ScriptLib.EndSceneMultiStagePlayStage(context, 1, "PlayRound"..CurRound, false)
 	end
-	
+
 	return 0
 end
 
@@ -152,15 +152,15 @@ function EndBossStage( context, prev_context, is_success, GroupID)
 		ScriptLib.EndSceneMultiStagePlayStage(context, 1, "BossPlayRound", false)
 		ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : BOSS ROUND LOSE!!!")
 	end
-	
+
 	return 0
 end
 
 function ReTrans( context, prev_context, uid )
-	local UidList = ScriptLib.GetSceneUidList(context)
-	local CurRound = ScriptLib.GetGroupTempValue(context, "CurRound", {})
-	local CurSequence = ScriptLib.GetGroupTempValue(context, "sequence"..CurRound, {})
-	local ActivityStage = ScriptLib.GetGroupTempValue(context, "ActivityStage", {})
+	UidList = ScriptLib.GetSceneUidList(context)
+	CurRound = ScriptLib.GetGroupTempValue(context, "CurRound", {})
+	CurSequence = ScriptLib.GetGroupTempValue(context, "sequence"..CurRound, {})
+	ActivityStage = ScriptLib.GetGroupTempValue(context, "ActivityStage", {})
 
 	ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : ReTrans CurSequence ->"..CurSequence)
 
@@ -170,24 +170,24 @@ function ReTrans( context, prev_context, uid )
 		--Boss传送
 		for i,v in ipairs(UidList) do
 			if v == uid then
-				local ProtalPos = BossPointList[ActivityStage][i].pos
-				local ProtalRot = BossPointList[ActivityStage][i].rot
+				ProtalPos = BossPointList[ActivityStage][i].pos
+				ProtalRot = BossPointList[ActivityStage][i].rot
 				ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Player ->"..v.." ReTrans")
-				ScriptLib.TransPlayerToPos(context, {uid_list = {v}, pos = ProtalPos, radius = 0, rot = ProtalRot , is_skip_ui = false}) 
-			end	
+				ScriptLib.TransPlayerToPos(context, {uid_list = {v}, pos = ProtalPos, radius = 0, rot = ProtalRot , is_skip_ui = false})
+			end
 		end
 	else
 		--非Boss传送
 		for i,v in ipairs(UidList) do
 			if v == uid then
-				local ProtalPos = ProtalPointList[CurSequence][i].pos
-				local ProtalRot = ProtalPointList[CurSequence][i].rot
+				ProtalPos = ProtalPointList[CurSequence][i].pos
+				ProtalRot = ProtalPointList[CurSequence][i].rot
 				ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Player ->"..v.." ReTrans")
-				ScriptLib.TransPlayerToPos(context, {uid_list = {v}, pos = ProtalPos, radius = 0, rot = ProtalRot , is_skip_ui = false}) 
-			end	
+				ScriptLib.TransPlayerToPos(context, {uid_list = {v}, pos = ProtalPos, radius = 0, rot = ProtalRot , is_skip_ui = false})
+			end
 		end
 	end
-	
+
 	return 0
 end
 
@@ -202,16 +202,16 @@ function action_wait_all_player( context, evt )
 
 	ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Rounds Initial ！！！！！！！！！ ")
 
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 	-- 初始化一个多阶段玩法
 	ScriptLib.InitSceneMultistagePlay(context, 1, MultistagePlayType.FleurFair, {gallery_stage_count = GalleryNum}, UidList)
 
-	local temp = ScriptLib.GetFleurFairMultistagePlayGalleryIdVec(context, 235800001, 1)
+	temp = ScriptLib.GetFleurFairMultistagePlayGalleryIdVec(context, 235800001, 1)
 
 	ScriptLib.SetGroupTempValue(context, "GalleryNum_Real", #temp, {})
 
-	ScriptLib.SetGroupTempValue(context, "ActivityStage", ScriptLib.GetFleurFairDungeonSectionId(context), {}) 
+	ScriptLib.SetGroupTempValue(context, "ActivityStage", ScriptLib.GetFleurFairDungeonSectionId(context), {})
 
 	-- for i,v in ipairs(MiniGameLevelPoll[ActivityStage]) do
 	-- 	table.insert(temp,v)
@@ -223,9 +223,9 @@ function action_wait_all_player( context, evt )
 		ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : The Random CurSequence is -> "..ScriptLib.GetGroupTempValue(context, "sequence"..i, {}))
 	end
 
-	
+
 	ScriptLib.StartSceneMultiStagePlayStage(context, 1, 40, Multistage.FleurFairPreview, "PlayerReady",{preview_stage_index = 0, preview_display_duration = 40})
-	
+
 	return 0
 end
 
@@ -253,9 +253,9 @@ end
 
 function action_trans_time_delay( context,evt )
 	-- 玩家loading完后结束每个preview阶段
-	local CurRound = ScriptLib.GetGroupTempValue(context, "CurRound", {})
+	CurRound = ScriptLib.GetGroupTempValue(context, "CurRound", {})
 
-	local Rounds = ScriptLib.GetGroupTempValue(context, "Rounds", {})
+	Rounds = ScriptLib.GetGroupTempValue(context, "Rounds", {})
 
 	ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : CUT ROUND THE ROUNDS IS "..Rounds)
 
@@ -302,7 +302,7 @@ function action_multistage_end( context, evt)
 		ScriptLib.EndSceneMultiStagePlay(context, 1, true)
 	elseif evt.source_name == "BossPlayRound" and evt.param3 ==0  then
 		ScriptLib.CauseDungeonFail(context)
-		ScriptLib.EndSceneMultiStagePlay(context, 1, false)		
+		ScriptLib.EndSceneMultiStagePlay(context, 1, false)
 	elseif evt.source_name ~= "BossPlayRound" then
 		StartNewPlay(context)
 	end
@@ -324,13 +324,13 @@ end
 function StartNewPlay(context)
 	-- 根据sequence开启玩法
 
-	local CurRound = ScriptLib.GetGroupTempValue(context, "Rounds", {})
+	CurRound = ScriptLib.GetGroupTempValue(context, "Rounds", {})
 
 	ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : StartNewPlay And Rounds Is ->"..CurRound)
 
 	--单数开启传送、等待；偶数开启玩法
 	if CurRound%4 == 1 then
-		StartWaitStage(context, (CurRound+3)//4)	
+		StartWaitStage(context, (CurRound+3)//4)
 	elseif CurRound%4 == 2 then
 		StartIdleStage( context, (CurRound+2)//4)
 	elseif CurRound%4 == 3 then
@@ -364,32 +364,32 @@ function StartWaitStage( context, CurRound )
 		-- 如果所有sequence中的玩法都取完了，开启BOSS挑战
 	ScriptLib.SetGroupTempValue(context, "CurRound", CurRound, {})
 
-	local GalleryNum_Real = ScriptLib.GetGroupTempValue(context, "GalleryNum_Real", {})
+	GalleryNum_Real = ScriptLib.GetGroupTempValue(context, "GalleryNum_Real", {})
 
 	if CurRound == GalleryNum_Real+1 then
 		BossChallengeWait(context,CurRound)
 		return 0
 	end
-	
-	local CurSequence = ScriptLib.GetGroupTempValue(context, "sequence"..CurRound, {})
+
+	CurSequence = ScriptLib.GetGroupTempValue(context, "sequence"..CurRound, {})
 
 	ScriptLib.StartSceneMultiStagePlayStage(context, 1, 40, Multistage.FleurFairPreview, "WaitRound"..CurRound,{preview_stage_index = CurRound, preview_display_duration = 40})
 
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 	if UidList ~= nil then
 		for i,v in ipairs(UidList) do
-			local ProtalPos = ProtalPointList[CurSequence][i].pos
-			local ProtalRot = ProtalPointList[CurSequence][i].rot
+			ProtalPos = ProtalPointList[CurSequence][i].pos
+			ProtalRot = ProtalPointList[CurSequence][i].rot
 			ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Player ->"..v.."  Is In Trans")
-			ScriptLib.TransPlayerToPos(context, {uid_list = {v}, pos = ProtalPos, radius = 0, rot = ProtalRot , is_skip_ui = true}) 
+			ScriptLib.TransPlayerToPos(context, {uid_list = {v}, pos = ProtalPos, radius = 0, rot = ProtalRot , is_skip_ui = true})
 		end
 	else
 		ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : UidList Is Nil ")
 	end
 
 
-	local CurSequence = ScriptLib.GetGroupTempValue(context, "sequence"..CurRound, {})
-	local GroupID = WindFloraGroupList[CurSequence]
+	CurSequence = ScriptLib.GetGroupTempValue(context, "sequence"..CurRound, {})
+	GroupID = WindFloraGroupList[CurSequence]
 
 
 	--单独创建弹幕机关
@@ -402,9 +402,9 @@ end
 
 function StartIdleStage( context, CurRound )
 
-	local GalleryNum_Real = ScriptLib.GetGroupTempValue(context, "GalleryNum_Real", {})
+	GalleryNum_Real = ScriptLib.GetGroupTempValue(context, "GalleryNum_Real", {})
 
-	local ActivityStage = ScriptLib.GetGroupTempValue(context, "ActivityStage", {})
+	ActivityStage = ScriptLib.GetGroupTempValue(context, "ActivityStage", {})
 
 	ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : CurPlayRound Num is -> "..CurRound)
 
@@ -412,7 +412,7 @@ function StartIdleStage( context, CurRound )
 		BossChallengeIdle(context)
 		return 0
 	end
-	
+
 	ScriptLib.StartSceneMultiStagePlayStage(context, 1, 8, Multistage.Idle, "IdleRound"..CurRound,{})
 
 	return 0
@@ -421,9 +421,9 @@ end
 function StartPlayStage( context, CurRound )
 	-- 开启挑战回合
 
-	local GalleryNum_Real = ScriptLib.GetGroupTempValue(context, "GalleryNum_Real", {})
+	GalleryNum_Real = ScriptLib.GetGroupTempValue(context, "GalleryNum_Real", {})
 
-	local ActivityStage = ScriptLib.GetGroupTempValue(context, "ActivityStage", {})
+	ActivityStage = ScriptLib.GetGroupTempValue(context, "ActivityStage", {})
 
 	ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : CurPlayRound Num is -> "..CurRound)
 
@@ -432,14 +432,14 @@ function StartPlayStage( context, CurRound )
 		return 0
 	end
 
-	local CurSequence = ScriptLib.GetGroupTempValue(context, "sequence"..CurRound, {})
+	CurSequence = ScriptLib.GetGroupTempValue(context, "sequence"..CurRound, {})
 
 	-- 开启对应阶段
 	ScriptLib.StartSceneMultiStagePlayStage(context, 1, 0, Multistage.FleurFairGallery, "PlayRound"..CurRound,{gallery_stage_index = CurRound})
 
 	-- 开启对应的玩法
 	--初始化蓝色风之花分数
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
     for i,v in ipairs(UidList) do
         ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "get_random_flora", v, 0)
     end
@@ -455,21 +455,21 @@ end
 
 function BossChallengeWait( context,CurRound )
 	-- Boss等待回合
-	local ActivityStage = ScriptLib.GetGroupTempValue(context, "ActivityStage", {})
+	ActivityStage = ScriptLib.GetGroupTempValue(context, "ActivityStage", {})
 
-	local CurRound = ScriptLib.GetGroupTempValue(context, "CurRound", {})
+	CurRound = ScriptLib.GetGroupTempValue(context, "CurRound", {})
 
 	ScriptLib.StartSceneMultiStagePlayStage(context, 1, 40, Multistage.FleurFairPreview, "WaitRound"..CurRound,{preview_stage_index = CurRound, preview_display_duration = 1})
 
 	-- 传送到对应的位置
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(UidList) do
 		ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Player Uid Is -> "..v.."     BossPOS Is Ready")
 
-		local ProtalPos = BossPointList[ActivityStage][i].pos
-		local ProtalRot = BossPointList[ActivityStage][i].rot
+		ProtalPos = BossPointList[ActivityStage][i].pos
+		ProtalRot = BossPointList[ActivityStage][i].rot
 
-		ScriptLib.TransPlayerToPos(context, {uid_list = {v}, pos = ProtalPos, radius = 0, rot = ProtalRot, is_skip_ui = false}) 
+		ScriptLib.TransPlayerToPos(context, {uid_list = {v}, pos = ProtalPos, radius = 0, rot = ProtalRot, is_skip_ui = false})
 	end
 
 	ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Boss Wait Round")
@@ -481,7 +481,7 @@ end
 
 function BossChallengeIdle(context)
 
-	local RealRoundNum = ScriptLib.GetGroupTempValue(context, "GalleryNum_Real", {})
+	RealRoundNum = ScriptLib.GetGroupTempValue(context, "GalleryNum_Real", {})
 
 	ScriptLib.ExecuteGroupLua(context, 235800002, "RemoveFloorSuite", {})
 	ScriptLib.ExecuteGroupLua(context, 235800003, "RemoveFloorSuite", {})
@@ -494,7 +494,7 @@ function BossChallengeStart( context)
 	-- 获取阶段BUFF
 
 	-- 开启Boss阶段
-	local ActivityStage = ScriptLib.GetGroupTempValue(context, "ActivityStage", {})
+	ActivityStage = ScriptLib.GetGroupTempValue(context, "ActivityStage", {})
 
 	ScriptLib.ExecuteGroupLua(context, BossGroupList[ActivityStage], "RefreshRandomElem", {ActivityStage})
 

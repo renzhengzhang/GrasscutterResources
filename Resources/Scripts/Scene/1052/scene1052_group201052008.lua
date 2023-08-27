@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201052008
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -85,9 +85,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -98,9 +98,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -116,20 +116,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage1"为102
 	if ScriptLib.GetGroupVariableValue(context, "stage1") ~= 102 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -140,37 +140,37 @@ function action_EVENT_VARIABLE_CHANGE_8014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state1", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8011, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage1"为203
 	if ScriptLib.GetGroupVariableValue(context, "stage1") ~= 203 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -181,37 +181,37 @@ function action_EVENT_VARIABLE_CHANGE_8015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state2", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8011, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage1"为304
 	if ScriptLib.GetGroupVariableValue(context, "stage1") ~= 304 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -222,37 +222,37 @@ function action_EVENT_VARIABLE_CHANGE_8016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state1", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8011, 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage1"为401
 	if ScriptLib.GetGroupVariableValue(context, "stage1") ~= 401 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -263,37 +263,37 @@ function action_EVENT_VARIABLE_CHANGE_8017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state2", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8011, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage1"为104
 	if ScriptLib.GetGroupVariableValue(context, "stage1") ~= 104 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -304,37 +304,37 @@ function action_EVENT_VARIABLE_CHANGE_8018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state1", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8011, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage1"为201
 	if ScriptLib.GetGroupVariableValue(context, "stage1") ~= 201 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -345,37 +345,37 @@ function action_EVENT_VARIABLE_CHANGE_8019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state2", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8011, 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage1"为302
 	if ScriptLib.GetGroupVariableValue(context, "stage1") ~= 302 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -386,37 +386,37 @@ function action_EVENT_VARIABLE_CHANGE_8020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state1", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8011, 6) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8021(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage1"为403
 	if ScriptLib.GetGroupVariableValue(context, "stage1") ~= 403 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -427,25 +427,25 @@ function action_EVENT_VARIABLE_CHANGE_8021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state2", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8011, 8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -455,26 +455,26 @@ function action_EVENT_TIMER_EVENT_8022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8008 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8009 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -484,38 +484,38 @@ function action_EVENT_TIMER_EVENT_8023(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8025(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage2"为102
 	if ScriptLib.GetGroupVariableValue(context, "stage2") ~= 102 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -526,37 +526,37 @@ function action_EVENT_VARIABLE_CHANGE_8025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state3", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8012, 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8012) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8026(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage2"为203
 	if ScriptLib.GetGroupVariableValue(context, "stage2") ~= 203 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -567,37 +567,37 @@ function action_EVENT_VARIABLE_CHANGE_8026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state4", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8012, 12) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8012) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8027(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage2"为304
 	if ScriptLib.GetGroupVariableValue(context, "stage2") ~= 304 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -608,37 +608,37 @@ function action_EVENT_VARIABLE_CHANGE_8027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state3", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8012, 14) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8012) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8028(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage2"为401
 	if ScriptLib.GetGroupVariableValue(context, "stage2") ~= 401 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -649,37 +649,37 @@ function action_EVENT_VARIABLE_CHANGE_8028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state4", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8012, 16) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8012) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8029(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage2"为104
 	if ScriptLib.GetGroupVariableValue(context, "stage2") ~= 104 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -690,37 +690,37 @@ function action_EVENT_VARIABLE_CHANGE_8029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state3", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8012, 11) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8012) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8030(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage2"为201
 	if ScriptLib.GetGroupVariableValue(context, "stage2") ~= 201 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -731,37 +731,37 @@ function action_EVENT_VARIABLE_CHANGE_8030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state4", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8012, 13) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8012) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8031(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage2"为302
 	if ScriptLib.GetGroupVariableValue(context, "stage2") ~= 302 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -772,37 +772,37 @@ function action_EVENT_VARIABLE_CHANGE_8031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state3", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8012, 15) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8012) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8032(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage2"为403
 	if ScriptLib.GetGroupVariableValue(context, "stage2") ~= 403 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -813,25 +813,25 @@ function action_EVENT_VARIABLE_CHANGE_8032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state4", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8012, 17) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8012) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -841,20 +841,20 @@ function action_EVENT_TIMER_EVENT_8033(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8010 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8010, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -864,32 +864,32 @@ function action_EVENT_TIMER_EVENT_8034(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8007 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8035(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage3"为102
 	if ScriptLib.GetGroupVariableValue(context, "stage3") ~= 102 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -900,37 +900,37 @@ function action_EVENT_VARIABLE_CHANGE_8035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state5" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state5", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8013, 18) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8036(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage3"为203
 	if ScriptLib.GetGroupVariableValue(context, "stage3") ~= 203 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -941,37 +941,37 @@ function action_EVENT_VARIABLE_CHANGE_8036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state6" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state6", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8013, 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8037(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage3"为304
 	if ScriptLib.GetGroupVariableValue(context, "stage3") ~= 304 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -982,37 +982,37 @@ function action_EVENT_VARIABLE_CHANGE_8037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state7" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state7", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8013, 22) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8038(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage3"为401
 	if ScriptLib.GetGroupVariableValue(context, "stage3") ~= 401 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1023,37 +1023,37 @@ function action_EVENT_VARIABLE_CHANGE_8038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state8" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state8", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8013, 24) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8039(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage3"为104
 	if ScriptLib.GetGroupVariableValue(context, "stage3") ~= 104 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1064,37 +1064,37 @@ function action_EVENT_VARIABLE_CHANGE_8039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state7" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state7", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8013, 19) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8040(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage3"为201
 	if ScriptLib.GetGroupVariableValue(context, "stage3") ~= 201 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1105,37 +1105,37 @@ function action_EVENT_VARIABLE_CHANGE_8040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state8" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state8", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8013, 21) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8041(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage3"为302
 	if ScriptLib.GetGroupVariableValue(context, "stage3") ~= 302 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1146,37 +1146,37 @@ function action_EVENT_VARIABLE_CHANGE_8041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state5" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state5", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8013, 23) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8042(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stage3"为403
 	if ScriptLib.GetGroupVariableValue(context, "stage3") ~= 403 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1187,25 +1187,25 @@ function action_EVENT_VARIABLE_CHANGE_8042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：201052008的对象,请求一次调用,并将string参数："state6" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201052008, "state6", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 8013, 25) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1215,20 +1215,20 @@ function action_EVENT_TIMER_EVENT_8043(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1238,20 +1238,20 @@ function action_EVENT_TIMER_EVENT_8044(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1261,20 +1261,20 @@ function action_EVENT_TIMER_EVENT_8045(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1284,19 +1284,19 @@ function action_EVENT_TIMER_EVENT_8046(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 8005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

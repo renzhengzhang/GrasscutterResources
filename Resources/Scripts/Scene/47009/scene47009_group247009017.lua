@@ -1,37 +1,37 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 247009017
 }
 
 -- DEFS_MISCS
-local BossOperatorConfigID = 17002
-local QuitPointConfigID = 17001
-local BossPoolID = 28060
-local GroupId = 247009017
-local MainGroupID = 247009001
-local RegionID = 17007
-local questID = 0
-local doorConfigID = 0
-local doorBossFrontID = 17008
-local doorBossBackID = 17005
-local ThunderFloorTimeAxis = { 5,9 }
-local ThunderFloorList = {17013,17009,17010,17011,17012,17018,17019,17020,17021,17022,17023,17024,17025,17026,17027,17028,17029,17030,17031,17032,17033,17034,17035}
-local lastDoorConfigID = 0
-local isLastRoom = 0
-local EnterRoomTrigger = 17007
-local PlotRoom = {regionID= 0 , groupID= 0}
-local AirWallConfigID = 17046
-local DestinationConfigID = 0
-local BossDoorPos = {x=0,y=0,z=0}
-local BossDoorRot = {0}
-local nextQuestID = 0
-local DestinationPos = {x=0,y=0,z=0}
-local DestinationRot = {0}
+BossOperatorConfigID = 17002
+QuitPointConfigID = 17001
+BossPoolID = 28060
+GroupId = 247009017
+MainGroupID = 247009001
+RegionID = 17007
+questID = 0
+doorConfigID = 0
+doorBossFrontID = 17008
+doorBossBackID = 17005
+ThunderFloorTimeAxis = { 5,9 }
+ThunderFloorList = {17013,17009,17010,17011,17012,17018,17019,17020,17021,17022,17023,17024,17025,17026,17027,17028,17029,17030,17031,17032,17033,17034,17035}
+lastDoorConfigID = 0
+isLastRoom = 0
+EnterRoomTrigger = 17007
+PlotRoom = {regionID= 0 , groupID= 0}
+AirWallConfigID = 17046
+DestinationConfigID = 0
+BossDoorPos = {x=0,y=0,z=0}
+BossDoorRot = {0}
+nextQuestID = 0
+DestinationPos = {x=0,y=0,z=0}
+DestinationRot = {0}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -132,9 +132,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -145,9 +145,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -172,20 +172,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_17042(context, evt)
 	if evt.param1 ~= 17042 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -195,20 +195,20 @@ function action_EVENT_ENTER_REGION_17042(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_17043(context, evt)
 	if evt.param1 ~= 17043 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -218,20 +218,20 @@ function action_EVENT_ENTER_REGION_17043(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17015, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_17044(context, evt)
 	if evt.param1 ~= 17044 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -241,20 +241,20 @@ function action_EVENT_ENTER_REGION_17044(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17016, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_17045(context, evt)
 	if evt.param1 ~= 17045 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -264,8 +264,8 @@ function action_EVENT_ENTER_REGION_17045(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

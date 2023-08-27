@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 166001029
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -82,9 +82,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -92,7 +92,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_29002(context, evt)
 	if 29001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -103,7 +103,7 @@ function action_EVENT_GADGET_STATE_CHANGE_29002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -112,7 +112,7 @@ function condition_EVENT_GADGET_CREATE_29004(context, evt)
 	if 29003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -123,7 +123,7 @@ function action_EVENT_GADGET_CREATE_29004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -131,14 +131,14 @@ end
 function condition_EVENT_SELECT_OPTION_29005(context, evt)
 	-- 判断是gadgetid 29003 option_id 1
 	if 29003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -148,21 +148,21 @@ function action_EVENT_SELECT_OPTION_29005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 29001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 29003 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将本组内变量名为 "done" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "done", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -173,7 +173,7 @@ function action_EVENT_QUEST_START_29006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -183,7 +183,7 @@ function condition_EVENT_GROUP_LOAD_29007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "done") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -193,7 +193,7 @@ function action_EVENT_GROUP_LOAD_29007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 29001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

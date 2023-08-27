@@ -2,8 +2,8 @@
 --[[
 tide_defs = {
 	[1] = { sum = 40, min = 8, max = 12},
-	[2] = { sum = 40, min = 8, max = 12},	
-	[3] = { sum = 40, min = 8, max = 12},		
+	[2] = { sum = 40, min = 8, max = 12},
+	[3] = { sum = 40, min = 8, max = 12},
 }
 --]]
 
@@ -20,7 +20,7 @@ function LF_Init_Monster_Group()
 	table.insert(variables, { config_id=50000002,name = "challenge_group", value = 0})
 end
 
-local gear_group_id = defs.gear_group_id or 0
+gear_group_id = defs.gear_group_id or 0
 
 function action_monster_die(context, evt)
 	--ScriptLib.PrintContextLog(context, "--------------- award_points ------------")
@@ -40,9 +40,9 @@ end
 
 function monster_tide_over(context)
 	ScriptLib.PrintContextLog(context, "## monster_tide_over")
-	local tide = ScriptLib.GetGroupVariableValue(context, "tide_ptr")
+	tide = ScriptLib.GetGroupVariableValue(context, "tide_ptr")
 	if tide >= #tide_defs then
-		local challenge_group = ScriptLib.GetGroupVariableValue(context, "challenge_group")
+		challenge_group = ScriptLib.GetGroupVariableValue(context, "challenge_group")
 		ScriptLib.PrintContextLog(context, "## challenge_group = "..challenge_group)
 		ScriptLib.ExecuteGroupLua(context, challenge_group, "tide_done", {0})
 		ScriptLib.PrintContextLog(context, "## TD_LOG : Group Monster Tide End -> "..defs.group_id)

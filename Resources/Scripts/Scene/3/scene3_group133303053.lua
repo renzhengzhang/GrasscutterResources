@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133303053
 }
 
 -- DEFS_MISCS
-local defs = 
+defs =
 {
-    
+
     challenge_id = 2010057,
 
     starter_option_id = 175,
@@ -15,14 +15,14 @@ local defs =
 
 }
 
-local play_stage =
+play_stage =
 {
-    [1] = 
+    [1] =
     {
         gallery_id = 26006,
-        challenge_time = 120, 
+        challenge_time = 120,
         optimize_region = 53088,
-        
+
         element_target = 8,
         starter_operator_configID = 53012,
         dig_operator_configID = 53016,
@@ -34,10 +34,10 @@ local play_stage =
         treasure_configID = 53017,
     },
 
-    [2] = 
+    [2] =
     {
         gallery_id = 26006,
-        challenge_time = 120, 
+        challenge_time = 120,
         optimize_region = 53089,
 
         element_target = 10,
@@ -53,10 +53,10 @@ local play_stage =
 
     },
 
-    [3] = 
+    [3] =
     {
         gallery_id = 26006,
-        challenge_time = 120, 
+        challenge_time = 120,
         optimize_region = 53090,
 
         element_target = 6,
@@ -73,16 +73,16 @@ local play_stage =
 
 }
 
-local extra_elements =
+extra_elements =
 {
     53018,53019,53020,53021,53022,53023,53024
 ,53025,53055,53056,53057,53058
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -210,9 +210,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -223,9 +223,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -385,9 +385,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -396,7 +396,7 @@ function condition_EVENT_ANY_MONSTER_DIE_53046(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -404,7 +404,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_53046(context, evt)
 	-- 添加suite15的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303053, 15)
-	
+
 	return 0
 end
 
@@ -414,7 +414,7 @@ function condition_EVENT_ANY_MONSTER_DIE_53047(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -422,7 +422,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_53047(context, evt)
 	-- 添加suite16的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303053, 16)
-	
+
 	return 0
 end
 
@@ -430,10 +430,10 @@ end
 function action_EVENT_CHALLENGE_FAIL_53061(context, evt)
 	-- 删除suite15的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133303053, 15)
-	
+
 	-- 删除suite16的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133303053, 16)
-	
+
 	return 0
 end
 
@@ -443,7 +443,7 @@ function condition_EVENT_ANY_MONSTER_DIE_53082(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -451,7 +451,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_53082(context, evt)
 	-- 添加suite17的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303053, 17)
-	
+
 	return 0
 end
 
@@ -459,7 +459,7 @@ end
 function action_EVENT_CHALLENGE_FAIL_53083(context, evt)
 	-- 删除suite17的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133303053, 17)
-	
+
 	return 0
 end
 
@@ -468,7 +468,7 @@ function condition_EVENT_ANY_GADGET_DIE_53086(context, evt)
 	if 53070 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -479,7 +479,7 @@ function action_EVENT_ANY_GADGET_DIE_53086(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -488,7 +488,7 @@ function condition_EVENT_GADGET_CREATE_53087(context, evt)
 	if 53028 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -499,7 +499,7 @@ function action_EVENT_GADGET_CREATE_53087(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 

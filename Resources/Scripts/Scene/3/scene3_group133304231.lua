@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133304231
 }
 
 -- DEFS_MISCS
-local defs = 
+defs =
 {
-    
+
     challenge_id = 2010057,
 
     starter_option_id = 175,
@@ -15,14 +15,14 @@ local defs =
 
 }
 
-local play_stage =
+play_stage =
 {
-    [1] = 
+    [1] =
     {
         gallery_id = 26004,
-        challenge_time = 120, 
+        challenge_time = 120,
         optimize_region = 231091,
-        
+
         element_target = 7,
         starter_operator_configID = 231012,
         dig_operator_configID = 231016,
@@ -34,10 +34,10 @@ local play_stage =
         treasure_configID = 231017,
     },
 
-    [2] = 
+    [2] =
     {
         gallery_id = 26004,
-        challenge_time = 120, 
+        challenge_time = 120,
         optimize_region = 231092,
 
         element_target = 6,
@@ -53,10 +53,10 @@ local play_stage =
 
     },
 
-    [3] = 
+    [3] =
     {
         gallery_id = 26004,
-        challenge_time = 120, 
+        challenge_time = 120,
         optimize_region = 231093,
 
         element_target = 7,
@@ -74,16 +74,16 @@ local play_stage =
 
 }
 
-local extra_elements =
+extra_elements =
 {
     231018,231019,231020,231021,231022,231023,231024
 ,231025,231059,231060,231061,231062,231063,231064
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -214,9 +214,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -227,9 +227,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -371,9 +371,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -382,7 +382,7 @@ function condition_EVENT_ANY_MONSTER_DIE_231048(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -390,7 +390,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_231048(context, evt)
 	-- 添加suite15的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304231, 15)
-	
+
 	return 0
 end
 
@@ -399,7 +399,7 @@ function condition_EVENT_GADGET_CREATE_231055(context, evt)
 	if 231038 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -410,13 +410,13 @@ function action_EVENT_GADGET_CREATE_231055(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304231, EntityType.GADGET, 231053 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -427,25 +427,25 @@ function action_EVENT_CHALLENGE_SUCCESS_231056(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为231053的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 231053 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304231, EntityType.GADGET, 231078 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304231, EntityType.GADGET, 231084 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -453,7 +453,7 @@ end
 function action_EVENT_CHALLENGE_FAIL_231065(context, evt)
 	-- 删除suite15的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133304231, 15)
-	
+
 	return 0
 end
 
@@ -464,25 +464,25 @@ function action_EVENT_CHALLENGE_FAIL_231066(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为231053的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 231053 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304231, EntityType.GADGET, 231078 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304231, EntityType.GADGET, 231084 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -491,7 +491,7 @@ function condition_EVENT_ANY_GADGET_DIE_231067(context, evt)
 	if 231070 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -502,13 +502,13 @@ function action_EVENT_ANY_GADGET_DIE_231067(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 创建id为231078的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 231078 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -517,7 +517,7 @@ function condition_EVENT_ANY_GADGET_DIE_231089(context, evt)
 	if 231072 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -528,7 +528,7 @@ function action_EVENT_ANY_GADGET_DIE_231089(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -537,7 +537,7 @@ function condition_EVENT_ANY_GADGET_DIE_231090(context, evt)
 	if 231074 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -548,7 +548,7 @@ function action_EVENT_ANY_GADGET_DIE_231090(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

@@ -1,33 +1,33 @@
-local MAX_attackbylevelentity_LV = 20
-local MAX_mutehurtbylevelentity_LV = 10
-local MAX_defencebylevelentity_LV = 10
-local MAX_chargebylevelentity_LV = 10
+MAX_attackbylevelentity_LV = 20
+MAX_mutehurtbylevelentity_LV = 10
+MAX_defencebylevelentity_LV = 10
+MAX_chargebylevelentity_LV = 10
 
 
 
 
 --场景破碎物计数
 function KillLevelEntityCount( context )
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 	-- ScriptLib.AddExhibitionAccumulableData(context, UidList[1], "Rogue_BrokenLevelEntity_AccumulableCount_1", 1)
 
 	-- ScriptLib.AddExhibitionReplaceableData(context, UidList[1], "Rogue_BrokenLevelEntity_ReplaceableCount_1", 1)
 
 	return 0
-	
+
 end
 
 --炸药桶计数
 function KillLevelEntityCount( context )
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 	-- ScriptLib.AddExhibitionAccumulableData(context, UidList[1], "Rogue_BrokenBomb_AccumulableCount_1", 1)
 
 	-- ScriptLib.AddExhibitionAccumulableData(context, UidList[1], "Rogue_BrokenBomb_ReplaceableCount_1", 1)
 
 	return 0
-	
+
 end
 
 
@@ -37,10 +37,10 @@ function LevelEntityBroken_Attack(context)
 
 	ScriptLib.PrintContextLog(context, "##Rogue LOG : LevelEntityBroken ")
 
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 
-	local TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_ATTACKBYLEVELENTITY")
+	TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_ATTACKBYLEVELENTITY")
 
 	ScriptLib.PrintContextLog(context, "##Rogue LOG : LevelEntityBroken TeamValue =="..TeamValue)
 
@@ -59,10 +59,10 @@ function LevelEntityBroken_MuteHurt(context)
 
 	ScriptLib.PrintContextLog(context, "##Rogue LOG : LevelEntityBroken ")
 
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 
-	local TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_MUTEHURTBYLEVELENTITY")
+	TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_MUTEHURTBYLEVELENTITY")
 
 	ScriptLib.PrintContextLog(context, "##Rogue LOG : LevelEntityBroken TeamValue =="..TeamValue)
 
@@ -81,10 +81,10 @@ function LevelEntityBroken_ChargeSpeed(context)
 
 	ScriptLib.PrintContextLog(context, "##Rogue LOG : LevelEntityBroken ")
 
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 
-	local TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_CHARGEBYLEVELENTITY")
+	TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_CHARGEBYLEVELENTITY")
 
 	ScriptLib.PrintContextLog(context, "##Rogue LOG : LevelEntityBroken TeamValue =="..TeamValue)
 
@@ -103,10 +103,10 @@ function LevelEntityBroken_Defence(context)
 
 	ScriptLib.PrintContextLog(context, "##Rogue LOG : LevelEntityBroken ")
 
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 
-	local TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_DEFENCEBYLEVELENTITY")
+	TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_DEFENCEBYLEVELENTITY")
 
 	ScriptLib.PrintContextLog(context, "##Rogue LOG : LevelEntityBroken TeamValue =="..TeamValue)
 
@@ -122,10 +122,10 @@ end
 
 --关闭元素机关上发消息
 function CloseGear(context)
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 
-	local TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_MASTERYBYGEAR")
+	TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_MASTERYBYGEAR")
 
 	ScriptLib.PrintContextLog(context, "##Rogue LOG : LevelEntityBroken TeamValue =="..TeamValue)
 
@@ -141,10 +141,10 @@ end
 
 --踩到陷阱
 function TriggerTrap(context, isBlock)
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 
-	local TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_TRAPBLOCK")
+	TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_TRAPBLOCK")
 
 	--触发陷阱计数
 	--ScriptLib.AddExhibitionAccumulableData(context, UidList[1], "Rogue_TriggerTrap_Count", 1)
@@ -171,10 +171,10 @@ end
 
 --回复房间加BUFF
 function AddReviveRoomBuff(context)
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 
-	local TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_REVIVEROOMBUFF")
+	TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_REVIVEROOMBUFF")
 
 	ScriptLib.PrintContextLog(context, "##Rogue LOG : LevelEntityBroken TeamValue =="..TeamValue)
 
@@ -192,10 +192,10 @@ end
 
 --战斗房间加BUFF
 function AddBattleRoomBuff(context)
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 
-	local TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_BATTLEROOMBUFF")
+	TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_BATTLEROOMBUFF")
 
 	ScriptLib.PrintContextLog(context, "##Rogue LOG : LevelEntityBroken TeamValue =="..TeamValue)
 
@@ -214,7 +214,7 @@ end
 --吃到增益球
 function GetRogueBuff( context )
 
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 	--吃到BUFF计数
 	--ScriptLib.AddExhibitionAccumulableData(context, UidList[1], "Rogue_GetBuff_AccumulableCount", 1)
@@ -222,13 +222,13 @@ function GetRogueBuff( context )
 	--ScriptLib.AddExhibitionReplaceableData(context, UidList[1], "Rogue_TriggerTrap_ReplaceableCount", 1)
 
 	return 0
-	
+
 end
 
 
 function SetGardianSGV( context, value)
 
-	local entityID = ScriptLib.GetContextGadgetEntityId(context)
+	entityID = ScriptLib.GetContextGadgetEntityId(context)
 
 	ScriptLib.SetEntityServerGlobalValueByEntityId(context, entityID, "SGV_CAN_CLEAR_THREAT", value )
 
@@ -239,5 +239,5 @@ function SetGardianState(context, value )
 
 	ScriptLib.SetGadgetState(context, value)
 
-	return 0 
+	return 0
 end

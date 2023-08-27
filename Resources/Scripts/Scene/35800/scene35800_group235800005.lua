@@ -1,42 +1,42 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 235800005
 }
 
 -- DEFS_MISCS
-local defs = { 
+defs = {
 	laser_group_id = 235800005,
 	hurt_floor_id = 5293
 }
 
-local hurt_floor_delay = 5
+hurt_floor_delay = 5
 
-local random_flower_time_axis = {20,50,80}
+random_flower_time_axis = {20,50,80}
 
-local random_flower_sum = {min = 3, max = 5}
+random_flower_sum = {min = 3, max = 5}
 
-local flower_life_time = 10
+flower_life_time = 10
 
-local flower_suite_index = 8
+flower_suite_index = 8
 
-local wind_force_time_axis = {1,30,60}
+wind_force_time_axis = {1,30,60}
 
-local wind_force_suites = {2,3,4,5,6,7}
+wind_force_suites = {2,3,4,5,6,7}
 
-local regionIndex = 5102
+regionIndex = 5102
 
 --飞行接花
 --飞行接花玩法结束时达到关卡积分目标后奖励的能量值
-local WindFlower_Flight_Clear_Bonus = 60
+WindFlower_Flight_Clear_Bonus = 60
 --飞行接花玩法结束时未达到关卡积分目标扣除的能量值
-local WindFlower_Flight_Failed_Deduction = -10
+WindFlower_Flight_Failed_Deduction = -10
 
-local Catch_Flower_Score = 10
+Catch_Flower_Score = 10
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -224,9 +224,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -237,9 +237,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -318,9 +318,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "WindFlora_Laser"

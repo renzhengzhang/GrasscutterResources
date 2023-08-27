@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 177008098
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -98,9 +98,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -108,7 +108,7 @@ function condition_EVENT_GADGET_CREATE_98003(context, evt)
 	if 98001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -117,12 +117,12 @@ function action_EVENT_GADGET_CREATE_98003(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 2, turn_mode = false}
+	tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98001, 700800024, {1,6,2,5}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -131,7 +131,7 @@ function condition_EVENT_GADGET_CREATE_98008(context, evt)
 	if 98002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -140,12 +140,12 @@ function action_EVENT_GADGET_CREATE_98008(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 2, turn_mode = false}
+	tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98002, 700800024, {3,8,4,7}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -156,19 +156,19 @@ function action_EVENT_GROUP_LOAD_98013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_98015(context, evt)
 	if evt.param1 ~= 98015 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -176,9 +176,9 @@ end
 function action_EVENT_ENTER_REGION_98015(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008098, 2)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177008098, 2)
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220136010
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -86,9 +86,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -99,9 +99,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -126,25 +126,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10001(context, evt)
 	if evt.param1 ~= 10001 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"finishRmd1"为0
 	if ScriptLib.GetGroupVariableValue(context, "finishRmd1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -155,30 +155,30 @@ function action_EVENT_ENTER_REGION_10001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10002(context, evt)
 	if evt.param1 ~= 10002 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"finishRmd2"为0
 	if ScriptLib.GetGroupVariableValue(context, "finishRmd2") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -189,30 +189,30 @@ function action_EVENT_ENTER_REGION_10002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10003(context, evt)
 	if evt.param1 ~= 10003 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"finishRmd3"为0
 	if ScriptLib.GetGroupVariableValue(context, "finishRmd3") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -223,30 +223,30 @@ function action_EVENT_ENTER_REGION_10003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10004(context, evt)
 	if evt.param1 ~= 10004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"finishRmd4"为0
 	if ScriptLib.GetGroupVariableValue(context, "finishRmd4") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -257,30 +257,30 @@ function action_EVENT_ENTER_REGION_10004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10005(context, evt)
 	if evt.param1 ~= 10005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"finishRmd5"为0
 	if ScriptLib.GetGroupVariableValue(context, "finishRmd5") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -291,30 +291,30 @@ function action_EVENT_ENTER_REGION_10005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd5" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd5", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10006(context, evt)
 	if evt.param1 ~= 10006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"finishRmd6"为0
 	if ScriptLib.GetGroupVariableValue(context, "finishRmd6") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -325,30 +325,30 @@ function action_EVENT_ENTER_REGION_10006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd6" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd6", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10007(context, evt)
 	if evt.param1 ~= 10007 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"finishRmd7"为0
 	if ScriptLib.GetGroupVariableValue(context, "finishRmd7") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -359,30 +359,30 @@ function action_EVENT_ENTER_REGION_10007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd7" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd7", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10008(context, evt)
 	if evt.param1 ~= 10008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"finishRmd8"为0
 	if ScriptLib.GetGroupVariableValue(context, "finishRmd8") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -393,13 +393,13 @@ function action_EVENT_ENTER_REGION_10008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd8" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd8", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -410,61 +410,61 @@ function action_EVENT_QUEST_START_10009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd3", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd4" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd4", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd5" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd5", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd6" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd6", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd7" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd7", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd8" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd8", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "questFinishPart3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "questFinishPart3", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220136010, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -472,17 +472,17 @@ end
 function condition_EVENT_QUEST_FINISH_10010(context, evt)
 	--检查ID为4007611的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 4007611 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -493,13 +493,13 @@ function action_EVENT_QUEST_FINISH_10010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220136010, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -509,7 +509,7 @@ function condition_EVENT_GROUP_LOAD_10011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "questFinishPart3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -520,16 +520,16 @@ function action_EVENT_GROUP_LOAD_10011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_10012(context, evt)
 			    if ScriptLib.GetHostQuestState(context,4007611)==2 then
-				ScriptLib.RefreshGroup(context, { group_id = 220136010, suite = 1 }) 
+				ScriptLib.RefreshGroup(context, { group_id = 220136010, suite = 1 })
 				end
-			
+
 			return 0
 end
 
@@ -540,49 +540,49 @@ function action_EVENT_GROUP_LOAD_10013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd3", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd4" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd4", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd5" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd5", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd6" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd6", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd7" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd7", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd8" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd8", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -593,48 +593,48 @@ function action_EVENT_GROUP_REFRESH_10014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd3", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd4" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd4", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd5" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd5", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd6" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd6", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd7" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd7", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finishRmd8" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finishRmd8", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

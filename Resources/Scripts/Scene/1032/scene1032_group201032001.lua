@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201032001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -69,9 +69,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -81,13 +81,13 @@ function action_EVENT_QUEST_FINISH_1002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_player_interact_option")
 		return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：201032001的对象,请求一次调用,并将string参数："xiao_skill" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201032001, "xiao_skill", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -97,20 +97,20 @@ function action_EVENT_TIMER_EVENT_1004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟2秒后,向groupId为：201032001的对象,请求一次调用,并将string参数："tutorial" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201032001, "tutorial", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "isFirstEntry" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "isFirstEntry", 0, 201032010) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -121,21 +121,21 @@ function action_EVENT_TIMER_EVENT_1005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 屏蔽战斗主界面UI模块,参数传字符串,参数内容为"bool 屏蔽ui组key"
 	if 0 ~= ScriptLib.SetPlayerInteractOption(context, "true DisableXiaoDungeon") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_player_interact_option")
 		return -1
 	end
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201032002, 4)
-	
+
 	-- 将本组内变量名为 "test_re" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "test_re", 1, 201032010) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -2,18 +2,18 @@
 --[[
 tide_defs = {
 	[1] = { sum = 40, min = 8, max = 12},
-	[2] = { sum = 40, min = 8, max = 12},	
-	[3] = { sum = 40, min = 8, max = 12},		
+	[2] = { sum = 40, min = 8, max = 12},
+	[3] = { sum = 40, min = 8, max = 12},
 }
 
-local guide_point_list=
+guide_point_list=
 {
 	[1]={1006,1007,1008,1009,1010,1011},
 	[2]={1012,1013,1014,1015,1016,1017},
 }
 
 
-local monster_tide_defs={
+monster_tide_defs={
 	[1]={{monster_package={1001,1002,1003},route={1,2,2},route_points={{1,2,3,4},{1,2,3},{1,2,3,4,5}},speed={1,1,2},tags={1,2,3},count=100,max=6,min=5},{monster_package={1001,1002,1003},route={1,2,3},route_points={{1,2,3,4},{1,2,3},{1,2,3,4,5}},speed={1,1,2},tags={1,2,3},count=100,max=6,min=5}},
 	[2]={{monster_package={1001,1002,1003},route={1,2,2},route_points={{1,2,3,4},{1,2,3},{1,2,3,4,5}},speed={1,1,2},tags={1,2,3},count=100,max=6,min=5},{monster_package={1001,1002,1003},route={1,2,3},route_points={{1,2,3,4},{1,2,3},{1,2,3,4,5}},speed={1,1,2},tags={1,2,3},count=100,max=6,min=5}},
 	[3]={{monster_package={1001,1002,1003},route={1,2,2},route_points={{1,2,3,4},{1,2,3},{1,2,3,4,5}},speed={1,1,2},tags={1,2,3},count=100,max=6,min=5},{monster_package={1001,1002,1003},route={1,2,3},route_points={{1,2,3,4},{1,2,3},{1,2,3,4,5}},speed={1,1,2},tags={1,2,3},count=100,max=6,min=5}},
@@ -31,7 +31,7 @@ function LF_Init_Monster_Group()
 --	table.insert(triggers, t2)
 	table.insert(variables, {  config_id=50000001,name = "tide_ptr", value = 0})
 	table.insert(variables, {  config_id=50000002,name = "challenge_group", value = 0})
-	local leftMonsters=0
+	leftMonsters=0
 	for i=1,#tide_defs do
 		for j=1,#tide_defs[i] do
 			leftMonsters=leftMonsters+tide_defs[i][j].sum
@@ -40,7 +40,7 @@ function LF_Init_Monster_Group()
 	table.insert(variables, { config_id=50000003, name = "left_monsters", value = leftMonsters})
 end
 
-local gear_group_id = defs.gear_group_id or 0
+gear_group_id = defs.gear_group_id or 0
 
 function action_monster_die(context, evt)
 	--ScriptLib.PrintContextLog(context, "--------------- award_points ------------")
@@ -49,12 +49,12 @@ function action_monster_die(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) == 0 then
 		monster_tide_over(context)
 	end
-	
+
 	return 0
 end
 
 function MonsterArrive(context)
-	local entityId=context.target_entity_id
+	entityId=context.target_entity_id
 	ScriptLib.PrintContextLog(context, "TowerDefenseMonsterArrive"..context.target_entity_id)
 	for k,v in pairs(monsters) do
 		if ScriptLib.GetEntityIdByConfigId(context, v.config_id)==entityId then
@@ -75,7 +75,7 @@ end
 function start_tide(context, prev_context, param1, param2, param3)
 	ScriptLib.SetGroupVariableValue(context, "tide_ptr", 1)
 	ScriptLib.SetGroupVariableValue(context, "challenge_group", param1)
-	local monstersLeft=ScriptLib.GetGroupVariableValue(context, "left_monsters")
+	monstersLeft=ScriptLib.GetGroupVariableValue(context, "left_monsters")
 	ScriptLib.ExecuteGroupLua(context, ScriptLib.GetGroupVariableValue(context, "challenge_group"), "set_monster_number", {monstersLeft})
 	for i=1,#tide_defs[1] do
 		ScriptLib.AutoMonsterTide(context, 100+i, defs.group_id,  suites[tide_defs[1][i].suite].monsters, tide_defs[1][i].sum , tide_defs[1][i].min , tide_defs[1][i].max )
@@ -86,9 +86,9 @@ end
 
 function monster_tide_over(context)
 	ScriptLib.PrintContextLog(context, "## monster_tide_over")
-	local tide = ScriptLib.GetGroupVariableValue(context, "tide_ptr")
+	tide = ScriptLib.GetGroupVariableValue(context, "tide_ptr")
 	if tide >= #tide_defs then
-		local challenge_group = ScriptLib.GetGroupVariableValue(context, "challenge_group")
+		challenge_group = ScriptLib.GetGroupVariableValue(context, "challenge_group")
 		ScriptLib.PrintContextLog(context, "## challenge_group = "..challenge_group)
 		ScriptLib.ExecuteGroupLua(context, challenge_group, "tide_done", {0})
 		ScriptLib.PrintContextLog(context, "## TD_LOG : Group Monster Tide End -> "..defs.group_id)

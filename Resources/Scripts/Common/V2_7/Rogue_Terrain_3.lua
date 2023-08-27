@@ -1,5 +1,5 @@
 --[[
-local defs={
+defs={
     Portal_Eff = 999,
     Portal_Trigger = 999,
     Streaming_Gadget = 999,
@@ -8,28 +8,28 @@ local defs={
     air_wall = 999,
 }
 ]]
-local t3_last_group = {
+t3_last_group = {
     [246203001] = 246203004,
     [246203002] = 246203001,
     [246203003] = 246203002,
     [246203004] = 246203003,
 }
-local t3_next_group = {
+t3_next_group = {
     [246203001] = 246203002,
     [246203002] = 246203003,
     [246203003] = 246203004,
     [246203004] = 246203001,
 }
-local t3_time_order = {
+t3_time_order = {
     {1,2,3,4}
 }
-local temp_Variables_Rogue_Terrain_3 = {
+temp_Variables_Rogue_Terrain_3 = {
 	{  config_id=50000001,name = "Is_Inited", value = 0, no_refresh = false },
 	{  config_id=50000002,name = "Unload", value = 0, no_refresh = false },
 	{  config_id=50000003,name = "Can_Be_Inited", value = 1, no_refresh = false },
 }
-local temp_Tirgger_Rogue_Terrain_3 = {
---[[ 
+temp_Tirgger_Rogue_Terrain_3 = {
+--[[
     {event = EventType.EVENT_CHALLENGE_SUCCESS,source = "",condition="",action="action_t3_EVENT_CHALLENGE_SUCCESS",trigger_count=0},
     {event = EventType.EVENT_ROGUE_START_FIGHT,source = "",condition="",action="action_t3_EVENT_ROGUE_START_FIGHT",trigger_count=0},
 	{event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_t3_EVENT_CHALLENGE_FAIL",trigger_count = 0},
@@ -59,7 +59,7 @@ end
 function action_t3_EVENT_PLATFORM_REACH_POINT(context,evt)
     ScriptLib.PrintContextLog(context,"## Rogue_Terraion_3 action_t3_EVENT_PLATFORM_REACH_POINT:p1="..evt.param1)
     --罗盘刻度
-    local _t = defs.pointarray +1
+    _t = defs.pointarray +1
     if _t == 5 then _t = 1 end
     ScriptLib.SetEntityServerGlobalValueByConfigId(context,defs.clock,"SGV_Time",_t)
     --传送门贴图
@@ -85,7 +85,7 @@ function action_t3_EVENT_ENTER_REGION(context,evt)
         ScriptLib.SetGroupVariableValue(context,"Is_Inited",1)
         for k , v in pairs(t3_last_group) do
             ScriptLib.SetGroupVariableValueByGroup(context,"Can_Be_Inited",0,k) --任意房间被初始化，所有房间的值要设成0（防止还有各种奇怪方式触发到别的房间的region），同一时间只能有一个房间初始化，直到玩家打通房间
-            if k == base_info.group_id then 
+            if k == base_info.group_id then
                 ScriptLib.SetGroupVariableValueByGroup(context,"Unload",0,v)
                 ScriptLib.SetGroupVariableValueByGroup(context,"Is_Inited",0,v)
             end
@@ -99,19 +99,19 @@ function action_t3_EVENT_ROGUE_OPEN_ACCESS(context,evt)
     if evt.param1 == 1 then return 0 end --通关后不需要开通路
     --创建streaming物件，预加载目标位置场景
     ScriptLib.CreateGadget(context,{config_id = defs.Streaming_Gadget})
-    local _t = defs.pointarray +1
+    _t = defs.pointarray +1
     if _t == 5 then _t = 1 end
     --开始拨动指针
     ScriptLib.SetPlatformPointArray(context, defs.pointer, defs.pointarray, {defs.pointarray,_t}, {route_type = 0, turn_mode = false})
     --如果是第一间，那么注目天空轮盘
-    local _vec = ScriptLib.GetRogueDiaryRoundAndRoom(context)
-    if #_vec == 2 then 
-        local _stage = _vec[1]
-        local _cell = _vec[2]
+    _vec = ScriptLib.GetRogueDiaryRoundAndRoom(context)
+    if #_vec == 2 then
+        _stage = _vec[1]
+        _cell = _vec[2]
         ScriptLib.PrintContextLog(context,"## Rogue_Terraion_3 action_t3_EVENT_ROGUE_OPEN_ACCESS:_stage=".._stage .."|_cell=".._cell)
         if _stage == 1 and _cell == 2 then  --此时cell已经变成2 因为打完了第一间
             for k,v in pairs(gadgets) do
-                if v.config_id == defs.clock then 
+                if v.config_id == defs.clock then
                     ScriptLib.BeginCameraSceneLook(context, { look_pos = v.pos, duration = 2, is_force = false, is_broadcast = false, is_recover_keep_current = true, delay = 1, is_set_follow_pos =false, follow_pos = {x=0,y=0,z=0}, is_force_walk =true, is_change_play_mode = true, screen_x = 0, screen_y = 0, is_set_screenXY = false, other_params ={}, keep_rot_type = KeepRotType.KEEP_ROT_XY, custom_radius = 0})
                 end
             end
@@ -121,14 +121,14 @@ function action_t3_EVENT_ROGUE_OPEN_ACCESS(context,evt)
     end
     --通知下一个房间，可以被Inited
     for k , v in pairs(t3_next_group) do
-        if k == base_info.group_id then 
+        if k == base_info.group_id then
             ScriptLib.SetGroupVariableValueByGroup(context,"Can_Be_Inited",1,v)
         end
     end
     return 0
 end
 
---[[ 
+--[[
 function action_t3_EVENT_CHALLENGE_SUCCESS(context,evt)
     ScriptLib.PrintContextLog(context,"## Rogue_Terraion_3 action_t3_EVENT_CHALLENGE_SUCCESS:")
     return 0
@@ -151,7 +151,7 @@ end
 --初始化
 function Initialize_3()
 	--加触发器
-    if temp_Tirgger_Rogue_Terrain_3 ~= nil then 
+    if temp_Tirgger_Rogue_Terrain_3 ~= nil then
         for k,v in pairs(temp_Tirgger_Rogue_Terrain_3) do
             v.name = "temp_Tirgger3_"..k
             v.config_id = 40300000 + k
@@ -160,7 +160,7 @@ function Initialize_3()
         end
     end
 	--加变量
-    if temp_Variables_Rogue_Terrain_3 ~= nil then 
+    if temp_Variables_Rogue_Terrain_3 ~= nil then
         for k,v in pairs(temp_Variables_Rogue_Terrain_3) do
             table.insert(variables,v)
         end
@@ -169,13 +169,13 @@ function Initialize_3()
     for k,v in pairs(gadgets) do
         if v.gadget_id == 70800140 then
             v.server_global_value_config = { ["SGV_Disable"] = 1}
-        end 
+        end
     end
     --给钟增加sgv
     for k,v in pairs(gadgets) do
         if v.gadget_id == 70800163 then
             v.server_global_value_config = { ["SGV_Time"] = defs.pointarray}
-        end 
+        end
     end
 	return 0
 end

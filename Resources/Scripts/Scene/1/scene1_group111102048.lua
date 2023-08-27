@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111102048
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -68,21 +68,21 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_48002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	        ScriptLib.SetGroupTempValue(context, "INT_VAR1", 2, {})
 	        ScriptLib.PrintContextLog(context, "## RB_LOG : INT_VAR1: "..ScriptLib.GetGroupTempValue(context, "INT_VAR1",{}))
 	        ScriptLib.SetGroupTempValue(context, "FLOAT_VAR1", 2.0, {})
 	        ScriptLib.PrintContextLog(context, "## RB_LOG : FLOAT_VAR1: "..ScriptLib.GetGroupTempValue(context, "FLOAT_VAR1",{}))
 	        ScriptLib.SetGroupTempValue(context, "FLOAT_VAR2", 2.5, {})
 	        ScriptLib.PrintContextLog(context, "## RB_LOG : FLOAT_VAR2: "..ScriptLib.GetGroupTempValue(context, "FLOAT_VAR2",{}))
-	
+
 	return 0
 end

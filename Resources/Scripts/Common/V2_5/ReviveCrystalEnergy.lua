@@ -11,13 +11,13 @@
 
 
 =======================================================================================]]
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Interact_Dwon"] = { config_id = 80000002, name = "Interact_Dwon", event= EventType.EVENT_MICHIAE_INTERACT, source = "", condition = "", action = "action_InteractDwon", trigger_count = 0 },
 	}
 }
 
---local refreshGroupIDList = {}
+--refreshGroupIDList = {}
 
 
 function action_InteractDwon( context, evt )

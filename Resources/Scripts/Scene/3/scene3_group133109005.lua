@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133109005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -94,20 +94,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5001(context, evt)
 	if evt.param1 ~= 5001 then return false end
-	
+
 	-- 判断是区域5001
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 5001 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -118,19 +118,19 @@ function action_EVENT_ENTER_REGION_5001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为1
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -141,19 +141,19 @@ function action_EVENT_VARIABLE_CHANGE_5002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5003(context, evt)
 	if evt.param1 ~= 5003 then return false end
-	
+
 	-- 判断是区域5003
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 5003 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -164,29 +164,29 @@ function action_EVENT_ENTER_REGION_5003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-82.09121, y=240.6005, z=2077.073}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-82.09121, y=240.6005, z=2077.073}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-82.09121, y=240.6005, z=2077.073}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为2
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -197,19 +197,19 @@ function action_EVENT_VARIABLE_CHANGE_5004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5005(context, evt)
 	if evt.param1 ~= 5005 then return false end
-	
+
 	-- 判断是区域5005
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 5005 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -220,29 +220,29 @@ function action_EVENT_ENTER_REGION_5005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-1094.569, y=89.34392, z=3842.903}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-1094.569, y=89.34392, z=3842.903}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-1094.569, y=89.34392, z=3842.903}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为3
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -253,7 +253,7 @@ function action_EVENT_VARIABLE_CHANGE_5006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -263,7 +263,7 @@ function condition_EVENT_QUEST_START_5007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -274,7 +274,7 @@ function action_EVENT_QUEST_START_5007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -284,7 +284,7 @@ function condition_EVENT_QUEST_START_5008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -295,7 +295,7 @@ function action_EVENT_QUEST_START_5008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -305,7 +305,7 @@ function condition_EVENT_QUEST_START_5009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -316,7 +316,7 @@ function action_EVENT_QUEST_START_5009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -326,7 +326,7 @@ function condition_EVENT_QUEST_START_5010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -337,7 +337,7 @@ function action_EVENT_QUEST_START_5010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -347,7 +347,7 @@ function condition_EVENT_QUEST_START_5011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -358,7 +358,7 @@ function action_EVENT_QUEST_START_5011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -368,7 +368,7 @@ function condition_EVENT_QUEST_START_5012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -379,7 +379,7 @@ function action_EVENT_QUEST_START_5012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -389,7 +389,7 @@ function condition_EVENT_QUEST_START_5013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -400,7 +400,7 @@ function action_EVENT_QUEST_START_5013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -410,7 +410,7 @@ function condition_EVENT_QUEST_START_5014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -421,7 +421,7 @@ function action_EVENT_QUEST_START_5014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -431,7 +431,7 @@ function condition_EVENT_QUEST_START_5015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -442,6 +442,6 @@ function action_EVENT_QUEST_START_5015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

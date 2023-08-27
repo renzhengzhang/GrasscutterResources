@@ -15,7 +15,7 @@
 --编辑器配置
 --[[
 
-	local defs = {
+	defs = {
 		group_id = 245002003,
 		gear_group_id = 245002002
 	}
@@ -30,7 +30,7 @@
 	}
 
 	-- 刷怪方案。在MonsterWaveConfig中配置
-	local monsterTides = tides_level_01_sample
+	monsterTides = tides_level_01_sample
 
 ]]--
 
@@ -40,18 +40,18 @@
 
 -- 打印日志
 function PrintLog(context, content)
-	local log = "## [TowerDefence_Monster_V3.0] TD_V3: "..content
+	log = "## [TowerDefence_Monster_V3.0] TD_V3: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
 -- 初始化一些trigger和var
 function LF_Init_Monster_Group()
 
-	local extraTriggers = 
+	extraTriggers =
 	{
 		t1 = { config_id = 40000001, name = "monster_die", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_monster_die", trigger_count = 0 },
 		t3 = { config_id = 40000003, name = "MONSTER_WILL_LEAVE_SCENE", event = EventType.EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE, source = "", condition = "", action = "action_MONSTER_DIE_BEFORE_LEAVE_SCENE", trigger_count = 0 },
-		--t4 = { config_id = 40000004, name = "EVENT_ANY_MONSTER_LIVE", event = EventType.EVENT_ANY_MONSTER_LIVE, source = "", condition = "", action = "action_ANY_MONSTER_LIVE", trigger_count = 0 },	
+		--t4 = { config_id = 40000004, name = "EVENT_ANY_MONSTER_LIVE", event = EventType.EVENT_ANY_MONSTER_LIVE, source = "", condition = "", action = "action_ANY_MONSTER_LIVE", trigger_count = 0 },
 	}
 
 	for _, _trigger in pairs(extraTriggers) do
@@ -75,7 +75,7 @@ function action_monster_die(context, evt)
 	ScriptLib.ExecuteGroupLua(context, ScriptLib.GetGroupVariableValue(context, "challenge_group"), "UpdateLeftMonsterNum", {0})
 
 	LF_UpdateMonsterKillCount(context)
-	
+
 	return 0
 end
 
@@ -84,20 +84,20 @@ function action_MONSTER_DIE_BEFORE_LEAVE_SCENE(context, evt)
 	PrintLog(context, "怪物在离开场景前死亡事件触发。")
 
 	-- 根据monsterId判断死亡的怪物是否是【精英怪】
-	local eid = evt.source_eid
-	local mid = ScriptLib.GetMonsterIdByEntityId(context, eid)
+	eid = evt.source_eid
+	mid = ScriptLib.GetMonsterIdByEntityId(context, eid)
 	PrintLog(context, "MONSTERID:"..mid)
 
-	local eliteMonsters = superMonsters or {}
-	local isElite = 0
+	eliteMonsters = superMonsters or {}
+	isElite = 0
 	for _, _monsterId in pairs(eliteMonsters) do
-		if mid == _monsterId then 
+		if mid == _monsterId then
 			isElite = 1
 		end
 	end
 
 	-- 获取主控Group编号
-	local challengeGroup = ScriptLib.GetGroupVariableValue(context, "challenge_group")
+	challengeGroup = ScriptLib.GetGroupVariableValue(context, "challenge_group")
 
 	-- 地脉异常L1检查（掉落击杀）
 	LF_GetDieFallBonusPoints(context, evt, isElite)
@@ -111,18 +111,18 @@ end
 -- 掉落死亡判定
 function LF_GetDieFallBonusPoints(context, evt, _isElite)
 
-	local dieReason = evt.param3
-	if dieReason == nil then 
+	dieReason = evt.param3
+	if dieReason == nil then
 		PrintLog(context, "死亡原因未知")
 		return 0
 	else
 		PrintLog(context, "死亡原因:"..dieReason)
 	end
 
-	local challengeGroup = ScriptLib.GetGroupVariableValue(context, "challenge_group")
+	challengeGroup = ScriptLib.GetGroupVariableValue(context, "challenge_group")
 
-	if dieReason == 5 or dieReason == 6 or dieReason == 7 then 
-		-- 地脉异常L1检查 
+	if dieReason == 5 or dieReason == 6 or dieReason == 7 then
+		-- 地脉异常L1检查
 		ScriptLib.ExecuteGroupLua(context, challengeGroup, "LF_SpecialGameplayLevel1", {_isElite})
 	end
 
@@ -131,16 +131,16 @@ end
 -- SLC 怪物到达终点（成功逃跑）
 -- 复用已有的塔防怪物终点物件。为不影响之前版本逻辑，所以没有修改此function名称为SLC_MonsterArrive
 function MonsterArrive(context)
-	local entityId = context.target_entity_id
+	entityId = context.target_entity_id
 	ScriptLib.PrintContextLog(context, "TowerDefenseMonsterArrive"..context.target_entity_id)
-	
+
 	-- points是刷怪点位
 	for k, v in pairs(points) do
 		if ScriptLib.GetEntityIdByConfigId(context, v.config_id) == entityId then
 
 			-- ScriptLib.ExecuteGroupLua(context, ScriptLib.GetGroupVariableValue(context, "challenge_group"), "MonsterEscaped", {0})
 			ScriptLib.ExecuteGroupLua(context, ScriptLib.GetGroupVariableValue(context, "challenge_group"), "UpdateLeftMonsterNum", {0})
-			
+
 			-- 直接Remove（不会走掉血死亡流程）
 			ScriptLib.RemoveEntityByConfigId(context, defs.group_id, EntityType.MONSTER, v.config_id)
 
@@ -154,7 +154,7 @@ function MonsterArrive(context)
 end
 
 function LF_UpdateMonsterKillCount(context)
-	local monster_kill_count = ScriptLib.GetGroupVariableValue(context, "monster_kill_count")
+	monster_kill_count = ScriptLib.GetGroupVariableValue(context, "monster_kill_count")
 	monster_kill_count = monster_kill_count + 1
 	ScriptLib.SetGroupVariableValue(context, "monster_kill_count", monster_kill_count)
 
@@ -166,12 +166,12 @@ end
 -- 计算并设置当前WAVE怪物总数（会由TowerDefence_Challenge_V3.0调用）
 function set_monster_number_req(context, prev_context, _challengeGroup, param2, param3)
 
-	--local wave_ptr = param1
+	--wave_ptr = param1
 
 	--设置挑战groupid
 	ScriptLib.SetGroupVariableValue(context, "challenge_group", _challengeGroup)
 
-	local monstersLeft = 0
+	monstersLeft = 0
 
 	if monsterTides == nil or #monsterTides == 0 then
 		PrintLog(context, "monsterTides未配置")
@@ -198,10 +198,10 @@ end
 
 -- 初始化某tide的怪物总数
 function LF_SetTideMonsterNum(context, tide)
-	local wave = 1
+	wave = 1
 
-	local num = 0
-	local tideConfigInfo = monsterTides[tide]
+	num = 0
+	tideConfigInfo = monsterTides[tide]
 
 	for i = 1, #tideConfigInfo do
 		num = num + (tideConfigInfo[i].count * #tideConfigInfo[i].route)
@@ -220,8 +220,8 @@ function LF_StartWave(context, prev_context, param1, param2, param3)
 
 	PrintLog(context, "WAVE开启！")
 
-	local wave = param2
-	
+	wave = param2
+
 	ScriptLib.SetGroupVariableValue(context, "challenge_group", param1)
 	ScriptLib.SetGroupVariableValue(context, "monster_wave_ptr", wave)
 	ScriptLib.SetGroupVariableValue(context, "tide_ptr", 1)
@@ -235,13 +235,13 @@ end
 function LF_MonsterTideOver(context)
 
 	ScriptLib.PrintContextLog(context, "TIDE结束")
-	
+
 	-- 当前wave和tide
-	local wave = ScriptLib.GetGroupVariableValue(context, "monster_wave_ptr")
-	local tide = ScriptLib.GetGroupVariableValue(context, "tide_ptr")
-	
+	wave = ScriptLib.GetGroupVariableValue(context, "monster_wave_ptr")
+	tide = ScriptLib.GetGroupVariableValue(context, "tide_ptr")
+
 	if tide >= #monsterTides then
-		local challenge_group = ScriptLib.GetGroupVariableValue(context, "challenge_group")
+		challenge_group = ScriptLib.GetGroupVariableValue(context, "challenge_group")
 		ScriptLib.ExecuteGroupLua(context, challenge_group, "wave_done", {0})
 		PrintLog(context, "此WAVE的所有TIDE结束")
 		return 0
@@ -259,11 +259,11 @@ function LF_StartTide(context, tide)
 
 	LF_SetTideMonsterNum(context, tide)
 
-	local miniTide = ScriptLib.GetGroupVariableValue(context, "monster_tide_index")
-	local affix={}
+	miniTide = ScriptLib.GetGroupVariableValue(context, "monster_tide_index")
+	affix={}
 	for i = 1, #monsterTides[tide] do
 
-		local monster_pool_table = monsterTides[tide][i].monster_package
+		monster_pool_table = monsterTides[tide][i].monster_package
 
 		if monster_pool_table == nil or #monster_pool_table == 0 then
 			PrintLog(context, "Tide"..tide.."的monster_pool_table没取到")

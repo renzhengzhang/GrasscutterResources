@@ -1,24 +1,24 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133213216
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 133213216,
 	gadget_thunderThelfID = 216001,
 	pointarray_ID = 321300006,
 	maxPointCount = 14,
-	pointInfo = {5,10,14} 
+	pointInfo = {5,10,14}
 }
 
 -- DEFS_MISCS
 function GetNextPath(context)
-	local path = {}
-	local index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
-	local stoppoint = defs.pointInfo[index]
+	path = {}
+	index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
+	stoppoint = defs.pointInfo[index]
 	ScriptLib.PrintLog(context, "stop point : "..stoppoint)
-	local currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
+	currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
 	for i=currentNodeIndex + 1,stoppoint do
 		table.insert(path,i)
 	end
@@ -40,9 +40,9 @@ function MovePlatform(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -84,9 +84,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -98,9 +98,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -143,9 +143,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -154,7 +154,7 @@ function condition_EVENT_GROUP_LOAD_216002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -165,7 +165,7 @@ function action_EVENT_GROUP_LOAD_216002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -174,27 +174,27 @@ function condition_EVENT_PLATFORM_REACH_POINT_216004(context, evt)
 	if 216001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_216004(context, evt)
-	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)		
+	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isMoving", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
-	end	
+	end
 	ScriptLib.StopPlatform(context, defs.gadget_thunderThelfID)
 	if evt.param3 == defs.maxPointCount then
 		ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_thunderThelfID, GadgetState.GearStart)
-		ScriptLib.SetFlowSuite(context, defs.group_ID, 2)		
-		ScriptLib.MarkPlayerAction(context, 2014, 3, 1)	
+		ScriptLib.SetFlowSuite(context, defs.group_ID, 2)
+		ScriptLib.MarkPlayerAction(context, 2014, 3, 1)
 		return 0
 	end
-			
-	local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
+
+	next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
 	next = next + 1
 	ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
 	ScriptLib.SetGroupVariableValue(context,"currentPathNodeIndex",evt.param3)
@@ -207,15 +207,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_216005(context, evt)
 			if defs.gadget_thunderThelfID ~= evt.param1 then
 				return false
 			end
-			local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
-			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state) 
-			if state == 201 then 
+			state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
+			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
+			if state == 201 then
 				return false
 			end
-			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then 
+			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then
 				return false
 			end
-			
+
 			return true
 end
 
@@ -228,12 +228,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_216006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isFinished"为1
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -244,6 +244,6 @@ function action_EVENT_VARIABLE_CHANGE_216006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

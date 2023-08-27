@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133107901
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -81,9 +81,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -96,7 +96,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901002(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 4000206) == QuestState.UNFINISHED or 
+	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 4000206) == QuestState.UNFINISHED or
 	ScriptLib.GetQuestState(context, evt.target_eid, 4000306) == QuestState.UNFINISHED)
 	and evt.param1 == 901002 then
 		return true
@@ -114,8 +114,8 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901004(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 4000110) == QuestState.UNFINISHED or 
-	ScriptLib.GetQuestState(context, evt.target_eid, 4000300) == QuestState.UNFINISHED) 
+	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 4000110) == QuestState.UNFINISHED or
+	ScriptLib.GetQuestState(context, evt.target_eid, 4000300) == QuestState.UNFINISHED)
 	and evt.param1 == 901004 then
 		return true
 	end

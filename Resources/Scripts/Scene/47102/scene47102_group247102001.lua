@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 247102001
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	awardball_configid = 1011,
 	defense_logicentity = 1012,
 	defense_viewentity = 1013,
@@ -31,9 +31,9 @@ awardBallGeneratePosition={
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -171,9 +171,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -184,9 +184,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -220,9 +220,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -231,7 +231,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1023(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -242,7 +242,7 @@ function action_EVENT_ANY_MONSTER_DIE_1023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -252,11 +252,11 @@ function condition_EVENT_ANY_MONSTER_LIVE_1024(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monsterCount") ~= 1 then
 			return false
 	end
-	
+
 	if 1016 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -264,13 +264,13 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_1024(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247102001, 3)
-	
+
 	-- 将本组内变量名为 "monsterCount" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monsterCount", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

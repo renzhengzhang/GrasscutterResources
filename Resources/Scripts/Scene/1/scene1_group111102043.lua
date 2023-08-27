@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111102043
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	starter_worktop_id = 43001,
 	pointarray_route = 110200017,
 	final_stage = 7,
@@ -14,13 +14,13 @@ local defs = {
 
 -- DEFS_MISCS
 --物件池物件gadgetid
-local pool_object_gadget_id =
+pool_object_gadget_id =
 {
     70380225,70380226
 }
 
 
-local fuel = {
+fuel = {
 	--初始燃料数量
 	init_fuel = 100,
 	--给发动机补充能量时，每秒消耗的燃料数量
@@ -29,7 +29,7 @@ local fuel = {
 	fuel_ball = 5,
 }
 
-local energy = {
+energy = {
 	--初始发动机能量
 	init_energy = 100,
 	--发动机最大能量
@@ -43,7 +43,7 @@ local energy = {
 }
 
 
-local part = {
+part = {
 	--初始零件数
 	init_part = 100,
 	--修补分块时，每秒消耗的零件数
@@ -53,12 +53,12 @@ local part = {
 }
 
 
-local score = {
+score = {
     checkpoint = 20,
     monster = 5,
 }
 
-local raft = 
+raft =
 {
     engine = 43106,
     part_1 = 43002,
@@ -68,7 +68,7 @@ local raft =
 }
 
 
-local stage = 
+stage =
 {
 	[1] = {main_suites = {2}, tag = "Sailing"},
     [2] = {main_suites = {3}, side_suites = {9}, tag = "KillMonster", obstacle = {43018}},
@@ -80,9 +80,9 @@ local stage =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -222,9 +222,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -235,9 +235,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -325,9 +325,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "V2_8/SocialActivity_Common"

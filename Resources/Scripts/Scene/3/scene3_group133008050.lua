@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008050
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -94,9 +94,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -143,23 +143,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_50015(context, evt)
 	-- 判断是gadgetid 50024 option_id 7
 	if 50024 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -170,57 +170,57 @@ function action_EVENT_SELECT_OPTION_50015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 133008050 ；指定config：50024；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133008050, 50024, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50004, 300800002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50005, 300800003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50003, 300800006) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将configid为 50021 的物件更改为状态 GadgetState.GearStart
-	ScriptLib.SetGadgetStateByConfigId(context, 50021, GadgetState.GearStart) 
-	
+	ScriptLib.SetGadgetStateByConfigId(context, 50021, GadgetState.GearStart)
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 50021 }) then
 			    return -1
 		end
-	
+
 	return 0
 end
 
@@ -228,14 +228,14 @@ end
 function condition_EVENT_SELECT_OPTION_50016(context, evt)
 	-- 判断是gadgetid 50025 option_id 7
 	if 50025 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -246,57 +246,57 @@ function action_EVENT_SELECT_OPTION_50016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 133008050 ；指定config：50025；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133008050, 50025, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50002, 300800004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50011, 300800019) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50007, 300800015) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50007) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将configid为 50022 的物件更改为状态 GadgetState.GearStart
 	ScriptLib.SetGadgetStateByConfigId(context, 50022, GadgetState.GearStart)
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 50022 }) then
 			    return -1
 		end
-	
+
 	return 0
 end
 
@@ -304,14 +304,14 @@ end
 function condition_EVENT_SELECT_OPTION_50017(context, evt)
 	-- 判断是gadgetid 50026 option_id 7
 	if 50026 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -322,89 +322,89 @@ function action_EVENT_SELECT_OPTION_50017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 133008050 ；指定config：50026；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133008050, 50026, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50006, 300800005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50008, 300800016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50009, 300800017) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50010, 300800018) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50006) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50009) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50010) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将configid为 50023 的物件更改为状态 GadgetState.GearStart
-	ScriptLib.SetGadgetStateByConfigId(context, 50023, GadgetState.GearStart) 
-	
+	ScriptLib.SetGadgetStateByConfigId(context, 50023, GadgetState.GearStart)
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 50023 }) then
 			    return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_50018(context, evt)
 	-- 判断是gadgetid 为 50002的移动平台，是否到达了300800004 的路线中的 1 点
-	
+
 	if 50002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800004 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -415,19 +415,19 @@ function action_EVENT_PLATFORM_REACH_POINT_50018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_50019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"reach_point_count"为3
 	if ScriptLib.GetGroupVariableValue(context, "reach_point_count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -438,7 +438,7 @@ function action_EVENT_VARIABLE_CHANGE_50019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -449,7 +449,7 @@ function action_EVENT_QUEST_START_50020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -458,7 +458,7 @@ function condition_EVENT_GADGET_CREATE_50027(context, evt)
 	if 50021 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -469,7 +469,7 @@ function action_EVENT_GADGET_CREATE_50027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -478,7 +478,7 @@ function condition_EVENT_GADGET_CREATE_50028(context, evt)
 	if 50022 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -489,7 +489,7 @@ function action_EVENT_GADGET_CREATE_50028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -498,7 +498,7 @@ function condition_EVENT_GADGET_CREATE_50029(context, evt)
 	if 50023 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -509,7 +509,7 @@ function action_EVENT_GADGET_CREATE_50029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -518,7 +518,7 @@ function condition_EVENT_ANY_GADGET_DIE_50030(context, evt)
 	if 50012 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -529,25 +529,25 @@ function action_EVENT_ANY_GADGET_DIE_50030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133008050, 50024, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "progress", 1, 133008644) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "progress", 1, 133008170) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -556,7 +556,7 @@ function condition_EVENT_ANY_GADGET_DIE_50031(context, evt)
 	if 50013 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -567,25 +567,25 @@ function action_EVENT_ANY_GADGET_DIE_50031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133008050, 50025, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "progress", 1, 133008644) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "progress", 1, 133008170) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -594,7 +594,7 @@ function condition_EVENT_ANY_GADGET_DIE_50032(context, evt)
 	if 50014 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -605,37 +605,37 @@ function action_EVENT_ANY_GADGET_DIE_50032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133008050, 50026, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "progress", 1, 133008644) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "progress", 1, 133008170) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_50033(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"reach_point_count_option_50015"为3
 	if ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50015") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -646,7 +646,7 @@ function action_EVENT_VARIABLE_CHANGE_50033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -656,7 +656,7 @@ function condition_EVENT_QUEST_START_50034(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "option_50015_active") ~= 1 or ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50015") == 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -667,55 +667,55 @@ function action_EVENT_QUEST_START_50034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "option_50015_active" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "option_50015_active", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为50021的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 50021 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50004, 300800063) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50005, 300800064) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50003, 300800062) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -725,7 +725,7 @@ function condition_EVENT_QUEST_START_50035(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "option_50016_active") ~= 1 or ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50016") == 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -736,55 +736,55 @@ function action_EVENT_QUEST_START_50035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "option_50016_active" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "option_50016_active", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为50022的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 50022 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50002, 300800061) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50011, 300800070) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50007, 300800066) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50007) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -794,7 +794,7 @@ function condition_EVENT_QUEST_START_50036(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "option_50017_active") ~= 1 or ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50017") == 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -805,79 +805,79 @@ function action_EVENT_QUEST_START_50036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "option_50017_active" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "option_50017_active", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为50023的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 50023 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50006, 300800065) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50008, 300800067) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50009, 300800068) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 50010, 300800069) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50006) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50009) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50010) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_50037(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"reach_point_count_option_50016"为3
 	if ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50016") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -888,19 +888,19 @@ function action_EVENT_VARIABLE_CHANGE_50037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_50038(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"reach_point_count_option_50017"为4
 	if ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50017") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -911,19 +911,19 @@ function action_EVENT_VARIABLE_CHANGE_50038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_QUEST_START_50039(context, evt)
 	-- 判断变量"option_50015_active"为0，核心和冰块是否存在
-	
-	if ScriptLib.GetGroupVariableValue(context, "option_50015_active") ~= 0 or ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50015") == 3 or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50021) or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50012) 
+
+	if ScriptLib.GetGroupVariableValue(context, "option_50015_active") ~= 0 or ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50015") == 3 or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50021) or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50012)
 	then
 			return false
 	end
-		
+
 	return true
 end
 
@@ -934,25 +934,25 @@ function action_EVENT_QUEST_START_50039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为50021的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 50021 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_QUEST_START_50040(context, evt)
 	-- 判断变量"option_50016_active"为0，核心和冰块是否存在
-	
-	if ScriptLib.GetGroupVariableValue(context, "option_50016_active") ~= 0 or ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50016") == 3 or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50022) or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50013) 
+
+	if ScriptLib.GetGroupVariableValue(context, "option_50016_active") ~= 0 or ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50016") == 3 or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50022) or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50013)
 	then
 			return false
 	end
-		
+
 	return true
 end
 
@@ -963,25 +963,25 @@ function action_EVENT_QUEST_START_50040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为50022的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 50022 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_QUEST_START_50041(context, evt)
 	-- 判断变量"option_50017_active"为0，核心和冰块是否存在
-	
-	if ScriptLib.GetGroupVariableValue(context, "option_50017_active") ~= 0 or ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50017") == 4 or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50023) or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50014) 
+
+	if ScriptLib.GetGroupVariableValue(context, "option_50017_active") ~= 0 or ScriptLib.GetGroupVariableValue(context, "reach_point_count_option_50017") == 4 or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50023) or -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008050, 50014)
 	then
 			return false
 	end
-		
+
 	return true
 end
 
@@ -992,33 +992,33 @@ function action_EVENT_QUEST_START_50041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为50023的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 50023 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_50042(context, evt)
 	-- 判断是gadgetid 为 50003的移动平台，是否到达了300800006 的路线中的 1 点
-	
+
 	if 50003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800006 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1029,27 +1029,27 @@ function action_EVENT_PLATFORM_REACH_POINT_50042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_50043(context, evt)
 	-- 判断是gadgetid 为 50004的移动平台，是否到达了300800002 的路线中的 1 点
-	
+
 	if 50004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800002 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1060,27 +1060,27 @@ function action_EVENT_PLATFORM_REACH_POINT_50043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_50044(context, evt)
 	-- 判断是gadgetid 为 50005的移动平台，是否到达了300800003 的路线中的 1 点
-	
+
 	if 50005 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800003 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1091,27 +1091,27 @@ function action_EVENT_PLATFORM_REACH_POINT_50044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_50045(context, evt)
 	-- 判断是gadgetid 为 50006的移动平台，是否到达了300800005 的路线中的 1 点
-	
+
 	if 50006 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800005 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1122,27 +1122,27 @@ function action_EVENT_PLATFORM_REACH_POINT_50045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_50046(context, evt)
 	-- 判断是gadgetid 为 50007的移动平台，是否到达了300800015 的路线中的 1 点
-	
+
 	if 50007 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800015 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1153,27 +1153,27 @@ function action_EVENT_PLATFORM_REACH_POINT_50046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_50047(context, evt)
 	-- 判断是gadgetid 为 50008的移动平台，是否到达了300800016 的路线中的 1 点
-	
+
 	if 50008 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800016 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1184,27 +1184,27 @@ function action_EVENT_PLATFORM_REACH_POINT_50047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_50048(context, evt)
 	-- 判断是gadgetid 为 50009的移动平台，是否到达了300800017 的路线中的 1 点
-	
+
 	if 50009 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800017 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1215,27 +1215,27 @@ function action_EVENT_PLATFORM_REACH_POINT_50048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_50049(context, evt)
 	-- 判断是gadgetid 为 50010的移动平台，是否到达了300800018 的路线中的 1 点
-	
+
 	if 50010 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800018 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1246,27 +1246,27 @@ function action_EVENT_PLATFORM_REACH_POINT_50049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_50050(context, evt)
 	-- 判断是gadgetid 为 50011的移动平台，是否到达了300800019 的路线中的 1 点
-	
+
 	if 50011 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800019 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1277,7 +1277,7 @@ function action_EVENT_PLATFORM_REACH_POINT_50050(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1287,7 +1287,7 @@ function condition_EVENT_QUEST_START_50051(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "reach_point_count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1298,7 +1298,7 @@ function action_EVENT_QUEST_START_50051(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1309,6 +1309,6 @@ function action_EVENT_TIMER_EVENT_50068(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	return 0
 end

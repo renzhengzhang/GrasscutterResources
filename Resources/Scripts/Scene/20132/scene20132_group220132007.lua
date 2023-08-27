@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220132007
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -86,9 +86,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -98,7 +98,7 @@ function action_EVENT_TIMER_EVENT_7004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -106,67 +106,67 @@ end
 function condition_EVENT_QUEST_FINISH_7005(context, evt)
 	--检查ID为300315的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 300315 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_7005(context, evt)
-	
-	ScriptLib.SetWeatherAreaState(context, 10134, 1) 
-	
+
+	ScriptLib.SetWeatherAreaState(context, 10134, 1)
+
 	if 0 ~= ScriptLib.EnterWeatherArea(context, 10134) then
 	    return -1
 	end
-	
+
 	-- 延迟6秒后,向groupId为：220132007的对象,请求一次调用,并将string参数："1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220132007, "1", 6) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	ScriptLib.ActivateDungeonCheckPoint(context, 6)
-	
+
 	-- 创建id为7002的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 7002 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220132002, EntityType.GADGET, 2021 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220132002, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220132009, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220132010, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -174,43 +174,43 @@ end
 function condition_EVENT_QUEST_FINISH_7006(context, evt)
 	--检查ID为300316的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 300316 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_7006(context, evt)
-	
-	ScriptLib.SetWeatherAreaState(context, 10134, 0) 
-	
+
+	ScriptLib.SetWeatherAreaState(context, 10134, 0)
+
 	-- 延迟6秒后,向groupId为：220132007的对象,请求一次调用,并将string参数："2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220132007, "2", 6) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	ScriptLib.ActivateDungeonCheckPoint(context, 7)
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220132008, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	if 0 ~= ScriptLib.EnterWeatherArea(context, 10134) then
 	    return -1
 	end
-	
+
 	return 0
 end
 
@@ -218,46 +218,46 @@ end
 function condition_EVENT_QUEST_FINISH_7007(context, evt)
 	--检查ID为300317的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 300317 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_7007(context, evt)
-	
-	ScriptLib.SetWeatherAreaState(context, 10135, 1) 
-	
+
+	ScriptLib.SetWeatherAreaState(context, 10135, 1)
+
 	if 0 ~= ScriptLib.EnterWeatherArea(context, 10135) then
 	    return -1
 	end
-	
+
 	-- 延迟6秒后,向groupId为：220132007的对象,请求一次调用,并将string参数："3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220132007, "3", 6) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220132001, 5)
-	
+
 	ScriptLib.ActivateDungeonCheckPoint(context, 9)
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220132011, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -265,53 +265,53 @@ end
 function condition_EVENT_QUEST_FINISH_7008(context, evt)
 	--检查ID为300318的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 300318 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_7008(context, evt)
-	
-	ScriptLib.SetWeatherAreaState(context, 10135, 0) 
-	ScriptLib.SetWeatherAreaState(context, 10136, 1) 
-	
+
+	ScriptLib.SetWeatherAreaState(context, 10135, 0)
+	ScriptLib.SetWeatherAreaState(context, 10136, 1)
+
 	-- 延迟6秒后,向groupId为：220132007的对象,请求一次调用,并将string参数："4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220132007, "4", 6) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	ScriptLib.ActivateDungeonCheckPoint(context, 11)
-	
+
 	if 0 ~= ScriptLib.EnterWeatherArea(context, 10136) then
 	    return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220132007, 2)
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220132011, suite = 11 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220132001, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -322,7 +322,7 @@ function action_EVENT_TIMER_EVENT_7009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -333,7 +333,7 @@ function action_EVENT_TIMER_EVENT_7010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -344,6 +344,6 @@ function action_EVENT_TIMER_EVENT_7011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

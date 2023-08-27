@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133104439
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -88,19 +88,19 @@ function condition_EVENT_GADGET_STATE_CHANGE_439003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "flag") ~= 0 then
 	                return false
 	end
-	
+
 	if 439001 ~= evt.param2 and 439008 ~= evt.param2 then
 	        return false
 	end
-	
+
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 439001) ~= GadgetState.GearStart then
 	        return false
-	end 
-	
+	end
+
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 439008) ~= GadgetState.GearStart then
 	        return false
-	end        
-	
+	end
+
 	return true
 end
 
@@ -110,32 +110,32 @@ function action_EVENT_GADGET_STATE_CHANGE_439003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 439002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 439004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 439004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 439009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 439009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "flag" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "flag", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟3秒后,向groupId为：133104439的对象,请求一次调用,并将string参数："DestroyGate" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133104439, "DestroyGate", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -144,7 +144,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_439005(context, evt)
 	if 439004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -154,14 +154,14 @@ function action_EVENT_GADGET_STATE_CHANGE_439005(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 133104440, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133104440中， configid为440006的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133104440, 440006, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -169,12 +169,12 @@ end
 function condition_EVENT_GROUP_LOAD_439007(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 439001) ~= GadgetState.GearStart then
 	        return false
-	end 
-	
+	end
+
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 439008) ~= GadgetState.GearStart then
 	        return false
-	end        
-	
+	end
+
 	return true
 end
 
@@ -184,32 +184,32 @@ function action_EVENT_GROUP_LOAD_439007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 439002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 439004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 439004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 439009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 439009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_439011(context, evt)
 	if evt.param1 ~= 439011 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -219,20 +219,20 @@ function action_EVENT_ENTER_REGION_439011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 439004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 439009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 439009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟3秒后,向groupId为：133104439的对象,请求一次调用,并将string参数："DestroyGate" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133104439, "DestroyGate", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -243,14 +243,14 @@ function action_EVENT_TIMER_EVENT_439012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 439009 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end

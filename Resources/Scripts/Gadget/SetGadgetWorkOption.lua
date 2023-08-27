@@ -5,9 +5,9 @@
 ---
 function OnClientExecuteReq(context, param1, param2, param3)
 
-	local this_target = ScriptLib.GetContextGadgetConfigId(context)
+	this_target = ScriptLib.GetContextGadgetConfigId(context)
 	--ScriptLib.PrintLog("##config="..this_target)
-	local this_group = ScriptLib.GetContextGroupId(context)
+	this_group = ScriptLib.GetContextGroupId(context)
 
 	if (param1 == 0) then
 		ScriptLib.SetWorktopOptionsByGroupId(context, this_group, this_target, {})

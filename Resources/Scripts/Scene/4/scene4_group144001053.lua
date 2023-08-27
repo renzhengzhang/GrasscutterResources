@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 144001053
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -76,9 +76,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -86,7 +86,7 @@ function condition_EVENT_ANY_GADGET_DIE_53003(context, evt)
 	if 53001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -97,13 +97,13 @@ function action_EVENT_ANY_GADGET_DIE_53003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "talk" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "talk", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -113,7 +113,7 @@ function condition_EVENT_GROUP_LOAD_53004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "talk") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -124,6 +124,6 @@ function action_EVENT_GROUP_LOAD_53004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101057
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	option_1 = 201,
 	option_2 = 202,
 	option_3 = 203,
@@ -13,9 +13,9 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local play = {
-	options = { 
-		[0] = defs.option_1, --ore 
+play = {
+	options = {
+		[0] = defs.option_1, --ore
 		[1] = defs.option_2, --mithril
 		[2] = defs.option_3  --crystal
 	},
@@ -31,9 +31,9 @@ local play = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -108,25 +108,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_57001(context, evt)
 	if evt.param1 ~= 57001 then return false end
-	
+
 	if 57001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_57001(context, evt)
-	local ret2 = ScriptLib.SetPlayerEyePointStream(context, 57001, 57004, true)
+	ret2 = ScriptLib.SetPlayerEyePointStream(context, 57001, 57004, true)
 	ScriptLib.PrintContextLog(context, "## ret2 = "..ret2)
 	return 0
 end
@@ -134,17 +134,17 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_57003(context, evt)
 	if evt.param1 ~= 57003 then return false end
-	
+
 	if 57003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_57003(context, evt)
-	local ret1 = ScriptLib.SetPlayerEyePointStream(context, 57003, 57004, true)
+	ret1 = ScriptLib.SetPlayerEyePointStream(context, 57003, 57004, true)
 	ScriptLib.PrintContextLog(context, "## ret1 = "..ret1)
 	return 0
 end

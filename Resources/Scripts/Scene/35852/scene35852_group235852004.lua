@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 235852004
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 				--起始操作台
 				starter = 4001 ,
 				--起始操作台选项
@@ -14,7 +14,7 @@ local defs = {
 				--挑战总时限 秒
 				time_limit = 90,
  is_tutorial = 1,
-	challenge_id = 2010055,	
+	challenge_id = 2010055,
 	  type = 4,
 		rand_suites = {3},
 				--怪物潮信息
@@ -22,33 +22,33 @@ local defs = {
 				--当场上本列表的怪数量小于min时触发补怪，补至max。max勿超过mosnters数量【max是代表一次性刷出的最大数量，min代表的是当小于该值时会触发补怪，每只怪物在一个集合内只能使用一次】
 				--spec_event:随着本怪物潮的出现而发生的关卡事件。为LD约定好的枚举。（即希望随着怪物潮出现的BUFF）
 				tide_cfg = {
-			
+
 					[1] = { monsters = {4002,4003,4004,4005,4006,4007,4008,4009,4010,4011}, min =10, max = 10,mona_buffs = {1}},
-				
+
 				},
 
 				stars = {
 					--suite x
 					[3] = {{4012, 4019}, {4013,4020}, {4014,4021}, {4015,4022}, {4016,4023}, {4017,4024},{4018,4025}},
-					
+
 			},
 				--怪物潮随机表
 				--随机固定顺序怪物潮组合 每次进地城随机取key。
 				--key对应value代表依序出现的MonsterTide【即上面tide_cfg中配置的参数】，小花括号内配置复数个表示同时刷出。【即table配置不同的怪物波次的组合，允许复数个怪物波次为一波一次性刷出】
 				rand_table = {
-					[1] = 
+					[1] =
 					{
 						{1},
-						
+
 					},
-					
+
 				},
 			}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -168,9 +168,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -181,9 +181,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -226,40 +226,40 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_4026(context, evt)
 	-- 触发镜头注目，注目位置为坐标（199，635，-1768），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=199, y=635, z=-1768}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=199, y=635, z=-1768}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4027 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235852006, 2)
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4079 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -267,14 +267,14 @@ end
 function condition_EVENT_SELECT_OPTION_4029(context, evt)
 	-- 判断是gadgetid 4001 option_id 94
 	if 4001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 94 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -284,20 +284,20 @@ function action_EVENT_SELECT_OPTION_4029(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 235852004 ；指定config：4001；物件身上指定option：94；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 235852004, 4001, 94) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 创建id为4079的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4079 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -308,32 +308,32 @@ function action_EVENT_CHALLENGE_FAIL_4030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 将configid为 4001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4079 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4031(context, evt)
 	if evt.param1 ~= 4031 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -344,30 +344,30 @@ function action_EVENT_ENTER_REGION_4031(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4078(context, evt)
 	if evt.param1 ~= 4078 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 	        return false
 	end
-	
+
 	if 0~=ScriptLib.GetExhibitionAccumulableData(context,context.uid,11402109) then
 	              return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_4078(context, evt)
 	ScriptLib.AddExhibitionAccumulableData(context, context.uid,"Activity_SummerTimeV2_Mona_Guide2", 1)
-	
+
 	ScriptLib.ShowClientTutorial(context,868,{})
 	return 0
 end

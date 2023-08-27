@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133213555
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 
         group_id = 133213555,
 
@@ -20,7 +20,7 @@ local defs = {
         --挑战id
         challenge_id = 2003006,
 
-        --目标捕捉数  
+        --目标捕捉数
         taget_score = 2,
 
         --目标捕捉数，配在陈列室表里，每个营地对应各自的陈列室ID
@@ -38,9 +38,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -104,9 +104,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -117,9 +117,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -162,19 +162,19 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_555019(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213555, 2)
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213555, 3)
-	
+
 	return 0
 end
 
@@ -184,7 +184,7 @@ function condition_EVENT_ANY_MONSTER_DIE_555020(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -192,13 +192,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_555020(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213555, 4)
-	
+
 	-- 调用提示id为 400004 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_MONSTER_BATTLE_555024(context, evt)
 	if 555003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -218,7 +218,7 @@ function action_EVENT_MONSTER_BATTLE_555024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -228,12 +228,12 @@ function condition_EVENT_ANY_MONSTER_DIE_555025(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"sneak_first"为0
 	if ScriptLib.GetGroupVariableValue(context, "sneak_first") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -244,13 +244,13 @@ function action_EVENT_ANY_MONSTER_DIE_555025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "fight_first" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "fight_first", 1, 133213554) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -260,12 +260,12 @@ function condition_EVENT_ANY_MONSTER_DIE_555026(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"sneak_first"为1
 	if ScriptLib.GetGroupVariableValue(context, "sneak_first") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -276,13 +276,13 @@ function action_EVENT_ANY_MONSTER_DIE_555026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "fight_first" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "fight_first", 1, 133213555) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -292,7 +292,7 @@ function condition_EVENT_ANY_MONSTER_DIE_555027(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -303,7 +303,7 @@ function action_EVENT_ANY_MONSTER_DIE_555027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 

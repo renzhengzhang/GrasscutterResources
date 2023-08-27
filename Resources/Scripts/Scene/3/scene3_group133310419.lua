@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133310419
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -115,20 +115,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_419001(context, evt)
 	if evt.param1 ~= 419001 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -136,7 +136,7 @@ end
 function action_EVENT_ENTER_REGION_419001(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133310419, 2)
-	
+
 	return 0
 end
 
@@ -144,8 +144,8 @@ end
 function action_EVENT_LEAVE_REGION_419002(context, evt)
 	-- 创建标识为"leave1"，时间节点为{30}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "leave1", {30}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_TIME_AXIS_PASS_419003(context, evt)
 	if "leave1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -162,7 +162,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_419003(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133310419, 2)
-	
+
 	return 0
 end
 
@@ -170,6 +170,6 @@ end
 function action_EVENT_GROUP_LOAD_419014(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133310419, 2)
-	
+
 	return 0
 end

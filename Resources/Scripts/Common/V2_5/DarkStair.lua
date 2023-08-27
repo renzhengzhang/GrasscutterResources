@@ -5,15 +5,15 @@ function SLC_DarkStair_SetState( context )
 
 	ScriptLib.PrintContextLog(context, "## DS_LOG : target_eid = "..context.target_entity_id)
 
-	local configID = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+	configID = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 
 	ScriptLib.PrintContextLog(context, "## DS_LOG : configID = "..configID)
 
-	local curState = ScriptLib.GetGadgetStateByConfigId(context, 0, configID)
+	curState = ScriptLib.GetGadgetStateByConfigId(context, 0, configID)
 
 	ScriptLib.PrintContextLog(context, "## DS_LOG : curState = "..curState)
 
-	local curIndex = 1
+	curIndex = 1
 
 	for i,v in ipairs(stair_mode[configID]) do
 		if v==curState then
@@ -34,6 +34,6 @@ function SLC_DarkStair_SetState( context )
 
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 0, configID, stair_mode[configID][curIndex])
 
-	return 0 
+	return 0
 
 end

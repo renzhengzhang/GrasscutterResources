@@ -7,7 +7,7 @@
 ||	Protection:     [Protection]
 =======================================]]
 
-local deathMonsterDict = {
+deathMonsterDict = {
     [26090101] = {monsterid = 26090101,name = "蕈兽-小-飞-水"},
     [26090201] = {monsterid = 26090201,name = "蕈兽-小-飞-草"},
     [26090301] = {monsterid = 26090301,name = "蕈兽-小-飞-风"},
@@ -24,7 +24,7 @@ local deathMonsterDict = {
     [26120201] = {monsterid = 26120201,name = "蕈兽-精英-飞-冰"},
 }
 
-local deathGadgetDict = {
+deathGadgetDict = {
     --三态物件
     [70330197] = {gadgetid = 70330197,name = "弹跳蘑菇"},
     [70330199] = {gadgetid = 70330199,name = "可抬起石块"},
@@ -41,12 +41,12 @@ local deathGadgetDict = {
     [70290492] = {gadgetid = 70290492,name = "死域节点光源"},
 }
 
-local deathGatherDict = {
+deathGatherDict = {
     [2045] = {point_type = 2045,name = "生命之菇"},
 }
 
 
-local DeathFieldStandard_Trigger = {
+DeathFieldStandard_Trigger = {
     { config_id = 90700001, name = "DeathFieldStandard_GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "",
       condition = "", action = "action_CheckDeathEntity", trigger_count = 0},
     { config_id = 90700002, name = "DeathFieldStandard_DEATH_ZONE_STATUS_CHANGE", event = EventType.EVENT_DEATH_ZONE_STATUS_CHANGE, source = "",
@@ -60,7 +60,7 @@ function LF_Initialize_DeathFieldStandard()
 
     LF_InsertTriggers(DeathFieldStandard_Trigger,{})
 
-    local var = { config_id= 90700101, name = "SGV_DeathZoneState", value = 0, no_refresh = true, variable_type = 1 }  --死域状态
+    var = { config_id= 90700101, name = "SGV_DeathZoneState", value = 0, no_refresh = true, variable_type = 1 }  --死域状态
     variables[var.name] = var
 
     LF_InitialDeathMonster()
@@ -75,7 +75,7 @@ end
 --======================================]]
 function LF_InitialDeathMonster()
     for _,v in pairs(monsters) do
-        local monsterID = v.monster_id
+        monsterID = v.monster_id
         if deathMonsterDict[monsterID] ~= nil then
             if nil == v.logic_state then
                 -- 如果无logic_state，则直接写入
@@ -90,7 +90,7 @@ end
 
 function LF_InitialDeathGadget()
     for _,v in pairs(gadgets) do
-        local gadgetsID = v.gadget_id
+        gadgetsID = v.gadget_id
         if deathGadgetDict[gadgetsID] ~= nil then
             if nil == v.logic_state then
                 -- 如果无logic_state，则直接写入
@@ -105,8 +105,8 @@ end
 
 function LF_InitialDeathGather()
     for _,v in pairs(gadgets) do
-        local gadgetsID = v.gadget_id
-        local pointType = v.point_type
+        gadgetsID = v.gadget_id
+        pointType = v.point_type
         if gadgetsID == 70500000 and pointType ~= nil then
             if deathGatherDict[pointType] ~= nil then
                 if nil == v.logic_state then
@@ -127,7 +127,7 @@ end
 --======================================]]
 function action_CheckDeathEntity(context,evt)
     -- 查询死域值并根据死域值设置LogicState
-    local curDeathStatus = ScriptLib.GetDeathZoneStatus(context,0)
+    curDeathStatus = ScriptLib.GetDeathZoneStatus(context,0)
     ScriptLib.PrintContextLog(context, "## TD_DeathFieldStandard GroupLoad: 当前Group"..base_info.group_id.."死域状态为"..curDeathStatus)
     if -1 == curDeathStatus then
         ScriptLib.PrintContextLog(context, "## TD_DeathFieldStandard GroupLoad: 当前Group"..base_info.group_id.."没有对应死域")
@@ -140,7 +140,7 @@ end
 
 function action_DeathZoneChange(context,evt)
     -- 查询死域值并根据死域值设置LogicState
-    local curDeathStatus = ScriptLib.GetDeathZoneStatus(context,0)
+    curDeathStatus = ScriptLib.GetDeathZoneStatus(context,0)
     ScriptLib.SetGroupLogicStateValue(context,"SGV_DeathZoneState",curDeathStatus)
     ScriptLib.PrintContextLog(context, "## TD_DeathFieldStandard DeathZoneChange 死域LogicState切换为" .. curDeathStatus)
     return 0
@@ -152,7 +152,7 @@ end
 
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -192,7 +192,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    local s = "{"
+    s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","

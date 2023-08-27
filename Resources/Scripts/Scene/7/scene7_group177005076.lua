@@ -1,34 +1,34 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 177005076
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	pointarray_1 = 700500010
 }
 
 -- DEFS_MISCS
-local PlatList = {76001,76002,76003,76004,0,76006,76007,76008,76005}
-local initPlatList = {0,76002,76003,76001,76006,76005,76004,76007,76008}
+PlatList = {76001,76002,76003,76004,0,76006,76007,76008,76005}
+initPlatList = {0,76002,76003,76001,76006,76005,76004,76007,76008}
 
-local groupID = 177005076
-local ArrayID = 700500010
+groupID = 177005076
+ArrayID = 700500010
 
-local operatorConfigID = 76010
-local successOptionID = 703
-local offeringConfigID = 76014
-local borderConfigID = 76018
-local baseConfigID = 76019
-local lastOfferingConfigID = 76011
-local completeConfigID = 76016
-local centreConfigID = 76030
-local successConfigID = 76017
+operatorConfigID = 76010
+successOptionID = 703
+offeringConfigID = 76014
+borderConfigID = 76018
+baseConfigID = 76019
+lastOfferingConfigID = 76011
+completeConfigID = 76016
+centreConfigID = 76030
+successConfigID = 76017
 
 
-local OptionID = 705   
-local RestartOption = 704
-local PointList ={
+OptionID = 705
+RestartOption = 704
+PointList ={
         {pos={x=242.83, y=325.696, z=284.28}, rot={x=0 ,y=306.419, z=0}},
         {pos={x=241.3458, y=325.696, z=282.2683}, rot={x=0 ,y=306.419, z=0}},
         {pos={x=239.865, y=325.696, z=280.259}, rot={x=0 ,y=306.419, z=0}},
@@ -41,9 +41,9 @@ local PointList ={
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -137,9 +137,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -150,9 +150,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -195,42 +195,42 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_76009(context, evt)
-	
+
 	-- 判断变量"count"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "doorflag", 177005076) == 1 then
 	    ScriptLib.KillEntityByConfigId(context, { config_id = 76015 })
 	end
-	
-	
+
+
 	-- 判断变量"questflag"为13
 	if ScriptLib.GetGroupVariableValueByGroup(context, "questflag", 177005076) == 13 then
 	    ScriptLib.AddQuestProgress(context, "7227605")
 	end
-	
+
 	-- 判断变量"questflag"为14
 	if ScriptLib.GetGroupVariableValueByGroup(context, "questflag", 177005076) == 14 then
-	    ScriptLib.AddQuestProgress(context, "7227605")	
+	    ScriptLib.AddQuestProgress(context, "7227605")
 	    ScriptLib.AddQuestProgress(context, "7227621")
 	end
-	
+
 	-- 判断变量"questflag"为15
 	if ScriptLib.GetGroupVariableValueByGroup(context, "questflag", 177005076) == 15 then
 	    ScriptLib.AddQuestProgress(context, "7227605")
 	    ScriptLib.AddQuestProgress(context, "7227621")
 	    ScriptLib.AddQuestProgress(context, "7227622")
 	end
-	
+
 	return 0
-	
-	
-	
+
+
+
 end
 
 -- 触发操作
@@ -240,7 +240,7 @@ function action_EVENT_QUEST_START_76013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -249,7 +249,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_76020(context, evt)
 	if 76011 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -260,13 +260,13 @@ function action_EVENT_GADGET_STATE_CHANGE_76020(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 177005076, 76010, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -275,19 +275,19 @@ function condition_EVENT_SELECT_OPTION_76022(context, evt)
 	--联机下不可使用
 	if ScriptLib.CheckIsInMpMode(context) then
 	    ScriptLib.AssignPlayerShowTemplateReminder(context, 165, {param_vec={},param_uid_vec={},uid_vec={context.uid}})
-	    return false 
+	    return false
 	end
-	
+
 	-- 判断是gadgetid 76010 option_id 706
 	if 76010 ~= evt.param1 then
-	  return false  
+	  return false
 	end
-	
+
 	if 706 ~= evt.param2 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -298,37 +298,37 @@ function action_EVENT_SELECT_OPTION_76022(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 177005076 ；指定config：76010；物件身上指定option：706；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 177005076, 76010, 706) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 创建id为76016的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 76016 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为76019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 76019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为76021的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 76021 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 177005076, EntityType.GADGET, 76018 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -336,14 +336,14 @@ end
 function condition_EVENT_SELECT_OPTION_76023(context, evt)
 	-- 判断是gadgetid 76010 option_id 7
 	if 76010 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -354,25 +354,25 @@ function action_EVENT_SELECT_OPTION_76023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 177005076 ；指定config：76010；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 177005076, 76010, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 	  return -1
 	end
-	
+
 	  -- 卸载指定gadget
 	  if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 177005076, EntityType.GADGET, 76016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 	    return -1
 	  end
-	
+
 	  -- 卸载指定gadget
 	  if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 177005076, EntityType.GADGET, 76019 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 	    return -1
 	  end
-	
+
 	  -- 卸载指定gadget
 	  if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 177005076, EntityType.GADGET, 76030 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
@@ -383,13 +383,13 @@ function action_EVENT_SELECT_OPTION_76023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 	    return -1
 	  end
-	
+
 	-- 创建id为76018的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 76018 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -400,14 +400,14 @@ function action_EVENT_QUEST_START_76024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 76015 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -416,7 +416,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_76025(context, evt)
 	if 76014 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -427,37 +427,37 @@ function action_EVENT_GADGET_STATE_CHANGE_76025(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将configid为 76010 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 76010, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为76032的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 76032 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "questflag" 的变量设置为 13
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "questflag", 13) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_76026(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"PuzzleFlag"为2
 	if ScriptLib.GetGroupVariableValue(context, "PuzzleFlag") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -468,13 +468,13 @@ function action_EVENT_VARIABLE_CHANGE_76026(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "questflag" 的变量设置为 14
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "questflag", 14) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -482,17 +482,17 @@ end
 function condition_EVENT_QUEST_FINISH_76027(context, evt)
 	--检查ID为7227603的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 7227603 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -502,62 +502,62 @@ function action_EVENT_QUEST_FINISH_76027(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 76014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_QUEST_START_76028(context, evt)
-	
+
 	-- 将本组内变量名为 "stageflag" 的变量设置为 0
 	ScriptLib.SetGroupVariableValue(context, "stageflag", 0)
 	-- 增加重置按钮
 	ScriptLib.SetWorktopOptionsByGroupId(context, 177005076, 76010, {703})
-	
+
 	--加载底板
 	ScriptLib.CreateGadget(context, { config_id = 76019 })
 	--加载原版参照
 	ScriptLib.CreateGadget(context, { config_id = 76021 })
-	
+
 	-- 卸载完整华容道
 	ScriptLib.RemoveEntityByConfigId(context, 177005076, EntityType.GADGET, 76018 )
-	
+
 	-- 添加suite2的所有内容
 	ScriptLib.AddExtraGroupSuite(context, 177005076, 2)
 	-- 将本组内变量名为 "stageflag" 的变量设置为 0
 	ScriptLib.SetGroupVariableValue(context, "PuzzleFlag", 2)
-	
-	
+
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_QUEST_START_76029(context, evt)
 	-- 删除指定group： 177005076 ；指定config：76010；物件身上指定option：7；
-	
+
 	ScriptLib.SetWorktopOptionsByGroupId(context, 177005076, 76010, {7})
-	
-	
+
+
 	  -- 卸载指定gadget
-	
-	ScriptLib.CreateGadget(context, { config_id = 76016 }) 
-	
+
+	ScriptLib.CreateGadget(context, { config_id = 76016 })
+
 	  -- 卸载指定gadget
-	
-	ScriptLib.CreateGadget(context, { config_id = 76019 }) 
-	
+
+	ScriptLib.CreateGadget(context, { config_id = 76019 })
+
 	  -- 卸载指定gadget
-	
-	ScriptLib.CreateGadget(context, { config_id = 76030 }) 
+
+	ScriptLib.CreateGadget(context, { config_id = 76030 })
 	  -- 卸载指定gadget
-	
-	ScriptLib.CreateGadget(context, { config_id = 76021 }) 
-	
+
+	ScriptLib.CreateGadget(context, { config_id = 76021 })
+
 	-- 创建id为76018的gadget
-	
+
 	ScriptLib.RemoveEntityByConfigId(context, 177005076, EntityType.GADGET, 76018 )
-	
+
 	return 0
 end
 
@@ -568,7 +568,7 @@ function action_EVENT_QUEST_START_76031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

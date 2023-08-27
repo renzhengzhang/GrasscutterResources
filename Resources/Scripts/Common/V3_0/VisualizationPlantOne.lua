@@ -9,20 +9,20 @@
 =======================================]]
 
 --
-local RequireSuite = {}
+RequireSuite = {}
 
-local WatcherList ={
+WatcherList ={
 	[defs.gadget_VP] = { pointArray = defs.pointarray_id},
 }
 
-local VPOne_Trigger = {
+VPOne_Trigger = {
     { keyWord = "CheckFlowerCreate", event = EventType.EVENT_GADGET_CREATE, source = "", trigger_count = 0},
     { keyWord = "CheckPoint", event = EventType.EVENT_PLATFORM_ARRIVAL, source = "", trigger_count = 0},
     { keyWord = "StageChange", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", trigger_count = 0},
 }
 
 function LF_Initialize_VPOne()
-    local startConfigID = 40030001
+    startConfigID = 40030001
     for _,v in pairs(VPOne_Trigger) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -42,7 +42,7 @@ function LF_Initialize_VPOne()
 end
 
 function LF_AutoGenList()
-    local pointArrayList = {}
+    pointArrayList = {}
     for i = defs.minPoint,defs.maxPoint do
         table.insert(pointArrayList,i)
     end
@@ -54,7 +54,7 @@ end
 --======================================]]
 function action_CheckFlowerCreate(context,evt)
     ScriptLib.PrintContextLog(context, "## TD_VPOne  CheckFlowerCreate| configID = " .. evt.param1 )
-    local cid = evt.param1
+    cid = evt.param1
     if WatcherList[cid] ~= nil and ScriptLib.GetGadgetStateByConfigId(context, 0, cid) == 0 then
         LF_StartMove(context,cid)
     end
@@ -62,18 +62,18 @@ function action_CheckFlowerCreate(context,evt)
 end
 
 function action_CheckPoint(context,evt)
-    local cid = evt.param1
-    local curPoint = evt.param3
+    cid = evt.param1
+    curPoint = evt.param3
     if WatcherList[cid] == nil then
         return 0
     end
 
-    local pointList = WatcherList[cid].pointArrayList
-    local curIndex = LF_GetIndexInTable(curPoint,pointList)
-    local nextIndex = LF_GetNextPointIndex(pointList,curIndex)
+    pointList = WatcherList[cid].pointArrayList
+    curIndex = LF_GetIndexInTable(curPoint,pointList)
+    nextIndex = LF_GetNextPointIndex(pointList,curIndex)
     ScriptLib.SetGroupTempValue(context, "Cid_"..cid.."_Index",nextIndex, {})
 
-    local msg = "## TD_VPOne  CheckPoint"
+    msg = "## TD_VPOne  CheckPoint"
     msg = msg .. "| configID = " .. cid
     msg = msg .. "| nextIndex被保存 = " .. nextIndex
     ScriptLib.PrintContextLog(context, msg)
@@ -82,14 +82,14 @@ function action_CheckPoint(context,evt)
 end
 
 function action_StageChange(context,evt)
-    local msg = "## TD_VPOne  GadgetCheck"
+    msg = "## TD_VPOne  GadgetCheck"
     msg = msg .. "| configID = " .. evt.param2
     msg = msg .. "的状态被修改为 = " .. evt.param1
     ScriptLib.PrintContextLog(context, msg)
-    local cid = evt.param2
+    cid = evt.param2
     if WatcherList[cid] ~= nil then
         if 0 ~= evt.param1 then
-            local resultVec = ScriptLib.GetPlatformPointArray(context, cid)
+            resultVec = ScriptLib.GetPlatformPointArray(context, cid)
             if resultVec ~= nil and resultVec[1] ~= 0 then
                 -- 停下来！
                 ScriptLib.StopPlatform(context, cid)
@@ -105,10 +105,10 @@ end
 ||	流程函数
 --======================================]]
 function LF_StartMove(context,cid)
-    local curPointIndex = ScriptLib.GetGroupTempValue(context, "Cid_"..cid.."_Index", {})
-    local pointArray = WatcherList[cid].pointArray
-    local pointList = WatcherList[cid].pointArrayList
-    local gadgetState = ScriptLib.GetGadgetStateByConfigId(context,0,cid)
+    curPointIndex = ScriptLib.GetGroupTempValue(context, "Cid_"..cid.."_Index", {})
+    pointArray = WatcherList[cid].pointArray
+    pointList = WatcherList[cid].pointArrayList
+    gadgetState = ScriptLib.GetGadgetStateByConfigId(context,0,cid)
 
     if 0 ~= gadgetState then
         ScriptLib.PrintContextLog(context, "## TD_VPOne  GadgetState为0不移动")
@@ -120,11 +120,11 @@ function LF_StartMove(context,cid)
         curPointIndex = 1
     end
 
-    local curPath = LF_GetStartPath(pointList,curPointIndex)
+    curPath = LF_GetStartPath(pointList,curPointIndex)
 
     ScriptLib.SetPlatformPointArray(context, cid, pointArray, curPath, { route_type = 2,record_mode=0 })
 
-    local msg = "## TD_VPOne  LF_StartMove"
+    msg = "## TD_VPOne  LF_StartMove"
     msg = msg .. "| curPointIndex = " .. cid
     msg = msg .. "| configID = " .. cid
     msg = msg .. "| pointArray = " .. pointArray
@@ -141,7 +141,7 @@ end
 
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -181,7 +181,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    local s = "{"
+    s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","
@@ -196,15 +196,15 @@ end
 -- 根据起点获得点阵资料
 function LF_GetStartPath(pointArrayList, curPointIndex)
 
-    local path = {}
-    local pointList = pointArrayList
+    path = {}
+    pointList = pointArrayList
 
     if pointList[curPointIndex] == nil then
         return path
     end
 
     for i = 1,#pointList do
-        local point = pointList[curPointIndex]
+        point = pointList[curPointIndex]
         table.insert(path,point)
         curPointIndex = LF_GetNextPointIndex(pointList,curPointIndex)
     end
@@ -213,7 +213,7 @@ function LF_GetStartPath(pointArrayList, curPointIndex)
 end
 
 function LF_GetNextPointIndex(pointList, curPointIndex)
-    local nextPointIndex = curPointIndex + 1
+    nextPointIndex = curPointIndex + 1
     if nextPointIndex > #pointList then
         nextPointIndex = 1
     end

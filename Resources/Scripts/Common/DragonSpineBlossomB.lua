@@ -1,4 +1,4 @@
-local triggers_lib = {
+triggers_lib = {
 	["Group_Load"] = { config_id = 8000001, name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
 	["Load_Protect"] = { config_id = 8000002, name = "Load_Protect", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_load_protect", trigger_count = 0},
 	["Gadget_Create"] = { config_id = 8000003, name = "Gadget_Create", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0},
@@ -15,8 +15,8 @@ local triggers_lib = {
 	["Timer_Event"] = { config_id = 8000014, name ="Timer_Event", event = EventType.EVENT_TIMER_EVENT, source = "timer", condition = "", action = "action_timer_event", trigger_count = 0 }
 }
 
-local gid = defs.group_id or 0
-local interval = defs.timer or 15
+gid = defs.group_id or 0
+interval = defs.timer or 15
 --雪山营地B
 function Initialize_Group()
 	table.insert(variables, {config_id=54000001,name = "wave", value = 0})
@@ -52,7 +52,7 @@ end
 Initialize_Group()
 ----------------------------------------------
 --[[
-local defs = {
+defs = {
 	operator = 422010,
 	blossom_chest = 422011,
 	platform = 422013
@@ -73,17 +73,17 @@ local defs = {
 --]]
 
 function LF_Active_Challenge(context)
-	local max = 0
+	max = 0
 	for i,v in ipairs(defs.challenge) do
 		max = max + v.weight
 	end
 	math.randomseed(ScriptLib.GetServerTime(context))
-	local ran = math.random(max)
+	ran = math.random(max)
 	--ScriptLib.PrintContextLog(context, "## random = "..ran)
 	for i,v in ipairs(defs.challenge) do
 		ran = ran - v.weight
 		if ran <= 0 then
-			local sum = #suites[3].monsters + #suites[5].monsters + #suites[6].monsters
+			sum = #suites[3].monsters + #suites[5].monsters + #suites[6].monsters
 			ScriptLib.ActiveChallenge(context, 1, v.id, 0, sum, 0, 0)
 			ScriptLib.ShowTemplateReminder(context, v.temp_r, {0,0})
 			--ScriptLib.PrintContextLog(context, "## i = "..i)
@@ -210,7 +210,7 @@ function action_platform_reach_point(context, evt)
 			return 0
 		end
 		for i,v in ipairs(defs.route_info) do
-			local wave = ScriptLib.GetGroupVariableValue(context, "wave")
+			wave = ScriptLib.GetGroupVariableValue(context, "wave")
 			if evt.param2 == v.route_id and evt.param3 == v.point_id then
 				if i >= wave then
 					ScriptLib.StopPlatform(context, defs.platform)
@@ -218,7 +218,7 @@ function action_platform_reach_point(context, evt)
 				ScriptLib.CreateGadget(context, { config_id = v.gadget })
 				break
 			end
-		end	
+		end
 	end
 	return 0
 end
@@ -228,8 +228,8 @@ function action_timer_event(context, evt)
 		return -1
 	end
 	ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, defs.timedOre)
-	local eid = ScriptLib.GetEntityIdByConfigId(context, defs.platform)
-	local pos = ScriptLib.GetPosByEntityId(context, eid)
+	eid = ScriptLib.GetEntityIdByConfigId(context, defs.platform)
+	pos = ScriptLib.GetPosByEntityId(context, eid)
 	ScriptLib.CreateGadgetByConfigIdByPos(context, defs.timedOre, {x=pos.x,y=pos.y,z=pos.z}, {x=0,y=0,z=0})
 	ScriptLib.CreateGroupTimerEvent(context, ScriptLib.GetContextGroupId(context), "timer", interval)
 	return 0

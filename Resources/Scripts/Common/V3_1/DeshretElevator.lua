@@ -16,7 +16,7 @@ defs.gadget_elevatorID
 defs.finalMovePoints
 --]]
 ---
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		{ config_id = 80000001, name = "OnWorkOptionSelect", event= EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_OnWorkOptionSelect", trigger_count = 0},
 		{ config_id = 80000002, name = "OnPlatformReach", event= EventType.EVENT_PLATFORM_ARRIVAL, source = "", condition = "", action = "action_OnPlatformReach", trigger_count = 0},
@@ -28,10 +28,10 @@ local extrTriggers = {
 function action_OnGroupLoad(context, evt)
 	ScriptLib.PrintContextLog(context, "@@ DeshretElevator : elevator action_OnGroupLoad")
 
-	local curMovePoint = ScriptLib.GetGroupVariableValue(context, "CurMovePoint")
-	local pointArrayID = ScriptLib.GetGroupVariableValue(context, "pointarray_ID")
+	curMovePoint = ScriptLib.GetGroupVariableValue(context, "CurMovePoint")
+	pointArrayID = ScriptLib.GetGroupVariableValue(context, "pointarray_ID")
 	ScriptLib.SetPlatformPointArray(context, defs.gadget_elevatorID, pointArrayID, {curMovePoint}, { route_type = 0,record_mode=1 })
-	local isBlockMoveMode = ScriptLib.GetGroupVariableValue(context, "IsBlockMoveMode")
+	isBlockMoveMode = ScriptLib.GetGroupVariableValue(context, "IsBlockMoveMode")
 	if isBlockMoveMode == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_elevatorID, 203)
 	else
@@ -43,13 +43,13 @@ end
 function action_OnWorkOptionSelect(context, evt)
 	ScriptLib.PrintContextLog(context, "@@ DeshretElevator : elevator action_OnWorkOptionSelect")
 
-	local optionID = evt.param2
+	optionID = evt.param2
 	if(optionID == defs.elevatorOptionID)then
-		local curMovePoint = ScriptLib.GetGroupVariableValue(context, "CurMovePoint")
-		local movePoint1 = ScriptLib.GetGroupVariableValue(context, "MovePoint1")
-		local movePoint2 = ScriptLib.GetGroupVariableValue(context, "MovePoint2")
+		curMovePoint = ScriptLib.GetGroupVariableValue(context, "CurMovePoint")
+		movePoint1 = ScriptLib.GetGroupVariableValue(context, "MovePoint1")
+		movePoint2 = ScriptLib.GetGroupVariableValue(context, "MovePoint2")
 
-		local toMovePoint = 0
+		toMovePoint = 0
 		if(movePoint1==curMovePoint)then
 			toMovePoint = movePoint2
 		else
@@ -69,7 +69,7 @@ function SetElevator(context,PointArray,Point)
 	ScriptLib.SetGroupVariableValue(context, "MovePoint2",2)
 	ScriptLib.StopPlatform(context, defs.gadget_elevatorID)
 	ScriptLib.SetPlatformPointArray(context, defs.gadget_elevatorID, PointArray, {Point}, { route_type = 0,record_mode=1 })
-	local isBlockMoveMode = ScriptLib.GetGroupVariableValue(context, "IsBlockMoveMode")
+	isBlockMoveMode = ScriptLib.GetGroupVariableValue(context, "IsBlockMoveMode")
 	if isBlockMoveMode == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_elevatorID, 203)
 	else
@@ -87,7 +87,7 @@ function SetElevator_finalMove(context,PointArray,StartPoint)
 	ScriptLib.SetGroupVariableValue(context, "MovePoint2",defs.finalMovePoints[#defs.finalMovePoints])
 	ScriptLib.StopPlatform(context, defs.gadget_elevatorID)
 	ScriptLib.SetPlatformPointArray(context, defs.gadget_elevatorID, PointArray, {StartPoint}, { route_type = 0,record_mode=1 })
-	local isBlockMoveMode = ScriptLib.GetGroupVariableValue(context, "IsBlockMoveMode")
+	isBlockMoveMode = ScriptLib.GetGroupVariableValue(context, "IsBlockMoveMode")
 	if isBlockMoveMode == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_elevatorID, 203)
 	else
@@ -99,19 +99,19 @@ end
 function TryMoveElevatorToPoint(context,Point)
 	ScriptLib.PrintContextLog(context, "@@ DeshretElevator : elevator TryMoveElevatorToPoint "..Point)
 
-	local curMovePoint = ScriptLib.GetGroupVariableValue(context, "CurMovePoint")
+	curMovePoint = ScriptLib.GetGroupVariableValue(context, "CurMovePoint")
 	if(curMovePoint==Point)then
 		ScriptLib.ShowReminder(context, 400191)
 		return 0
 	end
-	local pointArrayID = ScriptLib.GetGroupVariableValue(context, "pointarray_ID")
+	pointArrayID = ScriptLib.GetGroupVariableValue(context, "pointarray_ID")
 	ScriptLib.PrintContextLog(context, "@@ DeshretElevator : elevator pointArrayID "..pointArrayID)
 
 	--先停再移动
 	ScriptLib.StopPlatform(context, defs.gadget_elevatorID)
-	local IsFinalMove = ScriptLib.GetGroupVariableValue(context, "IsFinalMove")
+	IsFinalMove = ScriptLib.GetGroupVariableValue(context, "IsFinalMove")
 	if IsFinalMove == 1 then
-		local movePoints = {}
+		movePoints = {}
 		if(defs.finalMovePoints[1]==Point)then
 			for i = #defs.finalMovePoints,1,-1 do
 				table.insert(movePoints,defs.finalMovePoints[i])
@@ -134,9 +134,9 @@ end
 function action_OnPlatformReach(context, evt)
 	ScriptLib.PrintContextLog(context, "@@ DeshretElevator : elevator action_OnPlatformReach")
 
-	local config_id = evt.param1
-	local reachPoint = evt.param3
-	local curMovePoint = ScriptLib.GetGroupVariableValue(context, "CurMovePoint")
+	config_id = evt.param1
+	reachPoint = evt.param3
+	curMovePoint = ScriptLib.GetGroupVariableValue(context, "CurMovePoint")
 
 	if(config_id == defs.gadget_elevatorID and reachPoint == curMovePoint)then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_elevatorID, 0)
@@ -148,7 +148,7 @@ end
 function SLC_DeshretElevatorUpdate(context, value)
 	ScriptLib.PrintContextLog(context, "@@ DeshretElevator : elevator SLC_DeshretElevatorUpdate")
 
-	local gadgetID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	gadgetID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 
 	if(value == 0)then
 		ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, gadgetID, {defs.elevatorOptionID})

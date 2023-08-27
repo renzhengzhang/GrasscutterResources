@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199003126
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	starter_worktop_id = 126080,
 	pointarray_route = 900300022,
 	final_stage = 7,
@@ -16,15 +16,15 @@ local defs = {
 
 -- DEFS_MISCS
 --物件池物件gadgetid
-local pool_object_gadget_id =
+pool_object_gadget_id =
 {
     70380225,70380226
 }
 
-monster_drop_num = 
+monster_drop_num =
 {1,1}
 
-local elite_drop = 
+elite_drop =
 {
     [126001] = {3,3},
     [126006] = {2,2},
@@ -44,14 +44,14 @@ local elite_drop =
 
 
 
-local point_id_array = 
+point_id_array =
 {
        from = 1,
        to = 49,
 
 }
 
-local fuel = {
+fuel = {
         --初始燃料数量
         init_fuel = 100,
         --给发动机补充能量时，每秒消耗的燃料数量
@@ -60,7 +60,7 @@ local fuel = {
         fuel_ball = 20,
 }
 
-local energy = {
+energy = {
         --初始发动机能量
         init_energy = 100,
         --发动机最大能量
@@ -75,7 +75,7 @@ local energy = {
 }
 
 
-local part = {
+part = {
         --初始零件数
         init_part = 100,
         --修补分块时，每秒消耗的零件数
@@ -87,12 +87,12 @@ local part = {
 }
 
 
-local score = {
+score = {
     checkpoint = 20,
     monster = 5,
 }
 
-local raft = 
+raft =
 {
     engine = 126062,
     part_1 = 126073,
@@ -101,10 +101,10 @@ local raft =
     part_4 = 126079
 }
 
-local checkpoint = 
+checkpoint =
 {15,28,46,49}
 
-local stage = 
+stage =
 {
     [1] = {monster_suites = {2},start_suites = {2}, tag = "Sailing",obstacle = {126120},revive_point = 126237},
     [2] = {monster_suites = {3},start_suites = {3}, tag = "KillMonster", obstacle = {126120},revive_point = 126238},
@@ -123,9 +123,9 @@ CloudNets = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -314,9 +314,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -327,9 +327,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -408,9 +408,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -418,7 +418,7 @@ function condition_EVENT_GADGET_CREATE_126030(context, evt)
 	if 126009 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -428,28 +428,28 @@ function action_EVENT_GADGET_CREATE_126030(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 126071, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_126228(context, evt)
 	-- 判断是gadgetid 为 126062的移动平台，是否到达了900100002 的点集中的 27 点
-	
+
 	if 126062 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 900100002 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 27 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -460,45 +460,45 @@ function action_EVENT_PLATFORM_REACH_POINT_126228(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为126128的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 126128 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为126129的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 126129 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为126130的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 126130 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_126229(context, evt)
 	-- 判断是gadgetid 为 126062的移动平台，是否到达了900100002 的点集中的 29 点
-	
+
 	if 126062 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 900100002 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 29 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -509,7 +509,7 @@ function action_EVENT_PLATFORM_REACH_POINT_126229(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

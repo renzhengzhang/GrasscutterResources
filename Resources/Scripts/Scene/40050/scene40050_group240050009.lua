@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240050009
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -79,9 +79,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -89,12 +89,12 @@ function condition_EVENT_GADGET_CREATE_9003(context, evt)
 	if 9004 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"open"为0
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -105,19 +105,19 @@ function action_EVENT_GADGET_CREATE_9003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"open"为1
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -128,7 +128,7 @@ function action_EVENT_VARIABLE_CHANGE_9005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -136,14 +136,14 @@ end
 function condition_EVENT_SELECT_OPTION_9006(context, evt)
 	-- 判断是gadgetid 9004 option_id 1
 	if 9004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -153,26 +153,26 @@ function action_EVENT_SELECT_OPTION_9006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 9001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 9002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 9002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 240050009 ；指定config：9004；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240050009, 9004, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "open" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "open", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -180,14 +180,14 @@ end
 function condition_EVENT_SELECT_OPTION_9007(context, evt)
 	-- 判断是gadgetid 9004 option_id 4
 	if 9004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 4 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -197,38 +197,38 @@ function action_EVENT_SELECT_OPTION_9007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 9001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 9002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 9002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 240050009 ；指定config：9004；物件身上指定option：4；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240050009, 9004, 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "open" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "open", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"open"为0
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -239,6 +239,6 @@ function action_EVENT_VARIABLE_CHANGE_9008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end

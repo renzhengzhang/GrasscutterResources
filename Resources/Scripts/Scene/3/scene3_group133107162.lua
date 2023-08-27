@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133107162
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_id = 133107162,
 	gadget_riddle_hint = 162001,
 	gadget_riddle_1 = 162002,
@@ -15,9 +15,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -95,15 +95,15 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_162007(context, evt)
 	if evt.param2 ~= defs.gadget_riddle_1 and evt.param2 ~= defs.gadget_riddle_2 and evt.param2 ~= defs.gadget_riddle_3 and evt.param2 ~= defs.gadget_riddle_4 then
-	return false 
+	return false
 	end
 	return true
 end
@@ -114,7 +114,7 @@ function action_EVENT_GADGET_STATE_CHANGE_162007(context, evt)
 	ScriptLib.ChangeGroupVariableValue(context, "State_Flag", 1)
 	if 0 == ScriptLib.GetCurTriggerCount(context) then
 	ScriptLib.MarkPlayerAction(context, 1003, 1, 1)
-	end 
+	end
 	elseif evt.param1 == GadgetState.Default then
 	ScriptLib.ChangeGroupVariableValue(context, "State_Flag", -1)
 	end
@@ -124,7 +124,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_162008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 < 0 or evt.param1 > 4 then
 	return false
 	end
@@ -137,16 +137,16 @@ function action_EVENT_VARIABLE_CHANGE_162008(context, evt)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Default)
 	elseif evt.param1 == 1 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action01)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 2) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 2)
 	elseif evt.param1 == 2 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action02)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 3) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 3)
 	elseif evt.param1 == 3 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action03)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 4) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 4)
 	elseif evt.param1 == 4 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.GearStart)
-	ScriptLib.MarkPlayerAction(context, 1003, 3, 5) 
+	ScriptLib.MarkPlayerAction(context, 1003, 3, 5)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_chest, GadgetState.Default)
 	end
 	return 0
@@ -154,7 +154,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_162009(context, evt)
-	local sum = 0
+	sum = 0
 	if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_1) == GadgetState.GearStart then
 	sum = sum + 1
 	end
@@ -174,12 +174,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_162010(context, evt)
 	if evt.param1 ~= 162010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -190,7 +190,7 @@ function action_EVENT_ENTER_REGION_162010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_162011(context, evt)
 	if 162006 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -210,13 +210,13 @@ function action_EVENT_GADGET_STATE_CHANGE_162011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "fin" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "fin", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -226,7 +226,7 @@ function condition_EVENT_GROUP_LOAD_162017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -237,6 +237,6 @@ function action_EVENT_GROUP_LOAD_162017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

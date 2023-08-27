@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 247023001
 }
 
 -- DEFS_MISCS
-local defs ={
+defs ={
         gallery_id = 27006,
         finish_region = 1094,
         --关闭机关持续时间
@@ -18,12 +18,13 @@ local defs ={
 
         challenge_id=14,
         ball_challenge_id=13,
-        ability_region = 1196,
+
+        ability_region = 1196,
     }
 
 
 --[]内为大疾风微粒id，后面为要刷的suit
-local windball_list = {
+windball_list = {
 [1049]=2,
 [1113]=5,
 [1159]=6,
@@ -31,7 +32,7 @@ local windball_list = {
 
 
 --[]内为关闭/加强机关id，后面为控制的吹风机id
-local operator_list = {
+operator_list = {
 
 [1020]={1016},
 [1021]={1017,1135,1136,1156},
@@ -43,7 +44,7 @@ local operator_list = {
 }
 
 
-local transfer_list = {
+transfer_list = {
         --[region_configid] = point_id,
         [1180] =1080,
         [1181] =1081,
@@ -55,7 +56,7 @@ local transfer_list = {
 
 
 --[]内为region，后面为控制的pointid,进入region后会会切换到对应的point
-local revivepoint_list={
+revivepoint_list={
 [1087]=1080,
 [1088]=1081,
 [1089]=1082,
@@ -66,9 +67,9 @@ local revivepoint_list={
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -364,9 +365,9 @@ sight_groups = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -377,9 +378,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -485,20 +486,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1109(context, evt)
 	if evt.param1 ~= 1109 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -506,17 +507,17 @@ end
 function action_EVENT_ENTER_REGION_1109(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247023001, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_1110(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 247023001) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -524,79 +525,79 @@ end
 function action_EVENT_ANY_MONSTER_DIE_1110(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247023001, 3)
-	
+
 	-- 调用提示id为 470210105 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 470210105) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1143(context, evt)
 	if evt.param1 ~= 1143 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1143(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-402.7935，23.5，-429.9759），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-402.7935, y=23.5, z=-429.9759}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-402.7935, y=23.5, z=-429.9759}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1144(context, evt)
 	if evt.param1 ~= 1144 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1144(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-428，28，-342.5），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-428, y=28, z=-342.5}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-428, y=28, z=-342.5}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1157(context, evt)
 	if evt.param1 ~= 1157 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -604,145 +605,145 @@ end
 function action_EVENT_ENTER_REGION_1157(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247023001, 8)
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 247023001, EntityType.GADGET, 1097 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1188(context, evt)
 	if evt.param1 ~= 1188 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1188(context, evt)
-	local list = {ScriptLib.GetSceneUidList(context),}
-	local count = 0
+	list = {ScriptLib.GetSceneUidList(context),}
+	count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
-	
+
 	if count == 1 then
 		ScriptLib.AssignPlayerShowTemplateReminder(context, 206, {param_vec = {}, param_uid_vec = {}, uid_vec = {context.uid}})
-	
+
 		return 0
 	else return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1189(context, evt)
 	if evt.param1 ~= 1189 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1189(context, evt)
-	local list = {ScriptLib.GetSceneUidList(context),}
-	local count = 0
+	list = {ScriptLib.GetSceneUidList(context),}
+	count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
-	
+
 	if count == 1 then
 		ScriptLib.AssignPlayerShowTemplateReminder(context, 210, {param_vec = {}, param_uid_vec = {}, uid_vec = {context.uid}})
-	
+
 		return 0
 	else return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1190(context, evt)
 	if evt.param1 ~= 1190 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1190(context, evt)
-	local list = {ScriptLib.GetSceneUidList(context),}
-	local count = 0
+	list = {ScriptLib.GetSceneUidList(context),}
+	count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
-	
+
 	if count == 1 then
 		ScriptLib.AssignPlayerShowTemplateReminder(context, 209, {param_vec = {}, param_uid_vec = {}, uid_vec = {context.uid}})
-	
+
 		return 0
 	else return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1191(context, evt)
 	if evt.param1 ~= 1191 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1191(context, evt)
-	local list = {ScriptLib.GetSceneUidList(context),}
-	local count = 0
+	list = {ScriptLib.GetSceneUidList(context),}
+	count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
-	
+
 	if count == 1 then
 		ScriptLib.AssignPlayerShowTemplateReminder(context, 208, {param_vec = {}, param_uid_vec = {}, uid_vec = {context.uid}})
-	
+
 		return 0
 	else return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1192(context, evt)
 	if evt.param1 ~= 1192 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -750,25 +751,25 @@ end
 function action_EVENT_ENTER_REGION_1192(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247023001, 11)
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 247023001, EntityType.GADGET, 1100 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1193(context, evt)
 	if evt.param1 ~= 1193 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -776,25 +777,25 @@ end
 function action_EVENT_ENTER_REGION_1193(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247023001, 10)
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 247023001, EntityType.GADGET, 1126 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1194(context, evt)
 	if evt.param1 ~= 1194 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -805,19 +806,19 @@ function action_EVENT_ENTER_REGION_1194(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1195(context, evt)
 	if evt.param1 ~= 1195 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -825,13 +826,13 @@ end
 function action_EVENT_ENTER_REGION_1195(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247023001, 9)
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 247023001, EntityType.GADGET, 1119 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155005277
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155005277,
 	gadget_lamp_01 = 277003,
 	gadget_lamp_02 = 277004,
@@ -19,25 +19,25 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local Controllers = {}
-local EnvControlGadgets = {277006,277007,277008}
-local Worktops = {}
-local DayAppearGadgets = {}
-local NightAppearGadgets = {}
+Controllers = {}
+EnvControlGadgets = {277006,277007,277008}
+Worktops = {}
+DayAppearGadgets = {}
+NightAppearGadgets = {}
 
-local gadgetinfo = 
+gadgetinfo =
 {
 	{defs.gadget_controller_01, defs.gadget_lamp_01,defs.gadget_sound_01},
 	{defs.gadget_controller_02, defs.gadget_lamp_02,defs.gadget_sound_02},
 	{defs.gadget_controller_03, defs.gadget_lamp_03,defs.gadget_sound_03}
 }
 
-local stateloopinfo = 
+stateloopinfo =
 {
 	202,203,204
 }
 
-local solution = 
+solution =
 {
 	203,202,204
 }
@@ -68,12 +68,12 @@ local solution =
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-local gameplayStateFuncitons = 
+gameplayStateFuncitons =
 {
 	["0"] = function(context)
-		
+
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-		
+
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
@@ -81,7 +81,7 @@ local gameplayStateFuncitons =
 		DayNight_Gadget_Unlock(context,defs.gadget_controller_01)
 		DayNight_Gadget_Unlock(context,defs.gadget_controller_02)
 		DayNight_Gadget_Unlock(context,defs.gadget_controller_03)
-		
+
 	end,
 	["2"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
@@ -91,14 +91,14 @@ local gameplayStateFuncitons =
 		DayNight_Gadget_Finish(context,defs.gadget_controller_03)
 		ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_gate })
 		--ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_controller_01, 201)
-		
+
 	end
 
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -106,8 +106,8 @@ end
 
 function GetNextStateFromStateList(context,curstate,list)
 	for i=1, #list do
-		if list[i] == curstate then 
-			if i == #list then 
+		if list[i] == curstate then
+			if i == #list then
 				return list[1]
 			else
 				return list[i+1]
@@ -121,7 +121,7 @@ end
 
 function CheckIfSuccess(context)
 	ScriptLib.PrintContextLog(context,"------check start------")
-	local statelist = {}
+	statelist = {}
 
 	for i=1,#gadgetinfo do
 		table.insert(statelist,ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, gadgetinfo[i][2]))
@@ -130,13 +130,13 @@ function CheckIfSuccess(context)
 	for i=1,#statelist do
 		ScriptLib.PrintContextLog(context,"State["..i.."] = "..statelist[i])
 	end
-	if #statelist ~= #solution then 
+	if #statelist ~= #solution then
 		ScriptLib.PrintContextLog(context,"------check false------")
 		return false
 	end
 
 	for i=1,#statelist do
-		if statelist[i] ~= solution[i] then 
+		if statelist[i] ~= solution[i] then
 			ScriptLib.PrintContextLog(context,"------check false------")
 			return false
 		end
@@ -147,24 +147,24 @@ end
 
 function FeedBackActive(context,gadgetid)
 	ScriptLib.PrintContextLog(context,"------FeedBack Start------")
-	local tempindex
+	tempindex
 	for i=1,#gadgetinfo do
-		if gadgetinfo[i][2] == gadgetid then 
+		if gadgetinfo[i][2] == gadgetid then
 			tempindex = i
 		end
 	end
 
-	if solution[tempindex] == ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, gadgetid) then 
-		ScriptLib.ShowReminder(context, 50050102) 
+	if solution[tempindex] == ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, gadgetid) then
+		ScriptLib.ShowReminder(context, 50050102)
 		ScriptLib.SetGadgetStateByConfigId(context, gadgetinfo[tempindex][3], 201)
 
 	end
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -210,9 +210,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -223,9 +223,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -259,9 +259,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -273,77 +273,77 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_277002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	UpdateGamePlayState(context)
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_277010(context, evt)
-		if evt.param2 ~= defs.gadget_controller_01 and evt.param2 ~= defs.gadget_controller_02 and evt.param2 ~= defs.gadget_controller_03 then 
+		if evt.param2 ~= defs.gadget_controller_01 and evt.param2 ~= defs.gadget_controller_02 and evt.param2 ~= defs.gadget_controller_03 then
 			return false
 		end
-	
+
 		if 222 ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, evt.param2) then
 			return false
 		end
-		
+
 		return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_277010(context, evt)
-		local lamp
-		
+		lamp
+
 			for i=1,#gadgetinfo do
-				if gadgetinfo[i][1] == evt.param2 then 
+				if gadgetinfo[i][1] == evt.param2 then
 					lamp = gadgetinfo[i][2]
 				end
 			end
 			ScriptLib.PrintContextLog(context, "Lamp = "..lamp)
-			local state =  ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, lamp)
+			state =  ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, lamp)
 			ScriptLib.PrintContextLog(context,"Pre State = "..state)
-			if state ~= 202 and state ~= 203 and  state ~= 204 then 
+			if state ~= 202 and state ~= 203 and  state ~= 204 then
 				return -1
 			end
-	
-			
-		
+
+
+
 			state = GetNextStateFromStateList(context,state,stateloopinfo)
-			
-			if state == 202 then 
-				state = 0 
-			elseif state == 203 then 
-				state = 101 
-			elseif state == 204 then 
-				state = 201 
+
+			if state == 202 then
+				state = 0
+			elseif state == 203 then
+				state = 101
+			elseif state == 204 then
+				state = 201
 			end
-			
+
 			ScriptLib.PrintContextLog(context,"Aft State = "..state)
-		
+
 			ScriptLib.SetGadgetStateByConfigId(context, lamp, state)
-	
+
 			return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_277015(context, evt)
-	
-		if evt.param2 ~= defs.gadget_lamp_01 and evt.param2 ~= defs.gadget_lamp_02 and evt.param2 ~= defs.gadget_lamp_03 then 
+
+		if evt.param2 ~= defs.gadget_lamp_01 and evt.param2 ~= defs.gadget_lamp_02 and evt.param2 ~= defs.gadget_lamp_03 then
 			return false
 		end
-		
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_277015(context, evt)
 		FeedBackActive(context,evt.param2)
-	
-		if CheckIfSuccess(context) then 
+
+		if CheckIfSuccess(context) then
 			ScriptLib.SetGroupVariableValue(context, "gameplayState", 2)
 		end
-	
+
 		return 0
 end
 

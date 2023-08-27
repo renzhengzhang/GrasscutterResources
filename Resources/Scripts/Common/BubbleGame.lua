@@ -1,5 +1,5 @@
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		--["Group_Load"] = { config_id = 8000001, name = "Group_Load", event= EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_on_group_load", trigger_count = 0 },
 		["TimeAxis_Event"] = { config_id = 6000001, name = "TimeAxis_Event", event= EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_trigger_timeacis", trigger_count = 0 },
@@ -14,7 +14,7 @@ local extrTriggers = {
 	}
 }
 
-local openDoorAxis = {5, 8, bubble_delay_sec, 17}
+openDoorAxis = {5, 8, bubble_delay_sec, 17}
 
 -- function action_on_group_load( context, evt )
 -- 	-- 初始化计数变量
@@ -110,7 +110,7 @@ end
 
 function action_random_flora1( context,evt)
 
-	local GadgetList = {}
+	GadgetList = {}
 
 	for i,v in ipairs(suites[flower_suite_index[1]].gadgets) do
 		table.insert(GadgetList,v)
@@ -123,7 +123,7 @@ end
 
 function action_random_flora2( context,evt)
 
-	local GadgetList = {}
+	GadgetList = {}
 
 	for i,v in ipairs(suites[flower_suite_index[2]].gadgets) do
 		table.insert(GadgetList,v)
@@ -137,7 +137,7 @@ end
 
 function action_random_flora3( context,evt)
 
-	local GadgetList = {}
+	GadgetList = {}
 
 	for i,v in ipairs(suites[flower_suite_index[3]].gadgets) do
 		table.insert(GadgetList,v)
@@ -151,7 +151,7 @@ end
 
 function action_random_flora4( context,evt)
 
-	local GadgetList = {}
+	GadgetList = {}
 
 	for i,v in ipairs(suites[flower_suite_index[4]].gadgets) do
 		table.insert(GadgetList,v)
@@ -171,7 +171,7 @@ function RandomFlora( context, minNum, maxNum, GadgetList )
 	randomNum = math.random(minNum, maxNum)
 
 	for i=1,randomNum do
-		local configIndex = math.random(#GadgetList)
+		configIndex = math.random(#GadgetList)
 		ScriptLib.CreateGadget(context, { config_id = GadgetList[configIndex] })
 		table.remove(GadgetList,configIndex)
 	end
@@ -185,7 +185,7 @@ function action_player_destination( context,evt)
 		return 0
 	end
 
-	local GameStartTime = ScriptLib.GetGroupTempValue(context, "GameStartTime", {})
+	GameStartTime = ScriptLib.GetGroupTempValue(context, "GameStartTime", {})
 
 	ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "get_destination_bubblegame", context.uid, ScriptLib.GetServerTime(context) - GameStartTime)
 
@@ -194,9 +194,9 @@ function action_player_destination( context,evt)
 	ScriptLib.ChangeGroupTempValue(context, "Player_In_Des", 1, {})
 	ScriptLib.SetGroupTempValue(context, "Player_In_Des"..context.uid, 1, {})
 
-	local Player_In_Des = ScriptLib.GetGroupTempValue(context, "Player_In_Des", {})
+	Player_In_Des = ScriptLib.GetGroupTempValue(context, "Player_In_Des", {})
 
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 	if Player_In_Des >= #UidList then
 		ScriptLib.StopGallery(context, galleryID, false)
@@ -208,7 +208,7 @@ function action_player_destination( context,evt)
 end
 
 function action_open_door_delay( context,evt )
-	
+
 end
 
 
@@ -234,7 +234,7 @@ end
 
 function Achivment( context )
 	--根据玩家行为进行结算
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(UidList) do
 
 		ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, collect_energy, v, 5 * ScriptLib.GetSceneMultiStagePlayUidValue(context,235800001, 1, "get_random_flora", v))
@@ -246,7 +246,7 @@ function Achivment( context )
 			ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, complete_timelimit_challenge, v, Bubble_TimeScore )
 
 			ScriptLib.PrintContextLog(context, "##WINDFLORA_LOG: PLAYER GET DESTINATION ENERGY UID IS->"..v)
-			
+
 			--watcher结算
             ScriptLib.SetSceneMultiStagePlayUidValue(context, 235800001, 1, "watcher_hit_by_bubble", v, ScriptLib.GetSceneMultiStagePlayUidValue(context,235800001, 1, "hit_by_bubble", v))
 
@@ -263,7 +263,7 @@ function Achivment( context )
 			ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "hit_by_bubble", v, -1)
 			ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "get_destination_bubblegame", v, 100)
 
-			ScriptLib.AddFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, v, Bubble_TimeOutScore)  
+			ScriptLib.AddFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, v, Bubble_TimeOutScore)
 			ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, defeated_timelimit_challenge, v, Bubble_TimeOutScore )
 		end
 	end
@@ -273,7 +273,7 @@ end
 
 function action_trigger_timeacis( context, evt)
 	-- 触发泡泡发射
-	local activeStage = ScriptLib.GetGroupTempValue(context, "activeStage", {})
+	activeStage = ScriptLib.GetGroupTempValue(context, "activeStage", {})
 
 	if evt.source_name == "opendoordelay" and evt.param1 == 1 then
 		ScriptLib.ShowReminder(context, 358000002)
@@ -293,7 +293,7 @@ function action_trigger_timeacis( context, evt)
 
 	if evt.source_name == "BubbleGameTimmer" then
 
-		local bubbleWeightList = BubbleStep[activeStage].list
+		bubbleWeightList = BubbleStep[activeStage].list
 
 		RandomBubbleNum(context,bubbleWeightList)
 	end
@@ -309,12 +309,12 @@ end
 function RandomBubbleNum(context,bubbleWeightList)
 	math.randomseed(ScriptLib.GetServerTime(context))
 
-	local Times = ScriptLib.GetGroupTempValue(context, "Times", {})
+	Times = ScriptLib.GetGroupTempValue(context, "Times", {})
 
 	--ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Time Is -> "..Times)
 
 	randomWeight = math.random(100)
-	local CurNum = 0
+	CurNum = 0
 
 	for i,v in ipairs(bubbleWeightList[Times]) do
 		if v.weight >= randomWeight then
@@ -341,17 +341,17 @@ end
 function RandomBubbleCP(context, Num)
 	math.randomseed(ScriptLib.GetServerTime(context))
 
-	local BubbleSequence = ScriptLib.GetGroupTempValue(context, "BubbleSequence", {})
+	BubbleSequence = ScriptLib.GetGroupTempValue(context, "BubbleSequence", {})
 
 	--ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : BubbleSequence Is -> "..BubbleSequence)
 
-	local TempBubbles = {}
+	TempBubbles = {}
 
 	for i,v in ipairs(Bubbles) do
 		table.insert(TempBubbles,v)
 	end
 
-	
+
 	for i=1,Num do
 		randomIndex = math.random(#TempBubbles)
 

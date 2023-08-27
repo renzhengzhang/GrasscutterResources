@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101164
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
     PotConfigIDA =164004,
     PotConfigIDB =164005,
     PotConfigIDC =164006,
@@ -15,9 +15,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -207,9 +207,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -220,9 +220,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -319,9 +319,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -329,12 +329,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_164011(context, evt)
 	if 164001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"curPos"为1
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -345,7 +345,7 @@ function action_EVENT_GADGET_STATE_CHANGE_164011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -354,12 +354,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_164012(context, evt)
 	if 164002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"curPos"为1
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -370,19 +370,19 @@ function action_EVENT_GADGET_STATE_CHANGE_164012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 164003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "fireDirection" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "fireDirection", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -391,7 +391,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164013(context, evt)
 	if 164001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -402,7 +402,7 @@ function action_EVENT_GADGET_STATE_CHANGE_164013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -411,7 +411,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164014(context, evt)
 	if 164002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -422,7 +422,7 @@ function action_EVENT_GADGET_STATE_CHANGE_164014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -430,14 +430,14 @@ end
 function condition_EVENT_SELECT_OPTION_164015(context, evt)
 	-- 判断是gadgetid 164007 option_id 175
 	if 164007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 175 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -445,37 +445,37 @@ end
 function action_EVENT_SELECT_OPTION_164015(context, evt)
 	-- 创建标识为"monstercreate1"，时间节点为{20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "monstercreate1", {20}, false)
-	
-	
+
+
 	-- 创建标识为"monstercreate2"，时间节点为{40}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "monstercreate2", {40}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164016(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100089 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100089 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"fireDirection"为2
 	if ScriptLib.GetGroupVariableValue(context, "fireDirection") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -486,13 +486,13 @@ function action_EVENT_PLATFORM_REACH_POINT_164016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 164003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -503,60 +503,60 @@ function action_EVENT_TIME_AXIS_PASS_164017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randRest")
 			return -1
 		end
-	
+
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	local functionKey = "StartPotTaunt"
-	local functionParam1 = "StartPotTaunt" .. "Param1"
-	local functionParam2 = "StartPotTaunt" .. "Param2"
-	local functionParam3 = "StartPotTaunt" .. "Param3"
-	local functionParam4 = "StartPotTaunt" .. "Param4"
-	
+	functionKey = "StartPotTaunt"
+	functionParam1 = "StartPotTaunt" .. "Param1"
+	functionParam2 = "StartPotTaunt" .. "Param2"
+	functionParam3 = "StartPotTaunt" .. "Param3"
+	functionParam4 = "StartPotTaunt" .. "Param4"
+
 	ScriptLib.SetGroupTempValue(context, functionParam1, 148004, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 1, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-	
+
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	local functionKey = "StartPotTaunt"
-	local functionParam1 = "StartPotTaunt" .. "Param1"
-	local functionParam2 = "StartPotTaunt" .. "Param2"
-	local functionParam3 = "StartPotTaunt" .. "Param3"
-	local functionParam4 = "StartPotTaunt" .. "Param4"
-	
+	functionKey = "StartPotTaunt"
+	functionParam1 = "StartPotTaunt" .. "Param1"
+	functionParam2 = "StartPotTaunt" .. "Param2"
+	functionParam3 = "StartPotTaunt" .. "Param3"
+	functionParam4 = "StartPotTaunt" .. "Param4"
+
 	ScriptLib.SetGroupTempValue(context, functionParam1, 148006, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164018(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100091 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100091 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"fireDirection"为1
 	if ScriptLib.GetGroupVariableValue(context, "fireDirection") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -567,33 +567,33 @@ function action_EVENT_PLATFORM_REACH_POINT_164018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 164003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164019(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100092 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100092 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -604,27 +604,27 @@ function action_EVENT_PLATFORM_REACH_POINT_164019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164020(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100089 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100089 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -635,27 +635,27 @@ function action_EVENT_PLATFORM_REACH_POINT_164020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164021(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100090 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100090 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -666,7 +666,7 @@ function action_EVENT_PLATFORM_REACH_POINT_164021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -675,12 +675,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_164022(context, evt)
 	if 164001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"curPos"为2
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -691,19 +691,19 @@ function action_EVENT_GADGET_STATE_CHANGE_164022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 164003, 110100092) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 164003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -712,12 +712,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_164023(context, evt)
 	if 164002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"curPos"为2
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -728,19 +728,19 @@ function action_EVENT_GADGET_STATE_CHANGE_164023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 164003, 110100090) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 164003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -749,12 +749,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_164024(context, evt)
 	if 164001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"curPos"为3
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -765,19 +765,19 @@ function action_EVENT_GADGET_STATE_CHANGE_164024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 164003, 110100091) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 164003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -786,12 +786,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_164025(context, evt)
 	if 164002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"curPos"为3
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -802,27 +802,27 @@ function action_EVENT_GADGET_STATE_CHANGE_164025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164026(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100092 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100092 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -833,39 +833,39 @@ function action_EVENT_PLATFORM_REACH_POINT_164026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenBTempDirection" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenCTempDirection" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164027(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100089 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100089 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -876,39 +876,39 @@ function action_EVENT_PLATFORM_REACH_POINT_164027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenBTempDirection" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenCTempDirection" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164028(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100090 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100090 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -919,31 +919,31 @@ function action_EVENT_PLATFORM_REACH_POINT_164028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenBTempDirection" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenCTempDirection" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164029(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenATempDirection"为1
 	if ScriptLib.GetGroupVariableValue(context, "ovenATempDirection") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -954,13 +954,13 @@ function action_EVENT_VARIABLE_CHANGE_164029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenATempFall") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -970,7 +970,7 @@ function condition_EVENT_TIMER_EVENT_164030(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "ovenATempDirection") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -981,13 +981,13 @@ function action_EVENT_TIMER_EVENT_164030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：111101164的对象,请求一次调用,并将string参数："ovenATempRise" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 111101164, "ovenATempRise", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -996,7 +996,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164031(context, evt)
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 111101164, 164004) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1004,37 +1004,37 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_164031(context, evt)
 	-- 终止识别id为888的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 888, 0)
-	
+
 	-- 将configid为 164005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 164006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "ovenATempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenATempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenBTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenCTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1043,7 +1043,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164032(context, evt)
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 111101164, 164005) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1051,49 +1051,49 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_164032(context, evt)
 	-- 终止识别id为888的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 888, 0)
-	
+
 	-- 将configid为 164004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 164006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "ovenATempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenATempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenBTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenCTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164033(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenATempDirection"为2
 	if ScriptLib.GetGroupVariableValue(context, "ovenATempDirection") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1104,13 +1104,13 @@ function action_EVENT_VARIABLE_CHANGE_164033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenATempRise") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1120,7 +1120,7 @@ function condition_EVENT_TIMER_EVENT_164034(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "ovenATempDirection") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1131,13 +1131,13 @@ function action_EVENT_TIMER_EVENT_164034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：111101164的对象,请求一次调用,并将string参数："ovenATempFall" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 111101164, "ovenATempFall", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1146,7 +1146,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164035(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 111101164, 164005) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1154,37 +1154,37 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_164035(context, evt)
 	-- 终止识别id为888的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 888, 0)
-	
+
 	-- 将configid为 164004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 164006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "ovenATempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenATempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenBTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenCTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1193,7 +1193,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164036(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 111101164, 164006) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1201,49 +1201,49 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_164036(context, evt)
 	-- 终止识别id为888的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 888, 0)
-	
+
 	-- 将configid为 164004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 164005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "ovenATempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenATempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenBTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenCTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164037(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenBTempDirection"为1
 	if ScriptLib.GetGroupVariableValue(context, "ovenBTempDirection") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1254,13 +1254,13 @@ function action_EVENT_VARIABLE_CHANGE_164037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenBTempFall") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1270,7 +1270,7 @@ function condition_EVENT_TIMER_EVENT_164038(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "ovenBTempDirection") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1281,13 +1281,13 @@ function action_EVENT_TIMER_EVENT_164038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：111101164的对象,请求一次调用,并将string参数："ovenBTempRise" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 111101164, "ovenBTempRise", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1296,7 +1296,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164039(context, evt)
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 111101164, 164006) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1304,49 +1304,49 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_164039(context, evt)
 	-- 终止识别id为888的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 888, 0)
-	
+
 	-- 将configid为 164004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 164005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "ovenATempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenATempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenBTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenCTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164040(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenBTempDirection"为2
 	if ScriptLib.GetGroupVariableValue(context, "ovenBTempDirection") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1357,13 +1357,13 @@ function action_EVENT_VARIABLE_CHANGE_164040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenBTempRise") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1373,7 +1373,7 @@ function condition_EVENT_TIMER_EVENT_164041(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "ovenBTempDirection") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1384,29 +1384,29 @@ function action_EVENT_TIMER_EVENT_164041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：111101164的对象,请求一次调用,并将string参数："ovenBTempFall" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 111101164, "ovenBTempFall", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 创建标识为""，时间节点为{}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "", {}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164042(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenCTempDirection"为1
 	if ScriptLib.GetGroupVariableValue(context, "ovenCTempDirection") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1417,13 +1417,13 @@ function action_EVENT_VARIABLE_CHANGE_164042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenCTempFall") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1433,7 +1433,7 @@ function condition_EVENT_TIMER_EVENT_164043(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "ovenCTempDirection") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1444,25 +1444,25 @@ function action_EVENT_TIMER_EVENT_164043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：111101164的对象,请求一次调用,并将string参数："ovenCTempRise" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 111101164, "ovenCTempRise", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164044(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenCTempDirection"为2
 	if ScriptLib.GetGroupVariableValue(context, "ovenCTempDirection") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1473,13 +1473,13 @@ function action_EVENT_VARIABLE_CHANGE_164044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenCTempRise") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1489,7 +1489,7 @@ function condition_EVENT_TIMER_EVENT_164045(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "ovenCTempDirection") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1500,13 +1500,13 @@ function action_EVENT_TIMER_EVENT_164045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：111101164的对象,请求一次调用,并将string参数："ovenCTempFall" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 111101164, "ovenCTempFall", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1515,7 +1515,7 @@ function condition_EVENT_GADGET_CREATE_164046(context, evt)
 	if 164007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1526,7 +1526,7 @@ function action_EVENT_GADGET_CREATE_164046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1534,14 +1534,14 @@ end
 function condition_EVENT_SELECT_OPTION_164047(context, evt)
 	-- 判断是gadgetid 164007 option_id 175
 	if 164007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 175 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1552,67 +1552,67 @@ function action_EVENT_SELECT_OPTION_164047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将configid为 164007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建编号为888（该挑战的识别id),挑战内容为245的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 888, 245, 150, 15, 666, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	-- 延迟149秒后,向groupId为：111101164的对象,请求一次调用,并将string参数："challengeTimer" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 111101164, "challengeTimer", 149) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenATempDirection" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenATempDirection", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenBTempDirection" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenCTempDirection" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 164004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 164005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 164006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 164003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1623,7 +1623,7 @@ function action_EVENT_TIME_AXIS_PASS_164048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1632,7 +1632,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164051(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 111101164, 164004) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1640,57 +1640,57 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_164051(context, evt)
 	-- 终止识别id为888的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 888, 0)
-	
+
 	-- 将configid为 164005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 164006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "ovenATempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenATempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenBTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenCTempDirection" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164052(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100091 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100091 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1701,39 +1701,39 @@ function action_EVENT_PLATFORM_REACH_POINT_164052(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenBTempDirection" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "ovenCTempDirection" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164053(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100091 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100091 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1744,7 +1744,7 @@ function action_EVENT_PLATFORM_REACH_POINT_164053(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1754,100 +1754,100 @@ function action_EVENT_CHALLENGE_SUCCESS_164054(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 164004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 111101164, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将configid为 164005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 164006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenATempRise") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenBTempRise") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenCTempRise") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenATempFall") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenBTempFall") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "ovenCTempFall") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 111101164, "challengeTimer") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 111101168, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 停止标识为"monstercreate1"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate1")
-	
-	
+
+
 	-- 停止标识为"monstercreate2"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate2")
-	
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 111101169, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将configid为 164003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1858,7 +1858,7 @@ function action_EVENT_TIME_AXIS_PASS_164055(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1869,19 +1869,19 @@ function action_EVENT_TIME_AXIS_PASS_164056(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164057(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenATempDirection"为1
 	if ScriptLib.GetGroupVariableValue(context, "ovenATempDirection") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1889,8 +1889,8 @@ end
 function action_EVENT_VARIABLE_CHANGE_164057(context, evt)
 	-- 创建标识为"ovenAUP"，时间节点为{1}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "ovenAUP", {1}, true)
-	
-	
+
+
 	return 0
 end
 
@@ -1901,19 +1901,19 @@ function action_EVENT_TIME_AXIS_PASS_164058(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164059(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenATempDirection"为2
 	if ScriptLib.GetGroupVariableValue(context, "ovenATempDirection") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1921,24 +1921,24 @@ end
 function action_EVENT_VARIABLE_CHANGE_164059(context, evt)
 	-- 重启标识为"ovenADOWN"的时间轴
 	ScriptLib.ContinueTimeAxis(context, "ovenADOWN")
-	
-	
+
+
 	-- 暂停标识为"ovenAUP"的时间轴
 	ScriptLib.PauseTimeAxis(context, "ovenAUP")
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164060(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenBTempDirection"为1
 	if ScriptLib.GetGroupVariableValue(context, "ovenBTempDirection") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1946,12 +1946,12 @@ end
 function action_EVENT_VARIABLE_CHANGE_164060(context, evt)
 	-- 暂停标识为"ovenBDOWN"的时间轴
 	ScriptLib.PauseTimeAxis(context, "ovenBDOWN")
-	
-	
+
+
 	-- 创建标识为"ovenBUP"，时间节点为{1}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "ovenBUP", {1}, true)
-	
-	
+
+
 	return 0
 end
 
@@ -1962,19 +1962,19 @@ function action_EVENT_TIME_AXIS_PASS_164061(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164062(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenBTempDirection"为2
 	if ScriptLib.GetGroupVariableValue(context, "ovenBTempDirection") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1982,24 +1982,24 @@ end
 function action_EVENT_VARIABLE_CHANGE_164062(context, evt)
 	-- 重启标识为"ovenBDOWN"的时间轴
 	ScriptLib.ContinueTimeAxis(context, "ovenBDOWN")
-	
-	
+
+
 	-- 暂停标识为"ovenBUP"的时间轴
 	ScriptLib.PauseTimeAxis(context, "ovenBUP")
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164063(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenCTempDirection"为1
 	if ScriptLib.GetGroupVariableValue(context, "ovenCTempDirection") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2007,12 +2007,12 @@ end
 function action_EVENT_VARIABLE_CHANGE_164063(context, evt)
 	-- 创建标识为"ovenCDOWN"，时间节点为{1}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "ovenCDOWN", {1}, true)
-	
-	
+
+
 	-- 暂停标识为"ovenCTemp"的时间轴
 	ScriptLib.PauseTimeAxis(context, "ovenCTemp")
-	
-	
+
+
 	return 0
 end
 
@@ -2023,19 +2023,19 @@ function action_EVENT_TIME_AXIS_PASS_164064(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_164065(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ovenCTempDirection"为2
 	if ScriptLib.GetGroupVariableValue(context, "ovenCTempDirection") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2043,12 +2043,12 @@ end
 function action_EVENT_VARIABLE_CHANGE_164065(context, evt)
 	-- 重启标识为"ovenCDOWN"的时间轴
 	ScriptLib.ContinueTimeAxis(context, "ovenCDOWN")
-	
-	
+
+
 	-- 暂停标识为"ovenCUP"的时间轴
 	ScriptLib.PauseTimeAxis(context, "ovenCUP")
-	
-	
+
+
 	return 0
 end
 
@@ -2059,35 +2059,35 @@ function action_EVENT_TIME_AXIS_PASS_164066(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randRest")
 			return -1
 		end
-	
+
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	local functionKey = "StartPotTaunt"
-	local functionParam1 = "StartPotTaunt" .. "Param1"
-	local functionParam2 = "StartPotTaunt" .. "Param2"
-	local functionParam3 = "StartPotTaunt" .. "Param3"
-	local functionParam4 = "StartPotTaunt" .. "Param4"
-	
+	functionKey = "StartPotTaunt"
+	functionParam1 = "StartPotTaunt" .. "Param1"
+	functionParam2 = "StartPotTaunt" .. "Param2"
+	functionParam3 = "StartPotTaunt" .. "Param3"
+	functionParam4 = "StartPotTaunt" .. "Param4"
+
 	ScriptLib.SetGroupTempValue(context, functionParam1, 148006, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 1, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-	
+
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	local functionKey = "StartPotTaunt"
-	local functionParam1 = "StartPotTaunt" .. "Param1"
-	local functionParam2 = "StartPotTaunt" .. "Param2"
-	local functionParam3 = "StartPotTaunt" .. "Param3"
-	local functionParam4 = "StartPotTaunt" .. "Param4"
-	
+	functionKey = "StartPotTaunt"
+	functionParam1 = "StartPotTaunt" .. "Param1"
+	functionParam2 = "StartPotTaunt" .. "Param2"
+	functionParam3 = "StartPotTaunt" .. "Param3"
+	functionParam4 = "StartPotTaunt" .. "Param4"
+
 	ScriptLib.SetGroupTempValue(context, functionParam1, 148004, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-	
+
 	return 0
 end
 
@@ -2095,19 +2095,19 @@ end
 function action_EVENT_GROUP_LOAD_164067(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101164, 10)
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 111101168, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 111101169, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -2116,12 +2116,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_164068(context, evt)
 	if 164002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"curPos"为1
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2132,7 +2132,7 @@ function action_EVENT_GADGET_STATE_CHANGE_164068(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -2141,12 +2141,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_164069(context, evt)
 	if 164002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"curPos"为2
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2157,7 +2157,7 @@ function action_EVENT_GADGET_STATE_CHANGE_164069(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -2166,12 +2166,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_164070(context, evt)
 	if 164001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"curPos"为2
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2182,7 +2182,7 @@ function action_EVENT_GADGET_STATE_CHANGE_164070(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -2191,12 +2191,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_164071(context, evt)
 	if 164001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"curPos"为3
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2207,32 +2207,32 @@ function action_EVENT_GADGET_STATE_CHANGE_164071(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164072(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100089 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100089 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"isRightBtnPressed"为1
 	if ScriptLib.GetGroupVariableValue(context, "isRightBtnPressed") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2243,32 +2243,32 @@ function action_EVENT_PLATFORM_REACH_POINT_164072(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_164073(context, evt)
 	-- 判断是gadgetid 为 164003的移动平台，是否到达了110100091 的路线中的 1 点
-	
+
 	if 164003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 110100091 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"isLeftBtnPressed"为1
 	if ScriptLib.GetGroupVariableValue(context, "isLeftBtnPressed") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2279,7 +2279,7 @@ function action_EVENT_PLATFORM_REACH_POINT_164073(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -2288,7 +2288,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164074(context, evt)
 	if 164001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -2299,7 +2299,7 @@ function action_EVENT_GADGET_STATE_CHANGE_164074(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -2308,7 +2308,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164075(context, evt)
 	if 164002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -2319,7 +2319,7 @@ function action_EVENT_GADGET_STATE_CHANGE_164075(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -2328,7 +2328,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164076(context, evt)
 	if 164001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -2339,7 +2339,7 @@ function action_EVENT_GADGET_STATE_CHANGE_164076(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -2348,7 +2348,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_164077(context, evt)
 	if 164002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -2359,7 +2359,7 @@ function action_EVENT_GADGET_STATE_CHANGE_164077(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

@@ -1,25 +1,25 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220149019
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_LookHookCid = 19003
 }
 
 -- DEFS_MISCS
-local RequireSuite = {1}
+RequireSuite = {1}
 
-local HookLookPlay = {
+HookLookPlay = {
     HookPoint = defs.gadget_LookHookCid,
     Duration = 3,
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -101,7 +101,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_19005(context, evt)
 	if 19001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -109,13 +109,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_19005(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220149019, 2)
-	
+
 	-- 将本组内变量名为 "RaioState" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "RaioState", 1, 220149017) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

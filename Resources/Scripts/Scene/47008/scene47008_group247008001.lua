@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 247008001
 }
 
 -- DEFS_MISCS
-local MainGroupID = 247008001
-local MonsterAffix = 1009
-local ReminderList = {470060705,470060805,470060905,470061004,470061106}
-local PointToReminderList = {
+MainGroupID = 247008001
+MonsterAffix = 1009
+ReminderList = {470060705,470060805,470060905,470061004,470061106}
+PointToReminderList = {
         {configID = 0, reminderID = 470070901},
         {configID = 0, reminderID = 470071001},
         {configID = 0, reminderID = 470071101},
         {configID = 0, reminderID = 470071201},
 }
-local challengeList = {
+challengeList = {
 { monsterPool = 29001, challengeParamList = {2, 2017, -1, 6, 0, 0}, monsterPoolParamList = {total_count=6, min_count=4, max_count=4, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 29002, challengeParamList = {2, 2017, -1, 7, 0, 0}, monsterPoolParamList = {total_count=7, min_count=4, max_count=4, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 29003, challengeParamList = {2, 2017, -1, 15, 0, 0}, monsterPoolParamList = {total_count=15, min_count=5, max_count=5, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
@@ -58,9 +58,9 @@ local challengeList = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -100,9 +100,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -113,9 +113,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -131,9 +131,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "V2_2/RogueDungeon_Main"

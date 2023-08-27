@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155006083
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -82,9 +82,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -92,7 +92,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_83002(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 155006083, 83001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -103,13 +103,13 @@ function action_EVENT_GADGET_STATE_CHANGE_83002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "gameplayState" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 1, 155006178) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -119,13 +119,13 @@ function condition_EVENT_GROUP_LOAD_83003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "chestopened") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_83003(context, evt)
-		if ScriptLib.GetGroupVariableValueByGroup(context,  "gameplayState", 155006178) == 0 then 
+		if ScriptLib.GetGroupVariableValueByGroup(context,  "gameplayState", 155006178) == 0 then
 			ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 1, 155006178)
 		end
 		return 0
@@ -134,12 +134,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_83004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"activecount"为3
 	if ScriptLib.GetGroupVariableValue(context, "activecount") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -150,6 +150,6 @@ function action_EVENT_VARIABLE_CHANGE_83004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end

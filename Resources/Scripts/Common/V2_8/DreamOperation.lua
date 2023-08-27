@@ -5,11 +5,11 @@
 ||	owner: 		weiwei.sun
 ||	description: 	2.8愚人众操作台旋转输密码逻辑
 ||	LogName:	## [DreamOperation]
-||	Protection:	
+||	Protection:
 =======================================]]
 --[[
 
-local defs = {
+defs = {
 	--每个操作台config_id, 控制的markfalg和它的解，最多5位数字。
 	--玩家按按钮，左转写2 右转写3。
 	--例如“左左右左”即为“{2,2,3,2}”
@@ -17,12 +17,12 @@ local defs = {
 		[操作台config_id1] = { markflag = 1, key = {2,2,3,2},
 		[操作台config_id2] = { markflag = 2, key = {2,2,3,2},
 	}
-	
+
 }
 
 ]]
 
-local Triggers = {
+Triggers = {
 	{ config_id = 8000001, name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_Group_Load", trigger_count = 0 },
 }
 
@@ -53,11 +53,11 @@ end
 
 --ability Init完成后，再赋值
 function SLC_DreamOperation_GetFlag(context)
-	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, config_id, "SGV_Control_Target", defs.answers[config_id].markflag)
 	ScriptLib.PrintContextLog(context, "## [DreamOperation] LF_InitGear. config_id@"..config_id.." markflag@"..defs.answers[config_id].markflag)
-		
+
 	return 0
 end
 
@@ -65,14 +65,14 @@ end
 function SLC_DreamOperation_Turn(context, param)
 
 	--本组解谜是否完成
-	local count = LF_CountTableNum(context, defs.answers)
+	count = LF_CountTableNum(context, defs.answers)
 	if count <= ScriptLib.GetGroupVariableValue(context, "unlock_num") then
 		return 0
 	end
 
 	--是否为组内已被完成的操作台
-	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
-	local gadget_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, config_id)
+	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	gadget_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, config_id)
 	if 202 == gadget_state then
 		return 0
 	end
@@ -90,9 +90,9 @@ end
 function LF_HandleInput(context, config_id, param)
 
 	--获取当前是该操作台的第几次输入
-	local index = ScriptLib.GetGroupTempValue(context, "g_"..config_id, {})
+	index = ScriptLib.GetGroupTempValue(context, "g_"..config_id, {})
 
-	local key = defs.answers[config_id].key
+	key = defs.answers[config_id].key
 
 	ScriptLib.PrintContextLog(context, "## [DreamOperation] LF_HandleInput. input_index@"..index.." input@"..param.." answer@"..key[index])
 
@@ -109,19 +109,19 @@ function LF_HandleInput(context, config_id, param)
 		ScriptLib.SetGadgetStateByConfigId(context, config_id, 202)
 		ScriptLib.ChangeGroupVariableValue(context, "unlock_num", 1)
 
-		local num = ScriptLib.GetGroupVariableValue(context, "unlock_num")
+		num = ScriptLib.GetGroupVariableValue(context, "unlock_num")
 		ScriptLib.PrintContextLog(context, "## [DreamOperation] DreamOperation puzzle done. config_id@"..config_id)
 
 	else
 		--继续
 		ScriptLib.SetGroupTempValue(context, "g_"..config_id, index, {})
 	end
-	
+
 	return 0
 end
 
 function LF_CountTableNum(context, t)
-	local count = 0 
+	count = 0
 	for k,v in pairs(t) do
 		count = count + 1
 	end

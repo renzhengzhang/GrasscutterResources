@@ -1,16 +1,16 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250079004
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
 
         --连线形态
-        patterns = 
+        patterns =
         {
                 --形态1
-                [1] = 
+                [1] =
                 {
                        	[4001] = 4002,
                         	[4002] = 4003,
@@ -20,7 +20,7 @@ local        defs = {
                                 [4006] = 4005,
                 },
                 --形态2
-                [2] = 
+                [2] =
                 {
                        	[4001] = 4003,
                         	[4002] = 4004,
@@ -34,9 +34,9 @@ local        defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -72,9 +72,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +85,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -103,23 +103,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_4009(context, evt)
 	-- 判断是gadgetid 4007 option_id 35
 	if 4007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 35 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -130,13 +130,13 @@ function action_EVENT_SELECT_OPTION_4009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 杀死Group内所有gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 250079005, kill_policy = GroupKillPolicy.GROUP_KILL_GADGET }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 

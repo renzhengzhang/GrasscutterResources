@@ -3,16 +3,16 @@
 ||  owner:      shuyi.chang
 ||  description:    连续弹跳蘑菇
 ||  LogName:    ## [ContinuousTrampoline]
-||  Protection: 
+||  Protection:
 =======================================]]
 
--- local defs = 
+-- defs =
 -- {
 --     maxRegion = 34004,
 --     maxJumpTimes = 5,
 --     mushroomList = {
---         [1] = {34001, 34002,}, 
---         [2] = {34003}, 
+--         [1] = {34001, 34002,},
+--         [2] = {34003},
 --         [3] = {34004, 34005, 34006,},
 --         [4] = {34007,},
 --         [5] = {34008,},
@@ -21,11 +21,11 @@
 --     },
 -- }
 
-local challengeId = 84
+challengeId = 84
 
 
-local extraTriggers = 
-{	
+extraTriggers =
+{
 	{ config_id = 5000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_GROUP_LOAD", trigger_count = 0},
 	{ config_id = 5000002, name = "ENTER_REGION", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_ENTER_REGION", forbid_guest = true, trigger_count = 0},
     { config_id = 5000003, name = "AVATAR_JUMP", event = EventType.EVENT_VARIABLE_CHANGE, source = "jumpTimes", condition = "", action = "action_AVATAR_JUMP", trigger_count = 0, tag = "99"},
@@ -36,7 +36,7 @@ local extraTriggers =
 
 }
 
-local extraVariables = 
+extraVariables =
 {
     -- 记录玩家连续跳跃次数
     { config_id = 5000101, name = "jumpTimes", value = 0, no_refresh = false },
@@ -47,11 +47,11 @@ local extraVariables =
     { config_id = 5000104, name = "onMushroom", value = 0, no_refresh = false },
 }
 
-local mushroomRegion = {}
+mushroomRegion = {}
 
-local abilityGroup = "ActivityAbility_ContinuousTrampoline"
+abilityGroup = "ActivityAbility_ContinuousTrampoline"
 --================================================================
--- Local Functions
+-- Functions
 --================================================================
 function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
 
@@ -74,13 +74,13 @@ function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
 	-- add ability group
 	-- regions[defs.maxRegion].team_ability_group_list = {abilityGroup}
 
-    -- local regionBaseId = 4000000
+    -- regionBaseId = 4000000
     -- -- 每个蘑菇都加一个region
     -- for i = 1, #defs.mushroomList do
     --     for j = 1, #defs.mushroomList[i] do
-    --         local idTemp = regionBaseId + i * 10 + j
-    --         local posTemp = {x = gadgets[defs.mushroomList[i][j]].pos.x, y = gadgets[defs.mushroomList[i][j]].pos.y + 2.5, z = gadgets[defs.mushroomList[i][j]].pos.z}
-    --         local regionTemp = { config_id = idTemp, 
+    --         idTemp = regionBaseId + i * 10 + j
+    --         posTemp = {x = gadgets[defs.mushroomList[i][j]].pos.x, y = gadgets[defs.mushroomList[i][j]].pos.y + 2.5, z = gadgets[defs.mushroomList[i][j]].pos.z}
+    --         regionTemp = { config_id = idTemp,
     --             shape = RegionShape.CYLINDER, radius = 1.5, pos = { x = posTemp.x, y = posTemp.y, z = posTemp.z }, height = 3.000 }
     --         regions[idTemp] = regionTemp
     --         mushroomRegion[i] = idTemp
@@ -88,7 +88,7 @@ function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
     --         -- add region to suites
     --         table.insert(suites[1].regions, idTemp)
     --     end
-       
+
     -- end
 end
 
@@ -124,10 +124,10 @@ function action_GROUP_LOAD(context, evt)
     ScriptLib.PrintContextLog(context, "## [ContinuousTrampoline] group is loaded")
 
     if ScriptLib.GetGroupVariableValue(context, "succeed") == 0 then
-        local currentMushroomIdx = ScriptLib.GetGroupVariableValue(context, "mushroomIdx")
+        currentMushroomIdx = ScriptLib.GetGroupVariableValue(context, "mushroomIdx")
         LF_CreateMushrooms(context, currentMushroomIdx)
     end
-    
+
     return 0
 
 end
@@ -137,7 +137,7 @@ function action_GROUP_WILL_UNLOAD(context, evt)
 
     -- 挑战底层问题？group unload时强制挑战失败
     ScriptLib.StopChallenge(context, challengeId, 0)
-    
+
     return 0
 
 end
@@ -165,7 +165,7 @@ end
 function action_LEAVE_REGION(context, evt)
     ScriptLib.PrintContextLog(context, "## [ContinuousTrampoline] leave region = "..evt.param1)
 
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    uid_list = ScriptLib.GetSceneUidList(context)
 
     if evt.param1 == defs.maxRegion then
         ScriptLib.StopChallenge(context, challengeId, 0)
@@ -176,7 +176,7 @@ function action_LEAVE_REGION(context, evt)
     --             -- 离开了一个蘑菇区域
     --             ScriptLib.SetGroupVariableValue(context, "onMushroom", 0)
 
-    --             local isJumping = ScriptLib.GetTeamServerGlobalValue(context, uid_list[1], "_ABILITY_Activity_Trampoline_Jump")
+    --             isJumping = ScriptLib.GetTeamServerGlobalValue(context, uid_list[1], "_ABILITY_Activity_Trampoline_Jump")
     --             if isJumping == false then
     --                 LF_RestartChallenge(context)
 
@@ -219,7 +219,7 @@ end
 --================================================================
 -- SLC functions
 --================================================================
-function SLC_Jump_Succeed_Once(context, evt)    
+function SLC_Jump_Succeed_Once(context, evt)
     ScriptLib.PrintContextLog(context, "## [ContinuousTrampoline] SLC_Jump_Succeed_Once is called")
 
     -- 为了处理断网情况，需要给ability层一个callback，把gv值设回0，ability层只有在对应gv值为0的情况下才允许发slc
@@ -229,9 +229,9 @@ function SLC_Jump_Succeed_Once(context, evt)
     ScriptLib.ChangeGroupVariableValue(context, "jumpTimes", 1)
     ScriptLib.ChangeGroupVariableValue(context, "mushroomIdx", 1)
 
-    local curJumpTimes = ScriptLib.GetGroupVariableValue(context, "jumpTimes")
-    local currentMushroomIdx = ScriptLib.GetGroupVariableValue(context, "mushroomIdx");
-    local lastOne = false
+    curJumpTimes = ScriptLib.GetGroupVariableValue(context, "jumpTimes")
+    currentMushroomIdx = ScriptLib.GetGroupVariableValue(context, "mushroomIdx");
+    lastOne = false
 
     if currentMushroomIdx > #defs.mushroomList then
         ScriptLib.SetGroupVariableValue(context, "mushroomIdx", 1)
@@ -255,21 +255,21 @@ end
 
 function SLC_Fall_Onto_Ground(context, evt)
     -- 玩家进入落到地上的动画状态（超级跳前会短暂进入FallOnGround和FallOnGroundLit，在ability层过滤掉了这种情况）
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    uid_list = ScriptLib.GetSceneUidList(context)
     ScriptLib.PrintContextLog(context, "## [ContinuousTrampoline] SLC_Fall_Onto_Ground is called")
 
     -- 判断是不是落在了蘑菇上的region，落在上面了不算失败
-    -- local onMushroom = ScriptLib.GetGroupVariableValue(context, "onMushroom")
+    -- onMushroom = ScriptLib.GetGroupVariableValue(context, "onMushroom")
     -- if onMushroom == 1 then
     --     return 0
     -- end
 
     -- 检查跳了几次
-    local jumpTimes = ScriptLib.GetGroupVariableValue(context, "jumpTimes")
+    jumpTimes = ScriptLib.GetGroupVariableValue(context, "jumpTimes")
     if jumpTimes <  defs.maxJumpTimes and jumpTimes > 0 then
         LF_RestartChallenge(context)
     end
-    
+
     return 0
 end
 

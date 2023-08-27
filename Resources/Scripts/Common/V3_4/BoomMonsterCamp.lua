@@ -2,7 +2,7 @@
 
 -- DEFS_MISCS
 
-local defs = {
+defs = {
     duration = 30,
     kill_sum = 1,
     GroupID = 111102025,
@@ -13,7 +13,7 @@ local defs = {
 
 
 --]]
-local defs = {
+defs = {
     duration = 30,
     kill_sum = 1,
     GroupID = 111102025,
@@ -25,7 +25,7 @@ local defs = {
     FireworkID = 25005,
 }
 
-local Phase ={
+Phase ={
     [1] = {2},
     [2] = {3},
     [3] = {4},
@@ -33,7 +33,7 @@ local Phase ={
 }
 
 ---------------------
-local tempTrigger_BoomMonsterCamp = {
+tempTrigger_BoomMonsterCamp = {
 
     { config_id = 2230000, name = "RISE_CHALLENGE", event = EventType.EVENT_ENTER_REGION, source = "1",
     condition = "", action = "action_RISE_CHALLENGE", trigger_count = 0},
@@ -44,7 +44,7 @@ local tempTrigger_BoomMonsterCamp = {
       condition = "", action = "action_LEAVE_REGION_Challenge", trigger_count = 0},
     { config_id = 2330005, name = "VARIABLE_CHANGE_BundleEnd", event = EventType.EVENT_VARIABLE_CHANGE, source = "StartNextGroup",
       condition = "", action = "action_VARIABLE_CHANGE_BundleEnd", trigger_count = 0},
-    
+
 }
 
 --------初始化----------
@@ -60,7 +60,7 @@ LF_Initialize_BoomMonsterCamp()
 --------公用函数----------
 --  Gadget发送事件后触发对应挑战
 function action_RISE_CHALLENGE(context, evt)
-  
+
     if evt.param1 ~= defs.ChallengeStartRegion or ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
         ScriptLib.PrintContextLog(context,evt.param1, "## TD_BoomMonsterCamp : 非对应挑战Region触发 ")
         return 0
@@ -70,13 +70,13 @@ function action_RISE_CHALLENGE(context, evt)
     if -1 == LF_CheckChallenge(context) then return 0 end
 
     -- 检查Group中怪物是否已经全死
-    local MDNum = ScriptLib.GetGroupVariableValue(context,"MonsterDieNum")
+    MDNum = ScriptLib.GetGroupVariableValue(context,"MonsterDieNum")
     if 0 ~=  LF_CheckMonsterNum(context,MDNum) then
         return 0
     end
 
     ScriptLib.PrintContextLog(context, "## TD_BoomMonsterCamp : 准备开启挑战")
-    
+
     --ScriptLib.PrintContextLog(context,  "## MDNum" .. MDNum .. "")
     ScriptLib.StartChallenge(context, 10*defs.ChallengeID, defs.ChallengeID, {1, 25015, 4, 1, MDNum})
 
@@ -94,11 +94,11 @@ end
 --[[
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_25015(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 111102025) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 --]]
@@ -110,11 +110,11 @@ function action_EVENT_ANY_MONSTER_DIE_25015(context, evt)
     if ScriptLib.GetGroupMonsterCountByGroupId(context, 111102025) ~= 0 then
 		return 0
 	end
-	
+
     ScriptLib.PrintContextLog(context, "## TD_BoomMonsterCamp : 怪物死亡，stage变更")
     ScriptLib.ChangeGroupVariableValue(context, "stage", 1)
     LF_RefreshPhaseSuit(context)
-	
+
 	return 0
 end
 
@@ -139,7 +139,7 @@ function action_ChallengeLose(context, evt)
 end
 
 function LF_CheckChallenge(context)
-    local haveStartChallenge = ScriptLib.GetGroupTempValue(context, "haveStartChallenge",{})
+    haveStartChallenge = ScriptLib.GetGroupTempValue(context, "haveStartChallenge",{})
     if 1 == haveStartChallenge then
         ScriptLib.PrintContextLog(context, "## TD_BoomMonsterCamp : 挑战已触发，不再重复触发 ")
         return -1
@@ -173,7 +173,7 @@ end
 --记录当前刷新的怪物的波次，方便下次挑战
 function LF_RefreshPhaseSuit(context)
 
-    local stage = ScriptLib.GetGroupVariableValue(context, "stage")
+    stage = ScriptLib.GetGroupVariableValue(context, "stage")
 
     if nil == Phase then
         ScriptLib.PrintContextLog(context, "## TD_BoomMonsterCamp : Group: " .. defs.GroupID .. "没有对应Phase")
@@ -186,7 +186,7 @@ function LF_RefreshPhaseSuit(context)
     end
 
 
-    local needRefreshSuit = Phase[stage]
+    needRefreshSuit = Phase[stage]
 
     ScriptLib.PrintContextLog(context, "## TD_BoomMonsterCamp : PhaseStage= " .. stage .. "需要刷新的suit为：" .. LF_arrayToString(needRefreshSuit))
 
@@ -209,7 +209,7 @@ end
 
 
 function LF_arrayToString(array)
-    local s = "{"
+    s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","

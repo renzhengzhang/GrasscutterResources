@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133102217
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -113,25 +113,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_217006(context, evt)
 	if evt.param1 ~= 217006 then return false end
-	
+
 	-- 判断变量"hasOpen"为1
 	if ScriptLib.GetGroupVariableValue(context, "hasOpen") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"isAvailable"为1
 	if ScriptLib.GetGroupVariableValue(context, "isAvailable") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -142,17 +142,17 @@ function action_EVENT_ENTER_REGION_217006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "isAvailable" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isAvailable", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"fireTime"，时间节点为{60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fireTime", {60}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -160,17 +160,17 @@ end
 function condition_EVENT_QUEST_FINISH_217007(context, evt)
 	--检查ID为4003712的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 4003712 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -181,7 +181,7 @@ function action_EVENT_QUEST_FINISH_217007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -191,12 +191,12 @@ function condition_EVENT_LEAVE_REGION_217008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "hasOpen") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断是区域217008
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 217008 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -207,23 +207,23 @@ function action_EVENT_LEAVE_REGION_217008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 停止标识为"fireTime"的时间轴
 	ScriptLib.EndTimeAxis(context, "fireTime")
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_217009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"openFire"为1
 	if ScriptLib.GetGroupVariableValue(context, "openFire") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -234,37 +234,37 @@ function action_EVENT_VARIABLE_CHANGE_217009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 217001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -283,23 +283,23 @@ function action_EVENT_TIME_AXIS_PASS_217010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 停止标识为"fireTime"的时间轴
 	ScriptLib.EndTimeAxis(context, "fireTime")
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_217011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"closeFire"为1
 	if ScriptLib.GetGroupVariableValue(context, "closeFire") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -310,54 +310,54 @@ function action_EVENT_VARIABLE_CHANGE_217011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 217001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_217013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"hasOpen"为1
 	if ScriptLib.GetGroupVariableValue(context, "hasOpen") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"isAvailable"为1
 	if ScriptLib.GetGroupVariableValue(context, "isAvailable") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -368,17 +368,17 @@ function action_EVENT_VARIABLE_CHANGE_217013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "isAvailable" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isAvailable", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"fireTime"，时间节点为{60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fireTime", {60}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -389,6 +389,6 @@ function action_EVENT_GROUP_LOAD_217014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 251019001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -103,67 +103,67 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1003(context, evt)
 	if evt.param1 ~= 1003 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1003(context, evt)
 	ScriptLib.AddExtraGroupSuite(context, 251019001, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1006(context, evt)
 	if evt.param1 ~= 1006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1006(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=-33.64, y= 0.1, z=-31.24}, radius = 0.5, rot = {x=0, y=270, z=0}}) 
-	
+	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=-33.64, y= 0.1, z=-31.24}, radius = 0.5, rot = {x=0, y=270, z=0}})
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1009(context, evt)
 	if evt.param1 ~= 1009 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1009(context, evt)
 	ScriptLib.SetGadgetStateByConfigId(context,1008, GadgetState.Default)
-	
+
 	ScriptLib.AddExtraGroupSuite(context, 251019001, 3)
-	
+
 	return 0
 end
 
@@ -173,29 +173,29 @@ function condition_EVENT_ANY_MONSTER_DIE_1013(context, evt)
 	if evt.param1 ~= 1010 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_1013(context, evt)
 	ScriptLib.SetGadgetStateByConfigId(context,1011, GadgetState.GearStart)
-	
+
 	ScriptLib.SetGadgetStateByConfigId(context,1012, GadgetState.GearStart)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1014(context, evt)
 	if evt.param1 ~= 1014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -205,26 +205,26 @@ function action_EVENT_ENTER_REGION_1014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1015(context, evt)
 	if evt.param1 ~= 1015 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1015(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=-32.83, y= 12.07, z=-1.23}, radius = 0.5, rot = {x=0, y=270, z=0}}) 
-	
+	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=-32.83, y= 12.07, z=-1.23}, radius = 0.5, rot = {x=0, y=270, z=0}})
+
 	return 0
 end

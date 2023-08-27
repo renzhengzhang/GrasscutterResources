@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199002194
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -84,29 +84,29 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_194006(context, evt)
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id=199002194 , gadget_id=0}) == 2 and ScriptLib.GetGroupVariableValue(context, "finish") == 0 then
 		ScriptLib.SetGroupVariableValue(context, "finish", 1)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,194005, GadgetState.Default)
-		
+
 		ScriptLib.SetGadgetTalkByConfigId(context, 199002194, 194001, 6800357)
-		
+
 		ScriptLib.GoToGroupSuite(context, 199002194, 2)
 	else
 		if ScriptLib.GetGroupVariableValue(context, "finish") == 0 and ScriptLib.GetGroupVariableValue(context, "time") == 0 then
 			ScriptLib.SetGroupVariableValue(context, "time", 1)
-			
+
 			ScriptLib.InitTimeAxis(context, "temp", {2}, false)
 		end
 	end
-	
+
 	return 0
 end
 
@@ -114,12 +114,12 @@ end
 function action_EVENT_GROUP_LOAD_194007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context,194005, GadgetState.Default)
-		
+
 		ScriptLib.GoToGroupSuite(context, 199002194, 2)
 	else
 		ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=1})
 	end
-	
+
 	return 0
 end
 
@@ -128,12 +128,12 @@ function condition_EVENT_TIME_AXIS_PASS_194009(context, evt)
 	if "temp" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"finish"为0
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -144,12 +144,12 @@ function action_EVENT_TIME_AXIS_PASS_194009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199002194, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

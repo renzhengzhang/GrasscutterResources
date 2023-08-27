@@ -1,50 +1,50 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199002044
 }
 
 -- DEFS_MISCS
-local        defs = 
+       defs =
 {
 	--幕布Group
 	curtain_group = 199002075,
         --每个阶段的所有演员物件config_id。用于统一设置可拾取/可对话状态
-        actor_list = 
+        actor_list =
         {
-                [1] = 
-                { 
+                [1] =
+                {
                         [44001] = 1110761,
                         [44003] = 1110817,
                         [44005] = 1110818,
                         [44006] = 1110819,
                 },
-                [2] = 
-                { 
+                [2] =
+                {
                         [44001] = 1110769,
                         [44005] = 1110818,
                         [44006] = 1110819,
                 },
-                [3] = 
-                { 
+                [3] =
+                {
                         [44001] = 1110779,
                         [44006] = 1110819,
                 },
         },
         --可拾取的gadget列表，即not in any suite的夜鸦雕像
-        pickable_gadget = 
+        pickable_gadget =
         {
                         [44003] = {0, 44028, 44029, 44029},
                         [44005] = {0, 0, 44026, 44027},
                         [44006] = {0, 0, 0, 44030},
         },
         --行动序列
-        actions = 
+        actions =
         {
                 {
                           [1] = { config_id = 44001, reminder_id = 1110755, point_array = 0, point_id_list = 0, duration = 25},
                           [2] = { config_id = 44002, reminder_id = 1110758, point_array = 0, point_id_list = 0, duration = 21},
                           [3] = { config_id = 44001, reminder_id = 1110761, point_array = 0, point_id_list = 0, duration = 7},
-                        
+
                 },
                 {
                           [1] = { config_id = 44003, reminder_id = 1110762, point_array = 900200042, point_id_list = {1,2}, duration = 7},
@@ -76,7 +76,7 @@ local        defs =
 
         --每段剧情结束时加载的对应suite(放聚光灯和操作台用),和正确的放置槽位config_id
         --key是阶段id
-        question_suits =  
+        question_suits =
         {
                    [1] = { add_suite = 3, correct_slot = 44008, correct_gadget = 44003},
                    [2] = { add_suite = 4, correct_slot = 44009, correct_gadget = 44005},
@@ -88,9 +88,9 @@ no_actor = 44001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -168,9 +168,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -181,9 +181,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -235,20 +235,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_44024(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"is_done"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -259,7 +259,7 @@ function action_EVENT_VARIABLE_CHANGE_44024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -269,7 +269,7 @@ function condition_EVENT_GROUP_LOAD_44025(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -280,7 +280,7 @@ function action_EVENT_GROUP_LOAD_44025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

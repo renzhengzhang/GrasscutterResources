@@ -21,19 +21,19 @@ defs = {
 --在完成后会切SuiteFlow
 ]]
 
-local Triggers_LoopSeelie = {
+Triggers_LoopSeelie = {
 	[1] = { name = "avatar_near_platform", config_id = 9000401, event = EventType.EVENT_AVATAR_NEAR_PLATFORM, source = "", condition = "", action = "action_avatar_near_platform", trigger_count = 0 },
 	[2] = { name = "platform_reach",config_id = 9000402, event = EventType.EVENT_PLATFORM_REACH_POINT, source = "", condition = "", action = "action_platform_reach_point", trigger_count = 0 },
 }
 
 function GetNextPath(context)
-	local path = {}
-	local curNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
-	local nextRouteIndex = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
+	path = {}
+	curNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
+	nextRouteIndex = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
 	--根据状态返回一个移动路径
 	if 0 ~= ScriptLib.GetGroupVariableValue(context,"IsLoop") then
 		--循环状态
-		local nextReachPoint = defs.pointsLoop[nextRouteIndex]
+		nextReachPoint = defs.pointsLoop[nextRouteIndex]
 		if curNodeIndex == defs.finalPointLoop then
 			curNodeIndex = 0
 		end
@@ -42,7 +42,7 @@ function GetNextPath(context)
 			table.insert(path, i)
 		end
 	else
-		local nextReachPoint = defs.pointsSeq[nextRouteIndex]
+		nextReachPoint = defs.pointsSeq[nextRouteIndex]
 		ScriptLib.PrintLog("@@Lua Loop Seelie: Get_Next_"..nextReachPoint)
 		for i = curNodeIndex+1, nextReachPoint do
 			table.insert(path, i)
@@ -67,7 +67,7 @@ function MovePlatform(context)
 		ScriptLib.SetPlatformPointArray(context, defs.seelie_id, defs.pointarraySeq, GetNextPath(context), { route_type = 0 })
 		ScriptLib.PrintLog("@@Lua Loop Seelie: Start_Loop_Move")
 	end
-	
+
 	return 0
 end
 
@@ -94,7 +94,7 @@ function action_platform_reach_point(context, evt)
 			ScriptLib.SetGroupVariableValue(context,"currentPathNodeIndex",evt.param3)
 		else
 	--在list里找设一个目标路点
-			local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
+			next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
 			next = next + 1
 			ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
 		--更新当前所在的路点
@@ -106,15 +106,15 @@ function action_platform_reach_point(context, evt)
 		if evt.param3 == defs.finalPointSeq then
 			ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
 			if defs.reward_id ~= 0 then
-				ScriptLib.CreateGadget(context, { config_id = defs.reward_id }) 
+				ScriptLib.CreateGadget(context, { config_id = defs.reward_id })
 			end
 			ScriptLib.SetGadgetStateByConfigId(context, defs.seelie_id, 201)
-			ScriptLib.RefreshGroup(context, { group_id = defs.group_id, suite = defs.endSuite})	
-			ScriptLib.MarkPlayerAction(context, 2014, 3, 1)	
+			ScriptLib.RefreshGroup(context, { group_id = defs.group_id, suite = defs.endSuite})
+			ScriptLib.MarkPlayerAction(context, 2014, 3, 1)
 			return 0
 		end
 	--在list里找设一个目标路点
-		local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
+		next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
 		next = next + 1
 		ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
 		--更新当前所在的路点
@@ -132,13 +132,13 @@ function action_avatar_near_platform(context, evt)
 		return -1
 	end
 	--201底座状态下不触发移动操作
-	local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.seelie_id)
-	ScriptLib.PrintLog("@@Lua Loop Seelie:Platform condition_State_"..state) 
-	if state == 201 then 
+	state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.seelie_id)
+	ScriptLib.PrintLog("@@Lua Loop Seelie:Platform condition_State_"..state)
+	if state == 201 then
 		return -1
 	end
 	--移动状态下不触发新一次移动操作
-	if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then 
+	if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then
 		return -1
 	end
 	MovePlatform(context)

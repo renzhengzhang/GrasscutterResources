@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133304447
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	enter_region = 447005,
 	leave_region = 447006,
 	FindClue = 1,
@@ -15,9 +15,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -110,9 +110,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -123,9 +123,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -168,20 +168,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_447003(context, evt)
 	if evt.param1 ~= 447003 then return false end
-	
+
 	-- 判断是区域447003
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 447003 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -189,7 +189,7 @@ end
 function action_EVENT_ENTER_REGION_447003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304447, 2)
-	
+
 	return 0
 end
 
@@ -197,19 +197,19 @@ end
 function condition_EVENT_SELECT_OPTION_447008(context, evt)
 	-- 判断是gadgetid 447023 option_id 917
 	if 447023 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 917 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"FindClue"为0
 	if ScriptLib.GetGroupVariableValue(context, "FindClue") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -217,62 +217,62 @@ end
 function action_EVENT_SELECT_OPTION_447008(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304447, 4)
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304447, 3)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133304447, 2)
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 447016 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 针对当前group内变量名为 "FindClue" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "FindClue", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 变量"FindRock"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "FindRock", 0)
-	
+
 	-- 调用提示id为 600164 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 600164) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 447002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 触发镜头注目，注目位置为坐标{x=-1560.257, y=275.6446, z=2448.56}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-1560.257, y=275.6446, z=2448.56}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-1560.257, y=275.6446, z=2448.56}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 删除指定group： 133304447 ；指定config：447023；物件身上指定option：917；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133304447, 447023, 917) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 创建标识为"delay2s"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "delay2s", {2}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -281,7 +281,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_447020(context, evt)
 	if 447001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -292,10 +292,10 @@ function action_EVENT_GADGET_STATE_CHANGE_447020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133304447, 3)
-	
+
 	return 0
 end
 
@@ -304,12 +304,12 @@ function condition_EVENT_GADGET_CREATE_447032(context, evt)
 	if 447023 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"FindClue"为0
 	if ScriptLib.GetGroupVariableValue(context, "FindClue") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -320,7 +320,7 @@ function action_EVENT_GADGET_CREATE_447032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -331,7 +331,7 @@ function action_EVENT_TIME_AXIS_PASS_447040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

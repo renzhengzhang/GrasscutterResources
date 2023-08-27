@@ -1,15 +1,15 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220131004
 }
 
 -- DEFS_MISCS
 --设置var: level_start为1以开启推箱子流程
 --用var_change接source为"level_finish"即可响应箱子推完的结果
-local defs = {
+defs = {
         box_gadget_id_1 = 70290378,
         box_gadget_id_2 = 70290377,
-        config_suites = {1}, 
+        config_suites = {1},
         point_array_id = 1,
         option_id = 193,
         reminder_level_boarder = 201310102,
@@ -19,7 +19,7 @@ local defs = {
 }
 
 --地形信息：0-墙面,1-地面,2-空气墙
-local level_map = {
+level_map = {
 	{ 0, 0, 0, 0, 0, 0, 0},
 	{ 0, 1, 1, 1, 1, 0, 0},
 	{ 0, 1, 1, 1, 1, 1, 0},
@@ -27,7 +27,7 @@ local level_map = {
 	{ 0, 0, 0, 0, 0, 0, 0},
 }
 
---[[local level_map = {
+--[[level_map = {
 	{ 0, 0, 0, 0, 0},
 	{ 0, 0, 1, 1, 0},
 	{ 0, 1, 1, 1, 0},
@@ -38,7 +38,7 @@ local level_map = {
 }]]--
 
 --点阵id信息
-local point_map = {
+point_map = {
 	{ 0, 0, 0, 0, 0, 0, 0},
 	{ 0, 1, 2, 3, 4, 0, 0},
 	{ 0, 6, 7, 8, 9,10, 0},
@@ -46,7 +46,7 @@ local point_map = {
 	{ 0, 0, 0, 0, 0, 0, 0}
 }
 
---[[local point_map = {
+--[[point_map = {
 	{ 0, 0,   0, 0, 0},
 	{ 0, 0,   6, 1, 0},
 	{ 0, 12,  7, 2, 0},
@@ -57,7 +57,7 @@ local point_map = {
 }]]--
 
 --箱子起始信息
---[[local box_config = {
+--[[box_config = {
 	[1] = {config_id = 4001, pos = {x=4,z=2}},
 	[2] = {config_id = 4002, pos = {x=2,z=4}},
 	[3] = {config_id = 4003, pos = {x=2,z=6}},
@@ -69,7 +69,7 @@ local point_map = {
 	[9] = {config_id = 4009, pos = {x=2,z=5}},
 }]]--
 
-local box_config = {
+box_config = {
 	[1] = {config_id = 4001, pos = {x=2,z=2}},
 	[2] = {config_id = 4002, pos = {x=4,z=2}},
 	[3] = {config_id = 4003, pos = {x=6,z=4}},
@@ -82,13 +82,13 @@ local box_config = {
 }
 
 --关卡结算信息
-local level_finish_config = {
+level_finish_config = {
         box_config_id = {1,2,3}, --box_config中序列
         target_point_id = {12,13,14} --点阵id
 }
 
 --路径摘除信息(pont_id)
-local illegal_path = {
+illegal_path = {
         {2,3},
         {7,8},
         {6,11},
@@ -97,9 +97,9 @@ local illegal_path = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -139,9 +139,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -152,9 +152,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -188,33 +188,33 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_4011(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	-- 将本组内变量名为 "Open" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Open", 1, 220131010) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "110262201") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Stage" 的变量设置为 5
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Stage", 5, 220131016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

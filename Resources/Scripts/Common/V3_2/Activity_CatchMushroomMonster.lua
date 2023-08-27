@@ -7,19 +7,19 @@
 =======================================]]
 
 --[[
-local mushroomBeastInfo = 
+mushroomBeastInfo =
 {
 	[1]={configId=85006,maxProgress=300,normal=10,active=20,dieOut=30,patrolRoute={1,2,3,4,5,6}},
 	[2]={configId=85007,maxProgress=300,normal=10,active=20,dieOut=30,patrolRoute={7,8,9,10,11,12,13}}
 }
 
-local groupInfo =
+groupInfo =
 {
 	pointArrayId = 110200025,
 }
 
 ]]
-local globalInfo =
+globalInfo =
 {
 	maxProgress=1200,
 	empiricalParamOne=0,
@@ -33,11 +33,11 @@ local globalInfo =
 
 -- 打印日志
 function PrintLog(context, content)
-	local log = "## [Activity_CatchMushroomMonster] TD: "..content
+	log = "## [Activity_CatchMushroomMonster] TD: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
-local extraTriggers = 
+extraTriggers =
 {
     { config_id = 40000001, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
     { config_id = 40000002, name = "enter_region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_EVENT_ENTER_REGION", trigger_count = 0 },
@@ -50,7 +50,7 @@ local extraTriggers =
 	{ config_id = 40000009, name = "group_will_unload", event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_EVENT_GROUP_WILL_UNLOAD", trigger_count = 0},
 }
 
------- Local Functions -----------
+------ Functions -----------
 function LF_Initialize_Level()
     --- TRIGGER
 	for i, _suite in ipairs(suites) do
@@ -61,7 +61,7 @@ function LF_Initialize_Level()
 	for _, _trigger in pairs(extraTriggers) do
 		table.insert(triggers, _trigger)
 	end
-	
+
 	for k,v in pairs(mushroomBeastInfo) do
 		--标记蕈兽是否正在受到惊吓状态
 		table.insert(variables,{ config_id=50000000+v.configId,name = v.configId.."isAlert", value = 0})
@@ -71,7 +71,7 @@ function LF_Initialize_Level()
 		table.insert(variables,{ config_id=53000000+v.configId,name = v.configId.."startPoint", value = 0})
 	end
 	table.insert(variables,{ config_id=51000000,name = "has_succeeded", value = 0, no_refresh = true})
-	
+
     return 0
 end
 
@@ -97,9 +97,9 @@ end
 
 --设置蕈兽路径
 function LF_SetFungusRoute(context,fungusConfigId,pointArrayId,routePoints,route_type)
-	local fungusEntityId=ScriptLib.GetEntityIdByConfigId(context, fungusConfigId)
-    local fungusMonsterId=ScriptLib.GetMonsterIdByEntityId(context, fungusEntityId)
-    local fungusType=LF_GetFungusType(context,fungusMonsterId)
+	fungusEntityId=ScriptLib.GetEntityIdByConfigId(context, fungusConfigId)
+    fungusMonsterId=ScriptLib.GetMonsterIdByEntityId(context, fungusEntityId)
+    fungusType=LF_GetFungusType(context,fungusMonsterId)
     if fungusType==0 then
     	PrintLog(context, "蕈兽怪物id不在任何分类中")
     elseif fungusType==1 then
@@ -117,13 +117,13 @@ function LF_SetAlertBeastTarget(context,inputConfigId)
 	for k,v in pairs(mushroomBeastInfo) do
 		if v.configId==inputConfigId then
 			ScriptLib.SetGroupVariableValue(context, inputConfigId.."isAlert",1)
-			local avatarEntity=ScriptLib.GetAvatarEntityIdByUid(context,context.owner_uid)
+			avatarEntity=ScriptLib.GetAvatarEntityIdByUid(context,context.owner_uid)
 			PrintLog(context,"avatar entity"..avatarEntity)
-			local monsterEid = ScriptLib.GetEntityIdByConfigId(context, inputConfigId)
-			local maxDistance=0
-			local targetPoint=0
+			monsterEid = ScriptLib.GetEntityIdByConfigId(context, inputConfigId)
+			maxDistance=0
+			targetPoint=0
 			for a,b in pairs(v.patrolRoute) do
-				local tempScore=globalInfo.empiricalParamOne*LF_CalculateXZDistance(context,avatarEntity,b)+globalInfo.empiricalParamTwo*LF_CalculateIntersectionAngle(context,monsterEid,b)
+				tempScore=globalInfo.empiricalParamOne*LF_CalculateXZDistance(context,avatarEntity,b)+globalInfo.empiricalParamTwo*LF_CalculateIntersectionAngle(context,monsterEid,b)
 				if tempScore>maxDistance and LF_CheckPointIsValid(context,b,v.configId) then
 					maxDistance=tempScore
 					targetPoint=b
@@ -145,15 +145,15 @@ end
 --1.目标点距离蕈兽位置必须有一定距离，暂定大于5
 --2.目标点距离玩家位置也需要有一定距离，暂定大于7
 function LF_CheckPointIsValid(context,pointId,fungusConfigId)
-	local isValid=true
+	isValid=true
 	if ScriptLib.GetGroupVariableValue(context, fungusConfigId.."startPoint") == pointId then
 		isValid=false
 	end
 	if ScriptLib.GetGroupVariableValue(context, fungusConfigId.."targetPoint") ~= 0 then
 		return isValid
 	end
-	local fungusEntityId = ScriptLib.GetEntityIdByConfigId(context, fungusConfigId)
-	local avatarEntity=ScriptLib.GetAvatarEntityIdByUid(context,ScriptLib.GetSceneOwnerUid(context))
+	fungusEntityId = ScriptLib.GetEntityIdByConfigId(context, fungusConfigId)
+	avatarEntity=ScriptLib.GetAvatarEntityIdByUid(context,ScriptLib.GetSceneOwnerUid(context))
 	if LF_CalculateXZDistance(context,fungusEntityId,pointId) <= 5 then
 		isValid=false
 	end
@@ -170,7 +170,7 @@ function LF_CreateNewRoute(context,inputConfigId,inputPoint)
 		if v.configId==inputConfigId then
 			for i=1, #v.patrolRoute do
 				if v.patrolRoute[i]==inputPoint then
-					local newRoute={}
+					newRoute={}
 					for j=i+1,#v.patrolRoute do
 						table.insert(newRoute, v.patrolRoute[j])
 					end
@@ -183,51 +183,51 @@ function LF_CreateNewRoute(context,inputConfigId,inputPoint)
 			end
 		end
 	end
-	
+
 	return 0
 end
 
 --计算两entity的XZ平面距离
 function LF_CalculateXZDistance(context,entityId,pointId,entityIdTwo)
-	local pos1=ScriptLib.GetPosByEntityId(context, entityId)
-	local pos2={}
+	pos1=ScriptLib.GetPosByEntityId(context, entityId)
+	pos2={}
 	if pointId~=0 then
-		local arrayPointRet,arrayPointPos,arrayPointRot=ScriptLib.GetPlatformArrayInfoByPointId(context, groupInfo.pointArrayId, pointId)
+		arrayPointRet,arrayPointPos,arrayPointRot=ScriptLib.GetPlatformArrayInfoByPointId(context, groupInfo.pointArrayId, pointId)
 		pos2={x=arrayPointPos.x,y=arrayPointPos.y,z=arrayPointPos.z}
 	else
 		pos2=ScriptLib.GetPosByEntityId(context, entityIdTwo)
 	end
-	local distance=math.sqrt((pos1.x-pos2.x)*(pos1.x-pos2.x)+(pos1.z-pos2.z)*(pos1.z-pos2.z))
+	distance=math.sqrt((pos1.x-pos2.x)*(pos1.x-pos2.x)+(pos1.z-pos2.z)*(pos1.z-pos2.z))
 	return distance
 end
 
 --计算蕈兽指向玩家向量和指向路点向量的夹角
 function LF_CalculateIntersectionAngle(context,fungusEntityId,pointId)
-	local angle=0
-	local avatarEntityId=ScriptLib.GetAvatarEntityIdByUid(context,ScriptLib.GetSceneOwnerUid(context))
-	local fungusPos=ScriptLib.GetPosByEntityId(context, fungusEntityId)
-	local avatarPos=ScriptLib.GetPosByEntityId(context, avatarEntityId)
-	local arrayPointRet,arrayPointPos,arrayPointRot=ScriptLib.GetPlatformArrayInfoByPointId(context, groupInfo.pointArrayId, pointId)
-	local pointPos={x=arrayPointPos.x,y=arrayPointPos.y,z=arrayPointPos.z}
+	angle=0
+	avatarEntityId=ScriptLib.GetAvatarEntityIdByUid(context,ScriptLib.GetSceneOwnerUid(context))
+	fungusPos=ScriptLib.GetPosByEntityId(context, fungusEntityId)
+	avatarPos=ScriptLib.GetPosByEntityId(context, avatarEntityId)
+	arrayPointRet,arrayPointPos,arrayPointRot=ScriptLib.GetPlatformArrayInfoByPointId(context, groupInfo.pointArrayId, pointId)
+	pointPos={x=arrayPointPos.x,y=arrayPointPos.y,z=arrayPointPos.z}
 	--蕈兽指向玩家
-	local vectorOne={x=avatarPos.x-fungusPos.x,y=avatarPos.y-fungusPos.y,z=avatarPos.z-fungusPos.z}
+	vectorOne={x=avatarPos.x-fungusPos.x,y=avatarPos.y-fungusPos.y,z=avatarPos.z-fungusPos.z}
 	--蕈兽指向目标点
-	local vectorTwo={x=pointPos.x-fungusPos.x,y=pointPos.y-fungusPos.y,z=pointPos.z-fungusPos.z}
+	vectorTwo={x=pointPos.x-fungusPos.x,y=pointPos.y-fungusPos.y,z=pointPos.z-fungusPos.z}
 	return LF_CalculateXZRotate(context,vectorOne.x,vectorOne.y,vectorTwo.x,vectorTwo.y)
 end
 
 --计算XZ平面上两个向量的夹角
 function LF_CalculateXZRotate(context,x1,y1,x2,y2)
-	local cos=(x1*x2+y1*y2)/(math.sqrt(x1*x1+y1*y1)*math.sqrt(x2*x2+y2*y2))
-	local rotate=math.deg(math.acos(cos))
-	local output=math.abs(180-(180-rotate)%360)
+	cos=(x1*x2+y1*y2)/(math.sqrt(x1*x1+y1*y1)*math.sqrt(x2*x2+y2*y2))
+	rotate=math.deg(math.acos(cos))
+	output=math.abs(180-(180-rotate)%360)
 	--PrintLog(context, "计算夹角"..output)
 	return output
 end
 
 --蕈兽是否存活
 function LF_MonsterIsAlive(context,configId)
-	local monsterList=ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id)
+	monsterList=ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id)
 	--PrintLog(context,"存活怪物数量："..#monsterList)
 	for _,v in pairs(monsterList) do
 		if v==configId then
@@ -239,23 +239,23 @@ end
 
 --判断蕈兽是否在圈内
 function LF_IsFungusInRegion(context,configId,regionId)
-	local region={}
+	region={}
 	for i = 1, #regions do
-        if regions[i].config_id == regionId then 
+        if regions[i].config_id == regionId then
             region = regions[i]
             break
         end
     end
-    local monster_eid = ScriptLib.GetEntityIdByConfigId(context, configId)
-	local pos1 = ScriptLib.GetPosByEntityId(context, monster_eid)
-	local X = pos1.x - region.pos.x
-	local Y = pos1.y - region.pos.y
-	local Z = pos1.z - region.pos.z
-    
+    monster_eid = ScriptLib.GetEntityIdByConfigId(context, configId)
+	pos1 = ScriptLib.GetPosByEntityId(context, monster_eid)
+	X = pos1.x - region.pos.x
+	Y = pos1.y - region.pos.y
+	Z = pos1.z - region.pos.z
+
 	if region.shape == RegionShape.SPHERE then
 		if math.sqrt(X*X+Y*Y+Z*Z) <= region.radius then
 			return true
-		else 
+		else
 			return false
 		end
 	elseif region.shape == RegionShape.CUBIC then
@@ -281,8 +281,8 @@ end
 
 --初始化蕈兽行为
 function LF_InitFungusBehaviour(context,v)
-	local fungusMonsterId=LF_GetFungusMonsterId(context,v.configId)
-	local isCaptured=ScriptLib.IsFungusCaptured(context, ScriptLib.GetSceneOwnerUid(context) ,fungusMonsterId)
+	fungusMonsterId=LF_GetFungusMonsterId(context,v.configId)
+	isCaptured=ScriptLib.IsFungusCaptured(context, ScriptLib.GetSceneOwnerUid(context) ,fungusMonsterId)
 	PrintLog(context, "查询蕈兽捕捉情况："..v.configId.."|"..tostring(isCaptured))
 	if isCaptured==0 then
 		--ScriptLib.KillEntityByConfigId(context, { config_id = v.configId,entity_type=EntityType.MONSTER })
@@ -302,7 +302,7 @@ end
 
 --判断是否所有蕈兽都已被捕捉
 function LF_AFungusCatched(context)
-	local allBeastsDead=true
+	allBeastsDead=true
 	for k,v in pairs(mushroomBeastInfo) do
 		if LF_MonsterIsAlive(context,v.configId) then
 			allBeastsDead=false
@@ -332,8 +332,8 @@ end
 function SLC_MushroomMonsterAlert(context)
 	PrintLog(context,"蕈兽受到惊吓")
 	--进入惊吓状态
-	local beast = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
-	--local beast = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	beast = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
+	--beast = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, beast, "SGV_MushroomMonster_Alert", 1)
 	LF_SetAlertBeastTarget(context,beast)
 	return 0
@@ -342,20 +342,20 @@ end
 --怪物被打到，通知加分
 function SLC_MushroomMonsterCatch(context,param1)
 	PrintLog(context,"蕈兽被命中")
-	local beast = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
-	--local beast = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	beast = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
+	--beast = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	--ScriptLib.ChangeGroupVariableValue(context, beast.."progress", 100)
-	local maxProgress=globalInfo.maxProgress
-	local addProgress=-1
-	local monsterId=ScriptLib.GetMonsterIdByEntityId(context, context.source_entity_id)
+	maxProgress=globalInfo.maxProgress
+	addProgress=-1
+	monsterId=ScriptLib.GetMonsterIdByEntityId(context, context.source_entity_id)
 	--埋点
-	local isFinished=0
+	isFinished=0
 	if monsterId~=nil then
 		PrintLog(context,"蕈兽monsterid"..monsterId)
 	else
 		PrintLog(context,"蕈兽monsterid为空")
 	end
-	local curProgress=ScriptLib.GetGalleryProgressScore(context,tostring(monsterId),defs.gallery_id) 
+	curProgress=ScriptLib.GetGalleryProgressScore(context,tostring(monsterId),defs.gallery_id)
 	--数据校验
 	if curProgress==-1 then
 		PrintLog(context,"蕈兽抓捕值获取失败")
@@ -375,7 +375,7 @@ function SLC_MushroomMonsterCatch(context,param1)
 			break
 		end
 	end
-	
+
 	--尝试结算gallery
 	if curProgress+addProgress >= maxProgress then
 		if ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["group_id"]=base_info.group_id,["config_id"]=beast})==0 then
@@ -413,7 +413,7 @@ function action_EVENT_GROUP_WILL_UNLOAD(context, evt)
 	if ScriptLib.IsGalleryStart(context,defs.gallery_id) then
 		ScriptLib.StopGalleryByReason(context,defs.gallery_id,5)
 	end
-	local hostUid=ScriptLib.GetSceneOwnerUid(context)
+	hostUid=ScriptLib.GetSceneOwnerUid(context)
 	ScriptLib.EndTimeAxis(context,"itemCheck")
 	ScriptLib.SetGroupTempValue(context,"templateReminderShow",0,{})
 	ScriptLib.RevokePlayerShowTemplateReminder(context, 204, {hostUid})
@@ -465,7 +465,7 @@ function action_EVENT_ENTER_REGION(context, evt)
         	return 0
     	end
     	for k,v in pairs(mushroomBeastInfo) do
-			local monsterId=LF_GetFungusMonsterId(context,v.configId)
+			monsterId=LF_GetFungusMonsterId(context,v.configId)
     		if LF_MonsterIsAlive(context,v.configId)==false then
 				ScriptLib.InitGalleryProgressWithScore(context, tostring(monsterId), defs.gallery_id, {0,globalInfo.maxProgress},globalInfo.maxProgress, GalleryProgressScoreUIType.GALLERY_PROGRESS_SCORE_UI_TYPE_DIG,GalleryProgressScoreType.GALLERY_PROGRESS_SCORE_NONE)
     			PrintLog(context, "怪物："..v.configId.."已捕获")
@@ -473,7 +473,7 @@ function action_EVENT_ENTER_REGION(context, evt)
 				ScriptLib.InitGalleryProgressWithScore(context, tostring(monsterId), defs.gallery_id, {0,globalInfo.maxProgress},0, GalleryProgressScoreUIType.GALLERY_PROGRESS_SCORE_UI_TYPE_DIG,GalleryProgressScoreType.GALLERY_PROGRESS_SCORE_NONE)
 				PrintLog(context, "怪物："..v.configId.."未捕获")
     		end
-    	end	
+    	end
 	end
 	--看下是不是所有蕈兽都抓住了,是的话刷新一次结算
 	if LF_AFungusCatched(context) then
@@ -519,7 +519,7 @@ end
 --时间轴处理tick逻辑
 function action_EVENT_TIME_AXIS_PASS(context, evt)
 	if evt.source_name=="itemCheck" then
-		local hostUid=ScriptLib.GetSceneOwnerUid(context)
+		hostUid=ScriptLib.GetSceneOwnerUid(context)
 		--如果没装小道具且没显示，提示
 		if (not ScriptLib.IsWidgetEquipped(context, hostUid, 220073)) and ScriptLib.GetGroupTempValue(context,"templateReminderShow",{})==0 then
 			PrintLog(context, "提示装小道具")
@@ -538,12 +538,12 @@ function action_EVENT_TIME_AXIS_PASS(context, evt)
 		--检测受惊蕈兽的逃跑目标点
 		for k,v in pairs(mushroomBeastInfo) do
 			if ScriptLib.GetGroupVariableValue(context, v.configId.."isAlert") == 1 then
-				local fungusEntityId = ScriptLib.GetEntityIdByConfigId(context, v.configId)
-				local avatarEntity=ScriptLib.GetAvatarEntityIdByUid(context,ScriptLib.GetSceneOwnerUid(context))
+				fungusEntityId = ScriptLib.GetEntityIdByConfigId(context, v.configId)
+				avatarEntity=ScriptLib.GetAvatarEntityIdByUid(context,ScriptLib.GetSceneOwnerUid(context))
 				--只有周围有人的时候才尝试修改位置
 				if LF_CalculateXZDistance(context,fungusEntityId,0,avatarEntity) <= 5 then
 					LF_SetAlertBeastTarget(context,v.configId)
-				end	
+				end
 			end
 		end
 		--检测蕈兽出界
@@ -573,7 +573,7 @@ end
 function action_EVENT_GALLERY_STOP(context, evt)
 	PrintLog(context, "event gallery stop")
 	--关时间轴
-	local hostUid=ScriptLib.GetSceneOwnerUid(context)
+	hostUid=ScriptLib.GetSceneOwnerUid(context)
 	ScriptLib.EndTimeAxis(context,"itemCheck")
 	ScriptLib.SetGroupTempValue(context,"templateReminderShow",0,{})
 	ScriptLib.RevokePlayerShowTemplateReminder(context, 204, {hostUid})

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250007008
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -79,9 +79,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -89,7 +89,7 @@ function condition_EVENT_GADGET_CREATE_46(context, evt)
 	if 33 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -100,7 +100,7 @@ function action_EVENT_GADGET_CREATE_46(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -109,7 +109,7 @@ function condition_EVENT_SELECT_OPTION_47(context, evt)
 	if 33 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -119,33 +119,33 @@ function action_EVENT_SELECT_OPTION_47(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 30 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 30, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟4秒后,向groupId为：250007008的对象,请求一次调用,并将string参数："WaitFor2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250007008, "WaitFor2", 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟8秒后,向groupId为：250007008的对象,请求一次调用,并将string参数："WaitFor3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250007008, "WaitFor3", 8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 33 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -155,8 +155,8 @@ function action_EVENT_TIMER_EVENT_48(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 31, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -166,8 +166,8 @@ function action_EVENT_TIMER_EVENT_49(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 32, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -175,32 +175,32 @@ end
 function action_EVENT_CLIENT_EXECUTE_50(context, evt)
 	--羽球落地或出界后把羽毛球发射器设为Default
 	if evt.param1 == defs.gadget_id_3 then
-	
+
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.Default) then
 	  return -1
-	 end 
-	
-	
+	 end
+
+
 	end
-	
+
 	-- 针对当前group内变量名为 "FailTimes" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "FailTimes", 1) then
 	  return -1
 	end
-	
+
 	return 0
-	
+
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_51(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FailTimes"为3
 	if ScriptLib.GetGroupVariableValue(context, "FailTimes") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -211,6 +211,6 @@ function action_EVENT_VARIABLE_CHANGE_51(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

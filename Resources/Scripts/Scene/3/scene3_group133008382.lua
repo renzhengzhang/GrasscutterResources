@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008382
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -84,49 +84,49 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_382010(context, evt)
 		-- 改变指定monster的globalvalue
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {382002}, "_MONSTERAFFIX_AIHITFEELING_LEVELTRIGGER", 1)
-	
+
 	-- 通知groupid为133008382中,configid为：382002的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 382002, 133008382) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 		-- 改变指定monster的globalvalue
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {382003}, "_MONSTERAFFIX_AIHITFEELING_LEVELTRIGGER", 1)
-	
+
 	-- 通知groupid为133008382中,configid为：382003的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 382003, 133008382) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- 将group 133008382 中config id为 382002 的怪物血量设为 10 %（血量百分比不能填0，如果掉血，则走通用的掉血流程，如果加血，直接设置新的血量）。
 	if 0 ~= ScriptLib.SetMonsterHp(context, 133008382, 382002, 10) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_hp_by_group")
 			return -1
 		end
-	
+
 	-- 将group 133008382 中config id为 382003 的怪物血量设为 10 %（血量百分比不能填0，如果掉血，则走通用的掉血流程，如果加血，直接设置新的血量）。
 	if 0 ~= ScriptLib.SetMonsterHp(context, 133008382, 382003, 10) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_hp_by_group")
 			return -1
 		end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133008382, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -135,7 +135,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_382013(context, evt)
 	if 382003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -143,21 +143,21 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_382013(context, evt)
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133008382, EntityType.MONSTER, 382003)
-	
-		
-	
+
+
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 382007, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 将group 133008382 中config id为 382007 的怪物血量设为 20 %（血量百分比不能填0，如果掉血，则走通用的掉血流程，如果加血，直接设置新的血量）。
 	if 0 ~= ScriptLib.SetMonsterHp(context, 133008382, 382007, 20) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_hp_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -166,7 +166,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_382014(context, evt)
 	if 382005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -174,21 +174,21 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_382014(context, evt)
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133008382, EntityType.MONSTER, 382005)
-	
-		
-	
+
+
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 382008, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 将group 133008382 中config id为 382008 的怪物血量设为 20 %（血量百分比不能填0，如果掉血，则走通用的掉血流程，如果加血，直接设置新的血量）。
 	if 0 ~= ScriptLib.SetMonsterHp(context, 133008382, 382008, 20) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_hp_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_382017(context, evt)
 	if 382007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -208,7 +208,7 @@ function action_EVENT_ANY_MONSTER_LIVE_382017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_hp_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_382018(context, evt)
 	if 382008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -228,6 +228,6 @@ function action_EVENT_ANY_MONSTER_LIVE_382018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_hp_by_group")
 			return -1
 		end
-	
+
 	return 0
 end

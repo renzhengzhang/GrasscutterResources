@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220140020
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
 
                 --本Group中发射器gadget的configID，最多3个,
                 fireMachineList = {
@@ -33,7 +33,7 @@ local        defs = {
                         [20003] = {0, 102, 103, 104},
                         [20004] = {0, 102, 103, 104},
                         [20005] = {0, 102, 103, 104},
-                        [20006] = {0, 102, 103, 104},	        
+                        [20006] = {0, 102, 103, 104},
 
                 },
 
@@ -42,14 +42,14 @@ local        defs = {
                         [20002] = {0, 302, 303, 304},
                         [20003] = {0, 302, 303, 304},
                         [20004] = {0, 302, 303, 304},
- 	        
+
                 }
         }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -99,9 +99,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -112,9 +112,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -139,18 +139,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_20006(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 220140020) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -161,20 +161,20 @@ function action_EVENT_ANY_MONSTER_DIE_20006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 20001 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 20001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 20002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -183,7 +183,7 @@ function condition_EVENT_ANY_GADGET_DIE_20012(context, evt)
 	if 20008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -194,13 +194,13 @@ function action_EVENT_ANY_GADGET_DIE_20012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "plat" 的变量设置为 10
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "plat", 10, 220140004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -210,7 +210,7 @@ function condition_EVENT_GROUP_LOAD_20014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -218,13 +218,13 @@ end
 function action_EVENT_GROUP_LOAD_20014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140020, 2)
-	
+
 	-- 将configid为 20001 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 20001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

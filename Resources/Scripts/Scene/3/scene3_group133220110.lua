@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133220110
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -77,9 +77,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -90,9 +90,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -117,9 +117,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -127,7 +127,7 @@ function condition_EVENT_GADGET_CREATE_110001(context, evt)
 	if 110002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -138,7 +138,7 @@ function action_EVENT_GADGET_CREATE_110001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_GADGET_CREATE_110003(context, evt)
 	if 110005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_GADGET_CREATE_110003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -166,14 +166,14 @@ end
 function condition_EVENT_SELECT_OPTION_110004(context, evt)
 	-- 判断是gadgetid 110002 option_id 169
 	if 110002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 169 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -184,19 +184,19 @@ function action_EVENT_SELECT_OPTION_110004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 110019 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 110019, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -204,14 +204,14 @@ end
 function condition_EVENT_SELECT_OPTION_110006(context, evt)
 	-- 判断是gadgetid 110005 option_id 169
 	if 110005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 169 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -222,19 +222,19 @@ function action_EVENT_SELECT_OPTION_110006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 110018 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 110018, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -242,14 +242,14 @@ end
 function condition_EVENT_SELECT_OPTION_110008(context, evt)
 	-- 判断是gadgetid 110007 option_id 169
 	if 110007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 169 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -260,19 +260,19 @@ function action_EVENT_SELECT_OPTION_110008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 110020 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 110020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -281,7 +281,7 @@ function condition_EVENT_GADGET_CREATE_110009(context, evt)
 	if 110007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -292,31 +292,31 @@ function action_EVENT_GADGET_CREATE_110009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_110010(context, evt)
 	if evt.param1 ~= 110010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_110010(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=-2346,y=200,z=-4166}
+	pos = {x=-2346,y=200,z=-4166}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 7210902, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -325,7 +325,7 @@ function condition_EVENT_GADGET_CREATE_110012(context, evt)
 	if 110011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -336,7 +336,7 @@ function action_EVENT_GADGET_CREATE_110012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -344,14 +344,14 @@ end
 function condition_EVENT_SELECT_OPTION_110013(context, evt)
 	-- 判断是gadgetid 110011 option_id 169
 	if 110011 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 169 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -362,31 +362,31 @@ function action_EVENT_SELECT_OPTION_110013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 110021 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 110021, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_110014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为4
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -397,85 +397,85 @@ function action_EVENT_VARIABLE_CHANGE_110014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=-2347,y=200,z=-4163}
+	pos = {x=-2347,y=200,z=-4163}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 7210908, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_110015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为1
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_110015(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=-2347,y=200,z=-4163}
+	pos = {x=-2347,y=200,z=-4163}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 7210905, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_110016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为2
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_110016(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=-2347,y=200,z=-4163}
+	pos = {x=-2347,y=200,z=-4163}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 7210906, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_110017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为3
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_110017(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=-2347,y=200,z=-4163}
+	pos = {x=-2347,y=200,z=-4163}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 7210907, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end

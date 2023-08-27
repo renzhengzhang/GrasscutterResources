@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133106450
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_11 = 450001,
 	gadget_12 = 450002,
 	gadget_13 = 450003,
@@ -110,9 +110,9 @@ digMaps={
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -196,9 +196,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -209,9 +209,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -245,38 +245,38 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_450029(context, evt)
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106450, 1)
-	
+
 	-- 针对当前group内变量名为 "PlayStartTrigger" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "PlayStartTrigger", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 310645001 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310645001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-834.0877，182.9215，1990.333），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-834.0877, y=182.9215, z=1990.333}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-834.0877, y=182.9215, z=1990.333}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -287,20 +287,20 @@ function action_EVENT_GADGET_STATE_CHANGE_450030(context, evt)
 			ScriptLib.AddQuestProgress(context, "71078got_tresure")
 		end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_450031(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "71078got_bomb") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -311,7 +311,7 @@ function action_EVENT_QUEST_FINISH_450032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -321,7 +321,7 @@ function condition_EVENT_GROUP_LOAD_450033(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "questFinish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -332,7 +332,7 @@ function action_EVENT_GROUP_LOAD_450033(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -343,7 +343,7 @@ function action_EVENT_QUEST_FINISH_450034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -352,7 +352,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_450035(context, evt)
 	if 450026 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -363,13 +363,13 @@ function action_EVENT_GADGET_STATE_CHANGE_450035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "71078lowChestOpened") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -378,7 +378,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_450036(context, evt)
 	if 450027 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -389,13 +389,13 @@ function action_EVENT_GADGET_STATE_CHANGE_450036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "71078mediumChestOpened") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -404,7 +404,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_450037(context, evt)
 	if 450028 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -415,13 +415,13 @@ function action_EVENT_GADGET_STATE_CHANGE_450037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "71078highChestOpened") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -431,7 +431,7 @@ function condition_EVENT_GROUP_LOAD_450038(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "lowChestOpened") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -442,7 +442,7 @@ function action_EVENT_GROUP_LOAD_450038(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -452,7 +452,7 @@ function condition_EVENT_GROUP_LOAD_450039(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mediumChestOpened") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -463,7 +463,7 @@ function action_EVENT_GROUP_LOAD_450039(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -473,7 +473,7 @@ function condition_EVENT_GROUP_LOAD_450040(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "highChestOpened") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -484,7 +484,7 @@ function action_EVENT_GROUP_LOAD_450040(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 

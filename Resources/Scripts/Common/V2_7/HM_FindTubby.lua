@@ -34,8 +34,8 @@
     defs.Tubby_Count = 12,               --总共有多少个阿圆
 ]]
 
-local HM_FindTubby = {
-    Board_Gadget_ID = 77307018,     
+HM_FindTubby = {
+    Board_Gadget_ID = 77307018,
     Tubby_Gadget_ID = 77307019,
     Game_Time = defs.Game_Time,                         --全局时长
     Stage_Time = defs.Stage_Time,                       --每个阶段多久
@@ -45,7 +45,7 @@ local HM_FindTubby = {
     galleryID = 20001
 }
 
-local temp_Variables = {
+temp_Variables = {
 	{  config_id=50000001,name = "cur_tide_total_num", value = 0, no_refresh = false },
 	{  config_id=50000002,name = "cur_tide_left_num", value = 0, no_refresh = false },
 	{  config_id=50000003,name = "score", value = 0, no_refresh = false },
@@ -53,7 +53,7 @@ local temp_Variables = {
 }
 
 
-local temp_Tirgger = {
+temp_Tirgger = {
 	{event = EventType.EVENT_SELECT_UIINTERACT, source = "", action = "action_EVENT_SELECT_UIINTERACT"},
 	{event = EventType.EVENT_LEAVE_REGION, source = "", action = "action_EVENT_LEAVE_REGION",forbid_guest = false,},
 	{event = EventType.EVENT_ENTER_REGION, source = "", action = "action_EVENT_ENTER_REGION",forbid_guest = false,},
@@ -69,8 +69,8 @@ local temp_Tirgger = {
 --ENTER时，如果玩家还在gallery里，重新放回注册名单（用于处理重连、灭掉的情况）
 function action_EVENT_ENTER_REGION(context,evt)
     ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_ENTER_REGION:"..context.uid)
-    if ScriptLib.IsGalleryStart(context, HM_FindTubby.galleryID) then 
-        local _list = ScriptLib.GetGalleryUidList(context,HM_FindTubby.galleryID)
+    if ScriptLib.IsGalleryStart(context, HM_FindTubby.galleryID) then
+        _list = ScriptLib.GetGalleryUidList(context,HM_FindTubby.galleryID)
         for i = 1 , #_list do
             if _list[i] == context.uid then ScriptLib.SetGroupTempValue(context,"player_"..context.uid,1,{}) end
         end
@@ -92,9 +92,9 @@ end
 function action_EVENT_GALLERY_START(context,evt)
     ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_GALLERY_START:".."func")
     --注册所有阿圆的config_id 顺便初始化tempvalue
-    local _tubby_count = 0
+    _tubby_count = 0
     for k , v in pairs(gadgets) do
-        if v.gadget_id == HM_FindTubby.Tubby_Gadget_ID then 
+        if v.gadget_id == HM_FindTubby.Tubby_Gadget_ID then
             _tubby_count = _tubby_count +1
             ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_SELECT_UIINTERACT:注册".."Tubby_".._tubby_count..", cid="..v.config_id)
             ScriptLib.SetGroupTempValue(context,"Tubby_".._tubby_count,v.config_id,{})
@@ -108,9 +108,9 @@ function action_EVENT_GALLERY_START(context,evt)
         return 0
     end
     --注册参与者的uid，用于拾取校验
-    local _uidlist = ScriptLib.GetSceneUidList(context)
+    _uidlist = ScriptLib.GetSceneUidList(context)
     for i = 1 ,#_uidlist do
-        ScriptLib.SetGroupTempValue(context,"player_".._uidlist[i],1,{})    
+        ScriptLib.SetGroupTempValue(context,"player_".._uidlist[i],1,{})
         ScriptLib.PrintContextLog(context,"## HM_FindTubby UpdatePlayerGalleryScore: 注册uid|".. "player_".._uidlist[i])
     end
     ScriptLib.PrintContextLog(context,"## HM_FindTubby UpdatePlayerGalleryScore:".. "cur_tide_total_num="..HM_FindTubby.Stage_Tubby_Count)
@@ -129,7 +129,7 @@ end
 --unload时关gallery
 function action_EVENT_GROUP_WILL_UNLOAD(context,evt)
     ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_GROUP_WILL_UNLOAD:".."func")
-    
+
 	ScriptLib.StopGalleryByReason(context, HM_FindTubby.galleryID, 2)
     return 0
 end
@@ -143,9 +143,9 @@ end
 function action_EVENT_SELECT_UIINTERACT(context,evt)
     ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_SELECT_UIINTERACT:lua版本[2022_3_25_205659]".."| [evt.param1]="..evt.param1.."|group_id="..base_info.group_id)
     --判断交互对象是不是计分板
---[[     if evt.param1 ~= 2 then 
+--[[     if evt.param1 ~= 2 then
         ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_SELECT_UIINTERACT:".."[Warnning]交互id不对")
-        return 0 
+        return 0
     end ]]
     --开gallery
     if ScriptLib.StartHomeGallery(context, HM_FindTubby.galleryID, context.uid) == -1 then
@@ -166,12 +166,12 @@ end
 function LF_Stage_Start(context)
     ScriptLib.PrintContextLog(context,"## HM_FindTubby LF_Stage_Start:".."func")
     --先计算出要生成哪几个
-    local _create_list = LF_Cal_Tubby(context,HM_FindTubby.Stage_Tubby_Count)
+    _create_list = LF_Cal_Tubby(context,HM_FindTubby.Stage_Tubby_Count)
     ScriptLib.PrintContextLog(context,"## HM_FindTubby LF_Stage_Start:".."#_create_list="..#_create_list)
     --create
     for i = 1 , #_create_list do
         ScriptLib.PrintContextLog(context,"## HM_FindTubby LF_Stage_Start:".."i="..i)
-        local _cid = ScriptLib.GetGroupTempValue(context,"Tubby_".._create_list[i],{})
+        _cid = ScriptLib.GetGroupTempValue(context,"Tubby_".._create_list[i],{})
         ScriptLib.PrintContextLog(context,"## HM_FindTubby LF_Stage_Start:".."正在创建：Tubby_".._create_list[i]..", cid=".._cid)
         ScriptLib.CreateGadget(context,{config_id = _cid})
         ScriptLib.SetWorktopOptionsByGroupId(context,base_info.group_id,_cid, {HM_FindTubby.Tubby_Option_ID})
@@ -189,11 +189,11 @@ function LF_Stage_Start(context)
     ScriptLib.PrintContextLog(context,"## HM_FindTubby UpdatePlayerGalleryScore:".. "cur_tide_left_num="..HM_FindTubby.Stage_Tubby_Count)
     ScriptLib.UpdatePlayerGalleryScore(context, HM_FindTubby.galleryID, {["cur_tide_left_num"] = HM_FindTubby.Stage_Tubby_Count})
     --reminder
-    local _curuidlist = ScriptLib.GetSceneUidList(context)
-    local _targetuidlist = {}
+    _curuidlist = ScriptLib.GetSceneUidList(context)
+    _targetuidlist = {}
     for i = 1 , #_curuidlist do
         ScriptLib.PrintContextLog(context,"## HM_FindTubby LF_Stage_Start:".."player_".._curuidlist[i])
-        if ScriptLib.GetGroupTempValue(context,"player_".._curuidlist[i],{}) == 1 then 
+        if ScriptLib.GetGroupTempValue(context,"player_".._curuidlist[i],{}) == 1 then
             ScriptLib.PrintContextLog(context,"## HM_FindTubby LF_Stage_Start:".."player_".._curuidlist[i].." = 1")
             table.insert(_targetuidlist,_curuidlist[i])
         end
@@ -208,7 +208,7 @@ end
 function LF_Cal_Tubby(context,n)
     ScriptLib.PrintContextLog(context,"## HM_FindTubby LF_Cal_Tubby:".."func")
     --先确定哪些上一轮没用过
-    local _list_temp = {}
+    _list_temp = {}
     for i = 1 , HM_FindTubby.Tubby_Count do
         if ScriptLib.GetGroupTempValue(context,"Used_"..i , {}) ~= 1 then
             ScriptLib.PrintContextLog(context,"## HM_FindTubby LF_Cal_Tubby:".."如果上一轮没用过，加入_list_temp="..i)
@@ -221,10 +221,10 @@ function LF_Cal_Tubby(context,n)
         end
     end
     --开抽（从_list_temp中不放回抽取n个到_list_result）
-    local _list_result = {}
+    _list_result = {}
     math.randomseed(ScriptLib.GetServerTime(context))
-    for i = 1 , n do 
-        local _rand = math.random(#_list_temp)
+    for i = 1 , n do
+        _rand = math.random(#_list_temp)
         ScriptLib.PrintContextLog(context,"## HM_FindTubby LF_Cal_Tubby:".."踢出temp，加入result，_rand=".._rand..", _list_temp[_rand]=".._list_temp[_rand])
         --踢出temp，加入result
         table.insert(_list_result,_list_temp[_rand])
@@ -236,22 +236,22 @@ end
 --和阿圆交互，执行：
 function action_EVENT_SELECT_OPTION(context,evt)
     ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_SELECT_OPTION:")
-    if ScriptLib.GetGroupTempValue(context,"player_"..context.uid,{}) ~= 1 then 
+    if ScriptLib.GetGroupTempValue(context,"player_"..context.uid,{}) ~= 1 then
         ScriptLib.SetTeamEntityGlobalFloatValue(context, {context.uid}, "GV_Reminder_1", 1)
         --ScriptLib.AssignPlayerShowTemplateReminder(context, 174, {param_vec={},param_uid_vec={},uid_vec={context.uid}})
         ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_SELECT_OPTION:".. "该玩家无法拾取")
         return 0
     end
-    if ScriptLib.GetGroupTempValue(context,"cid_selectable_".. evt.param1,{}) == 1 then 
+    if ScriptLib.GetGroupTempValue(context,"cid_selectable_".. evt.param1,{}) == 1 then
         ScriptLib.SetGroupTempValue(context,"cid_selectable_".. evt.param1,0,{}) --防止重复拾取标记  重置
         --给玩家计分
-        ScriptLib.PrintContextLog(context,"## HM_FindTubby UpdatePlayerGalleryScore:".. "score="..1)  
+        ScriptLib.PrintContextLog(context,"## HM_FindTubby UpdatePlayerGalleryScore:".. "score="..1)
         ScriptLib.UpdatePlayerGalleryScore(context, HM_FindTubby.galleryID, {["score"] = 1})
         ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_SELECT_OPTION:".."有人捡到了阿圆,uid="..context.uid)
         ScriptLib.KillEntityByConfigId(context, {config_id=evt.param1, entity_type = EntityType.GADGET})
         --计算本波剩余数量，更新gallery显示
-        ScriptLib.ChangeGroupTempValue(context,"cur_stage_Tubby_found",1,{})		
-        local _found = ScriptLib.GetGroupTempValue(context,"cur_stage_Tubby_found",{})
+        ScriptLib.ChangeGroupTempValue(context,"cur_stage_Tubby_found",1,{})
+        _found = ScriptLib.GetGroupTempValue(context,"cur_stage_Tubby_found",{})
         if HM_FindTubby.Stage_Tubby_Count - _found > 0 then
             ScriptLib.PrintContextLog(context,"## HM_FindTubby UpdatePlayerGalleryScore:".. "cur_tide_left_num="..HM_FindTubby.Stage_Tubby_Count-_found)
             ScriptLib.UpdatePlayerGalleryScore(context, HM_FindTubby.galleryID, {["cur_tide_left_num"] = HM_FindTubby.Stage_Tubby_Count-_found})
@@ -266,13 +266,13 @@ end
 --阶段倒计时结束，执行：
 function action_EVENT_TIME_AXIS_PASS_stage(context,evt)
     ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_TIME_AXIS_PASS_stage:".."evt.param1 = "..evt.param1)
-    if evt.param1 == 1 then 
+    if evt.param1 == 1 then
         --reminder
-        local _curuidlist = ScriptLib.GetSceneUidList(context)
-        local _targetuidlist = {}
+        _curuidlist = ScriptLib.GetSceneUidList(context)
+        _targetuidlist = {}
         for i = 1 , #_curuidlist do
             ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_TIME_AXIS_PASS_stage:".."player_".._curuidlist[i])
-            if ScriptLib.GetGroupTempValue(context,"player_".._curuidlist[i],{}) == 1 then 
+            if ScriptLib.GetGroupTempValue(context,"player_".._curuidlist[i],{}) == 1 then
                 ScriptLib.PrintContextLog(context,"## HM_FindTubby action_EVENT_TIME_AXIS_PASS_stage:".."player_".._curuidlist[i].." = 1")
                 table.insert(_targetuidlist,_curuidlist[i])
             end
@@ -281,7 +281,7 @@ function action_EVENT_TIME_AXIS_PASS_stage(context,evt)
         ScriptLib.SetTeamEntityGlobalFloatValue(context, _targetuidlist, "GV_Reminder_2", 1)
         --ScriptLib.AssignPlayerShowTemplateReminder(context, 175, {param_vec={},param_uid_vec={},uid_vec=_targetuidlist})
     end
-    if evt.param1 == 2 then 
+    if evt.param1 == 2 then
         LF_Stage_End(context,2)
     end
     return 0
@@ -296,8 +296,8 @@ function LF_Stage_End(context,reason)
     --如果是倒计时结束，清空剩余阿圆
     if reason == 2 then
         for i = 1 , HM_FindTubby.Tubby_Count do
-            local _cid = ScriptLib.GetGroupTempValue(context,"Tubby_" .. i ,{})
-            if ScriptLib.GetGroupTempValue(context,"cid_selectable_".._cid,{}) == 1 then 
+            _cid = ScriptLib.GetGroupTempValue(context,"Tubby_" .. i ,{})
+            if ScriptLib.GetGroupTempValue(context,"cid_selectable_".._cid,{}) == 1 then
                 ScriptLib.KillEntityByConfigId(context, {config_id=_cid, entity_type = EntityType.GADGET})
                 ScriptLib.SetGroupTempValue(context,"cid_selectable_".. _cid,0,{}) --防止重复拾取标记  重置
             end
@@ -325,7 +325,7 @@ end
 --初始化
 function Initialize()
 	--加触发器
-    if temp_Tirgger ~= nil then 
+    if temp_Tirgger ~= nil then
         for k,v in pairs(temp_Tirgger) do
             v.name = "temp_Trigger_"..k
             v.config_id = 40000000 + k
@@ -336,7 +336,7 @@ function Initialize()
         end
     end
 	--加变量
-    if temp_Variables ~= nil then 
+    if temp_Variables ~= nil then
         for k,v in pairs(temp_Variables) do
             table.insert(variables,v)
         end

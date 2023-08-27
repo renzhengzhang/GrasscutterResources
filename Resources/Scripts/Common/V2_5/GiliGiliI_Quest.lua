@@ -8,32 +8,32 @@
 ||	LogName       ||    ## GiliGili_LOG
 ||	Protection    ||	groupunload，下线等情况由任务负责回滚，关卡做一层保底
 =====================================================================================================================
--- local LowBossID = {1,1}
--- local MidBossID = {1,1}
--- local HighBossID = {1,1}
+-- LowBossID = {1,1}
+-- MidBossID = {1,1}
+-- HighBossID = {1,1}
 
--- local LowChallengeID = 1
--- local MidChallengeID = 1
--- local HighChallengeID = 1
+-- LowChallengeID = 1
+-- MidChallengeID = 1
+-- HighChallengeID = 1
 
--- local SwitchGadgetID = 1
--- local MovePlatID = 1
--- local BlackBall = {75023,75024,75025,75026,75027,75028,75029,75030}
+-- SwitchGadgetID = 1
+-- MovePlatID = 1
+-- BlackBall = {75023,75024,75025,75026,75027,75028,75029,75030}
 
---local groupID = 0
---local questID = 0
---local bright_area = 22019
+--groupID = 0
+--questID = 0
+--bright_area = 22019
 
 =======================================================================================]]
 
 
 
-local global = {
+global = {
 	darkBallNum = 5,
 	intervalTime = {60}
 }
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Time_Axis"] = { config_id = 80000006, name = "Time_Axis", event= EventType.EVENT_TIME_AXIS_PASS, source = "darkballinterval", condition = "", action = "action_TimeAxis", trigger_count = 0 },
 		["Boss_Die"] = { config_id = 80000008, name = "Boss_Die", event= EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_WhenBossDie", trigger_count = 0, tag = "999" },
@@ -83,8 +83,8 @@ function SLC_Reset_Battle(context)
 	LF_RemoveBattleEntity(context)
 
 	--龙蜥试图脱战重刷时，会先尝试找圈内合法的玩家作为authority。如果此时圈内没有玩家，再随缘给authority
-    local uidlist = ScriptLib.GetSceneUidList(context)
-    local has_avatar_in_region = false
+    uidlist = ScriptLib.GetSceneUidList(context)
+    has_avatar_in_region = false
     for i = 1, #uidlist do
         if LF_Avatar_is_in_region(context,uidlist[i],enter_battle_region) then
             ScriptLib.PrintContextLog(context,"DeepseaDrakeBoss: 龙蜥重置，尝试将Authority设置给圈内玩家："..uidlist[i])
@@ -96,18 +96,18 @@ function SLC_Reset_Battle(context)
             break
         end
     end
-    
+
     if (has_avatar_in_region) then
-        local ret1 = ScriptLib.SetMonsterBattleByGroup(context, monster_1, groupID)
-        local ret2 = ScriptLib.SetMonsterBattleByGroup(context, monster_2, groupID)
+        ret1 = ScriptLib.SetMonsterBattleByGroup(context, monster_1, groupID)
+        ret2 = ScriptLib.SetMonsterBattleByGroup(context, monster_2, groupID)
         ScriptLib.PrintContextLog(context,"DeepseaDrakeBoss: 设置怪物入战的结果为"..ret1)
         ScriptLib.PrintContextLog(context,"DeepseaDrakeBoss: 设置怪物入战的结果为"..ret2)
     end
 
-    
+
     ScriptLib.CreateGadget(context,{config_id = wall_1})
-    ScriptLib.CreateGadget(context,{config_id = wall_2}) 
-    ScriptLib.CreateGadget(context,{config_id = wall_3}) 
+    ScriptLib.CreateGadget(context,{config_id = wall_2})
+    ScriptLib.CreateGadget(context,{config_id = wall_3})
 
     --ScriptLib.SetGroupVariableValue(context, "challenge_state", 0)
     return 0
@@ -135,18 +135,18 @@ function LF_RemoveBattleEntity(context)
 end
 
 function LF_Avatar_is_in_region(context,uid,region_id)
-    local avatar_id = ScriptLib.GetAvatarEntityIdByUid(context, uid)
-	local pos1 = ScriptLib.GetPosByEntityId(context, avatar_id)
-    local region = regions[region_id]
+    avatar_id = ScriptLib.GetAvatarEntityIdByUid(context, uid)
+	pos1 = ScriptLib.GetPosByEntityId(context, avatar_id)
+    region = regions[region_id]
 
-	local X = pos1.x - region.pos.x
-	local Y = pos1.y - region.pos.y
-	local Z = pos1.z - region.pos.z
-    
+	X = pos1.x - region.pos.x
+	Y = pos1.y - region.pos.y
+	Z = pos1.z - region.pos.z
+
 	if region.shape == RegionShape.SPHERE then
 		if math.sqrt(X*X+Y*Y+Z*Z) <= region.radius then
 			return true
-		else 
+		else
 			return false
 		end
 	elseif region.shape == RegionShape.CUBIC then
@@ -192,9 +192,9 @@ function action_Leave_Battle_Region(context, evt)
     ScriptLib.PrintContextLog(context,"DeepseaDrakeBoss: 玩家出战斗圈"..context.uid)
 	--尝试转移config_id的authority, 当uid和config_id的authority不一致时尝试转移到region_config_id里的玩家。
     ScriptLib.PrintContextLog(context,"DeepseaDrakeBoss: 尝试重新分配authority")
-	local ret1 = ScriptLib.TryReallocateEntityAuthority(context, context.uid, monster_1, evt.param1)
-	local ret2 = ScriptLib.TryReallocateEntityAuthority(context, context.uid, monster_2, evt.param1)
-	
+	ret1 = ScriptLib.TryReallocateEntityAuthority(context, context.uid, monster_1, evt.param1)
+	ret2 = ScriptLib.TryReallocateEntityAuthority(context, context.uid, monster_2, evt.param1)
+
 
 	return 0
 end
@@ -209,8 +209,8 @@ function action_Enter_Battle_Region(context, evt)
     --玩家进圈时，先查询入战region范围内是否存在玩家
     --如果存在，说明该玩家不是第一个进入region的，那么圈内其他玩家中一定有authority（因为出圈会强制重新分配，入圈的时候会强制分配）
     --如果不存在，说明该玩家是第一个进入region的，将authority分配给他
-    local no_avatar_in_region = true
-    local uidlist = ScriptLib.GetSceneUidList(context)
+    no_avatar_in_region = true
+    uidlist = ScriptLib.GetSceneUidList(context)
     if next(uidlist)== nil then
         ScriptLib.PrintContextLog(context,"DeepseaDrakeBoss: 没有取到uidlist，认为是上线触发region的情况，强制把authority刷给进圈的玩家")
         --将Authority强行设置为进圈的玩家
@@ -235,13 +235,13 @@ function action_Enter_Battle_Region(context, evt)
     --重复入战逻辑，防止角色死亡没入战；需要在怪物入战后关闭
     ScriptLib.InitTimeAxis(context, "battletimer", {5}, true)
 
-    local ret1 = ScriptLib.SetMonsterBattleByGroup(context, monster_1, groupID)
-    local ret2 = ScriptLib.SetMonsterBattleByGroup(context, monster_2, groupID)
+    ret1 = ScriptLib.SetMonsterBattleByGroup(context, monster_1, groupID)
+    ret2 = ScriptLib.SetMonsterBattleByGroup(context, monster_2, groupID)
     ScriptLib.PrintContextLog(context,"DeepseaDrakeBoss: 设置怪物入战的结果为"..ret1)
     ScriptLib.PrintContextLog(context,"DeepseaDrakeBoss: 设置怪物入战的结果为"..ret2)
 
 
-   
+
 
 	return 0
 end
@@ -250,8 +250,8 @@ function action_BattleTimer( context, evt )
 
 	ScriptLib.PrintContextLog(context, "## GiliGili_LOG : 入战TICK，尝试拉起怪物")
 
-    local ret1 = ScriptLib.SetMonsterBattleByGroup(context, monster_1, groupID)
-    local ret2 = ScriptLib.SetMonsterBattleByGroup(context, monster_2, groupID)
+    ret1 = ScriptLib.SetMonsterBattleByGroup(context, monster_1, groupID)
+    ret2 = ScriptLib.SetMonsterBattleByGroup(context, monster_2, groupID)
     ScriptLib.PrintContextLog(context,"DeepseaDrakeBoss: 设置怪物入战的结果为"..ret1)
     ScriptLib.PrintContextLog(context,"DeepseaDrakeBoss: 设置怪物入战的结果为"..ret2)
 
@@ -269,27 +269,27 @@ function action_TimeAxis( context, evt )
 	end
 
 	--复制黑球List，同时筛选出剩余的球
-	local leaveNum = 0
+	leaveNum = 0
 
-    local tempList = {}
+    tempList = {}
 	for i,v in ipairs(BlackBall) do
 		if ScriptLib.GetGadgetStateByConfigId(context, 0, v) ~= -1 then
 			leaveNum = leaveNum + 1
 		else
 			table.insert(tempList, v)
-		end	
+		end
 	end
 
 	--获取需要补的球数
-	local upNum = global.darkBallNum-leaveNum
+	upNum = global.darkBallNum-leaveNum
 	if upNum <= 0 then
 		return 0
 	end
 
-	
+
 	--补齐黑球到指定数量
 	for i=1,upNum do
-		local randomIndex = math.random(1,#tempList)
+		randomIndex = math.random(1,#tempList)
 		ScriptLib.CreateGadget(context, { config_id = tempList[randomIndex] })
 
 		table.remove(tempList, randomIndex)
@@ -339,7 +339,7 @@ end
 
 
 function action_WhenBossDie( context, evt )
-	local tempList = ScriptLib.GetGroupAliveMonsterList(context, groupID)
+	tempList = ScriptLib.GetGroupAliveMonsterList(context, groupID)
 
 	ScriptLib.PrintContextLog(context, "## GiliGili_LOG : Monster Die")
 

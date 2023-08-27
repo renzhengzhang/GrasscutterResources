@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111103002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -300,9 +300,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -313,9 +313,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -520,20 +520,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2145(context, evt)
 	if evt.param1 ~= 2145 then return false end
-	
+
 	-- 判断是区域2145
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2145 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -541,22 +541,22 @@ end
 function action_EVENT_ENTER_REGION_2145(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 2)
-	
+
 	-- 添加suite22的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 22)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2148(context, evt)
 	if evt.param1 ~= 2148 then return false end
-	
+
 	-- 判断是区域2148
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2148 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -564,22 +564,22 @@ end
 function action_EVENT_ENTER_REGION_2148(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 3)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2225(context, evt)
 	if evt.param1 ~= 2225 then return false end
-	
+
 	-- 判断是区域2225
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2225 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -587,22 +587,22 @@ end
 function action_EVENT_ENTER_REGION_2225(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 4)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2226(context, evt)
 	if evt.param1 ~= 2226 then return false end
-	
+
 	-- 判断是区域2226
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2226 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -610,22 +610,22 @@ end
 function action_EVENT_ENTER_REGION_2226(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 6)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 5)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2227(context, evt)
 	if evt.param1 ~= 2227 then return false end
-	
+
 	-- 判断是区域2227
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2227 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -633,22 +633,22 @@ end
 function action_EVENT_ENTER_REGION_2227(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 7)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 6)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2228(context, evt)
 	if evt.param1 ~= 2228 then return false end
-	
+
 	-- 判断是区域2228
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2228 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -656,22 +656,22 @@ end
 function action_EVENT_ENTER_REGION_2228(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 8)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 7)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2229(context, evt)
 	if evt.param1 ~= 2229 then return false end
-	
+
 	-- 判断是区域2229
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2229 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -679,22 +679,22 @@ end
 function action_EVENT_ENTER_REGION_2229(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 9)
-	
+
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 8)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2230(context, evt)
 	if evt.param1 ~= 2230 then return false end
-	
+
 	-- 判断是区域2230
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2230 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -702,22 +702,22 @@ end
 function action_EVENT_ENTER_REGION_2230(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 10)
-	
+
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 9)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2231(context, evt)
 	if evt.param1 ~= 2231 then return false end
-	
+
 	-- 判断是区域2231
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2231 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -725,22 +725,22 @@ end
 function action_EVENT_ENTER_REGION_2231(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 11)
-	
+
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 10)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2232(context, evt)
 	if evt.param1 ~= 2232 then return false end
-	
+
 	-- 判断是区域2232
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2232 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -748,22 +748,22 @@ end
 function action_EVENT_ENTER_REGION_2232(context, evt)
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 12)
-	
+
 	-- 删除suite11的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 11)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2233(context, evt)
 	if evt.param1 ~= 2233 then return false end
-	
+
 	-- 判断是区域2233
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2233 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -771,22 +771,22 @@ end
 function action_EVENT_ENTER_REGION_2233(context, evt)
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 13)
-	
+
 	-- 删除suite12的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 12)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2234(context, evt)
 	if evt.param1 ~= 2234 then return false end
-	
+
 	-- 判断是区域2234
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2234 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -794,22 +794,22 @@ end
 function action_EVENT_ENTER_REGION_2234(context, evt)
 	-- 添加suite14的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 14)
-	
+
 	-- 删除suite13的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 13)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2235(context, evt)
 	if evt.param1 ~= 2235 then return false end
-	
+
 	-- 判断是区域2235
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2235 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -817,22 +817,22 @@ end
 function action_EVENT_ENTER_REGION_2235(context, evt)
 	-- 添加suite15的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 15)
-	
+
 	-- 删除suite14的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 14)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2236(context, evt)
 	if evt.param1 ~= 2236 then return false end
-	
+
 	-- 判断是区域2236
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2236 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -840,22 +840,22 @@ end
 function action_EVENT_ENTER_REGION_2236(context, evt)
 	-- 添加suite16的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 16)
-	
+
 	-- 删除suite15的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 15)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2237(context, evt)
 	if evt.param1 ~= 2237 then return false end
-	
+
 	-- 判断是区域2237
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2237 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -863,22 +863,22 @@ end
 function action_EVENT_ENTER_REGION_2237(context, evt)
 	-- 添加suite17的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 17)
-	
+
 	-- 删除suite16的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 16)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2238(context, evt)
 	if evt.param1 ~= 2238 then return false end
-	
+
 	-- 判断是区域2238
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2238 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -886,22 +886,22 @@ end
 function action_EVENT_ENTER_REGION_2238(context, evt)
 	-- 添加suite18的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 18)
-	
+
 	-- 删除suite17的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 17)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2239(context, evt)
 	if evt.param1 ~= 2239 then return false end
-	
+
 	-- 判断是区域2239
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2239 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -909,22 +909,22 @@ end
 function action_EVENT_ENTER_REGION_2239(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 5)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111103002, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2244(context, evt)
 	if evt.param1 ~= 2244 then return false end
-	
+
 	-- 判断是区域2244
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2244 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -932,19 +932,19 @@ end
 function action_EVENT_ENTER_REGION_2244(context, evt)
 	-- 添加suite19的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 19)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2245(context, evt)
 	if evt.param1 ~= 2245 then return false end
-	
+
 	-- 判断是区域2245
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2245 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -952,19 +952,19 @@ end
 function action_EVENT_ENTER_REGION_2245(context, evt)
 	-- 添加suite20的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 20)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2246(context, evt)
 	if evt.param1 ~= 2246 then return false end
-	
+
 	-- 判断是区域2246
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 2246 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -972,6 +972,6 @@ end
 function action_EVENT_ENTER_REGION_2246(context, evt)
 	-- 添加suite21的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111103002, 21)
-	
+
 	return 0
 end

@@ -1,4 +1,4 @@
-local TempTrigger = {
+TempTrigger = {
     { name = "Timer_Event_SwitchToVisible", config_id = 860010, event = EventType.EVENT_TIME_AXIS_PASS,
       source = "SwitchToVisible", condition = "", action = "action_Visible_Floor", trigger_count = 0 },
     { name = "Timer_Event_SwitchToPreVisible", config_id = 860011, event = EventType.EVENT_TIME_AXIS_PASS,
@@ -19,7 +19,7 @@ local TempTrigger = {
       source = "Start", condition = "", action = "action_GM_Mode", trigger_count = 0 }
 }
 
-local Enum ={
+Enum ={
     FallNum = "fall_down_darkfloor",
     TimeEnterRegion = "get_destination_darkfloor"
 }
@@ -31,7 +31,7 @@ function LF_Initialize_Level()
         table.insert(triggers, v)
         table.insert(suites[1].triggers, v.name)
     end
-    local var = { config_id=50000001,name = "suite_index", value = 0, no_refresh = false }
+    var = { config_id=50000001,name = "suite_index", value = 0, no_refresh = false }
     variables[var.name] = var
     var = { config_id=50000002,name = "Start", value = 0, no_refresh = false }
     variables[var.name] = var
@@ -49,10 +49,10 @@ end
 -- 隐藏地板
 function action_Invisible_Floor(context, evt)
    -- ScriptLib.PrintContextLog(context, "## TD_RecordFloorTransparent : Pre Set All Floor To Invisible")
-    local suiteIndex = ScriptLib.GetGroupTempValue(context, "FloorSuites_Index", {})
+    suiteIndex = ScriptLib.GetGroupTempValue(context, "FloorSuites_Index", {})
 
     --ScriptLib.PrintContextLog(context, "## TD_RecordFloorTransparent : Invisible suiteIndex[1]:" .. suiteIndex)
-    local gadget_list = suites[suiteIndex].gadgets
+    gadget_list = suites[suiteIndex].gadgets
 
    -- ScriptLib.PrintContextLog(context, "## TD_RecordFloorTransparent : Invisible gadget_list[1]:" .. gadget_list[1])
     for k, v in ipairs(gadget_list) do
@@ -67,7 +67,7 @@ end
 -- 提前显示地板
 function action_PreVisible_Floor(context, evt)
 
-    local oldShowGadgets = GetRandomGadgetIDList(context, "preShowGadgets")
+    oldShowGadgets = GetRandomGadgetIDList(context, "preShowGadgets")
     -- 处理随机结果
     for k, v in ipairs(oldShowGadgets) do
         if v > 0 then
@@ -75,7 +75,7 @@ function action_PreVisible_Floor(context, evt)
         end
     end
 
-    local preShowGadgets = SetRandomGadgetIDList(context, "preShowGadgets")
+    preShowGadgets = SetRandomGadgetIDList(context, "preShowGadgets")
     -- 处理随机结果
     for k, v in ipairs(preShowGadgets) do
         if v > 0 then
@@ -86,22 +86,22 @@ function action_PreVisible_Floor(context, evt)
 end
 
 function SetRandomGadgetIDList(context, arrayName)
-    local suiteIndex = ScriptLib.GetGroupTempValue(context, "FloorSuites_Index", {})
+    suiteIndex = ScriptLib.GetGroupTempValue(context, "FloorSuites_Index", {})
 
-    local currentGadgets = {}
+    currentGadgets = {}
     for k, v in ipairs(suites[suiteIndex].gadgets) do
         currentGadgets[k] = v
     end
 
     -- 确定随机数量
     math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-    local randomNum = math.random(defs.PreVisibleFloorNumRange.min, defs.PreVisibleFloorNumRange.max)
+    randomNum = math.random(defs.PreVisibleFloorNumRange.min, defs.PreVisibleFloorNumRange.max)
 
     -- 获取提前展示的Gadgets列表
-    local preShowGadgets = {}
+    preShowGadgets = {}
     for i = 1, defs.PreVisibleFloorNumRange.max do
         if i <= randomNum then
-            local randomIndex = math.random(1, #currentGadgets)
+            randomIndex = math.random(1, #currentGadgets)
             table.insert(preShowGadgets, currentGadgets[randomIndex])
             table.remove(currentGadgets, randomIndex)
         else
@@ -117,9 +117,9 @@ function SetRandomGadgetIDList(context, arrayName)
 end
 
 function GetRandomGadgetIDList(context, arrayName)
-    local preShowGadgets = {}
+    preShowGadgets = {}
     for i = 1, defs.PreVisibleFloorNumRange.max do
-        local gadgetId = ScriptLib.GetGroupTempValue(context, arrayName .. i, {})
+        gadgetId = ScriptLib.GetGroupTempValue(context, arrayName .. i, {})
         table.insert(preShowGadgets, gadgetId)
     end
     return preShowGadgets
@@ -129,10 +129,10 @@ end
 -- 显示地板
 function action_Visible_Floor(context, evt)
   --  ScriptLib.PrintContextLog(context, "## TD_RecordFloorTransparent : Pre Set All Floor To Visible")
-    local suiteIndex = ScriptLib.GetGroupTempValue(context, "FloorSuites_Index", {})
+    suiteIndex = ScriptLib.GetGroupTempValue(context, "FloorSuites_Index", {})
 
    -- ScriptLib.PrintContextLog(context, "## TD_RecordFloorTransparent : Visible suiteIndex[1]:" .. suiteIndex)
-    local gadget_list = suites[suiteIndex].gadgets
+    gadget_list = suites[suiteIndex].gadgets
 
    -- ScriptLib.PrintContextLog(context, "## TD_RecordFloorTransparent : Visible gadget_list[1]:" .. gadget_list[1])
 
@@ -149,18 +149,18 @@ end
 -- 显示花花
 function action_Show_Flower(context, evt)
     -- 出随机数
-    local suiteIndex = ScriptLib.GetGroupTempValue(context, "FloorSuites_Index", {})
-    local currentGadgets = {}
+    suiteIndex = ScriptLib.GetGroupTempValue(context, "FloorSuites_Index", {})
+    currentGadgets = {}
     for k, v in ipairs(suites[suiteIndex].gadgets) do
         currentGadgets[k] = v
     end
     math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-    local randomNum = math.random(defs.FlowerNumRange.min, defs.FlowerNumRange.max)
-    local posInfoList = {}
+    randomNum = math.random(defs.FlowerNumRange.min, defs.FlowerNumRange.max)
+    posInfoList = {}
     for i = 1, randomNum, 1 do
-        local randomIndex = math.random(1, #currentGadgets)
-        local tempPos = gadgets[currentGadgets[randomIndex]].pos
-        local posInfo = { pos = { x = tempPos.x, y = tempPos.y + defs.FlowerHeight, z = tempPos.z },
+        randomIndex = math.random(1, #currentGadgets)
+        tempPos = gadgets[currentGadgets[randomIndex]].pos
+        posInfo = { pos = { x = tempPos.x, y = tempPos.y + defs.FlowerHeight, z = tempPos.z },
                           rot = gadgets[currentGadgets[randomIndex]].rot }
         table.insert(posInfoList, posInfo)
         table.remove(currentGadgets, randomIndex)
@@ -179,7 +179,7 @@ end
 
 -- 删除各种花
 function action_Close_Flower(context, evt)
-    local randomNum = ScriptLib.GetGroupTempValue(context, "randomFlowerNum", {})
+    randomNum = ScriptLib.GetGroupTempValue(context, "randomFlowerNum", {})
    -- ScriptLib.PrintContextLog(context, "## TD_RecordFloorTransparent : randomNum :" .. randomNum)
     for j = 1, randomNum, 1 do
         if 0 ~= ScriptLib.GetEntityIdByConfigId(context, 20000 + j) then
@@ -195,11 +195,11 @@ function StartGallery(context, prev_context, activeStage)
 
     --初始化地板
     math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-    local randomIdx = math.random(1, #defs.FloorSuites)
-    local floorTimeAxis_Index = math.random(1, #defs.FloorTimeAxis)
+    randomIdx = math.random(1, #defs.FloorSuites)
+    floorTimeAxis_Index = math.random(1, #defs.FloorTimeAxis)
 
     -- QA用测试接口
-    local tempFloorSuitesIndex = ScriptLib.GetFleurFairMultistagePlayGalleryTempValue(context,defs.MainGroupID,1,"6001_FLOORSUITESINDEX")
+    tempFloorSuitesIndex = ScriptLib.GetFleurFairMultistagePlayGalleryTempValue(context,defs.MainGroupID,1,"6001_FLOORSUITESINDEX")
     --ScriptLib.PrintContextLog(context, "## TD_RecordFloorTransparent : QASet tempFloorSuitesIndex" .. tempFloorSuitesIndex)
     if tempFloorSuitesIndex > 0 and tempFloorSuitesIndex <= #defs.FloorSuites then
         randomIdx = tempFloorSuitesIndex
@@ -222,7 +222,7 @@ function StartGallery(context, prev_context, activeStage)
     ScriptLib.InitTimeAxis(context, "CloseFlower", defs.FlowerDeathTimeLine, false)
 
 	-- 游戏开始时对应地板设置为902
-	local gadget_list = suites[defs.FloorSuites[randomIdx]].gadgets
+	gadget_list = suites[defs.FloorSuites[randomIdx]].gadgets
 	for k, v in ipairs(gadget_list) do
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, v, 902) then
 		end
@@ -240,7 +240,7 @@ function StartGallery(context, prev_context, activeStage)
 end
 
 function InitRandomGadgetID(context, arrayName)
-    local preShowGadgets = {}
+    preShowGadgets = {}
     for i = 1, defs.PreVisibleFloorNumRange.max do
         table.insert(preShowGadgets, 0)
     end
@@ -263,8 +263,8 @@ end
 
 function SubController( context, SubSocre, Tag)
 	-- 取出要减分数的绝对值
-	local absSubScore = math.abs(SubSocre)
-	local CurScore = ScriptLib.GetFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, context.uid)
+	absSubScore = math.abs(SubSocre)
+	CurScore = ScriptLib.GetFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, context.uid)
 
 	if ScriptLib.GetSceneMultiStagePlayUidValue(context,235800001, 1, Tag, context.uid) == 0 then
 		ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, Tag, context.uid, 0)
@@ -285,7 +285,7 @@ function action_ENTER_REGION_Fall(context, evt)
                   radius = defs.RevivePoint.radius, rot = defs.RevivePoint.rot })
 
         SubController(context, InvisibleFloor_Falling_Deduction, "hit_counts_falldown_6001")
-        
+
         ScriptLib.AddFleurFairMultistagePlayBuffEnergy(context, defs.MainGroupID, 1, evt.uid, InvisibleFloor_Falling_Deduction)
 
 
@@ -313,7 +313,7 @@ function action_ENTER_REGION_Over(context, evt)
     end
 
     -- 第一次到达终点判定
-    local timeValue = ScriptLib.GetServerTime(context) - ScriptLib.GetGroupTempValue(context, "GameStartTime",{})
+    timeValue = ScriptLib.GetServerTime(context) - ScriptLib.GetGroupTempValue(context, "GameStartTime",{})
     ScriptLib.SetSceneMultiStagePlayUidValue(context,defs.MainGroupID,1,Enum.TimeEnterRegion,evt.uid, timeValue)
 
     -- 处理玩家抵达终点加分
@@ -321,8 +321,8 @@ function action_ENTER_REGION_Over(context, evt)
 
     -- stopGallery
     -- 处理是否提前结束游戏
-    local UidList = ScriptLib.GetSceneUidList(context)
-    local entityCount = 0
+    UidList = ScriptLib.GetSceneUidList(context)
+    entityCount = 0
     for i,v in ipairs(UidList) do
         if ScriptLib.GetSceneMultiStagePlayUidValue(context,defs.MainGroupID, 1, Enum.TimeEnterRegion, v) > 0 then
             entityCount = entityCount + 1
@@ -352,7 +352,7 @@ function action_gallery_stop(context, evt)
     end
 
     ActionAddEnergy( context )
-    
+
     if evt.param2 == 1 then
         -- 若超时
         ScriptLib.ExecuteGroupLua(context, defs.MainGroupID, "EndPlayStage", { 0, defs.GroupID })
@@ -364,7 +364,7 @@ end
 
 function ActionAddEnergy( context )
 	-- 结算，被命中N次以下的玩家获得加分
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(UidList) do
 
 
@@ -396,7 +396,7 @@ function ActionAddEnergy( context )
 
 			ScriptLib.AddFleurFairMultistagePlayBuffEnergy(context, defs.MainGroupID, 1, v, InvisibleFloor_Failed_Deduction)
 			ScriptLib.SetSceneMultiStagePlayUidValue(context,defs.MainGroupID, 1, "defeated_timelimit_challenge_6001", v, InvisibleFloor_Failed_Deduction)
-		end	
+		end
 	end
 end
 
@@ -413,7 +413,7 @@ function RemoveFloorSuite(context, prev_context )
     for i=2,#suites do
         ScriptLib.RemoveExtraGroupSuite(context, defs.GroupID, i)
     end
-	
+
 	return 0
 end
 

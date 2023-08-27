@@ -1,4 +1,4 @@
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Enter_Room"] = { config_id = 8000001, name = "Enter_Room", event= EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_EnterRoom", trigger_count = 0 },
 		["Gadget_StateChange"] = { config_id = 8000002, name = "Gadget_StateChange", event= EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_GadgetStateChange", trigger_count = 0 },
@@ -44,7 +44,7 @@ function action_EnterRoom( context,evt )
 		end
 	end
 
-	
+
 	--设置为完成
 	ScriptLib.SetRogueCellState(context, GroupId, 3)
 

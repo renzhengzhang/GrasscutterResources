@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002284
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -113,9 +113,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -123,15 +123,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_383(context, evt)
 	if 2379 == evt.param2 and GadgetState.ChestOpened == evt.param1 then
 		return true
 	end
-	
+
 	if 2382 == evt.param2 and GadgetState.ChestOpened == evt.param1 then
 		return true
 	end
-	
+
 	if 2387 == evt.param2 and GadgetState.ChestOpened == evt.param1 then
 		return true
 	end
-	
+
 	return false
 end
 
@@ -142,7 +142,7 @@ function action_EVENT_GADGET_STATE_CHANGE_383(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -151,7 +151,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_384(context, evt)
 	if 2379 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -162,7 +162,7 @@ function action_EVENT_GADGET_STATE_CHANGE_384(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -171,7 +171,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_385(context, evt)
 	if 2387 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -182,7 +182,7 @@ function action_EVENT_GADGET_STATE_CHANGE_385(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -191,7 +191,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_386(context, evt)
 	if 2382 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -202,6 +202,6 @@ function action_EVENT_GADGET_STATE_CHANGE_386(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end

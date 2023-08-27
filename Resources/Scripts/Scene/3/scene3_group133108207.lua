@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133108207
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_id = 133108207
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -104,30 +104,30 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_207010(context, evt)
 	if evt.param1 ~= 207010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"challengeStart"为0
 	if ScriptLib.GetGroupVariableValue(context, "challengeStart") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"challengeSuccess"为0
 	if ScriptLib.GetGroupVariableValue(context, "challengeSuccess") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -138,7 +138,7 @@ function action_EVENT_ENTER_REGION_207010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -148,12 +148,12 @@ function condition_EVENT_LEAVE_REGION_207011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "challengeStart") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"challengeSuccess"为0
 	if ScriptLib.GetGroupVariableValue(context, "challengeSuccess") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -164,13 +164,13 @@ function action_EVENT_LEAVE_REGION_207011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133108207, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -180,7 +180,7 @@ function condition_EVENT_ANY_MONSTER_DIE_207012(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -191,7 +191,7 @@ function action_EVENT_ANY_MONSTER_DIE_207012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -199,14 +199,14 @@ end
 function condition_EVENT_SELECT_OPTION_207014(context, evt)
 	-- 判断是gadgetid 207009 option_id 189
 	if 207009 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 189 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -216,37 +216,37 @@ function action_EVENT_SELECT_OPTION_207014(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133108207, 207009, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133108207 ；指定config：207009；物件身上指定option：189；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133108207, 207009, 189) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "challengeSuccess" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "challengeSuccess", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_207015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"challengeSuccess"为1
 	if ScriptLib.GetGroupVariableValue(context, "challengeSuccess") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"hasReward"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasReward") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -257,15 +257,15 @@ function action_EVENT_VARIABLE_CHANGE_207015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	ScriptLib.FinishGroupLinkBundle(context, defs.group_id)
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133108207, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 

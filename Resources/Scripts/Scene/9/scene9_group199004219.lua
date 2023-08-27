@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199004219
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -112,9 +112,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -124,19 +124,19 @@ function action_EVENT_LEVEL_TAG_CHANGE_219008(context, evt)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 199004219, 2)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "chest2") == 0 and ScriptLib.CheckSceneTag(context, 9,1024 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 199004219, 3)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "chest3") == 0 and ScriptLib.CheckSceneTag(context, 9,1022 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 4)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 199004219, 4)
 	end
-	
+
 	return 0
 end
 
@@ -145,25 +145,25 @@ function action_EVENT_GROUP_LOAD_219009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "chest1") == 0 and ScriptLib.CheckSceneTag(context, 9,1025 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "chest2") == 0 and ScriptLib.CheckSceneTag(context, 9,1024 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "chest3") == 0 and ScriptLib.CheckSceneTag(context, 9,1022 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 4)
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_219010(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "chest1") == 1 and ScriptLib.GetGroupVariableValue(context, "chest2") == 1 and ScriptLib.GetGroupVariableValue(context, "chest3") == 1 then
 		ScriptLib.GoToGroupSuite(context, 199004219, 5)
 	end
-	
+
 	return 0
 end

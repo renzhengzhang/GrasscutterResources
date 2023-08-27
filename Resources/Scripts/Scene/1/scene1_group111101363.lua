@@ -1,39 +1,39 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101363
 }
 
 -- DEFS_MISCS
-local fans = 
+fans =
 {
     363001,
 }
 
-local sandpiles = 
+sandpiles =
 {
     363002,
     363003,
     363004,
 }
 
-local shutters = 
+shutters =
 {
     363005,
 }
 
-local shutter_switches = 
+shutter_switches =
 {
     363006,
 }
 
-local FanToPointArray = 
+FanToPointArray =
 {
 	[fans[1]] = 110100060
 }
 
 
 
-local FanToSandpile = 
+FanToSandpile =
 {
     [sandpiles[1]] = {fan = fans[1], dir_state = 204, pos = 1},
     [sandpiles[2]] = {fan = fans[1], dir_state = 202, pos = 2},
@@ -41,15 +41,15 @@ local FanToSandpile =
 }
 
 
-local SwitchToShutter = 
+SwitchToShutter =
 {
     [shutter_switches[1]] = shutters[1],
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,9 +114,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "V3_4/ScarletKingFan"

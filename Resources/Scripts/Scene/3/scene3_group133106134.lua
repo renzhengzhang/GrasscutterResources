@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133106134
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	steps = 3,
 	config_id = 134011,
 	routes = { [1]={route=310600001,points={1,2,3}},  [2]={route=310600001,points={3,4,5}},  [3]={route=310600001,points={5,6,7}},  },
@@ -12,9 +12,9 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local shootLightMap={[134003]=134015,[134004]=134016,[134006]=134017}
+shootLightMap={[134003]=134015,[134004]=134016,[134006]=134017}
 
-local lawfulGadgets =
+lawfulGadgets =
 {
         [1]={134004},
         [2]={134003},
@@ -22,9 +22,9 @@ local lawfulGadgets =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -81,9 +81,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -94,9 +94,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -130,9 +130,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -140,7 +140,7 @@ function condition_EVENT_TIME_AXIS_PASS_134001(context, evt)
 	if "killlightriver" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -151,7 +151,7 @@ function action_EVENT_TIME_AXIS_PASS_134001(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -161,7 +161,7 @@ function condition_EVENT_GROUP_LOAD_134005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "questFinished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -172,13 +172,13 @@ function action_EVENT_GROUP_LOAD_134005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133106492, monsters = {}, gadgets = {492005} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -188,7 +188,7 @@ function condition_EVENT_QUEST_START_134012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MoveStep") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -198,20 +198,20 @@ function action_EVENT_QUEST_START_134012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 134003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 134004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 134004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 134006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 134006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -221,7 +221,7 @@ function condition_EVENT_PLATFORM_REACH_POINT_134013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MoveStep") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -232,17 +232,17 @@ function action_EVENT_PLATFORM_REACH_POINT_134013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "questFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "questFinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"killlightriver"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "killlightriver", {3}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -253,7 +253,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_134022(context, evt)
 			return true
 		end
 	end
-	
+
 	return false
 end
 
@@ -264,7 +264,7 @@ function action_EVENT_GADGET_STATE_CHANGE_134022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 

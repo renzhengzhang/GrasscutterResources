@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133212556
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -188,20 +188,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_556031(context, evt)
 	if evt.param1 ~= 556031 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -212,19 +212,19 @@ function action_EVENT_ENTER_REGION_556031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_556032(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 133212556) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -232,19 +232,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_556032(context, evt)
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212556, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_556033(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 133212556) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -252,21 +252,21 @@ end
 function action_EVENT_VARIABLE_CHANGE_556033(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212556, 6)
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_556034(context, evt)
 	-- 初始化table
-	    local suite_table = {}
-	
+	    suite_table = {}
+
 	-- 需要在group创建时调用，该函数会通过context的groupid读取HuntingData表，来创建entity填充points
 	    if 0~= ScriptLib.RefreshHuntingClueGroup(context) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_hunting_clue_group")
 	        return -1
 	    end
-	
+
 	-- 根据HuntingData表的配置来激活对应的suite
 	    if 0~= ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context) then
 	        suite_table = ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context)
@@ -274,7 +274,7 @@ function action_EVENT_GROUP_LOAD_556034(context, evt)
 	            ScriptLib.AddExtraGroupSuite(context, 133212556, suite_id)
 	        end
 	    end
-	
+
 	return 0
 end
 
@@ -285,6 +285,6 @@ function action_EVENT_HUNTING_FINISH_FINAL_556035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

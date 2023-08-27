@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309331
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_receiver_1 = 331002,
 	gadget_receiver_2 = 331003
 }
@@ -18,9 +18,9 @@ defs.receiverList = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -89,9 +89,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -102,9 +102,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -120,9 +120,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -130,12 +130,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_331001(context, evt)
 	if 331002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"sparkReach"为0
 	if ScriptLib.GetGroupVariableValue(context, "sparkReach") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -146,7 +146,7 @@ function action_EVENT_GADGET_STATE_CHANGE_331001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -155,12 +155,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_331005(context, evt)
 	if 331002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"sparkReach"为0
 	if ScriptLib.GetGroupVariableValue(context, "sparkReach") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -171,7 +171,7 @@ function action_EVENT_GADGET_STATE_CHANGE_331005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -180,12 +180,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_331007(context, evt)
 	if 331003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"isOpen"为0
 	if ScriptLib.GetGroupVariableValue(context, "isOpen") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -196,31 +196,31 @@ function action_EVENT_GADGET_STATE_CHANGE_331007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 331004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 331004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5020, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_331008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"sparkReach"为1
 	if ScriptLib.GetGroupVariableValue(context, "sparkReach") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -231,7 +231,7 @@ function action_EVENT_VARIABLE_CHANGE_331008(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -240,7 +240,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_331009(context, evt)
 	if 331012 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -250,20 +250,20 @@ function action_EVENT_GADGET_STATE_CHANGE_331009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 331010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_331011(context, evt)
 	if evt.param1 ~= 331011 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -274,7 +274,7 @@ function action_EVENT_ENTER_REGION_331011(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -283,7 +283,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_331015(context, evt)
 	if 331003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -293,8 +293,8 @@ function action_EVENT_GADGET_STATE_CHANGE_331015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 331010, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -304,7 +304,7 @@ function condition_EVENT_GROUP_LOAD_331016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isOpen") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -314,8 +314,8 @@ function action_EVENT_GROUP_LOAD_331016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 331004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -324,34 +324,34 @@ function condition_EVENT_GADGET_STATE_CHANGE_331017(context, evt)
 	if 331003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_331017(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-2448.001, y=65.15718, z=5296.999}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-2448.001, y=65.15718, z=5296.999}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-2448.001, y=65.15718, z=5296.999}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = true, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_331018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"sparkReach"为1
 	if ScriptLib.GetGroupVariableValue(context, "sparkReach") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -362,13 +362,13 @@ function action_EVENT_VARIABLE_CHANGE_331018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将configid为 331002 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 331002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -378,7 +378,7 @@ function condition_EVENT_GROUP_LOAD_331019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "sparkReach") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -389,12 +389,12 @@ function action_EVENT_GROUP_LOAD_331019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将configid为 331002 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 331002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

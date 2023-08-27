@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309205
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -100,19 +100,19 @@ function action_EVENT_ANY_MONSTER_DIE_205007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_205008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"vase1"为1
 	if ScriptLib.GetGroupVariableValue(context, "vase1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -123,19 +123,19 @@ function action_EVENT_VARIABLE_CHANGE_205008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_205009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"vase2"为1
 	if ScriptLib.GetGroupVariableValue(context, "vase2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -146,19 +146,19 @@ function action_EVENT_VARIABLE_CHANGE_205009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_205010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"vase3"为1
 	if ScriptLib.GetGroupVariableValue(context, "vase3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -169,19 +169,19 @@ function action_EVENT_VARIABLE_CHANGE_205010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_205011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"vase4"为1
 	if ScriptLib.GetGroupVariableValue(context, "vase4") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -192,19 +192,19 @@ function action_EVENT_VARIABLE_CHANGE_205011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_205012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"vase5"为1
 	if ScriptLib.GetGroupVariableValue(context, "vase5") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -215,19 +215,19 @@ function action_EVENT_VARIABLE_CHANGE_205012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_205013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"vase6"为1
 	if ScriptLib.GetGroupVariableValue(context, "vase6") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -238,19 +238,19 @@ function action_EVENT_VARIABLE_CHANGE_205013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_205014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"monstercount"为6
 	if ScriptLib.GetGroupVariableValue(context, "monstercount") ~= 6 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -261,7 +261,7 @@ function action_EVENT_VARIABLE_CHANGE_205014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -271,7 +271,7 @@ function condition_EVENT_GROUP_LOAD_205016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monstercount") ~= 6 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -282,6 +282,6 @@ function action_EVENT_GROUP_LOAD_205016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

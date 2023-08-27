@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001275
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	monster_id_1 = 520,
 	monster_id_2 = 522,
 	monster_id_3 = 521
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -102,9 +102,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -112,33 +112,33 @@ function condition_EVENT_TIMER_EVENT_139(context, evt)
 	if "M1" ~= evt.source_name then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_139(context, evt)
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_1, delay_time = 0 }) then
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_2, delay_time = 0 }) then
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_3, delay_time = 0 }) then
 	  return -1
 	end
-	
+
 	return 0
-	
-	
-	
-	
+
+
+
+
 end
 
 -- 触发条件
@@ -146,7 +146,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_411(context, evt)
 	if 518 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_ANY_MONSTER_LIVE_411(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -167,8 +167,8 @@ function condition_EVENT_ANY_MONSTER_DIE_412(context, evt)
 	if evt.param1 ~= 522 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -179,7 +179,7 @@ function action_EVENT_ANY_MONSTER_DIE_412(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -189,8 +189,8 @@ function condition_EVENT_ANY_MONSTER_DIE_413(context, evt)
 	if evt.param1 ~= 521 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -201,7 +201,7 @@ function action_EVENT_ANY_MONSTER_DIE_413(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -211,8 +211,8 @@ function condition_EVENT_ANY_MONSTER_DIE_414(context, evt)
 	if evt.param1 ~= 520 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -223,7 +223,7 @@ function action_EVENT_ANY_MONSTER_DIE_414(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -233,8 +233,8 @@ function condition_EVENT_ANY_MONSTER_DIE_415(context, evt)
 	if evt.param1 ~= 519 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -245,7 +245,7 @@ function action_EVENT_ANY_MONSTER_DIE_415(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -255,8 +255,8 @@ function condition_EVENT_ANY_MONSTER_DIE_416(context, evt)
 	if evt.param1 ~= 518 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -267,7 +267,7 @@ function action_EVENT_ANY_MONSTER_DIE_416(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -277,8 +277,8 @@ function condition_EVENT_ANY_MONSTER_DIE_417(context, evt)
 	if evt.param1 ~= 517 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -289,7 +289,7 @@ function action_EVENT_ANY_MONSTER_DIE_417(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -299,8 +299,8 @@ function condition_EVENT_ANY_MONSTER_DIE_418(context, evt)
 	if evt.param1 ~= 516 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -311,19 +311,19 @@ function action_EVENT_ANY_MONSTER_DIE_418(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_419(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Boss"为7
 	if ScriptLib.GetGroupVariableValue(context, "Boss") ~= 7 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -334,24 +334,24 @@ function action_EVENT_VARIABLE_CHANGE_419(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 639, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 640, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Boss" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Boss", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133105347
 }
 
@@ -11,9 +11,9 @@ function Avatar_Eula_Plot_Fail(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -65,9 +65,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -78,9 +78,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -137,9 +137,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -148,25 +148,25 @@ function condition_EVENT_ANY_MONSTER_DIE_347009(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_347009(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=0,y=0,z=0}
+	pos = {x=0,y=0,z=0}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400002, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133105347, 2)
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133105347, 3)
-	
+
 	return 0
 end
 
@@ -176,7 +176,7 @@ function condition_EVENT_ANY_MONSTER_DIE_347010(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -184,25 +184,25 @@ end
 function action_EVENT_ANY_MONSTER_DIE_347010(context, evt)
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
-		local pos = {x=0, y=0, z=0}
+		pos = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=0,y=0,z=0}
+	pos = {x=0,y=0,z=0}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400003, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133105347, 3)
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133105347, 4)
-	
+
 	return 0
 end
 
@@ -211,7 +211,7 @@ function condition_EVENT_GADGET_CREATE_347011(context, evt)
 	if 347008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -222,7 +222,7 @@ function action_EVENT_GADGET_CREATE_347011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -232,7 +232,7 @@ function condition_EVENT_ANY_MONSTER_DIE_347013(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -240,7 +240,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_347013(context, evt)
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133105347, 4)
-	
+
 	return 0
 end
 
@@ -248,14 +248,14 @@ end
 function condition_EVENT_SELECT_OPTION_347014(context, evt)
 	-- 判断是gadgetid 347008 option_id 7
 	if 347008 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -265,37 +265,37 @@ function action_EVENT_SELECT_OPTION_347014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 347008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "youla" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "youla", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133105347, 2)
-	
+
 	-- 删除指定group： 133105347 ；指定config：347008；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133105347, 347008, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1012110") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 开启编号为888，挑战内容为2的区域挑战
 	ScriptLib.CreateFatherChallenge(context, 1012102, 227, 180, {success = 1, fail =1})
 	ScriptLib.AttachChildChallenge(context, 1012102, 10, 2,{180, 133105347, 10},{}, {success=1,fail=1})
 	ScriptLib.AttachChildChallenge(context, 1012102, 11, 224,{180, 3, 666, 1},{}, {success=0, fail=1})
 	ScriptLib.AttachChildChallenge(context, 1012102, 12, 225,{180, 3, 777, 1},{}, {success=0, fail=1})
 	ScriptLib.StartFatherChallenge(context, 1012102)
-	
-	
+
+
 	return 0
 end
 
@@ -303,28 +303,28 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_347015(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133105347, 2)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133105347, 3)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133105347, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133105347, 5)
-	
+
 	-- 将configid为 347008 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 347008, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1012111") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -334,44 +334,44 @@ function action_EVENT_CHALLENGE_FAIL_347016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 347008, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133105347, 2)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133105347, 3)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133105347, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133105347, 5)
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133105347, 347008, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1012199") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_347017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"youla"为1
 	if ScriptLib.GetGroupVariableValue(context, "youla") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -379,19 +379,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_347017(context, evt)
 	-- 终止识别id为11的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 11, 0)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_347020(context, evt)
 	if evt.param1 ~= 347020 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -402,19 +402,19 @@ function action_EVENT_ENTER_REGION_347020(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_347022(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"youla"为1
 	if ScriptLib.GetGroupVariableValue(context, "youla") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -422,6 +422,6 @@ end
 function action_EVENT_VARIABLE_CHANGE_347022(context, evt)
 	-- 终止识别id为12的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 12, 0)
-	
+
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133102720
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	active_step = 201,
 	inactive_step = 0,
 	gadget_array = {720011,720017,720020,720021,720022},
@@ -12,14 +12,14 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local v = 0
-local v_error = 0
-local max_bit = #defs.gadget_array
+v = 0
+v_error = 0
+max_bit = #defs.gadget_array
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -84,9 +84,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -97,9 +97,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -117,9 +117,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -127,7 +127,7 @@ function condition_EVENT_GADGET_CREATE_720001(context, evt)
 	if 720011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -138,7 +138,7 @@ function action_EVENT_GADGET_CREATE_720001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_GADGET_CREATE_720002(context, evt)
 	if 720017 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_GADGET_CREATE_720002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -167,7 +167,7 @@ function condition_EVENT_GADGET_CREATE_720003(context, evt)
 	if 720020 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -178,7 +178,7 @@ function action_EVENT_GADGET_CREATE_720003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_GADGET_CREATE_720004(context, evt)
 	if 720021 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -198,7 +198,7 @@ function action_EVENT_GADGET_CREATE_720004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_GADGET_CREATE_720005(context, evt)
 	if 720022 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -218,7 +218,7 @@ function action_EVENT_GADGET_CREATE_720005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -244,7 +244,7 @@ function action_EVENT_GADGET_STATE_CHANGE_720006(context, evt)
 				v = ScriptLib.GetGroupVariableValue(context, "sort")
 				v = 10*v + i
 				ScriptLib.SetGroupVariableValue(context, "sort", v)
-				break 
+				break
 			end
 			if i == max_bit and defs.gadget_array[i] ~= evt.param2 then
 				ScriptLib.SetGroupVariableValue(context, "v_error", 1)
@@ -269,7 +269,7 @@ function action_EVENT_GADGET_STATE_CHANGE_720006(context, evt)
 		if v_error ~= 1 then
 			v_error = -1
 		end
-		ScriptLib.SetGroupVariableValue(context, "sort", v) 
+		ScriptLib.SetGroupVariableValue(context, "sort", v)
 		ScriptLib.SetGroupVariableValue(context, "gear_reset", v_error)
 		ScriptLib.SetGroupVariableValue(context, "v_error", 0)
 	end
@@ -279,7 +279,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_720007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	return true
 end
 
@@ -308,7 +308,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_720008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 > 0 and evt.param1 ~= evt.param2 then
 		return true
 	end
@@ -322,7 +322,7 @@ function action_EVENT_VARIABLE_CHANGE_720008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -330,14 +330,14 @@ end
 function condition_EVENT_SELECT_OPTION_720023(context, evt)
 	-- 判断是gadgetid 720011 option_id 7
 	if 720011 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -347,14 +347,14 @@ function action_EVENT_SELECT_OPTION_720023(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 720011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133102720 ；指定config：720011；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133102720, 720011, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -362,14 +362,14 @@ end
 function condition_EVENT_SELECT_OPTION_720024(context, evt)
 	-- 判断是gadgetid 720017 option_id 7
 	if 720017 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -379,14 +379,14 @@ function action_EVENT_SELECT_OPTION_720024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 720017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133102720 ；指定config：720017；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133102720, 720017, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -394,14 +394,14 @@ end
 function condition_EVENT_SELECT_OPTION_720025(context, evt)
 	-- 判断是gadgetid 720020 option_id 7
 	if 720020 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -411,14 +411,14 @@ function action_EVENT_SELECT_OPTION_720025(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 720020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133102720 ；指定config：720020；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133102720, 720020, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -426,14 +426,14 @@ end
 function condition_EVENT_SELECT_OPTION_720026(context, evt)
 	-- 判断是gadgetid 720021 option_id 7
 	if 720021 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -443,14 +443,14 @@ function action_EVENT_SELECT_OPTION_720026(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 720021, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133102720 ；指定config：720021；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133102720, 720021, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -458,14 +458,14 @@ end
 function condition_EVENT_SELECT_OPTION_720027(context, evt)
 	-- 判断是gadgetid 720022 option_id 7
 	if 720022 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -475,14 +475,14 @@ function action_EVENT_SELECT_OPTION_720027(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 720022, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133102720 ；指定config：720022；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133102720, 720022, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -492,7 +492,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_720028(context, evt)
 	if 720011 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -503,7 +503,7 @@ function action_EVENT_GADGET_STATE_CHANGE_720028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -513,7 +513,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_720029(context, evt)
 	if 720017 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -524,7 +524,7 @@ function action_EVENT_GADGET_STATE_CHANGE_720029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -534,7 +534,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_720030(context, evt)
 	if 720020 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -545,7 +545,7 @@ function action_EVENT_GADGET_STATE_CHANGE_720030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -555,7 +555,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_720031(context, evt)
 	if 720021 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -566,7 +566,7 @@ function action_EVENT_GADGET_STATE_CHANGE_720031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -576,7 +576,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_720032(context, evt)
 	if 720022 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -587,7 +587,7 @@ function action_EVENT_GADGET_STATE_CHANGE_720032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -597,7 +597,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_720034(context, evt)
 	if 720011 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -607,13 +607,13 @@ function action_EVENT_GADGET_STATE_CHANGE_720034(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 720010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 31020830 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 31020830) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

@@ -3,19 +3,19 @@
 --miscs
 
 --昼夜主控group控制的所有group
---local EnvControlGroups = {}
+--EnvControlGroups = {}
 
 
 ----------------------------------
 
---local local_defs = {
+--local_defs = {
 --}
 --
 --
---local Tri = {
+--Tri = {
 --    [1] = { name = "variable_change", config_id = 8000001, event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change", trigger_count = 0},
 --    [2] = { name = "group_load", config_id = 8000002, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
---    
+--
 --}
 --
 --function Initialize()
@@ -35,18 +35,18 @@
 ----主控group的env_state被修改时，认为玩家改了昼夜，则修改下属所有group的env_state
 --function action_variable_change(context,evt)
 --
---    if (evt.source_name == "env_state") then 
+--    if (evt.source_name == "env_state") then
 --
 --        ScriptLib.PrintContextLog(context,"EnvState: 主控group昼夜状态修改，修改下属group状态")
---        local new_value = evt.param1
+--        new_value = evt.param1
 --        if new_value == 1 then
 --            ScriptLib.AddQuestProgress(context, "OnChangeDay")
 --        elseif new_value == 2 then
---            ScriptLib.AddQuestProgress(context, "OnChangeNight") 
+--            ScriptLib.AddQuestProgress(context, "OnChangeNight")
 --        end
 --        for i = 1, #EnvControlGroups do
 --            ScriptLib.PrintContextLog(context,"EnvState: 将下属group "..EnvControlGroups[i].."昼夜状态修改为 "..new_value)
---            ScriptLib.SetGroupVariableValueByGroup(context, "env_state", new_value, EnvControlGroups[i])   
+--            ScriptLib.SetGroupVariableValueByGroup(context, "env_state", new_value, EnvControlGroups[i])
 --        end
 --        LF_Get_Env_State(context)
 --    end
@@ -57,13 +57,13 @@
 --function action_group_load(context,evt)
 --
 --    ScriptLib.PrintContextLog(context,"EnvState: 主控group加载，尝试从team上获取最新的env_state")
---    local env_state = LF_Get_Env_State(context)
+--    env_state = LF_Get_Env_State(context)
 --    if (env_state == -1) then
 --        ScriptLib.PrintContextLog(context,"EnvState: 读取uid list失败")
 --        ScriptLib.SetGroupVariableValue(context, "env_state", 1)
 --        return 0
 --    end
---    if env_state == 0 then 
+--    if env_state == 0 then
 --        ScriptLib.PrintContextLog(context,"EnvState: 读取uid list失败")
 --        ScriptLib.SetGroupVariableValue(context, "env_state", 1)
 --        return 0
@@ -74,17 +74,17 @@
 --
 --------------------------------------------------------------------
 --function LF_Get_Env_State(context)
---    
---    local uid_list = ScriptLib.GetSceneUidList(context)
+--
+--    uid_list = ScriptLib.GetSceneUidList(context)
 --    if #uid_list<=0 then return -1 end
---    local env_state = ScriptLib.GetTeamServerGlobalValue(context,uid_list[1],"SGV_env_state")
+--    env_state = ScriptLib.GetTeamServerGlobalValue(context,uid_list[1],"SGV_env_state")
 --    if (env_state == nil) then
---        
+--
 --        ScriptLib.PrintContextLog(context,"EnvState: 获取当前team的env state失败")
 --        return 0
 --    end
 --    ScriptLib.PrintContextLog(context,"EnvState: 当前team的env state为 "..env_state)
---    
+--
 --    return env_state
 --end
 -------------------------------------------------------------------
@@ -92,10 +92,10 @@
 ----从机关的modifier上调用，调整主控group记录的昼夜状态，并修改team上的状态
 --function SLC_Change_Env_State(context,env_state)
 --
---    local uid_list = ScriptLib.GetSceneUidList(context)
+--    uid_list = ScriptLib.GetSceneUidList(context)
 --    ScriptLib.PrintContextLog(context,"EnvState: 昼夜转化机关尝试将昼夜状态转换为："..env_state)
 --    ScriptLib.SetGroupVariableValue(context, "env_state", env_state)
---    return 0 
+--    return 0
 --end
 --
 --------------------------------------------------------------------

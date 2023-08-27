@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133103161
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -93,9 +93,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -104,7 +104,7 @@ function condition_EVENT_ANY_MONSTER_DIE_161008(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -112,7 +112,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_161008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103161, 2)
-	
+
 	return 0
 end
 
@@ -121,7 +121,7 @@ function condition_EVENT_MONSTER_BATTLE_161010(context, evt)
 	if 161001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -129,6 +129,6 @@ end
 function action_EVENT_MONSTER_BATTLE_161010(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103161, 3)
-	
+
 	return 0
 end

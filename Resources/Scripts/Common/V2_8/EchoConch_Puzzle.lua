@@ -4,18 +4,18 @@
 ||  owner:      xudong.sun
 ||  description:    物件交付接口返回值是列表。提供一个将列表第一位ID设为GroupVariable的功能，供关卡编辑器使用
 ||  LogName:    ## EchoPuzzle_LOG
-||  Protection: 
+||  Protection:
 =======================================]]
 --[[
-    local GivingID = {0,0,0}
-    local MaterialID = {0,0,0}
-    local ConchConfigID = {}
-    local CreateList = {
+    GivingID = {0,0,0}
+    MaterialID = {0,0,0}
+    ConchConfigID = {}
+    CreateList = {
         {[material_A]={{虚影_A,point_1},{configid,point}}, [materialID]={{configid,point},{configid,point}}, [materialID]={{configid,point},{configid,point}}},
         {[material_A]={{虚影_A,point_2},{configid,point}}, [materialID]={{configid,point},{configid,point}}, [materialID]={{configid,point},{configid,point}}},
         {[material_A]={{虚影_A,point_3},{configid,point}}, [materialID]={{configid,point},{configid,point}}, [materialID]={{configid,point},{configid,point}}},
     }
-    local NoticeReminder= {
+    NoticeReminder= {
         [12]= 0,
         [13]= 0,
     }
@@ -28,10 +28,10 @@
 交付可取回 - 102
 ]]
 
-local giving_Triggers = {
+giving_Triggers = {
     { config_id = 8800001, name = "Gadget_Giving_Finished", event = EventType.EVENT_GADGET_GIVING_FINISHED, source = "", condition = "", action = "action_Gadget_Giving_Finished", trigger_count = 0 },
     { config_id = 8800002, name = "Gadget_Giving_TakeBack", event = EventType.EVENT_GADGET_GIVING_TAKEBACK, source = "", condition = "", action = "action_Gadget_Giving_TakeBack", trigger_count = 0 },
-    { config_id = 8800003, name = "Group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_Group_Load", trigger_count = 0 },    
+    { config_id = 8800003, name = "Group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_Group_Load", trigger_count = 0 },
 }
 
 
@@ -50,7 +50,7 @@ function action_Group_Load( context, evt)
 
     --打开交付开关 初始化当前givingID的信息
     for i,v in ipairs(ConchConfigID) do
-        local tempList = ScriptLib.GetGivingItemList(context, GivingID[i])
+        tempList = ScriptLib.GetGivingItemList(context, GivingID[i])
         if ScriptLib.GetGroupVariableValue(context, "conch_puzzle_success")==1 then
             ScriptLib.SetGroupGadgetStateByConfigId(context, 0, ConchConfigID[i], 101)
         elseif next(tempList) == nil then
@@ -61,7 +61,7 @@ function action_Group_Load( context, evt)
             ScriptLib.SetGroupTempValue(context, "Conch_Slot"..i, 0, {})
         else
             ScriptLib.SetGroupGadgetStateByConfigId(context, 0, ConchConfigID[i], 102)
-            
+
             ScriptLib.SetGroupTempValue(context, "Conch_Slot"..i, tempList[1], {})
         end
     end
@@ -77,7 +77,7 @@ end
 
 function action_Gadget_Giving_Finished(context, evt)
     --evt.param1物件的configID   evt.param2物件的GivingID
-    local slotNum = 0
+    slotNum = 0
 
     --获取当前Slot的ID
     for i=1,3 do
@@ -98,7 +98,7 @@ function action_Gadget_Giving_Finished(context, evt)
 
     --创建虚影
       --获取当前交付的materialID
-    local _materialID = ScriptLib.GetGivingItemList(context, evt.param2)[1]
+    _materialID = ScriptLib.GetGivingItemList(context, evt.param2)[1]
     ScriptLib.PrintContextLog(context, "## EchoPuzzle_LOG : _materialID = ".._materialID)
 
       --根据materialID创建对应的虚影
@@ -117,7 +117,7 @@ function action_Gadget_Giving_Finished(context, evt)
 
     --2022/4/20新增提示reminder
     --获取当前提交的materialindex
-    local materialIndex = 0
+    materialIndex = 0
     for i,v in ipairs(MaterialID) do
         if v == _materialID then
             materialIndex = i
@@ -128,7 +128,7 @@ function action_Gadget_Giving_Finished(context, evt)
         ScriptLib.PrintGroupWarning(context,"## EchoConch_Puzzle action_Gadget_Giving_Finished: 没有获取到当前materialIndex")
     elseif slotNum ~= materialIndex then
         --slotNum和materialIndex不对应，需要弹出错误提示
-        local reminderIndex = slotNum*10 + materialIndex
+        reminderIndex = slotNum*10 + materialIndex
         if NoticeReminder[reminderIndex]~= nil then
             ScriptLib.ShowReminderByUid(context, {context.owner_uid},NoticeReminder[reminderIndex])
         end
@@ -139,7 +139,7 @@ function action_Gadget_Giving_Finished(context, evt)
     for i=1,3 do
 
         if ScriptLib.GetGroupTempValue(context, "Conch_Slot"..i, {}) ~= MaterialID[i] then
-            return 0 
+            return 0
         end
     end
 
@@ -160,7 +160,7 @@ end
 
 function action_Gadget_Giving_TakeBack(context, evt)
 
-    local slotNum = 0
+    slotNum = 0
 
     --获取当前Slot的ID
     for i=1,3 do
@@ -172,13 +172,13 @@ function action_Gadget_Giving_TakeBack(context, evt)
     ScriptLib.PrintContextLog(context, "## EchoPuzzle_LOG : Get slotNum = "..slotNum)
 
     --获取当前slotID对应的虚影materialID
-    local _materialID = ScriptLib.GetGroupTempValue(context, "Conch_Slot"..slotNum, {})
+    _materialID = ScriptLib.GetGroupTempValue(context, "Conch_Slot"..slotNum, {})
 
     ScriptLib.PrintContextLog(context, "## EchoPuzzle_LOG : Get _materialID = ".._materialID)
 
     --删除虚影
     for i,v in ipairs(CreateList[slotNum][_materialID]) do
-        
+
         ScriptLib.KillEntityByConfigId(context, { group_id = base_info.group_id, config_id = v.configid, entity_type=EntityType.GADGET })
     end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199003005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -101,9 +101,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -175,16 +175,16 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_START_5006(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 199003005, 2)
-	
+
 	return 0
 end
 
@@ -192,7 +192,7 @@ end
 function action_EVENT_QUEST_START_5007(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 199003005, 3)
-	
+
 	return 0
 end
 
@@ -201,7 +201,7 @@ function action_EVENT_GROUP_LOAD_5008(context, evt)
 	    if ScriptLib.GetHostQuestState(context,7901307)==3 then
 	        ScriptLib.GoToFlowSuite(context, 199003005, 2)
 	       end
-	      
+
 	      return 0
 end
 
@@ -210,7 +210,7 @@ function action_EVENT_GROUP_LOAD_5009(context, evt)
 	    if ScriptLib.GetHostQuestState(context,7901315)==3 then
 	        ScriptLib.GoToFlowSuite(context, 199003005, 3)
 	       end
-	      
+
 	      return 0
 end
 
@@ -218,7 +218,7 @@ end
 function action_EVENT_QUEST_START_5010(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 199003005, 2)
-	
+
 	return 0
 end
 
@@ -227,7 +227,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5017(context, evt)
 	if 5011 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -237,8 +237,8 @@ function action_EVENT_GADGET_STATE_CHANGE_5017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -247,7 +247,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5018(context, evt)
 	if 5012 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -257,8 +257,8 @@ function action_EVENT_GADGET_STATE_CHANGE_5018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -267,7 +267,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5019(context, evt)
 	if 5013 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -277,8 +277,8 @@ function action_EVENT_GADGET_STATE_CHANGE_5019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5013, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -287,7 +287,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5020(context, evt)
 	if 5014 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -297,7 +297,7 @@ function action_EVENT_GADGET_STATE_CHANGE_5020(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199003113
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -39,9 +39,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -79,25 +79,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_113002(context, evt)
-	 if ScriptLib.GetGroupVariableValueByGroup(context, "create", 199003093) == 0 then	 
+	 if ScriptLib.GetGroupVariableValueByGroup(context, "create", 199003093) == 0 then
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "weather", 199003100) == 1 then
-	
-	ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 2 }) 
-	
+
+	ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 2 })
+
 		  else
-			ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 1 }) 
+			ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 1 })
 	end
 	  else
-			ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 2 }) 
+			ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 2 })
 			end
-	
+
 	return 0
-	
+
 end

@@ -15,13 +15,13 @@
 --]]
 
 --[[
-local DreamStonePlay = {
+DreamStonePlay = {
     LevelTagGroup = 12,
     DreamStoneCid = 306001,
 }
 
 -- 在对应LevelTag中操作梦境石发生的切换
-local LevelTagState = {
+LevelTagState = {
     ["3.0_Dream"] ={
         ChangeTag = 39,
         WeatherStateList = {
@@ -44,13 +44,13 @@ local LevelTagState = {
     },
 }
 
-local KeyQuest = {
+KeyQuest = {
     ["Lock"] = {7302518,7302519,7302515,7303201,7303202,7303203},
     ["Unlock"] ={7302525,7302506,7302511,7302514,7303301},
 }
 --]]
 
-local Tri_DreamStone = {
+Tri_DreamStone = {
     -- GadgetStateChange
     { keyWord = "ChangeLevelTag",event = EventType.EVENT_LUA_NOTIFY, source = "AraraDreamStone", trigger_count = 0},
     -- 部分初始化的逻辑见 LF_AutoGenTri
@@ -58,7 +58,7 @@ local Tri_DreamStone = {
 
 function LF_Initialize_DreamStone()
     LF_AutoGenTri()
-    local startConfigID = 50050001
+    startConfigID = 50050001
     for _,v in pairs(Tri_DreamStone) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -77,13 +77,13 @@ function LF_Initialize_DreamStone()
 end
 
 function LF_AutoGenTri()
-    local keyWord = 100
-    local questList = KeyQuest["Lock"]
+    keyWord = 100
+    questList = KeyQuest["Lock"]
     for i = 1,#questList do
         keyWord = keyWord + 1
-        local keyWordType = tostring(keyWord)
-        local sourceQuest = tostring(questList[i])
-        local trigger = { keyWord = "CheckLock",keyWordType = keyWordType,event = EventType.EVENT_QUEST_START, source = sourceQuest, trigger_count = 0}
+        keyWordType = tostring(keyWord)
+        sourceQuest = tostring(questList[i])
+        trigger = { keyWord = "CheckLock",keyWordType = keyWordType,event = EventType.EVENT_QUEST_START, source = sourceQuest, trigger_count = 0}
         table.insert(Tri_DreamStone, trigger)
     end
 
@@ -91,9 +91,9 @@ function LF_AutoGenTri()
     questList = KeyQuest["Unlock"]
     for i = 1,#questList do
         keyWord = keyWord + 1
-        local keyWordType = tostring(keyWord)
-        local sourceQuest = tostring(questList[i])
-        local trigger = { keyWord = "CheckUnlock",keyWordType = keyWordType,event = EventType.EVENT_QUEST_START, source = sourceQuest, trigger_count = 0}
+        keyWordType = tostring(keyWord)
+        sourceQuest = tostring(questList[i])
+        trigger = { keyWord = "CheckUnlock",keyWordType = keyWordType,event = EventType.EVENT_QUEST_START, source = sourceQuest, trigger_count = 0}
         table.insert(Tri_DreamStone, trigger)
     end
     return 0
@@ -105,27 +105,27 @@ end
 function action_ChangeLevelTag(context,evt)
     -- 检查梦境石状态是否合法,仅做网络延迟时的保护。
     if 201 ~= ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, DreamStonePlay.DreamStoneCid) then
-        local msg = "## [TD_DreamStone] 对应梦境石已上锁，无法切状态"
+        msg = "## [TD_DreamStone] 对应梦境石已上锁，无法切状态"
         ScriptLib.PrintContextLog(context, msg)
         return 0
     end
 
-    local tag_name = LF_GetCurLevelTagName(context)
-    local changeData = LevelTagState[tag_name]
+    tag_name = LF_GetCurLevelTagName(context)
+    changeData = LevelTagState[tag_name]
     if changeData == nil then
-        local msg = "## [TD_DreamStone] LF_GetCurLevelTagName"
+        msg = "## [TD_DreamStone] LF_GetCurLevelTagName"
         msg = msg .."||current_env_state = ".. tag_name
         ScriptLib.PrintContextLog(context, msg)
         return 0
     end
-    local changeWeatherStateList = changeData.WeatherStateList
+    changeWeatherStateList = changeData.WeatherStateList
 
-    local msg = "## [TD_DreamStone] action_ChangeLevelTag"
+    msg = "## [TD_DreamStone] action_ChangeLevelTag"
     msg = msg .."||changeToLevelTag = " .. changeData.ChangeTag
     ScriptLib.PrintContextLog(context, msg)
 
     for i = 1,#changeWeatherStateList do
-        local weatherState = changeWeatherStateList[i]
+        weatherState = changeWeatherStateList[i]
         ScriptLib.SetWeatherAreaState(context, weatherState.AreaID, weatherState.State)
     end
 
@@ -135,7 +135,7 @@ function action_ChangeLevelTag(context,evt)
 end
 
 function action_CheckLock(context,evt)
-    local msg = "## [TD_DreamStone] action_CheckLock"
+    msg = "## [TD_DreamStone] action_CheckLock"
     msg = msg .."||QuestStart = ".. evt.param1
     ScriptLib.PrintContextLog(context, msg)
     ScriptLib.SetGadgetStateByConfigId(context, DreamStonePlay.DreamStoneCid, 0)
@@ -143,7 +143,7 @@ function action_CheckLock(context,evt)
 end
 
 function action_CheckUnlock(context,evt)
-    local msg = "## [TD_DreamStone] action_CheckUnlock"
+    msg = "## [TD_DreamStone] action_CheckUnlock"
     msg = msg .."||QuestStart = ".. evt.param1
     ScriptLib.PrintContextLog(context, msg)
     ScriptLib.SetGadgetStateByConfigId(context, DreamStonePlay.DreamStoneCid, 201)
@@ -154,14 +154,14 @@ end
 ||	LocalFunction
 --======================================]]
 function LF_GetCurLevelTagName(context)
-    local cur_TagVec = ScriptLib.GetCurrentLevelTagVec(context, DreamStonePlay.LevelTagGroup)
+    cur_TagVec = ScriptLib.GetCurrentLevelTagVec(context, DreamStonePlay.LevelTagGroup)
     if cur_TagVec[1] == nil then
         return "Empty"
     end
-    local cur_tag = cur_TagVec[1]
-    local tag_name = ScriptLib.GetLevelTagNameById(context,cur_tag)
+    cur_tag = cur_TagVec[1]
+    tag_name = ScriptLib.GetLevelTagNameById(context,cur_tag)
 
-    local msg = "## [TD_DreamStone] LF_GetCurLevelTagName"
+    msg = "## [TD_DreamStone] LF_GetCurLevelTagName"
     msg = msg .."||current_env_state = ".. tag_name
     ScriptLib.PrintContextLog(context, msg)
 
@@ -172,7 +172,7 @@ end
 --======================================]]
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -212,7 +212,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    local s = "{"
+    s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","

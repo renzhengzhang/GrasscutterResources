@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250058001
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
     BossConfigID = 1001,
     GroupID = 250058001,
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -73,9 +73,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -84,7 +84,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -92,9 +92,9 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002(context, evt)
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 250058001, EntityType.MONSTER, 1001)
-	
-		
-	
+
+
+
 	return 0
 end
 

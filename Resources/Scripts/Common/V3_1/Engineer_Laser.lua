@@ -6,22 +6,22 @@
 ||	Owner         ||	xudong.sun
 ||	Description   ||	3.1建筑师射线
 ||	LogName       ||    ## Engineer_Laser_LOG
-||	Protection    ||	
+||	Protection    ||
 =====================================================================================================================
-local engineerLaserConfigID = 0
-local turnOption = 0 
+engineerLaserConfigID = 0
+turnOption = 0
 
-local correctState = 0
+correctState = 0
 
 =======================================================================================]]
 
-local nextState ={
+nextState ={
 	[0]= 201,
 	[201]= 202,
 	[202]= 0,
 }
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Gadget_Create"] = { config_id = 80000002, name = "Gadget_Create", event= EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0},
 		["State_Change"] = { config_id = 80000003, name = "State_Change", event= EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_state_change", trigger_count = 0},
@@ -55,7 +55,7 @@ end
 
 function SLC_EngineerMark( context )
 
-	local eid = context.source_entity_id
+	eid = context.source_entity_id
 
 	ScriptLib.MarkGroupLuaAction(context, "getengineer", "", {group_id = base_info.group_id ,config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = eid }) })
 

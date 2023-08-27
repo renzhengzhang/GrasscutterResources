@@ -7,20 +7,20 @@
 一关内最多5个池子，难度会逐渐提升，一关定时4分钟，
 普通玩家可能只能刷到池子3，能拿到所有奖励，头部玩家能刷到池子5，后面的2个池子就是用于给头部玩家进行
 --fever进度升级节点
-local fever_progress_table = {
+fever_progress_table = {
     0,40,120,270,570,800
 }
 --各等级fever的下降速率
-local fever_attenuation = {
+fever_attenuation = {
     -1,-1,-2,-2,-3
 }
 --地城对应的天气配置
-local DungeonWeather = { 
-    10039,10040,10041,10042 
-} 
+DungeonWeather = {
+    10039,10040,10041,10042
+}
 
 --怪物潮
-local monster_tide = {
+monster_tide = {
     [1] = {2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2048,2049,2050,2051},
     [2] = {2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2052,2053,2054,2055},
     [3] = {2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2056,2057,2058,2059},
@@ -29,7 +29,7 @@ local monster_tide = {
 }
 
 
-local defs = {
+defs = {
     group_id = 235801002,
     worktop_id = 123,   --操作台对应的操作数
     air_wall = 2005,    --场内空气墙对应的ConfigID
@@ -46,7 +46,7 @@ local defs = {
 ]]
 
 
-local local_defs = {
+local_defs = {
     worktop_option = 30110,
     progress_key = 1,
     team_global_value = "FEVER_LEVEL",
@@ -60,7 +60,7 @@ local local_defs = {
 }
 
 
-local time_axis = {
+time_axis = {
     --扣分时间轴，每秒掉一定的分数
     fever_axis = {1},
 
@@ -70,7 +70,7 @@ local time_axis = {
 }
 
 
-local Tri = {
+Tri = {
     [1] = { name = "group_load", config_id = 8000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     [2] = { name = "select_option", config_id = 8000002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
     [3] = { name = "time_axis_pass", config_id = 8000003, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0},
@@ -82,7 +82,7 @@ local Tri = {
     [9] = { name = "dungeon_all_avatar_die", config_id = 8000009, event = EventType.EVENT_DUNGEON_ALL_AVATAR_DIE, source = "", condition = "", action = "action_dungeon_all_avatar_die", trigger_count = 0},
     [10] = { name = "dungeon_settle", config_id = 8000010, event = EventType.EVENT_DUNGEON_SETTLE, source = "", condition = "", action = "action_dungeon_settle", trigger_count = 0},
     [11] = { name = "enter_start_region", config_id = 8000011, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_start_region", trigger_count = 0},
-   
+
 }
 
 function Initialize()
@@ -122,7 +122,7 @@ end
 --按下操作台按键，启动玩法
 function action_select_option(context,evt)
     --如果空气墙没有提前创建，那么不会处理开始事件
-    if 1~= ScriptLib.GetGroupVariableValue(context,"is_air_wall_created") then 
+    if 1~= ScriptLib.GetGroupVariableValue(context,"is_air_wall_created") then
         return -1
     end
     ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, defs.worktop_id, local_defs.worktop_option)
@@ -157,7 +157,7 @@ end
 
 --fever升级时，给team挂global value，并激活场景氛围物件
 function action_gallery_progress_pass(context,evt)
-    local fever_level = evt.param1
+    fever_level = evt.param1
     ScriptLib.PrintContextLog(context,"FS: Fever uprade to level "..fever_level)
     ScriptLib.ShowReminder(context, local_defs.base_upgrade_reminder+fever_level)
     LF_Set_Team_Global_Value(context,local_defs.team_global_value,fever_level)
@@ -174,17 +174,17 @@ end
 --当前的怪物潮刷完的时候，重置当前的怪物潮或者刷下一波怪物潮
 function action_monster_tide_die(context,evt)
 --    ScriptLib.PrintContextLog(context,"FS: Tide Clear"..evt.param1)
---    local is_being_switched = ScriptLib.GetGroupVariableValue(context,"is_tide_being_switched")
+--    is_being_switched = ScriptLib.GetGroupVariableValue(context,"is_tide_being_switched")
 --   ScriptLib.PrintContextLog(context,"FS: Tide Switch"..is_being_switched)
-    local current_monster_tide = LF_Get_Current_Monster_Tide(context)
-    local current_tide_list = monster_tide[current_monster_tide]
+    current_monster_tide = LF_Get_Current_Monster_Tide(context)
+    current_tide_list = monster_tide[current_monster_tide]
 --    ScriptLib.PrintContextLog(context,"FS: Tide Max"..(#current_tide_list))
     --不在刷够怪物切换怪物潮的过程中
     --如果当前怪物潮已经被杀完了
     if evt.param1 >= #current_tide_list then
         if defs.num_killed_per_tide[current_monster_tide] == 0 then
-            LF_Refresh_Monster_Tide(context,"Current")  
-        else 
+            LF_Refresh_Monster_Tide(context,"Current")
+        else
             LF_Refresh_Monster_Tide(context,"Next")
         end
     end
@@ -193,26 +193,26 @@ end
 
 --有怪死亡时，计分，并更新fever条,怪物死亡只处理积分
 function action_monster_die_before_leave_scene(context,evt)
-    local monster_eid = evt.source_eid
-    local monster_cid = evt.param1
-    local fever_ratio = ScriptLib.GetGroupVariableValue(context,"fever_ratio")
-    local monster_fever = monsters[monster_cid].kill_score
+    monster_eid = evt.source_eid
+    monster_cid = evt.param1
+    fever_ratio = ScriptLib.GetGroupVariableValue(context,"fever_ratio")
+    monster_fever = monsters[monster_cid].kill_score
     LF_Update_Fever(context,monster_fever*fever_ratio)
     LF_Update_Score(context,monster_eid)
-    return 0  
+    return 0
 end
 
 
 function LF_Refresh_Monster_Tide(context, refresh_mode)
-    local current_monster_tide_index = LF_Get_Current_Monster_Tide(context)
+    current_monster_tide_index = LF_Get_Current_Monster_Tide(context)
 --  ScriptLib.KillMonsterTide(context, defs.group_id, LF_Get_Current_Tide_Num(context))
 --    ScriptLib.SetGroupVariableValue(context,"is_tide_being_switched",1)
-    if refresh_mode == "Current" then 
+    if refresh_mode == "Current" then
         LF_Set_Current_Monster_Tide(context, current_monster_tide_index)
         LF_Create_Monster_Tide(context,current_monster_tide_index)
         ScriptLib.PrintContextLog(context,"FS: Tide Clear Refresh Current")
     end
-    if refresh_mode == "Next" then 
+    if refresh_mode == "Next" then
         LF_Set_Current_Monster_Tide(context, current_monster_tide_index + 1)
         LF_Create_Monster_Tide(context,current_monster_tide_index + 1)
         ScriptLib.PrintContextLog(context,"FS: Tide Clear Refresh Next")
@@ -236,20 +236,20 @@ function action_sumo_switch_team(context,evt)
     LF_Update_Fever(context,defs.switch_team_fever)
 
     --换队的时候给服务端发送消息，让客户端显示惩罚倒计时UI
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    uid_list = ScriptLib.GetSceneUidList(context)
     ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["uid"] = uid_list[1], ["noswitch_time"] = defs.noswitch_punishment_interval})
 
     --清除当前显示的换队惩罚的reminder
-    
-    local uid_list = ScriptLib.GetSceneUidList(context)
-    local ret = ScriptLib.RevokePlayerShowTemplateReminder(context, local_defs.team_noswitch_pubishment_reminder, {})
+
+    uid_list = ScriptLib.GetSceneUidList(context)
+    ret = ScriptLib.RevokePlayerShowTemplateReminder(context, local_defs.team_noswitch_pubishment_reminder, {})
     ScriptLib.RevokePlayerShowTemplateReminder(context, local_defs.punish_inAdvance_reminder, {})
 
     ScriptLib.PrintContextLog(context,"FS: Clear reminder result"..ret)
 
     --换队的时候修改team的gv，重新刷一下新的avatar身上的加成效果
     LF_Set_Team_Global_Value(context,local_defs.team_has_switch,1)
-    
+
     ScriptLib.SetGroupVariableValue(context,"is_noswitch_punishment",0)
 
     return 0
@@ -300,14 +300,14 @@ function LF_Start_Play(context)
     ScriptLib.InitTimeAxis(context,"NOSWITCH_PUNISHMENT_AXIS",time_axis.noswitch_punishment_axis,false)
 	ScriptLib.InitTimeAxis(context,"NOSWITCH_PUNISHMENT_INADVANCE_AXIS",time_axis.noswitch_punishment_inAdvance_axis,false)
 	--玩法开始的时候给服务端发送消息，让客户端显示惩罚倒计时UI
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    uid_list = ScriptLib.GetSceneUidList(context)
     ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["uid"] = uid_list[1], ["noswitch_time"] = defs.noswitch_punishment_interval})
 end
 
 --终止玩法方法，关掉各种东西
 function LF_Stop_Play(context)
-    
-    local current_monster_tide = LF_Get_Current_Monster_Tide(context)
+
+    current_monster_tide = LF_Get_Current_Monster_Tide(context)
     --清理一下空气墙，防止其他问题
 	ScriptLib.RemoveEntityByConfigId(context, defs.group_id, EntityType.GADGET, defs.air_wall)
     --玩法结束，清理掉当前的怪物潮
@@ -322,11 +322,11 @@ end
 --启动一波指定ID的怪物潮，需要传入该波怪物潮的ID（具体配置在miscs中定义）
 function LF_Create_Monster_Tide(context,monster_tide_index)
     ScriptLib.PrintContextLog(context,"FS: Creating monster tide ["..monster_tide_index.."]")
-    local monster_config_id_list = monster_tide[monster_tide_index]
+    monster_config_id_list = monster_tide[monster_tide_index]
     --增加怪物潮的计数，下一次开启时index会+1，防止索引到同一波怪物潮
-    local tide_num = LF_Get_Current_Tide_Num(context)    
+    tide_num = LF_Get_Current_Tide_Num(context)
     LF_Set_Current_Tide_Num(context,tide_num+1)
-    local current_monster_tide = LF_Get_Current_Monster_Tide(context)
+    current_monster_tide = LF_Get_Current_Monster_Tide(context)
     ScriptLib.AutoMonsterTide(context, tide_num+1, defs.group_id, monster_config_id_list, #monster_config_id_list, tide_suite_config[current_monster_tide].min, tide_suite_config[current_monster_tide].max)
 end
 
@@ -341,43 +341,43 @@ function LF_Activate_Environment_Gadget(context,fever_level)
     --根据当前的fever等级，改变天气
     if (fever_level>local_defs.environment_change_level) then
         ScriptLib.PrintContextLog(context,"FS: Changing environment weather!")
-        local ret = ScriptLib.SetWeatherAreaState(context, DungeonWeather[fever_level],1)
+        ret = ScriptLib.SetWeatherAreaState(context, DungeonWeather[fever_level],1)
         ScriptLib.PrintContextLog(context,"FS: The result of starting weather ".. DungeonWeather[fever_level].."is "..ret)
-        local ret = ScriptLib.EnterWeatherArea(context, DungeonWeather[fever_level])
+        ret = ScriptLib.EnterWeatherArea(context, DungeonWeather[fever_level])
         ScriptLib.PrintContextLog(context,"FS: The result of changing weather".. DungeonWeather[fever_level].."is "..ret)
     end
 
     --切换场上所有的物件的状态
     for i = 1, #suites[defs.environment_suite].gadgets do
-        local config_id = suites[defs.environment_suite].gadgets[i]
-        local gadget_id = LF_Get_Gadget_Id_By_Config_Id(context,config_id)
+        config_id = suites[defs.environment_suite].gadgets[i]
+        gadget_id = LF_Get_Gadget_Id_By_Config_Id(context,config_id)
         --大小火盆
-        if (gadget_id == 70350306 or gadget_id == 70350307) then 
+        if (gadget_id == 70350306 or gadget_id == 70350307) then
             if (fever_level<local_defs.burn_effect_level) then
                 --点燃小火
                 --ScriptLib.PrintContextLog(context,"FS: Burn little fire!")
-                local ret = ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, config_id, 101)
+                ret = ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, config_id, 101)
             end
             if (fever_level<#fever_progress_table-2 and fever_level>=local_defs.burn_effect_level) then
                 --喷大火，5秒后转回小火
                 --ScriptLib.PrintContextLog(context,"FS: Burn middle fire!")
-                local ret = ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, config_id, 201)
+                ret = ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, config_id, 201)
             end
-            if (fever_level >= #fever_progress_table-2) then 
+            if (fever_level >= #fever_progress_table-2) then
                  --持续喷大火
                 --ScriptLib.PrintContextLog(context,"FS: Burn super fire!")
                 ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, config_id, 202)
             end
         end
         --挂灯
-        if (gadget_id == 70350308) then 
+        if (gadget_id == 70350308) then
             if (fever_level>=local_defs.burn_effect_level) then
                 --点燃小火
                 ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, config_id, 201)
             end
         end
          --场景氛围
-         if (gadget_id == 70350309) then 
+         if (gadget_id == 70350309) then
             --转到对应的gadgetState：default-0、phase1-201、phase2-202、phase3-203、phase4-204
             ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, config_id, 200+fever_level)
         end
@@ -387,7 +387,7 @@ end
 --给team挂global value，角色处理各种特殊效果
 function LF_Set_Team_Global_Value(context,gv_name,value)
     --ScriptLib.PrintContextLog(context,"FS: Sending global values to team!")
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    uid_list = ScriptLib.GetSceneUidList(context)
     ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, gv_name, value)
 end
 
@@ -403,18 +403,18 @@ end
 --更新积分，需要传入目标monster的entity id
 function LF_Update_Score(context,monster_eid)
 --    ScriptLib.PrintContextLog(context,"FS: Update Score!")
-    local uid_list = ScriptLib.GetSceneUidList(context)
-    local monster_id = ScriptLib.GetMonsterIdByEntityId(context,monster_eid)
+    uid_list = ScriptLib.GetSceneUidList(context)
+    monster_id = ScriptLib.GetMonsterIdByEntityId(context,monster_eid)
     ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["uid"] = uid_list[1], ["monster_id"] = monster_id})
 end
 
 
 --返回当前等级下的积分衰减速率
 function LF_Get_Fever_Subnum(context)
-    local fever = ScriptLib.GetGalleryProgressScore(context, "fever", defs.gallery_id)
+    fever = ScriptLib.GetGalleryProgressScore(context, "fever", defs.gallery_id)
     for i = 1, #fever_progress_table-1 do
-        local lower_bound = fever_progress_table[i]
-        local higher_bound = fever_progress_table[i+1]
+        lower_bound = fever_progress_table[i]
+        higher_bound = fever_progress_table[i+1]
         if fever>=lower_bound and fever<higher_bound then
             return fever_attenuation[i]
         end
@@ -439,15 +439,15 @@ end
 
 --获取当前怪物潮波次的index
 function LF_Get_Current_Monster_Tide(context)
-    local monster_tide = ScriptLib.GetGroupVariableValue(context,"current_monster_tide")
+    monster_tide = ScriptLib.GetGroupVariableValue(context,"current_monster_tide")
     return monster_tide
 end
 
 --2.5新增
 --获取当前怪物潮的击杀数量
 function LF_Get_Current_Tide_Minion_Killed(context)
-    local num_minion_killed = ScriptLib.GetGroupVariableValue(context,"num_current_minion_killed")
-    return num_minion_killed 
+    num_minion_killed = ScriptLib.GetGroupVariableValue(context,"num_current_minion_killed")
+    return num_minion_killed
 end
 
 --增加当前怪物潮的击杀数量
@@ -469,23 +469,23 @@ end
 --server lua call-------------------------------------------------
 
 function SLC_Update_Fever_Ratio(context,new_fever_ratio)
-    
+
     ScriptLib.PrintContextLog(context,"FS: SERVER_LUA_CALL: Changing fever ratio to: "..new_fever_ratio)
     ScriptLib.SetGroupVariableValue(context,"fever_ratio",new_fever_ratio)
 
-    return 0 
+    return 0
 end
 
 --向客户端下发当前的惩罚状态和fever值，用于客户端重连时请求
 function SLC_Refresh_Team_State(context)
-    
+
     ScriptLib.PrintContextLog(context,"FS: SERVER_LUA_CALL: Request for refresh punishment state: ")
-    local is_noswitch_punishment = ScriptLib.GetGroupVariableValue(context,"is_noswitch_punishment")
+    is_noswitch_punishment = ScriptLib.GetGroupVariableValue(context,"is_noswitch_punishment")
     LF_Set_Team_Global_Value(context,"NOSWITCH_PUNISHMENT",is_noswitch_punishment)
-    
-    local fever = ScriptLib.GetGalleryProgressScore(context, "fever", defs.gallery_id)
+
+    fever = ScriptLib.GetGalleryProgressScore(context, "fever", defs.gallery_id)
     LF_Set_Team_Global_Value(context,"fever",fever)
-    return 0 
+    return 0
 end
 
 ------------------------------------------------------------------

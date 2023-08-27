@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308032
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -84,9 +84,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -97,9 +97,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -180,9 +180,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -190,15 +190,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_32028(context, evt)
 	if GadgetState.ChestTrap ~= ScriptLib.GetGadgetStateByConfigId(context, 133308032, 32013) then
 		return false
 	end
-	
+
 	if GadgetState.ChestTrap ~= ScriptLib.GetGadgetStateByConfigId(context, 133308032, 32014) then
 		return false
 	end
-	
+
 	if GadgetState.ChestTrap ~= ScriptLib.GetGadgetStateByConfigId(context, 133308032, 32015) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -208,8 +208,8 @@ function action_EVENT_GADGET_STATE_CHANGE_32028(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 32027, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -218,7 +218,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_32036(context, evt)
 	if 32013 ~= evt.param2 or GadgetState.ChestTrap ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -229,7 +229,7 @@ function action_EVENT_GADGET_STATE_CHANGE_32036(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -238,15 +238,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_32040(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133308032, 32007) then
 		return false
 	end
-	
+
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133308032, 32025) then
 		return false
 	end
-	
+
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133308032, 32026) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -256,8 +256,8 @@ function action_EVENT_GADGET_STATE_CHANGE_32040(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 32029, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -266,7 +266,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_32043(context, evt)
 	if 32014 ~= evt.param2 or GadgetState.ChestTrap ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -277,7 +277,7 @@ function action_EVENT_GADGET_STATE_CHANGE_32043(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -286,7 +286,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_32044(context, evt)
 	if 32015 ~= evt.param2 or GadgetState.ChestTrap ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -297,7 +297,7 @@ function action_EVENT_GADGET_STATE_CHANGE_32044(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -306,7 +306,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_32045(context, evt)
 	if 32007 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -317,7 +317,7 @@ function action_EVENT_GADGET_STATE_CHANGE_32045(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -326,7 +326,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_32046(context, evt)
 	if 32025 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -337,7 +337,7 @@ function action_EVENT_GADGET_STATE_CHANGE_32046(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -346,7 +346,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_32047(context, evt)
 	if 32026 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -357,7 +357,7 @@ function action_EVENT_GADGET_STATE_CHANGE_32047(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 

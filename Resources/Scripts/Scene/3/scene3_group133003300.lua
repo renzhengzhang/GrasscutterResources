@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133003300
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 980,
 	gadget_id_2 = 981,
 	gadget_id_3 = 982,
@@ -12,9 +12,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -103,7 +103,7 @@ function action_EVENT_GATHER_218(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -114,7 +114,7 @@ function action_EVENT_GATHER_219(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -125,7 +125,7 @@ function action_EVENT_GATHER_220(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -136,7 +136,7 @@ function action_EVENT_GATHER_221(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -144,49 +144,49 @@ end
 function condition_EVENT_ANY_MONSTER_DIE_222(context, evt)
 	if defs.gadget_id_1 == evt.param1 then
 		-- 将本组内变量名为 "v980" 的变量设置为 1
-	 
+
 	  if 0 ~= ScriptLib.SetGroupVariableValue(context, "v980", 1) then
 	    return -1
 	  end
-	
+
 	end
-	
+
 	if defs.gadget_id_2 == evt.param1 then
 		-- 将本组内变量名为 "v981" 的变量设置为 1
-	 
+
 	  if 0 ~= ScriptLib.SetGroupVariableValue(context, "v981", 1) then
 	    return -1
 	  end
-	
+
 	end
-	
+
 	if defs.gadget_id_3 == evt.param1 then
 		-- 将本组内变量名为 "v982" 的变量设置为 1
-	 
+
 	  if 0 ~= ScriptLib.SetGroupVariableValue(context, "v982", 1) then
 	    return -1
 	  end
-	
+
 	end
-	
+
 	if defs.gadget_id_4 == evt.param1 then
 		-- 将本组内变量名为 "v983" 的变量设置为 1
-	 
+
 	  if 0 ~= ScriptLib.SetGroupVariableValue(context, "v983", 1) then
 	    return -1
 	  end
-	
+
 	end
-	
+
 	-- 获取本组内变量名为 "v980" 的变量值
 	if ScriptLib.GetGroupVariableValue(context, "v980") + ScriptLib.GetGroupVariableValue(context, "v981") + ScriptLib.GetGroupVariableValue(context, "v982") + ScriptLib.GetGroupVariableValue(context, "v983") == 4  then
-	  
+
 	return true
-	
+
 	end
-	
-	
-	
+
+
+
 	return false
 end
 
@@ -197,6 +197,6 @@ function action_EVENT_ANY_MONSTER_DIE_222(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

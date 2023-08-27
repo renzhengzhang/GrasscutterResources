@@ -1,4 +1,4 @@
-local base_info = {
+base_info = {
 	group_id = 220179001
 }
 
@@ -45,7 +45,7 @@ suites = {
 }
 
 function condition_EVENT_ANY_MONSTER_DIE_1028(context, evt)
-	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set condition monster 1")	
+	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set condition monster 1")
 	return true
 end
 

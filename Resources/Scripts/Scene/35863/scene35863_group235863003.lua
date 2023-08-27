@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 235863003
 }
 
 -- DEFS_MISCS
-local defs = 
+defs =
 {
     isStartLevel = false,
     nextGroupId = -1,
@@ -24,16 +24,16 @@ local defs =
     monsterPoolTable = {
         {
             pool_list = {35023},
-            point_array_id = 0, 
-            point_id_list = {}, 
-            affix_list = {}, 
+            point_array_id = 0,
+            point_id_list = {},
+            affix_list = {},
             param = {total_count = 999, min_count = 2, max_count = 5, tag = 0, fill_time = 0, fill_count = 0, is_ordered = true, is_tag_bit_match = true},
         },
         {
             pool_list = {35024},
-            point_array_id = 0, 
-            point_id_list = {}, 
-            affix_list = {}, 
+            point_array_id = 0,
+            point_id_list = {},
+            affix_list = {},
             param = {total_count = 999, min_count = 1, max_count = 4, tag = 0, fill_time = 0, fill_count = 0, is_ordered = true, is_tag_bit_match = true},
         },
     },
@@ -52,9 +52,9 @@ local defs =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -112,9 +112,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -125,9 +125,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -152,9 +152,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "V3_0/UnstableSpray"

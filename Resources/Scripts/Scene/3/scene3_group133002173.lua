@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002173
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -93,9 +93,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -103,7 +103,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_186(context, evt)
 	if 1502 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -114,7 +114,7 @@ function action_EVENT_GADGET_STATE_CHANGE_186(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -123,7 +123,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_187(context, evt)
 	if 1503 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -134,7 +134,7 @@ function action_EVENT_GADGET_STATE_CHANGE_187(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -143,7 +143,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_188(context, evt)
 	if 1504 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -154,7 +154,7 @@ function action_EVENT_GADGET_STATE_CHANGE_188(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -163,7 +163,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_189(context, evt)
 	if 1502 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -173,32 +173,32 @@ function action_EVENT_GADGET_STATE_CHANGE_189(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "t1385", 1) then
 	  return -1
 	end
-	
+
 	--if ScriptLib.GetGroupVariableValue(context, "isoff") == 0 then
 		--if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133002173, "stop1385", 8) then
 		--  return -1
 		--end
 		--end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "t1385") + ScriptLib.GetGroupVariableValue(context, "t1386") + ScriptLib.GetGroupVariableValue(context, "t1387") == 3 then
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "isoff") == 0 then
-		
+
 	-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133002182, suite =2 }) then
 			return -1
 		end
-		
-	
+
+
 		if 0 ~= ScriptLib.SetGroupVariableValue(context, "isoff", 1) then
 		  return -1
 		end
-		
+
 		end
-		
+
 		end
-		
-		
+
+
 		return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_190(context, evt)
 	if 1503 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -217,30 +217,30 @@ function action_EVENT_GADGET_STATE_CHANGE_190(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "t1386", 1) then
 	  return -1
 	end
-	
+
 	--if ScriptLib.GetGroupVariableValue(context, "isoff") == 0 then
 		--if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133002173, "stop1386", 8) then
 		--  return -1
 		--end
 		--end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "t1385") + ScriptLib.GetGroupVariableValue(context, "t1386") + ScriptLib.GetGroupVariableValue(context, "t1387") == 3 then
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "isoff") == 0 then
 	-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133002182, suite = 2 }) then
 			return -1
 		end
-	
+
 		if 0 ~= ScriptLib.SetGroupVariableValue(context, "isoff", 1) then
 		  return -1
 		end
-		
+
 		end
-		
+
 		end
-		
-		
+
+
 	return 0
 end
 
@@ -249,7 +249,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_191(context, evt)
 	if 1504 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -259,31 +259,31 @@ function action_EVENT_GADGET_STATE_CHANGE_191(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "t1387", 1) then
 	  return -1
 	end
-	
+
 	--if ScriptLib.GetGroupVariableValue(context, "isoff") == 0 then
 		--if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133002173, "stop1387", 8) then
 		--  return -1
 		--end
 		--end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "t1385") + ScriptLib.GetGroupVariableValue(context, "t1386") + ScriptLib.GetGroupVariableValue(context, "t1387") == 3 then
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "isoff") == 0 then
 	-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133002182, suite = 2 }) then
 			return -1
 		end
-		
-	
+
+
 		if 0 ~= ScriptLib.SetGroupVariableValue(context, "isoff", 1) then
 		  return -1
 		end
-		
+
 	end
-		
+
 	end
-		
-		
+
+
 	return 0
 end
 
@@ -293,7 +293,7 @@ function condition_EVENT_TIMER_EVENT_192(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isoff") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -303,8 +303,8 @@ function action_EVENT_TIMER_EVENT_192(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1502, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -314,7 +314,7 @@ function condition_EVENT_TIMER_EVENT_193(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isoff") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -324,8 +324,8 @@ function action_EVENT_TIMER_EVENT_193(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1503, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -335,7 +335,7 @@ function condition_EVENT_TIMER_EVENT_194(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isoff") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -345,7 +345,7 @@ function action_EVENT_TIMER_EVENT_194(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1504, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

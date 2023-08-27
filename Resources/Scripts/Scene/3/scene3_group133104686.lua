@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133104686
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id = 686004
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -87,7 +87,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_686005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") == #suites[1].gadgets then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -98,11 +98,11 @@ function action_EVENT_GADGET_STATE_CHANGE_686005(context, evt)
 	elseif evt.param1 == GadgetState.Default then
 		ScriptLib.ChangeGroupVariableValue(context,"start",-1)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "start") == #suites[1].gadgets-1 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id, GadgetState.Default)
 	end
-	
+
 	return 0
 end
 
@@ -113,7 +113,7 @@ function action_EVENT_GADGET_STATE_CHANGE_686006(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -122,7 +122,7 @@ function condition_EVENT_GADGET_CREATE_686007(context, evt)
 	if defs.gadget_id ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -133,12 +133,12 @@ function action_EVENT_GADGET_CREATE_686007(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 将configid为 0 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 0, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

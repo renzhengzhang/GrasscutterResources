@@ -1,5 +1,5 @@
 --[[
-local defs = {
+defs = {
 	timer_region = 1,
 	challenge_region = 2,
 	monster_hilichurl = 3,
@@ -7,7 +7,7 @@ local defs = {
 }
 --]]
 
-local Tri = {
+Tri = {
 	[1] = { name = "enter_region", config_id = 8000001, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0, forbid_guest = false },
 	[2] = { name = "leave_region", config_id = 8000002, event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_region", trigger_count = 0, forbid_guest = false },
 	[3] = { name = "hilichurl_die", config_id = 8000003, event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_hilichurl_die", trigger_count = 0, tag = "950" },
@@ -20,7 +20,7 @@ local Tri = {
 	--[10]= { name = "var_print", config_id = 8000010, event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_var_print", trigger_count = 0 }
 }
 
-local Var = {
+Var = {
 	[1] = { config_id=50000001,name = "hili_die", value = 0, no_refresh = false }
 }
 
@@ -36,8 +36,8 @@ end
 function action_enter_region(context, evt)
 	if evt.param1 == defs.challenge_region then
 		--做一个challenge唯一的保护
-		if ScriptLib.GetGroupTempValue(context, "in_challenge", {}) == 0 then	
-			local ret = ScriptLib.ActiveChallenge(context, 234, 234, 1, 950, 1, 0)
+		if ScriptLib.GetGroupTempValue(context, "in_challenge", {}) == 0 then
+			ret = ScriptLib.ActiveChallenge(context, 234, 234, 1, 950, 1, 0)
 			ScriptLib.PrintContextLog(context, "## Hilichurl : hili challenge ret = "..ret)
 			ScriptLib.SetGroupTempValue(context, "in_challenge", 1, {})
 		end
@@ -67,7 +67,7 @@ function action_hilichurl_die(context, evt)
 	--仅大伟丘正常死亡才计数
 	if evt.param2 == 0 then
 		ScriptLib.SetGroupTempValue(context, "in_challenge", 0, {})
-		local ret = ScriptLib.ChangeGroupVariableValue(context, "hili_die", 1)
+		ret = ScriptLib.ChangeGroupVariableValue(context, "hili_die", 1)
 		ScriptLib.PrintContextLog(context, "## Hilichurl : die_count_result = "..ret)
 		ScriptLib.RemoveExtraGroupSuite(context, 0, 2)
 		ScriptLib.RemoveExtraGroupSuite(context, 0, 3)
@@ -84,7 +84,7 @@ function action_hilichurl_die(context, evt)
 end
 
 function action_time_axis_pass(context, evt)
-	local time = ScriptLib.GetGameHour(context)
+	time = ScriptLib.GetGameHour(context)
 	ScriptLib.PrintContextLog(context, "## Hilichurl : game hour = "..time)
 	LF_Handle_Monster_Hilichurl(context)
 	return 0
@@ -146,10 +146,10 @@ function action_var_print(context, evt)
 end
 ----------------------------------------------
 function LF_Handle_Monster_Hilichurl(context)
-	local time = ScriptLib.GetGameHour(context)
+	time = ScriptLib.GetGameHour(context)
 	if defs.exist_hour[2] == 24 then
 		if time == 0 then
-			time = 24 
+			time = 24
 		end
 	end
 	--先校验时间符合区间
@@ -172,7 +172,7 @@ function LF_Try_Remove_Hilichurl(context)
  		return 0
  	end
 	if 1 ~= ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_hilichurl, "_IS_IN_BATTLE") then
-		local ret = ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.MONSTER, defs.monster_hilichurl)
+		ret = ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.MONSTER, defs.monster_hilichurl)
 		ScriptLib.PrintContextLog(context, "## Hilichurl : Remove Monster Result = "..ret)
 		ScriptLib.SetGroupTempValue(context, "Exist", 0, {})
 	end
@@ -184,7 +184,7 @@ function LF_Try_Summon_Hilichurl(context)
 		return 0
 	end
 	ScriptLib.PrintContextLog(context, "## Hilichurl : Create Monster")
-	local ret = ScriptLib.CreateMonster(context, {config_id = defs.monster_hilichurl, delay_time = 0})
+	ret = ScriptLib.CreateMonster(context, {config_id = defs.monster_hilichurl, delay_time = 0})
 	ScriptLib.PrintContextLog(context, "## Hilichurl : Create Monster Result = "..ret)
 	if ret == 0 then
 		ScriptLib.SetGroupTempValue(context, "Exist", 1, {})

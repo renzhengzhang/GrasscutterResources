@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220034001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ sight_groups = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -132,9 +132,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -142,7 +142,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1005(context, evt)
 	if 1001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -153,7 +153,7 @@ function action_EVENT_ANY_MONSTER_DIE_1005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -162,14 +162,14 @@ function condition_EVENT_ANY_MONSTER_DIE_1006(context, evt)
 	if 1004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_1006(context, evt)
-	
-	local uidList=ScriptLib.GetSceneUidList(context)
+
+	uidList=ScriptLib.GetSceneUidList(context)
 	if #uidList < 2 then
 	ScriptLib.PlayCutScene(context, 220101003, 0)
 	ScriptLib.CreateGroupTimerEvent(context, 220034001, "move", 2)
@@ -185,8 +185,8 @@ function condition_EVENT_ANY_MONSTER_DIE_1029(context, evt)
 	if evt.param1 ~= 1009 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -196,8 +196,8 @@ function action_EVENT_ANY_MONSTER_DIE_1029(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1028, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -206,7 +206,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1033(context, evt)
 	if 1028 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -217,7 +217,7 @@ function action_EVENT_GADGET_STATE_CHANGE_1033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -225,9 +225,9 @@ end
 function action_EVENT_TIMER_EVENT_1034(context, evt)
 	-- 延迟0.5秒刷怪
 	ScriptLib.CreateMonster(context, { config_id = 1009, delay_time = 0.5 })
-	
+
 	ScriptLib.RefreshGroup(context, { group_id = 220034001, suite = 3, refresh_level_revise = 0, exclude_prev = false })
-	ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=-0.2, y=-55.7, z=19.2}, radius = 2, rot = {x=0, y=180, z=0}}) 
+	ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=-0.2, y=-55.7, z=19.2}, radius = 2, rot = {x=0, y=180, z=0}})
 	ScriptLib.CreateGroupTimerEvent(context, 220034001, "checkheight", 10)
 	ScriptLib.ActivateDungeonCheckPoint(context, 3)
 	return 0
@@ -235,12 +235,12 @@ end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_1035(context, evt)
-	local uid=ScriptLib.GetSceneUidList(context)
+	uid=ScriptLib.GetSceneUidList(context)
 	for i=1,#uid do
-	local entity=ScriptLib.GetAvatarEntityIdByUid(context, uid[i])
-	local pos=ScriptLib.GetPosByEntityId(context, entity)
+	entity=ScriptLib.GetAvatarEntityIdByUid(context, uid[i])
+	pos=ScriptLib.GetPosByEntityId(context, entity)
 	if pos.y>= -20 then
-	ScriptLib.MovePlayerToPos(context,  {uid_list ={uid[i]}, pos = {x=-0.2, y=-55.7, z=19.2}, radius = 2, rot = {x=0, y=180, z=0}}) 
+	ScriptLib.MovePlayerToPos(context,  {uid_list ={uid[i]}, pos = {x=-0.2, y=-55.7, z=19.2}, radius = 2, rot = {x=0, y=180, z=0}})
 	end
 	end
 	ScriptLib.CreateGroupTimerEvent(context, 220034001, "checkheight", 10)
@@ -259,8 +259,8 @@ function condition_EVENT_ANY_MONSTER_LIVE_1037(context, evt)
 	if evt.param1 ~= 1001 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -271,6 +271,6 @@ function action_EVENT_ANY_MONSTER_LIVE_1037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

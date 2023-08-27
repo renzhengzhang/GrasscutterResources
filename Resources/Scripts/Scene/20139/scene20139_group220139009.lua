@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220139009
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -77,23 +77,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_OBSERVATION_POINT_NOTIFY_9003(context, evt)
 	if 9001 == evt.param1 and 405 == evt.param2 then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 220139010, 10003, GadgetState.GearStop)
-		
+
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 220139010, 10004, GadgetState.GearStop)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,9001, GadgetState.ChestOpened)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,9002, GadgetState.GearStart)
 	end
-	
+
 	return 0
 end
 
@@ -102,7 +102,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9004(context, evt)
 	if 9002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -113,6 +113,6 @@ function action_EVENT_GADGET_STATE_CHANGE_9004(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end

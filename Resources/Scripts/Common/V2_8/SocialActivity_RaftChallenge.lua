@@ -3,18 +3,18 @@
 ||	owner: 		luyao.huang
 ||	description:	2.8社交活动-木筏挑战
 ||	LogName:	SocialActivity_RaftChallenge
-||	Protection:	
+||	Protection:
 =======================================]]--
 
 ------
 
-local time_axis = 
+time_axis =
 {
     energy_tick_axis = {1},
     low_hp_reminder_interval = {15}
 }
 
-local local_defs = 
+local_defs =
 {
     --激流纹章
     coin_id = 70380240,
@@ -29,9 +29,9 @@ local local_defs =
     low_hp_reminder = 60010449,
 }
 
-local gadget_config_id_map = {}
+gadget_config_id_map = {}
 
-local Tri = {
+Tri = {
     [1] = { name = "monster_die_before_leave_scene", config_id = 9000001, event = EventType.EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE, source = "", condition = "", action = "action_monster_die_before_leave_scene", trigger_count = 0},
     [2] = { name = "any_gadget_die", config_id = 9000002, event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_any_gadget_die", trigger_count = 0},
     [3] = { name = "platform_arrival", config_id = 9000003, event = EventType.EVENT_PLATFORM_ARRIVAL, source = tostring(raft.engine), condition = "", action = "action_platform_arrival", trigger_count = 0},
@@ -49,7 +49,7 @@ function Initialize()
 		table.insert(suites[1].triggers, v.name)
 	end
 
-    
+
     for i = 1, #gadgets do
         gadget_config_id_map[gadgets[i].config_id] = gadgets[i].gadget_id
     end
@@ -60,7 +60,7 @@ function Initialize()
     --金币数
     table.insert(variables,{config_id = 50000002, name = "coin_num", value = 0})
 
-    
+
     --各个分块是否存活，存成一个四位二进制数方便管理
     table.insert(variables,{config_id = 50000003, name = "raft_part_alive", value = 1111})
 
@@ -87,7 +87,7 @@ function Initialize()
     table.insert(variables,{config_id = 50000010, name = "current_stage_monster_all_killed", value = 0})
     --当前阶段的障碍物是否被消灭
     table.insert(variables,{config_id = 50000011, name = "current_stage_obstacled_all_killed", value = 0})
-    
+
     --检查点计数，用于给客户端同步的
     table.insert(variables,{config_id = 50000012, name = "checkpoint_index", value = 1})
 
@@ -114,7 +114,7 @@ end
 function action_monster_die_before_leave_scene(context,evt)
 
     --看看chain上有没有需要加载的下一位的suite。如果有，则直接加载
-    local monster_suite_id = LF_Get_Suite_By_Config_Id(evt.param1,false)
+    monster_suite_id = LF_Get_Suite_By_Config_Id(evt.param1,false)
     LF_Try_Create_Next_Chain_Suite(context,monster_suite_id)
 
     for i = 1, monster_drop_num[1] do
@@ -124,7 +124,7 @@ function action_monster_die_before_leave_scene(context,evt)
         LF_Create_Object_Random_Pos_From_Pool_By_Monster_Config_Id(context,2,evt.param1,1.5)
     end
 
-    --if elite_drop[evt.param1] ~= nil then 
+    --if elite_drop[evt.param1] ~= nil then
     --    for i = 1, #elite_drop[evt.param1] do
     --        for j = 1,elite_drop[evt.param1][i] do
     --            LF_Create_Object_Random_Pos_From_Pool_By_Monster_Config_Id(context,i,evt.param1,1.5)
@@ -138,7 +138,7 @@ end
 function action_any_gadget_die(context,evt)
 
     --是否障碍物死亡
-    local obstacles =  LF_Get_Stage_Obstacle(context,LF_Get_Current_Stage(context))
+    obstacles =  LF_Get_Stage_Obstacle(context,LF_Get_Current_Stage(context))
     if (obstacles ~= 0) then
         if (evt.param1 == obstacles[1]) then
             ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] action_any_gadget_die: 当前阶段的障碍物死亡")
@@ -160,8 +160,8 @@ function action_any_gadget_die(context,evt)
         LF_Update_Exhibition(context,-2,"Activity_IslandParty_Raft_Protection",1)
 
         --分块死亡事件打点
-        local gid = LF_Get_Gadget_Id_By_Config_Id(evt.param1)
-        local param_table = 
+        gid = LF_Get_Gadget_Id_By_Config_Id(evt.param1)
+        param_table =
         {
             ["gadget_id"] = gid,
             ["change_type"] = 1,
@@ -179,8 +179,8 @@ function action_any_gadget_die(context,evt)
         LF_Update_Exhibition(context,-2,"Activity_IslandParty_Raft_Protection",1)
 
         --分块死亡事件打点
-        local gid = LF_Get_Gadget_Id_By_Config_Id(evt.param1)
-        local param_table = 
+        gid = LF_Get_Gadget_Id_By_Config_Id(evt.param1)
+        param_table =
         {
             ["gadget_id"] = gid,
             ["change_type"] = 1,
@@ -198,8 +198,8 @@ function action_any_gadget_die(context,evt)
         LF_Update_Exhibition(context,-2,"Activity_IslandParty_Raft_Protection",1)
 
         --分块死亡事件打点
-        local gid = LF_Get_Gadget_Id_By_Config_Id(evt.param1)
-        local param_table = 
+        gid = LF_Get_Gadget_Id_By_Config_Id(evt.param1)
+        param_table =
         {
             ["gadget_id"] = gid,
             ["change_type"] = 1,
@@ -218,8 +218,8 @@ function action_any_gadget_die(context,evt)
 
 
         --分块死亡事件打点
-        local gid = LF_Get_Gadget_Id_By_Config_Id(evt.param1)
-        local param_table = 
+        gid = LF_Get_Gadget_Id_By_Config_Id(evt.param1)
+        param_table =
         {
             ["gadget_id"] = gid,
             ["change_type"] = 1,
@@ -234,7 +234,7 @@ function action_any_gadget_die(context,evt)
     end
 
     --处理吃零件球和燃料球
-    local index = LF_Get_Pool_Index(context,evt.param1)
+    index = LF_Get_Pool_Index(context,evt.param1)
     if index == 1 then
         LF_Change_Part_Num(context,part.part_ball)
         return 0
@@ -245,8 +245,8 @@ function action_any_gadget_die(context,evt)
     end
 
     --处理吃金币
-    local cid = evt.param1
-    local gid = gadget_config_id_map[cid]
+    cid = evt.param1
+    gid = gadget_config_id_map[cid]
     if (gid == local_defs.coin_id) then
         ScriptLib.ChangeGroupVariableValue(context,"coin_num",1)
         LF_Gallery_Update(context,"COIN")
@@ -261,17 +261,17 @@ end
 --木筏到达检查点
 function action_platform_arrival(context,evt)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] action_platform_reach_point: 木筏到达检查点"..evt.param3)
-    
+
     --记录最近一次收到的路点事件，下次StopMove时，如果发现所在路点漏发了事件，需要补做相关逻辑
     ScriptLib.SetGroupVariableValue(context,"last_route_point",evt.param3)
 
     --这里客户端要求传过去的点id是连续的，所有得自己记一个当前的id
-    local checkpoint_index = ScriptLib.GetGroupVariableValue(context,"checkpoint_index")
+    checkpoint_index = ScriptLib.GetGroupVariableValue(context,"checkpoint_index")
     LF_Gallery_Update(context,"REACH_POINT",{point_id = checkpoint_index})
     ScriptLib.ChangeGroupVariableValue(context,"checkpoint_index",1)
 
     if LF_Is_Checkpoint(evt.param3) then
-        
+
         --当前阶段障碍物是否活着？活着停船，否则重新开船
         if LF_Is_Current_Obstacle_Alive(context) then
             ScriptLib.SetGroupVariableValue(context,"has_stopped_by_road_block",1)
@@ -287,9 +287,9 @@ end
 function action_time_axis_pass(context,evt)
     --每秒tick，如果当前处于运行状态，则扣除一定量的燃料
     if (evt.source_name == "ENERGY_TICK_AXIS") then
-        local energy_pool = ScriptLib.GetGroupVariableValue(context,"engine_energy_pool")
+        energy_pool = ScriptLib.GetGroupVariableValue(context,"engine_energy_pool")
             if LF_Is_Running(context) then
-                local energy_delta = energy_pool + (-energy.energy_consume_by_tick) 
+                energy_delta = energy_pool + (-energy.energy_consume_by_tick)
                 if energy_delta ~= 0 then
                     LF_Change_Engine_Energy(context,energy_delta)
                 end
@@ -303,7 +303,7 @@ function action_time_axis_pass(context,evt)
     end
 
     if evt.source_name == "LOW_HP_REMINDER_INTERVAL" then
-        
+
         ScriptLib.SetGroupVariableValue(context,"can_show_low_hp_reminder",1)
     end
 
@@ -318,24 +318,24 @@ function action_specific_gadget_hp_change(context,evt)
     end
 
     --处理运营打点
-    
-    local gid = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
+
+    gid = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_Common]LF_Mark_Lua_Action: 筏子"..gid.."运营打点：----------------------------")
-    local percentage_stage = {80,50,30,0}
+    percentage_stage = {80,50,30,0}
     ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] LF_Mark_Lua_Action: 筏子"..gid.."血量变化前为"..evt.param2)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] LF_Mark_Lua_Action: 筏子"..gid.."血量变化后为"..evt.param3)
     for i = 1, 4 do
         --gadget血量变化事件是每10%血量记一次，所以即可能是上界碰到、也有可能是下界碰到、也有可能是横跨，三种情况都要算
         --去掉血量为0的计数，放到死亡事件里单独处理
         if (LF_Is_In_Range(percentage_stage[i],evt.param2,evt.param3) or percentage_stage[i] == evt.param2 or percentage_stage[i] == evt.param3) and evt.param3 ~= 0 then
-            local change_type = 0
+            change_type = 0
             if (evt.param2 > evt.param3) then
                 change_type = 1
             else
                 change_type = 2
             end
-            local gid = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
-            local param_table = 
+            gid = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
+            param_table =
             {
                 ["gadget_id"] = gid,
                 ["change_type"] = change_type,
@@ -354,12 +354,12 @@ function action_engine_energy_change(context,evt)
 
     --处理运营打点
     ScriptLib.PrintContextLog(context,"## [SocialActivity_Common]LF_Mark_Lua_Action: 运营打点：----------------------------")
-    local percentage_stage = {energy.max_energy * 0.8,energy.max_energy * 0.5,energy.max_energy * 0.3,0}
+    percentage_stage = {energy.max_energy * 0.8,energy.max_energy * 0.5,energy.max_energy * 0.3,0}
     ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] LF_Mark_Lua_Action: 引擎能量变化前为"..evt.param2)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] LF_Mark_Lua_Action: 引擎能量变化后为"..evt.param1)
     for i = 1, 4 do
         if LF_Is_In_Range(percentage_stage[i],evt.param1,evt.param2) then
-            local change_type = 0
+            change_type = 0
             if (evt.param1 < evt.param2) then
                 change_type = 1
             else
@@ -367,9 +367,9 @@ function action_engine_energy_change(context,evt)
             end
 
             --木筏发动机的gid
-            local gid = 70380224
-        
-            local param_table = 
+            gid = 70380224
+
+            param_table =
             {
                 ["gadget_id"] = gid,
                 ["change_type"] = change_type,
@@ -412,9 +412,9 @@ function LF_Special_Play_Start(context)
     --玩法开始时，重置一次对象池
     LF_Reset_Gadget_Pool(context)
 
-    local PointArray = {}
+    PointArray = {}
     for i = point_id_array.from,  point_id_array.to do
-        local flag = true
+        flag = true
         if point_id_array.except ~= nil then
             for j = 1, #point_id_array.except do
                 if point_id_array.except[j] == i then
@@ -431,7 +431,7 @@ function LF_Special_Play_Start(context)
     if #PointArray == 0 then
         ScriptLib.PrintGroupWarning(context,"## [SocialActivity_RaftChallenge]LF_Special_Play_Start：生成的点阵为空，检查LD点阵配置是否正确")
     else
-        local ret = ScriptLib.SetPlatformPointArray(context,raft.engine, defs.pointarray_route, PointArray, { route_type = 0,turn_mode=false })
+        ret = ScriptLib.SetPlatformPointArray(context,raft.engine, defs.pointarray_route, PointArray, { route_type = 0,turn_mode=false })
     end
     LF_Gallery_Update(context,"START_PLAY",{})
 
@@ -452,7 +452,7 @@ end
 --木筏挑战的特殊阶段转换事件，注意取current_stage已经是转阶段后的stage了
 function LF_Special_State_Change(context)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] LF_Special_State_Change: 特殊阶段转换逻辑")
-    
+
 
     ScriptLib.InitTimeAxis(context,"ENERGY_TICK_AXIS",time_axis.energy_tick_axis,true)
 
@@ -462,7 +462,7 @@ function LF_Special_State_Change(context)
         ScriptLib.SetGroupVariableValue(context,"current_stage_obstacled_all_killed",0)
     end
 
-    
+
     --根据LD的需求，隔X个stage，清理前面所有stage的内容
     for i = 1, LF_Get_Current_Stage(context)-local_defs.clear_stage_interval do
         LF_Clear_Specific_Stage(context,i)
@@ -477,7 +477,7 @@ end
 
 
 function LF_Special_Play_Finish(context,is_success)
-    
+
     ScriptLib.EndTimeAxis(context,"ENERGY_TICK_AXIS")
     if is_success then
         LF_Update_Exhibition(context,-2,"Activity_IslandParty_Raft_Success",1)
@@ -498,7 +498,7 @@ end
 --尝试启动木筏
 function LF_Try_Start_Raft(context)
     LF_Try_Set_Stop_Raft_Op_Num(context, -1)
-    local stop_raft_op_num = ScriptLib.GetGroupVariableValue(context,"stop_raft_op_num")
+    stop_raft_op_num = ScriptLib.GetGroupVariableValue(context,"stop_raft_op_num")
     --停船的操作数小于等于0的情况下，才能继续启动船
     if (stop_raft_op_num <= 0) then
         ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] LF_Try_Start_Raft: 启动木筏")
@@ -506,7 +506,7 @@ function LF_Try_Start_Raft(context)
         --ScriptLib.SetPlatformRouteIndexToNext(context, raft.engine)
         --服务端的目标直接指向了下一个点，要同步发给客户端
         --ScriptLib.ChangeGroupVariableValue(context,"checkpoint_index",1)
-        --local checkpoint_index = ScriptLib.GetGroupVariableValue(context,"checkpoint_index")
+        --checkpoint_index = ScriptLib.GetGroupVariableValue(context,"checkpoint_index")
         --LF_Gallery_Update(context,"REACH_POINT",{point_id = checkpoint_index})
 
 
@@ -522,8 +522,8 @@ function LF_Try_Stop_Raft(context)
     ScriptLib.StopPlatform(context,raft.engine)
     ScriptLib.SetGroupVariableValue(context,"is_running",0)
 
-    local current_point = ScriptLib.GetPlatformPointArray(context,raft.engine)[2]
-    local last_point = ScriptLib.GetGroupVariableValue(context,"last_route_point")
+    current_point = ScriptLib.GetPlatformPointArray(context,raft.engine)[2]
+    last_point = ScriptLib.GetGroupVariableValue(context,"last_route_point")
     ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] LF_Try_Stop_Raft: 当前所在路点为"..current_point)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] LF_Try_Stop_Raft: 最近获得事件的路点为"..last_point)
     if current_point ~= last_point then
@@ -531,7 +531,7 @@ function LF_Try_Stop_Raft(context)
 
         --给客户端更新路点信息
         --这里客户端要求传过去的点id是连续的，所有得自己记一个当前的id
-        local checkpoint_index = ScriptLib.GetGroupVariableValue(context,"checkpoint_index")
+        checkpoint_index = ScriptLib.GetGroupVariableValue(context,"checkpoint_index")
         LF_Gallery_Update(context,"REACH_POINT",{point_id = checkpoint_index})
         ScriptLib.ChangeGroupVariableValue(context,"checkpoint_index",1)
 
@@ -550,7 +550,7 @@ function LF_Try_Stop_Raft(context)
 end
 
 function LF_Try_Set_Stop_Raft_Op_Num(context, delta)
-    local stop_raft_op_num = ScriptLib.GetGroupVariableValue(context,"stop_raft_op_num")
+    stop_raft_op_num = ScriptLib.GetGroupVariableValue(context,"stop_raft_op_num")
     if stop_raft_op_num+delta <=0 then
         ScriptLib.SetGroupVariableValue(context,"stop_raft_op_num",0)
     else
@@ -605,7 +605,7 @@ function LF_Change_Part_Num(context, part_delta)
     if ScriptLib.GetGroupVariableValue(context,"part_num") <= 0 then
         ScriptLib.SetGroupVariableValue(context,"part_num", 0)
     end
-    
+
     LF_Gallery_Update(context,"PART_CHANGE",{})
 end
 
@@ -624,7 +624,7 @@ end
 --燃料数量为空时，触发保底机制
 function LF_On_Fuel_Zero(context)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] LF_On_Fuel_Zero: 燃料数为空，触发保底机制")
-    local guarantee_times = ScriptLib.GetGroupVariableValue(context,"fuel_guarantee_times")
+    guarantee_times = ScriptLib.GetGroupVariableValue(context,"fuel_guarantee_times")
     if guarantee_times < local_defs.fuel_guarantee_max_times then
         LF_Change_Fuel_Num(context,local_defs.fuel_guarantee_num)
         ScriptLib.ChangeGroupVariableValue(context,"fuel_guarantee_times",1)
@@ -684,8 +684,8 @@ end
 
 --设置第n个分块的存活情况
 function LF_Set_Raft_Part_Alive(context,part_id,alive)
-    local raft_part_alive = ScriptLib.GetGroupVariableValue(context,"raft_part_alive")
-    local exact_part_alive = LF_Get_N_Digit(context,raft_part_alive,(5-part_id))
+    raft_part_alive = ScriptLib.GetGroupVariableValue(context,"raft_part_alive")
+    exact_part_alive = LF_Get_N_Digit(context,raft_part_alive,(5-part_id))
     if alive == 1 and exact_part_alive == 0 then
         raft_part_alive = math.floor(raft_part_alive + 10^(4-part_id))
         ScriptLib.SetGroupVariableValue(context,"raft_part_alive",raft_part_alive)
@@ -700,8 +700,8 @@ end
 
 --返回第n个分块的存活情况
 function LF_Get_Raft_Part_Alive(context,part_id)
-    local raft_part_alive = ScriptLib.GetGroupVariableValue(context,"raft_part_alive")
-    local exact_part_alive = LF_Get_N_Digit(context,raft_part_alive,(5-part_id))
+    raft_part_alive = ScriptLib.GetGroupVariableValue(context,"raft_part_alive")
+    exact_part_alive = LF_Get_N_Digit(context,raft_part_alive,(5-part_id))
     return exact_part_alive == 1
 end
 
@@ -711,12 +711,12 @@ end
 
 
 function LF_Is_Part_Hp_Full(context,part_index)
-    local part_config_id = LF_Get_Part_Config_Id_By_Index(part_index)
+    part_config_id = LF_Get_Part_Config_Id_By_Index(part_index)
     if part_config_id == 0 then
         return false
     end
-    local hp_percent = ScriptLib.GetGadgetHpPercent(context, base_info.group_id, part_config_id)
-    return hp_percent >= 100 
+    hp_percent = ScriptLib.GetGadgetHpPercent(context, base_info.group_id, part_config_id)
+    return hp_percent >= 100
 end
 
 function LF_Is_Engine_Energy_Full(context)
@@ -750,8 +750,8 @@ end
 
 --给team上写SGV
 function LF_Set_SGV_To_All_Team(context, gv_name, group_variable)
-    local uid_list = ScriptLib.GetSceneUidList(context)
-    local value = ScriptLib.GetGroupVariableValue(context,group_variable)
+    uid_list = ScriptLib.GetSceneUidList(context)
+    value = ScriptLib.GetGroupVariableValue(context,group_variable)
     for i = 1, #uid_list do
         ScriptLib.SetTeamServerGlobalValue(context, uid_list[i], gv_name, value)
     end
@@ -759,7 +759,7 @@ end
 
 --给船上面写SGV
 function LF_Set_SGV_To_Raft(context,gv_name, group_variable)
-    local value = ScriptLib.GetGroupVariableValue(context,group_variable)
+    value = ScriptLib.GetGroupVariableValue(context,group_variable)
     ScriptLib.SetEntityServerGlobalValueByConfigId(context, raft.engine, gv_name, value)
 end
 
@@ -797,38 +797,38 @@ function LF_Gallery_Update(context,command,param)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_RaftChallenge] LF_Gallery_Update: 向gallery同步")
 
     if command == "START_PLAY" then
-        local raft_entity_id = ScriptLib.GetEntityIdByConfigId(context, raft.engine)
+        raft_entity_id = ScriptLib.GetEntityIdByConfigId(context, raft.engine)
 
-        local param_table = {["raft_entity_id"] = raft_entity_id }
+        param_table = {["raft_entity_id"] = raft_entity_id }
         LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end
 
     if command == "REACH_POINT" then
 
-        local param_table = {["point_id"] = param.point_id }
+        param_table = {["point_id"] = param.point_id }
         LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end
 
     if command == "FUEL_CHANGE" then
-        local fuel = ScriptLib.GetGroupVariableValue(context,"fuel_num")
-        local param_table = {["fuel"] = fuel}
+        fuel = ScriptLib.GetGroupVariableValue(context,"fuel_num")
+        param_table = {["fuel"] = fuel}
         --LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end
 
     if command == "PART_CHANGE" then
-        local part = ScriptLib.GetGroupVariableValue(context,"part_num")
-        local param_table = {["part"] = part}
+        part = ScriptLib.GetGroupVariableValue(context,"part_num")
+        param_table = {["part"] = part}
         --LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end
 
-    
+
     if command == "COIN" then
-        local coin = ScriptLib.GetGroupVariableValue(context,"coin_num")
-        local param_table = {["coin"] = coin}
+        coin = ScriptLib.GetGroupVariableValue(context,"coin_num")
+        param_table = {["coin"] = coin}
         --LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end
@@ -860,18 +860,18 @@ function SLC_Try_Recover_Engine(context,avatar_num)
         return 0
     end
     if avatar_num <= 0 or avatar_num > 4 then
-        return 0 
+        return 0
     end
     if ScriptLib.IsGalleryStart(context,defs.gallery_id) then
         --有燃料，且燃料没满：恢复能量，并将发动机切到能量恢复状态
         if LF_Have_Enough_Fuel(context) and not LF_Is_Engine_Energy_Full(context) then
 
             --当下一次补充会直接补满能量时，按比例进行消耗而不是全部消耗
-            local current_energy = ScriptLib.GetGroupVariableValue(context,"engine_energy")
-            local max_energy = energy.max_energy
-            local consumed_energy = max_energy - current_energy
-            local ratio = consumed_energy / (energy.energy_heal_by_tick * avatar_num)
-            if ratio > 1 then 
+            current_energy = ScriptLib.GetGroupVariableValue(context,"engine_energy")
+            max_energy = energy.max_energy
+            consumed_energy = max_energy - current_energy
+            ratio = consumed_energy / (energy.energy_heal_by_tick * avatar_num)
+            if ratio > 1 then
                 ratio = 1
             end
 
@@ -911,24 +911,24 @@ function SLC_Try_Recover_Part_Hp(context,part_id,avatar_num)
         return 0
     end
     if avatar_num <= 0 and avatar_num > 4 then
-        return 0 
+        return 0
     end
     if part_id <= 0 and part_id > 4 then
-        return 0 
+        return 0
     end
 
 
     if ScriptLib.IsGalleryStart(context,defs.gallery_id) then
-        local part_config_id = LF_Get_Part_Config_Id_By_Index(part_id)
+        part_config_id = LF_Get_Part_Config_Id_By_Index(part_id)
         if part_config_id == 0 then
             return 0
         end
         if LF_Have_Enough_Part(context) and not LF_Is_Part_Hp_Full(context,part_id) then
             --当下一次补充会直接补满血量时，按比例进行消耗而不是全部消耗
-            local hp_percent = ScriptLib.GetGadgetHpPercent(context, base_info.group_id, part_config_id)
-            local max_hp_percent = 100
-            local consumed_hp = max_hp_percent - hp_percent
-            local ratio  = consumed_hp / (part.hp_recover_by_tick * avatar_num)
+            hp_percent = ScriptLib.GetGadgetHpPercent(context, base_info.group_id, part_config_id)
+            max_hp_percent = 100
+            consumed_hp = max_hp_percent - hp_percent
+            ratio  = consumed_hp / (part.hp_recover_by_tick * avatar_num)
             if ratio > 1 then
                 ratio = 1
             end
@@ -967,7 +967,7 @@ function SLC_Exhibition_Repair_Time(context,part_id)
         return 0
     end
     if part_id < 0 and part_id > 4 then
-        return 0 
+        return 0
     end
 
     --引擎修复的计数
@@ -978,12 +978,12 @@ function SLC_Exhibition_Repair_Time(context,part_id)
         end
     end
 
-    local part_config_id = LF_Get_Part_Config_Id_By_Index(part_id)
+    part_config_id = LF_Get_Part_Config_Id_By_Index(part_id)
     if part_config_id == 0 then
         return 0
     end
     --必须要真的能回复分块血量才计入统计
-    local hp_percent = ScriptLib.GetGadgetHpPercent(context, base_info.group_id, part_config_id)
+    hp_percent = ScriptLib.GetGadgetHpPercent(context, base_info.group_id, part_config_id)
     if hp_percent < 100 and LF_Have_Enough_Part(context) then
         LF_Update_Exhibition(context,context.uid,"Activity_IslandParty_Raft_Fix",1)
     end

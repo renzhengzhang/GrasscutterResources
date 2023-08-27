@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220133037
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -98,12 +98,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_37003(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133037, 37001) then
 		return false
 	end
-	
+
 	-- 判断变量"DrumTime"为1
 	if ScriptLib.GetGroupVariableValue(context, "DrumTime") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -114,28 +114,28 @@ function action_EVENT_GADGET_STATE_CHANGE_37003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220133037, 2)
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220133038, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 改变指定group组220133041中， configid为41005的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220133041, 41005, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220133042中， configid为42001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220133042, 42001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -144,12 +144,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_37004(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133037, 37001) then
 		return false
 	end
-	
+
 	-- 判断变量"DrumTime"为0
 	if ScriptLib.GetGroupVariableValue(context, "DrumTime") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -157,25 +157,25 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_37004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220133037, 2)
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220133038, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 改变指定group组220133041中， configid为41005的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220133041, 41005, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220133042中， configid为42001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220133042, 42001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -184,7 +184,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_37005(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133037, 37001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -195,7 +195,7 @@ function action_EVENT_GADGET_STATE_CHANGE_37005(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -204,17 +204,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_37006(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133037, 37001) then
 		return false
 	end
-	
+
 	-- 判断变量"DrumTime"为1
 	if ScriptLib.GetGroupVariableValue(context, "DrumTime") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"CsShown"为0
 	if ScriptLib.GetGroupVariableValue(context, "CsShown") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -225,19 +225,19 @@ function action_EVENT_GADGET_STATE_CHANGE_37006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "CsShown" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "CsShown", 0, 220133038) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 通知场景上的所有玩家播放名字为201330101 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 201330101, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -246,17 +246,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_37007(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133037, 37001) then
 		return false
 	end
-	
+
 	-- 判断变量"DrumTime"为0
 	if ScriptLib.GetGroupVariableValue(context, "DrumTime") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"CsShown"为0
 	if ScriptLib.GetGroupVariableValue(context, "CsShown") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -267,18 +267,18 @@ function action_EVENT_GADGET_STATE_CHANGE_37007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "CsShown" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "CsShown", 0, 220133038) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 通知场景上的所有玩家播放名字为201330103 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 201330103, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

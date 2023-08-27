@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220142010
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -93,9 +93,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -104,10 +104,10 @@ function action_EVENT_LEVEL_TAG_CHANGE_10002(context, evt)
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 220142010, 3)
-		
+
 		ScriptLib.KillEntityByConfigId(context, {group_id=220142010, config_id=10006, entity_type=EntityType.GADGET})
 	end
-	
+
 	return 0
 end
 
@@ -117,16 +117,16 @@ function action_EVENT_GROUP_LOAD_10003(context, evt)
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 220142010, 3)
-		
+
 		ScriptLib.RemoveExtraGroupSuite(context, 220142010, 2)
 	end
-	
+
 	if ScriptLib.CheckSceneTag(context, 20142,1051 ) and ScriptLib.GetGroupVariableValue(context, "letter") == 0 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 220142010, 2)
 	end
-	
+
 	return 0
 end
 
@@ -134,7 +134,7 @@ end
 function action_EVENT_QUEST_START_10004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220142010, 2)
-	
+
 	return 0
 end
 
@@ -145,16 +145,16 @@ function action_EVENT_QUEST_FINISH_10005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220142010, 3)
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220142010, monsters = {}, gadgets = {10006} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -165,12 +165,12 @@ function action_EVENT_QUEST_FINISH_10008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220142010, EntityType.GADGET, 10006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end

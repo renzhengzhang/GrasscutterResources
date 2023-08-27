@@ -1,4 +1,4 @@
---[[local defs = {
+--[[defs = {
 	group_id = xxx,
 	gadget_prison_list = {1,2,3,4},
 	gadget_guide = {1,2,3},
@@ -11,14 +11,14 @@
 	rampage_time = 40,
 	gadget_energy = 1,
 }--]]
- 
---[[local energy_info = {
+
+--[[energy_info = {
 	[1] = { time = 80, points = {1,2,3,4,5,6}},
 	[2] = { time = 160, points = {1,2,3,4,5,6}}
 }--]]
 
 --初始化给的state
-local HS_State = {
+HS_State = {
 	["Play"] 	 = { name = "HideAndSeek_PlayerState_Play", value = 3 },
 	["Visible"]  = { name = "HideAndSeek_PlayerState_Visible", value = 1 },
 	["OnMap"] 	 = { name = "HideAndSeek_PlayerState_OnMap", value = 0 },
@@ -33,7 +33,7 @@ local HS_State = {
 	["Is_Detected"] = { name = "HideAndSeek_PlayerState_Is_Detected", value = 0},
 }
 
-local skill_info = {
+skill_info = {
 	["HideAndSeek_Skill_CatchPrey"] = { radius = 4 },
 	["HideAndSeek_Skill_Guide"] = { radius = 500 },
 	["HideAndSeek_Skill_Detect_F"] = { radius = 10 },
@@ -42,11 +42,11 @@ local skill_info = {
 	["HideAndSeek_Skill_SuperPrison"] = { radius = 500, duration = 40 },
 }
 
-local hunter_win_by_EX = 30
-local hunter_win_in_time = 120
-local hunter_catch_by_guide = 10
+hunter_win_by_EX = 30
+hunter_win_in_time = 120
+hunter_catch_by_guide = 10
 
-local map_info = {
+map_info = {
 	--一期
 	[1001003] = { name = "QingCe", list = {1,2,3} },
 	[1001001] = { name = "QingQuan", list = {4,5} },
@@ -75,7 +75,7 @@ local map_info = {
 }
 
 
-local Tri = {
+Tri = {
 	[1]={ name = "gallery_stop", config_id = 8000001, event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_gallery_stop", trigger_count = 0},
 	[2]={ name = "challenge_success", config_id = 8000003, event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0},
 	[3]={ name = "challenge_fail", config_id = 8000004, event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail", trigger_count = 0},
@@ -91,7 +91,7 @@ local Tri = {
 	[13]={name = "group_will_unload", config_id = 8000014, event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload", trigger_count = 0 },
 }
 
-local Var = {
+Var = {
  	{ config_id=50000001,name = "catch_sum", value = 0, no_refresh = false},
  	{ config_id=50000002,name = "GM_stage", value = 0, no_refresh = false},
 }
@@ -209,11 +209,11 @@ function action_time_axis_pass(context, evt)
 	elseif evt.source_name == "energy" then
 		ScriptLib.KillEntityByConfigId(context, {config_id = defs.gadget_energy, entity_type = EntityType.GADGET})
 		--随机选择位置创建能量球
-		local p_list = energy_info[evt.param1].points
+		p_list = energy_info[evt.param1].points
 		math.randomseed(ScriptLib.GetServerTime(context))
-		local ret = p_list[math.random(#p_list)]
-		local p_pos = {}
-		local p_rot = {}
+		ret = p_list[math.random(#p_list)]
+		p_pos = {}
+		p_rot = {}
 		for k,v in ipairs(points) do
 			if v.config_id == ret then
 				p_pos = v.pos
@@ -222,14 +222,14 @@ function action_time_axis_pass(context, evt)
 			end
 		end
 		ScriptLib.CreateGadgetByConfigIdByPos(context, defs.gadget_energy, p_pos, p_rot)
-		local uid_list = ScriptLib.GetSceneUidList(context)
+		uid_list = ScriptLib.GetSceneUidList(context)
 		--通知全体掉能量球
 		ScriptLib.AssignPlayerUidOpNotify(context, {param_index = 12,param_list={},param_uid_list={},duration=3,target_uid_list=uid_list})
 	elseif evt.source_name == "hunter_win_by_EX" or evt.source_name == "hunter_win_in_time" or evt.source_name == "hunter_catch_by_guide" then
 		ScriptLib.SetGroupTempValue(context, evt.source_name, 0, {})
 	else
 		for i=1,3 do
-			local _uid = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+			_uid = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 			if evt.source_name == tostring(_uid) then
 				ScriptLib.AssignPlayerShowTemplateReminder(context, 138, {param_vec={},param_uid_vec={},uid_vec={_uid}})
 				LF_Set_Player_State_Value(context, _uid, HS_State.Dead.name, 1)
@@ -241,7 +241,7 @@ function action_time_axis_pass(context, evt)
 end
 
 function action_avatar_die(context, evt)
-	local char = ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..context.uid, {})
+	char = ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..context.uid, {})
 	ScriptLib.PrintContextLog(context, "## H&S_LOG : avatar_die "..context.uid.." | character = "..char)
 	if ScriptLib.GetGroupTempValue(context, "is_in_play", {}) == 0 then
 		ScriptLib.PrintContextLog(context, "## H&S_LOG : is_in_play = 0")
@@ -255,15 +255,15 @@ function action_avatar_die(context, evt)
 		LF_Set_Prey_Die(context, context.uid)
 	elseif char == 3 then
 		for i = 1,3 do
-			local prey = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+			prey = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 			if prey == context.uid then
 				--prey提前死亡不参与游戏
 				LF_Set_Prey_Die(context, context.uid)
-				return 0	
+				return 0
 			end
-		end 
+		end
 		--hunter提前死亡直接结算prey胜利
-		local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
+		_index = ScriptLib.GetHideAndSeekPlayIndex(context)
 		ScriptLib.EndSceneMultiStagePlayStage(context, _index, "null", true)
 		LF_Stop_Hide_And_Seek(context, 2)
 	end
@@ -288,7 +288,7 @@ function action_GM_Debug(context, evt)
 	if evt.param1 == evt.param2 then
 		return -1
 	end
-	local uid_list = ScriptLib.GetSceneUidList(context)
+	uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		if evt.source_name == HS_State.OnMap.name.."_"..v then
 			LF_Notify_Player_Visible(context, v)
@@ -312,7 +312,7 @@ end
 ---------------------------------------
 function LF_Start_Hide_And_Seek(context)
 	ScriptLib.PrintContextLog(context, "## HS_Log : LF_Start_Hide_And_Seek")
-	local uid_list = ScriptLib.GetSceneUidList(context)
+	uid_list = ScriptLib.GetSceneUidList(context)
 	LF_Start_Comp_Challenge(context)
 end
 
@@ -321,12 +321,12 @@ function LF_Stop_Hide_And_Seek(context, value)
 	ScriptLib.SetGroupTempValue(context, "is_in_play", 0, {})
 	ScriptLib.EndTimeAxis(context, "rampage")
 	ScriptLib.EndTimeAxis(context, "energy")
-	local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
+	hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
 	for i=1,3 do
-		local _uid = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+		_uid = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 		ScriptLib.EndTimeAxis(context, tostring(_uid))
 	end
-	local uid_list = ScriptLib.GetSceneUidList(context)
+	uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		LF_Init_Player_State(context, v)
 	end
@@ -341,9 +341,9 @@ function LF_Stop_Hide_And_Seek(context, value)
 		ScriptLib.StopChallenge(context, 9011, 0)
 		return -1
 	end
-	local _gallery = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	_gallery = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 	-------
-	local catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
+	catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
 	--统计：抓捕总数
 	ScriptLib.AddExhibitionReplaceableData(context, hunter, "hunter_catch_sum", catch_sum)
 	--hunter胜利
@@ -369,18 +369,18 @@ end
 
 function LF_Assign_Character_Card(context)
 	ScriptLib.PrintContextLog(context, "## HS_Log : LF_Assign_Character_Card")
-	local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
-	local _gallery = ScriptLib.GetHideAndSeekPlayGalleryId(context, _index)
+	_index = ScriptLib.GetHideAndSeekPlayIndex(context)
+	_gallery = ScriptLib.GetHideAndSeekPlayGalleryId(context, _index)
 	ScriptLib.SetGroupTempValue(context, "gallery_id", _gallery, {})
 	ScriptLib.SetGroupTempValue(context, "is_in_play", 1, {})
-	local uid_list = ScriptLib.GetSceneUidList(context)
+	uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetPlayerGroupVisionType(context, uid_list, {0})
-	local hunter = 0
-	local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
+	hunter = 0
+	_index = ScriptLib.GetHideAndSeekPlayIndex(context)
 	hunter = ScriptLib.GetHideAndSeekHunter(context, _index)
 	ScriptLib.PrintContextLog(context, "## HS_Log : hunter_uid = "..hunter)
 	ScriptLib.SetGroupTempValue(context, "hunter", hunter, {})
-	local cnt = 1
+	cnt = 1
 	for i,v in ipairs(uid_list) do
 		if v ~= hunter then
 			ScriptLib.SetGroupTempValue(context, "prey_"..cnt, v, {})
@@ -406,9 +406,9 @@ end
 
 function LF_Init_Player_Skill(context, uid, u_ptr)
 	ScriptLib.PrintContextLog(context, "## H&S_LOG : LF_Init_Player_Skill : "..uid)
-	local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
-	local _gallery = ScriptLib.GetHideAndSeekPlayGalleryId(context, _index)
-	local skill_list = ScriptLib.GetHideAndSeekPlayerSkillList(context, _index, uid)
+	_index = ScriptLib.GetHideAndSeekPlayIndex(context)
+	_gallery = ScriptLib.GetHideAndSeekPlayGalleryId(context, _index)
+	skill_list = ScriptLib.GetHideAndSeekPlayerSkillList(context, _index, uid)
 	for p,q in ipairs(skill_list) do
 		ScriptLib.AttachGalleryAbilityGroup(context, {uid}, _gallery, q)
 	end
@@ -417,21 +417,21 @@ end
 function LF_Start_Comp_Challenge(context)
 	ScriptLib.PrintContextLog(context, "## HS_Log : LF_Start_Comp_Challenge")
 	ScriptLib.CreateFatherChallenge(context, 9011, 9011, defs.duration, {success=10,fail=10})
-	local uid_list = ScriptLib.GetSceneUidList(context)
-	local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
+	uid_list = ScriptLib.GetSceneUidList(context)
+	hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
 	ScriptLib.ForceRefreshAuthorityByConfigId(context, defs.gadget_prison_list[1], hunter)
 	--prey_sum这里统计就太晚了，需要三阶段开始先统计一次
-	local prey_sum = 0
+	prey_sum = 0
 	for i,v in ipairs(uid_list) do
 		if v == hunter then
 			LF_Set_Player_State_Value(context, v, HS_State.Play.name, 0)
-		else 
-			local idx = 0
+		else
+			idx = 0
 			for j = 1,3 do
 				if v == ScriptLib.GetGroupTempValue(context, "prey_"..j, {}) then
 					idx = j
 					break
-				end	
+				end
 			end
 			--只有非死亡状态的游侠才继续游戏
 			if ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {}) == 3 then
@@ -462,7 +462,7 @@ end
 function LF_Set_Energy(context)
 	ScriptLib.PrintContextLog(context, "## HS_Log : LF_Set_Energy")
 	math.randomseed(ScriptLib.GetServerTime(context))
-	local energy_list = {}
+	energy_list = {}
 	for i,v in ipairs(energy_info) do
 		table.insert(energy_list, v.time + math.random(energy_info[i].step[1],energy_info[i].step[2]))
 	end
@@ -517,16 +517,16 @@ end
 --用于集中处理hunter失败的结算
 function LF_Handle_Exhibition_Prey_Win(context)
 	ScriptLib.PrintContextLog(context, "## H&S_LOG : LF_Handle_Exhibition_Prey_Win")
-	local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
-	local prey_sum = ScriptLib.GetGroupTempValue(context, "prey_sum", {})
-	local catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
+	hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
+	prey_sum = ScriptLib.GetGroupTempValue(context, "prey_sum", {})
+	catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
 	--剩余人数结算
-	local prey_alive = prey_sum - catch_sum
+	prey_alive = prey_sum - catch_sum
 	if prey_alive == 1 then
 		--统计：猎手的惜败
 		ScriptLib.AddExhibitionReplaceableData(context, hunter, "hunter_miss_one", 1)
 		for i=1,3 do
-			local _prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
+			_prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
 			if _prey ~= 0 then
 				--统计：最后的火种
 				ScriptLib.AddExhibitionReplaceableData(context, _prey, "prey_alive_only", 1)
@@ -542,18 +542,18 @@ function LF_Handle_Exhibition_Prey_Win(context)
 		ScriptLib.AddExhibitionReplaceableData(context, hunter, "hunter_miss_all", 1)
 	end
 	for i=1,3 do
-		local _prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
-		local _const = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+		_prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
+		_const = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 		if _const ~= 0 then
 			--存活的prey
 			if _prey ~= 0 then
 				--统计：抗争到底
 				ScriptLib.AddExhibitionReplaceableData(context, _const, "prey_alive_win", 1)
 				--统计：全身而退
-				local guide_time = ScriptLib.GetGroupTempValue(context, "prey_win_by_guide", {})
+				guide_time = ScriptLib.GetGroupTempValue(context, "prey_win_by_guide", {})
 				ScriptLib.AddExhibitionReplaceableData(context, _const, "prey_win_by_guide", guide_time)
 				--统计：灯下取巧
-				local detect_time = ScriptLib.GetGroupTempValue(context, "prey_win_by_detect_".._prey, {})
+				detect_time = ScriptLib.GetGroupTempValue(context, "prey_win_by_detect_".._prey, {})
 				ScriptLib.AddExhibitionReplaceableData(context, _prey, "prey_win_by_detect", detect_time)
 				--统计：无技能胜利,要反转统计一次
 				if 0 == ScriptLib.GetGroupTempValue(context, "prey_win_without_skill_".._const, {}) then

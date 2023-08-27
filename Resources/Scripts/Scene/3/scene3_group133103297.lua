@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133103297
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -104,9 +104,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -117,9 +117,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -144,20 +144,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297003(context, evt)
 	if evt.param1 ~= 297003 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -168,25 +168,25 @@ function action_EVENT_ENTER_REGION_297003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297004(context, evt)
 	if evt.param1 ~= 297004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -197,25 +197,25 @@ function action_EVENT_ENTER_REGION_297004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297005(context, evt)
 	if evt.param1 ~= 297005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -226,25 +226,25 @@ function action_EVENT_ENTER_REGION_297005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297007(context, evt)
 	if evt.param1 ~= 297007 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -255,25 +255,25 @@ function action_EVENT_ENTER_REGION_297007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297008(context, evt)
 	if evt.param1 ~= 297008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -284,25 +284,25 @@ function action_EVENT_ENTER_REGION_297008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297010(context, evt)
 	if evt.param1 ~= 297010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -313,25 +313,25 @@ function action_EVENT_ENTER_REGION_297010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297011(context, evt)
 	if evt.param1 ~= 297011 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -342,25 +342,25 @@ function action_EVENT_ENTER_REGION_297011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297012(context, evt)
 	if evt.param1 ~= 297012 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -371,25 +371,25 @@ function action_EVENT_ENTER_REGION_297012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297013(context, evt)
 	if evt.param1 ~= 297013 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -400,25 +400,25 @@ function action_EVENT_ENTER_REGION_297013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297014(context, evt)
 	if evt.param1 ~= 297014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -429,25 +429,25 @@ function action_EVENT_ENTER_REGION_297014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297015(context, evt)
 	if evt.param1 ~= 297015 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -458,25 +458,25 @@ function action_EVENT_ENTER_REGION_297015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297016(context, evt)
 	if evt.param1 ~= 297016 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -487,25 +487,25 @@ function action_EVENT_ENTER_REGION_297016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297017(context, evt)
 	if evt.param1 ~= 297017 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -516,25 +516,25 @@ function action_EVENT_ENTER_REGION_297017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297018(context, evt)
 	if evt.param1 ~= 297018 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -545,25 +545,25 @@ function action_EVENT_ENTER_REGION_297018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297019(context, evt)
 	if evt.param1 ~= 297019 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -574,25 +574,25 @@ function action_EVENT_ENTER_REGION_297019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297020(context, evt)
 	if evt.param1 ~= 297020 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -603,25 +603,25 @@ function action_EVENT_ENTER_REGION_297020(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297022(context, evt)
 	if evt.param1 ~= 297022 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -632,25 +632,25 @@ function action_EVENT_ENTER_REGION_297022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297023(context, evt)
 	if evt.param1 ~= 297023 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -661,25 +661,25 @@ function action_EVENT_ENTER_REGION_297023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297024(context, evt)
 	if evt.param1 ~= 297024 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -690,25 +690,25 @@ function action_EVENT_ENTER_REGION_297024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297026(context, evt)
 	if evt.param1 ~= 297026 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -719,25 +719,25 @@ function action_EVENT_ENTER_REGION_297026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297028(context, evt)
 	if evt.param1 ~= 297028 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -748,25 +748,25 @@ function action_EVENT_ENTER_REGION_297028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297029(context, evt)
 	if evt.param1 ~= 297029 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -777,25 +777,25 @@ function action_EVENT_ENTER_REGION_297029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297030(context, evt)
 	if evt.param1 ~= 297030 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -806,25 +806,25 @@ function action_EVENT_ENTER_REGION_297030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297031(context, evt)
 	if evt.param1 ~= 297031 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -835,25 +835,25 @@ function action_EVENT_ENTER_REGION_297031(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297032(context, evt)
 	if evt.param1 ~= 297032 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -864,25 +864,25 @@ function action_EVENT_ENTER_REGION_297032(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297033(context, evt)
 	if evt.param1 ~= 297033 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -893,25 +893,25 @@ function action_EVENT_ENTER_REGION_297033(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297034(context, evt)
 	if evt.param1 ~= 297034 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -922,25 +922,25 @@ function action_EVENT_ENTER_REGION_297034(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297035(context, evt)
 	if evt.param1 ~= 297035 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -951,25 +951,25 @@ function action_EVENT_ENTER_REGION_297035(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297036(context, evt)
 	if evt.param1 ~= 297036 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -980,12 +980,12 @@ function action_EVENT_ENTER_REGION_297036(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
-	
-	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
+
+	ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
 	ScriptLib.PrintLog(context, tostring(ret))
-	
+
 	return 0
 end

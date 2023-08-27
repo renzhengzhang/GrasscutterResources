@@ -1,19 +1,20 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133314024
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 	maxPlayerEnergyLev = 3,
 	titanRegion = 24004,
-    
+
     -- todo: 保底判断一下各个位置的config id对应的是否是正确的gadget id
     cells = {
         -- 每一项均需严格遵循下述格式，没有line或者node则留空，不能不创建！
         -- [cell_config_id] = {cell = cell_config_id, lines = {line01_config_id, line02_config_id, ...}, nodes = {node01_config_id, ...}}
         [0] = {cell = 0, lines = {}, nodes = {}}
-    },
+    }
+,
 
     -- 指定初始激活的电池id，未指定则默认初始未激活
     activeCells = {},
@@ -23,9 +24,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -72,9 +73,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +86,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -103,9 +104,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -113,7 +114,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_24005(context, evt)
 	if 24002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -123,20 +124,20 @@ function action_EVENT_GADGET_STATE_CHANGE_24005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 24001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 1000080006 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1000080006) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "groupStatus" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "groupStatus", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -147,7 +148,7 @@ function action_EVENT_QUEST_START_24013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

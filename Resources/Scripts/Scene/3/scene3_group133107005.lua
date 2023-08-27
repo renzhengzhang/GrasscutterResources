@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133107005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -71,9 +71,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -132,9 +132,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -142,55 +142,55 @@ function condition_EVENT_ANY_GADGET_DIE_5005(context, evt)
 	if 5001 == evt.param1 then
 		return true
 	end
-	
+
 	if 5002 == evt.param1 then
 		return true
 	end
-	
+
 	if 5003 == evt.param1 then
 		return true
-	
+
 	end
-	
+
 	if 5004 == evt.param1 then
 		return true
-	
+
 	end
-	
+
 	if 5006 == evt.param1 then
 		return true
-	
+
 	end
-	
+
 	if 5007 == evt.param1 then
 		return true
 	end
-	
+
 	if 5008 == evt.param1 then
 		return true
 	end
-	
+
 	if 5009 == evt.param1 then
 		return true
 	end
-	
+
 	if 5010 == evt.param1 then
 		return true
 	end
-	
+
 	if 5011 == evt.param1 then
 		return true
-	
+
 	end
-	
+
 	if 5012 == evt.param1 then
 		return true
 	end
-	
+
 	if 5013 == evt.param1 then
 		return true
 	end
-	
+
 	return false
 end
 
@@ -201,7 +201,7 @@ function action_EVENT_ANY_GADGET_DIE_5005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -210,7 +210,7 @@ function condition_EVENT_ANY_GADGET_DIE_5015(context, evt)
 	if 5010 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -221,8 +221,8 @@ function action_EVENT_ANY_GADGET_DIE_5015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -231,7 +231,7 @@ function condition_EVENT_ANY_GADGET_DIE_5027(context, evt)
 	if 5013 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -242,8 +242,8 @@ function action_EVENT_ANY_GADGET_DIE_5027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -252,7 +252,7 @@ function condition_EVENT_ANY_GADGET_DIE_5028(context, evt)
 	if 5008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -263,8 +263,8 @@ function action_EVENT_ANY_GADGET_DIE_5028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -273,7 +273,7 @@ function condition_EVENT_ANY_GADGET_DIE_5029(context, evt)
 	if 5003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -284,8 +284,8 @@ function action_EVENT_ANY_GADGET_DIE_5029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -294,7 +294,7 @@ function condition_EVENT_ANY_GADGET_DIE_5030(context, evt)
 	if 5009 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -305,8 +305,8 @@ function action_EVENT_ANY_GADGET_DIE_5030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -315,7 +315,7 @@ function condition_EVENT_ANY_GADGET_DIE_5031(context, evt)
 	if 5011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -326,8 +326,8 @@ function action_EVENT_ANY_GADGET_DIE_5031(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -336,7 +336,7 @@ function condition_EVENT_ANY_GADGET_DIE_5032(context, evt)
 	if 5012 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -347,8 +347,8 @@ function action_EVENT_ANY_GADGET_DIE_5032(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -357,7 +357,7 @@ function condition_EVENT_ANY_GADGET_DIE_5033(context, evt)
 	if 5007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -368,8 +368,8 @@ function action_EVENT_ANY_GADGET_DIE_5033(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -378,7 +378,7 @@ function condition_EVENT_ANY_GADGET_DIE_5034(context, evt)
 	if 5006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -389,8 +389,8 @@ function action_EVENT_ANY_GADGET_DIE_5034(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -399,7 +399,7 @@ function condition_EVENT_ANY_GADGET_DIE_5035(context, evt)
 	if 5002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -410,8 +410,8 @@ function action_EVENT_ANY_GADGET_DIE_5035(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -420,7 +420,7 @@ function condition_EVENT_ANY_GADGET_DIE_5036(context, evt)
 	if 5004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -431,8 +431,8 @@ function action_EVENT_ANY_GADGET_DIE_5036(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -441,7 +441,7 @@ function condition_EVENT_ANY_GADGET_DIE_5037(context, evt)
 	if 5001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -452,7 +452,7 @@ function action_EVENT_ANY_GADGET_DIE_5037(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end

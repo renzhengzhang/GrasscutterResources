@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133003910
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -71,9 +71,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -113,9 +113,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -123,7 +123,7 @@ function condition_EVENT_ANY_GADGET_DIE_910005(context, evt)
 	if 910006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -134,7 +134,7 @@ function action_EVENT_ANY_GADGET_DIE_910005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -143,7 +143,7 @@ function condition_EVENT_ANY_GADGET_DIE_910014(context, evt)
 	if 910003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -154,7 +154,7 @@ function action_EVENT_ANY_GADGET_DIE_910014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -163,7 +163,7 @@ function condition_EVENT_ANY_GADGET_DIE_910019(context, evt)
 	if 910001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -174,7 +174,7 @@ function action_EVENT_ANY_GADGET_DIE_910019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -183,7 +183,7 @@ function condition_EVENT_ANY_GADGET_DIE_910021(context, evt)
 	if 910012 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -194,7 +194,7 @@ function action_EVENT_ANY_GADGET_DIE_910021(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -203,7 +203,7 @@ function condition_EVENT_ANY_GADGET_DIE_910022(context, evt)
 	if 910004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -214,7 +214,7 @@ function action_EVENT_ANY_GADGET_DIE_910022(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -223,7 +223,7 @@ function condition_EVENT_ANY_GADGET_DIE_910023(context, evt)
 	if 910007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -234,7 +234,7 @@ function action_EVENT_ANY_GADGET_DIE_910023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_ANY_GADGET_DIE_910024(context, evt)
 	if 910020 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -254,7 +254,7 @@ function action_EVENT_ANY_GADGET_DIE_910024(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -263,7 +263,7 @@ function condition_EVENT_ANY_GADGET_DIE_910031(context, evt)
 	if 910025 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -274,7 +274,7 @@ function action_EVENT_ANY_GADGET_DIE_910031(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -283,7 +283,7 @@ function condition_EVENT_ANY_GADGET_DIE_910032(context, evt)
 	if 910026 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -294,7 +294,7 @@ function action_EVENT_ANY_GADGET_DIE_910032(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -303,7 +303,7 @@ function condition_EVENT_ANY_GADGET_DIE_910033(context, evt)
 	if 910027 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -314,7 +314,7 @@ function action_EVENT_ANY_GADGET_DIE_910033(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -323,7 +323,7 @@ function condition_EVENT_ANY_GADGET_DIE_910034(context, evt)
 	if 910028 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -334,7 +334,7 @@ function action_EVENT_ANY_GADGET_DIE_910034(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -343,7 +343,7 @@ function condition_EVENT_ANY_GADGET_DIE_910035(context, evt)
 	if 910029 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -354,7 +354,7 @@ function action_EVENT_ANY_GADGET_DIE_910035(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -363,7 +363,7 @@ function condition_EVENT_ANY_GADGET_DIE_910036(context, evt)
 	if 910030 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -374,7 +374,7 @@ function action_EVENT_ANY_GADGET_DIE_910036(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -385,6 +385,6 @@ function action_EVENT_QUEST_START_910037(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

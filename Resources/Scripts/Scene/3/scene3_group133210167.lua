@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210167
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -90,9 +90,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -101,7 +101,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_167002(context, evt)
 	if 167001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.GearStop ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -109,8 +109,8 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_167002(context, evt)
 	-- 创建标识为"changestate"，时间节点为{1,5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "changestate", {1,5}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -120,7 +120,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_167003(context, evt)
 	if 167001 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -128,8 +128,8 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_167003(context, evt)
 	-- 创建标识为"revivestate"，时间节点为{1,5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "revivestate", {1,5}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -147,8 +147,8 @@ function action_EVENT_TIME_AXIS_PASS_167004(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133210347, 347002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -165,7 +165,7 @@ function condition_EVENT_GADGET_CREATE_167006(context, evt)
 	if 167001 ~= evt.param1 or GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -176,7 +176,7 @@ function action_EVENT_GADGET_CREATE_167006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -184,14 +184,14 @@ end
 function condition_EVENT_SELECT_OPTION_167007(context, evt)
 	-- 判断是gadgetid 167001 option_id 61
 	if 167001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 61 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -201,14 +201,14 @@ function action_EVENT_SELECT_OPTION_167007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 167001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133210167 ；指定config：167001；物件身上指定option：61；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133210167, 167001, 61) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -227,7 +227,7 @@ function action_EVENT_TIME_AXIS_PASS_167008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -246,7 +246,7 @@ function action_EVENT_TIME_AXIS_PASS_167009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -254,14 +254,14 @@ end
 function condition_EVENT_SELECT_OPTION_167010(context, evt)
 	-- 判断是gadgetid 167001 option_id 62
 	if 167001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 62 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -271,14 +271,14 @@ function action_EVENT_SELECT_OPTION_167010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 167001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133210167 ；指定config：167001；物件身上指定option：62；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133210167, 167001, 62) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -287,7 +287,7 @@ function condition_EVENT_GADGET_CREATE_167011(context, evt)
 	if 167001 ~= evt.param1 or GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -298,7 +298,7 @@ function action_EVENT_GADGET_CREATE_167011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -308,7 +308,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_167012(context, evt)
 	if 167001 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -319,18 +319,18 @@ function action_EVENT_GADGET_STATE_CHANGE_167012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_167013(context, evt)
 	if evt.param1 ~= 167013 then return false end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133210167, 167001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -341,6 +341,6 @@ function action_EVENT_ENTER_REGION_167013(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end

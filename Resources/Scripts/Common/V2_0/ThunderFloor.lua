@@ -1,5 +1,5 @@
 --自定义函数部分
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Enter_Region"] = { config_id = 8000001, name = "Enter_Region", event= EventType.EVENT_ENTER_REGION, source = "1", condition = "", action = "player_in_region", trigger_count = 0, forbid_guest = false },
 		["Random_Floor"] = { config_id = 8000002, name = "Random_Floor", event= EventType.EVENT_TIME_AXIS_PASS, source = "triggerThunderFloor", condition = "", action = "action_timeaxis_randomfloor", trigger_count = 0 },
@@ -10,16 +10,16 @@ local extrTriggers = {
 function DeduplicationRandom( context, configIDList, randomNum )
 	math.randomseed(ScriptLib.GetServerTime(context))
 
-	local TempList = {}
+	TempList = {}
 
-	local ReturnList = {}
+	ReturnList = {}
 
 	for i,v in ipairs(configIDList) do
 		table.insert(TempList, v)
 	end
 
 	for i=1,randomNum do
-		local TempNum = math.random(#TempList)
+		TempNum = math.random(#TempList)
 
 		table.insert(ReturnList, TempList[TempNum] )
 
@@ -49,9 +49,9 @@ function player_in_region( context, evt )
 
 
 	math.randomseed(ScriptLib.GetServerTime(context))
-	local randomNum = math.random(randomNumMin, randomNumMax)
+	randomNum = math.random(randomNumMin, randomNumMax)
 
-	local CurList = DeduplicationRandom(context, floorList, randomNum)
+	CurList = DeduplicationRandom(context, floorList, randomNum)
 
 	for i,v in ipairs(CurList) do
 
@@ -94,9 +94,9 @@ function action_timeaxis_randomfloor( context, evt )
 	end
 
 	math.randomseed(ScriptLib.GetServerTime(context))
-	local randomNum = math.random(randomNumMin, randomNumMax)
+	randomNum = math.random(randomNumMin, randomNumMax)
 
-	local CurList = DeduplicationRandom(context, floorList, randomNum)
+	CurList = DeduplicationRandom(context, floorList, randomNum)
 
 	for i,v in ipairs(CurList) do
 

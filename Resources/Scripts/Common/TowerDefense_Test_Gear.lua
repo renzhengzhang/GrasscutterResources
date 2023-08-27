@@ -1,11 +1,11 @@
 --[[
 setmetatable(_ENV,{__index=function() return {} end })
 --]]
-local define = {
+define = {
 	group_id = defs.group_id or 250030001,
 	gear_list = --[[defs.gear_list or]] {70350107,70350099,70350100,70350101,70350102,70350103},
 	option_list = --[[defs.option_list or]] {41,42,43,44,45},
-	option_revert = 46,   
+	option_revert = 46,
 	option_points = --[[defs.option_points or]] {20,20,20,20,20},
 	monster_points = defs.monster_points or 10,
 	max_points = defs.max_points or 100
@@ -20,7 +20,7 @@ function LF_Initialize_Level()
 				table.insert(suites[1].gadgets, i*1000+1)
 			end
 		end
-		var1 = { config_id=51000000+i,name = "gear_info_"..i, value = 0 }	
+		var1 = { config_id=51000000+i,name = "gear_info_"..i, value = 0 }
 		table.insert(variables, var1)
 		--[[if suites[1].gadgets[i] ~= nil then
 			ScriptLib.PrintLog("## suite[1] add gadget -> "..suites[1].gadgets[i])
@@ -46,7 +46,7 @@ end
 
 function condition_EVENT_GADGET_CREATE(context, evt)
 	if evt.param1%1000 == 1 then
-		return true 
+		return true
 	end
 	return false
 end
@@ -60,23 +60,23 @@ end
 
 function action_EVENT_SELECT_OPTION(context, evt)
 	ScriptLib.PrintContextLog(context, "## select_option : param1 -> "..evt.param1.." | param2 -> "..evt.param2.." uid -> "..context.uid)
-	local uid_list = ScriptLib.GetSceneUidList(context)
-	local player = 0
+	uid_list = ScriptLib.GetSceneUidList(context)
+	player = 0
 	for i,v in ipairs(uid_list) do
 		if v == context.uid then
 			player = i
 			break
 		end
 	end
-	local result = LF_Enough_Points(context, evt.param2%10, player)
+	result = LF_Enough_Points(context, evt.param2%10, player)
 	if 1 == result then
-		local prev_option = ScriptLib.GetGroupVariableValue(context, "gear_info_"..(evt.param1//1000))
+		prev_option = ScriptLib.GetGroupVariableValue(context, "gear_info_"..(evt.param1//1000))
 		ScriptLib.PrintContextLog(context, "## -----------------get_variable : gear_info_"..(evt.param1//1000).."->"..prev_option)
-		local create_gear = evt.param1 + evt.param2%10
+		create_gear = evt.param1 + evt.param2%10
 	 	ScriptLib.CreateGadget(context, { config_id = create_gear })
 	 	ScriptLib.PrintContextLog(context, "$$ create_cid = "..create_gear.." | option = "..evt.param2.." | gid = "..gadgets[create_gear].gadget_id)
-	 	local new_option_list = {}
-	 	local j = 1
+	 	new_option_list = {}
+	 	j = 1
 	 	for i=1,#define.option_list do
 	 		if define.option_list[i] ~= evt.param2 then
 	 			new_option_list[j] = define.option_list[i]
@@ -84,7 +84,7 @@ function action_EVENT_SELECT_OPTION(context, evt)
 	 		end
 	 	end
 	 	if prev_option ~= 0 then
- 			local remove_gear = evt.param1 + prev_option%10
+ 			remove_gear = evt.param1 + prev_option%10
  			--ScriptLib.PrintContextLog(context, "$$ remove gear -> "..remove_gear)
 			ScriptLib.RemoveEntityByConfigId(context, define.group_id, EntityType.GADGET, remove_gear )
 			LF_Return_Points(context, prev_option%10, player)
@@ -93,23 +93,23 @@ function action_EVENT_SELECT_OPTION(context, evt)
 		ScriptLib.SetWorktopOptionsByGroupId(context, define.group_id, evt.param1, new_option_list)
 		ScriptLib.SetGroupVariableValue(context, "gear_info_"..(evt.param1//1000), evt.param2%10)
 		ScriptLib.PrintContextLog(context, "## -----------------set_variable : gear_info_"..(evt.param1//1000).."->"..(evt.param2%10))
-		local cur_p = ScriptLib.GetGroupVariableValue(context, "cur_points_"..player)
+		cur_p = ScriptLib.GetGroupVariableValue(context, "cur_points_"..player)
 		ScriptLib.ShowTemplateReminder(context, 115, {player, cur_p, define.max_points})
 	elseif -1 == result then
-		local cur_p = ScriptLib.GetGroupVariableValue(context, "cur_points_"..player)
+		cur_p = ScriptLib.GetGroupVariableValue(context, "cur_points_"..player)
 		ScriptLib.ShowTemplateReminder(context, 116, {player, cur_p, define.max_points})
 		return -1
 	elseif 0 == result then
 		--返回建造点数并重置机关
-		local prev_option = ScriptLib.GetGroupVariableValue(context, "gear_info_"..(evt.param1//1000))
-		local remove_gear = evt.param1 + prev_option%10
+		prev_option = ScriptLib.GetGroupVariableValue(context, "gear_info_"..(evt.param1//1000))
+		remove_gear = evt.param1 + prev_option%10
 	 	--ScriptLib.PrintContextLog(context, "$$ remove gear -> "..remove_gear)
 		ScriptLib.RemoveEntityByConfigId(context, define.group_id, EntityType.GADGET, remove_gear )
 		LF_Return_Points(context, prev_option%10, player)
 		ScriptLib.SetWorktopOptionsByGroupId(context, define.group_id, evt.param1, define.option_list)
 		ScriptLib.SetGroupVariableValue(context, "gear_info_"..(evt.param1//1000), 0)
 		ScriptLib.PrintContextLog(context, "## -----------------set_variable : gear_info_"..(evt.param1//1000).."->"..(evt.param2%10))
-		local cur_p = ScriptLib.GetGroupVariableValue(context, "cur_points_"..player)
+		cur_p = ScriptLib.GetGroupVariableValue(context, "cur_points_"..player)
 		ScriptLib.ShowTemplateReminder(context, 115, {player, cur_p, define.max_points})
 	end
 	return 0
@@ -123,10 +123,10 @@ function action_EVENT_GROUP_LOAD(context, evt)
 end
 
 function award_points(context, prev_context, param1, param2, param3)
-	local uid_list = ScriptLib.GetSceneUidList(context)
-	local new_points = 0
+	uid_list = ScriptLib.GetSceneUidList(context)
+	new_points = 0
 	for i,v in ipairs(uid_list) do
-		local cur_points = ScriptLib.GetGroupVariableValue(context, "cur_points_"..i)
+		cur_points = ScriptLib.GetGroupVariableValue(context, "cur_points_"..i)
 		new_points = cur_points + define.monster_points
 		if new_points > define.max_points then
 			new_points = define.max_points
@@ -140,8 +140,8 @@ end
 
 function LF_Return_Points(context, index, player)
 	if index > 0 then
-		local cur_points = ScriptLib.GetGroupVariableValue(context, "cur_points_"..player)
-		local new_points = cur_points + define.option_points[index%10]
+		cur_points = ScriptLib.GetGroupVariableValue(context, "cur_points_"..player)
+		new_points = cur_points + define.option_points[index%10]
 		if new_points > define.max_points then
 			new_points = define.max_points
 		end
@@ -158,12 +158,12 @@ function LF_Enough_Points(context, index, player)
 		return 0
 	end
 	--使用点数建造对应机关
-	local cur_points = ScriptLib.GetGroupVariableValue(context, "cur_points_"..player)
+	cur_points = ScriptLib.GetGroupVariableValue(context, "cur_points_"..player)
 	if cur_points >= define.option_points[index] then
 		ScriptLib.ChangeGroupVariableValue(context, "cur_points_"..player, -define.option_points[index])
 		return 1
-	else 
-	--点数不够	
+	else
+	--点数不够
 		return -1
 	end
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199003068
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_id = 199003068,
 	gadget_riddle_hint = 68021,
 	gadget_riddle_1  = 68002,
@@ -18,18 +18,18 @@ local defs = {
 -- DEFS_MISCS
 function GadgetStateSwitcher(context,gadget_id,state)
 
-				if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, gadget_id)  == state[1] then 
+				if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, gadget_id)  == state[1] then
 					ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, gadget_id, state[2])
-				elseif ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, gadget_id)  == state[2] then 
+				elseif ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, gadget_id)  == state[2] then
 					ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, gadget_id, state[1])
-				end 
-			
+				end
+
 			end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -113,9 +113,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -126,9 +126,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -144,9 +144,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -154,7 +154,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68006(context, evt)
 	if 68013 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -164,16 +164,16 @@ function action_EVENT_GADGET_STATE_CHANGE_68006(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "open2", 199003068) == 1
 	then
 	ScriptLib.SetGadgetStateByConfigId(context, 68012, GadgetState.GearStart)
-	local pos = {x=-718, y=220, z=-25}
-	  local pos_follow = {x=0, y=0, z=0}
+	pos = {x=-718, y=220, z=-25}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
+				end
 	end
-	
+
 	return 0
 end
 
@@ -182,7 +182,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68020(context, evt)
 	if 68014 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -192,23 +192,23 @@ function action_EVENT_GADGET_STATE_CHANGE_68020(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "open1", 199003068) == 1
 	then
 	ScriptLib.SetGadgetStateByConfigId(context, 68012, GadgetState.GearStart)
-	local pos = {x=-718, y=220, z=-25}
-	  local pos_follow = {x=0, y=0, z=0}
+	pos = {x=-718, y=220, z=-25}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
+				end
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_68022(context, evt)
 	if evt.param2 ~= defs.gadget_riddle_1 and evt.param2 ~= defs.gadget_riddle_2 and evt.param2 ~= defs.gadget_riddle_3 and evt.param2 ~= defs.gadget_riddle_4 then
-	return false 
+	return false
 	end
 	return true
 end
@@ -219,7 +219,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68022(context, evt)
 	ScriptLib.ChangeGroupVariableValue(context, "State_Flag", 1)
 	if 0 == ScriptLib.GetCurTriggerCount(context) then
 	ScriptLib.MarkPlayerAction(context, 1003, 1, 1)
-	end 
+	end
 	elseif evt.param1 == GadgetState.Default then
 	ScriptLib.ChangeGroupVariableValue(context, "State_Flag", -1)
 	end
@@ -229,7 +229,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_68023(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 < 0 or evt.param1 > 4 then
 	return false
 	end
@@ -242,17 +242,17 @@ function action_EVENT_VARIABLE_CHANGE_68023(context, evt)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Default)
 	elseif evt.param1 == 1 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action01)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 2) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 2)
 	elseif evt.param1 == 2 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action02)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 3) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 3)
 	elseif evt.param1 == 3 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action03)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 4) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 4)
 	elseif evt.param1 == 4 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.GearStart)
-	ScriptLib.MarkPlayerAction(context, 1003, 3, 5) 
-	
+	ScriptLib.MarkPlayerAction(context, 1003, 3, 5)
+
 	end
 	return 0
 end
@@ -261,21 +261,21 @@ end
 function condition_EVENT_SELECT_OPTION_68028(context, evt)
 	-- 判断是gadgetid 68013 option_id 7
 	if 68013 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_68028(context, evt)
 	GadgetStateSwitcher(context,68013,{0,201})
-	
+
 	return 0
 end
 
@@ -283,14 +283,14 @@ end
 function condition_EVENT_SELECT_OPTION_68029(context, evt)
 	-- 判断是gadgetid 68014 option_id 7
 	if 68014 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -304,16 +304,16 @@ end
 function action_EVENT_TIME_AXIS_PASS_68031(context, evt)
 	-- 变量"open1"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "open1", 0)
-	
+
 	-- 变量"open2"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "open2", 0)
-	
+
 	-- 将configid为 68021 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 68021, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -322,19 +322,19 @@ function condition_EVENT_GADGET_STATE_CHANGE_68032(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003068, 68002) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003068, 68003) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003068, 68004) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003068, 68005) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -344,70 +344,70 @@ function action_EVENT_GADGET_STATE_CHANGE_68032(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 68019, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 68001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 68001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 停止标识为"reverse"的时间轴
 	ScriptLib.EndTimeAxis(context, "reverse")
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_68034(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"is_reverting"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_reverting") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_68034(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=-718,y=211,z=-39}
+	pos = {x=-718,y=211,z=-39}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1111350, pos, 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_68035(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"is_reverting"为0
 	if ScriptLib.GetGroupVariableValue(context, "is_reverting") ~= 0 then
 			return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 199003068, 68001) then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_68035(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=-718,y=211,z=-39}
+	pos = {x=-718,y=211,z=-39}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1111351, pos, 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 

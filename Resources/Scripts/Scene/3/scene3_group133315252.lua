@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133315252
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -78,9 +78,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -88,7 +88,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_252004(context, evt)
 	if 252002 ~= evt.param2 or GadgetState.GatherDrop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -99,7 +99,7 @@ function action_EVENT_GADGET_STATE_CHANGE_252004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -108,7 +108,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_252005(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315252, 252003) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -118,18 +118,18 @@ function action_EVENT_GADGET_STATE_CHANGE_252005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 252001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标{x=314.7013, y=408.2248, z=2459.955}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=314.7013, y=408.2248, z=2459.955}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=314.7013, y=408.2248, z=2459.955}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_GROUP_LOAD_252007(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315252, 252003) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -149,7 +149,7 @@ function action_EVENT_GROUP_LOAD_252007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end

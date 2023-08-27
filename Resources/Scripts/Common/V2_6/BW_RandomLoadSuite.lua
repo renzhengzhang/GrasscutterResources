@@ -3,10 +3,10 @@
 ||	owner: 		chen.chen
 ||	description:	初次load时用来根据suiteWeightTable配置的权重随机一个suite加载并存档，之后加载都使用第一次的随机结果
 ||	LogName:	BW_RandomLoadSuite
-||	Protection:	
+||	Protection:
 =======================================]]--
 
-local suiteWeightTable={
+suiteWeightTable={
 	[2]=100,
 	[3]=100,
 	[4]=100,
@@ -20,7 +20,7 @@ local suiteWeightTable={
 	[12]=40,
 	[13]=40,
 }
-local extraTriggers={
+extraTriggers={
   { config_id = 40000001, name = "EVENT_GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
 }
 
@@ -35,16 +35,16 @@ function LF_Initialize_Group(triggers, suites)
 end
 
 function action_EVENT_GROUP_LOAD(context, evt)
-	local _extraSuite=ScriptLib.GetGroupVariableValue(context, "ExtraSuite")
+	_extraSuite=ScriptLib.GetGroupVariableValue(context, "ExtraSuite")
 	--如果已经随机过初始suite了，则直接加载对应的suite
 	if _extraSuite~=0 then
 		--ScriptLib.AddExtraGroupSuite(context, 0, _extraSuite)
 		ScriptLib.RefreshGroup(context, { group_id = 0, suite = _extraSuite })
 		return 0
-	--如果还没有随机过，则按权重随机一个新的suite加载	
+	--如果还没有随机过，则按权重随机一个新的suite加载
 	else
 		--计算一下权重的和
-		local _maxWeight=0
+		_maxWeight=0
 		for k,v in pairs(suiteWeightTable) do
 			_maxWeight=_maxWeight+v
 		end

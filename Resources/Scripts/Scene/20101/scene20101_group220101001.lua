@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220101001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -117,9 +117,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -127,7 +127,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1005(context, evt)
 	if 1001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -138,7 +138,7 @@ function action_EVENT_ANY_MONSTER_DIE_1005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1006(context, evt)
 	if 1004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -164,17 +164,17 @@ end
 function condition_EVENT_QUEST_FINISH_1028(context, evt)
 	--检查ID为102302的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 102302 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -185,7 +185,7 @@ function action_EVENT_QUEST_FINISH_1028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -195,8 +195,8 @@ function condition_EVENT_ANY_MONSTER_DIE_1029(context, evt)
 	if evt.param1 ~= 1009 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -207,13 +207,13 @@ function action_EVENT_ANY_MONSTER_DIE_1029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_1032(context, evt)
-	ScriptLib.TransPlayerToPos(context,  {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=-0.2, y=-55.7, z=19.2}, radius = 2, rot = {x=0, y=180, z=0}}) 
+	ScriptLib.TransPlayerToPos(context,  {uid_list =ScriptLib.GetSceneUidList(context), pos = {x=-0.2, y=-55.7, z=19.2}, radius = 2, rot = {x=0, y=180, z=0}})
 	-- 延迟0.5秒刷怪
 	ScriptLib.CreateMonster(context, { config_id = 1009, delay_time = 0.5 })
 	ScriptLib.RefreshGroup(context, { group_id = 220101001, suite = 3, refresh_level_revise = 0, exclude_prev = false })
@@ -224,12 +224,12 @@ end
 -- 触发操作
 function action_EVENT_TIMER_EVENT_1033(context, evt)
 	ScriptLib.CreateGroupTimerEvent(context, 220101001, "checkheight", 10)
-	local uid=ScriptLib.GetSceneUidList(context)
+	uid=ScriptLib.GetSceneUidList(context)
 	for i=1,#uid do
-	local entity=ScriptLib.GetAvatarEntityIdByUid(context, uid[i])
-	local pos=ScriptLib.GetPosByEntityId(context, entity)
+	entity=ScriptLib.GetAvatarEntityIdByUid(context, uid[i])
+	pos=ScriptLib.GetPosByEntityId(context, entity)
 	if pos.y>= -20 then
-	ScriptLib.MovePlayerToPos(context,  {uid_list ={uid[i]}, pos = {x=-0.2, y=-55.7, z=19.2}, radius = 2, rot = {x=0, y=180, z=0}}) 
+	ScriptLib.MovePlayerToPos(context,  {uid_list ={uid[i]}, pos = {x=-0.2, y=-55.7, z=19.2}, radius = 2, rot = {x=0, y=180, z=0}})
 	end
 	end
 	return 0
@@ -237,7 +237,7 @@ end
 
 -- 触发条件
 function condition_EVENT_TIMER_EVENT_1035(context, evt)
-	local uid=ScriptLib.GetSceneUidList(context)
+	uid=ScriptLib.GetSceneUidList(context)
 	if ScriptLib.IsPlayerAllAvatarDie(context, uid[1]) then
 	return false
 	end
@@ -251,6 +251,6 @@ function action_EVENT_TIMER_EVENT_1035(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

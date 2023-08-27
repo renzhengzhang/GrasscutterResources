@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220025001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -84,9 +84,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -96,7 +96,7 @@ function action_EVENT_CUTSCENE_END_1(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -106,20 +106,20 @@ function action_EVENT_ENTER_REGION_2(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 200201, 60) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3(context, evt)
 	if evt.param1 ~= 3 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -130,7 +130,7 @@ function action_EVENT_ENTER_REGION_3(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -140,7 +140,7 @@ function condition_EVENT_DUNGEON_SETTLE_1012(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -148,14 +148,14 @@ end
 function action_EVENT_DUNGEON_SETTLE_1012(context, evt)
 	-- 创建标识为"delay"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "delay", {1}, false)
-	
-	
+
+
 	-- 将configid为 1013 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -165,9 +165,9 @@ function action_EVENT_TIME_AXIS_PASS_1014(context, evt)
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1011 }) then
 	  return -1
 	end
-	
-	local player = ScriptLib.GetSceneUidList(context)
-	local t_pos = {x=13, y=1, z=81}
+
+	player = ScriptLib.GetSceneUidList(context)
+	t_pos = {x=13, y=1, z=81}
 	ScriptLib.TransPlayerToPos(context, {uid_list = player, pos = t_pos, rot = {x=0, y=190, z=0}})
 	return 0
 end

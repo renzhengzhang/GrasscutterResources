@@ -1,4 +1,4 @@
-local retransTriggers = {
+retransTriggers = {
 	initialtrigger = {
 		--["Gallery_Start"] = {name = "Gallery_Start", config_id = 8000001, event = EventType.EVENT_GALLERY_START, source = "", condition = "", action = "action_gallery_start", trigger_count = 0},
 		--["Gallery_Stop"] = {name = "Gallery_Start", config_id = 8000002, event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_gallery_stop", trigger_count = 0},
@@ -22,14 +22,14 @@ function StopReTransCheck( context, prev_context )
 end
 
 function action_time_axis_retrans( context, evt )
-	local UidList = ScriptLib.GetSceneUidList(context)
-	local CenterPoint = regions[regionIndex].pos
-	local CenterSize = regions[regionIndex].size
+	UidList = ScriptLib.GetSceneUidList(context)
+	CenterPoint = regions[regionIndex].pos
+	CenterSize = regions[regionIndex].size
 
 	ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : ReCheck Triggered")
 
-	for i,v in ipairs(UidList) do	
-		local PlayerPos = ScriptLib.GetPosByEntityId(context, ScriptLib.GetAvatarEntityIdByUid(context, v))
+	for i,v in ipairs(UidList) do
+		PlayerPos = ScriptLib.GetPosByEntityId(context, ScriptLib.GetAvatarEntityIdByUid(context, v))
 		if math.abs(PlayerPos.x - CenterPoint.x) > (CenterSize.x/2) or math.abs(PlayerPos.y - CenterPoint.y) > (CenterSize.y/2) or math.abs(PlayerPos.z - CenterPoint.z) > (CenterSize.z/2) then
 			ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Player "..v.." ReTrans")
 			ScriptLib.ExecuteGroupLua(context, 235800001, "ReTrans", {v})

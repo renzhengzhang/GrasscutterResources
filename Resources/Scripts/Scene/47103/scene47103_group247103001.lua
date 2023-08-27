@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 247103001
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	monster_tide = {1009,1011,1012,1013},
 	total_count = 8,
 	max_count = 4,
@@ -15,37 +15,37 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local enemy_fungus_born_points=
+enemy_fungus_born_points=
 {
 	[1]=1005,
 	[2]=1006,
 	[3]=1007,
 	[4]=1008
 }
-local partner_fungus_born_points=
+partner_fungus_born_points=
 {
 	[1]=1001,
 	[2]=1002,
 	[3]=1003,
-	[4]=1004	
+	[4]=1004
 }
 
-local enemy_fungus_born_points_two=
+enemy_fungus_born_points_two=
 {
 	[1]=1014,
 	[2]=1015,
 	[3]=1016,
 	[4]=1017
 }
-local partner_fungus_born_points_two=
+partner_fungus_born_points_two=
 {
 	[1]=1018,
 	[2]=1019,
 	[3]=1020,
-	[4]=1021	
+	[4]=1021
 }
 
-local awardball_room_one=
+awardball_room_one=
 {
 	[1]=1025,
 	[2]=1026,
@@ -53,7 +53,7 @@ local awardball_room_one=
 	[4]=1028
 }
 
-local awardball_room_two=
+awardball_room_two=
 {
 	[1]=1029,
 	[2]=1030,
@@ -61,7 +61,7 @@ local awardball_room_two=
 	[4]=1032
 }
 
-local create_partner_fungus=
+create_partner_fungus=
 {
 [4008206]={},
 [4008304]={},
@@ -79,7 +79,7 @@ local create_partner_fungus=
 }
 }
 
-local create_enemy_fungus=
+create_enemy_fungus=
 {
     [4008206]=
     {
@@ -139,12 +139,12 @@ local create_enemy_fungus=
     [4008511]={}
 }
 
-local room_two_quests={4008511,4008514}
+room_two_quests={4008511,4008514}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -215,9 +215,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -228,9 +228,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -246,9 +246,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "V3_2/Activity_BattleMushroomMonster_FugusInitialize"

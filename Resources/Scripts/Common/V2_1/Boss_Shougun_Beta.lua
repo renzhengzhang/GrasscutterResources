@@ -1,6 +1,6 @@
 -- Trigger变量
 --[[
-local defs = {
+defs = {
     BossConfigID = 1002,
     EnvConfigID = 1001,
     GroupID = 220117001,
@@ -8,7 +8,7 @@ local defs = {
 --]]
 
 --------Boss女士-------------
-local tempTrigger = {
+tempTrigger = {
     { config_id = 2330002, name = "VARIABLE_CHANGE_DebugTest", event = EventType.EVENT_VARIABLE_CHANGE, source = "DebugPhase",
       condition = "", action = "action_DebugTest", trigger_count = 0},
     { config_id = 2330003, name = "TIME_AXIS_MovieEvent1", event = EventType.EVENT_TIME_AXIS_PASS, source = "PhaseAxis1",
@@ -24,7 +24,7 @@ function LF_Initialize_Level()
         table.insert(suites[1].triggers, v.name)
     end
 
-    local var = { config_id=50000001,name = "PhaseStep", value = 1, no_refresh = false }   --阶段计数器
+    var = { config_id=50000001,name = "PhaseStep", value = 1, no_refresh = false }   --阶段计数器
     variables[var.name] = var
     var = { config_id=50000002,name = "DebugPhase", value = 1, no_refresh = false }   -- Debug用阶段计数器
     variables[var.name] = var
@@ -89,4 +89,3 @@ end
 
 LF_Initialize_Level()
 --- ServerUploadTool Save to [/root/env/data/lua/common/V2_1]  ---
-

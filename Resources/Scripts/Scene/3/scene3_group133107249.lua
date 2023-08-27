@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133107249
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -104,9 +104,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -116,13 +116,13 @@ function action_EVENT_QUEST_START_249001(context, evt)
 	                        ScriptLib.PrintGroupWarning(context, "## YeLan Quest : ReCreate 249005")
 	                end
 	        end
-	
+
 	        if 2 == ScriptLib.GetHostQuestState(context,1101926) and ScriptLib.GetGroupVariableValueByGroup(context, "Leaftalkfinish", 133107249) ~= 0 then
 	                if 0 == ScriptLib.CreateGadget(context, {config_id=249009}) then
 	                        ScriptLib.PrintGroupWarning(context, "## YeLan Quest : ReCreate 249009")
 	                end
 	        end
-	
+
 	        if 2 == ScriptLib.GetHostQuestState(context,1101926) and 0 == ScriptLib.GetGroupVariableValueByGroup(context, "Leaftalkfinish", 133107249) then
 	        -- 卸载已创建的果核
 	        if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133107249, EntityType.GADGET, 249009 ) then
@@ -135,19 +135,19 @@ function action_EVENT_QUEST_START_249001(context, evt)
 	                        --ScriptLib.PrintGroupWarning(context, "## YeLan Quest : ReCreate 249014")
 	                end
 	        end
-	
+
 	        if 2 == ScriptLib.GetHostQuestState(context,1101927)  then
 	                if 0 == ScriptLib.CreateGadget(context, {config_id=249008}) then
 	                        ScriptLib.PrintGroupWarning(context, "## YeLan Quest : ReCreate 249008")
 	                end
 	        end
-	
+
 	        if 2 == ScriptLib.GetHostQuestState(context,1101928)  then
 	                if 0 == ScriptLib.CreateGadget(context, {config_id=249006}) then
 	                        ScriptLib.PrintGroupWarning(context, "## YeLan Quest : ReCreate 249006")
 	                end
 	        end
-	
+
 	return 0
 end
 
@@ -158,13 +158,13 @@ function action_EVENT_GADGETTALK_DONE_249002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "Leaftalkfinish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Leaftalkfinish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -175,7 +175,7 @@ function action_EVENT_GADGETTALK_DONE_249003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -186,7 +186,7 @@ function action_EVENT_GADGETTALK_DONE_249012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_ANY_GADGET_DIE_249013(context, evt)
 	if 249011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_ANY_GADGET_DIE_249013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -217,7 +217,7 @@ function action_EVENT_GADGETTALK_DONE_249015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -228,7 +228,7 @@ function action_EVENT_GADGETTALK_DONE_249016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -237,12 +237,12 @@ function condition_EVENT_ANY_GADGET_DIE_249017(context, evt)
 	if 249011 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"Leaftalkfinish"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Leaftalkfinish", 133107249) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -253,6 +253,6 @@ function action_EVENT_ANY_GADGET_DIE_249017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,15 +1,15 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199003071
 }
 
 -- DEFS_MISCS
-local   defs = {
+  defs = {
 
 
 	guide_region =71010 ,
-	
-				gear_info = 
+
+				gear_info =
 				{        --connect: 每个物件各个旋转档位可连接的对象 0表示无可连接
 						[1] = { config_id=71001 , connect = {71004,71002}, point_array_id = 900300003 },
 						[2] = { config_id=71002 , connect = {71001,71004,71003}, point_array_id = 900300004  },
@@ -18,11 +18,11 @@ local   defs = {
 						[5] = { config_id= 71005 , connect = {71006,71004,71007}, point_array_id = 900300007  },
 						[6] = { config_id=71006 , connect = {71005,71003}, point_array_id = 900300008  },
 						[7] = { config_id=71007 , connect = {71005,71006}, point_array_id = 900300009 },
-						
-						
+
+
 					},
 	--几种解
-	solutions = 
+	solutions =
 				{
 						--[解法x] = {gear_info[1]切到它的第x档, gear_info[2]切到它的第y档...}
 						[1] = { connection = {2,3,2,1,2,1,1}, ends = {71003 }},
@@ -37,9 +37,9 @@ local   defs = {
 		}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -88,9 +88,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -101,9 +101,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -128,9 +128,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -138,7 +138,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_71009(context, evt)
 	if 71011 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -149,21 +149,21 @@ function action_EVENT_GADGET_STATE_CHANGE_71009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_71012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"solution"为1
 	if ScriptLib.GetGroupVariableValue(context, "solution") >= 1 then
 			return true
 	end
-	
+
 	return false
 end
 
@@ -171,7 +171,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_71012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199003071, 2)
-	
+
 	return 0
 end
 

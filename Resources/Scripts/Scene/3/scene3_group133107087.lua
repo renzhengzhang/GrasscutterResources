@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133107087
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -86,9 +86,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -98,7 +98,7 @@ function action_EVENT_QUEST_START_87003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -109,23 +109,23 @@ function action_EVENT_QUEST_FINISH_87005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_87010(context, evt)
-	local uid_list = ScriptLib.GetSceneUidList(context)
+	uid_list = ScriptLib.GetSceneUidList(context)
 	if #uid_list ~= 0 and uid_list ~= nil then
-	        local avatar_eid = ScriptLib.GetAvatarEntityIdByUid(context, uid_list[1])
-	        local _qs = ScriptLib.GetQuestState(context, avatar_eid, 101610)
+	        avatar_eid = ScriptLib.GetAvatarEntityIdByUid(context, uid_list[1])
+	        _qs = ScriptLib.GetQuestState(context, avatar_eid, 101610)
 	        if _qs == 3 then
 	                ScriptLib.RefreshGroup(context, {group_id = 133107087, suite = 1})
 	        end
 	else
 	        ScriptLib.PrintContextLog(context, "## LUA_WARNING : Venti Quest Get Player Fail !!!")
 	end
-	
+
 	return 0
 end

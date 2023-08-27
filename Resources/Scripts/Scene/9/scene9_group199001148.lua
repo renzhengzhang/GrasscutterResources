@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199001148
 }
 
 -- DEFS_MISCS
-local defs = 
+defs =
 {
         rmd_list = {1111157,1111158,1111159},
 }
@@ -13,7 +13,7 @@ function LF_GetRandomResult(context, source_table)
 
         math.randomseed(ScriptLib.GetServerTime(context))
         rand_index = math.random(#source_table)
-        
+
         if nil ~= source_table[rand_index] then
                 ScriptLib.PrintContextLog(context, "## [GetRandom] Get Random Result: value@"..source_table[rand_index])
                 return source_table[rand_index]
@@ -23,9 +23,9 @@ function LF_GetRandomResult(context, source_table)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -75,9 +75,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -88,9 +88,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -106,9 +106,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -117,7 +117,7 @@ function condition_EVENT_ANY_MONSTER_DIE_148006(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -127,13 +127,13 @@ function action_EVENT_ANY_MONSTER_DIE_148006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 148021, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "is_remindered" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "is_remindered", 1, 199001062) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

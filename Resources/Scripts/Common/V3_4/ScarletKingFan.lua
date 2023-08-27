@@ -3,7 +3,7 @@
 ||	owner: 		luyao.huang
 ||	description:	赤王风扇玩法
 ||	LogName:	ScarletKingFan
-||	Protection:	
+||	Protection:
 =======================================]]--
 
 
@@ -14,13 +14,13 @@
 
 
 ------
-local local_defs = 
+local_defs =
 {
-    
+
 }
 
 
-local options = 
+options =
 {
     switch_open = 5000,
     switch_close = 5001,
@@ -28,7 +28,7 @@ local options =
 }
 
 
-local fan_state = 
+fan_state =
 {
     lock = 0,
     move = 101,
@@ -38,13 +38,13 @@ local fan_state =
     dir4 = 204
 }
 
-local shutter_state = 
+shutter_state =
 {
     close = 0,
     open = 201,
 }
 
-local shutter_switch_state = 
+shutter_switch_state =
 {
     close = 0,
     open = 201,
@@ -55,12 +55,12 @@ local shutter_switch_state =
 
 
 
-local Tri = {
+Tri = {
     [1] = { name = "group_load", config_id = 8000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     [2] = { name = "gadget_state_change", config_id = 8000002, event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0},
     [3] = { name = "select_option", config_id = 8000003, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
     [4] = { name = "platform_arrival", config_id = 8000004, event = EventType.EVENT_PLATFORM_ARRIVAL, source = "", condition = "", action = "action_platform_arrival", trigger_count = 0},
-    
+
 }
 
 function Initialize()
@@ -101,8 +101,8 @@ end
 function action_gadget_state_change(context,evt)
     if LF_Is_In_Table(context,evt.param2,fans) then
         ScriptLib.PrintContextLog(context,"## [ScarletKingFan]action_gadget_state_change：风扇状态变化")
-        local state = evt.param1
-        local fan = evt.param2
+        state = evt.param1
+        fan = evt.param2
         if evt.param3 == fan_state.lock then
             LF_Set_Fan_Option(context,fan,true)
         end
@@ -111,7 +111,7 @@ function action_gadget_state_change(context,evt)
             LF_Update_Sandpile_State(context, fan)
         end
 
-        
+
     end
     if LF_Is_In_Table(context,evt.param2,shutter_switches) then
         ScriptLib.PrintContextLog(context,"## [ScarletKingFan]action_gadget_state_change：百叶窗开关状态变化")
@@ -141,11 +141,11 @@ function action_select_option(context,evt)
 
     if LF_Is_In_Table(context,evt.param1,fans) then
         if evt.param2 == options.move_fan then
-            local fan = evt.param1
-            local current_pos = ScriptLib.GetGroupVariableValue(context,"fan_pos_"..fan)
-            local pos = 3 - current_pos
-            
-            local pre_move_state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,fan)
+            fan = evt.param1
+            current_pos = ScriptLib.GetGroupVariableValue(context,"fan_pos_"..fan)
+            pos = 3 - current_pos
+
+            pre_move_state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,fan)
             ScriptLib.SetGroupVariableValue(context,"fan_pre_move_state_"..fan,pre_move_state)
 
             ScriptLib.SetGadgetStateByConfigId(context,fan, fan_state.move)
@@ -169,16 +169,16 @@ end
 
 function action_platform_arrival(context,evt)
     ScriptLib.PrintContextLog(context,"## [ScarletKingFan]action_platform_arrival：风扇到达路点")
-    local fan = evt.param1
-    local point_id = evt.param3
+    fan = evt.param1
+    point_id = evt.param3
 
-    local pos = ScriptLib.GetGroupVariableValue(context,"fan_pos_"..fan)
+    pos = ScriptLib.GetGroupVariableValue(context,"fan_pos_"..fan)
     --和LD约定所有风扇只有两个端点，因此pos只会为1或者2
-    local target_pos = 3 - pos
+    target_pos = 3 - pos
     if point_id == target_pos then
 
         --运动到端点时，根据运动前的状态恢复gadgetState
-        local pre_move_state = ScriptLib.GetGroupVariableValue(context,"fan_pre_move_state_"..fan)
+        pre_move_state = ScriptLib.GetGroupVariableValue(context,"fan_pre_move_state_"..fan)
         if pre_move_state ~= fan_state.dir1 and pre_move_state ~= fan_state.dir2 and pre_move_state ~= fan_state.dir3 and pre_move_state ~= fan_state.dir4 then
             pre_move_state = fan_state.dir1
         end
@@ -201,11 +201,11 @@ function LF_Update_Sandpile_State(context, fan)
     ScriptLib.PrintContextLog(context,"## [ScarletKingFan]LF_Update_Sandpile_State：更新"..fan.."相关的沙堆状态")
     for k,v in pairs(FanToSandpile) do
         if v.fan == fan then
-            local pos = ScriptLib.GetGroupVariableValue(context,"fan_pos_"..fan)
+            pos = ScriptLib.GetGroupVariableValue(context,"fan_pos_"..fan)
             ScriptLib.PrintContextLog(context,"## [ScarletKingFan]LF_Update_Sandpile_State：当前风扇位置为"..pos)
-            local dir_state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,fan)
+            dir_state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,fan)
             ScriptLib.PrintContextLog(context,"## [ScarletKingFan]LF_Update_Sandpile_State：当前风扇方向状态为"..dir_state)
-            local fan_shutter_state
+            fan_shutter_state
             if v.shutter ~= nil then
                 fan_shutter_state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,v.shutter)
                 ScriptLib.PrintContextLog(context,"## [ScarletKingFan]LF_Update_Sandpile_State：当前风扇路径上的百叶窗状态为"..fan_shutter_state)
@@ -224,7 +224,7 @@ end
 
 function LF_Set_Fan_Option(context,fan,enable)
 
-    local flag = false
+    flag = false
     if FanToPointArray ~= nil then
         for k,v in pairs(FanToPointArray) do
             if k == fan then
@@ -234,7 +234,7 @@ function LF_Set_Fan_Option(context,fan,enable)
     end
 
     if flag then
-        local state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,fan)
+        state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,fan)
         if state == 0 or state == 101 then
             ScriptLib.DelWorktopOptionByGroupId(context,base_info.group_id,fan,options.move_fan)
         else
@@ -249,7 +249,7 @@ end
 
 
 function LF_Set_Shutter_Switch_Option(context,switch)
-    local state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,switch)
+    state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,switch)
     if state == 0 then
         ScriptLib.SetWorktopOptionsByGroupId(context,base_info.group_id,switch,{options.switch_open})
         ScriptLib.DelWorktopOptionByGroupId(context,base_info.group_id,switch,options.switch_close)

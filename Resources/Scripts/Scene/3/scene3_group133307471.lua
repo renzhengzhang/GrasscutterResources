@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133307471
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -74,9 +74,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -85,7 +85,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_471003(context, evt)
 	if 471002 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -96,25 +96,25 @@ function action_EVENT_GADGET_STATE_CHANGE_471003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 31001, 3, 70330315) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_471004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"built"为1
 	if ScriptLib.GetGroupVariableValue(context, "built") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -125,8 +125,8 @@ function action_EVENT_VARIABLE_CHANGE_471004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -135,7 +135,7 @@ function condition_EVENT_ANY_GADGET_DIE_471006(context, evt)
 	if 471005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -145,8 +145,8 @@ function action_EVENT_ANY_GADGET_DIE_471006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 471001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

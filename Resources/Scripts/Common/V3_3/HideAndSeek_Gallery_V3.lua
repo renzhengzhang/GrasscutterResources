@@ -8,7 +8,7 @@
 
 --[[
 
-local defs = 
+defs =
 {
 	gadget_prison = gadget_id,
 	duration = 240,
@@ -17,20 +17,20 @@ local defs =
 	-- 用于固定lod 1的region，千万不能填错，填错了一定会炸服务器
 	eye_point = region_id,
 }
- 
-local energy_info = 
+
+energy_info =
 {
 	[1] = { time = 80, step = {-30,30}, points = {1,2,3,4,5,6}},
 	[2] = { time = 160, step = {-30,30}, points = {1,2,3,4,5,6}}
 }
 
 -- 这个group对应的图用哪些，这里就填哪些
-local disguiseList = {1, 2, 3}
+disguiseList = {1, 2, 3}
 
 --]]
 
 --初始化给的state,V2开始全部由SGV实现
-local HS_State = {
+HS_State = {
 	["Play"] 	 = { name = "SGV_HideAndSeek_PlayerState_Play", value = 3 },
 	["Visible"]  = { name = "SGV_HideAndSeek_PlayerState_Visible", value = 0 },
 	["OnMap"] 	 = { name = "SGV_HideAndSeek_PlayerState_OnMap", value = 0 },
@@ -48,7 +48,7 @@ local HS_State = {
 	["Visible_Mark"] = { name = "SGV_HideSeek_Real_Invisible_Mark", value = 0},
 }
 
-local skill_info = {
+skill_info = {
 	["HideAndSeek_Skill_CatchPrey"] = { radius = 4 },
 	["HideAndSeek_Skill_Guide"] = { radius = 500 },
 	["HideAndSeek_Skill_Detect_F"] = { radius = 10 },
@@ -61,12 +61,12 @@ local skill_info = {
 	["HideAndSeek_Skill_HunterNet"] = { radius = 12 },
 }
 
-local hunter_win_by_EX = 30
-local hunter_win_in_time = 120
-local hunter_catch_by_guide = 10
-local final_time = 180	--抓捕阶段第180秒后为决胜时间，猎手在该时间内抓两人，记录翻牌
+hunter_win_by_EX = 30
+hunter_win_in_time = 120
+hunter_catch_by_guide = 10
+final_time = 180	--抓捕阶段第180秒后为决胜时间，猎手在该时间内抓两人，记录翻牌
 
-local map_info = {
+map_info = {
 	--一期
 	[1001003] = { name = "QingCe", list = {1,2,3} },
 	[1001022] = { name = "QingQuan", list = {4,5} },
@@ -112,9 +112,9 @@ local map_info = {
 -- 24层岩巨渊木箱，25竖木桶，26横木桶，27石块，28枯木，29珊瑚，30灯柱，31稻妻陶罐，32大酒坛，33璃月木箱，34须弥木箱，35竹筐，36须弥路灯，37营地竖木桶，38营地横木桶，39营地罐子
 
 --玩法中开启的天气
-local weather_id_list = {3151}
+weather_id_list = {3151}
 
-local Tri = {
+Tri = {
 	[1]={ name = "gallery_stop", config_id = 8000001, event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_gallery_stop", trigger_count = 0},
 	[2]={ name = "challenge_success", config_id = 8000003, event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0},
 	[3]={ name = "challenge_fail", config_id = 8000004, event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail", trigger_count = 0},
@@ -130,20 +130,20 @@ local Tri = {
 	[13]={name = "group_will_unload", config_id = 8000014, event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload", trigger_count = 0 },
 }
 
-local Var = {
+Var = {
 	{ config_id=50000001,name = "catch_sum", value = 0, no_refresh = false},
 	{ config_id=50000002,name = "GM_stage", value = 0, no_refresh = false},
 }
 
 -- 【三期新增】有些ability specials gadget是lua自行创建的，但是需要一个config id，直接在lua里写死，就不用在关卡编辑器里配了
 -- 但是对pos和area id有一些限制，所以找个地方存一下一定合法的值，方便后面调用
-local regionDefaultValues = {
+regionDefaultValues = {
 	pos = regions[defs.eye_point].pos,
 	area_id = regions[defs.eye_point].area_id,
 	radius = regions[defs.eye_point].radius,
 }
 
-local extraGadgets = {
+extraGadgets = {
 
 	-- 隐身诱饵，一人一个
 	-- 不太確定為什麼level = 10，不過二期都是10，所以三期先照抄
@@ -155,37 +155,37 @@ local extraGadgets = {
 	[30000004] = { config_id = 30000004, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000005] = { config_id = 30000005, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000006] = { config_id = 30000006, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
-	
+
 	[30000007] = { config_id = 30000007, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000008] = { config_id = 30000008, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000009] = { config_id = 30000009, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
-	
+
 	[30000010] = { config_id = 30000010, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000011] = { config_id = 30000011, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000012] = { config_id = 30000012, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
-	
+
 	-- 能量球，config id把不太吉利的数字跳过去
 	[30000015] = { config_id = 30000015, gadget_id = 44000105, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 
 }
 
-local gadget_energy = 30000015
+gadget_energy = 30000015
 
-local invisible_bait_list = { 30000001, 30000002, 30000003 }
+invisible_bait_list = { 30000001, 30000002, 30000003 }
 
-local bait_list = {
+bait_list = {
 	[1] = {30000004, 30000005, 30000006},
 	[2] = {30000007, 30000008, 30000009},
 	[3] = {30000010, 30000011, 300000012},
 }
 
-local extraRegions = {
+extraRegions = {
 	[40000001] = { config_id = 40000001, shape = RegionShape.SPHERE, radius = regionDefaultValues.radius + 5, pos = regionDefaultValues.pos, area_id = regionDefaultValues.area_id }
 }
 
-local eyepoint_large_region = 40000001
+eyepoint_large_region = 40000001
 
-local challengeTable = {
+challengeTable = {
 	fatherId = 9011,
 	hunterId = 9012,
 	hiderId = 9013,
@@ -288,7 +288,7 @@ function action_variable_change(context, evt)
 		-- 这段有用的，一个玩家在逃跑阶段死亡退出改变catch sum、并导致catch sum等于prey总数，从这里直接判猎人成功
 		if 1 == ScriptLib.GetGroupTempValue(context, "in_escape", {}) then
 			if evt.param1 == ScriptLib.GetGroupTempValue(context, "prey_sum", {}) then
-				local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
+				_index = ScriptLib.GetHideAndSeekPlayIndex(context)
 				ScriptLib.EndSceneMultiStagePlayStage(context, _index, "null", true)
 			end
 		end
@@ -309,7 +309,7 @@ function action_enter_region(context, evt)
 
 	-- -- 【三期新增】
 	-- -- 开启锁lod1
-	-- local ret = ScriptLib.SetPlayerEyePointLOD(context, defs.eye_point, eyepoint_large_region, 1)
+	-- ret = ScriptLib.SetPlayerEyePointLOD(context, defs.eye_point, eyepoint_large_region, 1)
 	-- ScriptLib.PrintContextLog(context, "## HideAndSeek_V3 lod level is set to 1, succeed = "..ret)
 	return 0
 end
@@ -322,10 +322,10 @@ function action_leave_region(context, evt)
 	ScriptLib.ClearPlayerEyePoint(context, evt.param1)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG ClearPlayerEyePoint")
 
-	
+
 	-- -- 【三期新增】
 	-- -- 关闭锁lod1
-	-- local ret = ScriptLib.ClearPlayerEyePoint(context, defs.eye_point)
+	-- ret = ScriptLib.ClearPlayerEyePoint(context, defs.eye_point)
     -- ScriptLib.PrintContextLog(context, "## HideAndSeek_V3 player eye point is cleared, succeed = "..ret)
 
 	return 0
@@ -346,11 +346,11 @@ function action_time_axis_pass(context, evt)
 		--刷新一个能量球
 		ScriptLib.KillEntityByConfigId(context, {config_id = gadget_energy, entity_type = EntityType.GADGET})
 		--随机选择位置创建能量球
-		local p_list = energy_info[evt.param1].points
+		p_list = energy_info[evt.param1].points
 		math.randomseed(ScriptLib.GetServerTime(context))
-		local ret = p_list[math.random(#p_list)]
-		local p_pos = {}
-		local p_rot = {}
+		ret = p_list[math.random(#p_list)]
+		p_pos = {}
+		p_rot = {}
 		for k,v in ipairs(points) do
 			if v.config_id == ret then
 				p_pos = v.pos
@@ -359,28 +359,28 @@ function action_time_axis_pass(context, evt)
 			end
 		end
 		ScriptLib.CreateGadgetByConfigIdByPos(context, gadget_energy, p_pos, p_rot)
-		local uid_list = ScriptLib.GetSceneUidList(context)
+		uid_list = ScriptLib.GetSceneUidList(context)
 		--通知全体掉能量球
 		ScriptLib.AssignPlayerUidOpNotify(context, {param_index = 12,param_list={},param_uid_list={},duration=3,target_uid_list=uid_list})
 	elseif evt.source_name == "hunter_win_by_EX" or evt.source_name == "hunter_win_in_time" or evt.source_name == "hunter_catch_by_guide" then
 		--相关陈列室统计
 		ScriptLib.SetGroupTempValue(context, evt.source_name, 0, {})
-	elseif evt.source_name == "final_time" then 
+	elseif evt.source_name == "final_time" then
 		--抓捕阶段第180秒后为决胜时间，猎手在该时间内抓两人，记录翻牌
 		ScriptLib.SetGroupTempValue(context,"is_in_final_time",1,{})
 	else
 		--终止游侠被捕阶段并转为真死亡
 		for i=1,3 do
-			local _uid = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+			_uid = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 			if evt.source_name == tostring(_uid) then
 				ScriptLib.PrintContextLog(context,"## HideAndSeek_V3_LOG realDie = "..tostring(_uid))
 
 				-- ScriptLib.AssignPlayerShowTemplateReminder(context, 138, {param_vec={},param_uid_vec={},uid_vec={_uid}})
 
 				-- 【三期新增】换了一个UI弹窗，要读表，改成下面了
-				local _gallery = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+				_gallery = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 				ScriptLib.UpdatePlayerGalleryScore(context, _gallery, {["update_type"]="updateGhostUid", ["ghost_uid"]= _uid})
-				
+
 				LF_Set_Player_State_Value(context, _uid, HS_State.Dead.name, 1)
 
 				-- 【三期新增】游侠死亡后变成幽灵，上新挑战目标
@@ -398,7 +398,7 @@ end
 
 function action_avatar_die(context, evt)
 	--multistage内触发的死亡回调
-	local char = ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..context.uid, {})
+	char = ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..context.uid, {})
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : avatar_die "..context.uid.." | character = "..char)
 	--首先排除玩家死在玩法外的情况
 	if ScriptLib.GetGroupTempValue(context, "is_in_play", {}) == 0 then
@@ -413,15 +413,15 @@ function action_avatar_die(context, evt)
 		LF_Set_Prey_Die(context, context.uid)
 	elseif char == 3 or char == 4 then
 		for i = 1,3 do
-			local prey = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+			prey = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 			if prey == context.uid then
 				--prey提前死亡不参与游戏
 				LF_Set_Prey_Die(context, context.uid)
-				return 0	
+				return 0
 			end
-		end 
+		end
 		--hunter提前死亡直接结算prey胜利
-		local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
+		_index = ScriptLib.GetHideAndSeekPlayIndex(context)
 		ScriptLib.EndSceneMultiStagePlayStage(context, _index, "null", true)
 		LF_Stop_Hide_And_Seek(context, 2)
 	end
@@ -447,7 +447,7 @@ function action_GM_Debug(context, evt)
 	if evt.param1 == evt.param2 then
 		return -1
 	end
-	local uid_list = ScriptLib.GetSceneUidList(context)
+	uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		--处理玩家隐身显形
 		if evt.source_name == HS_State.OnMap.name.."_"..v then
@@ -481,21 +481,21 @@ function LF_Stop_Hide_And_Seek(context, value)
 	ScriptLib.SetGroupTempValue(context, "is_in_play", 0, {})
 	ScriptLib.EndTimeAxis(context, "rampage")
 	ScriptLib.EndTimeAxis(context, "energy")
-	local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
+	hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
 	--还未进入幽灵状态的，不用进了，所以关掉时间轴（已经结束）
 	for i=1,3 do
-		local _uid = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+		_uid = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 		ScriptLib.EndTimeAxis(context, tostring(_uid))
 	end
 	--这个watcher比较特殊，需要在胜利时检测prey的state，所以要写在还原state之前。
-	if value == 2 then 
-		for i = 1 , 3 do 
-			local _prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
-			local _const = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+	if value == 2 then
+		for i = 1 , 3 do
+			_prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
+			_const = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 			if _const ~= 0 then
 				--存活的prey
 				if _prey ~= 0 then
-					local logvalue = ScriptLib.GetGroupTempValue(context, HS_State.Transfer.name.."_".._const, {})
+					logvalue = ScriptLib.GetGroupTempValue(context, HS_State.Transfer.name.."_".._const, {})
 					ScriptLib.PrintContextLog(context,"## HideAndSeek_V3_LOG uid:".._const.."的Transfer值为:"..logvalue)
 					--统计：胜利的时候处于变身状态
 					if ScriptLib.GetGroupTempValue(context, HS_State.Transfer.name.."_".._const, {}) > 0 then
@@ -508,7 +508,7 @@ function LF_Stop_Hide_And_Seek(context, value)
 	end
 
 	--还原玩家所有State
-	local uid_list = ScriptLib.GetSceneUidList(context)
+	uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		LF_Init_Player_State(context, v)
 		ScriptLib.RevertPlayerRegionVision(context, uid_list[i])
@@ -524,9 +524,9 @@ function LF_Stop_Hide_And_Seek(context, value)
 		ScriptLib.StopChallenge(context, 9011, 0)
 		return -1
 	end
-	local _gallery = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	_gallery = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 	-------
-	local catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
+	catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
 	--统计：抓捕总数
 	ScriptLib.AddExhibitionReplaceableData(context, hunter, "hunter_catch_sum", catch_sum)
 	--无论胜败都发的牌：
@@ -534,11 +534,11 @@ function LF_Stop_Hide_And_Seek(context, value)
 		ScriptLib.AddExhibitionReplaceableData(context, hunter, "is_hunter", 1)
 	--“是游侠”牌
 	for i=1,3 do
-		local _prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
+		_prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
 		ScriptLib.AddExhibitionReplaceableData(context, _prey, "is_hunter", 2)
 
 		-- 【三期新增翻牌】游侠-使用隐身诱饵维持多长时间的隐身
-		local invisible_time = ScriptLib.GetGroupTempValue(context, "Visible".._prey, {})
+		invisible_time = ScriptLib.GetGroupTempValue(context, "Visible".._prey, {})
 		ScriptLib.AddExhibitionReplaceableData(context, _prey, "prey_keep_invisible", invisible_time)
 
 	end
@@ -562,7 +562,7 @@ function LF_Stop_Hide_And_Seek(context, value)
 	end
 
 	-- 【三期新增翻牌】一次抓捕多个游侠
-	local max = ScriptLib.GetGroupTempValue(context, "catch_multiple_prey_max", {})
+	max = ScriptLib.GetGroupTempValue(context, "catch_multiple_prey_max", {})
 	ScriptLib.AddExhibitionReplaceableData(context, hunter, "hunter_catch_multiple_prey_max", max)
 
 	LF_Clear_Random_Scene(context)
@@ -573,23 +573,23 @@ function LF_Assign_Character_Card(context)
 	-- 2）开启视野优化
 	-- 3）初始化技能sgv
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : LF_Assign_Character_Card is called")
-	local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
-	local _gallery = ScriptLib.GetHideAndSeekPlayGalleryId(context, _index)
+	_index = ScriptLib.GetHideAndSeekPlayIndex(context)
+	_gallery = ScriptLib.GetHideAndSeekPlayGalleryId(context, _index)
 	ScriptLib.SetGroupTempValue(context, "gallery_id", _gallery, {})
 	ScriptLib.SetGroupTempValue(context, "is_in_play", 1, {})
 
-	-- local uid_list = ScriptLib.GetSceneUidList(context)
+	-- uid_list = ScriptLib.GetSceneUidList(context)
 	-- 【三期新增】新接口取prey，和服务器保持一致
-	local prey_list = ScriptLib.GetHideAndSeekPreyUidList(context, _index)
-	local hunter = ScriptLib.GetHideAndSeekHunter(context, _index)
+	prey_list = ScriptLib.GetHideAndSeekPreyUidList(context, _index)
+	hunter = ScriptLib.GetHideAndSeekHunter(context, _index)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : hunter_uid = "..hunter)
 	-- 所有参加活动的玩家的uid list
-	local all_player_list = {}
+	all_player_list = {}
 	for i = 1, #prey_list do
 		table.insert(all_player_list, prey_list[i])
 	end
 	table.insert(all_player_list, hunter)
-	
+
 	-- 开启视野优化
 	for i = 1, #all_player_list do
 		ScriptLib.ForbidPlayerRegionVision(context, all_player_list[i])
@@ -598,7 +598,7 @@ function LF_Assign_Character_Card(context)
 
 	--分配局内身份信息
 	ScriptLib.SetGroupTempValue(context, "hunter", hunter, {})
-	local cnt = 1
+	cnt = 1
 	for i,v in ipairs(prey_list) do
 		if v ~= hunter then-- 其实不用判，先留着了
 			ScriptLib.SetGroupTempValue(context, "prey_"..cnt, v, {})
@@ -630,9 +630,9 @@ end
 
 function LF_Init_Player_Skill(context, uid, u_ptr)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : LF_Init_Player_Skill : "..uid)
-	local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
-	local _gallery = ScriptLib.GetHideAndSeekPlayGalleryId(context, _index)
-	local skill_list = ScriptLib.GetHideAndSeekPlayerSkillList(context, _index, uid)
+	_index = ScriptLib.GetHideAndSeekPlayIndex(context)
+	_gallery = ScriptLib.GetHideAndSeekPlayGalleryId(context, _index)
+	skill_list = ScriptLib.GetHideAndSeekPlayerSkillList(context, _index, uid)
 	for p,q in ipairs(skill_list) do
 		ScriptLib.AttachGalleryAbilityGroup(context, {uid}, _gallery, q)
 	end
@@ -641,30 +641,30 @@ end
 function LF_Start_Comp_Challenge(context)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : LF_Start_Comp_Challenge")
 	ScriptLib.CreateFatherChallenge(context, 9011, 9011, defs.duration, {success=10,fail=10})
-	-- local uid_list = ScriptLib.GetSceneUidList(context)
+	-- uid_list = ScriptLib.GetSceneUidList(context)
 	-- 【三期新增】新接口取prey，和服务器保持一致
-	local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
-	local prey_list = ScriptLib.GetHideAndSeekPreyUidList(context, _index)
-	
-	local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
+	_index = ScriptLib.GetHideAndSeekPlayIndex(context)
+	prey_list = ScriptLib.GetHideAndSeekPreyUidList(context, _index)
+
+	hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
 	LF_Set_Player_State_Value(context, hunter, HS_State.Play.name, 0)
 
 	ScriptLib.ForceRefreshAuthorityByConfigId(context, defs.gadget_prison, hunter)
 
-	local challenge_start_time = ScriptLib.GetServerTime(context)
+	challenge_start_time = ScriptLib.GetServerTime(context)
 
 	--prey_sum这里统计就太晚了，需要三阶段开始先统计一次
-	local prey_sum = 0
+	prey_sum = 0
 	for i,v in ipairs(prey_list) do
 		-- if v == hunter then
 		-- 	LF_Set_Player_State_Value(context, v, HS_State.Play.name, 0)
 		-- else
-			local idx = 0
+			idx = 0
 			for j = 1,3 do
 				if v == ScriptLib.GetGroupTempValue(context, "prey_"..j, {}) then
 					idx = j
 					break
-				end	
+				end
 			end
 			--只有非死亡状态的游侠才继续游戏
 			if ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {}) == 3 then
@@ -672,7 +672,7 @@ function LF_Start_Comp_Challenge(context)
 				ScriptLib.AttachChildChallenge(context, 9011, idx*math.pow(10,5)+9013,9013,{base_info.group_id,10},{v},{success=1,fail=1})
 				prey_sum = prey_sum + 1
 			end
-			
+
 			-- 【三期新增】开始隐身的时间先设成挑战开始时间
 			ScriptLib.SetGroupTempValue(context, "VisibleStart"..v, challenge_start_time, {})
 
@@ -703,7 +703,7 @@ function LF_Set_Energy(context)
 	--出能量球的时间有略微偏移
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : LF_Set_Energy")
 	math.randomseed(ScriptLib.GetServerTime(context))
-	local energy_list = {}
+	energy_list = {}
 	for i,v in ipairs(energy_info) do
 		table.insert(energy_list, v.time + math.random(energy_info[i].step[1],energy_info[i].step[2]))
 	end
@@ -713,10 +713,10 @@ end
 function LF_Bake_Random_Scene(context)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : LF_Bake_Random_Scene")
 	--根据ld需求进行调整
-	
+
 	--开启天气
 	for i = 1 , #weather_id_list do
-		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 1) 
+		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 1)
 	end
 
 	--suite 2按权重随机创建
@@ -751,12 +751,12 @@ function LF_Clear_Random_Scene(context)
 	end
 
 	ScriptLib.KillEntityByConfigId(context, {config_id = defs.gadget_prison, entity_type = EntityType.GADGET})
-	
+
 	--关闭天气
 	for i = 1 , #weather_id_list do
-		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 0) 
+		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 0)
 	end
-	
+
 end
 
 function LF_Init_Player_State(context, uid)
@@ -769,7 +769,7 @@ function LF_Init_Player_State(context, uid)
 			else
 				LF_Set_Player_State_Value(context, uid, n.name, n.value)
 			end
-		else 
+		else
 			LF_Set_Player_State_Value(context, uid, n.name, n.value)
 		end
 	end
@@ -778,16 +778,16 @@ end
 --用于集中处理hunter失败的结算
 function LF_Handle_Exhibition_Prey_Win(context)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : LF_Handle_Exhibition_Prey_Win")
-	local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
-	local prey_sum = ScriptLib.GetGroupTempValue(context, "prey_sum", {})
-	local catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
+	hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
+	prey_sum = ScriptLib.GetGroupTempValue(context, "prey_sum", {})
+	catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
 	--剩余人数结算
-	local prey_alive = prey_sum - catch_sum
+	prey_alive = prey_sum - catch_sum
 	if prey_alive == 1 then
 		--统计：猎手的惜败
 		ScriptLib.AddExhibitionReplaceableData(context, hunter, "hunter_miss_one", 1)
 		for i=1,3 do
-			local _prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
+			_prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
 			if _prey ~= 0 then
 				--统计：最后的火种
 				ScriptLib.AddExhibitionReplaceableData(context, _prey, "prey_alive_only", 1)
@@ -803,18 +803,18 @@ function LF_Handle_Exhibition_Prey_Win(context)
 		ScriptLib.AddExhibitionReplaceableData(context, hunter, "hunter_miss_all", 1)
 	end
 	for i=1,3 do
-		local _prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
-		local _const = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+		_prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
+		_const = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 		if _const ~= 0 then
 			--存活的prey
 			if _prey ~= 0 then
 				--统计：抗争到底
 				ScriptLib.AddExhibitionReplaceableData(context, _const, "prey_alive_win", 1)
 				--统计：全身而退
-				local guide_time = ScriptLib.GetGroupTempValue(context, "prey_win_by_guide", {})
+				guide_time = ScriptLib.GetGroupTempValue(context, "prey_win_by_guide", {})
 				ScriptLib.AddExhibitionReplaceableData(context, _const, "prey_win_by_guide", guide_time)
 				--统计：灯下取巧
-				local detect_time = ScriptLib.GetGroupTempValue(context, "prey_win_by_detect_".._prey, {})
+				detect_time = ScriptLib.GetGroupTempValue(context, "prey_win_by_detect_".._prey, {})
 				ScriptLib.AddExhibitionReplaceableData(context, _prey, "prey_win_by_detect", detect_time)
 				--统计：无技能胜利,要反转统计一次
 				if 0 == ScriptLib.GetGroupTempValue(context, "prey_win_without_skill_".._const, {}) then

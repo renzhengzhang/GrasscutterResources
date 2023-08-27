@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133104121
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	duration = 15,
 	group_id = 133104121,
 	gadget_sum = 6
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -116,9 +116,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -127,21 +127,21 @@ function action_EVENT_CHALLENGE_SUCCESS_121010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 121002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 121005 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133104121, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -151,23 +151,23 @@ function action_EVENT_CHALLENGE_FAIL_121011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 121002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104121, 2)
-	
+
 	-- 创建id为121005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 121005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "gadget_start" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gadget_start", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -176,7 +176,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_121012(context, evt)
 	if 121002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -186,14 +186,14 @@ function action_EVENT_GADGET_STATE_CHANGE_121012(context, evt)
 	if 0 ~= ScriptLib.ActiveChallenge(context, 874, 201, defs.duration, 2, 874, defs.gadget_sum) then
 	return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
-	
-	
-	
+
+
+
 	return 0
-	
+
 end
 
 -- 触发条件
@@ -201,7 +201,7 @@ function condition_EVENT_GADGET_CREATE_121013(context, evt)
 	if 121005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -212,7 +212,7 @@ function action_EVENT_GADGET_CREATE_121013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -220,14 +220,14 @@ end
 function condition_EVENT_SELECT_OPTION_121014(context, evt)
 	-- 判断是gadgetid 121005 option_id 40
 	if 121005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 40 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -238,14 +238,14 @@ function action_EVENT_SELECT_OPTION_121014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 121002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 121002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -254,7 +254,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_121015(context, evt)
 	if 121009 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -262,7 +262,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_121015(context, evt)
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104121, 1)
-	
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 241023003
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -108,12 +108,12 @@ function condition_EVENT_ANY_MONSTER_DIE_3012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "wave") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -121,13 +121,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3012(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 241023003, 3)
-	
+
 	-- 针对当前group内变量名为 "wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -137,12 +137,12 @@ function condition_EVENT_ANY_MONSTER_DIE_3013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "wave") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -152,13 +152,13 @@ function action_EVENT_ANY_MONSTER_DIE_3013(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 241023003, {3017}, 1, 1, 1) then
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -167,7 +167,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_3022(context, evt)
 	if 3006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -178,7 +178,7 @@ function action_EVENT_ANY_MONSTER_LIVE_3022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -189,19 +189,19 @@ function action_EVENT_CHALLENGE_SUCCESS_3023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 241023002, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "wave" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wave", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -212,19 +212,19 @@ function action_EVENT_CHALLENGE_FAIL_3024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 241023003, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "wave" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wave", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -233,12 +233,12 @@ function condition_EVENT_MONSTER_TIDE_DIE_3025(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"stage"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage", 241023001) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -249,18 +249,18 @@ function action_EVENT_MONSTER_TIDE_DIE_3025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 开启通用UI提示,标题和文本内容配置ID对应TextMapData表中的ID名，0字段控制该UI提示栏的显示时间，填为0时为一直显示
 	if 0 ~= ScriptLib.sendShowCommonTipsToClient(context, "", "UI_COMMON_TIPS_TEXT_AVATAR_TRY_OUT", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : show_common_tips")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "wave" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wave", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

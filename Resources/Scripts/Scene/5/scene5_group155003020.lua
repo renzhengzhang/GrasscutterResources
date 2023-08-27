@@ -1,50 +1,50 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155003020
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155003020,
 	managerGroup = 155003001,
 	gadget_controller = 20004
 }
 
 -- DEFS_MISCS
-local gameplayStateFuncitons = 
+gameplayStateFuncitons =
 {
 	["0"] = function(context)
-		
-		
+
+
 	end,
 	["1"] = function(context)
 
 	ScriptLib.AddExtraGroupSuite(context,defs.group_ID, 2)
-	ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_ID, defs.gadget_controller, {188}) 
+	ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_ID, defs.gadget_controller, {188})
 
-	
+
 	end,
 	["2"] = function(context)
-		
+
 
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 
-	
+
 	end
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 	ScriptLib.PrintContextLog(context, "update gameplay state")
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -79,9 +79,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -92,9 +92,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -119,20 +119,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_20001(context, evt)
-			local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", defs.managerGroup)
-			
-			if isactive == 1 then 
-				if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then 
+			isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", defs.managerGroup)
+
+			if isactive == 1 then
+				if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then
 					ScriptLib.SetGroupVariableValue(context,"gameplayState", 1)
 				end
-				
+
 			end
 		UpdateGamePlayState(context)
 			return 0
@@ -141,7 +141,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_20002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -150,14 +150,14 @@ end
 function condition_EVENT_SELECT_OPTION_20005(context, evt)
 	-- 判断是gadgetid 20004 option_id 188
 	if 20004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 188 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -168,17 +168,17 @@ function action_EVENT_SELECT_OPTION_20005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 创建标识为"reset"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "reset", {5}, false)
-	
-	
+
+
 	-- 通知场景上的所有玩家播放名字为49 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 49, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -189,6 +189,6 @@ function action_EVENT_TIME_AXIS_PASS_20006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end

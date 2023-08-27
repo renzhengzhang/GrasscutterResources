@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133222243
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,9 +114,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -124,7 +124,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_243006(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133222243, 243001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -135,7 +135,7 @@ function action_EVENT_GADGET_STATE_CHANGE_243006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -144,7 +144,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_243008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133222243, 243002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -155,7 +155,7 @@ function action_EVENT_GADGET_STATE_CHANGE_243008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -164,7 +164,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_243010(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133222243, 243003) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -175,7 +175,7 @@ function action_EVENT_GADGET_STATE_CHANGE_243010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -184,7 +184,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_243012(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133222243, 243004) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -195,18 +195,18 @@ function action_EVENT_GADGET_STATE_CHANGE_243012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 6057, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 创建id为243013的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 243013 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

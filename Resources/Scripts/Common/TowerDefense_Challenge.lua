@@ -13,7 +13,7 @@ exit_pool={}
 
 
 function LF_Init_Challenge_Group()
-	--g1 = { config_id = 1, gadget_id = 70360002, pos = points[1].pos, rot = points[1].rot, level = 1 } 
+	--g1 = { config_id = 1, gadget_id = 70360002, pos = points[1].pos, rot = points[1].rot, level = 1 }
 	--table.insert(gadgets, g1)
 	--table.insert(suites[1].gadgets, g1.config_id)
 	--创建路径指引
@@ -86,8 +86,8 @@ function LF_Init_Challenge_Group()
 end
 --------------------------------------
 function action_ALL_AVATAR_DIE(context, evt)
-	local uidList=ScriptLib.GetSceneUidList(context)
-	local count=0
+	uidList=ScriptLib.GetSceneUidList(context)
+	count=0
 	for i=1,#uidList do
 		if ScriptLib.IsPlayerAllAvatarDie(context, uidList[i]) then
 			count=count+1
@@ -119,7 +119,7 @@ function action_PICK_CARD(context, evt)
 		ScriptLib.SetGroupVariableValue(context, "challenge_10", evt.param3)
 		ScriptLib.SetMechanicusChallengeState(context,defs.group_id, 999, evt.param3, 85, MechanicusChallenge.OnGoing)
 		--ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.attack_forbid_gadget, GadgetState.GearStart)
-		--ScriptLib.SetIsAllowUseSkill(context, 0) 
+		--ScriptLib.SetIsAllowUseSkill(context, 0)
 		ScriptLib.SetSceneMultiStagePlayValue(context, 999, "can_use_skill", 0, true)
 	end
 	--角色的移动速度降低，持续1轮
@@ -133,7 +133,7 @@ function action_PICK_CARD(context, evt)
 	--配置功能冷却降低
 	if evt.param3==33 then
 		if trap_group~=nil then
-			for i=1,#trap_group do 
+			for i=1,#trap_group do
 				ScriptLib.ExecuteGroupLua(context, trap_group[i], "SetColdTownDiscount", {0})
 			end
 		end
@@ -142,7 +142,7 @@ function action_PICK_CARD(context, evt)
 	--配置机关所需奇术点降低
 	if evt.param3==34 then
 		if trap_group~=nil then
-			for i=1,#trap_group do 
+			for i=1,#trap_group do
 				ScriptLib.ExecuteGroupLua(context, trap_group[i], "SetDiscount", {0})
 			end
 		end
@@ -156,7 +156,7 @@ function action_PICK_CARD(context, evt)
 	end
 	--立即回复地脉镇石5点耐久度
 	if evt.param3==45 then
-		local hp=ScriptLib.GetGroupVariableValue(context, "escaped_monsters")
+		hp=ScriptLib.GetGroupVariableValue(context, "escaped_monsters")
 		hp=hp-5
 		if hp<0 then
 			hp=0
@@ -246,10 +246,10 @@ function action_PICK_CARD(context, evt)
 end
 
 function Reset_Cards_Effect(context)
-	
-	--local challenge_83=ScriptLib.GetGroupVariableValue(context, "challenge_8")
-	local challenge_85=ScriptLib.GetGroupVariableValue(context, "challenge_10")
-	local challenge_86=ScriptLib.GetGroupVariableValue(context, "challenge_11")
+
+	--challenge_83=ScriptLib.GetGroupVariableValue(context, "challenge_8")
+	challenge_85=ScriptLib.GetGroupVariableValue(context, "challenge_10")
+	challenge_86=ScriptLib.GetGroupVariableValue(context, "challenge_11")
 	--if challenge_83~=0 then
 		--ScriptLib.PrintContextLog(context, "## TD_LOG : CHALLENGE 83 CARD ID"..challenge_83)
 		--ScriptLib.SetMechanicusChallengeState(context,defs.group_id, 999, challenge_83, 83,MechanicusChallenge.Success)
@@ -259,7 +259,7 @@ function Reset_Cards_Effect(context)
 		ScriptLib.SetMechanicusChallengeState(context,defs.group_id, 999, challenge_85, 85,MechanicusChallenge.Success)
 		--ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.attack_forbid_gadget, GadgetState.Default)
 		ScriptLib.SetSceneMultiStagePlayValue(context, 999, "can_use_skill", 1, true)
-		--ScriptLib.SetIsAllowUseSkill(context, 1) 
+		--ScriptLib.SetIsAllowUseSkill(context, 1)
 	end
 	if challenge_86~=0 then
 		ScriptLib.PrintContextLog(context, "## TD_LOG : CHALLENGE 86 CARD ID"..challenge_86)
@@ -353,7 +353,7 @@ function CreateDoors(context,wave)
 end
 
 
-function action_group_load(context, evt)	
+function action_group_load(context, evt)
 	if defs.max_escapable_monsters~= nil then
 		ScriptLib.SetGroupVariableValue(context, "max_escapable_monsters", defs.max_escapable_monsters)
 	end
@@ -382,14 +382,14 @@ function action_add_route_points(context, evt)
 end
 
 function add_route_guide_points(context)
-	local curwave=ScriptLib.GetGroupVariableValue(context, "wave_ptr")
+	curwave=ScriptLib.GetGroupVariableValue(context, "wave_ptr")
 	if tide_group_defs[curwave].guide_routes ==nil then
 		ScriptLib.PrintContextLog(context, "## TD_LOG : Guide Routes Is Nil")
 		return 0
 	end
 	for i=1,#tide_group_defs[curwave].guide_routes do
 		--tide_group_defs[curwave].guide_routes[i]
-		local idx=ScriptLib.GetGroupVariableValue(context, "route_guide_points_index")
+		idx=ScriptLib.GetGroupVariableValue(context, "route_guide_points_index")
 		if -2==ScriptLib.CreateGadgetByConfigIdByPos(context, guide_point_pool[idx], routes_start_point[tide_group_defs[curwave].guide_routes[i]].start_point, { x = 0.000, y = 0.000, z = 0.000 }) then
 			ScriptLib.PrintContextLog(context, "## TD_LOG : Guide Points Not Enough")
 			return 0
@@ -439,7 +439,7 @@ function action_select_option(context, evt)
 end
 
 function del_monster_number(context, prev_context, param1, param2, param3)
-	local new_num=ScriptLib.GetGroupVariableValue(context, "left_monsters")
+	new_num=ScriptLib.GetGroupVariableValue(context, "left_monsters")
 	if new_num==0 then
 		return 0
 	end
@@ -457,7 +457,7 @@ end
 --某group结束,进下一阶段
 function tide_done(context, prev_context, param1, param2, param3)
 	ScriptLib.EndSceneMultiStagePlayStage(context, 999,"battle"..ScriptLib.GetGroupVariableValue(context, "wave_ptr"), true)
-	local wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
+	wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
 	wave=wave+1
 	ScriptLib.SetGroupVariableValue(context, "wave_ptr", wave)
 	ScriptLib.PrintContextLog(context, "## wave = "..wave)
@@ -495,8 +495,8 @@ function monster_escaped(context, prev_context, param1, param2, param3)
 	if ScriptLib.GetGroupVariableValue(context, "GM_Ignore_Monster_Escape") ~=0 then
 		return 0
 	end
-	local max_escapable_monsters=ScriptLib.GetGroupVariableValue(context, "max_escapable_monsters")
-	local escaped_monsters=ScriptLib.GetGroupVariableValue(context, "escaped_monsters")
+	max_escapable_monsters=ScriptLib.GetGroupVariableValue(context, "max_escapable_monsters")
+	escaped_monsters=ScriptLib.GetGroupVariableValue(context, "escaped_monsters")
 	if ScriptLib.GetGroupVariableValue(context, "monster_double_damage") ==0 then
 		escaped_monsters=escaped_monsters+1
 	elseif ScriptLib.GetGroupVariableValue(context, "monster_double_damage") ==1 then

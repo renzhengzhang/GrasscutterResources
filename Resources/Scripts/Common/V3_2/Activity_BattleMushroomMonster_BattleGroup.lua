@@ -7,12 +7,12 @@
 =======================================]]
 
 --[[
-local custom_level={
+custom_level={
 	[81013]={max_count=5}
 }
 ]]--
 
-local global_info=
+global_info=
 {
 	attackLevel={groupId=247101001,galleryId=28021,max_wave=3},
 	defenseLevel={groupId=247102001,galleryId=28022,max_wave=1},
@@ -31,11 +31,11 @@ local global_info=
 
 -- 打印日志
 function PrintLog(context, content)
-	local log = "## [Activity_BattleMushroomMonster_BattleGroup] TD: "..content
+	log = "## [Activity_BattleMushroomMonster_BattleGroup] TD: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
-local extraTriggers = 
+extraTriggers =
 {
     { config_id = 40000001, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
     { config_id = 40000002, name = "fungus_select_done", event = EventType.EVENT_TRAINING_FUNGUS_SELECT_DONE, source = "", condition = "", action = "action_EVENT_TRAINING_FUNGUS_SELECT_DONE", trigger_count = 0 },
@@ -49,7 +49,7 @@ local extraTriggers =
 	{ config_id = 40000010, name = "gadget_create", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_EVENT_GADGET_CREATE", trigger_count = 0},
 }
 
------- Local Functions -----------
+------ Functions -----------
 function LF_Initialize_Level()
     --- TRIGGER
 	for i, _suite in ipairs(suites) do
@@ -80,7 +80,7 @@ end
 
 --1.dungeonid 2.round 3.randindex
 function LF_SetRandomResult(context)
-	local fungusFighterTrainingParams=ScriptLib.GetCurFungusFighterTrainingParams(context)
+	fungusFighterTrainingParams=ScriptLib.GetCurFungusFighterTrainingParams(context)
 	if #fungusFighterTrainingParams<3 then
 		PrintLog(context, "地城ID获取失败")
 		return 0
@@ -89,12 +89,12 @@ function LF_SetRandomResult(context)
 		PrintLog(context, "地城ID获取失败")
 	end
 
-	local dungeonId=fungusFighterTrainingParams[1]
+	dungeonId=fungusFighterTrainingParams[1]
 	if fungusFighterTrainingParams[2]==1 then
-		local upLoadPool={}
-		local index=0
-		local waveIndex=0
-		local waveNumber=LF_GetWaveNumber(context)
+		upLoadPool={}
+		index=0
+		waveIndex=0
+		waveNumber=LF_GetWaveNumber(context)
 		for i=1,waveNumber do
 			index=LF_Random(context,#fungus_strategy_info[dungeonId])
 			waveIndex=LF_Random(context,#fungus_strategy_info[dungeonId][index][i])
@@ -111,10 +111,10 @@ function LF_SetRandomResult(context)
 	end
 	--[[
 	if fungusFighterTrainingParams[3]==0 then
-		local dungeonId=fungusFighterTrainingParams[1]
-		local curRound=fungusFighterTrainingParams[2]
-		local index=LF_Random(context,#fungus_strategy_info[dungeonId])
-		local waveIndex=LF_Random(context,#fungus_strategy_info[dungeonId][index][curRound])
+		dungeonId=fungusFighterTrainingParams[1]
+		curRound=fungusFighterTrainingParams[2]
+		index=LF_Random(context,#fungus_strategy_info[dungeonId])
+		waveIndex=LF_Random(context,#fungus_strategy_info[dungeonId][index][curRound])
 		if curRound==1 then
 			ScriptLib.SetGroupVariableValue(context, "index",index)
 			ScriptLib.SetGroupVariableValue(context, "waveIndex",waveIndex)
@@ -137,23 +137,23 @@ function LF_GetGalleryId(context)
 end
 
 function LF_GetMonsterConfig(context)
-	local fungusFighterTrainingParams=ScriptLib.GetCurFungusFighterTrainingParams(context)
+	fungusFighterTrainingParams=ScriptLib.GetCurFungusFighterTrainingParams(context)
 	if #fungusFighterTrainingParams<3 then
 		PrintLog(context, "地城ID获取失败")
 		return 0
 	end
-	local curRound=fungusFighterTrainingParams[2]
-	local waveIndex=0
-	local index=0
+	curRound=fungusFighterTrainingParams[2]
+	waveIndex=0
+	index=0
 	if fungusFighterTrainingParams[2] == 1 then
 		waveIndex=ScriptLib.GetGroupVariableValue(context, "waveIndex")
 		index=ScriptLib.GetGroupVariableValue(context, "index")
 		return fungus_strategy_info[fungusFighterTrainingParams[1]][index][curRound][waveIndex]
 	elseif fungusFighterTrainingParams[2] > 1 then
-		local pool=fungusFighterTrainingParams[3+curRound]
+		pool=fungusFighterTrainingParams[3+curRound]
 		PrintLog(context, "获取pool:"..pool)
 		return monsterPoolReverseTable[pool]
-		--local multiIndex=fungusFighterTrainingParams[3]
+		--multiIndex=fungusFighterTrainingParams[3]
 		--waveIndex=multiIndex%100
 		--index=(multiIndex-waveIndex)/100
 	end
@@ -163,13 +163,13 @@ end
 
 function LF_Random(context,num)
 	math.randomseed(ScriptLib.GetServerTime(context))
-	local ret=math.random(num)
+	ret=math.random(num)
 	PrintLog(context, "随机结果为"..ret)
 	return ret
 end
 
 function LF_UpdateRestSkillCount(context, prev_context, param1, param2, param3)
-	local bindSGV=ScriptLib.GetTeamServerGlobalValue(context, ScriptLib.GetSceneOwnerUid(context),"SGV_Fungus_Burst_Count")
+	bindSGV=ScriptLib.GetTeamServerGlobalValue(context, ScriptLib.GetSceneOwnerUid(context),"SGV_Fungus_Burst_Count")
 	ScriptLib.AddTeamServerGlobalValue(context, context.owner_uid, "SGV_Fungus_Burst_Count", -1)
 	ScriptLib.UpdatePlayerGalleryScore(context, LF_GetGalleryId(context), {rest_skill_count=bindSGV-1})
 	return 0
@@ -196,13 +196,13 @@ end
 function SLC_AwardBall_Catch(context)
 	PrintLog(context, "玩家吃球")
 	ScriptLib.MarkGroupLuaAction(context, "FungusFighter_6",ScriptLib.GetGalleryTransaction(context, LF_GetGalleryId(context)) , {})
-	local index=LF_Random(context,global_info.maxEffectNum)
-	local monsterList=ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id)
+	index=LF_Random(context,global_info.maxEffectNum)
+	monsterList=ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id)
 	--迭代逻辑，如果场上的怪物小于三只，就不会刷到效果2
 	if #monsterList<3 then
 		--如果随到2就要重随一次
 		if index==2 then
-			local tmpIndex=LF_Random(context,global_info.maxEffectNum-1)
+			tmpIndex=LF_Random(context,global_info.maxEffectNum-1)
 			if tmpIndex>=2 then
 				tmpIndex=tmpIndex+1
 			end
@@ -211,7 +211,7 @@ function SLC_AwardBall_Catch(context)
 	end
 	--8.15迭代，只加次数
 	if true then
-		local bindSGV=ScriptLib.GetTeamServerGlobalValue(context, ScriptLib.GetSceneOwnerUid(context),"SGV_Fungus_Burst_Count")
+		bindSGV=ScriptLib.GetTeamServerGlobalValue(context, ScriptLib.GetSceneOwnerUid(context),"SGV_Fungus_Burst_Count")
 		if bindSGV<global_info.max_skill_count then
 			ScriptLib.AddTeamServerGlobalValue(context, context.owner_uid, "SGV_Fungus_Burst_Count", 1)
 			ScriptLib.UpdatePlayerGalleryScore(context, LF_GetGalleryId(context), {rest_skill_count=bindSGV+1})
@@ -245,7 +245,7 @@ end
 
 function SLC_EnemyMonsterReviveSkill(context,param1)
 	PrintLog(context, "点名怪物"..param1)
-	local beast = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
+	beast = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, beast, "SGV_Revive_Skill_Flag", param1)
 	return 0
 end
@@ -265,12 +265,12 @@ function action_EVENT_TRAINING_FUNGUS_SELECT_DONE(context, evt)
 	PrintLog(context, "已选择蕈兽")
 	PrintLog(context, "准备开启gallery:"..LF_GetGalleryId(context))
 	if not ScriptLib.IsGalleryStart(context,LF_GetGalleryId(context)) then
-		local bindSGV=ScriptLib.GetTeamServerGlobalValue(context, ScriptLib.GetSceneOwnerUid(context),"SGV_Fungus_Burst_Count")
-		local monsterConfig=LF_GetMonsterConfig(context)
+		bindSGV=ScriptLib.GetTeamServerGlobalValue(context, ScriptLib.GetSceneOwnerUid(context),"SGV_Fungus_Burst_Count")
+		monsterConfig=LF_GetMonsterConfig(context)
 		ScriptLib.SetPlayerStartGallery(context, LF_GetGalleryId(context), {ScriptLib.GetSceneOwnerUid(context)})
 		ScriptLib.SetGadgetStateByConfigId(context, defs.start_gear, 202)
 		PrintLog(context, "gallery已开启")
-		local fungusFighterTrainingParams=ScriptLib.GetCurFungusFighterTrainingParams(context)
+		fungusFighterTrainingParams=ScriptLib.GetCurFungusFighterTrainingParams(context)
 		if #fungusFighterTrainingParams<3 then
 			PrintLog(context, "地城ID获取失败")
 			return 0
@@ -323,17 +323,17 @@ function action_EVENT_ANY_MONSTER_DIE(context, evt)
 		PrintLog(context, "怪物死亡,gallery未开启")
 		return 0
 	end
-	local killMonsters=ScriptLib.GetGroupVariableValue(context, "killedMonsters")
+	killMonsters=ScriptLib.GetGroupVariableValue(context, "killedMonsters")
 	killMonsters=killMonsters+1
 	ScriptLib.SetGroupVariableValue(context, "killedMonsters",killMonsters)
 	ScriptLib.UpdatePlayerGalleryScore(context, LF_GetGalleryId(context), {["killed_monster_count"]=killMonsters})
-	local fungusFighterTrainingParams=ScriptLib.GetCurFungusFighterTrainingParams(context)
+	fungusFighterTrainingParams=ScriptLib.GetCurFungusFighterTrainingParams(context)
 	if custom_level~=nil and custom_level[10*fungusFighterTrainingParams[1]+fungusFighterTrainingParams[2]]~=nil then
 		if killMonsters>=custom_level[10*fungusFighterTrainingParams[1]+fungusFighterTrainingParams[2]].max_count then
 			ScriptLib.StopGallery(context,LF_GetGalleryId(context),false)
 		end
 	else
-		local monsterConfig=LF_GetMonsterConfig(context)
+		monsterConfig=LF_GetMonsterConfig(context)
 		if killMonsters>=monsterConfig.total_count then
 			ScriptLib.StopGallery(context,LF_GetGalleryId(context),false)
 		end
@@ -351,7 +351,7 @@ function action_EVENT_TIME_AXIS_PASS(context, evt)
 	if evt.source_name=="AwardBallGenerate" then
 		if defs.awardball_configid ~= nil then
 			if awardBallGeneratePosition ~= nil then
-				local index=LF_Random(context,#awardBallGeneratePosition)
+				index=LF_Random(context,#awardBallGeneratePosition)
 				ScriptLib.CreateGadgetByConfigIdByPos(context, defs.awardball_configid, awardBallGeneratePosition[index], {x=0,y=0,z=0})
 			end
 		end
@@ -395,7 +395,7 @@ function action_EVENT_ANY_GADGET_DIE(context, evt)
 		return 0
 	else
 		--如果死亡的是球
-		local containsKey=false
+		containsKey=false
 		for k,v in pairs(defs.start_awardball) do
 			if v==evt.param1 then
 				containsKey=true
@@ -403,13 +403,13 @@ function action_EVENT_ANY_GADGET_DIE(context, evt)
 		end
 		if containsKey==true or evt.param1==defs.awardball_configid then
 			PrintLog(context, "助威球死亡")
-			local awardballNum=ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = base_info.group_id,gadget_id={global_info.awardball_gadget_id}})
+			awardballNum=ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = base_info.group_id,gadget_id={global_info.awardball_gadget_id}})
 			PrintLog(context, "剩余助威球数量"..awardballNum)
 			if awardballNum==0 then
-				local hostUid=ScriptLib.GetSceneOwnerUid(context)
+				hostUid=ScriptLib.GetSceneOwnerUid(context)
 				ScriptLib.RevokePlayerShowTemplateReminder(context, 212, {hostUid})
 				ScriptLib.SetGroupTempValue(context,"templateReminderShow",0,{})
-			end	
+			end
 		end
 	end
 	return 0
@@ -421,7 +421,7 @@ function action_EVENT_GALLERY_STOP(context, evt)
 	--关时间轴
 	ScriptLib.EndTimeAxis(context,"AwardBallGenerate")
 	--回收reminder
-	local hostUid=ScriptLib.GetSceneOwnerUid(context)
+	hostUid=ScriptLib.GetSceneOwnerUid(context)
 	ScriptLib.RevokePlayerShowTemplateReminder(context, 212, {hostUid})
 	ScriptLib.SetGroupTempValue(context,"templateReminderShow",0,{})
 	LF_ResetDungeon(context)
@@ -458,10 +458,10 @@ end
 function action_EVENT_GADGET_CREATE(context, evt)
 	if evt.param2 == global_info.awardball_gadget_id then
 		PrintLog(context, "GADGET_CREATE_助威球创建")
-		local awardballNum=ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = base_info.group_id,gadget_id={global_info.awardball_gadget_id}})
+		awardballNum=ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = base_info.group_id,gadget_id={global_info.awardball_gadget_id}})
 		PrintLog(context, "剩余助威球数量"..awardballNum)
 		if awardballNum>0 and ScriptLib.GetGroupTempValue(context,"templateReminderShow",{})==0 then
-			local hostUid=ScriptLib.GetSceneOwnerUid(context)
+			hostUid=ScriptLib.GetSceneOwnerUid(context)
 			ScriptLib.AssignPlayerShowTemplateReminder(context,212,{is_need_cache=true, param_uid_vec={},param_vec={},uid_vec={hostUid}})
 			ScriptLib.SetGroupTempValue(context,"templateReminderShow",1,{})
 		end

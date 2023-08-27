@@ -1,5 +1,5 @@
 --[[
-local wakuraConfig =
+wakuraConfig =
 {
 
     -- 布设时请务必保持上下Rotation相同，需要初始值不同的场合请通过GadgetState控制
@@ -18,7 +18,7 @@ local wakuraConfig =
     targetFaceNum = {3,2,5}, -- 设计者关注的最终面的数量
     SGVList = {"SGV_Light_01","SGV_Light_02","SGV_Light_03","SGV_Light_04","SGV_Light_05","SGV_Light_06"}
 }
-local stateIndex ={
+stateIndex ={
     [0] = {index = 1,next = 201},
     [201] ={index = 2,next = 202},
     [202] ={index = 3,next = 203},
@@ -28,7 +28,7 @@ local stateIndex ={
 }
 
 --]]
-local tempTrigger = {
+tempTrigger = {
     { config_id = 2330001, name = "UpStateChange", event = EventType.EVENT_GADGET_STATE_CHANGE, source = tostring(wakuraConfig.upConfig),
       condition = "", action = "action_StateChangeCheck", trigger_count = 0},
     { config_id = 2330002, name = "DownStateChange", event = EventType.EVENT_GADGET_STATE_CHANGE, source = tostring(wakuraConfig.downConfig),
@@ -62,7 +62,7 @@ function action_GADGET_CREATE_Operator(context, evt)
     if wakuraConfig.operatorConfig ~= evt.param1 then
         return 0
     end
-    local operatorState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.operatorConfig)
+    operatorState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.operatorConfig)
     if 201 == operatorState or 202 == operatorState then
         CalculateEachFaceNum(context)
     end
@@ -98,7 +98,7 @@ function action_SELECT_OPTION_Change(context, evt)
         CloseAllSGVLight(context)
         ScriptLib.DelWorktopOptionByGroupId(context, wakuraConfig.groupId, wakuraConfig.operatorConfig, 89)
         ScriptLib.DelWorktopOptionByGroupId(context, wakuraConfig.groupId, wakuraConfig.operatorConfig, 90)
-        local upState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.upConfig)
+        upState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.upConfig)
         ScriptLib.SetGadgetStateByConfigId(context, wakuraConfig.upConfig, stateIndex[upState].next)
     end
 
@@ -107,7 +107,7 @@ function action_SELECT_OPTION_Change(context, evt)
         CloseAllSGVLight(context)
         ScriptLib.DelWorktopOptionByGroupId(context, wakuraConfig.groupId, wakuraConfig.operatorConfig, 89)
         ScriptLib.DelWorktopOptionByGroupId(context, wakuraConfig.groupId, wakuraConfig.operatorConfig, 90)
-        local downState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.downConfig)
+        downState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.downConfig)
         ScriptLib.SetGadgetStateByConfigId(context, wakuraConfig.downConfig, stateIndex[downState].next)
     end
 
@@ -127,7 +127,7 @@ function action_StateChangeCheck(context, evt)
     end
 
     -- 202状态下不再设置操作台
-    local operatorState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.operatorConfig)
+    operatorState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.operatorConfig)
     if 201 == operatorState then
         ScriptLib.InitTimeAxis(context, "ReSetWorktopOption", {1}, false)
     end
@@ -141,22 +141,22 @@ end
 --------公用函数----------
     ------------检查各个方向计数同时控制方向开关---------
     function CalculateEachFaceNum(context)
-        local upState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.upConfig)
-        local downState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.downConfig)
-        local operatorState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.operatorConfig)
+        upState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.upConfig)
+        downState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.downConfig)
+        operatorState = ScriptLib.GetGadgetStateByConfigId(context, 0, wakuraConfig.operatorConfig)
         ScriptLib.PrintContextLog(context, "## TD磐座统计: ".. "上层State为 " .. upState .."，下层State为 " .. downState)
-        local upIndex = stateIndex[upState].index
-        local downIndex = stateIndex[downState].index
-        local eachFaceNum = {0,0,0,0,0,0}
+        upIndex = stateIndex[upState].index
+        downIndex = stateIndex[downState].index
+        eachFaceNum = {0,0,0,0,0,0}
         for i = 1,6 do
             eachFaceNum[i] = wakuraConfig.upNum[getIndex(upIndex + i - 1)] + wakuraConfig.downNum[getIndex(downIndex + i - 1)]
         end
         ScriptLib.PrintContextLog(context, "## TD磐座 总计数为 : " .. arrayToString(eachFaceNum))
 
-        local activeCount = 0
+        activeCount = 0
         for i = 1,#wakuraConfig.careFaceIndex do
-            local targetFaceNum = wakuraConfig.targetFaceNum[i]
-            local targetFaceIndex = wakuraConfig.careFaceIndex[i]
+            targetFaceNum = wakuraConfig.targetFaceNum[i]
+            targetFaceIndex = wakuraConfig.careFaceIndex[i]
             if  targetFaceNum == eachFaceNum[targetFaceIndex] then
                 ScriptLib.PrintContextLog(context, "## TD磐座 第"..targetFaceIndex.."方向符合计数要求,点亮其上下层")
                 ScriptLib.SetEntityServerGlobalValueByConfigId(context, wakuraConfig.upConfig, wakuraConfig.SGVList[getIndex(upIndex + targetFaceIndex - 1)], 1)
@@ -188,8 +188,8 @@ end
 --------工具函数----------
     ---根据Index加算返回合适的Index---
     function getIndex(index)
-        local circleNum = 6
-        local curIndex = index
+        circleNum = 6
+        curIndex = index
         if curIndex > circleNum then
             curIndex = curIndex % circleNum
             if 0 == curIndex then
@@ -201,7 +201,7 @@ end
 
     ---简单拆分一个数组---
     function arrayToString(array)
-        local s = "{"
+        s = "{"
         for k,v in pairs(array) do
             if k < #array then
                 s = s .. v ..","

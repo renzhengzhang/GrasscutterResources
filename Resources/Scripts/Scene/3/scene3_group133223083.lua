@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133223083
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -73,9 +73,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -83,7 +83,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_83003(context, evt)
 	if 83001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -94,16 +94,16 @@ function action_EVENT_GADGET_STATE_CHANGE_83003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 改变指定monster的globalvalue
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {83004}, "_MONSTERAFFIX_AIHITFEELING_LEVELTRIGGER", 1)
-	
+
 	-- 通知groupid为133223083中,configid为：83004的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 83004, 133223083) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -112,7 +112,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_83005(context, evt)
 	if 83002 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -123,19 +123,19 @@ function action_EVENT_GADGET_STATE_CHANGE_83005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_83006(context, evt)
 	if evt.param1 ~= 83006 then return false end
-	
+
 	-- 判断变量"battle"为1
 	if ScriptLib.GetGroupVariableValue(context, "battle") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -143,12 +143,12 @@ end
 function action_EVENT_ENTER_REGION_83006(context, evt)
 		-- 改变指定monster的globalvalue
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {83004}, "_MONSTERAFFIX_AIHITFEELING_LEVELTRIGGER", 1)
-	
+
 	-- 通知groupid为133223083中,configid为：83004的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 83004, 133223083) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

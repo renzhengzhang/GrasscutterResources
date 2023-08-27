@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133003130
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 2609
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -108,7 +108,7 @@ function condition_EVENT_GATHER_103(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "get1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -121,17 +121,17 @@ function action_EVENT_GATHER_103(context, evt)
 		return -1
 	end
 	ScriptLib.PrintLog(context, "Create Success")
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133003130, suite = 2 }) then
 	ScriptLib.PrintLog(context, "refresh 133003130  fail")
 			return -1
 		end
 	ScriptLib.PrintLog(context, "refresh 133003130 Success")
-	
+
 	-- 变量"get1"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "get1", 0)
-	
+
 	return 0
 end
 
@@ -142,7 +142,7 @@ function condition_EVENT_GATHER_119(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "get1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -150,7 +150,7 @@ end
 function action_EVENT_GATHER_119(context, evt)
 	-- 变量"get1"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "get1", 0)
-	
+
 	return 0
 end
 
@@ -160,7 +160,7 @@ function condition_EVENT_CHALLENGE_SUCCESS_120(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "get1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -172,12 +172,12 @@ function action_EVENT_CHALLENGE_SUCCESS_120(context, evt)
 			return -1
 		end
 	ScriptLib.PrintLog(context, "refresh 133003130  to 3 suc")
-	
+
 	-- 创建id为2609的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_1 }) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_CHALLENGE_FAIL_121(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "get1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -199,7 +199,7 @@ function action_EVENT_CHALLENGE_FAIL_121(context, evt)
 			return -1
 		end
 	ScriptLib.PrintLog(context, "challenge fail cause refresh to 3")
-	
+
 	return 0
 end
 
@@ -210,6 +210,6 @@ function action_EVENT_GATHER_141(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

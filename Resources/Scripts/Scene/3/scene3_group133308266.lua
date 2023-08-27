@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308266
 }
 
 -- DEFS_MISCS
-local engineerLaserConfigID = 266001
-local turnOption = 435
-local correctState = 202
+engineerLaserConfigID = 266001
+turnOption = 435
+correctState = 202
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -94,9 +94,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -105,7 +105,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_266005(context, evt)
 	if 266002 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -116,7 +116,7 @@ function action_EVENT_GADGET_STATE_CHANGE_266005(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -125,12 +125,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_266006(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133308266, 266002) then
 		return false
 	end
-	
+
 	-- 判断变量"Finish"为0
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -141,13 +141,13 @@ function action_EVENT_GADGET_STATE_CHANGE_266006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 改变指定group组133308689中， configid为689002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133308689, 689002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_266010(context, evt)
 	if 266001 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -168,7 +168,7 @@ function action_EVENT_GADGET_STATE_CHANGE_266010(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -176,14 +176,14 @@ end
 function condition_EVENT_SELECT_OPTION_266011(context, evt)
 	-- 判断是gadgetid 0 option_id 0
 	if defs.gadget_engineerLaser ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if turnOption ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -194,7 +194,7 @@ function action_EVENT_SELECT_OPTION_266011(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 

@@ -4,14 +4,14 @@
 ||	description:	物件池机制
 ||               这是一个简单的池机制，只实现了简单的池管理。没有（也做不到）动态扩容等功能。所以如果用完了就是用完了，会出现创建不出物件的情况
 ||	LogName:	LuaGadgetPool
-||	Protection:	
+||	Protection:
 =======================================]]--
 
 ------
 
 
 
-local pool_defs = 
+pool_defs =
 {
     --物件池的基础configid，后续id都在上面做增量
     pool_base_config_id = 1000000,
@@ -20,11 +20,11 @@ local pool_defs =
 
 
 function Pool_Initialize()
-	local pool_gadget_config = {}
+	pool_gadget_config = {}
 
     if pool_object_gadget_id ~= nil then
         for k = 1, #pool_object_gadget_id do
-            local pool_max = 0
+            pool_max = 0
             if elite_drop ~= nil then
                 --for m,v in pairs(elite_drop) do
                 --    pool_max = pool_max + v[k]
@@ -38,8 +38,8 @@ function Pool_Initialize()
                     pool_gadget_config = { config_id = 0, gadget_id = 0, pos = { x = 0, y = 0, z = 0 }, rot = { x = 0, y = 0, z = 0 }, level = 1 }
                     pool_gadget_config.config_id = pool_defs.pool_base_config_id + (k-1) * pool_max + i
                     pool_gadget_config.gadget_id = pool_object_gadget_id[k]
-                
-                    local legal_config = {}
+
+                    legal_config = {}
                     if #gadgets > 0 then
                         legal_config = gadgets[1]
                     end
@@ -61,7 +61,7 @@ function Pool_Initialize()
     end
 
     --物件池的物件计数
-    
+
 end
 
 
@@ -71,7 +71,7 @@ end
 
 --找一个未被占用的object创建出来，需要指定创建位置
 function LF_Create_Object_From_Pool(context,k,pos,rot)
-    local pool_top = LF_Get_Pool_Top(context,k)
+    pool_top = LF_Get_Pool_Top(context,k)
     if pool_top == -1 then
         ScriptLib.PrintContextLog(context,"## [LuaGadgetPool] 物件池全部被占用，创建失败")
         return
@@ -84,19 +84,19 @@ end
 
 --尝试获取一个当前未被占用的物件
 function LF_Get_Pool_Top(context,k)
-    local pool_top = ScriptLib.GetGroupVariableValue(context,"pool_top_"..k)
+    pool_top = ScriptLib.GetGroupVariableValue(context,"pool_top_"..k)
     if pool_top < ScriptLib.GetGroupVariableValue(context,"pool_max_"..k) then
         return ScriptLib.GetGroupVariableValue(context,"pool_top_"..k)
     else
-        return -1 
+        return -1
     end
 end
 
 --常用工具方法。根据特定config_id的怪物所在位置创建物件
 function LF_Create_Object_From_Pool_By_Monster_Config_Id(context,k,config_id)
-    local eid = ScriptLib.GetEntityIdByConfigId(context,config_id)
-    local pos = ScriptLib.GetPosByEntityId(context, eid)
-    local rot = ScriptLib.GetRotationByEntityId(context,eid)
+    eid = ScriptLib.GetEntityIdByConfigId(context,config_id)
+    pos = ScriptLib.GetPosByEntityId(context, eid)
+    rot = ScriptLib.GetRotationByEntityId(context,eid)
     ScriptLib.PrintContextLog(context,"## [LuaGadgetPool] 在怪物死亡位置创建第"..k.."个池物件")
     LF_Create_Object_From_Pool(context,k,{x=pos.x,y=pos.y+0.25,z=pos.z},rot)
 
@@ -104,21 +104,21 @@ end
 
 
 function LF_Create_Object_Random_Pos_From_Pool_By_Monster_Config_Id(context,k,config_id,r)
-    local eid = ScriptLib.GetEntityIdByConfigId(context,config_id)
-    local pos = ScriptLib.GetPosByEntityId(context, eid)
-    local rot = ScriptLib.GetRotationByEntityId(context,eid)
+    eid = ScriptLib.GetEntityIdByConfigId(context,config_id)
+    pos = ScriptLib.GetPosByEntityId(context, eid)
+    rot = ScriptLib.GetRotationByEntityId(context,eid)
     ScriptLib.PrintContextLog(context,"## [LuaGadgetPool] 在怪物死亡位置创建第"..k.."个池物件")
-    local deltaX = math.cos(2 * math.pi * math.random()) * r
-    local deltaZ = math.sin(2 * math.pi * math.random()) * r
+    deltaX = math.cos(2 * math.pi * math.random()) * r
+    deltaZ = math.sin(2 * math.pi * math.random()) * r
     LF_Create_Object_From_Pool(context,k,{x=pos.x+deltaX,y=pos.y+0.25,z=pos.z+deltaZ},rot)
 
-end 
+end
 
 
 --重置整个物件池，回收所有释放的物件i
 function LF_Reset_Gadget_Pool(context)
     for i = 1, #pool_object_gadget_id do
-        local base = LF_Get_Base_Config_Id(context,i)
+        base = LF_Get_Base_Config_Id(context,i)
         for j = base, base + ScriptLib.GetGroupVariableValue(context,"pool_max_"..i) do
             ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, base+j)
         end
@@ -130,9 +130,9 @@ end
 --输入config_id，检查是否是整个物件池内的物件
 function LF_Is_In_Pool(context,config_id)
     for i = 1, #pool_object_gadget_id-1 do
-        local lower = LF_Get_Base_Config_Id(context,i)
-        local upper = LF_Get_Base_Config_Id(context,i+1)
-        if (config_id >= lower and config_id < upper) then 
+        lower = LF_Get_Base_Config_Id(context,i)
+        upper = LF_Get_Base_Config_Id(context,i+1)
+        if (config_id >= lower and config_id < upper) then
             return true
         end
     end
@@ -142,8 +142,8 @@ end
 
 --输入config_id，检查是否是特定池内的物件
 function LF_Is_In_Specific_Pool(context,k,config_id)
-    local lower = LF_Get_Base_Config_Id(context,k)
-    local upper = LF_Get_Base_Config_Id(context,k+1)
+    lower = LF_Get_Base_Config_Id(context,k)
+    upper = LF_Get_Base_Config_Id(context,k+1)
     return (config_id >= lower and config_id < upper)
 end
 
@@ -158,10 +158,10 @@ end
 
 --根据config_id，反查它是第几个物件，以及池内的index
 function LF_Get_Index_By_Config_Id(context,config_id)
-    local ret = {k = 0, index = 0}
+    ret = {k = 0, index = 0}
     for i = 1, #pool_object_gadget_id-1 do
-        local lower = LF_Get_Base_Config_Id(context,i)
-        local upper = LF_Get_Base_Config_Id(context,i+1)
+        lower = LF_Get_Base_Config_Id(context,i)
+        upper = LF_Get_Base_Config_Id(context,i+1)
         if (config_id >= lower and config_id < upper) then
             ret.k = i
             ret.index = config_id - lower
@@ -179,7 +179,7 @@ end
 
 --找到特定id物件的偏移基础值
 function LF_Get_Base_Config_Id(context,k)
-    local _k = k-1
+    _k = k-1
     if _k ~= 0 then
         return pool_defs.pool_base_config_id + _k * ScriptLib.GetGroupVariableValue(context,"pool_max_".._k)
     else
@@ -205,7 +205,7 @@ function LF_Get_Monster_Config_By_Id(config_id)
             return monsters[i]
         end
     end
-end 
+end
 
 
 

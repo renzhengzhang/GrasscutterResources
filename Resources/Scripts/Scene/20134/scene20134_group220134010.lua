@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220134010
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
 
-        gear_info = 
+        gear_info =
         {        --connect: 每个物件各个旋转档位可连接的对象 0表示无可连接
                   [1] = { config_id=10001 , connect = {10002, 10004,10005, 10003}, point_array_id =7 },
                 [2] = { config_id=10002, connect = {10001,10005,10003,10004}, point_array_id = 8 },
@@ -16,23 +16,23 @@ local        defs = {
                 [6] = { config_id=10006 , connect = {10001,10004,10007}, point_array_id = 12 },
                 [7] = { config_id=10007 , connect = {10003,10004,10006}, point_array_id = 13 },
 
-           
+
         },
 
         --几种解
-        solutions = 
+        solutions =
         {
                 --[解法x] = {gear_info[1]切到它的第x档, gear_info[2]切到它的第y档...}
                 [1] = { connection = {4,4,3,2,3,1,3}, ends = { }},
-              
+
         },
 turn_option = 31,
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -74,9 +74,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -87,9 +87,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,9 +114,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -124,7 +124,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10008(context, evt)
 	if 10011 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -135,42 +135,42 @@ function action_EVENT_GADGET_STATE_CHANGE_10008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220134016, 2)
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 220134010, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 10009 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 10010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_10012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"solution"为1
 	if ScriptLib.GetGroupVariableValue(context, "solution") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -178,13 +178,13 @@ end
 function action_EVENT_VARIABLE_CHANGE_10012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220134010, 2)
-	
+
 	-- 将本组内变量名为 "finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

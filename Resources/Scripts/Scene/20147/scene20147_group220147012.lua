@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220147012
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -93,9 +93,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -104,7 +104,7 @@ function condition_EVENT_MONSTER_BATTLE_12007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MonsterWave") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -112,13 +112,13 @@ end
 function action_EVENT_MONSTER_BATTLE_12007(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220147012, 3)
-	
+
 	-- 将本组内变量名为 "MonsterWave" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "MonsterWave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -128,12 +128,12 @@ function condition_EVENT_ANY_MONSTER_DIE_12008(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"MonsterWave"为1
 	if ScriptLib.GetGroupVariableValue(context, "MonsterWave") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -141,13 +141,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_12008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220147011, 2)
-	
+
 	-- 针对当前group内变量名为 "MonsterWave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "MonsterWave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_ANY_MONSTER_DIE_12009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MonsterWave") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -165,12 +165,12 @@ end
 function action_EVENT_ANY_MONSTER_DIE_12009(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220147012, 3)
-	
+
 	-- 将本组内变量名为 "MonsterWave" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "MonsterWave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

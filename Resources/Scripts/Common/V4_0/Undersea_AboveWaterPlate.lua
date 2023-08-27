@@ -4,17 +4,17 @@
 ||  owner:      xudong.sun
 ||  description:    水上幻影板，有一块主幻影板控制当前group下的分幻影板的创建
 ||  LogName:    ## Undersea_AboveWaterPlat
-||  Protection: 
+||  Protection:
 =======================================]]
 
 --[[
 
-local MainPlate = 283007
-local SubPlate = {283008,283009}
+MainPlate = 283007
+SubPlate = {283008,283009}
 
 ]]--
 
-local Extra_Triggers = {
+Extra_Triggers = {
     { config_id = 8000001, name = "CreatePlateTimer", event = EventType.EVENT_TIME_AXIS_PASS, source = "createplate_timer", condition = "", action = "action_CreatePlate", trigger_count = 0 },
 	{ config_id = 8000002, name = "EnterRegion", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_EnterRegion", trigger_count = 0 },
 	{ config_id = 8000001, name = "DeletePlateTimer", event = EventType.EVENT_TIME_AXIS_PASS, source = "deleteplate_timer", condition = "", action = "action_DeletePlate", trigger_count = 0 },
@@ -42,7 +42,7 @@ function action_CreatePlate( context, evt )
 
 	ScriptLib.CreateGadget(context, { config_id = SubPlate[ScriptLib.GetGroupTempValue(context, "CreatePlateIndex", {})] })
 
-	--查询index + 1 
+	--查询index + 1
 	ScriptLib.ChangeGroupTempValue(context, "CreatePlateIndex", 1, {})
 
 	if ScriptLib.GetGroupTempValue(context, "CreatePlateIndex", {}) >= #SubPlate then
@@ -67,7 +67,7 @@ function action_DeletePlate( context, evt )
 
 	ScriptLib.KillEntityByConfigId(context, { group_id = base_info.group_id, config_id = SubPlate[ScriptLib.GetGroupTempValue(context, "CreatePlateIndex", {})] })
 
-	--查询index + 1 
+	--查询index + 1
 	ScriptLib.ChangeGroupTempValue(context, "CreatePlateIndex", 1, {})
 
 	if ScriptLib.GetGroupTempValue(context, "CreatePlateIndex", {}) >= #SubPlate then

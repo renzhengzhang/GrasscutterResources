@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133302536
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -102,9 +102,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -112,7 +112,7 @@ function condition_EVENT_GATHER_536010(context, evt)
 	if 536001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -123,7 +123,7 @@ function action_EVENT_GATHER_536010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -133,8 +133,8 @@ function condition_EVENT_ANY_MONSTER_DIE_536012(context, evt)
 	if evt.param1 ~= 536011 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -145,19 +145,19 @@ function action_EVENT_ANY_MONSTER_DIE_536012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_536014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"liaolidui"为9
 	if ScriptLib.GetGroupVariableValue(context, "liaolidui") ~= 9 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -168,7 +168,7 @@ function action_EVENT_VARIABLE_CHANGE_536014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_GATHER_536015(context, evt)
 	if 536002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -188,7 +188,7 @@ function action_EVENT_GATHER_536015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_GATHER_536016(context, evt)
 	if 536003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -208,7 +208,7 @@ function action_EVENT_GATHER_536016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_GATHER_536017(context, evt)
 	if 536004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -228,7 +228,7 @@ function action_EVENT_GATHER_536017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -237,7 +237,7 @@ function condition_EVENT_GATHER_536018(context, evt)
 	if 536005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -248,7 +248,7 @@ function action_EVENT_GATHER_536018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -257,7 +257,7 @@ function condition_EVENT_GATHER_536019(context, evt)
 	if 536006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -268,7 +268,7 @@ function action_EVENT_GATHER_536019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -277,7 +277,7 @@ function condition_EVENT_GATHER_536020(context, evt)
 	if 536007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -288,7 +288,7 @@ function action_EVENT_GATHER_536020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -297,7 +297,7 @@ function condition_EVENT_GATHER_536021(context, evt)
 	if 536008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -308,7 +308,7 @@ function action_EVENT_GATHER_536021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -317,7 +317,7 @@ function condition_EVENT_GATHER_536022(context, evt)
 	if 536009 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -328,7 +328,7 @@ function action_EVENT_GATHER_536022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -338,7 +338,7 @@ function condition_EVENT_GROUP_LOAD_536023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "liaolidui") ~= 9 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -349,17 +349,17 @@ function action_EVENT_GROUP_LOAD_536023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GATHER_536024(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0 
+	-- 判断指定group组剩余gadget数量是否是0
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133302536}) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -370,17 +370,17 @@ function action_EVENT_GATHER_536024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_536025(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0 
+	-- 判断指定group组剩余gadget数量是否是0
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133302536}) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -391,6 +391,6 @@ function action_EVENT_GROUP_LOAD_536025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

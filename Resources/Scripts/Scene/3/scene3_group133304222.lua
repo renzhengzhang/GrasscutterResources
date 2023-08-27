@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133304222
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_CoreID = 222005,
 	monster_BossID = 222002,
 	gadget_Point_1 = 222006,
@@ -16,9 +16,9 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-local DeathField ={
+DeathField ={
 	CoreID = defs.gadget_CoreID,
 	BossID = defs.monster_BossID,
 	BossSuite = 2,
@@ -26,7 +26,7 @@ local DeathField ={
 	PointList = {defs.gadget_Point_1,defs.gadget_Point_2,defs.gadget_Point_3},
 }
 
-local CameraLookSetting = {
+CameraLookSetting = {
     blend_type = 0,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -35,9 +35,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -100,9 +100,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -113,9 +113,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -158,9 +158,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -174,7 +174,7 @@ function condition_EVENT_MONSTER_BATTLE_222011(context, evt)
 	if 222002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -184,38 +184,38 @@ function action_EVENT_MONSTER_BATTLE_222011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 222012, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为222003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 222003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为222013的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 222013 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为222014的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 222014 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为222018的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 222018 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为222019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 222019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -224,7 +224,7 @@ function condition_EVENT_ANY_MONSTER_DIE_222016(context, evt)
 	if 222002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -234,8 +234,8 @@ function action_EVENT_ANY_MONSTER_DIE_222016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 222012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -244,7 +244,7 @@ function condition_EVENT_ANY_GADGET_DIE_222023(context, evt)
 	if 222005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -252,7 +252,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_222023(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304222, 4)
-	
+
 	return 0
 end
 
@@ -261,7 +261,7 @@ function condition_EVENT_ANY_GADGET_DIE_222024(context, evt)
 	if 222006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -272,8 +272,8 @@ function action_EVENT_ANY_GADGET_DIE_222024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -282,7 +282,7 @@ function condition_EVENT_ANY_GADGET_DIE_222025(context, evt)
 	if 222007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -293,14 +293,14 @@ function action_EVENT_ANY_GADGET_DIE_222025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将本组内变量名为 "dead" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "dead", 1, 133304225) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -309,7 +309,7 @@ function condition_EVENT_ANY_GADGET_DIE_222026(context, evt)
 	if 222008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -320,8 +320,8 @@ function action_EVENT_ANY_GADGET_DIE_222026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 

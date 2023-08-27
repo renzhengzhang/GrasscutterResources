@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220133064
 }
 
@@ -15,20 +15,20 @@ local	defs = {
 		--定义左右旋转的步长,key为传音花configID，value为旋转角对应的GadgetState
 --GadgetState不可重复
 		horizon_steps = {
-			
+
 		},
 
 		--定义上下俯仰的步长,key为传音花configID，value为旋转角对应的GadgetState
 --GadgetState不可重复
 		vertical_steps = {
-			
+
 		}
 	}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -94,9 +94,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -125,9 +125,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -136,8 +136,8 @@ function action_EVENT_QUEST_FINISH_64011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 64005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -146,7 +146,7 @@ function condition_EVENT_ANY_GADGET_DIE_64012(context, evt)
 	if 64004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -157,49 +157,49 @@ function action_EVENT_ANY_GADGET_DIE_64012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220133064, EntityType.GADGET, 64013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220133064, EntityType.GADGET, 64014 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220133064, EntityType.GADGET, 64015 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220133064, EntityType.GADGET, 64016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220133064, EntityType.GADGET, 64017 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220133064, EntityType.GADGET, 64018 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "doorDie" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "doorDie", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -209,7 +209,7 @@ function condition_EVENT_QUEST_START_64019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "doorDie") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -220,7 +220,7 @@ function action_EVENT_QUEST_START_64019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -230,7 +230,7 @@ function condition_EVENT_GROUP_LOAD_64020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "doorDie") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -241,7 +241,7 @@ function action_EVENT_GROUP_LOAD_64020(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 

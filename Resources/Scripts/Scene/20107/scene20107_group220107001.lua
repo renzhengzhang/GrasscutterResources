@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220107001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -101,9 +101,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -112,7 +112,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1002(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -123,7 +123,7 @@ function action_EVENT_ANY_MONSTER_DIE_1002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -132,7 +132,7 @@ function condition_EVENT_DUNGEON_SETTLE_1014(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -140,7 +140,7 @@ end
 function action_EVENT_DUNGEON_SETTLE_1014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220107001, 2)
-	
+
 	return 0
 end
 
@@ -149,7 +149,7 @@ function condition_EVENT_DUNGEON_SETTLE_1015(context, evt)
 	if 0 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -160,13 +160,13 @@ function action_EVENT_DUNGEON_SETTLE_1015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_TIMER_EVENT_1016(context, evt)
-	local uid=ScriptLib.GetSceneUidList(context)
+	uid=ScriptLib.GetSceneUidList(context)
 	if ScriptLib.IsPlayerAllAvatarDie(context, uid[1]) then
 	return false
 	end
@@ -180,6 +180,6 @@ function action_EVENT_TIMER_EVENT_1016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220142012
 }
 
@@ -9,7 +9,7 @@ defs = {
     levelTagGroupID = 7,
 
     --是否由re-quire控制切suite，填0则不需要配置switchByLevelTag_suites
-    switchByLevelTag = 1, 
+    switchByLevelTag = 1,
 
     --切入该LevelTag时，加载且仅加载的suite。
     --注意，被此操作Remove掉的物件不会保留GadgetState
@@ -18,23 +18,25 @@ defs = {
         ["2_8_Kazuha_01"] = {},
         ["2_8_Kazuha_02"] = {},
         ["2_8_Kazuha_03"] = {},
-        ["2_8_Kazuha_05"] = {2},
+        ["2_8_Kazuha_05"] = {2},
+
         ["2_8_Kazuha_06"] = {2},
         ["2_8_Kazuha_07"] = {2},
     },
 
     --需要保存gadgetState的物件configID，最多9个
-    saved_gadget = 
-    {  
+    saved_gadget =
+    {
     	12001,12002,12005
-    },
+    }
+,
 serve_items = {12011,12012},
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -109,9 +111,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -122,9 +124,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -158,9 +160,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -169,10 +171,10 @@ function action_EVENT_LEVEL_TAG_CHANGE_12003(context, evt)
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 220142012, 2)
-		
+
 		ScriptLib.RemoveExtraGroupSuite(context, 220142012, 3)
 	end
-	
+
 	return 0
 end
 
@@ -180,12 +182,12 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_12006(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 12002) == 201 and ScriptLib.GetGadgetStateByConfigId(context, 0, 12005) == 201 then
 		ScriptLib.AddQuestProgress(context, "4006512")
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,12001, GadgetState.GearStart)
-		
+
 		ScriptLib.SetGroupVariableValue(context, "temp", 1)
 	end
-	
+
 	return 0
 end
 
@@ -195,7 +197,7 @@ function condition_EVENT_QUEST_START_12007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -206,24 +208,24 @@ function action_EVENT_QUEST_START_12007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12008(context, evt)
 	if evt.param1 ~= 12008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"temp"为1
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -234,19 +236,19 @@ function action_EVENT_ENTER_REGION_12008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12010(context, evt)
 	if evt.param1 ~= 12010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -254,7 +256,7 @@ end
 function action_EVENT_ENTER_REGION_12010(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220142012, 3)
-	
+
 	return 0
 end
 
@@ -263,7 +265,7 @@ function condition_EVENT_TIME_AXIS_PASS_12013(context, evt)
 	if "temp1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -273,32 +275,32 @@ function action_EVENT_TIME_AXIS_PASS_12013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 12022 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12022, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 12023 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12023, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 12026 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12026, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 12027 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12027, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -307,19 +309,19 @@ function action_EVENT_ENTER_REGION_12014(context, evt)
 	if evt.param1 == 12014 and ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 and ScriptLib.TryRecordActivityPushTips(context, 2014009) == 0 then
 		ScriptLib.ShowClientTutorial(context, 1179, {})
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12016(context, evt)
 	if evt.param1 ~= 12016 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -330,20 +332,20 @@ function action_EVENT_ENTER_REGION_12016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12032(context, evt)
 	if evt.param1 ~= 12032 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -351,20 +353,20 @@ end
 function action_EVENT_ENTER_REGION_12032(context, evt)
 	-- 停止标识为"temp1"的时间轴
 	ScriptLib.EndTimeAxis(context, "temp1")
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12033(context, evt)
 	if evt.param1 ~= 12033 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -374,36 +376,36 @@ function action_EVENT_ENTER_REGION_12033(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 12022 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12022, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 12023 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12023, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 12026 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12026, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 12027 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12027, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"temp1"，时间节点为{4}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "temp1", {4}, true)
-	
-	
+
+
 	return 0
 end
 
@@ -412,7 +414,7 @@ function action_EVENT_GROUP_LOAD_12034(context, evt)
 	if ScriptLib.CheckSceneTag(context, 20142,1055 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	end
-	
+
 	return 0
 end
 

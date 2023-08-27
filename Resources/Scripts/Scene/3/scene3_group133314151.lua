@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133314151
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -94,9 +94,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -105,7 +105,7 @@ function condition_EVENT_ANY_MONSTER_DIE_151007(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -115,26 +115,26 @@ function action_EVENT_ANY_MONSTER_DIE_151007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 151006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 4000, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_151008(context, evt)
 	if evt.param1 ~= 151008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -144,12 +144,12 @@ function action_EVENT_ENTER_REGION_151008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING: SetGadgetStateByConfigId")
 		return -1
 	end
-	
+
 	if 0 ~= ScriptLib.AddExtraGroupSuite(context, 133314151, 2) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING: AddExtraGroupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -159,7 +159,7 @@ function condition_EVENT_ANY_MONSTER_DIE_151013(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -167,6 +167,6 @@ end
 function action_EVENT_ANY_MONSTER_DIE_151013(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133314151, 3)
-	
+
 	return 0
 end

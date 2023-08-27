@@ -9,23 +9,23 @@
 =======================================]]
 
 --
-local RequireSuite = {}
+RequireSuite = {}
 
 --[[
-local WatcherList ={
+WatcherList ={
 	[84001] = { pointArray = 110200022,pointArrayList = {1,2,3}},
 	[84002] = { pointArray = 110200022,pointArrayList = {4,5,6}},
 }
 --]]
 
-local VisualizationPlant_Trigger = {
+VisualizationPlant_Trigger = {
     { keyWord = "CheckFlowerCreate", event = EventType.EVENT_GADGET_CREATE, source = "", trigger_count = 0},
     { keyWord = "CheckPoint", event = EventType.EVENT_PLATFORM_ARRIVAL, source = "", trigger_count = 0},
     { keyWord = "StageChange", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", trigger_count = 0},
 }
 
 function LF_Initialize_VisualizationPlant()
-    local startConfigID = 40030001
+    startConfigID = 40030001
     for _,v in pairs(VisualizationPlant_Trigger) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -49,7 +49,7 @@ end
 --======================================]]
 function action_CheckFlowerCreate(context,evt)
     ScriptLib.PrintContextLog(context, "## TD_VisualizationPlant  CheckFlowerCreate| configID = " .. evt.param1 )
-    local cid = evt.param1
+    cid = evt.param1
     if WatcherList[cid] ~= nil then
         LF_StartMove(context,cid)
     end
@@ -57,18 +57,18 @@ function action_CheckFlowerCreate(context,evt)
 end
 
 function action_CheckPoint(context,evt)
-    local cid = evt.param1
-    local curPoint = evt.param3
+    cid = evt.param1
+    curPoint = evt.param3
     if WatcherList[cid] == nil then
         return 0
     end
 
-    local pointList = WatcherList[cid].pointArrayList
-    local curIndex = LF_GetIndexInTable(curPoint,pointList)
-    local nextIndex = LF_GetNextPointIndex(pointList,curIndex)
+    pointList = WatcherList[cid].pointArrayList
+    curIndex = LF_GetIndexInTable(curPoint,pointList)
+    nextIndex = LF_GetNextPointIndex(pointList,curIndex)
     ScriptLib.SetGroupTempValue(context, "Cid_"..cid.."_Index",nextIndex, {})
 
-    local msg = "## TD_VisualizationPlant  CheckPoint"
+    msg = "## TD_VisualizationPlant  CheckPoint"
     msg = msg .. "| configID = " .. cid
     msg = msg .. "| nextIndex被保存 = " .. nextIndex
     ScriptLib.PrintContextLog(context, msg)
@@ -77,11 +77,11 @@ function action_CheckPoint(context,evt)
 end
 
 function action_StageChange(context,evt)
-    local msg = "## TD_VisualizationPlant  GadgetCheck"
+    msg = "## TD_VisualizationPlant  GadgetCheck"
     msg = msg .. "| configID = " .. evt.param2
     msg = msg .. "的状态被修改为 = " .. evt.param1
     ScriptLib.PrintContextLog(context, msg)
-    local cid = evt.param2
+    cid = evt.param2
     if WatcherList[cid] ~= nil then
         if 0 ~= evt.param1 then
             -- 停下来！
@@ -99,20 +99,20 @@ end
 ||	流程函数
 --======================================]]
 function LF_StartMove(context,cid)
-    local curPointIndex = ScriptLib.GetGroupTempValue(context, "Cid_"..cid.."_Index", {})
-    local pointArray = WatcherList[cid].pointArray
-    local pointList = WatcherList[cid].pointArrayList
+    curPointIndex = ScriptLib.GetGroupTempValue(context, "Cid_"..cid.."_Index", {})
+    pointArray = WatcherList[cid].pointArray
+    pointList = WatcherList[cid].pointArrayList
 
     if 0 == curPointIndex then
         ScriptLib.SetGroupTempValue(context, "Cid_"..cid.."_Index", 1, {})
         curPointIndex = 1
     end
 
-    local curPath = LF_GetStartPath(pointList,curPointIndex)
+    curPath = LF_GetStartPath(pointList,curPointIndex)
 
     ScriptLib.SetPlatformPointArray(context, cid, pointArray, curPath, { route_type = 2,record_mode=0 })
 
-    local msg = "## TD_VisualizationPlant  LF_StartMove"
+    msg = "## TD_VisualizationPlant  LF_StartMove"
     msg = msg .. "| curPointIndex = " .. cid
     msg = msg .. "| configID = " .. cid
     msg = msg .. "| pointArray = " .. pointArray
@@ -129,7 +129,7 @@ end
 
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -169,7 +169,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    local s = "{"
+    s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","
@@ -184,15 +184,15 @@ end
 -- 根据起点获得点阵资料
 function LF_GetStartPath(pointArrayList, curPointIndex)
 
-    local path = {}
-    local pointList = pointArrayList
+    path = {}
+    pointList = pointArrayList
 
     if pointList[curPointIndex] == nil then
         return path
     end
 
     for i = 1,#pointList do
-        local point = pointList[curPointIndex]
+        point = pointList[curPointIndex]
         table.insert(path,point)
         curPointIndex = LF_GetNextPointIndex(pointList,curPointIndex)
     end
@@ -201,7 +201,7 @@ function LF_GetStartPath(pointArrayList, curPointIndex)
 end
 
 function LF_GetNextPointIndex(pointList, curPointIndex)
-    local nextPointIndex = curPointIndex + 1
+    nextPointIndex = curPointIndex + 1
     if nextPointIndex > #pointList then
         nextPointIndex = 1
     end

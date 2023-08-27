@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133102761
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -99,9 +99,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -109,7 +109,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_761009(context, evt)
 	if 761002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -120,13 +120,13 @@ function action_EVENT_GADGET_STATE_CHANGE_761009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "2102126_finish") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -135,7 +135,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_761010(context, evt)
 	if 761002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -146,13 +146,13 @@ function action_EVENT_GADGET_STATE_CHANGE_761010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "2102127_finish") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -161,7 +161,7 @@ function condition_EVENT_ANY_GADGET_DIE_761011(context, evt)
 	if 761002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -172,7 +172,7 @@ function action_EVENT_ANY_GADGET_DIE_761011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -181,7 +181,7 @@ function condition_EVENT_ANY_GADGET_DIE_761012(context, evt)
 	if 761002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -192,7 +192,7 @@ function action_EVENT_ANY_GADGET_DIE_761012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -200,17 +200,17 @@ end
 function condition_EVENT_QUEST_FINISH_761013(context, evt)
 	--检查ID为2102114的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 2102114 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -218,7 +218,7 @@ end
 function action_EVENT_QUEST_FINISH_761013(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133102761, 2)
-	
+
 	return 0
 end
 
@@ -226,17 +226,17 @@ end
 function condition_EVENT_QUEST_FINISH_761014(context, evt)
 	--检查ID为2102123的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 2102123 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -244,7 +244,7 @@ end
 function action_EVENT_QUEST_FINISH_761014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133102761, 2)
-	
+
 	return 0
 end
 
@@ -254,7 +254,7 @@ function condition_EVENT_GROUP_LOAD_761015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -265,7 +265,7 @@ function action_EVENT_GROUP_LOAD_761015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -275,7 +275,7 @@ function condition_EVENT_GROUP_LOAD_761016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -286,17 +286,17 @@ function action_EVENT_GROUP_LOAD_761016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_QUEST_START_761017(context, evt)
-	-- 判断指定group组剩余gadget数量是否是1 
+	-- 判断指定group组剩余gadget数量是否是1
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133102761}) ~= 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -307,17 +307,17 @@ function action_EVENT_QUEST_START_761017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_QUEST_START_761018(context, evt)
-	-- 判断指定group组剩余gadget数量是否是1 
+	-- 判断指定group组剩余gadget数量是否是1
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133102761}) ~= 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -328,6 +328,6 @@ function action_EVENT_QUEST_START_761018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

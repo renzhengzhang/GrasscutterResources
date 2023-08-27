@@ -1,6 +1,6 @@
 -- Trigger变量
 --[[
-local defs = {
+defs = {
     BossConfigID = 1002,
     EnvConfigID = 1001,
     GroupID = 220117001,
@@ -8,7 +8,7 @@ local defs = {
 --]]
 
 --------Boss女士-------------
-local tempTrigger = {
+tempTrigger = {
     --[[
     { config_id = 2330001, name = "EVENT_QUEST_START", event = EventType.EVENT_QUEST_START, source = "202010",
       condition = "", action = "action_NoticeMonsterEnterPhaseSecond", trigger_count = 0},
@@ -28,7 +28,7 @@ function LF_Initialize_Level()
         table.insert(suites[1].triggers, v.name)
     end
 
-    local var = { config_id=50000001,name = "PhaseStep", value = 1, no_refresh = false }   --阶段计数器
+    var = { config_id=50000001,name = "PhaseStep", value = 1, no_refresh = false }   --阶段计数器
     variables[var.name] = var
     var = { config_id=50000002,name = "DebugPhase", value = 1, no_refresh = false }   -- Debug用阶段计数器
     variables[var.name] = var
@@ -111,4 +111,3 @@ end
 
 LF_Initialize_Level()
 --- ServerUploadTool Save to [/root/env/data/lua/common/V2_1]  ---
-

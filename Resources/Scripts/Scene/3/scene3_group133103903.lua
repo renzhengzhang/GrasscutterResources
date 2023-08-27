@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133103903
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -92,9 +92,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -103,13 +103,13 @@ function condition_EVENT_ANY_MONSTER_DIE_903007(context, evt)
 	if evt.param1 ~= 903001 then
 	    return false
 	 end
-	  
-	
+
+
 	-- 判断变量"MonsterCouter"不为14
 	if ScriptLib.GetGroupVariableValue(context, "MonsterCouter") == 14 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -120,13 +120,13 @@ function action_EVENT_ANY_MONSTER_DIE_903007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "MonsterCouter" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "MonsterCouter", 1, 133103903) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -136,13 +136,13 @@ function condition_EVENT_ANY_MONSTER_DIE_903008(context, evt)
 	if evt.param1 ~= 903002 then
 	    return false
 	 end
-	  
-	
+
+
 	-- 判断变量"MonsterCouter"不为14
 	if ScriptLib.GetGroupVariableValue(context, "MonsterCouter") == 14 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -153,13 +153,13 @@ function action_EVENT_ANY_MONSTER_DIE_903008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "MonsterCouter" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "MonsterCouter", 1, 133103903) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -169,13 +169,13 @@ function condition_EVENT_ANY_MONSTER_DIE_903009(context, evt)
 	if evt.param1 ~= 903003 then
 	    return false
 	 end
-	  
-	
+
+
 	-- 判断变量"MonsterCouter"不为14
 	if ScriptLib.GetGroupVariableValue(context, "MonsterCouter") == 14 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -186,13 +186,13 @@ function action_EVENT_ANY_MONSTER_DIE_903009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "MonsterCouter" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "MonsterCouter", 1, 133103903) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -202,13 +202,13 @@ function condition_EVENT_ANY_MONSTER_DIE_903010(context, evt)
 	if evt.param1 ~= 903004 then
 	    return false
 	 end
-	  
-	
+
+
 	-- 判断变量"MonsterCouter"不为14
 	if ScriptLib.GetGroupVariableValue(context, "MonsterCouter") == 14 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -219,13 +219,13 @@ function action_EVENT_ANY_MONSTER_DIE_903010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "MonsterCouter" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "MonsterCouter", 1, 133103903) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -235,13 +235,13 @@ function condition_EVENT_ANY_MONSTER_DIE_903011(context, evt)
 	if evt.param1 ~= 903005 then
 	    return false
 	 end
-	  
-	
+
+
 	-- 判断变量"MonsterCouter"不为14
 	if ScriptLib.GetGroupVariableValue(context, "MonsterCouter") == 14 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -252,13 +252,13 @@ function action_EVENT_ANY_MONSTER_DIE_903011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "MonsterCouter" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "MonsterCouter", 1, 133103903) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -268,13 +268,13 @@ function condition_EVENT_ANY_MONSTER_DIE_903012(context, evt)
 	if evt.param1 ~= 903006 then
 	    return false
 	 end
-	  
-	
+
+
 	-- 判断变量"MonsterCouter"不为14
 	if ScriptLib.GetGroupVariableValue(context, "MonsterCouter") == 14 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -285,13 +285,13 @@ function action_EVENT_ANY_MONSTER_DIE_903012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "MonsterCouter" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "MonsterCouter", 1, 133103903) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -302,7 +302,7 @@ function action_EVENT_ANY_MONSTER_DIE_903013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -313,6 +313,6 @@ function action_EVENT_ANY_MONSTER_LIVE_903014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end

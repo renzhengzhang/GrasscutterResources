@@ -12,7 +12,7 @@ square={
 
 ]]--
 
-local square={
+square={
 	{config_id=defs.gadget_1,rotation=defs.rotation_1},
     {config_id=defs.gadget_2,rotation=defs.rotation_2},
     {config_id=defs.gadget_3,rotation=defs.rotation_3},
@@ -20,7 +20,7 @@ local square={
     {config_id=defs.gadget_5,rotation=defs.rotation_5},
 }
 
-local connectRelation={
+connectRelation={
 	[defs.gadget_1]=defs.gadget_connect1,
 	[defs.gadget_2]=defs.gadget_connect2,
 	[defs.gadget_3]=defs.gadget_connect3,
@@ -28,7 +28,7 @@ local connectRelation={
 	[defs.gadget_5]=defs.gadget_connect5,
 }
 
-local extraTriggers={
+extraTriggers={
   { config_id = 8000001, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
   { config_id = 8000002, name = "PLATFORM_REACH_POINT", event = EventType.EVENT_PLATFORM_REACH_POINT, source = "", condition = "", action = "action_EVENT_PLATFORM_REACH_POINT", trigger_count = 0 },
   { config_id = 8000003, name = "GADGET_CREATE", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_EVENT_GADGET_CREATE", trigger_count = 0 },
@@ -42,7 +42,7 @@ function LF_Initialize_Group(triggers, suites)
 	end
 	table.insert(variables,{ config_id=50000001,name = "successed", value = 0, no_refresh = true})
 	for i=1,#square do
-		if square[i].config_id ~= 0 then 
+		if square[i].config_id ~= 0 then
 			table.insert(variables,{ config_id=50000000+square[i].config_id,name = square[i].config_id.."isrotating", value = 0})
 			table.insert(variables,{ config_id=51000000+square[i].config_id,name = square[i].config_id.."rotation", value = square[i].rotation})
 		end
@@ -55,7 +55,7 @@ function SquareBeHit(context)
 		return 0
 	end
 	for i=1,#square do
-		if square[i].config_id ~= 0 then 
+		if square[i].config_id ~= 0 then
 			if context.target_entity_id == ScriptLib.GetEntityIdByConfigId(context, square[i].config_id) or context.source_entity_id== ScriptLib.GetEntityIdByConfigId(context, square[i].config_id) then
 				if CheckAllRotationDone(context) then
 					RotateGadget(context,square[i].config_id)
@@ -72,7 +72,7 @@ end
 function RotateGadget(context,config_id)
 	ScriptLib.SetGroupVariableValue(context, config_id.."isrotating", 1)
 	ScriptLib.SetPlatformPointArray(context, config_id, 322000031, { 1 }, { route_type = 0,turn_mode=true })
-	local angle=ScriptLib.GetGroupVariableValue(context,config_id.."rotation")
+	angle=ScriptLib.GetGroupVariableValue(context,config_id.."rotation")
 	angle=(angle+90)%360
 	ScriptLib.SetGroupVariableValue(context, config_id.."rotation",angle)
 	ScriptLib.SetGadgetStateByConfigId(context, config_id, 201) -- gadget旋转过程特效
@@ -107,7 +107,7 @@ end
 function action_group_load(context,evt)
 	if ScriptLib.GetGroupVariableValue(context,"successed")~=0 then
 		for i=1,#square do
-			if square[i].config_id ~= 0 then 
+			if square[i].config_id ~= 0 then
 				ScriptLib.SetGadgetStateByConfigId(context, square[i].config_id, 901)
 			end
 		end
@@ -116,7 +116,7 @@ function action_group_load(context,evt)
 	end
 	--groupload重置variable
 	for i=1,#square do
-		if square[i].config_id ~= 0 then 
+		if square[i].config_id ~= 0 then
 			ScriptLib.SetGroupVariableValue(context, square[i].config_id.."rotation", square[i].rotation)
 			ScriptLib.SetGroupVariableValue(context, square[i].config_id.."isrotating", 0)
 		end
@@ -146,14 +146,14 @@ function action_EVENT_GADGET_CREATE(context,evt)
 end
 
 function CheckIsSuccess(context)
-	local table0={}
-	local table90={}
-	local table180={}
-	local table270={}
-	local angle=999
-	local exitCount=0
+	table0={}
+	table90={}
+	table180={}
+	table270={}
+	angle=999
+	exitCount=0
 	for i=1,#square do
-		if square[i].config_id ~= 0 then 
+		if square[i].config_id ~= 0 then
 			exitCount=exitCount+1
 			angle=ScriptLib.GetGroupVariableValue(context,square[i].config_id.."rotation")
 			if angle==0 then
@@ -169,7 +169,7 @@ function CheckIsSuccess(context)
 	end
 	if #table0>=exitCount or #table90>=exitCount or #table180>=exitCount or #table270>=exitCount then
 		for i=1,#square do
-			if square[i].config_id ~= 0 then 
+			if square[i].config_id ~= 0 then
 				ScriptLib.SetGadgetStateByConfigId(context, square[i].config_id, 901)
 			end
 		end
@@ -221,5 +221,5 @@ function CheckIsSuccess(context)
 
 	return 0
 end
---local square=InitialData()
+--square=InitialData()
 LF_Initialize_Group(triggers, suites)

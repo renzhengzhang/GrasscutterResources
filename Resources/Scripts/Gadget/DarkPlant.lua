@@ -1,7 +1,7 @@
 function OnClientExecuteReq(context, param1, param2, param3)
 
-	local this_flower = ScriptLib.GetContextGadgetConfigId(context)
-	local this_group = ScriptLib.GetContextGroupId(context)
+	this_flower = ScriptLib.GetContextGadgetConfigId(context)
+	this_group = ScriptLib.GetContextGroupId(context)
 
 	if param1 == 0 then
 		ScriptLib.SetGadgetEnableInteract(context, this_group, this_flower, false)

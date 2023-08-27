@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240013002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -93,20 +93,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12(context, evt)
 	if evt.param1 ~= 12 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -117,43 +117,43 @@ function action_EVENT_ENTER_REGION_12(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 改变指定group组240013002中， configid为79的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013002, 79, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 2, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 3, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 4, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 5, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 6, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -162,7 +162,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13(context, evt)
 	if 86 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -172,14 +172,14 @@ function action_EVENT_GADGET_STATE_CHANGE_13(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013002, 76, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟8秒后,向groupId为：240013002的对象,请求一次调用,并将string参数："76" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 240013002, "76", 8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -188,7 +188,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_14(context, evt)
 	if 89 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -198,14 +198,14 @@ function action_EVENT_GADGET_STATE_CHANGE_14(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013002, 77, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟8秒后,向groupId为：240013002的对象,请求一次调用,并将string参数："77" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 240013002, "77", 8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -214,7 +214,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_15(context, evt)
 	if 91 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -224,14 +224,14 @@ function action_EVENT_GADGET_STATE_CHANGE_15(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013002, 31, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟8秒后,向groupId为：240013002的对象,请求一次调用,并将string参数："31" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 240013002, "31", 8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -241,14 +241,14 @@ function action_EVENT_TIMER_EVENT_19(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013002, 31, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013002中， configid为91的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013002, 91, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -258,14 +258,14 @@ function action_EVENT_TIMER_EVENT_20(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013002, 76, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013002中， configid为86的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013002, 86, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -275,14 +275,14 @@ function action_EVENT_TIMER_EVENT_21(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013002, 77, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013002中， configid为89的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013002, 89, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -291,7 +291,7 @@ function condition_EVENT_ANY_MONSTER_DIE_22(context, evt)
 	if 5 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -302,7 +302,7 @@ function action_EVENT_ANY_MONSTER_DIE_22(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -311,7 +311,7 @@ function condition_EVENT_ANY_MONSTER_DIE_23(context, evt)
 	if 4 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -322,7 +322,7 @@ function action_EVENT_ANY_MONSTER_DIE_23(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -331,7 +331,7 @@ function condition_EVENT_ANY_MONSTER_DIE_24(context, evt)
 	if 1002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -342,7 +342,7 @@ function action_EVENT_ANY_MONSTER_DIE_24(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -351,7 +351,7 @@ function condition_EVENT_ANY_MONSTER_DIE_25(context, evt)
 	if 1001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -362,19 +362,19 @@ function action_EVENT_ANY_MONSTER_DIE_25(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_26(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Boss"为4
 	if ScriptLib.GetGroupVariableValue(context, "Boss") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -385,7 +385,7 @@ function action_EVENT_VARIABLE_CHANGE_26(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -394,7 +394,7 @@ function condition_EVENT_ANY_MONSTER_DIE_27(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -405,6 +405,6 @@ function action_EVENT_ANY_MONSTER_DIE_27(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end

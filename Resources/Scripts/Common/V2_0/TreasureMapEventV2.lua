@@ -1,4 +1,4 @@
-local extraTriggers={
+extraTriggers={
 	{ config_id = 8000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
 	{ config_id = 8000002, name = "GENERAL_REWARD_TAKEN", event = EventType.EVENT_GENERAL_REWARD_TAKEN, source = "", condition = "", action = "action_EVENT_GENERAL_REWARD_TAKEN", trigger_count = 0 }
 }
@@ -13,7 +13,7 @@ function LF_Initialize_Group(triggers, suites)
 end
 
 
-function action_EVENT_GROUP_LOAD(context, evt)	
+function action_EVENT_GROUP_LOAD(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Created") == 0 then
 		ScriptLib.PrintContextLog(context,"DIG: DIG POINT GROUP LOADED")
 		for i=1,#gadgets do
@@ -25,10 +25,10 @@ function action_EVENT_GROUP_LOAD(context, evt)
 	return 0
 end
 
-function action_EVENT_GENERAL_REWARD_TAKEN(context, evt)  
-	ScriptLib.SetGroupVariableValue(context, "Created", 1)    
-	
-	ScriptLib.PrintContextLog(context,"DIG: AWARD HAS BEEN TAKEN")   
+function action_EVENT_GENERAL_REWARD_TAKEN(context, evt)
+	ScriptLib.SetGroupVariableValue(context, "Created", 1)
+
+	ScriptLib.PrintContextLog(context,"DIG: AWARD HAS BEEN TAKEN")
     return ScriptLib.CreateMonstersFromMonsterPool(context,"盗宝团")
 end
 

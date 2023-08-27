@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 166001086
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -88,9 +88,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -101,9 +101,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -137,9 +137,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -147,7 +147,7 @@ function condition_EVENT_ANY_GADGET_DIE_86018(context, evt)
 	if 86004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -157,14 +157,14 @@ function action_EVENT_ANY_GADGET_DIE_86018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 86042, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "leave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "leave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -173,7 +173,7 @@ function condition_EVENT_ANY_GADGET_DIE_86020(context, evt)
 	if 86006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -183,14 +183,14 @@ function action_EVENT_ANY_GADGET_DIE_86020(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 86041, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "leave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "leave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_ANY_GADGET_DIE_86022(context, evt)
 	if 86008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -209,14 +209,14 @@ function action_EVENT_ANY_GADGET_DIE_86022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 86043, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "leave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "leave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -225,7 +225,7 @@ function condition_EVENT_GADGET_CREATE_86026(context, evt)
 	if 86025 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -236,7 +236,7 @@ function action_EVENT_GADGET_CREATE_86026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -244,14 +244,14 @@ end
 function condition_EVENT_SELECT_OPTION_86027(context, evt)
 	-- 判断是gadgetid 86025 option_id 331
 	if 86025 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 331 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -262,15 +262,15 @@ function action_EVENT_SELECT_OPTION_86027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 86004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -279,7 +279,7 @@ function condition_EVENT_GADGET_CREATE_86032(context, evt)
 	if 86031 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -290,7 +290,7 @@ function action_EVENT_GADGET_CREATE_86032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -298,14 +298,14 @@ end
 function condition_EVENT_SELECT_OPTION_86033(context, evt)
 	-- 判断是gadgetid 86031 option_id 331
 	if 86031 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 331 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -316,15 +316,15 @@ function action_EVENT_SELECT_OPTION_86033(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 86006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -333,7 +333,7 @@ function condition_EVENT_GADGET_CREATE_86038(context, evt)
 	if 86037 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -344,7 +344,7 @@ function action_EVENT_GADGET_CREATE_86038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -352,14 +352,14 @@ end
 function condition_EVENT_SELECT_OPTION_86039(context, evt)
 	-- 判断是gadgetid 86037 option_id 331
 	if 86037 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 331 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -370,15 +370,15 @@ function action_EVENT_SELECT_OPTION_86039(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 86008 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -387,7 +387,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_86040(context, evt)
 	if 86001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -398,13 +398,13 @@ function action_EVENT_GADGET_STATE_CHANGE_86040(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 调用提示id为 60010275 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 60010275) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -413,15 +413,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_86044(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 166001086, 86041) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 166001086, 86042) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 166001086, 86043) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -431,7 +431,7 @@ function action_EVENT_GADGET_STATE_CHANGE_86044(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 86001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

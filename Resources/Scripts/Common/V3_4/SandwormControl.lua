@@ -3,11 +3,11 @@
 ||	owner: 		luyao.huang
 ||	description:	3.3沙尘爆发沙虫控制（白盒）
 ||	LogName:	SandwormControl
-||	Protection:	
+||	Protection:
 =======================================]]--
 
 
-local sandworm_config =
+sandworm_config =
 {
     sandworm_id = 1030,
     min_raidus = 10,
@@ -16,13 +16,13 @@ local sandworm_config =
 
 
 ------
-local local_defs = {
+local_defs = {
 }
 
 
 
 
-local Tri = {
+Tri = {
     [1] = { name = "time_axis_pass_sandworm", config_id = 10001001, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass_sandworm", trigger_count = 0},
     [2] = { name = "variable_change_sandworm", config_id = 10001002, event = EventType.EVENT_VARIABLE_CHANGE, source = "sandworm_state", condition = "", action = "action_variable_change_sandworm", trigger_count = 0},
     [3] = { name = "enter_region_sandworm", config_id = 10001003, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region_sandworm", trigger_count = 0},
@@ -101,7 +101,7 @@ function action_enter_region_sandworm(context,evt)
     if LF_Is_Region_Specific_Region(context,"SandwormRegion",evt.param1) then
         ScriptLib.PrintContextLog(context,"## [SandwormControl] action_enter_region_sandworm：玩家进入沙虫区域")
         if LF_Is_In_Sandstorm_State(context) then
-            local players_in_region = LF_Get_All_Legal_Player_Uid_In_Legal_Sandworm_Region(context)
+            players_in_region = LF_Get_All_Legal_Player_Uid_In_Legal_Sandworm_Region(context)
             ScriptLib.PrintContextLog(context,"## [SandwormControl] action_enter_region_sandworm：当前沙虫区域内玩家数为"..#players_in_region)
             if #players_in_region <= 1 then
                 --如果当前玩家是第一个进入沙虫区域的玩家，将沙虫的目标锁定为该玩家
@@ -133,7 +133,7 @@ function action_leave_region_sandworm(context,evt)
                 ScriptLib.PrintContextLog(context,"## [SandwormControl] action_leave_region_sandworm：停止当前沙虫攻击")
                 LF_Stop_Sandworm_Attack(context)
             end
-            local players_in_region = LF_Get_All_Legal_Player_Uid_In_Legal_Sandworm_Region(context) 
+            players_in_region = LF_Get_All_Legal_Player_Uid_In_Legal_Sandworm_Region(context)
             ScriptLib.PrintContextLog(context,"## [SandwormControl] action_leave_region_sandworm：当前沙虫区域内玩家数为"..#players_in_region)
             if #players_in_region >= 1 and evt.uid == LF_Get_Target_Uid(context) then
                 ScriptLib.PrintContextLog(context,"## [SandwormControl] action_leave_region_sandworm：有玩家离开区域，重新设置沙虫目标为"..players_in_region[1])
@@ -141,19 +141,19 @@ function action_leave_region_sandworm(context,evt)
             elseif #players_in_region <= 0 then
                 ScriptLib.PrintContextLog(context,"## [SandwormControl] action_leave_region_sandworm：所有玩家全部离开沙虫区域，存档时间轴")
 
-                local sandworm_state = ScriptLib.GetGroupVariableValue(context,"sandworm_state")
+                sandworm_state = ScriptLib.GetGroupVariableValue(context,"sandworm_state")
                 if sandworm_state == 1 then
                     ScriptLib.PrintContextLog(context,"## [SandwormControl] action_leave_region_sandworm：当前为初始CD状态，存档时间轴")
                     ScriptLib.EndTimeAxis(context,"SANDWORM_START_CD_AXIS")
                     LF_Save_Sandworm_Saves(context)
-                elseif sandworm_state == 2 then 
+                elseif sandworm_state == 2 then
                     ScriptLib.PrintContextLog(context,"## [SandwormControl] action_leave_region_sandworm：当前为常规CD状态，存档时间轴")
                     ScriptLib.EndTimeAxis(context,"SANDWORM_CD_AXIS")
                     LF_Save_Sandworm_Saves(context)
                 elseif sandworm_state == 3 then
                     ScriptLib.PrintContextLog(context,"## [SandwormControl] action_leave_region_sandworm：当前为沙虫攻击状态，什么都不需要存。下次加载时直接开始CD即可")
                 end
-                
+
             end
         end
     end
@@ -168,10 +168,10 @@ end
 
 function LF_Save_Sandworm_Saves(context)
     ScriptLib.PrintContextLog(context,"## [SandwormControl]LF_Save_Sandworm_State：开始存储当前时间轴状态")
-    local current_time = ScriptLib.GetServerTime(context)
-    local last_start_time = ScriptLib.GetGroupVariableValue(context,"sandworm_last_axis_start_time")
-    local last_last_time = ScriptLib.GetGroupVariableValue(context,"sandworm_last_axis_last_time")
-    local remain_time = last_last_time - (current_time - last_start_time)
+    current_time = ScriptLib.GetServerTime(context)
+    last_start_time = ScriptLib.GetGroupVariableValue(context,"sandworm_last_axis_start_time")
+    last_last_time = ScriptLib.GetGroupVariableValue(context,"sandworm_last_axis_last_time")
+    remain_time = last_last_time - (current_time - last_start_time)
 
     ScriptLib.PrintContextLog(context,"## [SandwormControl] LF_Save_Sandworm_State：剩余时间为"..remain_time)
     ScriptLib.SetGroupVariableValue(context,"sandworm_last_axis_remain_time",remain_time)
@@ -183,13 +183,13 @@ end
 function LF_Load_Sandworm_Saves(context)
 
     ScriptLib.PrintContextLog(context,"## [SandwormControl]LF_Load_Sandworm_State：开始恢复时间轴状态")
-    local remain_time =  ScriptLib.GetGroupVariableValue(context,"sandworm_last_axis_remain_time")
-    local sandworm_state = ScriptLib.GetGroupVariableValue(context,"sandworm_state")
+    remain_time =  ScriptLib.GetGroupVariableValue(context,"sandworm_last_axis_remain_time")
+    sandworm_state = ScriptLib.GetGroupVariableValue(context,"sandworm_state")
 
     if sandworm_state == 1 then
         ScriptLib.PrintContextLog(context,"## [SandwormControl]LF_Load_Sandworm_State：之前处于起始CD状态，恢复起始CD剩余时间"..remain_time.."秒")
         LF_Set_Time_Axis(context,"SANDWORM_START_CD_AXIS",{save_prefix = "sandworm", target_time = remain_time})
-    elseif sandworm_state == 2 then 
+    elseif sandworm_state == 2 then
         ScriptLib.PrintContextLog(context,"## [SandwormControl]LF_Load_Sandworm_State：之前处于CD状态，恢复CD剩余时间"..remain_time.."秒")
         LF_Set_Time_Axis(context,"SANDWORM_CD_AXIS",{save_prefix = "sandworm", target_time = remain_time})
     elseif sandworm_state == 3 then
@@ -217,7 +217,7 @@ end
 function LF_Start_Sandworm_Phase(context)
     ScriptLib.PrintContextLog(context,"## [SandwormControl]LF_Start_Sandworm_Phase：=====================================================")
     ScriptLib.PrintContextLog(context,"## [SandwormControl]LF_Start_Sandworm_Phase：沙尘暴开始，开始准备沙虫攻击相关逻辑")
-    local players_in_region = LF_Get_All_Legal_Player_Uid_In_Legal_Sandworm_Region(context)
+    players_in_region = LF_Get_All_Legal_Player_Uid_In_Legal_Sandworm_Region(context)
     if #players_in_region <= 0 then
         ScriptLib.PrintContextLog(context,"## [SandwormControl]LF_Start_Sandworm_Phase：沙虫区域没有玩家，等玩家enter region时再开始沙虫攻击")
     else
@@ -248,7 +248,7 @@ end
 
 --开启一次沙虫攻击
 function LF_Start_Sandworm_Attack(context)
-    local target_uid = LF_Get_Target_Uid(context) 
+    target_uid = LF_Get_Target_Uid(context)
     ScriptLib.PrintContextLog(context,"## [SandstormControl] LF_Start_Sandworm_Attack：在玩家"..target_uid.."附近开启一次沙虫袭击")
     LF_Create_Sandworm(context,target_uid)
     LF_Set_Sandworm_State(context,3)
@@ -265,9 +265,9 @@ end
 --在指定玩家身边生成一只沙虫
 function LF_Create_Sandworm(context,target_uid)
     ScriptLib.PrintContextLog(context,"## [SandstormControl] LF_Create_Sandworm：在玩家"..target_uid.."附近创建沙虫")
-    local owner_eid = ScriptLib.GetAvatarEntityIdByUid(context,target_uid)
-    local pos = ScriptLib.GetPosByEntityId(context,owner_eid)
-    local rpos =  LF_Get_Random_Neighbour(context,pos,sandworm_config.min_raidus,sandworm_config.max_radius)
+    owner_eid = ScriptLib.GetAvatarEntityIdByUid(context,target_uid)
+    pos = ScriptLib.GetPosByEntityId(context,owner_eid)
+    rpos =  LF_Get_Random_Neighbour(context,pos,sandworm_config.min_raidus,sandworm_config.max_radius)
     ScriptLib.CreateGadgetByConfigIdByPos(context,sandworm_config.sandworm_id,{x=rpos.x,y=rpos.y+1.5,z=rpos.z}, {x=0,y=0,z=0})
 end
 
@@ -286,11 +286,11 @@ end
 
 --获取指定位置的随机近邻位置。分布在min_r~max_r为半径的环上
 function LF_Get_Random_Neighbour(context,pos,min_r,max_r)
-    local random_r = math.random(min_r,max_r)
-    local random_a = math.random()*math.pi*2
-    local rpos_x = pos.x + random_r * math.cos(random_a)
-    local rpos_z = pos.z + random_r * math.sin(random_a)
-    local rpos = {x = rpos_x,y = pos.y,z = rpos_z}
+    random_r = math.random(min_r,max_r)
+    random_a = math.random()*math.pi*2
+    rpos_x = pos.x + random_r * math.cos(random_a)
+    rpos_z = pos.z + random_r * math.sin(random_a)
+    rpos = {x = rpos_x,y = pos.y,z = rpos_z}
     return rpos
 end
 --[[-----------------------------------------------------------------

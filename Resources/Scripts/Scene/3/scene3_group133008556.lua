@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008556
 }
 
@@ -7,9 +7,9 @@ local base_info = {
 --新版性能优化使用regionVision进行处理，考虑到旧1区域的平滑过渡，改为检测进出4/8region时剔除/归还vision
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -78,9 +78,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -97,7 +97,7 @@ function action_EVENT_LEAVE_REGION_556002(context, evt)
 	if evt.param1 ~= 556005 and evt.param1 ~= 556008 then
 		return -1
 	end
-	local position = ScriptLib.GetPosByEntityId(context, context.target_entity_id)
+	position = ScriptLib.GetPosByEntityId(context, context.target_entity_id)
 	if math.abs(position.x - regions[5].pos.x) <= regions[5].size.x/2 then
 		if math.abs(position.z - regions[5].pos.z) <= regions[5].size.z/2 then
 			if position.y < regions[8].pos.y + regions[8].size.y/2 and position.y > regions[5].pos.y - regions[5].size.y/2 then

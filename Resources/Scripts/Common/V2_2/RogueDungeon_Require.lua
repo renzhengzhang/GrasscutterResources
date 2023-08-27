@@ -1,5 +1,5 @@
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Room_Ready"] = { config_id = 8000001, name = "Room_Ready", event= EventType.EVENT_ROGUE_CELL_CONSTRUCT, source = "", condition = "", action = "action_WhenGetRoomType", trigger_count = 0 },
 		["Start_Challenge"] = { config_id = 8000002, name = "Start_Challenge", event= EventType.EVENT_ROGUE_CELL_STATE_CHANGE, source = "", condition = "", action = "action_CellStateChange", trigger_count = 0 },
@@ -11,8 +11,8 @@ local extrTriggers = {
 	}
 }
 
-local MAX_battleroombuff_LV = 6
-local MAX_reviveroombuff_LV = 2
+MAX_battleroombuff_LV = 6
+MAX_reviveroombuff_LV = 2
 
 --监听cell分配
 function action_WhenGetRoomType(context, evt)
@@ -25,7 +25,7 @@ end
 
 -- function action_monster_die( context, evt )
 
--- 	local UidList = ScriptLib.GetSceneUidList(context)
+-- 	UidList = ScriptLib.GetSceneUidList(context)
 
 -- 	-- 杀怪计数
 -- 	ScriptLib.AddExhibitionAccumulableData(context, UidList[1], "Rogue_KillMonster_Count", 1)
@@ -35,10 +35,10 @@ end
 
 
 function action_CellStateChange(context,evt)
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 	--检查当前房间类型
-	local roomType = ScriptLib.GetGroupTempValue(context, "RoomType", {})
+	roomType = ScriptLib.GetGroupTempValue(context, "RoomType", {})
 	ScriptLib.PrintContextLog(context, "## RG_LOG : roomType == "..roomType)
 
 	--存下当前poolID
@@ -52,11 +52,11 @@ function action_CellStateChange(context,evt)
 
 
 	end
-	
+
 	--完成回复房间加BUFF
 	if roomType == 5 and evt.param1 == 3 then
 
-		local TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_REVIVEROOMBUFF")
+		TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_REVIVEROOMBUFF")
 
 		ScriptLib.PrintContextLog(context, "##Rogue LOG : ReviveBUFF TeamValue =="..TeamValue)
 
@@ -70,7 +70,7 @@ function action_CellStateChange(context,evt)
 	--完成战斗房间加BUFF
 	if (roomType == 3 or roomType == 4) and evt.param1 == 2 then
 
-		local TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_BATTLEROOMBUFF")
+		TeamValue = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_BATTLEROOMBUFF")
 
 		ScriptLib.PrintContextLog(context, "##Rogue LOG : ReviveBUFF TeamValue =="..TeamValue)
 
@@ -85,7 +85,7 @@ end
 
 function action_EnterUnBattleRoom(context,evt)
 	-- 玩家进入非战斗房直接开门
-	local roomType = ScriptLib.GetGroupTempValue(context, "RoomType", {})
+	roomType = ScriptLib.GetGroupTempValue(context, "RoomType", {})
 
 	if RegionID ~= evt.param1 then
 		return 0
@@ -117,7 +117,7 @@ end
 
 function action_LeaveRoom( context,evt )
 
-	local roomType = ScriptLib.GetGroupTempValue(context, "RoomType", {})
+	roomType = ScriptLib.GetGroupTempValue(context, "RoomType", {})
 
 	if RegionID ~= evt.param1 then
 		return 0
@@ -125,7 +125,7 @@ function action_LeaveRoom( context,evt )
 
 	--清楚eyepoint锚点
 	ScriptLib.ClearPlayerEyePoint(context, RegionID)
-	
+
 
 	return 0
 end
@@ -155,7 +155,7 @@ end
 
 function RemoveBUFF( context )
 
-	local UidList = ScriptLib.GetSceneUidList(context)
+	UidList = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.AddTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_SR_AreaNoEnemyAtkSpeedUp", -1)
 
@@ -172,7 +172,3 @@ function LF_Initialize_Group()
 end
 
 LF_Initialize_Group()
-
-
-
-

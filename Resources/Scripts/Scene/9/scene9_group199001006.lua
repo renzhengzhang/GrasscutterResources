@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199001006
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -84,9 +84,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -94,7 +94,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_6001(context, evt)
 	if 6003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -105,20 +105,20 @@ function action_EVENT_GADGET_STATE_CHANGE_6001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=304.5369,y=121.0109,z=156.9601}
+	pos = {x=304.5369,y=121.0109,z=156.9601}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1111201, pos, 15) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7902202") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -127,7 +127,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_6002(context, evt)
 	if 6003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -138,20 +138,20 @@ function action_EVENT_GADGET_STATE_CHANGE_6002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=304.5369,y=121.0109,z=156.9601}
+	pos = {x=304.5369,y=121.0109,z=156.9601}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1111199, pos, 15) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7902202") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -161,7 +161,7 @@ function condition_EVENT_GROUP_LOAD_6004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IsItemPickedUp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_GROUP_LOAD_6005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IsItemPickedUp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 

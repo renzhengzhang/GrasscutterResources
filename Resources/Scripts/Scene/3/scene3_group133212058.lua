@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133212058
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -106,9 +106,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -117,8 +117,8 @@ function action_EVENT_QUEST_FINISH_58003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -127,7 +127,7 @@ function condition_EVENT_MONSTER_BATTLE_58005(context, evt)
 	if 58004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -138,7 +138,7 @@ function action_EVENT_MONSTER_BATTLE_58005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -148,8 +148,8 @@ function condition_EVENT_ANY_MONSTER_DIE_58006(context, evt)
 	if evt.param1 ~= 58004 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -160,7 +160,7 @@ function action_EVENT_ANY_MONSTER_DIE_58006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -170,8 +170,8 @@ function action_EVENT_QUEST_FINISH_58007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -181,8 +181,8 @@ function action_EVENT_QUEST_FINISH_58008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -192,8 +192,8 @@ function action_EVENT_QUEST_FINISH_58009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -203,8 +203,8 @@ function action_EVENT_QUEST_FINISH_58010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -214,8 +214,8 @@ function action_EVENT_QUEST_FINISH_58011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -225,8 +225,8 @@ function action_EVENT_QUEST_FINISH_58012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -236,8 +236,8 @@ function action_EVENT_QUEST_FINISH_58013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -247,8 +247,8 @@ function action_EVENT_QUEST_FINISH_58014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -258,8 +258,8 @@ function action_EVENT_QUEST_FINISH_58015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -269,8 +269,8 @@ function action_EVENT_QUEST_FINISH_58016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -280,8 +280,8 @@ function action_EVENT_QUEST_FINISH_58017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -291,8 +291,8 @@ function action_EVENT_QUEST_FINISH_58018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -302,8 +302,8 @@ function action_EVENT_QUEST_FINISH_58019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -313,7 +313,7 @@ function action_EVENT_QUEST_FINISH_58020(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220134002
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
 
-        gear_info = 
+        gear_info =
         {        --connect: 每个物件各个旋转档位可连接的对象 0表示无可连接
                 [1] = { config_id=2001 , connect = {2002,2006,2004}, point_array_id = 1 },
                 [2] = { config_id=2002 , connect = {2001,2004,2006,2003}, point_array_id = 2 },
@@ -14,11 +14,11 @@ local        defs = {
                 [4] = { config_id=2004 , connect = {2001,2005, 2006,2002}, point_array_id = 4},
                 [5] = { config_id= 2005 , connect = {2004,2003,2006}, point_array_id = 5 },
                 [6] = { config_id=2006 , connect = {2003,2002,2004,2005}, point_array_id = 6 }
-            
+
         },
 
         --几种解
-        solutions = 
+        solutions =
         {
                 --[解法x] = {gear_info[1]切到它的第x档, gear_info[2]切到它的第y档...}
                 [1] = { connection = {2,3,1,4,1,3}, ends = {}},
@@ -28,9 +28,9 @@ turn_option = 31,
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -75,9 +75,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -88,9 +88,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -124,9 +124,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -134,7 +134,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2007(context, evt)
 	if 2011 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -145,31 +145,31 @@ function action_EVENT_GADGET_STATE_CHANGE_2007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 220134015, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 220134002, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2008(context, evt)
 	if evt.param1 ~= 2008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -183,41 +183,41 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2010(context, evt)
 	if evt.param1 ~= 2010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_2010(context, evt)
 	-- 触发镜头注目，注目位置为坐标（387，672.5，-1648.8），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=387, y=672.5, z=-1648.8}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=387, y=672.5, z=-1648.8}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"solution"为1
 	if ScriptLib.GetGroupVariableValue(context, "solution") >= 1 then
 			return true
 	end
-	
+
 	return false
 end
 
@@ -225,24 +225,24 @@ end
 function action_EVENT_VARIABLE_CHANGE_2012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220134002, 2)
-	
+
 	-- 将本组内变量名为 "finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_2013(context, evt)
-	    if ScriptLib.GetHostQuestState(context,4007407)==3 or ScriptLib.GetHostQuestState(context,4007413)==3 or 
+	    if ScriptLib.GetHostQuestState(context,4007407)==3 or ScriptLib.GetHostQuestState(context,4007413)==3 or
 	ScriptLib.GetHostQuestState(context,4007410)==3 then
-		ScriptLib.RefreshGroup(context, { group_id = 220134002, suite = 3 }) 
-	        ScriptLib.GoToGroupSuite(context, 220134002, 3) 
+		ScriptLib.RefreshGroup(context, { group_id = 220134002, suite = 3 })
+	        ScriptLib.GoToGroupSuite(context, 220134002, 3)
 		end
-	
+
 	return 0
 end
 

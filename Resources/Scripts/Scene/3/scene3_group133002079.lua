@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002079
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	monster_id_1 = 163
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -103,33 +103,33 @@ function action_EVENT_GATHER_75(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "1034", 1) then
 	  return -1
 	end
-	
-	local c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
-	local c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
-	local c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
-	local c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
-	local c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
-	local c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
-	local total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
-	
+
+	c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
+	c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
+	c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
+	c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
+	c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
+	c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
+	total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
+
 	if total > 3 then
-	
-	local n = math.random(1,6)
+
+	n = math.random(1,6)
 	if n > 2 then
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_1, delay_time = 1 }) then
 	  return -1
 	end
 	end
-	
-		
-	
-	
+
+
+
+
 	end
-	
-	
-	
-	
+
+
+
+
 	return 0
 end
 
@@ -140,33 +140,33 @@ function action_EVENT_GATHER_76(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "1035", 1) then
 	  return -1
 	end
-	
-	local c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
-	local c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
-	local c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
-	local c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
-	local c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
-	local c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
-	local total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
-	
+
+	c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
+	c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
+	c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
+	c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
+	c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
+	c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
+	total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
+
 	if total > 3 then
-	
-	local n = math.random(1,6)
+
+	n = math.random(1,6)
 	if n > 2 then
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_1, delay_time = 1 }) then
 	  return -1
 	end
 	end
-	
-		
-	
-	
+
+
+
+
 	end
-	
-	
-	
-	
+
+
+
+
 	return 0
 end
 
@@ -177,33 +177,33 @@ function action_EVENT_GATHER_77(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "1036", 1) then
 	  return -1
 	end
-	
-	local c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
-	local c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
-	local c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
-	local c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
-	local c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
-	local c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
-	local total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
-	
+
+	c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
+	c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
+	c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
+	c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
+	c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
+	c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
+	total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
+
 	if total > 3 then
-	
-	local n = math.random(1,6)
+
+	n = math.random(1,6)
 	if n > 2 then
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_1, delay_time = 1 }) then
 	  return -1
 	end
 	end
-	
-		
-	
-	
+
+
+
+
 	end
-	
-	
-	
-	
+
+
+
+
 	return 0
 end
 
@@ -214,33 +214,33 @@ function action_EVENT_GATHER_78(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "1037", 1) then
 	  return -1
 	end
-	
-	local c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
-	local c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
-	local c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
-	local c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
-	local c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
-	local c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
-	local total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
-	
+
+	c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
+	c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
+	c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
+	c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
+	c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
+	c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
+	total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
+
 	if total > 3 then
-	
-	local n = math.random(1,6)
+
+	n = math.random(1,6)
 	if n > 2 then
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_1, delay_time = 1 }) then
 	  return -1
 	end
 	end
-	
-		
-	
-	
+
+
+
+
 	end
-	
-	
-	
-	
+
+
+
+
 	return 0
 end
 
@@ -251,33 +251,33 @@ function action_EVENT_GATHER_79(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "1039", 1) then
 	  return -1
 	end
-	
-	local c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
-	local c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
-	local c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
-	local c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
-	local c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
-	local c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
-	local total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
-	
+
+	c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
+	c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
+	c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
+	c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
+	c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
+	c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
+	total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
+
 	if total > 3 then
-	
-	local n = math.random(1,6)
+
+	n = math.random(1,6)
 	if n > 2 then
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_1, delay_time = 1 }) then
 	  return -1
 	end
 	end
-	
-		
-	
-	
+
+
+
+
 	end
-	
-	
-	
-	
+
+
+
+
 	return 0
 end
 
@@ -288,32 +288,32 @@ function action_EVENT_GATHER_80(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "1040", 1) then
 	  return -1
 	end
-	
-	local c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
-	local c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
-	local c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
-	local c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
-	local c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
-	local c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
-	local total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
-	
+
+	c_1034 = ScriptLib.GetGroupVariableValue(context, "1034")
+	c_1035 = ScriptLib.GetGroupVariableValue(context, "1035")
+	c_1036 = ScriptLib.GetGroupVariableValue(context, "1036")
+	c_1037 = ScriptLib.GetGroupVariableValue(context, "1037")
+	c_1039 = ScriptLib.GetGroupVariableValue(context, "1039")
+	c_1040 = ScriptLib.GetGroupVariableValue(context, "1040")
+	total = c_1034 + c_1035 + c_1036 + c_1037 + c_1039 + c_1040
+
 	if total > 3 then
-	
-	local n = math.random(1,6)
+
+	n = math.random(1,6)
 	if n > 2 then
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_1, delay_time = 1 }) then
 	  return -1
 	end
 	end
-	
-		
-	
-	
+
+
+
+
 	end
-	
-	
-	
-	
+
+
+
+
 	return 0
 end

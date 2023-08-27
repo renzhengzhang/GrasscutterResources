@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308059
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -190,9 +190,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -203,9 +203,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -221,9 +221,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -231,17 +231,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_59005(context, evt)
 	if 59001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -252,25 +252,25 @@ function action_EVENT_GADGET_STATE_CHANGE_59005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318914 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318914) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "Stone" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Stone", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -279,17 +279,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_59006(context, evt)
 	if 59002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -300,19 +300,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318906 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318906) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -321,17 +321,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_59007(context, evt)
 	if 59003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -342,19 +342,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318906 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318906) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -363,17 +363,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_59008(context, evt)
 	if 59004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -384,36 +384,36 @@ function action_EVENT_GADGET_STATE_CHANGE_59008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318906 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318906) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59009(context, evt)
 	if evt.param1 ~= 59009 then return false end
-	
+
 	-- 判断变量"HowMany"为10
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 10 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -424,24 +424,24 @@ function action_EVENT_ENTER_REGION_59009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59010(context, evt)
 	if evt.param1 ~= 59010 then return false end
-	
+
 	-- 判断变量"HowMany"为10
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 10 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -452,24 +452,24 @@ function action_EVENT_ENTER_REGION_59010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59011(context, evt)
 	if evt.param1 ~= 59011 then return false end
-	
+
 	-- 判断变量"HowMany"为10
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 10 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -480,24 +480,24 @@ function action_EVENT_ENTER_REGION_59011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59012(context, evt)
 	if evt.param1 ~= 59012 then return false end
-	
+
 	-- 判断变量"HowMany"为10
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 10 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -508,24 +508,24 @@ function action_EVENT_ENTER_REGION_59012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59013(context, evt)
 	if evt.param1 ~= 59013 then return false end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -536,24 +536,24 @@ function action_EVENT_ENTER_REGION_59013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59014(context, evt)
 	if evt.param1 ~= 59014 then return false end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -564,24 +564,24 @@ function action_EVENT_ENTER_REGION_59014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59015(context, evt)
 	if evt.param1 ~= 59015 then return false end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -592,24 +592,24 @@ function action_EVENT_ENTER_REGION_59015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59016(context, evt)
 	if evt.param1 ~= 59016 then return false end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -620,24 +620,24 @@ function action_EVENT_ENTER_REGION_59016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59017(context, evt)
 	if evt.param1 ~= 59017 then return false end
-	
+
 	-- 判断变量"HowMany"为1
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -648,24 +648,24 @@ function action_EVENT_ENTER_REGION_59017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59018(context, evt)
 	if evt.param1 ~= 59018 then return false end
-	
+
 	-- 判断变量"HowMany"为1
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -676,24 +676,24 @@ function action_EVENT_ENTER_REGION_59018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59019(context, evt)
 	if evt.param1 ~= 59019 then return false end
-	
+
 	-- 判断变量"HowMany"为1
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -704,24 +704,24 @@ function action_EVENT_ENTER_REGION_59019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59020(context, evt)
 	if evt.param1 ~= 59020 then return false end
-	
+
 	-- 判断变量"HowMany"为1
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -732,24 +732,24 @@ function action_EVENT_ENTER_REGION_59020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59021(context, evt)
 	if evt.param1 ~= 59021 then return false end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -760,24 +760,24 @@ function action_EVENT_ENTER_REGION_59021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59022(context, evt)
 	if evt.param1 ~= 59022 then return false end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -788,24 +788,24 @@ function action_EVENT_ENTER_REGION_59022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59023(context, evt)
 	if evt.param1 ~= 59023 then return false end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -816,24 +816,24 @@ function action_EVENT_ENTER_REGION_59023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59024(context, evt)
 	if evt.param1 ~= 59024 then return false end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -844,7 +844,7 @@ function action_EVENT_ENTER_REGION_59024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -853,17 +853,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_59025(context, evt)
 	if 59001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为1
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -874,25 +874,25 @@ function action_EVENT_GADGET_STATE_CHANGE_59025(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318924 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318924) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "Stone" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Stone", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -901,17 +901,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_59026(context, evt)
 	if 59001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -922,25 +922,25 @@ function action_EVENT_GADGET_STATE_CHANGE_59026(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318934 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318934) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "Stone" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Stone", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -949,17 +949,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_59027(context, evt)
 	if 59001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为3
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -970,25 +970,25 @@ function action_EVENT_GADGET_STATE_CHANGE_59027(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318912 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318912) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "Stone" 的变量设置为 4
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Stone", 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -997,22 +997,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59028(context, evt)
 	if 59002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为1
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为0
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1023,19 +1023,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59028(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318908 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318908) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1044,22 +1044,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59029(context, evt)
 	if 59003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为1
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为0
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1070,19 +1070,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59029(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318908 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318908) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1091,22 +1091,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59030(context, evt)
 	if 59004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为1
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为0
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1117,19 +1117,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59030(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318908 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318908) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1138,22 +1138,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59031(context, evt)
 	if 59002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为0
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1164,19 +1164,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59031(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318910 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318910) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1185,22 +1185,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59032(context, evt)
 	if 59003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为0
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1211,19 +1211,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59032(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318910 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318910) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1232,22 +1232,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59033(context, evt)
 	if 59004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为0
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1258,19 +1258,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59033(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318910 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318910) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1279,22 +1279,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59034(context, evt)
 	if 59002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为1
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为1
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1305,19 +1305,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59034(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318916 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318916) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1326,22 +1326,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59035(context, evt)
 	if 59003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为1
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为1
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1352,19 +1352,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59035(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318916 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318916) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1373,22 +1373,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59036(context, evt)
 	if 59004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为1
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为1
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1399,19 +1399,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59036(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318916 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318916) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1422,7 +1422,7 @@ function action_EVENT_QUEST_FINISH_59037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1431,17 +1431,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_59038(context, evt)
 	if 59001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为0
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1452,13 +1452,13 @@ function action_EVENT_GADGET_STATE_CHANGE_59038(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 10
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1467,17 +1467,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_59039(context, evt)
 	if 59002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为0
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1488,13 +1488,13 @@ function action_EVENT_GADGET_STATE_CHANGE_59039(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 10
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1503,17 +1503,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_59040(context, evt)
 	if 59003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为0
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1524,13 +1524,13 @@ function action_EVENT_GADGET_STATE_CHANGE_59040(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 10
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1539,17 +1539,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_59041(context, evt)
 	if 59004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为0
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为0
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1560,13 +1560,13 @@ function action_EVENT_GADGET_STATE_CHANGE_59041(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 10
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1575,7 +1575,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_59042(context, evt)
 	if 59001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1586,7 +1586,7 @@ function action_EVENT_GADGET_STATE_CHANGE_59042(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1595,7 +1595,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_59043(context, evt)
 	if 59002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1606,7 +1606,7 @@ function action_EVENT_GADGET_STATE_CHANGE_59043(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1615,7 +1615,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_59044(context, evt)
 	if 59003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1626,7 +1626,7 @@ function action_EVENT_GADGET_STATE_CHANGE_59044(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1635,7 +1635,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_59045(context, evt)
 	if 59004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1646,7 +1646,7 @@ function action_EVENT_GADGET_STATE_CHANGE_59045(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1657,13 +1657,13 @@ function action_EVENT_QUEST_FINISH_59046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "HowMany" 的变量设置为 20
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "HowMany", 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1672,22 +1672,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59047(context, evt)
 	if 59002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为1
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1698,19 +1698,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59047(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318918 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1719,22 +1719,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59048(context, evt)
 	if 59003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为1
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1745,19 +1745,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59048(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318918 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1766,22 +1766,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59049(context, evt)
 	if 59004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为1
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1792,19 +1792,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59049(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318918 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1813,22 +1813,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59050(context, evt)
 	if 59002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为2
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1839,19 +1839,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59050(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318926 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318926) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1860,22 +1860,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59051(context, evt)
 	if 59003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为2
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1886,19 +1886,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59051(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318926 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318926) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1907,22 +1907,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59052(context, evt)
 	if 59004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为2
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为2
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1933,19 +1933,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59052(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318926 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318926) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1954,22 +1954,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59053(context, evt)
 	if 59002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为3
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为1
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1980,19 +1980,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59053(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318920 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318920) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -2001,22 +2001,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59054(context, evt)
 	if 59003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为3
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为1
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2027,19 +2027,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59054(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318920 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318920) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -2048,22 +2048,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59055(context, evt)
 	if 59004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为3
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为1
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2074,19 +2074,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59055(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318920 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318920) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -2095,22 +2095,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59056(context, evt)
 	if 59002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为3
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为2
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2121,19 +2121,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59056(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318928 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318928) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -2142,22 +2142,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59057(context, evt)
 	if 59003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为3
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为2
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2168,19 +2168,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59057(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318928 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318928) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -2189,22 +2189,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59058(context, evt)
 	if 59004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为3
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为2
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2215,19 +2215,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59058(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318928 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318928) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -2236,22 +2236,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59059(context, evt)
 	if 59002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为3
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为3
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2262,19 +2262,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59059(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318937 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318937) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -2283,22 +2283,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59060(context, evt)
 	if 59003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为3
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为3
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2309,19 +2309,19 @@ function action_EVENT_GADGET_STATE_CHANGE_59060(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318937 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318937) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -2330,22 +2330,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_59061(context, evt)
 	if 59004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"HowMany"为3
 	if ScriptLib.GetGroupVariableValue(context, "HowMany") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"QuestExist"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestExist") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Stone"为3
 	if ScriptLib.GetGroupVariableValue(context, "Stone") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2356,18 +2356,18 @@ function action_EVENT_GADGET_STATE_CHANGE_59061(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "HowMany" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "HowMany", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 7318937 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7318937) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

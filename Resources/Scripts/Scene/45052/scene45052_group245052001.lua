@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 245052001
 }
 
@@ -25,48 +25,48 @@ synchronizer = 1078,
     }
 
 room_infos = {
-         {        
-                room_cur = 1, 
-                room_next = 2, 
+         {
+                room_cur = 1,
+                room_next = 2,
                 wall_connect = 1013, --到下一个房间的空气墙
                 region_enter = 0, --弱网拦截用的
-                region_wall_enter = 0, --弱网拦截用的空气墙 
+                region_wall_enter = 0, --弱网拦截用的空气墙
                 region_self = 1100,      --记录处于所属房间region
                 point_safe = 1029 --传送安全点的configID
          },
-         {        
-                room_cur = 2, 
-                room_next = 3, 
+         {
+                room_cur = 2,
+                room_next = 3,
                 wall_connect = 1015, --到下一个房间的空气墙
                 region_enter =1043, --弱网拦截用的
-                region_wall_enter = 1014, --弱网拦截用的空气墙 
+                region_wall_enter = 1014, --弱网拦截用的空气墙
                 region_self = 1101,      --记录处于所属房间region
                 point_safe = 1030 --传送安全点的configID
          },
-         {        
-                room_cur = 3, 
-                room_next = 4, 
+         {
+                room_cur = 3,
+                room_next = 4,
                 wall_connect = 1017, --到下一个房间的空气墙
                 region_enter = 1044, --弱网拦截用的
-                region_wall_enter = 1016, --弱网拦截用的空气墙 
+                region_wall_enter = 1016, --弱网拦截用的空气墙
                 region_self = 1102,      --记录处于所属房间region
                 point_safe = 1031 --传送安全点的configID
-         },		
-         {        
-                room_cur = 4, 
-                room_next = 0, 
+         },
+         {
+                room_cur = 4,
+                room_next = 0,
                 wall_connect = 0, --到下一个房间的空气墙
                 region_enter = 1045, --弱网拦截用的
-                region_wall_enter = 1018, --弱网拦截用的空气墙 
+                region_wall_enter = 1018, --弱网拦截用的空气墙
                 region_self = 1103,      --记录处于所属房间region
                 point_safe = 1042 --传送安全点的configID
-         },	 
+         },
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -205,9 +205,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -218,9 +218,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -263,9 +263,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "V2_5/UGCDungeon_Reforge"

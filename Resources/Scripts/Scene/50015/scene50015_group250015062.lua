@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250015062
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -166,23 +166,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_62005(context, evt)
 	-- 判断是gadgetid 62004 option_id 184
 	if 62004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 184 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -193,11 +193,11 @@ function action_EVENT_SELECT_OPTION_62005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015062, 2)
-	
+
 	return 0
 end
 
@@ -206,7 +206,7 @@ function condition_EVENT_GADGET_CREATE_62006(context, evt)
 	if 62004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -217,7 +217,7 @@ function action_EVENT_GADGET_CREATE_62006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -225,14 +225,14 @@ end
 function condition_EVENT_SELECT_OPTION_62013(context, evt)
 	-- 判断是gadgetid 62004 option_id 185
 	if 62004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 185 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -243,11 +243,11 @@ function action_EVENT_SELECT_OPTION_62013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015062, 3)
-	
+
 	return 0
 end
 
@@ -255,14 +255,14 @@ end
 function condition_EVENT_SELECT_OPTION_62014(context, evt)
 	-- 判断是gadgetid 62004 option_id 186
 	if 62004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 186 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -273,11 +273,11 @@ function action_EVENT_SELECT_OPTION_62014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015062, 4)
-	
+
 	return 0
 end
 
@@ -285,14 +285,14 @@ end
 function condition_EVENT_SELECT_OPTION_62015(context, evt)
 	-- 判断是gadgetid 62004 option_id 201
 	if 62004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 201 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -303,11 +303,11 @@ function action_EVENT_SELECT_OPTION_62015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015062, 5)
-	
+
 	return 0
 end
 
@@ -315,14 +315,14 @@ end
 function condition_EVENT_SELECT_OPTION_62016(context, evt)
 	-- 判断是gadgetid 62004 option_id 202
 	if 62004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 202 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -333,11 +333,11 @@ function action_EVENT_SELECT_OPTION_62016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015062, 6)
-	
+
 	return 0
 end
 
@@ -345,14 +345,14 @@ end
 function condition_EVENT_SELECT_OPTION_62017(context, evt)
 	-- 判断是gadgetid 62004 option_id 203
 	if 62004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 203 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -363,11 +363,11 @@ function action_EVENT_SELECT_OPTION_62017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015062, 7)
-	
+
 	return 0
 end
 
@@ -375,14 +375,14 @@ end
 function condition_EVENT_SELECT_OPTION_62018(context, evt)
 	-- 判断是gadgetid 62004 option_id 181
 	if 62004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 181 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -393,11 +393,11 @@ function action_EVENT_SELECT_OPTION_62018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015062, 8)
-	
+
 	return 0
 end
 
@@ -405,14 +405,14 @@ end
 function condition_EVENT_SELECT_OPTION_62019(context, evt)
 	-- 判断是gadgetid 62004 option_id 182
 	if 62004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 182 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -423,11 +423,11 @@ function action_EVENT_SELECT_OPTION_62019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015062, 9)
-	
+
 	return 0
 end
 
@@ -435,14 +435,14 @@ end
 function condition_EVENT_SELECT_OPTION_62020(context, evt)
 	-- 判断是gadgetid 62004 option_id 183
 	if 62004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 183 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -453,10 +453,10 @@ function action_EVENT_SELECT_OPTION_62020(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015062, 10)
-	
+
 	return 0
 end

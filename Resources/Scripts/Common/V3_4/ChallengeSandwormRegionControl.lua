@@ -1,14 +1,14 @@
 --[[======================================
-||	filename:	
+||	filename:
 ||	owner: 		luyao.huang
-||	description:	
-||	LogName:	
-||	Protection:	
+||	description:
+||	LogName:
+||	Protection:
 =======================================]]--
 
-local sandworm_params_config_id = 12
+sandworm_params_config_id = 12
 ------
-local local_defs = {
+local_defs = {
     sandworm_control_group = 133314001,
 
     --挑战业务类型为0，优先级为1
@@ -17,7 +17,7 @@ local local_defs = {
 }
 
 
-local Tri = {
+Tri = {
     [1] = { name = "enter_region_sandworm_challenge", config_id = 10010001, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region_sandworm_challenge", trigger_count = 0},
     [2] = { name = "leave_region_sandworm_challenge", config_id = 10010002, event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_region_sandworm_challenge", trigger_count = 0},
     [3] = { name = "time_axis_pass_sandworm_challenge", config_id = 10010011, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass_sandworm_challenge", trigger_count = 0},
@@ -45,7 +45,7 @@ function action_enter_region_sandworm_challenge(context,evt)
     if evt.param1 == defs.sandworm_region then
         if ScriptLib.IsChallengeStartedByChallengeId(context, defs.challenge_id) then
             ScriptLib.PrintContextLog(context,"## [ChallengeSandwormRegionControl]enter_region: 挑战中进入大世界区域，请求创生")
-            local request = 
+            request =
             {
                 group_id = base_info.group_id,
                 priority = local_defs.request_priority,
@@ -80,7 +80,7 @@ end
 function action_time_axis_pass_sandworm_challenge(context,evt)
     if (evt.source_name == "sandworm_alert_axis") then
         if ScriptLib.IsChallengeStartedByChallengeId(context, defs.challenge_id) then
-            local alert = math.random(sandworm_alert_by_tick[1],sandworm_alert_by_tick[2])
+            alert = math.random(sandworm_alert_by_tick[1],sandworm_alert_by_tick[2])
             ScriptLib.ExecuteGroupLua(context,local_defs.sandworm_control_group,"LF_Request_Change_Alert_Value",{alert})
         end
     end
@@ -108,13 +108,13 @@ end
 
 function LF_Challenge_Start_Change_Sandworm_Params(context)
     ScriptLib.PrintContextLog(context,"## [ChallengeSandwormRegionControl]LF_Challenge_Request_Create_Sandworm: 挑战开始，请求创生")
-    local request = 
+    request =
     {
         group_id = base_info.group_id,
         priority = local_defs.request_priority,
     }
     ScriptLib.ExecuteGroupLua(context,local_defs.sandworm_control_group,"LF_Request_Create_Sandworm_Params",{request.group_id,request.priority})
-    local ret = ScriptLib.InitTimeAxis(context,"sandworm_alert_axis",{1},true)
+    ret = ScriptLib.InitTimeAxis(context,"sandworm_alert_axis",{1},true)
     ScriptLib.PrintContextLog(context,"## [ChallengeSandwormRegionControl]LF_Challenge_Request_Create_Sandworm: 启动时间轴:"..ret)
 
 

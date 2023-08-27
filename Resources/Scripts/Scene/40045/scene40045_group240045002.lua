@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240045002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -107,20 +107,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2001(context, evt)
 	if evt.param1 ~= 2001 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -130,8 +130,8 @@ function action_EVENT_ENTER_REGION_2001(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045002, 2009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -140,7 +140,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_2006(context, evt)
 	if 2011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -151,40 +151,40 @@ function action_EVENT_ANY_MONSTER_LIVE_2006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "alive1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "alive1", 1, 240045002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_2007(context, evt)
-	-- 判断指定group组剩余怪物数量是否是1 
+	-- 判断指定group组剩余怪物数量是否是1
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240045002) ~= 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2010(context, evt)
 	if evt.param1 ~= 2010 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	-- 判断变量"alive1"为1
 	if ScriptLib.GetGroupVariableValue(context, "alive1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -194,8 +194,8 @@ function action_EVENT_ENTER_REGION_2010(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045002, 2009, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_CHALLENGE_FAIL_2018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -214,19 +214,19 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_2019(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240045002, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2020(context, evt)
 	if evt.param1 ~= 2020 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -236,13 +236,13 @@ function action_EVENT_ENTER_REGION_2020(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240045002, 2009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 240045006, 7)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240045002, 2)
-	
+
 	return 0
 end

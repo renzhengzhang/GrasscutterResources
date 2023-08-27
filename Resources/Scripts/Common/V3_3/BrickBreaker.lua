@@ -38,11 +38,11 @@ defs.envWeather =
 
 
 --地城对应的天气配置
-local DungeonWeather = {
+DungeonWeather = {
     10039,10040,10041,10042
 }
 
-local defs = {
+defs = {
     group_id = 235801002,
     worktop_id = 123,   --操作台对应的操作数
     air_wall = 2005,    --场内空气墙对应的ConfigID
@@ -58,7 +58,7 @@ local defs = {
 ]]
 
 
-local local_defs = {
+local_defs = {
 	worktop_option = 30110,
 	progress_key = 1,
 	team_global_value = "FEVER_LEVEL",
@@ -71,7 +71,7 @@ local local_defs = {
 	punish_inAdvance_reminder = 201
 }
 
-local Tri = {
+Tri = {
 	[1] = { name = "group_load", config_id = 8000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
 	[2] = { name = "gadget_talk_done", config_id = 8000002, event = EventType.EVENT_GADGETTALK_DONE, source = "", condition = "", action = "action_gadget_talk_done", trigger_count = 0},
 	[3] = { name = "gallery_pre_start", config_id = 8000003, event = EventType.EVENT_GALLERY_PRE_START, source = "", condition = "", action = "action_gallery_pre_start", trigger_count = 0},
@@ -108,8 +108,8 @@ end
 function action_gadget_talk_done(context,evt)
 	ScriptLib.PrintContextLog(context,"BrickBreaker action_gadget_talk_done")
 
-	local talkName = evt.source_name
-	local talkID = evt.param2
+	talkName = evt.source_name
+	talkID = evt.param2
 	if talkID == 6800419 or talkName == 6800419 then
 		ScriptLib.CreateGadget(context, { config_id = defs.gadget_teleport })
 	end
@@ -119,7 +119,7 @@ end
 function action_gallery_pre_start(context,evt)
 	ScriptLib.PrintContextLog(context,"BrickBreaker action_gallery_pre_start")
 
-	local curGallery = evt.param1
+	curGallery = evt.param1
 	ScriptLib.SetGroupTempValue(context, "curGallery", curGallery, {})
 
 	if defs then
@@ -136,7 +136,7 @@ end
 function action_dungeon_settle(context,evt)
 	ScriptLib.PrintContextLog(context,"BrickBreaker action_dungeon_settle")
 
-	local curGallery = ScriptLib.GetGroupTempValue(context, "curGallery", {})
+	curGallery = ScriptLib.GetGroupTempValue(context, "curGallery", {})
 	ScriptLib.StopGallery(context, curGallery, true)
 
 	return 0
@@ -182,4 +182,3 @@ end
 
 ------------------------------------------------------------------
 Initialize()
-

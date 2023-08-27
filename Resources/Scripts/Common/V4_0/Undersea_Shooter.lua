@@ -4,16 +4,16 @@
 ||  owner:      xudong.sun
 ||  description:    泪水大炮命中玩家触发传送
 ||  LogName:    ## Undersea_Shoter
-||  Protection: 
+||  Protection:
 =======================================]]
 
-local pointArray = 340100002
-local pointList = {1,2}
+pointArray = 340100002
+pointList = {1,2}
 
 function SLC_BackToStartPoint( context )
 
-	local uid = ScriptLib.GetUidByTeamEntityId(context, context.target_entity_id) 
+	uid = ScriptLib.GetUidByTeamEntityId(context, context.target_entity_id)
 
 	ScriptLib.MoveAvatarByPointArray(context, uid, pointArray, pointList, {speed=10}, "{\"MarkType\":1}")
-	return 0 
+	return 0
 end

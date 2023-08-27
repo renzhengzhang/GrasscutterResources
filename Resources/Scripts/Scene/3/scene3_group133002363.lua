@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002363
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -102,37 +102,37 @@ function condition_EVENT_ANY_MONSTER_DIE_363010(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_363010(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=2018,y=242.2154,z=-596.15}
+	pos = {x=2018,y=242.2154,z=-596.15}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110115, pos, 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133002363, "1178") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "FinishState" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "FinishState", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -142,7 +142,7 @@ function condition_EVENT_TIMER_EVENT_363011(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "FinishState", 133002363) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -153,7 +153,7 @@ function action_EVENT_TIMER_EVENT_363011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -164,32 +164,32 @@ function action_EVENT_QUEST_START_363012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 在当前group下创建新的变量，名称为 "FinishState"，初始值为3，整形，如果已经存在，返回-1
 	if 0 ~= ScriptLib.CreateGroupVariable(context, "FinishState", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=1930,y=207,z=-732}
+	pos = {x=1930,y=207,z=-732}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1105002, pos, 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_363014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FinishState"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "FinishState", 133002363) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -200,19 +200,19 @@ function action_EVENT_VARIABLE_CHANGE_363014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_363015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FinishState"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "FinishState", 133002363) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -223,6 +223,6 @@ function action_EVENT_VARIABLE_CHANGE_363015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133315018
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -118,9 +118,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -131,9 +131,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -158,20 +158,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_18005(context, evt)
 	if evt.param1 ~= 18005 then return false end
-	
+
 	-- 判断是区域18005
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 18005 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -182,23 +182,23 @@ function action_EVENT_ENTER_REGION_18005(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 创建标识为"rmd4"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "rmd4", {3}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_18006(context, evt)
 	if evt.param1 ~= 18006 then return false end
-	
+
 	-- 判断是区域18006
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 18006 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -209,23 +209,23 @@ function action_EVENT_ENTER_REGION_18006(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 创建标识为"rmd5"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "rmd5", {3}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_18007(context, evt)
 	if evt.param1 ~= 18007 then return false end
-	
+
 	-- 判断是区域18007
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 18007 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -236,11 +236,11 @@ function action_EVENT_ENTER_REGION_18007(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 创建标识为"rmd6"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "rmd6", {3}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -250,8 +250,8 @@ function action_EVENT_QUEST_START_18008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18028, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -260,7 +260,7 @@ function condition_EVENT_GATHER_18009(context, evt)
 	if 18028 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -268,7 +268,7 @@ end
 function action_EVENT_GATHER_18009(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133315018, 2)
-	
+
 	return 0
 end
 
@@ -276,7 +276,7 @@ end
 function action_EVENT_QUEST_START_18010(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315018, 2)
-	
+
 	return 0
 end
 
@@ -287,7 +287,7 @@ function action_EVENT_QUEST_START_18020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -296,7 +296,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_18030(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315018, 18002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -307,7 +307,7 @@ function action_EVENT_GADGET_STATE_CHANGE_18030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -316,7 +316,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_18031(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315018, 18003) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -327,7 +327,7 @@ function action_EVENT_GADGET_STATE_CHANGE_18031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -336,7 +336,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_18032(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315018, 18004) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -347,19 +347,19 @@ function action_EVENT_GADGET_STATE_CHANGE_18032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_18033(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"unlock"为1
 	if ScriptLib.GetGroupVariableValue(context, "unlock") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -369,34 +369,34 @@ function action_EVENT_VARIABLE_CHANGE_18033(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18029, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知场景上的所有玩家播放名字为70 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 70, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"rmd1"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "rmd1", {5}, false)
-	
-	
+
+
 	-- 创建标识为"unlock"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "unlock", {1}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_18034(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"unlock"为2
 	if ScriptLib.GetGroupVariableValue(context, "unlock") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -406,30 +406,30 @@ function action_EVENT_VARIABLE_CHANGE_18034(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18029, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知场景上的所有玩家播放名字为70 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 70, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"rmd2"，时间节点为{4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "rmd2", {4}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_18035(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"unlock"为3
 	if ScriptLib.GetGroupVariableValue(context, "unlock") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -439,30 +439,30 @@ function action_EVENT_VARIABLE_CHANGE_18035(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18029, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知场景上的所有玩家播放名字为70 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 70, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"rmd3"，时间节点为{4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "rmd3", {4}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_18036(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"done"为1
 	if ScriptLib.GetGroupVariableValue(context, "done") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -473,7 +473,7 @@ function action_EVENT_VARIABLE_CHANGE_18036(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -482,7 +482,7 @@ function condition_EVENT_TIME_AXIS_PASS_18049(context, evt)
 	if "rmd1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -493,7 +493,7 @@ function action_EVENT_TIME_AXIS_PASS_18049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -502,7 +502,7 @@ function condition_EVENT_TIME_AXIS_PASS_18051(context, evt)
 	if "rmd2" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -513,7 +513,7 @@ function action_EVENT_TIME_AXIS_PASS_18051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -522,7 +522,7 @@ function condition_EVENT_TIME_AXIS_PASS_18052(context, evt)
 	if "rmd3" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -533,7 +533,7 @@ function action_EVENT_TIME_AXIS_PASS_18052(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -542,7 +542,7 @@ function condition_EVENT_TIME_AXIS_PASS_18054(context, evt)
 	if "rmd4" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -553,7 +553,7 @@ function action_EVENT_TIME_AXIS_PASS_18054(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -562,7 +562,7 @@ function condition_EVENT_ANY_MONSTER_DIE_18056(context, evt)
 	if 18015 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -573,7 +573,7 @@ function action_EVENT_ANY_MONSTER_DIE_18056(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -582,7 +582,7 @@ function condition_EVENT_TIME_AXIS_PASS_18057(context, evt)
 	if "rmd5" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -593,7 +593,7 @@ function action_EVENT_TIME_AXIS_PASS_18057(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -602,7 +602,7 @@ function condition_EVENT_TIME_AXIS_PASS_18058(context, evt)
 	if "rmd6" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -613,7 +613,7 @@ function action_EVENT_TIME_AXIS_PASS_18058(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -622,7 +622,7 @@ function condition_EVENT_TIME_AXIS_PASS_18059(context, evt)
 	if "unlock" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -632,8 +632,8 @@ function action_EVENT_TIME_AXIS_PASS_18059(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18029, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -644,31 +644,31 @@ function action_EVENT_QUEST_START_18060(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 18028 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133315018, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_18061(context, evt)
-	local curQuestState = ScriptLib.GetHostQuestState(context,7306616)
+	curQuestState = ScriptLib.GetHostQuestState(context,7306616)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
 	if curQuestState ~= 3 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -679,6 +679,6 @@ function action_EVENT_GROUP_LOAD_18061(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end

@@ -1,5 +1,5 @@
 
-local tempTrigger = {
+tempTrigger = {
 	{ config_id = 2330001, name = "Challenge_Enter_Region", event = EventType.EVENT_ENTER_REGION, source = "",
 	  condition = "", action = "action_Challenge_Enter_Region", trigger_count = 0},
 	{ config_id = 2330002, name = "Challenge_LEAVE_REGION", event = EventType.EVENT_LEAVE_REGION, source = "",

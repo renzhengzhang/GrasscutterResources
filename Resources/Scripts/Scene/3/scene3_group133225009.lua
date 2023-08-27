@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133225009
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	region_Enter = 9008,
 	region_Leave = 9009,
 	group_id = 133225009,
@@ -15,16 +15,16 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local Pursina = {
-	{9002,9005},	
+Pursina = {
+	{9002,9005},
 	{9003,9006},
 	{9004,9007},
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -145,9 +145,9 @@ sight_groups = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -158,9 +158,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -185,23 +185,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_9010(context, evt)
 	-- 判断是gadgetid 9001 option_id 175
 	if 9001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 175 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -211,15 +211,15 @@ function action_EVENT_SELECT_OPTION_9010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 9001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_9011(context, evt)
 	-- 判断剩余怪物数量是否是0.
-	
+
 	-- 如果不为0设置超时标记，返回0
 	--if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 	--	ScriptLib.SetGroupVariableValue(context, "isTimeout", 1)
@@ -230,22 +230,22 @@ function action_EVENT_TIME_AXIS_PASS_9011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "refreshMonster") ~= ScriptLib.GetGroupVariableValue(context, "finalWave") then
 		ScriptLib.ChangeGroupVariableValue(context, "refreshMonster", 1)
 	else
-		ScriptLib.SetGroupVariableValue(context, "refreshMonster", 1)	
+		ScriptLib.SetGroupVariableValue(context, "refreshMonster", 1)
 	end
 	--end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_9012(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	--如果refesh为0
 	if ScriptLib.GetGroupVariableValue(context, "refreshMonster") == 0 then
 		return 0
 	end
-	
+
 	--三个电桩进度全满跳出
 	if ScriptLib.GetGalleryProgressScore(context, "digProgress0", defs.gallery_id)>=100 and ScriptLib.GetGalleryProgressScore(context, "digProgress1", defs.gallery_id)>=100 and ScriptLib.GetGalleryProgressScore(context, "digProgress2", defs.gallery_id)>=100 then
 		return 0
@@ -254,15 +254,15 @@ function action_EVENT_VARIABLE_CHANGE_9012(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.prospect_id[1]) ~= GadgetState.GearStop and ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.prospect_id[2]) ~= GadgetState.GearStop and ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.prospect_id[3]) ~= GadgetState.GearStop then
 		return 0
 	end
-	
-	
+
+
 	--根据激活矿机数量计算刷怪数量
-	
-	math.randomseed(ScriptLib.GetServerTime(context)) 
-	local tempValue = math.random(3,5) 
-	
-	local monsterArray = defs.monsterWave[1]
-	
+
+	math.randomseed(ScriptLib.GetServerTime(context))
+	tempValue = math.random(3,5)
+
+	monsterArray = defs.monsterWave[1]
+
 	if ScriptLib.GetGroupVariableValue(context, "Active_Count") == 2 then
 		monsterArray = defs.monsterWave[2]
 	elseif	ScriptLib.GetGroupVariableValue(context, "Active_Count")==3 then
@@ -270,15 +270,15 @@ function action_EVENT_VARIABLE_CHANGE_9012(context, evt)
 	else
 		monsterArray = defs.monsterWave[1]
 	end
-	
-	
+
+
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 1)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 2)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 3)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 4)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 5)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 6)
-	
+
 	-- refreshMonster=1，刷第1波.A点刷新
 	if ScriptLib.GetGroupVariableValue(context, "refreshMonster") == 1 then
 		if ScriptLib.GetGalleryProgressScore(context, "digProgress0", defs.gallery_id)>=100 or ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.prospect_id[1]) ~= GadgetState.GearStop then
@@ -310,19 +310,19 @@ function action_EVENT_VARIABLE_CHANGE_9012(context, evt)
 			return 0
 		end
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"IsFinished"为1
 	if ScriptLib.GetGroupVariableValue(context, "IsFinished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -337,19 +337,19 @@ function action_EVENT_VARIABLE_CHANGE_9019(context, evt)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 4)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 5)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 6)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9057(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Boss_Enhance"为1
 	if ScriptLib.GetGroupVariableValue(context, "Boss_Enhance") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -360,14 +360,14 @@ function action_EVENT_VARIABLE_CHANGE_9057(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"looptime"，时间节点为{40,80}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "looptime", {40,80}, true)
-	
-	
+
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133225009, 2)
-	
+
 	return 0
 end
 
@@ -376,7 +376,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9058(context, evt)
 	if 9002 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -388,7 +388,7 @@ function action_EVENT_GADGET_STATE_CHANGE_9058(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -397,7 +397,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9059(context, evt)
 	if 9003 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -409,7 +409,7 @@ function action_EVENT_GADGET_STATE_CHANGE_9059(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -418,7 +418,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9060(context, evt)
 	if 9004 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -430,7 +430,7 @@ function action_EVENT_GADGET_STATE_CHANGE_9060(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -439,7 +439,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9068(context, evt)
 	if (defs.prospect_id[1] ~= evt.param2 and defs.prospect_id[2] ~= evt.param2 and defs.prospect_id[3] ~= evt.param2) or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -450,19 +450,19 @@ function action_EVENT_GADGET_STATE_CHANGE_9068(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9069(context, evt)
 	if evt.param1 ~= 9069 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -472,19 +472,19 @@ function action_EVENT_ENTER_REGION_9069(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,147,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9070(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Boss_Enhance"为0
 	if ScriptLib.GetGroupVariableValue(context, "Boss_Enhance") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -495,11 +495,11 @@ function action_EVENT_VARIABLE_CHANGE_9070(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 停止标识为"looptime"的时间轴
 	ScriptLib.EndTimeAxis(context, "looptime")
-	
-	
+
+
 	return 0
 end
 

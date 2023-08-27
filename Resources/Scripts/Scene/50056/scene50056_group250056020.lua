@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250056020
 }
 
 -- DEFS_MISCS
-local challengeList = {
+challengeList = {
 { monsterPool = 17001, challengeParamList = {2, 1, -1, 15, 0, 0}, monsterPoolParamList = {total_count=15, min_count=6, max_count=6, fill_time=0, fill_count=0}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 17002, challengeParamList = {2, 1, -1, 12, 0, 0}, monsterPoolParamList = {total_count=12, min_count=5, max_count=5, fill_time=0, fill_count=0}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 17003, challengeParamList = {2, 1, -1, 13, 0, 0}, monsterPoolParamList = {total_count=13, min_count=6, max_count=6, fill_time=0, fill_count=0}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
@@ -25,9 +25,9 @@ local challengeList = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -87,9 +87,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "V2_2/RogueDungeon_Main"

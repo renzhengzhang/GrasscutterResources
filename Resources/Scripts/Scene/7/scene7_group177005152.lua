@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 177005152
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 177005152,
 	gadget_airforce = 152001,
 	gadget_windforce = 152002,
@@ -13,16 +13,16 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local Controllers = {}
-local EnvControlGadgets = {defs.gadget_Switch}
-local Worktops = {}
-local DayAppearGadgets = {}
-local NightAppearGadgets = {}
+Controllers = {}
+EnvControlGadgets = {defs.gadget_Switch}
+Worktops = {}
+DayAppearGadgets = {}
+NightAppearGadgets = {}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -72,9 +72,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +85,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -112,9 +112,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -122,7 +122,7 @@ function condition_EVENT_GADGET_CREATE_152003(context, evt)
 	if 152001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -131,44 +131,44 @@ function action_EVENT_GADGET_CREATE_152003(context, evt)
 			ScriptLib.SetGroupVariableValue(context, "ismoving", 0)
 			ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_airforce, 202)
 			ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_windforce )
-			ScriptLib.CreateGadget(context, { config_id = defs.gadget_windforce }) 
+			ScriptLib.CreateGadget(context, { config_id = defs.gadget_windforce })
 		return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_152007(context, evt)
-	
+
 	ScriptLib.PrintContextLog(context,"开始reachpoint")
-	
-	
+
+
 	-- 判断是gadgetid 为 25003的移动平台，是否到达了500600028 的路线中的 2 点
-	
+
 	if defs.gadget_airforce ~= evt.param1 then
 	    return false
 	end
-	
+
 	if defs.route_01 ~= evt.param2 then
 	    return false
 	end
-	
+
 	if defs.reachpoint ~= evt.param3 then
 	    return false
 	end
-	
-	
-	
+
+
+
 	ScriptLib.PrintContextLog(context,"155006188-结束判断reachpoint")
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_152007(context, evt)
-		ScriptLib.StopPlatform(context, defs.gadget_airforce) 
+		ScriptLib.StopPlatform(context, defs.gadget_airforce)
 		ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_airforce)
 		ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_windforce)
 		ScriptLib.SetGroupVariableValue(context, "ismoving", 0)
-		
+
 	ScriptLib.CreateGadget(context, { config_id = defs.gadget_airforce })
 		return 0
 end
@@ -176,23 +176,23 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_152008(context, evt)
 	if evt.param1 ~= 152008 then return false end
-	
+
 	-- 判断变量"ismoving"为1
 	if ScriptLib.GetGroupVariableValue(context, "ismoving") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_152008(context, evt)
 	--如果有冥鱼,并且在移动中, 则销毁创建
-	if 1 == ScriptLib.GetGroupVariableValue(context, "ismoving") then 
+	if 1 == ScriptLib.GetGroupVariableValue(context, "ismoving") then
 					ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_airforce )
 					ScriptLib.CreateGadget(context, { config_id = defs.gadget_airforce })
 					ScriptLib.SetGroupVariableValue(context, "ismoving", 0)
-	
+
 			end
 	return 0
 end
@@ -200,7 +200,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_152009(context, evt)
 		if evt.param1 ~= 152009 then return false end
-		if 203 ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_airforce) and 
+		if 203 ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_airforce) and
 		202 ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_airforce) then
 			return false
 		end
@@ -211,7 +211,7 @@ end
 function action_EVENT_ENTER_REGION_152009(context, evt)
 			ScriptLib.SetGroupVariableValue(context, "ismoving", 1)
 			ScriptLib.CreateGadget(context, { config_id = defs.gadget_windforce })
-			ScriptLib.StartPlatform(context, defs.gadget_airforce) 
+			ScriptLib.StartPlatform(context, defs.gadget_airforce)
 			ScriptLib.PrintContextLog(context,"启动移动平台--完成")
 			return 0
 end

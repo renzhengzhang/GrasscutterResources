@@ -8,13 +8,13 @@
 ||	LogName       ||    ## EchoConch_LOG
 ||	Protection    ||	离开范围后保证reminder被中断
 =====================================================================================================================
-local conchConfigID = 0
-local shadowConfigIDList = {}
+conchConfigID = 0
+shadowConfigIDList = {}
 
 =======================================================================================]]
 
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Triger_Interact"] = { config_id = 80000001, name = "Triger_Interact", event= EventType.EVENT_ECHO_SHELL_INTERACT, source = "", condition = "", action = "action_trigger_interact", trigger_count = 0},
 		["Leave_Region"] = { config_id = 80000002, name = "Leave_Region", event= EventType.EVENT_LEAVE_REGION, source = "1", condition = "", action = "action_player_leave_region", trigger_count = 0},
@@ -25,8 +25,8 @@ local extrTriggers = {
 function action_trigger_interact( context, evt )
 
 	--获取reminderID
-	--local reminderID = gadgets[conchConfigID].arguments[1]
-	local reminderID = evt.param3
+	--reminderID = gadgets[conchConfigID].arguments[1]
+	reminderID = evt.param3
 	ScriptLib.SetGroupTempValue(context, "reminderID", reminderID,{})
 	ScriptLib.PrintContextLog(context, "## EchoConch_LOG : remindferID is"..reminderID)
 
@@ -45,8 +45,8 @@ end
 function action_player_leave_region( context, evt )
 
 	--获取reminderID
-	--local reminderID = gadgets[conchConfigID].arguments[1]
-	local reminderID = ScriptLib.GetGroupTempValue(context, "reminderID",{})
+	--reminderID = gadgets[conchConfigID].arguments[1]
+	reminderID = ScriptLib.GetGroupTempValue(context, "reminderID",{})
 	ScriptLib.PrintContextLog(context, "## EchoConch_LOG : remindferID is"..reminderID)
 
 	--玩家离开区域后，停止对应的reminder
