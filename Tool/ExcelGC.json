@@ -79,6 +79,10 @@
     "comment": "Multi Map layer by Snoobii Yeo"
   },
   {
+    "name": "MapLayerFloorExcelConfigData.json",
+    "comment": "Multi Map layer by GC"
+  },
+  {
     "name": "ReliquaryAffixExcelConfigData.json",
     "comment": "maybe need fix"
   },
