@@ -2,5 +2,6 @@ repo:gitlab.com/YuukiPS/GC-Resources
 ver:4.0.0
 patches:Amber,Custom
 scripts:official
+hasnolocals:true
 hasserverres:true
 hasscenescriptdata:true
