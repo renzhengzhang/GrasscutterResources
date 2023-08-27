@@ -1,24 +1,25 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220134045
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
 
-      gear_info = {
+      gear_info =
+{
        [1] = { config_id=45001 , connect = {45003, 45002, 45005, 45006, 45004}, point_array_id = 40},
                 [2] = { config_id=45002 , connect = {45003, 45001, 45005}, point_array_id = 41 },
                 [3] = { config_id= 45003 , connect = {45002, 45001, 45004}, point_array_id = 42},
                 [4] = { config_id=45004 , connect = {45003, 45002, 45001, 45005, 45006}, point_array_id = 43},
                 [5] = { config_id= 45005 , connect = {45006, 45001, 45002}, point_array_id = 44 },
                 [6] = { config_id=45006 , connect = {45004, 45001, 45005}, point_array_id = 45 },
-             
+
         },
 
 
         --几种解
-        solutions = 
+        solutions =
         {
                 --[解法x] = {gear_info[1]切到它的第x档, gear_info[2]切到它的第y档...}
                 [1] = { connection = {2,1,3,5,2,3}, ends = {}},
@@ -28,9 +29,9 @@ turn_option = 31,
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -67,9 +68,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +81,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -107,23 +108,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_45012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"solution"为3
-	if ScriptLib.GetGroupVariableValue(context, "solution") < 1 
+	if ScriptLib.GetGroupVariableValue(context, "solution") < 1
 	 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -131,7 +132,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_45012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220134045, 2)
-	
+
 	return 0
 end
 

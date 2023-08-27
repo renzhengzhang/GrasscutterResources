@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133106461
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -75,23 +75,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_461001(context, evt)
 	-- 判断是gadgetid 461003 option_id 1
 	if 461003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -102,31 +102,31 @@ function action_EVENT_SELECT_OPTION_461001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 461002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 461002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 6079, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 删除指定group： 133106461 ；指定config：461003；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133106461, 461003, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将configid为 461003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 461003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -134,23 +134,23 @@ end
 function condition_EVENT_SELECT_OPTION_461006(context, evt)
 	-- 判断是gadgetid 461007 option_id 751
 	if 461007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 751 ~= evt.param2 then
 		return false
 	end
-	
+
 	if ScriptLib.GetHostQuestState(context,7103725) == 3 then
 		return true
 	end
-	
+
 	return false
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_461006(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=1112, y= 714, z=454.5}, radius = 2, rot = {x=0, y=-126, z=0},scene_id=6}) 
+	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=1112, y= 714, z=454.5}, radius = 2, rot = {x=0, y=-126, z=0},scene_id=6})
 	return 0
 end
 
@@ -160,7 +160,7 @@ function condition_EVENT_GROUP_LOAD_461008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isOpened") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -170,20 +170,20 @@ function action_EVENT_GROUP_LOAD_461008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 461002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 6079, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 将configid为 461003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 461003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_GROUP_LOAD_461009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isOpened") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -203,7 +203,7 @@ function action_EVENT_GROUP_LOAD_461009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 461002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

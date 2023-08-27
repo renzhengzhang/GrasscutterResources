@@ -1,16 +1,16 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 247007001
 }
 
 -- DEFS_MISCS
-local MainGroupID = 247007001
-local MonsterAffix = 1009
-local ReminderList = {470060101,470060304,470060404,470060504,470060604}
-local PointToReminderList = {
+MainGroupID = 247007001
+MonsterAffix = 1009
+ReminderList = {470060101,470060304,470060404,470060504,470060604}
+PointToReminderList = {
         {configID = 0, reminderID = 470070901},
 }
-local challengeList = {
+challengeList = {
 { monsterPool = 28001, challengeParamList = {2, 2017, -1, 15, 0, 0}, monsterPoolParamList = {total_count=15, min_count=6, max_count=6, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 28002, challengeParamList = {2, 2017, -1, 16, 0, 0}, monsterPoolParamList = {total_count=16, min_count=6, max_count=6, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 28003, challengeParamList = {2, 2017, -1, 16, 0, 0}, monsterPoolParamList = {total_count=16, min_count=6, max_count=6, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
@@ -51,9 +51,9 @@ local challengeList = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -100,9 +100,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -113,9 +113,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -131,9 +131,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "V2_2/RogueDungeon_Main"

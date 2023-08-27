@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201011062
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_id = 201011062,
 	gadget_riddle_hint = 62001,
 	gadget_riddle_1 = 62002,
@@ -57,14 +57,14 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local gadget_floor_1 = {62002,62003,62004,62005,62007,62008,62009,62010,62011,62012,62013,62014,62015,62016}
-local gadget_floor_2 = {62019,62020,62021,62022,62024,62025,62026,62027,62028,62029,62030,62031,62032,62033}
-local gadget_floor_3 = {62034,62035,62036,62037,62039,62040,62041,62042,62043,62044,62045,62046,62047,62048}
+gadget_floor_1 = {62002,62003,62004,62005,62007,62008,62009,62010,62011,62012,62013,62014,62015,62016}
+gadget_floor_2 = {62019,62020,62021,62022,62024,62025,62026,62027,62028,62029,62030,62031,62032,62033}
+gadget_floor_3 = {62034,62035,62036,62037,62039,62040,62041,62042,62043,62044,62045,62046,62047,62048}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -149,9 +149,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -162,9 +162,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -180,15 +180,15 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_62017(context, evt)
 	if evt.param2 ~= defs.gadget_riddle_1 and evt.param2 ~= defs.gadget_riddle_2 and evt.param2 ~= defs.gadget_riddle_3 and evt.param2 ~= defs.gadget_riddle_4 and evt.param2 ~= defs.gadget_riddle_5 and evt.param2 ~= defs.gadget_riddle_6 and evt.param2 ~= defs.gadget_riddle_7 and evt.param2 ~= defs.gadget_riddle_8 and evt.param2 ~= defs.gadget_riddle_9 and evt.param2 ~= defs.gadget_riddle_10 and evt.param2 ~= defs.gadget_riddle_11 and evt.param2 ~= defs.gadget_riddle_12 and evt.param2 ~= defs.gadget_riddle_13 and evt.param2 ~= defs.gadget_riddle_14 and evt.param2 ~= defs.gadget_riddle_15 and evt.param2 ~= defs.gadget_riddle_16 and evt.param2 ~= defs.gadget_riddle_17 and evt.param2 ~= defs.gadget_riddle_18 and evt.param2 ~= defs.gadget_riddle_19 and evt.param2 ~= defs.gadget_riddle_20 and evt.param2 ~= defs.gadget_riddle_21 and evt.param2 ~= defs.gadget_riddle_22 and evt.param2 ~= defs.gadget_riddle_23 and evt.param2 ~= defs.gadget_riddle_24 and evt.param2 ~= defs.gadget_riddle_25 and evt.param2 ~= defs.gadget_riddle_26 and evt.param2 ~= defs.gadget_riddle_27 and evt.param2 ~= defs.gadget_riddle_28 and evt.param2 ~= defs.gadget_riddle_29 and evt.param2 ~= defs.gadget_riddle_30 and evt.param2 ~= defs.gadget_riddle_31 and evt.param2 ~= defs.gadget_riddle_32 and evt.param2 ~= defs.gadget_riddle_33 and evt.param2 ~= defs.gadget_riddle_34 and evt.param2 ~= defs.gadget_riddle_35 and evt.param2 ~= defs.gadget_riddle_36 and evt.param2 ~= defs.gadget_riddle_37 and evt.param2 ~= defs.gadget_riddle_38 and evt.param2 ~= defs.gadget_riddle_39 and evt.param2 ~= defs.gadget_riddle_40 and evt.param2 ~= defs.gadget_riddle_41 and evt.param2 ~= defs.gadget_riddle_42 then
-	    return false 
+	    return false
 	    end
 	    return true
 end
@@ -198,9 +198,9 @@ function action_EVENT_GADGET_STATE_CHANGE_62017(context, evt)
 	--起点记录
 	if ScriptLib.GetCurTriggerCount(context) == 0 then
 	    ScriptLib.MarkPlayerAction(context, 5007, 1, 1)
-	end 
+	end
 	--映射点亮
-	
+
 	for i = 1,14 do
 	    if evt.param2 == gadget_floor_1[i] and evt.param1 == GadgetState.GearStart  then
 	        ScriptLib.ChangeGroupVariableValue(context, "State_Floor_1", 1)
@@ -215,11 +215,11 @@ function action_EVENT_GADGET_STATE_CHANGE_62017(context, evt)
 	end
 	--检查是否符合开门条件
 	if ScriptLib.GetGroupVariableValue(context, "Door_Open_1") == 0 then
-	    if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_5) == GadgetState.GearStart or 
+	    if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_5) == GadgetState.GearStart or
 	    ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_5) == GadgetState.GearAction1 then
-	        if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_1) == GadgetState.GearStart or 
+	        if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_1) == GadgetState.GearStart or
 	        ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_1) == GadgetState.GearAction1 then
-	            if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_3) == GadgetState.GearStart or 
+	            if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_3) == GadgetState.GearStart or
 	            ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_3) == GadgetState.GearAction1 then
 	                ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_chest, GadgetState.GearStart)
 	                ScriptLib.SetGroupVariableValueByGroup(context, "Door_Open_1", 1, defs.group_id)
@@ -242,13 +242,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62017(context, evt)
 	end
 	--检查是否符合开门条件
 	if ScriptLib.GetGroupVariableValue(context, "Door_Open_2") == 0 then
-	    if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_15) == GadgetState.GearStart or 
+	    if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_15) == GadgetState.GearStart or
 	    ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_15) == GadgetState.GearAction1 then
-	        if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_16) == GadgetState.GearStart or 
+	        if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_16) == GadgetState.GearStart or
 	        ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_16) == GadgetState.GearAction1 then
-	            if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_17) == GadgetState.GearStart or 
+	            if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_17) == GadgetState.GearStart or
 	            ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_17) == GadgetState.GearAction1 then
-	                if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_18) == GadgetState.GearStart or 
+	                if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_18) == GadgetState.GearStart or
 	                ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_18) == GadgetState.GearAction1 then
 	                    ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_chest_2, GadgetState.GearStart)
 	                    ScriptLib.SetGroupVariableValueByGroup(context, "Door_Open_2", 1, defs.group_id)
@@ -272,21 +272,21 @@ function action_EVENT_GADGET_STATE_CHANGE_62017(context, evt)
 	end
 	--检查是否符合开门条件
 	if ScriptLib.GetGroupVariableValue(context, "Door_Open_3") == 0 then
-	    if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_29) == GadgetState.GearStart or 
+	    if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_29) == GadgetState.GearStart or
 	    ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_29) == GadgetState.GearAction1 then
-	        if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_30) == GadgetState.GearStart or 
+	        if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_30) == GadgetState.GearStart or
 	        ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_30) == GadgetState.GearAction1 then
-	            if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_31) == GadgetState.GearStart or 
+	            if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_31) == GadgetState.GearStart or
 	            ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_31) == GadgetState.GearAction1 then
-	                if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_32) == GadgetState.GearStart or 
+	                if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_32) == GadgetState.GearStart or
 	                ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_32) == GadgetState.GearAction1 then
-	                    if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_33) == GadgetState.GearStart or 
+	                    if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_33) == GadgetState.GearStart or
 	                    ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_33) == GadgetState.GearAction1 then
-	                        if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_34) == GadgetState.GearStart or 
+	                        if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_34) == GadgetState.GearStart or
 	                        ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_34) == GadgetState.GearAction1 then
-	                            if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_35) == GadgetState.GearStart or 
+	                            if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_35) == GadgetState.GearStart or
 	                            ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_35) == GadgetState.GearAction1 then
-	                                if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_36) == GadgetState.GearStart or 
+	                                if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_36) == GadgetState.GearStart or
 	                                ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_36) == GadgetState.GearAction1 then
 	                                    ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_chest_3, GadgetState.GearStart)
 	                                    ScriptLib.SetGroupVariableValueByGroup(context, "Door_Open_3", 1, defs.group_id)
@@ -307,7 +307,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_62018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 < 0 then
 	return false
 	end

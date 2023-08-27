@@ -1,4 +1,4 @@
--- local extrTriggers = {
+-- extrTriggers = {
 -- 	initialtrigger = {
 -- 		--["General_Die"] = { config_id = 8000001, name = "General_Die", event= EventType.EVENT_MONSTER_BATTLE, source = "", condition = "", action = "action_whern_general_inbattle", trigger_count = 0 },
 -- 	}
@@ -16,7 +16,7 @@
 -- end
 
 -- function ExecuteInTuant( context )
--- 	local UidList = ScriptLib.GetSceneUidList(context)
+-- 	UidList = ScriptLib.GetSceneUidList(context)
 
 -- 	for i,v in ipairs(UidList) do
 -- 		ScriptLib.AddExhibitionReplaceableData(context, v, "GeneralBattle_ExecuteInTaunt", 1)
@@ -31,7 +31,7 @@
 -- 		return 0
 -- 	end
 
--- 	local UidList = ScriptLib.GetSceneUidList(context)
+-- 	UidList = ScriptLib.GetSceneUidList(context)
 
 -- 	for i,v in ipairs(UidList) do
 -- 		ScriptLib.AddExhibitionReplaceableData(context, v, "GeneralBattle_HitByShadow", 0)

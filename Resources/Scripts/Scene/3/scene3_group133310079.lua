@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133310079
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -85,25 +85,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_79001(context, evt)
 	if evt.param1 ~= 79001 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	-- 判断变量"quest_accept"为0
 	if ScriptLib.GetGroupVariableValue(context, "quest_accept") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -114,7 +114,7 @@ function action_EVENT_ENTER_REGION_79001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -125,10 +125,10 @@ function action_EVENT_QUEST_START_79002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133310079, 2)
-	
+
 	return 0
 end
 
@@ -138,11 +138,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_79004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "quest_accept") ~= 0 then
 			return false
 	end
-	
+
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133310079, 79003) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -153,7 +153,7 @@ function action_EVENT_GADGET_STATE_CHANGE_79004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -163,7 +163,7 @@ function condition_EVENT_MONSTER_BATTLE_79007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "quest_accept") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -174,24 +174,24 @@ function action_EVENT_MONSTER_BATTLE_79007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_79008(context, evt)
 	if evt.param1 ~= 79008 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	-- 判断变量"quest_accept"为1
 	if ScriptLib.GetGroupVariableValue(context, "quest_accept") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -202,6 +202,6 @@ function action_EVENT_ENTER_REGION_79008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

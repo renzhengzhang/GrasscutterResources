@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133223217
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	active_step = 201,
 	inactive_step = 0,
 	gadget_array = {217002,217001,217004,217003,217005},
@@ -12,14 +12,14 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local v = 0
-local v_error = 0
-local max_bit = #defs.gadget_array
+v = 0
+v_error = 0
+max_bit = #defs.gadget_array
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -61,9 +61,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -92,9 +92,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -119,7 +119,7 @@ function action_EVENT_GADGET_STATE_CHANGE_217007(context, evt)
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break 
+	                        break
 	                end
 	                if i == max_bit and defs.gadget_array[i] ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
@@ -144,7 +144,7 @@ function action_EVENT_GADGET_STATE_CHANGE_217007(context, evt)
 	        if v_error ~= 1 then
 	                v_error = -1
 	        end
-	        ScriptLib.SetGroupVariableValue(context, "sort", v) 
+	        ScriptLib.SetGroupVariableValue(context, "sort", v)
 	        ScriptLib.SetGroupVariableValue(context, "gear_reset", v_error)
 	        ScriptLib.SetGroupVariableValue(context, "v_error", 0)
 	end
@@ -154,7 +154,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_217008(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if evt.param1 == 1 then
 		if #defs.reset_gear_list == 0 then
 	                        defs.reset_gear_list = suites[1].gadgets
@@ -175,8 +175,8 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_217009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
-	
+
+
 	if evt.param1 == -1 then
 		return true
 	end
@@ -186,7 +186,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_217010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 > 0 then
 		return true
 	end
@@ -200,12 +200,12 @@ function action_EVENT_VARIABLE_CHANGE_217010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "markFinish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "markFinish", 1, 133223218) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

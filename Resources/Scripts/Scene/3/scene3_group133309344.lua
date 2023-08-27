@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309344
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -107,9 +107,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -118,8 +118,8 @@ function condition_EVENT_ANY_MONSTER_DIE_344005(context, evt)
 	if evt.param1 ~= 344003 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -130,13 +130,13 @@ function action_EVENT_ANY_MONSTER_DIE_344005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知groupid为133309344中,configid为：344004的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 344004, 133309344) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -146,8 +146,8 @@ function condition_EVENT_ANY_MONSTER_DIE_344006(context, evt)
 	if evt.param1 ~= 344004 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -158,13 +158,13 @@ function action_EVENT_ANY_MONSTER_DIE_344006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知groupid为133309344中,configid为：344002的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 344002, 133309344) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -174,7 +174,7 @@ function condition_EVENT_ANY_MONSTER_DIE_344008(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -185,31 +185,31 @@ function action_EVENT_ANY_MONSTER_DIE_344008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "die" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "die", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7329303") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将configid为 344009 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 344009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 344010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 344010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -219,7 +219,7 @@ function condition_EVENT_GROUP_LOAD_344012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -230,19 +230,19 @@ function action_EVENT_GROUP_LOAD_344012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将configid为 344009 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 344009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-	
-		end 
-	
+
+		end
+
 	-- 将configid为 344010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 344010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-	
-		end 
-	
+
+		end
+
 	return 0
 end
 
@@ -252,7 +252,7 @@ function condition_EVENT_GROUP_LOAD_344019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "die") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -263,18 +263,18 @@ function action_EVENT_GROUP_LOAD_344019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 344003, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 344004, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end

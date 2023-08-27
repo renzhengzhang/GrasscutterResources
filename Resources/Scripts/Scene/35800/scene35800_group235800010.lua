@@ -1,62 +1,14 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 235800010
 }
 
 -- DEFS_MISCS
---local Bubbles = {{10010,10011,10012},{10013,10014,10015},{10016,10017,10018},{10019,10020,10021},{10022,10023,10024},{10025,10026,10027},{10028,10029,10030},{10031,10032,10033},{10034,10035,10036},{10037,10038,10039},{10040,10041,10042},{10043,10044,10045}}
+--Bubbles = {{10010,10011,10012},{10013,10014,10015},{10016,10017,10018},{10019,10020,10021},{10022,10023,10024},{10025,10026,10027},{10028,10029,10030},{10031,10032,10033},{10034,10035,10036},{10037,10038,10039},{10040,10041,10042},{10043,10044,10045}}
 
-local Bubbles = {10001,10002,10003}   
+Bubbles = {10001,10002,10003}
 
-local BubbleWeightList = {
-        [1] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [2] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [3] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [4] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 100 }},
-        [5] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [6] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [7] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [8] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 100 }},
-        [9] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [10]= {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},          
-        [11]= {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [12]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 100 }},                                                  
-}
-
-local BubbleWeightList2 = {
-        [1] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
-        [2] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
-        [3] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
-        [4] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
-        [5] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
-        [6] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
-        [7] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
-        [8] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
-        [9] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
-        [10]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},          
-        [11]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
-        [12]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},                                                  
-}
-
-local BubbleWeightList3 = {
-        [1] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [2] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [3] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [4] = {{ Num= 1, weight= 0  }, { Num= 2, weight= 50 }, { Num= 3, weight= 50}},
-        [5] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [6] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [7] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [8] = {{ Num= 1, weight= 0  }, { Num= 2, weight= 50 }, { Num= 3, weight= 50}},
-        [9] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [10]= {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},         
-        [11]= {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [12]= {{ Num= 1, weight= 0  }, { Num= 2, weight= 50 }, { Num= 3, weight= 50}},                                          
-}
-
-
-
-
-local BubbleWeightList4 = {
+BubbleWeightList = {
         [1] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
         [2] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
         [3] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
@@ -68,7 +20,55 @@ local BubbleWeightList4 = {
         [9] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
         [10]= {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
         [11]= {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
-        [12]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 100 }},                                  
+        [12]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 100 }},
+}
+
+BubbleWeightList2 = {
+        [1] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+        [2] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+        [3] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+        [4] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+        [5] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+        [6] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+        [7] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+        [8] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+        [9] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+        [10]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+        [11]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+        [12]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
+}
+
+BubbleWeightList3 = {
+        [1] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [2] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [3] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [4] = {{ Num= 1, weight= 0  }, { Num= 2, weight= 50 }, { Num= 3, weight= 50}},
+        [5] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [6] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [7] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [8] = {{ Num= 1, weight= 0  }, { Num= 2, weight= 50 }, { Num= 3, weight= 50}},
+        [9] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [10]= {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [11]= {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [12]= {{ Num= 1, weight= 0  }, { Num= 2, weight= 50 }, { Num= 3, weight= 50}},
+}
+
+
+
+
+BubbleWeightList4 = {
+        [1] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [2] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [3] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [4] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 100 }},
+        [5] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [6] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [7] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [8] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 100 }},
+        [9] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [10]= {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [11]= {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
+        [12]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 100 }},
 }
 
 --BubbleStep = {{list= BubbleWeightList ,BubbleSpSuite=0},{list= BubbleWeightList2 , BubbleSpSuite=21},{list= BubbleWeightList3 , BubbleSpSuite=22} ,{list= BubbleWeightList4 ,BubbleSpSuite=22}}
@@ -81,45 +81,45 @@ BubbleStep = {{list= BubbleWeightList2 ,BubbleSpSuite=21},{list= BubbleWeightLis
 
 
 
-local regionIndex =  10004
+regionIndex =  10004
 
-local BubbleGroupID  = 235800010
+BubbleGroupID  = 235800010
 
-local BubbleWallID = 10055
+BubbleWallID = 10055
 
-local galleryID = 6006
+galleryID = 6006
 
-local TimeAxis = {1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49,52,55,58,61,64,67,70,73}
+TimeAxis = {1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49,52,55,58,61,64,67,70,73}
 --{1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49,51,53,55,57,59,61,63,65,67,69,71,73}
 
-local random_flower_sum = {min=3 , max=5}
+random_flower_sum = {min=3 , max=5}
 
-local flower_suite_index = {17,18,19,20}
+flower_suite_index = {17,18,19,20}
 
-local RegionID = 10046
+RegionID = 10046
 
-local flower_region_id = {10048,10049,10050,10051}
+flower_region_id = {10048,10049,10050,10051}
 
-local bubble_delay_sec = 10  --延迟开门时间,用来先刷泡泡
+bubble_delay_sec = 10  --延迟开门时间,用来先刷泡泡
 
-local Bubble_PerfectScore = 20
+Bubble_PerfectScore = 20
 
-local Bubble_TimeScore = 60
+Bubble_TimeScore = 60
 
-local Bubble_TimeOutScore = -10
+Bubble_TimeOutScore = -10
 
-local collect_energy = "collect_energy_6006"
+collect_energy = "collect_energy_6006"
 
-local complete_timelimit_challenge = "complete_timelimit_challenge_6006"
+complete_timelimit_challenge = "complete_timelimit_challenge_6006"
 
-local perfect_complete_timelimit_challenge = "perfect_complete_timelimit_challenge_6006"
+perfect_complete_timelimit_challenge = "perfect_complete_timelimit_challenge_6006"
 
-local defeated_timelimit_challenge = "defeated_timelimit_challenge_6006"
+defeated_timelimit_challenge = "defeated_timelimit_challenge_6006"
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -234,9 +234,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -247,9 +247,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -454,20 +454,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10048(context, evt)
 	if evt.param1 ~= 10048 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -478,19 +478,19 @@ function action_EVENT_ENTER_REGION_10048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10049(context, evt)
 	if evt.param1 ~= 10049 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -501,19 +501,19 @@ function action_EVENT_ENTER_REGION_10049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10050(context, evt)
 	if evt.param1 ~= 10050 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -524,19 +524,19 @@ function action_EVENT_ENTER_REGION_10050(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10051(context, evt)
 	if evt.param1 ~= 10051 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -547,7 +547,7 @@ function action_EVENT_ENTER_REGION_10051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

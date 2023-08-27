@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 235882001
 }
 
 -- DEFS_MISCS
-local defs =
+defs =
 {
 --操作台id
     starter_gadget = 1001,
 --gallery id
     gallery_id = 35003,
---传送点 id 
+--传送点 id
     teleportPos_id = 1005,
-    groups_info = 
+    groups_info =
     {
        --主控group 怪物数量不用管
         [1] = {id = 235882001, monster_num = 0,},
@@ -26,9 +26,9 @@ local defs =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -98,25 +98,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"GALLERY_STATE"为1
 	if ScriptLib.GetGroupVariableValue(context, "GALLERY_STATE") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"GROUP_INDEX"为2
 	if ScriptLib.GetGroupVariableValue(context, "GROUP_INDEX") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -124,24 +124,24 @@ end
 function action_EVENT_VARIABLE_CHANGE_1002(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235882002, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"GALLERY_STATE"为1
 	if ScriptLib.GetGroupVariableValue(context, "GALLERY_STATE") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"GROUP_INDEX"为3
 	if ScriptLib.GetGroupVariableValue(context, "GROUP_INDEX") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -149,24 +149,24 @@ end
 function action_EVENT_VARIABLE_CHANGE_1003(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235882003, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"GALLERY_STATE"为1
 	if ScriptLib.GetGroupVariableValue(context, "GALLERY_STATE") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"GROUP_INDEX"为4
 	if ScriptLib.GetGroupVariableValue(context, "GROUP_INDEX") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -174,7 +174,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_1004(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235882004, 3)
-	
+
 	return 0
 end
 

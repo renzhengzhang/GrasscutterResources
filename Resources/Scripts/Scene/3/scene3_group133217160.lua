@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133217160
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -100,20 +100,20 @@ function action_EVENT_QUEST_START_160002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	-- 对于当前玩家，启动9001的目标物距离指示gallery，目标config_id为160001
 	if 0 ~= ScriptLib.StartGallery(context, 9001) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: start gallery fails")
 	    return -1
 	end
-	local target_entity_id = ScriptLib.GetEntityIdByConfigId(context,160001)
-	local target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
+	target_entity_id = ScriptLib.GetEntityIdByConfigId(context,160001)
+	target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
 	if 0~=  ScriptLib.SetHandballGalleryBallPosAndRot(context, 9001, {x=target_pos.x,y=target_pos.y,z=target_pos.z}, {x=0,y=0,z=0}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -124,14 +124,14 @@ function action_EVENT_CHALLENGE_SUCCESS_160003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 对于当前玩家，关闭9001的目标物距离指示gallery
 	    if 0 ~=  ScriptLib.StopGallery(context, 9001, true) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
@@ -142,26 +142,26 @@ function action_EVENT_CHALLENGE_FAIL_160004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 对于当前玩家，关闭9001的目标物距离指示gallery
 	    if 0 ~=  ScriptLib.StopGallery(context, 9001, true) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_160005(context, evt)
 	if evt.param1 ~= 160005 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -169,7 +169,7 @@ end
 function action_EVENT_ENTER_REGION_160005(context, evt)
 	-- 终止识别id为111193的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 111193, 1)
-	
+
 	return 0
 end
 
@@ -177,6 +177,6 @@ end
 function action_EVENT_LEAVE_REGION_160012(context, evt)
 	-- 终止识别id为111193的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 111193, 0)
-	
+
 	return 0
 end

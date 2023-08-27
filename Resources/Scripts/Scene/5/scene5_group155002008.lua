@@ -1,25 +1,25 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155002008
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	pointarray_route = 500200002,
 	group_ID = 155002008
 }
 
 -- DEFS_MISCS
-local Controllers = {}
-local EnvControlGadgets = {8006,8009}
-local DayAppearGadgets = {}
-local NightAppearGadgets = {}
+Controllers = {}
+EnvControlGadgets = {8006,8009}
+DayAppearGadgets = {}
+NightAppearGadgets = {}
 
-local gameplayStateFuncitons = 
+gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-		
+
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
@@ -28,18 +28,18 @@ local gameplayStateFuncitons =
 		DayNight_Gadget_Unlock(context,8006)
 		DayNight_Gadget_Unlock(context,8009)
 		Restore(context)
-		ScriptLib.SetGroupVariableValue(context, "isMoving", 0) 
-	
+		ScriptLib.SetGroupVariableValue(context, "isMoving", 0)
+
 	end,
 	["2"] = function(context)
-		
+
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 	end
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -47,11 +47,11 @@ end
 
 function GadgetStateSwitcher(context,groupid,gadget_id,state)
 
-	if ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[1] then 
+	if ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[1] then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, groupid, gadget_id, state[2])
-	elseif ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[2] then 
+	elseif ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[2] then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, groupid, gadget_id, state[1])
-	end 
+	end
 end
 
 
@@ -62,7 +62,7 @@ end
 
 function PrintLog(context,str)
 
-	local log = "["..defs.group_ID.."] : "..str
+	log = "["..defs.group_ID.."] : "..str
 	ScriptLib.PrintContextLog(context,log)
 end
 
@@ -71,9 +71,9 @@ function Restore(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -119,9 +119,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -132,9 +132,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -159,9 +159,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -172,40 +172,40 @@ function condition_EVENT_GADGET_STATE_CHANGE_8005(context, evt)
 	if 222 ~= ScriptLib.GetGadgetStateByConfigId(context, 155002008, 8006) then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_8005(context, evt)
-				local blocker = 8001
-				local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, blocker)
-			
+				blocker = 8001
+				state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, blocker)
+
 				GadgetStateSwitcher(context,defs.group_ID,8002,{0,201})
-		
-			
-				
+
+
+
 				if (state == 0) then
 					if (ScriptLib.GetGroupVariableValue(context,"wallCurPos") ~= 2) then
 						ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, blocker, 201)
 					else
 						--ScriptLib.ShowReminder(context, 50050101)
 					end
-		
+
 				end
-				
+
 				if (state == 201) then
 					if (ScriptLib.GetGroupVariableValue(context,"wallCurPos") ~= 2) then
-						
-			
+
+
 						ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, blocker, 0)
 					else
-		
+
 						--ScriptLib.ShowReminder(context, 50050101)
 					end
 				end
-				
-				
+
+
 		return 0
 end
 
@@ -214,58 +214,58 @@ function condition_EVENT_GADGET_STATE_CHANGE_8007(context, evt)
 	if 8009 ~= evt.param2 then
 			return false
 		end
-		if ScriptLib.GetGroupVariableValue(context,"isMoving") ~= 0 then 
+		if ScriptLib.GetGroupVariableValue(context,"isMoving") ~= 0 then
 			return false
-		end	
-		
+		end
+
 		return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_8007(context, evt)
-				if evt.param2 == 8009 and 322 == ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, evt.param2) then 
+				if evt.param2 == 8009 and 322 == ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, evt.param2) then
 					PrintLog(context,"Controller("..evt.param2..") State = "..evt.param1)
-			
-			
-					local blockerstate = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, 8001)
-					if blockerstate ~= 201 then 
+
+
+					blockerstate = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, 8001)
+					if blockerstate ~= 201 then
 						ScriptLib.ShowReminder(context, 50050101)
-						return -1 
+						return -1
 					end
-			
+
 					MovePlatform(context,8008,defs.pointarray_route,{2},0,false)
-			
+
 					ScriptLib.SetGroupVariableValue(context,"isMoving",1)
 					ScriptLib.SetGroupVariableValue(context,"wallCurPos",2)
 					--ScriptLib.InitTimeAxis(context, "Active_"..evt.param2, {2}, false)
 				end
-			
-			
+
+
 				return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_8011(context, evt)
-			local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155002001)
-		
-			if isactive == 1 then 
-				if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then 
+			isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155002001)
+
+			if isactive == 1 then
+				if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then
 					ScriptLib.SetGroupVariableValue(context,"gameplayState", 1)
 				end
-				
+
 			end
 	UpdateGamePlayState(context)
-		
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
-	
-	
-	
+
+
+
+
 	-- 判断变量"gameplayState"为0
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 			return false
@@ -276,7 +276,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_8012(context, evt)
 	UpdateGamePlayState(context)
-	
+
 	return 0
 end
 
@@ -287,7 +287,7 @@ function action_EVENT_TIME_AXIS_PASS_8016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

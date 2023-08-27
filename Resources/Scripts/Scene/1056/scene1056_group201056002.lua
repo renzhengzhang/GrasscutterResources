@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201056002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -107,26 +107,26 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_QUEST_FINISH_2001(context, evt)
 	--检查ID为1102307的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 1102307 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -137,37 +137,37 @@ function action_EVENT_QUEST_FINISH_2001(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 创建id为2024的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2024 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将configid为 2007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201056002中， configid为2003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201056002, 2003, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2002(context, evt)
 	if evt.param1 ~= 2002 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -177,29 +177,29 @@ function action_EVENT_ENTER_REGION_2002(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201056002, 1002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_2006(context, evt)
-	
+
 	-- 判断变量"gravity_count"为1
 	if ScriptLib.GetGroupVariableValue(context, "gravity_check") ~= 1 then
 			return false
 		end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 201056002, 2004) then
 			return false
-	
-		end 
-	
+
+		end
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 201056002, 2005) then
 			return false
-	
-		end 
-	
+
+		end
+
 	return true
 end
 
@@ -209,20 +209,20 @@ function action_EVENT_GADGET_STATE_CHANGE_2006(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201056002, 2003, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 201056001, monsters = {}, gadgets = {1008} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 创建id为2020的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2020 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -232,8 +232,8 @@ function condition_EVENT_ANY_MONSTER_DIE_2012(context, evt)
 	if evt.param1 ~= 2010 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -244,7 +244,7 @@ function action_EVENT_ANY_MONSTER_DIE_2012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -252,17 +252,17 @@ end
 function condition_EVENT_QUEST_FINISH_2016(context, evt)
 	--检查ID为1102305的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 1102305 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -270,19 +270,19 @@ end
 function action_EVENT_QUEST_FINISH_2016(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201056002, 2)
-	
+
 	-- 将configid为 2003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 201056002, monsters = {}, gadgets = {2020} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -292,7 +292,7 @@ function condition_EVENT_ANY_MONSTER_DIE_2023(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -303,12 +303,12 @@ function action_EVENT_ANY_MONSTER_DIE_2023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为0的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

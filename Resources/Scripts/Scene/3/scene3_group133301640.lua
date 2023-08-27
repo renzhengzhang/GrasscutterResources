@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301640
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	point_camera = 640007,
 	gadget_lookEntity = 640011,
 	look_duration = 2
 }
 
 -- DEFS_MISCS
-local CameraLookSetting = {
+CameraLookSetting = {
     blend_type = 1,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -20,9 +20,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -73,9 +73,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +86,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -104,9 +104,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -114,7 +114,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_640003(context, evt)
 	if 640002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -125,13 +125,13 @@ function action_EVENT_GADGET_STATE_CHANGE_640003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 640001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -140,7 +140,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_640006(context, evt)
 	if 640002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -156,7 +156,7 @@ function condition_EVENT_GROUP_LOAD_640008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "123") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -167,25 +167,25 @@ function action_EVENT_GROUP_LOAD_640008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将configid为 640002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 640002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_640009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"water"为1
 	if ScriptLib.GetGroupVariableValue(context, "water") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -195,8 +195,8 @@ function action_EVENT_VARIABLE_CHANGE_640009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 640002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

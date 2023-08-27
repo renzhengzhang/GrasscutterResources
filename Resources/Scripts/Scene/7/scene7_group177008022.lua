@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 177008022
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	duration = 240,
 	group_id = 177008022,
 	collectable_sum = 14
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -146,9 +146,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -159,9 +159,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -285,9 +285,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -296,59 +296,59 @@ function action_EVENT_CHALLENGE_SUCCESS_22012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 177008022, 2)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 177008022, 4)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 177008022, 5)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 177008022, 6)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 177008022, 7)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 177008022, 8)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 177008022, 9)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 177008022, 10)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 177008022, 11)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 177008022, 12)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 177008022, 13)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 177008022, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	-- 创建id为22001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 22001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -358,53 +358,53 @@ function action_EVENT_CHALLENGE_FAIL_22013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为22003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 22003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 2)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 5)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 6)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 7)
-	
+
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 8)
-	
+
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 9)
-	
+
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 10)
-	
+
 	-- 删除suite11的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 11)
-	
+
 	-- 删除suite12的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 12)
-	
+
 	-- 删除suite13的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 13)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -413,7 +413,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_22014(context, evt)
 	if 22002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -423,20 +423,20 @@ function action_EVENT_GADGET_STATE_CHANGE_22014(context, evt)
 	if 0 ~= ScriptLib.ActiveChallenge(context, 666, 2005019, defs.duration, 2, 218, defs.collectable_sum) then
 	return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
-	
+
 	-- 添加suite12的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 12)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 1, 1) then
 	return -1
 	end
-	
+
 	return 0
-	
+
 end
 
 -- 触发条件
@@ -444,7 +444,7 @@ function condition_EVENT_GADGET_CREATE_22016(context, evt)
 	if 22003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -455,7 +455,7 @@ function action_EVENT_GADGET_CREATE_22016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -463,14 +463,14 @@ end
 function condition_EVENT_SELECT_OPTION_22017(context, evt)
 	-- 判断是gadgetid 22003 option_id 177
 	if 22003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 177 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -481,24 +481,24 @@ function action_EVENT_SELECT_OPTION_22017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 22002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标（-144.2，262，506.7），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-144.2, y=262, z=506.7}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-144.2, y=262, z=506.7}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -508,65 +508,65 @@ function action_EVENT_GROUP_LOAD_22018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为22003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 22003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 2)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 5)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 6)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 7)
-	
+
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 8)
-	
+
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 9)
-	
+
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 10)
-	
+
 	-- 删除suite11的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 11)
-	
+
 	-- 删除suite12的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 12)
-	
+
 	-- 删除suite13的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 13)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_22084(context, evt)
 	if evt.param1 ~= 22084 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -574,25 +574,25 @@ end
 function action_EVENT_ENTER_REGION_22084(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177008022, 4)
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177008022, 5)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_22085(context, evt)
 	if evt.param1 ~= 22085 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -600,19 +600,19 @@ end
 function action_EVENT_ENTER_REGION_22085(context, evt)
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_22086(context, evt)
 	if evt.param1 ~= 22086 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -620,28 +620,28 @@ end
 function action_EVENT_ENTER_REGION_22086(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177008022, 6)
-	
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177008022, 7)
-	
+
 	-- 删除suite12的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 12)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 5)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_22087(context, evt)
 	if evt.param1 ~= 22087 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -649,19 +649,19 @@ end
 function action_EVENT_ENTER_REGION_22087(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 6)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_22088(context, evt)
 	if evt.param1 ~= 22088 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -670,32 +670,32 @@ function action_EVENT_ENTER_REGION_22088(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22056, 700800025, {5,1,2,3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_22089(context, evt)
 	-- 判断是gadgetid 为 22056的移动平台，是否到达了700800025 的点集中的 3 点
-	
+
 	if 22056 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 700800025 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -703,22 +703,22 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_22089(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177008022, 8)
-	
+
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177008022, 9)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_22090(context, evt)
 	if evt.param1 ~= 22090 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -726,25 +726,25 @@ end
 function action_EVENT_ENTER_REGION_22090(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177008022, 10)
-	
+
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177008022, 13)
-	
+
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 8)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_22091(context, evt)
 	if evt.param1 ~= 22091 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -752,9 +752,9 @@ end
 function action_EVENT_ENTER_REGION_22091(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177008022, 11)
-	
+
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177008022, 10)
-	
+
 	return 0
 end

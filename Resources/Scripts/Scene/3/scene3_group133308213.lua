@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308213
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_receiver_1 = 213002
 }
 
@@ -15,9 +15,9 @@ defs.receiverList = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -73,9 +73,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +86,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -104,19 +104,19 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_213005(context, evt)
-	
+
 	for _,v in pairs(defs.receiverList) do
 	  if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133308213, v) then
 	    return false
 	  end
-	
+
 	end
 	return true
 end
@@ -125,8 +125,8 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_213005(context, evt)
 	-- 创建标识为"finish"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "finish", {2}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -135,7 +135,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_213007(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133308213, 213004) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -146,19 +146,19 @@ function action_EVENT_GADGET_STATE_CHANGE_213007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_213008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -169,7 +169,7 @@ function action_EVENT_VARIABLE_CHANGE_213008(context, evt)
 	  if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133308213, v, GadgetState.GearAction1)then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-	  end 
+	  end
 	end
 	return 0
 end
@@ -177,12 +177,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_213009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -192,24 +192,24 @@ function action_EVENT_VARIABLE_CHANGE_213009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 213003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 213004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 213004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标{x=-1903.941, y=123.4348, z=5379.104}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-1903.941, y=123.4348, z=5379.104}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-1903.941, y=123.4348, z=5379.104}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -219,7 +219,7 @@ function condition_EVENT_GROUP_LOAD_213010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -230,7 +230,7 @@ function action_EVENT_GROUP_LOAD_213010(context, evt)
 	  if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133308213, v, GadgetState.GearAction1)then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-	  end 
+	  end
 	end
 	return 0
 end
@@ -239,14 +239,14 @@ end
 function condition_EVENT_SELECT_OPTION_213011(context, evt)
 	-- 判断是gadgetid 213006 option_id 7
 	if 213006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -257,43 +257,43 @@ function action_EVENT_SELECT_OPTION_213011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1000120002 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1000120002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将configid为 213004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 213004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133308067中， configid为67001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133308067, 67001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308213, EntityType.GADGET, 213006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308581, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308193, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -303,7 +303,7 @@ function condition_EVENT_GROUP_LOAD_213012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -313,26 +313,26 @@ function action_EVENT_GROUP_LOAD_213012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 213003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 213004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 213004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_213013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -343,7 +343,7 @@ function action_EVENT_VARIABLE_CHANGE_213013(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -353,7 +353,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_213015(context, evt)
 	if 213001 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -364,7 +364,7 @@ function action_EVENT_GADGET_STATE_CHANGE_213015(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -373,11 +373,11 @@ function condition_EVENT_TIME_AXIS_PASS_213016(context, evt)
 	if "finish" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133308213, 213002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -388,11 +388,11 @@ function action_EVENT_TIME_AXIS_PASS_213016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 停止标识为"finish"的时间轴
 	ScriptLib.EndTimeAxis(context, "finish")
-	
-	
+
+
 	return 0
 end
 
@@ -402,7 +402,7 @@ function condition_EVENT_GROUP_LOAD_213017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isFinish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -412,32 +412,32 @@ function action_EVENT_GROUP_LOAD_213017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 213004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133308067中， configid为67001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133308067, 67001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308213, EntityType.GADGET, 213006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308581, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308193, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 

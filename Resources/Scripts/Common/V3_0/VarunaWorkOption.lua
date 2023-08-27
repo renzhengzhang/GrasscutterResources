@@ -14,31 +14,31 @@
 --def描述状态
 
 --[[
-local optionPlay ={
+optionPlay ={
     gadgetCid = 257001, --只确认该物件的GadgetState
     optionCid = 257002, --只修改此物件的操作台
 }
 --]]
 
-local gadgetStateTable =
+gadgetStateTable =
 {
     [201] = {optionList = {776,777}},   --晴天
     [202] = {optionList = {775,777}},   --阴天
     [203] = {optionList = {775,776}},   --切换
 }
-local weatherStateTable = {
+weatherStateTable = {
     [0] = {state = 202}, --雨
     [1] = {state = 201}, --晴
     [2] = {state = 203}, --切换
 }
 
-local gearTable = {
+gearTable = {
     [775] = {weatherState = 1}, --晴
     [776] = {weatherState = 0}, --雨
     [777] = {weatherState = 2}, --切换
 }
 
-local Tri_VarunaWorkOption = {
+Tri_VarunaWorkOption = {
     -- GroupLoad
     { keyWord = "CheckState",event = EventType.EVENT_GROUP_LOAD, source = "", trigger_count = 0},
     -- GadgetStateChange
@@ -50,7 +50,7 @@ local Tri_VarunaWorkOption = {
 }
 
 function LF_Initialize_VarunaWorkOption()
-    local startConfigID = 50040001
+    startConfigID = 50040001
     for _,v in pairs(Tri_VarunaWorkOption) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -72,11 +72,11 @@ end
 --======================================]]
 function action_CheckState(context,evt)
     -- 检查状态
-    local finalWeatherState = ScriptLib.GetGroupVariableValueByGroup(context, "finalWeatherState", 133303126)
-    local state = ScriptLib.GetGadgetStateByConfigId(context, 0, optionPlay.gadgetCid)
+    finalWeatherState = ScriptLib.GetGroupVariableValueByGroup(context, "finalWeatherState", 133303126)
+    state = ScriptLib.GetGadgetStateByConfigId(context, 0, optionPlay.gadgetCid)
     ScriptLib.PrintContextLog(context, "## [TD_VarunaWorkOption] action_CheckState || finalWeatherState = "..finalWeatherState..", ||state = "..state)
     if state > 0 and nil ~= weatherStateTable[finalWeatherState] then
-        local targetState = weatherStateTable[finalWeatherState].state
+        targetState = weatherStateTable[finalWeatherState].state
         if targetState ~= state then
             -- 如果状态不一致就切换，因为状态修改会切换状态
             ScriptLib.SetGadgetStateByConfigId(context, optionPlay.gadgetCid, targetState)
@@ -89,13 +89,13 @@ function action_CheckState(context,evt)
 end
 
 function action_PressButton(context,evt)
-    local gearid = evt.param2
-    local gearData = gearTable[gearid]
+    gearid = evt.param2
+    gearData = gearTable[gearid]
 
     ScriptLib.PrintContextLog(context, "## [TD_VarunaWorkOption] action_PressButton || gearCid = "..gearid)
     if gearData ~= nil then
-        local weatherState = gearData.weatherState
-        local oldState = ScriptLib.GetGadgetStateByConfigId(context, 0, optionPlay.gadgetCid)
+        weatherState = gearData.weatherState
+        oldState = ScriptLib.GetGadgetStateByConfigId(context, 0, optionPlay.gadgetCid)
         LF_ClearOptionByState(context,oldState)
         ScriptLib.SetGroupVariableValueByGroup(context, "finalWeatherState", weatherState, 133303126)
         ScriptLib.PrintContextLog(context, "## [TD_VarunaWorkOption] 修改finalWeatherState 为" .. weatherState)
@@ -105,12 +105,12 @@ function action_PressButton(context,evt)
 end
 function action_ChangeState(context,evt)
     -- 检查状态
-    local cid = evt.param2
+    cid = evt.param2
     if optionPlay.gadgetCid ~= cid then
         return 0
     end
 
-    local newState = evt.param1
+    newState = evt.param1
     LF_SetOptionByState(context,newState)
 
     return 0
@@ -118,7 +118,7 @@ end
 
 function action_DeviceActive(context,evt)
     -- 获取对应天气
-    local finalWeatherState = ScriptLib.GetGroupVariableValueByGroup(context, "finalWeatherState", 133303126)
+    finalWeatherState = ScriptLib.GetGroupVariableValueByGroup(context, "finalWeatherState", 133303126)
 
     if nil == weatherStateTable[finalWeatherState] then
         ScriptLib.PrintContextLog(context, "## [TD_VarunaWorkOption] 不合法的finalWeatherState，值为" .. finalWeatherState)
@@ -126,7 +126,7 @@ function action_DeviceActive(context,evt)
     end
 
     -- 根据finalWeatherState设置中枢的状态
-    local gadgetState = weatherStateTable[finalWeatherState].state
+    gadgetState = weatherStateTable[finalWeatherState].state
     ScriptLib.SetGadgetStateByConfigId(context, optionPlay.gadgetCid, gadgetState)
     ScriptLib.PrintContextLog(context, "## [TD_VarunaWorkOption] gadget = "..optionPlay.gadgetCid..", state is set to "..gadgetState)
 
@@ -137,9 +137,9 @@ end
 ||	LocalFunction
 --======================================]]
 function LF_SetOptionByState(context,state)
-    local stateData = gadgetStateTable[state]
+    stateData = gadgetStateTable[state]
     if nil ~= stateData then
-        local gearList = stateData.optionList
+        gearList = stateData.optionList
         ScriptLib.PrintContextLog(context, "## TD_VarunaWorkOption 对应需要添加的 gearList = " .. LF_ArrayToString(gearList))
         ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, optionPlay.optionCid, gearList)
     end
@@ -147,9 +147,9 @@ function LF_SetOptionByState(context,state)
 end
 
 function LF_ClearOptionByState(context,state)
-    local stateData = gadgetStateTable[state]
+    stateData = gadgetStateTable[state]
     if nil ~= stateData then
-        local gearList = stateData.optionList
+        gearList = stateData.optionList
         ScriptLib.PrintContextLog(context, "## TD_VarunaWorkOption 对应需要删除的 gearList = " .. LF_ArrayToString(gearList))
         for i = 1,#gearList do
             ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, optionPlay.optionCid, gearList[i])
@@ -161,14 +161,14 @@ end
 function LF_ChangeDeviceState(context, prev_context, finalWeatherState)
     ScriptLib.PrintContextLog(context, "## [TD_VarunaWorkOption] LF_ChangeDeviceState is called. finalWeatherState =" .. finalWeatherState)
 
-    local state = ScriptLib.GetGadgetStateByConfigId(context, 0, optionPlay.gadgetCid)
+    state = ScriptLib.GetGadgetStateByConfigId(context, 0, optionPlay.gadgetCid)
     if 0 == state then
         ScriptLib.PrintContextLog(context, "## [TD_VarunaWorkOption] 当前中枢未解锁")
         return 0
     end
 
     if nil ~= weatherStateTable[finalWeatherState] then
-        local gadgetState = weatherStateTable[finalWeatherState].state
+        gadgetState = weatherStateTable[finalWeatherState].state
         ScriptLib.SetGadgetStateByConfigId(context, optionPlay.gadgetCid, gadgetState)
         ScriptLib.PrintContextLog(context, "## [TD_VarunaWorkOption] gadget = "..optionPlay.gadgetCid..", state is set to "..gadgetState)
     end
@@ -180,7 +180,7 @@ end
 --======================================]]
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -220,7 +220,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    local s = "{"
+    s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","

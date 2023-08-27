@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133108228
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_id = 133108228,
 	num_monster = 5,
 	monster_id_boss = 228004
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -87,9 +87,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -100,9 +100,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -154,34 +154,34 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_228011(context, evt)
 	if evt.param1 ~= 228011 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"challengeStart"为0
 	if ScriptLib.GetGroupVariableValue(context, "challengeStart") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"challengeSuccess"为0
 	if ScriptLib.GetGroupVariableValue(context, "challengeSuccess") ~= 0 then
 			return false
 	end
-	
+
 	if ScriptLib.GetLanternRiteValue(context) ~=0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -192,35 +192,35 @@ function action_EVENT_ENTER_REGION_228011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 开启时将本组内变量名为 "Variable_StartWatcherCountDown" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Variable_StartWatcherCountDown", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 开始父挑战2004001，识别号2040，全灭时失败
 	ScriptLib.CreateFatherChallenge(context,2040,2004001,99999999, {success=2, fail=100,fail_on_wipe=true})
-	
-	local uid = ScriptLib.GetSceneUidList(context)
-	
+
+	uid = ScriptLib.GetSceneUidList(context)
+
 	-- #1 boss，子挑战2004002，识别号2041，触发1次，tag20491
 	ScriptLib.AttachChildChallenge(context,2040,2041,2004002,{1,20491,1},{uid[1]},{success=1, fail=100})
-	
+
 	-- #2 小怪，子挑战2004003，识别号2042，小怪，触发defs次，tag20492
 	ScriptLib.AttachChildChallenge(context,2040,2042,2004003,{1,20492,defs.num_monster},{uid[1]},{success=1, fail=100})
-	
+
 	-- 开始识别号2040的挑战
 	ScriptLib.StartFatherChallenge(context, 2040)
-	
+
 	-- 刷出suite2怪物
 	ScriptLib.AddExtraGroupSuite(context, 133108228, 2)
-	
+
 	-- 创建标识为"started"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "started", {5}, false)
-	
-	
-	
+
+
+
 	return 0
 end
 
@@ -230,17 +230,17 @@ function condition_EVENT_LEAVE_REGION_228012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "challengeStart") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"challengeSuccess"为0
 	if ScriptLib.GetGroupVariableValue(context, "challengeSuccess") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断是区域228012
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 228012 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -248,10 +248,10 @@ end
 function action_EVENT_LEAVE_REGION_228012(context, evt)
 	-- 终止识别id为2040的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 2040, 0)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133108228, 2)
-	
+
 	return 0
 end
 
@@ -259,14 +259,14 @@ end
 function condition_EVENT_SELECT_OPTION_228014(context, evt)
 	-- 判断是gadgetid 228010 option_id 68
 	if 228010 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 68 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -277,36 +277,36 @@ function action_EVENT_SELECT_OPTION_228014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 改变指定group组133108228中， configid为228010的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133108228, 228010, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "giveReward" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "giveReward", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_228015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"giveReward"为1
 	if ScriptLib.GetGroupVariableValue(context, "giveReward") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"hasReward"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasReward") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -317,15 +317,15 @@ function action_EVENT_VARIABLE_CHANGE_228015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	ScriptLib.FinishGroupLinkBundle(context, defs.group_id)
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133108228, 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -336,28 +336,28 @@ function action_EVENT_CHALLENGE_SUCCESS_228016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Variable_EndGame" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Variable_EndGame", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108228, 3)
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133108228, 228010, {68}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 将configid为 228010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 228010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -368,13 +368,13 @@ function action_EVENT_CHALLENGE_FAIL_228017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133108228, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -384,8 +384,8 @@ function condition_EVENT_ANY_MONSTER_DIE_228018(context, evt)
 	if evt.param1 == defs.monster_id_boss then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -395,8 +395,8 @@ function condition_EVENT_ANY_MONSTER_DIE_228019(context, evt)
 	if evt.param1 ~= defs.monster_id_boss then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -406,7 +406,7 @@ function condition_EVENT_GROUP_LOAD_228020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "challengeSuccess") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -414,19 +414,19 @@ end
 function action_EVENT_GROUP_LOAD_228020(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108228, 3)
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133108228, 228010, {68}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 将configid为 228010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 228010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -435,7 +435,7 @@ function condition_EVENT_TIME_AXIS_PASS_228021(context, evt)
 	if "started" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -443,19 +443,19 @@ end
 function action_EVENT_TIME_AXIS_PASS_228021(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108228, 5)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_228022(context, evt)
 	if evt.param1 ~= 228022 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -465,8 +465,8 @@ function action_EVENT_ENTER_REGION_228022(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,160,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -476,7 +476,7 @@ function condition_EVENT_GROUP_LOAD_228023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "challengeSuccess") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -487,7 +487,7 @@ function action_EVENT_GROUP_LOAD_228023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

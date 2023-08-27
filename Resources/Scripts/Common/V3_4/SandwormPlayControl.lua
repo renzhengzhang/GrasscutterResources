@@ -2,24 +2,24 @@
 --[[======================================
 ||	filename:	SandwormPlayControl
 ||	owner: 		luyao.huang
-||	description:	
+||	description:
 ||	LogName:	SandwormPlayControl
-||	Protection:	
+||	Protection:
 =======================================]]--
 
 
 
-local business_type = "direct"
-local priority = 3
+business_type = "direct"
+priority = 3
 
-local local_defs = 
+local_defs =
 {
     sandworm_manager_group = 133314001,
 }
 
 
 
-local challenge_Tri = {
+challenge_Tri = {
   }
 
 function challenge_Initialize()
@@ -58,7 +58,7 @@ function LF_On_Create_Sandworm_Fail(context)
 end
 
 --沙虫控制回调：移除沙虫
-function LF_On_Remove_Sandworm(context) 
+function LF_On_Remove_Sandworm(context)
     ScriptLib.PrintContextLog(context,"## [SandwormchallengeControl]LF_On_Create_Sandworm_Success: 沙虫控制回调：清除沙虫")
 end
 

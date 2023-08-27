@@ -1,14 +1,14 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155005002
 }
 
 -- DEFS_MISCS
-gadgetList = 
+gadgetList =
 {
-	
+
 	155005040,
-	
+
 	155005100,
 	155005289,
 
@@ -52,9 +52,9 @@ gadgetList =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -86,9 +86,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -99,9 +99,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -117,23 +117,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_START_2001(context, evt)
-	ScriptLib.SetGroupVariableValue(context,"isActiveAll",1)		
-	local state
+	ScriptLib.SetGroupVariableValue(context,"isActiveAll",1)
+	state
 			for	i=1, #gadgetList do
-				state = ScriptLib.GetGroupVariableValueByGroup(context, "gameplayState", gadgetList[i]) 
-				if state ~= 2 then 
+				state = ScriptLib.GetGroupVariableValueByGroup(context, "gameplayState", gadgetList[i])
+				if state ~= 2 then
 					ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 2,  gadgetList[i])
 				end
 			end
-	
-		
+
+
 		return 0
 end
 
@@ -143,19 +143,19 @@ function condition_EVENT_GROUP_LOAD_2002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isActiveAll") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_2002(context, evt)
-	local state
+	state
 			for	i=1, #gadgetList do
-				state = ScriptLib.GetGroupVariableValueByGroup(context, "gameplayState", gadgetList[i]) 
-				if state ~= 2 then 
+				state = ScriptLib.GetGroupVariableValueByGroup(context, "gameplayState", gadgetList[i])
+				if state ~= 2 then
 					ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 2,  gadgetList[i])
 				end
 			end
-	
+
 	return 0
 end

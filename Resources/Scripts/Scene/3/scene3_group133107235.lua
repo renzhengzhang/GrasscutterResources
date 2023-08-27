@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133107235
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -87,9 +87,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -97,7 +97,7 @@ function condition_EVENT_ANY_GADGET_DIE_235009(context, evt)
 	if 235005 == evt.param1 or 235006 == evt.param1 or 235007 == evt.param1 or 235008 == evt.param1 then
 		return true
 	end
-	
+
 	return false
 end
 
@@ -108,7 +108,7 @@ function action_EVENT_ANY_GADGET_DIE_235009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -117,7 +117,7 @@ function condition_EVENT_ANY_GADGET_DIE_235010(context, evt)
 	if 235001 == evt.param1 or 235002 == evt.param1 or 235003 == evt.param1 or 235004 == evt.param1 then
 		return true
 	end
-	
+
 	return false
 end
 
@@ -128,7 +128,7 @@ function action_EVENT_ANY_GADGET_DIE_235010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -139,12 +139,12 @@ function action_EVENT_QUEST_FINISH_235011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133107235, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

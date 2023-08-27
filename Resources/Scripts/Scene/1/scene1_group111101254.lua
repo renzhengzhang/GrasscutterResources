@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101254
 }
 
 -- DEFS_MISCS
-local EnvControlGadgets = {254001,254002,254003,254004}
-local DayAppearGadgets = {}
-local NightAppearGadgets = {}
-local Worktops = {254003,254004}
+EnvControlGadgets = {254001,254002,254003,254004}
+DayAppearGadgets = {}
+NightAppearGadgets = {}
+Worktops = {254003,254004}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -136,9 +136,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -146,40 +146,40 @@ function condition_EVENT_GADGET_STATE_CHANGE_254005(context, evt)
 	if 254004 ~= evt.param2 or 312 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_254005(context, evt)
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
-	local is_daynight_gadget = false
+	is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (254002 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
 	  end
 	end
-	
-	if (not is_daynight_gadget) then 
+
+	if (not is_daynight_gadget) then
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1 
+	    return -1
 	end
-	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,254002,202)
 	end
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,254002,302)
 	end
-	
-	
+
+
 	-- 将本组内变量名为 "Trigger_1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Trigger_1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -188,7 +188,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_254006(context, evt)
 	if 254003 ~= evt.param2 or 212 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -198,31 +198,31 @@ function action_EVENT_GADGET_STATE_CHANGE_254006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 254001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "Trigger_2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Trigger_2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_254007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Trigger_1"为1
 	if ScriptLib.GetGroupVariableValue(context, "Trigger_1") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Trigger_2"为1
 	if ScriptLib.GetGroupVariableValue(context, "Trigger_2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -230,10 +230,10 @@ end
 function action_EVENT_VARIABLE_CHANGE_254007(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 111101254, 2)
-	
+
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 111101254, 2, FlowSuiteOperatePolicy.COMPLETE)
-	
+
 	return 0
 end
 
@@ -242,7 +242,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_254008(context, evt)
 	if 254001 ~= evt.param2 or 222 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -253,7 +253,7 @@ function action_EVENT_GADGET_STATE_CHANGE_254008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -262,7 +262,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_254009(context, evt)
 	if 254002 ~= evt.param2 or 322 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -273,24 +273,24 @@ function action_EVENT_GADGET_STATE_CHANGE_254009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_254010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Trigger_3"为1
 	if ScriptLib.GetGroupVariableValue(context, "Trigger_3") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Trigger_4"为1
 	if ScriptLib.GetGroupVariableValue(context, "Trigger_4") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -298,10 +298,10 @@ end
 function action_EVENT_VARIABLE_CHANGE_254010(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 111101254, 3)
-	
+
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 111101254, 3, FlowSuiteOperatePolicy.COMPLETE)
-	
+
 	return 0
 end
 

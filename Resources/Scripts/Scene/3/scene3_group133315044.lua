@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133315044
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_CoreID = 44005,
 	monster_BossID = 44002,
 	gadget_Point_1 = 44006,
@@ -13,9 +13,9 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-local DeathField ={
+DeathField ={
 	CoreID = defs.gadget_CoreID,
 	BossID = defs.monster_BossID,
 	BossSuite = 2,
@@ -24,9 +24,9 @@ local DeathField ={
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -149,9 +149,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -162,9 +162,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -207,9 +207,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -218,7 +218,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_44017(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 60 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -229,13 +229,13 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_44017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 44019, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -244,7 +244,7 @@ function condition_EVENT_ANY_GADGET_DIE_44027(context, evt)
 	if 44005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -252,19 +252,19 @@ end
 function action_EVENT_ANY_GADGET_DIE_44027(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315044, 4)
-	
+
 	-- 将configid为 44032 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44032, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133315196, monsters = {}, gadgets = {196002,196003,196004,196005,196006,196007,196008} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -273,7 +273,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_44028(context, evt)
 	if 44006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -284,26 +284,26 @@ function action_EVENT_GADGET_STATE_CHANGE_44028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 调用提示id为 730662512 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 730662512) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "go1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "go1", 1, 133315217) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将configid为 44029 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44029, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -313,7 +313,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_44033(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 60 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -324,13 +324,13 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_44033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 44024, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -339,7 +339,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_44047(context, evt)
 	if 44008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -350,26 +350,26 @@ function action_EVENT_GADGET_STATE_CHANGE_44047(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 调用提示id为 730662513 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 730662513) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "go2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "go2", 1, 133315217) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将configid为 44030 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44030, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -378,7 +378,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_44048(context, evt)
 	if 44007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -389,26 +389,26 @@ function action_EVENT_GADGET_STATE_CHANGE_44048(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 调用提示id为 730662514 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 730662514) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "go3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "go3", 1, 133315217) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将configid为 44031 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44031, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -418,7 +418,7 @@ function condition_EVENT_ANY_MONSTER_DIE_44049(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -428,26 +428,26 @@ function action_EVENT_ANY_MONSTER_DIE_44049(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44050, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 44052 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44052, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 44054 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44054, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 44055 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44055, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -457,7 +457,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_44051(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 60 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -468,13 +468,13 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_44051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 44026, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -485,7 +485,7 @@ function action_EVENT_QUEST_START_44053(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -494,7 +494,7 @@ function condition_EVENT_MONSTER_BATTLE_44056(context, evt)
 	if 44001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -504,20 +504,20 @@ function action_EVENT_MONSTER_BATTLE_44056(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44052, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 44054 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44054, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 44055 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44055, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -526,7 +526,7 @@ function condition_EVENT_TIME_AXIS_PASS_44057(context, evt)
 	if "fight" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -536,20 +536,20 @@ function action_EVENT_TIME_AXIS_PASS_44057(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44052, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 44054 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44054, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 44055 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44055, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -558,7 +558,7 @@ function condition_EVENT_TIME_AXIS_PASS_44058(context, evt)
 	if "fight" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -568,20 +568,20 @@ function action_EVENT_TIME_AXIS_PASS_44058(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44054, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 44052 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44052, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 44055 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44055, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -590,7 +590,7 @@ function condition_EVENT_TIME_AXIS_PASS_44059(context, evt)
 	if "fight" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -600,20 +600,20 @@ function action_EVENT_TIME_AXIS_PASS_44059(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44055, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 44054 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44054, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 44052 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44052, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -622,7 +622,7 @@ function condition_EVENT_MONSTER_BATTLE_44060(context, evt)
 	if 44003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -630,8 +630,8 @@ end
 function action_EVENT_MONSTER_BATTLE_44060(context, evt)
 	-- 创建标识为"fight"，时间节点为{2,32,62,90}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fight", {2,32,62,90}, true)
-	
-	
+
+
 	return 0
 end
 
@@ -642,7 +642,7 @@ function action_EVENT_GROUP_LOAD_44063(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -651,7 +651,7 @@ function condition_EVENT_GADGET_CREATE_44065(context, evt)
 	if 44032 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -661,8 +661,8 @@ function action_EVENT_GADGET_CREATE_44065(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44032, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

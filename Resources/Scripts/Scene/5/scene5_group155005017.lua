@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155005017
 }
 
 -- DEFS_MISCS
-local Controllers = {}
-local EnvControlGadgets = {17001}
-local Worktops = {}
-local DayAppearGadgets = {}
-local NightAppearGadgets = {}
+Controllers = {}
+EnvControlGadgets = {17001}
+Worktops = {}
+DayAppearGadgets = {}
+NightAppearGadgets = {}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -39,7 +39,7 @@ triggers = {
 	{ config_id = 1017002, name = "GROUP_LOAD_17002", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD_17002", trigger_count = 0 },
 	-- 选择后转换昼夜.
 	{ config_id = 1017003, name = "SELECT_OPTION_17003", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "condition_EVENT_SELECT_OPTION_17003", action = "action_EVENT_SELECT_OPTION_17003", trigger_count = 0 },
-	-- 7217716[22] Start 
+	-- 7217716[22] Start
 	{ config_id = 1017004, name = "QUEST_START_17004", event = EventType.EVENT_QUEST_START, source = "7217716", condition = "", action = "action_EVENT_QUEST_START_17004", trigger_count = 0 },
 	-- 延迟切换昼夜
 	{ config_id = 1017005, name = "QUEST_FINISH_17005", event = EventType.EVENT_QUEST_FINISH, source = "7217746", condition = "", action = "action_EVENT_QUEST_FINISH_17005", trigger_count = 0 },
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -115,31 +115,31 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_17002(context, evt)
 			DayNight_Gadget_Unlock(context,17001)
-	
-	
+
+
 			--线上玩家保护
-	
-			local uidList = ScriptLib.GetSceneUidList(context)
-	
-			if (uidList == nil or #uidList == 0) then 
+
+			uidList = ScriptLib.GetSceneUidList(context)
+
+			if (uidList == nil or #uidList == 0) then
 				return 0
 			end
-	
-			local avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context,uidList[1])
-			local quest_state = ScriptLib.GetQuestState(context, avatar_entity, 7217716)
-	
-			if quest_state == QuestState.FINISHED then 
+
+			avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context,uidList[1])
+			quest_state = ScriptLib.GetQuestState(context, avatar_entity, 7217716)
+
+			if quest_state == QuestState.FINISHED then
 				ScriptLib.GoToFlowSuite(context, 155005017, 3)
 			end
-			
+
 			return 0
 end
 
@@ -147,29 +147,29 @@ end
 function condition_EVENT_SELECT_OPTION_17003(context, evt)
 	-- 判断是gadgetid 17001 option_id 7
 	if 17001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_17003(context, evt)
 			ScriptLib.DelWorktopOptionByGroupId(context, 155005017, 17001, 7)
-			ScriptLib.SetGadgetStateByConfigId(context, 17001, 312) 
-			local uid_List = ScriptLib.GetSceneUidList(context)
-			local host_id = uid_List[1]
-		
+			ScriptLib.SetGadgetStateByConfigId(context, 17001, 312)
+			uid_List = ScriptLib.GetSceneUidList(context)
+			host_id = uid_List[1]
+
 			ScriptLib.AddQuestProgress(context,"72177_UnlockTokoEngine")
 			--ScriptLib.InitTimeAxis(context, "StartEngine", {5}, false)
 			--ScriptLib.ChangeToTargetLevelTag(context, 2)
-		 
-		
+
+
 		return 0
 end
 
@@ -177,7 +177,7 @@ end
 function action_EVENT_QUEST_START_17004(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 155005017, 3)
-	
+
 	return 0
 end
 
@@ -192,13 +192,13 @@ function action_EVENT_QUEST_START_17006(context, evt)
 	DayNight_Gadget_Unlock(context,17001)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 155005017, 2)
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 155005017, 17001, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -211,7 +211,7 @@ end
 -- 触发操作
 function action_EVENT_QUEST_START_17008(context, evt)
 	DayNight_Gadget_Unlock(context,17001)
-	
+
 	return 0
 end
 
@@ -220,7 +220,7 @@ function condition_EVENT_GADGET_CREATE_17009(context, evt)
 	if 17001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -231,7 +231,7 @@ function action_EVENT_GADGET_CREATE_17009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 

@@ -1,15 +1,15 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155009002
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155009002
 }
 
 -- DEFS_MISCS
-local gameplayStateFuncitons = 
+gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -24,16 +24,16 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -116,9 +116,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -127,7 +127,7 @@ function condition_EVENT_QUEST_START_2001(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -138,34 +138,34 @@ function action_EVENT_QUEST_START_2001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 2002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 155009002, EntityType.GADGET, 2005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_2003(context, evt)
-		local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155009001)
-	
-		if isactive == 1 then 
-			if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then 
+		isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155009001)
+
+		if isactive == 1 then
+			if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then
 				ScriptLib.SetGroupVariableValue(context,"gameplayState", 1)
 			end
-			
+
 		end
-	
+
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -173,7 +173,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 			if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 					return false
 			end

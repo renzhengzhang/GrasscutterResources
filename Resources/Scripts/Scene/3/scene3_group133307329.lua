@@ -1,24 +1,24 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133307329
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	up_flow_speed = 5,
 	down_flow_speed = 10,
 	overflow_speed = 15
 }
 
 -- DEFS_MISCS
-local pools =
+pools =
 {
-    [1] = 329003,  
+    [1] = 329003,
     [2] = 329005,
     [3] = 329004
 }
 
-local origin_defs =
+origin_defs =
 {
     origin_nozzole = 329002,
     origin_pool = pools[1],
@@ -26,7 +26,7 @@ local origin_defs =
     origin_time = 20
 }
 
-local pool_defs =
+pool_defs =
 {
     max = 1000,
     overflow_max = 1500,
@@ -35,16 +35,16 @@ local pool_defs =
 
 
 --填-1时，说明该池子没有对应的喷口
-local nozzoles =
+nozzoles =
 {
-    [pools[1]] = {up_nozzole = 329008, down_nozzole = 329007},  
+    [pools[1]] = {up_nozzole = 329008, down_nozzole = 329007},
     [pools[2]] = {up_nozzole = -1, down_nozzole = 329006},
     [pools[3]] = {up_nozzole = -1, down_nozzole = 329009}
 }
 
 --填-1时，说明该池子没有对应的喷口
 --填0时，说明该喷口不指向任何下游池子
-local pool_connections =
+pool_connections =
 {
     [pools[1]] = {up_nozzole = 0, down_nozzole = pools[2]},
     [pools[2]] = {up_nozzole = -1, down_nozzole = pools[3]},
@@ -52,9 +52,9 @@ local pool_connections =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -91,9 +91,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -104,9 +104,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -122,9 +122,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "V3_4/SandStair"

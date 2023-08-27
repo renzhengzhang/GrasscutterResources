@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155002025
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155002025,
 	gadget_fire = 25001,
 	gadget_controller = 25002,
@@ -12,21 +12,21 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local gameplayStateFuncitons = 
+gameplayStateFuncitons =
 {
 	["0"] = function(context)
-		
-		
+
+
 	end,
 	["1"] = function(context)
-	
+
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 		ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_ID, defs.gadget_controller, {91})
-		
-		
+
+
 	end,
 	["2"] = function(context)
-		
+
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
 ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_fire })
 		--ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_fire)
@@ -37,16 +37,16 @@ ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_fire })
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -132,23 +132,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_25003(context, evt)
 	-- 判断是gadgetid 25002 option_id 91
 	if 25002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 91 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -159,25 +159,25 @@ function action_EVENT_SELECT_OPTION_25003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "gameplayState" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gameplayState", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_25004(context, evt)
-		local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", defs.managerGroupID)
-				
-		if isactive == 1 then 
-			if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then 
+		isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", defs.managerGroupID)
+
+		if isactive == 1 then
+			if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then
 				ScriptLib.SetGroupVariableValue(context,"gameplayState", 1)
 			end
-			
+
 		end
 	UpdateGamePlayState(context)
 	return 0
@@ -186,7 +186,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_25005(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	UpdateGamePlayState(context)
 	return 0
 end

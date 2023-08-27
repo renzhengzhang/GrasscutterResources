@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250008006
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 17
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -73,9 +73,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -83,7 +83,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_19(context, evt)
 	if 17 ~= evt.param2 or GadgetState.GearAction2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -94,27 +94,27 @@ function action_EVENT_GADGET_STATE_CHANGE_19(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_157(context, evt)
 	-- 判断是gadgetid 为 17的移动平台，是否到达了50008014 的路线中的 1 点
-	
+
 	if 17 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 50008014 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -124,19 +124,19 @@ function action_EVENT_PLATFORM_REACH_POINT_157(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 17, 50008015) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 停止移动平台
 	if 0 ~= ScriptLib.StopPlatform(context, 17) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001051
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
     ButtonLeftConfig = 51001,
     ButtonRightConfig = 51002,
     StoveConfig = 51003,
@@ -26,7 +26,7 @@ local defs = {
     }
 }
 
-local challengeParam = {
+challengeParam = {
     90, -- Time
     72, -- 72//EVENT_TIME_AXIS_PASS
     666,-- TAG
@@ -34,9 +34,9 @@ local challengeParam = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -174,9 +174,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -187,9 +187,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -286,9 +286,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -297,7 +297,7 @@ function condition_EVENT_QUEST_START_51015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "failTimes") >= 5 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -305,12 +305,12 @@ end
 function action_EVENT_QUEST_START_51015(context, evt)
 	-- 创建标识为"monstercreate1"，时间节点为{30}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "monstercreate1", {30}, false)
-	
-	
+
+
 	-- 创建标识为"monstercreate2"，时间节点为{60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "monstercreate2", {60}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -318,35 +318,35 @@ end
 function action_EVENT_TIME_AXIS_PASS_51017(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001052, 2)
-	
+
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	local functionKey = "StartPotTaunt"
-	local functionParam1 = "StartPotTaunt" .. "Param1"
-	local functionParam2 = "StartPotTaunt" .. "Param2"
-	local functionParam3 = "StartPotTaunt" .. "Param3"
-	local functionParam4 = "StartPotTaunt" .. "Param4"
-	
+	functionKey = "StartPotTaunt"
+	functionParam1 = "StartPotTaunt" .. "Param1"
+	functionParam2 = "StartPotTaunt" .. "Param2"
+	functionParam3 = "StartPotTaunt" .. "Param3"
+	functionParam4 = "StartPotTaunt" .. "Param4"
+
 	ScriptLib.SetGroupTempValue(context, functionParam1, 51004, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 1, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-	
+
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	local functionKey = "StartPotTaunt"
-	local functionParam1 = "StartPotTaunt" .. "Param1"
-	local functionParam2 = "StartPotTaunt" .. "Param2"
-	local functionParam3 = "StartPotTaunt" .. "Param3"
-	local functionParam4 = "StartPotTaunt" .. "Param4"
-	
+	functionKey = "StartPotTaunt"
+	functionParam1 = "StartPotTaunt" .. "Param1"
+	functionParam2 = "StartPotTaunt" .. "Param2"
+	functionParam3 = "StartPotTaunt" .. "Param3"
+	functionParam4 = "StartPotTaunt" .. "Param4"
+
 	ScriptLib.SetGroupTempValue(context, functionParam1, 51006, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-	
+
 	return 0
 end
 
@@ -357,19 +357,19 @@ function action_EVENT_QUEST_START_51047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133001052, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133001053, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -380,40 +380,40 @@ function action_EVENT_CHALLENGE_SUCCESS_51054(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=1765.99,y=195.4816,z=-1515.139}
+	pos = {x=1765.99,y=195.4816,z=-1515.139}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 70501091, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133001051, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 111101168, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 111101169, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 停止标识为"monstercreate1"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate1")
-	
-	
+
+
 	-- 停止标识为"monstercreate2"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate2")
-	
-	
+
+
 	return 0
 end
 
@@ -421,35 +421,35 @@ end
 function action_EVENT_TIME_AXIS_PASS_51066(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001053, 2)
-	
+
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	local functionKey = "StartPotTaunt"
-	local functionParam1 = "StartPotTaunt" .. "Param1"
-	local functionParam2 = "StartPotTaunt" .. "Param2"
-	local functionParam3 = "StartPotTaunt" .. "Param3"
-	local functionParam4 = "StartPotTaunt" .. "Param4"
-	
+	functionKey = "StartPotTaunt"
+	functionParam1 = "StartPotTaunt" .. "Param1"
+	functionParam2 = "StartPotTaunt" .. "Param2"
+	functionParam3 = "StartPotTaunt" .. "Param3"
+	functionParam4 = "StartPotTaunt" .. "Param4"
+
 	ScriptLib.SetGroupTempValue(context, functionParam1, 51006, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 1, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-	
+
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	local functionKey = "StartPotTaunt"
-	local functionParam1 = "StartPotTaunt" .. "Param1"
-	local functionParam2 = "StartPotTaunt" .. "Param2"
-	local functionParam3 = "StartPotTaunt" .. "Param3"
-	local functionParam4 = "StartPotTaunt" .. "Param4"
-	
+	functionKey = "StartPotTaunt"
+	functionParam1 = "StartPotTaunt" .. "Param1"
+	functionParam2 = "StartPotTaunt" .. "Param2"
+	functionParam3 = "StartPotTaunt" .. "Param3"
+	functionParam4 = "StartPotTaunt" .. "Param4"
+
 	ScriptLib.SetGroupTempValue(context, functionParam1, 51004, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-	
+
 	return 0
 end
 
@@ -459,8 +459,8 @@ function action_EVENT_QUEST_START_51068(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 51005, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -470,8 +470,8 @@ function action_EVENT_QUEST_START_51069(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 51005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -482,7 +482,7 @@ function action_EVENT_QUEST_START_51070(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -493,40 +493,40 @@ function action_EVENT_CHALLENGE_FAIL_51077(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=1765.99,y=195.4816,z=-1515.139}
+	pos = {x=1765.99,y=195.4816,z=-1515.139}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 70501092, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133001052, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133001053, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 停止标识为"monstercreate1"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate1")
-	
-	
+
+
 	-- 停止标识为"monstercreate2"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate2")
-	
-	
+
+
 	-- 针对当前group内变量名为 "failTimes" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "failTimes", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

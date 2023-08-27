@@ -7,11 +7,11 @@
                     重进地城，即GroupLoad：希望供奉物为201
                     3.供奉物还有一个锁态GadgetState 101，希望能根据一个”是否解锁“的变量恢复
 ||  LogName:    ## [KazuhaServeItem]
-||  Protection: 
+||  Protection:
 =======================================]]
 
 
-local ServeItem_Triggers = {
+ServeItem_Triggers = {
     { config_id = 8300001, name = "ServeItem_Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_ServeItem_Group_Load", trigger_count = 0 },
     { config_id = 8300002, name = "Device_Gadget_State_Change", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_Device_Gadget_State_Change", trigger_count = 0 },
     { config_id = 8300003, name = "Item_Gadget_Create", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_Item_Gadget_Create", trigger_count = 0 },
@@ -23,7 +23,7 @@ local ServeItem_Triggers = {
 function LF_Initialize_ServeItem(triggers, suites)
     for i=1,#ServeItem_Triggers do
         table.insert(triggers, ServeItem_Triggers[i])
-        table.insert(suites[init_config.suite].triggers,ServeItem_Triggers[i].name)    
+        table.insert(suites[init_config.suite].triggers,ServeItem_Triggers[i].name)
     end
     --为了实现且Suite时GadgetState保留，必须以变量暂存一下GadgetState
     table.insert(variables,{ config_id = 53000004, name = "state_1", value = 201, no_refresh = true})
@@ -69,17 +69,17 @@ function action_Item_Gadget_Create(context, evt)
 end
 --记录供奉物状态切换
 function action_Item_Gadget_State_Change(context, evt)
-    local index = LF_ServeItem_GetIndexInTable(context, evt.param2, defs.serve_items)
+    index = LF_ServeItem_GetIndexInTable(context, evt.param2, defs.serve_items)
     if 0 == index then
         return 0
-    end   
+    end
     ScriptLib.SetGroupVariableValue(context, "state_"..index, evt.param1)
     ScriptLib.PrintContextLog(context, "## [KazuhaServeItem]: Update gadget state record. configID@".. evt.param2.. " state@".. evt.param1)
     return 0
 end
 
 function LF_ResetServeItem(context, config_id)
-    local index = LF_ServeItem_GetIndexInTable(context, config_id, defs.serve_items)
+    index = LF_ServeItem_GetIndexInTable(context, config_id, defs.serve_items)
     if 0 == index then
         return 0
     end
@@ -88,26 +88,26 @@ function LF_ResetServeItem(context, config_id)
         ScriptLib.SetGroupVariableValue(context, "state_"..index, 101)
         ScriptLib.SetGadgetStateByConfigId(context, config_id, 101)
         ScriptLib.PrintContextLog(context, "## [KazuhaServeItem]: Handle gadget state on create. configID@".. config_id.. " state@101")
-    --无 isLock_ 配置或0  以state_x变量设GadgetSate   
+    --无 isLock_ 配置或0  以state_x变量设GadgetSate
     else
-        local state = ScriptLib.GetGroupVariableValue(context, "state_"..index)
+        state = ScriptLib.GetGroupVariableValue(context, "state_"..index)
         ScriptLib.SetGadgetStateByConfigId(context, config_id, state)
         ScriptLib.PrintContextLog(context, "## [KazuhaServeItem]: Handle gadget state on create. configID@".. config_id.. " state@".. state)
     end
-    
+
     return 0
 end
 
 function SLC_ServeItem_Picked(context)
     --判断是供奉物
-    local gadget_id = ScriptLib.GetGadgetIdByEntityId(context, context.source_entity_id)
+    gadget_id = ScriptLib.GetGadgetIdByEntityId(context, context.source_entity_id)
     if 70290374 ~= gadget_id and 70310363 ~= gadget_id then
         return 0
     end
 
-    local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+    config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
     --根据是第几次拾取，记录供奉物configID
-    local num =  ScriptLib.GetGroupTempValue(context, "pick_num", {})
+    num =  ScriptLib.GetGroupTempValue(context, "pick_num", {})
     if 1 == num then
         ScriptLib.SetGroupTempValue(context, "picked_1", config_id, {})
         ScriptLib.SetGadgetStateByConfigId(context, config_id, 0)
@@ -137,15 +137,15 @@ function action_Device_Gadget_State_Change(context, evt)
         return 0
     end
      --判断是供奉台
-    local gadget_id = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
+    gadget_id = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
     if 70290373 ~= gadget_id and 70290375 ~= gadget_id then
         return 0
     end
 
     --移除最早拾取的供奉物
-    local picked_1 = ScriptLib.GetGroupTempValue(context, "picked_1", {})
-    local picked_2 = ScriptLib.GetGroupTempValue(context, "picked_2", {})
-    local picked_3 = ScriptLib.GetGroupTempValue(context, "picked_3", {})
+    picked_1 = ScriptLib.GetGroupTempValue(context, "picked_1", {})
+    picked_2 = ScriptLib.GetGroupTempValue(context, "picked_2", {})
+    picked_3 = ScriptLib.GetGroupTempValue(context, "picked_3", {})
 
     ScriptLib.PrintContextLog(context, "## [KazuhaServeItem] Device_Gadget_State_Change. picked_1@"..picked_1 .." picked_2@"..picked_2.." picked_3@"..picked_3)
 
@@ -171,15 +171,15 @@ function EX_Device_Gadget_State_Change(context, prev_context, param1)
         return 0
     end
      --判断是供奉台
-    --[[local gadget_id = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
+    --[[gadget_id = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
     if 70290373 ~= gadget_id and 70290375 ~= gadget_id then
         return 0
     end]]
 
     --移除最早拾取的供奉物
-    local picked_1 = ScriptLib.GetGroupTempValue(context, "picked_1", {})
-    local picked_2 = ScriptLib.GetGroupTempValue(context, "picked_2", {})
-    local picked_3 = ScriptLib.GetGroupTempValue(context, "picked_3", {})
+    picked_1 = ScriptLib.GetGroupTempValue(context, "picked_1", {})
+    picked_2 = ScriptLib.GetGroupTempValue(context, "picked_2", {})
+    picked_3 = ScriptLib.GetGroupTempValue(context, "picked_3", {})
 
     ScriptLib.PrintContextLog(context, "## [KazuhaServeItem] Device_Gadget_State_Change. picked_1@"..picked_1 .." picked_2@"..picked_2.." picked_3@"..picked_3)
 

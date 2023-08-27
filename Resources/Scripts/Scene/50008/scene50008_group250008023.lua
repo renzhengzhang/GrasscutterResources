@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250008023
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -78,9 +78,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -90,19 +90,19 @@ function action_EVENT_TIMER_EVENT_60(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 250008023 ；指定config：116；物件身上指定option：172；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250008023, 116, 172) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 250008023 ；指定config：117；物件身上指定option：172；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250008023, 117, 172) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -111,7 +111,7 @@ function condition_EVENT_GADGET_CREATE_61(context, evt)
 	if 116 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -122,7 +122,7 @@ function action_EVENT_GADGET_CREATE_61(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -130,14 +130,14 @@ end
 function condition_EVENT_SELECT_OPTION_62(context, evt)
 	-- 判断是gadgetid 116 option_id 172
 	if 116 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 172 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -148,7 +148,7 @@ function action_EVENT_SELECT_OPTION_62(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_GADGET_CREATE_63(context, evt)
 	if 117 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -168,7 +168,7 @@ function action_EVENT_GADGET_CREATE_63(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -176,14 +176,14 @@ end
 function condition_EVENT_SELECT_OPTION_64(context, evt)
 	-- 判断是gadgetid 117 option_id 172
 	if 117 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 172 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -194,7 +194,7 @@ function action_EVENT_SELECT_OPTION_64(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -203,7 +203,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_67(context, evt)
 	if 197 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -213,8 +213,8 @@ function action_EVENT_GADGET_STATE_CHANGE_67(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 114, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -223,7 +223,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_128(context, evt)
 	if 114 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -234,7 +234,7 @@ function action_EVENT_GADGET_STATE_CHANGE_128(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_129(context, evt)
 	if 197 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -253,7 +253,7 @@ function action_EVENT_GADGET_STATE_CHANGE_129(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 114, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

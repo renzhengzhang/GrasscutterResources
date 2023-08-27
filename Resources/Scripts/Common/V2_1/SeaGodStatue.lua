@@ -1,12 +1,12 @@
 --[[
-local statueConfig =
+statueConfig =
 {
     ["Statue_Rotated1"] = {config_id = 121001,valueName = "Statue_Rotate1"},
     ["Statue_Rotated2"] = {config_id = 121001,valueName = "Statue_Rotate2"},
     ["Statue_Rotated3"] = {config_id = 121001,valueName = "Statue_Rotate3"}
 }
 --]]
-local tempTrigger = {
+tempTrigger = {
     { config_id = 233001, name = "VARIABLE_CHANGE_233001", event = EventType.EVENT_VARIABLE_CHANGE,
       source = "Statue_Rotated1", condition = "", action = "action_VARIABLE_CHANGE_Special", trigger_count = 0},
     { config_id = 233002, name = "VARIABLE_CHANGE_233002", event = EventType.EVENT_VARIABLE_CHANGE,
@@ -22,7 +22,7 @@ function LF_Initialize_Level()
             table.insert(suite_disk[i].triggers, v.name)
         end
     end
-    local tempStatueConfig = statueConfig["Statue_Rotated1"]
+    tempStatueConfig = statueConfig["Statue_Rotated1"]
     gadgets[tempStatueConfig.config_id].server_global_value_config = {["SGV_SeaGodStatue_RotationState"] = 0}
     tempStatueConfig = statueConfig["Statue_Rotated2"]
     gadgets[tempStatueConfig.config_id].server_global_value_config = {["SGV_SeaGodStatue_RotationState"] = 0}
@@ -50,12 +50,12 @@ end
 
         ------------尝试转动海神雕像---------
         function TrySetSeaGodStatueRotation(context,eventName)
-            local configId = statueConfig[eventName].config_id
-            local valueName = statueConfig[eventName].valueName
+            configId = statueConfig[eventName].config_id
+            valueName = statueConfig[eventName].valueName
             -- 获取物件状态
-            local gadgetState = ScriptLib.GetGadgetStateByConfigId(context, 0, configId)
+            gadgetState = ScriptLib.GetGadgetStateByConfigId(context, 0, configId)
             if( 201 == gadgetState) then
-                local currentRot = ScriptLib.GetGroupVariableValue(context, valueName) + 90
+                currentRot = ScriptLib.GetGroupVariableValue(context, valueName) + 90
                 if (360 <=currentRot) then currentRot = 0 end
                 ScriptLib.SetGroupVariableValue(context, valueName, currentRot)
                 ScriptLib.SetEntityServerGlobalValueByConfigId(context, configId, "SGV_SeaGodStatue_RotationState", currentRot)

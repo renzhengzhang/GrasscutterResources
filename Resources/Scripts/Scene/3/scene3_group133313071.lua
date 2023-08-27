@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133313071
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -123,9 +123,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -134,7 +134,7 @@ function condition_EVENT_GROUP_LOAD_71003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -145,19 +145,19 @@ function action_EVENT_GROUP_LOAD_71003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_71004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"door1"为0
 	if ScriptLib.GetGroupVariableValue(context, "door1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -167,20 +167,20 @@ function action_EVENT_VARIABLE_CHANGE_71004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 71001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_71005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"door1"为1
 	if ScriptLib.GetGroupVariableValue(context, "door1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -190,20 +190,20 @@ function action_EVENT_VARIABLE_CHANGE_71005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 71001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_71006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"door2"为0
 	if ScriptLib.GetGroupVariableValue(context, "door2") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -213,20 +213,20 @@ function action_EVENT_VARIABLE_CHANGE_71006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 71002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_71007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"door2"为1
 	if ScriptLib.GetGroupVariableValue(context, "door2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -236,20 +236,20 @@ function action_EVENT_VARIABLE_CHANGE_71007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 71002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_71008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -260,7 +260,7 @@ function action_EVENT_VARIABLE_CHANGE_71008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -270,7 +270,7 @@ function condition_EVENT_GROUP_LOAD_71009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -281,6 +281,6 @@ function action_EVENT_GROUP_LOAD_71009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

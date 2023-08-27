@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133304115
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -74,9 +74,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -87,9 +87,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -123,9 +123,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -133,7 +133,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_115001(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133304115, 115002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -144,7 +144,7 @@ function action_EVENT_GADGET_STATE_CHANGE_115001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_115008(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133304115, 115003) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -164,7 +164,7 @@ function action_EVENT_GADGET_STATE_CHANGE_115008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -173,7 +173,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_115009(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133304115, 115004) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -184,7 +184,7 @@ function action_EVENT_GADGET_STATE_CHANGE_115009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_115010(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133304115, 115013) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_GADGET_STATE_CHANGE_115010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -213,7 +213,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_115011(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133304115, 115014) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -224,7 +224,7 @@ function action_EVENT_GADGET_STATE_CHANGE_115011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -233,7 +233,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_115012(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133304115, 115015) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -244,19 +244,19 @@ function action_EVENT_GADGET_STATE_CHANGE_115012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为1
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -267,19 +267,19 @@ function action_EVENT_VARIABLE_CHANGE_115016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为2
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -290,19 +290,19 @@ function action_EVENT_VARIABLE_CHANGE_115017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为3
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -313,19 +313,19 @@ function action_EVENT_VARIABLE_CHANGE_115018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为1
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -336,19 +336,19 @@ function action_EVENT_VARIABLE_CHANGE_115019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为2
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -359,19 +359,19 @@ function action_EVENT_VARIABLE_CHANGE_115020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115021(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为3
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -382,7 +382,7 @@ function action_EVENT_VARIABLE_CHANGE_115021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -391,7 +391,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_115022(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133304115, 115005) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -402,7 +402,7 @@ function action_EVENT_GADGET_STATE_CHANGE_115022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -411,7 +411,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_115023(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133304115, 115006) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -422,7 +422,7 @@ function action_EVENT_GADGET_STATE_CHANGE_115023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -431,7 +431,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_115024(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133304115, 115007) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -442,19 +442,19 @@ function action_EVENT_GADGET_STATE_CHANGE_115024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115025(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为1
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -465,19 +465,19 @@ function action_EVENT_VARIABLE_CHANGE_115025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115026(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为2
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -488,19 +488,19 @@ function action_EVENT_VARIABLE_CHANGE_115026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115027(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为3
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -511,19 +511,19 @@ function action_EVENT_VARIABLE_CHANGE_115027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115028(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为3
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -534,19 +534,19 @@ function action_EVENT_VARIABLE_CHANGE_115028(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115029(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为3
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -557,19 +557,19 @@ function action_EVENT_VARIABLE_CHANGE_115029(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115030(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FOOD"为3
 	if ScriptLib.GetGroupVariableValue(context, "FOOD") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -580,6 +580,6 @@ function action_EVENT_VARIABLE_CHANGE_115030(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

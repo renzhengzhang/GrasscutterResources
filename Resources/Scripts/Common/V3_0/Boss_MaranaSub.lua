@@ -16,7 +16,7 @@ group SETVAR 133301038 BossBattleProgress 3
 
 -- 数据结构
 --[[
-local BattleCfg = {
+BattleCfg = {
     BossGroup = 133301038,
     VarKey = "State_Island01",
     BossCidList = {39011},
@@ -27,7 +27,7 @@ local BattleCfg = {
 --]]
 
 
-local ProgressGroup = {
+ProgressGroup = {
     BossMissionStart = {0},
     FirstNearMarana = {1},
     TryAttackBoss = {2},
@@ -42,7 +42,7 @@ local ProgressGroup = {
     BossBattleEnd = {19},
 }
 
-local MaranaSub_Trigger = {
+MaranaSub_Trigger = {
     { keyWord = "EnterIsland", event = EventType.EVENT_ENTER_REGION, source = "", trigger_count = 0},
     { keyWord = "CoreDie", event = EventType.EVENT_LUA_NOTIFY, source = "DF_CoreDie", trigger_count = 0},
     { keyWord = "PointDie", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", trigger_count = 0},
@@ -52,7 +52,7 @@ local MaranaSub_Trigger = {
 }
 
 function LF_Initialize_MaranaSub()
-    local startConfigID = 50030001
+    startConfigID = 50030001
     for _,v in pairs(MaranaSub_Trigger) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -68,7 +68,7 @@ function LF_Initialize_MaranaSub()
 
     LF_InsertTriggers(MaranaSub_Trigger,{1})
 
-    local var = { config_id= 50030101, name = "DeathPointNum", value = 0, no_refresh = false }  --Boss战的步骤计数器
+    var = { config_id= 50030101, name = "DeathPointNum", value = 0, no_refresh = false }  --Boss战的步骤计数器
     variables[var.name] = var
 
     return 0
@@ -93,7 +93,7 @@ function action_EnterIsland(context,evt)
         return 0
     end
 
-    local waveNum = LF_GetWaveNum(context,ProgressGroup.EnterLittleIsland,"action_EnterIsland")
+    waveNum = LF_GetWaveNum(context,ProgressGroup.EnterLittleIsland,"action_EnterIsland")
     if "State_Island0" .. waveNum ~= BattleCfg.VarKey then
         ScriptLib.PrintContextLog(context,"TD_BossMaranaSub 提前进入区域不触发")
         return 0
@@ -107,14 +107,14 @@ end
 
 function action_PointDie(context,evt)
     if gadgets[evt.param2].gadget_id ~= 70310195 or 202 ~= evt.param1 then
-        local msg = "TD_BossMaranaSub PointDie 未进入，检测到物件状态改变。"
+        msg = "TD_BossMaranaSub PointDie 未进入，检测到物件状态改变。"
         msg = msg .. "ConfigID为" .. evt.param2
         msg = msg .. "GadgetState为" .. evt.param1
         ScriptLib.PrintContextLog(context,msg)
         return  0
     end
 
-    local curDeathPointNum = ScriptLib.GetGroupVariableValue(context, "DeathPointNum")
+    curDeathPointNum = ScriptLib.GetGroupVariableValue(context, "DeathPointNum")
     ScriptLib.SetGroupVariableValue(context,"DeathPointNum",curDeathPointNum + 1)
     ScriptLib.PrintContextLog(context,"TD_BossMaranaSub 节点死亡流程：DeathPointNum + 1 = " .. curDeathPointNum + 1)
 
@@ -145,7 +145,7 @@ function action_BossDie(context,evt)
     end
 
     ScriptLib.ChangeGroupTempValue(context, "BossDieNum", -1, {})
-    local BossDieNum = ScriptLib.GetGroupTempValue(context, "BossDieNum", {})
+    BossDieNum = ScriptLib.GetGroupTempValue(context, "BossDieNum", {})
     ScriptLib.PrintContextLog(context,"TD_BossMaranaSub 死域之主战死，Cid =" .. evt.param1 .. "||BossDieNum = " .. BossDieNum)
 
     if BossDieNum == 0 then
@@ -173,9 +173,9 @@ end
 ||	流程函数
 --======================================]]
 function LF_CheckProgressNoMatchGroup(context,groupKey,functionName)
-    local targetProgressList = groupKey
-    local bossBattleProgress = ScriptLib.GetGroupVariableValueByGroup(context, "BossBattleProgress", 133301038)
-    local targetProgress = targetProgressList[#targetProgressList]
+    targetProgressList = groupKey
+    bossBattleProgress = ScriptLib.GetGroupVariableValueByGroup(context, "BossBattleProgress", 133301038)
+    targetProgress = targetProgressList[#targetProgressList]
     for i = #targetProgressList,1,-1 do
         if bossBattleProgress <= targetProgressList[i] then
             targetProgress = targetProgressList[i]
@@ -191,10 +191,10 @@ function LF_CheckProgressNoMatchGroup(context,groupKey,functionName)
 end
 
 function LF_GetWaveNum(context,groupKey,functionName)
-    local targetProgressList = groupKey
-    local bossBattleProgress = ScriptLib.GetGroupVariableValueByGroup(context, "BossBattleProgress", 133301038)
+    targetProgressList = groupKey
+    bossBattleProgress = ScriptLib.GetGroupVariableValueByGroup(context, "BossBattleProgress", 133301038)
 
-    local waveNum = #targetProgressList
+    waveNum = #targetProgressList
     for i = #targetProgressList,1,-1 do
         if bossBattleProgress <= targetProgressList[i] then
             waveNum = i
@@ -209,7 +209,7 @@ end
 
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -250,7 +250,7 @@ end
 
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    local s = "{"
+    s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","

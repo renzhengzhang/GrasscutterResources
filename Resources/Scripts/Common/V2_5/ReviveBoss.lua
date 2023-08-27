@@ -11,29 +11,29 @@
 =====================================================================================================================
 
 
---local BossConfigID = {1,1}
---local bossReviveTime = 30
---local ReviveGadgetID = 0
---local OperatorConfigID = 0
---local OptionID = 0
+--BossConfigID = {1,1}
+--bossReviveTime = 30
+--ReviveGadgetID = 0
+--OperatorConfigID = 0
+--OptionID = 0
 
---local ChallengeID = 0
---local ChallengeDuration = 0
---local ChestID = 0
+--ChallengeID = 0
+--ChallengeDuration = 0
+--ChestID = 0
 
 
---local GroupID = 0
+--GroupID = 0
 
 =======================================================================================]]
 
 --12.23  b1328470  LD自行处理失败，使用不可言说控制所有逻辑
 
-local Global = {
+Global = {
 	DieY = 105
 }
 
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Boss_Die"] = { config_id = 8000001, name = "Boss_Die", event= EventType.EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE, source = "", condition = "condition_WhenBossDie", action = "action_WhenBossDie", trigger_count = 0 },
 		["Revive_Timer"] = { config_id = 8000002, name = "Revive_Timer", event= EventType.EVENT_TIME_AXIS_PASS, source = "bossReviveTimer", condition = "", action = "action_BossReviveTimer", trigger_count = 0 },
@@ -134,7 +134,7 @@ function action_GroupUnload( context, evt )
 	--删除时间轴
 	ScriptLib.EndTimeAxis(context, "bossReviveTimer")
 	ScriptLib.EndTimeAxis(context, "revivenotice")
-	
+
 
 	return 0
 end
@@ -232,7 +232,7 @@ function condition_WhenBossDie( context,evt )
 
 		ScriptLib.PrintContextLog(context, "## RB_LOG : entityID: "..evt.source_eid)
 
-		local DiePos = ScriptLib.GetPosByEntityId(context, evt.source_eid)
+		DiePos = ScriptLib.GetPosByEntityId(context, evt.source_eid)
 
 		--开启复活时间轴
 		ScriptLib.InitTimeAxis(context, "bossReviveTimer", {bossReviveTime}, false)
@@ -241,7 +241,7 @@ function condition_WhenBossDie( context,evt )
 		ScriptLib.SetGroupTempValue(context, "DieBossID", evt.param1, {})
 
 		if Global.DieY <105 or math.abs(DiePos.y-Global.DieY)<30 then
-			local monsterConfig = {}
+			monsterConfig = {}
 
 			for i,v in ipairs(monsters) do
 				if v.config_id == evt.param1 then
@@ -291,7 +291,7 @@ function action_BossReviveTimer( context,evt)
 
 	--复活死亡的BOSS
 	--取出当前死亡的BOSSconfigID
-	local ReviveID = ScriptLib.GetGroupTempValue(context, "DieBossID", {})
+	ReviveID = ScriptLib.GetGroupTempValue(context, "DieBossID", {})
 
 	ScriptLib.CreateMonsterByConfigIdByPos(context, ReviveID, {x= ScriptLib.GetGroupTempValue(context, "DieX", {}) ,y= ScriptLib.GetGroupTempValue(context, "DieY", {}) ,z= ScriptLib.GetGroupTempValue(context, "DieZ", {}) }, {x=0,y=0,z=0})
 

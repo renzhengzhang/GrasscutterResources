@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250008142
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_door = 142002,
 	group_id = 250008142
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -75,9 +75,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -85,7 +85,7 @@ function condition_EVENT_GADGET_CREATE_142003(context, evt)
 	if 142001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -96,7 +96,7 @@ function action_EVENT_GADGET_CREATE_142003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -104,12 +104,12 @@ end
 function action_EVENT_SELECT_OPTION_142004(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_door) == GadgetState.Default then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_door, GadgetState.GearStart)
-	
+
 	elseif
 	 ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_door) == GadgetState.GearStart then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_door, GadgetState.Default)
-	
-	end 
-	
+
+	end
+
 	return 0
 end

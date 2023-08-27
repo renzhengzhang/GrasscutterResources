@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133213169
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -106,9 +106,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -119,9 +119,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -164,9 +164,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -174,7 +174,7 @@ function condition_EVENT_ANY_GADGET_DIE_169002(context, evt)
 	if 169024 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -185,7 +185,7 @@ function action_EVENT_ANY_GADGET_DIE_169002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -194,7 +194,7 @@ function condition_EVENT_ANY_GADGET_DIE_169013(context, evt)
 	if 169029 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -205,32 +205,32 @@ function action_EVENT_ANY_GADGET_DIE_169013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_169019(context, evt)
 	-- 判断是gadgetid 为 169016的移动平台，是否到达了321300020 的路线中的 30 点
-	
+
 	if 169016 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 321300020 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 30 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"isObstacle2Available"为2
 	if ScriptLib.GetGroupVariableValue(context, "isObstacle2Available") < 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -241,19 +241,19 @@ function action_EVENT_PLATFORM_REACH_POINT_169019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_169025(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isObstacle2Available"为0
 	if ScriptLib.GetGroupVariableValue(context, "isObstacle2Available") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -264,7 +264,7 @@ function action_EVENT_VARIABLE_CHANGE_169025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -273,7 +273,7 @@ function condition_EVENT_GADGET_CREATE_169037(context, evt)
 	if 169017 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -284,7 +284,7 @@ function action_EVENT_GADGET_CREATE_169037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -292,14 +292,14 @@ end
 function condition_EVENT_SELECT_OPTION_169038(context, evt)
 	-- 判断是gadgetid 169017 option_id 7
 	if 169017 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -310,23 +310,23 @@ function action_EVENT_SELECT_OPTION_169038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 169016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 169017 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213169, 2)
-	
+
 	return 0
 end
 
@@ -334,36 +334,36 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_169039(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133213169, 2)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133213169, 4)
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133213169, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_169040(context, evt)
 	-- 判断是gadgetid 为 169016的移动平台，是否到达了321300020 的路线中的 40 点
-	
+
 	if 169016 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 321300020 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 40 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -371,13 +371,13 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_169040(context, evt)
 	-- 终止识别id为666的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 666, 1)
-	
+
 	-- 将configid为 169016 的物件更改为状态 GadgetState.GearAction2
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 169016, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -385,13 +385,13 @@ end
 function action_EVENT_CHALLENGE_FAIL_169041(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133213169, 2)
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133213169, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -400,7 +400,7 @@ function condition_EVENT_ANY_GADGET_DIE_169042(context, evt)
 	if 169016 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -408,32 +408,32 @@ end
 function action_EVENT_ANY_GADGET_DIE_169042(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_169043(context, evt)
 	-- 判断是gadgetid 为 169016的移动平台，是否到达了321300020 的路线中的 16 点
-	
+
 	if 169016 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 321300020 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 16 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"isObstacle1Available"为1
 	if ScriptLib.GetGroupVariableValue(context, "isObstacle1Available") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -444,10 +444,10 @@ function action_EVENT_PLATFORM_REACH_POINT_169043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213169, 4)
-	
+
 	return 0
 end
 
@@ -456,7 +456,7 @@ function condition_EVENT_ANY_GADGET_DIE_169044(context, evt)
 	if 169018 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -467,19 +467,19 @@ function action_EVENT_ANY_GADGET_DIE_169044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_169046(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isObstacle1Available"为0
 	if ScriptLib.GetGroupVariableValue(context, "isObstacle1Available") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -490,19 +490,19 @@ function action_EVENT_VARIABLE_CHANGE_169046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_169053(context, evt)
 	if evt.param1 ~= 169053 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -510,7 +510,7 @@ end
 function action_EVENT_ENTER_REGION_169053(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213169, 4)
-	
+
 	return 0
 end
 
@@ -520,8 +520,8 @@ function condition_EVENT_ANY_MONSTER_DIE_169054(context, evt)
 	if evt.param1 ~= 169004 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -532,7 +532,7 @@ function action_EVENT_ANY_MONSTER_DIE_169054(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -542,8 +542,8 @@ function condition_EVENT_ANY_MONSTER_DIE_169055(context, evt)
 	if evt.param1 ~= 169005 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -554,7 +554,7 @@ function action_EVENT_ANY_MONSTER_DIE_169055(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -564,8 +564,8 @@ function condition_EVENT_ANY_MONSTER_DIE_169056(context, evt)
 	if evt.param1 ~= 169006 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -576,18 +576,18 @@ function action_EVENT_ANY_MONSTER_DIE_169056(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_169057(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"deadMonster"为3
 	if ScriptLib.GetGroupVariableValue(context, "deadMonster") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end

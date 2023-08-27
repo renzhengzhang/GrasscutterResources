@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199003131
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_animal = 131001,
 	pointarray_ID = 900300011,
 	maxPointCount = 12,
@@ -15,9 +15,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -122,20 +122,20 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_131006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isFinished"为1
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -146,25 +146,25 @@ function action_EVENT_VARIABLE_CHANGE_131006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "create" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "create", 1, 199003093) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003093, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_131007(context, evt)
-		 
+
 	if ScriptLib.GetGroupVariableValue(context,"finish") == 1 then
 	ScriptLib.GoToFlowSuite(context, 199003131, 3)
 	else

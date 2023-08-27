@@ -32,7 +32,7 @@ defs.boardControlList={
 
 --]]
 ---
-local obeliskList={
+obeliskList={
 	{config_id=defs.gadget_1,rotation=defs.rotation_1},
 	{config_id=defs.gadget_2,rotation=defs.rotation_2},
 	{config_id=defs.gadget_3,rotation=defs.rotation_3},
@@ -41,7 +41,7 @@ local obeliskList={
 
 
 
-local extraTriggers={
+extraTriggers={
 	{ config_id = 8000001, name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_GroupLoad", trigger_count = 0 },
 	{ config_id = 8000002, name = "Platform_Arrive", event = EventType.EVENT_PLATFORM_ARRIVAL, source = "", condition = "", action = "action_PlatformArrive", trigger_count = 0 },
 	{ config_id = 8000003, name = "OnRotateAxis", event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_TimeAxisPass", trigger_count = 0 },
@@ -95,9 +95,9 @@ end
 function action_GadgetStateChange(context,evt)
 	ScriptLib.PrintContextLog(context, "@@ DesertRotObelisk_Auto : action_GadgetStateChange start ")
 
-	local config_id = evt.param2
-	local state = evt.param1
-	local isBoard = false
+	config_id = evt.param2
+	state = evt.param1
+	isBoard = false
 
 	for boardId,_ in pairs(defs.boardControlList)do
 		if boardId == config_id then
@@ -106,9 +106,9 @@ function action_GadgetStateChange(context,evt)
 		end
 	end
 	if(isBoard)then
-		local lockObeliskTable = {}
+		lockObeliskTable = {}
 		for boardId,controlList in pairs(defs.boardControlList)do
-			local boardState = ScriptLib.GetGadgetStateByConfigId(context, 0, boardId)
+			boardState = ScriptLib.GetGadgetStateByConfigId(context, 0, boardId)
 			if (boardState == 0 or boardState == 202) then
 				for _,v in pairs(controlList)do
 					table.insert(lockObeliskTable,v)
@@ -117,7 +117,7 @@ function action_GadgetStateChange(context,evt)
 		end
 
 		for _,v in pairs(obeliskList)do
-			local isLock = false
+			isLock = false
 			for _,lockObelisk in pairs(lockObeliskTable)do
 				if(v.config_id==lockObelisk)then
 					isLock = true
@@ -140,7 +140,7 @@ function action_TimeAxisPass(context,evt)
 
 	if evt.source_name == "RotateTimeAxis" then
 		for _,v in pairs(obeliskList)do
-			local isLock = ScriptLib.GetGroupVariableValue(context, v.config_id.."isLock")
+			isLock = ScriptLib.GetGroupVariableValue(context, v.config_id.."isLock")
 			if(isLock==0)then
 				RotateGadget(context,v.config_id)
 			end
@@ -154,15 +154,15 @@ end
 function RotateGadget(context,config_id)
 	ScriptLib.SetGadgetStateByConfigId(context, config_id, 202)
 	ScriptLib.SetPlatformPointArray(context, config_id, defs.pointarray_ID, { 1 }, { route_type = 0,turn_mode=true })
-	local curRot = ScriptLib.GetGroupVariableValue(context, config_id.."rotation")
+	curRot = ScriptLib.GetGroupVariableValue(context, config_id.."rotation")
 	ScriptLib.SetGroupVariableValue(context, config_id.."rotation", (curRot+120)%360)
 end
 
 function action_PlatformArrive(context, evt)
 	ScriptLib.PrintContextLog(context, "@@ DesertRotObelisk_Auto : action_PlatformArrive start ")
 
-	local config_id = evt.param1
-	local curRot = ScriptLib.GetGroupVariableValue(context, config_id.."rotation")
+	config_id = evt.param1
+	curRot = ScriptLib.GetGroupVariableValue(context, config_id.."rotation")
 	if curRot == nil then
 		return 0
 	end

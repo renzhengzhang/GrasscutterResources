@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 144004005
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	point_sum = 11,
 	route_2 = 400400001,
 	gadget_seelie = 5002
@@ -14,9 +14,9 @@ local defs = {
 defs.final_point = defs.point_sum - 1
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -86,9 +86,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -127,9 +127,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -229,28 +229,28 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_5001(context, evt)
 	-- 判断是gadgetid 为 5002的移动平台，是否到达了400400015 的路线中的 4 点
-	
+
 	if 5002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 400400015 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 4 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -261,27 +261,27 @@ function action_EVENT_PLATFORM_REACH_POINT_5001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_5005(context, evt)
 	-- 判断是gadgetid 为 5002的移动平台，是否到达了400400001 的路线中的 6 点
-	
+
 	if 5002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 400400001 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -292,22 +292,22 @@ function action_EVENT_PLATFORM_REACH_POINT_5005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 停止移动平台
 	if 0 ~= ScriptLib.StopPlatform(context, 5002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1110223 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110223) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 添加某个flowSuite里的要素，不会更改当前场上已存在的物件/怪物状态
 	  ScriptLib.AddExtraFlowSuite(context, 144004005, 2, FlowSuiteOperatePolicy.DEFAULT)
-	
+
 	return 0
 end
 
@@ -316,15 +316,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_5006(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-	
+
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-	
+
 	if defs.final_point == evt.param3 then
 	return false
 	end
-	
+
 	return true
 end
 
@@ -333,24 +333,24 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_5006(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, 5002) then
 	return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= evt.param3 then
 	ScriptLib.MarkPlayerAction(context, 2005, 2, evt.param3 + 1)
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5007(context, evt)
 	if evt.param1 ~= 5007 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -361,32 +361,32 @@ function action_EVENT_ENTER_REGION_5007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 5002, 400400001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 5003 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 调用提示id为 1110220 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110220) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -394,14 +394,14 @@ end
 function condition_EVENT_SELECT_OPTION_5009(context, evt)
 	-- 判断是gadgetid 5004 option_id 171
 	if 5004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 171 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -412,47 +412,47 @@ function action_EVENT_SELECT_OPTION_5009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 144004005 ；指定config：5004；物件身上指定option：171；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 144004005, 5004, 171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "interact" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "interact", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 5002, 400400015) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "times", 144004005) ~= 4 then
 			return false
 	end
-	
+
 	-- 判断变量"correct"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "correct", 144004005) ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"interact"为1
 	if ScriptLib.GetGroupVariableValue(context, "interact") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -463,55 +463,55 @@ function action_EVENT_VARIABLE_CHANGE_5016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7900103finish") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1110226 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110226) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-718.6341，133，0.5923817），持续时间为3.5秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-718.6341, y=133, z=0.5923817}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-718.6341, y=133, z=0.5923817}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 添加某个flowSuite里的要素，不会更改当前场上已存在的物件/怪物状态
 	  ScriptLib.AddExtraFlowSuite(context, 144004005, 4, FlowSuiteOperatePolicy.DEFAULT)
-	
+
 	-- 将本组内变量名为 "complete" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "complete", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "times", 144004005) ~= 4 then
 			return false
 	end
-	
+
 	-- 判断变量"correct"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "correct", 144004005) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -519,57 +519,57 @@ end
 function action_EVENT_VARIABLE_CHANGE_5018(context, evt)
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 变量"correct"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "correct", 0)
-	
+
 	-- 改变指定group组144004066中， configid为66001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 1110269 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110269) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "times", 144004005) ~= 4 then
 			return false
 	end
-	
+
 	-- 判断变量"correct"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "correct", 144004005) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -577,57 +577,57 @@ end
 function action_EVENT_VARIABLE_CHANGE_5019(context, evt)
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 变量"correct"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "correct", 0)
-	
+
 	-- 改变指定group组144004066中， configid为66001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 1110269 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110269) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "times", 144004005) ~= 4 then
 			return false
 	end
-	
+
 	-- 判断变量"correct"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "correct", 144004005) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -635,57 +635,57 @@ end
 function action_EVENT_VARIABLE_CHANGE_5020(context, evt)
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 变量"correct"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "correct", 0)
-	
+
 	-- 改变指定group组144004066中， configid为66001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 1110269 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110269) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5029(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "times", 144004005) ~= 4 then
 			return false
 	end
-	
+
 	-- 判断变量"interact"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "interact", 144004005) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -693,60 +693,60 @@ end
 function action_EVENT_VARIABLE_CHANGE_5029(context, evt)
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 变量"correct"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "correct", 0)
-	
+
 	-- 改变指定group组144004066中， configid为66001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组144004066中， configid为66004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 144004066, 66004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 1110314 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110314) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_5034(context, evt)
 	-- 判断是gadgetid 为 5002的移动平台，是否到达了400400015 的路线中的 1 点
-	
+
 	if 5002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 400400015 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -756,28 +756,28 @@ function action_EVENT_PLATFORM_REACH_POINT_5034(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5030, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_5035(context, evt)
 	-- 判断是gadgetid 为 5002的移动平台，是否到达了400400015 的路线中的 2 点
-	
+
 	if 5002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 400400015 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -787,28 +787,28 @@ function action_EVENT_PLATFORM_REACH_POINT_5035(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5031, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_5036(context, evt)
 	-- 判断是gadgetid 为 5002的移动平台，是否到达了400400015 的路线中的 7 点
-	
+
 	if 5002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 400400015 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 7 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -819,20 +819,20 @@ function action_EVENT_PLATFORM_REACH_POINT_5036(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5037(context, evt)
 	if evt.param1 ~= 5037 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -843,36 +843,36 @@ function action_EVENT_ENTER_REGION_5037(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144004005, EntityType.GADGET, 5025 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 144004005, 5)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_5038(context, evt)
 	-- 判断是gadgetid 为 5002的移动平台，是否到达了400400015 的路线中的 3 点
-	
+
 	if 5002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 400400015 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -882,28 +882,28 @@ function action_EVENT_PLATFORM_REACH_POINT_5038(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5033, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_5039(context, evt)
 	-- 判断是gadgetid 为 5002的移动平台，是否到达了400400015 的路线中的 4 点
-	
+
 	if 5002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 400400015 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 4 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -913,17 +913,17 @@ function action_EVENT_PLATFORM_REACH_POINT_5039(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5032, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 1110267 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110267) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 添加某个flowSuite里的要素，不会更改当前场上已存在的物件/怪物状态
 	  ScriptLib.AddExtraFlowSuite(context, 144004005, 3, FlowSuiteOperatePolicy.DEFAULT)
-	
+
 	return 0
 end
 
@@ -932,7 +932,7 @@ function condition_EVENT_GADGET_CREATE_5040(context, evt)
 	if 5004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -943,6 +943,6 @@ function action_EVENT_GADGET_CREATE_5040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end

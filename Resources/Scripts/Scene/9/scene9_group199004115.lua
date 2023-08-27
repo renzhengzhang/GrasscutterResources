@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199004115
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	active_step = 201,
 	inactive_step = 0,
 	gadget_array = {115001,115002,115003,115004,115005},
@@ -12,14 +12,14 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local v = 0
-local v_error = 0
-local max_bit = #defs.gadget_array
+v = 0
+v_error = 0
+max_bit = #defs.gadget_array
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -65,9 +65,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -78,9 +78,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -96,9 +96,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -123,7 +123,7 @@ function action_EVENT_GADGET_STATE_CHANGE_115007(context, evt)
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break 
+	                        break
 	                end
 	                if i == max_bit and defs.gadget_array[i] ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
@@ -148,7 +148,7 @@ function action_EVENT_GADGET_STATE_CHANGE_115007(context, evt)
 	        if v_error ~= 1 then
 	                v_error = -1
 	        end
-	        ScriptLib.SetGroupVariableValue(context, "sort", v) 
+	        ScriptLib.SetGroupVariableValue(context, "sort", v)
 	        ScriptLib.SetGroupVariableValue(context, "gear_reset", v_error)
 	        ScriptLib.SetGroupVariableValue(context, "v_error", 0)
 	end
@@ -158,7 +158,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_115008(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if evt.param1 == 1 then
 		if #defs.reset_gear_list == 0 then
 	                        defs.reset_gear_list = suites[1].gadgets
@@ -179,8 +179,8 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
-	
+
+
 	if evt.param1 == -1 then
 		return true
 	end
@@ -190,7 +190,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_115010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 > 0 then
 		return true
 	end
@@ -204,30 +204,30 @@ function action_EVENT_VARIABLE_CHANGE_115010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 创建id为115006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 115006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_115011(context, evt)
 	if evt.param1 ~= 115011 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"talkdq"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "talkdq", 199004116) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -238,42 +238,42 @@ function action_EVENT_ENTER_REGION_115011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "talkly" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "talkly", 1, 199004116) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "talkdq" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "talkdq", 0, 199004116) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1111362 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1111362) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_115012(context, evt)
 	if evt.param1 ~= 115012 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"talkdq"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "talkdq", 199004116) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -284,12 +284,12 @@ function action_EVENT_ENTER_REGION_115012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "talkly" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "talkly", 1, 199004116) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

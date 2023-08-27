@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220123010
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -73,9 +73,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +86,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -122,69 +122,69 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10001(context, evt)
 	if evt.param1 ~= 10001 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_10001(context, evt)
 	-- 触发镜头注目，注目位置为坐标（4.9，-6，-36），持续时间为4秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=4.9, y=-6, z=-36}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=4.9, y=-6, z=-36}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 调用提示id为 4000123 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 4000123) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 改变指定group组220123004中， configid为4001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220123004, 4001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "stage" 的变量设置为 4
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage", 4, 220123001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 创建标识为"T1"，时间节点为{7}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T1", {7}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_10002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Start"为1
 	if ScriptLib.GetGroupVariableValue(context, "Start") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -195,12 +195,12 @@ function action_EVENT_VARIABLE_CHANGE_10002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 	    return -1
 	end
-	
+
 	ScriptLib.AddExtraGroupSuite(context, 220123004, 6)
 	ScriptLib.AddExtraGroupSuite(context, 220123004, 7)
 	ScriptLib.AddExtraGroupSuite(context, 220123004, 8)
 	ScriptLib.AddExtraGroupSuite(context, 220123004, 9)
-	
+
 	return 0
 end
 
@@ -211,42 +211,42 @@ function action_EVENT_CHALLENGE_SUCCESS_10003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Finish", 1, 220123004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_10004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Lamp"为1
 	if ScriptLib.GetGroupVariableValue(context, "Lamp") == 1 then
 	        return true
 	end
-	
+
 	-- 判断变量"Lamp"为2
 	if ScriptLib.GetGroupVariableValue(context, "Lamp") == 2 then
 	        return true
 	end
-	
+
 	-- 判断变量"Lamp"为3
 	if ScriptLib.GetGroupVariableValue(context, "Lamp") == 3 then
 	        return true
 	end
-	
+
 	-- 判断变量"Lamp"为4
 	if ScriptLib.GetGroupVariableValue(context, "Lamp") == 4 then
 	        return true
 	end
-	
+
 	return false
 end
 
@@ -259,12 +259,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10006(context, evt)
 	if evt.param1 ~= 10006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -275,11 +275,11 @@ function action_EVENT_ENTER_REGION_10006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建标识为"T"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T", {3}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -290,19 +290,19 @@ function action_EVENT_TIME_AXIS_PASS_10007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "stage" 的变量设置为 5
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage", 5, 220123001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Challenge" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Challenge", 1, 220123004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -313,7 +313,7 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE_10009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -323,7 +323,7 @@ function condition_EVENT_DUNGEON_SETTLE_10010(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -334,7 +334,7 @@ function action_EVENT_DUNGEON_SETTLE_10010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -342,19 +342,19 @@ end
 function action_EVENT_CHALLENGE_FAIL_10013(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220123010, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10014(context, evt)
 	if evt.param1 ~= 10014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -365,10 +365,10 @@ function action_EVENT_ENTER_REGION_10014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 	    return -1
 	end
-	
+
 	ScriptLib.AddExtraGroupSuite(context, 220123010, 3)
 	ScriptLib.RemoveExtraGroupSuite(context, 220123010, 2)
-	
+
 	return 0
 end
 
@@ -377,39 +377,39 @@ function condition_EVENT_GADGET_CREATE_10015(context, evt)
 	if 10005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_10015(context, evt)
-	local c = 0
-	
+	c = 0
+
 	c = ScriptLib.GetGroupVariableValue(context, "Lamp")
-	
+
 	if c == 1 then
 	    ScriptLib.ChangeGroupVariableValue(context, "Omega", 1)
 	end
-	
+
 	if c == 2 then
 	    ScriptLib.ChangeGroupVariableValue(context, "Omega", 1)
 	    ScriptLib.ChangeGroupVariableValue(context, "Omega", 1)
 	end
-	
+
 	if c == 3 then
 	    ScriptLib.ChangeGroupVariableValue(context, "Omega", 1)
 	    ScriptLib.ChangeGroupVariableValue(context, "Omega", 1)
 	    ScriptLib.ChangeGroupVariableValue(context, "Omega", 1)
 	end
-	
+
 	if c == 4 then
 	    ScriptLib.ChangeGroupVariableValue(context, "Omega", 1)
 	    ScriptLib.ChangeGroupVariableValue(context, "Omega", 1)
 	    ScriptLib.ChangeGroupVariableValue(context, "Omega", 1)
 	    ScriptLib.ChangeGroupVariableValue(context, "Omega", 1)
 	end
-	
+
 	ScriptLib.RemoveExtraGroupSuite(context, 220123010, 3)
-	
+
 	return 0
 end

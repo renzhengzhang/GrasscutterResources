@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240602005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -127,9 +127,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -137,7 +137,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_5025(context, evt)
 	if 5001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -148,7 +148,7 @@ function action_EVENT_ANY_MONSTER_LIVE_5025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -158,27 +158,27 @@ function action_EVENT_CHALLENGE_SUCCESS_5029(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240602007, 7002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240602007中， configid为7001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240602007, 7001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 5017 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 改变指定group组240602008中， configid为8001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240602008, 8001, GadgetState.GearAction1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -188,31 +188,31 @@ function action_EVENT_CHALLENGE_FAIL_5030(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240602008, 8001, GadgetState.GearAction2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 240602005, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 240602008, 8001, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 改变指定group组240602007中， configid为7001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240602007, 7001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240602007中， configid为7002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240602007, 7002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

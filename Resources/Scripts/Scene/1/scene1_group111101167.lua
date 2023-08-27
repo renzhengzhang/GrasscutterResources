@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101167
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -122,9 +122,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -135,9 +135,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -234,9 +234,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -244,7 +244,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_167047(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 111101167, 167002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -252,7 +252,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_167047(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101167, 3)
-	
+
 	return 0
 end
 
@@ -261,7 +261,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_167051(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 111101167, 167001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -269,19 +269,19 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_167051(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101167, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_167054(context, evt)
 	if evt.param1 ~= 167054 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -289,19 +289,19 @@ end
 function action_EVENT_ENTER_REGION_167054(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101167, 5)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_167055(context, evt)
 	if evt.param1 ~= 167055 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -309,22 +309,22 @@ end
 function action_EVENT_ENTER_REGION_167055(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101167, 6)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101167, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_167056(context, evt)
 	if evt.param1 ~= 167056 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -332,10 +332,10 @@ end
 function action_EVENT_ENTER_REGION_167056(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101167, 7)
-	
+
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101167, 8)
-	
+
 	return 0
 end
 
@@ -345,8 +345,8 @@ function condition_EVENT_ANY_MONSTER_DIE_167058(context, evt)
 	if evt.param1 ~= 167057 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -354,17 +354,17 @@ end
 function action_EVENT_ANY_MONSTER_DIE_167058(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101167, 9)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_167071(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 111101167) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -374,20 +374,20 @@ function action_EVENT_ANY_MONSTER_DIE_167071(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 111101167, 167001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_167074(context, evt)
 	if evt.param1 ~= 167074 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -395,6 +395,6 @@ end
 function action_EVENT_ENTER_REGION_167074(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101167, 10)
-	
+
 	return 0
 end

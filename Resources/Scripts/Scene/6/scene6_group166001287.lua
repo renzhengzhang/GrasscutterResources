@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 166001287
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	inner_region = 287003,
 	outer_region = 287003,
 	related_region = 287003,
@@ -13,9 +13,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ sight_groups = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -168,9 +168,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -179,7 +179,7 @@ function condition_EVENT_ANY_MONSTER_DIE_287004(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -190,25 +190,25 @@ function action_EVENT_ANY_MONSTER_DIE_287004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 2)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 3)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 5)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 6)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 7)
-	
+
 	return 0
 end
 
@@ -216,22 +216,22 @@ end
 function action_EVENT_LUA_NOTIFY_287005(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 2)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 3)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 5)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 6)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001287, 7)
-	
+
 	return 0
 end
 
@@ -239,7 +239,7 @@ end
 function action_EVENT_LUA_NOTIFY_287014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001287, 2)
-	
+
 	return 0
 end
 
@@ -247,7 +247,7 @@ end
 function action_EVENT_LUA_NOTIFY_287019(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001287, 3)
-	
+
 	return 0
 end
 
@@ -255,7 +255,7 @@ end
 function action_EVENT_LUA_NOTIFY_287020(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001287, 4)
-	
+
 	return 0
 end
 
@@ -263,7 +263,7 @@ end
 function action_EVENT_LUA_NOTIFY_287021(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001287, 5)
-	
+
 	return 0
 end
 
@@ -271,7 +271,7 @@ end
 function action_EVENT_LUA_NOTIFY_287022(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001287, 6)
-	
+
 	return 0
 end
 
@@ -279,7 +279,7 @@ end
 function action_EVENT_LUA_NOTIFY_287023(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001287, 7)
-	
+
 	return 0
 end
 
@@ -288,7 +288,7 @@ function condition_EVENT_ANY_GADGET_DIE_287026(context, evt)
 	if 287008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -299,8 +299,8 @@ function action_EVENT_ANY_GADGET_DIE_287026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -309,7 +309,7 @@ function condition_EVENT_ANY_GADGET_DIE_287029(context, evt)
 	if 287011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -320,8 +320,8 @@ function action_EVENT_ANY_GADGET_DIE_287029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -330,7 +330,7 @@ function condition_EVENT_ANY_GADGET_DIE_287030(context, evt)
 	if 287010 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -341,8 +341,8 @@ function action_EVENT_ANY_GADGET_DIE_287030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -351,7 +351,7 @@ function condition_EVENT_ANY_GADGET_DIE_287031(context, evt)
 	if 287009 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -362,8 +362,8 @@ function action_EVENT_ANY_GADGET_DIE_287031(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 

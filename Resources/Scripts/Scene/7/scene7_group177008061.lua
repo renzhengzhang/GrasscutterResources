@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 177008061
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	pointarray_1 = 700800016,
 	gadget_1 = 61002,
 	gadget_2 = 61003,
@@ -25,9 +25,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -108,9 +108,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -121,9 +121,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -139,9 +139,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -149,7 +149,7 @@ function condition_EVENT_GADGET_CREATE_61016(context, evt)
 	if defs.gadget_controller_1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -160,7 +160,7 @@ function action_EVENT_GADGET_CREATE_61016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -169,7 +169,7 @@ function condition_EVENT_GADGET_CREATE_61017(context, evt)
 	if defs.gadget_controller_2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -180,7 +180,7 @@ function action_EVENT_GADGET_CREATE_61017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_GADGET_CREATE_61018(context, evt)
 	if defs.gadget_controller_3 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -200,7 +200,7 @@ function action_EVENT_GADGET_CREATE_61018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -209,7 +209,7 @@ function condition_EVENT_GADGET_CREATE_61019(context, evt)
 	if defs.gadget_controller_4 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -220,7 +220,7 @@ function action_EVENT_GADGET_CREATE_61019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -229,7 +229,7 @@ function condition_EVENT_GADGET_CREATE_61020(context, evt)
 	if defs.gadget_controller_5 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -240,7 +240,7 @@ function action_EVENT_GADGET_CREATE_61020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -248,14 +248,14 @@ end
 function condition_EVENT_SELECT_OPTION_61021(context, evt)
 	-- 判断是gadgetid 470005 option_id 31
 	if defs.gadget_controller_1 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 31 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -266,22 +266,22 @@ function action_EVENT_SELECT_OPTION_61021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, defs.gadget_1, defs.pointarray_1, {defs.gadget_pointarray_1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：139998470的对象,请求一次调用,并将string参数："route1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, defs.group_id, "route1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -292,7 +292,7 @@ function action_EVENT_TIMER_EVENT_61022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -300,14 +300,14 @@ end
 function condition_EVENT_SELECT_OPTION_61023(context, evt)
 	-- 判断是gadgetid 470005 option_id 31
 	if defs.gadget_controller_2 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 31 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -318,22 +318,22 @@ function action_EVENT_SELECT_OPTION_61023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, defs.gadget_2, defs.pointarray_1, {defs.gadget_pointarray_2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：139998470的对象,请求一次调用,并将string参数："route1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, defs.group_id, "route2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -344,7 +344,7 @@ function action_EVENT_TIMER_EVENT_61024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -352,14 +352,14 @@ end
 function condition_EVENT_SELECT_OPTION_61025(context, evt)
 	-- 判断是gadgetid 470005 option_id 31
 	if defs.gadget_controller_3 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 31 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -370,22 +370,22 @@ function action_EVENT_SELECT_OPTION_61025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, defs.gadget_3, defs.pointarray_1, {defs.gadget_pointarray_3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：139998470的对象,请求一次调用,并将string参数："route1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, defs.group_id, "route3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -396,7 +396,7 @@ function action_EVENT_TIMER_EVENT_61026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -404,14 +404,14 @@ end
 function condition_EVENT_SELECT_OPTION_61027(context, evt)
 	-- 判断是gadgetid 470005 option_id 31
 	if defs.gadget_controller_4 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 31 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -422,22 +422,22 @@ function action_EVENT_SELECT_OPTION_61027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, defs.gadget_4, defs.pointarray_1, {defs.gadget_pointarray_4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：139998470的对象,请求一次调用,并将string参数："route1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, defs.group_id, "route4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -448,7 +448,7 @@ function action_EVENT_TIMER_EVENT_61028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -456,14 +456,14 @@ end
 function condition_EVENT_SELECT_OPTION_61029(context, evt)
 	-- 判断是gadgetid 470005 option_id 31
 	if defs.gadget_controller_5 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 31 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -474,22 +474,22 @@ function action_EVENT_SELECT_OPTION_61029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	local tempParam = {route_type = 0, turn_mode = false}
+	tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, defs.gadget_5, defs.pointarray_1, {defs.gadget_pointarray_5}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：139998470的对象,请求一次调用,并将string参数："route1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, defs.group_id, "route5", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -500,7 +500,7 @@ function action_EVENT_TIMER_EVENT_61030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -509,7 +509,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_61031(context, evt)
 	if 61004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -520,7 +520,7 @@ function action_EVENT_GADGET_STATE_CHANGE_61031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

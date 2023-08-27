@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133223198
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_Teleport_1 = 198001,
 	gadget_Teleport_2 = 198003,
 	gadget_Teleport_3 = 0,
@@ -23,14 +23,15 @@ local defs = {
 }
 
 -- DEFS_MISCS
-connectInfo = 
-{	{defs.gadget_Teleport_1,defs.gadget_Teleport_2,defs.pointarray_1,10}
+connectInfo =
+{
+	{defs.gadget_Teleport_1,defs.gadget_Teleport_2,defs.pointarray_1,10}
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -76,9 +77,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +90,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -107,27 +108,27 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_198015(context, evt)
 	if evt.param1 ~= 198015 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_1_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_1_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_198015(context, evt)
 			--gadget_Teleport_1 trigger
-			local teleportid = defs["gadget_Teleport_1"]
+			teleportid = defs["gadget_Teleport_1"]
 			TeleportAction(context, teleportid)
 			return 0
 end
@@ -135,19 +136,19 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_198017(context, evt)
 	if evt.param1 ~= 198017 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_2_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_2_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_198017(context, evt)
 			--gadget_Teleport_3 trigger
-			local teleportid = defs["gadget_Teleport_2"]
+			teleportid = defs["gadget_Teleport_2"]
 			TeleportAction(context, teleportid)
 			return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250043001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -108,9 +108,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -121,9 +121,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -166,27 +166,27 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1014(context, evt)
 	if evt.param1 ~= 1014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1014(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = ScriptLib.GetSceneUidList(context), pos = {x=281.3869, y= -27.85048, z=442.8226}, radius = 2, rot = {x=0, y=180, z=0}}) 
-	
+	ScriptLib.TransPlayerToPos(context, {uid_list = ScriptLib.GetSceneUidList(context), pos = {x=281.3869, y= -27.85048, z=442.8226}, radius = 2, rot = {x=0, y=180, z=0}})
+
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_GADGET_CREATE_1037(context, evt)
 	if 1001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_GADGET_CREATE_1037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -214,14 +214,14 @@ end
 function condition_EVENT_SELECT_OPTION_1038(context, evt)
 	-- 判断是gadgetid 1001 option_id 7
 	if 1001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -232,58 +232,58 @@ function action_EVENT_SELECT_OPTION_1038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将configid为 1001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250043001, 2)
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250043001, 3)
-	
+
 	-- 延迟3秒后,向groupId为：250043001的对象,请求一次调用,并将string参数："SwitchToInvisible" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250043001, "SwitchToInvisible", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_1039(context, evt)
-	local gadget_list = suites[2].gadgets
-	
+	gadget_list = suites[2].gadgets
+
 	for i, v in ipairs(gadget_list) do
 	        ScriptLib.SetGroupGadgetStateByConfigId(context, 250043001, v, 901)
 	        ScriptLib.ChangeGroupVariableValue(context, "test1", 1)
 	end
-	
+
 	-- 延迟10秒后,向groupId为：250043001的对象,请求一次调用,并将string参数："SwitchToVisible" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250043001, "SwitchToVisible", 10) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_1040(context, evt)
-	local gadget_list = suites[2].gadgets
-	
+	gadget_list = suites[2].gadgets
+
 	for i, v in ipairs(gadget_list) do
 	        ScriptLib.SetGroupGadgetStateByConfigId(context, 250043001, v, 902)
 	        ScriptLib.ChangeGroupVariableValue(context, "test2", 1)
 	end
-	
+
 	-- 延迟3秒后,向groupId为：250043001的对象,请求一次调用,并将string参数："SwitchToInvisible" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250043001, "SwitchToInvisible", 3) then
 	  return -1
 	end
-	
+
 	return 0
 end

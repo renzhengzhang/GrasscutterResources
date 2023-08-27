@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220132005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -72,9 +72,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -82,7 +82,7 @@ function condition_EVENT_GADGET_CREATE_5001(context, evt)
 	if 5005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -93,7 +93,7 @@ function action_EVENT_GADGET_CREATE_5001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -101,14 +101,14 @@ end
 function condition_EVENT_SELECT_OPTION_5002(context, evt)
 	-- 判断是gadgetid 5005 option_id 68
 	if 5005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 68 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -118,26 +118,26 @@ function action_EVENT_SELECT_OPTION_5002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 220132005 ；指定config：5005；物件身上指定option：68；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220132005, 5005, 68) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "KeyHigh" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "KeyHigh", 1, 220132011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "KeyCount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "KeyCount", 1, 220132011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	if ScriptLib.GetGroupVariableValueByGroup(context, "KeyCount", 220132011) ~= 3 then
 	    if ScriptLib.GetGroupVariableValueByGroup(context, "KeyU", 220132011) ~= 1 then
 	        ScriptLib.RefreshGroup(context, { group_id = 220132002, suite = 5 })
@@ -151,6 +151,6 @@ function action_EVENT_SELECT_OPTION_5002(context, evt)
 	    ScriptLib.RefreshGroup(context, { group_id = 220132002, suite = 1 })
 	    ScriptLib.RefreshGroup(context, { group_id = 220132010, suite = 1 })
 	end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133003209
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -72,18 +72,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_CLIENT_EXECUTE_169(context, evt)
 	-- 针对groupid为 133003209 中该config对应的物件进行状态改变操作
-	local this_gadget = ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid })
+	this_gadget = ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid })
 		--ScriptLib.PrintLog(context, "config_id="..this_gadget)
-	
+
 	 ScriptLib.SetGadgetEnableInteract(context, 133003209, this_gadget, true)
-	
+
 	return 0
 end

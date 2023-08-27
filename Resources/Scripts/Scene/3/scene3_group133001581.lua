@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001581
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 	RegionID =  581029
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -105,9 +105,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -118,9 +118,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -163,9 +163,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -173,25 +173,25 @@ function condition_EVENT_GADGET_CREATE_581020(context, evt)
 	if 581019 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_581020(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 503, 110171, 240, {success = 1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 503, 110272, 110172, {240,133001581,30,0},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 503, 110274, 110174, {240,1,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 503)
-	
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 504, 133001581, {581001,581002,581003,581004,581005,581006,581007,581008,581009,581010,581011,581012,581013,581014,581015,581016,581017,581018,581064,581063,581062}, 30, 5, 5) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -202,7 +202,7 @@ function action_EVENT_CHALLENGE_SUCCESS_581021(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -213,7 +213,7 @@ function action_EVENT_CHALLENGE_FAIL_581022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -222,25 +222,25 @@ function condition_EVENT_GADGET_CREATE_581023(context, evt)
 	if 581019 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_581023(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 505, 110171, 150, {success = 1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 505, 110372, 110172, {150,133001581,30,0},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 505, 110374, 110179, {150,0,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 505)
-	
+
 	-- 创建编号为506（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 506, 133001581, {581030,581031,581032,581033,581034,581035,581036,581037,581038,581039,581040,581041,581042,581043,581044,581045,581046,581047,581048,581049,581050,581051,581052,581053,581054,581055,581056,581057,581058,581059}, 30, 5, 5) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -251,7 +251,7 @@ function action_EVENT_CHALLENGE_SUCCESS_581024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -260,25 +260,25 @@ function condition_EVENT_GADGET_CREATE_581025(context, evt)
 	if 581019 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_581025(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 501, 110171, 300, {success = 1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 501, 110172, 110172, {300,133001581,25,0},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 501, 110174, 110174, {300,2,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 501)
-	
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 502, 133001581, {581001,581002,581003,581004,581005,581006,581007,581008,581009,581010,581011,581012,581013,581014,581015,581016,581017,581018,581064,581063,581062}, 25, 5, 5) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -289,7 +289,7 @@ function action_EVENT_CHALLENGE_FAIL_581026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -300,7 +300,7 @@ function action_EVENT_CHALLENGE_SUCCESS_581027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -311,7 +311,7 @@ function action_EVENT_CHALLENGE_FAIL_581028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 

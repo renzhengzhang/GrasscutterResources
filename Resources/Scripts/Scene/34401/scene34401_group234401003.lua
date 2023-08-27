@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 234401003
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -69,9 +69,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -79,7 +79,7 @@ function condition_EVENT_GADGET_CREATE_3002(context, evt)
 	if 3001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -90,7 +90,7 @@ function action_EVENT_GADGET_CREATE_3002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -98,19 +98,19 @@ end
 function condition_EVENT_SELECT_OPTION_3003(context, evt)
 	-- 判断是gadgetid 3001 option_id 175
 	if 3001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 175 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"stage"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage", 234401002) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -121,54 +121,54 @@ function action_EVENT_SELECT_OPTION_3003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_allow_use_skill")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 234401004, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 创建编号为1（该怪物潮的识别id)的怪物潮，创建怪物总数为10，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 234401004, {4001,4002,4003,4004,4006,4007,4017,4018,4020,4021}, 10, 5, 5) then
 		return -1
 	end
-	
+
 	-- 删除指定group： 234401003 ；指定config：3001；物件身上指定option：175；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 234401003, 3001, 175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 改变指定group组234401003中， configid为3001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234401003, 3001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组234401002中， configid为2002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234401002, 2002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组234401002中， configid为2001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234401002, 2001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组234401001中， configid为1001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234401001, 1001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组234401001中， configid为1002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234401001, 1002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -176,19 +176,19 @@ end
 function condition_EVENT_SELECT_OPTION_3004(context, evt)
 	-- 判断是gadgetid 3001 option_id 176
 	if 3001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 176 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"stage"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage", 234401002) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -199,53 +199,53 @@ function action_EVENT_SELECT_OPTION_3004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_allow_use_skill")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 234401005, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 创建编号为2（该怪物潮的识别id)的怪物潮，创建怪物总数为10，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 2, 234401005, {5001,5002,5003,5004,5005,5006,5007,5008,5009,5017}, 10, 5, 5) then
 		return -1
 	end
-	
+
 	-- 删除指定group： 234401003 ；指定config：3001；物件身上指定option：176；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 234401003, 3001, 176) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 改变指定group组234401003中， configid为3001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234401003, 3001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组234401002中， configid为2002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234401002, 2002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组234401002中， configid为2001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234401002, 2001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组234401001中， configid为1001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234401001, 1001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组234401001中， configid为1002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234401001, 1002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

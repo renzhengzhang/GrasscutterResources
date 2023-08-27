@@ -1,6 +1,6 @@
 --2.0奥博伦派对-前置WQ，用于启动奥博伦的方向指示gallery
 
-local Tri = {
+Tri = {
     [1] = { name = "quest_start", config_id = 8000001, event = EventType.EVENT_QUEST_START, source = "7217604", condition = "", action = "action_quest_start", trigger_count = 0},
     [2] = { name = "challenge_success", config_id = 8000002, event = EventType.EVENT_CHALLENGE_SUCCESS, source = "",condition = "",action = "action_challenge_success",trigger_count= 0},
 	[3] = { name = "challenge_fail", config_id = 8000003, event = EventType.EVENT_CHALLENGE_FAIL, source = "",condition = "",action = "action_challenge_fail",trigger_count= 0},
@@ -23,7 +23,7 @@ end
 
 --奥博伦前置任务启动的时候，起一个gallery
 function action_challenge_success(context,evt)
-    
+
     ScriptLib.PrintContextLog(context,"TMRPre: challenge stops!")
     LF_Stop_Temari_Gallery(context)
     return 0
@@ -39,7 +39,7 @@ end
 --------------------------------------------------------------------
 --启动藏球的方向指示gallery
 function LF_Start_Temari_Gallery(context)
-	local temari_pos = LF_Get_Temari_Pos(context)
+	temari_pos = LF_Get_Temari_Pos(context)
     ScriptLib.SetPlayerStartGallery(context, 9001, {context.uid})
     ScriptLib.SetHandballGalleryBallPosAndRot(context, 9001, {x=temari_pos.x,y=temari_pos.y,z=temari_pos.z}, {x=0,y=0,z=0})
 end
@@ -51,8 +51,8 @@ end
 
 --返回当前关卡的手鞠球位置
 function LF_Get_Temari_Pos(context)
-    local temari_entity_id = ScriptLib.GetEntityIdByConfigId(context,defs.temari_id)
-	local temari_pos = ScriptLib.GetPosByEntityId(context, temari_entity_id)
+    temari_entity_id = ScriptLib.GetEntityIdByConfigId(context,defs.temari_id)
+	temari_pos = ScriptLib.GetPosByEntityId(context, temari_entity_id)
     ScriptLib.PrintContextLog(context,"TMR: Temari pos: "..temari_pos.x..","..temari_pos.y..","..temari_pos.z)
     return temari_pos
 end

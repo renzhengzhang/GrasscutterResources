@@ -10,26 +10,26 @@
 =====================================================================================================================
 
 
-local PlatList = {76001,76002,76003,76004,0,76006,76007,76008,76009}
-local initPlatList = {0,76001,76002,76003,76004,76006,76007,76008,76009}
+PlatList = {76001,76002,76003,76004,0,76006,76007,76008,76009}
+initPlatList = {0,76001,76002,76003,76004,76006,76007,76008,76009}
 
-local groupID = 177005076
-local ArrayID = 700500010
+groupID = 177005076
+ArrayID = 700500010
 
-local operatorConfigID = 76010
-local successOptionID = 703
-local offeringConfigID = 76014
-local borderConfigID = 76018
+operatorConfigID = 76010
+successOptionID = 703
+offeringConfigID = 76014
+borderConfigID = 76018
 
-local lastOfferingConfigID = 76011
-local completeConfigID = 76016
-local centreConfigID = 76016
+lastOfferingConfigID = 76011
+completeConfigID = 76016
+centreConfigID = 76016
 
-local successConfigID = 0
+successConfigID = 0
 
-local OptionID = 705   
-local RestartOption = 704
-local PointList ={
+OptionID = 705
+RestartOption = 704
+PointList ={
         {pos={x=242.596, y=325.599, z=284.231}, rot={x=0 ,y=306.31, z=0}},
         {pos={x=241.107, y=325.599, z=282.2}, rot={x=0 ,y=306.31, z=0}},
         {pos={x=239.68, y=325.599, z=280.16}, rot={x=0 ,y=306.31, z=0}},
@@ -52,7 +52,7 @@ local PointList ={
 
 
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["Reach_Point"] = { config_id = 8000001, name = "Reach_Point", event= EventType.EVENT_PLATFORM_REACH_POINT, source = "", condition = "", action = "action_PlatReachPoint", trigger_count = 0 },
 		["Option_Down"] = { config_id = 8000002, name = "Option_Down", event= EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_OptionDown", trigger_count = 0 },
@@ -61,13 +61,13 @@ local extrTriggers = {
 	}
 }
 
-local referenceConfigID = 76021
+referenceConfigID = 76021
 
 --在tempvalue组里插入数据，返回其当前所在的位置，singlMode为true表示自动过滤重复数据
 function LF_TempValueInsert( context, key, value, isSingleMode )
 
 	for i=1,10 do
-		local curSlot = LF_GetTempValueByIndex( context, key, i )	
+		curSlot = LF_GetTempValueByIndex( context, key, i )
 
 		ScriptLib.PrintContextLog(context, "## HRD_LOG2 : 缓存加值循环")
 
@@ -91,11 +91,11 @@ function LF_TempValueInsert( context, key, value, isSingleMode )
 	end
 
 	return -1
-	
+
 end
 
 function LF_TempValueRemoveByIndex( context, key, index )
-	local sum = LF_TempValueGetSize( context, key )
+	sum = LF_TempValueGetSize( context, key )
 
 	if sum == 0 then
 		ScriptLib.PrintContextLog(context, "## HRD_LOG2 : 有问题，缓存是空的")
@@ -106,8 +106,8 @@ function LF_TempValueRemoveByIndex( context, key, index )
 	end
 
 	--取成List
-	local tempList = {}
-	for i=1,sum do	
+	tempList = {}
+	for i=1,sum do
 		table.insert(tempList, ScriptLib.GetGroupTempValue(context, key..i, {}))
 	end
 
@@ -127,8 +127,8 @@ function LF_TempValueRemoveByIndex( context, key, index )
 end
 
 function LF_TempValueRemoveByValue( context, key, value )
-	local sum = LF_TempValueGetSize( context, key )
-	local i = 1
+	sum = LF_TempValueGetSize( context, key )
+	i = 1
 
 
 	for i=1,sum do
@@ -145,7 +145,7 @@ end
 
 
 function LF_GetTempValueByIndex( context, key, index )
-	local sum = LF_TempValueGetSize( context, key )
+	sum = LF_TempValueGetSize( context, key )
 	if index > sum then
 		return nil
 	end
@@ -168,14 +168,14 @@ end
 function SLC_Huarongdao_Selecte( context, isSelected)
 
 	--获取当前拼图的configID
-	local configID = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+	configID = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 
 	if isSelected == 1 then
 
 		ScriptLib.PrintContextLog(context, "## HRD_LOG2 : In Select")
 
 		--将所有被踩到的拼图加入缓存区
-		local i = LF_TempValueInsert( context, "SelectPlat", configID, true )
+		i = LF_TempValueInsert( context, "SelectPlat", configID, true )
 
 		ScriptLib.PrintContextLog(context, "## HRD_LOG2 : 当前进入的是第 "..i.." 块拼图")
 
@@ -215,7 +215,7 @@ function SLC_Huarongdao_Selecte( context, isSelected)
 		--将离开范围的拼图移除缓存区
 		LF_TempValueRemoveByValue( context, "SelectPlat", configID )
 
-		
+
 
 		--如果缓存区还有拼图，设置发光和按键
 
@@ -248,7 +248,7 @@ function action_OptionDown( context,evt )
 
 		ScriptLib.AssignPlayerShowTemplateReminder(context, 165, {param_vec={},param_uid_vec={},uid_vec={context.uid}})
 
-		return 0 
+		return 0
 	end
 
 
@@ -259,10 +259,10 @@ function action_OptionDown( context,evt )
 
 		ScriptLib.PrintContextLog(context, "## HRD_LOG2 : 平台移动，ConfigID = "..evt.param1)
 
-		local BlankPoint = LF_GetBlankPoint(context)
+		BlankPoint = LF_GetBlankPoint(context)
 
 		--删除缓存
-		local sum = LF_TempValueGetSize( context, "SelectPlat" )
+		sum = LF_TempValueGetSize( context, "SelectPlat" )
 
 		for i=2,sum do
 			ScriptLib.PrintContextLog(context, "## HRD_LOG2 : 按下按键，删除缓存, value = "..ScriptLib.GetGroupTempValue(context, "SelectPlat"..i,{}))
@@ -281,7 +281,7 @@ function action_OptionDown( context,evt )
 				ScriptLib.DelWorktopOptionByGroupId(context, groupID, v, OptionID)
 			end
 		end
-		
+
 		ScriptLib.PrintContextLog(context, "## HRD_LOG : Start Move")
 
 		ScriptLib.SetPlatformPointArray(context, evt.param1, ArrayID, {BlankPoint}, {route_type = 0})
@@ -309,12 +309,12 @@ function action_OptionDown( context,evt )
 
 		-- 	ScriptLib.PrintContextLog(context, "## HRD_LOG : Get Point Value Point "..i.." IS "..ScriptLib.GetGroupVariableValue(context, "PlatPoint"..i))
 		-- end
-		
+
 	elseif evt.param2 == RestartOption then
 		--按下重来按键后，恢复到初始图案
 		ScriptLib.SetGroupTempValue(context, "PlatInMove",0,{})
 		--删除缓存
-		local sum = LF_TempValueGetSize( context, "SelectPlat" )
+		sum = LF_TempValueGetSize( context, "SelectPlat" )
 
 		if sum~= 0 then
 			for i= 1,sum do
@@ -324,7 +324,7 @@ function action_OptionDown( context,evt )
 
 
 		for i=1,9 do
-			local CurConfigID = ScriptLib.GetGroupVariableValue(context, "PlatPoint"..i)
+			CurConfigID = ScriptLib.GetGroupVariableValue(context, "PlatPoint"..i)
 			ScriptLib.PrintContextLog(context, "## HRD_LOG : Get Point Value Point "..i.." IS "..CurConfigID)
 			if CurConfigID~=0 then
 				ScriptLib.RemoveEntityByConfigId(context, groupID, EntityType.GADGET, CurConfigID)
@@ -336,7 +336,7 @@ function action_OptionDown( context,evt )
 
 		--创建散装板块
 		for i=1,9 do
-			local CurConfigID = ScriptLib.GetGroupVariableValue(context, "PlatPoint"..i)
+			CurConfigID = ScriptLib.GetGroupVariableValue(context, "PlatPoint"..i)
 			ScriptLib.PrintContextLog(context, "## HRD_LOG : Get Point Value Point "..i.." IS "..CurConfigID)
 			if CurConfigID~=0 then
 				ScriptLib.CreateGadgetByConfigIdByPos(context, CurConfigID, PointList[i].pos, PointList[i].rot)
@@ -364,22 +364,22 @@ function action_OptionDown( context,evt )
 
 	end
 
-	return 0 
+	return 0
 end
 
 function action_GroupLoad( context, evt)
 
 	ScriptLib.PrintContextLog(context, "## HRD_LOG : Group加载")
 
-	
+
 
 	ScriptLib.SetGroupTempValue(context, "PlatInMove",0,{})
 
 
 	--根据任务状态还原
-	local uidList = ScriptLib.GetSceneUidList(context)
+	uidList = ScriptLib.GetSceneUidList(context)
 	if next(uidList)~=nil then
-		local avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
+		avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
 
 		ScriptLib.PrintContextLog(context, "## HRD_LOG : QuestState is "..ScriptLib.GetQuestState(context, avatar_entity, 7227622))
 
@@ -404,14 +404,14 @@ function action_GroupLoad( context, evt)
 		end
 	end
 
-	
+
 	ScriptLib.PrintContextLog(context, "## HRD_LOG : 重载后PUZZLEFLAG = "..ScriptLib.GetGroupVariableValue(context, "PuzzleFlag"))
 
 	--根据玩法状态创建板块
 	if ScriptLib.GetGroupVariableValue(context, "PuzzleFlag")==1 or ScriptLib.GetGroupVariableValue(context, "PuzzleFlag")==2 then
 		--创建散装板块
 		for i=1,9 do
-			local CurConfigID = ScriptLib.GetGroupVariableValue(context, "PlatPoint"..i)
+			CurConfigID = ScriptLib.GetGroupVariableValue(context, "PlatPoint"..i)
 			ScriptLib.PrintContextLog(context, "## HRD_LOG : Get Point Value Point "..i.." IS "..CurConfigID)
 			if CurConfigID~=0 then
 				ScriptLib.CreateGadgetByConfigIdByPos(context, CurConfigID, PointList[i].pos, PointList[i].rot)
@@ -424,7 +424,7 @@ function action_GroupLoad( context, evt)
 			LF_SetPlatState(context, 0)
 			LF_SetOption(context)
 		end
-		
+
 
 
 
@@ -437,7 +437,7 @@ function action_GroupLoad( context, evt)
 
 
 	--删除缓存
-	local sum = LF_TempValueGetSize( context, "SelectPlat" )
+	sum = LF_TempValueGetSize( context, "SelectPlat" )
 
 	ScriptLib.PrintContextLog(context, "## HRD_LOG : Group加载, 缓存尺寸为"..sum)
 
@@ -454,7 +454,7 @@ end
 
 --查空point
 function LF_GetBlankPoint( context)
-	
+
 	for i=1,9 do
 		if ScriptLib.GetGroupVariableValue(context, "PlatPoint"..i) == 0 then
 
@@ -462,7 +462,7 @@ function LF_GetBlankPoint( context)
 
 			return i
 		end
-		
+
 	end
 
 end
@@ -471,8 +471,8 @@ end
 --查找可移动操作台
 function LF_FindMoveablePlat( context)
 
-	local BlankPoint = LF_GetBlankPoint(context)
-	local MoveablePlatList = {}
+	BlankPoint = LF_GetBlankPoint(context)
+	MoveablePlatList = {}
 
 	--在最左列
 	if BlankPoint%3 == 1 then
@@ -526,11 +526,11 @@ end
 
 --设置操作台按键
 function LF_SetOption(context)
-	local MoveablePlatList = LF_FindMoveablePlat( context)
+	MoveablePlatList = LF_FindMoveablePlat( context)
 
 	for i,v in ipairs(MoveablePlatList) do
 
-		local PlatConfigID = ScriptLib.GetGroupVariableValue(context, "PlatPoint"..v)
+		PlatConfigID = ScriptLib.GetGroupVariableValue(context, "PlatPoint"..v)
 
 		ScriptLib.PrintContextLog(context, "## HRD_LOG : SET OPTION, PLATCONFIGID IS  "..PlatConfigID)
 
@@ -588,7 +588,7 @@ function action_GadgetStateChange( context,evt )
 
 		--创建散装板块
 		for i=1,9 do
-			local CurConfigID = ScriptLib.GetGroupVariableValue(context, "PlatPoint"..i)
+			CurConfigID = ScriptLib.GetGroupVariableValue(context, "PlatPoint"..i)
 			ScriptLib.PrintContextLog(context, "## HRD_LOG : Get Point Value Point "..i.." IS "..CurConfigID)
 			if CurConfigID~=0 then
 				ScriptLib.CreateGadgetByConfigIdByPos(context, CurConfigID, PointList[i].pos, PointList[i].rot)
@@ -605,14 +605,14 @@ function action_GadgetStateChange( context,evt )
 	end
 
 
-	--完成第二次碎片提交 
+	--完成第二次碎片提交
 	if evt.param2 == lastOfferingConfigID and evt.param1 == 201 then
 		--切换整版拼图状态
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0, completeConfigID, 201)
 
 		--创建中心拼图
 		ScriptLib.CreateGadget(context, { config_id = centreConfigID })
-		
+
 
 		--设置玩法状态
 		ScriptLib.SetGroupVariableValue(context, "PuzzleFlag", 4)
@@ -628,7 +628,7 @@ end
 function action_PlatReachPoint( context,evt )
 
 	ScriptLib.PrintContextLog(context, "## HRD_LOG : reachPoint")
-	
+
 	if CheckPointAndPlat(context) == true then
 		--设置挑战完成
 		ScriptLib.SetWorktopOptionsByGroupId(context, groupID, operatorConfigID, {successOptionID})

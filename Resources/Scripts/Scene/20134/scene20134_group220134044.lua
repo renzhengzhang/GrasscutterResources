@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220134044
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	max_gear = 4,
 	timer = 10,
 	group_id = 220134044,
@@ -16,9 +16,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -98,9 +98,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -108,19 +108,19 @@ function condition_EVENT_GADGET_STATE_CHANGE_44006(context, evt)
 	if GadgetState.Action02 ~= ScriptLib.GetGadgetStateByConfigId(context, 220134044, 44001) then
 		return false
 	end
-	
+
 	if GadgetState.Action02 ~= ScriptLib.GetGadgetStateByConfigId(context, 220134044, 44011) then
 		return false
 	end
-	
+
 	if GadgetState.Action02 ~= ScriptLib.GetGadgetStateByConfigId(context, 220134044, 44009) then
 		return false
 	end
-	
+
 	if GadgetState.Action02 ~= ScriptLib.GetGadgetStateByConfigId(context, 220134044, 44010) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -131,7 +131,7 @@ function action_EVENT_GADGET_STATE_CHANGE_44006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -140,7 +140,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_44008(context, evt)
 	if GadgetState.Action02 ~= ScriptLib.GetGadgetStateByConfigId(context, 220134044, 44011) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -150,8 +150,8 @@ function action_EVENT_GADGET_STATE_CHANGE_44008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44005, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -160,7 +160,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_44012(context, evt)
 	if GadgetState.Action02 ~= ScriptLib.GetGadgetStateByConfigId(context, 220134044, 44009) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -170,8 +170,8 @@ function action_EVENT_GADGET_STATE_CHANGE_44012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44002, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -180,7 +180,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_44013(context, evt)
 	if GadgetState.Action02 ~= ScriptLib.GetGadgetStateByConfigId(context, 220134044, 44010) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -190,20 +190,20 @@ function action_EVENT_GADGET_STATE_CHANGE_44013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44003, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_44014(context, evt)
 	if evt.param1 ~= 44014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -213,26 +213,26 @@ function action_EVENT_ENTER_REGION_44014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134006中， configid为6012的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134006, 6012, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134007中， configid为7002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134007, 7002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134043中， configid为43008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134043, 43008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -242,7 +242,7 @@ function condition_EVENT_LEAVE_REGION_44015(context, evt)
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -252,8 +252,8 @@ function action_EVENT_LEAVE_REGION_44015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -262,7 +262,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_44017(context, evt)
 	if GadgetState.Action02 ~= ScriptLib.GetGadgetStateByConfigId(context, 220134044, 44001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -273,13 +273,13 @@ function action_EVENT_GADGET_STATE_CHANGE_44017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 改变指定group组220134049中， configid为49002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134049, 49002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -288,7 +288,7 @@ function condition_EVENT_GROUP_LOAD_44018(context, evt)
 	if GadgetState.Action02 ~= ScriptLib.GetGadgetStateByConfigId(context, 220134044, 44001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -299,12 +299,12 @@ function action_EVENT_GROUP_LOAD_44018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 改变指定group组220134049中， configid为49002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134049, 49002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

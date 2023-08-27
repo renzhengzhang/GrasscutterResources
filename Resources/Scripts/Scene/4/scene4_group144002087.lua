@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 144002087
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	maxPathNode = 5,
 	pointarray_route = 400200015,
 	gadget_bubble = 87002,
@@ -15,9 +15,9 @@ local defs = {
 -- DEFS_MISCS
 function MovePlatform(context)
 	ScriptLib.PrintLog(context, "platform to move")
-	local pathnodeindex = ScriptLib.GetGroupVariableValue(context, "currentPathNode") + 1
+	pathnodeindex = ScriptLib.GetGroupVariableValue(context, "currentPathNode") + 1
 
-	if pathnodeindex > defs.maxPathNode then 
+	if pathnodeindex > defs.maxPathNode then
 		pathnodeindex = defs.maxPathNode
 	end
 
@@ -27,9 +27,9 @@ function MovePlatform(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -69,9 +69,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -82,9 +82,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -109,9 +109,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -139,12 +139,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_87004(context, evt)
 	if evt.param1 ~= 87004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -163,14 +163,14 @@ end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_87005(context, evt)
-			ScriptLib.SetGroupVariableValue(context, "currentPathNode", evt.param3)	
-				ScriptLib.StopPlatform(context, defs.gadget_bubble) 
-			
-				if evt.param3 == defs.maxPathNode then 
+			ScriptLib.SetGroupVariableValue(context, "currentPathNode", evt.param3)
+				ScriptLib.StopPlatform(context, defs.gadget_bubble)
+
+				if evt.param3 == defs.maxPathNode then
 					--ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_bubble})
 					--ScriptLib.CreateGadget(context, { config_id = defs.gadget_reward })
 					--ScriptLib.GoToGroupSuite(context,defs.group_id,2)
-					ScriptLib.SetGroupVariableValue(context, "isReachGoal", 1)				
+					ScriptLib.SetGroupVariableValue(context, "isReachGoal", 1)
 				end
 				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_bubble, GadgetState.Default)
 				return 0

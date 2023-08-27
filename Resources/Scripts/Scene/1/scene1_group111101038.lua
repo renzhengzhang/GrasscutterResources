@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101038
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	challenge_1_duration = 50,
 	challenge_2_duration = 40,
 	challenge_3_duration = 30,
@@ -70,9 +70,9 @@ defs.quest_4_success = defs.group_id.."0401"
 defs.quest_4_fail = defs.group_id.."0402"
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -118,9 +118,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -131,9 +131,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -176,9 +176,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -224,7 +224,7 @@ end
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_38013(context, evt)
 	-- 根据触发的挑战类型决定奖励物品
-	local reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
+	reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
 	if reward == 1 then
 	ScriptLib.CreateGadget(context, {config_id = defs.gadget_chest_1} )
 	-- 向任务返回结果
@@ -262,7 +262,7 @@ end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_38014(context, evt)
-	local reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
+	reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
 	if reward == 1 then
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context, defs.quest_1_fail)
@@ -293,7 +293,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_38015(context, evt)
-	if evt.param1 ~= defs.region then 
+	if evt.param1 ~= defs.region then
 	return false
 	end
 	return true

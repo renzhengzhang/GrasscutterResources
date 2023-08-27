@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250004023
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 174,
 	gadget_id_2 = 163
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -84,18 +84,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_CLIENT_EXECUTE_36(context, evt)
 	-- 判断是gadgetid 57 option_id 0
 	if defs.gadget_id_1 == ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid }) then
-	
+
 	return true
-	
+
 	end
 end
 
@@ -105,8 +105,8 @@ function action_EVENT_CLIENT_EXECUTE_36(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 164, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -114,9 +114,9 @@ end
 function condition_EVENT_CLIENT_EXECUTE_37(context, evt)
 	-- 判断是gadgetid 57 option_id 0
 	if defs.gadget_id_2 == ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid }) then
-	
+
 	return true
-	
+
 	end
 end
 
@@ -126,7 +126,7 @@ function action_EVENT_CLIENT_EXECUTE_37(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 167, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

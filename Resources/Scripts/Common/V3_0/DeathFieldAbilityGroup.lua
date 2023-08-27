@@ -10,7 +10,7 @@
 
 -- 该功能仅用于模拟死域的基础感受
 --[[
-local DFAGConfig ={
+DFAGConfig ={
     BasicCounter = 3,
     ExtraCounter = 0,
     Region = 33007,
@@ -18,7 +18,7 @@ local DFAGConfig ={
 }
 --]]
 
-local DeathFieldAbilityGroup_Trigger = {
+DeathFieldAbilityGroup_Trigger = {
     { config_id = 41000001, name = "DFAG_EnterRegion", event = EventType.EVENT_ENTER_REGION, source = "",
       condition = "", action = "action_DFAG_EnterRegion", trigger_count = 0},
     { config_id = 41000002, name = "DFAG_LeaveRegion", event = EventType.EVENT_LEAVE_REGION, source = "",
@@ -73,9 +73,9 @@ end
 -- 每10秒增加1格死域值
 function action_DFAG_TimeAxis(context,evt)
 
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    uid_list = ScriptLib.GetSceneUidList(context)
     ScriptLib.PrintContextLog(context,"TD_DFAG 玩家" .. uid_list[1] .. "死域时间到！")
-    local extraCounter = ScriptLib.GetTeamServerGlobalValue(context, uid_list[1], "SGV_DeathZone_ExtraCounter")
+    extraCounter = ScriptLib.GetTeamServerGlobalValue(context, uid_list[1], "SGV_DeathZone_ExtraCounter")
     if DFAGConfig.BasicCounter + extraCounter <= 9 then
         ScriptLib.AddTeamServerGlobalValue(context, uid_list[1], "SGV_DeathZone_ExtraCounter", 1)
         ScriptLib.PrintContextLog(context,"TD_DFAG 玩家" .. uid_list[1] .. "死域附加值+1")
@@ -88,8 +88,8 @@ end
 
 function SLC_ExtraAttack(context,param1)
     -- 临时增加extraLevel
-    local uid_list = ScriptLib.GetSceneUidList(context)
-    local extraCounter = ScriptLib.GetTeamServerGlobalValue(context, uid_list[1], "SGV_DeathZone_ExtraCounter")
+    uid_list = ScriptLib.GetSceneUidList(context)
+    extraCounter = ScriptLib.GetTeamServerGlobalValue(context, uid_list[1], "SGV_DeathZone_ExtraCounter")
     if DFAGConfig.BasicCounter + extraCounter <= 9 then
         ScriptLib.AddTeamServerGlobalValue(context, uid_list[1], "SGV_DeathZone_ExtraCounter", 1)
         ScriptLib.PrintContextLog(context,"TD_DFAG 玩家" .. uid_list[1] .. "受到死域重击，死域附加值+1")
@@ -101,8 +101,8 @@ end
 
 function SLC_LifePointBuff(context)
     -- 临时增加extraLevel
-    local uid_list = ScriptLib.GetSceneUidList(context)
-    local extraCounter = ScriptLib.GetTeamServerGlobalValue(context, uid_list[1], "SGV_DeathZone_ExtraCounter")
+    uid_list = ScriptLib.GetSceneUidList(context)
+    extraCounter = ScriptLib.GetTeamServerGlobalValue(context, uid_list[1], "SGV_DeathZone_ExtraCounter")
     if extraCounter > 0 then
         ScriptLib.AddTeamServerGlobalValue(context, uid_list[1], "SGV_DeathZone_ExtraCounter", -1)
         ScriptLib.PrintContextLog(context,"TD_DFAG 玩家" .. uid_list[1] .. "处于生命源质附近，死域附加值-1")
@@ -120,7 +120,7 @@ end
 
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list

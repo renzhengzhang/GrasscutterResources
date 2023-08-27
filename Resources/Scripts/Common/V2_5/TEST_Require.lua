@@ -1,6 +1,6 @@
 --ServerUploadTool Save to [/root/env/data/lua/common/V2_5]
 
-local extrTriggers = {
+extrTriggers = {
 	initialtrigger = {
 		["GadgetStateChange"] = { config_id = 8000004, name = "GadgetStateChange", event= EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_GadgetStateChange", trigger_count = 0 },
 		["Group_Load"] = { config_id = 8000005, name = "Group_Load", event= EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_GroupLoad", trigger_count = 0 },
@@ -27,7 +27,7 @@ function action_GadgetStateChange( context, evt )
 end
 
 function action_any_player_die(context, evt)
-	
+
 
 	return 0
 end

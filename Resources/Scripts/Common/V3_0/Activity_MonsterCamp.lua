@@ -7,7 +7,7 @@
 =======================================]]
 
 --- 刷怪模式：0为波次刷怪。1为怪物潮刷怪。
---- defs.levelType = 0, 
+--- defs.levelType = 0,
 --- defs.challenge_id = 2010045,
 --- 怪物总数
 --- defs.target_count = 6,
@@ -18,24 +18,24 @@
 
 
 -- 波次模式配置-对应的suite
--- local monsterSuites = {2, 3, 4}
+-- monsterSuites = {2, 3, 4}
 
 -- 怪物潮模式配置 - 对应的monsterConfigId
--- local tideMonsters = {1001, 1002, 1003}
+-- tideMonsters = {1001, 1002, 1003}
 
 -- 打印日志
 function PrintLog(context, content)
-    local log = "## [Activity_MonsterCamp] TD: "..content
+    log = "## [Activity_MonsterCamp] TD: "..content
     ScriptLib.PrintContextLog(context, log)
 end
 
-local extraTriggers = 
+extraTriggers =
 {
     { config_id = 40000001, name = "tri_group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
     { config_id = 40000002, name = "tri_group_will_unload", event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_EVENT_GROUP_WILL_UNLOAD", trigger_count = 0 },
 
     { config_id = 40000003, name = "tri_monster_die", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_EVENT_ANY_MONSTER_DIE", trigger_count = 0 },
-   
+
     { config_id = 40000004, name = "tri_enter_region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_EVENT_ENTER_REGION", action = "action_EVENT_ENTER_REGION", trigger_count = 0 },
     { config_id = 40000005, name = "tri_leave_region", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "condition_EVENT_LEAVE_REGION", action = "action_EVENT_LEAVE_REGION", trigger_count = 0 },
 
@@ -73,10 +73,10 @@ function action_EVENT_GROUP_LOAD(context, evt)
         ScriptLib.SetGroupVariableValue(context, "challenge_state", 0)
     end
     -- 第一次加载时的怪物初始化
-    if ScriptLib.GetGroupVariableValue(context, "initialized") == 0 then 
-        if defs.levelType == 0 then 
+    if ScriptLib.GetGroupVariableValue(context, "initialized") == 0 then
+        if defs.levelType == 0 then
             -- 波次刷怪初始化
-            local wave = ScriptLib.GetGroupVariableValue(context, "current_wave")
+            wave = ScriptLib.GetGroupVariableValue(context, "current_wave")
             LF_StartMonsterWave(context, wave)
         else
             -- 怪物潮刷怪初始化
@@ -92,7 +92,7 @@ end
 
 function action_EVENT_GROUP_WILL_UNLOAD(context, evt)
 
-    if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then 
+    if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then
         ScriptLib.SetGroupVariableValue(context, "challenge_state", 0)
         if 0 == ScriptLib.PauseChallenge(context, 99) then
             PrintLog(context, "暂停挑战成功")
@@ -134,15 +134,15 @@ function action_EVENT_ANY_MONSTER_DIE(context, evt)
     PrintLog(context, "怪物死亡")
     -- 更新挑战进度
     ScriptLib.ChangeGroupVariableValue(context, "monster_killed", 1)
-    local cur_progress = ScriptLib.GetGroupVariableValue(context, "monster_killed")
+    cur_progress = ScriptLib.GetGroupVariableValue(context, "monster_killed")
     if cur_progress == #monsters and ScriptLib.GetGroupVariableValue(context, "challenge_state") == 0 then
         LF_Try_Start_Challenge(context)
     end
     ScriptLib.MarkGroupLuaAction(context, "GravenInnocence_Camp_2", "", {current_progress=cur_progress, total_progress=#monsters})
-    if defs.levelType == 0 then 
+    if defs.levelType == 0 then
         -- 波次模式。怪清空刷下一波怪
         if ScriptLib.GetGroupMonsterCountByGroupId(context, base_info.group_id) == 0 then
-            local wave = ScriptLib.GetGroupVariableValue(context, "current_wave") + 1
+            wave = ScriptLib.GetGroupVariableValue(context, "current_wave") + 1
             ScriptLib.SetGroupVariableValue(context, "current_wave", wave)
             LF_StartMonsterWave(context, wave)
         end
@@ -183,7 +183,7 @@ end
 
 function action_EVENT_LEAVE_REGION(context, evt)
     PrintLog(context, "离开挑战区域")
-    if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then 
+    if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then
         if 0 == ScriptLib.PauseChallenge(context, 99) then
             PrintLog(context, "暂停挑战成功")
         end
@@ -193,23 +193,23 @@ end
 
 --------- 关卡Functions --------
 function LF_Try_Start_Challenge(context)
-    if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 0 then 
+    if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 0 then
 
-        local init_count = ScriptLib.GetGroupVariableValue(context, "monster_killed")
-        
+        init_count = ScriptLib.GetGroupVariableValue(context, "monster_killed")
+
         -- 挑战进度保护
-        local left_count = 0
-        local is_done = 0
-        if init_count < defs.target_count then 
+        left_count = 0
+        is_done = 0
+        if init_count < defs.target_count then
             -- 安全
-        else 
+        else
             left_count = init_count - defs.target_count + 1
             init_count = defs.target_count - 1
             is_done = 1
         end
 
         --参数1： event_type所在枚举序号； 参数2： trigger_tag；参数3： 次数；参数4：Bool，次数达成是否计为成功；参数5：初始次数值
-        if 0 ~= ScriptLib.StartChallenge(context, 99, defs.challenge_id, {3, 666, defs.target_count, 1, init_count}) then 
+        if 0 ~= ScriptLib.StartChallenge(context, 99, defs.challenge_id, {3, 666, defs.target_count, 1, init_count}) then
             PrintLog(context, "开启挑战失败")
         else
             -- 成功开启挑战1
@@ -221,7 +221,7 @@ function LF_Try_Start_Challenge(context)
                 ScriptLib.ChangeGroupVariableValue(context, "monster_killed", 1)
             end
             --[[if left_count > 0 then
-                -- 挑战进度还原 
+                -- 挑战进度还原
                 for i = 1, left_count do
                     ScriptLib.ChangeGroupVariableValue(context, "monster_killed", 1)
                 end
@@ -232,26 +232,26 @@ end
 
 function LF_StartMonsterWave(context, wave)
     PrintLog(context, "start wave: "..wave)
-    if wave > #monsterSuites then 
+    if wave > #monsterSuites then
         PrintLog(context, "所有波次已完成")
     else
         --ScriptLib.MarkGroupLuaAction(context, "GravenInnocence_Camp_2", "", {current_progress=wave, total_progress=#monsterSuites})
-        local suite = monsterSuites[wave]
+        suite = monsterSuites[wave]
         ScriptLib.AddExtraGroupSuite(context, base_info.group_id, suite)
     end
     return 0
 end
 
 function LF_Try_Create_Monster(context)
-    local index = ScriptLib.GetGroupVariableValue(context, "monster_index")
-    if index < defs.target_count then 
+    index = ScriptLib.GetGroupVariableValue(context, "monster_index")
+    if index < defs.target_count then
 
-        local configId = tideMonsters[index+1]
+        configId = tideMonsters[index+1]
 
-        if 0 == ScriptLib.CreateMonster(context, { config_id = configId, delay_time = 0}) then 
+        if 0 == ScriptLib.CreateMonster(context, { config_id = configId, delay_time = 0}) then
             PrintLog(context, "添加怪物成功")
             ScriptLib.SetGroupVariableValue(context, "monster_index", index + 1)
-        else 
+        else
             PrintLog(context, "添加怪物失败")
         end
     end
@@ -273,7 +273,7 @@ function LF_Init_Vars()
     table.insert(variables, {config_id = 50000002, name = "challenge_state", value = 0, no_refresh = true})
     -- 刷怪进度
     table.insert(variables, {config_id = 50000003, name = "monster_killed", value = 0, no_refresh =true})
-    
+
     -- 怪物潮进度
     table.insert(variables, {config_id = 50000005, name = "monster_index", value = 0, no_refresh =true})
     -- Group状态

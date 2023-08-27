@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133314086
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	point_camera = 86008,
 	gadget_lookEntity = 86003,
 	look_duration = 3
 }
 
 -- DEFS_MISCS
-local CameraLookSetting = {
+CameraLookSetting = {
     blend_type = 1,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -20,9 +20,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -108,9 +108,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 使用reminderUI
@@ -129,7 +129,7 @@ function condition_EVENT_ANY_MONSTER_DIE_86002(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -140,7 +140,7 @@ function action_EVENT_ANY_MONSTER_DIE_86002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -150,7 +150,7 @@ function condition_EVENT_ANY_MONSTER_DIE_86004(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -161,7 +161,7 @@ function action_EVENT_ANY_MONSTER_DIE_86004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -170,7 +170,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_86005(context, evt)
 	if 86001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -181,7 +181,7 @@ function action_EVENT_ANY_MONSTER_LIVE_86005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -190,14 +190,14 @@ function condition_EVENT_ANY_MONSTER_LIVE_86006(context, evt)
 	if 86003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_LIVE_86006(context, evt)
 	TLA_active_reminder_ui(context, evt, 1000190016)
-	
+
 	LF_PointLook(context)
 	return 0
 end
@@ -207,7 +207,7 @@ function condition_EVENT_MONSTER_BATTLE_86007(context, evt)
 	if 86001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -218,7 +218,7 @@ function action_EVENT_MONSTER_BATTLE_86007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 

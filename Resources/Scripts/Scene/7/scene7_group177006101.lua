@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 177006101
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	max_gear = 3,
 	timer = 25,
 	group_id = 177006101,
@@ -16,9 +16,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -126,14 +126,14 @@ end
 function action_EVENT_TIMER_EVENT_101007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, tonumber(evt.source_name), GadgetState.Action01) then
 	return -1
-	end 
+	end
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_101008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == -1 then
 	ScriptLib.MarkPlayerAction(context, 1001, 4, 1)
 	end
@@ -149,23 +149,23 @@ function action_EVENT_VARIABLE_CHANGE_101008(context, evt)
 	ScriptLib.CancelGroupTimerEvent(context, defs.group_id, tostring(defs.gadget_2))
 	ScriptLib.CancelGroupTimerEvent(context, defs.group_id, tostring(defs.gadget_3))
 	ScriptLib.CancelGroupTimerEvent(context, defs.group_id, tostring(defs.gadget_4))
-	
+
 	if defs.gadget_1 ~= 0 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStart)
 	end
-	
+
 	if defs.gadget_2 ~= 0 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_2, GadgetState.GearStart)
 	end
-	
+
 	if defs.gadget_3 ~=0 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.GearStart)
 	end
-	
+
 	if defs.gadget_4 ~=0 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_4, GadgetState.GearStart)
 	end
-	
+
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 101004, GadgetState.Default) then
 		return -1
 	end

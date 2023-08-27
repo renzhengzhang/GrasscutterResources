@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133316092
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -118,9 +118,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -128,7 +128,7 @@ function condition_EVENT_GADGET_CREATE_92011(context, evt)
 	if 92009 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -139,7 +139,7 @@ function action_EVENT_GADGET_CREATE_92011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -147,14 +147,14 @@ end
 function condition_EVENT_SELECT_OPTION_92012(context, evt)
 	-- 判断是gadgetid 92009 option_id 3
 	if 92009 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 3 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -162,13 +162,13 @@ end
 function action_EVENT_SELECT_OPTION_92012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133316092, 2)
-	
+
 	-- 删除指定group： 133316092 ；指定config：92009；物件身上指定option：3；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133316092, 92009, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_92013(context, evt)
 	if 92001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -185,7 +185,7 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_92013(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133316092, 3)
-	
+
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_ANY_MONSTER_DIE_92014(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -203,10 +203,10 @@ end
 function action_EVENT_ANY_MONSTER_DIE_92014(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133316092, 4)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133316092, 3)
-	
+
 	return 0
 end
 
@@ -216,7 +216,7 @@ function condition_EVENT_ANY_MONSTER_DIE_92015(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -227,22 +227,22 @@ function action_EVENT_ANY_MONSTER_DIE_92015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133316092, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_92016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Launch"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Launch", 133316092) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -250,6 +250,6 @@ end
 function action_EVENT_VARIABLE_CHANGE_92016(context, evt)
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133316092, 1)
-	
+
 	return 0
 end

@@ -4,7 +4,7 @@
 ||  owner:      xudong.sun
 ||  description:    冥想盆玩法，根据提交的内容不同，触发不同的关卡事件
 ||  LogName:    ## Undersea_Pensieve
-||  Protection: 
+||  Protection:
 =======================================]]
 
 --[[
@@ -14,15 +14,15 @@
 交付可取回 - 102
 ]]
 
-local pensieveConfigID = 285001
+pensieveConfigID = 285001
 
-local giving_Triggers = {
+giving_Triggers = {
     { config_id = 8800001, name = "Gadget_Giving_Finished", event = EventType.EVENT_GADGET_GIVING_FINISHED, source = "", condition = "", action = "action_Gadget_Giving_Finished", trigger_count = 0 },
     { config_id = 8800002, name = "Gadget_Giving_TakeBack", event = EventType.EVENT_GADGET_GIVING_TAKEBACK, source = "", condition = "", action = "action_Gadget_Giving_TakeBack", trigger_count = 0 },
-    { config_id = 8800003, name = "Group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_Group_Load", trigger_count = 0 },    
+    { config_id = 8800003, name = "Group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_Group_Load", trigger_count = 0 },
 }
 
-local Pensieve_Action= {
+Pensieve_Action= {
     [102009] = function ( context)
 
         ScriptLib.PrintContextLog(context, "## Undersea_Pensieve : 播放CS")
@@ -69,7 +69,7 @@ function action_Gadget_Giving_Finished(context, evt)
     --evt.param1物件的configID   evt.param2物件的GivingID
 
     --获取当前提交的materialID
-    local _materialID = ScriptLib.GetGivingItemList(context, evt.param2)[1]
+    _materialID = ScriptLib.GetGivingItemList(context, evt.param2)[1]
 
     ScriptLib.PrintContextLog(context, "## Undersea_Pensieve : 交付成功, _materialID = ".._materialID)
 

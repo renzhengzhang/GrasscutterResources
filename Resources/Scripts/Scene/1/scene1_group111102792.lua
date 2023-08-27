@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111102792
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -98,15 +98,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_792007(context, evt)
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 111102792, 792003) then
 		return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 111102792, 792004) then
 		return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 111102792, 792005) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -117,13 +117,13 @@ function action_EVENT_GADGET_STATE_CHANGE_792007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 将configid为 792002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 792002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -131,14 +131,14 @@ end
 function condition_EVENT_SELECT_OPTION_792008(context, evt)
 	-- 判断是gadgetid 792006 option_id 72
 	if 792006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 72 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -148,20 +148,20 @@ function action_EVENT_SELECT_OPTION_792008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 792002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 111102792 ；指定config：792006；物件身上指定option：72；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111102792, 792006, 72) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 通知groupid为111102792中,configid为：792001的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 792001, 111102792) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -170,19 +170,19 @@ function action_EVENT_ENTER_REGION_792009(context, evt)
 		-- 设置封印圈的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792002, "SGV_GRASSSEAL_MARK", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792002, "SGV_SEAL_ENABLED", 3)
-		
+
 		-- 设置能量桩1的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792003, "SGV_GRASSSEAL_TARGET", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792003, "SGV_GRASSSEAL_ATTACHPOINT", 1)
-	
+
 		-- 设置能量桩2的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792004, "SGV_GRASSSEAL_TARGET", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792004, "SGV_GRASSSEAL_ATTACHPOINT", 2)
-	
+
 		-- 设置能量桩3的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792005, "SGV_GRASSSEAL_TARGET", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792005, "SGV_GRASSSEAL_ATTACHPOINT", 3)
-	
+
 		return 0
 end
 
@@ -191,19 +191,19 @@ function action_EVENT_GROUP_LOAD_792010(context, evt)
 		-- 设置封印圈的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792002, "SGV_GRASSSEAL_MARK", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792002, "SGV_SEAL_ENABLED", 3)
-		
+
 		-- 设置能量桩1的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792003, "SGV_GRASSSEAL_TARGET", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792003, "SGV_GRASSSEAL_ATTACHPOINT", 1)
-	
+
 		-- 设置能量桩2的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792004, "SGV_GRASSSEAL_TARGET", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792004, "SGV_GRASSSEAL_ATTACHPOINT", 2)
-	
+
 		-- 设置能量桩3的globalvalue
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792005, "SGV_GRASSSEAL_TARGET", 1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 792005, "SGV_GRASSSEAL_ATTACHPOINT", 3)
-	
+
 		return 0
 end
 
@@ -213,7 +213,7 @@ function condition_EVENT_ANY_MONSTER_DIE_792012(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -221,6 +221,6 @@ end
 function action_EVENT_ANY_MONSTER_DIE_792012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111102792, 2)
-	
+
 	return 0
 end

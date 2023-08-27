@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133220707
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -81,18 +81,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_707002(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133220707) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -103,19 +103,19 @@ function action_EVENT_ANY_MONSTER_DIE_707002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "win" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "win", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 322070702 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 322070702) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -125,7 +125,7 @@ function condition_EVENT_GROUP_LOAD_707003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "win") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -136,7 +136,7 @@ function action_EVENT_GROUP_LOAD_707003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -144,9 +144,9 @@ end
 function action_EVENT_LEAVE_REGION_707004(context, evt)
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133220707, EntityType.MONSTER, 707001)
-	
-		
-	
+
+
+
 	return 0
 end
 
@@ -157,6 +157,6 @@ function action_EVENT_MONSTER_BATTLE_707005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

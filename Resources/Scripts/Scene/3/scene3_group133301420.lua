@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301420
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	finishquest = "7304929_fin",
 	group_reward = 133301422,
 	keyNum = 3,
@@ -12,9 +12,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -137,9 +137,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -150,9 +150,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -240,9 +240,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -251,7 +251,7 @@ function condition_EVENT_GROUP_LOAD_420022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "success") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -262,25 +262,25 @@ function action_EVENT_GROUP_LOAD_420022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, defs.finishquest) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_420024(context, evt)
 	if evt.param1 ~= 420024 then return false end
-	
+
 	-- 判断是区域420024
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 420024 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -299,15 +299,15 @@ function condition_EVENT_ANY_GADGET_DIE_420025(context, evt)
 	if gadgets[evt.param1].gadget_id ~= 70330245 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_420025(context, evt)
-	local value = ScriptLib.GetGroupLogicStateValue(context,"SGV_WellUnlock")
+	value = ScriptLib.GetGroupLogicStateValue(context,"SGV_WellUnlock")
 	ScriptLib.SetGroupLogicStateValue(context,"SGV_WellUnlock",value +1)
-	
+
 	return 0
 end
 
@@ -317,20 +317,20 @@ function action_EVENT_CHALLENGE_SUCCESS_420026(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 420017, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133301420, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133301420, EntityType.GADGET, 420021 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -340,12 +340,12 @@ function action_EVENT_CHALLENGE_FAIL_420027(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 420017, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"failDelay"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "failDelay", {1}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -353,14 +353,14 @@ end
 function condition_EVENT_SELECT_OPTION_420028(context, evt)
 	-- 判断是gadgetid 420021 option_id 770
 	if 420021 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 770 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -371,22 +371,22 @@ function action_EVENT_SELECT_OPTION_420028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 将configid为 420017 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 420017, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 5)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 6)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 7)
-	
+
 	return 0
 end
 
@@ -396,7 +396,7 @@ function condition_EVENT_LEAVE_REGION_420029(context, evt)
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 420029 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -404,7 +404,7 @@ end
 function action_EVENT_LEAVE_REGION_420029(context, evt)
 	-- 终止识别id为457的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 457, 0)
-	
+
 	return 0
 end
 
@@ -415,25 +415,25 @@ function action_EVENT_CHALLENGE_SUCCESS_420030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 4)
-	
+
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 8)
-	
+
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 9)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 5)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 6)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 7)
-	
+
 	return 0
 end
 
@@ -444,31 +444,31 @@ function action_EVENT_CHALLENGE_FAIL_420031(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将configid为 420017 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 420017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 4)
-	
+
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 8)
-	
+
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 9)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 5)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 6)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 7)
-	
+
 	return 0
 end
 
@@ -477,7 +477,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_420032(context, evt)
 	if 420017 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -487,7 +487,7 @@ function condition_EVENT_LEAVE_REGION_420033(context, evt)
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 420033 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -495,14 +495,14 @@ end
 function action_EVENT_LEAVE_REGION_420033(context, evt)
 	-- 终止识别id为458的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 458, 0)
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_420034(context, evt)
 			ScriptLib.AttachChildChallenge(context, 457, 1458, 265, {9,232,1,1,0,0}, {}, {success=1,fail=1})
-	
+
 	return 0
 end
 
@@ -510,14 +510,14 @@ end
 function condition_EVENT_SELECT_OPTION_420035(context, evt)
 	-- 判断是gadgetid 420021 option_id 770
 	if 420021 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 770 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -526,7 +526,7 @@ function action_EVENT_SELECT_OPTION_420035(context, evt)
 			ScriptLib.CreateFatherChallenge(context, 458, 266, 1800, {success=1,fail=1,fail_on_wipe=true})
 			ScriptLib.AttachChildChallenge(context, 458, 1270, 270, {180,7,234,1}, {}, {success=1,fail=1})
 			ScriptLib.StartFatherChallenge(context, 458)
-	
+
 	return 0
 end
 
@@ -537,13 +537,13 @@ function action_EVENT_CHALLENGE_SUCCESS_420036(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, defs.finishquest) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -554,7 +554,7 @@ function action_EVENT_LUA_NOTIFY_420037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -565,7 +565,7 @@ function action_EVENT_LUA_NOTIFY_420038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -576,7 +576,7 @@ function action_EVENT_CHALLENGE_SUCCESS_420039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -585,7 +585,7 @@ function condition_EVENT_ANY_GADGET_DIE_420040(context, evt)
 	if 420018 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -593,7 +593,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_420040(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301420, 5)
-	
+
 	return 0
 end
 
@@ -602,7 +602,7 @@ function condition_EVENT_ANY_GADGET_DIE_420041(context, evt)
 	if 420019 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -610,7 +610,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_420041(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301420, 6)
-	
+
 	return 0
 end
 
@@ -619,7 +619,7 @@ function condition_EVENT_ANY_GADGET_DIE_420042(context, evt)
 	if 420020 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -627,7 +627,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_420042(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301420, 7)
-	
+
 	return 0
 end
 
@@ -635,13 +635,13 @@ end
 function action_EVENT_LUA_NOTIFY_420043(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301420, 4)
-	
+
 	-- 调用提示id为 1111399 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1111399) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -649,13 +649,13 @@ end
 function action_EVENT_LUA_NOTIFY_420044(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301420, 8)
-	
+
 	-- 调用提示id为 1111399 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1111399) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -663,13 +663,13 @@ end
 function action_EVENT_LUA_NOTIFY_420045(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301420, 9)
-	
+
 	-- 调用提示id为 1111399 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1111399) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -680,7 +680,7 @@ function action_EVENT_GROUP_LOAD_420046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_LogicStateValue")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -691,7 +691,7 @@ function action_EVENT_CHALLENGE_FAIL_420047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_LogicStateValue")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -702,13 +702,13 @@ function action_EVENT_GROUP_LOAD_420048(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将configid为 420017 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 420017, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -718,7 +718,7 @@ function condition_EVENT_GROUP_LOAD_420049(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "success") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -729,31 +729,31 @@ function action_EVENT_GROUP_LOAD_420049(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将configid为 420017 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 420017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 4)
-	
+
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 8)
-	
+
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 9)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 5)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 6)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301420, 7)
-	
+
 	return 0
 end
 
@@ -763,7 +763,7 @@ function condition_EVENT_ANY_MONSTER_DIE_420050(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -774,13 +774,13 @@ function action_EVENT_ANY_MONSTER_DIE_420050(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_LogicStateValue")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1111400 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1111400) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -790,7 +790,7 @@ function condition_EVENT_ANY_MONSTER_DIE_420051(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -801,13 +801,13 @@ function action_EVENT_ANY_MONSTER_DIE_420051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_LogicStateValue")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1111400 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1111400) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -817,7 +817,7 @@ function condition_EVENT_ANY_MONSTER_DIE_420052(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -828,13 +828,13 @@ function action_EVENT_ANY_MONSTER_DIE_420052(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_LogicStateValue")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1111400 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1111400) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -843,7 +843,7 @@ function condition_EVENT_TIME_AXIS_PASS_420053(context, evt)
 	if "failDelay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -854,6 +854,6 @@ function action_EVENT_TIME_AXIS_PASS_420053(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

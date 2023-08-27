@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210264
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -133,9 +133,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -143,7 +143,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_264004(context, evt)
 	if 264007 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -151,7 +151,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_264004(context, evt)
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210264, 4)
-	
+
 	return 0
 end
 
@@ -161,8 +161,8 @@ function condition_EVENT_ANY_MONSTER_DIE_264009(context, evt)
 	if evt.param2 ~= 1 then
 	    return false
 	 end
-	
-	
+
+
 	return true
 end
 
@@ -170,13 +170,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_264009(context, evt)
 		-- 添加某个flowSuite里的要素，不会更改当前场上已存在的物件/怪物状态
 	  ScriptLib.AddExtraFlowSuite(context, 133210264, 2, FlowSuiteOperatePolicy.DEFAULT)
-	
+
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210264, 2)
-	
+
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210265, 2)
-	
+
 	return 0
 end
 
@@ -185,7 +185,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_264010(context, evt)
 	if 264006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -196,48 +196,48 @@ function action_EVENT_GADGET_STATE_CHANGE_264010(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 264008 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 264006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210264, 3)
-	
+
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133210264, 3, FlowSuiteOperatePolicy.COMPLETE)
-	
+
 	-- 判断变量"start"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "start", 133210265) ~= 3 then
-	
+
 	-- 改变指定group组133210265中， configid为265001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133210265, 265001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133210265中， configid为265002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133210265, 265002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133210265中， configid为265003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133210265, 265003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
+		end
 	end
-	
+
 	return 0
 end

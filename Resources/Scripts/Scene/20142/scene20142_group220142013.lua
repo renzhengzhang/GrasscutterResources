@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220142013
 }
 
@@ -9,7 +9,7 @@ defs = {
     levelTagGroupID = 7,
 
     --是否由re-quire控制切suite，填0则不需要配置switchByLevelTag_suites
-    switchByLevelTag = 1, 
+    switchByLevelTag = 1,
 
     --切入该LevelTag时，加载且仅加载的suite。
     --注意，被此操作Remove掉的物件不会保留GadgetState
@@ -18,23 +18,25 @@ defs = {
         ["2_8_Kazuha_01"] = {},
         ["2_8_Kazuha_02"] = {},
         ["2_8_Kazuha_03"] = {},
-        ["2_8_Kazuha_05"] = {},
+        ["2_8_Kazuha_05"] = {},
+
         ["2_8_Kazuha_06"] = {},
         ["2_8_Kazuha_07"] = {},
     },
 
     --需要保存gadgetState的物件configID，最多9个
-    saved_gadget = 
-    {  
+    saved_gadget =
+    {
     	13002,13004,13005,13008
-    },
+    }
+,
     serve_items = {13010,13011,13012},
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -98,9 +100,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -111,9 +113,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -138,9 +140,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -148,7 +150,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13003(context, evt)
 	if 13005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -159,7 +161,7 @@ function action_EVENT_GADGET_STATE_CHANGE_13003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -168,7 +170,7 @@ function action_EVENT_GADGET_STATE_CHANGE_13006(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 13002) == 201 and ScriptLib.GetGadgetStateByConfigId(context, 0, 13005) == 201 and ScriptLib.GetGadgetStateByConfigId(context, 0, 13008) == 201 then
 		ScriptLib.SetGadgetStateByConfigId(context,13004, GadgetState.GearStart)
 	end
-	
+
 	return 0
 end
 
@@ -177,7 +179,7 @@ function condition_EVENT_QUEST_FINISH_13014(context, evt)
 	if GadgetState.ChestLocked ~= ScriptLib.GetGadgetStateByConfigId(context, 220142013, 13010) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -188,13 +190,13 @@ function action_EVENT_QUEST_FINISH_13014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将configid为 13010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -203,7 +205,7 @@ function condition_EVENT_QUEST_FINISH_13015(context, evt)
 	if GadgetState.ChestLocked ~= ScriptLib.GetGadgetStateByConfigId(context, 220142013, 13011) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -214,13 +216,13 @@ function action_EVENT_QUEST_FINISH_13015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 13011 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -229,7 +231,7 @@ function condition_EVENT_QUEST_FINISH_13016(context, evt)
 	if GadgetState.ChestLocked ~= ScriptLib.GetGadgetStateByConfigId(context, 220142013, 13012) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -240,13 +242,13 @@ function action_EVENT_QUEST_FINISH_13016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 13012 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -255,7 +257,7 @@ function condition_EVENT_QUEST_START_13017(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220142013, 13010) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -266,7 +268,7 @@ function action_EVENT_QUEST_START_13017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -275,7 +277,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13018(context, evt)
 	if 13008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -286,7 +288,7 @@ function action_EVENT_GADGET_STATE_CHANGE_13018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -295,7 +297,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13019(context, evt)
 	if 13002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -306,7 +308,7 @@ function action_EVENT_GADGET_STATE_CHANGE_13019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -315,15 +317,15 @@ function action_EVENT_QUEST_START_13020(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 13002) == 201 then
 		ScriptLib.AddQuestProgress(context, "4006521")
 	end
-	
+
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 13005) == 201 then
 		ScriptLib.AddQuestProgress(context, "4006508")
 	end
-	
+
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 13008) == 201 then
 		ScriptLib.AddQuestProgress(context, "4006520")
 	end
-	
+
 	return 0
 end
 
@@ -332,15 +334,15 @@ function action_EVENT_QUEST_START_13021(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 13002) == 201 then
 		ScriptLib.AddQuestProgress(context, "4006521")
 	end
-	
+
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 13005) == 201 then
 		ScriptLib.AddQuestProgress(context, "4006508")
 	end
-	
+
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 13008) == 201 then
 		ScriptLib.AddQuestProgress(context, "4006520")
 	end
-	
+
 	return 0
 end
 
@@ -349,15 +351,15 @@ function action_EVENT_QUEST_START_13022(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 13002) == 201 then
 		ScriptLib.AddQuestProgress(context, "4006521")
 	end
-	
+
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 13005) == 201 then
 		ScriptLib.AddQuestProgress(context, "4006508")
 	end
-	
+
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 13008) == 201 then
 		ScriptLib.AddQuestProgress(context, "4006520")
 	end
-	
+
 	return 0
 end
 
@@ -366,7 +368,7 @@ function condition_EVENT_QUEST_START_13023(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220142013, 13010) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -377,7 +379,7 @@ function action_EVENT_QUEST_START_13023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -386,7 +388,7 @@ function condition_EVENT_QUEST_START_13024(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220142013, 13011) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -397,7 +399,7 @@ function action_EVENT_QUEST_START_13024(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -406,7 +408,7 @@ function condition_EVENT_QUEST_START_13025(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220142013, 13012) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -417,7 +419,7 @@ function action_EVENT_QUEST_START_13025(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -426,7 +428,7 @@ function condition_EVENT_QUEST_START_13026(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220142013, 13011) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -437,7 +439,7 @@ function action_EVENT_QUEST_START_13026(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -446,7 +448,7 @@ function condition_EVENT_QUEST_START_13027(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220142013, 13012) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -457,7 +459,7 @@ function action_EVENT_QUEST_START_13027(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 

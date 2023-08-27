@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001189
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	challenge_id = 2010063,
 	enter_region = 189018,
 	leave_region = 189024,
@@ -12,15 +12,15 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local Phase ={
+Phase ={
         [1] = {3,5},
         [2] = {4,5},
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -150,17 +150,17 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_MONSTER_BATTLE_189011(context, evt)
 	-- 创建标识为"T_SEED"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T_SEED", {3}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -171,19 +171,19 @@ function action_EVENT_TIME_AXIS_PASS_189012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_189018(context, evt)
 	if evt.param1 ~= 189018 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -193,19 +193,19 @@ function action_EVENT_ENTER_REGION_189018(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,205,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_189022(context, evt)
 	if evt.param1 ~= 189022 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -213,7 +213,7 @@ end
 function action_EVENT_ENTER_REGION_189022(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001189, 2)
-	
+
 	return 0
 end
 
@@ -223,7 +223,7 @@ function condition_EVENT_ANY_MONSTER_DIE_189023(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -231,7 +231,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_189023(context, evt)
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001189, 5)
-	
+
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_ANY_MONSTER_DIE_189025(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -249,25 +249,25 @@ end
 function action_EVENT_ANY_MONSTER_DIE_189025(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001189, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001189, 5)
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001189, 5)
-	
+
 	-- 调用提示id为 400075 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400075) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "STAGE" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "STAGE", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -278,7 +278,7 @@ function action_EVENT_ANY_MONSTER_DIE_189027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

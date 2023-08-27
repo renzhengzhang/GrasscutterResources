@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002415
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	randomPositions = {415042,415043,415044},
 	groupId = 133002415,
 	specialice1 = 415012,
@@ -24,9 +24,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -150,9 +150,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -163,9 +163,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -253,9 +253,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -263,7 +263,7 @@ function condition_EVENT_ANY_MONSTER_DIE_415006(context, evt)
 	if 415001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -274,7 +274,7 @@ function action_EVENT_ANY_MONSTER_DIE_415006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -288,18 +288,18 @@ end
 function action_EVENT_LEAVE_REGION_415008(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_415009(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=1080,y=285,z=-439}
+	pos = {x=1080,y=285,z=-439}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400010, pos, 50) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -308,7 +308,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_415010(context, evt)
 	if 415001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -316,47 +316,47 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_415010(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_415023(context, evt)
 	if evt.param1 ~= 415023 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_415023(context, evt)
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002415, 4)
-	
-	
+
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "4121312") then
 	  return -1
 	end
-	
-	
+
+
 	-- 创建编号为666（该挑战的识别id),挑战内容为213的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 666, 220, 600, 1, 800, 1) then
 		return -1
 	end
-	
+
 	-- 创建编号为415（该怪物潮的识别id)的怪物潮，创建怪物总数为999，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 415, 133002415, {415002,415003,415004,415005}, 999, 1, 1) then
 		return -1
 	end
-	
+
 	return 0
-	
+
 end
 
 -- 触发条件
@@ -364,7 +364,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_415025(context, evt)
 	if 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -374,7 +374,7 @@ function action_EVENT_MONSTER_TIDE_DIE_415025(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 2, 133002415, {24008,24009}, 4, 1, 1) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -384,29 +384,29 @@ function action_EVENT_CHALLENGE_FAIL_415030(context, evt)
 	if 0 ~= ScriptLib.AddQuestProgress(context, "4121399") then
 	  return -1
 	end
-	
+
 	-- 将configid为 415015 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 415015, GadgetState.GearStop) then
 			return -1
-		end 
-	
+		end
+
 	-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 415015 }) then
 		    return -1
 		end
-	
+
 	--销毁编号为415（该怪物潮的识别id)的怪物潮
 	if 0 ~= ScriptLib.KillMonsterTide(context, 133002415, 415) then
 		return -1
 	end
-		
-	
+
+
 	-- 杀死指定group内的gadget和monster,移除其它东西
 	ScriptLib.KillExtraGroupSuite(context, 133002415, 3)
-	
-	
-	
-	
+
+
+
+
 	return 0
 end
 
@@ -416,26 +416,26 @@ function action_EVENT_CHALLENGE_SUCCESS_415035(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 415015, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	--销毁编号为415（该怪物潮的识别id)的怪物潮
 	if 0 ~= ScriptLib.KillMonsterTide(context, 133002415, 415) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 		return -1
 	end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133002415, monsters = {415002,415003,415004,415005,415001}, gadgets = {415015} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133002415, suite = 5 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -444,7 +444,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_415070(context, evt)
 	if 415001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -455,19 +455,19 @@ function action_EVENT_ANY_MONSTER_LIVE_415070(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "MonsterTideCheck" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "MonsterTideCheck", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟5秒后,向groupId为：133002415的对象,请求一次调用,并将string参数："41212777" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133002415, "41212777", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -475,14 +475,14 @@ end
 function action_EVENT_TIMER_EVENT_415071(context, evt)
 	--怪物转阶段
 	ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {415001}, "_SERVER_REGISVINE_ICE_ACTIVITY_FLAG_PHASE02", 2)
-	
+
 	--怪物状态Check
 	ScriptLib.CreateGroupTimerEvent(context, defs.groupId, "phasetwocheck", 1)
-	
-	
+
+
 	--冰立方生成条件重置
 	ScriptLib.SetGroupVariableValue(context, "iceCubeAlive", 0)
-	
+
 	return 0
 end
 

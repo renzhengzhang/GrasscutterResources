@@ -1,38 +1,39 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 247007020
 }
 
 -- DEFS_MISCS
-local BossOperatorConfigID = 20001
-local QuitPointConfigID = 20005
-local BossPoolID = 28037
-local GroupId = 247007020
-local MainGroupID = 247007001
-local RegionID = 20004
-local questID = 0
-local questRegionID = 0
-local doorConfigID = 0
-local doorBossFrontID = 20002
-local doorBossBackID = 20003
-local finishQuestID = 0
-local lastDoorConfigID = 0
-local isLastRoom = 0
-local EnterRoomTrigger = 20004
-local PlotRoom = {regionID= 0 , groupID= 0}
-local AirWallConfigID = 20011
-local ThunderFloorTimeAxis = { 5,9 }
-local ThunderFloorList = {20012, 20013, 20014, 20015, 20016, 20017, 20018, 20019, 20020, 20021, 20022, 20023, 20024, 20025, 20026, 20027, 20028, 20029, 20032, 20033, 20034, 20035, 20036, 20037, 20038, 20039, 20040, 20041, 20042, 20043, 20044, 20045, 20046, 20047, 20048, 20049, 20050, 20051, 20052}
-local BossDoorPos = {x=0,y=0,z=0}
-local BossDoorRot = {0}
-local nextQuestID = 0
-local DestinationPos = {x=0,y=0,z=0}
-local DestinationRot = {0}
+BossOperatorConfigID = 20001
+QuitPointConfigID = 20005
+BossPoolID = 28037
+GroupId = 247007020
+MainGroupID = 247007001
+RegionID = 20004
+questID = 0
+questRegionID =
+0
+doorConfigID = 0
+doorBossFrontID = 20002
+doorBossBackID = 20003
+finishQuestID = 0
+lastDoorConfigID = 0
+isLastRoom = 0
+EnterRoomTrigger = 20004
+PlotRoom = {regionID= 0 , groupID= 0}
+AirWallConfigID = 20011
+ThunderFloorTimeAxis = { 5,9 }
+ThunderFloorList = {20012, 20013, 20014, 20015, 20016, 20017, 20018, 20019, 20020, 20021, 20022, 20023, 20024, 20025, 20026, 20027, 20028, 20029, 20032, 20033, 20034, 20035, 20036, 20037, 20038, 20039, 20040, 20041, 20042, 20043, 20044, 20045, 20046, 20047, 20048, 20049, 20050, 20051, 20052}
+BossDoorPos = {x=0,y=0,z=0}
+BossDoorRot = {0}
+nextQuestID = 0
+DestinationPos = {x=0,y=0,z=0}
+DestinationRot = {0}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -126,9 +127,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -139,9 +140,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -166,9 +167,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "V2_2/RogueDungeon_BOSS"

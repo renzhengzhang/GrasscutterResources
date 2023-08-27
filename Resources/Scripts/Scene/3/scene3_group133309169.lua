@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309169
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	pointarray_ID = 330900005,
 	pointArrayNum = 2,
 	gadget_shooter = 169001,
@@ -39,9 +39,9 @@ defs.finalShooterPoint = 2
 defs.stayTime={1}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -86,9 +86,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -99,9 +99,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -117,23 +117,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_169005(context, evt)
 	-- 判断是gadgetid 0 option_id 0
 	if defs.gadget_shooterBase_1 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if defs.optionID ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -144,7 +144,7 @@ function action_EVENT_SELECT_OPTION_169005(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 

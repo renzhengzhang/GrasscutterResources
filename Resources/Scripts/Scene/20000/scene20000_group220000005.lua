@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220000005
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 5006,
 	gadget_id_2 = 5002,
 	gadget_id_3 = 5003,
@@ -14,9 +14,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -65,9 +65,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -78,9 +78,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -96,9 +96,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -106,7 +106,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_16(context, evt)
 	if GadgetState.GearStart ~= evt.param1 or defs.gadget_id_2 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -116,8 +116,8 @@ function action_EVENT_GADGET_STATE_CHANGE_16(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -126,7 +126,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_17(context, evt)
 	if GadgetState.GearStart ~= evt.param1 or defs.gadget_id_3 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -136,8 +136,8 @@ function action_EVENT_GADGET_STATE_CHANGE_17(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -146,7 +146,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_18(context, evt)
 	if GadgetState.GearStart ~= evt.param1 or defs.gadget_id_4 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_GADGET_STATE_CHANGE_18(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -168,7 +168,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_19(context, evt)
 	ScriptLib.PrintLog(context, "judge false")
 		return false
 	end
-	
+
 	ScriptLib.PrintLog(context, "judge true")
 	return true
 end
@@ -179,8 +179,8 @@ function action_EVENT_GADGET_STATE_CHANGE_19(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5004, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -190,9 +190,9 @@ function condition_EVENT_GADGET_STATE_CHANGE_20(context, evt)
 	if GadgetState.GearStop ~= evt.param1 or defs.gadget_id_3 ~= evt.param2 then
 	ScriptLib.PrintLog(context, "judge false")
 		return false
-	
+
 	end
-	
+
 	ScriptLib.PrintLog(context, "judge true")
 	return true
 end
@@ -203,8 +203,8 @@ function action_EVENT_GADGET_STATE_CHANGE_20(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5005, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -215,7 +215,7 @@ function condition_EVENT_ENTER_REGION_21(context, evt)
 	ScriptLib.PrintLog(context, "judge false")
 		return false
 	end
-	
+
 	ScriptLib.PrintLog(context, "judge true")
 	return true
 end
@@ -226,8 +226,8 @@ function action_EVENT_ENTER_REGION_21(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -236,7 +236,7 @@ function condition_EVENT_GADGET_CREATE_22(context, evt)
 	if 5007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -247,7 +247,7 @@ function action_EVENT_GADGET_CREATE_22(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -257,7 +257,7 @@ function condition_EVENT_SELECT_OPTION_23(context, evt)
 	if 5007 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -274,14 +274,14 @@ function action_EVENT_SELECT_OPTION_23(context, evt)
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220000005, defs.gadget_id_5,23 ) then
 			return -1
 		end
-	
+
 	end
-	
-	
-	
+
+
+
 		-- 重新生成指定group，指定suite
-		
-	
+
+
 	return 0
 end
 
@@ -292,19 +292,19 @@ function action_EVENT_GATHER_24(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_69(context, evt)
 	if evt.param1 ~= 69 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -315,6 +315,6 @@ function action_EVENT_ENTER_REGION_69(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : unlock_gadget")
 		return -1
 	end
-	
+
 	return 0
 end

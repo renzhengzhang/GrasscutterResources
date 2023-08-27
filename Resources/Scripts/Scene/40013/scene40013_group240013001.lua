@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240013001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -125,9 +125,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -138,9 +138,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -156,20 +156,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1(context, evt)
 	if evt.param1 ~= 1 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -180,37 +180,37 @@ function action_EVENT_ENTER_REGION_1(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 1025) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 创建id为1043的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1043 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 240013001, monsters = {}, gadgets = {1042} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2(context, evt)
 	if evt.param1 ~= 2 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -221,13 +221,13 @@ function action_EVENT_ENTER_REGION_2(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 1030) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -237,26 +237,26 @@ function action_EVENT_TIMER_EVENT_3(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1014, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013001中， configid为1041的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1041, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为1047的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1047 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为1048的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1048 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -265,7 +265,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4(context, evt)
 	if 1013 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -276,13 +276,13 @@ function action_EVENT_GADGET_STATE_CHANGE_4(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 改变指定group组240013001中， configid为1061的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1061, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -291,7 +291,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5(context, evt)
 	if 1036 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -302,13 +302,13 @@ function action_EVENT_GADGET_STATE_CHANGE_5(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 改变指定group组240013001中， configid为1059的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1059, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -317,7 +317,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_6(context, evt)
 	if 1015 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -328,13 +328,13 @@ function action_EVENT_GADGET_STATE_CHANGE_6(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 改变指定group组240013001中， configid为1062的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1062, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -343,7 +343,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7(context, evt)
 	if 1014 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -353,14 +353,14 @@ function action_EVENT_GADGET_STATE_CHANGE_7(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1064, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 240013001, monsters = {}, gadgets = {1048} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -369,7 +369,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_8(context, evt)
 	if 1041 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -379,26 +379,26 @@ function action_EVENT_GADGET_STATE_CHANGE_8(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1063, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 240013001, monsters = {}, gadgets = {1047} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9(context, evt)
 	if evt.param1 ~= 9 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -409,29 +409,29 @@ function action_EVENT_ENTER_REGION_9(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-144，16，73），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-144, y=16, z=73}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-144, y=16, z=73}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10(context, evt)
 	if evt.param1 ~= 10 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -442,25 +442,25 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 改变指定group组240013001中， configid为1013的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1013, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11(context, evt)
 	if evt.param1 ~= 11 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -471,37 +471,37 @@ function action_EVENT_ENTER_REGION_11(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 240013001, monsters = {}, gadgets = {1045} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 240013001, monsters = {}, gadgets = {1046} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 240013001, monsters = {}, gadgets = {1047} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 240013001, monsters = {}, gadgets = {1048} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 创建id为1049的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1049 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -510,7 +510,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_16(context, evt)
 	if 1056 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -520,32 +520,32 @@ function action_EVENT_GADGET_STATE_CHANGE_16(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013001中， configid为1057的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1057, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013001中， configid为1058的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1058, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 240013001, monsters = {}, gadgets = {1060} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 延迟3秒后,向groupId为：240013001的对象,请求一次调用,并将string参数："Test" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 240013001, "Test", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -555,8 +555,8 @@ function action_EVENT_TIMER_EVENT_17(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1056, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -565,7 +565,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_18(context, evt)
 	if 1056 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -575,56 +575,56 @@ function action_EVENT_GADGET_STATE_CHANGE_18(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013001中， configid为1057的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1057, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013001中， configid为1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013001中， configid为13的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 13, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013001中， configid为14的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 14, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013001中， configid为1056的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1056, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为1060的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1060 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_28(context, evt)
 	if evt.param1 ~= 28 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -634,38 +634,38 @@ function action_EVENT_ENTER_REGION_28(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1015, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组240013001中， configid为1036的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240013001, 1036, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为1045的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1045 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为1046的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1046 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_29(context, evt)
 	if evt.param1 ~= 29 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -676,39 +676,39 @@ function action_EVENT_ENTER_REGION_29(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_30(context, evt)
 	if evt.param1 ~= 30 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_30(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-165，1，107），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=-165, y=1, z=107}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=-165, y=1, z=107}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 创建id为1044的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1044 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

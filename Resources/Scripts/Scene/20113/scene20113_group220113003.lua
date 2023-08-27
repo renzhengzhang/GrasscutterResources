@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220113003
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -80,20 +80,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3003(context, evt)
 	if evt.param1 ~= 3003 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -104,7 +104,7 @@ function action_EVENT_ENTER_REGION_3003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -112,14 +112,14 @@ end
 function condition_EVENT_SELECT_OPTION_3004(context, evt)
 	-- 判断是gadgetid 3002 option_id 73
 	if 3002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 73 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -129,26 +129,26 @@ function action_EVENT_SELECT_OPTION_3004(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113003, 3001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 220113003 ；指定config：3002；物件身上指定option：73；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220113003, 3002, 73) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3007(context, evt)
 	if evt.param1 ~= 3007 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -159,7 +159,7 @@ function action_EVENT_ENTER_REGION_3007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -167,14 +167,14 @@ end
 function condition_EVENT_SELECT_OPTION_3008(context, evt)
 	-- 判断是gadgetid 3006 option_id 73
 	if 3006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 73 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -184,26 +184,26 @@ function action_EVENT_SELECT_OPTION_3008(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113003, 3005, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 220113003 ；指定config：3006；物件身上指定option：73；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220113003, 3006, 73) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3011(context, evt)
 	if evt.param1 ~= 3011 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -214,7 +214,7 @@ function action_EVENT_ENTER_REGION_3011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -222,14 +222,14 @@ end
 function condition_EVENT_SELECT_OPTION_3012(context, evt)
 	-- 判断是gadgetid 3010 option_id 73
 	if 3010 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 73 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -239,13 +239,13 @@ function action_EVENT_SELECT_OPTION_3012(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113003, 3009, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 220113003 ；指定config：3010；物件身上指定option：73；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220113003, 3010, 73) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133312059
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -95,7 +95,7 @@ function condition_EVENT_ANY_GADGET_DIE_59003(context, evt)
 	if 59001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -106,18 +106,18 @@ function action_EVENT_ANY_GADGET_DIE_59003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 59002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 创建标识为"die"，时间节点为{4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "die", {4}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -127,7 +127,7 @@ function condition_EVENT_GROUP_LOAD_59004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -138,7 +138,7 @@ function action_EVENT_GROUP_LOAD_59004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_TIME_AXIS_PASS_59005(context, evt)
 	if "die" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -158,11 +158,11 @@ function action_EVENT_TIME_AXIS_PASS_59005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 停止标识为"die"的时间轴
 	ScriptLib.EndTimeAxis(context, "die")
-	
-	
+
+
 	return 0
 end
 
@@ -172,20 +172,20 @@ function action_EVENT_QUEST_START_59006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 59001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_59007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -195,20 +195,20 @@ function action_EVENT_VARIABLE_CHANGE_59007(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133310018, 18001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组0中， configid为0的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133310018, 18003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组0中， configid为0的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133310018, 18004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -218,7 +218,7 @@ function condition_EVENT_GROUP_LOAD_59008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -228,19 +228,19 @@ function action_EVENT_GROUP_LOAD_59008(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133310018, 18001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组0中， configid为0的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133310018, 18003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组0中， configid为0的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133310018, 18004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220115001
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
         groupID = 220115001,
         cutSceneID = 201902
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -117,9 +117,9 @@ sight_groups = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -130,9 +130,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -184,9 +184,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -194,7 +194,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_1002(context, evt)
 	if 1003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -202,7 +202,7 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_1002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220115001, 2)
-	
+
 	return 0
 end
 
@@ -211,7 +211,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_1005(context, evt)
 	if 1004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -219,7 +219,7 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_1005(context, evt)
 	-- 改变气候为HotMonster
 	ChangeClimateToHotMonster(context)
-	
+
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1006(context, evt)
 	if 1003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -238,13 +238,13 @@ function action_EVENT_ANY_MONSTER_DIE_1006(context, evt)
 	PlayCutScene(context)
 	-- 移除低温空气墙
 	    ScriptLib.RemoveExtraGroupSuite(context, 220115001, 2)
-	
+
 	-- 移除屏风
 	    ScriptLib.RemoveExtraGroupSuite(context, 220115001, 3)
 	-- 添加高温空气墙
 	    ScriptLib.AddExtraGroupSuite(context, 220115001, 4)
-	
-	
+
+
 	return 0
 end
 
@@ -253,7 +253,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_1028(context, evt)
 	if 1003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -261,7 +261,7 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_1028(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220115001, 3)
-	
+
 	return 0
 end
 
@@ -271,16 +271,16 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1031(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 21 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1031(context, evt)
 	ScriptLib.SetWeatherAreaState(context, 10033,1)
-	
+
 	ScriptLib.PrintContextLog(context,"weather!LX2222")
-	
+
 	return 0
 end
 
@@ -289,16 +289,16 @@ function condition_EVENT_ANY_MONSTER_LIVE_1032(context, evt)
 	if 1004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_LIVE_1032(context, evt)
 	ScriptLib.SetWeatherAreaState(context, 10034,1)
-	
+
 	ScriptLib.PrintContextLog(context,"weather!LX3333")
-	
+
 	return 0
 end
 
@@ -308,7 +308,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1044(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 21 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -319,13 +319,13 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220115001, EntityType.GADGET, 1041 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -334,7 +334,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1045(context, evt)
 	if 1004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -344,8 +344,8 @@ function action_EVENT_ANY_MONSTER_DIE_1045(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1046, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -354,7 +354,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1047(context, evt)
 	if 1046 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -365,7 +365,7 @@ function action_EVENT_GADGET_STATE_CHANGE_1047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -374,7 +374,7 @@ function condition_EVENT_GADGET_CREATE_1049(context, evt)
 	if 1043 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -385,7 +385,7 @@ function action_EVENT_GADGET_CREATE_1049(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 

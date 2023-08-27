@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133303058
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -81,9 +81,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -94,9 +94,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -112,9 +112,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -122,7 +122,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_58004(context, evt)
 	if 58017 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -133,7 +133,7 @@ function action_EVENT_GADGET_STATE_CHANGE_58004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -144,19 +144,19 @@ function action_EVENT_QUEST_START_58005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_58006(context, evt)
 	if evt.param1 ~= 58006 then return false end
-	
+
 	-- 判断是区域58006
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 58006 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -167,7 +167,7 @@ function action_EVENT_ENTER_REGION_58006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -178,7 +178,7 @@ function action_EVENT_QUEST_START_58007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -189,19 +189,19 @@ function action_EVENT_QUEST_START_58008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将configid为 58001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为58012的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 58012 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -212,7 +212,7 @@ function action_EVENT_QUEST_START_58011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -223,7 +223,7 @@ function action_EVENT_QUEST_FINISH_58014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -234,8 +234,8 @@ function action_EVENT_QUEST_FINISH_58015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -244,7 +244,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_58016(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133303058, 58009) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -255,8 +255,8 @@ function action_EVENT_GADGET_STATE_CHANGE_58016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -264,14 +264,14 @@ end
 function condition_EVENT_SELECT_OPTION_58018(context, evt)
 	-- 判断是gadgetid 58017 option_id 68
 	if 58017 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 68 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -282,13 +282,13 @@ function action_EVENT_SELECT_OPTION_58018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将configid为 58017 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -297,7 +297,7 @@ function condition_EVENT_GADGET_CREATE_58019(context, evt)
 	if 58002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -308,7 +308,7 @@ function action_EVENT_GADGET_CREATE_58019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -317,7 +317,7 @@ function condition_EVENT_GROUP_LOAD_58020(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303058, 58017) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -328,6 +328,6 @@ function action_EVENT_GROUP_LOAD_58020(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end

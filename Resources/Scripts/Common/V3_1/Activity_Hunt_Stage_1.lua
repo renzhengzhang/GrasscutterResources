@@ -8,7 +8,7 @@
 
 --需求defs
 --[[
-    local defs = {
+    defs = {
         gallery_id = 111,
         region = 111
     }
@@ -23,8 +23,8 @@ monster_id
 left_num
 total_num ]]
 
-local stage_2_group_id = 133002100
-local temp_Variables = {--已自动添加config_id
+stage_2_group_id = 133002100
+temp_Variables = {--已自动添加config_id
 	{  name = "gm_Try_End", value = 0, no_refresh = false },
 	{  name = "gm_Try_Start", value = 0, no_refresh = false },
     --一阶段
@@ -41,7 +41,7 @@ local temp_Variables = {--已自动添加config_id
 	{  name = "is_finish", value = 0, no_refresh = false },
 	{  name = "go_weak", value = 0, no_refresh = false },
 }
-local temp_Tirgger = {
+temp_Tirgger = {
 	{event = EventType.EVENT_VARIABLE_CHANGE, source = "", action = "action_EVENT_VARIABLE_CHANGE"},
 	{event = EventType.EVENT_GALLERY_START, source = "", action = "action_EVENT_GALLERY_START"},
 	{event = EventType.EVENT_GROUP_REFRESH, source = "", action = "action_EVENT_GROUP_REFRESH"},
@@ -51,7 +51,7 @@ local temp_Tirgger = {
 }
 function action_EVENT_GALLERY_STOP(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_1 action_EVENT_GALLERY_STOP:evt.param1="..evt.param1)
-    local _uidlist = ScriptLib.GetSceneUidList(context)
+    _uidlist = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetPlayerGroupVisionType(context, _uidlist, {1})
     return 0
 end
@@ -77,10 +77,10 @@ function action_EVENT_GALLERY_START(context,evt)
     if base_info.group_id == stage_2_group_id then
         ScriptLib.UpdatePlayerGalleryScore(context,defs.gallery_id,{["total_num"] = defs.stage_2_goal})
         ScriptLib.SetGroupVariableValue(context, "Stage_2_Monster_Count", 0)
-        local _uid = ScriptLib.GetSceneOwnerUid(context)
+        _uid = ScriptLib.GetSceneOwnerUid(context)
 		ScriptLib.SetTeamServerGlobalValue(context, _uid, "SGV_CUR_STAGE", 2)
     else
-        local _uid = ScriptLib.GetSceneOwnerUid(context)
+        _uid = ScriptLib.GetSceneOwnerUid(context)
 		ScriptLib.SetTeamServerGlobalValue(context, _uid, "SGV_CUR_STAGE", 0)
     end
     return 0
@@ -118,7 +118,7 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
     --二阶段抓到动物后 判断是否完成
     if evt.source_name == "Stage_2_Monster_Count" then
         ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_1 action_EVENT_VARIABLE_CHANGE1:defs.stage_2_goal="..defs.stage_2_goal)
-        if evt.param1 >= defs.stage_2_goal then 
+        if evt.param1 >= defs.stage_2_goal then
             ScriptLib.StopGallery(context, 27002, false)
         end
     end
@@ -136,7 +136,7 @@ end
 --初始化
 function Initialize()
 	--加触发器
-    if temp_Tirgger ~= nil then 
+    if temp_Tirgger ~= nil then
         for k,v in pairs(temp_Tirgger) do
             v.name = v.action
             v.config_id = 40000000 + k
@@ -147,7 +147,7 @@ function Initialize()
         end
     end
 	--加变量
-    if temp_Variables ~= nil then 
+    if temp_Variables ~= nil then
         for k,v in pairs(temp_Variables) do
             v.config_id = 50000000 + k
             table.insert(variables,v)

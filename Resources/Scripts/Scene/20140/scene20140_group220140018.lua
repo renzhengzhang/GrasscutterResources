@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220140018
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
 
                 --本Group中发射器gadget的configID，最多3个,
                 fireMachineList = {
@@ -33,7 +33,7 @@ local        defs = {
                         [18005] = {0, 102, 103, 104},
                         [18006] = {0, 102, 103, 104},
                         [18007] = {0, 102, 103, 104},
-                        [18008] = {0, 102, 103, 104},		        
+                        [18008] = {0, 102, 103, 104},
 
                 },
 
@@ -45,14 +45,14 @@ local        defs = {
                         [18006] = {0, 302, 303, 304},
                         [18007] = {0, 302, 303, 304},
                         [18008] = {0, 302, 303, 304},
- 	        
+
                 },
 
     --本Group用哪组LevelTag控制，请查LevelTagData表
     levelTagGroupID = 10,
 
     --是否由re-quire控制切suite，填0则不需要配置switchByLevelTag_suites
-    switchByLevelTag = 1, 
+    switchByLevelTag = 1,
 
     --切入该LevelTag时，加载且仅加载的suite。
     --注意，被此操作Remove掉的物件不会保留GadgetState
@@ -63,17 +63,17 @@ local        defs = {
         ["2_8_Kazuha03_05"] = {2},
     },
     --需要保存gadgetState的物件configID，最多9个
-    saved_gadget = 
-    {  
+    saved_gadget =
+    {
             18009,18012
     },
               serve_items = {18009}
         }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -124,9 +124,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -137,9 +137,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -164,9 +164,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -174,7 +174,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_18007(context, evt)
 	if 18009 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -185,7 +185,7 @@ function action_EVENT_GADGET_STATE_CHANGE_18007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_QUEST_START_18008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "message") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_QUEST_START_18008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -215,7 +215,7 @@ function condition_EVENT_ANY_GADGET_DIE_18011(context, evt)
 	if 18010 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -226,13 +226,13 @@ function action_EVENT_ANY_GADGET_DIE_18011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 18009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_18013(context, evt)
 	if 18012 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -252,33 +252,33 @@ function action_EVENT_GADGET_STATE_CHANGE_18013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "plat" 的变量设置为 4
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "plat", 4, 220140004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "message" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "message", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220140012, monsters = {}, gadgets = {12001} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 创建标识为"message"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "message", {1}, false)
-	
-	
+
+
 	-- 创建标识为"temp"，时间节点为{2,4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "temp", {2,4}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -288,7 +288,7 @@ function condition_EVENT_LUA_NOTIFY_18014(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "plat", 220140004) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -299,7 +299,7 @@ function action_EVENT_LUA_NOTIFY_18014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -308,7 +308,7 @@ function condition_EVENT_TIME_AXIS_PASS_18016(context, evt)
 	if "message" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -319,7 +319,7 @@ function action_EVENT_TIME_AXIS_PASS_18016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -328,11 +328,11 @@ function action_EVENT_GROUP_LOAD_18017(context, evt)
 	if ScriptLib.CheckSceneTag(context, 20140,1070 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "message") == 1 then
 		ScriptLib.AddQuestProgress(context, "4006708")
 	end
-	
+
 	return 0
 end
 
@@ -341,7 +341,7 @@ function condition_EVENT_TIME_AXIS_PASS_18018(context, evt)
 	if "temp" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -349,7 +349,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_18018(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140012, 3)
-	
+
 	return 0
 end
 

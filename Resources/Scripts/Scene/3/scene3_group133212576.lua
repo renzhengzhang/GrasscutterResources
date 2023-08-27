@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133212576
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	order = {576006,576007,576008,576009},
 	region = 576013,
 	region_Enter = 576013,
@@ -13,9 +13,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -72,9 +72,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +85,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -148,23 +148,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_576014(context, evt)
 	-- 判断是gadgetid 576006 option_id 92
 	if 576006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 92 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -172,7 +172,7 @@ end
 function action_EVENT_SELECT_OPTION_576014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212576, 2)
-	
+
 	return 0
 end
 
@@ -180,14 +180,14 @@ end
 function condition_EVENT_SELECT_OPTION_576015(context, evt)
 	-- 判断是gadgetid 576007 option_id 92
 	if 576007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 92 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -198,10 +198,10 @@ function action_EVENT_SELECT_OPTION_576015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212576, 3)
-	
+
 	return 0
 end
 
@@ -209,14 +209,14 @@ end
 function condition_EVENT_SELECT_OPTION_576016(context, evt)
 	-- 判断是gadgetid 576008 option_id 92
 	if 576008 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 92 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -227,19 +227,19 @@ function action_EVENT_SELECT_OPTION_576016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "stage" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage", 1, 133212601) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "LD_Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "LD_Finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -247,14 +247,14 @@ end
 function condition_EVENT_SELECT_OPTION_576017(context, evt)
 	-- 判断是gadgetid 576009 option_id 92
 	if 576009 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 92 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -265,7 +265,7 @@ function action_EVENT_SELECT_OPTION_576017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -274,7 +274,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_576018(context, evt)
 	if 576010 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -285,7 +285,7 @@ function action_EVENT_GADGET_STATE_CHANGE_576018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -295,7 +295,7 @@ function condition_EVENT_ANY_MONSTER_DIE_576019(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -306,25 +306,25 @@ function action_EVENT_ANY_MONSTER_DIE_576019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "LD_Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "LD_Finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_576022(context, evt)
 	if evt.param1 ~= 576022 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -334,7 +334,7 @@ function action_EVENT_ENTER_REGION_576022(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,145,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 

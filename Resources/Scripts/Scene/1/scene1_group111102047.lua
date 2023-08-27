@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111102047
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 	--每个操作台config_id, 控制的markflag和它的解，最多5位数字。
 	--玩家按按钮，左转写2 右转写3。
 	--例如“左左右左”即为“{2,2,3,2}”
@@ -16,9 +16,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -104,28 +104,28 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_47011(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111102047, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"unlock_num"为2
 	if ScriptLib.GetGroupVariableValue(context, "unlock_num") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -135,14 +135,14 @@ function action_EVENT_VARIABLE_CHANGE_47012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 47008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 47010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 47010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

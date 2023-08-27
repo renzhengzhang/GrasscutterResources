@@ -5,18 +5,18 @@
 --||   Owner         ||    chao-jin
 --||   Description   ||    精灵花朵收集玩法
 --||   LogName       ||    ##[PB_ElfFlower]
---||   Protection    ||    
+--||   Protection    ||
 --======================================================================================================================
 --Defs & Miscs || 需要LD配置的内容
 --[[
-local defs = {
+defs = {
 	flower_gadget_id = 70290733,
 }
-local elf_flowers = {}
+elf_flowers = {}
 ]]
 --======================================================================================================================
 --Events || Group内EVENT事件,记得初始化和return 0
-local EF_Triggers ={
+EF_Triggers ={
 	{ name = "group_load", config_id = 8000101, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
 	{ name = "gadget_state_change", config_id = 8000102, event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0 },
 	{ name = "time_axis_pass", config_id = 8000103, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0 },
@@ -32,17 +32,17 @@ end
 
 EF_Initialize()
 
-function action_group_load(context, evt) 
+function action_group_load(context, evt)
 	ScriptLib.PrintContextLog(context, "##[PB_ElfFlower]:精灵花朵玩法加载")
 	ScriptLib.SetGroupTempValue(context, "FlowerBloomed", 0, {base_info.group_id})
 	return 0
 end
 
 --监听花朵状态
-function action_gadget_state_change(context, evt) 
-	if gadgets[evt.param2].gadget_id == 70290733 and evt.param1 == 201 then 
+function action_gadget_state_change(context, evt)
+	if gadgets[evt.param2].gadget_id == 70290733 and evt.param1 == 201 then
 		ScriptLib.PrintContextLog(context, "##[PB_ElfFlower]: 精灵花朵状态变化")
-		if #elf_flowers == ScriptLib.GetGroupTempValue(context, "FlowerBloomed", {base_info.group_id}) then 
+		if #elf_flowers == ScriptLib.GetGroupTempValue(context, "FlowerBloomed", {base_info.group_id}) then
 			ScriptLib.EndTimeAxis(context, "FlowerBloomTrail")
 			ScriptLib.PrintContextLog(context, "##[PB_ElfFlower]:挑战完成")
 			for i=1,#elf_flowers do
@@ -59,7 +59,7 @@ function action_gadget_state_change(context, evt)
 end
 
 function action_time_axis_pass(context, evt)
-	if evt.source_name ==  "FlowerBloomTrail" then 
+	if evt.source_name ==  "FlowerBloomTrail" then
 		ScriptLib.PrintContextLog(context, "##[PB_ElfFlower]:时间结束，重置Group")
 		ScriptLib.SetGroupTempValue(context, "FlowerBloomed", 0, {base_info.group_id})
 		for i=1,#elf_flowers do
@@ -73,6 +73,3 @@ end
 
 --======================================================================================================================
 --LevelFunctions || 自定义函数
-
-
-

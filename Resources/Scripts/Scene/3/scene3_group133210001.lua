@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210001
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 133210001,
 	gadget_fundation01 = 1001,
 	gadget_hand01 = 1003,
@@ -20,9 +20,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -99,20 +99,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"successed"为1
 	if ScriptLib.GetGroupVariableValue(context, "successed") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -123,7 +123,7 @@ function action_EVENT_VARIABLE_CHANGE_1006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -132,12 +132,12 @@ function condition_EVENT_GROUP_LOAD_1009(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133210031, 31001) then
 		return false
 	end
-	
+
 	-- 判断变量"success"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "success", 133210031) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -147,8 +147,8 @@ function action_EVENT_GROUP_LOAD_1009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

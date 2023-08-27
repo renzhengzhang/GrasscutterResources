@@ -9,14 +9,14 @@
 =======================================]]
 
 
-local CameraLookPlay = {
+CameraLookPlay = {
     CameraPointCid = defs.point_camera,
     LookEntityCid = defs.gadget_lookEntity,
     Duration = defs.look_duration,
 }
 
 --[[
-local CameraLookSetting = {
+CameraLookSetting = {
     blend_type = 0,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -39,16 +39,16 @@ function LF_PointLook(context)
         ScriptLib.PrintContextLog(context, "## TD_CameraLook LookPosInfo 配置非法")
         return 0
     end
-    local LookPosInfo = gadgets[CameraLookPlay.LookEntityCid]
+    LookPosInfo = gadgets[CameraLookPlay.LookEntityCid]
 
     if points[CameraLookPlay.CameraPointCid] == nil then
         ScriptLib.PrintContextLog(context, "## TD_CameraLook CameraPointInfo 配置非法")
         return 0
     end
-    local CameraPointInfo = points[CameraLookPlay.CameraPointCid]
+    CameraPointInfo = points[CameraLookPlay.CameraPointCid]
 
-    local lookPos = LookPosInfo.pos
-    local cameraPos = CameraPointInfo.pos
+    lookPos = LookPosInfo.pos
+    cameraPos = CameraPointInfo.pos
     ScriptLib.BeginCameraSceneLook(context,
             { look_pos = lookPos,
               is_allow_input = CameraLookSetting.is_allow_input,

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220142002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -89,97 +89,97 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_2003(context, evt)
 	if evt.param2 == 606 then
 		ScriptLib.SetGadgetStateByConfigId(context,2002, GadgetState.Default)
-		
+
 		ScriptLib.InitTimeAxis(context, "temp", {2,7}, false)
-		
+
 		ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 605)
-		
+
 		ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 606)
-		
+
 		ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 607)
-		
+
 		ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 615)
-		
+
 		ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 616)
 	else
 		if evt.param2 == 605 then
 			ScriptLib.SetGadgetStateByConfigId(context,2002, GadgetState.Default)
-			
+
 			ScriptLib.InitTimeAxis(context, "temp2", {2,7}, false)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 605)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 606)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 607)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 615)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 616)
 		end
-		
+
 		if evt.param2 == 607 then
 			ScriptLib.SetGadgetStateByConfigId(context,2002, GadgetState.Default)
-			
+
 			ScriptLib.InitTimeAxis(context, "temp3", {2,3,7}, false)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 605)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 606)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 607)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 615)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 616)
 		end
-		
+
 		if evt.param2 == 615 then
 			ScriptLib.SetGadgetStateByConfigId(context,2002, GadgetState.Default)
-			
+
 			ScriptLib.InitTimeAxis(context, "temp4", {2,7}, false)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "room2", 1)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 605)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 606)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 607)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 615)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 616)
 		end
-		
+
 		if evt.param2 == 616 then
 			ScriptLib.SetGadgetStateByConfigId(context,2002, GadgetState.Default)
-			
+
 			ScriptLib.InitTimeAxis(context, "temp5", {2,3,7}, false)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "room3", 1)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 605)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 606)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 607)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 615)
-			
+
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 2001, 616)
 		end
 	end
-	
+
 	return 0
 end
 
@@ -187,10 +187,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_2004(context, evt)
 	if evt.source_name == "temp" and evt.param1 == 1 then
 		ScriptLib.ChangeToTargetLevelTag(context, 25)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,2002, GadgetState.GearStart)
 	end
-	
+
 	if evt.source_name == "temp" and evt.param1 == 2 then
 		if ScriptLib.GetGroupVariableValue(context, "room2") == 1 and ScriptLib.GetGroupVariableValue(context, "room3") == 1 then
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2001, {606,605,607})
@@ -206,7 +206,7 @@ function action_EVENT_TIME_AXIS_PASS_2004(context, evt)
 			end
 		end
 	end
-	
+
 	return 0
 end
 
@@ -214,10 +214,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_2005(context, evt)
 	if evt.source_name == "temp2" and evt.param1 == 1 then
 		ScriptLib.ChangeToTargetLevelTag(context, 24)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,2002, GadgetState.GearStart)
 	end
-	
+
 	if evt.source_name == "temp2" and evt.param1 == 2 then
 		if ScriptLib.GetGroupVariableValue(context, "room3") == 1 then
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2001, {606,605,607})
@@ -225,7 +225,7 @@ function action_EVENT_TIME_AXIS_PASS_2005(context, evt)
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2001, {606,605,616})
 		end
 	end
-	
+
 	return 0
 end
 
@@ -234,11 +234,11 @@ function action_EVENT_TIME_AXIS_PASS_2006(context, evt)
 	if evt.source_name == "temp3" and evt.param1 == 1 then
 		ScriptLib.ChangeToTargetLevelTag(context, 26)
 	end
-	
+
 	if evt.source_name == "temp3" and evt.param1 == 2 then
 		ScriptLib.SetGadgetStateByConfigId(context,2002, GadgetState.GearStart)
 	end
-	
+
 	if evt.source_name == "temp3" and evt.param1 == 3 then
 		if ScriptLib.GetGroupVariableValue(context, "room2") == 1 then
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2001, {606,605,607})
@@ -246,7 +246,7 @@ function action_EVENT_TIME_AXIS_PASS_2006(context, evt)
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2001, {606,615,607})
 		end
 	end
-	
+
 	return 0
 end
 
@@ -254,10 +254,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_2007(context, evt)
 	if evt.source_name == "temp4" and evt.param1 == 1 then
 		ScriptLib.ChangeToTargetLevelTag(context, 24)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,2002, GadgetState.GearStart)
 	end
-	
+
 	if evt.source_name == "temp4" and evt.param1 == 2 then
 		if ScriptLib.GetGroupVariableValue(context, "room3") == 1 then
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2001, {606,605,607})
@@ -265,7 +265,7 @@ function action_EVENT_TIME_AXIS_PASS_2007(context, evt)
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2001, {606,605,616})
 		end
 	end
-	
+
 	return 0
 end
 
@@ -274,11 +274,11 @@ function action_EVENT_TIME_AXIS_PASS_2008(context, evt)
 	if evt.source_name == "temp5" and evt.param1 == 1 then
 		ScriptLib.ChangeToTargetLevelTag(context, 26)
 	end
-	
+
 	if evt.source_name == "temp5" and evt.param1 == 2 then
 		ScriptLib.SetGadgetStateByConfigId(context,2002, GadgetState.GearStart)
 	end
-	
+
 	if evt.source_name == "temp5" and evt.param1 == 3 then
 		if ScriptLib.GetGroupVariableValue(context, "room2") == 1 then
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2001, {606,605,607})
@@ -286,7 +286,7 @@ function action_EVENT_TIME_AXIS_PASS_2008(context, evt)
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2001, {606,615,607})
 		end
 	end
-	
+
 	return 0
 end
 
@@ -294,28 +294,28 @@ end
 function action_EVENT_SELECT_OPTION_2009(context, evt)
 	if evt.param2 == 623 and ScriptLib.GetGroupVariableValue(context, "message") == 0 then
 		ScriptLib.ShowReminder(context, 201420101)
-		
+
 		ScriptLib.InitTimeAxis(context, "message1", {3}, false)
-		
+
 		ScriptLib.SetGroupVariableValue(context, "message", 1)
 	end
-	
+
 	if evt.param2 == 624 and ScriptLib.GetGroupVariableValue(context, "message") == 0 then
 		ScriptLib.ShowReminder(context, 201420101)
-		
+
 		ScriptLib.InitTimeAxis(context, "message1", {3}, false)
-		
+
 		ScriptLib.SetGroupVariableValue(context, "message", 1)
 	end
-	
+
 	if evt.param2 == 625 and ScriptLib.GetGroupVariableValue(context, "message") == 0 then
 		ScriptLib.ShowReminder(context, 201420101)
-		
+
 		ScriptLib.InitTimeAxis(context, "message1", {3}, false)
-		
+
 		ScriptLib.SetGroupVariableValue(context, "message", 1)
 	end
-	
+
 	return 0
 end
 
@@ -324,7 +324,7 @@ function action_EVENT_TIME_AXIS_PASS_2010(context, evt)
 	if evt.source_name == "message1" and evt.param1 == 1 and ScriptLib.GetGroupVariableValue(context, "message") == 1 then
 		ScriptLib.SetGroupVariableValue(context, "message", 0)
 	end
-	
+
 	return 0
 end
 
@@ -335,13 +335,13 @@ function action_EVENT_QUEST_FINISH_2011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220142002, 2001, {606,615,616}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -349,29 +349,29 @@ end
 function condition_EVENT_SELECT_OPTION_2012(context, evt)
 	-- 判断是gadgetid 2001 option_id 605
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 605 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_2012(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=93.5885, y=5.5, z=50.01584}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=93.5885, y=5.5, z=50.01584}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=93.5885, y=5.5, z=50.01584}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -379,29 +379,29 @@ end
 function condition_EVENT_SELECT_OPTION_2013(context, evt)
 	-- 判断是gadgetid 2001 option_id 606
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 606 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_2013(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=93.5885, y=5.5, z=50.01584}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=93.5885, y=5.5, z=50.01584}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=93.5885, y=5.5, z=50.01584}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -409,29 +409,29 @@ end
 function condition_EVENT_SELECT_OPTION_2014(context, evt)
 	-- 判断是gadgetid 2001 option_id 607
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 607 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_2014(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=93.5885, y=5.5, z=50.01584}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=93.5885, y=5.5, z=50.01584}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=93.5885, y=5.5, z=50.01584}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -439,29 +439,29 @@ end
 function condition_EVENT_SELECT_OPTION_2015(context, evt)
 	-- 判断是gadgetid 2001 option_id 615
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 615 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_2015(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=93.5885, y=5.5, z=50.01584}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=93.5885, y=5.5, z=50.01584}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=93.5885, y=5.5, z=50.01584}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -469,36 +469,36 @@ end
 function condition_EVENT_SELECT_OPTION_2016(context, evt)
 	-- 判断是gadgetid 2001 option_id 616
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 616 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_2016(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=93.5885, y=5.5, z=50.01584}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		local pos = {x=93.5885, y=5.5, z=50.01584}
-	  local pos_follow = {x=0, y=0, z=0}
+		pos = {x=93.5885, y=5.5, z=50.01584}
+	  pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_2017(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "message", 0)
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "open") == 1 and ScriptLib.GetGroupVariableValue(context, "room2") == 1 and ScriptLib.GetGroupVariableValue(context, "room3") == 1 then
 		ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2001, {606,605,607})
 	else
@@ -518,25 +518,25 @@ function action_EVENT_GROUP_LOAD_2017(context, evt)
 			end
 		end
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2018(context, evt)
 	if evt.param1 ~= 2018 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_2018(context, evt)
-	
+
 	ScriptLib.ActivateDungeonCheckPoint(context, 4)
 	ScriptLib.ActivateDungeonCheckPoint(context, 3)
 	return 0
@@ -553,6 +553,6 @@ function action_EVENT_SELECT_OPTION_2019(context, evt)
 			end
 		end
 	end
-	
+
 	return 0
 end

@@ -1,11 +1,11 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199004120
 }
 
 -- DEFS_MISCS
-local defs = {
-	stages = 
+defs = {
+	stages =
 	{
 		--key为第几段，value1为这一段的起点suite，value2为这一段的主体suite
 		--这些suite里不要放台子以外的gadget, 不要有InitSuite
@@ -22,9 +22,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -82,9 +82,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -95,9 +95,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -194,9 +194,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -204,7 +204,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_120017(context, evt)
 	if 120015 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -215,13 +215,13 @@ function action_EVENT_GADGET_STATE_CHANGE_120017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 120016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133310143
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -86,20 +86,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_143002(context, evt)
 	if evt.param1 ~= 143002 then return false end
-	
+
 	-- 判断变量"boomcount"为5
 	if ScriptLib.GetGroupVariableValue(context, "boomcount") ~= 5 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -107,7 +107,7 @@ end
 function action_EVENT_ENTER_REGION_143002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133310143, 2)
-	
+
 	return 0
 end
 
@@ -116,7 +116,7 @@ function condition_EVENT_ANY_GADGET_DIE_143006(context, evt)
 	if 143004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -127,19 +127,19 @@ function action_EVENT_ANY_GADGET_DIE_143006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_143007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"boomcount"为0
 	if ScriptLib.GetGroupVariableValue(context, "boomcount") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -150,7 +150,7 @@ function action_EVENT_VARIABLE_CHANGE_143007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -160,7 +160,7 @@ function condition_EVENT_GROUP_LOAD_143010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "boomcount") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -171,6 +171,6 @@ function action_EVENT_GROUP_LOAD_143010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	return 0
 end

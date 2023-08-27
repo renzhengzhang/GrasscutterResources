@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220142004
 }
 
 -- DEFS_MISCS
-local        defs = {
+       defs = {
 
                 --本Group中发射器gadget的configID，最多3个,
                 fireMachineList = {
@@ -85,9 +85,9 @@ local        defs = {
         }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -168,9 +168,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -181,9 +181,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -226,20 +226,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4008(context, evt)
 	if evt.param1 ~= 4008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -250,8 +250,8 @@ function action_EVENT_ENTER_REGION_4008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -260,7 +260,7 @@ function condition_EVENT_ANY_GADGET_DIE_4015(context, evt)
 	if 4014 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -271,13 +271,13 @@ function action_EVENT_ANY_GADGET_DIE_4015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 4003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -286,7 +286,7 @@ function condition_EVENT_ANY_GADGET_DIE_4034(context, evt)
 	if 4033 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -297,13 +297,13 @@ function action_EVENT_ANY_GADGET_DIE_4034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 4032 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4032, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -313,7 +313,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4035(context, evt)
 	if 4021 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -324,11 +324,11 @@ function action_EVENT_GADGET_STATE_CHANGE_4035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"stone1"，时间节点为{30}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "stone1", {30}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -337,7 +337,7 @@ function condition_EVENT_ANY_GADGET_DIE_4036(context, evt)
 	if 4024 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -348,19 +348,19 @@ function action_EVENT_ANY_GADGET_DIE_4036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "stone1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "stone1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 4021 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4021, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -370,7 +370,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4042(context, evt)
 	if 4032 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -381,11 +381,11 @@ function action_EVENT_GADGET_STATE_CHANGE_4042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"stone2"，时间节点为{35}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "stone2", {35}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -394,7 +394,7 @@ function condition_EVENT_TIME_AXIS_PASS_4043(context, evt)
 	if "stone1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -405,29 +405,29 @@ function action_EVENT_TIME_AXIS_PASS_4043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_4044(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "stone1") == 1 and ScriptLib.CheckSceneTag(context, 20142,1056 ) then
 		ScriptLib.SetGadgetStateByConfigId(context,4021, GadgetState.Default)
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_4045(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "stone2") == 1 and ScriptLib.CheckSceneTag(context, 20142,1057 ) then
 		ScriptLib.SetGadgetStateByConfigId(context,4032, GadgetState.Default)
 	end
-	
+
 	return 0
 end
 
@@ -435,58 +435,58 @@ end
 function action_EVENT_LEVEL_TAG_CHANGE_4046(context, evt)
 	if ScriptLib.CheckSceneTag(context, 20142,1056 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 4)
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone1") == 0 then
 			ScriptLib.SetGadgetStateByConfigId(context,4021, GadgetState.ChestLocked)
 		end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone1") == 1 or ScriptLib.GetGroupVariableValue(context, "stone1") == 3 then
 			ScriptLib.SetGadgetStateByConfigId(context,4021, GadgetState.Default)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "stone1", 1)
 		end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone1") == 2 then
 			ScriptLib.SetGadgetStateByConfigId(context,4021, GadgetState.GearStop)
 		end
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 220142004, 4)
 	end
-	
+
 	if ScriptLib.CheckSceneTag(context, 20142,1057 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone2") == 0 then
 			ScriptLib.SetGadgetStateByConfigId(context,4032, GadgetState.ChestLocked)
 		end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone2") == 1 or ScriptLib.GetGroupVariableValue(context, "stone2") == 3 then
 			ScriptLib.SetGadgetStateByConfigId(context,4032, GadgetState.Default)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "stone2", 1)
 		end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone2") == 2 then
 			ScriptLib.SetGadgetStateByConfigId(context,4032, GadgetState.GearStop)
 		end
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 220142004, 3)
 	end
-	
+
 	if ScriptLib.CheckSceneTag(context, 20142,1058 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "chest") == 0 then
 			ScriptLib.SetGadgetStateByConfigId(context,4003, GadgetState.ChestLocked)
 		end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "chest") == 1 then
 			ScriptLib.SetGadgetStateByConfigId(context,4003, GadgetState.Default)
 		end
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 220142004, 2)
 	end
-	
+
 	return 0
 end
 
@@ -494,18 +494,18 @@ end
 function action_EVENT_GROUP_LOAD_4047(context, evt)
 	if ScriptLib.CheckSceneTag(context, 20142,1056 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 4)
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone1") == 0 then
 			ScriptLib.SetGadgetStateByConfigId(context,4021, GadgetState.ChestLocked)
 		end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone1") == 1 then
 			ScriptLib.SetGadgetStateByConfigId(context,4021, GadgetState.Default)
 		end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone1") == 2 then
 			ScriptLib.SetGadgetStateByConfigId(context,4021, GadgetState.Default)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "stone1", 1)
 		end
 	else
@@ -513,21 +513,21 @@ function action_EVENT_GROUP_LOAD_4047(context, evt)
 			ScriptLib.SetGroupVariableValue(context, "stone1", 1)
 		end
 	end
-	
+
 	if ScriptLib.CheckSceneTag(context, 20142,1057 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone2") == 0 then
 			ScriptLib.SetGadgetStateByConfigId(context,4032, GadgetState.ChestLocked)
 		end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone2") == 1 then
 			ScriptLib.SetGadgetStateByConfigId(context,4032, GadgetState.Default)
 		end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "stone2") == 2 then
 			ScriptLib.SetGadgetStateByConfigId(context,4032, GadgetState.Default)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "stone2", 1)
 		end
 	else
@@ -535,19 +535,19 @@ function action_EVENT_GROUP_LOAD_4047(context, evt)
 			ScriptLib.SetGroupVariableValue(context, "stone2", 1)
 		end
 	end
-	
+
 	if ScriptLib.CheckSceneTag(context, 20142,1058 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "chest") == 0 then
 			ScriptLib.SetGadgetStateByConfigId(context,4003, GadgetState.ChestLocked)
 		end
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "chest") == 1 then
 			ScriptLib.SetGadgetStateByConfigId(context,4003, GadgetState.Default)
 		end
 	end
-	
+
 	return 0
 end
 
@@ -556,7 +556,7 @@ function condition_EVENT_TIME_AXIS_PASS_4048(context, evt)
 	if "stone2" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -567,7 +567,7 @@ function action_EVENT_TIME_AXIS_PASS_4048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

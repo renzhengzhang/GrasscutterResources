@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133103572
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -179,9 +179,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -190,7 +190,7 @@ function condition_EVENT_ANY_MONSTER_DIE_572002(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -198,10 +198,10 @@ end
 function action_EVENT_ANY_MONSTER_DIE_572002(context, evt)
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 4)
-	
+
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103572, 9)
-	
+
 	return 0
 end
 
@@ -210,12 +210,12 @@ function condition_EVENT_GADGET_CREATE_572018(context, evt)
 	if 572001 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"hasFinished"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasFinished") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -226,7 +226,7 @@ function action_EVENT_GADGET_CREATE_572018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -234,14 +234,14 @@ end
 function condition_EVENT_SELECT_OPTION_572019(context, evt)
 	-- 判断是gadgetid 572001 option_id 2902
 	if 572001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 2902 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -251,23 +251,23 @@ function action_EVENT_SELECT_OPTION_572019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 572001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103572, 3)
-	
+
 	-- 删除指定group： 133103572 ；指定config：572001；物件身上指定option：2902；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133103572, 572001, 2902) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133103572, EntityType.GADGET, 572040 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -276,7 +276,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_572020(context, evt)
 	if 572006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -284,13 +284,13 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_572020(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103572, 7)
-	
+
 	-- 创建编号为666（该挑战的识别id),挑战内容为222的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 666, 222, 133103572, 26, 572021, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -300,7 +300,7 @@ function condition_EVENT_ANY_MONSTER_DIE_572022(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -308,10 +308,10 @@ end
 function action_EVENT_ANY_MONSTER_DIE_572022(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 3)
-	
+
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103572, 8)
-	
+
 	return 0
 end
 
@@ -321,50 +321,50 @@ function action_EVENT_CHALLENGE_FAIL_572023(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 572001, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 3)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 5)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133103572, 6)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 6)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 7)
-	
+
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 8)
-	
+
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 9)
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133103572, 572001, {2902}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 创建id为572040的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 572040 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "challenge2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "challenge2", 1, 133103578) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -372,46 +372,46 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_572024(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 3)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 5)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133103572, 6)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 6)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 7)
-	
+
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 8)
-	
+
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 9)
-	
+
 	-- 将本组内变量名为 "hasFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasFinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 572001 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 572001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1331035721") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -421,7 +421,7 @@ function condition_EVENT_ANY_MONSTER_DIE_572025(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -429,10 +429,10 @@ end
 function action_EVENT_ANY_MONSTER_DIE_572025(context, evt)
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 5)
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103572, 6)
-	
+
 	return 0
 end
 
@@ -442,7 +442,7 @@ function condition_EVENT_ANY_MONSTER_DIE_572035(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -450,10 +450,10 @@ end
 function action_EVENT_ANY_MONSTER_DIE_572035(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 6)
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103572, 4)
-	
+
 	return 0
 end
 
@@ -463,7 +463,7 @@ function condition_EVENT_ANY_MONSTER_DIE_572039(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -471,10 +471,10 @@ end
 function action_EVENT_ANY_MONSTER_DIE_572039(context, evt)
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 9)
-	
+
 	-- 终止识别id为666的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 666, 1)
-	
+
 	return 0
 end
 
@@ -482,32 +482,32 @@ end
 function condition_EVENT_SELECT_OPTION_572041(context, evt)
 	-- 判断是gadgetid 572001 option_id 2902
 	if 572001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 2902 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_572041(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	local pos = {x=600,y=230,z=1651}
+	pos = {x=600,y=230,z=1651}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31021011, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1331035723") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -517,7 +517,7 @@ function condition_EVENT_ANY_MONSTER_DIE_572046(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -525,9 +525,9 @@ end
 function action_EVENT_ANY_MONSTER_DIE_572046(context, evt)
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103572, 8)
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103572, 5)
-	
+
 	return 0
 end

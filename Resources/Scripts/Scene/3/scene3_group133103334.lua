@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133103334
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -132,9 +132,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -142,12 +142,12 @@ function condition_EVENT_GADGET_CREATE_334003(context, evt)
 	if 334002 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"zhenjun1"为1
 	if ScriptLib.GetGroupVariableValue(context, "zhenjun1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_GADGET_CREATE_334003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -166,14 +166,14 @@ end
 function condition_EVENT_SELECT_OPTION_334004(context, evt)
 	-- 判断是gadgetid 334002 option_id 171
 	if 334002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 171 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -183,29 +183,29 @@ function action_EVENT_SELECT_OPTION_334004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 334005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103334, 2)
-	
+
 	-- 删除指定group： 133103334 ；指定config：334002；物件身上指定option：171；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133103334, 334002, 171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "133103334_step1") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "zhenjun1" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "zhenjun1", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -214,12 +214,12 @@ function condition_EVENT_GADGET_CREATE_334007(context, evt)
 	if 334006 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"zhenjun2"为1
 	if ScriptLib.GetGroupVariableValue(context, "zhenjun2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -230,7 +230,7 @@ function action_EVENT_GADGET_CREATE_334007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -238,14 +238,14 @@ end
 function condition_EVENT_SELECT_OPTION_334008(context, evt)
 	-- 判断是gadgetid 334006 option_id 171
 	if 334006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 171 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -255,29 +255,29 @@ function action_EVENT_SELECT_OPTION_334008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 334009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103334, 3)
-	
+
 	-- 删除指定group： 133103334 ；指定config：334006；物件身上指定option：171；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133103334, 334006, 171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "133103334_step2") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "zhenjun2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "zhenjun2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -286,12 +286,12 @@ function condition_EVENT_GADGET_CREATE_334011(context, evt)
 	if 334010 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"zhenjun3"为1
 	if ScriptLib.GetGroupVariableValue(context, "zhenjun3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -302,7 +302,7 @@ function action_EVENT_GADGET_CREATE_334011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -310,14 +310,14 @@ end
 function condition_EVENT_SELECT_OPTION_334012(context, evt)
 	-- 判断是gadgetid 334010 option_id 171
 	if 334010 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 171 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -327,29 +327,29 @@ function action_EVENT_SELECT_OPTION_334012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 334013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103334, 4)
-	
+
 	-- 删除指定group： 133103334 ；指定config：334010；物件身上指定option：171；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133103334, 334010, 171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "133103334_step3") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "zhenjun3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "zhenjun3", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -357,17 +357,17 @@ end
 function condition_EVENT_QUEST_FINISH_334017(context, evt)
 	--检查ID为7100206的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 7100206 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -378,7 +378,7 @@ function action_EVENT_QUEST_FINISH_334017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -386,14 +386,14 @@ end
 function condition_EVENT_SELECT_OPTION_334018(context, evt)
 	-- 判断是gadgetid 334001 option_id 32
 	if 334001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 32 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -404,46 +404,46 @@ function action_EVENT_SELECT_OPTION_334018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103334, 5)
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "133103334_finish") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 解锁目标47
 	if 0 ~= ScriptLib.UnlockForce(context, 47) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : unlock_force")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "EnableOption" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "EnableOption", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知场景上的所有玩家播放名字为133103334 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 133103334, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_334020(context, evt)
 	if evt.param1 ~= 334020 then return false end
-	
+
 	-- 判断变量"EnableOption"为1
 	if ScriptLib.GetGroupVariableValue(context, "EnableOption") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -454,6 +454,6 @@ function action_EVENT_ENTER_REGION_334020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end

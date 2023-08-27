@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220133006
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -92,9 +92,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -105,9 +105,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -132,9 +132,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -144,25 +144,25 @@ function action_EVENT_GROUP_LOAD_6016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "StoneReadyB" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "StoneReadyB", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "StoneReadyC" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "StoneReadyC", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "StoneReadyD" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "StoneReadyD", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -171,7 +171,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_6017(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133006, 6001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -182,7 +182,7 @@ function action_EVENT_GADGET_STATE_CHANGE_6017(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -191,7 +191,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_6018(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133006, 6002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -202,27 +202,27 @@ function action_EVENT_GADGET_STATE_CHANGE_6018(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_6019(context, evt)
 	-- 判断是gadgetid 为 6004的移动平台，是否到达了16 的路线中的 0 点
-	
+
 	if 6004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 16 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -233,27 +233,27 @@ function action_EVENT_PLATFORM_ARRIVAL_6019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_6020(context, evt)
 	-- 判断是gadgetid 为 6003的移动平台，是否到达了22 的路线中的 0 点
-	
+
 	if 6003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 22 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -264,27 +264,27 @@ function action_EVENT_PLATFORM_ARRIVAL_6020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_6024(context, evt)
 	-- 判断是gadgetid 为 6008的移动平台，是否到达了23 的路线中的 0 点
-	
+
 	if 6008 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 23 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -295,27 +295,27 @@ function action_EVENT_PLATFORM_ARRIVAL_6024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_6025(context, evt)
 	-- 判断是gadgetid 为 6022的移动平台，是否到达了24 的路线中的 0 点
-	
+
 	if 6022 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 24 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -326,7 +326,7 @@ function action_EVENT_PLATFORM_ARRIVAL_6025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -335,77 +335,77 @@ function action_EVENT_GADGET_STATE_CHANGE_6027(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 220133006, 6001) == 201 or ScriptLib.GetGadgetStateByConfigId(context, 220133006, 6002) == 201 then
 		if ScriptLib.GetGroupVariableValue(context, "StoneReadyA") == 0 and ScriptLib.GetGroupVariableValue(context, "StoneReadyB") == 0 and ScriptLib.GetGroupVariableValue(context, "StoneReadyC") == 0 and ScriptLib.GetGroupVariableValue(context, "StoneReadyD") == 0 then
 			ScriptLib.SetGroupVariableValue(context, "StoneReadyA", 1)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "StoneReadyB", 1)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "StoneReadyC", 1)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "StoneReadyD", 1)
-			
+
 			ScriptLib.SetPlatformRouteId(context, 6004, 16)
-			
+
 			ScriptLib.SetPlatformRouteId(context, 6003, 22)
-			
+
 			ScriptLib.SetPlatformRouteId(context, 6008, 23)
-			
+
 			ScriptLib.SetPlatformRouteId(context, 6022, 24)
-			
+
 			ScriptLib.StartPlatform(context, 6004)
-			
+
 			ScriptLib.StartPlatform(context, 6003)
-			
+
 			ScriptLib.StartPlatform(context, 6008)
-			
+
 			ScriptLib.StartPlatform(context, 6022)
 		else
 			if ScriptLib.GetGroupVariableValue(context, "StoneReadyA") == 2 and ScriptLib.GetGroupVariableValue(context, "StoneReadyB") == 2 and ScriptLib.GetGroupVariableValue(context, "StoneReadyC") == 2 and ScriptLib.GetGroupVariableValue(context, "StoneReadyD") == 2 then
 				ScriptLib.SetGroupVariableValue(context, "StoneReadyA", 1)
-				
+
 				ScriptLib.SetGroupVariableValue(context, "StoneReadyB", 1)
-				
+
 				ScriptLib.SetGroupVariableValue(context, "StoneReadyC", 1)
-				
+
 				ScriptLib.SetGroupVariableValue(context, "StoneReadyD", 1)
-				
+
 				ScriptLib.SetPlatformRouteId(context, 6004, 21)
-				
+
 				ScriptLib.SetPlatformRouteId(context, 6003, 25)
-				
+
 				ScriptLib.SetPlatformRouteId(context, 6008, 26)
-				
+
 				ScriptLib.SetPlatformRouteId(context, 6022, 27)
-				
+
 				ScriptLib.StartPlatform(context, 6004)
-				
+
 				ScriptLib.StartPlatform(context, 6003)
-				
+
 				ScriptLib.StartPlatform(context, 6008)
-				
+
 				ScriptLib.StartPlatform(context, 6022)
 			end
 		end
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_6028(context, evt)
 	-- 判断是gadgetid 为 6004的移动平台，是否到达了21 的路线中的 0 点
-	
+
 	if 6004 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 21 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -416,27 +416,27 @@ function action_EVENT_PLATFORM_ARRIVAL_6028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_6029(context, evt)
 	-- 判断是gadgetid 为 6003的移动平台，是否到达了25 的路线中的 0 点
-	
+
 	if 6003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 25 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -447,27 +447,27 @@ function action_EVENT_PLATFORM_ARRIVAL_6029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_6030(context, evt)
 	-- 判断是gadgetid 为 6008的移动平台，是否到达了26 的路线中的 0 点
-	
+
 	if 6008 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 26 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -478,27 +478,27 @@ function action_EVENT_PLATFORM_ARRIVAL_6030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_6031(context, evt)
 	-- 判断是gadgetid 为 6022的移动平台，是否到达了27 的路线中的 0 点
-	
+
 	if 6022 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 27 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -509,6 +509,6 @@ function action_EVENT_PLATFORM_ARRIVAL_6031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

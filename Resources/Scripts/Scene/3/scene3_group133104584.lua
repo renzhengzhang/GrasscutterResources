@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133104584
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	option_1 = 201,
 	option_2 = 202,
 	option_3 = 203,
@@ -23,13 +23,13 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local play = {
+play = {
 
 
 
-	options = { 
+	options = {
 
-		[0] = defs.option_1, --ore 
+		[0] = defs.option_1, --ore
 
 		[1] = defs.option_2, --mithril
 
@@ -74,9 +74,9 @@ local play = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -144,9 +144,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -157,9 +157,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -256,9 +256,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -268,7 +268,7 @@ function action_EVENT_QUEST_START_584003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -278,11 +278,11 @@ function condition_EVENT_GADGET_CREATE_584005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "questStart") ~= 1 then
 			return false
 	end
-	
+
 	if 584002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -293,44 +293,44 @@ function action_EVENT_GADGET_CREATE_584005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133104584, 584009, {201,202,203}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133104584, 584010, {201,202,203}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133104584, 584013, {201,202,203}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133104584, 584015, {201,202,203}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133104584, 584016, {201,202,203}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_584006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 		-- 判断变量"fef"为0
 		if evt.source_name ~= "curColor01" and
 			evt.source_name ~= "curColor02" and
@@ -340,13 +340,13 @@ function condition_EVENT_VARIABLE_CHANGE_584006(context, evt)
 			evt.source_name ~= "curColor06" then
 				return false
 		end
-		
+
 		return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_584006(context, evt)
-				local s = play.colors[evt.param1]
+				s = play.colors[evt.param1]
 				if evt.source_name == "curColor01" then
 					ScriptLib.SetGroupGadgetStateByConfigId(context, 0, defs.water_1, s)
 				elseif evt.source_name	== "curColor02" then
@@ -358,24 +358,24 @@ function action_EVENT_VARIABLE_CHANGE_584006(context, evt)
 				elseif evt.source_name	== "curColor05" then
 					ScriptLib.SetGroupGadgetStateByConfigId(context, 0, defs.water_5, s)
 				elseif evt.source_name	== "curColor06" then
-					ScriptLib.SetGroupGadgetStateByConfigId(context, 0, defs.water_6, s)	
+					ScriptLib.SetGroupGadgetStateByConfigId(context, 0, defs.water_6, s)
 				end
-			
+
 				ScriptLib.SetGroupVariableValue(context, "uniqueColorCount", 0)
-				local colorIndex = 0
-				local colorCompare = 0
-				local temp_flag = 0
+				colorIndex = 0
+				colorCompare = 0
+				temp_flag = 0
 				for i=0,4 do
 					temp_flag = 0
 					colorIndex = ScriptLib.GetGroupVariableValue(context, play.curColorList[i])
 					j = i+1
-			
+
 					for n=j,5 do
 						colorCompare = ScriptLib.GetGroupVariableValue(context, play.curColorList[n])
 						if colorIndex == colorCompare then
 							temp_flag = 1
 						end
-					end 
+					end
 					if temp_flag == 0 then
 						ScriptLib.ChangeGroupVariableValue(context, "uniqueColorCount", 1)
 					end
@@ -388,7 +388,7 @@ end
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_584007(context, evt)
-			if evt.param1 ~= defs.gadget_1 and 
+			if evt.param1 ~= defs.gadget_1 and
 				evt.param1 ~= defs.gadget_2 and
 				evt.param1 ~= defs.gadget_3 and
 				evt.param1 ~= defs.gadget_4 and
@@ -401,8 +401,8 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_584007(context, evt)
-	local colorName = ""
-		
+	colorName = ""
+
 			if evt.param1 == defs.gadget_1 then
 				colorName = "curColor01"
 			elseif	evt.param1 == defs.gadget_2 then
@@ -416,11 +416,11 @@ function action_EVENT_SELECT_OPTION_584007(context, evt)
 			elseif	evt.param1 == defs.gadget_6 then
 				colorName = "curColor06"
 			end
-						
+
 			for i=0,2 do
 				if evt.param2 == play.options[i] then
-					local t = 2^i
-					local c = ScriptLib.GetGroupVariableValue(context, colorName)
+					t = 2^i
+					c = ScriptLib.GetGroupVariableValue(context, colorName)
 					if c%(2*t) >= t then
 						return 0
 					end
@@ -438,12 +438,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_584018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"correct"为1
 	if ScriptLib.GetGroupVariableValue(context, "correct") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -454,6 +454,6 @@ function action_EVENT_VARIABLE_CHANGE_584018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

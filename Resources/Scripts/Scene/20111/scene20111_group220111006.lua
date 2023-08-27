@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220111006
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -81,9 +81,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -94,9 +94,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -121,25 +121,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6005(context, evt)
 	if evt.param1 ~= 6005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"point"为1
 	if ScriptLib.GetGroupVariableValue(context, "point") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -147,24 +147,24 @@ end
 function action_EVENT_ENTER_REGION_6005(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220111010, 11)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6008(context, evt)
 	if evt.param1 ~= 6008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"alive"为0
 	if ScriptLib.GetGroupVariableValue(context, "alive") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -174,24 +174,24 @@ function action_EVENT_ENTER_REGION_6008(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111006, 6001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "alive" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "alive", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_6009(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 220111006) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -201,37 +201,37 @@ function action_EVENT_ANY_MONSTER_DIE_6009(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111006, 6002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220111006中， configid为6001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111006, 6001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "alive" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "alive", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6010(context, evt)
 	if evt.param1 ~= 6010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"alive"为1
 	if ScriptLib.GetGroupVariableValue(context, "alive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -241,20 +241,20 @@ function action_EVENT_ENTER_REGION_6010(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111006, 6001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6017(context, evt)
 	if evt.param1 ~= 6017 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -262,19 +262,19 @@ end
 function action_EVENT_ENTER_REGION_6017(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220111006, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6024(context, evt)
 	if evt.param1 ~= 6024 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -284,20 +284,20 @@ function action_EVENT_ENTER_REGION_6024(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111006, 6012, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220111006, 6027, {72}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220111006, 6028, {73}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -305,14 +305,14 @@ end
 function condition_EVENT_SELECT_OPTION_6025(context, evt)
 	-- 判断是gadgetid 6027 option_id 72
 	if 6027 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 72 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -322,14 +322,14 @@ function action_EVENT_SELECT_OPTION_6025(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111006, 6012, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 220111006 ；指定config：6027；物件身上指定option：72；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220111006, 6027, 72) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -337,14 +337,14 @@ end
 function condition_EVENT_SELECT_OPTION_6026(context, evt)
 	-- 判断是gadgetid 6028 option_id 73
 	if 6028 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 73 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -354,38 +354,38 @@ function action_EVENT_SELECT_OPTION_6026(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111006, 6023, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 220111006 ；指定config：6028；物件身上指定option：73；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220111006, 6028, 73) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "collect" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "collect", 1, 220111013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "point1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "point1", 1, 220111006) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6029(context, evt)
 	if evt.param1 ~= 6029 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -393,33 +393,33 @@ end
 function action_EVENT_ENTER_REGION_6029(context, evt)
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220111010, 7)
-	
+
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220111010, 12)
-	
+
 	-- 将本组内变量名为 "point2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "point2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6030(context, evt)
 	if evt.param1 ~= 6030 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"point1"为0
 	if ScriptLib.GetGroupVariableValue(context, "point1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -427,24 +427,24 @@ end
 function action_EVENT_ENTER_REGION_6030(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220111010, 11)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6031(context, evt)
 	if evt.param1 ~= 6031 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"alive"为1
 	if ScriptLib.GetGroupVariableValue(context, "alive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -454,8 +454,8 @@ function action_EVENT_ENTER_REGION_6031(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111006, 6001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -463,14 +463,14 @@ end
 function condition_EVENT_SELECT_OPTION_6032(context, evt)
 	-- 判断是gadgetid 6028 option_id 73
 	if 6028 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 73 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -478,7 +478,7 @@ end
 function action_EVENT_SELECT_OPTION_6032(context, evt)
 	-- 删除suite11的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220111010, 11)
-	
+
 	return 0
 end
 
@@ -486,19 +486,19 @@ end
 function condition_EVENT_SELECT_OPTION_6033(context, evt)
 	-- 判断是gadgetid 6028 option_id 73
 	if 6028 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 73 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"point2"为0
 	if ScriptLib.GetGroupVariableValue(context, "point2") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -506,25 +506,25 @@ end
 function action_EVENT_SELECT_OPTION_6033(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220111010, 7)
-	
+
 	-- 将本组内变量名为 "point2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "point2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6034(context, evt)
 	if evt.param1 ~= 6034 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -532,6 +532,6 @@ end
 function action_EVENT_ENTER_REGION_6034(context, evt)
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220111010, 10)
-	
+
 	return 0
 end

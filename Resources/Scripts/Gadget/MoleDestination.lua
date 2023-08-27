@@ -1,12 +1,12 @@
-local _delay = 10
+_delay = 10
 
 -- ¶¨Ê±Æ÷»Øµ÷
 function OnTimer(context, now)
 	-- »ñÈ¡»ú¹Øµ±Ç°×´Ì¬
-	local state = ScriptLib.GetGadgetState(context)
+	state = ScriptLib.GetGadgetState(context)
 	if state ~= GadgetState.GearAction1 then
 		-- »ñÈ¡µ±Ç°×´Ì¬µÄ¿ªÊ¼Ê±¼ä
-		local state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
+		state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
 		if now >= state_begin_time + _delay then
 			-- Èç¹ûÆô¶¯Ê±¼ä³¬¹ýÆô¶¯³ÖÐøÊ±¼ä£¬Ôò×ª»»ÎªDefault×´Ì¬
 			ScriptLib.SetGadgetState(context, GadgetState.GearStart)
