@@ -1,16 +1,16 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144003005
 }
 
 -- DEFS_MISCS
-NormalRoundTime = 50
-ShooterConfigID = 5001
-GalleryID = 7006
-TextEnterConfigID = 5002
-GalleryIDList = {7006,7013,7014}
+local NormalRoundTime = 50
+local ShooterConfigID = 5001
+local GalleryID = 7006
+local TextEnterConfigID = 5002
+local GalleryIDList = {7006,7013,7014}
 
-NormalRandomList = {
+local NormalRandomList = {
        {[1] = {1},
         [2] = {3},
         [3] = {5},},
@@ -18,13 +18,13 @@ NormalRandomList = {
        {[1] = {7},
         [2] = {9},
         [3] = {11},},
-
+        
        {[1] = {13},
         [2] = {15},
         [3] = {17},},
 }
 
-NormalRandomList2 = {
+local NormalRandomList2 = {
        {[1] = {19},
         [2] = {21},
         [3] = {23},},
@@ -32,81 +32,75 @@ NormalRandomList2 = {
        {[1] = {25},
         [2] = {27},
         [3] = {29},},
-
+        
        {[1] = {31},
         [2] = {33},
         [3] = {35},},
 }
 
-FeverRandomList = {
+local FeverRandomList = {
        {[1] = {2},
         [2] = {4},
-        [3] = {6},
-},
+        [3] = {6},},
 
        {[1] = {8},
         [2] = {10},
-        [3] = {12},
-},
+        [3] = {12},},
 
        {[1] = {14},
         [2] = {16},
-        [3] = {18},
-},
+        [3] = {18},},
 
 }
 
-FeverRandomList2 = {
+local FeverRandomList2 = {
        {[1] = {20},
         [2] = {22},
-        [3] = {24},
-},
+        [3] = {24},},
 
        {[1] = {26},
         [2] = {28},
-        [3] = {30},
-},
+        [3] = {30},},
 
        {[1] = {32},
         [2] = {34},
-        [3] = {36},
-},
+        [3] = {36},},
 
 }
 
-RandomBuffTimeAxis = {
+local RandomBuffTimeAxis = {
         {20,50,80,120,150},
         {15,45,75,115,145},
         {25,50,85,125,155},
 }
 
-BUffList = {
+local BUffList = {
         {buffConfigID = 5033, buffWeight = 10},
         {buffConfigID = 5034, buffWeight = 20},
         {buffConfigID = 5035, buffWeight = 0},
 }
 
-BUffList2 = {
+local BUffList2 = {
         {buffConfigID = 5033, buffWeight = 10},
         {buffConfigID = 5034, buffWeight = 10},
         {buffConfigID = 5035, buffWeight = 20},
 }
 
-BUffList3 = {
+local BUffList3 = {
         {buffConfigID = 5033, buffWeight = 10},
         {buffConfigID = 5034, buffWeight = 10},
         {buffConfigID = 5035, buffWeight = 10},
 }
 
-BuffRegionID = 5036
+local BuffRegionID = 5036
 
-PerDamageScore = 2
-PerShooterScore = 100
+local PerDamageScore = 2
+local PerShooterScore = 100
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -176,9 +170,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -189,9 +183,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -207,9 +201,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -218,8 +212,8 @@ function action_EVENT_GALLERY_STOP_5038(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -229,8 +223,8 @@ function action_EVENT_GALLERY_START_5041(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

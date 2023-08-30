@@ -1,4 +1,4 @@
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Monster_Die1"] = { config_id = 8000001, name = "Monster_Die1", event= EventType.EVENT_ANY_MONSTER_DIE, source = "Activity_EndoraGadgetSkill_BubbleTrigger", condition = "", action = "action_monster_die1", trigger_count = 0 },
 		["Monster_Die2"] = { config_id = 8000002, name = "Monster_Die2", event= EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_monster_die2", trigger_count = 0 }

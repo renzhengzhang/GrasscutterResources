@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101137
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -80,9 +80,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -90,7 +90,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_137003(context, evt)
 	if 137002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -100,25 +100,25 @@ function action_EVENT_GADGET_STATE_CHANGE_137003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 137001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_137007(context, evt)
 	if evt.param1 ~= 137007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasEnteredArea"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasEnteredArea") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -129,8 +129,8 @@ function action_EVENT_ENTER_REGION_137007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
-	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=2747.952, y= 196.9105, z=-1687.89}, radius = 2, rot = {x=0, y=0, z=1},is_skip_ui = true})
-
+	
+	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=2747.952, y= 196.9105, z=-1687.89}, radius = 2, rot = {x=0, y=0, z=1},is_skip_ui = true}) 
+	
 	return 0
 end

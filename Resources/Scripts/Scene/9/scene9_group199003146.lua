@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003146
 }
 
 -- DEFS_MISCS
-       defs = {
+local        defs = {
 	is_movable = 1,
 	--连线形态
-	patterns =
+	patterns = 
 	{
 			--形态1
 			[1] = {
-
+	 
 			[146002] = {connect =0 , point_array = 900300037, point_id = {2}} ,
 			[146003] = {connect =0 , point_array = 900300037, point_id = {3}} ,
 			[146004] = {connect =0, point_array = 900300037, point_id = {4}} ,
@@ -24,7 +24,7 @@ base_info = {
 			[146011] = {connect =0 , point_array = 900300037, point_id = {9}} ,
 			},
 			--形态2
-			[2] =
+			[2] = 
 			{
 			[146002] = {connect =0 ,point_array = 900300037, point_id = {2}} ,
 			[146003] = {connect =0 ,point_array = 900300037, point_id = {3}} ,
@@ -37,7 +37,7 @@ base_info = {
 			[146010] = {connect =0 ,point_array = 900300037, point_id = {10}} ,
 			[146011] = {connect =0, point_array = 900300037, point_id = {11}} ,
 			},
-            [3] =
+            [3] = 
 			{
 			[146002] = {connect =146009 ,point_array = 900300037, point_id = {2}} ,
 			[146003] = {connect =146004 ,point_array = 900300037, point_id = {3}} ,
@@ -55,9 +55,9 @@ base_info = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -98,9 +98,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -111,9 +111,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -138,28 +138,28 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_146001(context, evt)
 	-- 判断是gadgetid 为 146002的移动平台，是否到达了900300037 的点集中的 2 点
-
+	
 	if 146002 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 900300037 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -170,7 +170,7 @@ function action_EVENT_PLATFORM_REACH_POINT_146001(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 

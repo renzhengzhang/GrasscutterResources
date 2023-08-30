@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303478
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -116,9 +116,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -126,7 +126,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_478003(context, evt)
 	if 478002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -137,7 +137,7 @@ function action_EVENT_GADGET_STATE_CHANGE_478003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -146,15 +146,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_478013(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303478, 478004) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303478, 478005) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303478, 478006) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -164,27 +164,27 @@ function action_EVENT_GADGET_STATE_CHANGE_478013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 478001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 478018 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 478018, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133303478, 3)
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=-1107.813, y=173.0522, z=3699.369}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1107.813, y=173.0522, z=3699.369}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1107.813, y=173.0522, z=3699.369}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_ANY_GADGET_DIE_478019(context, evt)
 	if 478014 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_ANY_GADGET_DIE_478019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -213,7 +213,7 @@ function condition_EVENT_ANY_GADGET_DIE_478020(context, evt)
 	if 478015 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -224,7 +224,7 @@ function action_EVENT_ANY_GADGET_DIE_478020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -234,7 +234,7 @@ function condition_EVENT_GROUP_LOAD_478022(context, evt)
 	if ScriptLib.CheckIsInGroup(context, 0, 478014) ~= false then
 	        return false
 	end
-
+	
 	return true
 end
 
@@ -245,7 +245,7 @@ function action_EVENT_GROUP_LOAD_478022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -255,7 +255,7 @@ function condition_EVENT_GROUP_LOAD_478023(context, evt)
 	if ScriptLib.CheckIsInGroup(context, 0, 478015) ~= false then
 	        return false
 	end
-
+	
 	return true
 end
 
@@ -266,7 +266,7 @@ function action_EVENT_GROUP_LOAD_478023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -275,15 +275,15 @@ function condition_EVENT_GROUP_LOAD_478024(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303478, 478004) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303478, 478005) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303478, 478006) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -293,17 +293,17 @@ function action_EVENT_GROUP_LOAD_478024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 478001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 478018 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 478018, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133303478, 3)
-
+	
 	return 0
 end
 
@@ -312,7 +312,7 @@ function condition_EVENT_GROUP_REFRESH_478025(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133303478, 478002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -322,7 +322,7 @@ function action_EVENT_GROUP_REFRESH_478025(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 478002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

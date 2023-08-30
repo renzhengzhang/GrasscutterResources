@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133001220
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	challenge_id = 2010061,
 	enter_region = 220025,
 	leave_region = 220028,
@@ -12,14 +12,14 @@ defs = {
 }
 
 -- DEFS_MISCS
-Phase ={
+local Phase ={
         [1] = {3,6},
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -93,9 +93,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -106,9 +106,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -169,9 +169,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -180,8 +180,8 @@ function condition_EVENT_ANY_MONSTER_DIE_220009(context, evt)
 	if evt.param1 ~= 220005 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -192,7 +192,7 @@ function action_EVENT_ANY_MONSTER_DIE_220009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -202,8 +202,8 @@ function condition_EVENT_ANY_MONSTER_DIE_220012(context, evt)
 	if evt.param1 ~= 220006 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -214,7 +214,7 @@ function action_EVENT_ANY_MONSTER_DIE_220012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -224,8 +224,8 @@ function condition_EVENT_ANY_MONSTER_DIE_220016(context, evt)
 	if evt.param1 ~= 220010 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -236,7 +236,7 @@ function action_EVENT_ANY_MONSTER_DIE_220016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -244,12 +244,12 @@ end
 function action_EVENT_MONSTER_BATTLE_220018(context, evt)
 	-- 创建标识为"T1"，时间节点为{12}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T1", {12}, false)
-
-
+	
+	
 	-- 创建标识为"T_SEED"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T_SEED", {3}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -257,31 +257,31 @@ end
 function action_EVENT_TIME_AXIS_PASS_220019(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001220, 4)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001220, 6)
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001220, 6)
-
+	
 	-- 调用提示id为 400069 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400069) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_220023(context, evt)
 	if evt.param1 ~= 220023 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -289,7 +289,7 @@ end
 function action_EVENT_ENTER_REGION_220023(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001220, 2)
-
+	
 	return 0
 end
 
@@ -298,7 +298,7 @@ function condition_EVENT_ANY_MONSTER_DIE_220024(context, evt)
 	if 220001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -309,19 +309,19 @@ function action_EVENT_ANY_MONSTER_DIE_220024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001220, 3)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001220, 4)
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001220, 5)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001220, 6)
-
+	
 	return 0
 end
 
@@ -329,40 +329,40 @@ end
 function action_EVENT_TIME_AXIS_PASS_220026(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001220, 5)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001220, 6)
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001220, 6)
-
+	
 	-- 调用提示id为 400069 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400069) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "DIE" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "DIE", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001220, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_220027(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"DIE"为2
 	if ScriptLib.GetGroupVariableValue(context, "DIE") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -370,8 +370,8 @@ end
 function action_EVENT_VARIABLE_CHANGE_220027(context, evt)
 	-- 创建标识为"T2"，时间节点为{10}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T2", {10}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -382,7 +382,7 @@ function action_EVENT_TIME_AXIS_PASS_220029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -390,40 +390,40 @@ end
 function action_EVENT_TIME_AXIS_PASS_220030(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001220, 4)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001220, 6)
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001220, 6)
-
+	
 	-- 调用提示id为 400069 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400069) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "DIE" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "DIE", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001220, 5)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_220031(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"DIE"为2
 	if ScriptLib.GetGroupVariableValue(context, "DIE") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -431,8 +431,8 @@ end
 function action_EVENT_VARIABLE_CHANGE_220031(context, evt)
 	-- 创建标识为"T3"，时间节点为{10}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T3", {10}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -442,8 +442,8 @@ function condition_EVENT_ANY_MONSTER_DIE_220035(context, evt)
 	if evt.param1 ~= 220011 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -454,7 +454,7 @@ function action_EVENT_ANY_MONSTER_DIE_220035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

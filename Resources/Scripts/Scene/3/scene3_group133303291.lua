@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303291
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_CoreID = 291005,
 	monster_BossID = 291002,
 	gadget_Point_1 = 291006,
@@ -16,9 +16,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-DeathField ={
+local DeathField ={
 	CoreID = defs.gadget_CoreID,
 	BossID = defs.monster_BossID,
 	BossSuite = 2,
@@ -26,7 +26,7 @@ DeathField ={
 	PointList = {defs.gadget_Point_1,defs.gadget_Point_2,defs.gadget_Point_3},
 }
 
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 0,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -35,9 +35,9 @@ CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -123,9 +123,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -136,9 +136,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -181,9 +181,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -191,7 +191,7 @@ function condition_EVENT_MONSTER_BATTLE_291009(context, evt)
 	if 291002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -202,31 +202,31 @@ function action_EVENT_MONSTER_BATTLE_291009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为291014的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 291014 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为291016的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 291016 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为291028的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 291028 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为291029的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 291029 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -235,7 +235,7 @@ function condition_EVENT_ANY_GADGET_DIE_291025(context, evt)
 	if 291006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -246,8 +246,8 @@ function action_EVENT_ANY_GADGET_DIE_291025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -256,7 +256,7 @@ function condition_EVENT_ANY_GADGET_DIE_291026(context, evt)
 	if 291007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -267,8 +267,8 @@ function action_EVENT_ANY_GADGET_DIE_291026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -277,7 +277,7 @@ function condition_EVENT_ANY_GADGET_DIE_291027(context, evt)
 	if 291008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -288,8 +288,8 @@ function action_EVENT_ANY_GADGET_DIE_291027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -298,7 +298,7 @@ function condition_EVENT_ANY_MONSTER_DIE_291030(context, evt)
 	if 291002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -308,8 +308,8 @@ function action_EVENT_ANY_MONSTER_DIE_291030(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 291012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -318,7 +318,7 @@ function condition_EVENT_ANY_GADGET_DIE_291032(context, evt)
 	if 291005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -326,17 +326,17 @@ end
 function action_EVENT_ANY_GADGET_DIE_291032(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303291, 4)
-
+	
 	-- 将本组内变量名为 "deathzoneover" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "deathzoneover", 1, 133303052) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 创建标识为"gptimer"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "gptimer", {5}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -351,7 +351,7 @@ function condition_EVENT_TIME_AXIS_PASS_291034(context, evt)
 	if "gptimer" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -362,7 +362,7 @@ function action_EVENT_TIME_AXIS_PASS_291034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 

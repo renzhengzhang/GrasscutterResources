@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103058
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -71,9 +71,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -82,14 +82,14 @@ function condition_EVENT_ANY_MONSTER_DIE_58006(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_58006(context, evt)
-	ScriptLib.SetGadgetStateByConfigId(context, 58003, GadgetState.Default)
-	ScriptLib.SetGadgetStateByConfigId(context, 58005, GadgetState.Default)
+	ScriptLib.SetGadgetStateByConfigId(context, 58003, GadgetState.Default) 
+	ScriptLib.SetGadgetStateByConfigId(context, 58005, GadgetState.Default) 
 	ScriptLib.SetGadgetStateByConfigId(context, 58004, GadgetState.Default)
 	return 0
 end

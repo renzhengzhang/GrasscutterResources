@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133001231
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -96,9 +96,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -107,7 +107,7 @@ function condition_EVENT_ANY_MONSTER_DIE_231001(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -118,7 +118,7 @@ function action_EVENT_ANY_MONSTER_DIE_231001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -128,7 +128,7 @@ function condition_EVENT_QUEST_FINISH_231005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "is_monster_killed") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -139,7 +139,7 @@ function action_EVENT_QUEST_FINISH_231005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -147,7 +147,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_231006(context, evt)
 	-- 变量"is_monster_killed"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "is_monster_killed", 0)
-
+	
 	return 0
 end
 
@@ -158,6 +158,6 @@ function action_EVENT_QUEST_FINISH_231007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

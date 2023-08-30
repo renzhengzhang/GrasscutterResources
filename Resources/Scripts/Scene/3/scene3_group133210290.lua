@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210290
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	loop_mode = 0,
 	group_ID = 133210290,
 	gadget_1 = 290001,
@@ -18,9 +18,9 @@ defs = {
 
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -61,9 +61,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -101,26 +101,26 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_290007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"successed"为1
 	if ScriptLib.GetGroupVariableValue(context, "successed") ~= 1 then
 			return false
 	end
-
+	
 	if 9010 == ScriptLib.GetGadgetStateByConfigId(context, 133210290, 290001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -130,29 +130,29 @@ function action_EVENT_VARIABLE_CHANGE_290007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 290001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 290002 的物件更改为状态 GadgetState.Action02
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 290002, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 290003 的物件更改为状态 GadgetState.Action03
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 290003, GadgetState.Action03) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "successed" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "successed", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133210290, 2)
-
+	
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220134032
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -69,9 +69,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -79,15 +79,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_32004(context, evt)
 		if GadgetState.ChestOpened == ScriptLib.GetGadgetStateByConfigId(context, 220134032, 32001) then
 			return true
 		end
-
+		
 		if GadgetState.ChestOpened == ScriptLib.GetGadgetStateByConfigId(context, 220134032, 32002) then
 			return true
 		end
-
+		
 		if GadgetState.ChestOpened == ScriptLib.GetGadgetStateByConfigId(context, 220134032, 32003) then
 			return true
 		end
-
+		
 		return false
 end
 

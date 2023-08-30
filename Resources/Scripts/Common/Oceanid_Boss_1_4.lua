@@ -1,15 +1,15 @@
-relevant_group = {
+local relevant_group = {
 	[1] = 133102769
 }
-play = {
+local play = {
 	PlayType = 4,
 	PlayId = 4,
 	board = 70
 }
 
-Tri = {
+local Tri = {
 	{ name = "variable_change", config_id = 8000001, event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change", trigger_count = 0	},
---	{ name = "gadget_create", config_id = 8000002, event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0 },
+--	{ name = "gadget_create", config_id = 8000002, event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0 }, 
 --	{ name = "select_option", config_id = 8000003, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
 	{ name = "group_will_unload", config_id = 8000004, event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload", trigger_count = 0 },
 	{ name = "time_axis_pass", config_id = 8000005, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0 },
@@ -22,7 +22,7 @@ Tri = {
 	{ name = "any_player_die", config_id = 8000012, event = EventType.EVENT_SCENE_MP_PLAY_ALL_AVATAR_DIE, source = "", condition = "", action = "action_any_player_die", trigger_count = 0 }
 }
 
-other_Tri = {
+local other_Tri = {
 	[1] = { name = "enter_region", config_id = 7000001, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", forbid_guest = false, trigger_count = 0 }
 }
 
@@ -37,7 +37,7 @@ end
 -----------------------------------
 function condition_battle_state(context, evt)
 	ScriptLib.PrintContextLog(context, "## ACT_OCEANID_LOG: battle_state : param1->"..evt.param1.." | param2->"..evt.param2.." | param3->"..evt.param3)
-	if evt.param1 == play.PlayType and evt.param2 == play.PlayId then
+	if evt.param1 == play.PlayType and evt.param2 == play.PlayId then 
 		return true
 	end
 	return false
@@ -47,7 +47,7 @@ function action_battle_state(context, evt)
 	--BATTLE_PREPARE
 	if evt.param3 == 2 then
 		ScriptLib.SetGadgetEnableInteract(context, 133102112, defs.gadget_operator, false)
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		ScriptLib.ForceRefreshAuthorityByConfigId(context, defs.gadget_operator_list[1], uid_list[1])
 		LF_Manage_OceanId_Replacement(context, 1)
 	--BATTLE_READY
@@ -127,10 +127,10 @@ function action_time_axis_pass(context, evt)
 	ScriptLib.PrintContextLog(context, "## time axis pass : "..evt.source_name.." | param1 = "..evt.param1)
 	--依次召唤阶段的处理逻辑
 	if evt.source_name == "summon" then
-		SummonStep_ = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
+		local SummonStep_ = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
 
 		for i=2,4 do
-			temp_ = SummonStep_
+			local temp_ = SummonStep_
 			if temp_%math.pow(10,i)//math.pow(10,i-1) == 0 then
 				LF_Summon_Action(context, i+1)
 				break
@@ -139,7 +139,7 @@ function action_time_axis_pass(context, evt)
 	elseif evt.source_name == "summon_delay" then
 		SLC_Summon_Start(context)
 	elseif evt.source_name == "stage_1" then
-		stage = ScriptLib.GetGroupTempValue(context, "Oceanid_State", {})
+		local stage = ScriptLib.GetGroupTempValue(context, "Oceanid_State", {})
 		ScriptLib.PrintContextLog(context, "## ACT_OCEANID_LOG : stage = "..stage)
 		if 1 == stage then
 			SLC_Stage_To_2(context)
@@ -170,7 +170,7 @@ function action_any_monster_die(context, evt)
 		for k,v in ipairs(defs.stage_monster_list) do
 			if evt.param1 == v then
 				--怪死了立即召唤下一只
-				temp_ = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
+				local temp_ = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
 				for i=2,4 do
 					if temp_ == 0 then
 						break
@@ -181,7 +181,7 @@ function action_any_monster_die(context, evt)
 					end
 				end
 				ScriptLib.ChangeGroupTempValue(context, "Oceanid_HP", -10, {})
-				hp_ = ScriptLib.GetGroupTempValue(context, "Oceanid_HP", {})
+				local hp_ = ScriptLib.GetGroupTempValue(context, "Oceanid_HP", {})
 				ScriptLib.PrintContextLog(context, "## ACT_OCEANID_LOG : boss_cur_hp = "..hp_)
 				ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.monster_boss, "SGV_Oceanid_HP", hp_)
 				--血量40则进入3阶段
@@ -192,7 +192,7 @@ function action_any_monster_die(context, evt)
 					LF_Random_Attack_Platform(context)
 					ScriptLib.InitTimeAxis(context, "shuffle_loop", {25}, true)
 				end
-				break
+				break 
 			end
 		end
 	end
@@ -203,7 +203,7 @@ function action_auth_change(context, evt)
 	---[[
 	if evt.param1 == 112009 then
 		ScriptLib.PrintContextLog(context, "## ACT_OCEANID_LOG : uid = "..context.uid)
-		ret = ScriptLib.TryReallocateEntityAuthority(context, context.uid, defs.gadget_operator_list[1], evt.param1)
+		local ret = ScriptLib.TryReallocateEntityAuthority(context, context.uid, defs.gadget_operator_list[1], evt.param1)
 		ScriptLib.PrintContextLog(context, "## ACT_OCEANID_LOG : auth_change_result = "..ret)
 		if -1 == ret then
 			if 1 == ScriptLib.GetGroupTempValue(context, "is_in_battle", {}) then
@@ -217,8 +217,8 @@ function action_auth_change(context, evt)
 end
 
 function action_any_player_die(context, evt)
-	uid_list=ScriptLib.GetSceneUidList(context)
-	cnt = 0
+	local uid_list=ScriptLib.GetSceneUidList(context)
+	local cnt = 0
 	for i,v in ipairs(uid_list) do
 		if ScriptLib.IsPlayerAllAvatarDie(context, v) or LF_Get_Distance(context, v, defs.gadget_operator) >= play.board then
 			cnt = cnt + 1
@@ -232,19 +232,19 @@ function action_any_player_die(context, evt)
 end
 ---------------------------------------
 function LF_Get_Distance(context, uid, config_id)
-	eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
-	pos1 = ScriptLib.GetPosByEntityId(context, eid)
-	pos2 = gadgets[config_id].pos
-	X = pos1.x - pos2.x
-	Y = pos1.y - pos2.y
-	Z = pos1.z - pos2.z
+	local eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
+	local pos1 = ScriptLib.GetPosByEntityId(context, eid)
+	local pos2 = gadgets[config_id].pos
+	local X = pos1.x - pos2.x
+	local Y = pos1.y - pos2.y
+	local Z = pos1.z - pos2.z
 	return math.sqrt(X*X+Y*Y+Z*Z)
 end
 
 function LF_Battle_Start(context, evt)
 	ScriptLib.PrintContextLog(context, "## ACT_OCEANID_LOG : LF_Battle_Start")
 	ScriptLib.SetWeatherAreaState(context, 2021, 1)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	LF_Create_Boss(context)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 0, defs.gadget_operator, 201)
 	LF_Check_Avatar_Near_Boss(context)
@@ -276,7 +276,7 @@ function LF_Manage_OceanId_Replacement(context, manage_type)
 		for i,v in ipairs(relevant_group) do
 			ScriptLib.SetGroupVariableValueByGroup(context, "is_in_replacement", 0, v)
 		end
-	end
+	end	
 end
 
 function LF_Clear_Battle_Arena(context)
@@ -305,10 +305,10 @@ end
 
 function LF_Random_Attack_Platform(context)
 	math.randomseed(ScriptLib.GetServerTime(context))
-	p={0,0,0}
-	array = {1,2,3,4,5,6,7,8,9}
+	local p={0,0,0}
+	local array = {1,2,3,4,5,6,7,8,9}
 	for j=1,3 do
-		ran = math.random(#array)
+		local ran = math.random(#array)
 		for k,v in pairs(array) do
 			if ran == k then
 				p[j] = array[k]
@@ -332,8 +332,8 @@ function LF_Summon_Action(context, idx)
 	--根据召唤的suite自行换算行为
 	ScriptLib.AddExtraGroupSuite(context, 0, idx)
 	ScriptLib.RemoveExtraGroupSuite(context, 0, idx+5)
-	value = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
-	value = value - value%math.pow(10,idx-1) + value%math.pow(10,idx-2) + math.pow(10,idx-2)
+	local value = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
+	value = value - value%math.pow(10,idx-1) + value%math.pow(10,idx-2) + math.pow(10,idx-2) 
 	ScriptLib.SetGroupTempValue(context, "SummonStep", value, {})
 	if value ~= 1111 then
 		ScriptLib.InitTimeAxis(context, "summon", {defs.summon_interval}, true)
@@ -341,7 +341,7 @@ function LF_Summon_Action(context, idx)
 end
 
 function LF_Check_Avatar_Near_Boss(context)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		if 45 >= LF_Get_Distance(context, v, defs.gadget_operator) then
 			ScriptLib.ForceRefreshAuthorityByConfigId(context, defs.gadget_operator_list[1], v)
@@ -351,23 +351,23 @@ function LF_Check_Avatar_Near_Boss(context)
 	ScriptLib.FailScenePlayBattle(context, 133102112)
 	return -1
 end
-
+						
 --[[
 function LF_Summon_Crabs(context)
-	position = {x=0,y=0,z=0}
-	rotation = {x=0,y=0,z=0}
-	ran = ScriptLib.GetGroupTempValue(context, "safe", {})
-	X = gadgets[defs.gadget_operator_list[ran] ].pos.x
-	Y = gadgets[defs.gadget_operator_list[ran] ].pos.y
-	Z = gadgets[defs.gadget_operator_list[ran] ].pos.z
-	born_radius = 5
+	local position = {x=0,y=0,z=0}
+	local rotation = {x=0,y=0,z=0}
+	local ran = ScriptLib.GetGroupTempValue(context, "safe", {})
+	local X = gadgets[defs.gadget_operator_list[ran] ].pos.x
+	local Y = gadgets[defs.gadget_operator_list[ran] ].pos.y
+	local Z = gadgets[defs.gadget_operator_list[ran] ].pos.z
+	local born_radius = 5
 	math.randomseed(ScriptLib.GetServerTime(context))
 	for i,v in ipairs(suites[6].monsters) do
 		position.x = X + (2*math.random()-1)*born_radius
 		position.y = Y
 		position.z = Z + (2*math.random()-1)*born_radius
-		x0 = X - position.x
-		z0 = Z - position.z
+		local x0 = X - position.x
+		local z0 = Z - position.z
 		if z0 == 0 then
 			z0 = 0.01
 		end
@@ -397,7 +397,7 @@ end
 function SLC_Summon_Start(context)
 	if 1 ~= ScriptLib.GetGroupTempValue(context, "summon_lock", {}) then
 		ScriptLib.SetGroupTempValue(context, "summon_lock", 1, {})
-	else
+	else 
 		return -1
 	end
 	ScriptLib.EndTimeAxis(context, "summon_delay")
@@ -430,28 +430,28 @@ Initialize()
 --uidValue判定区
 --下落攻击命中螃蟹的次数
 function SLC_FallingAttack_Crab(context)
-	cnt = ScriptLib.GetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_FallingAttack_Crab")
+	local cnt = ScriptLib.GetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_FallingAttack_Crab")
 	ScriptLib.SetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_FallingAttack_Crab", cnt+1)
 	return 0
 end
 
 --上电梯的次数
 function SLC_Use_Lift(context)
-	cnt = ScriptLib.GetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_Use_Lift")
+	local cnt = ScriptLib.GetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_Use_Lift")
 	ScriptLib.SetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_Use_Lift", cnt+1)
 	return 0
 end
 
 --承受boss大招次数
 function SLC_Endure_Boss_EX_Skill(context)
-	cnt = ScriptLib.GetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_Endure_Boss_EX_Skill")
+	local cnt = ScriptLib.GetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_Endure_Boss_EX_Skill")
 	ScriptLib.SetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_Endure_Boss_EX_Skill", cnt+1)
 	return 0
 end
 
 --提前踩出小怪次数
 function LF_Summon_In_Advance(context)
-	cnt = ScriptLib.GetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_Summon_In_Advance")
+	local cnt = ScriptLib.GetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_Summon_In_Advance")
 	ScriptLib.SetScenePlayBattleUidValue(context, 133102112, context.uid, "ACT_OCEANID_Summon_In_Advance", cnt+1)
 	if 1 == ScriptLib.GetScenePlayBattleUidValue(context, 0, context.uid, "ACT_OCEANID_Summon_In_Advance") then
 		ScriptLib.MarkPlayerAction(context, 20050102, 1, 1)

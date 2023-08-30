@@ -1,16 +1,16 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303042
 }
 
 -- DEFS_MISCS
-DreamStonePlay = {
+local DreamStonePlay = {
     LevelTagGroup = 19,
     DreamStoneCid = 42001,
 }
 
 -- 在对应LevelTag中操作梦境石发生的切换
-LevelTagState = {
+local LevelTagState = {
     ["3.0_CaveForest_Dream"] ={
         ChangeTag = 56,
         WeatherStateList = {
@@ -27,15 +27,15 @@ LevelTagState = {
     },
 }
 
-KeyQuest = {
+local KeyQuest = {
     ["Lock"] = {7301712},
     ["Unlock"] ={7301715,7301714},
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -97,26 +97,26 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_QUEST_FINISH_42002(context, evt)
 	--检查ID为7301704的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 7301704 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -126,21 +126,21 @@ function action_EVENT_QUEST_FINISH_42002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 42001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_42005(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7301704)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7301704)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
 	if curQuestState ~= 3 then
 	   return false
 	end
-
+	
 	return true
 end
 
@@ -150,8 +150,8 @@ function action_EVENT_GROUP_LOAD_42005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 42001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

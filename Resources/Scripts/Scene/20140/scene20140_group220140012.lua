@@ -1,15 +1,15 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220140012
 }
 
 -- DEFS_MISCS
-  defs = {  serve_items = {12025,12026}}
+local   defs = {  serve_items = {12025,12026}}
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -71,9 +71,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -147,9 +147,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -157,7 +157,7 @@ function action_EVENT_LEVEL_TAG_CHANGE_12002(context, evt)
 	if evt.param2 == 31 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	end
-
+	
 	return 0
 end
 
@@ -167,7 +167,7 @@ function condition_EVENT_ANY_MONSTER_DIE_12008(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -178,24 +178,24 @@ function action_EVENT_ANY_MONSTER_DIE_12008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "temp" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "temp", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 12007 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建标识为"temp"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "temp", {2}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -205,7 +205,7 @@ function condition_EVENT_ANY_MONSTER_DIE_12012(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -216,24 +216,24 @@ function action_EVENT_ANY_MONSTER_DIE_12012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "plat" 的变量设置为 6
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "plat", 6, 220140004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 12009 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建标识为"temp1"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "temp1", {2}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -241,16 +241,16 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_12015(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 12003) == 201 and ScriptLib.GetGadgetStateByConfigId(context, 0, 12021) == 201 and ScriptLib.GetGroupVariableValue(context, "temp") == 3 then
 		ScriptLib.SetGroupVariableValueByGroup(context, "plat", 7, 220140004)
-
+		
 		ScriptLib.SetGroupVariableValue(context, "temp", 4)
-
+		
 		ScriptLib.SetGroupVariableValueByGroup(context, "monster", 1, 220140019)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 6)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 220140019, 2)
 	end
-
+	
 	return 0
 end
 
@@ -258,10 +258,10 @@ end
 function action_EVENT_ENTER_REGION_12023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "change") == 0 and ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 then
 		ScriptLib.SetGroupVariableValue(context, "change", 1)
-
+		
 		ScriptLib.ChangeToTargetLevelTag(context, 32)
 	end
-
+	
 	return 0
 end
 
@@ -269,56 +269,56 @@ end
 function action_EVENT_GROUP_LOAD_12024(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 1 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 2 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 4)
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 3 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 4)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 5)
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 4 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 4)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 5)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 6)
 	end
-
+	
 	if ScriptLib.CheckSceneTag(context, 20140,1070 ) or ScriptLib.GetGroupVariableValue(context, "temp") == 0 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12029(context, evt)
 	if evt.param1 ~= 12029 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -329,7 +329,7 @@ function action_EVENT_ENTER_REGION_12029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -338,7 +338,7 @@ function condition_EVENT_TIME_AXIS_PASS_12030(context, evt)
 	if "temp" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -346,7 +346,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_12030(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140012, 4)
-
+	
 	return 0
 end
 
@@ -355,7 +355,7 @@ function condition_EVENT_TIME_AXIS_PASS_12031(context, evt)
 	if "temp1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -363,7 +363,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_12031(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140012, 5)
-
+	
 	return 0
 end
 

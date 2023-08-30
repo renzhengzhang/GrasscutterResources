@@ -1,44 +1,44 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002034
 }
 
 -- DEFS_MISCS
-       defs =
+local        defs = 
 {
 	--幕布Group
 	curtain_group = 199002035,
         --每个阶段的所有演员物件config_id。用于统一设置可拾取/可对话状态
-        actor_list =
+        actor_list = 
         {
-                [1] =
-                {
+                [1] = 
+                { 
                         [34005] = 1110684,
                         [34006] = 1110685,
                         [34007] = 1110686,
                         [34001] = 1110613,
-                },
-                [2] =
-                {
+                }, 
+                [2] = 
+                { 
                         [34006] = 1110685,
                         [34007] = 1110686,
                         [34001] = 1110617,
-                },
-                [3] =
-                {
+                }, 
+                [3] = 
+                { 
                         [34007] = 1110686,
                         [34001] = 1110622,
                 },
         },
         --可拾取的gadget列表，即not in any suite的夜鸦雕像
-        pickable_gadget =
+        pickable_gadget = 
         {
-                [34005] = {0, 34036, 34037, 34037},
-                [34006] = {0, 0, 34036, 34038},
+                [34005] = {0, 34036, 34037, 34037}, 
+                [34006] = {0, 0, 34036, 34038}, 
                 [34007] = {0, 0, 0, 34036},
         },
         --行动序列
-        actions =
+        actions = 
         {
                 {
                           [1] = { config_id = 34001, reminder_id = 1110594, point_array = 0, point_id_list = 0, duration = 21},
@@ -76,7 +76,7 @@ base_info = {
 
         --每段剧情结束时加载的对应suite(放聚光灯和操作台用),和正确的放置槽位config_id
         --key是阶段id
-        question_suits =
+        question_suits =  
         {
                    [1] = { add_suite = 3, correct_slot = 34010, correct_gadget = 34005},
                    [2] = { add_suite = 4, correct_slot = 34010, correct_gadget = 34006},
@@ -88,9 +88,9 @@ no_actor = 34001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -171,9 +171,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -184,9 +184,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -247,20 +247,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_34012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_done"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -271,25 +271,25 @@ function action_EVENT_VARIABLE_CHANGE_34012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "appear" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "appear", 1, 199002188) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_34033(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_done"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -300,7 +300,7 @@ function action_EVENT_VARIABLE_CHANGE_34033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -310,7 +310,7 @@ function condition_EVENT_GROUP_LOAD_34034(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -321,7 +321,7 @@ function action_EVENT_GROUP_LOAD_34034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 

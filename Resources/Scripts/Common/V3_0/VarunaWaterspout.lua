@@ -3,19 +3,19 @@
 ||  owner:      shuyi.chang
 ||  description:    回流之柱
 ||  LogName:    ## [VarunaWaterspout]
-||  Protection:
+||  Protection: 
 =======================================]]
 --[[
-defs =
+local defs = 
 {
 	-- 受回流之柱控制的group id
-	groupTable =
+	groupTable = 
 	{
 
 	},
 
 	-- 回流之柱副中枢所在的group id
-	deviceGroupTable =
+	deviceGroupTable = 
 	{
 
 	},
@@ -40,7 +40,7 @@ defs =
 }
 --]]
 
-extraTriggers =
+local extraTriggers = 
 {
 	{ config_id = 50000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
 	{ config_id = 50000002, name = "TIME_AXIS_PASS", event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_EVENT_TIME_AXIS_PASS", trigger_count = 0 },
@@ -50,7 +50,7 @@ extraTriggers =
 
 }
 
-extraVariables =
+local extraVariables = 
 {
 	-- 0雨天，1晴天，不要在其他group里改这个变量的值！
 	{ config_id = 50000101, name = "SGV_WeatherState", value = 0, no_refresh = true },
@@ -63,7 +63,7 @@ extraVariables =
 
 }
 
-weatherTable =
+local weatherTable = 
 {
 	clearBefore = 4013,
 	rainBefore = 4014,
@@ -71,11 +71,11 @@ weatherTable =
 	rainAfter = 4016,
 }
 
-clearWeather = weatherTable.clearBefore
-rainWeather = weatherTable.rainBefore
+local clearWeather = weatherTable.clearBefore
+local rainWeather = weatherTable.rainBefore
 
 --================================================================
--- Functions
+-- Local Functions
 --================================================================
 function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
 
@@ -98,9 +98,9 @@ end
 
 function LF_CheckTime(context, destTime)
 	-- 每次时间轴到时之后需要再检查一次时间，以防中途出现什么意外导致时间计算不对
-	temp = false
+	local temp = false
 
-	time = LF_GetGameTime(context)
+	local time = LF_GetGameTime(context)
 	if #time ~= 3 then
 		ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] LF_Check_Weather_Status is cancelled because LF_GetGameTime failed")
 		return temp
@@ -111,14 +111,14 @@ function LF_CheckTime(context, destTime)
 		return temp
 	end
 
-	curGameMinutePassed = time[3]
-	destTimePassed = destTime[1] * 60 + destTime[2]
-
+	local curGameMinutePassed = time[3]
+	local destTimePassed = destTime[1] * 60 + destTime[2]
+	
 	-- 允许前后2s内的误差
 	if math.abs(curGameMinutePassed - destTimePassed) < 2 then
 		temp = true
 	end
-
+	
 	return temp
 end
 
@@ -127,8 +127,8 @@ function LF_SetSpoutGadgetState(context, gadgetState)
 
 	ScriptLib.SetGadgetStateByConfigId(context, defs.waterSpoutId, gadgetState)
 
-	photoIdList = "photo gadget, "
-	photoState = 0
+	local photoIdList = "photo gadget, "
+	local photoState = 0
 	-- 只要水柱不在0,照相物件就要进入可照相状态201
 	if gadgetState ~= 0 then
 		photoState = 201
@@ -140,7 +140,7 @@ function LF_SetSpoutGadgetState(context, gadgetState)
 		ScriptLib.SetGadgetStateByConfigId(context, defs.photoTable[i], photoState)
 		photoIdList = photoIdList..defs.photoTable[i].." state = "..photoState..","
 	end
-
+	
 	ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] water spout gadget state is set to "..gadgetState..
 		", "..photoIdList)
 
@@ -155,13 +155,13 @@ function LF_CheckSpoutStatusByTime(context, hour, minute)
 		LF_SetSpoutGadgetState(context, 901)
 		LF_WaterSpoutTimeAxis(context, false, hour, minute)
 	end
-
-	temp = hour % 12
+	
+	local temp = hour % 12
 	if temp == 0 then
 		-- 是起水柱的那个小时，0或12
 		if minute == 0 then
 			-- 暂时不走这里，走上面，允许一点误差
-
+			
 		elseif minute < defs.waterRise + defs.waterStayup then
 			-- 如果还没到该下落的时间，保持循环状态(通常是调时间之后走这里，先等几秒不出特效，等镜头上移之后从物件层进201)
 			LF_SetSpoutGadgetState(context, 903)
@@ -187,26 +187,26 @@ function LF_WaterSpoutTimeAxis(context, temp, hour, minute)
 		ScriptLib.InitTimeAxis(context, "waterSpout_"..LF_TempAxisValue(context, 3), {defs.waterRise, defs.waterRise + defs.waterStayup, defs.waterRise + defs.waterStayup + defs.waterDown}, false)
 		ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] start a time axis, name = waterSpout_"..LF_TempAxisValue(context, 3)..", time = "..hour..":"..minute)
 	end
-
+	
 end
 
 
 function LF_GetGameTime(context)
 
-	temp = ScriptLib.GetGameTimePassed(context)
+	local temp = ScriptLib.GetGameTimePassed(context)
 
 	if #temp ~= 2 then
 		ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] cannot get current time")
 		return {}
 	end
 
-	curGameHour = temp[1]
-	curGameMinutePassed = temp[2]
+	local curGameHour = temp[1]
+	local curGameMinutePassed = temp[2]
 
 	-- 得到精确到提瓦特分钟（现实世界秒）的当前时间
-	curGameMinute = curGameMinutePassed - curGameHour * 60
+	local curGameMinute = curGameMinutePassed - curGameHour * 60
 
-	time = {curGameHour, curGameMinute, curGameMinutePassed}
+	local time = {curGameHour, curGameMinute, curGameMinutePassed}
 
 	ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] curGameHour = ".. curGameHour..
 		", curGameMinute = "..curGameMinute..", totalMinutePassed = ".. curGameMinutePassed)
@@ -229,11 +229,11 @@ function LF_Check_Weather_Status(context)
 			return
 		end
 	end
-
+	
 	-- 只要进了这个function，就一定会起新的tempWeather时间轴，所以一定要把所有时间轴都取消掉
 	LF_CancelAllAxis(context)
 
-	temp = LF_GetGameTime(context)
+	local temp = LF_GetGameTime(context)
 
 	-- 要是没取到时间，就不往下更新天气了
 	if #temp ~= 3 then
@@ -241,16 +241,16 @@ function LF_Check_Weather_Status(context)
 		return
 	end
 
-	curGameHour = temp[1]
-	curGameMinute = temp[2]
-	curGameMinutePassed = temp[3]
+	local curGameHour = temp[1]
+	local curGameMinute = temp[2]
+	local curGameMinutePassed = temp[3]
 
 	-- 判断 当前小时数/6 是奇数还是偶数，暂定奇数为晴天
 	-- 提瓦特的24小时晴雨状况： |-水柱-|----0雨----|----1晴----|-水柱-|----0雨----|----1晴----|
 	-- stage				  |--------0--------|-----1-----|---------2--------|-----3-----|
-	stage = math.floor(curGameHour / 6)
-	weather = stage % 2
-	timeRemain
+	local stage = math.floor(curGameHour / 6)
+	local weather = stage % 2
+	local timeRemain
 
 	ScriptLib.SetGroupVariableValue(context, "SGV_WeatherState", weather)
 	LF_ChangeWeather(context, weather)
@@ -288,11 +288,11 @@ end
 
 function LF_ChangeWeather(context, weatherState)
 	-- 根据当前的任务状态，自动切换到对应的天气
-	questStatus = ScriptLib.GetGroupVariableValue(context, "questStatus")
-	curWeather = ScriptLib.GetGroupTempValue(context, "weatherId", {})
-	destWeather
-	lowWeather
-	highWeather
+	local questStatus = ScriptLib.GetGroupVariableValue(context, "questStatus")
+	local curWeather = ScriptLib.GetGroupTempValue(context, "weatherId", {})
+	local destWeather
+	local lowWeather
+	local highWeather
 
 
 	if questStatus == 0 then
@@ -323,17 +323,17 @@ function LF_ChangeWeather(context, weatherState)
 	end
 
 	-- 先开优先级最低的天气
-	var1 = ScriptLib.SetWeatherAreaState(context, lowWeather, 1)
+	local var1 = ScriptLib.SetWeatherAreaState(context, lowWeather, 1)
 	ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] set base weather = "..lowWeather..", succeed = "..var1)
 
 	if destWeather == lowWeather then
 		-- 判断目标天气的优先级，如果是低优先级，需要关掉高优先级天气
-		var2 = ScriptLib.SetWeatherAreaState(context, highWeather, 0)
+		local var2 = ScriptLib.SetWeatherAreaState(context, highWeather, 0)
 		ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] LF_ChangeWeather is called, destWeather = "..destWeather..
 		", close higher priority weather = "..highWeather..", succeed = ".. var2)
 	elseif destWeather == highWeather then
 		-- 如果是高优先级，直接开
-		var3 = ScriptLib.SetWeatherAreaState(context, highWeather, 1)
+		local var3 = ScriptLib.SetWeatherAreaState(context, highWeather, 1)
 		ScriptLib.PrintContextLog(context, "## [VarunaWaterspout]  LF_ChangeWeather is called, weather changes from "..curWeather.." to "..destWeather..
 		", succeed = ".. var3)
 
@@ -342,11 +342,11 @@ function LF_ChangeWeather(context, weatherState)
 
 	-- -- 为了测试方便新加，强制关闭所有天气，不然天气配了不一样的优先级没办法退到任务完成前状态
 	-- for k, v in pairs(weatherTable) do
-	-- 	temp = ScriptLib.SetWeatherAreaState(context, v, 0)
+	-- 	local temp = ScriptLib.SetWeatherAreaState(context, v, 0)
 	-- 	ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] weather id = "..v.." is closed, succeed = "..temp)
 	-- end
 
-	-- var2 = ScriptLib.SetWeatherAreaState(context, destWeather, 1)
+	-- local var2 = ScriptLib.SetWeatherAreaState(context, destWeather, 1)
 	-- ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] LF_ChangeWeather is called, weather changes from "..curWeather.." to "..destWeather..
 	-- 	", succeed = ".. var2)
 
@@ -354,10 +354,10 @@ end
 
 function LF_CancelAllAxis(context)
 	-- temp和formal loop都要停
-	temp1 = ScriptLib.GetGroupTempValue(context, "axis_tempWeather", {})
-	-- temp2 = ScriptLib.GetGroupTempValue(context, "axis_loopWeather", {})
-	temp3 = ScriptLib.GetGroupTempValue(context, "axis_tempWaterSpout", {})
-	temp4 = ScriptLib.GetGroupTempValue(context, "axis_waterSpout", {})
+	local temp1 = ScriptLib.GetGroupTempValue(context, "axis_tempWeather", {})
+	-- local temp2 = ScriptLib.GetGroupTempValue(context, "axis_loopWeather", {})
+	local temp3 = ScriptLib.GetGroupTempValue(context, "axis_tempWaterSpout", {})
+	local temp4 = ScriptLib.GetGroupTempValue(context, "axis_waterSpout", {})
 
 	ScriptLib.EndTimeAxis(context, "tempWeather_"..temp1)
 	-- ScriptLib.EndTimeAxis(context, "loopWeather_"..temp2)
@@ -369,8 +369,8 @@ end
 
 function LF_TempAxisValue(context, type)
 	-- 0临时天气时间轴，1整循环天气时间轴，2水柱时间轴
-	tempValue
-	tempName
+	local tempValue
+	local tempName
 	if type == 0 then
 		tempName = "axis_tempWeather"
 		tempValue = ScriptLib.GetGroupTempValue(context, "axis_tempWeather", {})
@@ -384,7 +384,7 @@ function LF_TempAxisValue(context, type)
 		tempName = "axis_waterSpout"
 		tempValue = ScriptLib.GetGroupTempValue(context, "axis_waterSpout", {})
 	end
-
+	
 	if tempValue == 1 then
 		ScriptLib.SetGroupTempValue(context, tempName, 0, {})
 		return 0
@@ -400,7 +400,7 @@ end
 --================================================================
 
 function action_EVENT_GROUP_LOAD(context, evt)
-
+	
 	ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] group is loaded")
 
 	ScriptLib.SetGroupTempValue(context, "axis_tempWeather", 0, {})
@@ -424,7 +424,7 @@ function action_EVENT_ENTER_REGION(context, evt)
 		-- 更新当前天气
 		LF_Check_Weather_Status(context)
 	end
-
+	
 	return 0
 end
 
@@ -438,7 +438,7 @@ function action_VARIABLE_CHANGE(context, evt)
                 ScriptLib.GetGroupVariableValue(context, "questStatus"))
 		return 0
 	end
-
+	
 	if evt.source_name == "finalWeatherState" then
 
 		-- 通知中枢所在组
@@ -469,13 +469,13 @@ function action_VARIABLE_CHANGE(context, evt)
 			ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] quest finished, weather changes according to time")
 		end
 	elseif evt.source_name == "questStatus" then
-		curWeather = ScriptLib.GetGroupVariableValue(context,"SGV_WeatherState")
+		local curWeather = ScriptLib.GetGroupVariableValue(context,"SGV_WeatherState")
 		LF_ChangeWeather(context, curWeather)
 		ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] quest finished, weather changes to "..curWeather)
-
+	
 	end
 
-
+	
 	return 0
 end
 
@@ -487,7 +487,7 @@ function action_EVENT_SET_GAME_TIME(context, evt)
 	return 0
 end
 
-function action_EVENT_TIME_AXIS_PASS(context, evt)
+function action_EVENT_TIME_AXIS_PASS(context, evt)	
 	ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] Time axis "..evt.source_name..", stage "..evt.param1.." is finished")
 
 	-- 只要时间轴走完一个阶段，一定切换天气状态
@@ -497,21 +497,21 @@ function action_EVENT_TIME_AXIS_PASS(context, evt)
 
 		ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] game hour = "..ScriptLib.GetGameHour(context)..
 			", current weather state = "..ScriptLib.GetGroupVariableValue(context, "SGV_WeatherState"))
-
-	elseif string.sub(evt.source_name, 0, 10) == "waterSpout" then
+			
+	elseif string.sub(evt.source_name, 0, 10) == "waterSpout" then		
 		if evt.param1 == 1 then
 			-- if LF_CheckTime(context, {0, 5}) == false and LF_CheckTime(context, {12, 5}) == false then
 			-- 	LF_CheckSpoutStatusByMinute(context, curGameMinute)
 			-- 	return 0
 			-- else
 				LF_SetSpoutGadgetState(context, 201)
-			-- end
+			-- end 
 		elseif evt.param1 == 2 then
 			LF_SetSpoutGadgetState(context, 902)
 		elseif evt.param1 == 3 then
 			LF_SetSpoutGadgetState(context, 0)
 		end
-
+	
 	elseif string.sub(evt.source_name, 0, 14) == "tempWaterSpout" then
 		if evt.param1 == 1 then
 			LF_SetSpoutGadgetState(context, 902)

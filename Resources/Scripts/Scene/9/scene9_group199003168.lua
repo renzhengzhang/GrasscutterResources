@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003168
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -84,23 +84,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_168002(context, evt)
 	-- 判断是gadgetid 168001 option_id 418
 	if 168001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 418 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -111,13 +111,13 @@ function action_EVENT_SELECT_OPTION_168002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 删除指定group： 199003168 ；指定config：168001；物件身上指定option：418；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 199003168, 168001, 418) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -125,14 +125,14 @@ end
 function condition_EVENT_SELECT_OPTION_168003(context, evt)
 	-- 判断是gadgetid 168004 option_id 418
 	if 168004 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 418 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -143,13 +143,13 @@ function action_EVENT_SELECT_OPTION_168003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 删除指定group： 199003168 ；指定config：168004；物件身上指定option：418；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 199003168, 168004, 418) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -157,14 +157,14 @@ end
 function condition_EVENT_SELECT_OPTION_168006(context, evt)
 	-- 判断是gadgetid 168005 option_id 418
 	if 168005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 418 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -175,13 +175,13 @@ function action_EVENT_SELECT_OPTION_168006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 删除指定group： 199003168 ；指定config：168005；物件身上指定option：418；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 199003168, 168005, 418) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -189,14 +189,14 @@ end
 function condition_EVENT_SELECT_OPTION_168008(context, evt)
 	-- 判断是gadgetid 168007 option_id 418
 	if 168007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 418 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -207,22 +207,22 @@ function action_EVENT_SELECT_OPTION_168008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 删除指定group： 199003168 ；指定config：168007；物件身上指定option：418；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 199003168, 168007, 418) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_168009(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003171) == 1 then
-
+	
 	 ScriptLib.RefreshGroup(context, { group_id = 199003168, suite = 2 })
 	end
-
+	
 	return 0
 end

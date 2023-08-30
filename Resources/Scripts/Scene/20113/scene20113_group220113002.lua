@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220113002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -89,13 +89,13 @@ function action_EVENT_TIMER_EVENT_2008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 改变指定group组220113002中， configid为2003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113002, 2003, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -105,7 +105,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2009(context, evt)
 	if 2001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -115,8 +115,8 @@ function action_EVENT_GADGET_STATE_CHANGE_2009(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113002, 2004, GadgetState.Action01) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -126,7 +126,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2010(context, evt)
 	if 2001 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -136,8 +136,8 @@ function action_EVENT_GADGET_STATE_CHANGE_2010(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113002, 2005, GadgetState.Action01) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2011(context, evt)
 	if 2001 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 or GadgetState.GearStop ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -157,14 +157,14 @@ function action_EVENT_GADGET_STATE_CHANGE_2011(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113002, 2006, GadgetState.Action01) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟1.5秒后,向groupId为：220113002的对象,请求一次调用,并将string参数："time3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220113002, "time3", 1.5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -172,14 +172,14 @@ end
 function condition_EVENT_SELECT_OPTION_2012(context, evt)
 	-- 判断是gadgetid 2007 option_id 1
 	if 2007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -189,37 +189,37 @@ function action_EVENT_SELECT_OPTION_2012(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113002, 2001, GadgetState.GearAction2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220113002中， configid为2003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113002, 2003, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220113002中， configid为2006的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113002, 2006, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220113002中， configid为2004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113002, 2004, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220113002中， configid为2005的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220113002, 2005, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 220113002 ；指定config：2007；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220113002, 2007, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end

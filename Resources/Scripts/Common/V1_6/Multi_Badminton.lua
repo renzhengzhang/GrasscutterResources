@@ -1,10 +1,10 @@
 
-GroupID = 144003005
-smallRegion = 5039
-bigRegion = 5040
+local GroupID = 144003005
+local smallRegion = 5039
+local bigRegion = 5040
 
 --自定义函数部分
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Start_Gallery"] = { config_id = 8000001, name = "Start_Gallery", event= EventType.EVENT_GALLERY_START, source = "", condition = "", action = "action_whern_gallery_start", trigger_count = 0 },
 		["MultiStage_End"] = { config_id = 8000002, name = "MultiStage_End", event= EventType.EVENT_SCENE_MULTISTAGE_PLAY_STAGE_END, source = "", condition = "", action = "action_multistage_end", trigger_count = 0 },
@@ -21,7 +21,7 @@ extrTriggers = {
 	}
 }
 
-extrSuites = {
+local extrSuites = {
 	{
 		monsters = { },
 		gadgets = { },
@@ -53,10 +53,10 @@ function FeverEnd( context )
 end
 
 function GetRandomType(context, randomList, isFerver)
-	MaxNum = #randomList
-	CurStage = ScriptLib.GetGroupTempValue(context, "StageCount", {})
+	local MaxNum = #randomList
+	local CurStage = ScriptLib.GetGroupTempValue(context, "StageCount", {})
 	math.randomseed(ScriptLib.GetServerTime(context))
-
+	
 	if CurStage > MaxNum then
 		CurStage = MaxNum
 	end
@@ -108,7 +108,7 @@ end
 
 function TimeLimitedShieldDieCount( context )
 	-- 限时内护盾被击破翻牌子计数
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	for i,v in ipairs(UidList) do
 
@@ -117,13 +117,13 @@ function TimeLimitedShieldDieCount( context )
 	end
 
 	return 0
-
+	
 end
 
 function ShieldDieCount( context)
 	-- 护盾击破计数
 
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	for i,v in ipairs(UidList) do
 		ScriptLib.PrintContextLog(context, "##BD LOG : ShieldDieCount +1 for uid"..v)
@@ -147,10 +147,10 @@ end
 
 function GoldPAPACount( context )
 	-- 黄金球拍计数
-	GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
+	local GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
 
 	ScriptLib.UpdatePlayerGalleryScore(context, GalleryIDList[GalleryStage], {["catch_gadget_id"] = 70350257 ,["add_score"] = 0, ["add_destroyed_machine_count"] = 0, ["add_damage"] = 0,["add_normal_hit_count"] = 0,["add_perfect_hit_count"] = 0, ["add_fever_count"] = 0} )
-
+	
 
 	return 0
 end
@@ -159,7 +159,7 @@ function PepperBuffCount( context )
 
 	ScriptLib.PrintContextLog(context, "##BD LOG : player  "..context.uid.."PepperBuffCount ++")
 	-- 绝云辣椒计数
-	GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
+	local GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
 
 	ScriptLib.UpdatePlayerGalleryScore(context, GalleryIDList[GalleryStage], {["catch_gadget_id"] = 70350252 ,["add_score"] = 0, ["add_destroyed_machine_count"] = 0, ["add_damage"] = 0,["add_normal_hit_count"] = 0,["add_perfect_hit_count"] = 0, ["add_fever_count"] = 0} )
 
@@ -171,7 +171,7 @@ end
 function SpeedBuffCount( context )
 	ScriptLib.PrintContextLog(context, "##BD LOG : player  "..context.uid.."SpeedBuffCount ++")
 	-- 黄金鞋计数
-	GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
+	local GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
 
 	ScriptLib.UpdatePlayerGalleryScore(context, GalleryIDList[GalleryStage], {["catch_gadget_id"] = 70350248 ,["add_score"] = 0, ["add_destroyed_machine_count"] = 0, ["add_damage"] = 0,["add_normal_hit_count"] = 0,["add_perfect_hit_count"] = 0, ["add_fever_count"] = 0} )
 
@@ -209,7 +209,7 @@ function AddScore( context, damage, isPerfect, ballType )
 
 	ScriptLib.PrintContextLog(context, "##BD LOG : Score Damage == "..damage.." UID == "..context.uid)
 
-	GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
+	local GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
 
 	if isPerfect == 1 then
 
@@ -244,7 +244,7 @@ function AddScore( context, damage, isPerfect, ballType )
 end
 
 function SetGadgetStateByGalleryStage(context)
-	Stage = ScriptLib.GetGroupTempValue(context, "GalleryStage", {})
+	local Stage = ScriptLib.GetGroupTempValue(context, "GalleryStage", {})
 
 	ScriptLib.SetGroupGadgetStateByConfigId(context, GroupID, ShooterConfigID, 200+Stage)
 
@@ -296,7 +296,7 @@ end
 function action_group_will_unload( context, evt )
 	--优化suite卸载
 
-	GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
+	local GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
 
 	if GalleryStage == 0 then
 		return 0
@@ -329,21 +329,21 @@ function action_gadgetstate_change(context,evt )
 	-- 	ScriptLib.StartGallery(context, GalleryID)
 	-- elseif evt.param1 == 204 then
 
-	-- 	GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
+	-- 	local GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
 
 
 	-- 	ScriptLib.StopGallery(context, GalleryIDList[GalleryStage], false)
 	-- end
 
 	return 0
-
+	
 end
 
 function action_timeaxis_randombuff( context, evt )
 	math.randomseed(ScriptLib.GetServerTime(context))
 
-	MaxNum = 0
-	CurBuffList = 0
+	local MaxNum = 0
+	local CurBuffList = 0
 
 	if ScriptLib.GetGroupTempValue(context, "GalleryStage", {})==1 then
 		CurBuffList = BUffList
@@ -357,8 +357,8 @@ function action_timeaxis_randombuff( context, evt )
 		MaxNum = MaxNum + v.buffWeight
 	end
 
-	randomWeight = math.random(MaxNum)
-	CurBuffConfigID = 0
+	local randomWeight = math.random(MaxNum)
+	local CurBuffConfigID = 0
 
 	for i,v in ipairs(CurBuffList) do
 		if v.buffWeight >= randomWeight then
@@ -368,19 +368,19 @@ function action_timeaxis_randombuff( context, evt )
 			randomWeight = randomWeight - v.buffWeight
 		end
 	end
-	regionPos = regions[BuffRegionID].pos
-	regionSize = regions[BuffRegionID].size
+	local regionPos = regions[BuffRegionID].pos
+	local regionSize = regions[BuffRegionID].size
 
 	ScriptLib.PrintContextLog(context, "##BD simple pos.x = "..regions[BuffRegionID].pos.x.." Size.x = "..regions[BuffRegionID].size.x)
 
-	pos_table = { x = math.random(math.ceil(regionPos.x - (regionSize.x/2)), math.ceil(regionPos.x + (regionSize.x/2))),
-					y = regionPos.y,
+	local pos_table = { x = math.random(math.ceil(regionPos.x - (regionSize.x/2)), math.ceil(regionPos.x + (regionSize.x/2))), 
+					y = regionPos.y, 
 					z = math.random(math.ceil(regionPos.z - (regionSize.z/2)), math.ceil(regionPos.z + (regionSize.z/2)))
 				}
 
 	ScriptLib.PrintContextLog(context, "##BD BUFF CONFIGID = "..CurBuffConfigID)
 
-	ScriptLib.CreateGadgetByConfigIdByPos(context, CurBuffConfigID, pos_table, {x=0,y=0,z=0})
+	ScriptLib.CreateGadgetByConfigIdByPos(context, CurBuffConfigID, pos_table, {x=0,y=0,z=0}) 
 
 	return 0
 end
@@ -395,7 +395,7 @@ end
 
 
 function action_whern_gallery_start(context, evt )
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	--加载岩创杀手
 	ScriptLib.CreateGadget(context, { config_id = 5030 })
@@ -429,10 +429,10 @@ function action_whern_gallery_start(context, evt )
 
 	ScriptLib.SetGroupTempValue(context, "GalleryOn", 1, {})
 
-
+	
 	math.randomseed(ScriptLib.GetServerTime(context))
 
-	GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
+	local GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
 
 	if evt.param1 ~= GalleryIDList[GalleryStage] then
 		return 0
@@ -449,7 +449,7 @@ function action_whern_gallery_start(context, evt )
 
 	-- 创建一个发射器
 
-	GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
+	local GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
 
 	if ScriptLib.GetGroupTempValue(context, "PlayerNum", {}) == 1 then
 
@@ -465,7 +465,7 @@ function action_whern_gallery_start(context, evt )
 
 	end
 
-
+	
 	--ScriptLib.CreateGadgetWithGlobalValue(context, ShooterConfigID, { ["SGV_BDShootType"]= RandomType})
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, ShooterConfigID, "SGV_BDShootType", ScriptLib.GetGroupTempValue(context, "RandomType",{}))
 	SetGadgetStateByGalleryStage(context)
@@ -485,9 +485,9 @@ function action_whern_gallery_stop( context,evt )
 
 	ScriptLib.SetGroupTempValue(context, "GalleryOn", 0, {})
 
-	UidList = ScriptLib.GetSceneUidList(context)
-
-	FeverCount = ScriptLib.GetGroupTempValue(context, "FeverCount", {})
+	local UidList = ScriptLib.GetSceneUidList(context)
+	
+	local FeverCount = ScriptLib.GetGroupTempValue(context, "FeverCount", {})
 
 
 
@@ -512,7 +512,7 @@ function action_whern_gallery_stop( context,evt )
 				--设置每个玩家的脏脏球次数
 				ScriptLib.AddExhibitionReplaceableData(context, v, "Activity_BD_NoDirtyCount"..ScriptLib.GetGroupTempValue(context, "GalleryID", {}), 1 )
 			end
-
+			
 		end
 	end
 
@@ -537,7 +537,7 @@ function action_whern_gallery_stop( context,evt )
 	ScriptLib.EndTimeAxis(context, "randombuff")
 	ScriptLib.EndTimeAxis(context, "shooterreborn")
 
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(UidList) do
 		--设置本局Fever次数
 		ScriptLib.AddExhibitionReplaceableData(context, v, "Activity_BD_FeverCount", FeverCount)
@@ -561,12 +561,12 @@ function action_multistage_start(context, evt )
 	-- 阶段开始，设置gadgetSGV
 	ScriptLib.PrintContextLog(context, "##BD LOG : MultiStage Start")
 
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 
 	math.randomseed(ScriptLib.GetServerTime(context))
 
-	GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
+	local GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
 
 	if evt.source_name == "NormalRound" then
 		--从基础库里挑一个随机
@@ -585,7 +585,7 @@ function action_multistage_start(context, evt )
 		end
 
 		--从Fever库里挑一个随机
-		UidList = ScriptLib.GetSceneUidList(context)
+		local UidList = ScriptLib.GetSceneUidList(context)
 
 		for i,v in ipairs(UidList) do
 			ScriptLib.PrintContextLog(context, "##BD LOG : updatePlayerScore  Fever ")
@@ -599,7 +599,7 @@ function action_multistage_start(context, evt )
 		ScriptLib.PrintContextLog(context, "##BD LOG : Fever RandomType == "..ScriptLib.GetGroupTempValue(context, "FeverRandomType",{}))
 	end
 
-
+	
 
 	return 0
 end
@@ -628,15 +628,15 @@ function action_multistage_end(context, evt )
 end
 
 
-function action_whern_shooter_die(context, evt )
+function action_whern_shooter_die(context, evt )	
 	if evt.param1 ~= ShooterConfigID then
 		return 0
 	end
 
 	ScriptLib.SetGroupTempValue(context, "ShooterAlive", 0, {})
 
-	UidList = ScriptLib.GetSceneUidList(context)
-	GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
+	local UidList = ScriptLib.GetSceneUidList(context)
+	local GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
 
 	for i,v in ipairs(UidList) do
 		ScriptLib.PrintContextLog(context, "##BD LOG : add_destroyed_machine_count")
@@ -679,7 +679,7 @@ function action_timer_shooterreborn(context, evt)
 	ScriptLib.SetGroupTempValue(context, "ShooterAlive", 1, {})
 
 
-	GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
+	local GalleryStage = ScriptLib.GetGroupTempValue(context, "GalleryStage",{})
 
 	if ScriptLib.GetGroupTempValue(context, "PlayerNum", {}) == 1 then
 
@@ -710,7 +710,7 @@ function action_timer_shooterreborn(context, evt)
 
 	end
 
-
+	
 
 	return 0
 end

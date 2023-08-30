@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303356
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -110,9 +110,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -120,7 +120,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_356006(context, evt)
 	if 356002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -128,13 +128,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_356006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303356, 2)
-
+	
 	-- 删除指定group： 133303356 ；指定config：356002；物件身上指定option：173；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133303356, 356002, 173) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -143,7 +143,7 @@ function condition_EVENT_ANY_MONSTER_DIE_356007(context, evt)
 	if 356001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -154,13 +154,13 @@ function action_EVENT_ANY_MONSTER_DIE_356007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2002, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -168,14 +168,14 @@ end
 function condition_EVENT_SELECT_OPTION_356008(context, evt)
 	-- 判断是gadgetid 356004 option_id 173
 	if 356004 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 173 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -185,14 +185,14 @@ function action_EVENT_SELECT_OPTION_356008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 356004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2002, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -200,14 +200,14 @@ end
 function condition_EVENT_SELECT_OPTION_356009(context, evt)
 	-- 判断是gadgetid 356002 option_id 173
 	if 356002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 173 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -217,20 +217,20 @@ function action_EVENT_SELECT_OPTION_356009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 356002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2002, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 删除指定group： 133303356 ；指定config：356002；物件身上指定option：173；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133303356, 356002, 173) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -239,7 +239,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_356010(context, evt)
 	if 356003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -247,13 +247,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_356010(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303356, 3)
-
+	
 	-- 删除指定group： 133303356 ；指定config：356003；物件身上指定option：173；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133303356, 356003, 173) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -262,7 +262,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_356011(context, evt)
 	if 356004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -270,13 +270,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_356011(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303356, 4)
-
+	
 	-- 删除指定group： 133303356 ；指定config：356004；物件身上指定option：173；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133303356, 356004, 173) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -284,14 +284,14 @@ end
 function condition_EVENT_SELECT_OPTION_356012(context, evt)
 	-- 判断是gadgetid 356003 option_id 173
 	if 356003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 173 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -301,14 +301,14 @@ function action_EVENT_SELECT_OPTION_356012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 356003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2002, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -317,7 +317,7 @@ function condition_EVENT_GADGET_CREATE_356013(context, evt)
 	if 356002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -328,8 +328,8 @@ function action_EVENT_GADGET_CREATE_356013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -338,7 +338,7 @@ function condition_EVENT_GADGET_CREATE_356014(context, evt)
 	if 356003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -349,8 +349,8 @@ function action_EVENT_GADGET_CREATE_356014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -359,7 +359,7 @@ function condition_EVENT_GADGET_CREATE_356015(context, evt)
 	if 356004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -370,7 +370,7 @@ function action_EVENT_GADGET_CREATE_356015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end

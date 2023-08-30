@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133223359
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -90,9 +90,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -100,7 +100,7 @@ function condition_EVENT_ANY_GADGET_DIE_359003(context, evt)
 	if 359001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -111,13 +111,13 @@ function action_EVENT_ANY_GADGET_DIE_359003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "group_4_progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "group_4_progress", 1, 133223501) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -126,7 +126,7 @@ function condition_EVENT_MONSTER_BATTLE_359006(context, evt)
 	if 359004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -134,6 +134,6 @@ end
 function action_EVENT_MONSTER_BATTLE_359006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133223359, 2)
-
+	
 	return 0
 end

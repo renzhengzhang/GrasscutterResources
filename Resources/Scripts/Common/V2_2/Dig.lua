@@ -1,13 +1,13 @@
 --ServerUploadTool Save to [/root/env/data/lua/common/V2_2]
 --[[
-defs = {
+local defs = {
 	region_Enter = 191004,
 	region_Leave = 191006
 	Boss = 222,
 }
 
 -- DEFS_MISCS
-Pursina = {
+local Pursina = {
 	{191001,191008},
 	{191002,191009},
 	{191003,191007},
@@ -21,15 +21,15 @@ Pursina = {
 2.2挖矿活动__完成且击倒少于n次	Activity_PursinaChallenge_watcher_5
 2.2挖矿活动__累计击破弱点n次	Activity_PursinaChallenge_watcher_6
 ]]
-RMD_HP_LOW = {600077,600090,600091}
-LOWPOWER_SPEED = 0		--低电量充能速度（千分比）
-MEDIUMPOWER_SPEED = 5		--中电量充能速度（千分比）
-HIGHPOWER_SPEED = 10		--高电量充能速度（千分比）
-GALLERY_ID = defs.gallery_id
-CHALLENGEID = 2002007
-CHALLENGEID_CHILD = 2001007
-Operator_Config_id = 0
-Watcher_Condition = {  --watcher的条件，检测用
+local RMD_HP_LOW = {600077,600090,600091}
+local LOWPOWER_SPEED = 0		--低电量充能速度（千分比）
+local MEDIUMPOWER_SPEED = 5		--中电量充能速度（千分比）
+local HIGHPOWER_SPEED = 10		--高电量充能速度（千分比）
+local GALLERY_ID = defs.gallery_id
+local CHALLENGEID = 2002007
+local CHALLENGEID_CHILD = 2001007
+local Operator_Config_id = 0
+local Watcher_Condition = {  --watcher的条件，检测用
 	[1] = 1, --完成boss挑战【无用】
 	[2] = 50, --完成且保持所有桩子血量 		填0~100
 	[3] = 180, --n秒内完成挑战 			填秒数
@@ -37,14 +37,14 @@ Watcher_Condition = {  --watcher的条件，检测用
 	[5] = 2, --完成且击倒少于n次	填次数
 	[6] = 6, --已废弃
 }
-temp_Variables = {
+local temp_Variables = {
 	{ config_id=50000001,name = "IsFinished", value = 2, no_refresh = false },	--用于标识是否已完成，未开始为2，战斗中为0，完成后变1.
 	{ config_id=50000002,name = "Boss_Enhance", value = 0, no_refresh = false },	--用于标识是否狂暴，挑战开始时初始化为0，其他时候由ServerLuaCall控制
 	{ config_id=50000003,name = "Active_Count", value = 0, no_refresh = false },	--用于表示当前运行中挖掘器数量。(0~3)
 	{ config_id=50000004,name = "test_quickFinish", value = 0, no_refresh = false },	--快速完成
 	{ config_id=50000005,name = "Boss_SetBattle", value = 0, no_refresh = false },	--快速完成
 }
-Tirgger_Start = {
+local Tirgger_Start = {
 	{ name = "1", config_id = 9000001, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "Finteract",trigger_count = 0},
 	{ name = "2", config_id = 9000002, event = EventType.EVENT_TIME_AXIS_PASS, source = "tick", condition = "", action = "tick",trigger_count = 0},
 	{ name = "3", config_id = 9000003, event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "gallerytimeout",trigger_count = 0},
@@ -67,11 +67,11 @@ Tirgger_Start = {
 }
 function action_CreateBoss(context,evt)
 	ScriptLib.PrintContextLog(context,"【[action_CreateBoss]】evt.param1 = ".. evt.param1)
-	result = ScriptLib.CreateMonster(context, {config_id = defs.Boss, delay_time = 0})
+	local result = ScriptLib.CreateMonster(context, {config_id = defs.Boss, delay_time = 0})
 	ScriptLib.SetGadgetStateByConfigId(context, Pursina[1][1], GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, Pursina[2][1], GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, Pursina[3][1], GadgetState.Default)
-	if evt.param1 == 1 then
+	if evt.param1 == 1 then 
 		for k,v in pairs(gadgets) do
 			if v.gadget_id == 70800055 then
 				ScriptLib.CreateGadget(context,{config_id = v.config_id})
@@ -93,9 +93,9 @@ end
 function log_ActivityDig_2(context,result)	--胜负结果 & 失败原因 埋点
 	ScriptLib.PrintContextLog(context,"【[log_ActivityDig_2]】"..result)
 	--埋点
-	hp1=ScriptLib.GetGroupTempValue(context, "HP_1",{})
-	hp2=ScriptLib.GetGroupTempValue(context, "HP_2",{})
-	hp3=ScriptLib.GetGroupTempValue(context, "HP_3",{})
+	local hp1=ScriptLib.GetGroupTempValue(context, "HP_1",{})
+	local hp2=ScriptLib.GetGroupTempValue(context, "HP_2",{})
+	local hp3=ScriptLib.GetGroupTempValue(context, "HP_3",{})
 	ScriptLib.MarkGroupLuaAction(context, "ActivityDig_2",ScriptLib.GetGalleryTransaction(context, GALLERY_ID) , {["result"] = result,["left_hp1"]=hp1,["left_hp2"]=hp2,["left_hp3"]=hp3})
 	return 0
 end
@@ -110,17 +110,17 @@ function enterRegion(context,evt)
 		ScriptLib.ForbidPlayerRegionVision(context, context.uid)
 		ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {0})
 	end
-	return 0
+	return 0 
 end
 function action_Active_Count(context,evt)	--纯reminder 用 无逻辑
-	if defs.Boss ~= nil then
+	if defs.Boss ~= nil then 
 		if evt.param1 == 2 and evt.param1 > evt.param2 then ScriptLib.ShowReminder(context,600081) end
 		if evt.param1 == 3 and evt.param1 > evt.param2 then ScriptLib.ShowReminder(context,600080) end
 	end
-	return 0
+	return 0 
 end
 function action_Boss_SetBattle(context,evt)
-	groupID = ScriptLib.GetContextGroupId(context)
+	local groupID = ScriptLib.GetContextGroupId(context)
 	--if defs.Boss ~= nil then ScriptLib.SetMonsterBattleByGroup(context, defs.Boss, groupID) end --LD负责通知进战
 	if defs.Boss ~= nil then
 		--给血量物件增加血量modifier
@@ -147,7 +147,7 @@ function action_EndGame(context,evt)--只用来触发挑战,同时关gallery
 	return 0
 end
 function action_refreshgroup(context,evt)
-	groupID = ScriptLib.GetContextGroupId(context)
+	local groupID = ScriptLib.GetContextGroupId(context)
 	ScriptLib.RefreshGroup(context, { group_id = groupID, suite = init_config.suite})
 	return	0
 end
@@ -175,7 +175,7 @@ function leaveRegion(context,evt)
 		ScriptLib.RevertPlayerRegionVision(context, context.uid)
 		ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {1})
 		if ScriptLib.GetGroupVariableValue(context,"IsFinished") == 0 then --该then内为 未完成玩法时离开region时执行的操作
-			log_ActivityDig_2(context,4)
+			log_ActivityDig_2(context,4) 
 			fail(context)
 		end
 	end
@@ -186,7 +186,7 @@ function fail(context) --离场、超时后执行。关tick、关gallery、标�
 	ScriptLib.EndTimeAxis(context, "tick")
 	--标识回到未开始状态
 	ScriptLib.SetGroupVariableValue(context, "IsFinished", 2)
-	groupID = ScriptLib.GetContextGroupId(context)
+	local groupID = ScriptLib.GetContextGroupId(context)
 	-- 停止标识为"looptime"的时间轴【LD需求】
 	ScriptLib.EndTimeAxis(context, "looptime")
 	ScriptLib.StopGallery(context,GALLERY_ID,false)
@@ -234,7 +234,7 @@ end
 
 function Finteract(context, evt)
 	if evt.param2 == 175 then
-		groupID = ScriptLib.GetContextGroupId(context)
+		local groupID = ScriptLib.GetContextGroupId(context)
 		--boss专用:设置进战、初始化watcher
 		if defs.Boss ~= nil then
 			ScriptLib.PrintContextLog(context, "【[bOSS]1】")
@@ -261,12 +261,12 @@ function Finteract(context, evt)
 		ScriptLib.SetGroupTempValue(context,"Progress_To_Add_1",0,{})	--挖掘进度中转变量
 		ScriptLib.SetGroupTempValue(context,"Progress_To_Add_2",0,{})	--挖掘进度中转变量
 		ScriptLib.SetGroupTempValue(context,"Progress_To_Add_3",0,{})	--挖掘进度中转变量
-
+		
 		-- 卸载操作台
 		if defs.Boss == nil then ScriptLib.SetGadgetStateByConfigId(context, evt.param1, GadgetState.GearStart) end
 		ScriptLib.DelWorktopOptionByGroupId(context, groupID, evt.param1, 175)
 		--gallery+challenge同开同关
-		uid = ScriptLib.GetSceneUidList(context)
+		local uid = ScriptLib.GetSceneUidList(context)
 		ScriptLib.SetPlayerStartGallery(context, GALLERY_ID, {uid[1]})
 		ScriptLib.CreateFatherChallenge(context,CHALLENGEID,CHALLENGEID,99999999, {success=1, fail=1,fail_on_wipe=false})
 		ScriptLib.StartFatherChallenge(context, CHALLENGEID)
@@ -277,23 +277,23 @@ function Finteract(context, evt)
 		ScriptLib.InitTimeAxis(context, "tick", {1}, true)
 		--5秒后显示reminder
 		ScriptLib.InitTimeAxis(context, "reminder", {6}, false)
-	end
+	end 
 	return 0
 end
 function tick(context,evt)--每tick计算进度  "Progress_To_Add_"..i
-	FinishPursina = {}
+	local FinishPursina = {}
 	for i = 1, #Pursina do
 		FinishPursina[i] = ScriptLib.GetGroupTempValue(context,"FinishPursina_"..i,{})
 		if FinishPursina[i] ~= 1 then
-			Progress_wait_for_Add = ScriptLib.GetGroupTempValue(context, "Progress_To_Add_"..i,{})	--取当前待增加进度
-			if Progress_wait_for_Add >= 10 then
-				real_add = math.floor(Progress_wait_for_Add/10)
+			local Progress_wait_for_Add = ScriptLib.GetGroupTempValue(context, "Progress_To_Add_"..i,{})	--取当前待增加进度
+			if Progress_wait_for_Add >= 10 then 
+				local real_add = math.floor(Progress_wait_for_Add/10)
 				ScriptLib.AddGalleryProgressScore(context, "digProgress"..i-1, GALLERY_ID, real_add)
 				ScriptLib.SetGroupTempValue(context,"Progress_To_Add_"..i,Progress_wait_for_Add - real_add*10,{})
 
-				nowProgress = ScriptLib.GetGalleryProgressScore(context,"digProgress".. i-1,GALLERY_ID)
-				if nowProgress >= 100 then
-					groupID = ScriptLib.GetContextGroupId(context)
+				local nowProgress = ScriptLib.GetGalleryProgressScore(context,"digProgress".. i-1,GALLERY_ID) 
+				if nowProgress >= 100 then 
+					local groupID = ScriptLib.GetContextGroupId(context)
 					ScriptLib.SetGadgetStateByConfigId(context,Pursina[i][1], GadgetState.GearAction1)
 					ScriptLib.RemoveEntityByConfigId(context, groupID, EntityType.GADGET, Pursina[i][2])
 					ScriptLib.RemoveEntityByConfigId(context, groupID, EntityType.GADGET, 888880+i)
@@ -310,7 +310,7 @@ end
 function finishPlay(context)
 	ScriptLib.PrintContextLog(context, "【[finishPlay]】")
 	ScriptLib.EndTimeAxis(context, "tick")
-	groupID = ScriptLib.GetContextGroupId(context)
+	local groupID = ScriptLib.GetContextGroupId(context)
 	--标识设为1
 	ScriptLib.SetGroupVariableValue(context, "IsFinished", 1)
 	-- 停止标识为"looptime"的时间轴【LD需求】
@@ -322,8 +322,8 @@ function finishPlay(context)
 	--中间操作台特效关掉
 	ScriptLib.SetGadgetStateByConfigId(context, ScriptLib.GetGroupTempValue(context,"Operator_Config_id",{}), GadgetState.GearStop)
 	--处理watcher
-	uid = ScriptLib.GetSceneUidList(context)
-	groupID = ScriptLib.GetContextGroupId(context)
+	local uid = ScriptLib.GetSceneUidList(context)
+	local groupID = ScriptLib.GetContextGroupId(context)
 	if defs.Boss ~= nil then
 		--杀死boss
 		ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {defs.Boss}, "Monster_Konungmathr_None_RealDie_Label", 1)
@@ -334,25 +334,25 @@ function finishPlay(context)
 			ScriptLib.AddExhibitionAccumulableData(context, uid[1], "Activity_PursinaChallenge_watcher_2", 1)
 		end
 		--2.2挖矿活动__特定时间内完成
-	   temp_result = ScriptLib.GetGroupTempValue(context,"watcher3",{})
+	   local temp_result = ScriptLib.GetGroupTempValue(context,"watcher3",{})
 	   if temp_result ~= 1 then
 		   ScriptLib.AddExhibitionAccumulableData(context, uid[1], "Activity_PursinaChallenge_watcher_3", 1)
 		   ScriptLib.PrintContextLog(context, "[通关成就]特定时间内完成")
 	   end
 --[[  		--2.2挖矿活动__完成且中断特殊技能n次
-		temp_result = ScriptLib.GetGroupTempValue(context,"watcher4",{})
+		local temp_result = ScriptLib.GetGroupTempValue(context,"watcher4",{})
 		ScriptLib.PrintContextLog(context, "[通关计数]中断特殊技能".. temp_result.. "次")
 		if temp_result >= Watcher_Condition[4] then
 			ScriptLib.AddExhibitionAccumulableData(context, uid[1], "Activity_PursinaChallenge_watcher_4", 1)
 		end ]]
 		--2.2挖矿活动__完成且击倒boss不少于n次
-		temp_result = ScriptLib.GetGroupTempValue(context,"watcher5",{})
+		local temp_result = ScriptLib.GetGroupTempValue(context,"watcher5",{})
 		ScriptLib.PrintContextLog(context, "[通关计数]击倒boss".. temp_result.. "次")
-		if temp_result >= Watcher_Condition[5] then
+		if temp_result >= Watcher_Condition[5] then 
 			ScriptLib.AddExhibitionAccumulableData(context,  uid[1], "Activity_PursinaChallenge_watcher_5", 1)
 		end
 		--2.2挖矿活动__完成且未击倒boss
-		if temp_result == 0 then
+		if temp_result == 0 then 
 			ScriptLib.AddExhibitionAccumulableData(context,  uid[1], "Activity_PursinaChallenge_watcher_4", 1)
 		end
 		--完成后，等待一段时间refreshgroup
@@ -361,7 +361,7 @@ function finishPlay(context)
 		ScriptLib.AddExhibitionAccumulableData(context, uid[1], "Activity_Pursina_Group_".. groupID,1)
 		ScriptLib.FinishGroupLinkBundle(context, groupID)
 	end
-
+	
 	log_ActivityDig_2(context,0)
 	return 0
 end
@@ -371,7 +371,7 @@ function gallerytimeout(context,evt)
 	ScriptLib.PrintContextLog(context, "【[gallerytimeout]】evt.param2="..evt.param2)
 	ScriptLib.PrintContextLog(context, "【[gallerytimeout]】GALLERY_ID="..GALLERY_ID)
 	if evt.param1 == GALLERY_ID and evt.param2 == 0 then
-		if evt.param3 == 1 then
+		if evt.param3 == 1 then 
 			ScriptLib.PrintContextLog(context, "【[gallerytimeout]】evt.param3="..evt.param3)
 			--埋点
 			log_ActivityDig_2(context,2)
@@ -403,7 +403,7 @@ function action_HPChange_3(context,evt)
 end
 --以下为ServerLuaCall函数。
 function AddProgress_LowPower(context)
-	configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	for i = 1 , #Pursina do
 		if configID ==Pursina[i][1] then
 			ScriptLib.ChangeGroupTempValue(context,"Progress_To_Add_"..i, LOWPOWER_SPEED,{})
@@ -412,7 +412,7 @@ function AddProgress_LowPower(context)
 	return 0
 end
 function AddProgress_MediumPower(context)
-	configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	for i = 1 , #Pursina do
 		if configID ==Pursina[i][1] then
 			ScriptLib.ChangeGroupTempValue(context,"Progress_To_Add_"..i, MEDIUMPOWER_SPEED,{})
@@ -421,7 +421,7 @@ function AddProgress_MediumPower(context)
 	return 0
 end
 function AddProgress_HighPower(context)
-	configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	for i = 1 , #Pursina do
 		if configID ==Pursina[i][1] then
 			ScriptLib.ChangeGroupTempValue(context,"Progress_To_Add_"..i, HIGHPOWER_SPEED,{})
@@ -431,19 +431,19 @@ function AddProgress_HighPower(context)
 end
 function LowPower(context)
 	ScriptLib.PrintContextLog(context, "【[LowPower]】")
-	configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	ScriptLib.MarkGroupLuaAction(context, "ActivityDig_3",ScriptLib.GetGalleryTransaction(context, GALLERY_ID), {["Pursina_ID"] = configID,["change_type"]=4})
-	return 0
+	return 0 
 end
 function MediumPower(context)
 	ScriptLib.PrintContextLog(context, "【[MediumPower]】")
- 	configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+ 	local configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	ScriptLib.MarkGroupLuaAction(context, "ActivityDig_3",ScriptLib.GetGalleryTransaction(context, GALLERY_ID) , {["Pursina_ID"] = configID,["change_type"]=3})
-	return 0
+	return 0 
 end
 function HighPower(context)
 	ScriptLib.PrintContextLog(context, "【[HighPower]】")
-	configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	if defs.Boss ~= nil then ScriptLib.SetGroupVariableValue(context, "Boss_SetBattle", 1) end
 	ScriptLib.MarkGroupLuaAction(context, "ActivityDig_3",ScriptLib.GetGalleryTransaction(context, GALLERY_ID), {["Pursina_ID"] = configID,["change_type"]=2})
 	return 0
@@ -451,20 +451,20 @@ end
 
 function SLC_ShowUI(context)
 	ScriptLib.PrintContextLog(context, "【[SLC_ShowUI]】")
-	configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	for i = 1, #Pursina do
 		if Pursina[i][2] == configID then ScriptLib.CreateGadget(context, {config_id = 888880 + i}) end
-	end
-	return 0
+	end	
+	return 0 
 end
 function SLC_HideUI(context)
 	ScriptLib.PrintContextLog(context, "【[SLC_HideUI]】")
-	configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
-	groupID = ScriptLib.GetContextGroupId(context)
+	local configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local groupID = ScriptLib.GetContextGroupId(context)
 	for i = 1, #Pursina do
 		if Pursina[i][2] == configID then ScriptLib.RemoveEntityByConfigId(context, groupID, EntityType.GADGET, 888880+i) end
-	end
-	return 0
+	end	
+	return 0 
 end
 function ServerLuaCall_Pursina_Start(context)--桩子物件用，用于当前激活桩子的计数,顺便埋个点
 	ScriptLib.ChangeGroupVariableValue(context, "Active_Count", 1)
@@ -497,7 +497,7 @@ function watcher5_count(context)--事件[击倒]供战斗组的ServerLuaCall调�
 end
 function watcher6_count(context)--事件[击破弱点]供战斗组的ServerLuaCall调用  【直接add陈列室，因为不用局内计算 而是累计值】
 	ScriptLib.PrintContextLog(context, "【[watcher6_count]】")
-	uid = ScriptLib.GetSceneUidList(context)
+	local uid = ScriptLib.GetSceneUidList(context)
 	ScriptLib.AddExhibitionAccumulableData(context, uid[1], "Activity_PursinaChallenge_watcher_6", 1)
 	return 0
 end
@@ -540,20 +540,21 @@ function Initialize()
 		if v.gadget_id == 70800047 then
 			table.insert(gadgets , {config_id = 888881 , gadget_id = 70800050, pos = v.pos, rot = v.rot, level = v.level, area_id = v.area_id })
 			break
-		end
+		end 
 	end
 	for k,v in pairs(gadgets) do
 		if v.gadget_id == 70800048 then
 			table.insert(gadgets , {config_id = 888882 , gadget_id = 70800051, pos = v.pos, rot = v.rot, level = v.level, area_id = v.area_id })
 			break
-		end
+		end 
 	end
 	for k,v in pairs(gadgets) do
 		if v.gadget_id == 70800049 then
 			table.insert(gadgets , {config_id = 888883 , gadget_id = 70800052, pos = v.pos, rot = v.rot, level = v.level, area_id = v.area_id })
 			break
-		end
+		end 
 	end
 	return 0
 end
 Initialize()
+

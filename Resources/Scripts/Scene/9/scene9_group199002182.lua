@@ -1,16 +1,16 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002182
 }
 
 -- DEFS_MISCS
-shadowConfigIDList = {182002,182003,182004}
-questID = 7902406
+local shadowConfigIDList = {182002,182003,182004}
+local questID = 7902406
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -116,9 +116,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -126,14 +126,14 @@ function condition_EVENT_GADGET_CREATE_182006(context, evt)
 	if 182007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_182006(context, evt)
 	ScriptLib.ActiveGadgetItemGiving(context, 10000116, 199002182, 182007)
-
+	
 	return 0
 end
 
@@ -144,52 +144,52 @@ function action_EVENT_GADGET_GIVING_FINISHED_182009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "Isdone" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Isdone", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 182001, 900200137, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（702.9603，120.9969，-568.589），持续时间为4秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=702.9603, y=120.9969, z=-568.589}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=702.9603, y=120.9969, z=-568.589}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_182010(context, evt)
 	-- 判断是gadgetid 为 182001的移动平台，是否到达了900200137 的点集中的 2 点
-
+	
 	if 182001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 900200137 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -199,8 +199,8 @@ function action_EVENT_PLATFORM_REACH_POINT_182010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 182001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -208,7 +208,7 @@ end
 function action_EVENT_QUEST_START_182011(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002182, 3)
-
+	
 	return 0
 end
 
@@ -216,7 +216,7 @@ end
 function action_EVENT_QUEST_START_182012(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002182, 3)
-
+	
 	return 0
 end
 
@@ -226,7 +226,7 @@ function condition_EVENT_GROUP_LOAD_182014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Isdone") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -235,13 +235,13 @@ function action_EVENT_GROUP_LOAD_182014(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 182001, 900200137, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
 	ScriptLib.SetGadgetStateByConfigId(context, 182001, GadgetState.GearStart)
-
+	
 	return 0
 end
 
@@ -250,7 +250,7 @@ function condition_EVENT_ANY_GADGET_DIE_182016(context, evt)
 	if 182001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -261,18 +261,18 @@ function action_EVENT_ANY_GADGET_DIE_182016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_182019(context, evt)
 	if -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 199002182, 182001) then
-
+	
 	    return false
-
+	
 	end
-
+	
 	return true
 end
 

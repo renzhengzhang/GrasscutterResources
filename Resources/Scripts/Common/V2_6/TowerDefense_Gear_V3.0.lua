@@ -15,7 +15,7 @@
 --[[
 
 	-- Trigger变量
-	defs = {
+	local defs = {
 		group_id = 245002002,
 		fundation_id = 70350145,
 		challange_group_id = 245002001,
@@ -24,20 +24,20 @@
 
 	-- DEFS_MISCS
 	-- 预设塔配置表（底座和塔的对应关系）
-	towerPrebuild =
+	local towerPrebuild = 
 	{
 		foundationConfigId = towerGearId, --需要查询Excel
 	}
 
 --]]
 
-Global =
+local Global = 
 {
 	-- 塔的标记槽位数。同时存在的塔不会超过这个数字
 	slotNum = 20,
-
+	
 	-- 所有类型塔信息表
-	allTowerType =
+	allTowerType = 
 	{
 		-- 二期机关
 		[70350281] = {price = 500}, --水塔
@@ -68,14 +68,14 @@ Global =
 
 -- 打印日志
 function PrintLog(context, content)
-	log = "## [TowerDefence_Gear_V3.0] TD_V3: "..content
+	local log = "## [TowerDefence_Gear_V3.0] TD_V3: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
 -- 判断创生物件是否是塔
 function condition_TOWER_CREATE(context, evt)
-	towerGadgetId = evt.param2
-	if Global.allTowerType[towerGadgetId] ~= nil then
+	local towerGadgetId = evt.param2
+	if Global.allTowerType[towerGadgetId] ~= nil then 
 		PrintLog(context, "TowerGadgetId "..evt.param2.." Created.")
 		return true
 	end
@@ -84,12 +84,12 @@ end
 
 -- 造塔事件
 function action_TOWER_CREATE(context, evt)
-	towerGadgetId = evt.param2
+	local towerGadgetId = evt.param2
 	LF_AddTowerNum(context, towerGadgetId, 1)
 
 	-- 存储该塔
 	for i = 1, Global.slotNum do
-		if ScriptLib.GetGroupVariableValue(context, "Slot"..i) == 0 then
+		if ScriptLib.GetGroupVariableValue(context, "Slot"..i) == 0 then 
 			ScriptLib.SetGroupVariableValue(context, "Slot"..i, evt.param1)
 			break
 		end
@@ -100,11 +100,11 @@ end
 
 -- 判断是否拆的是塔
 function condition_TOWER_DESTROY(context, evt)
-	configId = evt.param1
+	local configId = evt.param1
 
 	-- 清除该塔的记录
 	for i = 1, Global.slotNum do
-		if ScriptLib.GetGroupVariableValue(context, "Slot"..i) == configId then
+		if ScriptLib.GetGroupVariableValue(context, "Slot"..i) == configId then 
 			ScriptLib.SetGroupVariableValue(context, "Slot"..i, 0)
 			return true
 		end
@@ -124,7 +124,7 @@ end
 
 function action_EVENT_GROUP_LOAD(context, evt)
 	PrintLog(context, "Gear Group Load Begin 1544")
-
+	
 	LF_Initialize_Fundations(context)
 	LF_Initialize_Towers(context)
 
@@ -146,7 +146,7 @@ end
 function LF_AddTowerNum(context, towerGadgetId, num)
 
 	-- 总塔计数
-	towers = ScriptLib.GetGroupVariableValueByGroup(context, "towers", 0)
+	local towers = ScriptLib.GetGroupVariableValueByGroup(context, "towers", 0)
 	towers = towers + num
 	ScriptLib.SetGroupVariableValueByGroup(context, "towers", towers, 0)
 
@@ -164,8 +164,8 @@ end
 function LF_Initialize_Fundations(context, prev_context, param1, param2, param3)
 
 	-- config_id_2_point_table = {config_id: point_id}
-	fundationTable = {}
-    -- uidList = ScriptLib.GetSceneUidList(context)
+	local fundationTable = {}
+    -- local uidList = ScriptLib.GetSceneUidList(context)
     for i = 1, math.min(#gadgets, #points) do
         if gadgets[i].gadget_id == defs.fundation_id then
             fundationTable[gadgets[i].config_id] = points[i].config_id
@@ -179,19 +179,19 @@ end
 function LF_Initialize_Towers(context, prev_context, param1, param2, param3)
 	PrintLog(context, "Init Towers!")
 
-	if towerPrebuild == nil then
+	if towerPrebuild == nil then 
 		PrintLog(context, "towerPrebuild为nil")
 	else
 		--PrintLog(context, "towerPrebuild表长度"..#towerPrebuild)
 	end
 
-	prebuildTable = towerPrebuild or {}
+	local prebuildTable = towerPrebuild or {}
 
 	PrintLog(context, "预设塔列表长度"..#prebuildTable)
 
-	if 0 ~= ScriptLib.ForceSetIrodoriFoundationTowers(context, prebuildTable, defs.challange_group_id, 999) then
+	if 0 ~= ScriptLib.ForceSetIrodoriFoundationTowers(context, prebuildTable, defs.challange_group_id, 999) then 
 		PrintLog(context, "设置预设塔失败！")
-	else
+	else 
 		PrintLog(context, "设置预设塔成功！")
 	end
 	return 0
@@ -210,7 +210,7 @@ end
 -- 怪物毁灭光环
 function SLC_DestroyTower(context)
 
-	entityId = context.source_entity_id
+	local entityId = context.source_entity_id
 	PrintLog(context, "destory entityId: "..entityId)
 
 	ScriptLib.DestroyIrodoriChessTower(context, entityId, defs.challange_group_id, 999)
@@ -221,7 +221,7 @@ end
 -- 初始化Group
 function LF_Initialize_Group(triggers, suites)
 
-	extraTriggers =
+	local extraTriggers = 
 	{
 		{ config_id = 40000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0},
 		{ config_id = 40000012, name = "TOWER_CREATE", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "condition_TOWER_CREATE", action = "action_TOWER_CREATE", trigger_count = 0 },
@@ -240,7 +240,7 @@ function LF_Initialize_Group(triggers, suites)
 	table.insert(variables, {config_id=50000001,name = "towers", value = 0})
 
 	-- 标记塔槽位
-	for i = 1, Global.slotNum do
+	for i = 1, Global.slotNum do 
 		table.insert(variables, {config_id=51000000+i,name = "Slot"..i, value = 0})
 	end
 

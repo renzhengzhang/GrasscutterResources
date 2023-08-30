@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133313014
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -152,9 +152,9 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -164,7 +164,7 @@ function action_EVENT_GROUP_REFRESH_14004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -172,14 +172,14 @@ end
 function condition_EVENT_SELECT_OPTION_14005(context, evt)
 	-- 判断是gadgetid 14001 option_id 7
 	if 14001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -190,22 +190,22 @@ function action_EVENT_SELECT_OPTION_14005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 添加某个flowSuite里的要素，不会更改当前场上已存在的物件/怪物状态
 	  ScriptLib.AddExtraFlowSuite(context, 133313014, 4, FlowSuiteOperatePolicy.DEFAULT)
-
+	
 	-- 删除指定group： 133313014 ；指定config：14001；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133313014, 14001, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 14001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 14001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -216,7 +216,7 @@ function action_EVENT_CHALLENGE_SUCCESS_14006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -227,19 +227,19 @@ function action_EVENT_CHALLENGE_FAIL_14007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "fail_num" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "fail_num", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "deadMonster" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "deadMonster", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -250,7 +250,7 @@ function action_EVENT_ANY_MONSTER_DIE_14008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -260,7 +260,7 @@ function condition_EVENT_ANY_MONSTER_DIE_14009(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -268,10 +268,10 @@ end
 function action_EVENT_ANY_MONSTER_DIE_14009(context, evt)
 		-- 添加某个flowSuite里的要素，不会更改当前场上已存在的物件/怪物状态
 	  ScriptLib.AddExtraFlowSuite(context, 133313014, 5, FlowSuiteOperatePolicy.DEFAULT)
-
+	
 		-- 将flowGroup的某个flowSuite移除，不会触发物件和怪物死亡
 	  ScriptLib.RemoveExtraFlowSuite(context, 133313014, 4, FlowSuiteOperatePolicy.DEFAULT)
-
+	
 	return 0
 end
 
@@ -282,7 +282,7 @@ function action_EVENT_ANY_MONSTER_LIVE_14013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -291,12 +291,12 @@ function condition_EVENT_MONSTER_BATTLE_14014(context, evt)
 	if 14002 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"fail_num"为0
 	if ScriptLib.GetGroupVariableValue(context, "fail_num") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -307,6 +307,6 @@ function action_EVENT_MONSTER_BATTLE_14014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

@@ -23,14 +23,14 @@
 
 
 
-Tri = {
-    [1] = { name = "group_load", config_id = 1500001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
+local Tri = {
+    [1] = { name = "group_load", config_id = 1500001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},  
     [2] = { name = "gadget_state_change", config_id = 1500002, event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0},
     [3] = { name = "variable_change", config_id = 1500003, event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change", trigger_count = 0},
     [4] = { name = "time_axis_pass", config_id = 1500004, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0},
     [5] = { name = "gadget_create", config_id = 1500005, event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0},
     [6] = { name = "level_tag_change", config_id = 1500006, event = EventType.EVENT_LEVEL_TAG_CHANGE, source = "", condition = "", action = "action_level_tag_change", trigger_count = 0},
-
+    
 }
 
 function Initialize()
@@ -64,7 +64,7 @@ end
 function action_gadget_create(context,evt)
 
     if LF_Is_In_Table(context,Gates,evt.param1) then
-        index = LF_Get_Index_In_Table(context,Gates,evt.param1)
+        local index = LF_Get_Index_In_Table(context,Gates,evt.param1)
         LF_Reset_Gate_State(context,index)
     end
     return 0
@@ -80,12 +80,12 @@ function action_level_tag_change(context,evt)
     return 0
 end
 function action_gadget_state_change(context,evt)
-    gadget = evt.param2
-    gate_index = LF_Get_Index_In_Table(context,Gates,gadget)
+    local gadget = evt.param2
+    local gate_index = LF_Get_Index_In_Table(context,Gates,gadget)
     --传送门被激活，且当前没有未被领取的奖励
     if (gate_index ~= -1 and evt.param1 == 201 and not LF_Has_Unfinished_Chamber(context)) then
-        uid_list = ScriptLib.GetSceneUidList(context)
-        ret = ScriptLib.MoveAvatarByPointArray(context, uid_list[1], defs.pointarray_route, {6}, {speed=10}, "{\"MarkType\":2,\"IgnoreCollisionWhenEnter\":true}")
+        local uid_list = ScriptLib.GetSceneUidList(context) 
+        local ret = ScriptLib.MoveAvatarByPointArray(context, uid_list[1], defs.pointarray_route, {6}, {speed=10}, "{\"MarkType\":2,\"IgnoreCollisionWhenEnter\":true}")
         ScriptLib.PrintContextLog(context,"SealedAltar: 触发传送！ 结果为 "..ret)
         LF_Check_Solution(context,gate_index)
     end
@@ -137,11 +137,11 @@ function LF_Reset_Gate_State(context,gate_index)
     if (LF_Has_Unfinished_Chamber(context)) then
         ScriptLib.PrintContextLog(context,"SealedAltar: 存在未领取的玩法，将门设置到锁定状态")
         LF_Set_Gate_Lock(context,gate_index,1)
-        unfinished_chamber = LF_Get_Unfinished_Chamber(context)
-        unfinished_solution = SolutionList[unfinished_chamber]
+        local unfinished_chamber = LF_Get_Unfinished_Chamber(context)
+        local unfinished_solution = SolutionList[unfinished_chamber]
         ScriptLib.PrintContextLog(context,"SealedAltar: 未领取的玩法id为"..unfinished_chamber)
         --如果有未领取的chamber，将该解法对应的门转到201，提示玩家该门已经处于锁定的激活状态
-        if (LF_Is_In_Table(context,unfinished_solution,gate_index)) then
+        if (LF_Is_In_Table(context,unfinished_solution,gate_index)) then 
             ScriptLib.PrintContextLog(context,"SealedAltar: 将门"..gate_index.."转到状态201")
             ScriptLib.SetGroupGadgetStateByConfigId(context,0,Gates[gate_index],201)
         end
@@ -154,19 +154,19 @@ end
 
 --输入当前触发的门index，检查是否完成某个玩法
 function LF_Check_Solution(context, current_index)
-
+    
     ScriptLib.PrintContextLog(context,"SealedAltar: -------------------------------------------")
     ScriptLib.PrintContextLog(context,"SealedAltar: 当前触碰的门为 "..current_index)
     ScriptLib.PrintContextLog(context,"SealedAltar: 正在检查当前解法是否匹配")
-    has_correct = false
+    local has_correct = false
     for i = 1, #SolutionList do
-        target_solution = SolutionList[i]
-        solution_progress = ScriptLib.GetGroupVariableValue(context,"solution_progress_"..i)
-        solution_state = ScriptLib.GetGroupVariableValue(context,"solution_state_"..i)
+        local target_solution = SolutionList[i]
+        local solution_progress = ScriptLib.GetGroupVariableValue(context,"solution_progress_"..i)
+        local solution_state = ScriptLib.GetGroupVariableValue(context,"solution_state_"..i)
         ScriptLib.PrintContextLog(context,"SealedAltar: 目标解法"..i.." 进度为： "..solution_progress)
         --玩法开启，且进度不为-1（即不是已经失败的解法）
         if (solution_state == 1 and solution_progress ~= -1) then
-            target_index = target_solution[solution_progress+1]
+            local target_index = target_solution[solution_progress+1]
             --当前位数匹配
             if (target_index == current_index) then
                 --解法与当前答案匹配，进度前进，并记录进度
@@ -180,13 +180,13 @@ function LF_Check_Solution(context, current_index)
                     ScriptLib.SetGroupVariableValue(context,"solution_state_"..i,2)
                     ScriptLib.PrintContextLog(context,"SealedAltar: 解法"..i.."匹配成功！！")
                     for i = 1,#target_solution do
-                        gate = Gates[target_solution[i]]
+                        local gate = Gates[target_solution[i]]
                         ScriptLib.SetGroupGadgetStateByConfigId(context,0,gate,101)
                     end
                     --延时重置整个玩法
                     ScriptLib.InitTimeAxis(context, "gate_wait_change_to_active", {5}, false)
                     --按照优先短匹配的原则，提前返回
-                    return
+                    return 
                 end
             else
                 ScriptLib.SetGroupVariableValue(context,"solution_progress_"..i,-1)
@@ -215,7 +215,7 @@ end
 --检查是否有solution_state处于状态2（即玩法解开，但奖励未领取）
 function LF_Has_Unfinished_Chamber(context)
     for i = 1, #SolutionList do
-        solution_state = ScriptLib.GetGroupVariableValue(context,"solution_state_"..i)
+        local solution_state = ScriptLib.GetGroupVariableValue(context,"solution_state_"..i)
         if (solution_state == 2) then
             return true
         end
@@ -226,7 +226,7 @@ end
 --返回Solution_state处于状态2的解法id。如果没有返回-1
 function LF_Get_Unfinished_Chamber(context)
     for i = 1, #SolutionList do
-        solution_state = ScriptLib.GetGroupVariableValue(context,"solution_state_"..i)
+        local solution_state = ScriptLib.GetGroupVariableValue(context,"solution_state_"..i)
         if (solution_state == 2) then
             return i
         end
@@ -272,7 +272,7 @@ end
 --从表中start位置开始截取子表（包含start）
 function LF_Get_Table_Tail(context,t,start)
 
-    tail = {}
+    local tail = {}
     for i = start,#t do
         table.insert(tail,t[i])
     end

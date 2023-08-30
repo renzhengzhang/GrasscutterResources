@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133314002
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	direct_sandworm_id = 2015
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -107,9 +107,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -118,7 +118,7 @@ function condition_EVENT_ANY_MONSTER_DIE_2002(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -126,21 +126,21 @@ end
 function action_EVENT_ANY_MONSTER_DIE_2002(context, evt)
 	-- 创建标识为"finish"，时间节点为{7}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "finish", {7}, false)
-
-
+	
+	
 	-- 停止标识为"Sandworm_Attack"的时间轴
 	ScriptLib.EndTimeAxis(context, "Sandworm_Attack")
-
-
+	
+	
 	  --清理当前沙虫，如果已被别的group占用可能失败
 	  LF_Remove_All_Sandworm(context)
-
+	
 	-- 调用提示id为 1000080000 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1000080000) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -148,8 +148,8 @@ end
 function action_EVENT_ENTER_REGION_2003(context, evt)
 	-- 重启标识为"Sandworm_Attack"的时间轴
 	ScriptLib.ContinueTimeAxis(context, "Sandworm_Attack")
-
-
+	
+	
 	return 0
 end
 
@@ -158,7 +158,7 @@ function condition_EVENT_TIME_AXIS_PASS_2004(context, evt)
 	if "finish" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -169,11 +169,11 @@ function action_EVENT_TIME_AXIS_PASS_2004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 停止标识为"finish"的时间轴
 	ScriptLib.EndTimeAxis(context, "finish")
-
-
+	
+	
 	return 0
 end
 
@@ -183,7 +183,7 @@ function condition_EVENT_ANY_MONSTER_DIE_2006(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -191,7 +191,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_2006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133314002, 2)
-
+	
 	return 0
 end
 
@@ -200,7 +200,7 @@ function condition_EVENT_MONSTER_BATTLE_2012(context, evt)
 	if 2008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -211,7 +211,7 @@ function action_EVENT_MONSTER_BATTLE_2012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -220,16 +220,16 @@ function condition_EVENT_TIME_AXIS_PASS_2013(context, evt)
 	if "Sandworm_Attack" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_2013(context, evt)
 	  --在主机玩家脚下召唤一只沙虫，并攻击若干次。可能失败
-	  uid = ScriptLib.GetSceneOwnerUid(context)
+	  local uid = ScriptLib.GetSceneOwnerUid(context)
 	  LF_Summon_Direct_Sandworm_By_Avatar(context,uid,1)
-
+	
 	return 0
 end
 
@@ -237,11 +237,11 @@ end
 function action_EVENT_LEAVE_REGION_2014(context, evt)
 	  --清理当前沙虫，如果已被别的group占用可能失败
 	  LF_Remove_All_Sandworm(context)
-
+	
 	-- 暂停标识为"Sandworm_Attack"的时间轴
 	ScriptLib.PauseTimeAxis(context, "Sandworm_Attack")
-
-
+	
+	
 	return 0
 end
 
@@ -249,8 +249,8 @@ end
 function action_EVENT_GROUP_LOAD_2016(context, evt)
 	-- 创建标识为"wait_create_sandworm"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "wait_create_sandworm", {2}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -259,7 +259,7 @@ function condition_EVENT_TIME_AXIS_PASS_2017(context, evt)
 	if "wait_create_sandworm" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -267,11 +267,11 @@ end
 function action_EVENT_TIME_AXIS_PASS_2017(context, evt)
 	-- 创建标识为"Sandworm_Attack"，时间节点为{20}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Sandworm_Attack", {20}, true)
-
-
+	
+	
 	  --召唤一只巡游沙虫，需输入一个沙虫参数。可能失败
 	  LF_Create_Normal_Sandworm_By_Custom_Params(context, 2, 2)
-
+	
 	return 0
 end
 
@@ -279,7 +279,7 @@ end
 function action_EVENT_GROUP_WILL_UNLOAD_2018(context, evt)
 	  --清理当前沙虫，如果已被别的group占用可能失败
 	  LF_Remove_All_Sandworm(context)
-
+	
 	return 0
 end
 

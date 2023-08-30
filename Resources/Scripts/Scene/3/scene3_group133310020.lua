@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133310020
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -170,18 +170,18 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_20002(context, evt)
-	-- 判断指定group组剩余gadget数量是否是1
+	-- 判断指定group组剩余gadget数量是否是1 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133310020}) ~= 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -192,32 +192,32 @@ function action_EVENT_ANY_GADGET_DIE_20002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为101 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 101, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "WQ7308412") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 20003 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133310020, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -227,7 +227,7 @@ function condition_EVENT_GROUP_LOAD_20010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -238,20 +238,20 @@ function action_EVENT_GROUP_LOAD_20010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 20003 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133310020, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -260,7 +260,7 @@ function condition_EVENT_ANY_GADGET_DIE_20011(context, evt)
 	if 20004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -268,7 +268,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_20011(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133310020, 4)
-
+	
 	return 0
 end
 
@@ -277,7 +277,7 @@ function condition_EVENT_ANY_GADGET_DIE_20014(context, evt)
 	if 20005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -285,7 +285,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_20014(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133310020, 5)
-
+	
 	return 0
 end
 
@@ -294,7 +294,7 @@ function condition_EVENT_ANY_GADGET_DIE_20016(context, evt)
 	if 20006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -302,7 +302,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_20016(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133310020, 6)
-
+	
 	return 0
 end
 
@@ -311,7 +311,7 @@ function condition_EVENT_ANY_GADGET_DIE_20019(context, evt)
 	if 20007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -319,7 +319,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_20019(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133310020, 7)
-
+	
 	return 0
 end
 
@@ -328,7 +328,7 @@ function condition_EVENT_ANY_GADGET_DIE_20022(context, evt)
 	if 20008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -336,6 +336,6 @@ end
 function action_EVENT_ANY_GADGET_DIE_20022(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133310020, 8)
-
+	
 	return 0
 end

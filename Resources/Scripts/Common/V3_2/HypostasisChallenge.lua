@@ -3,16 +3,16 @@
 ||	owner: 		zhangchi.chen
 ||	description:	3.2无相挑战活动
 ||	LogName:	HypostasisChallenge
-||	Protection:
+||	Protection:	
 =======================================]]--
 
-local_defs = {
+local local_defs = {
     worktop_option = 175,
 
 }
 
-Tri = {
-
+local Tri = {
+    
     [1] = { name = "group_load", config_id = 40000000, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     [2] = { name = "select_option", config_id = 40000001, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
     [3] = { name = "dungeon_all_avatar_die", config_id = 40000002, event = EventType.EVENT_DUNGEON_ALL_AVATAR_DIE, source = "", condition = "condition_dungeon_all_avatar_die", action = "action_dungeon_all_avatar_die", trigger_count = 0},
@@ -23,7 +23,7 @@ Tri = {
     [11] = { name = "variable_change", config_id = 40000010, event = EventType.EVENT_VARIABLE_CHANGE, source = "GALLERY_STATE", condition = "", action = "action_variable_change", trigger_count = 0 },
 }
 
-Reminder_Map = {
+local Reminder_Map = {
     [1] = 470410101,
     [2] = 470410102,
     [3] = 470410103,
@@ -61,29 +61,29 @@ end
 
 --判断是否所有玩家都死了
 function condition_dungeon_all_avatar_die(context,evt)
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
 
-    ret = 0
-
+    local ret = 0
+    
     for i,v in ipairs(uid_list) do
-        is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
+        local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
         if true ~= is_all_dead then
             ret = -1
             break
         end
     end
-
+    
     if ret ~= 0 then
         return false
     end
-
+    
     return true
 end
 
 --主动退出地城
 function action_dungeon_settle(context,evt)
     if ScriptLib.IsGalleryStart(context, defs.gallery_id) then
-        if 0 ~= ScriptLib.StopGalleryByReason(context,defs.gallery_id,4) then
+        if 0 ~= ScriptLib.StopGalleryByReason(context,defs.gallery_id,4) then 
             ScriptLib.PrintContextLog(context,"Stop Gallery失败")
         else
             ScriptLib.PrintContextLog(context,"Stop Gallery成功")
@@ -103,7 +103,7 @@ end
 
 function action_any_monster_die(context,evt)
     ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["kill_monster_cnt"] = 1})
-
+    
     return 0
 end
 
@@ -159,7 +159,7 @@ end
 --加载操作台并上选项
 function LF_Init_Play(context)
     --操作台激活
-    if defs.is_first_group == true then
+    if defs.is_first_group == true then 
         LF_Set_InitGadgets(context,true)
     end
 
@@ -172,7 +172,7 @@ function LF_Start_Play(context)
     if (ScriptLib.SetPlayerStartGallery(context, defs.gallery_id, ScriptLib.GetSceneUidList(context)) ~= 0) then
         return 0
     end
-
+    
     ScriptLib.PrintContextLog(context,"## [HypostasisChallenge] 开启gallery")
     ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["total_kill_cnt"] = defs.monster_num})
 
@@ -184,7 +184,7 @@ function LF_Stop_Play(context, is_success)
         --成功通关
         ScriptLib.PrintContextLog(context,"## [HypostasisChallenge] 成功通关小关")
         ScriptLib.StopGalleryByReason(context,defs.gallery_id,3)
-        if defs.next_group_id ~=nil then
+        if defs.next_group_id ~=nil then 
             ScriptLib.PrintContextLog(context,"## [HypostasisChallenge] 传送开始，加入新一轮的suite")
             if ScriptLib.GetSceneUidList(context)[1] then
                 ScriptLib.TransPlayerToPos(context, {uid_list ={ScriptLib.GetSceneUidList(context)[1]}, pos = {x=LF_GetPointPos(context, defs.trans_p1).x-1,y=LF_GetPointPos(context, defs.trans_p1).y,z=LF_GetPointPos(context, defs.trans_p1).z}, radius = 0, rot = LF_GetPointRot(context, defs.trans_p1)})
@@ -238,7 +238,7 @@ function SLC_ClearSGV(context)
     --清理火种子计数
     ScriptLib.SetGroupVariableValue(context, "seed_self_destroy", 0)
     --ScriptLib.SetGroupVariableValue(context, "slime_self_destroy", 0)
-    uid = ScriptLib.GetSceneUidList(context)
+    local uid = ScriptLib.GetSceneUidList(context)
     if uid[1]~=nil then
         ScriptLib.SetTeamServerGlobalValue(context, uid[1], "SGV_Team_HypostasisChallenge_Fire", 0)
     end
@@ -249,20 +249,20 @@ end
 --更新火挑战t键技能参数
 function SLC_Fire_SeedDestroy(context)
     ScriptLib.PrintContextLog(context,"## [HypostasisChallenge] 火种死亡")
-
+    
     if ScriptLib.GetGroupVariableValue(context, "seed_self_destroy")==0 then
-        uid = ScriptLib.GetSceneUidList(context)
+        local uid = ScriptLib.GetSceneUidList(context)
         if uid[1]~=nil then
-            value=ScriptLib.GetTeamServerGlobalValue(context,uid[1],"SGV_Team_HypostasisChallenge_Fire")
-            if value<=2 then
+            local value=ScriptLib.GetTeamServerGlobalValue(context,uid[1],"SGV_Team_HypostasisChallenge_Fire")
+            if value<=2 then 
                 ScriptLib.PrintContextLog(context,"## [HypostasisChallenge] 火种非自杀")
                 ScriptLib.SetTeamServerGlobalValue(context, uid[1], "SGV_Team_HypostasisChallenge_Fire", value+1)
             end
         end
-    else
+    else 
         ScriptLib.SetGroupVariableValue(context, "seed_self_destroy", ScriptLib.GetGroupVariableValue(context, "seed_self_destroy")-1)
     end
-    --[[uidprint = ScriptLib.GetSceneUidList(context)
+    --[[local uidprint = ScriptLib.GetSceneUidList(context)
     if uidprint[1]~=nil then
         ScriptLib.PrintContextLog(context,tostring(ScriptLib.GetTeamServerGlobalValue(context,uidprint[1],"SGV_Team_HypostasisChallenge_Fire")))
     end]]
@@ -278,10 +278,10 @@ end
 --[[更新水挑战t键技能参数
 function SLC_Water_SlimeDestroy(context)
     ScriptLib.PrintContextLog(context,"## [HypostasisChallenge] 水史莱姆死亡")
-
+    
     if ScriptLib.GetGroupVariableValue(context, "slime_self_destroy")==0 then
-        uid = ScriptLib.GetSceneUidList(context)
-        value=ScriptLib.GetTeamServerGlobalValue(context,uid[1],"SGV_Team_HypostasisChallenge_Water")
+        local uid = ScriptLib.GetSceneUidList(context)
+        local value=ScriptLib.GetTeamServerGlobalValue(context,uid[1],"SGV_Team_HypostasisChallenge_Water")
         ScriptLib.SetTeamServerGlobalValue(context, uid[1], "SGV_Team_HypostasisChallenge_Water", value+1)
     else
         ScriptLib.SetGroupVariableValue(context, "slime_self_destroy", ScriptLib.GetGroupVariableValue(context, "slime_self_destroy")-1)
@@ -300,16 +300,16 @@ end]]
 function SLC_Grass_AreaChange(context,seed_number)
     ScriptLib.PrintContextLog(context,"## [HypostasisChallenge] 草场地变化")
     ScriptLib.PrintContextLog(context,tostring(seed_number))
-
-    uid = ScriptLib.GetSceneUidList(context)
+    
+    local uid = ScriptLib.GetSceneUidList(context)
     if uid[1]~=nil then
         ScriptLib.SetTeamServerGlobalValue(context, uid[1], "SGV_Team_HypostasisChallenge_Grass", seed_number)
         ScriptLib.PrintContextLog(context,tostring(ScriptLib.GetTeamServerGlobalValue(context,uid[1],"SGV_Team_HypostasisChallenge_Grass")))
-    end
+    end 
     return 0
 end
 
-function LF_Set_InitedByOtherGroup(context, prev_context)
+function LF_Set_InitedByOtherGroup(context, prev_context) 
     ScriptLib.AddExtraGroupSuite(context,base_info.group_id,2)
     LF_Set_InitGadgets(context, true)
     return 0
@@ -322,7 +322,7 @@ function LF_Unload_Group(context)
         ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, k)
     end
     ScriptLib.SetGroupVariableValue(context, "GALLERY_STATE", 0)
-    if defs.is_first_group == true then
+    if defs.is_first_group == true then 
         ScriptLib.RefreshGroup(context,{group_id=base_info.group_id})
         ScriptLib.PrintContextLog(context,"## [HypostasisChallenge] 第一关")
     else
@@ -348,14 +348,14 @@ function LF_Set_InitGadgets(context, is_active)
         ScriptLib.SetGroupGadgetStateByConfigId(context, base_info.group_id, defs.worktop_id, 202)
         ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, defs.recovergadget_id )
     end
-
+    
     ScriptLib.PrintContextLog(context, "## [HypostasisChallenge] 更新gadget信息完毕")
     return 0
 end
 
 function LF_GetPointPos(context,point_id)
     for k,v in pairs(points) do
-        if v.config_id == point_id then
+        if v.config_id == point_id then 
             ScriptLib.PrintContextLog(context,tostring(v.pos))
             return v.pos
         end
@@ -367,7 +367,7 @@ end
 function LF_GetPointRot(context,point_id)
 
     for k,v in pairs(points) do
-        if v.config_id == point_id then
+        if v.config_id == point_id then 
             return v.rot
         end
 	end

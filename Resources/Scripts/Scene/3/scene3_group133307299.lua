@@ -1,23 +1,23 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133307299
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	up_flow_speed = 5,
 	down_flow_speed = 10,
 	overflow_speed = 15
 }
 
 -- DEFS_MISCS
-pools =
+local pools =
 {
-    [1] = 299001,
+    [1] = 299001,  
     [2] = 299002
 }
 
-origin_defs =
+local origin_defs =
 {
     origin_nozzole = 299010,
     origin_pool = pools[1],
@@ -25,7 +25,7 @@ origin_defs =
     origin_time = 20
 }
 
-pool_defs =
+local pool_defs =
 {
     max = 1000,
     overflow_max = 1500,
@@ -34,24 +34,24 @@ pool_defs =
 
 
 --填-1时，说明该池子没有对应的喷口
-nozzoles =
+local nozzoles =
 {
-    [pools[1]] = {up_nozzole = -1, down_nozzole = 299007},
+    [pools[1]] = {up_nozzole = -1, down_nozzole = 299007},  
     [pools[2]] = {up_nozzole = -1, down_nozzole = 299008}
 }
 
 --填-1时，说明该池子没有对应的喷口
 --填0时，说明该喷口不指向任何下游池子
-pool_connections =
+local pool_connections =
 {
     [pools[1]] = {up_nozzole = -1, down_nozzole = pools[2]},
     [pools[2]] = {up_nozzole = -1, down_nozzole = 0}
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -89,9 +89,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -102,9 +102,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -120,9 +120,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 require "V3_4/SandStair"

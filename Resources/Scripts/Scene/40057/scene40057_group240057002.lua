@@ -1,28 +1,28 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240057002
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
         worktop_id = 2007,  --操作台gadget的id
         gallery_id = 29024,  --对应gallery的id
         recovergadget_id = 2009,   --恢复gadget的id
         battle_region_id = 2002, --td region的id
-        cleaner_id = 2005,  --gadget（能量球）清理gadget的id
+        cleaner_id = 2005,  --local gadget（能量球）清理gadget的id
         trans_p1 = 2017,  --P1玩家传送点
         trans_p2 = 2018,  --P2玩家传送点
         trans_p3 = 2019,  --P3玩家传送点
-        trans_p4 = 2020,  --P4玩家传送点
+        trans_p4 = 2020,  --P4玩家传送点  
         monster_num = 2,  --刷怪总数量
-        is_first_group = false,   --是否是第一个group
+        is_first_group = false,   --是否是第一个group  
         next_group_id = 240057003  --下一个group的id，最后一个group不需要这条
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -80,9 +80,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -93,9 +93,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -156,9 +156,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -166,7 +166,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_2010(context, evt)
 	if 2003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -177,13 +177,13 @@ function action_EVENT_ANY_MONSTER_LIVE_2010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "monster_wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "monster_wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -191,14 +191,14 @@ end
 function condition_EVENT_SELECT_OPTION_2011(context, evt)
 	-- 判断是gadgetid 2007 option_id 175
 	if 2007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -208,17 +208,17 @@ function action_EVENT_SELECT_OPTION_2011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2007, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 240057002 ；指定config：2007；物件身上指定option：175；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240057002, 2007, 175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240057002, 4)
-
+	
 	return 0
 end
 
@@ -228,12 +228,12 @@ function condition_EVENT_ANY_MONSTER_DIE_2012(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"monster_wave"为1
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -241,13 +241,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_2012(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240057002, 4)
-
+	
 	-- 针对当前group内变量名为 "monster_wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "monster_wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -257,12 +257,12 @@ function condition_EVENT_ANY_MONSTER_DIE_2013(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"monster_wave"为2
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -273,7 +273,7 @@ function action_EVENT_ANY_MONSTER_DIE_2013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -283,12 +283,12 @@ function condition_EVENT_ANY_MONSTER_DIE_2014(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"monster_wave"为3
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -299,19 +299,19 @@ function action_EVENT_ANY_MONSTER_DIE_2014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"monster_count"为2
 	if ScriptLib.GetGroupVariableValue(context, "monster_count") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -322,7 +322,7 @@ function action_EVENT_VARIABLE_CHANGE_2015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -333,7 +333,7 @@ function action_EVENT_ANY_MONSTER_DIE_2016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

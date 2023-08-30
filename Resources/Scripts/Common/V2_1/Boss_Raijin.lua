@@ -7,14 +7,14 @@
 =======================================]]--
 -- Trigger变量
 --[[
-defs = {
+local defs = {
     BossConfigID = 181001,
     regionID = 181005,
 }
 --]]
 
 --------Boss女士-------------
-tempTrigger = {
+local tempTrigger = {
     { config_id = 2330001, name = "EVENT_ENTER_REGION", event = EventType.EVENT_ENTER_REGION, source = "",
       condition = "", action = "action_BattleStart", trigger_count = 0,forbid_guest = false },
     { config_id = 2330002, name = "EVENT_LEAVE_REGION", event = EventType.EVENT_LEAVE_REGION, source = "",
@@ -42,8 +42,8 @@ function action_BattleStart(context,evt)
     ScriptLib.PrintContextLog(context,"##TD_Raijin: 玩家"..context.uid.. "进战斗圈")
     -- 入战时，尽可能分配Host（host在圈里分给host、host不在分给任意圈内玩家)
 
-    no_avatar_in_region = true
-    uidlist = ScriptLib.GetSceneUidList(context)
+    local no_avatar_in_region = true
+    local uidlist = ScriptLib.GetSceneUidList(context)
 
     if uidlist == -1 or uidlist == nil or #uidlist == 0 then
         ScriptLib.PrintContextLog(context,"##TD_Raijin: 没有取到uidlist，上限触发region，强制锁Auth为入圈者")
@@ -77,26 +77,26 @@ function action_LeaveRegion(context,evt)
     end
 
     ScriptLib.PrintContextLog(context, "## TD_Raijin : 离开的玩家uid = "..context.uid)
-    ret = ScriptLib.TryReallocateEntityAuthority(context, context.uid, defs.BossConfigID, evt.param1)
+    local ret = ScriptLib.TryReallocateEntityAuthority(context, context.uid, defs.BossConfigID, evt.param1)
     ScriptLib.PrintContextLog(context, "## TD_Raijin : 返回值为 "..ret)
 
     return 0
 end
 
 function LF_Avatar_is_in_region(context,uid,region_id)
-    avatar_id = ScriptLib.GetAvatarEntityIdByUid(context, uid)
-    pos1 = ScriptLib.GetPosByEntityId(context, avatar_id)
+    local avatar_id = ScriptLib.GetAvatarEntityIdByUid(context, uid)
+    local pos1 = ScriptLib.GetPosByEntityId(context, avatar_id)
 
-    region = {}
+    local region = {}
     for i = 1, #regions do
         if regions[i].config_id == region_id then
             region = regions[i]
         end
     end
 
-    X = pos1.x - region.pos.x
-    Y = pos1.y - region.pos.y
-    Z = pos1.z - region.pos.z
+    local X = pos1.x - region.pos.x
+    local Y = pos1.y - region.pos.y
+    local Z = pos1.z - region.pos.z
 
     if region.shape == RegionShape.SPHERE then
         ScriptLib.PrintContextLog(context, "## TD_Raijin : LF_Avatar_is_in_region 距离为 = "..math.sqrt(X*X+Y*Y+Z*Z))
@@ -119,3 +119,4 @@ end
 
 LF_Initialize_Level()
 --- ServerUploadTool Save to [/root/env/data/lua/common/V2_1]  ---
+

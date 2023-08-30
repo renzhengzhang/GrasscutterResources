@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220388
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -102,9 +102,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -115,9 +115,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -241,9 +241,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -252,22 +252,22 @@ function action_EVENT_ENTER_REGION_388050(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 133220388, {388001}, 50, 1, 1) then
 		return -1
 	end
-
+	
 	-- 创建编号为2（该怪物潮的识别id)的怪物潮，创建怪物总数为50，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 2, 133220388, {388002}, 50, 1, 1) then
 		return -1
 	end
-
+	
 	-- 创建编号为3（该怪物潮的识别id)的怪物潮，创建怪物总数为50，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 3, 133220388, {388003}, 50, 1, 1) then
 		return -1
 	end
-
+	
 	-- 创建编号为4（该怪物潮的识别id)的怪物潮，创建怪物总数为50，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 4, 133220388, {388004}, 50, 1, 1) then
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -276,7 +276,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_388051(context, evt)
 	if 388010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -287,7 +287,7 @@ function action_EVENT_ANY_MONSTER_LIVE_388051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -297,7 +297,7 @@ function condition_EVENT_TIMER_EVENT_388052(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -305,13 +305,13 @@ end
 function action_EVENT_TIMER_EVENT_388052(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220388, 8)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133220388, 7)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220388, 7)
-
+	
 	return 0
 end
 
@@ -320,7 +320,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_388053(context, evt)
 	if 388014 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -331,7 +331,7 @@ function action_EVENT_ANY_MONSTER_LIVE_388053(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -341,7 +341,7 @@ function condition_EVENT_TIMER_EVENT_388054(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -349,27 +349,27 @@ end
 function action_EVENT_TIMER_EVENT_388054(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220388, 9)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133220388, 8)
-
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220388, 8)
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_388055(context, evt)
 	-- 初始化table
-	    suite_table = {}
-
+	    local suite_table = {}
+	
 	-- 需要在group创建时调用，该函数会通过context的groupid读取HuntingData表，来创建entity填充points
 	    if 0~= ScriptLib.RefreshHuntingClueGroup(context) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_hunting_clue_group")
 	        return -1
 	    end
-
+	
 	-- 根据HuntingData表的配置来激活对应的suite
 	    if 0~= ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context) then
 	        suite_table = ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context)
@@ -377,7 +377,7 @@ function action_EVENT_GROUP_LOAD_388055(context, evt)
 	            ScriptLib.AddExtraGroupSuite(context, 133220388, suite_id)
 	        end
 	    end
-
+	
 	return 0
 end
 
@@ -388,26 +388,26 @@ function action_EVENT_HUNTING_FINISH_FINAL_388056(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133220388, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_388057(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -418,25 +418,25 @@ function action_EVENT_VARIABLE_CHANGE_388057(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : end_monster_tide")
 		return -1
 	end
-
+	
 	-- 停止编号为2的怪物潮，end_type为1则是成功停止，0是失败停止（一般就是1）
 	if 0 ~= ScriptLib.EndMonsterTide(context, 133220388, 2, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : end_monster_tide")
 		return -1
 	end
-
+	
 	-- 停止编号为3的怪物潮，end_type为1则是成功停止，0是失败停止（一般就是1）
 	if 0 ~= ScriptLib.EndMonsterTide(context, 133220388, 3, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : end_monster_tide")
 		return -1
 	end
-
+	
 	-- 停止编号为4的怪物潮，end_type为1则是成功停止，0是失败停止（一般就是1）
 	if 0 ~= ScriptLib.EndMonsterTide(context, 133220388, 4, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : end_monster_tide")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -445,7 +445,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_388058(context, evt)
 	if 388019 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -456,7 +456,7 @@ function action_EVENT_ANY_MONSTER_LIVE_388058(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -466,7 +466,7 @@ function condition_EVENT_TIMER_EVENT_388059(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -474,13 +474,13 @@ end
 function action_EVENT_TIMER_EVENT_388059(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220388, 8)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133220388, 9)
-
+	
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220388, 9)
-
+	
 	return 0
 end
 

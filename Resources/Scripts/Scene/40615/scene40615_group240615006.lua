@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240615006
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -81,9 +81,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -94,9 +94,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -139,9 +139,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -149,12 +149,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6017(context, evt)
 	if 6013 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite4_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite4_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -165,7 +165,7 @@ function action_EVENT_ANY_MONSTER_DIE_6017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -175,12 +175,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6018(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "suite2_status") ~= 1 then
 			return false
 	end
-
-	-- 判断指定group组剩余怪物数量是否是0
+	
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240615006) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,19 +188,19 @@ end
 function action_EVENT_ANY_MONSTER_DIE_6018(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240615006, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_6019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"suite2_create_count"为10
 	if ScriptLib.GetGroupVariableValue(context, "suite2_create_count") ~= 10 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -211,7 +211,7 @@ function action_EVENT_VARIABLE_CHANGE_6019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -220,12 +220,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6020(context, evt)
 	if 6012 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite4_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite4_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -236,7 +236,7 @@ function action_EVENT_ANY_MONSTER_DIE_6020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -245,12 +245,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6021(context, evt)
 	if 6003 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite2_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite2_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -261,7 +261,7 @@ function action_EVENT_ANY_MONSTER_DIE_6021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -270,7 +270,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_6022(context, evt)
 	if 6003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -281,7 +281,7 @@ function action_EVENT_ANY_MONSTER_LIVE_6022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -291,7 +291,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_6023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "suite3_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -302,7 +302,7 @@ function action_EVENT_ANY_MONSTER_LIVE_6023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -312,7 +312,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_6024(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "suite4_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -323,7 +323,7 @@ function action_EVENT_ANY_MONSTER_LIVE_6024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -332,12 +332,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6025(context, evt)
 	if 6010 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite3_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite3_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -348,7 +348,7 @@ function action_EVENT_ANY_MONSTER_DIE_6025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -358,14 +358,14 @@ function action_EVENT_CHALLENGE_SUCCESS_6026(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240615004, 4002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 240615006, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -375,32 +375,32 @@ function action_EVENT_CHALLENGE_FAIL_6027(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240615005, 5001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 240615005, 5001, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 改变指定group组240615004中， configid为4001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240615004, 4001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组240615004中， configid为4002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240615004, 4002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 240615006, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -410,7 +410,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_6028(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "suite2_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -421,7 +421,7 @@ function action_EVENT_ANY_MONSTER_LIVE_6028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -430,12 +430,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6030(context, evt)
 	if 6004 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite2_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite2_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -446,7 +446,7 @@ function action_EVENT_ANY_MONSTER_DIE_6030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -455,12 +455,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6031(context, evt)
 	if 6010 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite3_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite3_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -471,7 +471,7 @@ function action_EVENT_ANY_MONSTER_DIE_6031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -481,12 +481,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6032(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "suite3_status") ~= 1 then
 			return false
 	end
-
-	-- 判断指定group组剩余怪物数量是否是0
+	
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240615006) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -494,19 +494,19 @@ end
 function action_EVENT_ANY_MONSTER_DIE_6032(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240615006, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_6033(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"suite3_create_count"为9
 	if ScriptLib.GetGroupVariableValue(context, "suite3_create_count") ~= 9 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -517,7 +517,7 @@ function action_EVENT_VARIABLE_CHANGE_6033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -526,12 +526,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6034(context, evt)
 	if 6009 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite3_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite3_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -542,19 +542,19 @@ function action_EVENT_ANY_MONSTER_DIE_6034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_6035(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"suite4_create_count"为9
 	if ScriptLib.GetGroupVariableValue(context, "suite4_create_count") ~= 9 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -565,7 +565,7 @@ function action_EVENT_VARIABLE_CHANGE_6035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -574,12 +574,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6036(context, evt)
 	if 6007 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite3_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite3_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -590,7 +590,7 @@ function action_EVENT_ANY_MONSTER_DIE_6036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -599,12 +599,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6037(context, evt)
 	if 6006 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite3_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite3_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -615,7 +615,7 @@ function action_EVENT_ANY_MONSTER_DIE_6037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -624,12 +624,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6038(context, evt)
 	if 6014 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite4_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite4_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -640,7 +640,7 @@ function action_EVENT_ANY_MONSTER_DIE_6038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -649,12 +649,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6039(context, evt)
 	if 6015 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite4_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite4_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -665,7 +665,7 @@ function action_EVENT_ANY_MONSTER_DIE_6039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -674,12 +674,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6040(context, evt)
 	if 6029 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite2_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite2_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -690,7 +690,7 @@ function action_EVENT_ANY_MONSTER_DIE_6040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -699,12 +699,12 @@ function condition_EVENT_ANY_MONSTER_DIE_6041(context, evt)
 	if 6005 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite2_status"为0
 	if ScriptLib.GetGroupVariableValue(context, "suite2_status") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -715,6 +715,6 @@ function action_EVENT_ANY_MONSTER_DIE_6041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end

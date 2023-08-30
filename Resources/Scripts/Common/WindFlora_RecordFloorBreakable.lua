@@ -1,6 +1,6 @@
 ------------------------------
 -- 正式代码 --
-TempTrigger = {
+local TempTrigger = {
     {name = "TIMER_EVENT_Floor_Warn", config_id = 860010, event = EventType.EVENT_TIME_AXIS_PASS,
      source = "Floor_Warn", condition = "", action = "action_Floor_Warn", trigger_count = 0},
     {name = "TIMER_EVENT_Floor_Start", config_id = 860011, event = EventType.EVENT_TIME_AXIS_PASS,
@@ -17,7 +17,7 @@ TempTrigger = {
       source = "GM_Start", condition = "", action = "action_GM_Mode", trigger_count = 0 }
 }
 
-Enum ={
+local Enum ={
     FallNum = "fall_down_brokenfloor",
 }
 
@@ -25,9 +25,9 @@ Enum ={
 
 -- 初始化
 function LF_Initialize_Level()
-    suite_sum = #suites
+    local suite_sum = #suites
     for i = 1,#PhasePlay do
-        phaseId = i
+        local phaseId = i
         suites[phaseId + suite_sum] = { monsters={}, gadgets={}, regions={}, triggers={}, rand_weight=0}
         LF_Initialize_Points(phaseId,suite_sum)
     end
@@ -43,7 +43,7 @@ function LF_Initialize_Level()
         table.insert(suites[init_config.suite].triggers, v.name)
     end
 
-    var = { config_id=50000001,name = "GM_Start", value = 0, no_refresh = false }
+    local var = { config_id=50000001,name = "GM_Start", value = 0, no_refresh = false }
     variables[var.name] = var
     var = { config_id=50000002,name = "GM_Phase", value = 0, no_refresh = true }
     variables[var.name] = var
@@ -55,18 +55,18 @@ end
 -- 初始化地板位置
 function LF_Initialize_Points(phaseId,suite_sum)
     -- body
-    currentPhasePlay = PhasePlay[phaseId]
+    local currentPhasePlay = PhasePlay[phaseId]
     for i = 1, currentPhasePlay.FloorArray_Size.x, 1 do
         for j = 1, currentPhasePlay.FloorArray_Size.y, 1 do
             if LF_CheckInitFloor(phaseId,i,j) then
-                point = {
+                local point = {
                     x = currentPhasePlay.Pos_Standard.x + defs.Pos_Range.x * (i - 1),
                     y = currentPhasePlay.Pos_Standard.y,
                     z = currentPhasePlay.Pos_Standard.z - defs.Pos_Range.y * (j - 1)
                 }
                 -- gadgets录入
-                tempConfigId = 100000 * phaseId +1000 * i + j
-                tempGadgetId = defs.FloorGadgetID[currentPhasePlay.InitFloorStyle[i][j]]
+                local tempConfigId = 100000 * phaseId +1000 * i + j
+                local tempGadgetId = defs.FloorGadgetID[currentPhasePlay.InitFloorStyle[i][j]]
                 gadgets[tempConfigId] = { config_id = tempConfigId, gadget_id = tempGadgetId,
                                           pos = point, rot = currentPhasePlay.Rot_Standard,
                                           level = 1,state = GadgetState.GearAction1 }
@@ -78,7 +78,7 @@ function LF_Initialize_Points(phaseId,suite_sum)
 end
 
 function LF_CheckInitFloor(phaseId,i,j)
-    currentPhasePlay = PhasePlay[phaseId]
+    local currentPhasePlay = PhasePlay[phaseId]
     if currentPhasePlay.HasInitFloorArray == true then
         if currentPhasePlay.InitFloorArray[i][j] == 0 then
                 return false
@@ -92,8 +92,8 @@ function action_group_load(context)
         return 0
     end
     ScriptLib.PrintContextLog(context, "## ================ INITIALIZE 1 ==============")
-    currentPhase = ScriptLib.GetFleurFairDungeonSectionId(context)
-    suite_Sum= ScriptLib.GetGroupVariableValue(context, "Suite_Sum")
+    local currentPhase = ScriptLib.GetFleurFairDungeonSectionId(context)
+    local suite_Sum= ScriptLib.GetGroupVariableValue(context, "Suite_Sum")
     ScriptLib.PrintContextLog(context, "## TD_Log:RecordFloorBreakable : currentPhase Index is" .. currentPhase)
     ScriptLib.AddExtraGroupSuite(context, defs.GroupID, currentPhase + suite_Sum)
     ScriptLib.SetGroupTempValue(context, "FirstLoad", 1, {})
@@ -102,7 +102,7 @@ end
 
 -- 点击按钮后触发，游戏开始流程
 function StartGallery(context, prev_context, activeStage)
-    currentPhase = activeStage
+    local currentPhase = activeStage
 
     -- 关闭墙壁
     for index,value in ipairs(defs.AirWallGadgetID) do
@@ -123,13 +123,13 @@ end
 
 -- 游戏开始时调用，确认随机相关
 function LF_Calculate_ArrayVar(context, currentPhase)
-    tempArray = {}
+    local tempArray = {}
     math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
     for i = 1, #PhasePlay[currentPhase].FloorArrays do
         table.insert(tempArray, i)
     end
     for i = 1, #PhasePlay[currentPhase].FloorArrays do
-        randomIndex = math.random(#tempArray)
+        local randomIndex = math.random(#tempArray)
         ScriptLib.SetGroupTempValue(context, "FloorArrayWave" .. i, tempArray[randomIndex],{})
         table.remove(tempArray, randomIndex)
     end
@@ -141,7 +141,7 @@ end
 -- 开启地板TimeAxis
 function LF_Start_TimeEvent(context)
     math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-    randomIndex = math.random(#TimeLines)
+    local randomIndex = math.random(#TimeLines)
     ScriptLib.SetGroupTempValue(context, "timeLinesIndex", randomIndex,{})
     ScriptLib.InitTimeAxis(context, "Floor_Warn", TimeLines[randomIndex].WarnTimeLine, false)
     ScriptLib.InitTimeAxis(context, "Floor_Start", TimeLines[randomIndex].StartTimeLine, false)
@@ -152,15 +152,15 @@ end
 
 
 function action_Floor_Warn(context, evt)
-    floorArrayWaveIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWaveIndex",{})
-    arrayIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWave" .. floorArrayWaveIndex,{})
+    local floorArrayWaveIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWaveIndex",{})
+    local arrayIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWave" .. floorArrayWaveIndex,{})
     LF_SetFloorGadgetState(context, arrayIndex, GadgetState.GearStart)
     return 0
 end
 
 function action_Floor_Start(context, evt)
-    floorArrayWaveIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWaveIndex",{})
-    arrayIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWave" .. floorArrayWaveIndex,{})
+    local floorArrayWaveIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWaveIndex",{})
+    local arrayIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWave" .. floorArrayWaveIndex,{})
     LF_SetFloorGadgetState(context, arrayIndex, GadgetState.GearStop)
     -- 赏花
     if floorArrayWaveIndex > 1 then
@@ -170,9 +170,9 @@ function action_Floor_Start(context, evt)
 end
 
 function action_Floor_Over(context, evt)
-    timeLinesIndex = ScriptLib.GetGroupTempValue(context, "timeLinesIndex", {})
-    floorArrayWaveIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWaveIndex",{})
-    arrayIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWave" .. floorArrayWaveIndex,{})
+    local timeLinesIndex = ScriptLib.GetGroupTempValue(context, "timeLinesIndex", {})
+    local floorArrayWaveIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWaveIndex",{})
+    local arrayIndex = ScriptLib.GetGroupTempValue(context, "FloorArrayWave" .. floorArrayWaveIndex,{})
     action_Show_Flower(context)
     LF_SetFloorGadgetState(context, arrayIndex, GadgetState.GearAction1)
     if floorArrayWaveIndex + 1 <= #TimeLines[timeLinesIndex].OverTimeLine then
@@ -183,13 +183,13 @@ end
 
 -- 批量设置地板GadgetState
 function LF_SetFloorGadgetState(context, arrayIndex, gadgetState)
-    currentPhase = ScriptLib.GetGroupTempValue(context, "Phase", {})
-    currentPlay = PhasePlay[currentPhase]
-    tempArray = currentPlay.FloorArrays[arrayIndex]
+    local currentPhase = ScriptLib.GetGroupTempValue(context, "Phase", {})
+    local currentPlay = PhasePlay[currentPhase]
+    local tempArray = currentPlay.FloorArrays[arrayIndex]
     for i = 1, currentPlay.FloorArray_Size.x do
         for j = 1, currentPlay.FloorArray_Size.y do
             if 1 == tempArray[i][j] and LF_CheckInitFloor(currentPhase,i,j) then
-                configId = 100000 * currentPhase +1000 * i + j
+                local configId = 100000 * currentPhase +1000 * i + j
                 if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, configId, gadgetState) then
                     ScriptLib.PrintContextLog(context, "## TD_ErrorLog : cid -> " .. configId .. " | gadgetState -> " .. gadgetState)
                     return -1
@@ -204,19 +204,19 @@ end
 -- 显示花花
 function action_Show_Flower(context)
     -- 出随机数
-    currentPhase = ScriptLib.GetGroupTempValue(context, "Phase", {})
-    suite_Sum= ScriptLib.GetGroupVariableValue(context, "Suite_Sum")
-    currentGadgets = {}
+    local currentPhase = ScriptLib.GetGroupTempValue(context, "Phase", {})
+    local suite_Sum= ScriptLib.GetGroupVariableValue(context, "Suite_Sum")
+    local currentGadgets = {}
     for k, v in ipairs(suites[currentPhase + suite_Sum].gadgets) do
         currentGadgets[k] = v
     end
     math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-    randomNum = math.random(defs.FlowerNumRange.min, defs.FlowerNumRange.max)
-    posInfoList = {}
+    local randomNum = math.random(defs.FlowerNumRange.min, defs.FlowerNumRange.max)
+    local posInfoList = {}
     for i = 1, randomNum, 1 do
-        randomIndex = math.random(1, #currentGadgets)
-        tempPos = gadgets[currentGadgets[randomIndex]].pos
-        posInfo = { pos = { x = tempPos.x, y = tempPos.y + defs.FlowerHeight, z = tempPos.z },
+        local randomIndex = math.random(1, #currentGadgets)
+        local tempPos = gadgets[currentGadgets[randomIndex]].pos
+        local posInfo = { pos = { x = tempPos.x, y = tempPos.y + defs.FlowerHeight, z = tempPos.z },
                           rot = gadgets[currentGadgets[randomIndex]].rot }
         table.insert(posInfoList, posInfo)
         table.remove(currentGadgets, randomIndex)
@@ -234,7 +234,7 @@ end
 
 -- 删除各种花
 function action_Close_Flower(context)
-    randomNum = ScriptLib.GetGroupTempValue(context, "randomFlowerNum", {})
+    local randomNum = ScriptLib.GetGroupTempValue(context, "randomFlowerNum", {})
     ScriptLib.PrintContextLog(context, "## TD_Log RecordFloorBreakable : randomFlowerNum :" .. randomNum)
     for j = 1, randomNum, 1 do
         if 0 ~= ScriptLib.GetEntityIdByConfigId(context, 21300 + j) then
@@ -259,8 +259,8 @@ end
 
 function SubController( context, SubSocre, Tag)
     -- 取出要减分数的绝对值
-    absSubScore = math.abs(SubSocre)
-    CurScore = ScriptLib.GetFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, context.uid)
+    local absSubScore = math.abs(SubSocre)
+    local CurScore = ScriptLib.GetFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, context.uid)
 
     if ScriptLib.GetSceneMultiStagePlayUidValue(context,235800001, 1, Tag, context.uid) == 0 then
         ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, Tag, context.uid, 0)
@@ -277,8 +277,8 @@ end
 
 
 function action_ENTER_REGION_Fall(context, evt)
-    fallNum = ScriptLib.GetGroupTempValue(context, "fallNum", {})
-    uidList = ScriptLib.GetSceneUidList(context)
+    local fallNum = ScriptLib.GetGroupTempValue(context, "fallNum", {})
+    local uidList = ScriptLib.GetSceneUidList(context)
 
     -- 此处用于避开重复Trigger的情况
     if ScriptLib.GetSceneMultiStagePlayUidValue(context,defs.MainGroupID,1,Enum.FallNum,evt.uid) > 0 then
@@ -335,11 +335,11 @@ function action_gallery_stop( context, evt )
 end
 
 function ActionAddEnergy( context )
-     UidList = ScriptLib.GetSceneUidList(context)
+    local  UidList = ScriptLib.GetSceneUidList(context)
     for i,v in ipairs(UidList) do
         --风之花结算计数
         ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "collect_energy_6003", v, 5 * ScriptLib.GetSceneMultiStagePlayUidValue(context,235800001, 1, "get_random_flora", v))
-
+        
         if ScriptLib.GetSceneMultiStagePlayUidValue(context,defs.MainGroupID,1,Enum.FallNum,v) == 0 then
 
             --watcher结算
@@ -374,8 +374,10 @@ function RemoveFloorSuite(context, prev_context )
     for i=2,#suites do
         ScriptLib.RemoveExtraGroupSuite(context, defs.GroupID, i)
     end
-
+	
 	return 0
 end
 
 LF_Initialize_Level()
+
+

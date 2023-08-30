@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133108198
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	eyepoint = 198044
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -81,9 +81,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -94,9 +94,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -121,9 +121,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -132,7 +132,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_198006(context, evt)
 	if 198005 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -140,7 +140,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_198006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108198, 2)
-
+	
 	return 0
 end
 
@@ -149,7 +149,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_198020(context, evt)
 	if 198001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -160,18 +160,18 @@ function action_EVENT_ANY_MONSTER_LIVE_198020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 创建编号为1（该怪物潮的识别id)的怪物潮，创建怪物总数为8，场上怪物最少2只，最多2只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 133108198, {198018,198019,198012,198013,198014,198015,198016,198017}, 8, 2, 2) then
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Variable_StartWatcherCountDown" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Variable_StartWatcherCountDown", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -182,7 +182,7 @@ function action_EVENT_GROUP_LOAD_198022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -192,8 +192,8 @@ function condition_EVENT_ANY_MONSTER_DIE_198025(context, evt)
 	if evt.param1 == 198001 or evt.param1 == 198002 or evt.param1 == 198003 or evt.param1 == 198004 then
 	    return true
 	 end
-
-
+	  
+	
 	return false
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_ANY_MONSTER_DIE_198025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -215,20 +215,20 @@ function action_EVENT_CHALLENGE_FAIL_198026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133108198, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	-- 变量"Boss"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "Boss", 0)
-
+	
 	-- 变量"challenge"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "challenge", 0)
-
+	
 	return 0
 end
 
@@ -239,14 +239,14 @@ function action_EVENT_CHALLENGE_SUCCESS_198027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133108198, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -254,18 +254,18 @@ end
 function condition_EVENT_SELECT_OPTION_198029(context, evt)
 	-- 判断是gadgetid 198007 option_id 175
 	if 198007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
+	
 	if ScriptLib.GetLanternRiteValue(context) ~= 0 then
 			return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -275,32 +275,32 @@ function action_EVENT_SELECT_OPTION_198029(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 198005, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133108198 ；指定config：198007；物件身上指定option：175；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133108198, 198007, 175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "challenge" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "challenge", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_198040(context, evt)
 	if evt.param1 ~= 198040 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -310,8 +310,8 @@ function action_EVENT_ENTER_REGION_198040(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,153,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -320,7 +320,7 @@ function condition_EVENT_GADGET_CREATE_198042(context, evt)
 	if 198007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -331,7 +331,7 @@ function action_EVENT_GADGET_CREATE_198042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -341,12 +341,12 @@ function condition_EVENT_LEAVE_REGION_198043(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "challenge") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断是区域198043
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 198043 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -354,7 +354,7 @@ end
 function action_EVENT_LEAVE_REGION_198043(context, evt)
 	-- 终止识别id为1的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 1, 0)
-
+	
 	return 0
 end
 

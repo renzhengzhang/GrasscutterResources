@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303419
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_CoreID = 419005,
 	monster_BossID = 419002,
 	gadget_Point_1 = 419006,
@@ -16,9 +16,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-DeathField ={
+local DeathField ={
 	CoreID = defs.gadget_CoreID,
 	BossID = defs.monster_BossID,
 	BossSuite = 2,
@@ -26,7 +26,7 @@ DeathField ={
 	PointList = {defs.gadget_Point_1,defs.gadget_Point_2,defs.gadget_Point_3},
 }
 
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 0,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -35,9 +35,9 @@ CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -139,9 +139,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -152,9 +152,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -197,9 +197,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -207,7 +207,7 @@ function condition_EVENT_MONSTER_BATTLE_419001(context, evt)
 	if 419002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -218,19 +218,19 @@ function action_EVENT_MONSTER_BATTLE_419001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为419050的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 419050 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为419051的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 419051 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -239,7 +239,7 @@ function condition_EVENT_ANY_GADGET_DIE_419023(context, evt)
 	if 419005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -247,19 +247,19 @@ end
 function action_EVENT_ANY_GADGET_DIE_419023(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303419, 4)
-
+	
 	-- 将configid为 419037 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 419037, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133303419, EntityType.GADGET, 419040 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -268,7 +268,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_419024(context, evt)
 	if 419006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -279,8 +279,8 @@ function action_EVENT_GADGET_STATE_CHANGE_419024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -289,7 +289,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_419025(context, evt)
 	if 419007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -300,8 +300,8 @@ function action_EVENT_GADGET_STATE_CHANGE_419025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -310,7 +310,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_419026(context, evt)
 	if 419008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -321,8 +321,8 @@ function action_EVENT_GADGET_STATE_CHANGE_419026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -331,7 +331,7 @@ function condition_EVENT_ANY_GADGET_DIE_419038(context, evt)
 	if 419005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -355,7 +355,7 @@ function condition_EVENT_GROUP_LOAD_419052(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "PlayPhase") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -366,7 +366,7 @@ function action_EVENT_GROUP_LOAD_419052(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -376,7 +376,7 @@ function condition_EVENT_QUEST_START_419053(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "PlayPhase") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -387,7 +387,7 @@ function action_EVENT_QUEST_START_419053(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 

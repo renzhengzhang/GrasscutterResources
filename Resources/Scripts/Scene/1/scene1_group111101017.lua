@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101017
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	maxRouteCount = 3
 }
 
@@ -15,28 +15,28 @@ function MovePlatform(context)
 	ScriptLib.PrintLog(context, "Hit platform to move")
 
 
-	index = ScriptLib.GetGroupVariableValue(context,"route")
+	local index = ScriptLib.GetGroupVariableValue(context,"route")
 	ScriptLib.PrintLog(context, "Hit platform to move : get index = ".. index)
-	route = "route_" ..index
+	local route = "route_" ..index
 	ScriptLib.PrintLog(context, "Hit platform to move : get key = ".. route)
 
 	ScriptLib.SetPlatformPointArray(context, 17002, 110100010, routeInfo[route], { route_type = 0 })
 
 	ScriptLib.PrintLog(context, "Hit platform to move : start platform")
 	index = index + 1
-	if index > defs.maxRouteCount then
+	if index > defs.maxRouteCount then 
 		index = 1
 	end
 	ScriptLib.SetGroupVariableValue(context,"route",index)
 
 	return 0
-
+	
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -71,9 +71,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -102,9 +102,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -112,14 +112,14 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_17003(context, evt)
 	if 17002 ~= evt.param1 then
 							return false
 						end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_AVATAR_NEAR_PLATFORM_17003(context, evt)
 			ScriptLib.SetGadgetStateByConfigId(context, 17002, GadgetState.GearStart)
-
+	
 			MovePlatform(context)
 		return 0
 end
@@ -134,9 +134,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_17009(context, evt)
 				ScriptLib.StopPlatform(context, 17002)
 				ScriptLib.SetGadgetStateByConfigId(context, 17002, GadgetState.Default)
-				route = ScriptLib.GetGroupVariableValue(context,"route")
+				local route = ScriptLib.GetGroupVariableValue(context,"route")
 				if route == defs.maxRouteCount then
-
+					
 				end
 	return 0
 end

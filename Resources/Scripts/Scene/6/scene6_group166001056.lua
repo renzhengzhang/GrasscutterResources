@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 166001056
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -100,9 +100,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -112,7 +112,7 @@ function action_EVENT_ENTER_REGION_56002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -121,7 +121,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_56005(context, evt)
 	if 56004 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -132,7 +132,7 @@ function action_EVENT_GADGET_STATE_CHANGE_56005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -141,7 +141,7 @@ function condition_EVENT_ANY_GADGET_DIE_56008(context, evt)
 	if 56006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -152,7 +152,7 @@ function action_EVENT_ANY_GADGET_DIE_56008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -161,7 +161,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_56009(context, evt)
 	if 56001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -172,13 +172,13 @@ function action_EVENT_GADGET_STATE_CHANGE_56009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 60010134 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 60010134) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_ANY_GADGET_DIE_56015(context, evt)
 	if 56013 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -198,7 +198,7 @@ function action_EVENT_ANY_GADGET_DIE_56015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_GADGET_CREATE_56017(context, evt)
 	if 56016 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -218,7 +218,7 @@ function action_EVENT_GADGET_CREATE_56017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -226,14 +226,14 @@ end
 function condition_EVENT_SELECT_OPTION_56018(context, evt)
 	-- 判断是gadgetid 56016 option_id 99
 	if 56016 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 99 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -244,21 +244,21 @@ function action_EVENT_SELECT_OPTION_56018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 56021 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建id为56019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 56019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -267,7 +267,7 @@ function condition_EVENT_ANY_GADGET_DIE_56020(context, evt)
 	if 56019 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -278,27 +278,27 @@ function action_EVENT_ANY_GADGET_DIE_56020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 56004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建id为56001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 56001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 56021 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -308,7 +308,7 @@ function condition_EVENT_GROUP_LOAD_56022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "keyB") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -319,19 +319,19 @@ function action_EVENT_GROUP_LOAD_56022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为56016的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 56016 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为56021的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 56021 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -341,7 +341,7 @@ function condition_EVENT_GROUP_LOAD_56023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "keyB") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -352,27 +352,27 @@ function action_EVENT_GROUP_LOAD_56023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 56004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建id为56001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 56001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 56021 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -381,7 +381,7 @@ function condition_EVENT_GADGET_CREATE_56024(context, evt)
 	if 56004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -392,6 +392,6 @@ function action_EVENT_GADGET_CREATE_56024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

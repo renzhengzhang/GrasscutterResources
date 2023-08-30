@@ -6,7 +6,7 @@
 ||	Protection:     [Protection]
 =======================================]]
 
-bossMonsterId=
+local bossMonsterId=
 {
 	29070101,
 	29070102,
@@ -17,11 +17,11 @@ bossMonsterId=
 
 -- 打印日志
 function PrintLog(context, content)
-	log = "## [Boss_Battle_Process_Scaramouche_Quest] TD: "..content
+	local log = "## [Boss_Battle_Process_Scaramouche_Quest] TD: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
-extraTriggers =
+local extraTriggers = 
 {
     { config_id = 40000001, name = "monster_die", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_EVENT_ANY_MONSTER_DIE", trigger_count = 0 },
 	{ config_id = 40000002, name = "quest_finish", event = EventType.EVENT_QUEST_FINISH, source = "", condition = "", action = "action_EVENT_QUEST_FINISH", trigger_count = 0 },
@@ -31,7 +31,7 @@ extraTriggers =
 	{ config_id = 40000006, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
 }
 
------- Functions -----------
+------ Local Functions -----------
 function LF_Initialize_Level()
     --- TRIGGER
 	for i, _suite in ipairs(suites) do
@@ -83,7 +83,7 @@ function action_EVENT_TIME_AXIS_PASS(context, evt)
 		ScriptLib.AddQuestProgress(context, "302825")
 		ScriptLib.RefreshGroup(context, {group_id = base_info.group_id, suite = 2})
 		ScriptLib.CreateMonster(context, {config_id=defs.phaseTwoBoss or 0 , delay_time=0})
-
+		
 		for k,v in pairs(points) do
 			if v.config_id==defs.transTarget then
 				ScriptLib.TransPlayerToPos(context, {uid_list = ScriptLib.GetSceneUidList(context), pos = v.pos, radius = 2, rot = v.rot})
@@ -96,10 +96,10 @@ function action_EVENT_TIME_AXIS_PASS(context, evt)
 	end
 
 	if evt.source_name=="YAxisCheck" then
-		uidList=ScriptLib.GetSceneUidList(context)
+		local uidList=ScriptLib.GetSceneUidList(context)
 		for a,b in pairs(uidList) do
-			entity=ScriptLib.GetAvatarEntityIdByUid(context, b)
-			pos=ScriptLib.GetPosByEntityId(context, entity)
+			local entity=ScriptLib.GetAvatarEntityIdByUid(context, b)
+			local pos=ScriptLib.GetPosByEntityId(context, entity)
 			if pos.y>= 0 then
 				for k,v in pairs(points) do
 					if v.config_id==defs.transTarget then
@@ -130,8 +130,8 @@ end
 function action_EVENT_ANY_MONSTER_LIVE(context, evt)
 	--进入方法的log
 	PrintLog(context, "monster alive:"..evt.param1)
-	monsterEntityId=ScriptLib.GetEntityIdByConfigId(context, evt.param1)
-    monsterId=ScriptLib.GetMonsterIdByEntityId(context, monsterEntityId)
+	local monsterEntityId=ScriptLib.GetEntityIdByConfigId(context, evt.param1)
+    local monsterId=ScriptLib.GetMonsterIdByEntityId(context, monsterEntityId)
 	if LF_IsBossMonster(context,monsterId) then
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, evt.param1, "SGV_MONSTER_NADA", 1)
 	end

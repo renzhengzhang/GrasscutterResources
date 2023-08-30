@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133221060
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -69,9 +69,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -82,9 +82,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -127,20 +127,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_60011(context, evt)
 	if evt.param1 ~= 60011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -151,26 +151,26 @@ function action_EVENT_ENTER_REGION_60011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 60004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_60012(context, evt)
 	if evt.param1 ~= 60012 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -181,26 +181,26 @@ function action_EVENT_ENTER_REGION_60012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 60005 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_60013(context, evt)
 	if evt.param1 ~= 60013 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -211,21 +211,21 @@ function action_EVENT_ENTER_REGION_60013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 60006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_LEAVE_REGION_60015(context, evt)
 	if evt.param1 ~= 60015 then return false end
-
+	
 	return true
 end
 
@@ -234,24 +234,24 @@ function condition_EVENT_GADGET_CREATE_60016(context, evt)
 	if 60007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_60016(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 168, 110200, 60, {success=2, fail=1, fail_on_wipe=true})
-
+	
 	ScriptLib.AttachChildChallenge(context, 168, 110201, 110201, {60,1,665,3}, {},{success=1, fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 168, 110202, 110202, {60,3,666,3}, {},{success=1, fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 168, 110203, 110203, {60,5,667,1,0}, {},{success=0, fail=1})
-
+	
 	ScriptLib.StartFatherChallenge(context, 168)
-
+	
 	ScriptLib.AddExtraGroupSuite(context, 133221060, 3)
-
+	
 	return 0
 end
 
@@ -262,19 +262,19 @@ function action_EVENT_CHALLENGE_SUCCESS_60017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 -1074245752 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, -1074245752) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133221060, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -285,13 +285,13 @@ function action_EVENT_CHALLENGE_FAIL_60018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133221060, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -302,7 +302,7 @@ function action_EVENT_CHALLENGE_FAIL_60020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -313,7 +313,7 @@ function action_EVENT_CHALLENGE_FAIL_60021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -324,7 +324,7 @@ function action_EVENT_CHALLENGE_FAIL_60022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -333,7 +333,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_60023(context, evt)
 	if 60002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -341,8 +341,8 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_60023(context, evt)
 	-- 创建标识为"reminder_delay"，时间节点为{2,30}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "reminder_delay", {2,30}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -351,7 +351,7 @@ function condition_EVENT_GADGET_CREATE_60024(context, evt)
 	if 60010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -359,8 +359,8 @@ end
 function action_EVENT_GADGET_CREATE_60024(context, evt)
 	-- 创建标识为"delay"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "delay", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -369,7 +369,7 @@ function condition_EVENT_TIME_AXIS_PASS_60025(context, evt)
 	if "delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -380,7 +380,7 @@ function action_EVENT_TIME_AXIS_PASS_60025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -389,7 +389,7 @@ function condition_EVENT_TIME_AXIS_PASS_60026(context, evt)
 	if "reminder_delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -400,7 +400,7 @@ function action_EVENT_TIME_AXIS_PASS_60026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -409,7 +409,7 @@ function condition_EVENT_TIME_AXIS_PASS_60027(context, evt)
 	if "reminder_delay" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -420,6 +420,6 @@ function action_EVENT_TIME_AXIS_PASS_60027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

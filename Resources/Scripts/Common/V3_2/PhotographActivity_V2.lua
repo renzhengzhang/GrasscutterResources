@@ -3,25 +3,25 @@
 ||	owner: 		zhangchi.chen luyao.huang
 ||	description:	3.2拍照活动
 ||	LogName:	PhotographActivity
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 ------
---defs = {
+--local defs = {
 --    worktop_id = 10001,
 --    gallery_id = 18001,
 --    region_id = 20001,
 --    client_judge_id = 1
 --}
 
-local_defs = {
+local local_defs = {
     worktop_option = 190,
     region_out_reminder = 600106,
     region_warning_reminder = 600159,
     begin_fail_reminder=600158,
 }
 
-Tri = {
+local Tri = {
     [1] = { name = "group_load", config_id = 40000000, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     [3] = { name = "select_option", config_id = 40000002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
     [4] = { name = "photo_finish", config_id = 40000003, event = EventType.EVENT_PHOTO_FINISH, source = "", condition = "", action = "action_photo_finish", trigger_count = 0},
@@ -55,7 +55,7 @@ function action_select_option(context,evt)
         LF_Start_Play(context)
     else
         ScriptLib.PrintContextLog(context,"## [PhotographActivity] 未装备【留影机】")
-        uid = ScriptLib.GetSceneUidList(context)
+        local uid = ScriptLib.GetSceneUidList(context)
         if uid[1]~=nil then
             ScriptLib.ShowReminderByUid(context,{uid[1]}, local_defs.begin_fail_reminder)
         end
@@ -83,15 +83,15 @@ end
 function  action_leave_region(context,evt)
     ScriptLib.PrintContextLog(context,"## [PhotographActivity] action_leave_region: 玩家出圈")
     if (evt.param1 == defs.warning_region_id and ScriptLib.IsGalleryStart(context,defs.gallery_id)) then
-        uid = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
+        local uid = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
         if uid[1]~=nil then
             ScriptLib.ShowReminderByUid(context,{uid[1]}, local_defs.region_warning_reminder)
         end
 
     elseif (evt.param1 == defs.region_id and ScriptLib.IsGalleryStart(context,defs.gallery_id)) then
         ScriptLib.PrintContextLog(context,"## [PhotographActivity] action_leave_region: 挑战失败，并回滚group状态")
-        uid = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
-        if uid[1]~=nil then
+        local uid = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
+        if uid[1]~=nil then 
             ScriptLib.ShowReminderByUid(context,{uid[1]}, local_defs.region_out_reminder)
         end
         LF_Stop_Play(context,false)
@@ -101,7 +101,7 @@ end
 
 --玩家首次进圈显示教程
 function  action_enter_region(context,evt)
-    if ScriptLib.GetGroupVariableValue(context,"trigger_count") == 0 then
+    if ScriptLib.GetGroupVariableValue(context,"trigger_count") == 0 then 
         ScriptLib.PrintContextLog(context,"## [PhotographActivity] action_enter_region: 玩家进圈")
         ScriptLib.SetGroupVariableValue(context,"trigger_count",1)
         if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,211,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
@@ -124,7 +124,7 @@ end
 --失败情况3：灭队
 function action_gallery_stop(context,evt)
     --关闭黄圈
-    ScriptLib.DeactivateGroupLinkBundle(context, base_info.group_id)
+    ScriptLib.DeactivateGroupLinkBundle(context, base_info.group_id) 
     ScriptLib.PrintContextLog(context,"## [PhotographActivity] action_gallery_stop: 重新加载group")
     LF_Init_Play(context)
 

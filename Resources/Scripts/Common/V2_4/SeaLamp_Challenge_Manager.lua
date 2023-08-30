@@ -2,7 +2,7 @@
 --用于管理所有海灯节活动group，防止开启两个挑战。
 --原则上不需要在玩法requir里增加任何代码，只在该requir里监听，但challenge的开启没法监听，所以在Firecracker处有一行调用。
 
-temp_Tirgger2 = {
+local temp_Tirgger2 = {
     --正式trigger
 	{event = EventType.EVENT_GALLERY_START, source = "", condition = "", action = "action_Start",trigger_count = 0},
 	{event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_End",trigger_count = 0},
@@ -29,13 +29,13 @@ function SeaLamp_Challenge_Manager_Start(context)
     ScriptLib.PrintContextLog(context,"SeaLamp_Challenge_Manager_Start")	--开标记
 	ScriptLib.SetLanternRiteValue(context,1)
 	ScriptLib.SetGroupTempValue(context,"Is_In_Gameplay",1,{})
-	return 0
+	return 0 
 end
 function SeaLamp_Challenge_Manager_End(context)
     ScriptLib.PrintContextLog(context,"SeaLamp_Challenge_Manager_End")	--关标记
 	ScriptLib.SetLanternRiteValue(context,0)
 	ScriptLib.SetGroupTempValue(context,"Is_In_Gameplay",0,{})
-	return 0
+	return 0 
 end
 
 

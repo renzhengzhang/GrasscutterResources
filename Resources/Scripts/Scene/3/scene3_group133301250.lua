@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301250
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_CoreID = 250005,
 	monster_BossID = 250002,
 	gadget_Point_1 = 250006,
@@ -23,9 +23,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-DeathField ={
+local DeathField ={
 	CoreID = defs.gadget_CoreID,
 	BossID = defs.monster_BossID,
 	BossSuite = 2,
@@ -33,7 +33,7 @@ DeathField ={
 	PointList = {defs.gadget_Point_1,defs.gadget_Point_2,defs.gadget_Point_3},
 }
 
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 0,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -42,9 +42,9 @@ CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -117,9 +117,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -130,9 +130,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -175,24 +175,24 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_LUA_NOTIFY_250014(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-3024.84, y=268.74, z=4872.4}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=defs.target_x, y=defs.target_y, z=defs.target_z}
-	  pos_follow = {x=defs.camera_x, y=defs.camera_y, z=defs.camera_z}
+		local pos = {x=defs.target_x, y=defs.target_y, z=defs.target_z}
+	  local pos_follow = {x=defs.camera_x, y=defs.camera_y, z=defs.camera_z}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = defs.duration, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true,is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
-
+				end 
+	
+	
 	return 0
 end
 
@@ -201,7 +201,7 @@ function condition_EVENT_MONSTER_BATTLE_250016(context, evt)
 	if 250002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -211,38 +211,38 @@ function action_EVENT_MONSTER_BATTLE_250016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250012, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为250015的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 250015 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为250025的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 250025 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为250032的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 250032 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为250033的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 250033 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为250034的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 250034 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -252,8 +252,8 @@ function condition_EVENT_ANY_MONSTER_DIE_250018(context, evt)
 	if evt.param1 ~= 250002 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -263,8 +263,8 @@ function action_EVENT_ANY_MONSTER_DIE_250018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -273,7 +273,7 @@ function condition_EVENT_ANY_GADGET_DIE_250027(context, evt)
 	if 250005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -281,7 +281,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_250027(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301250, 4)
-
+	
 	return 0
 end
 
@@ -290,7 +290,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_250028(context, evt)
 	if 250006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -301,8 +301,8 @@ function action_EVENT_GADGET_STATE_CHANGE_250028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -311,7 +311,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_250029(context, evt)
 	if 250007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -322,8 +322,8 @@ function action_EVENT_GADGET_STATE_CHANGE_250029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -332,7 +332,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_250030(context, evt)
 	if 250008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -343,8 +343,8 @@ function action_EVENT_GADGET_STATE_CHANGE_250030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 

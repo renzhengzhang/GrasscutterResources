@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133313016
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -39,9 +39,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 删除指定操作台的option
@@ -108,7 +108,7 @@ function condition_EVENT_GADGET_CREATE_16003(context, evt)
 	if 16002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -119,7 +119,7 @@ function action_EVENT_GADGET_CREATE_16003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -127,22 +127,22 @@ end
 function condition_EVENT_SELECT_OPTION_16004(context, evt)
 	-- 判断是gadgetid 16002 option_id 35
 	if 16002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 35 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_16004(context, evt)
 	ScriptLib.AddQuestProgress(context, "Q7322004")
-
+	
 	TLA_del_work_options_by_group_configid(context, evt, 133313016, 16002, 35)
-
+	
 	return 0
 end

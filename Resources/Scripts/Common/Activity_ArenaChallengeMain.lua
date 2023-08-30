@@ -1,10 +1,10 @@
 --[[
-defs = {
+local defs = {
 	RegionID =  575001
 }
 --]]
 -----------------------------------------
-tempTrigger = {
+local tempTrigger = {
     { config_id = 2330000, name = "LEAVE_REGION_Arena", event = EventType.EVENT_LEAVE_REGION, source = "1",
       condition = "", action = "action_LEAVE_REGION_Arena", trigger_count = 0},
     { config_id = 2330001, name = "ENTER_REGION_Arena", event = EventType.EVENT_ENTER_REGION, source = "1",
@@ -36,8 +36,8 @@ end
 --此方法在两个region坐标接近时调用比较合适
 function TrySetPlayerEyePoint(context, small_region, big_region, opt_type, vision_type_list)
     --opt_type为1表示需要setVisionType
-    eid = ScriptLib.GetAvatarEntityIdByUid(context, context.uid)
-    player_pos = ScriptLib.GetPosByEntityId(context, eid)
+    local eid = ScriptLib.GetAvatarEntityIdByUid(context, context.uid)
+    local player_pos = ScriptLib.GetPosByEntityId(context, eid)
     --在小圈内要处理入圈
     if Is_In_Region(player_pos, small_region) == true then
         ScriptLib.SetPlayerEyePoint(context, small_region.config_id, big_region.config_id)
@@ -48,9 +48,9 @@ function TrySetPlayerEyePoint(context, small_region, big_region, opt_type, visio
 end
 
 function Is_In_Region(pos1, region)
-    X = pos1.x - region.pos.x
-    Y = pos1.y - region.pos.y
-    Z = pos1.z - region.pos.z
+    local X = pos1.x - region.pos.x
+    local Y = pos1.y - region.pos.y
+    local Z = pos1.z - region.pos.z
     if region.shape == RegionShape.SPHERE then
         if math.sqrt(X*X+Y*Y+Z*Z) <= region.radius then
             return true

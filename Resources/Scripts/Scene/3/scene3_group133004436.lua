@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133004436
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	challenge_1_duration = 300,
 	group_id = 133004436,
 	father_quest = 20058,
@@ -22,9 +22,9 @@ defs.quest_1_success = defs.group_id.."01"
 defs.quest_1_fail = defs.group_id.."02"
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -94,9 +94,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -224,18 +224,18 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_436021(context, evt)
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context,defs.quest_1_success)
-
+	
 	ScriptLib.KillExtraGroupSuite(context,133004275,6)
-
+	
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 12)
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 11)
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 10)
@@ -247,7 +247,7 @@ function action_EVENT_CHALLENGE_SUCCESS_436021(context, evt)
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 4)
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 3)
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 2)
-
+	
 	return 0
 end
 
@@ -256,7 +256,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_436022(context, evt)
 	if 436007 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -264,14 +264,14 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_436022(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133004436, 5)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 436002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -280,7 +280,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_436023(context, evt)
 	if 436006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -288,14 +288,14 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_436023(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133004436, 4)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 436001 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -304,7 +304,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_436024(context, evt)
 	if 436008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -312,14 +312,14 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_436024(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133004436, 7)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 436004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -327,8 +327,8 @@ end
 function condition_EVENT_ENTER_REGION_436025(context, evt)
 	if evt.param1 ~= 436025 then return false end
 	if ScriptLib.GetGroupVariableValue(context, "Challenge_Endpoint_Available")
-	 ~= 1 then
-	return false
+	 ~= 1 then 
+	return false 
 	end
 	return true
 end
@@ -338,17 +338,17 @@ function action_EVENT_QUEST_START_436026(context, evt)
 	-- 添加2号资源包
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 3)
-
+	
 	-- 触发镜头注目，注目位置为坐标（0，0，0），持续时间为0秒，并且为强制注目形式，不广播其他玩家
-	pos = {x=2296, y=261, z=-761}
+	local pos = {x=2296, y=261, z=-761}
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos,  duration = 1, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1 }) then
 	return -1
-	end
-
+	end 
+	
 	-- 开启限时到达挑战
 	ScriptLib.SetGroupVariableValue(context, "Challenge_Log", 1)
 	ScriptLib.ActiveChallenge(context, 10, defs.challenge_id_have_record, defs.challenge_1_duration, 4, 555, 1)
-
+	
 	ScriptLib.SetGroupVariableValue(context, "Challenge_Log", 2)
 	ScriptLib.SetGroupVariableValue(context, "Challenge_Flag", 1)
 	ScriptLib.SetGroupVariableValue(context, "Challenge_Endpoint_Available", 0)
@@ -357,10 +357,10 @@ end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_436027(context, evt)
-
+	
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context, defs.quest_1_fail)
-
+	
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 12)
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 11)
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 10)
@@ -372,7 +372,7 @@ function action_EVENT_CHALLENGE_FAIL_436027(context, evt)
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 4)
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 3)
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 2)
-
+	
 	return 0
 end
 
@@ -381,7 +381,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_436028(context, evt)
 	if 436010 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -389,14 +389,14 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_436028(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133004436, 8)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 436009 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -405,7 +405,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_436029(context, evt)
 	if 436012 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -413,14 +413,14 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_436029(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133004436, 9)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 436011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -429,7 +429,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_436030(context, evt)
 	if 436014 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -437,20 +437,20 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_436030(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 0, 10)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 436013 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 调用提示id为 1120003 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1120003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -459,7 +459,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_436031(context, evt)
 	if 436016 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -467,14 +467,14 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_436031(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133004436, 11)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 436015 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -483,7 +483,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_436032(context, evt)
 	if 436018 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -491,14 +491,14 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_436032(context, evt)
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133004436, 12)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 436017 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -507,7 +507,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_436033(context, evt)
 	if 436020 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -515,54 +515,54 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_436033(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133004436, 6)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 436019 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 将本组内变量名为 "Challenge_Endpoint_Available" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Challenge_Endpoint_Available", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1120004 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1120004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_436034(context, evt)
 	if evt.param1 ~= 436034 then return false end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_436034(context, evt)
 	ScriptLib.ShowReminder(context, 1120001)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_436035(context, evt)
 	if evt.param1 ~= 436035 then return false end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_436035(context, evt)
 	ScriptLib.ShowReminder(context, 1120002)
-
+	
 	return 0
 end
 

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304214
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_CoreID = 214005,
 	monster_BossID = 214002,
 	gadget_Point_1 = 214006,
@@ -16,9 +16,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-DeathField ={
+local DeathField ={
 	CoreID = defs.gadget_CoreID,
 	BossID = defs.monster_BossID,
 	BossSuite = 2,
@@ -27,7 +27,7 @@ DeathField ={
                                  NoProtect = true,
 }
 
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 0,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -36,9 +36,9 @@ CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -95,9 +95,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -108,9 +108,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -153,9 +153,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -164,14 +164,14 @@ function action_EVENT_GROUP_REFRESH_214009(context, evt)
 	if 0 ~= ScriptLib.ChangeDeathZone(context,0,{is_open = true}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_deatzone")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "PlayPhase" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "PlayPhase", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -188,19 +188,19 @@ function action_EVENT_GROUP_LOAD_214012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_214023(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"PlayPhase"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "PlayPhase", 133304214) ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -211,7 +211,7 @@ function action_EVENT_VARIABLE_CHANGE_214023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -220,7 +220,7 @@ function condition_EVENT_ANY_GADGET_DIE_214024(context, evt)
 	if 214006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -231,8 +231,8 @@ function action_EVENT_ANY_GADGET_DIE_214024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_ANY_GADGET_DIE_214025(context, evt)
 	if 214007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -252,8 +252,8 @@ function action_EVENT_ANY_GADGET_DIE_214025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -262,7 +262,7 @@ function condition_EVENT_ANY_GADGET_DIE_214026(context, evt)
 	if 214008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -273,8 +273,8 @@ function action_EVENT_ANY_GADGET_DIE_214026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 

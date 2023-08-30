@@ -1,25 +1,25 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133302671
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_LookHookCid = 671003
 }
 
 -- DEFS_MISCS
-RequireSuite = {1}
+local RequireSuite = {1}
 
-HookLookPlay = {
+local HookLookPlay = {
     HookPoint = defs.gadget_LookHookCid,
     Duration = 3,
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -99,9 +99,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -109,7 +109,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_671005(context, evt)
 	if 671001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -117,7 +117,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_671005(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302671, 2)
-
+	
 	return 0
 end
 

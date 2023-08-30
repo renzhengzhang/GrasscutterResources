@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220133033
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_animal = 33001,
 	pointarray_ID = 7,
 	maxPointCount = 12,
@@ -15,9 +15,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -112,28 +112,28 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_33003(context, evt)
 	-- 判断是gadgetid 为 33001的移动平台，是否到达了7 的点集中的 5 点
-
+	
 	if 33001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 7 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 5 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -143,28 +143,28 @@ function action_EVENT_PLATFORM_REACH_POINT_33003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_33004(context, evt)
 	-- 判断是gadgetid 为 33001的移动平台，是否到达了7 的点集中的 8 点
-
+	
 	if 33001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 7 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 8 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -174,28 +174,28 @@ function action_EVENT_PLATFORM_REACH_POINT_33004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_33005(context, evt)
 	-- 判断是gadgetid 为 33001的移动平台，是否到达了7 的点集中的 11 点
-
+	
 	if 33001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 7 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 11 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -205,28 +205,28 @@ function action_EVENT_PLATFORM_REACH_POINT_33005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_33006(context, evt)
 	-- 判断是gadgetid 为 33001的移动平台，是否到达了7 的点集中的 12 点
-
+	
 	if 33001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 7 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 12 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -236,8 +236,8 @@ function action_EVENT_PLATFORM_REACH_POINT_33006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -247,7 +247,7 @@ function condition_EVENT_GROUP_LOAD_33008(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "isFinished", 220133032) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -258,7 +258,7 @@ function action_EVENT_GROUP_LOAD_33008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 

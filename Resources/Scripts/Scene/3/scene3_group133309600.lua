@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309600
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -88,7 +88,7 @@ function condition_EVENT_GROUP_LOAD_600005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "default") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -99,7 +99,7 @@ function action_EVENT_GROUP_LOAD_600005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -108,7 +108,7 @@ function condition_EVENT_ANY_GADGET_DIE_600006(context, evt)
 	if 600002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -119,7 +119,7 @@ function action_EVENT_ANY_GADGET_DIE_600006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -128,7 +128,7 @@ function condition_EVENT_ANY_GADGET_DIE_600007(context, evt)
 	if 600003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -139,7 +139,7 @@ function action_EVENT_ANY_GADGET_DIE_600007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -148,7 +148,7 @@ function condition_EVENT_ANY_GADGET_DIE_600008(context, evt)
 	if 600004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -159,19 +159,19 @@ function action_EVENT_ANY_GADGET_DIE_600008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_600009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"default"为4
 	if ScriptLib.GetGroupVariableValue(context, "default") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -182,7 +182,7 @@ function action_EVENT_VARIABLE_CHANGE_600009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -191,7 +191,7 @@ function condition_EVENT_ANY_GADGET_DIE_600011(context, evt)
 	if 600001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -202,6 +202,6 @@ function action_EVENT_ANY_GADGET_DIE_600011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

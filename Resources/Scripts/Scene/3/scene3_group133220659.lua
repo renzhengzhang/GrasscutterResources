@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220659
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -80,59 +80,59 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_659005(context, evt)
-		if (659001 ~= evt.param2 and
+		if (659001 ~= evt.param2 and 
 			659002 ~= evt.param2 and
 			659003 ~= evt.param2 and
-			659004 ~= evt.param2 )
+			659004 ~= evt.param2 ) 
 			or (GadgetState.GearStart ~= evt.param1)  then
 			return false
 		end
-
+		
 		return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_659005(context, evt)
-
-		if(evt.param2 == 659001) then
+	
+		if(evt.param2 == 659001) then 
 			ScriptLib.SetGroupVariableValueByGroup(context, "stone1", 1, 133220357)
 		end
-
-		if(evt.param2 == 659002) then
+	
+		if(evt.param2 == 659002) then 
 			ScriptLib.SetGroupVariableValueByGroup(context, "stone2", 1, 133220357)
 		end
-		if(evt.param2 == 659003) then
+		if(evt.param2 == 659003) then 
 			ScriptLib.SetGroupVariableValueByGroup(context, "stone3", 1, 133220357)
 		end
-		if(evt.param2 == 659004) then
+		if(evt.param2 == 659004) then 
 			ScriptLib.SetGroupVariableValueByGroup(context, "stone4", 1, 133220357)
 		end
-
+		
 		return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_659006(context, evt)
-		stonestate = {}
-		varname
+		local stonestate = {}
+		local varname
 		table.insert( stonestate, ScriptLib.GetGadgetStateByConfigId(context, 133220659, 659001))
 		table.insert( stonestate, ScriptLib.GetGadgetStateByConfigId(context, 133220659, 659002))
 		table.insert( stonestate, ScriptLib.GetGadgetStateByConfigId(context, 133220659, 659003))
 		table.insert( stonestate, ScriptLib.GetGadgetStateByConfigId(context, 133220659, 659004))
-
+	
 		for n=1, 4 do
 			varname = "stone"..n
 			if stonestate[n] == GadgetState.GearStart then
 				ScriptLib.SetGroupVariableValueByGroup(context, varname, 1, 133220357)
-			end
+			end	
 		end
-
+	
 		return 0
 end

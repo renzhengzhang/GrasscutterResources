@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133313078
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -78,9 +78,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 使用reminderUI
@@ -97,8 +97,8 @@ end
 function action_EVENT_QUEST_START_78003(context, evt)
 	-- 创建标识为"start"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "start", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -107,15 +107,15 @@ function condition_EVENT_TIME_AXIS_PASS_78004(context, evt)
 	if "start" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_78004(context, evt)
 	ScriptLib.StartPlatform(context, 78001)
-
+	
 	TLA_active_reminder_ui(context, evt, 1000080036)
-
+	
 	return 0
 end

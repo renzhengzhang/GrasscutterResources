@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199004206
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	point_sum = 13,
 	route_2 = 900400020,
 	gadget_seelie = 206002
@@ -14,9 +14,9 @@ defs = {
 defs.final_point = defs.point_sum - 1
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -61,9 +61,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -119,25 +119,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_206003(context, evt)
 	if evt.param1 ~= 206003 then return false end
-
+	
 	-- 判断变量"start"为1
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"temp"为0
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -148,7 +148,7 @@ function action_EVENT_ENTER_REGION_206003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -157,15 +157,15 @@ function condition_EVENT_PLATFORM_REACH_POINT_206005(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-
+	
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-
+	
 	if  defs.final_point ~= evt.param3 then
 	return false
 	end
-
+	
 	return true
 end
 
@@ -175,27 +175,27 @@ function action_EVENT_PLATFORM_REACH_POINT_206005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 206001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 停止移动平台
 	if 0 ~= ScriptLib.StopPlatform(context, 206002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 206002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -204,15 +204,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_206006(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-
+	
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-
+	
 	if defs.final_point == evt.param3 then
 	return false
 	end
-
+	
 	return true
 end
 
@@ -221,12 +221,12 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_206006(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, 206002) then
 	return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= evt.param3 then
 	ScriptLib.MarkPlayerAction(context, 2005, 2, evt.param3 + 1)
 	end
-
+	
 	return 0
 end
 
@@ -235,7 +235,7 @@ function condition_EVENT_ANY_GADGET_DIE_206007(context, evt)
 	if 206010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -246,25 +246,25 @@ function action_EVENT_ANY_GADGET_DIE_206007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "temp" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "temp", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 206002, 900400020) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -273,7 +273,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_206008(context, evt)
 	if 206001 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -284,7 +284,7 @@ function action_EVENT_GADGET_STATE_CHANGE_206008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -293,7 +293,7 @@ function condition_EVENT_GADGET_CREATE_206009(context, evt)
 	if 206004 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -304,13 +304,13 @@ function action_EVENT_GADGET_CREATE_206009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 206001 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 206001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -318,41 +318,41 @@ end
 function action_EVENT_LEVEL_TAG_CHANGE_206012(context, evt)
 	if ScriptLib.CheckSceneTag(context, 9,1025 ) then
 		ScriptLib.SetGroupVariableValue(context, "temp", 0)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 4)
-
+		
 		if ScriptLib.GetGroupVariableValue(context, "start") == 1 then
 			ScriptLib.KillEntityByConfigId(context, {group_id=199004206, config_id=206010, entity_type=EntityType.GADGET})
 		end
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 199004206, 4)
 	end
-
+	
 	ScriptLib.AddExtraGroupSuite(context, 0, 3)
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_REFRESH_206013(context, evt)
 	ScriptLib.AddExtraGroupSuite(context, 0, 3)
-
+	
 	if ScriptLib.CheckSceneTag(context, 9,1025 ) then
 		ScriptLib.SetGroupVariableValue(context, "temp", 0)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 0, 4)
-
+		
 		if ScriptLib.GetGroupVariableValue(context, "start") == 1 then
 			ScriptLib.KillEntityByConfigId(context, {group_id=199004206, config_id=206010, entity_type=EntityType.GADGET})
 		end
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_206014(context, evt)
 	ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=1})
-
+	
 	return 0
 end

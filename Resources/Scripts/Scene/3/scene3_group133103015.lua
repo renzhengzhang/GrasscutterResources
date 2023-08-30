@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103015
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -109,9 +109,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -122,9 +122,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -178,9 +178,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -188,12 +188,12 @@ function condition_EVENT_GADGET_CREATE_15001(context, evt)
 	if 15036 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"gears"为3
 	if ScriptLib.GetGroupVariableValue(context, "gears") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -203,14 +203,14 @@ function action_EVENT_GADGET_CREATE_15001(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15036, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133103015, 15036, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -220,7 +220,7 @@ function condition_EVENT_SELECT_OPTION_15002(context, evt)
 	if 15004 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
@@ -231,61 +231,61 @@ function action_EVENT_SELECT_OPTION_15002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 15004 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15004, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 通知场景上的所有玩家播放名字为310301501 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310301501, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为15049的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 15049 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 105) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5004, 2, 2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 将本组内变量名为 "wave3" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wave3", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "waterlevel" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "waterlevel", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103015, 4)
-
+	
 	-- 延迟1秒后,向groupId为：133103015的对象,请求一次调用,并将string参数："waterfall" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133103015, "waterfall", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103015, 5)
-
+	
 	return 0
 end
 
@@ -295,7 +295,7 @@ function condition_EVENT_TIMER_EVENT_15010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "wave3") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -305,14 +305,14 @@ function action_EVENT_TIMER_EVENT_15010(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 310301501, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为15049的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 15049 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -321,12 +321,12 @@ function condition_EVENT_GADGET_CREATE_15011(context, evt)
 	if 15004 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"wave3"为2
 	if ScriptLib.GetGroupVariableValue(context, "wave3") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -337,28 +337,28 @@ function action_EVENT_GADGET_CREATE_15011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将configid为 15004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_15021(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133103015) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"wave2"为0
 	if ScriptLib.GetGroupVariableValue(context, "wave2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -366,34 +366,34 @@ end
 function action_EVENT_ANY_MONSTER_DIE_15021(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103015, 2)
-
+	
 	-- 将本组内变量名为 "wave2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wave2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 400002 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_15027(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133103015) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"wave2"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -401,40 +401,40 @@ end
 function action_EVENT_ANY_MONSTER_DIE_15027(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103015, 3)
-
+	
 	-- 将本组内变量名为 "wave3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wave3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 400003 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "wave2" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wave2", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_15028(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133103015) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"wave3"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -444,42 +444,42 @@ function action_EVENT_ANY_MONSTER_DIE_15028(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133103015, 15004, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 创建id为15009的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 15009 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（742，174，1134），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=742, y=174, z=1134}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=742, y=174, z=1134}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5004, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 将本组内变量名为 "wave3" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wave3", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -487,17 +487,17 @@ end
 function condition_EVENT_QUEST_FINISH_15031(context, evt)
 	--检查ID为7100101的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 7100101 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -508,19 +508,19 @@ function action_EVENT_QUEST_FINISH_15031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_15040(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"gears"为3
 	if ScriptLib.GetGroupVariableValue(context, "gears") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -530,30 +530,30 @@ function action_EVENT_VARIABLE_CHANGE_15040(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15036, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133103015, 15036, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（699，156，1160），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=699, y=156, z=1160}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=699, y=156, z=1160}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5004, 3, 3) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -562,7 +562,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_15041(context, evt)
 	if 15037 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -573,13 +573,13 @@ function action_EVENT_GADGET_STATE_CHANGE_15041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "statue1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "statue1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -588,7 +588,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_15042(context, evt)
 	if 15038 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -599,13 +599,13 @@ function action_EVENT_GADGET_STATE_CHANGE_15042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "statue2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "statue2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -614,7 +614,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_15043(context, evt)
 	if 15039 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -625,13 +625,13 @@ function action_EVENT_GADGET_STATE_CHANGE_15043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "statue3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "statue3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -641,7 +641,7 @@ function condition_EVENT_SELECT_OPTION_15045(context, evt)
 	if 15036 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
@@ -653,28 +653,28 @@ function action_EVENT_SELECT_OPTION_15045(context, evt)
 	ScriptLib.SetPlatformRouteId(context, 105, 310300182)
 	ScriptLib.StartPlatform(context, 105)
 	ScriptLib.UnfreezeGroupLimit(context, 131)
-
-
+	
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5004, 4, 4) then
 	      return -1
 	    end
-
+	
 	-- 将本组内变量名为 "gears" 的变量设置为 4
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gears", 4) then
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "waterlevel2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "waterlevel2", 1) then
 	  return -1
 	end
-
+	
 	-- 延迟1秒后,向groupId为：133103015的对象,请求一次调用,并将string参数："waterfall2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133103015, "waterfall2", 13) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -684,7 +684,7 @@ function condition_EVENT_TIMER_EVENT_15051(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "gears") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -695,7 +695,7 @@ function action_EVENT_TIMER_EVENT_15051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -705,12 +705,12 @@ function condition_EVENT_GADGET_CREATE_15052(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "waterlevel") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"waterlevel2"为0
 	if ScriptLib.GetGroupVariableValue(context, "waterlevel2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -721,7 +721,7 @@ function action_EVENT_GADGET_CREATE_15052(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -730,17 +730,17 @@ function condition_EVENT_GADGET_CREATE_15053(context, evt)
 	if 105 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"waterlevel"为1
 	if ScriptLib.GetGroupVariableValue(context, "waterlevel") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"waterlevel2"为0
 	if ScriptLib.GetGroupVariableValue(context, "waterlevel2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -751,19 +751,19 @@ function action_EVENT_GADGET_CREATE_15053(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_15054(context, evt)
 	if evt.param1 ~= 15054 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -774,7 +774,7 @@ function action_EVENT_ENTER_REGION_15054(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -784,7 +784,7 @@ function condition_EVENT_GROUP_LOAD_15056(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "wave2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -792,7 +792,7 @@ end
 function action_EVENT_GROUP_LOAD_15056(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103015, 2)
-
+	
 	return 0
 end
 
@@ -802,7 +802,7 @@ function condition_EVENT_GROUP_LOAD_15057(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "wave3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -810,7 +810,7 @@ end
 function action_EVENT_GROUP_LOAD_15057(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103015, 3)
-
+	
 	return 0
 end
 
@@ -820,7 +820,7 @@ function condition_EVENT_GROUP_LOAD_15059(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "wave2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -831,25 +831,25 @@ function action_EVENT_GROUP_LOAD_15059(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 15007, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 15015, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 15016, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -859,7 +859,7 @@ function condition_EVENT_GROUP_LOAD_15060(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "statue1") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -869,8 +869,8 @@ function action_EVENT_GROUP_LOAD_15060(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15037, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -879,12 +879,12 @@ function condition_EVENT_GADGET_CREATE_15061(context, evt)
 	if 105 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"waterlevel2"为1
 	if ScriptLib.GetGroupVariableValue(context, "waterlevel2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -895,13 +895,13 @@ function action_EVENT_GADGET_CREATE_15061(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 105) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -911,7 +911,7 @@ function condition_EVENT_GROUP_LOAD_15062(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "statue2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -921,8 +921,8 @@ function action_EVENT_GROUP_LOAD_15062(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15038, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -932,7 +932,7 @@ function condition_EVENT_GROUP_LOAD_15063(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "statue3") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -942,8 +942,8 @@ function action_EVENT_GROUP_LOAD_15063(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15039, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -953,7 +953,7 @@ function condition_EVENT_GROUP_LOAD_15064(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "gears") < 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -964,36 +964,36 @@ function action_EVENT_GROUP_LOAD_15064(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "statue2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "statue2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "statue3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "statue3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 15037 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15037, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 15038 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15038, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 15039 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15039, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

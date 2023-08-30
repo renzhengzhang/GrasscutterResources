@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133310418
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -76,9 +76,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -86,7 +86,7 @@ function condition_EVENT_ANY_GADGET_DIE_418005(context, evt)
 	if 418001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -97,13 +97,13 @@ function action_EVENT_ANY_GADGET_DIE_418005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 杀死Group内所有gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133310418, kill_policy = GroupKillPolicy.GROUP_KILL_GADGET }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -112,7 +112,7 @@ function condition_EVENT_ANY_GADGET_DIE_418006(context, evt)
 	if 418002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -123,13 +123,13 @@ function action_EVENT_ANY_GADGET_DIE_418006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 杀死Group内所有gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133310418, kill_policy = GroupKillPolicy.GROUP_KILL_GADGET }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_ANY_GADGET_DIE_418007(context, evt)
 	if 418003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -149,13 +149,13 @@ function action_EVENT_ANY_GADGET_DIE_418007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 杀死Group内所有gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133310418, kill_policy = GroupKillPolicy.GROUP_KILL_GADGET }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -164,7 +164,7 @@ function condition_EVENT_ANY_GADGET_DIE_418009(context, evt)
 	if 418004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -175,13 +175,13 @@ function action_EVENT_ANY_GADGET_DIE_418009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 杀死Group内所有gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133310418, kill_policy = GroupKillPolicy.GROUP_KILL_GADGET }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -190,7 +190,7 @@ function condition_EVENT_ANY_GADGET_DIE_418010(context, evt)
 	if 418008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -201,13 +201,13 @@ function action_EVENT_ANY_GADGET_DIE_418010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 杀死Group内所有gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133310418, kill_policy = GroupKillPolicy.GROUP_KILL_GADGET }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -217,31 +217,31 @@ function action_EVENT_QUEST_FINISH_418011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 418001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 418002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 418002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 418003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 418003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 418004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 418004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 418008 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 418008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

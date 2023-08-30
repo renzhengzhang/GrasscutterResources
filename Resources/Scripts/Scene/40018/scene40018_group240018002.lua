@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240018002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -107,9 +107,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -117,7 +117,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2007(context, evt)
 	if 2001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -128,25 +128,25 @@ function action_EVENT_GADGET_STATE_CHANGE_2007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2023的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2023 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2024的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2024 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -155,7 +155,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2008(context, evt)
 	if 2015 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -166,25 +166,25 @@ function action_EVENT_GADGET_STATE_CHANGE_2008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2023的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2023 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2024的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2024 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2009(context, evt)
 	if 2014 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -204,25 +204,25 @@ function action_EVENT_GADGET_STATE_CHANGE_2009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2018的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2018 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2021的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2021 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2022的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2022 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -231,7 +231,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2010(context, evt)
 	if 2013 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -242,25 +242,25 @@ function action_EVENT_GADGET_STATE_CHANGE_2010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2018的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2018 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2021的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2021 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2022的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2022 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -269,7 +269,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2011(context, evt)
 	if 2002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -280,25 +280,25 @@ function action_EVENT_GADGET_STATE_CHANGE_2011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2016的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2016 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2020的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2020 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -307,7 +307,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2012(context, evt)
 	if 2003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -318,25 +318,25 @@ function action_EVENT_GADGET_STATE_CHANGE_2012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2016的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2016 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为2020的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2020 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -347,25 +347,25 @@ function action_EVENT_TIMER_EVENT_2025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240018002, EntityType.GADGET, 2005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240018002, EntityType.GADGET, 2023 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240018002, EntityType.GADGET, 2024 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -376,25 +376,25 @@ function action_EVENT_TIMER_EVENT_2026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240018002, EntityType.GADGET, 2016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240018002, EntityType.GADGET, 2019 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240018002, EntityType.GADGET, 2020 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -405,25 +405,25 @@ function action_EVENT_TIMER_EVENT_2027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240018002, EntityType.GADGET, 2018 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240018002, EntityType.GADGET, 2021 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240018002, EntityType.GADGET, 2022 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -432,7 +432,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2028(context, evt)
 	if 2001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -443,7 +443,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -452,7 +452,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2029(context, evt)
 	if 2015 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -463,7 +463,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -472,7 +472,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2030(context, evt)
 	if 2014 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -483,7 +483,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -492,7 +492,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2031(context, evt)
 	if 2013 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -503,7 +503,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -512,7 +512,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2032(context, evt)
 	if 2002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -523,7 +523,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -532,7 +532,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2033(context, evt)
 	if 2003 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -543,6 +543,6 @@ function action_EVENT_GADGET_STATE_CHANGE_2033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end

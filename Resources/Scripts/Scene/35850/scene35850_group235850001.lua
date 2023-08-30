@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235850001
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     --起始操作台
     starter = 1001,
     --起始操作台选项
@@ -29,13 +29,13 @@ defs = {
     --随机固定顺序怪物潮组合 每次进地城随机取key。
     --key对应value代表依序出现的MonsterTide，小花括号内配置复数个表示同时刷出。
     rand_table = {
-        [1] =
+        [1] = 
         {
             {1},
             {2},
             {3}
         },
-        [2] =
+        [2] = 
         {
             {1},
             {2},
@@ -60,9 +60,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -151,9 +151,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -164,9 +164,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -191,23 +191,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_1002(context, evt)
 	-- 判断是gadgetid 1001 option_id 94
 	if 1001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 94 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -215,19 +215,19 @@ end
 function action_EVENT_SELECT_OPTION_1002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235850001, 2)
-
+	
 	-- 删除指定group： 235850001 ；指定config：1001；物件身上指定option：94；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 235850001, 1001, 94) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 1001 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -237,7 +237,7 @@ function condition_EVENT_GROUP_REFRESH_1044(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -248,25 +248,25 @@ function action_EVENT_GROUP_REFRESH_1044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 235850001, 1001, {94}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1045(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"start1"为1
 	if ScriptLib.GetGroupVariableValue(context, "start1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -277,13 +277,13 @@ function action_EVENT_VARIABLE_CHANGE_1045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 235850001, 1001, {94}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -292,12 +292,12 @@ function condition_EVENT_GADGET_CREATE_1047(context, evt)
 	if 1046 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"start1"为1
 	if ScriptLib.GetGroupVariableValue(context, "start1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -308,13 +308,13 @@ function action_EVENT_GADGET_CREATE_1047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 235850001, 1001, {94}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 

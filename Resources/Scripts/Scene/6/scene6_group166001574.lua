@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 166001574
 }
 
@@ -20,7 +20,7 @@ defs = {
 
 -- 黑泥配置。每个黑泥核心死亡时，将对应的黑泥物件给remove掉，并且将对应的charge_point_mud_cover_id黑泥包裹物件给清掉
 -- 当出现黑泥核心时，会创生mud_id对应的黑泥物件，会创生charge_point_mud_cover_id对应的黑泥包裹物
-black_mud_list = {
+local black_mud_list = {
     [1] = {core_id = 574028, mud_id = 574034, charge_point_mud_cover_id = 574095},
     [2] = {core_id = 574029, mud_id = 574035, charge_point_mud_cover_id = 574095},
     [3] = {core_id = 574030, mud_id = 574036, charge_point_mud_cover_id = 574095},
@@ -33,7 +33,7 @@ black_mud_list = {
 -- 发光蜜虫配置。
 -- 发光蜜虫初始存在
 -- 当场景中出现对应mud_cover_id的黑泥包裹物时，将发光蜜虫移除；当该黑泥包裹物被清除时，将发光蜜虫刷回来
-charge_point_list = {
+local charge_point_list = {
     [574095] = 574093,
     [574096] = 574094,
 }
@@ -42,13 +42,13 @@ charge_point_list = {
 -- 该波次场上刷出黑泥时，出现黑泥包裹物包裹住光钉，光钉停止运作
 -- 当前场上所有的黑泥被清掉时，杀掉黑泥包裹物，并让光钉回复正常状态
 -- 特殊情况：当之前的波次黑泥没有被干掉，下个波次继续刷，补刷黑泥
-monster_list = {
+local monster_list = {
         ---1波：丘丘人
-        { tide_mons = {574002,574003,574004,574005,574006,574050}, mud = {}, next_tide = 2,min = 6, max = 6, next_time = 2},
+        { tide_mons = {574002,574003,574004,574005,574006,574050}, mud = {}, next_tide = 2,min = 6, max = 6, next_time = 2}, 
         --- 黑泥波+史莱姆
         { tide_mons = {574007,574008,574009,574010,574052}, mud = {3}, next_tide = 3,min = 5, max = 5, tide_delay = 4, next_time = 2},
         ---3波：精英暴徒+丘丘人
-        { tide_mons = {574011,574012,574013,574014,574015,574054}, mud = {}, next_tide = 4,min = 6, max = 6, next_time = 2},
+        { tide_mons = {574011,574012,574013,574014,574015,574054}, mud = {}, next_tide = 4,min = 6, max = 6, next_time = 2}, 
         --- 黑泥波+史莱姆
         { tide_mons = {574016,574017,574018,574019,574020}, mud = {4}, next_tide = 5,min = 5, max = 5, tide_delay = 4, next_time = 2},
         ---5波：遗迹怪
@@ -56,7 +56,7 @@ monster_list = {
         --- 黑泥波+丘丘人
         { tide_mons = {574061,574062,574063,574064,574065,574066}, mud = {1}, next_tide = 7,min = 6, max = 6, tide_delay = 4, next_time = 2},
         ---7波：遗迹
-        { tide_mons = {574067,574068,574069}, mud = {}, next_tide = 8,min = 2, max = 2, next_time = 2},
+        { tide_mons = {574067,574068,574069}, mud = {}, next_tide = 8,min = 2, max = 2, next_time = 2}, 
         --- 黑泥波+丘丘人
         { tide_mons = {574071,574072,574073,574074,574075,574076}, mud = {4,6}, next_tide = 9,min = 6, max = 6, tide_delay = 5, next_time = 2},
         ---9波：猎犬
@@ -64,13 +64,13 @@ monster_list = {
         --- 黑泥波+丘丘人
         { tide_mons = {574083,574084,574085,574086,574087,574088}, mud = {1,3,4}, next_tide = 11,min = 6, max = 6, tide_delay = 5, next_time = 2},
         ---11波：黑蛇骑士
-        { tide_mons = {574089,574090}, mud = {}, next_tide = 6,min = 2, max = 2, next_time = 2},
+        { tide_mons = {574089,574090}, mud = {}, next_tide = 6,min = 2, max = 2, next_time = 2},  
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -277,9 +277,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -290,9 +290,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -317,20 +317,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_574101(context, evt)
 	if evt.param1 ~= 574101 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -340,7 +340,7 @@ function action_EVENT_ENTER_REGION_574101(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,183,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-
+	
 	return 0
 end
 

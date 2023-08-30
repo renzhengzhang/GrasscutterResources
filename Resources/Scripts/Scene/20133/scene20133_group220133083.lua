@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220133083
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -92,9 +92,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -103,12 +103,12 @@ function condition_EVENT_ANY_MONSTER_DIE_83003(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"Wave"为2
 	if ScriptLib.GetGroupVariableValue(context, "Wave") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -118,14 +118,14 @@ function action_EVENT_ANY_MONSTER_DIE_83003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 83002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 4001, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -135,12 +135,12 @@ function condition_EVENT_ANY_MONSTER_DIE_83004(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"Wave"为0
 	if ScriptLib.GetGroupVariableValue(context, "Wave") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -148,13 +148,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_83004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220133083, 2)
-
+	
 	-- 针对当前group内变量名为 "Wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -164,12 +164,12 @@ function condition_EVENT_ANY_MONSTER_DIE_83008(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"Wave"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wave") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -177,12 +177,12 @@ end
 function action_EVENT_ANY_MONSTER_DIE_83008(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220133083, 3)
-
+	
 	-- 将本组内变量名为 "Wave" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wave", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

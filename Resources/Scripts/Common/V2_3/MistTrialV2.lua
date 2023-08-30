@@ -13,7 +13,7 @@
 		最终挑战 903
 ]]
 --[[
-	defs = {
+	local defs = {
 
 		--galleryID
 		gallery_id = ,
@@ -41,12 +41,12 @@
 ]]
 
 --Mist_trial的Buff_obtain日志
-buff_gadgetId = {
+local buff_gadgetId = {
 	"Buff_Attack",
 	"Buff_Heal"
 }
 
-extraTriggers = {
+local extraTriggers = {
 	--这个Trigger用于在地城内断线重连时接续父挑战
   { config_id = 8000001, name = "Enter_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_Enter_FatherRegion", action = "action_Enter_FatherRegion", trigger_count = 0 },
   { config_id = 8000002, name = "Gallery_Stop", event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_Gallery_Stop", trigger_count = 0 },
@@ -67,7 +67,7 @@ extraTriggers = {
 }
 
 --和关卡约定的challenge Index
-cfg = {
+local cfg = {
 	["father_index"] = 999,
 	["key_challenge_index"] = 901,
 	["worktop_challenge_index"] = 902,
@@ -103,20 +103,20 @@ end
 --使用前请保证父挑战已经启动
 function StartSubChallengeKillMonster(context, prev_context, child_index, challenge_id)
 
-	father_state = ScriptLib.GetGroupVariableValue(context, "father_state")
+	local father_state = ScriptLib.GetGroupVariableValue(context, "father_state")
 
 	if father_state ~= 0 and father_state ~= 1 then
-		--添加子挑战
+		--添加子挑战 
 		--挑战类型为：击杀指定数量怪物 参数1： 指定groupid， 参数2：指定group内怪物死亡的数量
 
-		target_count = ScriptLib.GetGroupTempValue(context, "target_count",{})
+		local target_count = ScriptLib.GetGroupTempValue(context, "target_count",{})
 
 		--ScriptLib.SetGroupVariableValue(context, "catchKey", 0)
 
 		ScriptLib.AttachChildChallenge(context, cfg.father_index, child_index, challenge_id, {3, 666, target_count, 1}, {},{success=1, fail=1})
 
 	else
- 		ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Trying to start a subchallenge while father is not actived!! ")
+ 		ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Trying to start a subchallenge while father is not actived!! ") 
  	end
 	return 0
 end
@@ -140,7 +140,7 @@ function AddMistTrialChildChallengeScore(context, prev_context, score)
 		ScriptLib.SetGroupVariableValue(context, "catchKey", 0)
 	else
 		ScriptLib.SetGroupVariableValue(context, "catchKey", 1)
-	end
+	end 
 	return 0
 end
 
@@ -154,20 +154,20 @@ end
 --当钥匙房被完成时，调这个方法-----
 --参数为 {1}
 function AddMistTrialKeyProgress(context, prev_context, param)
-	ScriptLib.PrintContextLog(context, "[MistTrialV2] Get Key Progress. add@"..param)
-	father_state = ScriptLib.GetGroupVariableValue(context, "father_state")
+	ScriptLib.PrintContextLog(context, "[MistTrialV2] Get Key Progress. add@"..param) 
+	local father_state = ScriptLib.GetGroupVariableValue(context, "father_state")
 	--if father_state == 2 then
 		ScriptLib.ChangeGroupVariableValue(context, "key_progress", param)
-		key_progress = ScriptLib.GetGroupVariableValue(context, "key_progress")
+		local key_progress = ScriptLib.GetGroupVariableValue(context, "key_progress")
 		Reminder_Key_Progress(context, key_progress)
 	--else
-		--ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Trying to finish a key room while father challenge is @"..father_state.." (need 2)")
+		--ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Trying to finish a key room while father challenge is @"..father_state.." (need 2)") 
 	--end
 	return 0
 end
 --由于复活的实现原因，不能反复Attach，如果一个地城有多个复活房，每次交互复活房操作台的时候先调用这个来移除
 function RemoveReviveAbility(context, prev_context)
-	ScriptLib.PrintContextLog(context, "[MistTrialV2] Remove MistTrial Revive Ability.")
+	ScriptLib.PrintContextLog(context, "[MistTrialV2] Remove MistTrial Revive Ability.") 
 	ScriptLib.DelGalleryAbilityGroup(context, {}, defs.gallery_id, 0)
 	return 0
 end
@@ -175,18 +175,18 @@ end
 --LD通知Ability变动 。 参数 0-地脉异常升级 1-全队复活
 
 function ModifyMistTrialAbility(context, prev_context, param)
-	ScriptLib.PrintContextLog(context, "[MistTrialV2] Modify MistTrial Ability. Param@"..param)
+	ScriptLib.PrintContextLog(context, "[MistTrialV2] Modify MistTrial Ability. Param@"..param) 
 
-	if param == 0 then
+	if param == 0 then 
 		--设置地脉异常等级，初始1级 升档最多3次  一共4个档
 		ScriptLib.ChangeGroupTempValue(context, "Buff_Attack", 1, {})
 		ScriptLib.ChangeGroupVariableValue(context, "floor_level", 1)
 
-		floor_level = ScriptLib.GetGroupVariableValue(context, "floor_level")
+		local floor_level = ScriptLib.GetGroupVariableValue(context, "floor_level")
 
-		if floor_level > 4 or floor_level < 1 then
+		if floor_level > 4 or floor_level < 1 then 
 
-			ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Unexpected floor_level: Got@"..floor_level.." (floor_level is 1 ~ 4 in MistTrialV2)")
+			ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Unexpected floor_level: Got@"..floor_level.." (floor_level is 1 ~ 4 in MistTrialV2)") 
 
 			return 0
 		else
@@ -195,7 +195,7 @@ function ModifyMistTrialAbility(context, prev_context, param)
 
 		return 0
 
-	elseif param == 1 then
+	elseif param == 1 then 
 
 		--复活
 		ScriptLib.ChangeGroupTempValue(context, "Buff_Heal", 1, {})
@@ -204,7 +204,7 @@ function ModifyMistTrialAbility(context, prev_context, param)
 		return 0
 
 	else
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Unexpected ModifyMistTrialAbility param: Got@"..param.." (param is 0 or 1 in MistTrialV2)")
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Unexpected ModifyMistTrialAbility param: Got@"..param.." (param is 0 or 1 in MistTrialV2)") 
 	end
 
 	return 0
@@ -214,31 +214,31 @@ end
 
 --用于获知挑战进行到哪个阶段了.三符文完成
 function action_Key_Challenge_Success(context, evt)
-	ScriptLib.PrintContextLog(context, "[MistTrialV2] Get Challenge Success. @"..evt.param1)
+	ScriptLib.PrintContextLog(context, "[MistTrialV2] Get Challenge Success. @"..evt.param1) 
 	ScriptLib.SetGroupVariableValue(context, "father_state", 3)
 	return 0
 end
 --用于获知挑战进行到哪个阶段了.激活操作台完成
 function action_Worktop_Challenge_Success(context, evt)
-	ScriptLib.PrintContextLog(context, "[MistTrialV2] Get Challenge Success. @"..evt.param1)
+	ScriptLib.PrintContextLog(context, "[MistTrialV2] Get Challenge Success. @"..evt.param1) 
 	ScriptLib.SetGroupVariableValue(context, "father_state", 4)
 	return 0
 end
 --用于获知挑战进行到哪个阶段了.最终挑战完成
 function action_Final_Challenge_Success(context, evt)
-	ScriptLib.PrintContextLog(context, "[MistTrialV2] Get Challenge Success. @"..evt.param1)
+	ScriptLib.PrintContextLog(context, "[MistTrialV2] Get Challenge Success. @"..evt.param1) 
 	ScriptLib.SetGroupVariableValue(context, "father_state", 5)
 	return 0
 end
 --初始化标志位
 function action_Gallery_Start(context, evt)
-	ScriptLib.PrintContextLog(context, "[MistTrialV2] Gallery Start Detected!! GalleryId@"..evt.param1)
+	ScriptLib.PrintContextLog(context, "[MistTrialV2] Gallery Start Detected!! GalleryId@"..evt.param1) 
 	ScriptLib.SetGroupVariableValue(context, "gallery_state", 1)
 	ScriptLib.SetGroupVariableValue(context, "father_state", 2)
 	ResetGroupTempVar(context)
-	--由于复活的实现原因，需要手动下下来才行（复刻不要再复用这个1.5的远古ability了！）b1326884
+	--由于复活的实现原因，需要手动下下来才行（复刻不要再复用这个1.5的远古ability了！）b1326884 
 	ScriptLib.DelGalleryAbilityGroup(context, {}, defs.gallery_id, 0)
-
+	
 	return 0
 end
 
@@ -248,8 +248,8 @@ function action_Sub_Challenge_Success(context, evt)
 		--特殊三挑战不发，发了也没用
 		return 0
 	else
-		fromGroup = ScriptLib.GetGroupTempValue(context, "target_group", {})
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] A Sub Challenge Finished. ChallengeID@"..evt.param1.." ChallengeIndex@"..evt.source_name..". Send GroupVar(succcess = 1) to Group@"..fromGroup)
+		local fromGroup = ScriptLib.GetGroupTempValue(context, "target_group", {}) 
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] A Sub Challenge Finished. ChallengeID@"..evt.param1.." ChallengeIndex@"..evt.source_name..". Send GroupVar(succcess = 1) to Group@"..fromGroup) 
 		ScriptLib.SetGroupVariableValueByGroup(context, "success", 1, fromGroup)
 	end
 
@@ -258,13 +258,13 @@ end
 --钥匙房进度
 function Reminder_Key_Progress(context, progress)
 
-	if progress == 1 then
+	if progress == 1 then 
 		ScriptLib.ShowReminder(context, 43001002)
 		return 0
-	elseif progress == 2 then
+	elseif progress == 2 then 
 		ScriptLib.ShowReminder(context, 43001003)
 		return 0
-	elseif progress == 3 then
+	elseif progress == 3 then 
 		ScriptLib.ShowReminder(context, 43001004)
 		return 0
 	else
@@ -274,53 +274,53 @@ function Reminder_Key_Progress(context, progress)
 end
 
 function condition_Enter_FatherRegion(context, evt)
-	if evt.param1 ~= defs.region_id then
-		return false
+	if evt.param1 ~= defs.region_id then 
+		return false 
 	end
 	return true
 end
 --由大Region触发，用且仅用于接续父挑战
 function action_Enter_FatherRegion(context, evt)
 
-	ScriptLib.PrintContextLog(context, "[MistTrialV2] Enter father region triggered...")
+	ScriptLib.PrintContextLog(context, "[MistTrialV2] Enter father region triggered...") 
 
-	if ScriptLib.GetGroupVariableValue(context, "father_state") == 0 then
+	if ScriptLib.GetGroupVariableValue(context, "father_state") == 0 then 
 
 		ScriptLib.SetGroupVariableValue(context, "father_state", 1)
 
 		ScriptLib.PrintContextLog(context, "[MistTrialV2] First Time Enter region. Set mark.")
 		return 0
-	end
+	end	
 
-	gallery_state = ScriptLib.GetGroupVariableValue(context, "gallery_state")
+	local gallery_state = ScriptLib.GetGroupVariableValue(context, "gallery_state")
 
-	if gallery_state == 2 then
+	if gallery_state == 2 then 
 
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] ...gallery is finished, will do nothing.")
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] ...gallery is finished, will do nothing.") 
 
 		return 0
 
 	elseif gallery_state == 1 then
 
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] Gallery_state = 1 & father_state is not 0, Trying to get Challenge Progress. ")
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] Gallery_state = 1 & father_state is not 0, Trying to get Challenge Progress. ") 
 
-		if ResumeMistTrial(context) == -1 then
+		if ResumeMistTrial(context) == -1 then 
 
 			ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Unexpected Challenge Progress!!")
 
 		end
 		return 0
 
-	elseif gallery_state == 0 then
+	elseif gallery_state == 0 then 
 
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] ...gallery is not started, will do nothing.")
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] ...gallery is not started, will do nothing.") 
 
 		return 0
 	else
 
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Unexpected Gallery state! gallery_state@".. gallery_state)
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Unexpected Gallery state! gallery_state@".. gallery_state) 
 		return 0
-	end
+	end 
 
 	return 0
 end
@@ -329,22 +329,22 @@ end
 function ResumeMistTrial(context, evt)
 
 	--父挑战状态 0-初始 1-进了地城但未开始 2-进行中（正在激活古代符文 3-进行中（启动遗迹控制台）4-进行中（最终挑战） 5-全部完成
-	father_state = ScriptLib.GetGroupVariableValue(context, "father_state")
-	ScriptLib.PrintContextLog(context, "[MistTrialV2] ResumeMistTrial Called. father_state@".. father_state)
+	local father_state = ScriptLib.GetGroupVariableValue(context, "father_state")
+	ScriptLib.PrintContextLog(context, "[MistTrialV2] ResumeMistTrial Called. father_state@".. father_state) 
 	--迷城战线v2的限时用Gallery控制（excel表）
 	--此处用于保证接续挑战时，CreateFatherChallenge的时长不要小于Gallery
-	father_life = 1800
+	local father_life = 1800
 
-	if father_state == 0 or father_state == 1 then
+	if father_state == 0 or father_state == 1 then 
 
 		--挑战还没开始过，就触发了接续挑战
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Mark has set 1 but father challenge state is 0 ! ")
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] #WRONG# Mark has set 1 but father challenge state is 0 ! ") 
 
 		return 0
 
-	elseif father_state == 2 then
+	elseif father_state == 2 then 
 		--接续钥匙房挑战 defs.key_challenge
-		saved = ScriptLib.GetGroupVariableValue(context, "key_progress")
+		local saved = ScriptLib.GetGroupVariableValue(context, "key_progress")
 
 		--创建父挑战
 		ScriptLib.CreateFatherChallenge(context, cfg.father_index, defs.challenge_id, father_life , {success=99999, fail=99999})
@@ -353,13 +353,13 @@ function ResumeMistTrial(context, evt)
 		ScriptLib.AttachChildChallenge(context, cfg.father_index, cfg.key_challenge_index, defs.key_challenge, {3,901,defs.key_target,1,saved}, {}, {success=1, fail=1} )
 		ScriptLib.StartFatherChallenge(context, cfg.father_index)
 
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] Resuming MistTrial Starting: 激活古代符文. Saved key num@"..saved)
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] Resuming MistTrial Starting: 激活古代符文. Saved key num@"..saved) 
 
 		return 0
 
-	elseif father_state == 3 then
+	elseif father_state == 3 then 
 
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] Resuming MistTrial Starting: 启动遗迹控制台.")
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] Resuming MistTrial Starting: 启动遗迹控制台.") 
 
 		--创建父挑战
 		ScriptLib.CreateFatherChallenge(context, cfg.father_index, defs.challenge_id, father_life ,  {success=99999, fail=99999})
@@ -372,9 +372,9 @@ function ResumeMistTrial(context, evt)
 
 		return 0
 
-	elseif father_state == 4 then
+	elseif father_state == 4 then 
 
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] Resuming MistTrial Starting: 最终挑战.")
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] Resuming MistTrial Starting: 最终挑战.") 
 
 		--创建父挑战
 		ScriptLib.CreateFatherChallenge(context, cfg.father_index, defs.challenge_id, father_life , {success=99999, fail=99999})
@@ -387,10 +387,10 @@ function ResumeMistTrial(context, evt)
 		return 0
 
 
-	elseif father_state == 5 then
+	elseif father_state == 5 then 
 
 		--挑战还没开始过，就触发了接续挑战
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] Trying to resume challenge but it is all clear. Do nothing.")
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] Trying to resume challenge but it is all clear. Do nothing.") 
 
 		return 0
 	end
@@ -399,15 +399,15 @@ end
 
 function action_Gallery_Stop(context, evt)
 
-	if evt.param1 ~= defs.gallery_id then
+	if evt.param1 ~= defs.gallery_id then 
 		return -1
 	end
 	UpLoadActionLog(context)
 	--evt.param3
 	--1、时间到 2、客户端中断 3、LUA中断
-	if evt.param3 == 1 then
+	if evt.param3 == 1 then 
 
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] Gallery Stop Triggered. reason@ Time Up.")
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] Gallery Stop Triggered. reason@ Time Up.") 
 
 		ScriptLib.SetGroupVariableValue(context, "gallery_state", 2)
 
@@ -417,7 +417,7 @@ function action_Gallery_Stop(context, evt)
 
 	elseif evt.param3 == 2 then
 
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] Gallery Stop Triggered. reason@ Client.")
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] Gallery Stop Triggered. reason@ Client.") 
 
 		ScriptLib.SetGroupVariableValue(context, "gallery_state", 2)
 
@@ -426,11 +426,11 @@ function action_Gallery_Stop(context, evt)
 		ScriptLib.SetGroupVariableValue(context, "father_state", 5)
 
 	elseif evt.param3 == 3 then
-		ScriptLib.PrintContextLog(context, "[MistTrialV2] Gallery Stop Triggered. reason@ Lua.")
+		ScriptLib.PrintContextLog(context, "[MistTrialV2] Gallery Stop Triggered. reason@ Lua.") 
 		ScriptLib.SetGroupVariableValue(context, "gallery_state", 2)
 		ScriptLib.SetGroupVariableValue(context, "father_state", 5)
-	end
-
+	end 
+	
 	return 0
 end
 function ResetGroupTempVar(context)
@@ -439,12 +439,12 @@ function ResetGroupTempVar(context)
 	end
 	return 0
 end
---上报运营日志数据 需求单s1286673
+--上报运营日志数据 需求单s1286673 
 function UpLoadActionLog(context)
 
-	log = {
+	local log = {
 		["Buff_Attack"] = 0,
-		["Buff_Heal"] = 0
+		["Buff_Heal"] = 0	
 	}
 
 	for k, v in pairs(log) do
@@ -456,13 +456,13 @@ function UpLoadActionLog(context)
 	return 0
 end
 --用于检查value是否在目标table中
-function CheckIsInTable(context,check_value)
+function CheckIsInTable(context,check_value)	
 	--和关卡约定的challenge Index
-	indexs = {999,901,902,903}
+	local indexs = {999,901,902,903}
 
 	for k,v in pairs(indexs) do
-		if v == check_value then
-			--ScriptLib.PrintContextLog(context, "[MistTrialV2] Check Is SpecialChallenge. return 1")
+		if v == check_value then 
+			--ScriptLib.PrintContextLog(context, "[MistTrialV2] Check Is SpecialChallenge. return 1") 
 			return 1
 		end
 	end

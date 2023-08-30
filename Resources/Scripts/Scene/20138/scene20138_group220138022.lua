@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220138022
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -97,9 +97,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -110,9 +110,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -137,9 +137,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -147,44 +147,44 @@ function action_EVENT_QUEST_FINISH_22002(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22001, 4, {1,2,3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将configid为 22001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "TalkDone" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "TalkDone", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22003(context, evt)
 	-- 判断是gadgetid 为 22001的移动平台，是否到达了4 的点集中的 4 点
-
+	
 	if 22001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -195,27 +195,27 @@ function action_EVENT_PLATFORM_ARRIVAL_22003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22004(context, evt)
 	-- 判断是gadgetid 为 22001的移动平台，是否到达了13 的点集中的 4 点
-
+	
 	if 22001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 13 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -226,27 +226,27 @@ function action_EVENT_PLATFORM_ARRIVAL_22004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22005(context, evt)
 	-- 判断是gadgetid 为 22001的移动平台，是否到达了14 的点集中的 6 点
-
+	
 	if 22001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 14 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 6 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -257,29 +257,29 @@ function action_EVENT_PLATFORM_ARRIVAL_22005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_22006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
 	if evt.source_name ~= "eyefinish1" and evt.source_name ~="duankou" then
-	return false
+	return false 
 	end
-
+	
 	-- 判断变量"eyefinish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "eyefinish1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"duankou"为1
 	if ScriptLib.GetGroupVariableValue(context, "duankou") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -288,35 +288,35 @@ function action_EVENT_VARIABLE_CHANGE_22006(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22001, 5, {1,2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_22007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.source_name ~= "eyefinish2" and evt.source_name ~="duankou" then
-	return false
+	return false 
 	end
-
+	
 	-- 判断变量"eyefinish2"为1
 	if ScriptLib.GetGroupVariableValue(context, "eyefinish2") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"duankou"为2
 	if ScriptLib.GetGroupVariableValue(context, "duankou") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -325,35 +325,35 @@ function action_EVENT_VARIABLE_CHANGE_22007(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22001, 6, {1,2,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_22008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.source_name ~= "eyefinish3" and evt.source_name ~="duankou" then
-	return false
+	return false 
 	end
-
+	
 	-- 判断变量"eyefinish3"为1
 	if ScriptLib.GetGroupVariableValue(context, "eyefinish3") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"duankou"为3
 	if ScriptLib.GetGroupVariableValue(context, "duankou") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -362,32 +362,32 @@ function action_EVENT_VARIABLE_CHANGE_22008(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22001, 7, {1,2,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22020(context, evt)
 	-- 判断是gadgetid 为 22001的移动平台，是否到达了5 的点集中的 2 点
-
+	
 	if 22001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 5 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -396,41 +396,41 @@ function action_EVENT_PLATFORM_ARRIVAL_22020(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22011, 9, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22001, 13, {1,2,3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22021(context, evt)
 	-- 判断是gadgetid 为 22001的移动平台，是否到达了6 的点集中的 3 点
-
+	
 	if 22001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 6 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -439,41 +439,41 @@ function action_EVENT_PLATFORM_ARRIVAL_22021(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22015, 10, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22001, 14, {1,2,3,4,5,6}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22022(context, evt)
 	-- 判断是gadgetid 为 22001的移动平台，是否到达了7 的点集中的 3 点
-
+	
 	if 22001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 7 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -482,41 +482,41 @@ function action_EVENT_PLATFORM_ARRIVAL_22022(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22019, 11, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22001, 15, {1,2,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22024(context, evt)
 	-- 判断是gadgetid 为 22001的移动平台，是否到达了15 的点集中的 3 点
-
+	
 	if 22001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 15 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -527,25 +527,25 @@ function action_EVENT_PLATFORM_ARRIVAL_22024(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 22001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220138022, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "missionComplete" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "missionComplete", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -556,8 +556,8 @@ function action_EVENT_QUEST_FINISH_22026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -567,12 +567,12 @@ function condition_EVENT_GROUP_LOAD_22028(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "missionComplete") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"TalkDone"为1
 	if ScriptLib.GetGroupVariableValue(context, "TalkDone") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -583,40 +583,40 @@ function action_EVENT_GROUP_LOAD_22028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 22001, 4, {1,2,3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将configid为 22001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_22038(context, evt)
 			    if ScriptLib.GetHostQuestState(context,4007214)==3 then
-				ScriptLib.RefreshGroup(context, { group_id = 220138022, suite = 2 })
+				ScriptLib.RefreshGroup(context, { group_id = 220138022, suite = 2 }) 
 				end
-
+			
 			return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_22039(context, evt)
 				    if ScriptLib.GetHostQuestState(context,4007219)==2 then
-					ScriptLib.CreateGadget(context, { config_id = 22037 })
+					ScriptLib.CreateGadget(context, { config_id = 22037 }) 
 					end
-
+				
 				return 0
 end
 
@@ -627,7 +627,7 @@ function action_EVENT_QUEST_START_22040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -637,7 +637,7 @@ function condition_EVENT_GROUP_LOAD_22041(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "missionComplete") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -648,7 +648,7 @@ function action_EVENT_GROUP_LOAD_22041(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -658,7 +658,7 @@ function condition_EVENT_QUEST_START_22042(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "missionComplete") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -669,6 +669,6 @@ function action_EVENT_QUEST_START_22042(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

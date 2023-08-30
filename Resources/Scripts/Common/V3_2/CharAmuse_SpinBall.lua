@@ -5,11 +5,11 @@
 ||	owner: 		weiwei.sun
 ||	description: 	3.2奇趣秘园 局内逻辑 弹球
 ||	LogName:	## [CharAmuse_SpinBall]
-||	Protection:
+||	Protection:	
 =======================================]]
 --[[
 
-defs = {
+local defs = {
 
 	-----全玩法通用配置-----
 
@@ -30,24 +30,24 @@ defs = {
 	reminder = 400171,
 
 	--点阵长度
-	length =
+	length = 
 	{--[点阵id] =点阵长度
 		[1] = 9,
 		[2] = 4.
 	},
 	--创生配置
-	born =
+	born = 
 	{--[点阵id] ={ pos = { x=,y=,z=}, rot = pos = { x=,y=,z=}}
 		[1]={ pos = { x=,y=,z=}, rot = pos = { x=,y=,z=}}
 	}
 	--点阵组
-	array_combine =
+	array_combine = 
 	{
 		[1] = {5, 6},
 	}
 
     -- 刷金币suite的规则
-    coin_list =
+    coin_list = 
     {
         -- 单人玩家
         ["SP"] = {
@@ -80,12 +80,12 @@ defs = {
 }
 
 ]]
-cfg = {
+local cfg = {
 	--主控GroupID
 	main_group = 251008007,
 }
 
-extraTriggers = {
+local extraTriggers = {
 	{ config_id = 8000003, name = "TimeAxis_StopGallery", event = EventType.EVENT_TIME_AXIS_PASS, source = "StopGallery", condition = "", action = "action_TimeAxis_StopGallery", trigger_count = 0 },
 	{ config_id = 8000004, name = "Gallery_Stop", event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_Gallery_Stop", trigger_count = 0 },
 	{ config_id = 8000005, name = "TimeAxis_StopGallery_Fail", event = EventType.EVENT_TIME_AXIS_PASS, source = "StopGallery_Fail", condition = "", action = "action_TimeAxis_StopGallery_Fail", trigger_count = 0 },
@@ -109,7 +109,7 @@ end
 --主控调用
 function EX_StartGallery(context, prev_context, gallery_id, is_last_level)
 
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})
 
 	ScriptLib.SetGroupTempValue(context, "is_last_level", is_last_level, {})
@@ -148,7 +148,7 @@ function action_AirWallVariable_Change(context, evt)
 	elseif 0 == evt.param1 and 1 == evt.param2 then
 		for i,v in ipairs(defs.air_wall) do
 			ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, v)
-		end
+		end	
 	end
 	return 0
 end
@@ -159,17 +159,17 @@ function action_Gallery_Stop(context, evt)
 	LF_ClearRound(context)
 	ScriptLib.EndAllTimeAxis(context)
 
-	if 3 ~= evt.param3 then
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+	if 3 ~= evt.param3 then		
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		--ScriptLib.InitTimeAxis(context, "StopGallery_Fail", { 3 } , false) 9.21修改 失败不要延时结束
 		ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {1, base_info.group_id})
 	else
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
 		if is_last_level then
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
 			ScriptLib.InitTimeAxis(context, "StopGallery", { 3 } , false)
-		end
+		end	
 	end
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] Gallery stoped. reason@".. evt.param3.." --------------")
 
@@ -182,10 +182,10 @@ function LF_Start_Play(context)
 
 	ScriptLib.SetGroupTempValue(context, "round", 0, {})
 
-	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
-	target = 0
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local target = 0
 	if player_count > 1 then
 		target = ScriptLib.GetCharAmusementGalleryTarget(context, gallery_id, true)
 	else
@@ -195,7 +195,7 @@ function LF_Start_Play(context)
 	ScriptLib.SetGroupTempValue(context, "cur_score", target, {})
 	ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["max_score"]= target} )
 
-	rand_length = 1
+	local rand_length = 1
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] LF_Start_Play. player_count@"..player_count)
 	if 1 < player_count then
 		rand_length = #defs.coin_list["MP"]
@@ -203,11 +203,11 @@ function LF_Start_Play(context)
 		rand_length = #defs.coin_list["SP"]
 	end
 	math.randomseed(ScriptLib.GetServerTime(context))
-	rand_index = math.random(rand_length)
+	local rand_index = math.random(rand_length)
 	ScriptLib.SetGroupTempValue(context, "rand_index", rand_index, {})
 
 	LF_StartRound(context)
-
+	
 	return 0
 end
 
@@ -223,14 +223,14 @@ end
 
 function LF_StartRound(context)
 
-	rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
+	local rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
 
-	player_num = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	local player_num = ScriptLib.GetGroupTempValue(context, "player_count", {})
 
 	ScriptLib.SetGroupTempValue(context, "coin_num", 0, {})
 	ScriptLib.SetGroupTempValue(context, "score_total", 0, {})
-
-	coin_list = {}
+	
+	local coin_list = {}
 	if 1 < player_num then
 		coin_list = defs.coin_list["MP"]
 	else
@@ -244,13 +244,13 @@ function LF_StartRound(context)
 
 	--round++
 	ScriptLib.ChangeGroupTempValue(context, "round", 1, {})
-	round = ScriptLib.GetGroupTempValue(context, "round", {})
+	local round = ScriptLib.GetGroupTempValue(context, "round", {})
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] LF_StartRound. New round@".. round ..  ". in rand_index@"..rand_index)
 
 	--如果已经到了LD配置尽头，则循环最后一波
 	if round > #coin_list[rand_index] then
 		round = #coin_list[rand_index]
-		ScriptLib.SetGroupTempValue(context, "round", round, {})
+		ScriptLib.SetGroupTempValue(context, "round", round, {}) 
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] LF_StartRound. All round finished. Set to final.")
 	end
 
@@ -270,11 +270,11 @@ function LF_StartRound(context)
 
 	--创建球
 	-- 根据点阵数量 创建球 等待后，开始点阵移动
-	ball_index = coin_list[rand_index][round].ball
+	local ball_index = coin_list[rand_index][round].ball
 	ScriptLib.SetGroupTempValue(context, "ball_index", ball_index, {})
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] ball_index@"..ball_index)
 	for k,v in pairs(defs.array_combine[ball_index]) do
-		config_id = LF_CreateBall(context, defs.born[v].pos, defs.born[v].rot)
+		local config_id = LF_CreateBall(context, defs.born[v].pos, defs.born[v].rot)
 		ScriptLib.SetGroupTempValue(context, "ball_"..k, config_id, {})
 	end
 	ScriptLib.InitTimeAxis(context, "ball_wait", { 1.5 } , false)
@@ -287,22 +287,22 @@ end
 function action_Wait_TimeAxis_Pass(context, evt)
 
 
-	rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
-	round = ScriptLib.GetGroupTempValue(context, "round", {})
-	player_num = ScriptLib.GetGroupTempValue(context, "player_count", {})
-	coin_list = {}
+	local rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
+	local round = ScriptLib.GetGroupTempValue(context, "round", {})
+	local player_num = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	local coin_list = {}
 	if 1 < player_num then
 		coin_list = defs.coin_list["MP"]
 	else
 		coin_list = defs.coin_list["SP"]
 	end
 
-	ball_index = ScriptLib.GetGroupTempValue(context, "ball_index", {})
+	local ball_index = ScriptLib.GetGroupTempValue(context, "ball_index", {})
 	for k,v in pairs(defs.array_combine[ball_index]) do
-		config_id = ScriptLib.GetGroupTempValue(context, "ball_"..k, {})
+		local config_id = ScriptLib.GetGroupTempValue(context, "ball_"..k, {})
 		--设置点阵
 		if 0 < config_id then
-			path = {}
+			local path = {}
 			if nil == defs.length[v] then
 				ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] Get path length failed. point_array_id@"..v)
 				return 0
@@ -310,21 +310,21 @@ function action_Wait_TimeAxis_Pass(context, evt)
 			for i = 1, defs.length[v] do
 			    table.insert(path, i)
 			end
-			tempParam = {route_type = 2, turn_mode = false}
-			ScriptLib.SetPlatformPointArray(context, config_id, v, path, tempParam)
+			local tempParam = {route_type = 2, turn_mode = false}
+			ScriptLib.SetPlatformPointArray(context, config_id, v, path, tempParam) 
 			ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] SetPlatformPointArray. config_id@".. config_id.. "point_array_id@"..v)
 		end
 	end
 
 	-- 创建金币
-	coin_suites = coin_list[rand_index][round].coin
+	local coin_suites = coin_list[rand_index][round].coin
 	for k,v in pairs(coin_suites) do
 		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v)
-	end
+	end	
 
 	--埋点统计本波总分
-	coin_1 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320015 }})
-	coin_2 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320022 }})
+	local coin_1 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320015 }})
+	local coin_2 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320022 }})
 	ScriptLib.SetGroupTempValue(context, "coin_num", coin_1 + coin_2, {})
 	if nil ~= defs.super_coin and 1 <= defs.super_coin then
 		ScriptLib.SetGroupTempValue(context, "score_total", coin_1 + (coin_2 *math.floor(defs.super_coin)), {})
@@ -337,14 +337,14 @@ end
 
 function LF_ClearRound(context)
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
-	round = ScriptLib.GetGroupTempValue(context, "round", {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local round = ScriptLib.GetGroupTempValue(context, "round", {})
 	if ScriptLib.IsGalleryStart(context, gallery_id) then
 		--埋点
-		score_total = ScriptLib.GetGroupTempValue(context, "score_total", {})
-		coin_1 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320015 }})
-		coin_2 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320022 }})
-		score_left = coin_1 + (coin_2 *5)
+		local score_total = ScriptLib.GetGroupTempValue(context, "score_total", {})
+		local coin_1 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320015 }})
+		local coin_2 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320022 }})
+		local score_left = coin_1 + (coin_2 *5)
 		if nil ~= defs.super_coin and 1 <= defs.super_coin then
 			score_left = coin_1 + (coin_2 *math.floor(defs.super_coin))
 		end
@@ -355,18 +355,18 @@ function LF_ClearRound(context)
 		ScriptLib.KillEntityByConfigId(context, { config_id = v })--kill播放onKill动画
 	end
 
-	player_num = ScriptLib.GetGroupTempValue(context, "player_count", {})
-	coin_list = {}
+	local player_num = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	local coin_list = {}
 	if 1 < player_num then
 		coin_list = defs.coin_list["MP"]
 	else
 		coin_list = defs.coin_list["SP"]
 	end
-	rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
-
+	local rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
+	
 	for i,v in ipairs(coin_list[rand_index][round].coin) do
 		ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, v)
-	end
+	end	
 	if nil ~= coin_list[rand_index][round].buff then
 		for i,v in ipairs(coin_list[rand_index][round].buff) do
 			ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, v)
@@ -377,14 +377,14 @@ function LF_ClearRound(context)
 end
 
 function LF_CreateBall(context, pos, rot)
-
+	
     for k , v in pairs(defs.ball_pool) do
-        ret = ScriptLib.CreateGadgetByConfigIdByPos(context, v, pos, rot)
+        local ret = ScriptLib.CreateGadgetByConfigIdByPos(context, v, pos, rot)
         if 0 == ret then
         	ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] LF_CreateBall. Create gadget@"..v)
             return v
         end
-    end
+    end 
 	ScriptLib.PrintGroupWarning(context,"## [CharAmuse_SpinBall] LF_CreateBall. Unable to create ball.")
 	return 0
 end
@@ -394,8 +394,8 @@ function action_Round_TimeAxis(context, evt)
 	ScriptLib.EndTimeAxis(context, "round_time")
 	ScriptLib.EndTimeAxis(context, "reminder_time")
 
-	LF_ClearRound(context)
-	ScriptLib.InitTimeAxis(context, "roundwait_time", { defs.wait_time } , false)
+	LF_ClearRound(context)	
+	ScriptLib.InitTimeAxis(context, "roundwait_time", { defs.wait_time } , false)	
 	return 0
 end
 
@@ -417,20 +417,20 @@ end
 --param1: 1-普通 2-大金币
 function SLC_CharAmusement_CoinGet(context, param1)
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
-	stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", { cfg.main_group })
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", { cfg.main_group })
 
 	if 1 == param1 then
-		config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+		local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, config_id)
 		ScriptLib.ChangeGroupTempValue(context, "cur_score", -1, {})
 		ScriptLib.ChangeGroupTempValue(context, "coin_num", -1, {})
-
+		
 		ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["add_score"]= 1} )
 		ScriptLib.CharAmusementUpdateScore(context, cfg.main_group, 1, 1)--给MultStage更新分数 服务器侧埋点用
 
-	elseif 2 == param1 then
-		config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+	elseif 2 == param1 then 
+		local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, config_id)
 		if nil ~= defs.super_coin and 1 <= defs.super_coin then
 			ScriptLib.ChangeGroupTempValue(context, "cur_score", -1*math.floor(defs.super_coin), {})
@@ -445,23 +445,23 @@ function SLC_CharAmusement_CoinGet(context, param1)
 	end
 
 	if 0 >= ScriptLib.GetGroupTempValue(context, "cur_score", {}) then
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["is_last_level"] = is_last_level, ["is_finish"] = true, ["is_success"] = true } )
 		ScriptLib.StopGallery(context, gallery_id, false)
 		return 0
 	end
 
-	coin_num = ScriptLib.GetGroupTempValue(context, "coin_num", {})
+	local coin_num = ScriptLib.GetGroupTempValue(context, "coin_num", {})
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] SLC_CharAmusement_CoinGet. param1@"..param1.." coin_num@"..coin_num)
-	if 0 >= coin_num then
+	if 0 >= coin_num then 
 
-		LF_ClearRound(context)
+		LF_ClearRound(context)	
 
 		ScriptLib.EndTimeAxis(context, "ball_wait")
 		ScriptLib.EndTimeAxis(context, "round_time")
 		ScriptLib.EndTimeAxis(context, "reminder_time")
 
-		ScriptLib.InitTimeAxis(context, "roundwait_time", { defs.wait_time } , false)
+		ScriptLib.InitTimeAxis(context, "roundwait_time", { defs.wait_time } , false)	
 
 	end
 

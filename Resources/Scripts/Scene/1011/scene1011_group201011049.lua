@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201011049
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 49009,
 	gadget_id_2 = 49010,
 	gadget_id_3 = 49011,
@@ -24,9 +24,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -123,9 +123,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -133,7 +133,7 @@ function condition_EVENT_GADGET_CREATE_141(context, evt)
 	if 49008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -144,7 +144,7 @@ function action_EVENT_GADGET_CREATE_141(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_SELECT_OPTION_142(context, evt)
 	if 49008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -164,49 +164,49 @@ function action_EVENT_SELECT_OPTION_142(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 49002, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 49003, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 49004, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 49005, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 49006, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 49007, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 创建编号为1001（该挑战的识别id),挑战内容为2001的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1001, 2001, 60, 201011049, 275, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -215,7 +215,7 @@ function condition_EVENT_ANY_MONSTER_DIE_162(context, evt)
 	if 49003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -226,7 +226,7 @@ function action_EVENT_ANY_MONSTER_DIE_162(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -235,7 +235,7 @@ function condition_EVENT_ANY_MONSTER_DIE_163(context, evt)
 	if 49002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -246,7 +246,7 @@ function action_EVENT_ANY_MONSTER_DIE_163(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -255,7 +255,7 @@ function condition_EVENT_ANY_MONSTER_DIE_164(context, evt)
 	if 49004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -266,7 +266,7 @@ function action_EVENT_ANY_MONSTER_DIE_164(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -275,7 +275,7 @@ function condition_EVENT_ANY_MONSTER_DIE_165(context, evt)
 	if 49001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -286,7 +286,7 @@ function action_EVENT_ANY_MONSTER_DIE_165(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -295,7 +295,7 @@ function condition_EVENT_ANY_MONSTER_DIE_166(context, evt)
 	if 49005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -306,7 +306,7 @@ function action_EVENT_ANY_MONSTER_DIE_166(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -315,7 +315,7 @@ function condition_EVENT_ANY_MONSTER_DIE_167(context, evt)
 	if 49006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -326,7 +326,7 @@ function action_EVENT_ANY_MONSTER_DIE_167(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -335,7 +335,7 @@ function condition_EVENT_ANY_MONSTER_DIE_168(context, evt)
 	if 49007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -346,6 +346,6 @@ function action_EVENT_ANY_MONSTER_DIE_168(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end

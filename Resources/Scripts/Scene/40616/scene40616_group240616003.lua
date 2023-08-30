@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240616003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -129,9 +129,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -139,7 +139,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_3022(context, evt)
 	if 3001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -150,22 +150,22 @@ function action_EVENT_ANY_MONSTER_LIVE_3022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_3023(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240616003) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"Key"为0
 	if ScriptLib.GetGroupVariableValue(context, "Key") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -173,28 +173,28 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3023(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240616003, 3)
-
+	
 	-- 针对当前group内变量名为 "Key" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Key", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_3024(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240616003) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"Key"为1
 	if ScriptLib.GetGroupVariableValue(context, "Key") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -202,28 +202,28 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3024(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240616003, 4)
-
+	
 	-- 针对当前group内变量名为 "Key" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Key", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_3025(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240616003) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"Key"为2
 	if ScriptLib.GetGroupVariableValue(context, "Key") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -231,13 +231,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3025(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240616003, 5)
-
+	
 	-- 针对当前group内变量名为 "Key" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Key", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -247,8 +247,8 @@ function action_EVENT_CHALLENGE_SUCCESS_3026(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240616001, 1002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -259,18 +259,18 @@ function action_EVENT_CHALLENGE_FAIL_3027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 改变指定group组240616002中， configid为2001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240616002, 2001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 240616002, 2001, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end

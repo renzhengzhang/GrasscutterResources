@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308193
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -86,32 +86,32 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_193003(context, evt)
 	-- 判断是gadgetid 193012 option_id 918
 	if 193012 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 918 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133308193, 193001) then
 		return false
 	end
-
+	
 	-- 判断变量"re"为1
 	if ScriptLib.GetGroupVariableValue(context, "re") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -122,23 +122,23 @@ function action_EVENT_SELECT_OPTION_193003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 193001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 193001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133308193 ；指定config：193012；物件身上指定option：918；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308193, 193012, 918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 创建标识为"button"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "button", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_TIME_AXIS_PASS_193004(context, evt)
 	if "button" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -158,11 +158,11 @@ function action_EVENT_TIME_AXIS_PASS_193004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 停止标识为"button"的时间轴
 	ScriptLib.EndTimeAxis(context, "button")
-
-
+	
+	
 	return 0
 end
 
@@ -171,7 +171,7 @@ function condition_EVENT_GADGET_CREATE_193011(context, evt)
 	if 193012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -182,7 +182,7 @@ function action_EVENT_GADGET_CREATE_193011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -190,23 +190,23 @@ end
 function condition_EVENT_SELECT_OPTION_193013(context, evt)
 	-- 判断是gadgetid 193012 option_id 918
 	if 193012 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 918 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133308193, 193001) then
 		return false
 	end
-
+	
 	-- 判断变量"re"为0
 	if ScriptLib.GetGroupVariableValue(context, "re") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -217,35 +217,35 @@ function action_EVENT_SELECT_OPTION_193013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "redblue" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "redblue", 1, 133308581) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 193001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 193001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 调用提示id为 1000120000 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1000120000) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133308193 ；指定config：193012；物件身上指定option：918；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308193, 193012, 918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 创建标识为"button"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "button", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -253,18 +253,18 @@ end
 function condition_EVENT_SELECT_OPTION_193014(context, evt)
 	-- 判断是gadgetid 193012 option_id 918
 	if 193012 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 918 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133308193, 193001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -274,23 +274,23 @@ function action_EVENT_SELECT_OPTION_193014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 193001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "redblue" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "redblue", 0, 133308581) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133308193 ；指定config：193012；物件身上指定option：918；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308193, 193012, 918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 创建标识为"button"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "button", {1}, false)
-
-
+	
+	
 	return 0
 end

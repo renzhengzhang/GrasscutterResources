@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133004233
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 1369
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -83,25 +83,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_233001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"num_1"为1
 	if ScriptLib.GetGroupVariableValue(context, "num_1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"num_2"为1
 	if ScriptLib.GetGroupVariableValue(context, "num_2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -112,6 +112,6 @@ function action_EVENT_VARIABLE_CHANGE_233001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end

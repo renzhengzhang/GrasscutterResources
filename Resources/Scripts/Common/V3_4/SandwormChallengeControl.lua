@@ -2,17 +2,17 @@
 --[[======================================
 ||	filename:	SandwormchallengeControl
 ||	owner: 		luyao.huang
-||	description:
+||	description:	
 ||	LogName:	SandwormchallengeControl
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 
 
-business_type = "challenge"
-priority = 2
+local business_type = "challenge"
+local priority = 2
 
-local_defs =
+local local_defs = 
 {
     sandworm_manager_group = 133314001,
 
@@ -22,7 +22,7 @@ local_defs =
 
 
 
-challenge_Tri = {
+local challenge_Tri = {
     [1] = { name = "select_option_challenge_sandworm", config_id = 100010001, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option_challenge_sandworm", trigger_count = 0},
     [2] = { name = "challenge_success_challenge_sandworm", config_id = 100010002, event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success_challenge_sandworm", trigger_count = 0},
     [3] = { name = "challenge_fail_challenge_sandworm", config_id = 100010003, event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail_challenge_sandworm", trigger_count = 0},
@@ -76,7 +76,7 @@ end
 
 
 function action_group_will_unload_challenge_sandworm(context,evt)
-
+    
     ScriptLib.PrintContextLog(context,"## [SandwormchallengeControl] group即将卸载")
     LF_Remove_All_Sandworm(context)
     ScriptLib.EndTimeAxis(context,local_defs.time_axis_name)
@@ -109,7 +109,7 @@ end
 function action_time_axis_pass_challenge_sandworm(context,evt)
     if ScriptLib.IsChallengeStartedByChallengeId(context, defs.challenge_id) then
         if (evt.source_name == local_defs.time_axis_name) then
-            uid = ScriptLib.GetSceneOwnerUid(context)
+            local uid = ScriptLib.GetSceneOwnerUid(context)
             LF_Summon_Direct_Sandworm_By_Avatar(context,uid,defs.attack_times)
         end
     end
@@ -141,7 +141,7 @@ function LF_On_Challenge_Start(context)
     ScriptLib.InitTimeAxis(context,local_defs.time_axis_name,{defs.attack_interval},true)
 end
 
-function LF_On_Challenge_Finish(context,is_success)
+function LF_On_Challenge_Finish(context,is_success)  
     LF_Remove_All_Sandworm(context)
     ScriptLib.EndTimeAxis(context,local_defs.time_axis_name)
 end
@@ -167,7 +167,7 @@ function LF_On_Create_Sandworm_Fail(context)
 end
 
 --沙虫控制回调：移除沙虫
-function LF_On_Remove_Sandworm(context)
+function LF_On_Remove_Sandworm(context) 
     ScriptLib.PrintContextLog(context,"## [SandwormchallengeControl]LF_On_Create_Sandworm_Success: 沙虫控制回调：清除沙虫")
 end
 

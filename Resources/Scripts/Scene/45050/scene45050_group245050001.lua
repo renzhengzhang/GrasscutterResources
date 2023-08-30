@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 245050001
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	is_offical = false,
 	startpoint = 1034,
 	connect_region = 1036,
@@ -19,39 +19,39 @@ airwall_graph = {
 }
 
 room_infos = {
-         {
-                room_cur = 1,
-                room_next = 2,
+         {        
+                room_cur = 1, 
+                room_next = 2, 
                 wall_connect = 1052, --到下一个房间的空气墙
                 region_enter = 0, --弱网拦截用的
-                region_wall_enter = 0, --弱网拦截用的空气墙
+                region_wall_enter = 0, --弱网拦截用的空气墙 
                 region_self = 1043,      --记录处于所属房间region
                 point_safe = 1037 --传送安全点的configID
          },
-         {
-                room_cur = 2,
-                room_next = 3,
+         {        
+                room_cur = 2, 
+                room_next = 3, 
                 wall_connect = 1054, --到下一个房间的空气墙
                 region_enter =1038, --弱网拦截用的
-                region_wall_enter = 1053, --弱网拦截用的空气墙
+                region_wall_enter = 1053, --弱网拦截用的空气墙 
                 region_self = 1044,      --记录处于所属房间region
                 point_safe = 1039 --传送安全点的configID
          },
-         {
-                room_cur = 3,
-                room_next = 0,
+         {        
+                room_cur = 3, 
+                room_next = 0, 
                 wall_connect = 0, --到下一个房间的空气墙
                 region_enter = 1040, --弱网拦截用的
-                region_wall_enter = 1055, --弱网拦截用的空气墙
+                region_wall_enter = 1055, --弱网拦截用的空气墙 
                 region_self = 1045,      --记录处于所属房间region
                 point_safe = 1041 --传送安全点的configID
-         },
+         },		 
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -139,9 +139,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -152,9 +152,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -206,9 +206,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 require "V2_5/UGCDungeon_Reforge"

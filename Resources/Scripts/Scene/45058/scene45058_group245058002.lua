@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 245058002
 }
 
@@ -10,7 +10,7 @@ group_id = 245058002,
 is_offical = true,
 startpoint = 2015,
 connect_region = 2037,
-synchronizer = 2050,
+synchronizer = 2050, 
 }
 
 
@@ -29,32 +29,30 @@ airwall_graph = {
 
 
 room_infos = {
-         {
-                room_cur = 1,
-                room_next = 2,
+         {        
+                room_cur = 1, 
+                room_next = 2, 
                 wall_connect = 2013, --到下一个房间的空气墙
                 region_enter = 0, --弱网拦截用的
-                region_wall_enter = 0, --弱网拦截用的空气墙
+                region_wall_enter = 0, --弱网拦截用的空气墙 
                 region_self = 2052,      --记录处于所属房间region
                 point_safe = 2046 --传送安全点的configID
-         },
-
-         {
-                room_cur = 2,
-                room_next = 0,
+         },	 
+         {        
+                room_cur = 2, 
+                room_next = 0, 
                 wall_connect = 0, --到下一个房间的空气墙
                 region_enter = 2048, --弱网拦截用的
-                region_wall_enter = 2014, --弱网拦截用的空气墙
+                region_wall_enter = 2014, --弱网拦截用的空气墙 
                 region_self = 2053,      --记录处于所属房间region
                 point_safe = 2047 --传送安全点的configID
-         },
-
+         },	 
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -149,9 +147,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -162,9 +160,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -225,22 +223,22 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_2002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 245058002, 2)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 245058002, EntityType.GADGET, 2007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -251,7 +249,7 @@ function action_EVENT_QUEST_FINISH_2003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -260,7 +258,7 @@ function condition_EVENT_ANY_GADGET_DIE_2006(context, evt)
 	if 2005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -268,31 +266,31 @@ end
 function action_EVENT_ANY_GADGET_DIE_2006(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 245058002, 4)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "2450580022") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 245058002, EntityType.GADGET, 2009 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 245058002, EntityType.GADGET, 2010 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 245058002, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 245058002, 3)
-
+	
 	return 0
 end
 
@@ -303,7 +301,7 @@ function action_EVENT_QUEST_FINISH_2012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -314,7 +312,7 @@ function action_EVENT_QUEST_FINISH_2034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -323,7 +321,7 @@ function condition_EVENT_GADGET_CREATE_2036(context, evt)
 	if 2015 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -334,7 +332,7 @@ function action_EVENT_GADGET_CREATE_2036(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 

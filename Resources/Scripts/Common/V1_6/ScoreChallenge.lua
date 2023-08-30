@@ -1,12 +1,12 @@
--- ProgressTable = {0,10,100}
--- GalleryID = 0
--- -- SubScoreTimeAxis = {1}
--- GroupID = 144004004
+-- local ProgressTable = {0,10,100}
+-- local GalleryID = 0
+-- -- local SubScoreTimeAxis = {1}
+-- local GroupID = 144004004
 
 --misc
 
 --自定义函数部分
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Start_Gallery"] = { config_id = 8000001, name = "Start_Gallery", event= EventType.EVENT_GALLERY_START, source = "", condition = "", action = "action_whern_gallery_start", trigger_count = 0 },
 		--["GadgetSate_Change"] = { config_id = 8000002, name = "GadgetSate_Change", event= EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadgetstate_change", trigger_count = 0 },
@@ -23,7 +23,7 @@ extrTriggers = {
 	}
 }
 
-extrSuites = {
+local extrSuites = {
 	{
 		monsters = { },
 		gadgets = { },
@@ -47,7 +47,7 @@ end
 
 function TargetAddScore(context)
 
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 	-- 杀靶标进度
 	ScriptLib.AddGalleryProgressScore(context, "ScoreProgress", GalleryID, GadgetTargetScore)
 	--杀靶标加分
@@ -60,14 +60,14 @@ end
 function DeduplicationRandom( context, configIDList, randomNum )
 	math.randomseed(ScriptLib.GetServerTime(context))
 
-	TempList = {}
+	local TempList = {}
 
 	for i,v in ipairs(configIDList) do
 		table.insert(TempList, v)
 	end
 
 	for i=1,randomNum do
-		TempNum = math.random(#TempList)
+		local TempNum = math.random(#TempList)
 
 		ScriptLib.CreateGadget(context, { config_id = TempList[TempNum] })
 
@@ -123,7 +123,7 @@ end
 function action_timeaxis_randomtarget( context,evt )
 	math.randomseed(ScriptLib.GetServerTime(context))
 
-	TargetConfigID = RandomTargetConfigID[math.random(#RandomTargetConfigID)]
+	local TargetConfigID = RandomTargetConfigID[math.random(#RandomTargetConfigID)]
 
 	ScriptLib.PrintContextLog(context, "##SC LOG : random target configID == "..TargetConfigID)
 
@@ -137,14 +137,14 @@ end
 function action_timeaxis_consttarget( context,evt )
 	math.randomseed(ScriptLib.GetServerTime(context))
 
-	TempList = {}
+	local TempList = {}
 
 	for i,v in ipairs(ConstTargetConfigID) do
 		table.insert(TempList, v)
 	end
 
 	for i=1,2 do
-		TempNum = math.random(#TempList)
+		local TempNum = math.random(#TempList)
 
 		ScriptLib.CreateGadget(context, { config_id = TempList[TempNum] })
 
@@ -156,16 +156,16 @@ end
 
 function action_monster_die( context,evt  )
 	-- body
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.PrintContextLog(context, "##SC LOG : monster entityID == "..evt.source_eid)
 
-	MonsterID = ScriptLib.GetMonsterIdByEntityId(context, evt.source_eid)
+	local MonsterID = ScriptLib.GetMonsterIdByEntityId(context, evt.source_eid)
 
 	ScriptLib.PrintContextLog(context, "##SC LOG : monsterID == "..MonsterID)
 
 	-- 杀怪进度
-	MonsterScore = 0
+	local MonsterScore = 0
 	for i,v in ipairs(MonsterTargetScore) do
 		if v.monsterID == MonsterID then
 			MonsterScore = v.score
@@ -185,7 +185,7 @@ end
 
 function action_gadget_die( context,evt  )
 	-- body
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.PrintContextLog(context, "##SC LOG : gadget entityID == "..evt.source_eid)
 
@@ -216,12 +216,12 @@ function action_whern_gallery_start( context,evt )
 
 	--初始化一个热度条
 	ScriptLib.InitGalleryProgressScore(context, "ScoreProgress", GalleryID, ProgressTable, GalleryProgressScoreUIType.GALLERY_PROGRESS_SCORE_UI_TYPE_BUOYANT_COMBAT)
-
+	
 
 	ScriptLib.AttachGalleryAbilityGroup(context, {}, GalleryID, 0)
 	if GalleryID == 8002 then
 		ScriptLib.SetGroupTempValue(context, "_phase", 0, {})
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, "BuoyantCombat_Water_Level", 0.5)
 	end
 	--初始化一个定时器扣分
@@ -233,7 +233,7 @@ end
 function action_whern_gallery_stop( context, evt )
 	if GalleryID == 8002 then
 		ScriptLib.SetGroupTempValue(context, "_phase", 0, {})
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, "BuoyantCombat_Water_Level", 0.5)
 	end
 	--优化suite卸载
@@ -273,8 +273,8 @@ end
 
 function action_progress_pass( context,evt )
 	-- 阶段变更后
-	LastPhase = evt.param3+1
-	CurPhase = evt.param1+1
+	local LastPhase = evt.param3+1
+	local CurPhase = evt.param1+1
 
 	ScriptLib.PrintContextLog(context, "##SC LOG : param1 =="..evt.param1.."param3 =="..evt.param3)
 
@@ -300,7 +300,7 @@ function action_progress_pass( context,evt )
 		end
 	elseif GalleryID == 8002 then
 		ScriptLib.SetGroupTempValue(context, "_phase", evt.param1, {})
-		ratio = 0.5
+		local ratio = 0.5
 		ScriptLib.PrintContextLog(context, "##SC LOG : Gallery is 8002")
 		if evt.param1 == 1 then
 			ratio = 1
@@ -309,7 +309,7 @@ function action_progress_pass( context,evt )
 		elseif evt.param1 == 3 then
 			ratio = 4.5
 		end
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, "BuoyantCombat_Water_Level", ratio)
 	end
 
@@ -319,7 +319,7 @@ end
 
 function action_trigger_timeaxis( context,evt )
 	-- 扣分
-	SubNum = ScriptLib.GetGroupTempValue(context, "SubNum", {})
+	local SubNum = ScriptLib.GetGroupTempValue(context, "SubNum", {})
 
 	ScriptLib.AddGalleryProgressScore(context, "ScoreProgress", GalleryID, SubNum)
 	return 0
@@ -340,8 +340,8 @@ end
 
 --水元素断线重连有风险，要slc辅助恢复
 function SLC_Recover_BuoyantCombat_Water_Level(context)
-	_p = ScriptLib.GetGroupTempValue(context, "_phase", {})
-	ratio = 0.5
+	local _p = ScriptLib.GetGroupTempValue(context, "_phase", {})
+	local ratio = 0.5
 	ScriptLib.PrintContextLog(context, "##SC LOG : SLC_Recover_BuoyantCombat_Water_Level | phase = ".._p)
 	if _p == 1 then
 		ratio = 1

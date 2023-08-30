@@ -1,20 +1,20 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199001018
 }
 
 -- DEFS_MISCS
-GivingID = {10000113,10000114,10000115}
-    MaterialID = {101935,101936,101937}
-    ConchConfigID = {18001,18002,18003}
+local GivingID = {10000113,10000114,10000115}
+    local MaterialID = {101935,101936,101937}
+    local ConchConfigID = {18001,18002,18003}
 
-CreateList = {
+local CreateList = {
         {[101935]={{configid = 18004,point = 18007},{configid = 18005,point = 18006}}, [101936]={{configid = 18012,point = 18014},{configid = 18013,point = 18015}}, [101937]={{configid = 18020,point = 18026},{configid = 18021,point = 18027},{configid = 18022,point = 18028}}},
         {[101935]={{configid = 18004,point = 18008},{configid = 18005,point = 18009}}, [101936]={{configid = 18012,point = 18016},{configid = 18013,point = 18017}}, [101937]={{configid = 18020,point = 18029},{configid = 18021,point = 18030},{configid = 18022,point = 18031}}},
         {[101935]={{configid = 18004,point = 18010},{configid = 18005,point = 18011}}, [101936]={{configid = 18012,point = 18018},{configid = 18013,point = 18019}}, [101937]={{configid = 18020,point = 18023},{configid = 18021,point = 18024},{configid = 18022,point = 18025}}},
     }
 
-NoticeReminder= {
+local NoticeReminder= {
 [32]= 1111240,
 [23]= 1111241,
 [31]= 1111242,
@@ -25,9 +25,9 @@ NoticeReminder= {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -99,9 +99,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -112,9 +112,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -139,20 +139,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_18032(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"conch_puzzle_success"为1
 	if ScriptLib.GetGroupVariableValue(context, "conch_puzzle_success") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -163,7 +163,7 @@ function action_EVENT_VARIABLE_CHANGE_18032(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -173,7 +173,7 @@ function condition_EVENT_GROUP_LOAD_18034(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "conch_puzzle_success") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 

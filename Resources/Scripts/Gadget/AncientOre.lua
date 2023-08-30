@@ -1,6 +1,6 @@
 function OnClientExecuteReq(context, param1, param2, param3)
-		this_config = ScriptLib.GetContextGadgetConfigId(context)
-        this_group = ScriptLib.GetContextGroupId(context)
+		local this_config = ScriptLib.GetContextGadgetConfigId(context)
+        local this_group = ScriptLib.GetContextGroupId(context)
 	--ScriptLib.PrintLog("GadgetState Get Change！！！！！！！")
 		ScriptLib.SetGadgetState(context, param1)
 		if param1==0 then

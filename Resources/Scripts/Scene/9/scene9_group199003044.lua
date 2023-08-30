@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003044
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -77,9 +77,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -90,9 +90,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -126,23 +126,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_44006(context, evt)
 	-- 判断是gadgetid 44022 option_id 411
 	if 44022 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 411 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -150,36 +150,36 @@ end
 function action_EVENT_SELECT_OPTION_44006(context, evt)
 	-- 创建标识为"star2"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star2", {1}, false)
-
-
+	
+	
 	-- 创建标识为"star3"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star3", {2}, false)
-
-
+	
+	
 	-- 创建标识为"star4"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star4", {3}, false)
-
-
+	
+	
 	-- 创建标识为"star5"，时间节点为{4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star5", {4}, false)
-
-
+	
+	
 	-- 创建标识为"star6"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star6", {5}, false)
-
-
+	
+	
 	-- 创建标识为"star7"，时间节点为{6}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star7", {6}, false)
-
-
+	
+	
 	-- 创建标识为"star8"，时间节点为{7}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star8", {7}, false)
-
-
+	
+	
 	-- 创建标识为"star9"，时间节点为{8}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star9", {8}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -190,13 +190,13 @@ function action_EVENT_TIME_AXIS_PASS_44008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "pattern" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003140) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -207,13 +207,13 @@ function action_EVENT_TIME_AXIS_PASS_44009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "pattern" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003141) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -224,13 +224,13 @@ function action_EVENT_TIME_AXIS_PASS_44010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "pattern" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003142) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -241,13 +241,13 @@ function action_EVENT_TIME_AXIS_PASS_44011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "pattern" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003143) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -258,13 +258,13 @@ function action_EVENT_TIME_AXIS_PASS_44012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "pattern" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003144) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -275,13 +275,13 @@ function action_EVENT_TIME_AXIS_PASS_44013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "pattern" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003145) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -292,26 +292,26 @@ function action_EVENT_TIME_AXIS_PASS_44014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "pattern" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003146) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_44015(context, evt)
-	ScriptLib.RefreshGroup(context, { group_id = 199003147, suite = 1 })
-	 ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003147)
+	ScriptLib.RefreshGroup(context, { group_id = 199003147, suite = 1 }) 
+	 ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003147) 
 	 ScriptLib.CreateGadget(context, { config_id = 44016 })
 	 ScriptLib.SetPlatformRouteId(context, 44016, 900300044)
-	 ScriptLib.StartPlatform(context, 44016)
-
-	pos = {x=-953, y=410, z=-114.5}
-	  pos_follow = {x=0, y=0, z=0}
+	 ScriptLib.StartPlatform(context, 44016) 
+	
+	local pos = {x=-953, y=410, z=-114.5}
+	  local pos_follow = {x=0, y=0, z=0}
 	 ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 5.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 6,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 })
@@ -321,20 +321,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_44017(context, evt)
 	-- 判断是gadgetid 为 44016的移动平台，是否到达了900300044 的路线中的 3 点
-
+	
 	if 44016 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 900300044 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -345,17 +345,17 @@ function action_EVENT_PLATFORM_REACH_POINT_44017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 改变指定group组199003044中， configid为44007的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 199003044, 44007, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"route"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "route", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -363,44 +363,44 @@ end
 function condition_EVENT_SELECT_OPTION_44019(context, evt)
 	-- 判断是gadgetid 44022 option_id 411
 	if 44022 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 411 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_44019(context, evt)
 	 ScriptLib.SetGroupVariableValue(context, "finish", 1)
-	ScriptLib.RefreshGroup(context, { group_id = 199003139, suite = 1 })
-	ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003139)
+	ScriptLib.RefreshGroup(context, { group_id = 199003139, suite = 1 }) 
+	ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003139) 
 	ScriptLib.SetGroupVariableValueByGroup(context, "weather", 3, 199003100)
 	ScriptLib.SetWeatherAreaState(context, 9005, 1)
 	ScriptLib.SetWeatherAreaState(context, 9006, 0)
 	ScriptLib.SetWeatherAreaState(context, 9007, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_44020(context, evt)
 	if evt.param1 ~= 44020 then return false end
-
+	
 	-- 判断变量"finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -411,57 +411,57 @@ function action_EVENT_ENTER_REGION_44020(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "pattern" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "pattern", 2, 199003139) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 创建标识为"star2"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star2", {1}, false)
-
-
+	
+	
 	-- 创建标识为"star3"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star3", {2}, false)
-
-
+	
+	
 	-- 创建标识为"star4"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star4", {3}, false)
-
-
+	
+	
 	-- 创建标识为"star5"，时间节点为{4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star5", {4}, false)
-
-
+	
+	
 	-- 创建标识为"star6"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star6", {5}, false)
-
-
+	
+	
 	-- 创建标识为"star7"，时间节点为{6}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star7", {6}, false)
-
-
+	
+	
 	-- 创建标识为"star8"，时间节点为{7}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star8", {7}, false)
-
-
+	
+	
 	-- 创建标识为"star9"，时间节点为{8}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "star9", {8}, false)
-
-
+	
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 44025, 900300047) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 44025) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -470,7 +470,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_44021(context, evt)
 	if 44007 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -481,21 +481,21 @@ function action_EVENT_GADGET_STATE_CHANGE_44021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 44025 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 44016 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -503,14 +503,14 @@ end
 function condition_EVENT_SELECT_OPTION_44023(context, evt)
 	-- 判断是gadgetid 44022 option_id 411
 	if 44022 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 411 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -521,19 +521,19 @@ function action_EVENT_SELECT_OPTION_44023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 44025) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 199003044, EntityType.GADGET, 44022 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -544,13 +544,13 @@ function action_EVENT_TIME_AXIS_PASS_44026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 44016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -560,7 +560,7 @@ function condition_EVENT_GROUP_LOAD_44027(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -571,54 +571,54 @@ function action_EVENT_GROUP_LOAD_44027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003140, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003141, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003142, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003143, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003144, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003145, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003146, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003147, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

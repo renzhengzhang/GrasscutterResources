@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220131003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -107,9 +107,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -119,16 +119,16 @@ function action_EVENT_GADGET_STATE_CHANGE_3013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 杀死Group内所有实体
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220131003, kill_policy = GroupKillPolicy.GROUP_KILL_ALL }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_group")
 			return -1
 		end
-
-
+		
+	
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131003, 1)
-
+	
 	return 0
 end

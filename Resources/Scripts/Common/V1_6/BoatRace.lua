@@ -1,16 +1,16 @@
 --[[
-defs = {
+local defs = {
 	need_kill_hint = true,
 	group_id = 144001108, --对应的GroupID
 	gadget_init = {108013, 108014},	--defs.gadget_init里按顺序填入 开启挑战机关ConfigID、 限时终点ConfigID
 	challenge_time = 181, --挑战持续的时间
-	gadget_suites = {
+	gadget_suites = { 
 		[4] = {108015,108023},	--suites每波需要销毁的指示路点和光柱,结构为[suite_id] = {gadget1,gadget2},id从4开始
 		[5] = {108017,108024},
 		[6] = {108019,108025},
 	},
 	--怪物死亡时刷新对应的Suites里的纹章,结构为[configid] = suiteid,
-	suites_heraldry_loot = {
+	suites_heraldry_loot = { 
 		[108075] = 7,
 		[108077] = 8,
 	},
@@ -20,7 +20,7 @@ defs = {
 }
 ]]--
 
-Triggers_Start = {
+local Triggers_Start = {
 	[1] = { name = "challenge_success", config_id = 9000001, event = EventType.EVENT_CHALLENGE_SUCCESS, source = "",condition = "",action = "action_challenge_success",trigger_count= 0},
 	[2] = { name = "challenge_fail", config_id = 9000002, event = EventType.EVENT_CHALLENGE_FAIL, source = "",condition = "",action = "action_challenge_fail",trigger_count= 0},
 	[3] = { name = "select_option", config_id = 9000003, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
@@ -32,7 +32,7 @@ Triggers_Start = {
 	[9] = { name = "group_unload", config_id = 9000009, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
 }
 
-Triggers_Final =	{
+local Triggers_Final =	{
 	[1] = { config_id=50000001,name = "enter_final_region",config_id = 9000010, event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_enter_final_region", action = "", trigger_count = 0, tag = "666" },
 }
 
@@ -50,7 +50,7 @@ end
 --机关开启条件及开启处理
 function action_select_option(context, evt)
 	if defs.gadget_init[1] ~= evt.param1 or 175 ~= evt.param2 then
-		return -1
+		return -1	
 	end
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
@@ -67,18 +67,18 @@ function action_select_option(context, evt)
 		ScriptLib.ShowReminder(context, 400046)
 		return -1
 	end
-	boat_groups = {144002049,144001130,144004065,144001127,144004063,144001108}
+	local boat_groups = {144002049,144001130,144004065,144001127,144004063,144001108}
 	for k,grp_id in pairs(boat_groups) do
 		ScriptLib.SetGroupTempValue(context, "flagHasStarted", 1, {group_id = grp_id})
 	end
 	-- 新建一个波次的全局变量 从1开始，suites的刷新顺序按suites_chain的顺序刷新
-	ret = ScriptLib.SetGroupTempValue(context, "wave", 1, {})
+	local ret = ScriptLib.SetGroupTempValue(context, "wave", 1, {})
 	--创建编号为888（该挑战的识别id),挑战内容为127的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	ScriptLib.CreateFatherChallenge(context, 2011, 2011, defs.challenge_time, {success = 10, fail = 5})
 	ScriptLib.AttachChildChallenge(context, 2011, 2012, 2012,{0,4, 666,1},{},{success = 10,fail = 5}) --限时到达
 	ScriptLib.AttachChildChallenge(context, 2011, 2013, 2013,{0,2, 888, defs.gadget_heraldry_count},{},{success = 1,fail = 0}) --收集纹章
 	if defs.need_kill_hint == true then
-		hints = 0
+		local hints = 0
 		for k,v in pairs(defs.suites_heraldry_loot) do
 			hints = hints+1
 		end
@@ -87,7 +87,7 @@ function action_select_option(context, evt)
 	ScriptLib.StartFatherChallenge(context, 2011)
 	ScriptLib.SetChallengeEventMark(context, 2011, ChallengeEventMarkType.SUMMER_TIME_SPRINT_BOAT_TIME)
 	ScriptLib.SetChallengeEventMark(context, 2013, ChallengeEventMarkType.SUMMER_TIME_SPRINT_BOAT_GATHER_POINT)
-	ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, defs.gadget_init[1], 175)
+	ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, defs.gadget_init[1], 175) 
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 	-- 添加suite4的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, defs.suites_chain[1])
@@ -96,29 +96,29 @@ function action_select_option(context, evt)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_id, 10)
 	end
 	-- 将configid为 defs.gadget_init[1] 的物件更改为状态 GadgetState.GearStart
-	ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_init[1], GadgetState.GearStart)
+	ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_init[1], GadgetState.GearStart) 
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_GearStart")
 	return 0
 end
 
 -- 处理成功
 function action_challenge_success(context, evt)
-	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : success_process_start")
+	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : success_process_start")	
 	if evt.param1 ~= 2011 then
 		return -1
 	end
 	for i=1,#defs.gadget_init do
-		ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_init[i] })
+		ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_init[i] })	
 	end
 
 	for i= 2, #suites do
 	    ScriptLib.KillExtraGroupSuite(context, defs.group_id, i)
 	end
-	boat_groups = {144002049,144001130,144004065,144001127,144004063,144001108}
+	local boat_groups = {144002049,144001130,144004065,144001127,144004063,144001108}
 	for k,grp_id in pairs(boat_groups) do
 		ScriptLib.SetGroupTempValue(context, "flagHasStarted", 0, {group_id = grp_id})
 	end
-	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : success_kill_all_entity")
+	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : success_kill_all_entity")	
 	ScriptLib.RefreshGroup(context, { group_id = defs.group_id, suite = 1 })
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : success_process_end")
 	return 0
@@ -133,7 +133,7 @@ function action_challenge_fail(context, evt)
 	-- 将本组内变量名为 "hasStarted" 的变量设置为 0
 	ScriptLib.SetGroupVariableValue(context, "hasStarted", 0)
 	--标记挑战结束
-	boat_groups = {144002049,144001130,144004065,144001127,144004063,144001108}
+	local boat_groups = {144002049,144001130,144004065,144001127,144004063,144001108}
 	for k,grp_id in pairs(boat_groups) do
 		ScriptLib.SetGroupTempValue(context, "flagHasStarted", 0, {group_id = grp_id})
 	end
@@ -142,10 +142,10 @@ function action_challenge_fail(context, evt)
 	-- 设置操作台选项
 	ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, defs.gadget_init[1], {175})
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
-
+	
 	for i= 2, #suites do --目前第三组为空，从第四组开始
 	    ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, i)
-	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_groupsuites")
+	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_groupsuites")	
 	end
 
 	-- 将configid为 defs.gadget_init[1] 的物件更改为状态 GadgetState.Default
@@ -160,7 +160,7 @@ end
 
 --统计激流纹章数量,
 function condition_gadget_die_count(context, evt)
-	death_config_id = evt.param1
+	local death_config_id = evt.param1
 	if gadgets[death_config_id].gadget_id == defs.gadget_heraldry_id then
 		return true
 	end
@@ -170,7 +170,7 @@ end
 -- 进入最终区域,suite2
 function condition_enter_final_region(context, evt)
 	-- 判断角色数量不少于1
-	if evt.param1 ~= suites[2].regions[1] then
+	if evt.param1 ~= suites[2].regions[1] then 
 		return false
 	end
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
@@ -182,16 +182,16 @@ end
 -- 进入每个Suite触发区域时移除终点指示器并刷新下一个Suite，移除上一个Suite
 function action_enter_region(context, evt)
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : EnterRegionToNext")
-	wave = ScriptLib.GetGroupTempValue(context, "wave", {})
+	local wave = ScriptLib.GetGroupTempValue(context, "wave", {})
 	if wave > #defs.suites_chain then --防止访问不存在的wave
 		return -1
 	end
-	suite_seq = defs.suites_chain[wave]
+	local suite_seq = defs.suites_chain[wave]
 	-- 判断角色数量不少于1
 	if evt.param1 ~= suites[suite_seq].regions[1] then
 		return -1
 	end
-	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
+	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then 
 		return -1
 	end
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : Enter"..suite_seq)
@@ -236,7 +236,7 @@ end
 
 --处理Group未正确卸载的情况
 function action_group_will_unload( context,evt )
-	boat_groups = {144002049,144001130,144004065,144001127,144004063,144001108}
+	local boat_groups = {144002049,144001130,144004065,144001127,144004063,144001108}
 	for k,grp_id in pairs(boat_groups) do
 		ScriptLib.SetGroupTempValue(context, "flagHasStarted", 0, {group_id = grp_id})
 	end

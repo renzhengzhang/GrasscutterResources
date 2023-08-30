@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111102014
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_id = 111102014,
 	gadget_1 = 14001,
 	gadget_2 = 14002,
@@ -13,9 +13,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -61,9 +61,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -101,20 +101,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_14006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"active_count"为4
 	if ScriptLib.GetGroupVariableValue(context, "active_count") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -122,7 +122,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_14006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111102014, 2)
-
+	
 	return 0
 end
 
@@ -132,21 +132,21 @@ function condition_EVENT_GADGET_STATE_CHANGE_14009(context, evt)
 	  then
 		return false
 	end
-	return true
+	return true 
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_14009(context, evt)
 	-- 创建标识为"timer1"，时间节点为{10}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer1", {10}, false)
-
-
+	
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_TIME_AXIS_PASS_14010(context, evt)
 			ScriptLib.ChangeGroupVariableValue(context, "active_count", -1)
 		end
 	end
-
+	
 	return 0
 end
 
@@ -167,21 +167,21 @@ function condition_EVENT_GADGET_STATE_CHANGE_14011(context, evt)
 	  then
 		return false
 	end
-	return true
+	return true 
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_14011(context, evt)
 	-- 创建标识为"timer2"，时间节点为{10}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer2", {10}, false)
-
-
+	
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -191,21 +191,21 @@ function condition_EVENT_GADGET_STATE_CHANGE_14012(context, evt)
 	  then
 		return false
 	end
-	return true
+	return true 
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_14012(context, evt)
 	-- 创建标识为"timer3"，时间节点为{10}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer3", {10}, false)
-
-
+	
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -215,20 +215,20 @@ function condition_EVENT_GADGET_STATE_CHANGE_14013(context, evt)
 	  then
 		return false
 	end
-	return true
+	return true 
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_14013(context, evt)
 	-- 创建标识为"timer4"，时间节点为{10}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer4", {10}, false)
-
-
+	
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

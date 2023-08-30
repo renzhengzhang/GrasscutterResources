@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220201
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -83,9 +83,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -94,12 +94,12 @@ function condition_EVENT_GADGET_CREATE_201003(context, evt)
 	if 201001 ~= evt.param1 then
 			return false
 		end
-
+	
 	-- 判断变量"open"为0
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -110,7 +110,7 @@ function action_EVENT_GADGET_CREATE_201003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -119,7 +119,7 @@ function condition_EVENT_SELECT_OPTION_201004(context, evt)
 	if 201001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -130,25 +130,25 @@ function action_EVENT_SELECT_OPTION_201004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2011, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133220201, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "open" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "open", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_201005(context, evt)
 	if 201002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -168,19 +168,19 @@ function action_EVENT_GADGET_STATE_CHANGE_201005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "open" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "open", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_USE_WIDGET_TOY_FOX_CAMERA_201007(context, evt)
-	 configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
+	 local configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
 	if configId==201006 then
 	return true
 	end
@@ -194,13 +194,13 @@ function action_EVENT_USE_WIDGET_TOY_FOX_CAMERA_201007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 创建id为201001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 201001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -210,7 +210,7 @@ function condition_EVENT_GROUP_LOAD_201008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -221,6 +221,6 @@ function action_EVENT_GROUP_LOAD_201008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end

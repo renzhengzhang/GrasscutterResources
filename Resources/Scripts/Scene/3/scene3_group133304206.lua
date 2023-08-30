@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304206
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_CoreID = 206005,
 	monster_BossID = 206002,
 	gadget_Point_1 = 206006,
@@ -16,9 +16,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-DeathField ={
+local DeathField ={
 	CoreID = defs.gadget_CoreID,
 	BossID = defs.monster_BossID,
 	BossSuite = 2,
@@ -26,7 +26,7 @@ DeathField ={
 	PointList = {defs.gadget_Point_1,defs.gadget_Point_2,defs.gadget_Point_3},
 }
 
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 1,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -35,9 +35,9 @@ CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -98,9 +98,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -111,9 +111,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -156,9 +156,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -166,7 +166,7 @@ function condition_EVENT_MONSTER_BATTLE_206003(context, evt)
 	if 206002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -176,8 +176,8 @@ function action_EVENT_MONSTER_BATTLE_206003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 206012, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -186,7 +186,7 @@ function condition_EVENT_ANY_MONSTER_DIE_206009(context, evt)
 	if 206002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -196,8 +196,8 @@ function action_EVENT_ANY_MONSTER_DIE_206009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 206012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -212,7 +212,7 @@ function condition_EVENT_ANY_GADGET_DIE_206023(context, evt)
 	if 206005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -220,7 +220,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_206023(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304206, 4)
-
+	
 	return 0
 end
 
@@ -229,7 +229,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_206024(context, evt)
 	if 206006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -240,8 +240,8 @@ function action_EVENT_GADGET_STATE_CHANGE_206024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -250,7 +250,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_206025(context, evt)
 	if 206007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -261,8 +261,8 @@ function action_EVENT_GADGET_STATE_CHANGE_206025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -271,7 +271,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_206026(context, evt)
 	if 206008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -282,8 +282,8 @@ function action_EVENT_GADGET_STATE_CHANGE_206026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 

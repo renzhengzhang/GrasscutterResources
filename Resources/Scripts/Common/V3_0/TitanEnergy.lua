@@ -3,11 +3,11 @@
 ||  owner:      shuyi.chang
 ||  description:    泰坦内舱能量玩法
 ||  LogName:    ## [TitanEnergy]
-||  Protection:
+||  Protection: 
 =======================================]]
 
 --[[
-defs = {
+local defs = {
     -- 【特别注意】所有流程必需的machine必须放在suite1中，在电池全亮后自动开启
     -- 【特别注意】探索性质的machine必须放在suite2中，在电池全亮后不会自动开启
     -- 【特别注意】只有suite1会在group load时加载
@@ -34,8 +34,8 @@ defs = {
 --]]
 
 
-extraTriggers =
-{
+local extraTriggers = 
+{	
     { config_id = 50000001, name = "ENTER_REGION", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_ENTER_REGION", trigger_count = 0 },
 	{ config_id = 50000002, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_GROUP_LOAD", trigger_count = 0 },
 	{ config_id = 50000003, name = "CELL_INTERACT", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_CELL_INTERACT", trigger_count = 0 },
@@ -48,7 +48,7 @@ extraTriggers =
 
 }
 
-extraVariables =
+local extraVariables = 
 {
     -- 记录玩家身上有几格能量
 	{ config_id = 50000101, name = "playerEnergyLevel", value = 0, no_refresh = true },
@@ -66,54 +66,54 @@ extraVariables =
     { config_id = 50000106, name = "enabled", value = 0, no_refresh = true },
 }
 
-machineGadgetIds = {
+local machineGadgetIds = {  
     -- key表示这个机器需要几格能量才能开启
-    [1] = 70350439,
-    [2] = 70350440,
+    [1] = 70350439, 
+    [2] = 70350440, 
     [3] = 70350441,
 }
 
-cellGadgetId = 70350442
-nodeGadgetId = 70350446
-stoneGadgetId = 70350449
-lineGadgetIds = {
+local cellGadgetId = 70350442
+local nodeGadgetId = 70350446
+local stoneGadgetId = 70350449
+local lineGadgetIds = {
     70350443,
     70350444,
     70350445,
 }
 
 -- 都是常量，记一下各个类别的gadget
-stones = {}
-lines = {}
-nodes = {}
-machines = {}
+local stones = {}
+local lines = {}
+local nodes = {}
+local machines = {}
 
 -- 这里的机关单指suite1中玩法必需的机关
-questMachines = {}
+local questMachines = {}
 
-cellCount
+local cellCount
 
 -- worktop option表中对应充能和回收的id
-worktopOpt = {
+local worktopOpt = {
     charge = 35,
     recycle = 69,
     collect = 68,
 }
 
-abilityGroup = "ActivityAbility_TitanEnergy"
+local abilityGroup = "ActivityAbility_TitanEnergy"
 
-reminderTable =
+local reminderTable = 
 {
     playerFull = 60010321, -- 【玩家拥有的能量到达最大值】好了，去下一处吧！
 }
 
 -- 能量机关交互后等1s再上新选项
-optionCd = 1
+local optionCd = 1
 
 
 
 --================================================================
--- Functions
+-- Local Functions
 --================================================================
 
 function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
@@ -136,14 +136,14 @@ function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
     LF_InitiateLuaVariables(gadgets, suites, variables)
 
     -- 用于玩家身上特效的ability group
-    regions[defs.titanRegion].team_ability_group_list = {abilityGroup}
+    regions[defs.titanRegion].team_ability_group_list = {abilityGroup}    
 
 end
 
 
 function LF_InitiateLuaVariables(gadgets, suites, variables)
 
-    temp = 0
+    local temp = 0
     for i, v in pairs(gadgets) do
 
         -- check the number of machines
@@ -153,7 +153,7 @@ function LF_InitiateLuaVariables(gadgets, suites, variables)
             if v.gadget_id == j then
                 temp = temp + 1
                 -- group variable记录这个机关有几格能量
-                machineEnergyLev = { config_id = 50000006 + temp, name = tostring(i), value = 0, no_refresh = true }
+                local machineEnergyLev = { config_id = 50000006 + temp, name = tostring(i), value = 0, no_refresh = true }
                 table.insert(variables, machineEnergyLev)
 
                 -- all machines
@@ -192,7 +192,7 @@ function LF_InitiateLuaVariables(gadgets, suites, variables)
                 table.insert(lines, i)
             end
         end
-
+        
     end
 
     for k, v in pairs(defs.cells) do
@@ -214,7 +214,7 @@ end
 
 
 function LF_GetTableLength(t)
-    count = 0
+    local count = 0
     for _ in pairs(t) do count = count + 1 end
     return count
 end
@@ -253,7 +253,7 @@ function LF_UpdateWorktopOption(context)
             -- 添加充能选项
             ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, k, {worktopOpt.charge})
             -- ScriptLib.PrintContextLog(context, "## [TitanEnergy] cell ".. k.." adds option "..worktopOpt.charge)
-
+        
         else
             -- 删除充能选项
             ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, k, worktopOpt.charge)
@@ -265,7 +265,7 @@ function LF_UpdateWorktopOption(context)
         if ScriptLib.GetGroupVariableValue(context, "playerEnergyLevel") < defs.maxPlayerEnergyLev and
             ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, k) == 201 and
             ScriptLib.GetGroupVariableValue(context, "activeCellNum") ~= cellCount then
-
+            
             ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, k, {worktopOpt.recycle})
             -- ScriptLib.PrintContextLog(context, "## [TitanEnergy] cell ".. k.." adds option "..worktopOpt.recycle)
 
@@ -273,15 +273,15 @@ function LF_UpdateWorktopOption(context)
             -- 删除回收选项
             ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, k, worktopOpt.recycle)
             -- ScriptLib.PrintContextLog(context, "## [TitanEnergy] cell ".. k.." deletes option "..worktopOpt.recycle)
-
+            
         end
 
     end
 
     -- machine
     for i = 1, #machines do
-
-        worktopState = {charge = false, recycle = false}
+        
+        local worktopState = {charge = false, recycle = false}
 
         -- 大前提条件是并不是所有电池都被点亮了
         if ScriptLib.GetGroupVariableValue(context, "activeCellNum") ~= cellCount then
@@ -303,7 +303,7 @@ function LF_UpdateWorktopOption(context)
                 worktopState.recycle = true
             else
                 -- 删除回收选项
-                worktopState.recycle = false
+                worktopState.recycle = false            
             end
 
         -- 如果所有电池都被点亮了，quest machine就不能再操作了
@@ -339,7 +339,7 @@ function LF_GetMaxEnergyLevelByConfigId(context, configId)
         return 0
     end
 
-    max = 0
+    local max = 0
     if gadgets[configId].gadget_id == 70350439 then
 
         max = 1
@@ -361,19 +361,19 @@ function LF_UpdateNodeStatByCell(context, isCharge, cellId)
     ScriptLib.PrintContextLog(context, "## [TitanEnergy] LF_UpdateNodeStatByCell is called")
 
     -- 找到这个cell关联的所有node，是个table
-    curNodes = defs.cells[cellId].nodes
+    local curNodes = defs.cells[cellId].nodes
 
     for i = 1, #curNodes do
-
+        
         -- 一个node的config id
-        curNode = curNodes[i]
+        local curNode = curNodes[i]
         -- ScriptLib.PrintContextLog(context, "## [TitanEnergy] curNode = "..curNode)
 
         -- 先把node设置为亮的
         ScriptLib.SetGroupGadgetStateByConfigId(context, base_info.group_id, curNode, 201)
 
         -- 找到这个node关联的所有电池
-        relatedCells = gadgets[curNode].cells
+        local relatedCells = gadgets[curNode].cells
         for j = 1, #relatedCells do
             if ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, relatedCells[j]) == 0 then
                 -- 任何一个电池不亮，node就不能亮
@@ -413,7 +413,7 @@ function LF_UpdateNodeStatByCell(context, isCharge, cellId)
 
         -- end
     end
-
+   
 end
 
 
@@ -426,21 +426,21 @@ function LF_UpdateLineStatByCell(context, isCharge, cellId)
     end
 
     -- 此电池关联的电线组
-    curLines = defs.cells[cellId].lines
+    local curLines = defs.cells[cellId].lines
 
     for i = 1, #curLines do
-
+        
         -- 当前line的config id
-        curLine = curLines[i]
+        local curLine = curLines[i]
 
         -- 电线先变暗，但只要有一个电池是亮的，电线就需要亮
         ScriptLib.SetGroupGadgetStateByConfigId(context, base_info.group_id, curLine, 0)
-
+         
         -- 找到当前line关联的所有电池
-        relatedCells = gadgets[curLine].cells
+        local relatedCells = gadgets[curLine].cells
 
         for j = 1, #relatedCells do
-
+           
             if ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, relatedCells[j]) == 201 then
                 ScriptLib.SetGroupGadgetStateByConfigId(context, base_info.group_id, curLine, 201)
                 ScriptLib.PrintContextLog(context, "## [TitanEnergy] node "..curLine..", status = light")
@@ -480,13 +480,13 @@ end
 function LF_UpdateCellEnergy(context, isCharge, cellId)
     ScriptLib.PrintContextLog(context, "## [TitanEnergy] LF_UpdateCellEnergy is called")
 
-    destGadgetState
-    delta
+    local destGadgetState
+    local delta
 
     if isCharge then
         destGadgetState = 201
         delta = 1
-    else
+    else 
         destGadgetState = 0
         delta = -1
     end
@@ -497,7 +497,7 @@ function LF_UpdateCellEnergy(context, isCharge, cellId)
     -- 更新group变量
     ScriptLib.ChangeGroupVariableValue(context, "activeCellNum", delta)
 
-    -- temp = 0
+    -- local temp = 0
     -- for k, v in pairs(defs.cells) do
     --     if ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, k) == 201 then
     --         temp = temp + 1
@@ -529,7 +529,7 @@ function LF_UpdateMachineEnergy(context, delta, machineId)
     -- 给机关增加delta的能量值
     ScriptLib.ChangeGroupVariableValue(context, tostring(machineId), delta)
 
-    curMachineEnergyNum = ScriptLib.GetGroupVariableValue(context, tostring(machineId))
+    local curMachineEnergyNum = ScriptLib.GetGroupVariableValue(context, tostring(machineId))
     ScriptLib.SetEntityServerGlobalValueByConfigId(context, machineId, "SGV_MACHINE_ENERGY_LEVEL", curMachineEnergyNum)
 
     ScriptLib.PrintContextLog(context, "## [TitanEnergy] machine "..machineId..", energyNum = "..curMachineEnergyNum)
@@ -542,7 +542,7 @@ function LF_UpdatePlayerEnergyLev(context, delta)
 
     -- 更新玩家身上能量
     ScriptLib.ChangeGroupVariableValue(context, "playerEnergyLevel", delta)
-    curPlayerEnergyLev = ScriptLib.GetGroupVariableValue(context, "playerEnergyLevel")
+    local curPlayerEnergyLev = ScriptLib.GetGroupVariableValue(context, "playerEnergyLevel")
 
     -- 同步给SGV
     ScriptLib.SetTeamServerGlobalValue(context, context.owner_uid, "SGV_ENERGY_LEVEL", curPlayerEnergyLev)
@@ -554,26 +554,26 @@ end
 function LF_ResetGroup(context)
     ScriptLib.PrintContextLog(context, "## [TitanEnergy] LF_ResetGroup is called")
 
-    uidList = ScriptLib.GetSceneUidList(context)
+    local uidList = ScriptLib.GetSceneUidList(context)
     -- 取不到uid list就不要往下走了
 	if #uidList == 0 then
 		ScriptLib.PrintContextLog(context, "## [TitanEnergy] no player in scene when resetting group")
 		return
 	end
 
-    groupStatus = ScriptLib.GetGroupVariableValue(context, "groupStatus")
+    local groupStatus = ScriptLib.GetGroupVariableValue(context, "groupStatus")
     ScriptLib.PrintContextLog(context, "## [TitanEnergy] group status = "..groupStatus)
-
+    
     if groupStatus == 2 then
         -- -- 进行中，表现不固定，不做特殊操作
         -- -- 玩家身上能量和group变量对齐(如果身上有能量的时候断线重连了)
-        -- playerEnergyLev = ScriptLib.GetGroupVariableValue(context, "playerEnergyLevel")
-        -- var = ScriptLib.SetTeamServerGlobalValue(context, context.owner_uid, "SGV_ENERGY_LEVEL", playerEnergyLev)
+        -- local playerEnergyLev = ScriptLib.GetGroupVariableValue(context, "playerEnergyLevel")
+        -- local var = ScriptLib.SetTeamServerGlobalValue(context, context.owner_uid, "SGV_ENERGY_LEVEL", playerEnergyLev)
         -- ScriptLib.PrintContextLog(context, "## [TitanEnergy] SGV_ENERGY_LEVEL is created and set to "..playerEnergyLev..", var = "..var)
 
         -- -- 机器能量值SGV和group var对齐
         -- for i = 1, #machines do
-        --     machineEnergy = ScriptLib.GetGroupVariableValue(context, tostring(machines[i]))
+        --     local machineEnergy = ScriptLib.GetGroupVariableValue(context, tostring(machines[i]))
         --     ScriptLib.SetEntityServerGlobalValueByConfigId(context, machines[i], "SGV_MACHINE_ENERGY_LEVEL", machineEnergy)
         --     ScriptLib.PrintContextLog(context, "## [TitanEnergy] machine "..machines[i]..", SGV_MACHINE_ENERGY_LEVEL is set to "..machineEnergy)
         -- end
@@ -604,7 +604,7 @@ function LF_ResetGroup(context)
 
         -- 只有任务机关在201
         for i = 1, #questMachines do
-            maxEnergy = LF_GetMaxEnergyLevelByConfigId(context, questMachines[i])
+            local maxEnergy = LF_GetMaxEnergyLevelByConfigId(context, questMachines[i])
             ScriptLib.SetGroupVariableValue(context, tostring(questMachines[i]), maxEnergy)
             ScriptLib.SetEntityServerGlobalValueByConfigId(context, questMachines[i], "SGV_MACHINE_ENERGY_LEVEL", maxEnergy)
             ScriptLib.PrintContextLog(context, "## [TitanEnergy] quest machine "..questMachines[i]..", SGV_MACHINE_ENERGY_LEVEL is set to "..maxEnergy)
@@ -677,7 +677,7 @@ function LF_ForceLevelStop(context)
 
     -- 联机专用function，没走正常逻辑，只是表面上把所有操作台选项删掉+所有物件进入未激活状态（即都暗掉了）
     -- 顺便除了groupStatus的变量也归零了，以免有什么我不知道的地方用它们做了判断
-    uidList = ScriptLib.GetSceneUidList(context)
+    local uidList = ScriptLib.GetSceneUidList(context)
     -- 所有玩家身上都不能有能量
 	for i = 1, #uidList do
         ScriptLib.SetTeamServerGlobalValue(context, context.owner_uid, "SGV_ENERGY_LEVEL", 0)
@@ -716,7 +716,7 @@ function LF_ForceLevelStop(context)
 end
 
 function LF_IsMPMode(context)
-    isMP = ScriptLib.CheckIsInMpMode(context)
+    local isMP = ScriptLib.CheckIsInMpMode(context)
 
     ScriptLib.PrintContextLog(context, "## [TitanEnergy] LF_IsMPMode is called, isMPMode = "..tostring(isMP))
 
@@ -765,7 +765,7 @@ function action_LEAVE_REGION(context, evt)
     -- 断线重连和联机后会被触发
     ScriptLib.PrintContextLog(context, "## [TitanEnergy] player leaves region "..evt.param1)
 
-    if evt.param1 == defs.titanRegion then
+    if evt.param1 == defs.titanRegion then    
         LF_RestartLevel(context)
     end
     return 0
@@ -793,7 +793,7 @@ function action_VARIABLE_CHANGE(context, evt)
     if evt.source_name == "activeCellNum" then
         -- 如果所有电池都已经完成了，电池和机关都维持201状态
         if ScriptLib.GetGroupVariableValue(context, "activeCellNum") == cellCount then
-
+            
             -- 已经完成这组机关，会再次触发此事件，走下面else里的resetGroup
             ScriptLib.SetGroupVariableValue(context, "groupStatus", 3)
 
@@ -803,10 +803,10 @@ function action_VARIABLE_CHANGE(context, evt)
 
             if LF_IsMPMode(context) == false then
                 LF_ResetGroup(context)
-            end
+            end        
         end
-    end
-
+    end 
+    
     return 0
 end
 
@@ -817,7 +817,7 @@ function action_CELL_INTERACT(context, evt)
         return 0
     end
 
-    -- uidList = ScriptLib.GetSceneUidList(context)
+    -- local uidList = ScriptLib.GetSceneUidList(context)
 
     -- 先判空
     if gadgets[evt.param1] == nil then
@@ -831,9 +831,9 @@ function action_CELL_INTERACT(context, evt)
         if ScriptLib.GetGroupVariableValue(context, "groupStatus") == 1 then
             ScriptLib.SetGroupVariableValue(context, "groupStatus", 2)
         end
-
+        
         -- 先拿到这个电池的config id
-        curCellId = evt.param1
+        local curCellId = evt.param1
 
         -- 充能
         if evt.param2 == worktopOpt.charge then
@@ -855,7 +855,7 @@ function action_CELL_INTERACT(context, evt)
         -- 更新操作台选项
         LF_UpdateWorktopOption(context)
 
-    end
+    end   
 
 	return 0
 end
@@ -868,12 +868,12 @@ function action_MACHINE_INTERACT(context, evt)
         return 0
     end
 
-    -- uidList = ScriptLib.GetSceneUidList(context)
+    -- local uidList = ScriptLib.GetSceneUidList(context)
 
     if gadgets[evt.param1].gadget_id == 70350439 or
         gadgets[evt.param1].gadget_id == 70350440 or
         gadgets[evt.param1].gadget_id == 70350441 then
-
+        
         ScriptLib.PrintContextLog(context, "## [TitanEnergy] player interact with machine worktop "..evt.param1..", option = "..evt.param2)
 
         -- 玩法进行中
@@ -882,17 +882,17 @@ function action_MACHINE_INTERACT(context, evt)
         end
 
         -- 是机关, 拿到机关的config id
-        curMachineId = evt.param1
+        local curMachineId = evt.param1
 
         -- 机关最大能量数
-        curMachineMaxEnergy = LF_GetMaxEnergyLevelByConfigId(context, curMachineId)
-
+        local curMachineMaxEnergy = LF_GetMaxEnergyLevelByConfigId(context, curMachineId)
+        
         -- 机关目前能量数
-        curMachineEnergy = ScriptLib.GetGroupVariableValue(context, tostring(curMachineId))
+        local curMachineEnergy = ScriptLib.GetGroupVariableValue(context, tostring(curMachineId))
 
-        machineNeed = curMachineMaxEnergy - curMachineEnergy
-        playerNeed = defs.maxPlayerEnergyLev - ScriptLib.GetGroupVariableValue(context, "playerEnergyLevel")
-        delta
+        local machineNeed = curMachineMaxEnergy - curMachineEnergy
+        local playerNeed = defs.maxPlayerEnergyLev - ScriptLib.GetGroupVariableValue(context, "playerEnergyLevel")
+        local delta
 
         -- 充能
         if evt.param2 == worktopOpt.charge then
@@ -929,7 +929,7 @@ end
 
 
 function action_ENERGY_PICKUP(context, evt)
-
+  
     -- 以防万一，如果联机的时候出现了交互选项，立刻结束
     if LF_IsMPMode(context) == true then
         return 0
@@ -944,14 +944,14 @@ function action_ENERGY_PICKUP(context, evt)
             ScriptLib.SetGroupVariableValue(context, "groupStatus", 2)
         end
 
-        curStoneId = evt.param1
-        -- uidList = ScriptLib.GetSceneUidList(context)
+        local curStoneId = evt.param1
+        -- local uidList = ScriptLib.GetSceneUidList(context)
 
         if ScriptLib.GetGroupVariableValue(context, "playerEnergyLevel") < defs.maxPlayerEnergyLev then
 
             -- 能量块和操作台选项都无了
             LF_UpdateStone(context, curStoneId, 202)
-
+    
             -- 玩家身上energy level ++
             LF_UpdatePlayerEnergyLev(context, 1)
 
@@ -962,7 +962,7 @@ function action_ENERGY_PICKUP(context, evt)
                 ..ScriptLib.GetGroupVariableValue(context, "playerEnergyLevel"))
 
         end
-
+    
         -- 更新操作台选项
         LF_UpdateWorktopOption(context)
     end
@@ -976,7 +976,7 @@ function action_TIME_AXIS_PASS(context, evt)
     if evt.source_name == "optionCD" then
         LF_UpdateWorktopOption(context)
     end
-
+   
     return 0
 end
 

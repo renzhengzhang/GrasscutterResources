@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220127006
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -100,20 +100,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6001(context, evt)
 	if evt.param1 ~= 6001 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -123,13 +123,13 @@ function action_EVENT_ENTER_REGION_6001(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 220127006, 2)
 	ScriptLib.AddExtraGroupSuite(context, 220127006, 3)
 	ScriptLib.RemoveExtraGroupSuite(context, 220127006, 1)
-
+	
 	-- 改变指定group组220127002中， configid为2071的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220127002, 2071, 302) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -139,7 +139,7 @@ function condition_EVENT_ANY_MONSTER_DIE_6002(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -150,22 +150,22 @@ function action_EVENT_ANY_MONSTER_DIE_6002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 延迟2秒后,向groupId为：220127006的对象,请求一次调用,并将string参数："success" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220127006, "success", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220127006, 3)
-
+	
 	-- 将本组内变量名为 "levelFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "levelFinished", 1, 220127002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -176,29 +176,29 @@ function action_EVENT_TIMER_EVENT_6003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（60，60，141），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=60, y=60, z=141}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=60, y=60, z=141}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 201270401 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 201270401) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 延迟1秒后,向groupId为：220127006的对象,请求一次调用,并将string参数："finish" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220127006, "finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -209,23 +209,23 @@ function action_EVENT_TIMER_EVENT_6004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6007(context, evt)
 	if evt.param1 ~= 6007 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	if 302 ~= ScriptLib.GetGadgetStateByConfigId(context, 220127002, 2071) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -233,32 +233,32 @@ end
 function action_EVENT_ENTER_REGION_6007(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220127006, 2)
-
+	
 	-- 改变指定group组220127002中， configid为2071的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220127002, 2071, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220127006, 1)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6008(context, evt)
 	if evt.param1 ~= 6007 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	if 302 ~= ScriptLib.GetGadgetStateByConfigId(context, 220127002, 2071) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -266,15 +266,15 @@ end
 function action_EVENT_ENTER_REGION_6008(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220127006, 2)
-
+	
 	-- 改变指定group组220127002中， configid为2071的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220127002, 2071, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220127006, 1)
-
+	
 	return 0
 end

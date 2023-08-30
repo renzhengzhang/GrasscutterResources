@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220142009
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -121,23 +121,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_9006(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 220142009) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"temp"为0
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -148,42 +148,42 @@ function action_EVENT_ANY_MONSTER_DIE_9006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220142009, 4)
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_LEVEL_TAG_CHANGE_9008(context, evt)
 	ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=1})
-
+	
 	if evt.param2 == 27 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 220142009, 2)
-
+		
 		ScriptLib.RemoveExtraGroupSuite(context, 220142009, 3)
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9009(context, evt)
 	if evt.param1 ~= 9009 then return false end
-
+	
 	-- 判断变量"temp"为0
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -191,13 +191,13 @@ end
 function action_EVENT_ENTER_REGION_9009(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220142009, 2)
-
+	
 	-- 改变指定group组220142003中， configid为3002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220142003, 3002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_ANY_MONSTER_DIE_9010(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -218,40 +218,40 @@ function action_EVENT_ANY_MONSTER_DIE_9010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 改变指定group组220142003中， configid为3002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220142003, 3002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220142004中， configid为4021的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220142004, 4021, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220142004, monsters = {}, gadgets = {4024} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_9018(context, evt)
 	ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=1})
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 1 then
 		ScriptLib.SetGroupVariableValue(context, "temp", 0)
 	end
-
+	
 	if ScriptLib.CheckSceneTag(context, 20142,1056 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
 	end
-
+	
 	return 0
 end
 
@@ -260,30 +260,30 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE_9019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 1 then
 		ScriptLib.SetGroupVariableValue(context, "temp", 0)
 	end
-
+	
 	ScriptLib.RemoveExtraGroupSuite(context, 220142009, 2)
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_DUNGEON_AVATAR_SLIP_DIE_9020(context, evt)
 	ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=1})
-
+	
 	if ScriptLib.CheckSceneTag(context, 20142,1056 ) then
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 1 then
 		ScriptLib.SetGroupVariableValue(context, "temp", 0)
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_DUNGEON_ALL_AVATAR_DIE_9021(context, evt)
 	ScriptLib.RemoveExtraGroupSuite(context, 220142009, 4)
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309174
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -82,9 +82,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -95,9 +95,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -122,9 +122,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -133,7 +133,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_174002(context, evt)
 	if 174020 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -144,19 +144,19 @@ function action_EVENT_GADGET_STATE_CHANGE_174002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 174001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1000070004 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1000070004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -166,7 +166,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_174003(context, evt)
 	if 174020 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.GearStop ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -177,22 +177,22 @@ function action_EVENT_GADGET_STATE_CHANGE_174003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 174001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为103 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 103, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309174, 2)
-
+	
 	return 0
 end
 
@@ -202,16 +202,16 @@ function condition_EVENT_GROUP_LOAD_174004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "waterdown") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"reachpoint1"为0
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint1") ~= 0 then
 			return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133309174, 174020) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -222,13 +222,13 @@ function action_EVENT_GROUP_LOAD_174004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 174001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -238,16 +238,16 @@ function condition_EVENT_GROUP_LOAD_174005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "waterdown") ~= 2 then
 			return false
 	end
-
+	
 	-- 判断变量"reachpoint2"为0
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint2") ~= 0 then
 			return false
 	end
-
+	
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133309174, 174020) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -258,41 +258,41 @@ function action_EVENT_GROUP_LOAD_174005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 174001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309174, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_174006(context, evt)
 	-- 判断是gadgetid 为 174001的移动平台，是否到达了330900037 的路线中的 1 点
-
+	
 	if 174001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330900037 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	-- 判断变量"waterdown"为1
 	if ScriptLib.GetGroupVariableValue(context, "waterdown") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -303,32 +303,32 @@ function action_EVENT_PLATFORM_ARRIVAL_174006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_174007(context, evt)
 	-- 判断是gadgetid 为 174001的移动平台，是否到达了330900213 的路线中的 1 点
-
+	
 	if 174001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330900213 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	-- 判断变量"waterdown"为2
 	if ScriptLib.GetGroupVariableValue(context, "waterdown") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -339,7 +339,7 @@ function action_EVENT_PLATFORM_ARRIVAL_174007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -349,16 +349,16 @@ function condition_EVENT_GROUP_LOAD_174010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "waterdown") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"reachpoint2"为0
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint2") ~= 0 then
 			return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133309174, 174020) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -369,16 +369,16 @@ function action_EVENT_GROUP_LOAD_174010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 174001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309174, 2)
-
+	
 	return 0
 end
 
@@ -388,16 +388,16 @@ function condition_EVENT_GROUP_LOAD_174011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "waterdown") ~= 2 then
 			return false
 	end
-
+	
 	-- 判断变量"reachpoint1"为0
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint1") ~= 0 then
 			return false
 	end
-
+	
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133309174, 174020) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -408,38 +408,38 @@ function action_EVENT_GROUP_LOAD_174011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 174001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_174012(context, evt)
 	-- 判断是gadgetid 为 174001的移动平台，是否到达了330900037 的路线中的 1 点
-
+	
 	if 174001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330900037 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	-- 判断变量"waterdown"为2
 	if ScriptLib.GetGroupVariableValue(context, "waterdown") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -450,32 +450,32 @@ function action_EVENT_PLATFORM_ARRIVAL_174012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_174013(context, evt)
 	-- 判断是gadgetid 为 174001的移动平台，是否到达了330900213 的路线中的 1 点
-
+	
 	if 174001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330900213 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	-- 判断变量"waterdown"为1
 	if ScriptLib.GetGroupVariableValue(context, "waterdown") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -486,24 +486,24 @@ function action_EVENT_PLATFORM_ARRIVAL_174013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_174017(context, evt)
 	if evt.param1 ~= 174017 then return false end
-
+	
 	-- 判断变量"reachpoint1"为1
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"reachpoint2"为1
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -514,24 +514,24 @@ function action_EVENT_ENTER_REGION_174017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_174018(context, evt)
 	if evt.param1 ~= 174018 then return false end
-
+	
 	-- 判断变量"reachpoint1"为1
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"reachpoint2"为1
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -542,24 +542,24 @@ function action_EVENT_ENTER_REGION_174018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_174019(context, evt)
 	if evt.param1 ~= 174019 then return false end
-
+	
 	-- 判断变量"reachpoint1"为1
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"reachpoint2"为1
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -570,7 +570,7 @@ function action_EVENT_ENTER_REGION_174019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -580,7 +580,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_174021(context, evt)
 	if 174020 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -591,19 +591,19 @@ function action_EVENT_GADGET_STATE_CHANGE_174021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 174001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1000070004 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1000070004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -613,7 +613,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_174022(context, evt)
 	if 174020 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -624,22 +624,22 @@ function action_EVENT_GADGET_STATE_CHANGE_174022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 174001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为103 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 103, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309174, 2)
-
+	
 	return 0
 end
 
@@ -649,12 +649,12 @@ function condition_EVENT_GROUP_LOAD_174023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"reachpoint2"为1
 	if ScriptLib.GetGroupVariableValue(context, "reachpoint2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -662,6 +662,6 @@ end
 function action_EVENT_GROUP_LOAD_174023(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309174, 2)
-
+	
 	return 0
 end

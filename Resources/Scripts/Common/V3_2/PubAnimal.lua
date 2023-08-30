@@ -11,16 +11,16 @@
 
 -- 打印日志
 function PrintLog(context, content)
-	log = "## [PubAnimal] TD: "..content
+	local log = "## [PubAnimal] TD: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
-extraTriggers =
+local extraTriggers = 
 {
     { config_id = 40000001, name = "tavern_refresh", event = EventType.EVENT_GCG_TAVERN_SCENE_REFRESH, source = "", condition = "", action = "action_EVENT_GCG_TAVERN_SCENE_REFRESH", trigger_count = 0 },
 }
 
------- Functions -----------
+------ Local Functions -----------
 function LF_Initialize_Level()
     --- TRIGGER
 	for i, _suite in ipairs(suites) do

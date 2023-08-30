@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 244011001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -77,9 +77,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -90,9 +90,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -153,9 +153,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -163,7 +163,7 @@ function condition_EVENT_GADGET_CREATE_1002(context, evt)
 	if 1001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -174,7 +174,7 @@ function action_EVENT_GADGET_CREATE_1002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -182,27 +182,27 @@ end
 function condition_EVENT_SELECT_OPTION_1003(context, evt)
 	-- 判断是gadgetid 1001 option_id 175
 	if 1001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_1003(context, evt)
 	-- 初始化变量
-	challenge_time = 0
-	gadget_number_up = 0
-	gadget_damage_up = 0
-	boss_affix_1 = 0
-	boss_affix_2 = 0
-
-
+	local challenge_time = 0
+	local gadget_number_up = 0
+	local gadget_damage_up = 0
+	local boss_affix_1 = 0
+	local boss_affix_2 = 0
+	
+	
 	--------------------------------------------------------------------------------
 	-- 以下部分为接口读取玩家选择的因子，记录在对应变量中
 	--------------------------------------------------------------------------------
@@ -210,57 +210,57 @@ function action_EVENT_SELECT_OPTION_1003(context, evt)
 	if (0 or -1) ~= ScriptLib.GetChannellerSlabLoopDungeonLimitTime(context) then
 	        challenge_time = ScriptLib.GetChannellerSlabLoopDungeonLimitTime(context)
 	end
-
+	
 	-- 判断玩家是否选择轰炸范围提升，如果是的话改变变量
 	if false ~= ScriptLib.IsChannellerSlabLoopDungeonConditionSelected(context, 301) then
 	        gadget_damage_up = 1
 	end
-
+	
 	-- 判断玩家是否选择多一个轰炸区域，如果是的话改变变量
 	if false ~= ScriptLib.IsChannellerSlabLoopDungeonConditionSelected(context, 302) then
 	        gadget_number_up = 1
 	end
-
+	
 	-- 判断玩家是否选择恒长机关瘫痪时间减半词缀
 	if false ~= ScriptLib.IsChannellerSlabLoopDungeonConditionSelected(context, 303) then
 	        boss_affix_1 = 1
 	end
-
+	
 	-- 判断玩家是否选择恒长机关起死回生词缀
 	if false ~= ScriptLib.IsChannellerSlabLoopDungeonConditionSelected(context, 304) then
 	        boss_affix_2 = 1
 	end
-
-
-
+	
+	
+	
 	--------------------------------------------------------------------------------
 	-- 以下部分为改操作台状态，删除option id，删除回血泉水之类
 	--------------------------------------------------------------------------------
-
+	
 	-- 将操作台物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 	        return -1
-	    end
-
+	    end 
+	
 	-- 删除操作台物件身上指定option
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 244011001, 1001, 175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 	    return -1
 	end
-
+	
 	-- 卸载回血gadget
 	if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 244011001, EntityType.GADGET, 1009) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 	        return -1
 	end
-
-
+	
+	
 	--------------------------------------------------------------------------------
 	-- 以下部分为刷怪相关的操作
 	--------------------------------------------------------------------------------
-
-
+	
+	
 	-- 根据参数判断刷哪个轰炸区域的suite
 	--
 	if gadget_number_up == 0 then
@@ -277,8 +277,8 @@ function action_EVENT_SELECT_OPTION_1003(context, evt)
 	        end
 	end
 	--
-
-
+	
+	
 	-- 根据参数判断boss挂什么词缀
 	--
 	if boss_affix_1 == 0 then
@@ -296,36 +296,36 @@ function action_EVENT_SELECT_OPTION_1003(context, evt)
 	        end
 	end
 	--
-
-
+	
+	
 	--------------------------------------------------------------------------------
 	-- 以下部分开启挑战相关部分
 	--------------------------------------------------------------------------------
-
+	
 	-- 创建编号为2003015父挑战，indexID为101
 	if 0 ~= ScriptLib.CreateFatherChallenge(context, 101, 2003015, 999999, {success = 1, fail = 1, fail_on_wipe=false}) then
 	        return -1
 	end
-
-
+	
+	
 	-- 创建编号为201的普通子挑战
 	if 0 ~= ScriptLib.AttachChildChallenge(context, 101, 201, 110181, {244011001,1},{},{success=0,fail=0}) then
 	        return -1
 	end
-
-
+	
+	
 	-- 创建编号为202的限时子挑战，如果没有选择不会开启，并且直接用suite2的trigger判断
 	if 0 ~= challenge_time then
 	        ScriptLib.AttachChildChallenge(context, 101, 202, 110182, {challenge_time,244011001,1},{},{success=0,fail=0})
 	    else
 	        ScriptLib.AddExtraGroupSuite(context, 244011001, 2)
 	end
-
+	
 	-- 开始父挑战
 	if 0 ~= ScriptLib.StartFatherChallenge(context, 101) then
 	        return -1
 	end
-
+	
 	return 0
 end
 
@@ -336,16 +336,16 @@ function action_EVENT_CHALLENGE_SUCCESS_1004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 终止识别id为101的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 101, 1)
-
+	
 		-- 杀死Group内所有gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244011001, kill_policy = GroupKillPolicy.GROUP_KILL_GADGET }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -353,7 +353,7 @@ end
 function action_EVENT_CHALLENGE_FAIL_1005(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 244011001, 2)
-
+	
 	return 0
 end
 
@@ -364,28 +364,28 @@ function action_EVENT_CHALLENGE_FAIL_1006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_1007(context, evt)
-	uid_list = ScriptLib.GetSceneUidList(context)
-
-	ret = 0
-
+	local uid_list = ScriptLib.GetSceneUidList(context)
+	
+	local ret = 0
+	
 	for i,v in ipairs(uid_list) do
-	        is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
+	        local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
 	        if true ~= is_all_dead then
 	                ret = -1
 	                break
 	        end
 	end
-
+	
 	if ret ~= 0 then
 	        return false
 	end
-
+	
 	return true
 end
 
@@ -393,13 +393,13 @@ end
 function action_EVENT_DUNGEON_ALL_AVATAR_DIE_1007(context, evt)
 	-- 终止识别id为101的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 101, 0)
-
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -407,13 +407,13 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_1008(context, evt)
 	-- 终止识别id为101的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 101, 1)
-
+	
 		-- 杀死Group内所有gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244011001, kill_policy = GroupKillPolicy.GROUP_KILL_GADGET }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -422,30 +422,30 @@ function action_EVENT_ENTER_REGION_1024(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1011, 1, {1,2,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1012, 1, {2,3,1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1010, 1, {3,1,2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -454,30 +454,30 @@ function action_EVENT_ENTER_REGION_1025(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1014, 1, {1,2,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1015, 1, {2,3,1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1013, 1, {3,1,2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -486,39 +486,39 @@ function action_EVENT_ENTER_REGION_1026(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1017, 2, {1,2,3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1018, 2, {2,3,4,1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1019, 2, {3,4,1,2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1016, 2, {4,1,2,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -527,38 +527,38 @@ function action_EVENT_ENTER_REGION_1027(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1021, 2, {1,2,3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1022, 2, {2,3,4,1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1023, 2, {3,4,1,2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 1020, 2, {4,1,2,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end

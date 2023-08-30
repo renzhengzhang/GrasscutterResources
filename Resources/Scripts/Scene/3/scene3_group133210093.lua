@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210093
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -96,9 +96,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -107,12 +107,12 @@ function condition_EVENT_ANY_MONSTER_DIE_93004(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"queststart"为1
 	if ScriptLib.GetGroupVariableValue(context, "queststart") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -120,13 +120,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_93004(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133210093, 3)
-
+	
 	-- 将本组内变量名为 "queststart" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "queststart", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -137,24 +137,24 @@ function action_EVENT_QUEST_START_93008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_93010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"queststart"为1
 	if ScriptLib.GetGroupVariableValue(context, "queststart") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -162,13 +162,13 @@ end
 function action_EVENT_VARIABLE_CHANGE_93010(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133210093, 3)
-
+	
 	-- 将本组内变量名为 "queststart" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "queststart", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -178,7 +178,7 @@ function condition_EVENT_ANY_MONSTER_DIE_93011(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -189,6 +189,6 @@ function action_EVENT_ANY_MONSTER_DIE_93011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

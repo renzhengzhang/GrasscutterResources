@@ -1,11 +1,11 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308472
 }
 
 -- DEFS_MISCS
 --第一次交互的option，之后切为2
-optionID = {440}
+local optionID = {440}
 
 --常用ID：
 --{431,432} 开/关门
@@ -14,9 +14,9 @@ optionID = {440}
 --{440} 权限操作台解除物件锁定
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -84,23 +84,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_472003(context, evt)
 	-- 判断是gadgetid 472002 option_id 440
 	if 472002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 440 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -110,18 +110,18 @@ function action_EVENT_SELECT_OPTION_472003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 472002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 触发镜头注目，注目位置为坐标{x=-1663.182, y=94.77126, z=4533.212}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1663.182, y=94.77126, z=4533.212}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1663.182, y=94.77126, z=4533.212}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -130,7 +130,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_472004(context, evt)
 	if 472002 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -140,14 +140,14 @@ function action_EVENT_GADGET_STATE_CHANGE_472004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 472001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "start" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "start", 1, 133308584) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -156,7 +156,7 @@ function condition_EVENT_GROUP_LOAD_472005(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133308472, 472002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -166,14 +166,14 @@ function action_EVENT_GROUP_LOAD_472005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 472001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "start" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "start", 1, 133308584) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -183,8 +183,8 @@ function action_EVENT_QUEST_FINISH_472006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 472002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

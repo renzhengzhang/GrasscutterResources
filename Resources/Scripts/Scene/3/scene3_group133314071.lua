@@ -1,13 +1,13 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133314071
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	maxPlayerEnergyLev = 3,
 	titanRegion = 71025,
-
+    
     -- todo: 保底判断一下各个位置的config id对应的是否是正确的gadget id
     cells = {
         -- 每一项均需严格遵循下述格式，没有line或者node则留空，不能不创建！
@@ -15,8 +15,7 @@ defs = {
         [71001] = {cell = 71001, lines = {}, nodes = {}},
         [71002] = {cell = 71002, lines = {}, nodes = {}},
         [71003] = {cell = 71003, lines = {}, nodes = {}}
-    }
-,
+    },
 
     -- 指定初始激活的电池id，未指定则默认初始未激活
     activeCells = {71001},
@@ -26,9 +25,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -94,9 +93,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +106,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -134,9 +133,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -144,7 +143,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_71004(context, evt)
 	if 71015 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -155,19 +154,19 @@ function action_EVENT_GADGET_STATE_CHANGE_71004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_71026(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"groupStatus"为3
 	if ScriptLib.GetGroupVariableValue(context, "groupStatus") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -177,20 +176,20 @@ function action_EVENT_VARIABLE_CHANGE_71026(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 71015, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "finished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "finished", 1, 133314076) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "3F" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "3F", 1, 133314070) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -199,7 +198,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_71028(context, evt)
 	if 71009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -210,7 +209,7 @@ function action_EVENT_GADGET_STATE_CHANGE_71028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -219,7 +218,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_71029(context, evt)
 	if 71009 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -230,7 +229,7 @@ function action_EVENT_GADGET_STATE_CHANGE_71029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -239,7 +238,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_71030(context, evt)
 	if 71010 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -250,7 +249,7 @@ function action_EVENT_GADGET_STATE_CHANGE_71030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -259,7 +258,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_71031(context, evt)
 	if 71010 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -270,7 +269,7 @@ function action_EVENT_GADGET_STATE_CHANGE_71031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -280,7 +279,7 @@ function condition_EVENT_QUEST_START_71036(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "groupStatus") == 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -291,7 +290,7 @@ function action_EVENT_QUEST_START_71036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

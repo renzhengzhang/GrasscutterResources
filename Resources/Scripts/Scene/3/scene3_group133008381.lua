@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133008381
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -95,20 +95,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_381003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"success"为1
 	if ScriptLib.GetGroupVariableValue(context, "success") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -119,39 +119,39 @@ function action_EVENT_VARIABLE_CHANGE_381003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "is_start" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "is_start", 1, 133008483) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133008381, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_381004(context, evt)
 	-- 判断是gadgetid 为 381001的移动平台，是否到达了300800095 的路线中的 10 点
-
+	
 	if 381001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800095 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 10 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -162,43 +162,43 @@ function action_EVENT_PLATFORM_REACH_POINT_381004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 停止移动平台
 	if 0 ~= ScriptLib.StopPlatform(context, 381001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	-- 改变指定group组133008380中， configid为380001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008380, 380001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组133008380中， configid为380002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008380, 380002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组133008380中， configid为380003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008380, 380003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组133008380中， configid为380004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008380, 380004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组133008380中， configid为380005的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008380, 380005, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_GADGET_CREATE_381006(context, evt)
 	if 381005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -218,7 +218,7 @@ function action_EVENT_GADGET_CREATE_381006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -226,14 +226,14 @@ end
 function condition_EVENT_SELECT_OPTION_381007(context, evt)
 	-- 判断是gadgetid 381005 option_id 7
 	if 381005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -244,26 +244,26 @@ function action_EVENT_SELECT_OPTION_381007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 381001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 将configid为 381002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 381002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 381005 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -273,7 +273,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_381008(context, evt)
 	if 381002 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -284,7 +284,7 @@ function action_EVENT_GADGET_STATE_CHANGE_381008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -293,7 +293,7 @@ function condition_EVENT_GADGET_CREATE_381009(context, evt)
 	if 381002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -303,8 +303,8 @@ function action_EVENT_GADGET_CREATE_381009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 381002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -314,7 +314,7 @@ function condition_EVENT_GROUP_LOAD_381010(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "is_reach_end", 133008381) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -325,6 +325,6 @@ function action_EVENT_GROUP_LOAD_381010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

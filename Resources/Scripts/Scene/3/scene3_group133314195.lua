@@ -1,33 +1,28 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133314195
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	point_camera = 195002,
 	gadget_lookEntity = 195003,
 	look_duration = 4
 }
 
 -- DEFS_MISCS
-CameraLookSetting = {
-    blend_type = 1,
-  --镜头的移动路径，球面0，直线1
-    blend_duration = 2,
- --镜头的移动时间
-    is_force_walk = false,
- --强制玩家行走
-    is_allow_input = false,
- --允许输入
-    delay = 0,
- --触发延迟
+local CameraLookSetting = {
+    blend_type = 1,  --镜头的移动路径，球面0，直线1
+    blend_duration = 2, --镜头的移动时间
+    is_force_walk = false, --强制玩家行走
+    is_allow_input = false, --允许输入
+    delay = 0, --触发延迟
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -63,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -94,20 +89,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_195001(context, evt)
 	if evt.param1 ~= 195001 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 

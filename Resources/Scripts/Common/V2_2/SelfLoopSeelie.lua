@@ -18,12 +18,12 @@ function MovePlatform(context)
 end
 
 function GetNextPath(context)
-	path = {}
-	nextNode = 0
-	nextIndex = 0
-	curNode = ScriptLib.GetGroupVariableValue(context,"currentPathNodeID")
+	local path = {}
+	local nextNode = 0
+	local nextIndex = 0
+	local curNode = ScriptLib.GetGroupVariableValue(context,"currentPathNodeID")
 --	ScriptLib.PrintContextLog(context,"@@Lua Loop Seelie: Cur_"..curNode)
-	len = #defs.chaseLoopRoute
+	local len = #defs.chaseLoopRoute
 	for index,point_id in pairs(defs.chaseLoopRoute) do
 		if curNode == point_id then
 			nextIndex = index
@@ -43,7 +43,7 @@ function GetNextPath(context)
 end
 
 
-Triggers_SelfLoopSeelie = {
+local Triggers_SelfLoopSeelie = {
 	[1] = { name = "avatar_near_platform", config_id = 9001201, event = EventType.EVENT_AVATAR_NEAR_PLATFORM, source = "", condition = "", action = "action_avatar_near_platform", trigger_count = 0 },
 	[2] = { name = "platform_reach",config_id = 9001202, event = EventType.EVENT_PLATFORM_REACH_POINT, source = "", condition = "", action = "action_platform_reach_point", trigger_count = 0 },
 	[3] = { name = "group_load",config_id = 9001203, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },

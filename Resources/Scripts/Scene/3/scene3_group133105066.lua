@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133105066
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     group_id = 133105066,
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -99,9 +99,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -110,7 +110,7 @@ function condition_EVENT_ANY_MONSTER_DIE_66010(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -121,13 +121,13 @@ function action_EVENT_ANY_MONSTER_DIE_66010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建宝箱gadget
 	if 0 ~= ScriptLib.CreateChannellerSlabCampRewardGadget(context, 66009) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -137,11 +137,11 @@ function action_EVENT_ENTER_REGION_66011(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,149,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-
+	
 	return 0
-
-
-
+	
+	
+	
 end
 
 -- 触发条件
@@ -150,7 +150,7 @@ function condition_EVENT_GROUP_LOAD_66016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "CHEST_CREATED") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -161,7 +161,7 @@ function action_EVENT_GROUP_LOAD_66016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 

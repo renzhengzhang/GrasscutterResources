@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301648
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	max_gear = 4,
 	timer = 40,
 	group_id = 133301648,
@@ -16,9 +16,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -138,14 +138,14 @@ end
 function action_EVENT_TIMER_EVENT_648007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, tonumber(evt.source_name), GadgetState.Action01) then
 	return -1
-	end
+	end 
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_648008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == -1 then
 	ScriptLib.MarkPlayerAction(context, 1001, 4, 1)
 	end
@@ -161,23 +161,23 @@ function action_EVENT_VARIABLE_CHANGE_648008(context, evt)
 	ScriptLib.CancelGroupTimerEvent(context, defs.group_id, tostring(defs.gadget_2))
 	ScriptLib.CancelGroupTimerEvent(context, defs.group_id, tostring(defs.gadget_3))
 	ScriptLib.CancelGroupTimerEvent(context, defs.group_id, tostring(defs.gadget_4))
-
+	
 	if defs.gadget_1 ~= 0 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStart)
 	end
-
+	
 	if defs.gadget_2 ~= 0 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_2, GadgetState.GearStart)
 	end
-
+	
 	if defs.gadget_3 ~=0 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.GearStart)
 	end
-
+	
 	if defs.gadget_4 ~=0 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_4, GadgetState.GearStart)
 	end
-
+	
 	ScriptLib.MarkPlayerAction(context, 1001, 3, 1)
 	return 0
 end
@@ -185,7 +185,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_648010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == -1 then
 	ScriptLib.MarkPlayerAction(context, 1001, 4, 1)
 	end
@@ -201,18 +201,18 @@ function action_EVENT_VARIABLE_CHANGE_648010(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133301649, 649004, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 触发镜头注目，注目位置为坐标{x=-949.4774, y=397.815, z=3187.362}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-949.4774, y=397.815, z=3187.362}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-949.4774, y=397.815, z=3187.362}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -221,7 +221,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_648012(context, evt)
 	if 648002 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -232,7 +232,7 @@ function action_EVENT_GADGET_STATE_CHANGE_648012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_648013(context, evt)
 	if 648003 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -252,7 +252,7 @@ function action_EVENT_GADGET_STATE_CHANGE_648013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -261,7 +261,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_648014(context, evt)
 	if 648001 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -272,6 +272,6 @@ function action_EVENT_GADGET_STATE_CHANGE_648014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end

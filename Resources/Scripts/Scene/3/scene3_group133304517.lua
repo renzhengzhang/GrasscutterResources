@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304517
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -84,28 +84,28 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_517002(context, evt)
 	if evt.param1 ~= 517002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
-	curQuestState = ScriptLib.GetHostQuestState(context,7302712)
+	
+	local curQuestState = ScriptLib.GetHostQuestState(context,7302712)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
 	if curQuestState ~= 3 then
 	   return false
 	end
-
+	
 	return true
 end
 
@@ -115,24 +115,24 @@ function action_EVENT_ENTER_REGION_517002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 517001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133304517, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_517003(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7302712)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7302712)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
 	if curQuestState ~= 3 then
 	   return false
 	end
-
+	
 	return true
 end
 
@@ -140,6 +140,6 @@ end
 function action_EVENT_GROUP_LOAD_517003(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133304517, 2)
-
+	
 	return 0
 end

@@ -7,10 +7,10 @@
 =======================================]]
 
 
-temp_Variables = {
+local temp_Variables = {
 	{ name = "SET_TRIGGER", value = 0, no_refresh = false },
 }
-temp_Tirgger = {
+local temp_Tirgger = {
 	{event = EventType.EVENT_SELECT_OPTION, source = "", action = "action_EVENT_SELECT_OPTION"},
 }
 function action_EVENT_SELECT_OPTION(context,evt)
@@ -19,7 +19,7 @@ function action_EVENT_SELECT_OPTION(context,evt)
 end
 function SLC_ShadowPlay_Transfer(context)
     ScriptLib.PrintContextLog(context,"## ShadowPlay SLC_ShadowPlay_Transfer:2")
-	_uidlist = ScriptLib.GetSceneUidList(context)
+	local _uidlist = ScriptLib.GetSceneUidList(context)
     if _uidlist ~= nil then
         ScriptLib.PrintContextLog(context,"## ShadowPlay SLC_ShadowPlay_Transfer:"..#_uidlist)
     end
@@ -39,7 +39,7 @@ end
 --初始化
 function Initialize()
 	--加触发器
-    if temp_Tirgger ~= nil then
+    if temp_Tirgger ~= nil then 
         for k,v in pairs(temp_Tirgger) do
             v.name = v.action
             v.config_id = 40000000 + k
@@ -50,7 +50,7 @@ function Initialize()
         end
     end
 	--加变量
-    if temp_Variables ~= nil then
+    if temp_Variables ~= nil then 
         for k,v in pairs(temp_Variables) do
             v.config_id = 50000000 + k
             table.insert(variables,v)

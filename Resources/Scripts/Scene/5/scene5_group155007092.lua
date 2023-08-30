@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155007092
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155007092,
 	gadget_Rune_01 = 92001,
 	gadget_Rune_02 = 92002,
@@ -19,7 +19,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-gadgetlist =
+local gadgetlist = 
 {
 	{defs.gadget_controller_01, defs.gadget_Rune_01, "Rune_01"},
 	{defs.gadget_controller_02, defs.gadget_Rune_02, "Rune_02"},
@@ -29,9 +29,9 @@ gadgetlist =
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -88,9 +88,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -101,9 +101,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -119,9 +119,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -137,7 +137,7 @@ end
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_92018(context, evt)
 		for i=1,#gadgetlist do
-			if evt.param1 == gadgetlist[i][1] and 65 == evt.param2 then
+			if evt.param1 == gadgetlist[i][1] and 65 == evt.param2 then 
 				return true
 			end
 		end
@@ -147,10 +147,10 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_92018(context, evt)
 		for i=1,#gadgetlist do
-			if gadgetlist[i][1] == evt.param1 then
+			if gadgetlist[i][1] == evt.param1 then 
 				ScriptLib.SetGadgetStateByConfigId(context, gadgetlist[i][2], 201)
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.group_ID, gadgetlist[i][1], 65)
-				ScriptLib.SetGroupVariableValue(context, gadgetlist[i][3], 1)
+				ScriptLib.SetGroupVariableValue(context, gadgetlist[i][3], 1)	
 				ScriptLib.ChangeGroupVariableValueByGroup(context, "activecount", 1, 155007011)
 				ScriptLib.SetGroupVariableValueByGroup(context, gadgetlist[i][3], 1, 155007011)
 			end

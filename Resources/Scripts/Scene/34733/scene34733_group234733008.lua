@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 234733008
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -94,9 +94,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -104,7 +104,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_8010(context, evt)
 	if 8001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -115,10 +115,10 @@ function action_EVENT_ANY_MONSTER_LIVE_8010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建编号为2（该挑战的识别id),挑战内容为198的区域挑战，param1必须为时间
 	-- 从234733005的变量TPL_TIME中取出对应值并开启挑战
-	  tpl_time = ScriptLib.GetGroupVariableValueByGroup(context, "TPL_TIME", 234733005)
+	  local tpl_time = ScriptLib.GetGroupVariableValueByGroup(context, "TPL_TIME", 234733005)
 	  if tpl_time == nil or tpl_time < 0 then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge_by_remainTime")
 	    return -1
@@ -129,7 +129,7 @@ function action_EVENT_ANY_MONSTER_LIVE_8010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge_by_remainTime")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
@@ -140,19 +140,19 @@ function action_EVENT_CHALLENGE_SUCCESS_8012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 改变指定group组234733009中， configid为9001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234733009, 9001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组234733009中， configid为9002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234733009, 9002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -163,25 +163,25 @@ function action_EVENT_CHALLENGE_FAIL_8013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	-- 改变指定group组234733009中， configid为9001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234733009, 9001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组234733009中， configid为9002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234733009, 9002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -191,12 +191,12 @@ function condition_EVENT_ANY_MONSTER_DIE_8020(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"monster_wave"为1
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -207,9 +207,9 @@ function action_EVENT_ANY_MONSTER_DIE_8020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 234733008, 3)
-
+	
 	return 0
 end

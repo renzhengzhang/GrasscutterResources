@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220456
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -65,9 +65,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -78,9 +78,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -96,9 +96,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -106,12 +106,12 @@ function condition_EVENT_GADGET_CREATE_456004(context, evt)
 	if 456009 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"gate2"为0
 	if ScriptLib.GetGroupVariableValue(context, "gate2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -122,7 +122,7 @@ function action_EVENT_GADGET_CREATE_456004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -130,14 +130,14 @@ end
 function condition_EVENT_SELECT_OPTION_456005(context, evt)
 	-- 判断是gadgetid 456010 option_id 1
 	if 456010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -147,14 +147,14 @@ function action_EVENT_SELECT_OPTION_456005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 456006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133220456 ；指定config：456010；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133220456, 456010, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -163,12 +163,12 @@ function condition_EVENT_GADGET_CREATE_456007(context, evt)
 	if 456010 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"gate1"为0
 	if ScriptLib.GetGroupVariableValue(context, "gate1") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -179,7 +179,7 @@ function action_EVENT_GADGET_CREATE_456007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -187,14 +187,14 @@ end
 function condition_EVENT_SELECT_OPTION_456008(context, evt)
 	-- 判断是gadgetid 456009 option_id 1
 	if 456009 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -204,14 +204,14 @@ function action_EVENT_SELECT_OPTION_456008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 456001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "gate2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gate2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -219,14 +219,14 @@ end
 function condition_EVENT_SELECT_OPTION_456011(context, evt)
 	-- 判断是gadgetid 456010 option_id 1
 	if 456010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -236,20 +236,20 @@ function action_EVENT_SELECT_OPTION_456011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 456002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "gate1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gate1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为456016的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 456016 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -257,14 +257,14 @@ end
 function condition_EVENT_SELECT_OPTION_456012(context, evt)
 	-- 判断是gadgetid 456009 option_id 1
 	if 456009 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -274,14 +274,14 @@ function action_EVENT_SELECT_OPTION_456012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 456003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133220456 ；指定config：456009；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133220456, 456009, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -290,12 +290,12 @@ function condition_EVENT_GADGET_CREATE_456017(context, evt)
 	if 456016 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"gate3"为0
 	if ScriptLib.GetGroupVariableValue(context, "gate3") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -306,7 +306,7 @@ function action_EVENT_GADGET_CREATE_456017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -314,14 +314,14 @@ end
 function condition_EVENT_SELECT_OPTION_456018(context, evt)
 	-- 判断是gadgetid 456016 option_id 1
 	if 456016 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -331,14 +331,14 @@ function action_EVENT_SELECT_OPTION_456018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 456014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "gate3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gate3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -346,14 +346,14 @@ end
 function condition_EVENT_SELECT_OPTION_456019(context, evt)
 	-- 判断是gadgetid 456016 option_id 1
 	if 456016 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -363,13 +363,13 @@ function action_EVENT_SELECT_OPTION_456019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 456015, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133220456 ；指定config：456016；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133220456, 456016, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end

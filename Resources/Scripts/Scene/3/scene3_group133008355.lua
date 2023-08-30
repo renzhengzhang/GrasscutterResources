@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133008355
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -87,7 +87,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_355002(context, evt)
 	if 355017 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -98,7 +98,7 @@ function action_EVENT_GADGET_STATE_CHANGE_355002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -107,7 +107,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_355003(context, evt)
 	if 355017 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -118,7 +118,7 @@ function action_EVENT_GADGET_STATE_CHANGE_355003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -127,7 +127,7 @@ function condition_EVENT_ANY_GADGET_DIE_355004(context, evt)
 	if 355017 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -138,7 +138,7 @@ function action_EVENT_ANY_GADGET_DIE_355004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_355018(context, evt)
 	if 355015 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_GADGET_STATE_CHANGE_355018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -167,7 +167,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_355019(context, evt)
 	if 355015 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -178,7 +178,7 @@ function action_EVENT_GADGET_STATE_CHANGE_355019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_ANY_GADGET_DIE_355020(context, evt)
 	if 355015 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -198,17 +198,17 @@ function action_EVENT_ANY_GADGET_DIE_355020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_355021(context, evt)
-	-- 判断指定group组剩余gadget数量是否是1
+	-- 判断指定group组剩余gadget数量是否是1 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133008355}) ~= 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -219,7 +219,7 @@ function action_EVENT_ANY_GADGET_DIE_355021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_355022(context, evt)
 	if 355013 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -239,12 +239,12 @@ function action_EVENT_GADGET_STATE_CHANGE_355022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为355017的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 355017 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

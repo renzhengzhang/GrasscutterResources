@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220000057
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 318,
 	gadget_id_2 = 319,
 	gadget_id_3 = 320,
@@ -17,9 +17,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -94,9 +94,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -104,7 +104,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_100(context, evt)
 	if 317 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -114,47 +114,47 @@ function action_EVENT_GADGET_STATE_CHANGE_100(context, evt)
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_1 }) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_2 }) then
 	  return -1
 	end
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_3 }) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_4 }) then
 	  return -1
 	end
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_5 }) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_6 }) then
 	  return -1
 	end
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_7 }) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_8 }) then
 	  return -1
 	end
-	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ison", 1) then
+	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ison", 1) then 
 	return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_102(context, evt)
-	c_num_1 = ScriptLib.GetGroupVariableValue(context, "count")
-	c_num = c_num_1 + 1
+	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "count")
+	local c_num = c_num_1 + 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "count", c_num) then
 	ScriptLib.PrintLog(context, "c_num="..c_num)
 	    return -1
 	end
-
+	
 	if c_num == 9 then
 	 if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_9 }) then
 	ScriptLib.PrintLog(context, "create")
@@ -169,12 +169,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_103(context, evt)
 	if 317 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"ison"为1
 	if ScriptLib.GetGroupVariableValue(context, "ison") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -184,49 +184,49 @@ function action_EVENT_GADGET_STATE_CHANGE_103(context, evt)
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_id_1 }) then
 		    return -1
 		end
-
-
+		
+	
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_id_2 }) then
 		    return -1
 		end
-
-
+		
+	
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_id_3 }) then
 		    return -1
 		end
-
-
+		
+	
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_id_4 }) then
 		    return -1
 		end
-
-
+		
+	
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_id_5 }) then
 		    return -1
 		end
-
+		
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_id_6 }) then
 		    return -1
 		end
-
-
+		
+	
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_id_7 }) then
 		    return -1
 		end
-
+		
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_id_8 }) then
 		    return -1
 		end
-
-	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ison", 0) then
+		
+	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ison", 0) then 
 	return -1
 	end
-
-
-	if 0 ~= ScriptLib.SetGroupVariableValue(context, "count", 0) then
+	
+		
+	if 0 ~= ScriptLib.SetGroupVariableValue(context, "count", 0) then 
 	return -1
 	end
-
-
+	
+	
 	return 0
 end

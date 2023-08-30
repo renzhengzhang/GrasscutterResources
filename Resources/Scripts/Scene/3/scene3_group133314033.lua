@@ -1,26 +1,26 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133314033
 }
 
 -- DEFS_MISCS
-I_connectors =
+local I_connectors = 
 {
     [1] = 33008,
     [2] = 33003
 }
 
-L_connectors =
+local L_connectors = 
 {
 
 }
 
-containers =
+local containers = 
 {
     [1] = 33001
 }
 
-lights =
+local lights = 
 {
     [1] = 33009,
     [2] = 33010,
@@ -28,36 +28,36 @@ lights =
     [4] = 33013
 }
 
-streams =
+local streams = 
 {
    [containers[1]] = {I_connectors[1],lights[1],lights[2],lights[3],lights[4],I_connectors[2]}
 }
 
-L_connections =
+local L_connections = 
 {
 
 }
 
-base_interval = 1
+local base_interval = 1
 
-special_interval =
+local special_interval = 
 {
 }
 
-worktops =
+local worktops = 
 {
     [1] = 33005
 }
 
-connector_to_worktop =
+local connector_to_worktop = 
 {
     [I_connectors[2]] = worktops[1]
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -99,9 +99,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -112,9 +112,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -130,9 +130,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -140,7 +140,7 @@ function condition_EVENT_ANY_GADGET_DIE_33007(context, evt)
 	if 33006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -150,8 +150,8 @@ function action_EVENT_ANY_GADGET_DIE_33007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -160,7 +160,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_33012(context, evt)
 	if 33001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -170,14 +170,14 @@ function action_EVENT_GADGET_STATE_CHANGE_33012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 33004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

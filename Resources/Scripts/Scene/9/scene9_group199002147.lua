@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002147
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -128,9 +128,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -141,9 +141,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -177,20 +177,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_147035(context, evt)
 	if evt.param1 ~= 147035 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -202,7 +202,7 @@ function condition_EVENT_ENTER_REGION_147035(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -213,34 +213,34 @@ function action_EVENT_ENTER_REGION_147035(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_QUEST_START_147036(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=522.5, y=180.88, z=-99.48}，持续时间为6秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=522.5, y=180.88, z=-99.48}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=522.5, y=180.88, z=-99.48}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 6, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 6,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_147037(context, evt)
 	if evt.param1 ~= 147037 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -252,26 +252,26 @@ function condition_EVENT_ENTER_REGION_147037(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_147037(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=88.55505,y=120,z=-489.0142}
+	local pos = {x=88.55505,y=120,z=-489.0142}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1111008, pos, 40) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_147038(context, evt)
 	if evt.param1 ~= 147038 then return false end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -283,36 +283,36 @@ function condition_EVENT_ENTER_REGION_147038(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_147038(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=291.5137,y=120,z=-267.3651}
+	local pos = {x=291.5137,y=120,z=-267.3651}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1111012, pos, 200) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_147099(context, evt)
 	if evt.param1 ~= 147099 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -320,19 +320,19 @@ end
 function action_EVENT_ENTER_REGION_147099(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002147, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_147100(context, evt)
 	if evt.param1 ~= 147100 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -340,6 +340,6 @@ end
 function action_EVENT_ENTER_REGION_147100(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002147, 3)
-
+	
 	return 0
 end

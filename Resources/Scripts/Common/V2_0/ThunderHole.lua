@@ -3,7 +3,7 @@
 --1. 同group内的溢出洞口，每经过时间randomTime，发一次球
 --2. 每次randomCount个洞口会发球
 --[[
-defs = {
+local defs = {
 	--GroupID
 	group_id = 240950005,
 
@@ -19,14 +19,14 @@ defs = {
 
 	--配置每次几个洞口发球
 	random_thunderhole_sum = {
-		min = 1,
+		min = 1, 
 		max = 3,
 	},
 
 }
 ]]--
 
-define = {
+local define = {
 	gadgetList = {},
 	groupID = defs.group_id,
 	starter_configID = defs.starter_configID,
@@ -34,9 +34,9 @@ define = {
 	random_thunderhole_sum = defs.random_thunderhole_sum,
 }
 
-extraTriggers={
-	initialtrigger =
-	{
+local extraTriggers={
+	initialtrigger = 
+	{		
 		--["Select_Option"] = { config_id = 8000001, name = "Select_Option", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
 		["TimeAxis_Event"] = { config_id = 8000002, name = "TimeAxis_Event", event= EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_trigger_timeaxis", trigger_count = 0 },
 		--["Challenge_Fail"] = { config_id = 8000003, name = "Challenge_Fail", event= EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail", trigger_count = 0 },
@@ -91,7 +91,7 @@ function RandomThunderHole(context, minNum, maxNum)
 	math.randomseed(ScriptLib.GetServerTime(context))
 	randomNum = math.random(minNum, maxNum)
 
-	for i=1,randomNum do
+	for i=1,randomNum do	
 		if ScriptLib.GetGadgetStateByConfigId(context, define.groupID, define.gadgetList[i]) ~= 0 then
 		ScriptLib.SetGadgetStateByConfigId(context, define.gadgetList[i], 202)--物件切202发球后会自己切回201
 		end
@@ -143,9 +143,9 @@ end
 function CheckThunderHoleState(context)
 	for i=1,#define.gadgetList do
 		if ScriptLib.GetGadgetStateByConfigId(context, define.groupID, define.gadgetList[i]) == 0 then
-			ScriptLib.EndTimeAxis(context, "shoot")
+			ScriptLib.EndTimeAxis(context, "shoot")	
 			break
-		end
+		end		
 	end
 	return 0
 end

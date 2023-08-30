@@ -1,13 +1,13 @@
 --[[======================================
-||	filename:
+||	filename:	
 ||	owner: 		luyao.huang
-||	description:
-||	LogName:
-||	Protection:
+||	description:	
+||	LogName:	
+||	Protection:	
 =======================================]]--
 
 
-defs =
+local defs = 
 {
     sandworm_id = 1030,
     direct_sandworm_id = 1031,
@@ -17,19 +17,19 @@ defs =
 ----
 
 --
-local_defs = {
+local local_defs = {
     request_list_capacity = 3,
     --占据90010000后的若干字段，不要占用这些字段的var
     array_base_offset = 90010000,
 }
 
-sandworm_state =
+local sandworm_state = 
 {
     waiting = 0,
     attacking = 1
 }
 
-business_type_defs =
+local business_type_defs = 
 {
     --大世界
     --目标玩家为沙虫区域内的一个随机合法玩家
@@ -42,7 +42,7 @@ business_type_defs =
     direct = 2,
 }
 
-sandworm_default_params =
+local sandworm_default_params = 
 {
     business_type = business_type_defs.bigworld,
     sandworm_params_config_id = 0,
@@ -53,7 +53,7 @@ sandworm_default_params =
 
 
 
-Tri = {
+local Tri = {
     [1] = { name = "variable_change_alert", config_id = 10020001, event = EventType.EVENT_VARIABLE_CHANGE, source = "alert_value", condition = "", action = "action_variable_change_alert", trigger_count = 0},
     [2] = { name = "group_will_unload_alert", config_id = 10020002, event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload_alert", trigger_count = 0},
 }
@@ -84,8 +84,8 @@ function action_variable_change_alert(context,evt)
     if evt.param1 >= defs.alert_max_value then
         if not LF_Sandworm_Is_Attacking(context) then
             ScriptLib.PrintContextLog(context,"## [SandwormAlertControl] variable_change: 沙虫警戒度超过最大值，召唤沙虫")
-            current_request = LF_Get_Max_Priority_Request(context)
-            origin_group_id = current_request.group_id
+            local current_request = LF_Get_Max_Priority_Request(context)
+            local origin_group_id = current_request.group_id
             LF_Create_Sandworm(context,origin_group_id)
             LF_Set_Sandworm_State(context,sandworm_state.attacking)
         end
@@ -97,7 +97,7 @@ function action_variable_change_alert(context,evt)
 end
 
 function action_group_will_unload_alert(context,evt)
-
+    
     ScriptLib.PrintContextLog(context,"## [SandwormAlertControl] group即将卸载，重置警戒值以及其他参数")
     ScriptLib.SetGroupVariableValue(context,"sandworm_state",sandworm_state.waiting)
     ScriptLib.SetGroupVariableValue(context,"alert_value",0)
@@ -118,34 +118,34 @@ function LF_Create_Sandworm(context,origin_group_id)
     ScriptLib.PrintContextLog(context,"## [SandwormAlertControl] LF_Create_Sandworm: 创生沙虫")
     --先确保取参数的目标group活着，否则参数是
     --if ScriptLib.IsGroupRegisteredInCurScene(context,origin_group_id) then
-        business_type = ScriptLib.GetGroupVariableValueByGroup(context,"business_type",origin_group_id)
+        local business_type = ScriptLib.GetGroupVariableValueByGroup(context,"business_type",origin_group_id)
         if business_type == business_type_defs.direct then
-            pos_x = ScriptLib.GetGroupVariableValueByGroup(context,"target_pos_x",origin_group_id)
-            pos_y = ScriptLib.GetGroupVariableValueByGroup(context,"target_pos_y",origin_group_id)
-            pos_z = ScriptLib.GetGroupVariableValueByGroup(context,"target_pos_z",origin_group_id)
+            local pos_x = ScriptLib.GetGroupVariableValueByGroup(context,"target_pos_x",origin_group_id)
+            local pos_y = ScriptLib.GetGroupVariableValueByGroup(context,"target_pos_y",origin_group_id)
+            local pos_z = ScriptLib.GetGroupVariableValueByGroup(context,"target_pos_z",origin_group_id)
             ScriptLib.CreateGadgetByParamTable(context,{config_id = defs.direct_sandworm_id,pos = {x=pos_x,y=pos_y+1.5,z=pos_z}, rot = {x=0,y=0,z=0}})
             --这种调用都是一次性的，召出沙虫后立刻清理掉这次参数，防止被其他地方反复召唤
-            index = LF_Get_Request_Index_From_List_By_Request_Id(context,origin_group_id)
+            local index = LF_Get_Request_Index_From_List_By_Request_Id(context,origin_group_id)
             if index == -1 then
                 return -1
             end
             LF_Remove_Request_From_List_By_Index(context,index)
         else
-            sandworm_params_config_id = ScriptLib.GetGroupVariableValueByGroup(context,"sandworm_params_config_id",origin_group_id)
-            sandworm_params = sandworm_dynamic_params[sandworm_params_config_id]
-            range = sandworm_static_params.range
-            ambush_times = sandworm_params.ambush_times
-            attack_times = sandworm_params.attack_times
-            target_uid = 0
+            local sandworm_params_config_id = ScriptLib.GetGroupVariableValueByGroup(context,"sandworm_params_config_id",origin_group_id)
+            local sandworm_params = sandworm_dynamic_params[sandworm_params_config_id]
+            local range = sandworm_static_params.range
+            local ambush_times = sandworm_params.ambush_times
+            local attack_times = sandworm_params.attack_times
+            local target_uid = 0
             if business_type == business_type_defs.bigworld then
                 target_uid = LF_Get_Legal_Player_Uid_In_Legal_Sandworm_Region(context)
             elseif business_type == business_type_defs.challenge then
                 target_uid = ScriptLib.GetSceneOwnerUid(context)
             end
-            owner_eid = ScriptLib.GetAvatarEntityIdByUid(context,target_uid)
-            pos = ScriptLib.GetPosByEntityId(context,owner_eid)
-            rpos =  LF_Get_Random_Neighbour(context,pos,range[1],range[2])
-            ScriptLib.CreateGadgetByParamTable(context,{config_id = defs.sandworm_id,pos = {x=rpos.x,y=rpos.y+1.5,z=rpos.z}, rot = {x=0,y=0,z=0},
+            local owner_eid = ScriptLib.GetAvatarEntityIdByUid(context,target_uid)
+            local pos = ScriptLib.GetPosByEntityId(context,owner_eid)
+            local rpos =  LF_Get_Random_Neighbour(context,pos,range[1],range[2])
+            ScriptLib.CreateGadgetByParamTable(context,{config_id = defs.sandworm_id,pos = {x=rpos.x,y=rpos.y+1.5,z=rpos.z}, rot = {x=0,y=0,z=0}, 
                 sgv_key = {"SGV_Ambush_Times","SGV_Attack_Times"}, sgv_value = {ambush_times,attack_times}})
         end
     --end
@@ -172,7 +172,7 @@ end
 --需要校验请求的id与当前堆顶的参数请求来源id是否一致，如果不一致直接无视
 function LF_Request_Remove_Sandworm(context,prev_context,origin_group_id)
     ScriptLib.PrintContextLog(context,"## [SandwormAlertControl] LF_Request_Remove_Sandworm: 请求移除沙虫，请求id为"..origin_group_id)
-    current_request = LF_Get_Max_Priority_Request(context)
+    local current_request = LF_Get_Max_Priority_Request(context)
     if current_request.group_id == origin_group_id then
         ScriptLib.PrintContextLog(context,"## [SandwormAlertControl] LF_Request_Remove_Sandworm: 与当前堆顶id一致，移除沙虫")
         LF_Remove_Sandworm(context)
@@ -247,11 +247,11 @@ end
 
 --获取指定位置的随机近邻位置。分布在min_r~max_r为半径的环上
 function LF_Get_Random_Neighbour(context,pos,min_r,max_r)
-    random_r = math.random(min_r,max_r)
-    random_a = math.random()*math.pi*2
-    rpos_x = pos.x + random_r * math.cos(random_a)
-    rpos_z = pos.z + random_r * math.sin(random_a)
-    rpos = {x = rpos_x,y = pos.y,z = rpos_z}
+    local random_r = math.random(min_r,max_r)
+    local random_a = math.random()*math.pi*2
+    local rpos_x = pos.x + random_r * math.cos(random_a)
+    local rpos_z = pos.z + random_r * math.sin(random_a)
+    local rpos = {x = rpos_x,y = pos.y,z = rpos_z}
     return rpos
 end
 
@@ -264,7 +264,7 @@ end
 
 function SLC_Request_Remove_Current_Sandworm(context)
     ScriptLib.PrintContextLog(context,"## [SandwormAlertControl] SLC_Request_Remove_Current_Sandworm: 物件层请求移除沙虫")
-    index = ScriptLib.GetGroupVariableValue(context,"max_priority_request_index")
+    local index = ScriptLib.GetGroupVariableValue(context,"max_priority_request_index")
     LF_Remove_Request_From_List_By_Index(context,index)
     LF_Remove_Sandworm(context)
     return 0
@@ -273,9 +273,9 @@ end
 --沙虫攻击计数。
 --注意这套计数的开关没有互斥和队列的逻辑，只要有人要求就会开，有人要求就会关。因此调用的时候确保环境干净
 function SLC_Sandworm_Attack_Success_Count(context)
-    is_started = ScriptLib.GetGroupVariableValue(context,"start_sandworm_attack_count") == 1
+    local is_started = ScriptLib.GetGroupVariableValue(context,"start_sandworm_attack_count") == 1
     if is_started then
-        target_group = ScriptLib.GetGroupVariableValue(context,"sandworm_attack_count_target_group")
+        local target_group = ScriptLib.GetGroupVariableValue(context,"sandworm_attack_count_target_group")
         ScriptLib.ChangeGroupVariableValueByGroup(context,"sandworm_attack_count",1,target_group)
     end
     return 0

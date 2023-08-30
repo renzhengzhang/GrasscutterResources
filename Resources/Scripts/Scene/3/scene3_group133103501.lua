@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103501
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_riddle_1 = 501001,
 	gadget_riddle_2 = 501002,
 	gadget_riddle_3 = 501003,
@@ -19,9 +19,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -96,15 +96,15 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_501009(context, evt)
 	if evt.param2 ~= defs.gadget_riddle_1 and evt.param2 ~= defs.gadget_riddle_2 and evt.param2 ~= defs.gadget_riddle_3 and evt.param2 ~= defs.gadget_riddle_4 and evt.param2 ~= defs.gadget_riddle_5 and evt.param2 ~= defs.gadget_riddle_6 and evt.param2 ~= defs.gadget_riddle_7 and evt.param2 ~= defs.gadget_riddle_8 then
-	return false
+	return false 
 	end
 	return true
 end
@@ -301,8 +301,8 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_501010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
-
+	
+	
 	if evt.param1 < 0 or evt.param1 > 8 then
 	return false
 	end
@@ -312,7 +312,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_501010(context, evt)
 	if evt.param1 == 8 then
-	    ScriptLib.MarkPlayerAction(context, 5006, 3, 4)
+	    ScriptLib.MarkPlayerAction(context, 5006, 3, 4) 
 	    ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_chest, GadgetState.Default)
 	    ScriptLib.SetGroupGadgetStateByConfigId(context, 133103540, 540004, GadgetState.Default)
 	-- 将本组内变量名为 "Puzzle_Flag_3" 的变量设置为 1
@@ -325,7 +325,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_501011(context, evt)
-	sum = 0
+	local sum = 0
 	if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_1) == GadgetState.GearStart then
 	sum = sum + 1
 	end
@@ -352,6 +352,6 @@ function action_EVENT_GROUP_LOAD_501011(context, evt)
 	end
 	ScriptLib.SetGroupVariableValue(context, "State_Flag", sum)
 	return 0
-
-
+	
+	
 end

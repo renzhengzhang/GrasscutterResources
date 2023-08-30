@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304373
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -89,9 +89,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -99,12 +99,12 @@ function condition_EVENT_GADGET_CREATE_373003(context, evt)
 	if 373002 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"finish"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 133304373) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -115,7 +115,7 @@ function action_EVENT_GADGET_CREATE_373003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -123,14 +123,14 @@ end
 function condition_EVENT_SELECT_OPTION_373004(context, evt)
 	-- 判断是gadgetid 373002 option_id 75
 	if 373002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 75 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -141,32 +141,32 @@ function action_EVENT_SELECT_OPTION_373004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133304373 ；指定config：373002；物件身上指定option：75；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133304373, 373002, 75) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_373005(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7306213)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7306213)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
 	if curQuestState ~= 3 then
 	   return false
 	end
-
+	
 	return true
 end
 
@@ -177,7 +177,7 @@ function action_EVENT_GROUP_LOAD_373005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_GROUP_LOAD_373006(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 133304373) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -198,6 +198,6 @@ function action_EVENT_GROUP_LOAD_373006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

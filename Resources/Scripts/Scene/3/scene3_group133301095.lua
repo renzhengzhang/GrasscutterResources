@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301095
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_CoreID = 95005,
 	monster_BossID = 95002,
 	gadget_Point_1 = 95006,
@@ -16,9 +16,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-DeathField ={
+local DeathField ={
 	CoreID = defs.gadget_CoreID,
 	BossID = defs.monster_BossID,
 	BossSuite = 2,
@@ -26,7 +26,7 @@ DeathField ={
 	PointList = {defs.gadget_Point_1,defs.gadget_Point_2,defs.gadget_Point_3},
 }
 
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 0,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -35,9 +35,9 @@ CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -115,9 +115,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -128,9 +128,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -173,9 +173,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -189,7 +189,7 @@ function condition_EVENT_ANY_GADGET_DIE_95023(context, evt)
 	if 95005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -197,7 +197,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_95023(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301095, 4)
-
+	
 	return 0
 end
 
@@ -206,7 +206,7 @@ function condition_EVENT_ANY_GADGET_DIE_95024(context, evt)
 	if 95006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -217,8 +217,8 @@ function action_EVENT_ANY_GADGET_DIE_95024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -227,7 +227,7 @@ function condition_EVENT_ANY_GADGET_DIE_95025(context, evt)
 	if 95007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -238,8 +238,8 @@ function action_EVENT_ANY_GADGET_DIE_95025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -248,7 +248,7 @@ function condition_EVENT_ANY_GADGET_DIE_95026(context, evt)
 	if 95008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -259,8 +259,8 @@ function action_EVENT_ANY_GADGET_DIE_95026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -270,7 +270,7 @@ function condition_EVENT_ANY_MONSTER_DIE_95032(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -280,14 +280,14 @@ function action_EVENT_ANY_MONSTER_DIE_95032(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 95016, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 95027 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 95027, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

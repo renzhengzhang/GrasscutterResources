@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220135006
 }
 
 -- DEFS_MISCS
-       defs = {
+local        defs = {
 
                 --本Group中发射器gadget的configID，最多3个,
                 fireMachineList = {
@@ -44,9 +44,9 @@ base_info = {
         }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -104,9 +104,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -117,9 +117,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -135,39 +135,39 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_6003(context, evt)
 	if evt.param2 == 7 and ScriptLib.GetGroupVariableValue(context, "turn") == 0 then
 		ScriptLib.SetGroupVariableValueByGroup(context, "room3", 1, 220135003)
-
+		
 		ScriptLib.SetGroupVariableValue(context, "turn", 1)
-
+		
 		ScriptLib.SetPlatformPointArray(context, 6001, 1, {1}, {route_type=RouteType.OneWay, turn_mode=true, record_mode=RouteRecordMode.Prereach, speed_level=0, arrive_range=0})
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,6006, GadgetState.Default)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,6002, GadgetState.Default)
 	else
 		if evt.param2 == 7 and ScriptLib.GetGroupVariableValue(context, "turn") == 1 then
 			ScriptLib.SetGadgetStateByConfigId(context,6002, GadgetState.GearStart)
-
+			
 			ScriptLib.SetGroupVariableValueByGroup(context, "room3", 0, 220135003)
-
+			
 			ScriptLib.SetGroupVariableValue(context, "turn", 0)
-
+			
 			ScriptLib.SetPlatformPointArray(context, 6001, 1, {2}, {route_type=RouteType.OneWay, turn_mode=true, record_mode=RouteRecordMode.Prereach, speed_level=0, arrive_range=0})
-
+			
 			if ScriptLib.GetGroupVariableValue(context, "room") == 1 then
 				ScriptLib.SetGadgetStateByConfigId(context,6006, GadgetState.GearStart)
 			end
 		end
 	end
-
+	
 	return 0
 end
 
@@ -175,29 +175,29 @@ end
 function condition_EVENT_SELECT_OPTION_6004(context, evt)
 	-- 判断是gadgetid 6002 option_id 7
 	if 6002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_6004(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=50.83, y=123.66, z=31.48}，持续时间为3.5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=50.83, y=123.66, z=31.48}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=50.83, y=123.66, z=31.48}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -206,9 +206,9 @@ function action_EVENT_GROUP_LOAD_6007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "turn") == 0 then
 		ScriptLib.SetPlatformPointArray(context, 6001, 6, {1}, {route_type=RouteType.OneWay, turn_mode=true, record_mode=RouteRecordMode.Reach, speed_level=0, arrive_range=0})
 	end
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context,6021, GadgetState.Default)
-
+	
 	return 0
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_6008(context, evt)
 	if 6009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -228,19 +228,19 @@ function action_EVENT_GADGET_STATE_CHANGE_6008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 6006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "4006605") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -249,7 +249,7 @@ function condition_EVENT_QUEST_START_6015(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220135006, 6006) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -260,30 +260,30 @@ function action_EVENT_QUEST_START_6015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6016(context, evt)
 	if evt.param1 ~= 6016 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"turn"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "turn", 220135006) ~= 1 then
 			return false
-
+		
 	end
-
+	
 	if ScriptLib.CheckSceneTag(context, 20135, 1072) ~= true then
 			return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -298,7 +298,7 @@ function condition_EVENT_GROUP_LOAD_6017(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220135006, 6006) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -309,7 +309,7 @@ function action_EVENT_GROUP_LOAD_6017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -318,7 +318,7 @@ function condition_EVENT_ANY_GADGET_DIE_6020(context, evt)
 	if 6019 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -329,25 +329,25 @@ function action_EVENT_ANY_GADGET_DIE_6020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 6018 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6018, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6022(context, evt)
 	if evt.param1 ~= 6022 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -364,7 +364,7 @@ function action_EVENT_GROUP_LOAD_6023(context, evt)
 	else
 		ScriptLib.SetGadgetStateByConfigId(context,6002, GadgetState.GearStart)
 	end
-
+	
 	return 0
 end
 

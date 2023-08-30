@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220019002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -110,20 +110,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_18(context, evt)
 	if evt.param1 ~= 18 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -134,49 +134,49 @@ function action_EVENT_ENTER_REGION_18(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2007的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2007, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2008的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2008, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2009的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2009, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2010的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2010, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2011的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2011, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2012的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2012, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：74的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 74, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -186,7 +186,7 @@ function condition_EVENT_ANY_MONSTER_DIE_19(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -196,30 +196,30 @@ function action_EVENT_ANY_MONSTER_DIE_19(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220019005, 27, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 2004, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2004的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2004, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（26，17，48），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=26, y=17, z=48}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=26, y=17, z=48}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_ANY_MONSTER_DIE_20(context, evt)
 	if 2001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -239,7 +239,7 @@ function action_EVENT_ANY_MONSTER_DIE_20(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -248,7 +248,7 @@ function condition_EVENT_ANY_MONSTER_DIE_21(context, evt)
 	if 2002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -259,7 +259,7 @@ function action_EVENT_ANY_MONSTER_DIE_21(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -268,7 +268,7 @@ function condition_EVENT_ANY_MONSTER_DIE_22(context, evt)
 	if 2003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -279,7 +279,7 @@ function action_EVENT_ANY_MONSTER_DIE_22(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -288,7 +288,7 @@ function condition_EVENT_ANY_MONSTER_DIE_23(context, evt)
 	if 2004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -299,13 +299,13 @@ function action_EVENT_ANY_MONSTER_DIE_23(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220019002, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -315,7 +315,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_24(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 66 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -326,13 +326,13 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_24(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2005的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2005, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -342,7 +342,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_51(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 33 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -353,13 +353,13 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_51(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2006的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2006, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -368,7 +368,7 @@ function condition_EVENT_ANY_MONSTER_DIE_57(context, evt)
 	if 2010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -379,13 +379,13 @@ function action_EVENT_ANY_MONSTER_DIE_57(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Badass_Lighting2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Badass_Lighting2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -394,7 +394,7 @@ function condition_EVENT_ANY_MONSTER_DIE_58(context, evt)
 	if 2011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -405,13 +405,13 @@ function action_EVENT_ANY_MONSTER_DIE_58(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Badass_Lighting2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Badass_Lighting2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -420,7 +420,7 @@ function condition_EVENT_ANY_MONSTER_DIE_59(context, evt)
 	if 2012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -431,25 +431,25 @@ function action_EVENT_ANY_MONSTER_DIE_59(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Badass_Lighting2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Badass_Lighting2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_61(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Badass_Lighting"为2
 	if ScriptLib.GetGroupVariableValue(context, "Badass_Lighting") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -460,25 +460,25 @@ function action_EVENT_VARIABLE_CHANGE_61(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2001的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2001, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_62(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Badass_Lighting2"为6
 	if ScriptLib.GetGroupVariableValue(context, "Badass_Lighting2") ~= 6 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -489,13 +489,13 @@ function action_EVENT_VARIABLE_CHANGE_62(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2002的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2002, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -504,7 +504,7 @@ function condition_EVENT_ANY_MONSTER_DIE_64(context, evt)
 	if 2007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -515,13 +515,13 @@ function action_EVENT_ANY_MONSTER_DIE_64(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Badass_Lighting2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Badass_Lighting2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -530,7 +530,7 @@ function condition_EVENT_ANY_MONSTER_DIE_65(context, evt)
 	if 2008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -541,13 +541,13 @@ function action_EVENT_ANY_MONSTER_DIE_65(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Badass_Lighting2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Badass_Lighting2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -556,7 +556,7 @@ function condition_EVENT_ANY_MONSTER_DIE_66(context, evt)
 	if 2009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -567,25 +567,25 @@ function action_EVENT_ANY_MONSTER_DIE_66(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Badass_Lighting2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Badass_Lighting2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_67(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Badass_Ice"为2
 	if ScriptLib.GetGroupVariableValue(context, "Badass_Ice") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -596,12 +596,12 @@ function action_EVENT_VARIABLE_CHANGE_67(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019002中,configid为：2003的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 2003, 220019002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end

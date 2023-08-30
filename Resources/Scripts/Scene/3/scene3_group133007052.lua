@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133007052
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	seal_light = 599,
 	seal_hint_1 = 194,
 	seal_hint_2 = 193,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -97,7 +97,7 @@ function action_EVENT_QUEST_FINISH_28(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -108,7 +108,7 @@ function action_EVENT_QUEST_FINISH_29(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -119,14 +119,14 @@ function action_EVENT_QUEST_FINISH_30(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_89(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 < 1 or evt.param1 > 3  then
 		return false
 	end
@@ -139,7 +139,7 @@ function action_EVENT_VARIABLE_CHANGE_89(context, evt)
 	if 3 == evt.param1 then
 		ScriptLib.CreateGroupTimerEvent(context, 133007052, "delay_7", 7)
 	end
-
+	
 	return 0
 end
 
@@ -153,7 +153,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_327(context, evt)
-	p = ScriptLib.GetGroupVariableValue(context, "dvalin_progress")
+	local p = ScriptLib.GetGroupVariableValue(context, "dvalin_progress")
 	if p >= 1 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.seal_hint_1, GadgetState.GearStart)
 	end
@@ -169,7 +169,7 @@ end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_337(context, evt)
-	v = ScriptLib.GetGroupVariableValue(context, "dvalin_progress")
+	local v = ScriptLib.GetGroupVariableValue(context, "dvalin_progress")
 	if v == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.seal_hint_1, GadgetState.GearStart)
 	elseif v == 2 then

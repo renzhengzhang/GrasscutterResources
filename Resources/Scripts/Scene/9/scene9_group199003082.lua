@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003082
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	point_sum = 9,
 	route_2 = 900300039,
 	gadget_seelie = 82003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -106,9 +106,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -117,36 +117,36 @@ function condition_EVENT_GROUP_LOAD_82002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_82002(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "star", 199003100) == 1 then
-	 ScriptLib.RefreshGroup(context, { group_id = 199003082, suite = 2 })
+	 ScriptLib.RefreshGroup(context, { group_id = 199003082, suite = 2 }) 
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_82005(context, evt)
 	-- 判断是gadgetid 为 82003的移动平台，是否到达了900300039 的路线中的 8 点
-
+	
 	if 82003 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 900300039 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 8 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -157,19 +157,19 @@ function action_EVENT_PLATFORM_REACH_POINT_82005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 199003082, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 199003082, EntityType.GADGET, 82003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -178,15 +178,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_82006(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-
+	
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-
+	
 	if defs.final_point == evt.param3 then
 	return false
 	end
-
+	
 	return true
 end
 
@@ -195,24 +195,24 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_82006(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, 82003) then
 	return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= evt.param3 then
 	ScriptLib.MarkPlayerAction(context, 2005, 2, evt.param3 + 1)
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_82007(context, evt)
 	if evt.param1 ~= 82007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -223,13 +223,13 @@ function action_EVENT_ENTER_REGION_82007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 82003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -239,7 +239,7 @@ function condition_EVENT_GROUP_LOAD_82008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -250,6 +250,6 @@ function action_EVENT_GROUP_LOAD_82008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

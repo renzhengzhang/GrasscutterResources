@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133225219
 }
 
@@ -12,16 +12,16 @@ defs = {
         hasChild = true, --表示是否切当前Group的suite，true表示切自己的
         selfSuiteId = 2, --需要切的自己的suite
         hasMultiStatues = false, --是否有多个雷鸟雕像
-        statuesMap =
+        statuesMap = 
         {
                 [10001] = 2, --雷鸟雕像和需要切出来的Suite的对应表
         },
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -86,35 +86,35 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_219002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Notified"为1
 	if ScriptLib.GetGroupVariableValue(context, "Notified") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_219002(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-6430，200，-2386），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-6430, y=200, z=-2386}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-6430, y=200, z=-2386}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -123,7 +123,7 @@ function condition_EVENT_QUEST_START_219003(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133225219, 219001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -133,8 +133,8 @@ function action_EVENT_QUEST_START_219003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 219001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

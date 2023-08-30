@@ -1,55 +1,55 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155008033
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {}
-Worktops = {}
-DayAppearGadgets = {33009,33010,33011,33012}
-NightAppearGadgets = {33002,33003,33004,33005}
+local Controllers = {}
+local EnvControlGadgets = {}
+local Worktops = {}
+local DayAppearGadgets = {33009,33010,33011,33012}
+local NightAppearGadgets = {33002,33003,33004,33005}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
-
+		
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 	end,
 	["2"] = function(context)
-
+		
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-		ScriptLib.CreateGadget(context, { config_id = 33007 })
-		ScriptLib.CreateGadget(context, { config_id = 33002 })
-		ScriptLib.CreateGadget(context, { config_id = 33003 })
-		ScriptLib.CreateGadget(context, { config_id = 33004 })
-		ScriptLib.CreateGadget(context, { config_id = 33005 })
-
+		ScriptLib.CreateGadget(context, { config_id = 33007 }) 
+		ScriptLib.CreateGadget(context, { config_id = 33002 }) 
+		ScriptLib.CreateGadget(context, { config_id = 33003 }) 
+		ScriptLib.CreateGadget(context, { config_id = 33004 }) 
+		ScriptLib.CreateGadget(context, { config_id = 33005 }) 
+		
 	end,
-	["3"] = function(context)
+	["3"] = function(context) 
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-		ScriptLib.CreateGadget(context, { config_id = 33002 })
-		ScriptLib.CreateGadget(context, { config_id = 33003 })
-		ScriptLib.CreateGadget(context, { config_id = 33004 })
-		ScriptLib.CreateGadget(context, { config_id = 33005 })
+		ScriptLib.CreateGadget(context, { config_id = 33002 }) 
+		ScriptLib.CreateGadget(context, { config_id = 33003 }) 
+		ScriptLib.CreateGadget(context, { config_id = 33004 }) 
+		ScriptLib.CreateGadget(context, { config_id = 33005 }) 
 	end,
 
 }
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -99,9 +99,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -112,9 +112,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -139,9 +139,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -149,24 +149,24 @@ function condition_EVENT_GADGET_STATE_CHANGE_33006(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155008033, 33002) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155008033, 33003) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155008033, 33004) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155008033, 33005) then
 		return false
 	end
-
+	
 	-- 判断变量"gameplayState"为1
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -177,7 +177,7 @@ function action_EVENT_GADGET_STATE_CHANGE_33006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -190,7 +190,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_33014(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -200,12 +200,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_33015(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 155008033, 33007) then
 		return false
 	end
-
+	
 	-- 判断变量"gameplayState"为2
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -216,13 +216,13 @@ function action_EVENT_GADGET_STATE_CHANGE_33015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "is_daynight_finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "is_daynight_finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

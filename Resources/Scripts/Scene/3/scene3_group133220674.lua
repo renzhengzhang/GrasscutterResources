@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220674
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -123,9 +123,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -136,9 +136,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -262,44 +262,44 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_START_674017(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 2)
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 6)
-
+	
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 8)
-
+	
 	-- 创建编号为111（该挑战的识别id),挑战内容为2001006的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 111, 2001006, 90, 4, 999, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 创建标识为"133220674"，时间节点为{1,35,60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "133220674", {1,35,60}, false)
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_674019(context, evt)
 	if evt.param1 ~= 674019 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -310,25 +310,25 @@ function action_EVENT_ENTER_REGION_674019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 3)
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_674020(context, evt)
 	if evt.param1 ~= 674020 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -336,19 +336,19 @@ end
 function action_EVENT_ENTER_REGION_674020(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_674022(context, evt)
 	if evt.param1 ~= 674022 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -359,22 +359,22 @@ function action_EVENT_ENTER_REGION_674022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 9)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_674023(context, evt)
 	if evt.param1 ~= 674023 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -382,31 +382,31 @@ end
 function action_EVENT_ENTER_REGION_674023(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220674, 2)
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 5)
-
+	
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 11)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220674, EntityType.GADGET, 674032 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_674029(context, evt)
 	if evt.param1 ~= 674029 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -417,13 +417,13 @@ function action_EVENT_ENTER_REGION_674029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 12)
-
+	
 	-- 删除suite13的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220674, 13)
-
+	
 	return 0
 end
 
@@ -433,7 +433,7 @@ function condition_EVENT_CHALLENGE_SUCCESS_674034(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Time_Var") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -441,20 +441,20 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_674034(context, evt)
 	-- 停止标识为"133220674"的时间轴
 	ScriptLib.EndTimeAxis(context, "133220674")
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1901503") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133220674, suite = 7 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -463,7 +463,7 @@ function condition_EVENT_TIME_AXIS_PASS_674035(context, evt)
 	if "133220674" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -474,7 +474,7 @@ function action_EVENT_TIME_AXIS_PASS_674035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -483,7 +483,7 @@ function condition_EVENT_TIME_AXIS_PASS_674036(context, evt)
 	if "133220674" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -494,7 +494,7 @@ function action_EVENT_TIME_AXIS_PASS_674036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -503,7 +503,7 @@ function condition_EVENT_TIME_AXIS_PASS_674037(context, evt)
 	if "133220674" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -514,7 +514,7 @@ function action_EVENT_TIME_AXIS_PASS_674037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -524,7 +524,7 @@ function condition_EVENT_CHALLENGE_SUCCESS_674038(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Time_Var") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -532,20 +532,20 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_674038(context, evt)
 	-- 停止标识为"133220674"的时间轴
 	ScriptLib.EndTimeAxis(context, "133220674")
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1901508") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133220674, suite = 7 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -555,7 +555,7 @@ function condition_EVENT_CHALLENGE_SUCCESS_674039(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Time_Var") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -563,20 +563,20 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_674039(context, evt)
 	-- 停止标识为"133220674"的时间轴
 	ScriptLib.EndTimeAxis(context, "133220674")
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1901509") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133220674, suite = 7 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -587,25 +587,25 @@ function action_EVENT_CHALLENGE_FAIL_674041(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1332206740") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_674042(context, evt)
 	if evt.param1 ~= 674042 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -613,25 +613,25 @@ end
 function action_EVENT_ENTER_REGION_674042(context, evt)
 	-- 终止识别id为111的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 111, 1)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220674, EntityType.GADGET, 674049 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_674045(context, evt)
 	if evt.param1 ~= 674045 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -639,21 +639,21 @@ end
 function action_EVENT_ENTER_REGION_674045(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220674, 6)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220674, EntityType.GADGET, 674043 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 13)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 3)
-
+	
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220674, 10)
-
+	
 	return 0
 end

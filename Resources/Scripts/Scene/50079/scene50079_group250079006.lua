@@ -1,16 +1,16 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250079006
 }
 
 -- DEFS_MISCS
-       defs = {
+local        defs = {
 
         --连线形态
-        patterns =
+        patterns = 
         {
                 --形态1
-                [1] =
+                [1] = 
                 {
                        	[6001] = 6002,
                         	[6002] = 6003,
@@ -22,7 +22,7 @@ base_info = {
                                 [6008] = 0
                 },
                 --形态2
-                [2] =
+                [2] = 
                 {
                         	[6001] = 6002,
                         	[6002] = 6003,
@@ -38,9 +38,9 @@ base_info = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -79,9 +79,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -92,9 +92,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -110,9 +110,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -120,7 +120,7 @@ function condition_EVENT_ANY_GADGET_DIE_6011(context, evt)
 	if 6009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -131,13 +131,13 @@ function action_EVENT_ANY_GADGET_DIE_6011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "pattern" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "pattern", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

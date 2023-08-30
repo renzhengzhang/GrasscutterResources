@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 233103003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -71,9 +71,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -102,9 +102,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -112,7 +112,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_3025(context, evt)
 	if 20 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -123,19 +123,19 @@ function action_EVENT_MONSTER_TIDE_DIE_3025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 3021, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 3022, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -146,13 +146,13 @@ function action_EVENT_CHALLENGE_FAIL_3026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -161,7 +161,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_3027(context, evt)
 	if 3001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -172,13 +172,13 @@ function action_EVENT_ANY_MONSTER_LIVE_3027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 爬塔三星计时（is_stop:  0:开始计时、1:暂停计时）
 	if 0 ~= ScriptLib.TowerCountTimeStatus(context, 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_time_status")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -188,13 +188,13 @@ function action_EVENT_CHALLENGE_SUCCESS_3028(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233103001, 1002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 爬塔三星计时（is_stop:  0:开始计时、1:暂停计时）
 	if 0 ~= ScriptLib.TowerCountTimeStatus(context, 1) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_time_status")
 		return -1
 	end
-
+	
 	return 0
 end

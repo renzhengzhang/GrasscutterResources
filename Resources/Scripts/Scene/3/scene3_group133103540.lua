@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103540
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_seal_id = 540005,
 	gadget_light_1 = 540002,
 	gadget_light_2 = 540003,
@@ -14,9 +14,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -103,18 +103,18 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_540006(context, evt)
-	t_p_value = 0
+	local t_p_value = 0
 	if evt.param2 == defs.gadget_light_1 or evt.param2 == defs.gadget_light_2 or evt.param2 == defs.gadget_light_3 then
 		-- 光柱触发信息令封印激活玩家身上的子弹
 		if evt.param1 == GadgetState.GearStart then
-			cur_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_id)
+			local cur_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_id)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_id, GadgetState.ChestTrap)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_id, cur_state)
 			-- 记录光柱触碰状况
@@ -124,7 +124,7 @@ function action_EVENT_GADGET_STATE_CHANGE_540006(context, evt)
 				t_p_value = 2
 			elseif evt.param2 == defs.gadget_light_3 then
 				t_p_value = 4
-			end
+			end	
 			ScriptLib.ChangeGroupVariableValue(context, "Temp_Point_Value", t_p_value)
 			return 0
 		end
@@ -135,10 +135,10 @@ function action_EVENT_GADGET_STATE_CHANGE_540006(context, evt)
 				t_p_value = ScriptLib.GetGroupVariableValue(context, "Temp_Point_Value")
 				ScriptLib.SetGroupVariableValue(context, "Point_Value", t_p_value)
 				ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_model, evt.param1)
-			end
+			end	
 		elseif evt.param1 == GadgetState.ChestLocked then
 			-- 玩家出界，group数据清理
-			p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
+			local p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
 			-- 重置临时数据
 			ScriptLib.SetGroupVariableValue(context, "Temp_Point_Value", p_value)
 			if p_value%2 == 0 then
@@ -189,13 +189,13 @@ function condition_EVENT_GADGET_CREATE_540007(context, evt)
 	if evt.param1 ~= defs.gadget_seal_id then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_540007(context, evt)
-	state_info = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_model)
+	local state_info = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_model)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_id, state_info)
 	if state_info == GadgetState.Default then
 		ScriptLib.SetGroupVariableValue(context, "Point_Value", 0)
@@ -204,7 +204,7 @@ function action_EVENT_GADGET_CREATE_540007(context, evt)
 		ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, defs.gadget_seal_id, {24})
 		return 0
 	end
-	p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
+	local p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
 	if p_value ~= 7 then
 		-- 重置临时数据
 		ScriptLib.SetGroupVariableValue(context, "Temp_Point_Value", p_value)
@@ -239,7 +239,7 @@ function condition_EVENT_QUEST_FINISH_540008(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Quest_Flag", 133103540) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -250,15 +250,15 @@ function action_EVENT_QUEST_FINISH_540008(context, evt)
 	-- 将configid为 540010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 540010, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 	-- 将configid为 540010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 540011, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 	-- 将configid为 540010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 540012, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 	return 0
 end
 
@@ -269,7 +269,7 @@ function action_EVENT_GROUP_LOAD_540009(context, evt)
 		ScriptLib.SetGroupVariableValue(context, "Temp_Point_Value", 3)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_model, GadgetState.Action02)
 	end
-	qf = ScriptLib.GetGroupVariableValue(context, "Quest_Flag")
+	local qf = ScriptLib.GetGroupVariableValue(context, "Quest_Flag")
 	if qf == 1 then
 	    ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Unlocked", 133103496) == 1 and ScriptLib.GetGroupVariableValueByGroup(context, "TreasureBox", 133103496) == 0 then
@@ -281,7 +281,7 @@ function action_EVENT_GROUP_LOAD_540009(context, evt)
 	return 0
 	end
 	end
-
+	
 	return 0
 end
 
@@ -291,7 +291,7 @@ function condition_EVENT_QUEST_START_540013(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Quest_Flag", 133103540) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -302,14 +302,14 @@ function action_EVENT_QUEST_START_540013(context, evt)
 	-- 将configid为 540010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 540010, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 	-- 将configid为 540010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 540011, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 	-- 将configid为 540010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 540012, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 	return 0
 end

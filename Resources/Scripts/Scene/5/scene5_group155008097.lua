@@ -1,20 +1,20 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155008097
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155008097,
 	pointarray_Rot = 500800010
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {97011,97012}
-Worktops = {}
-DayAppearGadgets = {97013}
-NightAppearGadgets = {97005,97006}
+local Controllers = {}
+local EnvControlGadgets = {97011,97012}
+local Worktops = {}
+local DayAppearGadgets = {97013}
+local NightAppearGadgets = {97005,97006}
 
 
 --[[
@@ -44,54 +44,54 @@ NightAppearGadgets = {97005,97006}
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
-
+		
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-
+		
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 		DayNight_Gadget_Unlock(context,97012)
-
-
+		
+		
 	end,
 	["2"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
-
+		
 	end
 
 }
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 function RotateGate(context,gadget_id,pointarray_id,rotvar,rotstep)
-	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {1}, {route_type = 0, turn_mode = true})
-	if rotvar ~= '' and rotvar ~= nil then
-		temprot = ScriptLib.GetGroupVariableValue(context, rotvar)
+	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {1}, {route_type = 0, turn_mode = true}) 
+	if rotvar ~= '' and rotvar ~= nil then 
+		local temprot = ScriptLib.GetGroupVariableValue(context, rotvar)
 
-		temprot = rotstep + temprot
+		temprot = rotstep + temprot 
 
-		if temprot >=360 then
-			temprot = 0
+		if temprot >=360 then 
+			temprot = 0 
 		end
 		ScriptLib.SetGroupVariableValue(context,rotvar, temprot)
 	end
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -134,9 +134,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -147,9 +147,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -183,9 +183,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -197,7 +197,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_97002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 		-- 判断变量"gameplayState"为0
 		if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 				return false
@@ -213,14 +213,14 @@ end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_97015(context, evt)
-	if evt.param2 ~= 97012 then
+	if evt.param2 ~= 97012 then 
 	return false
 	end
-
+	
 	if 222 ~= ScriptLib.GetGadgetStateByConfigId(context, 155008097, 97012) then
 		return false
 	end
-
+	
 	return true
 end
 

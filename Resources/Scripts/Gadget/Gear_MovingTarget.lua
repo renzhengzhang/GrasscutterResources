@@ -1,8 +1,8 @@
 function OnBeHurt(context, element_type, strike_type, is_host)
 	ScriptLib.SetGadgetState(context, GadgetState.Action01)
-	this_target = ScriptLib.GetContextGadgetConfigId(context)
+	local this_target = ScriptLib.GetContextGadgetConfigId(context)
 	--ScriptLib.PrintLog("##config="..this_target)
-	this_group = ScriptLib.GetContextGroupId(context)
+	local this_group = ScriptLib.GetContextGroupId(context)
 	--ScriptLib.PrintLog("##config="..this_group)
 	ScriptLib.KillEntityByConfigId(context, { group_id = this_group, config_id = this_target })
 end

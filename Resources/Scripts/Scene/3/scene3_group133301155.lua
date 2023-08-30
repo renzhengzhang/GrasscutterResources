@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301155
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -108,9 +108,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -118,7 +118,7 @@ function condition_EVENT_ANY_GADGET_DIE_155004(context, evt)
 	if 155001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -129,17 +129,17 @@ function action_EVENT_ANY_GADGET_DIE_155004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_155005(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0
+	-- 判断指定group组剩余gadget数量是否是0 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133301155}) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -150,16 +150,16 @@ function action_EVENT_ANY_GADGET_DIE_155005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301155, 3)
-
+	
 	-- 调用提示id为 7308702 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7308702) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -168,7 +168,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_155006(context, evt)
 	if 155018 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -178,8 +178,8 @@ function action_EVENT_GADGET_STATE_CHANGE_155006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 155010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -188,7 +188,7 @@ function condition_EVENT_ANY_GADGET_DIE_155011(context, evt)
 	if 155002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -199,7 +199,7 @@ function action_EVENT_ANY_GADGET_DIE_155011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_ANY_GADGET_DIE_155013(context, evt)
 	if 155003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -219,7 +219,7 @@ function action_EVENT_ANY_GADGET_DIE_155013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -228,12 +228,12 @@ function condition_EVENT_ANY_GADGET_DIE_155014(context, evt)
 	if 155007 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"count"等于3时击破才不算失败
 	if ScriptLib.GetGroupVariableValue(context, "count") == 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -244,13 +244,13 @@ function action_EVENT_ANY_GADGET_DIE_155014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 7308701 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7308701) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -259,12 +259,12 @@ function condition_EVENT_ANY_GADGET_DIE_155015(context, evt)
 	if 155008 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"count"等于3时击破才不算失败
 	if ScriptLib.GetGroupVariableValue(context, "count") == 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -275,13 +275,13 @@ function action_EVENT_ANY_GADGET_DIE_155015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 7308701 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7308701) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -290,12 +290,12 @@ function condition_EVENT_ANY_GADGET_DIE_155016(context, evt)
 	if 155009 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"count"等于3时击破才不算失败
 	if ScriptLib.GetGroupVariableValue(context, "count") == 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -306,25 +306,25 @@ function action_EVENT_ANY_GADGET_DIE_155016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 7308701 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7308701) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_155017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "count", 133301155) ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -332,24 +332,24 @@ end
 function action_EVENT_VARIABLE_CHANGE_155017(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301155, 3)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133301155, EntityType.GADGET, 155007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133301155, EntityType.GADGET, 155008 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133301155, EntityType.GADGET, 155009 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end

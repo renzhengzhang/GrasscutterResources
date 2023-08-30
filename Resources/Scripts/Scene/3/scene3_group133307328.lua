@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133307328
 }
 
 -- DEFS_MISCS
 --风扇
-fans =
+local fans =
 {
     328002,
     328017,
     328022
 }
 --沙堆
-sandpiles =
+local sandpiles =
 {
    328024,
    328026,
@@ -20,24 +20,24 @@ sandpiles =
    328004
 }
 --百叶窗
-shutters =
+local shutters =
 {
    328005
 }
 --百叶窗开关
-shutter_switches =
+local shutter_switches =
 {
    328006
 }
 --每个风扇对应点阵
-FanToPointArray =
+local FanToPointArray =
 {
    [fans[1]] = 330700014,
    [fans[2]] = 330700015,
    [fans[3]] = 330700016
 }
 --沙堆风扇方向位置
-FanToSandpile =
+local FanToSandpile =
 {
     [sandpiles[1]] = {fan = fans[1], dir_state = 203, pos = 1},
     [sandpiles[2]] = {fan = fans[1], dir_state = 201, pos = 2, shutter = shutters[1]},
@@ -46,15 +46,15 @@ FanToSandpile =
 }
 
 --百叶窗开关和百叶窗对应
-SwitchToShutter =
+local SwitchToShutter =
 {
     [shutter_switches[1]] = shutters[1]
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -127,9 +127,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -140,9 +140,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -158,9 +158,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 设置指定group的操作台与option
@@ -178,7 +178,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_328009(context, evt)
 	if 328024 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,8 +188,8 @@ function action_EVENT_GADGET_STATE_CHANGE_328009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 328006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -198,7 +198,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_328010(context, evt)
 	if 328026 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -208,8 +208,8 @@ function action_EVENT_GADGET_STATE_CHANGE_328010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 328017, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -217,14 +217,14 @@ end
 function condition_EVENT_SELECT_OPTION_328011(context, evt)
 	-- 判断是gadgetid 328001 option_id 7
 	if 328001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -235,25 +235,25 @@ function action_EVENT_SELECT_OPTION_328011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 328001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 328001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 328003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 328003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133307328 ；指定config：328001；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133307328, 328001, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -262,7 +262,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_328012(context, evt)
 	if 328025 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -272,8 +272,8 @@ function action_EVENT_GADGET_STATE_CHANGE_328012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 328022, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -282,20 +282,20 @@ function condition_EVENT_GADGET_STATE_CHANGE_328013(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133307328, 328004) then
 		return false
 	end
-
+	
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133307328, 328001) then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_328013(context, evt)
 	ScriptLib.SetGadgetStateByConfigId(context,328001, GadgetState.Default)
-
+	
 	TLA_set_work_options_by_configid(context, evt, 133307328, 328001, {7})
-
+	
 	return 0
 end
 

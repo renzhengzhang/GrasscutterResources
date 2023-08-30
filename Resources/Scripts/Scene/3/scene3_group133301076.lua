@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301076
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -78,9 +78,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -88,7 +88,7 @@ function condition_EVENT_GADGET_CREATE_76001(context, evt)
 	if 76003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -96,8 +96,8 @@ end
 function action_EVENT_GADGET_CREATE_76001(context, evt)
 	-- 创建标识为"timeStart"，时间节点为{20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timeStart", {20}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -106,22 +106,22 @@ function condition_EVENT_GADGET_CREATE_76002(context, evt)
 	if 76003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_76002(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-1085，272，3838），持续时间为8秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1085, y=272, z=3838}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1085, y=272, z=3838}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 8, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -130,7 +130,7 @@ function condition_EVENT_TIME_AXIS_PASS_76004(context, evt)
 	if "timeStart" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -141,6 +141,6 @@ function action_EVENT_TIME_AXIS_PASS_76004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end

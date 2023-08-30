@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133302005
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -84,9 +84,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -97,9 +97,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -133,35 +133,35 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_START_5002(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-273.525, y=103.6328, z=2212.746}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-273.525, y=103.6328, z=2212.746}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-273.525, y=103.6328, z=2212.746}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5003(context, evt)
 	if evt.param1 ~= 5003 then return false end
-
+	
 	-- 判断是区域5003
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 5003 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -172,19 +172,19 @@ function action_EVENT_ENTER_REGION_5003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5004(context, evt)
 	if evt.param1 ~= 5004 then return false end
-
+	
 	-- 判断是区域5004
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 5004 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -195,19 +195,19 @@ function action_EVENT_ENTER_REGION_5004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5005(context, evt)
 	if evt.param1 ~= 5005 then return false end
-
+	
 	-- 判断是区域5005
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 5005 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -218,19 +218,19 @@ function action_EVENT_ENTER_REGION_5005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"boom"为1
 	if ScriptLib.GetGroupVariableValue(context, "boom") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -241,19 +241,19 @@ function action_EVENT_VARIABLE_CHANGE_5006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5007(context, evt)
 	if evt.param1 ~= 5007 then return false end
-
+	
 	-- 判断是区域5007
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 5007 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -264,7 +264,7 @@ function action_EVENT_ENTER_REGION_5007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -272,7 +272,7 @@ end
 function action_EVENT_QUEST_START_5016(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302005, 3)
-
+	
 	return 0
 end
 
@@ -280,52 +280,52 @@ end
 function condition_EVENT_ANY_GADGET_DIE_5025(context, evt)
 	if 5018 == evt.param1 then
 		return true
-
-
+	
+	
 	elseif 5020 == evt.param1 then
 		return true
-
+	
 	elseif 5021 == evt.param1 then
 		return true
-
+	
 	elseif 5022 == evt.param1 then
 		return true
-
+	
 	elseif 5023 == evt.param1 then
 		return true
-
+	
 	elseif 5024 == evt.param1 then
 		return true
-
-
+	
+	
 	elseif 5034 == evt.param1 then
 		return true
-
+	
 	elseif 5035 == evt.param1 then
 		return true
-
+	
 	elseif 5036 == evt.param1 then
 		return true
-
+	
 	elseif 5037 == evt.param1 then
 		return true
-
+	
 	elseif 5038 == evt.param1 then
 		return true
-
+	
 	elseif 5040 == evt.param1 then
 		return true
-
+	
 	elseif 5041 == evt.param1 then
 		return true
-
+	
 	elseif 5042 == evt.param1 then
 		return true
-
+	
 	elseif 5043 == evt.param1 then
 		return true
-
-
+	
+	
 	elseif 5044 == evt.param1 then
 		return true
 	end
@@ -339,7 +339,7 @@ function action_EVENT_ANY_GADGET_DIE_5025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

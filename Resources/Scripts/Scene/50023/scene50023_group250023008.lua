@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250023008
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -115,9 +115,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -125,7 +125,7 @@ function condition_EVENT_GADGET_CREATE_8002(context, evt)
 	if 8001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -136,7 +136,7 @@ function action_EVENT_GADGET_CREATE_8002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -144,14 +144,14 @@ end
 function condition_EVENT_SELECT_OPTION_8003(context, evt)
 	-- 判断是gadgetid 8001 option_id 51
 	if 8001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 51 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -162,7 +162,7 @@ function action_EVENT_SELECT_OPTION_8003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -170,14 +170,14 @@ end
 function condition_EVENT_SELECT_OPTION_8004(context, evt)
 	-- 判断是gadgetid 8001 option_id 52
 	if 8001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 52 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -188,7 +188,7 @@ function action_EVENT_SELECT_OPTION_8004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -196,14 +196,14 @@ end
 function condition_EVENT_SELECT_OPTION_8023(context, evt)
 	-- 判断是gadgetid 8001 option_id 53
 	if 8001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 53 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -214,6 +214,6 @@ function action_EVENT_SELECT_OPTION_8023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

@@ -1,6 +1,6 @@
 
 --自定义函数部分
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Gadget_State_Change"] = { config_id = 8000001, name = "Gadget_State_Change", event= EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "gadget_state_change", trigger_count = 0 },
 		["Random_Floor"] = { config_id = 8000002, name = "Random_Floor", event= EventType.EVENT_TIME_AXIS_PASS, source = "triggerElementFloor", condition = "", action = "action_timeaxis_randomfloor", trigger_count = 0 },
@@ -13,16 +13,16 @@ extrTriggers = {
 function DeduplicationRandom( context, configIDList, randomNum )
 	math.randomseed(ScriptLib.GetServerTime(context))
 
-	TempList = {}
+	local TempList = {}
 
-	ReturnList = {}
+	local ReturnList = {}
 
 	for i,v in ipairs(configIDList) do
 		table.insert(TempList, v)
 	end
 
 	for i=1,randomNum do
-		TempNum = math.random(#TempList)
+		local TempNum = math.random(#TempList)
 
 		table.insert(ReturnList, TempList[TempNum] )
 
@@ -49,7 +49,7 @@ function gadget_state_change( context, evt )
 
 		ScriptLib.InitTimeAxis(context, "triggerElementFloor", elemenFloorTimer, true)
 
-		CurList = DeduplicationRandom(context, floorList, 2)
+		local CurList = DeduplicationRandom(context, floorList, 2)
 
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0, CurList[1], 201)
 
@@ -57,7 +57,7 @@ function gadget_state_change( context, evt )
 
 	end
 
-
+	
 
 	return 0
 
@@ -74,7 +74,7 @@ function action_timeaxis_randomfloor( context, evt )
 
 	end
 
-	CurList = DeduplicationRandom(context, floorList, 2)
+	local CurList = DeduplicationRandom(context, floorList, 2)
 
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 0, CurList[1], 201)
 
@@ -116,7 +116,7 @@ end
 
 function action_all_avatar_die( context,evt )
 	-- 所有角色死亡
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	for i,v in ipairs(UidList) do
 		if ScriptLib.IsPlayerAllAvatarDie(context, v) == false then
@@ -131,7 +131,7 @@ function action_all_avatar_die( context,evt )
 	for i,v in ipairs(floorList) do
 
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0, v, 0)
-
+		
 	end
 
 	return 0

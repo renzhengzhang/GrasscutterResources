@@ -3,9 +3,9 @@
 ServerUploadTool Save to [/root/env/data/lua/common/V2_0]
 ]]--
 
-RaioPillars={181006,181007,181008,181009,181010}
+local RaioPillars={181006,181007,181008,181009,181010}
 
-extraTriggers={
+local extraTriggers={
 	 { config_id = 8000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
 	 { config_id = 8000002, name = "SELECT_OPTION", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
 	 { config_id = 8000003, name = "VARIBLE_CHANGE", event = EventType.EVENT_VARIABLE_CHANGE, source = "step", condition = "", action = "action_step_change", trigger_count = 0 },
@@ -35,10 +35,10 @@ function DeleteLaserSkill(context)
 end
 
 function RaioCotterDoLaserSkill(context)
-	RaioCotterDoLaserSkill = ScriptLib.GetGroupVariableValue(context, "RaioCotterDoLaserSkill")
+	local RaioCotterDoLaserSkill = ScriptLib.GetGroupVariableValue(context, "RaioCotterDoLaserSkill")
 	RaioCotterDoLaserSkill=RaioCotterDoLaserSkill+1
 	ScriptLib.SetGroupVariableValue(context, "RaioCotterDoLaserSkill", RaioCotterDoLaserSkill)
-	ScriptLib.CreateGadget(context, { config_id = 181027 })
+	ScriptLib.CreateGadget(context, { config_id = 181027 }) 
 	ScriptLib.SetGadgetStateByConfigId(context, 181001, 901)
 	return 0
 end
@@ -77,37 +77,37 @@ function CheckConnectPhaseOne(context)
 	if 203 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181007) then
 		return false
 	end
-
+	
 	if 204 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181008) then
 		return false
 	end
-
+	
 	if 902 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181009) then
 		return false
 	end
-
+	
 	if 901 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181010) then
 		return false
 	end
-
+	
 	return true
 
 end
 
 function CheckConnectPhaseTwo(context)
-
+	
 	if 901 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181007) then
 		return false
 	end
-
+	
 	if 902 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181008) then
 		return false
 	end
-
+	
 	if 204 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181009) then
 		return false
 	end
-
+	
 	if 203 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181010) then
 		return false
 	end
@@ -120,19 +120,19 @@ function CheckConnectPhaseThree(context)
 	if 203 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181007) then
 		return false
 	end
-
+	
 	if 204 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181008) then
 		return false
 	end
-
+	
 	if 204 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181009) then
 		return false
 	end
-
+	
 	if 203 ~= ScriptLib.GetGadgetStateByConfigId(context, 133220181, 181010) then
 		return false
 	end
-
+	
 	return true
 
 end
@@ -150,7 +150,7 @@ end
 
 function action_gadget_state_change(context, evt)
 	if evt.param2==181001 and evt.param1==0 then
-		step=ScriptLib.GetGroupVariableValue(context, "step")
+		local step=ScriptLib.GetGroupVariableValue(context, "step")
 		if step == 3 then
 			ScriptLib.ShowReminder(context, 7210504)
 			ScriptLib.CreateMonster(context, { config_id = 181088, delay_time = 5 })
@@ -235,7 +235,7 @@ end
 function action_axis_success(context, evt)
 	ScriptLib.SetGadgetStateByConfigId(context, 181001, GadgetState.GearStart)
 	ResetAllGadgets(context)
-	step=ScriptLib.GetGroupVariableValue(context, "step")
+	local step=ScriptLib.GetGroupVariableValue(context, "step")
 	if step == 2 then
 		ScriptLib.KillExtraGroupSuite(context, 133220181, 8)
 		ScriptLib.SetGroupVariableValue(context, "step",3)
@@ -261,8 +261,8 @@ end
 
 function action_select_option(context, evt)
 	if evt.param2==79 then
-		_gadgetStateList = {203,204,901,902}
-		_key = 0
+		local _gadgetStateList = {203,204,901,902}
+		local _key = 0
 		for k,v in pairs(_gadgetStateList) do
 		  if v == ScriptLib.GetGadgetStateByConfigId(context, 133220181, evt.param1) then
 		    _key = k
@@ -289,9 +289,9 @@ function action_select_option(context, evt)
 	if evt.param2==80 then
 		ScriptLib.SetGadgetStateByConfigId(context, 181006, GadgetState.GearStop)
 		RemoveAllOptions(context)
-		step=ScriptLib.GetGroupVariableValue(context, "step")
+		local step=ScriptLib.GetGroupVariableValue(context, "step")
 		if step == 2 then
-			if CheckConnectPhaseOne(context)==true then
+			if CheckConnectPhaseOne(context)==true then 
 				ScriptLib.InitTimeAxis(context, "checkSuccess", {3}, false)
 			else
 				ScriptLib.InitTimeAxis(context, "checkFail", {3}, false)

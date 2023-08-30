@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308594
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	wait = 0,
 	duration = 5,
 	interval = 3
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,20 +85,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_594002(context, evt)
 	if evt.param1 ~= 594002 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -109,7 +109,7 @@ function action_EVENT_ENTER_REGION_594002(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -119,7 +119,7 @@ function condition_EVENT_GROUP_LOAD_594003(context, evt)
 	if defs.wait == 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -128,12 +128,12 @@ function action_EVENT_GROUP_LOAD_594003(context, evt)
 	-- 将configid为 594001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 594001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-		end
-
+		end 
+	
 	-- 创建标识为"start"，时间节点为{wait}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "start", {defs.wait}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -143,59 +143,59 @@ function condition_EVENT_GROUP_LOAD_594004(context, evt)
 	if defs.wait ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_594004(context, evt)
-
+	
 	-- 将configid为 594001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 594001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-		end
-
-
-	axis
+		end 
+	
+	
+	local axis
 	axis = defs.duration + defs.interval
 	-- 创建标识为"fan_state"，时间节点为{defs.interval,defs.duration}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fan_state", {defs.duration,axis}, true)
-
+	
 	-- 将在groupid为 133308594 中的 configid为 594001 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	--
-	_gadgetStateList = {0,201,0}
-	_key = 0
-
+	-- 
+	local _gadgetStateList = {0,201,0}
+	local _key = 0
+	
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-
+	
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133308594, 594001) then
 	    _key = k
 	    break
 	  end
 	end
-
+	
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 594001 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133308594, 594001, _gadgetStateList[1])
 	  return 0
 	end
-
+	
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133308594, 594001, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 594001 .."State没有成功")
-
+	
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -204,59 +204,59 @@ function condition_EVENT_TIME_AXIS_PASS_594005(context, evt)
 	if "start" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_594005(context, evt)
-	axis
+	local axis
 	axis = defs.duration + defs.interval
 	-- 创建标识为"fan_state"，时间节点为{defs.interval,defs.duration}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fan_state", {defs.duration,axis}, true)
-
-
+	
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_594006(context, evt)
-
+	
 	-- 将在groupid为 133308594 中的 configid为 594001 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	--
-	_gadgetStateList = {0,201,0}
-	_key = 0
-
+	-- 
+	local _gadgetStateList = {0,201,0}
+	local _key = 0
+	
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-
+	
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133308594, 594001) then
 	    _key = k
 	    break
 	  end
 	end
-
+	
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 594001 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133308594, 594001, _gadgetStateList[1])
 	  return 0
 	end
-
+	
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133308594, 594001, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 594001 .."State没有成功")
-
+	
 	  return -1
 	end
-
-
+	
+	
 	return 0
 end

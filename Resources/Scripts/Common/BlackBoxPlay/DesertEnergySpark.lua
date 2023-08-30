@@ -11,7 +11,7 @@
 ||	Protection:     [Protection]
 =======================================]]
 
-fireTable = {
+local fireTable = {
 	[1]={fireID = defs.gadget_fire1,fireBaseID = defs.gadget_fireBase1},
 	[2]={fireID = defs.gadget_fire2,fireBaseID = defs.gadget_fireBase2},
 	[3]={fireID = defs.gadget_fire3,fireBaseID = defs.gadget_fireBase3},
@@ -19,8 +19,8 @@ fireTable = {
 
 }
 
-extraTriggers={
-
+local extraTriggers={
+	
 	{ config_id = 8000002, name = "Select_Option", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_SelectOption", trigger_count = 0 },
 	{ config_id = 8000003, name = "Fire_Reach_Point", event= EventType.EVENT_PLATFORM_ARRIVAL, source = "", condition = "", action = "action_PlatReachPoint", trigger_count = 0 },
 	{ config_id = 8000004, name = "Gadget_Create", event= EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_OnGadgetCreate", trigger_count = 0 },
@@ -36,11 +36,11 @@ function action_OnGroupLoad(context)
 			ScriptLib.KillEntityByConfigId(context, { config_id = v.fireID })
 		end
 	end
-	moveIndex = ScriptLib.GetGroupVariableValue(context, "recordMoveIndex")
+	local moveIndex = ScriptLib.GetGroupVariableValue(context, "recordMoveIndex")
 
 	for k,v in pairs(fireTable) do
 		if(v.fireBaseID and v.fireBaseID~=0)then
-			baseState = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, v.fireBaseID)
+			local baseState = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, v.fireBaseID)
 			if(baseState == 0 or baseState == 201)then
 				if(k==moveIndex)then
 					ScriptLib.SetGadgetStateByConfigId(context,v.fireBaseID , 201)
@@ -55,7 +55,7 @@ end
 
 function SLC_EngineerMark( context )
 
-	eid = context.source_entity_id
+	local eid = context.source_entity_id
 
 	ScriptLib.MarkGroupLuaAction(context, "getengineer", "", {group_id = base_info.group_id ,config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = eid }) })
 
@@ -75,8 +75,8 @@ end
 --初始化一些按键
 function action_OnGadgetCreate(context,evt )
 	-- 设置操作台选项
-	isFireBase = false
-	gadgetID = evt.param1
+	local isFireBase = false
+	local gadgetID = evt.param1
 	for _,v in pairs(fireTable) do
 		if(v.fireBaseID==gadgetID)then
 			isFireBase = true
@@ -102,9 +102,9 @@ end
 
 --基座状态改变需要增删按钮
 function action_GadgetStateChange( context,evt )
-	isFireBase = false
-	gadgetState = evt.param1
-	gadgetID = evt.param2
+	local isFireBase = false
+	local gadgetState = evt.param1
+	local gadgetID = evt.param2
 	for _,v in pairs(fireTable) do
 		if(v.fireBaseID==gadgetID)then
 			isFireBase = true
@@ -127,12 +127,12 @@ function action_GadgetStateChange( context,evt )
 end
 --按下按键召唤火种
 function action_SelectOption( context,evt )
-	gadgetID = evt.param1
-	optionID = evt.param2
+	local gadgetID = evt.param1
+	local optionID = evt.param2
 	if(optionID ~= defs.interactOptionID)then
 		return -1
 	end
-	moveIndex = 1
+	local moveIndex = 1
 	for k,v in ipairs(fireTable)do
 		if(v.fireBaseID==gadgetID)then
 			moveIndex = k
@@ -141,14 +141,14 @@ function action_SelectOption( context,evt )
 	end
 
 
-	nextIndex = moveIndex + 1
-	nextFireBase = 0
+	local nextIndex = moveIndex + 1
+	local nextFireBase = 0
 	if(fireTable[nextIndex]~=nil and fireTable[nextIndex].fireBaseID~=0)then
 		nextFireBase = fireTable[nextIndex].fireBaseID
-		entityID = ScriptLib.GetEntityIdByConfigId(context, nextFireBase)
+		local entityID = ScriptLib.GetEntityIdByConfigId(context, nextFireBase)
 
 		if ScriptLib.GetGadgetIdByEntityId(context, entityID) == 70330313 then
-			nextGadgetState = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, nextFireBase)
+			local nextGadgetState = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, nextFireBase)
 			if nextGadgetState == 204 then
 				ScriptLib.ShowReminder(context, 33010249)
 				return 0
@@ -168,10 +168,10 @@ end
 
 --角色靠近火种能推动它
 function action_AvatarNearPlatform( context,evt )
-	gadgetID = evt.param1
+	local gadgetID = evt.param1
 
 	--判断是否是火种
-	moveIndex = -1
+	local moveIndex = -1
 	for k,v in ipairs(fireTable)do
 		if(v.fireID==gadgetID)then
 			moveIndex = k
@@ -188,10 +188,10 @@ end
 
 --火种被风扇吹散
 function action_OnAnyGadgetDie( context,evt )
-	gadgetID = evt.param1
+	local gadgetID = evt.param1
 
 	--判断是否是火种
-	moveIndex = -1
+	local moveIndex = -1
 	for k,v in ipairs(fireTable)do
 		if(v.fireID==gadgetID)then
 			moveIndex = k
@@ -202,14 +202,14 @@ function action_OnAnyGadgetDie( context,evt )
 		return -1
 	end
 
-	nextIndex = moveIndex + 1
-	nextFireBase = 0
+	local nextIndex = moveIndex + 1
+	local nextFireBase = 0
 	if(fireTable[nextIndex]==nil or fireTable[nextIndex].fireBaseID==0)then
 		nextFireBase = defs.gadget_fireTorch
 	else
 		nextFireBase = fireTable[nextIndex].fireBaseID
 	end
-	gadgetState = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, nextFireBase)
+	local gadgetState = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, nextFireBase)
 	--下一个gadget还没被点亮，所以是被风吹灭的，需要把上一个基座恢复
 	if(gadgetState==0)then
 		ScriptLib.SetGadgetStateByConfigId(context, fireTable[moveIndex].fireBaseID, 201)
@@ -220,8 +220,8 @@ end
 
 --火种到达目的地
 function action_PlatReachPoint( context,evt )
-	gadgetID = evt.param1
-	moveIndex = -1
+	local gadgetID = evt.param1
+	local moveIndex = -1
 	for k,v in ipairs(fireTable)do
 		if(v.fireID==gadgetID)then
 			moveIndex = k
@@ -231,7 +231,7 @@ function action_PlatReachPoint( context,evt )
 	if(moveIndex==-1)then
 		return -1
 	end
-	nextIndex = moveIndex+1
+	local nextIndex = moveIndex+1
 	if(fireTable[nextIndex]==nil or fireTable[nextIndex].fireBaseID==0)then
 		--到达了终点
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_fireTorch, 201)
@@ -248,3 +248,4 @@ end
 
 
 LF_Initialize_Group(triggers, suites)
+
