@@ -26,7 +26,7 @@ defs = {
     }
 }
 
-challengeParam = {
+local challengeParam = {
     90, -- Time
     72, -- 72//EVENT_TIME_AXIS_PASS
     666,-- TAG
@@ -350,31 +350,31 @@ function action_EVENT_TIME_AXIS_PASS_41007(context, evt)
 		end
 
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	functionKey = "StartPotTaunt"
-	functionParam1 = "StartPotTaunt" .. "Param1"
-	functionParam2 = "StartPotTaunt" .. "Param2"
-	functionParam3 = "StartPotTaunt" .. "Param3"
-	functionParam4 = "StartPotTaunt" .. "Param4"
+	local functionKey = "StartPotTaunt"
+	local functionParam1 = "StartPotTaunt" .. "Param1"
+	local functionParam2 = "StartPotTaunt" .. "Param2"
+	local functionParam3 = "StartPotTaunt" .. "Param3"
+	local functionParam4 = "StartPotTaunt" .. "Param4"
 
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41006, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 1, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
 
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	functionKey = "StartPotTaunt"
-	functionParam1 = "StartPotTaunt" .. "Param1"
-	functionParam2 = "StartPotTaunt" .. "Param2"
-	functionParam3 = "StartPotTaunt" .. "Param3"
-	functionParam4 = "StartPotTaunt" .. "Param4"
+	local functionKey = "StartPotTaunt"
+	local functionParam1 = "StartPotTaunt" .. "Param1"
+	local functionParam2 = "StartPotTaunt" .. "Param2"
+	local functionParam3 = "StartPotTaunt" .. "Param3"
+	local functionParam4 = "StartPotTaunt" .. "Param4"
 
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41004, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
 
 	return 0
@@ -416,31 +416,31 @@ function action_EVENT_TIME_AXIS_PASS_41014(context, evt)
 		end
 
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	functionKey = "StartPotTaunt"
-	functionParam1 = "StartPotTaunt" .. "Param1"
-	functionParam2 = "StartPotTaunt" .. "Param2"
-	functionParam3 = "StartPotTaunt" .. "Param3"
-	functionParam4 = "StartPotTaunt" .. "Param4"
+	local functionKey = "StartPotTaunt"
+	local functionParam1 = "StartPotTaunt" .. "Param1"
+	local functionParam2 = "StartPotTaunt" .. "Param2"
+	local functionParam3 = "StartPotTaunt" .. "Param3"
+	local functionParam4 = "StartPotTaunt" .. "Param4"
 
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41004, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 1, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
 
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	functionKey = "StartPotTaunt"
-	functionParam1 = "StartPotTaunt" .. "Param1"
-	functionParam2 = "StartPotTaunt" .. "Param2"
-	functionParam3 = "StartPotTaunt" .. "Param3"
-	functionParam4 = "StartPotTaunt" .. "Param4"
+	local functionKey = "StartPotTaunt"
+	local functionParam1 = "StartPotTaunt" .. "Param1"
+	local functionParam2 = "StartPotTaunt" .. "Param2"
+	local functionParam3 = "StartPotTaunt" .. "Param3"
+	local functionParam4 = "StartPotTaunt" .. "Param4"
 
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41006, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
 
 	return 0
@@ -754,31 +754,31 @@ function action_EVENT_TIME_AXIS_PASS_41079(context, evt)
 		end
 
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	functionKey = "StartPotTaunt"
-	functionParam1 = "StartPotTaunt" .. "Param1"
-	functionParam2 = "StartPotTaunt" .. "Param2"
-	functionParam3 = "StartPotTaunt" .. "Param3"
-	functionParam4 = "StartPotTaunt" .. "Param4"
+	local functionKey = "StartPotTaunt"
+	local functionParam1 = "StartPotTaunt" .. "Param1"
+	local functionParam2 = "StartPotTaunt" .. "Param2"
+	local functionParam3 = "StartPotTaunt" .. "Param3"
+	local functionParam4 = "StartPotTaunt" .. "Param4"
 
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41006, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 1, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
 
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
-	functionKey = "StartPotTaunt"
-	functionParam1 = "StartPotTaunt" .. "Param1"
-	functionParam2 = "StartPotTaunt" .. "Param2"
-	functionParam3 = "StartPotTaunt" .. "Param3"
-	functionParam4 = "StartPotTaunt" .. "Param4"
+	local functionKey = "StartPotTaunt"
+	local functionParam1 = "StartPotTaunt" .. "Param1"
+	local functionParam2 = "StartPotTaunt" .. "Param2"
+	local functionParam3 = "StartPotTaunt" .. "Param3"
+	local functionParam4 = "StartPotTaunt" .. "Param4"
 
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41004, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
-	currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
+	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
 
 	return 0

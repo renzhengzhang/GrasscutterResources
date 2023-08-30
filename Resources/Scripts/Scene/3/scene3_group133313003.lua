@@ -4,22 +4,22 @@ base_info = {
 }
 
 -- DEFS_MISCS
-I_connectors =
+local I_connectors =
 {
     [1] = 3002
 }
 
-L_connectors =
+local L_connectors =
 {
 
 }
 
-containers =
+local containers =
 {
     [1] = 3011
 }
 
-lights =
+local lights =
 {
     [1] = 3013
 ,
@@ -28,29 +28,29 @@ lights =
     [3] = 3016
 }
 
-streams =
+local streams =
 {
    [containers[1]] = {I_connectors[1],lights[3],lights[1],lights[2]}
 }
 
-L_connections =
+local L_connections =
 {
 
 }
 
-base_interval = 2
+local base_interval = 2
 
-special_interval =
+local special_interval =
 {
     {upstream = I_connectors[1], downstream = lights[3], interval = 3}
 }
 
-worktops =
+local worktops =
 {
 
 }
 
-connector_to_worktop =
+local connector_to_worktop =
 {
 
 }
@@ -247,7 +247,7 @@ function condition_EVENT_SELECT_OPTION_3008(context, evt)
 	end
 
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7318719)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7318719)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

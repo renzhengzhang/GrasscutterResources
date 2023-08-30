@@ -106,7 +106,7 @@ function condition_EVENT_SELECT_OPTION_13003(context, evt)
 	end
 
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7310325)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7310325)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

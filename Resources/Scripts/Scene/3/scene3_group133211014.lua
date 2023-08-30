@@ -268,7 +268,7 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_14015(context, evt)
-	int j = ScriptLib.GetGroupVariableValueByGroup(context, "monster", 133211014)
+	local int j = ScriptLib.GetGroupVariableValueByGroup(context, "monster", 133211014)
 
 	ScriptLib.CreateFatherChallenge(context, 102, 111175, 9999, {success = 1, fail = 1, fail_on_wipe=true})
 
@@ -415,7 +415,7 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_14027(context, evt)
-	int i = ScriptLib.GetGroupVariableValueByGroup(context, "number", 133211014)
+	local int i = ScriptLib.GetGroupVariableValueByGroup(context, "number", 133211014)
 
 	ScriptLib.CreateFatherChallenge(context, 101, 111175, 9999, {success = 1, fail = 1, fail_on_wipe=true})
 

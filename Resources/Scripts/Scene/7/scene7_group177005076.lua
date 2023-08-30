@@ -9,26 +9,26 @@ defs = {
 }
 
 -- DEFS_MISCS
-PlatList = {76001,76002,76003,76004,0,76006,76007,76008,76005}
-initPlatList = {0,76002,76003,76001,76006,76005,76004,76007,76008}
+local PlatList = {76001,76002,76003,76004,0,76006,76007,76008,76005}
+local initPlatList = {0,76002,76003,76001,76006,76005,76004,76007,76008}
 
-groupID = 177005076
-ArrayID = 700500010
+local groupID = 177005076
+local ArrayID = 700500010
 
-operatorConfigID = 76010
-successOptionID = 703
-offeringConfigID = 76014
-borderConfigID = 76018
-baseConfigID = 76019
-lastOfferingConfigID = 76011
-completeConfigID = 76016
-centreConfigID = 76030
-successConfigID = 76017
+local operatorConfigID = 76010
+local successOptionID = 703
+local offeringConfigID = 76014
+local borderConfigID = 76018
+local baseConfigID = 76019
+local lastOfferingConfigID = 76011
+local completeConfigID = 76016
+local centreConfigID = 76030
+local successConfigID = 76017
 
 
-OptionID = 705
-RestartOption = 704
-PointList ={
+local OptionID = 705
+local RestartOption = 704
+local PointList ={
         {pos={x=242.83, y=325.696, z=284.28}, rot={x=0 ,y=306.419, z=0}},
         {pos={x=241.3458, y=325.696, z=282.2683}, rot={x=0 ,y=306.419, z=0}},
         {pos={x=239.865, y=325.696, z=280.259}, rot={x=0 ,y=306.419, z=0}},

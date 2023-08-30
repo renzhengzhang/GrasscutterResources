@@ -5,40 +5,40 @@ base_info = {
 
 -- DEFS_MISCS
 --风扇
-fans =
+local fans =
 {
     12003
 }
 --沙堆
-sandpiles =
+local sandpiles =
 {
     12007,
     12009
 }
 --百叶窗
-shutters =
+local shutters =
 {
 
 }
 --百叶窗开关
-shutter_switches =
+local shutter_switches =
 {
 
 }
 --每个风扇对应点阵
-FanToPointArray =
+local FanToPointArray =
 {
 
 }
 --沙堆风扇方向位置
-FanToSandpile =
+local FanToSandpile =
 {
     [sandpiles[1]] = {fan = fans[1], dir_state = 201, pos = 1},
     [sandpiles[2]] = {fan = fans[1], dir_state = 203, pos = 1}
 }
 
 --百叶窗开关和百叶窗对应
-SwitchToShutter =
+local SwitchToShutter =
 {
 
 }
@@ -143,7 +143,7 @@ function condition_EVENT_QUEST_START_12002(context, evt)
 		return false
 	end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7321910)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7321910)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -177,7 +177,7 @@ function condition_EVENT_GADGET_CREATE_12004(context, evt)
 		return false
 	end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7321910)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7321910)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -292,7 +292,7 @@ function condition_EVENT_GADGET_CREATE_12012(context, evt)
 		return false
 	end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7321914)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7321914)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

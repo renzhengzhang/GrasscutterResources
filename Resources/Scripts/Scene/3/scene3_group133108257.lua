@@ -415,7 +415,7 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_257017(context, evt)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, "GV_Mark_Skiff", 1)
 	ScriptLib.SetTeamServerGlobalValue(context, uid_list[1], "SGV_Box_Count", 5);
 

@@ -11,7 +11,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 1,
   --镜头的移动路径，球面0，直线1
     blend_duration = 1,
@@ -24,22 +24,22 @@ CameraLookSetting = {
  --触发延迟
 }
 
-I_connectors =
+local I_connectors =
 {
     [1] = 18003
 }
 
-L_connectors =
+local L_connectors =
 {
 
 }
 
-containers =
+local containers =
 {
     [1] = 18017
 }
 
-lights =
+local lights =
 {
     [1] = 18007,
     [2] = 18012,
@@ -48,28 +48,28 @@ lights =
     [5] = 18016
 }
 
-streams =
+local streams =
 {
    [containers[1]] = {I_connectors[1],lights[1],lights[2],lights[3],lights[4],lights[5]}
 }
 
-L_connections =
+local L_connections =
 {
 
 }
 
-base_interval = 2
+local base_interval = 2
 
-special_interval =
+local special_interval =
 {
 }
 
-worktops =
+local worktops =
 {
 
 }
 
-connector_to_worktop =
+local connector_to_worktop =
 {
 
 }

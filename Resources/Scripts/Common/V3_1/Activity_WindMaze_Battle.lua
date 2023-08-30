@@ -14,17 +14,17 @@
     }
 ]]
 --测试结束
-Stage_Battle = {
+local Stage_Battle = {
     Coin_Gadget_ID = 70800269,
     Revive_Point = 1148
 }
-temp_Variables = {
+local temp_Variables = {
 	{  name = "coin", value = 0, no_refresh = false },
 	{  name = "killed_monster", value = 0, no_refresh = false },
 	{  name = "cur_stage", value = 0, no_refresh = false },
 	{  name = "end", value = 0, no_refresh = false },
 }
-temp_Tirgger = {
+local temp_Tirgger = {
 	{event = EventType.EVENT_VARIABLE_CHANGE, source = "", action = "action_EVENT_VARIABLE_CHANGE"},
 	{event = EventType.EVENT_ANY_GADGET_DIE, source = "", action = "action_EVENT_ANY_GADGET_DIE"},
 	{event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", action = "action_EVENT_GROUP_WILL_UNLOAD"},
@@ -57,7 +57,7 @@ end
 --团灭检测器
 function action_EVENT_DUNGEON_ALL_AVATAR_DIE(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Battle action_EVENT_DUNGEON_ALL_AVATAR_DIE|evt.uid="..evt.uid)
-    _uidlist = ScriptLib.GetSceneUidList(context)
+    local _uidlist = ScriptLib.GetSceneUidList(context)
     for i = 1 ,#_uidlist do
         if ScriptLib.IsPlayerAllAvatarDie(context,_uidlist[i]) == false then --任一活着则结束
             return 0
@@ -92,7 +92,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Battle action_EVENT_ANY_MONSTER_DIE")
     --watcher累计杀怪
-    _uidlist = ScriptLib.GetSceneUidList(context)
+    local _uidlist = ScriptLib.GetSceneUidList(context)
     for i = 1 , #_uidlist do
         ScriptLib.AddExhibitionAccumulableDataAfterSuccess(context, _uidlist[i], "Activity_WindField_5_Monster", 1, {play_type=ExhibitionPlayType.Gallery,gallery_id=defs.gallery_id})
     end
@@ -107,7 +107,7 @@ end
 function action_EVENT_ANY_GADGET_DIE(context,evt)--吃金币
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Battle action_EVENT_ANY_GADGET_DIE: evt.param1=" .. evt.param1)
     --查询gadgetid
-    _gadgetid = 0
+    local _gadgetid = 0
     for k,v in pairs(gadgets) do
         if v.config_id == evt.param1 then
             _gadgetid = v.gadget_id
@@ -120,7 +120,7 @@ function action_EVENT_ANY_GADGET_DIE(context,evt)--吃金币
         ScriptLib.ChangeGroupVariableValue(context,"coin",1)
         ScriptLib.ChangeGroupTempValue(context,"level_5_coin_sum",1,{})
         --watcher单局吃金币
-        _uidlist = ScriptLib.GetSceneUidList(context)
+        local _uidlist = ScriptLib.GetSceneUidList(context)
         for i = 1 , #_uidlist do
             ScriptLib.AddExhibitionReplaceableDataAfterSuccess(context, _uidlist[i], "Activity_WindField_5_Coin", 1, {play_type=ExhibitionPlayType.Gallery,gallery_id=defs.gallery_id})
         end
@@ -130,7 +130,7 @@ end
 function action_EVENT_VARIABLE_CHANGE(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Battle action_EVENT_VARIABLE_CHANGE:"..evt.source_name.." = "..evt.param1)
     if evt.source_name == "cur_stage" then
-        _uidlist = ScriptLib.GetSceneUidList(context)
+        local _uidlist = ScriptLib.GetSceneUidList(context)
         if evt.param1 == 1 then
             --第一阶段先开gallery
             ScriptLib.SetPlayerStartGallery(context,defs.gallery_id,_uidlist)
@@ -154,7 +154,7 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
             return 0
         else
             --第二到四阶段，关旧的挑战
-            _score = {
+            local _score = {
                 ["is_start"] = false,
                 ["is_success"] = false,
                 ["challenge_time"] = 0,
@@ -165,7 +165,7 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
         if  evt.param1 ~= 6  then
             --无论什么阶段，都开新的挑战
             ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Battle action_EVENT_VARIABLE_CHANGE:stage_challenge_id[evt.param1]="..stage_challenge_id[evt.param1])
-            _score = {
+            local _score = {
                 ["is_start"] = true,
                 ["is_success"] = false,
                 ["challenge_time"] = stage_challenge_time[evt.param1],
@@ -181,7 +181,7 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
         ScriptLib.UpdatePlayerGalleryScore(context,defs.gallery_id,{[evt.source_name] = evt.param1})
         --二阶段吃金币奖励buff
         if ScriptLib.GetGroupVariableValue(context,"cur_stage") == 2 and evt.param1 == defs.stage2_coin_goal then
-            _uidlist = ScriptLib.GetSceneUidList(context)
+            local _uidlist = ScriptLib.GetSceneUidList(context)
             for i = 1 , #_uidlist do
                 --ScriptLib.AttachGalleryTeamAbilityGroup(context, {_uidlist[i]}, defs.gallery_id, 0)
                 ScriptLib.SetTeamServerGlobalValue(context, _uidlist[i], "SGV_WindField_Buff_1", 1)
@@ -190,7 +190,7 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
         end
         --三阶段吃金币奖励buff
         if ScriptLib.GetGroupVariableValue(context,"cur_stage") == 4 and evt.param1 == defs.stage4_coin_goal then
-            _uidlist = ScriptLib.GetSceneUidList(context)
+            local _uidlist = ScriptLib.GetSceneUidList(context)
             for i = 1 , #_uidlist do
                 --ScriptLib.AttachGalleryTeamAbilityGroup(context, {_uidlist[i]}, defs.gallery_id, 0)
                 ScriptLib.SetTeamServerGlobalValue(context, _uidlist[i], "SGV_WindField_Buff_2", 1)

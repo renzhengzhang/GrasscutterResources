@@ -152,13 +152,13 @@ end
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_126004(context, evt)
 	--获取时间轴对应物件的ID
-	_sGadget = 0
+	local _sGadget = 0
 	_sGadget = tonumber(string.sub(evt.source_name, -1))
 
 	--创建正式时间轴
-	_timeAxisKey = ""
+	local _timeAxisKey = ""
 	_timeAxisKey = string.format("switch_%d",_sGadget)
-	_switchTime = 0
+	local _switchTime = 0
 	_switchTime = defs.duration + defs.interval
 	ScriptLib.InitTimeAxis(context, _timeAxisKey, {defs.duration,_switchTime}, true)
 
@@ -177,13 +177,13 @@ end
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_126005(context, evt)
 	--获取时间轴对应物件的ID
-	_sGadget = 0
+	local _sGadget = 0
 	_sGadget = tonumber(string.sub(evt.source_name, -1))
 
 	-- 将在groupid为 133307126 中的 configid为 defs.fans[_sGadget] 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201,0}
-	_key = 0
+	local _gadgetStateList = {0,201,0}
+	local _key = 0
 
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133307126, defs.fans[_sGadget]) then
@@ -226,9 +226,9 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_126007(context, evt)
-	_timeAxisKey = ""
-	_waitTime = 0
-	_gadgetID = 0
+	local _timeAxisKey = ""
+	local _waitTime = 0
+	local _gadgetID = 0
 
 	--判断wait是否为空
 	if 0 == #defs.wait then
@@ -247,8 +247,8 @@ function action_EVENT_ENTER_REGION_126007(context, evt)
 	  else
 	    _gadgetID = v
 	    --执行一次转换
-	    _gadgetStateList = {0,201,0}
-	    _key = 0
+	    local _gadgetStateList = {0,201,0}
+	    local _key = 0
 
 	    for k,v in pairs(_gadgetStateList) do
 	      if v == ScriptLib.GetGadgetStateByConfigId(context, 133307126, _gadgetID) then
@@ -269,7 +269,7 @@ function action_EVENT_ENTER_REGION_126007(context, evt)
 	    end
 	    --创建正式时间轴
 	    _timeAxisKey = string.format("switch_%d",i)
-	    _switchTime = 0
+	    local _switchTime = 0
 	    _switchTime = defs.duration + defs.interval
 	    ScriptLib.InitTimeAxis(context, _timeAxisKey, {defs.duration,_switchTime}, true)
 	  end

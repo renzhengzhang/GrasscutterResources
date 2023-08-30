@@ -124,9 +124,9 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_120001(context, evt)
-	rmd_id = LF_GetRandomResult(context, defs.rmd_list)
+	local rmd_id = LF_GetRandomResult(context, defs.rmd_list)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-519,y=120,z=406}
+	local pos = {x=-519,y=120,z=406}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, rmd_id, pos, 35) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 	        return -1

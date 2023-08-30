@@ -4,9 +4,9 @@ base_info = {
 }
 
 -- DEFS_MISCS
-BossOperatorConfigID = 18007
-QuitPointConfigID = 18002
-BossPoolID = 17010
+local BossOperatorConfigID = 18007
+local QuitPointConfigID = 18002
+local BossPoolID = 17010
 
 --================================================================
 --

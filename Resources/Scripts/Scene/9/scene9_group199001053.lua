@@ -154,8 +154,8 @@ function action_EVENT_VARIABLE_CHANGE_53015(context, evt)
 
 
 	-- 触发镜头注目，注目位置为坐标（75.438，141.6627，-757.0629），持续时间为4秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=75.438, y=141.6627, z=-757.0629}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=75.438, y=141.6627, z=-757.0629}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -199,7 +199,7 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_53026(context, evt)
 	if  ScriptLib.CheckIsInMpMode(context) then
-		pos = {x=75,y=135,z=-757}
+		local pos = {x=75,y=135,z=-757}
 		ScriptLib.ShowReminderRadius(context, 321700501, pos, 20)
 	else
 		ScriptLib.KillEntityByConfigId(context, { config_id = 53002 })

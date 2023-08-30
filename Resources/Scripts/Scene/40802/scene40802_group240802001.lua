@@ -4,11 +4,11 @@ base_info = {
 }
 
 -- DEFS_MISCS
-elemenFloorTimer = {30}
+local elemenFloorTimer = {30}
 
-floorList = {1004,1005,1006,1007}
+local floorList = {1004,1005,1006,1007}
 
-EnterConfigID = 1001
+local EnterConfigID = 1001
 
 --================================================================
 --

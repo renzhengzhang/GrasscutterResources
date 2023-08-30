@@ -99,8 +99,8 @@ suites = {
 -- 使用注目镜头
 function TLA_active_cameralook_begin(context, evt, x, y, z, is_allow_input, duration, delay_time, is_set_follow_pos, x_follow, y_follow, z_follow, is_force_walk, is_change_play_mode, is_set_screen_XY, screen_x, screen_y)
 	-- 触发镜头注目，注目位置为坐标（x，y，z），持续时间为duration秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=x, y=y, z=z}
-	  pos_follow = {x=x_follow, y=y_follow, z=z_follow}
+		local pos = {x=x, y=y, z=z}
+	  local pos_follow = {x=x_follow, y=y_follow, z=z_follow}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = is_allow_input, duration = duration, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = delay_time,
 	                                                      is_set_follow_pos = is_set_follow_pos, follow_pos = pos_follow, is_force_walk = is_force_walk, is_change_play_mode = is_change_play_mode,
 	                                                      is_set_screen_XY = is_set_screen_XY, screen_x = screen_x, screen_y = screen_y }) then
@@ -141,8 +141,8 @@ end
 -- 触发操作
 function action_EVENT_QUEST_FINISH_1005(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-3.6，16，-14），持续时间为4秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-3.6, y=16, z=-14}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-3.6, y=16, z=-14}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -168,8 +168,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_1008(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-15.79274, y=3.8, z=-46.44774}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-15.79274, y=3.8, z=-46.44774}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-15.79274, y=3.8, z=-46.44774}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -195,8 +195,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_1009(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=23.93276, y=0.5, z=-40.42496}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=23.93276, y=0.5, z=-40.42496}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=23.93276, y=0.5, z=-40.42496}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

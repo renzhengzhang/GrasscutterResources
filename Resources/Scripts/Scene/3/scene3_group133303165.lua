@@ -110,8 +110,8 @@ function action_EVENT_ENTER_REGION_165010(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 133303165, 2)
 
 	-- 触发镜头注目，注目位置为坐标{x=-1340.805, y=281.9348, z=3297.909}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1340.805, y=281.9348, z=3297.909}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1340.805, y=281.9348, z=3297.909}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

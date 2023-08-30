@@ -6,20 +6,20 @@
 -- ||	Owner         ||	xudong.sun
 -- ||	Description   ||	3.1旋转台阶
 -- ||	LogName       ||    ## RotateStair_LOG
--- ||	Protection    ||
+-- ||	Protection    ||	
 -- =====================================================================================================================
--- stairConfigID = 0
--- turnOption = 0
--- cystalConfigID = 0
+-- local stairConfigID = 0
+-- local turnOption = 0 
+-- local cystalConfigID = 0
 
--- operator_stair = {
+-- local operator_stair = {
 -- 	[gadgetstate] = {stairconfigID, stairconfigID},
 -- 	[gadgetstate] = {stairconfigID, stairconfigID},
 -- }
 
 -- =======================================================================================]]
 
--- extrTriggers = {
+-- local extrTriggers = {
 -- 	initialtrigger = {
 -- 		["Option_Down"] = { config_id = 80000001, name = "Option_Down", event= EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_option_down", trigger_count = 0},
 -- 		["Group_Load"] = { config_id = 80000002, name = "Group_Load", event= EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
@@ -38,8 +38,8 @@
 -- 	if evt.param2 == turnOption then
 
 -- 		for i,v in ipairs(operator_stair[ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1)]) do
--- 			curState = ScriptLib.GetGadgetStateByConfigId(context, 0, v)
--- 			nextState = curState - 1
+-- 			local curState = ScriptLib.GetGadgetStateByConfigId(context, 0, v)
+-- 			local nextState = curState - 1
 -- 			if nextState < 201 then
 -- 				nextState = 204
 -- 			end

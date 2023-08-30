@@ -10,11 +10,11 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {259005,259006}
-Worktops = {}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local Controllers = {}
+local EnvControlGadgets = {259005,259006}
+local Worktops = {}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
 
 --[[
@@ -44,7 +44,7 @@ NightAppearGadgets = {}
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -69,7 +69,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -86,7 +86,7 @@ function GadgetStateSwitcher(context,gadget_id,state)
 end
 
 function Initial(context)
-	pos = ScriptLib.GetGroupVariableValue(context, "wallpos")
+	local pos = ScriptLib.GetGroupVariableValue(context, "wallpos")
 	if pos == 1 then
 		ScriptLib.SetPlatformPointArray(context, 259003, defs.pointarray_move, {1}, {route_type = 0, turn_mode = false})
 	elseif pos == 2 then
@@ -235,8 +235,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_259007(context, evt)
-		state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, 259004)
-		pos = ScriptLib.GetGroupVariableValue(context, "wallpos")
+		local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, 259004)
+		local pos = ScriptLib.GetGroupVariableValue(context, "wallpos")
 		if state == 201 then
 			if pos == 1 then
 				ScriptLib.SetPlatformPointArray(context, 259003, defs.pointarray_move, {1,2}, {route_type = 0, turn_mode = false})
@@ -269,7 +269,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_259008(context, evt)
-		temppos = ScriptLib.GetGroupVariableValue(context, "wallpos")
+		local temppos = ScriptLib.GetGroupVariableValue(context, "wallpos")
 		if temppos == 1 then
 			GadgetStateSwitcher(context,259004,{0,201})
 		elseif temppos ==2 then

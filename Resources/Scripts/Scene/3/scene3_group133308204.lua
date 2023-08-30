@@ -15,10 +15,10 @@ defs.receiverList = {
 	defs.gadget_receiver_2,
 }
 
-engineerLaserConfigID = 204002
-turnOption = 435
+local engineerLaserConfigID = 204002
+local turnOption = 435
 
-correctState = 0
+local correctState = 0
 
 --================================================================
 --

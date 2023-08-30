@@ -166,7 +166,7 @@ end
 
 -- 触发条件
 function condition_EVENT_TIMER_EVENT_1016(context, evt)
-	uid=ScriptLib.GetSceneUidList(context)
+	local uid=ScriptLib.GetSceneUidList(context)
 	if ScriptLib.IsPlayerAllAvatarDie(context, uid[1]) then
 	return false
 	end

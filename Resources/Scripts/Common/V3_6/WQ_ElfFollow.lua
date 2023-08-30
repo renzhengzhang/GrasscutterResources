@@ -24,7 +24,7 @@ defs = {
 	end_suite = 2
 }
 --小精灵到达对应的Point时短暂停留，播放动画，播的动画ID
-elf_actions = {
+local elf_actions = {
 	[1] = {wait_time = 0,action_id = 0, next_point = 4}, --目标点在点阵内的PointID 到达点阵时播放的动画ID,没有则填0
 	[4] = {wait_time = 2,action_id = 0, next_point = 8},
 	[8] = {wait_time = 2,action_id = 0, next_point = 12},
@@ -34,7 +34,7 @@ elf_actions = {
 ]]
 --======================================================================================================================
 --Events || Group内EVENT事件,记得初始化和return 0
-ElfFollow_Triggers = {
+local ElfFollow_Triggers = {
 	{ name = "gadget_state_change", config_id = 8000101, event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0 },
 	{ name = "time_axis_pass", config_id = 8000102, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0 },
 	{ name = "platform_arrival", config_id = 8000103, event = EventType.EVENT_PLATFORM_ARRIVAL, source = "", condition = "", action = "action_platform_arrival", trigger_count = 0 }
@@ -73,7 +73,7 @@ function action_time_axis_pass(context, evt)
 	--检查玩家是否上了载具
 	if evt.source_name == "CHECK_PLAYER_VEHICLE" then
 		ScriptLib.PrintContextLog(context, "##[WQ_ElfFollow]:检查玩家是否上载具")
-		_host_uid = ScriptLib.GetSceneOwnerUid(context)
+		local _host_uid = ScriptLib.GetSceneOwnerUid(context)
 		if defs.slusha_type ~= ScriptLib.GetPlayerVehicleType(context, _host_uid) then
 			ScriptLib.PrintContextLog(context, "##[WQ_ElfFollow]:玩家没有上载具")
 			LF_FollowPlayFail(context)
@@ -136,15 +136,15 @@ end
 function LF_CalcDist(context)
 	ScriptLib.PrintContextLog(context, "##[WQ_ElfFollow]:处理玩家和小精灵之间的距离")
 	--计算玩家和小精灵的距离
-	dis_h2e = 100
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local dis_h2e = 100
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	if uid_list ~= nil then
-		_host_uid = ScriptLib.GetSceneOwnerUid(context)
-		_avatar_eid = ScriptLib.GetAvatarEntityIdByUid(context, _host_uid)
-		_avatar_pos = ScriptLib.GetPosByEntityId(context, _avatar_eid)
+		local _host_uid = ScriptLib.GetSceneOwnerUid(context)
+		local _avatar_eid = ScriptLib.GetAvatarEntityIdByUid(context, _host_uid)
+		local _avatar_pos = ScriptLib.GetPosByEntityId(context, _avatar_eid)
 
-		_elf_eid = ScriptLib.GetEntityIdByConfigId(context, defs.elf_config_id)
-		_elf_pos = ScriptLib.GetPosByEntityId(context, _elf_eid)
+		local _elf_eid = ScriptLib.GetEntityIdByConfigId(context, defs.elf_config_id)
+		local _elf_pos = ScriptLib.GetPosByEntityId(context, _elf_eid)
 		dis_h2e = math.sqrt( (_avatar_pos.x - _elf_pos.x)^2 + (_avatar_pos.y - _elf_pos.y)^2 +(_avatar_pos.z - _elf_pos.z)^2 )
 		ScriptLib.PrintContextLog(context, "##[WQ_ElfFollow]:距离"..dis_h2e)
 	end
@@ -199,10 +199,10 @@ end
 --根据当前点生成飞行的路径
 function LF_GetFlyPath(context)
  	ScriptLib.PrintContextLog(context, "##[WQ_ElfFollow]:生成飞行路径")
-	cur_point = ScriptLib.GetGroupTempValue(context, "ELF_CUR_POINT", {})
-	fly_path = {}
+	local cur_point = ScriptLib.GetGroupTempValue(context, "ELF_CUR_POINT", {})
+	local fly_path = {}
 	if cur_point < defs.point_target then
-		target_point = elf_actions[cur_point].next_point
+		local target_point = elf_actions[cur_point].next_point
 		for i=cur_point,target_point do
 			table.insert(fly_path, i)
 --			ScriptLib.PrintContextLog(context, "##[WQ_ElfFollow]:路径"..i)

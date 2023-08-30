@@ -11,7 +11,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-CameraLookSetting =
+local CameraLookSetting =
 {
     blend_type = 1,
   --镜头的移动路径，球面0，直线1
@@ -25,46 +25,46 @@ CameraLookSetting =
  --触发延迟
 }
 
-I_connectors =
+local I_connectors =
 {
     [1] = 5002,
     [2] = 5007,
 }
-L_connectors =
+local L_connectors =
 {
 }
 
-containers =
+local containers =
 {
     [1] = 5009
 }
 
-lights =
+local lights =
 {
     [1] = 5003,
     [2] = 5012,
     [3] = 5004
 }
 
-streams =
+local streams =
 {
    [containers[1]] = {I_connectors[1],lights[1],lights[2],I_connectors[2],lights[3]}
 }
 
-L_connections =
+local L_connections =
 {
 
 }
-base_interval = 2
-special_interval =
+local base_interval = 2
+local special_interval =
 {
 }
 
-worktops =
+local worktops =
 {
     [1] = 5005
 }
-connector_to_worktop =
+local connector_to_worktop =
 {
     [I_connectors[2]] = worktops[1]
 }
@@ -187,7 +187,7 @@ end
 
 -- 触发条件
 function condition_EVENT_GADGET_CREATE_5010(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7318613)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7318613)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -266,7 +266,7 @@ function condition_EVENT_SELECT_OPTION_5014(context, evt)
 	end
 
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7318613)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7318613)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

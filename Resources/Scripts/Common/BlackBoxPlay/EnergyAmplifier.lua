@@ -11,7 +11,7 @@ square={
 
 
 ]]--
-stateChain={
+local stateChain={
 	{101,102,103,104},
 	{201,202,203,204},
 	{301,302,303,304},
@@ -19,7 +19,7 @@ stateChain={
 
 
 
-extraTriggers={
+local extraTriggers={
   --{ config_id = 8000001, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
   --{ config_id = 8000002, name = "PLATFORM_REACH_POINT", event = EventType.EVENT_PLATFORM_REACH_POINT, source = "", condition = "", action = "action_EVENT_PLATFORM_REACH_POINT", trigger_count = 0 },
   { config_id = 8000003, name = "GADGET_CREATE", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0 },
@@ -34,7 +34,7 @@ function LF_Initialize_Group(triggers, suites)
 		table.insert(suites[init_config.suite].triggers,extraTriggers[i].name)
 	end
 	for i=1,#defs.repeater do
-		time_trigger={ config_id = 8000000+defs.repeater[i], name = tostring(defs.repeater[i]), event = EventType.EVENT_TIMER_EVENT, source = tostring(defs.repeater[i]), condition = "", action = "action_Time_Event", trigger_count = 0}
+		local time_trigger={ config_id = 8000000+defs.repeater[i], name = tostring(defs.repeater[i]), event = EventType.EVENT_TIMER_EVENT, source = tostring(defs.repeater[i]), condition = "", action = "action_Time_Event", trigger_count = 0}
 		table.insert(triggers, time_trigger)
 		table.insert(suites[1].triggers, time_trigger.name)
 	end
@@ -44,7 +44,7 @@ end
 
 function action_Time_Event(context,evt)
 	ScriptLib.PrintContextLog(context, "##反射装置TimeEvent"..defs.groupID.."|"..evt.source_name.."|"..evt.param3)
-	temp_id=tonumber(evt.source_name)
+	local temp_id=tonumber(evt.source_name)
 	ScriptLib.PrintContextLog(context, "temp_id##"..temp_id)
 	ScriptLib.SetWorktopOptionsByGroupId(context, defs.groupID, temp_id, {54,55})
 	return 0
@@ -67,7 +67,7 @@ function action_gadget_create(context, evt)
 		if evt.param1==defs.repeater[i] then
 			if ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, evt.param1) ~= 0 then
 				ScriptLib.CreateGroupTimerEvent(context, defs.groupID, tostring(evt.param1), 3)
-			end
+			end	
 			return 0
 		end
 	end
@@ -95,7 +95,7 @@ function action_EVENT_SELECT_OPTION(context, evt)
 end
 
 function ChangeGadgetState(context,config_id,option_id)
-	stateID=ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, config_id)
+	local stateID=ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, config_id)
 	for i=1,#stateChain do
 		for j=1,#stateChain[i] do
 			if stateID==stateChain[i][j] then
@@ -103,7 +103,7 @@ function ChangeGadgetState(context,config_id,option_id)
 					if j==#stateChain[i] then
 						ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupID, config_id, stateChain[i][1])
 						return 0
-					else
+					else 
 						ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupID, config_id, stateChain[i][j+1])
 						return 0
 					end
@@ -112,7 +112,7 @@ function ChangeGadgetState(context,config_id,option_id)
 					if i==#stateChain then
 						ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupID, config_id, stateChain[1][j])
 						return 0
-					else
+					else 
 						ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupID, config_id, stateChain[i+1][j])
 						return 0
 					end
@@ -124,7 +124,7 @@ function ChangeGadgetState(context,config_id,option_id)
 end
 
 function CutSceneTrigger(context)
-	variable=ScriptLib.GetGroupVariableValue(context, "ShootTrigger")
+	local variable=ScriptLib.GetGroupVariableValue(context, "ShootTrigger")
 	variable=variable+1
 	ScriptLib.SetGroupVariableValue(context, "ShootTrigger", variable)
 	return 0

@@ -113,8 +113,8 @@ function action_EVENT_GADGET_STATE_CHANGE_109005(context, evt)
 
 		ScriptLib.PrintLog(context, "Beging Execute ".." : Gadget state = ".. evt.param1)
 
-		state = {0, 0, 0}
-		allEquale = 1
+		local state = {0, 0, 0}
+		local allEquale = 1
 
 		for k,v in pairs(gadgetInfo) do
 
@@ -122,7 +122,7 @@ function action_EVENT_GADGET_STATE_CHANGE_109005(context, evt)
 		end
 		ScriptLib.PrintLog(context, "Gadget State = "..state[1].."_"..state[2].."_"..state[3])
 
-		haschange = {0,0,0}
+		local haschange = {0,0,0}
 
 		for i = 1, #state, 1 do
 			if i == #state then
@@ -139,7 +139,7 @@ function action_EVENT_GADGET_STATE_CHANGE_109005(context, evt)
 		end
 		ScriptLib.PrintLog(context, "has change = "..haschange[1].."_"..haschange[2].."_"..haschange[3])
 		for i = 1, #haschange, 1 do
-			n = state[i]
+			local n = state[i]
 			if haschange[i] == 1 then
 
 				if n < 300 then

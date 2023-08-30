@@ -242,8 +242,8 @@ function action_EVENT_SELECT_OPTION_9014(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（-136，101，121），持续时间为8秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-136, y=101, z=121}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-136, y=101, z=121}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 8, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -577,8 +577,8 @@ function action_EVENT_SELECT_OPTION_9028(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（-136，101，121），持续时间为11秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-136, y=101, z=121}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-136, y=101, z=121}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 11, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -973,8 +973,8 @@ function action_EVENT_SELECT_OPTION_9043(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（-136，101，121），持续时间为13秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-136, y=101, z=121}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-136, y=101, z=121}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 13, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -1058,8 +1058,8 @@ function action_EVENT_CHALLENGE_SUCCESS_9046(context, evt)
 	    ScriptLib.RemoveExtraGroupSuite(context, 201052004, 2)
 
 	-- 触发镜头注目，注目位置为坐标（-76，84，190），持续时间为1.5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-76, y=84, z=190}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-76, y=84, z=190}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 1.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

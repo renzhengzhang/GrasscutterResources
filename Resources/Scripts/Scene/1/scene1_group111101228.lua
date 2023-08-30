@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-EnvControlGroups = {
+local EnvControlGroups = {
 111101229,
 111101230
 }

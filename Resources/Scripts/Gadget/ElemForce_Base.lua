@@ -1,5 +1,5 @@
 --玩家吃球的数据包
-protocol = {
+local protocol = {
 	[1] = { name = "small_grume", value = 0 },
 	[2] = { name = "big_grume", value = 0 },
 	[3] = { name = "in_burst", value = 0 },
@@ -8,7 +8,7 @@ protocol = {
 }
 
 --玩法基础定义,有可能会配在group里
-base = {
+local base = {
 	inferior = 200,		--小球分数
 	superior = 500,		--大球分数
 	hit_punish = 1000,	--受击扣分
@@ -16,7 +16,7 @@ base = {
 }
 
 --元素类型字典
-elemType = {
+local elemType = {
 	[1] = "Fire",
 	[2] = "Water",
 	[3] = "Electric",
@@ -27,14 +27,14 @@ elemType = {
 }
 
 --globalValue的字典
-submit = {
+local submit = {
 	[1] = { key = "_Crucible_Grume_Player_Sum_Inferior", value = 0 },	--该玩家本次提交小凝块的数量
 	[2] = { key = "_Crucible_Grume_Player_Sum_Superior", value = 0 },	--该玩家本次提交大凝块的数量
 	[3] = { key = "_Crucible_Grume_Player_In_Burst", value = 0 }		--该玩家是否处于加成状态
 }
 
 --跟ability通信的编码
-notify = {
+local notify = {
 	submit_grume = 10086,
 	select_user_str = "random_user",
 	select_user_value = 10
@@ -42,23 +42,23 @@ notify = {
 
 function OnPlayStageChange(context, old_stage, cur_stage, final_stage)
 	if cur_stage > old_stage and cur_stage ~= final_stage then
-		uid_list = ScriptLib.GetSceneUidList(context)
-		random_user = {}
+		local uid_list = ScriptLib.GetSceneUidList(context)
+		local random_user = {}
 		if #uid_list <= 2 then
 			random_user = uid_list
-		else
-			seed = math.randomseed(tostring(os.time()):reverse():sub(1,5))
+		else 
+			local seed = math.randomseed(tostring(os.time()):reverse():sub(1,5))
 			for i=1,2 do
-				r = math.random(1,#uid_list)
+				local r = math.random(1,#uid_list)
 				random_user[i] = uid_list[r]
 				table.remove(uid_list, r)
 			end
 
-			elem = LF_Calculate_ElemWeight(context)
+			local elem = LF_Calculate_ElemWeight(context)
 			ScriptLib.GadgetPlayUidOp(context, 0, 0, random_user, notify.select_user_value, elem)
 			--stage变化的识别符标为1
 			ScriptLib.GadgetLuaNotifyGroup(context, elem, old_stage, cur_stage)
-		end
+		end	
 	end
 	return 0
 end
@@ -66,8 +66,8 @@ end
 --接收来自abilityAction的消息，启动玩法进度更新逻辑
 function OnClientExecuteReq(context, param1, param2, param3)
 	--玩家提交param2->1
-	if param2 == 1 then
-		uid = ScriptLib.GetUidByTeamEntityId(context, param3)
+	if param2 == 1 then 
+		local uid = ScriptLib.GetUidByTeamEntityId(context, param3)
 		return LF_Update_Player_Submit_Grume(context, uid)
 
 	--本体受击param->9
@@ -77,7 +77,7 @@ function OnClientExecuteReq(context, param1, param2, param3)
 
 	--元素凝块异常param->100+
 	elseif param2 >= 100 then
-		uid = ScriptLib.GetTeamUidByEntityId(context, entity_id)
+		local uid = ScriptLib.GetTeamUidByEntityId(context, entity_id)
 		--解析复杂param
 		return LF_Update_Player_Lose_Grume(context, uid, param2)
 	end
@@ -86,12 +86,12 @@ end
 
 --计算炉子受击扣分信息
 function LF_Update_Crucible_BeHit(context)
-	process_lost = 0
+	local process_lost = 0
 
-	cur_process = ScriptLib.GetGadgetPlayProgress(context, 0, 0)
-	min_process = ScriptLib.GetGadgetPlayStageBeginProgress(context, 0, 0)
+	local cur_process = ScriptLib.GetGadgetPlayProgress(context, 0, 0)
+	local min_process = ScriptLib.GetGadgetPlayStageBeginProgress(context, 0, 0)  
 
-	if min_process <= cur_process - base.hit_punish then
+	if min_process <= cur_process - base.hit_punish then 
 		process_lost = base.hit_punish
 	else process_lost = min_process - cur_process
 	end
@@ -107,18 +107,18 @@ function LF_Update_Player_Submit_Grume(context, uid)
 	end
 
 	--user_crucible_protocal
-	user_crucible = LF_Get_Uid_Submit_Info(context, uid)
-
+	local user_crucible = LF_Get_Uid_Submit_Info(context, uid)
+	
 	--计算本次提交的分数
-	user_crucible[4].value = user_crucible[1].value*base.inferior*(1+user_crucible[3].value*base.burst_multi)
-	user_crucible[4].value = user_crucible[4].value + user_crucible[2].value*base.superior*(1+user_crucible[3].value*base.burst_multi)
-
+	user_crucible[4].value = user_crucible[1].value*base.inferior*(1+user_crucible[3].value*base.burst_multi) 
+	user_crucible[4].value = user_crucible[4].value + user_crucible[2].value*base.superior*(1+user_crucible[3].value*base.burst_multi) 
+	
 	--获取本次提交的元素
-	x = ScriptLib.GetTeamAbilityFloatValue(context, uid, "_Team_Real_Grume_ElemType")
+	local x = ScriptLib.GetTeamAbilityFloatValue(context, uid, "_Team_Real_Grume_ElemType")
 	user_crucible[5].value = elemType[x]
-
-	final_packet = {
-		[1]=user_crucible[1].value,
+	
+	local final_packet = {
+		[1]=user_crucible[1].value, 
 		[2]=user_crucible[2].value,
 		[3]=user_crucible[3].value,
 		[4]=user_crucible[4].value,
@@ -133,9 +133,9 @@ end
 
 --获取玩家信息数组
 function LF_Get_Uid_Submit_Info(context, uid)
-	result = protocol
+	local result = protocol
 	for i=1,#result do
-		LF_Get_Gadget_Uid_Variable(context, uid, result, i)
+		LF_Get_Gadget_Uid_Variable(context, uid, result, i) 
 	end
 	return result
 end
@@ -144,12 +144,12 @@ end
 function LF_Get_Gadget_Uid_Variable(context, uid, array, t)
 	array[t].value = submit[t].value - ScriptLib.GetGadgetPlayUidValue(context, 0, 0, uid, array[t].name)
 	ScriptLib.SetGadgetPlayUidValue(context, 0, 0, uid, array[t].name, submit[t].value)
-	return
+	return 
 end
 
 --解析复杂param
 function LF_Update_Player_Lose_Grume(context, uid, value)
-	struct = {}
+	local struct = {}
 	struct.location = math.floor(value%1000/100)
 	struct.size = math.floor(value%100/10)
 	struct.reason = math.floor(value%10)
@@ -162,17 +162,17 @@ function LF_Update_Player_Lose_Grume(context, uid, value)
 end
 
 function LF_Calculate_ElemWeight(context)
-	sum = 0
+	local sum = 0
 	for i=1,7 do
-		var_value = ScriptLib.GetGroupVariableValue(context, elemType[i])
+		local var_value = ScriptLib.GetGroupVariableValue(context, elemType[i])
 		if var_value < 0 then
 			break
 		end
 		sum = sum + var_value
 	end
-	r_s = math.random(1,sum)
+	local r_s = math.random(1,sum)
 	for i=1,7 do
-		var_value = ScriptLib.GetGroupVariableValue(context, elemType[i])
+		local var_value = ScriptLib.GetGroupVariableValue(context, elemType[i])
 		if r_s > var_value then
 			r_s = r_s - var_value
 		else

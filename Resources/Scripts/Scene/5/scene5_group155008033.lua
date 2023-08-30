@@ -4,13 +4,13 @@ base_info = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {}
-Worktops = {}
-DayAppearGadgets = {33009,33010,33011,33012}
-NightAppearGadgets = {33002,33003,33004,33005}
+local Controllers = {}
+local EnvControlGadgets = {}
+local Worktops = {}
+local DayAppearGadgets = {33009,33010,33011,33012}
+local NightAppearGadgets = {33002,33003,33004,33005}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -40,7 +40,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 

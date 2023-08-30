@@ -103,12 +103,12 @@ suites = {
 
 -- 触发条件
 function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_1005(context, evt)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 
-	ret = 0
+	local ret = 0
 
 	for i,v in ipairs(uid_list) do
-	        is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
+	        local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
 	        if true ~= is_all_dead then
 	                ret = -1
 	                break

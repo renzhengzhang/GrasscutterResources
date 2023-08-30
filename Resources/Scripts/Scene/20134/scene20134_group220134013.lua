@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-       defs = {
+local        defs = {
 
         gear_info =
         {        --connect: 每个物件各个旋转档位可连接的对象 0表示无可连接

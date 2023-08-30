@@ -12,7 +12,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-specialGears =
+local specialGears =
         {
                 [4001] = {operatorEffectConfigId = 4002, bridgeConfigId = 4003},
         }

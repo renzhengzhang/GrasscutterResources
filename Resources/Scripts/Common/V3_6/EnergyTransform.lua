@@ -9,7 +9,7 @@
 --======================================================================================================================
 --Defs & Miscs
 --[[
-DIR = {Up = 0,Right = 1,Down = 2,Left = 3,None = 4,}
+local DIR = {Up = 0,Right = 1,Down = 2,Left = 3,None = 4,}
 --转换器的列表，1表示可移动
 defs = {
 	pointarray_id = 110200028, --点阵ID
@@ -19,11 +19,11 @@ defs = {
 	rot_y = 0, --偏转角
 	reminder_push_warning = 400095, --无法推动的reminder
 }
-converter_infos = {[71017] = 2,[71022] = 1,[71039] = 1,[71040] = 1}
+local converter_infos = {[71017] = 2,[71022] = 1,[71039] = 1,[71040] = 1}
 --0->断路 |-1 电源| 1-> 可停留节点| 1.5 -> 可能存在结晶的节点| 2 -> 电线 | 2.5-> 结晶块 |
 --3-> 接收器 | 4 -> 中继器 | 4.5 -> 对位中继器输入
 
-connected_graph = {
+local connected_graph = {
 [9] = { 1, 2, 2, 2,  1, 2, 1},
 [8] = { 0, 0, 0, 0,  0, 0, 2},
 [7] = { 1, 2, 3, 0, -1, 0, 1},
@@ -36,7 +36,7 @@ connected_graph = {
 }
 
 --与节点图一一对应，点阵中 点的位置
-waypoint_graph = {
+local waypoint_graph = {
 [9] = {10, 0, 0, 0, 6, 0, 5},
 [8] = { 0, 0, 0, 0, 0, 0, 0},
 [7] = {11, 0, 0, 0, 0, 0, 4},
@@ -48,7 +48,7 @@ waypoint_graph = {
 [1] = { 0, 0, 0, 0, 0, 0, 1},
 }
 
-gadget_graph ={
+local gadget_graph ={
 [9] = { 71035,	71024,	71024,	71024,	71028,	71006,	71027},
 [8] = { 	0,		0,		0,		0,		0,		0,	71005},
 [7] = { 71029,	71013,	71019,		0,	71021,		0,	71036},
@@ -61,7 +61,7 @@ gadget_graph ={
 }
 
 --点阵和每个点的POS,用来在恢复的时候创建Gadget
-waypoint_pos = {
+local waypoint_pos = {
 	[1] = {x=1996.51245, y=197.46463, z=-1265.03467},
 	[2] = {x=2000.27747, y=197.637466, z=-1269.03479},
 	[3] = {x=2004.44043, y=197.682251, z=-1273.08423},
@@ -78,36 +78,36 @@ waypoint_pos = {
 }
 
 --定义左下角原点、X轴、Z轴正方向的点，通过向量计算位置关系
-axis_O = {x = 2009, z = -1252}
-axis_Z = {x = 2013, z = -1256}
-axis_X = {x = 2003, z = -1258}
+local axis_O = {x = 2009, z = -1252}
+local axis_Z = {x = 2013, z = -1256}
+local axis_X = {x = 2003, z = -1258}
 
 
 --发射器的位置以及朝向,发射器的状态
-emitter_infos = {
+local emitter_infos = {
 	[71001] = {z = 1, x = 7, dir = DIR.Up},
 	[71021] = {z = 7, x = 5, dir = DIR.Down},
 }
 
-receiver_infos = {
+local receiver_infos = {
 	[71018] = {r_type = "Rec", connect_gadget = {71037} },
 	[71019] = {r_type = "Rec", connect_gadget = {71038} },
 }
 ]]
 --======================================================================================================================
 --全局变量，不需要LD处理,仅在Require内部使用
-_G_pipe_route = {} --电路的流向合集
-_G_pipe_state= {}
-_G_ec_dir = 0 --电流的方向，每次递归计算的时候会用
-_G_recur_counter = 0 --递归计数器
-_G_cvt_graph = {} --在递归时建立的临时表，减少遍历次数
-OPTION = {ROTATE = 31,START = 7,STOP = 72,PUSH = 193,}
+local _G_pipe_route = {} --电路的流向合集
+local _G_pipe_state= {}
+local _G_ec_dir = 0 --电流的方向，每次递归计算的时候会用
+local _G_recur_counter = 0 --递归计数器
+local _G_cvt_graph = {} --在递归时建立的临时表，减少遍历次数
+local OPTION = {ROTATE = 31,START = 7,STOP = 72,PUSH = 193,}
 --0->断路 |-1 电源| 1-> 可停留节点| 1.5 -> 可能存在结晶的节点| 2 -> 电线 | 2.5-> 结晶块 |
 --3-> 接收器 | 4 -> 中继器 | 4.5 -> 对位中继器输入
-NODE = {Off = 0,Power = -1,N_Node = 1,C_Node = 1.5, N_Pipe = 2, Crystal = 2.5, N_Rec = 3,C_Rec = 3.5,Sy_P_Node = 4,Sy_R_Node = 4.5}
+local NODE = {Off = 0,Power = -1,N_Node = 1,C_Node = 1.5, N_Pipe = 2, Crystal = 2.5, N_Rec = 3,C_Rec = 3.5,Sy_P_Node = 4,Sy_R_Node = 4.5}
 --======================================================================================================================
 --Events
-ET_Triggers = {
+local ET_Triggers = {
 	{ name = "group_load", config_id = 8000101, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
 	{ name = "select_option", config_id = 8000102, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
 	{ name = "time_axis_pass", config_id = 8000103, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0 },
@@ -145,9 +145,9 @@ function action_group_load(context, evt)
 	end
 
 	ScriptLib.PrintContextLog(context, "##[EnergyTrans]:开始创建转换器")
-	_cvt_graph = LF_RefreshGlobalConverterList(context)
+	local _cvt_graph = LF_RefreshGlobalConverterList(context)
 	for cvt_id,cvt_info in pairs(_cvt_graph) do
-		waypoint = waypoint_graph[cvt_info.z][cvt_info.x]
+		local waypoint = waypoint_graph[cvt_info.z][cvt_info.x]
 		ScriptLib.PrintContextLog(context, "##[EnergyTrans]:转换器"..cvt_id.."对应路点"..waypoint)
 		--创建转换器，设置方向
 		ScriptLib.CreateGadgetByConfigIdByPos(context, cvt_id, waypoint_pos[waypoint], {x = 0, y = defs.rot_y, z = 0})
@@ -196,7 +196,7 @@ function action_select_option(context, evt)
 			ScriptLib.PrintContextLog(context, "##[EnergyTrans]:电桩结晶化了，不能旋转")
 			ScriptLib.ShowReminder(context, defs.reminder_push_warning)
 		end
-		rotate_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, evt.param1)
+		local rotate_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, evt.param1)
 --		ScriptLib.PrintContextLog(context, "##[EnergyTrans]:旋转中继器,旋转前方向"..rotate_state)
 		if rotate_state == 3 then
 			rotate_state = 0
@@ -218,8 +218,8 @@ function action_select_option(context, evt)
 			ScriptLib.ShowReminder(context, defs.reminder_push_warning)
 		end
 		--按照玩家和电桩的相对位置推动电桩
-		push_dir = LF_CalcDirection(context, context.uid, evt.param1)
-		path = LF_GetMovePath(context, evt.param1, push_dir)
+		local push_dir = LF_CalcDirection(context, context.uid, evt.param1)
+		local path = LF_GetMovePath(context, evt.param1, push_dir)
 		if path ~= 0 then
 			ScriptLib.PrintContextLog(context, "##[EnergyTrans]:推动中继器"..path[1].."to"..path[2])
 			ScriptLib.SetPlatformPointArray(context, evt.param1, defs.pointarray_id, path, { route_type = 0})
@@ -251,7 +251,7 @@ function action_platform_arrival( context, evt)
 	if evt.param3 ~= ScriptLib.GetGroupTempValue(context, "Move_Target_Point", {}) then
 		return -1
 	end
-	pos = LF_GetWaypointPos(evt.param3)
+	local pos = LF_GetWaypointPos(evt.param3)
 	--更新当前电桩的信息
 	LF_SetConverterData( context, evt.param1, "Gadget_Pos", {pos_z = pos[1] ,pos_x = pos[2]})
 	LF_CheckConnection(context)
@@ -261,7 +261,7 @@ end
 --ServerLuaCalls
 --电桩从结晶化恢复时，通知Group恢复操作
 function SLC_CVTCrystallizeOff(context)
-	cvt_cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local cvt_cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	if converter_infos[cvt_cfg_id] == 1 then
 		ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, cvt_cfg_id, {OPTION.PUSH, OPTION.ROTATE})
 	end
@@ -274,7 +274,7 @@ end
 
 --电桩结晶化，通知Group关闭操作
 function SLC_CVTCrystallizeOn(context)
-	cvt_cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local cvt_cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, cvt_cfg_id, {})
 	LF_CheckConnection(context)
 	return 0
@@ -282,7 +282,7 @@ end
 
 --电源结晶相关SLC
 function SLC_GeneratorCrystalStateChange(context, is_crystallized)
-	gen_cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local gen_cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	--结晶化时关掉开关的选项
 	if 1 == is_crystallized then
 		ScriptLib.PrintContextLog(context, "##[EnergyTrans]:[电源SLC]电源结晶")
@@ -312,7 +312,7 @@ end
 
 --电桩结晶相关SLC
 function SLC_ConverterCrystalStateChange(context, is_crystallized)
-	cvt_cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local cvt_cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 
 	--结晶化时关掉旋转的选项
 	if 1 == is_crystallized then
@@ -337,7 +337,7 @@ end
 
 --对位中继器相关SLC，结晶和结晶化解除时都要发
 function SLC_ReceiverCrystalStateChange(context, is_crystallized)
-	sync_cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local sync_cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	LF_CheckConnection(context)
 	return 0
 end
@@ -345,7 +345,7 @@ end
 --LevelFunctions
 --更新所有转换器的位置信息，使用一个全局表处理，每次使用时需要重置此表
 function LF_RefreshGlobalConverterList(context)
-	_cvt_graph = {}
+	local _cvt_graph = {}
 --	ScriptLib.PrintContextLog(context, "##[EnergyTrans]:[电桩]创建电桩列表")
 	for config_id,cvt_type in pairs(converter_infos) do
 		_cvt_graph[config_id] = LF_GetConverterData(context, config_id)
@@ -380,10 +380,10 @@ end
 --电桩移动相关
 --获取电桩的移动路点列表
 function LF_GetMovePath(context, cvt_id, push_dir)
-	_cvt_graph = LF_RefreshGlobalConverterList(context)
-	pos_z = _cvt_graph[cvt_id].z
-	pos_x = _cvt_graph[cvt_id].x
-	cur_point = waypoint_graph[pos_z][pos_x]
+	local _cvt_graph = LF_RefreshGlobalConverterList(context)
+	local pos_z = _cvt_graph[cvt_id].z
+	local pos_x = _cvt_graph[cvt_id].x
+	local cur_point = waypoint_graph[pos_z][pos_x]
 	--走到下一个可以停留的点为止
 	for i=1,defs.len_x do
 		if push_dir == DIR.Up then
@@ -460,7 +460,7 @@ end
 function LF_CheckConnection(context)
 	--每个电源都走一个递归检测逻辑
 	--递归次数清零
-	_cvt_graph = LF_RefreshGlobalConverterList(context)
+	local _cvt_graph = LF_RefreshGlobalConverterList(context)
 	--建立一个每个电线的状态表,记为0 关闭
 	for z = 1, defs.len_z do
 		_G_pipe_state[z] = {}
@@ -530,8 +530,8 @@ function LF_RunEC(context, ec_pos, is_on, _cvt_graph)
 		end
 	end
 	--获取电流的所在节点
-	pos_x = ec_pos.x
-	pos_z = ec_pos.z
+	local pos_x = ec_pos.x
+	local pos_z = ec_pos.z
 	--根据方向流动电流
 	if _G_ec_dir == DIR.Up then
 		pos_z = pos_z + 1
@@ -548,7 +548,7 @@ function LF_RunEC(context, ec_pos, is_on, _cvt_graph)
 	--检查是否越界,越界检查尝试转弯
 	if pos_z < 1 or pos_z > defs.len_z or pos_x < 1 or pos_x > defs.len_x then
 		ScriptLib.PrintContextLog(context, "##[EnergyTrans]:[电流]走到了尽头，尝试拐弯")
-		try_turn_ec = LF_TurnEcDir(context, ec_pos)
+		local try_turn_ec = LF_TurnEcDir(context, ec_pos)
 		if try_turn_ec.dir == DIR.None then
 			return false
 		else
@@ -559,7 +559,7 @@ function LF_RunEC(context, ec_pos, is_on, _cvt_graph)
 	--下一个点的信息判断
 	if connected_graph[pos_z][pos_x] == NODE.Off then
 		ScriptLib.PrintContextLog(context, "##[EnergyTrans]:[电流]走到了断路，尝试拐弯")
-		try_turn_ec = LF_TurnEcDir(context, ec_pos)
+		local try_turn_ec = LF_TurnEcDir(context, ec_pos)
 		if try_turn_ec.dir == DIR.None then
 			return false
 		else
@@ -641,7 +641,7 @@ end
 function LF_TurnEcDir(context, cur_pos)
 	--原来的电流是上下的，尝试左右移动
 	ScriptLib.PrintContextLog(context, "##[EnergyTrans]:[电流]尝试扭转电流")
-	can_turn_dir = 0
+	local can_turn_dir = 0
 	if _G_ec_dir == DIR.Up or _G_ec_dir == DIR.Down then
 		--尝试向右转动电流
 		if (cur_pos.x + 1) <= defs.len_x and (cur_pos.x + 1) >= 1 then
@@ -724,13 +724,13 @@ end
 --计算玩家和电桩的相对位置
 --根据玩家和电桩的坐标获取对应的夹角，计算出电桩移动的位置
 function LF_CalcDirection(context, uid, cvt_id)
-	avatar_pos = LF_GetEntityPos(context, context.uid, 0)
-	conver_pos = LF_GetEntityPos(context, 0, cvt_id)
-	vec_axis_OZ = {x = (axis_Z.x - axis_O.x), z = (axis_Z.z - axis_O.z)}
-	vec_axis_OX = {x = (axis_X.x - axis_O.x), z = (axis_X.z - axis_O.z)}
-	vec_cvt2avt = {x = (avatar_pos.x - conver_pos.x), z = (avatar_pos.z - conver_pos.z)}
-	deg_avt2OZ = LF_ClacAngle(vec_axis_OZ, vec_cvt2avt)
-	deg_avt2OX = LF_ClacAngle(vec_axis_OX, vec_cvt2avt)
+	local avatar_pos = LF_GetEntityPos(context, context.uid, 0)
+	local conver_pos = LF_GetEntityPos(context, 0, cvt_id)
+	local vec_axis_OZ = {x = (axis_Z.x - axis_O.x), z = (axis_Z.z - axis_O.z)}
+	local vec_axis_OX = {x = (axis_X.x - axis_O.x), z = (axis_X.z - axis_O.z)}
+	local vec_cvt2avt = {x = (avatar_pos.x - conver_pos.x), z = (avatar_pos.z - conver_pos.z)}
+	local deg_avt2OZ = LF_ClacAngle(vec_axis_OZ, vec_cvt2avt)
+	local deg_avt2OX = LF_ClacAngle(vec_axis_OX, vec_cvt2avt)
 	if 0 <= deg_avt2OZ and deg_avt2OZ <= 45 then
 		ScriptLib.PrintContextLog(context,  "##[EnergyTrans]:向后推动")
 		return DIR.Down
@@ -753,14 +753,14 @@ end
 
 --计算向量夹角
 function LF_ClacAngle(vec1, vec2)
-	vec_cos = (vec1.x*vec2.x + vec1.z*vec2.z)/(math.sqrt( vec1.x^2 + vec1.z^2 )*math.sqrt( vec2.x^2 + vec2.z^2))
+	local vec_cos = (vec1.x*vec2.x + vec1.z*vec2.z)/(math.sqrt( vec1.x^2 + vec1.z^2 )*math.sqrt( vec2.x^2 + vec2.z^2))
 	return (math.acos(vec_cos)/math.pi*180)
 end
 
 --拿到实体位置
 function LF_GetEntityPos(context, uid, cid)
 	ScriptLib.PrintContextLog(context,  "##[EnergyTrans]:获取坐标")
-	_eid = 0
+	local _eid = 0
 	--转译entityId
 	if uid ~= 0 then
 		_eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
@@ -768,8 +768,8 @@ function LF_GetEntityPos(context, uid, cid)
 		_eid = ScriptLib.GetEntityIdByConfigId(context, cid)
 	end
 	--返回安全值,印象中直接返回_array时table里不干净
-	_array = ScriptLib.GetPosByEntityId(context, _eid)
-	_res = {}
+	local _array = ScriptLib.GetPosByEntityId(context, _eid)
+	local _res = {}
 	if _array.x == 0 and _array.y == 0 and _array.z == 0 then
 		ScriptLib.PrintContextLog(context, "##[EnergyTrans]:获取坐标失败，报错")
 		_res.error = 1
@@ -787,8 +787,8 @@ end
 --|1移动  2固定|State 0 1 2 3代表朝向
 --切分储存的数据
 function LF_GetConverterData(context, config_id)
-	cvt_archive_int = ScriptLib.GetGroupVariableValue(context, "converter_"..tostring(config_id))
-	cvt_archive_str = tostring(math.ceil(cvt_archive_int))
+	local cvt_archive_int = ScriptLib.GetGroupVariableValue(context, "converter_"..tostring(config_id))
+	local cvt_archive_str = tostring(math.ceil(cvt_archive_int))
 	return { cvt_type = tonumber(string.sub(cvt_archive_str,1,1)),
 				dir = tonumber(string.sub(cvt_archive_str,2,2)),
 				z = tonumber(string.sub(cvt_archive_str,3,4)),
@@ -797,16 +797,16 @@ end
 
 --数据储存
 function LF_SetConverterData( context, config_id, data_type, data_info)
-	cvt_archive_int = ScriptLib.GetGroupVariableValue(context, "converter_"..tostring(config_id))
-	cvt_archive_str = tostring(math.ceil(cvt_archive_int))
-	cvt_new_archive_str = ""
+	local cvt_archive_int = ScriptLib.GetGroupVariableValue(context, "converter_"..tostring(config_id))
+	local cvt_archive_str = tostring(math.ceil(cvt_archive_int))
+	local cvt_new_archive_str = ""
 	if data_type == "Gadget_State" then
 		cvt_new_archive_str = table.concat({string.sub(cvt_archive_str,1,1), tostring(data_info), string.sub(cvt_archive_str,3,6)})
 		ScriptLib.SetGroupVariableValue(context, "converter_"..config_id,  math.ceil( tonumber(cvt_new_archive_str)) )
 	end
 	if data_type == "Gadget_Pos" then
-		cvt_pos_new_z = ""
-		cvt_pos_new_x = ""
+		local cvt_pos_new_z = ""
+		local cvt_pos_new_x = ""
 		if data_info.pos_z < 10 then
 			cvt_pos_new_z = "0"..tostring(data_info.pos_z)
 		else

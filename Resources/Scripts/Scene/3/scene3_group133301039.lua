@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-BattleCfg = {
+local BattleCfg = {
     BossGroup = 133301038,
     VarKey = "State_Island01",
     BossCidList = {39011},

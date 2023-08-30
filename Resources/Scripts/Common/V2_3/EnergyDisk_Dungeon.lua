@@ -16,7 +16,7 @@ defs = {
 
 ]]
 
-extraTriggers={
+local extraTriggers={
   --{ config_id = 8000001,name = "MONSTER_LIVE", event = EventType.EVENT_POOL_MONSTER_TIDE_CREATE, source = "", condition = "", action = "action_Monster_Tide_Create", trigger_count = 0 },
   --{ config_id = 8000002,name = "MONSTER_LIVE", event = EventType.EVENT_ANY_MONSTER_LIVE, source = "", condition = "", action = "action_Monster_Tide_Create", trigger_count = 0 },
   --{ config_id = 8000002,name = "MONSTER_DIE", event = EventType.EVENT_POOL_MONSTER_TIDE_DIE, source = "", condition = "", action = "action_Monster_Tide_Die", trigger_count = 0 },
@@ -34,7 +34,7 @@ function LF_Initialize_Group(triggers, suites)
 end
 
 function action_Group_Load(context, evt)
-	cur_level = ScriptLib.GetGroupVariableValue(context,"buff_level")
+	local cur_level = ScriptLib.GetGroupVariableValue(context,"buff_level")
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.buff_gadget, "SGV_EnergyDisk_Level", cur_level)
 	--ScriptLib.SetGroupTempValue(context, "step", 0, {})
 	return 0
@@ -65,8 +65,8 @@ function SLC_Change_EnhanceLevel(context, param1)
 	--先将中央物件置为可触发
 	--LF_DisTrigger_BuffGadget(context)
 
-	cur_level = ScriptLib.GetGroupVariableValue(context,"buff_level")
-	tmp = cur_level + param1
+	local cur_level = ScriptLib.GetGroupVariableValue(context,"buff_level")
+	local tmp = cur_level + param1
 	if tmp < 0 or tmp > 4 then
 		ScriptLib.PrintContextLog(context, "[EnergyDisk] #WARN# Get SLC at cur_level@"..cur_level.." change value@"..param1)
 		return 0

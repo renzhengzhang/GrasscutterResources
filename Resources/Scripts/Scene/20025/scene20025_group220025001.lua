@@ -166,8 +166,8 @@ function action_EVENT_TIME_AXIS_PASS_1014(context, evt)
 	  return -1
 	end
 
-	player = ScriptLib.GetSceneUidList(context)
-	t_pos = {x=13, y=1, z=81}
+	local player = ScriptLib.GetSceneUidList(context)
+	local t_pos = {x=13, y=1, z=81}
 	ScriptLib.TransPlayerToPos(context, {uid_list = player, pos = t_pos, rot = {x=0, y=190, z=0}})
 	return 0
 end

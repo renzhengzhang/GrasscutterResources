@@ -17,12 +17,12 @@ defs = {
 }
 
 -- DEFS_MISCS
-extra_info = {
+local extra_info = {
     start_operator = 581002,
     lantern = 581011,
 }
 
-mud_list = {
+local mud_list = {
 --普通黑泥
 [581016] = { mud_id = 581009, cover_list= {}, respawn_time = 8, mutex_id = 0, score = 6, cover_content = {} },
 [581014] = { mud_id = 581008, cover_list= {}, respawn_time = 8, mutex_id = 0, score = 6, cover_content = {} },

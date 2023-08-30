@@ -41,12 +41,12 @@ defs = {
 }
 
 ]]
-cfg = {
+local cfg = {
 	--主控GroupID
 	main_group = 251008007,
 }
 
-extraTriggers = {
+local extraTriggers = {
 	{ config_id = 8000001, name = "TimeAxis_StopGallery", event = EventType.EVENT_TIME_AXIS_PASS, source = "StopGallery", condition = "", action = "action_TimeAxis_StopGallery", trigger_count = 0 },
 	{ config_id = 8000002, name = "Any_Monster_Die", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_Any_Monster_Die", trigger_count = 0 },
 	{ config_id = 8000004, name = "Gallery_Stop", event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_Gallery_Stop", trigger_count = 0 },
@@ -72,7 +72,7 @@ function EX_StartGallery(context, prev_context, gallery_id, is_last_level)
 			ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v)
 		end
 	end
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})
 	ScriptLib.SetGroupTempValue(context, "is_last_level", is_last_level, {})
 
@@ -126,11 +126,11 @@ function action_Gallery_Stop(context, evt)
 	end
 
 	if 3 ~= evt.param3 then
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		--ScriptLib.InitTimeAxis(context, "StopGallery_Fail", { 3 } , false) 9.21修改 失败不要延时结束
 		ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {1, base_info.group_id})
 	else
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
 		if is_last_level then
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
@@ -139,10 +139,10 @@ function action_Gallery_Stop(context, evt)
 	end
 
 	--埋点
-	counter_1 = ScriptLib.GetGroupTempValue(context, "action_counter_1", {})
-	counter_2 = ScriptLib.GetGroupTempValue(context, "action_counter_2", {})
+	local counter_1 = ScriptLib.GetGroupTempValue(context, "action_counter_1", {})
+	local counter_2 = ScriptLib.GetGroupTempValue(context, "action_counter_2", {})
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 
 	if 28015 == gallery_id or 28016 == gallery_id then
 		ScriptLib.MarkGroupLuaAction(context, "CharAmuse_ElecAttack", ScriptLib.GetDungeonTransaction(context), {["reaction"] = counter_1})
@@ -168,10 +168,10 @@ function LF_Start_Play(context)
 	--杀怪数
 	ScriptLib.SetGroupTempValue(context, "kill_num", 0, {})
 
-	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
-	target = 0
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local target = 0
 	if player_count > 1 then
 		target = ScriptLib.GetCharAmusementGalleryTarget(context, gallery_id, true)
 	else
@@ -204,7 +204,7 @@ end
 --循环刷怪
 function action_Any_Monster_Die(context, evt)
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 
 	if false == ScriptLib.IsGalleryStart(context, gallery_id) then
 		return 0
@@ -218,7 +218,7 @@ function action_Any_Monster_Die(context, evt)
 	ScriptLib.ChangeGroupTempValue(context, "cur_score", -1 , {})
 	if 0 >= ScriptLib.GetGroupTempValue(context, "cur_score", {}) then
 		--客户端弹提示
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["is_last_level"] = is_last_level, ["is_finish"] = true, ["is_success"] = true } )
 
 		--ScriptLib.KillGroupEntity(context, { group_id = base_info.group_id, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER })
@@ -231,27 +231,27 @@ function action_Any_Monster_Die(context, evt)
 
 	--启动/停止怪物队列
 	ScriptLib.ChangeGroupTempValue(context, "kill_num", 1, {})
-	kill_num = ScriptLib.GetGroupTempValue(context, "kill_num", {})
-	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	local kill_num = ScriptLib.GetGroupTempValue(context, "kill_num", {})
+	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
 	if nil == defs.rule[player_count] then
 		return 0
 	end
 
 	if nil ~= defs.rule[player_count][kill_num] then
 		if nil ~= defs.rule[player_count][kill_num].toStart and 0 ~= defs.rule[player_count][kill_num].toStart then
-			tide_index_list = defs.rule[player_count][kill_num].toStart
+			local tide_index_list = defs.rule[player_count][kill_num].toStart
 			LF_InitMonsterByQueueList(context, tide_index_list)
 		end
 
 		if nil ~= defs.rule[player_count][kill_num].toStop and 0 ~= defs.rule[player_count][kill_num].toStop then
-			tide_index_list = defs.rule[player_count][kill_num].toStop
+			local tide_index_list = defs.rule[player_count][kill_num].toStop
 			LF_StopMonsterByQueue(context, tide_index_list)
 		end
 
 	end
 
 	--所在怪物队列补怪
-	from_tide = LF_GetMonsterTideIndexByConfigID(context, evt.param1)
+	local from_tide = LF_GetMonsterTideIndexByConfigID(context, evt.param1)
 
 	if 0 < ScriptLib.GetGroupTempValue(context, "tide_"..from_tide, {}) then
 		LF_CreateMonsterByQueue(context, from_tide)
@@ -273,7 +273,7 @@ function LF_InitMonsterByQueueList(context, tide_index_list)
 			ScriptLib.PrintContextLog(context, "## [CharAmuse_BattleTide] LF_InitMonsterByQueueList. Undefined tide index. index@"..v )
     		return 0
    		end
-   		monster_index = ScriptLib.GetGroupTempValue(context, "tide_"..v, {})
+   		local monster_index = ScriptLib.GetGroupTempValue(context, "tide_"..v, {})
    		if 0 < monster_index then
    			if nil == defs.tide[v][monster_index] then
    				ScriptLib.PrintContextLog(context, "## [CharAmuse_BattleTide] LF_InitMonsterByQueueList. Undefined monster_index. tide@"..v.." monster_index@"..monster_index )
@@ -292,7 +292,7 @@ end
 
 function LF_CreateMonsterByQueue(context, tide_index)
 
-	monster_index = ScriptLib.GetGroupTempValue(context, "tide_"..tide_index, {})
+	local monster_index = ScriptLib.GetGroupTempValue(context, "tide_"..tide_index, {})
 
 	ScriptLib.PrintContextLog(context, "## [CharAmuse_BattleTide] LF_CreateMonsterByQueue. tide@tide_"..tide_index.." monster_index@"..monster_index )
 

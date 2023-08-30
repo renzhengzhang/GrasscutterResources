@@ -32,7 +32,7 @@
 	--怪物group的ID
 	monster_group=245002003
 
-	guide_routes={1}
+	local guide_routes={1}
 
 	routes_start_point={
 			[1]={start_point={x=34.46477,y=-7.699215,z=-92.27316},points={1,2,3,4,5,6,7,8,9,10}},
@@ -43,21 +43,21 @@
 
 ]]--
 
-Global =
+local Global =
 {
 	totalWaves = 1,
 }
 
 -- 打印日志
 function PrintLog(context, content)
-	log = "## [TowerDefence_Challenge_V3.0] TD_V3: "..content
+	local log = "## [TowerDefence_Challenge_V3.0] TD_V3: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
 -- 初始化Group的各种变量
 function LF_Init_Challenge_Group()
 
-	innerTriggers =
+	local innerTriggers =
 	{
 
 		t3 = { config_id = 40000003, name = "challenge_success", event = EventType.EVENT_SCENE_MULTISTAGE_PLAY_STAGE_END, source = "", condition = "", action = "action_STAGE_END", trigger_count = 0},
@@ -114,8 +114,8 @@ end
 
 -- 游戏结束条件-所有玩家角色死亡
 function action_ALL_AVATAR_DIE(context, evt)
-	uidList = ScriptLib.GetSceneUidList(context)
-	count = 0
+	local uidList = ScriptLib.GetSceneUidList(context)
+	local count = 0
 	for i = 1, #uidList do
 		if ScriptLib.IsPlayerAllAvatarDie(context, uidList[i]) then
 			count = count + 1
@@ -141,7 +141,7 @@ function action_STAGE_END(context, evt)
 	if evt.param2 == Multistage.IrodoriChessBuild then
 		LF_StopRouteGuidePoints(context)
 
-		wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
+		local wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
 		ScriptLib.ExecuteGroupLua(context, monster_group, "LF_StartWave", {defs.group_id, wave})
 		ScriptLib.StartSceneMultiStagePlayStage(context, 999, 0, Multistage.IrodoriChessKill, "battle"..wave,{})
 
@@ -160,10 +160,10 @@ function action_group_load(context, evt)
 	-- 初始化波数
 	ScriptLib.SetGroupVariableValue(context, "wave_ptr", 1)
 
-	--ban_list={}
+	--local ban_list={}
 
 	-- 初始建造点
-	-- initBuildingPoints = defs.init_building_points or 1000
+	-- local initBuildingPoints = defs.init_building_points or 1000
 
 	if 0 ~= ScriptLib.InitSceneMultistagePlay(context, 999, MultistagePlayType.IrodoriChess, {}, ScriptLib.GetSceneUidList(context)) then
 		PrintLog(context, "MultiStage初始化失败")
@@ -232,7 +232,7 @@ function LF_AddRouteGuidePoints(context)
 	-- routes_start_point Table 看上去是标记路径信息
 	-- guide_point_pool Table 存储了Group中引导特效点的ConfigId
 	for i = 1, #guide_routes do
-		idx = ScriptLib.GetGroupVariableValue(context, "route_guide_points_index")
+		local idx = ScriptLib.GetGroupVariableValue(context, "route_guide_points_index")
 		if -2 == ScriptLib.CreateGadgetByConfigIdByPos(context, guide_point_pool[idx], routes_start_point[guide_routes[i]].start_point, { x = 0.000, y = 0.000, z = 0.000 }) then
 			PrintLog(context, "Guide Points Not Enough")
 			return 0
@@ -272,7 +272,7 @@ end
 
 -- 更新剩余怪物总数（由TowerDefense_Monster_V3.0调用）
 function UpdateLeftMonsterNum(context, prev_context, param1, param2, param3)
-	leftMonsters = ScriptLib.GetGroupVariableValue(context, "left_monsters")
+	local leftMonsters = ScriptLib.GetGroupVariableValue(context, "left_monsters")
 	if leftMonsters == 0 then
 		return 0
 	end
@@ -291,7 +291,7 @@ end
 -- wave结束（由TowerDefense_Monster_V3.0调用）
 function wave_done(context, prev_context, param1, param2, param3)
 	ScriptLib.EndSceneMultiStagePlayStage(context, 999, "battle"..ScriptLib.GetGroupVariableValue(context, "wave_ptr"), true)
-	wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
+	local wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
 	wave = wave + 1
 	ScriptLib.SetGroupVariableValue(context, "wave_ptr", wave)
 	PrintLog(context, "nextWave-"..wave)
@@ -311,8 +311,8 @@ end
 -- 怪物逃跑（由TowerDefense_Monster_V3.0调用）
 -- function MonsterEscaped(context, prev_context, param1, param2, param3)
 
--- 	max_escapable_monsters = ScriptLib.GetGroupVariableValue(context, "max_escapable_monsters")
--- 	escaped_monsters = ScriptLib.GetGroupVariableValue(context, "escaped_monsters")
+-- 	local max_escapable_monsters = ScriptLib.GetGroupVariableValue(context, "max_escapable_monsters")
+-- 	local escaped_monsters = ScriptLib.GetGroupVariableValue(context, "escaped_monsters")
 
 -- 	-- 特殊怪物
 -- 	if param1 == 1 then
@@ -340,12 +340,12 @@ end
 -- 处理局外选取的卡牌
 function LF_GetPickedCards(context)
 	PrintLog(context, "设置局外选取的卡牌")
-	cards = ScriptLib.GetIrodoriChessSelectedCards(context, defs.group_id, 999)
+	local cards = ScriptLib.GetIrodoriChessSelectedCards(context, defs.group_id, 999)
 
 	-- 掉落击杀的怪物额外获得资源卡牌编号
-	Card_DieReasonIsFall = 52
+	local Card_DieReasonIsFall = 52
 	-- 机关冷却时间减半卡牌编号
-	Card_GearCoolDown = 53
+	local Card_GearCoolDown = 53
 
 	for _, _card in pairs(cards) do
 		if _card == Card_DieReasonIsFall then
@@ -360,7 +360,7 @@ end
 
 -- 增加建造点
 function LF_AddBuildingPoints(context, prev_context, _buildingPoint)
-	uidList = ScriptLib.GetSceneUidList(context)
+	local uidList = ScriptLib.GetSceneUidList(context)
 	for i = 1, #uidList do
 		ScriptLib.AddIrodoriChessBuildingPoints(context, defs.group_id, 999, _buildingPoint)
 	end
@@ -369,10 +369,10 @@ end
 
 -- 关卡1的地脉异常：掉落击杀可获得资源点
 function LF_SpecialGameplayLevel1(context, prev_context, _isElite)
-	currentLevel = defs.level or 0
+	local currentLevel = defs.level or 0
 
 		-- GM
-		gmLevel = ScriptLib.GetGroupVariableValue(context, "GM_LevelNum")
+		local gmLevel = ScriptLib.GetGroupVariableValue(context, "GM_LevelNum")
 		if gmLevel > 0 then currentLevel = gmLevel end
 
 	--region 简单1/困难1
@@ -380,7 +380,7 @@ function LF_SpecialGameplayLevel1(context, prev_context, _isElite)
 		return 0
 	end
 
-	buildingPoint = 0
+	local buildingPoint = 0
 	if currentLevel == 1 then
 		buildingPoint = 10
 		if _isElite > 0 then
@@ -396,7 +396,7 @@ function LF_SpecialGameplayLevel1(context, prev_context, _isElite)
 	--endregion
 
 	-- 掉落击杀资源点翻倍卡
-	cardPicked = ScriptLib.GetGroupVariableValueByGroup(context, "CardPicked_DieReasonIsFall", 0)
+	local cardPicked = ScriptLib.GetGroupVariableValueByGroup(context, "CardPicked_DieReasonIsFall", 0)
 	if cardPicked > 0 then
 		buildingPoint = buildingPoint * 2
 	end
@@ -410,10 +410,10 @@ end
 
 -- 关卡3的地脉异常：塔数<N时击杀加建造值
 function LF_SpecialGameplayLevel3(context, prev_context, _isElite)
-	currentLevel = defs.level or 0
+	local currentLevel = defs.level or 0
 
 		-- GM
-		gmLevel = ScriptLib.GetGroupVariableValue(context, "GM_LevelNum")
+		local gmLevel = ScriptLib.GetGroupVariableValue(context, "GM_LevelNum")
 		if gmLevel > 0 then currentLevel = gmLevel end
 
 	if currentLevel ~= 3 and currentLevel ~= 7 then
@@ -421,14 +421,14 @@ function LF_SpecialGameplayLevel3(context, prev_context, _isElite)
 	end
 
 	-- 获取塔的总数
-	towers = ScriptLib.GetGroupVariableValueByGroup(context, "towers", defs.gear_group_id)
+	local towers = ScriptLib.GetGroupVariableValueByGroup(context, "towers", defs.gear_group_id)
 
-	buildingPoint = 10
+	local buildingPoint = 10
 	if _isElite > 0 then
 		buildingPoint = 50
 	end
 
-	N = 10
+	local N = 10
 	if towers < N then
 		LF_AddBuildingPoints(context, prev_context, buildingPoint)
 		PrintLog(context, "地脉异常LV3，增加"..buildingPoint.."点建造值")
@@ -443,10 +443,10 @@ function LF_SpecialGameplayLevel4(context, prev_context, param1)
 	PrintLog(context, "地脉异常4检查开始")
 
 
-	currentLevel = defs.level or 0
+	local currentLevel = defs.level or 0
 
 		-- GM
-		gmLevel = ScriptLib.GetGroupVariableValue(context, "GM_LevelNum")
+		local gmLevel = ScriptLib.GetGroupVariableValue(context, "GM_LevelNum")
 		if gmLevel > 0 then currentLevel = gmLevel end
 		--
 
@@ -455,12 +455,12 @@ function LF_SpecialGameplayLevel4(context, prev_context, param1)
 	end
 
 	-- 获取塔的总数
-	towers = ScriptLib.GetGroupVariableValueByGroup(context, "towers", defs.gear_group_id)
+	local towers = ScriptLib.GetGroupVariableValueByGroup(context, "towers", defs.gear_group_id)
 	-- 地脉异常4是否开启
-	M4 = ScriptLib.GetGroupVariableValueByGroup(context, "M4_Active", 0)
+	local M4 = ScriptLib.GetGroupVariableValueByGroup(context, "M4_Active", 0)
 
 	-- 临界值条件
-	N = 10
+	local N = 10
 
 	-- 关卡4简单
 	if currentLevel == 4 then
@@ -468,7 +468,7 @@ function LF_SpecialGameplayLevel4(context, prev_context, param1)
 		if towers < N and M4 == 0 then
 			PrintLog(context, "!开启L4地脉异常")
 
-			sgvDeltaTbl =
+			local sgvDeltaTbl =
 			{
 				SGV_AttackRatioUp = 1,
 			}
@@ -479,7 +479,7 @@ function LF_SpecialGameplayLevel4(context, prev_context, param1)
 		-- 满足关闭条件
 		if towers >= N and M4 == 1 then
 			PrintLog(context, "关闭L4地脉异常")
-			sgvDeltaTbl =
+			local sgvDeltaTbl =
 			{
 				SGV_AttackRatioUp = -1,
 			}
@@ -494,7 +494,7 @@ function LF_SpecialGameplayLevel4(context, prev_context, param1)
 		if towers < N and M4 == 0 then
 			PrintLog(context, "!开启L4地脉异常")
 
-			sgvDeltaTbl =
+			local sgvDeltaTbl =
 			{
 				SGV_AttackRatioUp = 2,
 			}
@@ -505,7 +505,7 @@ function LF_SpecialGameplayLevel4(context, prev_context, param1)
 		-- 满足关闭条件
 		if towers >= N and M4 == 1 then
 			PrintLog(context, "关闭L4地脉异常")
-			sgvDeltaTbl =
+			local sgvDeltaTbl =
 			{
 				SGV_AttackRatioUp = -2,
 			}

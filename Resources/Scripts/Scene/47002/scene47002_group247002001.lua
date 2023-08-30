@@ -4,9 +4,9 @@ base_info = {
 }
 
 -- DEFS_MISCS
-MainGroupID = 247002001
-MonsterAffix = 1009
-challengeList = {
+local MainGroupID = 247002001
+local MonsterAffix = 1009
+local challengeList = {
 { monsterPool = 26001, challengeParamList = {2, 2017, -1, 3, 0, 0}, monsterPoolParamList = {total_count=3, min_count=3, max_count=3, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 24002, challengeParamList = {2, 2017, -1, 11, 0, 0}, monsterPoolParamList = {total_count=11, min_count=5, max_count=5, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 24003, challengeParamList = {2, 2017, -1, 8, 0, 0}, monsterPoolParamList = {total_count=8, min_count=4, max_count=4, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
@@ -37,7 +37,7 @@ challengeList = {
 { monsterPool = 24028, challengeParamList = {2, 2017, -1, 8, 0, 0}, monsterPoolParamList = {total_count=8, min_count=4, max_count=4, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 }
 
-PointToReminderList = {
+local PointToReminderList = {
         {configID = 1001, reminderID = 470070701},
         {configID = 1002, reminderID = 470070801},
 }

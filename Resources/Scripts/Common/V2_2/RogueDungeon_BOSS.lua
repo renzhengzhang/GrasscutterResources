@@ -1,16 +1,16 @@
-startChallenge = 16
-getCard = 13
-quitDungeon = 15
+local startChallenge = 16
+local getCard = 13
+local quitDungeon = 15
 
 
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Gadget_Create"] = { config_id = 8000001, name = "Gadget_Create", event= EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_WhenGadgetCreate", trigger_count = 0 },
 		["Option_Dwon"] = { config_id = 8000002, name = "Option_Dwon", event= EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_WhenOptionDown", trigger_count = 0 },
 		["Challenge_Success"] = { config_id = 8000003, name = "Challenge_Success", event= EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_ChallengeSuccess", trigger_count = 0 },
 		["Challenge_Fail"] = { config_id = 8000004, name = "Challenge_Fail", event= EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_ChallengeFail", trigger_count = 0 },
 		["BOSSRoom_StateChange"] = { config_id = 8000005, name = "BOSSRoom_StateChange", event= EventType.EVENT_ROGUE_CELL_STATE_CHANGE, source = "", condition = "", action = "action_BossRoomStateChange", trigger_count = 0 },
-		["Dungeon_Settle"] = { config_id = 8000006, name = "Dungeon_Settle", event= EventType.EVENT_DUNGEON_SETTLE, source = "", condition = "", action = "action_DungeonSettle", trigger_count = 0 },
+		["Dungeon_Settle"] = { config_id = 8000006, name = "Dungeon_Settle", event= EventType.EVENT_DUNGEON_SETTLE, source = "", condition = "", action = "action_DungeonSettle", trigger_count = 0 },	
 		["Finish_Card"] = { config_id = 8000008, name = "Finish_Card", event= EventType.EVENT_ROGUE_CELL_FINISH_SELECT_CARD, source = "", condition = "", action = "action_FinishCard", trigger_count = 0 },
 		["Room_Ready"] = { config_id = 8000009, name = "Room_Ready", event= EventType.EVENT_ROGUE_CELL_CONSTRUCT, source = "", condition = "", action = "action_WhenRoomReady", trigger_count = 0 },
 		["ThunderFloor_TimeAxis"] = { config_id = 8000010, name = "ThunderFloor_TimeAxis", event= EventType.EVENT_TIME_AXIS_PASS, source = "thunderfloor_timer", condition = "", action = "action_ThunderFloorTimeAxis", trigger_count = 0 },
@@ -28,7 +28,7 @@ extrTriggers = {
 
 function RemoveBUFF( context )
 
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.SetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_SR_AreaNoEnemyAtkSpeedUp", 0)
 
@@ -53,7 +53,7 @@ end
 --监听cell分配
 function action_WhenGadgetCreate(context, evt)
 
-	roomState = ScriptLib.GetRogueCellState(context, GroupId)
+	local roomState = ScriptLib.GetRogueCellState(context, GroupId)
 
 
 	if evt.param1 == BossOperatorConfigID and roomState == 0 then
@@ -92,7 +92,7 @@ function action_WhenGadgetCreate(context, evt)
 		if doorConfigID~= 0 then
 			ScriptLib.SetGroupGadgetStateByConfigId(context, GroupId, doorConfigID, 201)
 		end
-
+		
 		--开BOSS后门
 		if doorBossBackID ~= 0 then
 			ScriptLib.SetGroupGadgetStateByConfigId(context, GroupId, doorBossBackID, 201)
@@ -124,10 +124,10 @@ end
 
 function action_WhenRoomReady(context,evt)
 	-- 当房间准备好后
-	roomState = ScriptLib.GetRogueCellState(context, GroupId)
+	local roomState = ScriptLib.GetRogueCellState(context, GroupId)
 
-	uidList = ScriptLib.GetSceneUidList(context)
-	avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
+	local uidList = ScriptLib.GetSceneUidList(context)
+	local avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
 
 
 	--如果任务还未完成
@@ -154,16 +154,16 @@ function action_WhenRoomReady(context,evt)
 
 	elseif ScriptLib.GetQuestState(context, avatar_entity, nextQuestID) == QuestState.FINISHED then
 		ScriptLib.PrintContextLog(context, "## RG_LOG : Quest Finish： Create DestinationPoint")
-
+		
 		--创建指引点，定点
-		ScriptLib.CreateGadgetByConfigIdByPos(context, DestinationConfigID, DestinationPos, {x=0, y=DestinationRot[1], z=0 })
+		ScriptLib.CreateGadgetByConfigIdByPos(context, DestinationConfigID, DestinationPos, {x=0, y=DestinationRot[1], z=0 }) 
 
 	else
 		ScriptLib.PrintContextLog(context, "## RG_LOG : Has Quest： Create DestinationPoint")
 
 		--创建指引点
 		ScriptLib.CreateGadget(context, { config_id = DestinationConfigID })
-
+		
 	end
 
 	return 0
@@ -171,7 +171,7 @@ end
 
 -- function action_monster_die( context, evt )
 
--- 	UidList = ScriptLib.GetSceneUidList(context)
+-- 	local UidList = ScriptLib.GetSceneUidList(context)
 
 -- 	-- 杀怪计数
 -- 	ScriptLib.AddExhibitionAccumulableData(context, UidList[1], "Rogue_KillMonster_Count", 1)
@@ -211,16 +211,16 @@ function action_BossRoomStateChange( context, evt )
 		if doorConfigID~= 0 then
 			ScriptLib.SetGroupGadgetStateByConfigId(context, GroupId, doorConfigID, 201)
 		end
-
+		
 		--开BOSS后门
 		if doorBossBackID ~= 0 then
 			ScriptLib.SetGroupGadgetStateByConfigId(context, GroupId, doorBossBackID, 201)
 		end
-
+	
 
 		--如果任务完成，直接设置地城成功
-		uidList = ScriptLib.GetSceneUidList(context)
-		avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
+		local uidList = ScriptLib.GetSceneUidList(context)
+		local avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
 
 		if questID == 0 then
 			ScriptLib.PrintContextLog(context, "## RG_LOG : No Quest")
@@ -281,7 +281,7 @@ function action_EnterBossRegion( context,evt )
 end
 
 function action_LeaveBossRegion( context,evt )
-
+	
 	if evt.param1 ~= RegionID then
 		return 0
 	end
@@ -301,31 +301,31 @@ function action_DungeonSettle( context,evt )
 	end
 
 	--获取任务，如果有任务，需要特殊创建门的位置
-	uidList = ScriptLib.GetSceneUidList(context)
-	avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
+	local uidList = ScriptLib.GetSceneUidList(context)
+	local avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
 
 	if nextQuestID == 0 then
 		ScriptLib.PrintContextLog(context, "## RG_LOG : No Quest： Create QuitPoint")
 
 		--创建跳层机关
 		ScriptLib.CreateGadget(context, { config_id = QuitPointConfigID })
-
+		
 
 	elseif ScriptLib.GetQuestState(context, avatar_entity, nextQuestID) == QuestState.FINISHED then
 		ScriptLib.PrintContextLog(context, "## RG_LOG : Quest Finish： Create QuitPoint")
 
 		--创建跳层机关，定点
-		ScriptLib.CreateGadgetByConfigIdByPos(context, QuitPointConfigID, BossDoorPos, {x=0, y=BossDoorRot[1], z=0})
+		ScriptLib.CreateGadgetByConfigIdByPos(context, QuitPointConfigID, BossDoorPos, {x=0, y=BossDoorRot[1], z=0}) 
 
 	else
 		ScriptLib.PrintContextLog(context, "## RG_LOG : Has Quest： Create QuitPoint")
 
 		--创建跳层机关
 		ScriptLib.CreateGadget(context, { config_id = QuitPointConfigID })
-
+		
 	end
 
-
+	
 
 	--开启最后一个门
 	if lastDoorConfigID ~= 0 then
@@ -339,7 +339,7 @@ end
 
 
 function action_WhenOptionDown(context,evt)
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.PrintContextLog(context, "## RG_LOG : Option Down ConfigID Is "..evt.param1.." Option ID Is "..evt.param2)
 
@@ -351,13 +351,13 @@ function action_WhenOptionDown(context,evt)
 			ScriptLib.ShowReminder(context, 470080101)
 
 			ScriptLib.PrintContextLog(context, "## RG_LOG : Chuan Men Gua Bi")
-			return 0
+			return 0 
 		end
 
 		--距离检查
-
-		PlayerPos = ScriptLib.GetPosByEntityId(context, ScriptLib.GetAvatarEntityIdByUid(context, UidList[1]))
-		OptionPos = ScriptLib.GetPosByEntityId(context, ScriptLib.GetEntityIdByConfigId(context, BossOperatorConfigID))
+		
+		local PlayerPos = ScriptLib.GetPosByEntityId(context, ScriptLib.GetAvatarEntityIdByUid(context, UidList[1]))
+		local OptionPos = ScriptLib.GetPosByEntityId(context, ScriptLib.GetEntityIdByConfigId(context, BossOperatorConfigID))
 
 		if math.abs(PlayerPos.x - OptionPos.x) > 10 or math.abs(PlayerPos.y - OptionPos.y) > 10 or math.abs(PlayerPos.z - OptionPos.z) > 10 then
 
@@ -368,10 +368,10 @@ function action_WhenOptionDown(context,evt)
 			ScriptLib.ShowReminder(context, 470080102)
 
 			ScriptLib.PrintContextLog(context, "## RG_LOG : Diao Xian Gua Bi")
-			return 0
+			return 0 
 		end
 
-
+		
 		--设置房间状态
 	  	ScriptLib.SetRogueCellState(context, GroupId, 1)
 		--删除按键
@@ -394,7 +394,7 @@ function action_WhenOptionDown(context,evt)
 
 	elseif evt.param1 == BossOperatorConfigID and evt.param2 == getCard then
 
-		UidList = ScriptLib.GetSceneUidList(context)
+		local UidList = ScriptLib.GetSceneUidList(context)
 
 		ScriptLib.PrintContextLog(context, "## RG_LOG : Card UidList == "..UidList[1])
 
@@ -404,12 +404,12 @@ function action_WhenOptionDown(context,evt)
 	elseif evt.param1 == QuitPointConfigID then
 
 		ScriptLib.PrintContextLog(context, "## RG_LOG : GOTO NEXT DUNGEON")
-
+	
 		--进入下一层
 		ScriptLib.EnterRogueDungeonNextLevel(context)
 
 	end
-
+	 
 	return 0
 end
 
@@ -434,7 +434,7 @@ end
 
 
 function action_ChallengeSuccess(context,evt)
-
+	
 	--关闭怪物潮
 	ScriptLib.ExecuteGroupLua(context, MainGroupID, "RogueStopChallenge", {BossPoolID,GroupId})
 
@@ -460,7 +460,7 @@ function action_ChallengeSuccess(context,evt)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, GroupId, BossOperatorConfigID, 203)
 	end
 
-
+	
 
 	--关闭雷电地板
 	for i,v in ipairs(ThunderFloorList) do
@@ -509,3 +509,7 @@ function LF_Initialize_Group()
 end
 
 LF_Initialize_Group()
+
+
+
+

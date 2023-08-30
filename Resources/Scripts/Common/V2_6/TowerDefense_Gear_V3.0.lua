@@ -24,14 +24,14 @@
 
 	-- DEFS_MISCS
 	-- 预设塔配置表（底座和塔的对应关系）
-	towerPrebuild =
+	local towerPrebuild =
 	{
 		foundationConfigId = towerGearId, --需要查询Excel
 	}
 
 --]]
 
-Global =
+local Global =
 {
 	-- 塔的标记槽位数。同时存在的塔不会超过这个数字
 	slotNum = 20,
@@ -68,13 +68,13 @@ Global =
 
 -- 打印日志
 function PrintLog(context, content)
-	log = "## [TowerDefence_Gear_V3.0] TD_V3: "..content
+	local log = "## [TowerDefence_Gear_V3.0] TD_V3: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
 -- 判断创生物件是否是塔
 function condition_TOWER_CREATE(context, evt)
-	towerGadgetId = evt.param2
+	local towerGadgetId = evt.param2
 	if Global.allTowerType[towerGadgetId] ~= nil then
 		PrintLog(context, "TowerGadgetId "..evt.param2.." Created.")
 		return true
@@ -84,7 +84,7 @@ end
 
 -- 造塔事件
 function action_TOWER_CREATE(context, evt)
-	towerGadgetId = evt.param2
+	local towerGadgetId = evt.param2
 	LF_AddTowerNum(context, towerGadgetId, 1)
 
 	-- 存储该塔
@@ -100,7 +100,7 @@ end
 
 -- 判断是否拆的是塔
 function condition_TOWER_DESTROY(context, evt)
-	configId = evt.param1
+	local configId = evt.param1
 
 	-- 清除该塔的记录
 	for i = 1, Global.slotNum do
@@ -146,7 +146,7 @@ end
 function LF_AddTowerNum(context, towerGadgetId, num)
 
 	-- 总塔计数
-	towers = ScriptLib.GetGroupVariableValueByGroup(context, "towers", 0)
+	local towers = ScriptLib.GetGroupVariableValueByGroup(context, "towers", 0)
 	towers = towers + num
 	ScriptLib.SetGroupVariableValueByGroup(context, "towers", towers, 0)
 
@@ -164,8 +164,8 @@ end
 function LF_Initialize_Fundations(context, prev_context, param1, param2, param3)
 
 	-- config_id_2_point_table = {config_id: point_id}
-	fundationTable = {}
-    -- uidList = ScriptLib.GetSceneUidList(context)
+	local fundationTable = {}
+    -- local uidList = ScriptLib.GetSceneUidList(context)
     for i = 1, math.min(#gadgets, #points) do
         if gadgets[i].gadget_id == defs.fundation_id then
             fundationTable[gadgets[i].config_id] = points[i].config_id
@@ -185,7 +185,7 @@ function LF_Initialize_Towers(context, prev_context, param1, param2, param3)
 		--PrintLog(context, "towerPrebuild表长度"..#towerPrebuild)
 	end
 
-	prebuildTable = towerPrebuild or {}
+	local prebuildTable = towerPrebuild or {}
 
 	PrintLog(context, "预设塔列表长度"..#prebuildTable)
 
@@ -210,7 +210,7 @@ end
 -- 怪物毁灭光环
 function SLC_DestroyTower(context)
 
-	entityId = context.source_entity_id
+	local entityId = context.source_entity_id
 	PrintLog(context, "destory entityId: "..entityId)
 
 	ScriptLib.DestroyIrodoriChessTower(context, entityId, defs.challange_group_id, 999)
@@ -221,7 +221,7 @@ end
 -- 初始化Group
 function LF_Initialize_Group(triggers, suites)
 
-	extraTriggers =
+	local extraTriggers =
 	{
 		{ config_id = 40000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0},
 		{ config_id = 40000012, name = "TOWER_CREATE", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "condition_TOWER_CREATE", action = "action_TOWER_CREATE", trigger_count = 0 },

@@ -116,7 +116,7 @@ function action_EVENT_ANY_MONSTER_LIVE_8010(context, evt)
 
 	-- 创建编号为2（该挑战的识别id),挑战内容为198的区域挑战，param1必须为时间
 	-- 从235745005的变量TPL_TIME中取出对应值并开启挑战
-	  tpl_time = ScriptLib.GetGroupVariableValueByGroup(context, "TPL_TIME", 235745005)
+	  local tpl_time = ScriptLib.GetGroupVariableValueByGroup(context, "TPL_TIME", 235745005)
 	  if tpl_time == nil or tpl_time < 0 then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge_by_remainTime")
 	    return -1

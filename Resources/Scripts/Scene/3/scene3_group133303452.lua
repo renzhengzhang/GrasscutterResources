@@ -9,9 +9,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {1}
+local RequireSuite = {1}
 
-HookLookPlay = {
+local HookLookPlay = {
     HookPoint = defs.gadget_LookHookCid,
     Duration = 3,
 }
@@ -120,8 +120,8 @@ function action_EVENT_GADGET_STATE_CHANGE_452005(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 133303452, 2)
 
 	-- 触发镜头注目，注目位置为坐标（-1916.286，19.73657，3204.258），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1916.286, y=19.73657, z=3204.258}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1916.286, y=19.73657, z=3204.258}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

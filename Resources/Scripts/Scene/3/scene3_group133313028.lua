@@ -4,23 +4,23 @@ base_info = {
 }
 
 -- DEFS_MISCS
-I_connectors =
+local I_connectors =
 {
     [1] = 28012
 }
 
-L_connectors =
+local L_connectors =
 {
     [1] = 28001
 }
 
-containers =
+local containers =
 {
     [1] = 28003,
     [2] = 28013
 }
 
-lights =
+local lights =
 {
     [1] = 28005,
     [2] = 28007,
@@ -28,30 +28,30 @@ lights =
     [4] = 28009
 }
 
-streams =
+local streams =
 {
    [containers[1]] = {I_connectors[1],lights[1],L_connectors[1],lights[2]},
    [containers[2]] = {I_connectors[1],lights[1],L_connectors[1],lights[3],lights[4]}
 }
 
-L_connections =
+local L_connections =
 {
    [L_connectors[1]] = {[202] = lights[2], [201] = lights[3]}
 }
 
-base_interval = 1
+local base_interval = 1
 
-special_interval =
+local special_interval =
 {
 }
 
-worktops =
+local worktops =
 {
 
      [1] = 28002
 }
 
-connector_to_worktop =
+local connector_to_worktop =
 {
 
     [L_connectors[1]] = worktops[1]

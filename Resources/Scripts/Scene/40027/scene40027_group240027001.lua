@@ -92,7 +92,7 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_1003(context, evt)
 
-	monster_level = 60
+	local monster_level = 60
 
 	if -1 ~= ScriptLib.GetEffigyChallengeMonsterLevel(context) then
 

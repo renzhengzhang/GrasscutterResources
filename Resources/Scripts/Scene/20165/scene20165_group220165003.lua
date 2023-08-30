@@ -867,7 +867,7 @@ end
 
 -- 触发条件
 function condition_EVENT_GADGET_LUA_NOTIFY_3053(context, evt)
-	configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+	local configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 	if 3004 ~= configId then
 	        return false
 	end

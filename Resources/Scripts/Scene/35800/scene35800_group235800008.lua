@@ -5,16 +5,16 @@ base_info = {
 
 -- DEFS_MISCS
 --Boss主题玩法1
-BossGroupID = 235800008
+local BossGroupID = 235800008
 
-BossConfigID = 8002
+local BossConfigID = 8002
 
-boss_hp_threshold = 30
+local boss_hp_threshold = 30
 
-ElementFallConfigID = 8004
+local ElementFallConfigID = 8004
 
 --四阶段Boss战随机要素列表
-BossRandomList = {
+local BossRandomList = {
         [1] = {
                 [1] = {type = 2, suite_id = {4,5,6,7}},
         },
@@ -38,11 +38,11 @@ BossRandomList = {
         }
 }
 
-regionIndex =  8009
+local regionIndex =  8009
 
-wind_force_interval = 30
+local wind_force_interval = 30
 
-bubble_point_array = {
+local bubble_point_array = {
     [7059] = {point_array_id = 1, point_id_list = {1,2,3,4,5,6}, route_type = 1},
     [7060] = {point_array_id = 2, point_id_list = {1,2,3,4,5,6}, route_type = 1},
     [7061] = {point_array_id = 3, point_id_list = {1,2,3,4,5,6}, route_type = 1},

@@ -100,7 +100,7 @@ suites = {
 -- Triggering conditions (It will take action if 3 monsters are killed)
 function condition_EVENT_ANY_MONSTER_DIE_511(context, evt)
 	-- Determine whether the number of remaining monsters is 0
-	count_kill = ScriptLib.GetGroupMonsterCount(context)
+	local count_kill = ScriptLib.GetGroupMonsterCount(context)
     if count_kill > 0 then
         ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : Not all monsters killed. Remaining count: " .. count_kill)
         return false

@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-hook_map = {
+local hook_map = {
 	[109001] = 109002,
 	[109003] = 109004,
 	[109005] = 109006,

@@ -25,7 +25,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-nodeTable={
+local nodeTable={
 	[1]=defs.gadget_node01,
 	[2]=defs.gadget_node02,
 	[3]=defs.gadget_node03,
@@ -36,7 +36,7 @@ nodeTable={
   [8]=defs.gadget_node08,
 }
 
-guideEffTable={
+local guideEffTable={
 	[1]=defs.gadget_hint01,
 	[2]=defs.gadget_hint02,
 	[3]=defs.gadget_hint03,

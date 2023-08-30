@@ -15,11 +15,11 @@ defs = {
 
 -- DEFS_MISCS
 function GetNextPath(context)
-        path = {}
-        index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
-        stoppoint = defs.pointInfo[index]
+        local path = {}
+        local index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
+        local stoppoint = defs.pointInfo[index]
         ScriptLib.PrintLog(context, "stop point : "..stoppoint)
-        currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
+        local currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
         for i=currentNodeIndex + 1,stoppoint do
                 table.insert(path,i)
         end
@@ -180,7 +180,7 @@ function action_EVENT_PLATFORM_REACH_POINT_438003(context, evt)
 	        return 0
 	end
 
-	next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
+	local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
 	next = next + 1
 	ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
 	ScriptLib.SetGroupVariableValue(context,"currentPathNodeIndex",evt.param3)
@@ -193,7 +193,7 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_438004(context, evt)
 			if defs.gadget_thunderThelfID ~= evt.param1 then
 				return false
 			end
-			state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
+			local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
 			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
 			if state == 201 then
 				return false
@@ -250,7 +250,7 @@ end
 -- 触发操作
 function action_EVENT_GROUP_REFRESH_438006(context, evt)
 	ScriptLib.PrintContextLog(context, "@@ FEATHER : GroupLoad")
-	featherValue = ScriptLib.GetGroupVariableValueByGroup(context, "feather04", 133223001)
+	local featherValue = ScriptLib.GetGroupVariableValueByGroup(context, "feather04", 133223001)
 	ScriptLib.PrintContextLog(context, "@@ FEATHER : featherValue"..featherValue)
 	if 1 == featherValue then
 		ScriptLib.RemoveEntityByConfigId(context, 133223438, EntityType.GADGET, 438001 )

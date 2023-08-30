@@ -4,11 +4,11 @@ base_info = {
 }
 
 -- DEFS_MISCS
-RegionID = 2002
-QuestID = 4002203
-GroupID = 247006002
-RoomDoorConfigID = 2001
-DestinationConfigID = 2004
+local RegionID = 2002
+local QuestID = 4002203
+local GroupID = 247006002
+local RoomDoorConfigID = 2001
+local DestinationConfigID = 2004
 
 --================================================================
 --

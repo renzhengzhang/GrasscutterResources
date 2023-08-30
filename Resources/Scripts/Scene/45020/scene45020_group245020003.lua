@@ -18,24 +18,24 @@ route_map={
 [3]={route_points={1,2,3,4,5,6,7,8,9,10},tags=8},
 }
 
-entrance_point_map={
+local entrance_point_map={
 [1]=10,
 [2]=11,
 [3]=12,
 }
 
-entrance_map={
+local entrance_map={
 [2]=10,
 [4]=11,
 [8]=12,
 }
 
-exit_point_list={13}
+local exit_point_list={13}
 
 -- 新的刷怪方案（在MonsterWaveConfig中配置）
-monsterTides = tides_level_04_hard
+local monsterTides = tides_level_04_hard
 
-superMonsters = {22010305, 24010102, 24010302, 21020402}
+local superMonsters = {22010305, 24010102, 24010302, 21020402}
 
 --================================================================
 --

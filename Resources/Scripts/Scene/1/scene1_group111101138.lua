@@ -80,7 +80,7 @@ function action_EVENT_ENTER_REGION_138001(context, evt)
 		ScriptLib.PrintContextLog(context, "## enter evt.param4 = "..evt.param4)
 	else ScriptLib.PrintContextLog(context, "## enter evt.param4 = nil")
 	end
-	ret = ScriptLib.GetPlayerVehicleType(context, context.uid)
+	local ret = ScriptLib.GetPlayerVehicleType(context, context.uid)
 	ScriptLib.PrintContextLog(context, "## enter vehicle_state = "..ret)
 	return 0
 end
@@ -91,7 +91,7 @@ function action_EVENT_LEAVE_REGION_138002(context, evt)
 		ScriptLib.PrintContextLog(context, "## enter evt.param4 = "..evt.param4)
 	else ScriptLib.PrintContextLog(context, "## enter evt.param4 = nil")
 	end
-	ret = ScriptLib.GetPlayerVehicleType(context, context.uid)
+	local ret = ScriptLib.GetPlayerVehicleType(context, context.uid)
 	ScriptLib.PrintContextLog(context, "## enter vehicle_state = "..ret)
 	return 0
 end

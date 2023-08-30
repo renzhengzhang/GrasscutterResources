@@ -141,7 +141,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_33005(context, evt)
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 		if (current_env_state_id == 1) then
 			ScriptLib.SetGroupGadgetStateByConfigId(context, 155005033, 33003, 201)
 		elseif (current_env_state_id == 2) then

@@ -24,21 +24,21 @@ defs = {
 
 -- DEFS_MISCS
 --fever进度升级节点
-fever_progress_table = {
+local fever_progress_table = {
     0,40,120,270,570
 ,800
 }
 --各等级fever的下降速率
-fever_attenuation = {
+local fever_attenuation = {
     -1,-1,-2,-2,-3
 }
 
-DungeonWeather = {
+local DungeonWeather = {
     10039,10040,10041,10042
 }
 
 --怪物潮
-monster_tide = {
+local monster_tide = {
     [1] = {2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2048,2049,2050,2051},
     [2] = {2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2052,2053,2054,2055}
 ,
@@ -46,12 +46,12 @@ monster_tide = {
 }
 
 --精英怪
-elite = {
+local elite = {
     2030,2031,2032
 }
 
 --精英怪创生点
-elite_born_points = {
+local elite_born_points = {
     2022,2023,2024,2025,2026,2027,2028,2029
 }
 

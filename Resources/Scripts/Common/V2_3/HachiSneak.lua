@@ -42,7 +42,7 @@ defs = {
 
 ]]
 
-extraTriggers={
+local extraTriggers={
 	{ config_id = 8000000, name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
   { config_id = 8000001,name = "Enter_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0 },
   { config_id = 8000002,name = "LeaveRegion_Region", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_region", trigger_count = 0 },
@@ -63,7 +63,7 @@ extraTriggers={
 
 --运营日志所需key，都是累计值。
 --作为groupTempVa，在挑战开始时重置，在挑战结束时上报。需求见单号 1286672
-log_enum = {
+local log_enum = {
 	"found_times",--本次挑战中被狗子发现的次数 怪物SLC
 	"tool1_used_times",--本次挑战中使用潜行物件烟雾的次数 物件SLC
 	"tool2_used_times",--本次挑战中使用潜行物件诱饵的次数 物件SLC
@@ -97,12 +97,12 @@ end
 function action_any_monster_die(context, evt)
 	if CheckIsInTable(context, evt.param1, suites[5].monsters) then
 
-		exist_int = ScriptLib.GetGroupVariableValue(context, "animal")
-		exist_table = LF_Split_Int(context, exist_int)
+		local exist_int = ScriptLib.GetGroupVariableValue(context, "animal")
+		local exist_table = LF_Split_Int(context, exist_int)
 		ScriptLib.PrintContextLog(context, "[HachiSneak] Try Set Animal. exist_int@"..exist_int)
-		animal_index = GetIndexInTable(context, evt.param1, suites[5].monsters)
+		local animal_index = GetIndexInTable(context, evt.param1, suites[5].monsters)
 		if exist_table[animal_index] == 0 then
-			ret = ScriptLib.CreateMonster(context, { config_id = evt.param1, delay_time = 2 })
+			local ret = ScriptLib.CreateMonster(context, { config_id = evt.param1, delay_time = 2 })
 			ScriptLib.PrintContextLog(context, "[HachiSneak] Reset animal@"..evt.param1.." ret@"..ret)
 		end
 	end
@@ -113,7 +113,7 @@ end
 function action_group_will_unload(context,evt)
 	--清SGV
 	ScriptLib.PrintContextLog(context, "[HachiSneak] SGV_CAN_CLEAR_THREAT Set: 0")
-	uidList = ScriptLib.GetSceneUidList(context)
+	local uidList = ScriptLib.GetSceneUidList(context)
 	if #uidList > 0 then
 		ScriptLib.SetTeamServerGlobalValue(context, uidList[1], "SGV_CAN_CLEAR_THREAT", 0)
 		--ScriptLib.SetTeamServerGlobalValue(context, uidList[1], "Hachi_IsInSmokeArea", 0)
@@ -172,7 +172,7 @@ function SLC_PlayerDie_DuringQuest(context)
 		return 0
 	end
 
-	quest_state = ScriptLib.GetQuestState(context, context.source_entity_id, 4003103)
+	local quest_state = ScriptLib.GetQuestState(context, context.source_entity_id, 4003103)
 	if 3 ~= quest_state then
 		--允许再次接受任务通知
 		ScriptLib.SetGroupVariableValue(context, "quest_done", 0)
@@ -202,8 +202,8 @@ function LF_SetAnimal(context)
 		ScriptLib.PrintContextLog(context, "[HachiSneak] #WARN# Too Many Animal in Suit 5! Tell LD.")
 		return -1
 	end
-	exist_int = ScriptLib.GetGroupVariableValue(context, "animal")
-	exist_table = LF_Split_Int(context, exist_int)
+	local exist_int = ScriptLib.GetGroupVariableValue(context, "animal")
+	local exist_table = LF_Split_Int(context, exist_int)
 	ScriptLib.PrintContextLog(context, "[HachiSneak] Try Set Animal. exist_int@"..exist_int)
 	for i=1, #suites[5].monsters do
 		if exist_table[i] == 0 then
@@ -213,7 +213,7 @@ function LF_SetAnimal(context)
 	return 0
 end
 function LF_Split_Int(context, num)
-    tb = {0,0,0,0}
+    local tb = {0,0,0,0}
     for i=1, #tb do
     	tb[i] = num%10
     	num = math.floor(num/10)
@@ -234,7 +234,7 @@ function action_challenge_success(context, evt)
 	end
 	--恢复玩家SGV
 	ScriptLib.PrintContextLog(context, "[HachiSneak] SGV_CAN_CLEAR_THREAT Set: 0")
-	uidList = ScriptLib.GetSceneUidList(context)
+	local uidList = ScriptLib.GetSceneUidList(context)
 	if #uidList > 0 then
 		ScriptLib.SetTeamServerGlobalValue(context, uidList[1], "SGV_CAN_CLEAR_THREAT", 0)
 		--ScriptLib.SetTeamServerGlobalValue(context, uidList[1], "Hachi_IsInSmokeArea", 0)
@@ -256,7 +256,7 @@ function action_challenge_fail(context,evt)
 	--恢复玩家SGV
 	ScriptLib.PrintContextLog(context, "[HachiSneak] SGV_CAN_CLEAR_THREAT Set: 0")
 
-	uidList = ScriptLib.GetSceneUidList(context)
+	local uidList = ScriptLib.GetSceneUidList(context)
 	if #uidList > 0 then
 		ScriptLib.SetTeamServerGlobalValue(context, uidList[1], "SGV_CAN_CLEAR_THREAT", 0)
 		--ScriptLib.SetTeamServerGlobalValue(context, uidList[1], "Hachi_IsInSmokeArea", 0)
@@ -287,7 +287,7 @@ function SetHachiWayPointGV(context)
 		for k,v in pairs(defs.waypoint) do
 			ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {k}, "_INU_SHIHANDAI_SEARCH_START" ,v[1])
 			ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {k}, "_INU_SHIHANDAI_SEARCH_END" ,v[2])
-			tmp = ScriptLib.GetEntityIdByConfigId(context, k)
+			local tmp = ScriptLib.GetEntityIdByConfigId(context, k)
 			ScriptLib.PrintContextLog(context, "[HachiSneak] Add GV: DogConfigID@"..k.." EntityID@"..tmp.." SEARCH_START@"..v[1].." SEARCH_END@"..v[2])
 		end
 	end
@@ -311,7 +311,7 @@ function action_quest4003109_notify(context,evt)
 	--处理黄点
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.starting_point_id, 201)
 
-	start_process = ScriptLib.GetGroupVariableValue(context,"saved_progress")
+	local start_process = ScriptLib.GetGroupVariableValue(context,"saved_progress")
 	ScriptLib.PrintContextLog(context, "[HachiSneak] Start Challenge. ChallengeID@ "..defs.challenge_id.." TargetScore@".. defs.taget_score.." CurrentScore@"..start_process)
 	--参数1： event_type所在枚举序号； 参数2： trigger_tag；参数3： 次数；参数4：Bool，次数达成是否计为成功；参数5：初始次数值
 	ScriptLib.StartChallenge(context, defs.ChallengeIndex, defs.challenge_id, {3, 1000, defs.taget_score, 1, start_process})
@@ -349,7 +349,7 @@ function action_quest4003103_notify(context,evt)
 	--处理黄点
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.starting_point_id, 201)
 
-	start_process = ScriptLib.GetGroupVariableValue(context,"saved_progress")
+	local start_process = ScriptLib.GetGroupVariableValue(context,"saved_progress")
 	ScriptLib.PrintContextLog(context, "[HachiSneak] Start Challenge. ChallengeID@ "..defs.challenge_id.." TargetScore@".. defs.taget_score.." CurrentScore@"..start_process)
 	--参数1： event_type所在枚举序号； 参数2： trigger_tag；参数3： 次数；参数4：Bool，次数达成是否计为成功；参数5：初始次数值
 	ScriptLib.StartChallenge(context, defs.ChallengeIndex, defs.challenge_id, {3, 1000, defs.taget_score, 1, start_process})
@@ -404,7 +404,7 @@ function action_enter_region(context,evt)
 	end
 
 	--检查前置任务 4003103任务状态不为finished时隐藏黄点，不可踩region开挑战
-	avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, context.uid)
+	local avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, context.uid)
 	if 3 ~= ScriptLib.GetQuestState(context, avatar_entity, 4003103) then
 		return -1
 	end
@@ -429,8 +429,8 @@ function action_enter_region(context,evt)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.starting_point_id, GadgetState.GearStart)
 
 		--读取进度
-		--start_process = ScriptLib.GetGroupVariableValue(context,"saved_progress")
-		start_process  = ScriptLib.GetExhibitionAccumulableData(context, context.uid, defs.exhibition_id)
+		--local start_process = ScriptLib.GetGroupVariableValue(context,"saved_progress")
+		local start_process  = ScriptLib.GetExhibitionAccumulableData(context, context.uid, defs.exhibition_id)
 		ScriptLib.PrintContextLog(context, "[HachiSneak] Start Challenge. ChallengeID@ "..defs.challenge_id.." TargetScore@".. defs.taget_score.." CurrentScore@"..start_process)
 		--参数1： event_type所在枚举序号； 参数2： trigger_tag；参数3： 次数；参数4：Bool，次数达成是否计为成功；参数5：初始次数值
 		ScriptLib.StartChallenge(context, defs.ChallengeIndex, defs.challenge_id, {3, 1000, defs.taget_score, 1, start_process})
@@ -459,14 +459,14 @@ function MonsterCallCaught(context)
 		return -1
 	end
 
-	player_uid = ScriptLib.GetGroupTempValue(context, "player_uid", {})
+	local player_uid = ScriptLib.GetGroupTempValue(context, "player_uid", {})
 	ScriptLib.ChangeGroupTempValue(context, "capture_times", 1, {})
 	ScriptLib.ChangeGroupVariableValue(context,"saved_progress",1)
 
 	ScriptLib.AddExhibitionAccumulableData(context, player_uid, "Activity_Hachi_Group_"..defs.group_id, 1)
 	ScriptLib.PrintContextLog(context, "[HachiSneak] Exhibition Update. UID@"..player_uid.." key@".."Activity_Hachi_Group_"..defs.group_id)
 	--
-	animal = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
+	local animal = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id })
 	LF_MarkAnimal(context,animal)
 	ScriptLib.RemoveEntityByConfigId(context, defs.group_id, EntityType.MONSTER, animal)
 	--ScriptLib.KillEntityByConfigId(context, { config_id = animal })
@@ -475,8 +475,8 @@ function MonsterCallCaught(context)
 end
 
 function LF_MarkAnimal(context,animal_id)
-	animal_index = GetIndexInTable(context, animal_id, suites[5].monsters)
-	mark = math.pow(10,animal_index-1)
+	local animal_index = GetIndexInTable(context, animal_id, suites[5].monsters)
+	local mark = math.pow(10,animal_index-1)
 	ScriptLib.PrintContextLog(context, "[HachiSneak] Exhibition Update. animal_index@"..animal_index.." AnimalMark@"..mark)
 	ScriptLib.ChangeGroupVariableValue(context, "animal",mark)
 
@@ -511,7 +511,7 @@ function SLC_SmokeClearThreat(context)
 		return -1
 	end
 	ScriptLib.PrintContextLog(context, "[HachiSneak] SGV_CAN_CLEAR_THREAT Set: 1")
-	uidList = ScriptLib.GetSceneUidList(context)
+	local uidList = ScriptLib.GetSceneUidList(context)
 	if #uidList > 0 then
 		ScriptLib.SetTeamServerGlobalValue(context, uidList[1], "SGV_CAN_CLEAR_THREAT", 1)
 	end
@@ -524,7 +524,7 @@ function SLC_SmokeSetThreat(context)
 		return -1
 	end]]
 	ScriptLib.PrintContextLog(context, "[HachiSneak] SGV_CAN_CLEAR_THREAT Set: 0")
-	uidList = ScriptLib.GetSceneUidList(context)
+	local uidList = ScriptLib.GetSceneUidList(context)
 	if #uidList > 0 then
 		ScriptLib.SetTeamServerGlobalValue(context, uidList[1], "SGV_CAN_CLEAR_THREAT", 0)
 	end
@@ -534,7 +534,7 @@ end
 --上报运营日志数据
 function UpLoadActionLog(context,transaction)
 
-	log = {
+	local log = {
 		["found_times"] = 0,--本次挑战中被狗子发现的次数 怪物SLC
 		["tool1_used_times"] = 0,--本次挑战中使用潜行物件烟雾的次数 物件SLC
 		["tool2_used_times"] = 0,--本次挑战中使用潜行物件诱饵的次数 物件SLC

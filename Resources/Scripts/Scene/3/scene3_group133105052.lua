@@ -15,7 +15,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-Pursina = {
+local Pursina = {
 	{52002,52005},
 	{52003,52006},
 	{52004,52007},

@@ -19,9 +19,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-EnvControlGadgets = {239014,239015,239016,239017,239021,239022}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local EnvControlGadgets = {239014,239015,239016,239017,239021,239022}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
 MaxSize = 12
 
@@ -171,7 +171,7 @@ suites = {
 -- 触发操作
 function action_EVENT_GROUP_LOAD_239018(context, evt)
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
-	is_daynight_gadget = false
+	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (239014 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
@@ -182,8 +182,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
 	    return -1
 	end
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239014,202)
 	end
@@ -193,7 +193,7 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 
 
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
-	is_daynight_gadget = false
+	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (239015 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
@@ -204,8 +204,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
 	    return -1
 	end
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239015,202)
 	end
@@ -215,7 +215,7 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 
 
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
-	is_daynight_gadget = false
+	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (239016 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
@@ -226,8 +226,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
 	    return -1
 	end
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239016,202)
 	end
@@ -237,7 +237,7 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 
 
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
-	is_daynight_gadget = false
+	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (239017 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
@@ -248,8 +248,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
 	    return -1
 	end
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239017,202)
 	end
@@ -259,7 +259,7 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 
 
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
-	is_daynight_gadget = false
+	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (239021 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
@@ -270,8 +270,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
 	    return -1
 	end
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239021,202)
 	end
@@ -281,7 +281,7 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 
 
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
-	is_daynight_gadget = false
+	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (239022 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
@@ -292,8 +292,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
 	    return -1
 	end
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239022,202)
 	end
@@ -317,7 +317,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_239023(context, evt)
 	-- 将configid为 239019 的物件更改为状态 GadgetState.GearStart
-	state = ScriptLib.GetGadgetStateByConfigId(context,0,239019)
+	local state = ScriptLib.GetGadgetStateByConfigId(context,0,239019)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 239019, 201-state) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
@@ -338,7 +338,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_239024(context, evt)
 	-- 将configid为 239020 的物件更改为状态 GadgetState.GearStart
-	state = ScriptLib.GetGadgetStateByConfigId(context,0,239020)
+	local state = ScriptLib.GetGadgetStateByConfigId(context,0,239020)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 239020, 201-state) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1

@@ -17,12 +17,12 @@ defs = {
 
 function SLC_MonaPortal_Start(context)
     if true == ScriptLib.CheckIsInMpMode(context) then
-        cfg_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+        local cfg_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
         ScriptLib.ShowReminderRadius(context, 321700501, gadgets[cfg_id].pos, 5)
         return 0
     end
     --埋点
-    config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+    local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
     ScriptLib.MarkGroupLuaAction(context, "MonaPortal", "", {["group_id"] = base_info.group_id, ["config_id"] = config_id, ["to_leveltag"] = defs.target_leveltag})
 
     ScriptLib.ChangeToTargetLevelTagWithParamTable(context, defs.target_leveltag, {pos = defs.pos, radius = defs.radius, rot = defs.rot})
@@ -31,7 +31,7 @@ function SLC_MonaPortal_Start(context)
 end
 
 function SLC_MonaPortal_TryShowReminder(context)
-    config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+    local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
     if 22 == defs.target_leveltag then
         ScriptLib.ShowReminderRadius(context, 1111377, gadgets[config_id].pos, 5)
     end

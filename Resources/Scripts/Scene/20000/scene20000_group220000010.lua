@@ -94,7 +94,7 @@ suites = {
 -- 触发操作
 function action_EVENT_CLIENT_EXECUTE_35(context, evt)
 	--由entityId获取configId
-		This_configID = ScriptLib.GetConfigIdByEntityId(context, evt.param1 )
+		local This_configID = ScriptLib.GetConfigIdByEntityId(context, evt.param1 )
 		--转换对应宝箱状态
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 0, This_configID, GadgetState.Default ) then
 		    return -1
@@ -143,7 +143,7 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_39(context, evt)
-	state = ScriptLib.GetGroupVariableValue(context, "Sculpture_State")
+	local state = ScriptLib.GetGroupVariableValue(context, "Sculpture_State")
 			-- 根据不同的选项做不同的操作
 			if defs.gadget_id_3 == evt.param2 then
 				if state == 0 then

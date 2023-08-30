@@ -19,14 +19,14 @@ defs = {
 }
 
 --地形信息：0-墙面,1-地面,2-空气墙
-level_map = {
+local level_map = {
 	{ 0, 0, 0, 0},
 	{ 0, 1, 1, 0},
 	{ 0, 1, 1, 0},
 	{ 0, 0, 0, 0},
 }
 
---[[level_map = {
+--[[local level_map = {
 	{ 0, 0, 0, 0, 0},
 	{ 0, 0, 1, 1, 0},
 	{ 0, 1, 1, 1, 0},
@@ -37,14 +37,14 @@ level_map = {
 }]]--
 
 --点阵id信息
-point_map = {
+local point_map = {
 	{ 0, 0, 0, 0},
 	{ 0, 4, 3, 0},
 	{ 0, 2, 1, 0},
 	{ 0, 0, 0, 0},
 }
 
---[[point_map = {
+--[[local point_map = {
 	{ 0, 0,   0, 0, 0},
 	{ 0, 0,   6, 1, 0},
 	{ 0, 12,  7, 2, 0},
@@ -55,7 +55,7 @@ point_map = {
 }]]--
 
 --箱子起始信息
---[[box_config = {
+--[[local box_config = {
 	[1] = {config_id = 4001, pos = {x=4,z=2}},
 	[2] = {config_id = 4002, pos = {x=2,z=4}},
 	[3] = {config_id = 4003, pos = {x=2,z=6}},
@@ -67,19 +67,19 @@ point_map = {
 	[9] = {config_id = 4009, pos = {x=2,z=5}},
 }]]--
 
-box_config = {
+local box_config = {
 	[1] = {config_id = 20001, pos = {x=3,z=3}},
 	[2] = {config_id = 20002, pos = {x=2,z=3}},
 }
 
 --关卡结算信息
-level_finish_config = {
+local level_finish_config = {
         box_config_id = {1,2}, --box_config中序列
         target_point_id = {3,4} --点阵id
 }
 
 --路径摘除信息(pont_id)
-illegal_path = {
+local illegal_path = {
         {1,2},
         {3,4},
 }

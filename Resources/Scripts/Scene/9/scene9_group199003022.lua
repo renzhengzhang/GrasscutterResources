@@ -133,8 +133,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_22006(context, evt)
-	    k=0
-	    t=0
+	    local k=0
+	    local t=0
 
 	        k=ScriptLib.GetGroupVariableValue(context, "key")
 	        t=ScriptLib.GetGroupVariableValue(context, "times")
@@ -165,8 +165,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_22007(context, evt)
-	    k=0
-	    t=0
+	    local k=0
+	    local t=0
 
 	        k=ScriptLib.GetGroupVariableValue(context, "key")
 	        t=ScriptLib.GetGroupVariableValue(context, "times")
@@ -197,8 +197,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_22008(context, evt)
-	    k=0
-	    t=0
+	    local k=0
+	    local t=0
 
 	        k=ScriptLib.GetGroupVariableValue(context, "key")
 	        t=ScriptLib.GetGroupVariableValue(context, "times")
@@ -290,8 +290,8 @@ function action_EVENT_ENTER_REGION_22013(context, evt)
 	 ScriptLib.AddQuestProgress(context, "7901305finish")
 	ScriptLib.SetGadgetStateByConfigId(context, 22012, GadgetState.Default)
 
-	pos = {x=-709, y=128, z=-6.39}
-	 pos_follow = {x=0, y=0, z=0}
+	local pos = {x=-709, y=128, z=-6.39}
+	 local pos_follow = {x=0, y=0, z=0}
 	ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 		                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 		                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 })

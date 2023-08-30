@@ -9,7 +9,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -36,14 +36,14 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 function CheckSuccess(context)
-	wallmatch = ScriptLib.GetGroupVariableValue(context, "iswallmatch")
+	local wallmatch = ScriptLib.GetGroupVariableValue(context, "iswallmatch")
 
 
 	if wallmatch == 1 then
@@ -172,7 +172,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_70003(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
 
-		current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+		local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 			if (current_env_state_id == 1) then
 				ScriptLib.SetGroupVariableValue(context, "isNight", 0)
 			elseif  (current_env_state_id == 2) then

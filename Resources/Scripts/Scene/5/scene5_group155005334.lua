@@ -14,11 +14,11 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {defs.gadget_Switch}
-Worktops = {}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local Controllers = {}
+local EnvControlGadgets = {defs.gadget_Switch}
+local Worktops = {}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
 --================================================================
 --
@@ -120,7 +120,7 @@ suites = {
 -- 触发条件
 function condition_EVENT_LEVEL_TAG_CHANGE_334002(context, evt)
 	-- 返回渊下宫当前是否为白天
-	    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 2) then
 	        return false
 	    else
@@ -153,7 +153,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_CREATE_334005(context, evt)
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
-	is_daynight_gadget = false
+	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (334004 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
@@ -164,8 +164,8 @@ function action_EVENT_GADGET_CREATE_334005(context, evt)
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
 	    return -1
 	end
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,334004,202)
 	end
@@ -175,7 +175,7 @@ function action_EVENT_GADGET_CREATE_334005(context, evt)
 
 
 	--lua层调用，重置gadget状态
-	is_daynight_gadget = false
+	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (334004 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
@@ -186,10 +186,10 @@ function action_EVENT_GADGET_CREATE_334005(context, evt)
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
 	    return -1
 	end
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
-	current_state = ScriptLib.GetGadgetStateByConfigId(context,0,334004)
-	current_phase = current_state % 10
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	local current_state = ScriptLib.GetGadgetStateByConfigId(context,0,334004)
+	local current_phase = current_state % 10
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,334004,200+current_phase)
 	end
@@ -233,9 +233,9 @@ function condition_EVENT_PLATFORM_REACH_POINT_334007(context, evt)
 	end
 
 	-- 返回渊下宫当前是否为黑夜
-	uid_List = ScriptLib.GetSceneUidList(context)
-	host_id = uid_List[1]
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local uid_List = ScriptLib.GetSceneUidList(context)
+	local host_id = uid_List[1]
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	if (current_env_state_id == 2) then
 	    return true
 	else
@@ -265,7 +265,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_334008(context, evt)
 	    return false
 	end
 
-	currentState = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_Switch)
+	local currentState = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_Switch)
 
 	ScriptLib.PrintContextLog(context,"开始判断322 ?="..currentState)
 
@@ -325,7 +325,7 @@ end
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_334010(context, evt)
 	--lua层调用，重置gadget状态
-	is_daynight_gadget = false
+	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (334004 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
@@ -336,10 +336,10 @@ function action_EVENT_ANY_GADGET_DIE_334010(context, evt)
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
 	    return -1
 	end
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
-	current_state = ScriptLib.GetGadgetStateByConfigId(context,0,334004)
-	current_phase = current_state % 10
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	local current_state = ScriptLib.GetGadgetStateByConfigId(context,0,334004)
+	local current_phase = current_state % 10
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,334004,200+current_phase)
 	end

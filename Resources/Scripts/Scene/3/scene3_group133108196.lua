@@ -535,7 +535,7 @@ end
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_196034(context, evt)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, "GV_Mark_Skiff", 1)
 
@@ -555,7 +555,7 @@ end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_196035(context, evt)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 
 
 	ScriptLib.PrintContextLog(context, "adding effs")

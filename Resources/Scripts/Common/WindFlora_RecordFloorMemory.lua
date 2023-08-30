@@ -2,7 +2,7 @@
 -- 全体玩家进入区域时，玩法结束，所有玩家宣布胜利
 -- 倒计时结束时，玩法结束。如果地板全部点亮，在区域中的玩家宣布胜利
 -- 正式代码 --
-TempTrigger = {
+local TempTrigger = {
     { name = "GROUP_LOAD_5000", config_id = 5000, event = EventType.EVENT_GROUP_LOAD,
       source = "", condition = "", action = "action_GROUP_LOAD_5000", trigger_count = 0 },
     { name = "TIME_AXIS_PASS_5001", config_id = 5001, event = EventType.EVENT_TIME_AXIS_PASS,
@@ -25,7 +25,7 @@ TempTrigger = {
       source = "GM_CheckConfigIDGadgetState", condition = "", action = "action_GM_Mode", trigger_count = 0 }
 }
 
-Enum ={
+local Enum ={
     EnterWrongNum = "wrong_position_memoryfloor",
     TimeEnterRegion = "get_destination_memoryfloor"
 }
@@ -34,7 +34,7 @@ Enum ={
 -- 初始化地板位置
 function LF_Initialize_Points()
     -- body
-    points = {}
+    local points = {}
     for i = 1, defs.FloorArray_Size.x, 1 do
         points[i] = {}
         for j = 1, defs.FloorArray_Size.y, 1 do
@@ -44,7 +44,7 @@ function LF_Initialize_Points()
                 z = defs.Pos_Standard.z - defs.Pos_Range.y * (j - 1)
             })
             -- gadgets录入
-            floorGadgetID = defs.FloorGadgetID[defs.InitFloorStyle[i][j]]
+            local floorGadgetID = defs.FloorGadgetID[defs.InitFloorStyle[i][j]]
             gadgets[100000 * i + j] = { config_id = 100000 * i + j, gadget_id = floorGadgetID,
                                         pos = points[i][j], rot = defs.Rot_Standard, level = 1 }
             table.insert(suites[1].gadgets, i * 100000 + j)
@@ -65,7 +65,7 @@ function LF_Initialize_Points()
 end
 
 function LF_Initialize_Variable()
-    var = { config_id=50000001,name = "CurrentFloorArrayIndex", value = 1, no_refresh = true }
+    local var = { config_id=50000001,name = "CurrentFloorArrayIndex", value = 1, no_refresh = true }
     variables[var.name] = var
     var = { config_id=50000002,name = "CurrentPhasePlayIndex", value = 1, no_refresh = true }
     variables[var.name] = var
@@ -95,8 +95,8 @@ end
 
 function SubController( context, SubSocre, Tag)
     -- 取出要减分数的绝对值
-    absSubScore = math.abs(SubSocre)
-    CurScore = ScriptLib.GetFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, context.uid)
+    local absSubScore = math.abs(SubSocre)
+    local CurScore = ScriptLib.GetFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, context.uid)
 
     if ScriptLib.GetSceneMultiStagePlayUidValue(context,235800001, 1, Tag, context.uid) == 0 then
         ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, Tag, context.uid, 0)
@@ -114,9 +114,9 @@ end
 
 
 function OnEnterWrongFloor(context)
-    wrongNum = ScriptLib.GetSceneMultiStagePlayUidValue(context,defs.MainGroupID, 1, Enum.EnterWrongNum, context.uid)
+    local wrongNum = ScriptLib.GetSceneMultiStagePlayUidValue(context,defs.MainGroupID, 1, Enum.EnterWrongNum, context.uid)
 
-
+    
     SubController(context, defs.FallScore, "fall_down_count_6008")
     -- 扣除单个玩家分数
     ScriptLib.AddFleurFairMultistagePlayBuffEnergy(context, defs.MainGroupID, 1, context.uid, defs.FallScore)
@@ -137,7 +137,7 @@ function StartGallery(context, prev_context, activeStage)
     ScriptLib.SetGroupVariableValue(context, "ArrayPathStep", 1)
     ScriptLib.SetGroupTempValue(context, "RightFloorNum", 0, {})
 
-    currentPhasePlayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentPhasePlayIndex")
+    local currentPhasePlayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentPhasePlayIndex")
     LF_CallFloorTimer(context, currentPhasePlayIndex)
 
     ScriptLib.StartGallery(context, defs.GalleryID)
@@ -147,11 +147,11 @@ function StartGallery(context, prev_context, activeStage)
 end
 
 function LF_CallFloorTimer(context, currentPhasePlayIndex)
-    currentPhasePlay = PhasePlay[currentPhasePlayIndex]
-    currentFloorArrayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFloorArrayIndex")
-    currentArrayPath = currentPhasePlay.ArrayPath[currentFloorArrayIndex]
-    showFloorTimeAxis = {}
-    timeValue = currentPhasePlay.EachFloorShowTime
+    local currentPhasePlay = PhasePlay[currentPhasePlayIndex]
+    local currentFloorArrayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFloorArrayIndex")
+    local currentArrayPath = currentPhasePlay.ArrayPath[currentFloorArrayIndex]
+    local showFloorTimeAxis = {}
+    local timeValue = currentPhasePlay.EachFloorShowTime
     for i = 1, #currentArrayPath, 1 do
         showFloorTimeAxis[i] = timeValue
         timeValue = timeValue + currentPhasePlay.EachFloorShowTime
@@ -169,10 +169,10 @@ function LF_CallFloorTimer(context, currentPhasePlayIndex)
 
     if currentPhasePlay.ShowMode == 2 then
         ScriptLib.ShowReminder(context, 358000014)
-        arrayPathHalfLength = math.floor(#currentArrayPath * currentPhasePlay.SnakeRate)
+        local arrayPathHalfLength = math.floor(#currentArrayPath * currentPhasePlay.SnakeRate)
         -- 地板贪食蛇结束逻辑
-        eachFloorEndTime = currentPhasePlay.EachFloorShowTime * arrayPathHalfLength
-        endFloorTimeAxis = {}
+        local eachFloorEndTime = currentPhasePlay.EachFloorShowTime * arrayPathHalfLength
+        local endFloorTimeAxis = {}
         for k, v in ipairs(showFloorTimeAxis) do
             endFloorTimeAxis[k] = v + eachFloorEndTime - 0.2
         end
@@ -195,12 +195,12 @@ function action_GROUP_LOAD_5000(context, evt)
 
     ScriptLib.PrintContextLog(context, "## ================ INITIALIZE 12 ==============")
     math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-    randomPhasePlayIndex = math.random(#PhasePlay)
-    randomFloorArrayIndex = math.random(#PhasePlay[randomPhasePlayIndex].FloorArrays)
+    local randomPhasePlayIndex = math.random(#PhasePlay)
+    local randomFloorArrayIndex = math.random(#PhasePlay[randomPhasePlayIndex].FloorArrays)
 
     -- QA用测试接口
-    tempPhasePlayIndex = ScriptLib.GetFleurFairMultistagePlayGalleryTempValue(context,defs.MainGroupID,1,"6008_PHASEPLAYINDEX")
-    tempFloorArrayIndex = ScriptLib.GetFleurFairMultistagePlayGalleryTempValue(context,defs.MainGroupID,1,"6008_FLOORARRAYINDEX")
+    local tempPhasePlayIndex = ScriptLib.GetFleurFairMultistagePlayGalleryTempValue(context,defs.MainGroupID,1,"6008_PHASEPLAYINDEX")
+    local tempFloorArrayIndex = ScriptLib.GetFleurFairMultistagePlayGalleryTempValue(context,defs.MainGroupID,1,"6008_FLOORARRAYINDEX")
     ScriptLib.PrintContextLog(context, "## TD_RecordFloorMemory : QASet PhasePlayIndex" .. tempPhasePlayIndex)
     ScriptLib.PrintContextLog(context, "## TD_RecordFloorMemory : QASet PhasePlayIndex" .. tempFloorArrayIndex)
     if tempPhasePlayIndex > 0 and tempPhasePlayIndex <= #PhasePlay then
@@ -218,7 +218,7 @@ function action_GROUP_LOAD_5000(context, evt)
     ScriptLib.SetGroupVariableValue(context, "CurrentPhasePlayIndex", randomPhasePlayIndex)
     ScriptLib.SetGroupVariableValue(context, "CurrentFloorArrayIndex", randomFloorArrayIndex)
     ScriptLib.PrintContextLog(context, "## TD_RecordFloorMemory : Choose Current Floor Array Index" .. randomFloorArrayIndex)
-    tempArray = PhasePlay[randomPhasePlayIndex].FloorArrays[randomFloorArrayIndex]
+    local tempArray = PhasePlay[randomPhasePlayIndex].FloorArrays[randomFloorArrayIndex]
     for i = 1, defs.FloorArray_Size.x do
         for j = 1, defs.FloorArray_Size.y do
             if 0 == tempArray[i][j] then
@@ -239,9 +239,9 @@ end
 function Set_Flower(context,randomPhasePlayIndex, randomFloorArrayIndex)
 
     math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 5))
-    tempFlowerPath = PhasePlay[randomPhasePlayIndex].FlowerPath[randomFloorArrayIndex]
-    randomPathIndex = math.random(#tempFlowerPath)
-    flowerNum = 0
+    local tempFlowerPath = PhasePlay[randomPhasePlayIndex].FlowerPath[randomFloorArrayIndex]
+    local randomPathIndex = math.random(#tempFlowerPath)
+    local flowerNum = 0
     for k, v in ipairs(tempFlowerPath[randomPathIndex]) do
         if v >= 1 then
             flowerNum = flowerNum + 1
@@ -257,10 +257,10 @@ end
 -- 控制地板灯亮部分的时间轴,每次触发会处理序列中的1个地板
 function action_ShowFloor(context, evt)
     -- 获取当前序列进度
-    currentPhasePlayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentPhasePlayIndex")
-    currentFloorArrayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFloorArrayIndex")
-    currentFlowerPathIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFlowerPathIndex")
-    arrayPathStep = ScriptLib.GetGroupVariableValue(context, "ArrayPathStep")
+    local currentPhasePlayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentPhasePlayIndex")
+    local currentFloorArrayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFloorArrayIndex")
+    local currentFlowerPathIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFlowerPathIndex")
+    local arrayPathStep = ScriptLib.GetGroupVariableValue(context, "ArrayPathStep")
 
     SetFloorGadgetState(context, currentPhasePlayIndex, currentFloorArrayIndex, arrayPathStep, 901)
     CreateFlowerGadget(context, currentPhasePlayIndex, currentFloorArrayIndex, currentFlowerPathIndex, arrayPathStep)
@@ -274,10 +274,10 @@ end
 -- 控制地板关闭部分的TIMEAXIS,每次触发会处理序列中的1个地板
 function action_EndFloor(context, evt)
     -- 获取当前序列进度
-    currentPhasePlayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentPhasePlayIndex")
-    currentFloorArrayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFloorArrayIndex")
-    currentFlowerPathIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFlowerPathIndex")
-    arrayPathEndStep = ScriptLib.GetGroupTempValue(context, "ArrayPathEndStep", {})
+    local currentPhasePlayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentPhasePlayIndex")
+    local currentFloorArrayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFloorArrayIndex")
+    local currentFlowerPathIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFlowerPathIndex")
+    local arrayPathEndStep = ScriptLib.GetGroupTempValue(context, "ArrayPathEndStep", {})
 
     SetFloorGadgetState(context, currentPhasePlayIndex, currentFloorArrayIndex, arrayPathEndStep, 903)
     SetFlowerGadgetState(context, currentPhasePlayIndex, currentFloorArrayIndex, currentFlowerPathIndex, arrayPathEndStep, 202)
@@ -290,19 +290,19 @@ end
 
 
 function SetFloorGadgetState(context, currentPhasePlayIndex, currentFloorArrayIndex, arrayPathStep, gadgetState)
-    targetArrayXY = PhasePlay[currentPhasePlayIndex].ArrayPath[currentFloorArrayIndex][arrayPathStep]
-    targetConfigID = 100000 * targetArrayXY[1] + targetArrayXY[2]
+    local targetArrayXY = PhasePlay[currentPhasePlayIndex].ArrayPath[currentFloorArrayIndex][arrayPathStep]
+    local targetConfigID = 100000 * targetArrayXY[1] + targetArrayXY[2]
     ScriptLib.SetGadgetStateByConfigId(context, targetConfigID, gadgetState)
 end
 
 function CreateFlowerGadget(context, currentPhasePlayIndex, currentFloorArrayIndex, currentFlowerPathIndex, arrayPathStep)
-    targetArrayXY = PhasePlay[currentPhasePlayIndex].ArrayPath[currentFloorArrayIndex][arrayPathStep]
-    targetConfigID = 100000 * targetArrayXY[1] + targetArrayXY[2]
-    targetFlowerStep = PhasePlay[currentPhasePlayIndex].FlowerPath[currentFloorArrayIndex][currentFlowerPathIndex][arrayPathStep]
+    local targetArrayXY = PhasePlay[currentPhasePlayIndex].ArrayPath[currentFloorArrayIndex][arrayPathStep]
+    local targetConfigID = 100000 * targetArrayXY[1] + targetArrayXY[2]
+    local targetFlowerStep = PhasePlay[currentPhasePlayIndex].FlowerPath[currentFloorArrayIndex][currentFlowerPathIndex][arrayPathStep]
     if targetFlowerStep >= 1 then
-        flowerConfigID = 21300 + targetFlowerStep
-        pos = gadgets[targetConfigID].pos
-        rot = gadgets[targetConfigID].rot
+        local flowerConfigID = 21300 + targetFlowerStep
+        local pos = gadgets[targetConfigID].pos
+        local rot = gadgets[targetConfigID].rot
         ScriptLib.CreateGadgetByConfigIdByPos(context, flowerConfigID, { x = pos.x, y = pos.y + defs.FlowerHeight, z = pos.z}, rot)
     end
 
@@ -310,9 +310,9 @@ function CreateFlowerGadget(context, currentPhasePlayIndex, currentFloorArrayInd
 end
 
 function SetFlowerGadgetState(context, currentPhasePlayIndex, currentFloorArrayIndex, currentFlowerPathIndex, arrayPathStep, gadgetState)
-    targetFlowerStep = PhasePlay[currentPhasePlayIndex].FlowerPath[currentFloorArrayIndex][currentFlowerPathIndex][arrayPathStep]
+    local targetFlowerStep = PhasePlay[currentPhasePlayIndex].FlowerPath[currentFloorArrayIndex][currentFlowerPathIndex][arrayPathStep]
     if targetFlowerStep >= 1 then
-        flowerConfigID = 21300 + targetFlowerStep
+        local flowerConfigID = 21300 + targetFlowerStep
         ScriptLib.SetGadgetStateByConfigId(context, flowerConfigID, gadgetState)
     end
 
@@ -324,9 +324,9 @@ function action_ShowFloorEnd(context, evt)
     -- 遍历地板
     ScriptLib.PrintContextLog(context, "## TD_RecordFloorMemory : Start End Show Floor")
     LF_SetFloorArrayGadgetState(context, 903)
-    flowerNum = ScriptLib.GetGroupTempValue(context, "FlowerNum", {})
+    local flowerNum = ScriptLib.GetGroupTempValue(context, "FlowerNum", {})
     for i = 1, flowerNum, 1 do
-        flowerConfigID = 21300 + i
+        local flowerConfigID = 21300 + i
         ScriptLib.SetGadgetStateByConfigId(context, flowerConfigID, 202)
     end
 
@@ -335,14 +335,14 @@ end
 
 -- 批量设置地板GadgetState
 function LF_SetFloorArrayGadgetState(context, gadgetState)
-    currentPhasePlayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentPhasePlayIndex")
-    currentFloorArrayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFloorArrayIndex")
-    currentArrayPath = PhasePlay[currentPhasePlayIndex].ArrayPath[currentFloorArrayIndex]
+    local currentPhasePlayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentPhasePlayIndex")
+    local currentFloorArrayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFloorArrayIndex")
+    local currentArrayPath = PhasePlay[currentPhasePlayIndex].ArrayPath[currentFloorArrayIndex]
 
     ScriptLib.PrintContextLog(context, "## TD_RecordFloorMemory : Set array" .. currentFloorArrayIndex .. " to " .. gadgetState)
     for i = 1, #currentArrayPath do
-        targetArrayXY = currentArrayPath[i]
-        targetConfigID = 100000 * targetArrayXY[1] + targetArrayXY[2]
+        local targetArrayXY = currentArrayPath[i]
+        local targetConfigID = 100000 * targetArrayXY[1] + targetArrayXY[2]
         if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, targetConfigID, gadgetState) then
             ScriptLib.PrintContextLog(context, "## TD_ErrorLog : cid -> " .. targetConfigID .. " | gadgetState -> " .. gadgetState)
             return -1
@@ -366,9 +366,9 @@ function action_floorStateChange(context, evt)
     -- evt.param1 : 物件修改后的state
     -- evt.param2 : 物件在group中的config_id
     -- evt.param3 : 物件修改前的state
-    currentPhasePlayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentPhasePlayIndex")
-    currentFloorArrayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFloorArrayIndex")
-    targetArrayPath = PhasePlay[currentPhasePlayIndex].ArrayPath[currentFloorArrayIndex]
+    local currentPhasePlayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentPhasePlayIndex")
+    local currentFloorArrayIndex = ScriptLib.GetGroupVariableValue(context, "CurrentFloorArrayIndex")
+    local targetArrayPath = PhasePlay[currentPhasePlayIndex].ArrayPath[currentFloorArrayIndex]
     if evt.param1 ~= 902 then
         ScriptLib.PrintContextLog(context, "## TD_RecordFloorMemory : Floor " .. evt.param2 .. "Go To " .. evt.param1)
     end
@@ -377,7 +377,7 @@ function action_floorStateChange(context, evt)
         return 0
     end
 
-    rightFloorNum = ScriptLib.GetGroupTempValue(context, "RightFloorNum", {})
+    local rightFloorNum = ScriptLib.GetGroupTempValue(context, "RightFloorNum", {})
     rightFloorNum = rightFloorNum + 1
     if rightFloorNum >= #targetArrayPath then
         -- 开启终点开关(suite2配置终点Gadget以及相关Field)
@@ -390,8 +390,8 @@ end
 
 function checkRightFloorConfigID(targetArrayPath, targetConfigID)
     for i = 1, #targetArrayPath, 1 do
-        targetArrayXY = targetArrayPath[i]
-        currentConfigID = 100000 * targetArrayXY[1] + targetArrayXY[2]
+        local targetArrayXY = targetArrayPath[i]
+        local currentConfigID = 100000 * targetArrayXY[1] + targetArrayXY[2]
         if currentConfigID == targetConfigID then
             return true
         end
@@ -430,7 +430,7 @@ function action_ENTER_REGION_Over(context, evt)
 
     -- 第一次到达终点判定
     if ScriptLib.GetSceneMultiStagePlayUidValue(context,defs.MainGroupID, 1, Enum.TimeEnterRegion, context.uid) == 0 then
-        timeValue = ScriptLib.GetServerTime(context) - ScriptLib.GetGroupTempValue(context, "GameStartTime",{})
+        local timeValue = ScriptLib.GetServerTime(context) - ScriptLib.GetGroupTempValue(context, "GameStartTime",{})
         ScriptLib.SetSceneMultiStagePlayUidValue(context,defs.MainGroupID,1,Enum.TimeEnterRegion,context.uid, timeValue)
 
         -- 处理玩家抵达终点加分
@@ -439,8 +439,8 @@ function action_ENTER_REGION_Over(context, evt)
     end
 
     -- 处理是否提前结束游戏
-    UidList = ScriptLib.GetSceneUidList(context)
-    entityCount = 0
+    local UidList = ScriptLib.GetSceneUidList(context)
+    local entityCount = 0
     for i,v in ipairs(UidList) do
         if ScriptLib.GetSceneMultiStagePlayUidValue(context,defs.MainGroupID, 1, Enum.TimeEnterRegion, v) > 0 then
             entityCount = entityCount + 1
@@ -494,7 +494,7 @@ end
 
 function ActionAddEnergy( context )
     --结算未抵达终点的全部玩家
-    UidList = ScriptLib.GetSceneUidList(context)
+    local UidList = ScriptLib.GetSceneUidList(context)
     for i,v in ipairs(UidList) do
         ScriptLib.SetSceneMultiStagePlayUidValue(context,defs.MainGroupID, 1, "collect_energy_6008", v, 5 * ScriptLib.GetSceneMultiStagePlayUidValue(context,defs.MainGroupID, 1, "get_random_flora", v))
 
@@ -538,9 +538,9 @@ end
 
 function action_GM_Mode(context, evt)
     -- GROUP SETVAR 235800002 GM_CheckConfigIDGadgetState “configID”
-    configID = ScriptLib.GetGroupVariableValue(context, "GM_CheckConfigIDGadgetState")
+    local configID = ScriptLib.GetGroupVariableValue(context, "GM_CheckConfigIDGadgetState")
     if 0 ~= configID then
-        currentGadgetState = ScriptLib.GetGadgetStateByConfigId(context,defs.GroupID,configID)
+        local currentGadgetState = ScriptLib.GetGadgetStateByConfigId(context,defs.GroupID,configID)
         ScriptLib.PrintContextLog(context, "## TD_RecordFloorMemory : ConfigID " .. configID .. " Gadget State Is " .. currentGadgetState)
     end
 

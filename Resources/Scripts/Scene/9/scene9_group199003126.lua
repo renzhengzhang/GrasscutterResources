@@ -16,7 +16,7 @@ defs = {
 
 -- DEFS_MISCS
 --物件池物件gadgetid
-pool_object_gadget_id =
+local pool_object_gadget_id =
 {
     70380225,70380226
 }
@@ -24,7 +24,7 @@ pool_object_gadget_id =
 monster_drop_num =
 {1,1}
 
-elite_drop =
+local elite_drop =
 {
     [126001] = {3,3},
     [126006] = {2,2},
@@ -44,14 +44,14 @@ elite_drop =
 
 
 
-point_id_array =
+local point_id_array =
 {
        from = 1,
        to = 49,
 
 }
 
-fuel = {
+local fuel = {
         --初始燃料数量
         init_fuel = 100,
         --给发动机补充能量时，每秒消耗的燃料数量
@@ -60,7 +60,7 @@ fuel = {
         fuel_ball = 20,
 }
 
-energy = {
+local energy = {
         --初始发动机能量
         init_energy = 100,
         --发动机最大能量
@@ -75,7 +75,7 @@ energy = {
 }
 
 
-part = {
+local part = {
         --初始零件数
         init_part = 100,
         --修补分块时，每秒消耗的零件数
@@ -87,12 +87,12 @@ part = {
 }
 
 
-score = {
+local score = {
     checkpoint = 20,
     monster = 5,
 }
 
-raft =
+local raft =
 {
     engine = 126062,
     part_1 = 126073,
@@ -101,10 +101,10 @@ raft =
     part_4 = 126079
 }
 
-checkpoint =
+local checkpoint =
 {15,28,46,49}
 
-stage =
+local stage =
 {
     [1] = {monster_suites = {2},start_suites = {2}, tag = "Sailing",obstacle = {126120},revive_point = 126237},
     [2] = {monster_suites = {3},start_suites = {3}, tag = "KillMonster", obstacle = {126120},revive_point = 126238},

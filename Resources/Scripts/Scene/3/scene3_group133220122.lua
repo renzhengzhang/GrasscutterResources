@@ -170,7 +170,7 @@ end
 
 -- 触发条件
 function condition_EVENT_USE_WIDGET_TOY_FOX_CAMERA_122012(context, evt)
-	 configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
+	 local configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
 	if configId==122001 then
 	return true
 	end
@@ -196,7 +196,7 @@ end
 
 -- 触发条件
 function condition_EVENT_USE_WIDGET_TOY_FOX_CAMERA_122013(context, evt)
-	 configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
+	 local configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
 	if configId==122002 then
 	return true
 	end
@@ -222,7 +222,7 @@ end
 
 -- 触发条件
 function condition_EVENT_USE_WIDGET_TOY_FOX_CAMERA_122014(context, evt)
-	 configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
+	 local configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
 	if configId==122003 then
 	return true
 	end
@@ -259,7 +259,7 @@ end
 
 -- 触发条件
 function condition_EVENT_USE_WIDGET_TOY_FOX_CAMERA_122025(context, evt)
-	 configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
+	 local configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
 	if configId==122004 then
 	return true
 	end
@@ -279,7 +279,7 @@ end
 
 -- 触发条件
 function condition_EVENT_USE_WIDGET_TOY_FOX_CAMERA_122026(context, evt)
-	 configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
+	 local configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
 	if configId==122005 then
 	return true
 	end
@@ -299,7 +299,7 @@ end
 
 -- 触发条件
 function condition_EVENT_USE_WIDGET_TOY_FOX_CAMERA_122028(context, evt)
-	 configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
+	 local configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
 	if configId==122010 then
 	return true
 	end
@@ -319,7 +319,7 @@ end
 
 -- 触发条件
 function condition_EVENT_USE_WIDGET_TOY_FOX_CAMERA_122029(context, evt)
-	 configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
+	 local configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
 	if configId==122011 then
 	return true
 	end
@@ -339,7 +339,7 @@ end
 
 -- 触发条件
 function condition_EVENT_USE_WIDGET_TOY_FOX_CAMERA_122030(context, evt)
-	 configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
+	 local configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
 	if configId==122024 then
 	return true
 	end
@@ -418,7 +418,7 @@ end
 
 -- 触发条件
 function condition_EVENT_USE_WIDGET_TOY_FOX_CAMERA_122034(context, evt)
-	 configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
+	 local configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
 	if configId==122027 then
 	return true
 	end

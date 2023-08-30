@@ -3,16 +3,16 @@
 ||	owner: 		luyao.huang
 ||	description:	2.8社交活动-用于社交玩法group的性能优化
 ||	LogName:	SocialActivity_Optimization
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 
-optimize_Tri={
+local optimize_Tri={
 	{config_id = 13000001, name = "enter_region_optimization", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region_optimization", forbid_guest = false,trigger_count = 0 },
 	{config_id = 13000002, name = "leave_region_optimization", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_region_optimization", forbid_guest = false,trigger_count = 0 },
 	{config_id = 13000003, name = "group_will_unload_optimization", event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload_optimization",trigger_count = 0 },
     {config_id = 13000004, name = "gallery_cannot_start_after_countdown_optimization", event = EventType.EVENT_GALLERY_CANNOT_START_AFTER_COUNTDOWN, source = "", condition = "", action = "action_gallery_cannot_start_after_countdown_optimization",trigger_count = 0 },
-
+	
 }
 
 
@@ -81,7 +81,7 @@ end
 --恢复所有玩家
 function LF_Stop_Optimization_All(context)
     if ScriptLib.GetGroupVariableValue(context,"play_start_fails") ~= 1 then
-        uid_list = ScriptLib.GetSceneUidList(context)
+        local uid_list = ScriptLib.GetSceneUidList(context)
         for i = 1, #uid_list do
             ScriptLib.SetPlayerGroupVisionType(context, {uid_list[i]}, {1})
             ScriptLib.RevertPlayerRegionVision(context, uid_list[i])

@@ -10,12 +10,12 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {8006,8009}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local Controllers = {}
+local EnvControlGadgets = {8006,8009}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -39,7 +39,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -62,7 +62,7 @@ end
 
 function PrintLog(context,str)
 
-	log = "["..defs.group_ID.."] : "..str
+	local log = "["..defs.group_ID.."] : "..str
 	ScriptLib.PrintContextLog(context,log)
 end
 
@@ -178,8 +178,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_8005(context, evt)
-				blocker = 8001
-				state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, blocker)
+				local blocker = 8001
+				local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, blocker)
 
 				GadgetStateSwitcher(context,defs.group_ID,8002,{0,201})
 
@@ -227,7 +227,7 @@ function action_EVENT_GADGET_STATE_CHANGE_8007(context, evt)
 					PrintLog(context,"Controller("..evt.param2..") State = "..evt.param1)
 
 
-					blockerstate = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, 8001)
+					local blockerstate = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, 8001)
 					if blockerstate ~= 201 then
 						ScriptLib.ShowReminder(context, 50050101)
 						return -1
@@ -246,7 +246,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_8011(context, evt)
-			isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155002001)
+			local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155002001)
 
 			if isactive == 1 then
 				if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then

@@ -14,7 +14,7 @@ defs = {
  operator_3 = 21006,
 }
 --每个转子的Decal顺序，以State0为正方向，顺时针顺序
-pillar_decals = {
+local pillar_decals = {
  [21003] = {"E","F","F"}, --底层转子的Decal顺序
  [21002] = {"C","D","C"},--中层转子的Decal顺序
  [21001] = {"A","B","A"},--上层子的Decal顺序

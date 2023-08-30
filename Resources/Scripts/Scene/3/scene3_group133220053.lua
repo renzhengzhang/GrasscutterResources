@@ -383,7 +383,7 @@ function action_EVENT_SELECT_OPTION_53027(context, evt)
 	end
 
 	-- 挑战开启将'ElectricCorePlayHasStarted'改为1
-	challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
+	local challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 1, {group_id = grp_id})
 	    end
@@ -401,7 +401,7 @@ end
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_53028(context, evt)
 	-- 所有物件的List
-	gadget_table = {
+	local gadget_table = {
 	    53033,
 	    53034,
 	    53035,
@@ -453,7 +453,7 @@ function action_EVENT_CHALLENGE_SUCCESS_53029(context, evt)
 	end
 
 	-- 挑战结束将'ElectricCorePlayHasStarted'改为0
-	challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
+	local challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 0, {group_id = grp_id})
 	    end
@@ -479,7 +479,7 @@ function action_EVENT_CHALLENGE_FAIL_53030(context, evt)
 	end
 
 	-- 挑战结束将'ElectricCorePlayHasStarted'改为0
-	challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
+	local challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 0, {group_id = grp_id})
 	    end
@@ -507,7 +507,7 @@ end
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_53039(context, evt)
 	-- 所有怪物的List
-	monster_table = {
+	local monster_table = {
 	    53046,
 	    53047,
 	    53048,

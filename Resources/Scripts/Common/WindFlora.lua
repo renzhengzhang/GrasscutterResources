@@ -1,4 +1,4 @@
-WindFloraPlay ={
+local WindFloraPlay ={
 
 [1] = {
 	Uid = 0,
@@ -22,7 +22,7 @@ WindFloraPlay ={
 
 }
 
-SumScore = 0
+local SumScore = 0
 
 -- defs = {
 -- 	area_flower_suites = 2,
@@ -34,7 +34,7 @@ SumScore = 0
 -- 	sequence_shoot_time_axis = {1,2,3,4,5,6,7,8,9,10}
 -- }
 
-Tri = {
+local Tri = {
 	{name = "time_axis_pass", config_id = 840001, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0},
 	{name = "gallery_stop", config_id = 840002, event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_gallery_stop", trigger_count = 0}
 }
@@ -62,10 +62,10 @@ function action_time_axis_pass(context, evt)
 	elseif evt.source_name == "static_sequence_flower" then
 		--按照点射序列依次发射
 		ScriptLib.PrintContextLog(context, "@@ Require_WARNING : static_sequence_flower_Index "..evt.param1.."  >>> Ready")
-		curren_id = evt.param1
-		sum = ScriptLib.GetGroupVariableValue(context, "seq_sum")
-		seq_suites = ScriptLib.GetGroupVariableValue(context, "seq_suites")
-		suites_index = defs.static_flower_suites[seq_suites]
+		local curren_id = evt.param1
+		local sum = ScriptLib.GetGroupVariableValue(context, "seq_sum")
+		local seq_suites = ScriptLib.GetGroupVariableValue(context, "seq_suites")
+		local suites_index = defs.static_flower_suites[seq_suites]
 		if curren_id <= sum then
 		        ScriptLib.SetGroupGadgetStateByConfigId(context, 0, suites[suites_index].gadgets[curren_id], GadgetState.GearStart)
 		        ScriptLib.PrintContextLog(context, "@@ Require_WARNING : Shoot_Static_Flower_Index >>> "..curren_id)
@@ -132,7 +132,7 @@ end
 
 function GalleryWinBonus( context )
 
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	for i,v in ipairs(UidList) do
 
@@ -153,7 +153,7 @@ end
 
 function GalleryLosePunish( context )
 
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	for i,v in ipairs(UidList) do
 
@@ -196,8 +196,8 @@ end
 function LF_Area_Flower(context)
 	--随机发射范围花
 	math.randomseed(ScriptLib.GetServerTime(context))
-	WindFloraCreator = suites[defs.area_flower_suites].gadgets
-	randomIdx = math.random(#WindFloraCreator)
+	local WindFloraCreator = suites[defs.area_flower_suites].gadgets
+	local randomIdx = math.random(#WindFloraCreator)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 0, WindFloraCreator[randomIdx], GadgetState.GearStart)
 	ScriptLib.PrintContextLog(context, "@@ Require_WARNING : Shoot_Area_Flower >>> "..randomIdx)
 
@@ -207,11 +207,11 @@ end
 function LF_Static_Flower(context, stage)
 	--固定路径发射list准备
 	ScriptLib.SetGroupVariableValue(context, "seq_suites", stage)
-	suites_index = defs.static_flower_suites[stage]
+	local suites_index = defs.static_flower_suites[stage]
 	ScriptLib.PrintContextLog(context, "@@ Require_WARNING : suites_index >>>"..suites_index)
 	ScriptLib.AddExtraGroupSuite(context, defs.flower_group_id, suites_index)
-	StaticList = suites[suites_index].gadgets
-	sum = 0
+	local StaticList = suites[suites_index].gadgets
+	local sum = 0
 	for i,v in ipairs(StaticList) do
 		sum = sum + 1
 	end

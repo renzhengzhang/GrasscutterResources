@@ -15,13 +15,13 @@ defs ={
         ability_region = 1142,
     }
 
-windball_list = {
+local windball_list = {
  [1019] = 2,
  [1057] = 4,
  [1076] = 3,
 }
 
-operator_list = {
+local operator_list = {
         [1002] = {1007},
         [1009] = {1032,1038},
         [1041] = {1031,1040,1043,1104},
@@ -445,8 +445,8 @@ function action_EVENT_ANY_MONSTER_DIE_1036(context, evt)
 		end
 
 	-- 触发镜头注目，注目位置为坐标{x=-507.3787, y=73.40715, z=-395.5232}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-507.3787, y=73.40715, z=-395.5232}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-507.3787, y=73.40715, z=-395.5232}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -504,8 +504,8 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_1105(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-493.7006，79.10858，-392.2777），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-493.7006, y=79.10858, z=-392.2777}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-493.7006, y=79.10858, z=-392.2777}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -775,8 +775,8 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1138(context, evt)
-	list = {ScriptLib.GetSceneUidList(context),}
-	count = 0
+	local list = {ScriptLib.GetSceneUidList(context),}
+	local count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
@@ -805,8 +805,8 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1139(context, evt)
-	list = {ScriptLib.GetSceneUidList(context),}
-	count = 0
+	local list = {ScriptLib.GetSceneUidList(context),}
+	local count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
@@ -835,8 +835,8 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1140(context, evt)
-	list = {ScriptLib.GetSceneUidList(context),}
-	count = 0
+	local list = {ScriptLib.GetSceneUidList(context),}
+	local count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end

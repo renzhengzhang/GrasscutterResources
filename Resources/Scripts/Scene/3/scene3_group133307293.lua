@@ -13,7 +13,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-region_config =
+local region_config =
 {
     alert_by_tick_normal = {10,15},
     alert_by_tick_sandstorm = {60,100},
@@ -21,7 +21,7 @@ region_config =
 
 
 
-sandworm_point_array =
+local sandworm_point_array =
 {
     point_array = 330700006, max_point = 9
 }

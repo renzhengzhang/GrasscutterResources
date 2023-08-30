@@ -276,8 +276,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_596017(context, evt)
-	c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
-	c_num = c_num_1 +1
+	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
+	local c_num = c_num_1 +1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "num_1", c_num) then
 	  return -1
 	end
@@ -301,8 +301,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_596018(context, evt)
-	c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
-	c_num = c_num_1 +1
+	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
+	local c_num = c_num_1 +1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "num_1", c_num) then
 	  return -1
 	end
@@ -326,8 +326,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_596019(context, evt)
-	c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
-	c_num = c_num_1 +1
+	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
+	local c_num = c_num_1 +1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "num_1", c_num) then
 	  return -1
 	end
@@ -351,8 +351,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_596020(context, evt)
-	c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
-	c_num = c_num_1 +1
+	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
+	local c_num = c_num_1 +1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "num_1", c_num) then
 	  return -1
 	end
@@ -376,8 +376,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_596021(context, evt)
-	c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
-	c_num = c_num_1 +1
+	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
+	local c_num = c_num_1 +1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "num_1", c_num) then
 	  return -1
 	end
@@ -401,8 +401,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_596022(context, evt)
-	c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
-	c_num = c_num_1 +1
+	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
+	local c_num = c_num_1 +1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "num_1", c_num) then
 	  return -1
 	end
@@ -426,8 +426,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_596023(context, evt)
-	c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
-	c_num = c_num_1 +1
+	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "num_1")
+	local c_num = c_num_1 +1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "num_1", c_num) then
 	  return -1
 	end

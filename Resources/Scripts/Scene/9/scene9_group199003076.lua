@@ -123,7 +123,7 @@ function action_EVENT_VARIABLE_CHANGE_76002(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 76004, 900300039, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -157,7 +157,7 @@ function action_EVENT_TIME_AXIS_PASS_76009(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 76004, 900300039, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -193,11 +193,11 @@ function action_EVENT_PLATFORM_REACH_POINT_76010(context, evt)
 
 	if ScriptLib.GetGroupVariableValue(context,"destroy") == 0 then
 
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	 ScriptLib.SetPlatformPointArray(context, 76004, 900300039, {2}, tempParam)
 	else
 
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	ScriptLib.SetPlatformPointArray(context, 76004, 900300039, {2,3}, tempParam)
 
 
@@ -224,7 +224,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_76014(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-735,y=101,z=420}
+	local pos = {x=-735,y=101,z=420}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1111350, pos, 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
@@ -252,7 +252,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_76015(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-735,y=101,z=420}
+	local pos = {x=-735,y=101,z=420}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1111351, pos, 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
@@ -303,7 +303,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_76017(context, evt)
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	ScriptLib.SetPlatformPointArray(context, 76004, 900300039, {2,3}, tempParam)
 
 	ScriptLib.SetGadgetStateByConfigId(context, 76001, GadgetState.Default)

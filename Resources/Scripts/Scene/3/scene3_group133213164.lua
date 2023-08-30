@@ -202,7 +202,7 @@ end
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_164016(context, evt)
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-	randomTemp = math.random(1, 3)
+	local randomTemp = math.random(1, 3)
 
 	if randomTemp == 1 then
 	        ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
@@ -233,7 +233,7 @@ end
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_164017(context, evt)
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-	randomTemp = math.random(1, 3)
+	local randomTemp = math.random(1, 3)
 
 	if randomTemp == 1 then
 	        ScriptLib.AddExtraGroupSuite(context, defs.group_id, 3)
@@ -264,7 +264,7 @@ end
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_164018(context, evt)
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-	randomTemp = math.random(1, 3)
+	local randomTemp = math.random(1, 3)
 	if randomTemp == 1 then
 	        ScriptLib.AddExtraGroupSuite(context, defs.group_id, 4)
 	        ScriptLib.AttachChildChallenge(context, 100, 1004, 69, {1,103,1}, {},{success=100,fail=100})

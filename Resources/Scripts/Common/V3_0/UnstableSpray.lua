@@ -52,7 +52,7 @@ defs =
 }
 --]]
 
-extraTriggers =
+local extraTriggers =
 {
 	{ config_id = 50000001, name = "ENTER_REGION", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_ENTER_REGION", trigger_count = 0},
     { config_id = 50000002, name = "START_CHALLENGE", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_START_CHALLENGE", trigger_count = 0 },
@@ -65,7 +65,7 @@ extraTriggers =
 
 }
 
-extraVariables =
+local extraVariables =
 {
     -- 记录目前是第几个三十秒
     { config_id = 5000101, name = "stage", value = 0, no_refresh = false },
@@ -82,26 +82,26 @@ extraVariables =
 }
 
 
-worktopField =
+local worktopField =
 {
 	configId = 10460099,
 	gadgetId = 70360001,
 	optionId = 429,
 }
 
--- transParam =
+-- local transParam =
 -- {
 --     pos = {x = 0, y = 0, z = 0},
 --     rot = {x = 0, y = 0, z = 0},
 --     radius = 1,
 -- }
 
--- offset = {x = 0, y = 0, z = 0}
+-- local offset = {x = 0, y = 0, z = 0}
 
--- worktop = { config_id = worktopField.configId, gadget_id = worktopField.gadgetId, pos = gadgets[defs.startId].pos, rot = gadgets[defs.startId].rot, level = 1, area_id = gadgets[defs.startId].area_id, worktop_config = { init_options = { worktopField.optionId } } }
+-- local worktop = { config_id = worktopField.configId, gadget_id = worktopField.gadgetId, pos = gadgets[defs.startId].pos, rot = gadgets[defs.startId].rot, level = 1, area_id = gadgets[defs.startId].area_id, worktop_config = { init_options = { worktopField.optionId } } }
 
 --================================================================
--- Functions
+-- Local Functions
 --================================================================
 function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
 
@@ -133,7 +133,7 @@ end
 
 function LF_PrintList(context, name, list)
 
-    emptyStr = name
+    local emptyStr = name
     for k, v in pairs(list) do
         emptyStr = emptyStr..", "..v
     end
@@ -151,7 +151,7 @@ function LF_LevelStart(context)
 
     -- 保底把所有sgv的group var都设为0
     for i = 1, 4 do
-        varName = "sgv"..i
+        local varName = "sgv"..i
         ScriptLib.SetGroupVariableValue(context, varName, 0)
     end
 
@@ -162,8 +162,8 @@ function LF_CheckAndRecordBuff(context, buffIdx)
 
     -- 检查这个buff idx是不是已经被记录在group var里了
     for i = 1, 4 do
-        varName = "sgv"..i
-        varValue = ScriptLib.GetGroupVariableValue(context, varName)
+        local varName = "sgv"..i
+        local varValue = ScriptLib.GetGroupVariableValue(context, varName)
         ScriptLib.PrintContextLog(context, "## [UnstableSpray] group var "..varName.." = "..varValue )
 
         if varValue == buffIdx then
@@ -175,7 +175,7 @@ function LF_CheckAndRecordBuff(context, buffIdx)
             -- 还没有被记录过，检查自己是否是0，即还未记录过buff，是则用这个var记录
             ScriptLib.SetGroupVariableValue(context, varName, buffIdx)
 
-            temp = ScriptLib.GetGroupVariableValue(context, varName)
+            local temp = ScriptLib.GetGroupVariableValue(context, varName)
             ScriptLib.PrintContextLog(context, "## [UnstableSpray] group varName "..varName.." is unused and set to "..temp )
 
             return 0
@@ -204,7 +204,7 @@ end
 function action_START_CHALLENGE(context, evt)
     ScriptLib.PrintContextLog(context, "## [UnstableSpray] worktop "..evt.param1..", option = "..evt.param2)
 
-    uid = ScriptLib.GetSceneOwnerUid(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
 
     if evt.param2 == worktopField.optionId then
         -- 操作台物件转换状态，选项失效
@@ -247,11 +247,11 @@ end
 function action_STAGE_COMPLETE(context, evt)
     ScriptLib.PrintContextLog(context, "## [UnstableSpray] time axis "..evt.source_name..", stage "..evt.param1.. " is finished")
 
-    uid = ScriptLib.GetSceneOwnerUid(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
 
     if evt.source_name == "challengeTimer" then
         -- 更新阶段
-        temp = evt.param1 + 1
+        local temp = evt.param1 + 1
         ScriptLib.SetGroupVariableValue(context, "stage", temp)
         ScriptLib.PrintContextLog(context, "## [UnstableSpray] group variable stage is set to "..temp)
 
@@ -284,14 +284,14 @@ function action_STAGE_COMPLETE(context, evt)
 end
 
 function action_MONSTER_DIE(context, evt)
-    monsterId = ScriptLib.GetMonsterIdByEntityId(context, evt.source_eid)
+    local monsterId = ScriptLib.GetMonsterIdByEntityId(context, evt.source_eid)
     ScriptLib.UpdatePlayerGalleryScore(context, defs.galleryId, {["monster_id"] = monsterId})
 
     ScriptLib.PrintContextLog(context, "## [UnstableSpray] monster id = "..monsterId..", config id = "..evt.param1..
         ", entity id =  "..evt.source_eid.." is dead")
 
-    firstTideClose = ScriptLib.GetGroupVariableValue(context, "firstTideClose")
-    remainMax = 0
+    local firstTideClose = ScriptLib.GetGroupVariableValue(context, "firstTideClose")
+    local remainMax = 0
     if defs.remainMax ~= nil then
         remainMax = defs.remainMax
     end
@@ -316,7 +316,7 @@ end
 function action_GALLERY_STOP(context, evt)
     ScriptLib.PrintContextLog(context, "## [UnstableSpray] gallery = "..evt.param1.." finishes, fail = "..evt.param2)
 
-    uid = ScriptLib.GetSceneOwnerUid(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
 
     -- gallery结束，停止刷怪
     ScriptLib.ClearPoolMonsterTide(context, base_info.group_id, 1)
@@ -332,14 +332,14 @@ function action_GALLERY_STOP(context, evt)
 
     -- 所有buff sgv保底归零
     for i = 1, 4 do
-       buffIdx = ScriptLib.GetGroupVariableValue(context, "sgv"..i)
+       local buffIdx = ScriptLib.GetGroupVariableValue(context, "sgv"..i)
 
-       sgv = ScriptLib.InstableSprayGetSGVByBuffId(context, buffIdx)
+       local sgv = ScriptLib.InstableSprayGetSGVByBuffId(context, buffIdx)
        if sgv ~= "" then
             ScriptLib.EndTimeAxis(context, sgv)
 
             ScriptLib.SetTeamServerGlobalValue(context, uid, sgv, 0)
-            v = ScriptLib.GetTeamServerGlobalValue(context, uid, sgv)
+            local v = ScriptLib.GetTeamServerGlobalValue(context, uid, sgv)
             ScriptLib.PrintContextLog(context, "## [UnstableSpray] level ends and "..sgv.." = "..v)
        end
 
@@ -388,23 +388,23 @@ end
 function SLC_TriggerAbility(context, evt)
     ScriptLib.PrintContextLog(context, "## [UnstableSpray] SLC_TriggerAbility is called")
 
-    uid = ScriptLib.GetSceneOwnerUid(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
 
 
-    stage = ScriptLib.GetGroupVariableValue(context, "stage")
+    local stage = ScriptLib.GetGroupVariableValue(context, "stage")
 
     -- 本次随机出可用的buff index list，idx为活动表中idx
-    curBuffIdx = ScriptLib.InstableSprayRandomBuffs(context, defs.galleryId, stage)
+    local curBuffIdx = ScriptLib.InstableSprayRandomBuffs(context, defs.galleryId, stage)
     LF_PrintList(context, "curBuffIdx", curBuffIdx)
 
     for i = 1, #curBuffIdx do
-        sgv = ScriptLib.InstableSprayGetSGVByBuffId(context, curBuffIdx[i])
+        local sgv = ScriptLib.InstableSprayGetSGVByBuffId(context, curBuffIdx[i])
 
         -- 修改team身上sgv为1
         ScriptLib.AddTeamServerGlobalValue(context, uid, sgv, 0)
-        var = ScriptLib.SetTeamServerGlobalValue(context, uid, sgv, 1)
+        local var = ScriptLib.SetTeamServerGlobalValue(context, uid, sgv, 1)
 
-        v = ScriptLib.GetTeamServerGlobalValue(context, uid, sgv)
+        local v = ScriptLib.GetTeamServerGlobalValue(context, uid, sgv)
         ScriptLib.PrintContextLog(context, "## [UnstableSpray] "..sgv.." is set to "..v..", var = "..var)
 
         -- 通知gallery重置buff icon时间轴
@@ -420,9 +420,9 @@ function SLC_TriggerAbility(context, evt)
         -- 更新group var
         LF_CheckAndRecordBuff(context, curBuffIdx[i])
 
-        -- var1 = ScriptLib.SetGroupVariableValue(context, "sgv"..i, curBuffIdx[i])
+        -- local var1 = ScriptLib.SetGroupVariableValue(context, "sgv"..i, curBuffIdx[i])
 
-        -- r = ScriptLib.GetGroupVariableValue(context, "sgv"..i)
+        -- local r = ScriptLib.GetGroupVariableValue(context, "sgv"..i)
         -- ScriptLib.PrintContextLog(context, "## [UnstableSpray] group variable sgv"..i.." is set to "..r..", var = "..var1)
 
     end

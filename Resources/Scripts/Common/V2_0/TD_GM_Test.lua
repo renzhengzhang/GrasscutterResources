@@ -1,5 +1,5 @@
-gadget_list = {{key="water",id=70350281},{key="fire",id=70350282},{key="ice",id=70350283},{key="wind",id=70350284},{key="electric",id=70350285},{key="none",id=70350286}}
-var = {
+local gadget_list = {{key="water",id=70350281},{key="fire",id=70350282},{key="ice",id=70350283},{key="wind",id=70350284},{key="electric",id=70350285},{key="none",id=70350286}}
+local var = {
 	["common"] = {"SGV_AttackDamageLevel","SGV_ElementMasteryLevel","SGV_AttackSpeedLevel","SGV_RangeLevel"},
 	["water"] = {"SGV_Bubble","SGV_WaterImpulse","SGV_Evaporate","SGV_Wet","SGV_TargetAOE","SGV_Dot"},
 	["fire"] = {"SGV_Aoe","SGV_Enbreak","SGV_FireImpulse","SGV_Melt","SGV_Defensedown","SGV_FireArea","SGV_Missile"},
@@ -8,7 +8,7 @@ var = {
 	["electric"] = {"SGV_ExtraTargets","SGV_Confine","SGV_ElectricImpulse","SGV_UpgradeElectricRecation","SGV_FurySwipe","SGV_ExtraThunder","SGV_UpgradeNormalAttack"},
 	["none"] = {"SGV_HitExplosion","SGV_ReducePhysicalResistance","SGV_DamageByTime","SGV_WantedSign","SGV_EnergyBallAttack"},
 }
-tri = {
+local tri = {
 	[1] = {config_id=10000, name="group_load", event=EventType.EVENT_GROUP_LOAD, source="", condition="", action="action_group_load", trigger_count=0},
 	[2] = {config_id=10001, name="group_refresh", event=EventType.EVENT_GROUP_REFRESH, source="", condition="", action="action_group_load", trigger_count=0},
 	[3] = {config_id=10002, name="variable_change", event=EventType.EVENT_VARIABLE_CHANGE, source="", condition="", action="action_variable_change", trigger_count=0}
@@ -19,7 +19,7 @@ function Initialize()
 		if i > #gadget_list then
 			break
 		end
-
+		
 		if points[i] == nil then
 			break
 		end
@@ -31,7 +31,7 @@ function Initialize()
 
 	for k,v in pairs(var) do
 		for m,n in ipairs(v) do
-			_var = { name = n, value = 0, no_refresh = true }
+			local _var = { name = n, value = 0, no_refresh = true }
 			table.insert(variables, _var)
 		end
 	end
@@ -47,7 +47,7 @@ end
 function action_group_load(context, evt)
 	ScriptLib.PrintLog("--------------- v4 -----------------")
 	for i,v in ipairs(gadget_list) do
-		SGV_table = {}
+		local SGV_table = {}
 		for p,q in ipairs(var.common) do
 			SGV_table[q] = 0
 		end
@@ -70,7 +70,7 @@ function action_group_load(context, evt)
 end
 
 function action_variable_change(context, evt)
-	--value = ScriptLib.GetGroupVariableValue(context, evt.source_name)
+	--local value = ScriptLib.GetGroupVariableValue(context, evt.source_name)
 	for k,v in pairs(var) do
 		for p,q in ipairs(v) do
 			if q == evt.source_name then

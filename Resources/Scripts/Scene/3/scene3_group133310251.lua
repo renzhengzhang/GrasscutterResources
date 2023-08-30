@@ -5,10 +5,10 @@ base_info = {
 
 -- DEFS_MISCS
 --第一次交互的option，之后切为2
-optionID = {440}
+local optionID = {440}
 
 --第二次交互的option，之后切为1，一次性版本直接删除此项
---optionID_2 = 444
+--local optionID_2 = 444
 
 --================================================================
 --

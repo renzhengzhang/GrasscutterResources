@@ -143,8 +143,8 @@ function action_EVENT_GROUP_REFRESH_406002(context, evt)
 	end
 	end
 	--正常配置复数个
-	idx=ScriptLib.GetGroupVariableValue(context, "currentPointIndex")
-	newIdx= -1
+	local idx=ScriptLib.GetGroupVariableValue(context, "currentPointIndex")
+	local newIdx= -1
 	math.randomseed(ScriptLib.GetServerTime(context))
 		newIdx=math.random(#defs.bornPoints-1)
 		if newIdx>=idx then
@@ -155,7 +155,7 @@ function action_EVENT_GROUP_REFRESH_406002(context, evt)
 	for i=1,#gadgets do
 	if gadgets[i].config_id == defs.bornPoints[idx].gadget_id then
 	ScriptLib.CreateMonsterByConfigIdByPos(context, defs.bornPoints[idx].monster_id, gadgets[i].pos, gadgets[i].rot)
-	variablePosition=defs.bornPoints[idx].gadget_id
+	local variablePosition=defs.bornPoints[idx].gadget_id
 	ScriptLib.SetGroupVariableValue(context, "currentHiliPosition", variablePosition)
 	end
 	end
@@ -165,8 +165,8 @@ end
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_406030(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "isDead", 1)
-	lastRefreshTime=ScriptLib.GetGroupVariableValue(context, "lastRefreshTime")
-	currentTime=ScriptLib.GetServerTime(context)
+	local lastRefreshTime=ScriptLib.GetGroupVariableValue(context, "lastRefreshTime")
+	local currentTime=ScriptLib.GetServerTime(context)
 	if (currentTime-lastRefreshTime)>=defs.groupRefreshTime then
 	ScriptLib.RefreshGroup(context, { group_id = 133002406, suite = 2, refresh_level_revise = 0, exclude_prev =false })
 	end
@@ -177,7 +177,7 @@ end
 -- 触发操作
 function action_EVENT_GROUP_LOAD_406032(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isDead")==0 then
-	idx=ScriptLib.GetGroupVariableValue(context, "currentPointIndex")
+	local idx=ScriptLib.GetGroupVariableValue(context, "currentPointIndex")
 	for i=1,#gadgets do
 		if gadgets[i].config_id == defs.bornPoints[idx].gadget_id then
 		ScriptLib.CreateMonsterByConfigIdByPos(context, defs.bornPoints[idx].monster_id, gadgets[i].pos, gadgets[i].rot)

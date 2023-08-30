@@ -3,7 +3,7 @@
 
 ]]--
 
-matrix =
+local matrix = 
 {
 {defs.gadget_11,defs.gadget_12,defs.gadget_13,defs.gadget_14,defs.gadget_15},
 
@@ -15,7 +15,7 @@ matrix =
 
 {defs.gadget_51,defs.gadget_52,defs.gadget_53,defs.gadget_54,defs.gadget_55}}
 
-extraTriggers={
+local extraTriggers={
 	{config_id = 8000001, name = "GadgetStateChange", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_Gadget_State_Change", trigger_count = 0 },
 	{config_id = 8000002,name = "LEAVE_REGION", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_EVENT_LEAVE_REGION", forbid_guest = false, trigger_count = 0 },
 	--{ config_id = 8000003, name = "GADGET_CREATE", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0 },
@@ -50,14 +50,14 @@ function FaildProcess(context,str)
 	ScriptLib.PrintContextLog(context,"Faild Process Start : "..str)
 	ScriptLib.SetGroupVariableValue(context, "challenge_state", 3)
 
-	for k,v in pairs(matrix) do
+	for k,v in pairs(matrix) do 
 		for ik,iv in pairs(v) do
-			tempGadgeState = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, iv)
+			local tempGadgeState = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, iv) 
 			--除了禁用格和起始格，全部格子下降
-			if tempGadgeState ~= 903 then
-				if iv ~= defs.gadget_starter then
+			if tempGadgeState ~= 903 then 
+				if iv ~= defs.gadget_starter then 
 					ScriptLib.SetGadgetStateByConfigId(context, iv, 102)
-				else
+				else	
 					ScriptLib.SetGadgetStateByConfigId(context, iv, 201)
 				end
 			end
@@ -90,7 +90,7 @@ function action_Gadget_State_Change(context, evt)
 	end
 
 	--如果挑战状态是未开始（challenge_state=0），且被交互的是起始格，则开始挑战
-	if ScriptLib.GetGroupVariableValue(context, "challenge_state")==0 and
+	if ScriptLib.GetGroupVariableValue(context, "challenge_state")==0 and 
 		evt.param1==202 and evt.param2== defs.gadget_starter then
 		ScriptLib.PrintContextLog(context,"StartChallenge！ ")
 		ScriptLib.SetGroupVariableValue(context, "challenge_state", 1)
@@ -103,7 +103,7 @@ function action_Gadget_State_Change(context, evt)
 		end
 		--然后除了禁用格、起始格、终点格，全部格子升起
 		for i=1,#matrix do
-			for j=1,#matrix[i] do
+			for j=1,#matrix[i] do				
 				if ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, matrix[i][j]) ~= 903 then
 					if matrix[i][j] ~= defs.gadget_starter and matrix[i][j] ~= defs.gadget_ender then
 						ScriptLib.SetGadgetStateByConfigId(context, matrix[i][j], 101)
@@ -123,8 +123,8 @@ function action_Gadget_State_Change(context, evt)
 			CheckTwoGadgetIsAdjacent(context,ScriptLib.GetGroupVariableValue(context, "current_stone"),evt.param2)
 		end
 		if evt.param1==201 and evt.param3==202 then
-			current_idx=ScriptLib.GetGroupVariableValue(context, "current_stone")
-			config_one=matrix[math.floor(current_idx/10)][current_idx%10]
+			local current_idx=ScriptLib.GetGroupVariableValue(context, "current_stone")
+			local config_one=matrix[math.floor(current_idx/10)][current_idx%10]
 			if config_one==evt.param2 then
 				ScriptLib.SetGadgetStateByConfigId(context, evt.param2, 202)
 			else
@@ -139,23 +139,23 @@ end
 
 function action_EVENT_LEAVE_REGION(context, evt)
 	--解谜成功、解谜未开始 不算出圈
-	if evt.param1~=defs.trigger_boarder or
-		ScriptLib.GetGroupVariableValue(context, "successed")==1 or
+	if evt.param1~=defs.trigger_boarder or 
+		ScriptLib.GetGroupVariableValue(context, "successed")==1 or 
 		ScriptLib.GetGroupVariableValue(context, "challenge_state")==0 then
-		ScriptLib.PrintContextLog(context, "Safe LEAVE REGION")
+		ScriptLib.PrintContextLog(context, "Safe LEAVE REGION")	
 		return 0
-	else
+	else	
 		FaildProcess(context,"出圈")
 	end
 	return 0
 end
 --检测玩法是否成功
 function CheckIsSuccess(context)
-	score=0
-	state=nil
+	local score=0
+	local state=nil
 	for i=1,#matrix do
 		for j=1,#matrix[i] do
-			state=ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID,matrix[i][j])
+			state=ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID,matrix[i][j]) 
 			if state==202 or state==903 then
 				score=score+1
 			end
@@ -177,8 +177,8 @@ function CheckIsSuccess(context)
 end
 --检测两个方块是否是相邻方块
 function CheckTwoGadgetIsAdjacent(context,current_idx,config_two)
-	x=math.floor(current_idx/10)
-	y=current_idx%10
+	local x=math.floor(current_idx/10)
+	local y=current_idx%10
 	if matrix[x][y]==config_two then
 		return 0
 	end

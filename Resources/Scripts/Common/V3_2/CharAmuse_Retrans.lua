@@ -16,14 +16,14 @@ defs = {
 
 ]]
 
-retrans_cfg = {
+local retrans_cfg = {
 	--主控GroupID
 	main_group = 251008007,
 	--检查频率
 	check_interval = 5,
 }
 
-Retrans_Triggers = {
+local Retrans_Triggers = {
 	{ config_id = 8800001, name = "Time_Axis_ReTrans", event = EventType.EVENT_TIME_AXIS_PASS, source = "retranstimer", condition = "", action = "action_Time_Axis_ReTrans", trigger_count = 0}
 }
 
@@ -53,7 +53,7 @@ function EX_StopReTransCheck(context, prev_context)
 end
 
 function action_Time_Axis_ReTrans(context, evt)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		LF_DoReTransCheck(context, v)
 	end
@@ -61,7 +61,7 @@ function action_Time_Axis_ReTrans(context, evt)
 end
 
 function EX_DoReTransCheck(context, prev_context)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		LF_DoReTransCheck(context, v)
 	end

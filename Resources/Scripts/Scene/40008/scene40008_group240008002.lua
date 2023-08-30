@@ -276,8 +276,8 @@ function action_EVENT_SELECT_OPTION_2020(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（353，-18，322），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=353, y=-18, z=322}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=353, y=-18, z=322}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -339,8 +339,8 @@ function action_EVENT_SELECT_OPTION_2021(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（343，-18，322），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=343, y=-18, z=322}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=343, y=-18, z=322}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -402,8 +402,8 @@ function action_EVENT_SELECT_OPTION_2022(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（333，-18，322），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=333, y=-18, z=322}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=333, y=-18, z=322}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

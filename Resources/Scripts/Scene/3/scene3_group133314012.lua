@@ -4,51 +4,51 @@ base_info = {
 }
 
 -- DEFS_MISCS
-I_connectors =
+local I_connectors =
 {
     [1] = 12002,
     [2] = 12004
 }
 
-L_connectors =
+local L_connectors =
 {
 
 }
 
-containers =
+local containers =
 {
     [1] = 12005
 }
 
-lights =
+local lights =
 {
     [1] = 12006,
     [2] = 12007,
     [3] = 12008
 }
 
-streams =
+local streams =
 {
    [containers[1]] = {I_connectors[1],lights[1],I_connectors[2],lights[2],lights[3]}
 }
 
-L_connections =
+local L_connections =
 {
 
 }
 
-base_interval = 1
+local base_interval = 1
 
-special_interval =
+local special_interval =
 {
 }
 
-worktops =
+local worktops =
 {
     [1] = 12011
 }
 
-connector_to_worktop =
+local connector_to_worktop =
 {
     [I_connectors[2]] = worktops[1]
 }
@@ -254,8 +254,8 @@ function action_EVENT_SELECT_OPTION_12015(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标{x=-857.7263, y=-33.19478, z=5052.602}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-857.7263, y=-33.19478, z=5052.602}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-857.7263, y=-33.19478, z=5052.602}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

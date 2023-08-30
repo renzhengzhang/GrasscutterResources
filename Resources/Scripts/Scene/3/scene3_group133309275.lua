@@ -11,9 +11,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-markList = {275001,275002,275003,275006,275007,275008,275009,275010,275011,275012}
+local markList = {275001,275002,275003,275006,275007,275008,275009,275010,275011,275012}
 
-CameraLookSetting = {
+local CameraLookSetting = {
 
     blend_type = 1,
 

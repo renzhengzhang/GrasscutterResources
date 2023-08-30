@@ -88,13 +88,13 @@ defs = {
 
 ]]
 
-cfg =
+local cfg =
 {
 	--岔路旋转State列表
 	turn_queue = {0,201,202,203},
 }
 
-extraTriggers = {
+local extraTriggers = {
 	{ config_id = 8000001, name = "Select_Turn_Option", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_Select_Turn_Option", trigger_count = 0 },
 	{ config_id = 8000002, name = "Select_StartStop_Option", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_Select_StartStop_Option", trigger_count = 0 },
 	{ config_id = 8000003, name = "Enter_Play_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_Enter_Play_Region", trigger_count = 0 },
@@ -133,7 +133,7 @@ function action_Select_Turn_Option(context, evt)
 	if nil == defs.switcher_control[evt.param1] then
 		return 0
 	end
-	turn_queue = cfg.turn_queue
+	local turn_queue = cfg.turn_queue
 	if nil ~= defs.turn_queue then
 		turn_queue = defs.turn_queue
 	end
@@ -141,8 +141,8 @@ function action_Select_Turn_Option(context, evt)
 		return 0
 	end
 	for i,v in ipairs(defs.switcher_control[evt.param1]) do
-		gadget_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, v)
-		state_index = GetIndexInTable(context, gadget_state, turn_queue)
+		local gadget_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, v)
+		local state_index = GetIndexInTable(context, gadget_state, turn_queue)
 		if state_index >= #turn_queue then
 			ScriptLib.SetGadgetStateByConfigId(context, v, turn_queue[1])
 			ScriptLib.PrintContextLog(context,"## [MachineCarrier] action_Select_Turn_Option. config_id@"..v.." to state@".. turn_queue[1])
@@ -238,11 +238,11 @@ function action_Point_Arrival(context, evt)
 
 	--PointIndex更新
 	ScriptLib.ChangeGroupTempValue(context, "point_"..evt.param1, 1, {})
-	cur_way = ScriptLib.GetGroupTempValue(context, "way_"..evt.param1, {})
+	local cur_way = ScriptLib.GetGroupTempValue(context, "way_"..evt.param1, {})
 	if nil == defs.way_info[cur_way] then
 		return 0
 	end
-	length = #defs.way_info[cur_way].point_list
+	local length = #defs.way_info[cur_way].point_list
 
 	ScriptLib.PrintContextLog(context,"## [MachineCarrier] action_Point_Arrival. config_id@"..evt.param1.." cur_way@"..cur_way.." point@"..evt.param3.." check_point@"..defs.way_info[cur_way].point_list[length])
 
@@ -275,7 +275,7 @@ function action_Point_Arrival(context, evt)
 	--是否为 上车点
 	if nil ~= defs.stop_points then
 		if LF_CheckIsInTable(context, evt.param3, defs.stop_points) then
-			region_eid = ScriptLib.GetEntityIdByConfigId(context, defs.station_region)
+			local region_eid = ScriptLib.GetEntityIdByConfigId(context, defs.station_region)
 			if 1 == ScriptLib.GetGroupTempValue(context, "is_toStop", {}) or 1 <= ScriptLib.GetRegionEntityCount(context, { region_eid = region_eid, entity_type = EntityType.AVATAR }) then
 				if 0 == ScriptLib.GetGroupVariableValue(context, "first_station") then
 					ScriptLib.SetGroupVariableValue(context, "first_station", 1)
@@ -304,13 +304,13 @@ end
 --在路径判定点处，设置新点阵
 function LF_HandleChangeDir(context, config_id, cur_way)
 	ScriptLib.PrintContextLog(context,"## [MachineCarrier] LF_HandleChangeDir. config_id"..config_id.." cur_way@"..cur_way)
-	switcher_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, defs.way_info[cur_way].gear_id)
+	local switcher_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, defs.way_info[cur_way].gear_id)
 	if nil == defs.way_info[cur_way].dir[switcher_state] then
 		ScriptLib.PrintContextLog(context,"## [MachineCarrier] LF_HandleChangeDir. Empty switcher_state. gear_id@"..defs.way_info[cur_way].gear_id.." switcher_state@"..switcher_state)
 		return 0
 	end
 
-	new_way = defs.way_info[cur_way].dir[switcher_state]
+	local new_way = defs.way_info[cur_way].dir[switcher_state]
 	ScriptLib.PrintContextLog(context,"## [MachineCarrier] LF_HandleChangeDir. Get new way cur_way@"..cur_way.." switcher_state@"..switcher_state.. " new_way@"..new_way)
 	--前方无路，停车 不隐藏转向按钮
 	if 0 == new_way then
@@ -332,12 +332,12 @@ end
 function LF_IsMoveable(context)
 	for i,v in pairs(defs.carrier_list) do
 		--取得之前停在哪里
-		cur_way = ScriptLib.GetGroupTempValue(context, "way_"..v, {})
+		local cur_way = ScriptLib.GetGroupTempValue(context, "way_"..v, {})
 
 		if 0 < cur_way and nil ~= defs.way_info[cur_way] then
-			switcher_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, defs.way_info[cur_way].gear_id)
+			local switcher_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, defs.way_info[cur_way].gear_id)
 			if nil ~= defs.way_info[cur_way].dir[switcher_state] then
-				new_way = defs.way_info[cur_way].dir[switcher_state]
+				local new_way = defs.way_info[cur_way].dir[switcher_state]
 				if 0 >= new_way then
 					ScriptLib.PrintContextLog(context,"## [MachineCarrier] LF_IsMoveable. Is not movable. config_id@"..v.." cur_way@"..cur_way)
 					return 0
@@ -356,14 +356,14 @@ function LF_TryTurnGadget(context, config_id, point_id)
 end
 
 function LF_TrySpawnCarrier(context)
-	carrier_num = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320026 }})
+	local carrier_num = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320026 }})
 	ScriptLib.PrintContextLog(context,"## [MachineCarrier] LF_TrySpawnCarrier. carrier_num@"..carrier_num.." carrier_list@"..#defs.carrier_list)
 	if 0 > carrier_num then
 		return 0
 	end
 	if #defs.carrier_list > carrier_num then
 		for i,v in ipairs(defs.carrier_list) do
-			ret = ScriptLib.CreateGadget(context, { config_id = v })
+			local ret = ScriptLib.CreateGadget(context, { config_id = v })
 			if 0 == ret then
 				LF_StartMove(context, v)
 				return 0
@@ -379,7 +379,7 @@ function LF_StartMove(context, config_id)
 		return 0
 	end
 	ScriptLib.PrintContextLog(context,"## [MachineCarrier] LF_StartMove. Try start config_id@"..config_id.." point_list@".. table.concat(defs.way_info[1].point_list, ", "))
-	ret = ScriptLib.SetPlatformPointArray(context, config_id, defs.point_array, defs.way_info[1].point_list, { route_type = 0, record_mode = 0 })
+	local ret = ScriptLib.SetPlatformPointArray(context, config_id, defs.point_array, defs.way_info[1].point_list, { route_type = 0, record_mode = 0 })
 	if 0 == ret then
 		ScriptLib.SetGroupTempValue(context, "move_state", 1, {})
 		ScriptLib.SetGroupTempValue(context, "way_"..config_id, 1, {})
@@ -404,17 +404,17 @@ function LF_ResumeMove(context)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, v, "SGV_MachineCarrier_State", 0)
 
 		--取得之前停在哪里
-		cur_way = ScriptLib.GetGroupTempValue(context, "way_"..v, {})
+		local cur_way = ScriptLib.GetGroupTempValue(context, "way_"..v, {})
 		if 0 < cur_way then
 
-			cur_point_index = ScriptLib.GetGroupTempValue(context, "point_"..v, {})
+			local cur_point_index = ScriptLib.GetGroupTempValue(context, "point_"..v, {})
 
 			--是否是在终点停下
 			if #defs.way_info[cur_way].point_list <= cur_point_index then
 				LF_HandleChangeDir(context, v, cur_way)
 			end
 
-			resume_point_list = {}
+			local resume_point_list = {}
 			--设置点阵路径
 			--如果在起点
 			if 0 == cur_point_index then
@@ -450,7 +450,7 @@ function LF_PauseMove(context)
 end
 
 function LF_TryStopMoveAtStation(context, config_id)
-	carrier_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, config_id)
+	local carrier_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, config_id)
 	ScriptLib.PrintContextLog(context,"## [MachineCarrier] LF_TryStopMoveAtStation. carrier_state@"..carrier_state)
 	if 201 == carrier_state then
 		LF_PauseMove(context)
@@ -461,7 +461,7 @@ end
 --物件检测到玩家上车
 function SLC_MachineCarrier_Player_In(context)
 
-	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 
 	--确保整个运输线只能有一个201
 	for k,v in pairs(defs.carrier_list) do
@@ -470,9 +470,9 @@ function SLC_MachineCarrier_Player_In(context)
 		end
 	end
 
-	move_state = ScriptLib.GetGroupTempValue(context, "move_state", {})
-	cur_way = ScriptLib.GetGroupTempValue(context, "way_"..config_id, {})
-	cur_point_index = ScriptLib.GetGroupTempValue(context, "point_"..config_id, {})
+	local move_state = ScriptLib.GetGroupTempValue(context, "move_state", {})
+	local cur_way = ScriptLib.GetGroupTempValue(context, "way_"..config_id, {})
+	local cur_point_index = ScriptLib.GetGroupTempValue(context, "point_"..config_id, {})
 
 	ScriptLib.PrintContextLog(context,"## [MachineCarrier] SLC_MachineCarrier_Player_In. move_state@"..move_state.." config_id@"..config_id.." cur_point_index@"..cur_point_index)
 
@@ -480,7 +480,7 @@ function SLC_MachineCarrier_Player_In(context)
 		return 0
 	end
 
-	way_info = defs.way_info[cur_way]
+	local way_info = defs.way_info[cur_way]
 
 	if nil == way_info.point_list[cur_point_index] then
 		return 0

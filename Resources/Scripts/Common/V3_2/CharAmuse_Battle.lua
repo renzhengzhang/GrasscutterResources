@@ -20,12 +20,12 @@ defs = {
 }
 
 ]]
-cfg = {
+local cfg = {
 	--主控GroupID
 	main_group = 251008007,
 }
 
-extraTriggers = {
+local extraTriggers = {
 	{ config_id = 8000001, name = "TimeAxis_StopGallery", event = EventType.EVENT_TIME_AXIS_PASS, source = "StopGallery", condition = "", action = "action_TimeAxis_StopGallery", trigger_count = 0 },
 	{ config_id = 8000002, name = "Any_Monster_Die", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_Any_Monster_Die", trigger_count = 0 },
 	{ config_id = 8000003, name = "AirWallVariable_Change", event = EventType.EVENT_VARIABLE_CHANGE, source = "air_wall", condition = "", action = "action_AirWallVariable_Change", trigger_count = 0 },
@@ -51,7 +51,7 @@ function EX_StartGallery(context, prev_context, gallery_id, is_last_level)
 			ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v)
 		end
 	end
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})
 	ScriptLib.SetGroupTempValue(context, "is_last_level", is_last_level, {})
 
@@ -107,11 +107,11 @@ function action_Gallery_Stop(context, evt)
 	ScriptLib.EndAllTimeAxis(context)
 
 	if 3 ~= evt.param3 then
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		--ScriptLib.InitTimeAxis(context, "StopGallery_Fail", { 3 } , false) 9.21修改 失败不要延时结束
 		ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {1, base_info.group_id})
 	else
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
 		if is_last_level then
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
@@ -127,10 +127,10 @@ function LF_Start_Play(context)
 
 	ScriptLib.SetGroupTempValue(context, "round", 0, {})
 
-	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
-	target = 0
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local target = 0
 	if player_count > 1 then
 		target = ScriptLib.GetCharAmusementGalleryTarget(context, gallery_id, true)
 	else
@@ -141,7 +141,7 @@ function LF_Start_Play(context)
 
 	--随机序列
 	math.randomseed(ScriptLib.GetServerTime(context))
-	rand_index = math.random(#defs.suite_queue)
+	local rand_index = math.random(#defs.suite_queue)
 	ScriptLib.SetGroupTempValue(context, "rand_index", rand_index, {})
 
 	LF_StartRound(context)
@@ -150,8 +150,8 @@ function LF_Start_Play(context)
 end
 
 function LF_ClearRound(context)
-	round = ScriptLib.GetGroupTempValue(context, "round", {})
-	rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
+	local round = ScriptLib.GetGroupTempValue(context, "round", {})
+	local rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
 	ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, defs.suite_queue[rand_index][round])
 	--埋点
     ScriptLib.MarkGroupLuaAction(context, "CharAmuse_BreakingShield", ScriptLib.GetDungeonTransaction(context), {["wave_num"] = round})
@@ -163,11 +163,11 @@ function LF_StartRound(context)
 
 	--round++
 	ScriptLib.ChangeGroupTempValue(context, "round", 1, {})
-	round = ScriptLib.GetGroupTempValue(context, "round", {})
+	local round = ScriptLib.GetGroupTempValue(context, "round", {})
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Battle] LF_StartRound. New round@"..round)
 
 	--如果已经到了LD配置尽头，则循环最后一波
-	rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
+	local rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
 	if round > #defs.suite_queue[rand_index] then
 		round = #defs.suite_queue[rand_index]
 		ScriptLib.SetGroupTempValue(context, "round", round, {})
@@ -191,7 +191,7 @@ end
 --循环刷怪
 function action_Any_Monster_Die(context)
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 
 	if false == ScriptLib.IsGalleryStart(context, gallery_id) then
 		return 0
@@ -203,7 +203,7 @@ function action_Any_Monster_Die(context)
 	ScriptLib.ChangeGroupTempValue(context, "cur_score", -1 , {})
 	if 0 >= ScriptLib.GetGroupTempValue(context, "cur_score", {}) then
 		--客户端弹提示
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["is_last_level"] = is_last_level, ["is_finish"] = true, ["is_success"] = true } )
 		ScriptLib.KillGroupEntity(context, { group_id = base_info.group_id, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER })
 		LF_ClearRound(context)

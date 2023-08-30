@@ -4,22 +4,22 @@
 ||  owner:      xudong.sun
 ||  description:    水下幻影板，有一块主幻影板控制当前group下的分幻影板的创建和显隐
 ||  LogName:    ## Undersea_UnderWaterPlat
-||  Protection:
+||  Protection: 
 =======================================]]
 
 --[[
 
-CreateOption = 1
-DelOption = 2
-MainPlate = 283007
-SubPlate = {283008,283009}
+local CreateOption = 1
+local DelOption = 2
+local MainPlate = 283007
+local SubPlate = {283008,283009}
 
 ]]--
 
-Extra_Triggers = {
+local Extra_Triggers = {
     { config_id = 8000001, name = "GadgetStateChange", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_GadgetStateChange", trigger_count = 0 },
 	{ config_id = 8000002, name = "SelectOption", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_SelectOption", trigger_count = 0 },
-	{ config_id = 8000003, name = "GreateGadget", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_CreateGadget", trigger_count = 0 },
+	{ config_id = 8000003, name = "GreateGadget", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_CreateGadget", trigger_count = 0 }, 
 }
 
 function action_CreateGadget( context, evt )
@@ -85,7 +85,7 @@ function action_SelectOption( context, evt )
 
 		for i,v in ipairs(SubPlate) do
 			ScriptLib.KillEntityByConfigId(context, { group_id = base_info.group_id, config_id = v })
-		end
+		end	
 
 		ScriptLib.SetWorktopOptionsByGroupId(context, 0, MainPlate, {CreateOption})
 		ScriptLib.SetGroupVariableValue(context, "Is_Created", 0)

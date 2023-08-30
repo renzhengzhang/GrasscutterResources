@@ -261,7 +261,7 @@ function action_EVENT_SELECT_OPTION_311014(context, evt)
 		end
 
 	  --在主机玩家脚下召唤一只沙虫，并攻击若干次。可能失败
-	  uid = ScriptLib.GetSceneOwnerUid(context)
+	  local uid = ScriptLib.GetSceneOwnerUid(context)
 	  LF_Summon_Direct_Sandworm_By_Avatar(context,uid,2)
 
 	return 0

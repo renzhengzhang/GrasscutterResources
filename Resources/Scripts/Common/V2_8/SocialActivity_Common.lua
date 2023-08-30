@@ -3,23 +3,23 @@
 ||	owner: 		luyao.huang
 ||	description:	2.8社交活动-通用流程框架
 ||	LogName:	SocialActivity_Common
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 ------
-local_defs = {
+local local_defs = {
     --刷出下一波怪时的提示reminder
     monster_chain_reminder = 400158,
     day_weather = 9019
 }
 
-common_Tri = {
+local common_Tri = {
     [1] = { name = "group_load_common", config_id = 10000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load_common", trigger_count = 0},
     [2] = { name = "gallery_start_common", config_id = 10000002, event = EventType.EVENT_GALLERY_START, source = "", condition = "", action = "action_gallery_start", trigger_count = 0},
-    [3] = { name = "variable_change_common", config_id = 10000003, event = EventType.EVENT_VARIABLE_CHANGE, source = "current_stage", condition = "", action = "action_variable_change_common", trigger_count = 0},
+    [3] = { name = "variable_change_common", config_id = 10000003, event = EventType.EVENT_VARIABLE_CHANGE, source = "current_stage", condition = "", action = "action_variable_change_common", trigger_count = 0}, 
     [4] = { name = "gallery_stop_common", config_id = 10000004, event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_gallery_stop", trigger_count = 0},
-    [5] = { name = "variable_change_GM", config_id = 10000100, event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change_GM", trigger_count = 0},
-    [6] = { name = "group_will_unload_common", config_id = 1000005, event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload_common", trigger_count = 0},
+    [5] = { name = "variable_change_GM", config_id = 10000100, event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change_GM", trigger_count = 0}, 
+    [6] = { name = "group_will_unload_common", config_id = 1000005, event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload_common", trigger_count = 0}, 
 }
 
 function Common_Initialize()
@@ -107,7 +107,7 @@ end
 
 --保底恢复大世界天气
 function action_group_will_unload_common(context,evt)
-
+    
     ScriptLib.PrintContextLog(context,"## [SocialActivity_Common] action_group_will_unload_common：group保底卸载，恢复天气")
     --设置全局白天天气
     LF_Set_Weather(context,local_defs.day_weather,false)
@@ -145,12 +145,12 @@ function LF_Finish_Play(context,is_success)
     LF_Clear_Stage(context)
     if is_success then
         ScriptLib.PrintContextLog(context,"## [SocialActivity_Common] LF_Finish_Play：挑战成功")
-
+        
         LF_Special_Play_Finish(context,true)
         ScriptLib.StopGallery(context,defs.gallery_id,false)
     else
         ScriptLib.PrintContextLog(context,"## [SocialActivity_Common] LF_Finish_Play：挑战失败")
-
+   
         LF_Special_Play_Finish(context,false)
         ScriptLib.StopGallery(context,defs.gallery_id,true)
     end
@@ -160,10 +160,10 @@ end
 --进入下一阶段
 function LF_Goto_Next_Stage(context)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_Common] LF_Goto_Next_Stage：进入下一阶段")
-    current_stage = LF_Get_Current_Stage(context)
+    local current_stage = LF_Get_Current_Stage(context)
     LF_Set_Current_Stage(context,current_stage+1)
     --设置阶段复活点
-    revive_point = LF_Get_Stage_Revive_Point(LF_Get_Current_Stage(context))
+    local revive_point = LF_Get_Stage_Revive_Point(LF_Get_Current_Stage(context))
     LF_Set_Revive_Point(context,revive_point)
 
     if (LF_Get_Current_Stage(context) <= defs.final_stage) then
@@ -175,7 +175,7 @@ end
 --加载下一阶段布设
 function LF_Build_Next_Stage(context)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_Common] LF_Build_Next_Stage：加载下一阶段布设")
-    current_stage = LF_Get_Current_Stage(context)
+    local current_stage = LF_Get_Current_Stage(context)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_Common] LF_Build_Next_Stage：目标加载的阶段为"..current_stage)
     --加载下一阶段的布设
     for k,v in pairs(LF_Get_Stage_Start_Suites(context,current_stage)) do
@@ -203,7 +203,7 @@ end
 --清理当前关卡所有内容
 function LF_Clear_Stage(context)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_Common] LF_Clear_Stage: 清理玩法布设")
-
+    
     --强行刷新到suite 1，清除所有布设
     ScriptLib.RefreshGroup(context, { group_id = base_info.group_id, suite = 1 })
     LF_Init_Play(context)
@@ -213,7 +213,7 @@ end
 --移除一个stage下所有suite(注意这里只清monster_suite，如果LD有一些suite不放monster这种操作还得额外处理一下)
 function LF_Clear_Specific_Stage(context,stage_index)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_Common] LF_Clear_Specific_Stage: 清理stage "..stage_index.."的内容")
-    monster_suites = LF_Get_Stage_Monster_Suites(context,stage_index)
+    local monster_suites = LF_Get_Stage_Monster_Suites(context,stage_index) 
     for i = 1, #monster_suites do
         ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, monster_suites[i])
     end
@@ -223,7 +223,7 @@ end
 --移除一个stage下所有怪物(注意这里只清monster_suite，如果LD有一些suite不放monster这种操作还得额外处理一下)
 function LF_Clear_Specific_Stage_Monsters(context,stage_index)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_Common] LF_Clear_Specific_Stage_Monsters: 清理stage "..stage_index.."的所有怪物")
-    monster_list  =  LF_Get_Stage_Monsters(context,stage_index)
+    local monster_list  =  LF_Get_Stage_Monsters(context,stage_index)
     for i = 1, #monster_list do
         ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.MONSTER, monster_list[i])
     end
@@ -250,7 +250,7 @@ end
 
 --根据输入的阶段数，找到阶段对应的所有suite
 function LF_Get_Stage_All_Suites(context,index)
-    if stage[index].all_suites == nil then
+    if stage[index].all_suites == nil then 
         return {}
     end
     return stage[index].all_suites
@@ -258,7 +258,7 @@ end
 
 --根据输入的阶段数，找到所有包含了当前阶段怪物的suite
 function LF_Get_Stage_Monster_Suites(context,index)
-    if stage[index].monster_suites == nil then
+    if stage[index].monster_suites == nil then 
         return {}
     end
     return stage[index].monster_suites
@@ -266,17 +266,17 @@ end
 
 --根据输入的阶段数，找到所有启动suite（切换到该stage时加载的suite）
 function LF_Get_Stage_Start_Suites(context,index)
-    if stage[index].start_suites == nil then
+    if stage[index].start_suites == nil then 
         return {}
     end
-
+    
     return stage[index].start_suites
 end
 
 --根据输入的阶段数，获取该阶段的怪物列表
 function LF_Get_Stage_Monsters(context,stage)
-    _stage_suites = LF_Get_Stage_Monster_Suites(context,stage)
-    stage_monsters = {}
+    local _stage_suites = LF_Get_Stage_Monster_Suites(context,stage)
+    local stage_monsters = {}
     for i = 1, #_stage_suites do
         for j = 1,#suites[_stage_suites[i]].monsters do
             table.insert(stage_monsters,(suites[_stage_suites[i]].monsters)[j])
@@ -291,7 +291,7 @@ function LF_Stage_Has_Tag(context,id,tag)
     if stage[id] == nil then
         return false
     end
-    stage_tag = stage[id].tag
+    local stage_tag = stage[id].tag
     if stage_tag == nil or stage_tag ~= tag then
         return false
     else
@@ -365,7 +365,7 @@ function LF_Get_Stage_By_Config_Id(config_id, is_gadget)
 end
 
 --根据suiteid反查所属的stage
-function LF_Get_Suite_Stage(suite_id)
+function LF_Get_Suite_Stage(suite_id) 
     for i = 1, #stage do
         if (stage[i].all_suites~=nil) then
             for j = 1, #stage[i].all_suites do
@@ -395,7 +395,7 @@ end
 
 --检查表内的怪物是否已经都死了
 function LF_Is_Monster_In_List_All_Killed(context,check_monster_list)
-    alive_monster_list = ScriptLib.GetGroupAliveMonsterList(context,base_info.group_id)
+    local alive_monster_list = ScriptLib.GetGroupAliveMonsterList(context,base_info.group_id)
     for i = 1, #alive_monster_list do
         for j = 1,#check_monster_list do
             if (alive_monster_list[i] == check_monster_list[j]) then
@@ -411,7 +411,7 @@ function LF_Get_Gadget_Id_By_Config_Id(config_id)
     for k,v in pairs(gadgets) do
         if config_id == v.config_id then
             return v.gadget_id
-        end
+        end  
     end
     return 0
 end
@@ -471,7 +471,7 @@ end
 function LF_Is_In_Range(value, bound_1, bound_2)
 
     if bound_1 > bound_2 then
-        t = bound_1
+        local t = bound_1
         bound_1 = bound_2
         bound_2 = t
     end
@@ -493,7 +493,7 @@ end
 function LF_Update_Exhibition(context,uid,trigger_name,value)
 
     if uid == -2 then
-        uidlist = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
+        local uidlist = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
         for i = 1, #uidlist do
             ScriptLib.PrintContextLog(context,"## [SocialActivity_Common] 向陈列室同步：uid："..uidlist[i]..", trigger名："..trigger_name..", 增量："..value)
 	        ScriptLib.AddExhibitionReplaceableData(context, uidlist[i], trigger_name, value)

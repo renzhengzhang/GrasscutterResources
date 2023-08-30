@@ -20,8 +20,8 @@ defs = {
 }
 
 -- DEFS_MISCS
-pos = {x=pos_x, y=pos_y, z=pos_z}
-pos_follow = {x=pos_follow_x, y=pos_follow_y, z=pos_follow_z }
+local pos = {x=pos_x, y=pos_y, z=pos_z}
+local pos_follow = {x=pos_follow_x, y=pos_follow_y, z=pos_follow_z }
 
 --================================================================
 --

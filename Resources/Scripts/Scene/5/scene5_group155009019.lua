@@ -10,7 +10,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -36,7 +36,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 	ScriptLib.PrintContextLog(context, "update gameplay state")
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -127,7 +127,7 @@ suites = {
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_19004(context, evt)
-			isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", defs.managerGroup)
+			local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", defs.managerGroup)
 
 			if isactive == 1 then
 				if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then

@@ -4,10 +4,10 @@ base_info = {
 }
 
 -- DEFS_MISCS
-levelUpOption = 0
-chainId = 100007
-maxLevel = 1
-regionID = 95002
+local levelUpOption = 0
+local chainId = 100007
+local maxLevel = 1
+local regionID = 95002
 
 --================================================================
 --

@@ -16,7 +16,7 @@ defs = {
 }
 ]]
 
-extraTriggers={
+local extraTriggers={
   { config_id = 8000001,name = "Enter_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0 },
   --挑战计数trigger
   { config_id = 8000002, name = "Variable_Change", event = EventType.EVENT_VARIABLE_CHANGE, source = "saved_progress", condition = "", action = "", trigger_count = 0 ,tag = "1000"},
@@ -58,9 +58,9 @@ end
 
 function LF_Try_StartTutorial(context)
 
-    UidList = ScriptLib.GetSceneUidList(context)
-    ownerUid = UidList[1]
-    havePlayed  = ScriptLib.GetExhibitionAccumulableData(context, ownerUid, 10901103)
+    local UidList = ScriptLib.GetSceneUidList(context)
+    local ownerUid = UidList[1]
+    local havePlayed  = ScriptLib.GetExhibitionAccumulableData(context, ownerUid, 10901103)
 
     if 0 == havePlayed then
         ScriptLib.ShowClientTutorial(context, 835, {ownerUid})
@@ -135,13 +135,13 @@ end
 --圈外打雪堆 直接拉起挑战（tempStart）， 5秒没进圈、没接着打雪堆->挑战暂离(9.22迭代：出圈挑战不退出，不调用这个了)
 function StartChallengeOutOfRegion(context)
 
-	temp_start = ScriptLib.GetGroupTempValue(context, "temp_start",{})
+	local temp_start = ScriptLib.GetGroupTempValue(context, "temp_start",{})
 
 	ScriptLib.PrintContextLog(context,"[WinterCampGacha] Start Challenge OutOfRegion: temp_start@".. temp_start)
 
 	if temp_start == 0 then
 
-		start_process = ScriptLib.GetGroupVariableValue(context, "saved_progress")
+		local start_process = ScriptLib.GetGroupVariableValue(context, "saved_progress")
 		--参数1： event_type所在枚举序号； 参数2： trigger_tag；参数3： 次数；参数4：Bool，次数达成是否计为成功；参数5：初始次数值
 		ScriptLib.StartChallenge(context, 1, defs.challenge_id, {3, 1000, defs.target_count, 1 , start_process})
 
@@ -166,7 +166,7 @@ function LF_TryStartChallenge(context)
 	ScriptLib.SetGroupTempValue(context, "temp_start", 2, {})
 
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 0 then
-		start_process = ScriptLib.GetGroupVariableValue(context, "saved_progress")
+		local start_process = ScriptLib.GetGroupVariableValue(context, "saved_progress")
 		--参数1： event_type所在枚举序号； 参数2： trigger_tag；参数3： 次数；参数4：Bool，次数达成是否计为成功；参数5：初始次数值
 		ScriptLib.StartChallenge(context, 1, defs.challenge_id, {3, 1000, defs.target_count, 1 , start_process})
 
@@ -197,15 +197,15 @@ function GadgetCall_SnowPile_Interact(context)
 	--StartChallengeOutOfRegion(context)
 	LF_TryStartChallenge(context)
 
- 	configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+ 	local configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	--向服务器请求本次雪堆结果 1 刷怪，0掉落，-1有错误
-	result = ScriptLib.WinterCampSnowDriftInteract(context, configId)
+	local result = ScriptLib.WinterCampSnowDriftInteract(context, configId)
 
 	ScriptLib.PrintContextLog(context,"[WinterCampGacha] Get result form server: result@".. result)
 
 	if result == 1 then
 
-		tmp =  GetMonsterSuit(context,configId)
+		local tmp =  GetMonsterSuit(context,configId)
 
 		ScriptLib.ChangeGroupVariableValue(context, "saved_progress", 1)
 
@@ -245,7 +245,7 @@ end
 --当雪堆该刷怪时，刷哪个Suit
 	--雪堆1 对应suite2 雪堆2 对应suite3 以此类推
 function GetMonsterSuit(context, cfg_id)
-	tmp = 0
+	local tmp = 0
 	for k,v in ipairs(suites[1].gadgets) do
 		if cfg_id == v then
 			tmp = k+1

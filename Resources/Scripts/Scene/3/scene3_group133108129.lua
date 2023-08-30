@@ -132,7 +132,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_129012(context, evt)
 	-- 设置操作台选项
-	schedule = ScriptLib.GetBlossomScheduleStateByGroupId(context, 0)
+	local schedule = ScriptLib.GetBlossomScheduleStateByGroupId(context, 0)
 	if 0 == schedule or 1 == schedule then
 		  ScriptLib.SetWorktopOptions(context, {187})
 	end
@@ -158,7 +158,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_129013(context, evt)
 	-- 设置操作台选项
-	schedule = ScriptLib.GetBlossomScheduleStateByGroupId(context, 0)
+	local schedule = ScriptLib.GetBlossomScheduleStateByGroupId(context, 0)
 	if 0 == schedule or 1 == schedule then
 		  ScriptLib.SetWorktopOptions(context, {187})
 	end
@@ -184,7 +184,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_CREATE_129014(context, evt)
 	-- 设置操作台选项
-	schedule = ScriptLib.GetBlossomScheduleStateByGroupId(context, 0)
+	local schedule = ScriptLib.GetBlossomScheduleStateByGroupId(context, 0)
 	if 0 == schedule or 1 == schedule then
 		  ScriptLib.SetWorktopOptions(context, {187})
 	end
@@ -201,8 +201,8 @@ end
 -- 触发操作
 function action_EVENT_GROUP_REFRESH_129015(context, evt)
 	-- 指定group的循环玩法进度加1
-	  operator = {[1]=129009,[2]=nil,[3]=129010}
-	  r_Type = ScriptLib.GetBlossomRefreshTypeByGroupId(context, 133108129)
+	  local operator = {[1]=129009,[2]=nil,[3]=129010}
+	  local r_Type = ScriptLib.GetBlossomRefreshTypeByGroupId(context, 133108129)
 		if r_Type == nil then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_blossomOperator_byGroupId")
 	    return -1
@@ -257,7 +257,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_CREATE_129017(context, evt)
 	-- 设置操作台选项
-	schedule = ScriptLib.GetBlossomScheduleStateByGroupId(context, 0)
+	local schedule = ScriptLib.GetBlossomScheduleStateByGroupId(context, 0)
 	if 0 == schedule or 1 == schedule then
 		  ScriptLib.SetWorktopOptions(context, {187})
 	end

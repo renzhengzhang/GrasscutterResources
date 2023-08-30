@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-present_list = {
+local present_list = {
         [171001] = 19,
 }
 

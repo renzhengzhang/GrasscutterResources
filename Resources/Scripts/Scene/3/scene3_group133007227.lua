@@ -110,7 +110,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_293(context, evt)
-	state_info = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.seal_model)
+	local state_info = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.seal_model)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.seal_id, state_info)
 	if state_info == GadgetState.Action02 then
 		ScriptLib.CreateGadget(context, {config_id = defs.light_1})
@@ -124,7 +124,7 @@ function action_EVENT_GADGET_STATE_CHANGE_294(context, evt)
 	if evt.param2 == defs.light_1 then
 		-- 光柱触发信息令封印激活玩家身上的子弹
 		if evt.param1 == GadgetState.GearStart then
-			cur_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.seal_id)
+			local cur_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.seal_id)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.seal_id, GadgetState.ChestTrap)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.seal_id, cur_state)
 			return 0

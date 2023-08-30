@@ -4,13 +4,13 @@ base_info = {
 }
 
 -- DEFS_MISCS
-DreamStonePlay = {
+local DreamStonePlay = {
     LevelTagGroup = 12,
     DreamStoneCid = 306001,
 }
 
 -- 在对应LevelTag中操作梦境石发生的切换
-LevelTagState = {
+local LevelTagState = {
     ["3.0_Dream"] ={
         ChangeTag = 39,
         WeatherStateList = {
@@ -33,7 +33,7 @@ LevelTagState = {
     },
 }
 
-KeyQuest = {
+local KeyQuest = {
     ["Lock"] = {7302518,7302519,7302515,7303201,7303202,7303203},
     ["Unlock"] ={7302525,7302506,7302511,7302514,7303301,7303501},
 }
@@ -373,7 +373,7 @@ end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_306022(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7321304)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7321304)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -397,7 +397,7 @@ end
 
 -- 触发条件
 function condition_EVENT_LEVEL_TAG_CHANGE_306023(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7321304)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7321304)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -423,7 +423,7 @@ end
 function condition_EVENT_ENTER_REGION_306024(context, evt)
 	if evt.param1 ~= 306024 then return false end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7321304)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7321304)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

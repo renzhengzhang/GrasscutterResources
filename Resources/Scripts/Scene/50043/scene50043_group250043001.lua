@@ -256,7 +256,7 @@ end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_1039(context, evt)
-	gadget_list = suites[2].gadgets
+	local gadget_list = suites[2].gadgets
 
 	for i, v in ipairs(gadget_list) do
 	        ScriptLib.SetGroupGadgetStateByConfigId(context, 250043001, v, 901)
@@ -273,7 +273,7 @@ end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_1040(context, evt)
-	gadget_list = suites[2].gadgets
+	local gadget_list = suites[2].gadgets
 
 	for i, v in ipairs(gadget_list) do
 	        ScriptLib.SetGroupGadgetStateByConfigId(context, 250043001, v, 902)

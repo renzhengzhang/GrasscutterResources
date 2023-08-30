@@ -21,26 +21,26 @@
 monster_id
 left_num
 total_num ]]
-stage_1_group_id = 133002075
-stage_2_group_id = {133002081,133002082,133002099}
-stage_3_group_id = 133002068
-monster_list = {
+local stage_1_group_id = 133002075
+local stage_2_group_id = {133002081,133002082,133002099}
+local stage_3_group_id = 133002068
+local monster_list = {
     [28020310] = "add_timid_cnt",
     [28020311] = "add_brutal_cnt",
     [28020312] = "add_elite_cnt",
 }
-score_list = {
+local score_list = {
     [28020310] = 10,
     [28020311] = 50,
     [28020312] = 100,
 }
-temp_Variables = {
+local temp_Variables = {
 	{  config_id=50000009,name = "create_random_shield_orb", value = 0, no_refresh = false },
 	{  config_id=50000001,name = "create_monster_1", value = 0, no_refresh = false },
 	{  config_id=50000002,name = "create_monster_2", value = 0, no_refresh = false },
 	{  config_id=50000003,name = "create_monster_3", value = 0, no_refresh = false },
 }
-temp_Tirgger = {
+local temp_Tirgger = {
 	{event = EventType.EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE, source = "", action = "action_EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE"},
 	{event = EventType.EVENT_ENTER_REGION, source = "", action = "action_EVENT_ENTER_REGION"},
 	{event = EventType.EVENT_VARIABLE_CHANGE, source = "", action = "action2_EVENT_VARIABLE_CHANGE"},
@@ -51,7 +51,7 @@ temp_Tirgger = {
 }
 function action_EVENT_TIME_AXIS_PASS_create_random_shield_orb(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_TIME_AXIS_PASS_create_random_shield_orb:")
-    _cfgid = ScriptLib.GetGroupTempValue(context,"last_cfgid",{})
+    local _cfgid = ScriptLib.GetGroupTempValue(context,"last_cfgid",{})
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_TIME_AXIS_PASS_create_random_shield_orb:_cfgid=".._cfgid)
     ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, 20000002)
     ScriptLib.CreateGadget(context, { config_id = _cfgid })
@@ -71,7 +71,7 @@ function action_EVENT_ANY_MONSTER_DIE(context,evt)
     if base_info.group_id ~=stage_2_group_id[1] and base_info.group_id ~=stage_2_group_id[2] and base_info.group_id ~=stage_2_group_id[3] then
         return 0
     end
-    _count = ScriptLib.GetGroupMonsterCount(context)
+    local _count = ScriptLib.GetGroupMonsterCount(context)
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_ANY_MONSTER_DIE:_count=".._count)
     --1解锁2，2解锁3
     if _count == 2 and base_info.group_id == stage_2_group_id[1] then
@@ -82,7 +82,7 @@ function action_EVENT_ANY_MONSTER_DIE(context,evt)
         ScriptLib.AddExtraGroupSuite(context, stage_2_group_id[3], 2)
     end
     --如果最近踩过的黄圈是本group的圈，则更新左侧剩余数量
-	_circle = ScriptLib.GetGroupTempValue(context, "Cur_Circle",{ group_id = defs.target_group})
+	local _circle = ScriptLib.GetGroupTempValue(context, "Cur_Circle",{ group_id = defs.target_group})
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_ANY_MONSTER_DIE:_circle=".._circle)
     if _circle == defs.circle_region then
         --更新左侧面板
@@ -101,14 +101,14 @@ function action_EVENT_TIME_AXIS_PASS_Active_Trap(context,evt)
     if evt.param1 == 1 then
         ScriptLib.ShowReminder(context, 400174)
         --随机挑选一个未激活的trap，记录config_id，生成倒三角箭头
-        _list = {}
+        local _list = {}
         for k,v in pairs(gadgets) do
             if v.gadget_id == 70800230 and ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,v.config_id) ~= 201 then
                 table.insert(_list,v.config_id)
             end
         end
         if #_list > 0 then
-            _t = math.random(#_list)
+            local _t = math.random(#_list)
             ScriptLib.SetGroupTempValue(context,"random_cfgid",_list[_t],{})
             --找到待激活的机关，在他头顶创建一个倒三角
             for k,v in pairs(gadgets) do
@@ -119,7 +119,7 @@ function action_EVENT_TIME_AXIS_PASS_Active_Trap(context,evt)
         end
     elseif evt.param1 == 2 then
         --根据_t生成gadget，移除倒三角
-        _cfgid = ScriptLib.GetGroupTempValue(context,"random_cfgid",{})
+        local _cfgid = ScriptLib.GetGroupTempValue(context,"random_cfgid",{})
         ScriptLib.SetGadgetStateByConfigId(context,_cfgid,201)
 		ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, 20000001)
     end
@@ -141,14 +141,14 @@ function action_EVENT_ENTER_REGION(context,evt)
     --记录最新踩到的黄圈
     ScriptLib.SetGroupTempValue(context,"Cur_Circle",evt.param1,{ group_id = defs.target_group})
     --更新当前区域剩余怪物显示
-    _count = ScriptLib.GetGroupMonsterCount(context)
+    local _count = ScriptLib.GetGroupMonsterCount(context)
     ScriptLib.SetGroupVariableValueByGroup(context, "left_num", _count, defs.target_group)
 
     return 0
 end
 function action_EVENT_GROUP_LOAD(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_GROUP_LOAD33:")
-    _uid = ScriptLib.GetSceneOwnerUid(context)
+    local _uid = ScriptLib.GetSceneOwnerUid(context)
     --三个阶段分别弹图文教程
     if base_info.group_id == stage_1_group_id then
 		ScriptLib.AssignPlayerShowTemplateReminder(context,194,{param_uid_vec={},param_vec={},uid_vec={_uid}})
@@ -162,7 +162,7 @@ function action_EVENT_GROUP_LOAD(context,evt)
     if base_info.group_id == stage_3_group_id then
         --三阶段帮忙激活下八方网
 		ScriptLib.AssignPlayerShowTemplateReminder(context,196,{param_uid_vec={},param_vec={},uid_vec={_uid}})
-        _time = 20
+        local _time = 20
         if defs.Active_Trap_Time ~= nil then _time = defs.Active_Trap_Time end
         ScriptLib.InitTimeAxis(context,"Active_Trap",{_time-5,_time},true)
     end
@@ -173,16 +173,16 @@ end
 function action2_EVENT_VARIABLE_CHANGE(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action2_EVENT_VARIABLE_CHANGE:"..evt.source_name.."="..evt.param1)
     if evt.source_name == "create_random_shield_orb" then
-        _last_cfgid = ScriptLib.GetGroupTempValue(context,"last_cfgid",{})
+        local _last_cfgid = ScriptLib.GetGroupTempValue(context,"last_cfgid",{})
         ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action2_EVENT_VARIABLE_CHANGE:_last_cfgid=" .. _last_cfgid)
-        _list = {}
+        local _list = {}
         for k,v in pairs(gadgets) do
             if v.gadget_id == 70800232 and v.config_id ~= _last_cfgid then
                 table.insert(_list,v.config_id)
                 ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action2_EVENT_VARIABLE_CHANGE:v.config_id=" .. v.config_id)
             end
         end
-        _t = math.random(#_list)
+        local _t = math.random(#_list)
         ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action2_EVENT_VARIABLE_CHANGE:_t=" .. _t .. "| _list[_t] =" .. _list[_t] )
         ScriptLib.SetGroupTempValue(context,"last_cfgid",_list[_t] , {})
         ScriptLib.InitTimeAxis(context,"create_random_shield_orb",{5},false)
@@ -207,12 +207,12 @@ end
 --只有一阶段才会走这个方式创建怪物
 function LF_Create_Monster_By_Random_Point(context,m_id,num)
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 LF_Create_Monster_By_Random_Point:")
-    _alivelist = ScriptLib.GetGroupAliveMonsterList(context,base_info.group_id)
-    _count = 0
-    _list = {}
+    local _alivelist = ScriptLib.GetGroupAliveMonsterList(context,base_info.group_id)
+    local _count = 0
+    local _list = {}
     for k,v in pairs(monsters) do
         if v.monster_id == m_id then
-            _isalive = false
+            local _isalive = false
             for i = 1 , #_alivelist do
                 if _alivelist[i] == v.config_id then
                     _isalive = true
@@ -227,12 +227,12 @@ function LF_Create_Monster_By_Random_Point(context,m_id,num)
             end
         end
     end
-    _max = 0
+    local _max = 0
     if m_id == 28020310 then _max = defs.monster_max_1 end
     if m_id == 28020311 then _max = defs.monster_max_2 end
     if m_id == 28020312 then _max = defs.monster_max_3 end
     --创建相应数量怪物且不超过max值
-    _create_count = 0
+    local _create_count = 0
     if _count + num <= _max then
         _create_count = num
     else
@@ -241,7 +241,7 @@ function LF_Create_Monster_By_Random_Point(context,m_id,num)
     --开始创建
     for i = 1 ,_create_count do
         if #_list ~= 0 then
-            _t = math.random(#_list)
+            local _t = math.random(#_list)
             ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 LF_Create_Monster_By_Random_Point:_list[_t]=".._list[_t])
             --创建且给小猪、野林猪加初始sgv 设为0 （只有一阶段）其他阶段会默认1
             if m_id == 28020310 or m_id == 28020311 then
@@ -257,11 +257,11 @@ function LF_Create_Monster_By_Random_Point(context,m_id,num)
 end
 function action_EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE:"..evt.source_eid)
-    _v = ScriptLib.GetGroupTempValue(context,"eid_"..evt.source_eid,{})
+    local _v = ScriptLib.GetGroupTempValue(context,"eid_"..evt.source_eid,{})
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE:_v=".._v)
     if base_info.group_id == stage_1_group_id then
         --一阶段
-        _id = ScriptLib.GetMonsterIdByEntityId(context, evt.source_eid)
+        local _id = ScriptLib.GetMonsterIdByEntityId(context, evt.source_eid)
         --一阶段 林野猪和雪猪，不看v直接算分(他们不会逃跑，死了肯定都是捕捉)
         if _id == 28020311 or _id == 28020312 then
             ScriptLib.SetGroupVariableValueByGroup(context, monster_list[_id], 1, defs.target_group)
@@ -279,7 +279,7 @@ function action_EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE(context,evt)
         --二阶段
         if _v ~= 0 then
             --走到这里的怪都是抓到的，发monsterid
-            _monster_id = ScriptLib.GetMonsterIdByEntityId(context, evt.source_eid)
+            local _monster_id = ScriptLib.GetMonsterIdByEntityId(context, evt.source_eid)
             ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE:_monster_id=".._monster_id)
             if _v == 1 then
                 ScriptLib.SetGroupVariableValueByGroup(context, "monster_id", _monster_id, defs.target_group)
@@ -333,9 +333,9 @@ function Initialize()
     end
 
     --指示物件倒三角
-    _temp_gadget = {config_id = 20000001, gadget_id = 70710432, pos = { x = 1074.944, y = 286.500, z = -424.074 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1, area_id = 10 }
+    local _temp_gadget = {config_id = 20000001, gadget_id = 70710432, pos = { x = 1074.944, y = 286.500, z = -424.074 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1, area_id = 10 }
     table.insert(gadgets,_temp_gadget)
-    _temp_gadget = {config_id = 20000002, gadget_id = 70710432, pos = { x = 1074.944, y = 286.500, z = -424.074 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1, area_id = 10 }
+    local _temp_gadget = {config_id = 20000002, gadget_id = 70710432, pos = { x = 1074.944, y = 286.500, z = -424.074 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1, area_id = 10 }
     table.insert(gadgets,_temp_gadget)
 	return 0
 end

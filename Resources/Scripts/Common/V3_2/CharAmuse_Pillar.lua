@@ -76,7 +76,7 @@ defs = {
 }
 
 ]]
-cfg = {
+local cfg = {
 	--主控GroupID
 	main_group = 251008007,
 
@@ -134,7 +134,7 @@ cfg = {
 	}
 }
 
-extraTriggers = {
+local extraTriggers = {
 	{ config_id = 8000002, name = "TimeAxis_StopGallery", event = EventType.EVENT_TIME_AXIS_PASS, source = "StopGallery", condition = "", action = "action_TimeAxis_StopGallery", trigger_count = 0 },
 	{ config_id = 8000003, name = "ClearDelay_TimeAxis_Pass", event = EventType.EVENT_TIME_AXIS_PASS, source = "ClearDelay", condition = "", action = "action_ClearDelay_TimeAxis_Pass", trigger_count = 0 },
 	{ config_id = 8000004, name = "Gallery_Stop", event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_Gallery_Stop", trigger_count = 0 },
@@ -161,7 +161,7 @@ function EX_StartGallery(context, prev_context, gallery_id, is_last_level)
 			ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v)
 		end
 	end
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})
 
 	ScriptLib.SetGroupTempValue(context, "is_last_level", is_last_level, {})
@@ -218,11 +218,11 @@ function action_Gallery_Stop(context, evt)
 	ScriptLib.EndAllTimeAxis(context)
 
 	if 3 ~= evt.param3 then
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		--ScriptLib.InitTimeAxis(context, "StopGallery_Fail", { 3 } , false) 9.21修改 失败不要延时结束
 		ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {1, base_info.group_id})
 	else
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
 		if is_last_level then
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
@@ -237,10 +237,10 @@ end
 ---------------------------------------------------------------------------------------------------------------
 function LF_Start_Play(context)
 
-	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
-	target = 0
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local target = 0
 	if player_count > 1 then
 		target = ScriptLib.GetCharAmusementGalleryTarget(context, gallery_id, true)
 	else
@@ -276,14 +276,14 @@ function LF_StartRound(context)
 
 	--round++
 	ScriptLib.ChangeGroupTempValue(context, "round", 1, {})
-	round = ScriptLib.GetGroupTempValue(context, "round", {})
+	local round = ScriptLib.GetGroupTempValue(context, "round", {})
 
 	--埋点
-	hit = ScriptLib.GetGroupTempValue(context, "hit", {})
+	local hit = ScriptLib.GetGroupTempValue(context, "hit", {})
 
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_StartRound. New round@"..round)
 
-	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
 	--如果已经到了LD配置尽头，则从头循环
 	if round > #defs.rounds[player_count] then
 		round = 1
@@ -291,13 +291,13 @@ function LF_StartRound(context)
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_StartRound. All round finished. Set to 1.")
 	end
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 
 	--本轮要升起的柱子列表
-	pillar_list = defs.rounds[player_count][round]
+	local pillar_list = defs.rounds[player_count][round]
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_StartRound. pillar_list@"..table.concat( pillar_list, ", "))
 
-	avalid_normal_pos = {}
+	local avalid_normal_pos = {}
 
 	--本轮是否放置spec布设,若是，则不产生随机布设---------------------------------
 	if nil ~= pillar_list[3] and 0 < pillar_list[3] then
@@ -311,13 +311,13 @@ function LF_StartRound(context)
 	end
 
 	--放置高级柱子-----------------------------------------
-	root_pos = 0
-	leaf_pos = 0
-	extend_list = {}
+	local root_pos = 0
+	local leaf_pos = 0
+	local extend_list = {}
 	--若只有1个高级，则在center_area随机一个
 	if 1 == pillar_list[2] then
 		root_pos = LF_SelectSingleMainPillar(context)
-		root_config = LF_GetConfigIdByPos(context, root_pos)
+		local root_config = LF_GetConfigIdByPos(context, root_pos)
 		--记录
 		ScriptLib.SetGroupTempValue(context, "root_config", root_config, {})
 		--决定奖励的延伸方向extend_dir,并延申2格
@@ -329,17 +329,17 @@ function LF_StartRound(context)
 	elseif 2 <= pillar_list[2] then
 		--选Root柱子
 		root_pos = LF_SelectRootPillar(context)
-		root_config = LF_GetConfigIdByPos(context, root_pos)
+		local root_config = LF_GetConfigIdByPos(context, root_pos)
 		--选Leaf柱子
 		leaf_pos = LF_SelectLeafPillar(context)
-		leaf_config = LF_GetConfigIdByPos(context, leaf_pos)
+		local leaf_config = LF_GetConfigIdByPos(context, leaf_pos)
 		--记录
 		ScriptLib.SetGroupTempValue(context, "root_config", root_config, {})
 		ScriptLib.SetGroupTempValue(context, "leaf_config", leaf_config, {})
 
 		--决定奖励的延伸方向extend_dir,并延申2格
 		extend_list = LF_GetExtendArea(context, root_pos, 0)
-		leaf_extend_list = LF_GetExtendArea(context, leaf_pos, root_pos)
+		local leaf_extend_list = LF_GetExtendArea(context, leaf_pos, root_pos)
 		for k,v in pairs(leaf_extend_list) do
 			table.insert(extend_list, v)
 		end
@@ -365,12 +365,12 @@ function LF_StartRound(context)
 	if 0 >= #avalid_normal_pos then
 		return 0
 	end
-	seed = tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6)
+	local seed = tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6)
 	math.randomseed(seed)
 	for i = 1, pillar_list[1] do
-		rand_index = math.random(#avalid_normal_pos)
+		local rand_index = math.random(#avalid_normal_pos)
 		--升起
-		normal_config = LF_GetConfigIdByPos(context, avalid_normal_pos[rand_index])
+		local normal_config = LF_GetConfigIdByPos(context, avalid_normal_pos[rand_index])
 		table.remove(avalid_normal_pos, rand_index)
 		LF_RisePillar(context, normal_config, 0, gallery_id, player_count)
 	end
@@ -381,15 +381,15 @@ end
 --root_pos: 0-root柱子； 非空- leaf柱子 决定延展方式
 function LF_GetExtendArea(context, pos, root_pos)
 
-	y = pos%10
-	x_raw = pos - y
+	local y = pos%10
+	local x_raw = pos - y
 
-	temp = {}
+	local temp = {}
 	--离边缘距离
-	up = x_raw - 10
-	down = 60 - x_raw
-	left = y - 1
-	right = 6 - y
+	local up = x_raw - 10
+	local down = 60 - x_raw
+	local left = y - 1
+	local right = 6 - y
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_GetExtendArea. source x@"..x_raw.." y@"..y..". Distance up@"..up.. " down@".. down .." left@".. left .." right@"..right.. ". Reference root_pos@"..root_pos)
 	--main柱子或root柱子
 	if 0 == root_pos then
@@ -437,13 +437,13 @@ function LF_GetExtendArea(context, pos, root_pos)
 	end
 
 	math.randomseed(ScriptLib.GetServerTime(context) + 999)
-	extend_list = { }
+	local extend_list = { }
 	if 0 == #temp then
 		temp = { "up" }
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_GetExtendArea. Cannot get room for extand area!! Check distance rule.")
 		return 0
 	end
-	rand_index = math.random(1, #temp)
+	local rand_index = math.random(1, #temp)
 	if "up" == temp[rand_index] then
 		table.insert(extend_list, ( x_raw - 20 + y))
 		table.insert(extend_list, ( x_raw - 10 + y))
@@ -464,9 +464,9 @@ function LF_GetExtendArea(context, pos, root_pos)
 
 	--最后记录这个格子朝哪个方向摆奖励 1234上下左右
 	--通过取extend_list里的一个格子 和 传入的pos 做比较 来知道位置
-	sample_pos = extend_list[1]
+	local sample_pos = extend_list[1]
 	--在上
-	x = math.floor( x_raw/10)
+	local x = math.floor( x_raw/10)
 	if x > math.floor(sample_pos/10) then
 		if 0 == root_pos then
 			ScriptLib.SetGroupTempValue(context, "root_extend_dir", 1, {})
@@ -524,7 +524,7 @@ function LF_ClearRound(context)
 	for k,v in pairs(suites[2].gadgets) do
 		ScriptLib.SetGadgetStateByConfigId(context, v, 0)
 	end
-	round = ScriptLib.GetGroupTempValue(context, "round", {})
+	local round = ScriptLib.GetGroupTempValue(context, "round", {})
 	ScriptLib.MarkGroupLuaAction(context, "CharAmuse_Pillar", ScriptLib.GetDungeonTransaction(context), {["wave_num"] = round})
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_ClearRound.")
 	return 0
@@ -534,7 +534,7 @@ end
 function LF_IsRoundFinish(context)
 	for k , v in pairs(defs.matrix) do
 		for ik, iv in pairs(v) do
-			state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, iv)
+			local state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, iv)
 			if 201 == state or 202 == state then
 				ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_IsRoundFinish. UnFinished@"..iv)
 				return false
@@ -557,16 +557,16 @@ end
 function SLC_CharAmusePillar_TryCreatReward(context)
 
 
-	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	if 0 == config_id or -1 == config_id then
 		return 0
 	end
-	from_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, config_id)
+	local from_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, config_id)
 	if 201 ~= from_state and 202 ~= from_state then
 		return 0
 	end
 
-	spec_index = ScriptLib.GetGroupTempValue(context, "spec_index", {})
+	local spec_index = ScriptLib.GetGroupTempValue(context, "spec_index", {})
 
 	--降下柱子
 	ScriptLib.SetGadgetStateByConfigId(context, config_id, 0)
@@ -575,14 +575,14 @@ function SLC_CharAmusePillar_TryCreatReward(context)
 
 	--非spec布设 创建奖励金币
 	if 0 >= spec_index then
-		root_config = ScriptLib.GetGroupTempValue(context, "root_config", {})
-		leaf_config = ScriptLib.GetGroupTempValue(context, "leaf_config", {})
+		local root_config = ScriptLib.GetGroupTempValue(context, "root_config", {})
+		local leaf_config = ScriptLib.GetGroupTempValue(context, "leaf_config", {})
 
 		if root_config == config_id then
-			root_extend_dir = ScriptLib.GetGroupTempValue(context, "root_extend_dir", {})
+			local root_extend_dir = ScriptLib.GetGroupTempValue(context, "root_extend_dir", {})
 			LF_Create_Reward(context, LF_GetRandRewardSuite(context), gadgets[config_id].pos, root_extend_dir)
 		elseif leaf_config == config_id then
-			leaf_extend_dir = ScriptLib.GetGroupTempValue(context, "leaf_extend_dir", {})
+			local leaf_extend_dir = ScriptLib.GetGroupTempValue(context, "leaf_extend_dir", {})
 			LF_Create_Reward(context, LF_GetRandRewardSuite(context), gadgets[config_id].pos, leaf_extend_dir)
 		else
 			LF_Create_Reward(context, defs.simple_reward_suite, gadgets[config_id].pos, 0)
@@ -611,9 +611,9 @@ function SLC_CharAmusePillar_TryCreatReward(context)
 end
 
 function LF_GetRandRewardSuite(context)
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
-	round = ScriptLib.GetGroupTempValue(context, "round", {})
-	reward_suites= {}
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local round = ScriptLib.GetGroupTempValue(context, "round", {})
+	local reward_suites= {}
 
 	if -1 == gallery_id or 0 == gallery_id then
 		gallery_id = 1000 --无外围测试用
@@ -625,7 +625,7 @@ function LF_GetRandRewardSuite(context)
 		reward_suites = defs.reward_by_gallery[gallery_id]
 	end
 
-	rand_index = math.random(1, #reward_suites)
+	local rand_index = math.random(1, #reward_suites)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_GetRandRewardSuite. Gallery_id@"..gallery_id.. " rand_index@"..rand_index.. " result@".. reward_suites[rand_index])
 	return reward_suites[rand_index]
 end
@@ -633,15 +633,15 @@ end
 --将指定suite内的entity，以pos为轴，按dir转置后创生
 function LF_Create_Reward(context, suite, target_pos, dir)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_Create_Reward. suite@"..suite.. " pivot_pos@".. target_pos.x..","..target_pos.z.." dir@".. dir)
-	gadget_list = suites[suite].gadgets
-	pivot_pos = gadgets[gadget_list[1]].pos
+	local gadget_list = suites[suite].gadgets
+	local pivot_pos = gadgets[gadget_list[1]].pos
 	for i,v in ipairs(suites[suite].gadgets) do
 		--原本和pivot之间的相对距离
-		origin_offset_x = math.abs(gadgets[v].pos.x - pivot_pos.x)
-		origin_offset_z = math.abs(gadgets[v].pos.z - pivot_pos.z)
+		local origin_offset_x = math.abs(gadgets[v].pos.x - pivot_pos.x)
+		local origin_offset_z = math.abs(gadgets[v].pos.z - pivot_pos.z)
 		--ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_Create_Reward. origin_offset_x@"..origin_offset_x.. " origin_offset_z@".. origin_offset_z)
-		final_pos_x = 0
-		final_pos_z = 0
+		local final_pos_x = 0
+		local final_pos_z = 0
 		--1234上下左右
 		if 1 == dir or 0 == dir then
 			final_pos_x = target_pos.x + origin_offset_x
@@ -670,7 +670,7 @@ function LF_CreateGadgetFromPool(context, gadget_id, pos, rot)
 		return 0
 	end
 	for i,v in ipairs(defs.gadget_pool[gadget_id]) do
-		ret = ScriptLib.CreateGadgetByConfigIdByPos(context, v, pos, rot)
+		local ret = ScriptLib.CreateGadgetByConfigIdByPos(context, v, pos, rot)
 		if 0 == ret then
 			--ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_Create_Reward. gadget@"..v.. " pos.x@".. pos.x.. " pos.z@"..pos.z)
 			return 0
@@ -682,7 +682,7 @@ end
 
 function LF_SelectSingleMainPillar(context)
 	math.randomseed(ScriptLib.GetServerTime(context))
-	rand_index = math.random(1, #cfg.center_area)
+	local rand_index = math.random(1, #cfg.center_area)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_SelectSingleMainPillar. Select from center area. rand_index@"..rand_index.. "result@"..cfg.center_area[rand_index])
 	return cfg.center_area[rand_index]
 end
@@ -691,27 +691,27 @@ end
 function LF_SelectRootPillar(context)
 	math.randomseed(ScriptLib.GetServerTime(context))
 	--随机一个4*4角落作为首选区域
-	corner_index = math.random(1, 4)
+	local corner_index = math.random(1, 4)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_SelectRootPillar. first corner selection@"..corner_index)
 
 	ScriptLib.SetGroupTempValue(context, "corner_index", corner_index, {})
-	tile_index = math.random(1, #cfg.corner_area[corner_index])
+	local tile_index = math.random(1, #cfg.corner_area[corner_index])
 
 	return cfg.corner_area[corner_index][tile_index]
 end
 
 --在root柱子的矩阵内环对角5个点位中 随机一个leaf柱子
 function LF_SelectLeafPillar(context)
-	corner_index = ScriptLib.GetGroupTempValue(context, "corner_index", {})
+	local corner_index = ScriptLib.GetGroupTempValue(context, "corner_index", {})
 	math.randomseed(ScriptLib.GetServerTime(context) + 888)
-	leaf_tile_index = math.random(1, 5)
-	leaf_pos = cfg.leaf_area[corner_index][leaf_tile_index]
+	local leaf_tile_index = math.random(1, 5)
+	local leaf_pos = cfg.leaf_area[corner_index][leaf_tile_index]
 	return leaf_pos
 end
 
 function LF_GetConfigIdByPos(context, pos)
-	x = math.floor(pos/10)
-	y = pos%10
+	local x = math.floor(pos/10)
+	local y = pos%10
 	if nil == defs.matrix[x][y] or 0 == defs.matrix[x][y] then
 		ScriptLib.PrintGroupWarning(context, "## [CharAmuse_Pillar] Pillar matrix is not complete. Check defs!")
 		return 0
@@ -727,7 +727,7 @@ function LF_RisePillar(context, config_id, is_deluxe, gallery_id, player_count)
 	if nil == cfg.hp[gallery_id][player_count] then
 		return 0
 	end
-	hp_map = cfg.hp[gallery_id][player_count]
+	local hp_map = cfg.hp[gallery_id][player_count]
 	if nil == hp_map[1] or nil == hp_map[2] then
 		return 0
 	end
@@ -746,10 +746,10 @@ end
 --param1: 1-普通 2-大金币
 function SLC_CharAmusement_CoinGet(context, param1)
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 
 	if 1 == param1 then
-		config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+		local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, config_id)
 		ScriptLib.ChangeGroupTempValue(context, "cur_score", -1, {})
 
@@ -757,7 +757,7 @@ function SLC_CharAmusement_CoinGet(context, param1)
 		ScriptLib.CharAmusementUpdateScore(context, cfg.main_group, 1, 1)--给MultStage更新分数 服务器侧埋点用
 
 	elseif 2 == param1 then
-		config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+		local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, config_id)
 		if nil ~= defs.super_coin and 1 <= defs.super_coin then
 			ScriptLib.ChangeGroupTempValue(context, "cur_score", -1*math.floor(defs.super_coin), {})
@@ -772,7 +772,7 @@ function SLC_CharAmusement_CoinGet(context, param1)
 
 	--挑战完成
 	if 0 >= ScriptLib.GetGroupTempValue(context, "cur_score", {}) then
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["is_last_level"] = is_last_level, ["is_finish"] = true, ["is_success"] = true } )
 		ScriptLib.StopGallery(context, gallery_id, false)
 		return 0
@@ -782,8 +782,8 @@ function SLC_CharAmusement_CoinGet(context, param1)
 	if 1 ~= ScriptLib.GetGroupTempValue(context, "is_round_clear", {}) then
 		return 0
 	end
-	remain_coin_1 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320015 }})
-	remain_coin_2 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320022 }})
+	local remain_coin_1 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320015 }})
+	local remain_coin_2 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320022 }})
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] SLC_CharAmusement_CoinGet. Get coin while round clear. remain_coin_1@"..remain_coin_1.." remain_coin_2@"..remain_coin_2)
 	if 0 >= remain_coin_1 + remain_coin_2 then
 		ScriptLib.EndTimeAxis(context, "ClearDelay")
@@ -818,7 +818,7 @@ function EX_ClearPillarSuite(context, prev_context)
 end
 
 function LF_SetPillarSuite(context)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Pillar] LF_SetPillarSuite. player_count@"..#uid_list)
 	if nil ~= defs.enter_suites and nil ~= defs.enter_suites[#uid_list] then
 		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, defs.enter_suites[#uid_list])
@@ -837,10 +837,10 @@ function LF_CheckIsAround(context, pos, check_pos)
 	if 0 == check_pos then
 		return false
 	end
-	x = math.floor(pos/10)
-	y = pos%10
-	check_pos_x = math.floor(check_pos/10)
-	check_pos_y = check_pos%10
+	local x = math.floor(pos/10)
+	local y = pos%10
+	local check_pos_x = math.floor(check_pos/10)
+	local check_pos_y = check_pos%10
 	if 1 >= math.abs(x - check_pos_x) or 1 >= math.abs(y - check_pos_y) then
 		return true
 	end

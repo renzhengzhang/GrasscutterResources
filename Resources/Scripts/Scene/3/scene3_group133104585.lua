@@ -111,11 +111,11 @@ suites = {
 function action_EVENT_GADGET_STATE_CHANGE_585006(context, evt)
 	ScriptLib.PrintContextLog(context, "## SEAL_STATE | "..evt.param2.." : "..evt.param3.."->"..evt.param1)
 
-	t_p_value = 0
+	local t_p_value = 0
 	if evt.param2 == defs.gadget_light_1 or evt.param2 == defs.gadget_light_2 or evt.param2 == defs.gadget_light_3 then
 		-- 光柱触发信息令封印激活玩家身上的子弹
 		if evt.param1 == GadgetState.GearStart then
-			cur_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_id)
+			local cur_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_id)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_id, GadgetState.ChestTrap)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_id, cur_state)
 			-- 记录光柱触碰状况
@@ -139,7 +139,7 @@ function action_EVENT_GADGET_STATE_CHANGE_585006(context, evt)
 			end
 		elseif evt.param1 == GadgetState.ChestLocked then
 			-- 玩家出界，group数据清理
-			p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
+			local p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
 			-- 重置临时数据
 			ScriptLib.SetGroupVariableValue(context, "Temp_Point_Value", p_value)
 			if p_value%2 == 0 then
@@ -181,7 +181,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_585007(context, evt)
-	state_info = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_model)
+	local state_info = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_model)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_id, state_info)
 	if state_info == GadgetState.Default then
 		ScriptLib.SetGroupVariableValue(context, "Point_Value", 0)
@@ -190,7 +190,7 @@ function action_EVENT_GADGET_CREATE_585007(context, evt)
 		ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, defs.gadget_seal_id, {24})
 		return 0
 	end
-	p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
+	local p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
 	if p_value ~= 7 then
 		-- 重置临时数据
 		ScriptLib.SetGroupVariableValue(context, "Temp_Point_Value", p_value)
@@ -221,7 +221,7 @@ function action_EVENT_GROUP_LOAD_585009(context, evt)
 		ScriptLib.SetGroupVariableValue(context, "Temp_Point_Value", 3)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_model, GadgetState.Action02)
 	end
-	qf = ScriptLib.GetGroupVariableValue(context, "Quest_Flag")
+	local qf = ScriptLib.GetGroupVariableValue(context, "Quest_Flag")
 	if qf == 1 then
 		ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
 	end
@@ -235,7 +235,7 @@ function action_EVENT_VARIABLE_CHANGE_585010(context, evt)
 	-- Point_Value变化时判断值的变化
 
 	 if evt.param1 > evt.param2 then
-	                step = evt.param1 - evt.param2
+	                local step = evt.param1 - evt.param2
 	                if step%2 >= 1 then
 	                        ScriptLib.AddQuestProgress(context, "21025_progress1")
 	                ScriptLib.ChangeGroupVariableValue(context, "check", 1)

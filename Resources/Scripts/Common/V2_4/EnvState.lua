@@ -3,7 +3,7 @@
 --miscs
 
 ----昼夜group下控制的所有昼夜gadget
---EnvControlGadgets =
+--local EnvControlGadgets = 
 --{
 --    10001,
 --    10002,
@@ -12,30 +12,30 @@
 --}
 --
 ----仅在白天出现的gadget（夜晚会默认销毁）
---DayAppearGadgets =
+--local DayAppearGadgets = 
 --{
 --    20001,
 --    20002
 --}
 --
 ----仅在夜晚出现的gadget（白天会默认销毁）
---NightAppearGadgets =
+--local NightAppearGadgets = 
 --{
 --    30001,
 --    30002
 --}
 
---TriggerInsertWhitelist = {2,3}
+--local TriggerInsertWhitelist = {2,3}
 
 
 ----------------------------------
 
 
 
-Tri = {
+local Tri = {
     [1] = { name = "group_load_daynight", config_id = 8000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load_daynight", trigger_count = 0},
     [2] = { name = "level_tag_change_daynight", config_id = 8000002, event = EventType.EVENT_LEVEL_TAG_CHANGE, source = "", condition = "", action = "action_level_tag_change_daynight", trigger_count = 0},
-
+    
 }
 
 function Initialize()
@@ -43,12 +43,12 @@ function Initialize()
     for k,v in pairs(Tri) do
         table.insert(triggers, v)
     end
-    hasTriggerInsertWhitelist = not (TriggerInsertWhitelist==nil or #TriggerInsertWhitelist<=0)
+    local hasTriggerInsertWhitelist = not (TriggerInsertWhitelist==nil or #TriggerInsertWhitelist<=0)
     if (hasTriggerInsertWhitelist) then
         --存在白名单设置，走白名单的trigger注入流程
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
-            for i = 1, #TriggerInsertWhitelist do
+            for i = 1, #TriggerInsertWhitelist do 
                 for k,v in pairs(Tri) do
                     if (TriggerInsertWhitelist[i]<=#suites) then
                         table.insert(suites[TriggerInsertWhitelist[i]].triggers, v.name)
@@ -59,7 +59,7 @@ function Initialize()
         else
             table.insert(variables,{ config_id=50000001,name = "is_daynight_finish", value = 0, no_refresh = true})
             --flow group注入。trigger注入白名单定义的suite list
-            for i = 1, #TriggerInsertWhitelist do
+            for i = 1, #TriggerInsertWhitelist do 
                 for k,v in pairs(Tri) do
                     if (TriggerInsertWhitelist[i]<=#suite_disk) then
                         table.insert(suite_disk[TriggerInsertWhitelist[i]].triggers, v.name)
@@ -71,7 +71,7 @@ function Initialize()
     else
         --不存在白名单设置，走常规的trigger注入流程
         if (init_config.io_type ~= 1) then
-            for i = 1, #suites do
+            for i = 1, #suites do 
                 for k,v in pairs(Tri) do
 	            	table.insert(suites[i].triggers, v.name)
 	            end
@@ -79,7 +79,7 @@ function Initialize()
             table.insert(variables,{ config_id=50000001,name = "is_daynight_finish", value = 0, no_refresh = true})
         else
             table.insert(variables,{ config_id=50000001,name = "is_daynight_finish", value = 0, no_refresh = true})
-            for i = 1, #suite_disk do
+            for i = 1, #suite_disk do 
                 for k,v in pairs(Tri) do
 	            	table.insert(suite_disk[i].triggers, v.name)
 	            end
@@ -97,7 +97,7 @@ end
 function action_group_load_daynight(context,evt)
     ScriptLib.PrintContextLog(context,"EnvState: Group加载，修正物件的昼夜状态")
 
-    current_env_state = LF_Get_Current_Day_Night(context)
+    local current_env_state = LF_Get_Current_Day_Night(context)
     ScriptLib.PrintContextLog(context,"EnvState: 当前昼夜状态为： "..ScriptLib.GetLevelTagNameById(context,current_env_state))
     LF_Change_Day_Night(context,current_env_state)
 
@@ -108,8 +108,8 @@ end
 function action_level_tag_change_daynight(context,evt)
 
     --改之后的昼夜状态
-    target_env_state_id = evt.param2
-    target_env_state = ScriptLib.GetLevelTagNameById(context, target_env_state_id)
+    local target_env_state_id = evt.param2
+    local target_env_state = ScriptLib.GetLevelTagNameById(context, target_env_state_id)
 
     ScriptLib.PrintContextLog(context,"EnvState: 昼夜切换，开始切换昼夜物件状态到LevelTag "..target_env_state)
 
@@ -124,7 +124,7 @@ end
 ------------------------------------------------------------------
 
 function LF_Get_Current_Day_Night(context)
-    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 
     return current_env_state_id
 end
@@ -146,7 +146,7 @@ function LF_Change_Day_Night(context,target_env_state)
     end
 
 
-    is_daynight_finish = ScriptLib.GetGroupVariableValue(context, "is_daynight_finish")
+    local is_daynight_finish = ScriptLib.GetGroupVariableValue(context, "is_daynight_finish")
     if (is_daynight_finish ~= 1) then
         --当没有进入完成态时，处理昼夜出现/消失型物件的出现和消失
         if (ScriptLib.GetLevelTagNameById(context,target_env_state) == "2_4_Day") then
@@ -189,13 +189,13 @@ end
 --输入一个gadget，将其转到对应的昼夜状态
 function LF_Change_State_Day_Night(context, gadget, target_env_state_id)
 
-    target_env_state = ScriptLib.GetLevelTagNameById(context,target_env_state_id)
+    local target_env_state = ScriptLib.GetLevelTagNameById(context,target_env_state_id)
     ScriptLib.PrintContextLog(context,"EnvState: 正在将物件 "..gadget.." 的昼夜状态切换至 "..target_env_state)
 
-    current_state = ScriptLib.GetGadgetStateByConfigId(context,0,gadget)
-    current_phase = current_state % 10
-    target_gadgetState = 0
-
+    local current_state = ScriptLib.GetGadgetStateByConfigId(context,0,gadget)
+    local current_phase = current_state % 10
+    local target_gadgetState = 0
+    
     ScriptLib.PrintContextLog(context,"EnvState: 物件 "..gadget.." 的当前阶段为 "..current_phase)
     --夜转昼
     if (target_env_state == "2_4_Day") then
@@ -237,12 +237,12 @@ end
 function DayNight_Gadget_Lock(context,gadget_id)
 
     ScriptLib.PrintContextLog(context,"EnvState: 将昼夜物件"..gadget_id.."锁定")
-    if (not LF_Is_Gadget_DayNight(context,gadget_id)) then
+    if (not LF_Is_Gadget_DayNight(context,gadget_id)) then 
         ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-        return -1
+        return -1 
     end
-    current_env_state_id = LF_Get_Current_Day_Night(context)
-    current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+    local current_env_state_id = LF_Get_Current_Day_Night(context)
+    local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
     if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,gadget_id,200)
     end
@@ -257,12 +257,12 @@ end
 function DayNight_Gadget_Unlock(context,gadget_id)
 
     ScriptLib.PrintContextLog(context,"EnvState: 将昼夜物件"..gadget_id.."解锁")
-    if (not LF_Is_Gadget_DayNight(context,gadget_id)) then
+    if (not LF_Is_Gadget_DayNight(context,gadget_id)) then 
         ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-        return -1
+        return -1 
     end
-    current_env_state_id = LF_Get_Current_Day_Night(context)
-    current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+    local current_env_state_id = LF_Get_Current_Day_Night(context)
+    local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
     ScriptLib.PrintContextLog(context,"EnvState: 当前昼夜为"..current_env_state)
     if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,gadget_id,202)
@@ -280,14 +280,14 @@ end
 function DayNight_Gadget_Reset(context,gadget_id)
 
     ScriptLib.PrintContextLog(context,"EnvState: 将昼夜物件"..gadget_id.."重置")
-    if (not LF_Is_Gadget_DayNight(context,gadget_id)) then
+    if (not LF_Is_Gadget_DayNight(context,gadget_id)) then 
         ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-        return -1
+        return -1 
     end
-    current_env_state_id = LF_Get_Current_Day_Night(context)
-    current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
-    current_state = ScriptLib.GetGadgetStateByConfigId(context,0,gadget_id)
-    current_phase = current_state % 10
+    local current_env_state_id = LF_Get_Current_Day_Night(context)
+    local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+    local current_state = ScriptLib.GetGadgetStateByConfigId(context,0,gadget_id)
+    local current_phase = current_state % 10
     if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,gadget_id,200+current_phase)
     end
@@ -302,12 +302,12 @@ end
 function DayNight_Gadget_Finish(context,gadget_id)
 
     ScriptLib.PrintContextLog(context,"EnvState: 将昼夜物件"..gadget_id.."设置到完成")
-    if (not LF_Is_Gadget_DayNight(context,gadget_id)) then
+    if (not LF_Is_Gadget_DayNight(context,gadget_id)) then 
         ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-        return -1
+        return -1 
     end
-    current_env_state_id = LF_Get_Current_Day_Night(context)
-    current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+    local current_env_state_id = LF_Get_Current_Day_Night(context)
+    local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
     if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,gadget_id,201)
     end
@@ -325,11 +325,11 @@ end
 --s1329127 运营埋点，与封能台座交互
 function SLC_Mark_Energy_Source_Interaction(context)
     ScriptLib.PrintContextLog(context,"EnvState: source entity id为"..context.source_entity_id)
-
-    current_env_state = LF_Get_Current_Day_Night(context)
-    entity_id = context.source_entity_id
-    gadget_id = ScriptLib.GetGadgetIdByEntityId(context, entity_id)
-    configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+    
+    local current_env_state = LF_Get_Current_Day_Night(context)
+    local entity_id = context.source_entity_id
+    local gadget_id = ScriptLib.GetGadgetIdByEntityId(context, entity_id)
+    local configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
     ScriptLib.PrintContextLog(context,"EnvState: config id为"..configId)
 
     ScriptLib.PrintContextLog(context,"EnvState: 运营打点：封能台座-参数：".."daynight_state = "..current_env_state.."config_id = "..configId.."gadget_id = "..gadget_id)

@@ -3,18 +3,18 @@
 ||	owner: 		luyao.huang
 ||	description:	3.3流沙阶梯玩法
 ||	LogName:	SandStair
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 
 
 ------
-local_defs = {
+local local_defs = {
     option_active = 5000,
     option_deactive = 5001,
 }
 
-Tri = {
+local Tri = {
     [1] = { name = "group_load", config_id = 10000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     [2] = { name = "select_option", config_id = 10000002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
     [3] = { name = "time_axis_pass", config_id = 10000003, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0},
@@ -59,7 +59,7 @@ end
 
 
 function action_select_option(context,evt)
-    nozzole = evt.param1
+    local nozzole = evt.param1
     if evt.param2 == local_defs.option_active then
         ScriptLib.SetGadgetStateByConfigId(context,nozzole,201)
         if evt.param1 == origin_defs.origin_nozzole then
@@ -108,8 +108,8 @@ end
 
 function LF_Run_Sand_Flow(context)
 
-    state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,origin_defs.origin_nozzole)
-    flag = true
+    local state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,origin_defs.origin_nozzole)
+    local flag = true
     if state == 201 then
         flag = false
         ScriptLib.ChangeGroupVariableValue(context,"origin_time",1)
@@ -124,16 +124,16 @@ function LF_Run_Sand_Flow(context)
     for i = 1, #pools do
         ScriptLib.PrintContextLog(context,"## [SandStair] LF_Run_Sand_Flow：=================================================")
         ScriptLib.PrintContextLog(context,"## [SandStair] LF_Run_Sand_Flow：计算池子"..pools[i].."本次tick的沙量")
-        pool = pools[i]
-        flow_speed = 0
-        up_nozzole = nozzoles[pool].up_nozzole
-        down_nozzole = nozzoles[pool].down_nozzole
-        up_nozzole_pool = pool_connections[pool].up_nozzole
-        down_nozzole_pool = pool_connections[pool].down_nozzole
+        local pool = pools[i]
+        local flow_speed = 0
+        local up_nozzole = nozzoles[pool].up_nozzole
+        local down_nozzole = nozzoles[pool].down_nozzole
+        local up_nozzole_pool = pool_connections[pool].up_nozzole
+        local down_nozzole_pool = pool_connections[pool].down_nozzole
         --如果池子不为空，才会向下方流沙
         if not LF_Is_Pool_Empty(context,pool) then
-            flag_up = true
-            flag_down = true
+            local flag_up = true
+            local flag_down = true
             ScriptLib.PrintContextLog(context,"## [SandStair] LF_Run_Sand_Flow：池子不为空")
             --如果上喷口已激活
             if LF_Is_Nozzole_Active(context,up_nozzole) then
@@ -208,7 +208,7 @@ function LF_Get_Sand_Amount(context,pool)
 end
 
 function LF_Change_Sand_Amount(context,pool,delta)
-    sand_amount = LF_Get_Sand_Amount(context,pool)
+    local sand_amount = LF_Get_Sand_Amount(context,pool) 
     sand_amount = sand_amount + delta
     if sand_amount > pool_defs.overflow_max then
         sand_amount = pool_defs.overflow_max
@@ -235,7 +235,7 @@ function LF_Is_Nozzole_Active(context,nozzole)
     if nozzole == -1 then
         return false
     end
-    state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,nozzole)
+    local state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,nozzole)
     return state == 201
 end
 
@@ -247,7 +247,7 @@ function LF_Set_Nozzole_Freeze(context,nozzole)
     ScriptLib.SetEntityServerGlobalValueByConfigId(context, nozzole, "SGV_Is_Flow", 0)
 end
 
-function LF_Is_Up_Nozzole_Can_Flow(context,pool)
+function LF_Is_Up_Nozzole_Can_Flow(context,pool) 
     return LF_Get_Sand_Amount(context,pool) > pool_defs.up_nozzole_threshold
 end
 
@@ -266,7 +266,7 @@ end
 
 --给池子上面写SGV
 function LF_Set_SGV_To_Pool(context,pool)
-    sand_amount = LF_Get_Sand_Amount(context,pool)
+    local sand_amount = LF_Get_Sand_Amount(context,pool) 
     ScriptLib.SetEntityServerGlobalValueByConfigId(context, pool, "SGV_Sand_Amount", sand_amount)
 end
 --[[-----------------------------------------------------------------
@@ -277,18 +277,18 @@ end
 
 function LF_Set_Option(context,config_id)
     ScriptLib.PrintContextLog(context,"## [SandStair] LF_Set_Option：给"..config_id.."上选项")
-    state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,config_id)
+    local state = ScriptLib.GetGadgetStateByConfigId(context,base_info.group_id,config_id)
     if state == 0 then
         ScriptLib.SetWorktopOptionsByGroupId(context,base_info.group_id,config_id,{local_defs.option_active})
     end
     if state == 201 then
         ScriptLib.SetWorktopOptionsByGroupId(context,base_info.group_id,config_id,{local_defs.option_deactive})
-    end
+    end 
 end
 
 
 function LF_Show_Option(context)
-
+    
     ScriptLib.PrintContextLog(context,"## [SandStair] LF_Show_Option：显示选项")
     for k,v in pairs(nozzoles) do
         if v.up_nozzole ~= -1 and v.up_nozzole ~= 0 then

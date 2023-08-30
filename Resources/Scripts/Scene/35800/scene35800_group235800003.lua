@@ -36,9 +36,9 @@ defs = {
     NoArrivalScore = -10
 }
 
-regionIndex = 3005
+local regionIndex = 3005
 
-PhasePlay ={
+local PhasePlay ={
     [1]={
         FloorArrays = {
             [1] = {{0,0,0,0,0,0,0,0,0},

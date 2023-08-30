@@ -4,13 +4,13 @@ base_info = {
 }
 
 -- DEFS_MISCS
-PlayerElectrohercules = 107001
+local PlayerElectrohercules = 107001
 
-EnemyElectrohercules = {107002,107003,107004}
+local EnemyElectrohercules = {107002,107003,107004}
 
-weather_id = 3500
+local weather_id = 3500
 
-Battlefield = {
+local Battlefield = {
 
 	group_id = 133209096,
 

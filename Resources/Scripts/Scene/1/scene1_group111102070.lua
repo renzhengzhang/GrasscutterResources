@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-slots =
+local slots =
 {
      [1] = {slot_configID = 70002, worktop_configID = 70003},
      [2] = {slot_configID = 70004, worktop_configID = 70005}

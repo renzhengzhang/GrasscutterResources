@@ -61,7 +61,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-matrix =
+local matrix =
 {
 {defs.gadget_11,defs.gadget_12,defs.gadget_13,defs.gadget_14,defs.gadget_15,defs.gadget_16,defs.gadget_17},
 

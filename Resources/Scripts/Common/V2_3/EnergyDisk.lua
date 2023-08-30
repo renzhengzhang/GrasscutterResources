@@ -9,7 +9,7 @@ defs = {
 
 ]]
 
-extraTriggers={
+local extraTriggers={
   { config_id = 8000001,name = "ANY_MONSTER_LIVE", event = EventType.EVENT_ANY_MONSTER_LIVE, source = "", condition = "", action = "action_Set_SGV", trigger_count = 0 },
   { config_id = 8000002, name = "EVENT_ANY_GADGET_DIE", event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_Refresh_SGV", trigger_count = 0 },
   { config_id = 8000003, name = "EVENT_GADGET_CREATE", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_Refresh_SGV", trigger_count = 0 },
@@ -33,7 +33,7 @@ end
 
 
 function action_Set_SGV(context,evt)
-	powerGadgetNum=0
+	local powerGadgetNum=0
 	--根据group内残留的增幅器数量来给怪物上SGV
 	powerGadgetNum=ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = defs.group_id,gadget_id={70350201}})
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, evt.param1, "SGV_Energy_Level", powerGadgetNum)
@@ -42,10 +42,10 @@ end
 
 function action_Refresh_SGV(context,evt)
 	--物件数量发生变动时修改group内怪物的层数
-	powerGadgetNum=0
+	local powerGadgetNum=0
 	--根据group内残留的增幅器数量来给怪物上SGV
 	powerGadgetNum=ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = defs.group_id,gadget_id={70350201}})
-	monsterTable=ScriptLib.GetGroupAliveMonsterList(context,defs.group_id)
+	local monsterTable=ScriptLib.GetGroupAliveMonsterList(context,defs.group_id)
 	if monsterTable~=nil and monsterTable~=-1 then
 		for i=1,#monsterTable do
 			ScriptLib.SetEntityServerGlobalValueByConfigId(context, monsterTable[i], "SGV_Energy_Level", powerGadgetNum)

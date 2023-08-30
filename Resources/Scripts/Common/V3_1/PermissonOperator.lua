@@ -9,26 +9,26 @@
 ||	Protection    ||	在操作台创建时判断玩家权限是否足够开启
 =====================================================================================================================
 
-optionID = {}
-optionID_2 = 0
+local optionID = {}
+local optionID_2 = 0
 
 =======================================================================================]]
-SGV_Delta={
+local SGV_Delta={
 	[100004] = 103,
 	[100006] = 101,
 	[100007] = 102,
 	[100008] = 100,
 }
 
-FailOption = 495
+local FailOption = 495
 
-SGV_KEY = "SGV_PERMISSION_COMMONLEVEL"
-SGV_GLOW = "SGV_PERMISSION_GLOW"
-SGV_SWIPE = "SGV_PERMISSION_SWIPE"
+local SGV_KEY = "SGV_PERMISSION_COMMONLEVEL"
+local SGV_GLOW = "SGV_PERMISSION_GLOW"
+local SGV_SWIPE = "SGV_PERMISSION_SWIPE"
 
 
 
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Group_Load"] = { config_id = 80000001, name = "Group_Load", event= EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
 		["Select_Option"] = { config_id = 80000002, name = "Select_Option", event= EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
@@ -40,7 +40,7 @@ extrTriggers = {
 
 function action_state_change( context, evt)
 
-	entityID = ScriptLib.GetEntityIdByConfigId(context, evt.param2)
+	local entityID = ScriptLib.GetEntityIdByConfigId(context, evt.param2)
 	if ScriptLib.GetGadgetIdByEntityId(context, entityID) == 70330283 and evt.param3 == 202 then
 
 		ScriptLib.PrintContextLog(context, "## PermissionOperator_LOG : 权限操作台状态切换")
@@ -139,7 +139,7 @@ function action_group_load( context, evt )
 	ScriptLib.PrintContextLog(context, "## PermissionOperator_LOG : 权限操作台创建")
 	LF_StOperatorState( context )
 
-	return 0
+	return 0 
 end
 
 
@@ -156,8 +156,8 @@ function LF_StOperatorState( context )
 	for i,v in ipairs(gadgets) do
 		if v.gadget_id == 70330283 then
 			--获取需要的权限类型和等级
-			_permissiontype = 0
-			_permissionlevel = 0
+			local _permissiontype = 0
+			local _permissionlevel = 0
 			if v.server_global_value_config.SGV_CHAINTYPE ~= nil then
 				_permissiontype = v.server_global_value_config.SGV_CHAINTYPE
 			else
@@ -171,7 +171,7 @@ function LF_StOperatorState( context )
 			end
 			ScriptLib.PrintContextLog(context, "## PermissionOperator_LOG : 需要等级".._permissionlevel)
 
-			_curlevel = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), _permissiontype)
+			local _curlevel = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), _permissiontype)
 			ScriptLib.PrintContextLog(context, "## PermissionOperator_LOG : 自身等级：".._curlevel)
 
 			if ScriptLib.GetGadgetStateByConfigId(context, 0, v.config_id)==202 then
@@ -224,9 +224,9 @@ function LF_StOperatorState( context )
 						return 0
 					end
 
-
+					
 					ScriptLib.SetWorktopOptionsByGroupId(context, 0, v.config_id, {optionID[ScriptLib.GetGroupVariableValue(context, "Variable_OptionID")]})
-				end
+				end			
 
 			end
 			--8.8 更新：支持复数个权限操作台

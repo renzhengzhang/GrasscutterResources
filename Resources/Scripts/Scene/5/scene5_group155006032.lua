@@ -9,11 +9,11 @@ defs = {
 }
 
 -- DEFS_MISCS
-EnvControlGadgets = {}
-DayAppearGadgets = {32002}
-NightAppearGadgets = {32004}
+local EnvControlGadgets = {}
+local DayAppearGadgets = {32002}
+local NightAppearGadgets = {32004}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -36,7 +36,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 

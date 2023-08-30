@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-connection = {
+local connection = {
 	[240001] = {240003,1},
 	[240002] = {240001,1},
 	[240003] = {240002,1},

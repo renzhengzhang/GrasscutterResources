@@ -166,9 +166,9 @@ end
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_1004(context, evt)
-	pos = { x=defs.target_x, y=defs.target_y, z=defs.target_z}
+	local pos = { x=defs.target_x, y=defs.target_y, z=defs.target_z}
 
-	pos_follow = { x=defs.camera_x, y=defs.camera_y, z=defs.camera_z}
+	local pos_follow = { x=defs.camera_x, y=defs.camera_y, z=defs.camera_z}
 
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0, is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false, screen_x = 0, screen_y = 0, is_set_screenXY = false }) then
 	    ScriptLib.PrintContextLog(context, "@@Lua_warning : active_cameralook_begin")

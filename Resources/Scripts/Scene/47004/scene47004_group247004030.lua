@@ -4,10 +4,10 @@ base_info = {
 }
 
 -- DEFS_MISCS
-GroupId = 247004030
-ChestConfigID = 30002
-RegionID = 30001
-ChestConfigIDList = {30002}
+local GroupId = 247004030
+local ChestConfigID = 30002
+local RegionID = 30001
+local ChestConfigIDList = {30002}
 
 --================================================================
 --

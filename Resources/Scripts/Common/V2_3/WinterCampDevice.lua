@@ -37,7 +37,7 @@ defs = {
 
 ]]
 
-extraTriggers={
+local extraTriggers={
  -- { config_id = 8000001,name = "Time_Limit", event = EventType.EVENT_TIME_AXIS_PASS, source = "WinterCamp_LimitTime", condition = "", action = "action_Time_Limit", trigger_count = 0 },
   { config_id = 8000002, name = "Gadget_State_Change", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_Gadget_State_Change", trigger_count = 0 },
   { config_id = 8000003, name = "Enter_Tutorial_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_TutorialRegion", trigger_count = 0},
@@ -113,9 +113,9 @@ end
 
 function LF_Try_StartTutorial(context)
 
-    UidList = ScriptLib.GetSceneUidList(context)
-    ownerUid = UidList[1]
-    havePlayed  = ScriptLib.GetExhibitionAccumulableData(context, ownerUid, 10901104)
+    local UidList = ScriptLib.GetSceneUidList(context)
+    local ownerUid = UidList[1]
+    local havePlayed  = ScriptLib.GetExhibitionAccumulableData(context, ownerUid, 10901104)
 
     if 0 == havePlayed then
         ScriptLib.ShowClientTutorial(context, 836, {ownerUid})
@@ -154,7 +154,7 @@ function SuccessProcess(context)
 	ScriptLib.SetGroupVariableValue(context,"puzzle_state", 2)
 	SetGadgetStateInTable(context,defs.main_gadget,201)
 	--在战斗过程中解谜完成，立即上SGV
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for k,v in pairs(uid_list) do
 		ScriptLib.SetTeamServerGlobalValue(context, v, "SGV_WinterCamp_PlayerBuff", 1)
 	end
@@ -170,7 +170,7 @@ function action_Mineral_State_Change(context, evt)
 		return 0
 	end
 
-	mineral_index = LF_IndexInTable(context,evt.param2,defs.mineral)
+	local mineral_index = LF_IndexInTable(context,evt.param2,defs.mineral)
 
 	if mineral_index == 0 then
 		return 0
@@ -186,14 +186,14 @@ function action_Gadget_State_Change(context, evt)
 		return 0
 	end
 
-	gadget_index = LF_IndexInTable(context,evt.param2,defs.branch_gadgets)
+	local gadget_index = LF_IndexInTable(context,evt.param2,defs.branch_gadgets)
 
 	--如果是branch装置。且是被点亮.
 	if gadget_index ~= 0 and evt.param1 == 201 then
 		--无论是不是正确的顺序，都要mark
 		ScriptLib.MarkGroupLuaAction(context, "ActivityWinterCamp_4", "", {})
 
-		next_index = ScriptLib.GetGroupVariableValue(context,"next_index")
+		local next_index = ScriptLib.GetGroupVariableValue(context,"next_index")
 
 		--如果解谜已经开始
 		if ScriptLib.GetGroupVariableValue(context,"puzzle_state") == 1 then
@@ -206,7 +206,7 @@ function action_Gadget_State_Change(context, evt)
 			--如果是正确的交互顺序
 			else]]
 				--移除对应的龙血矿
-				index_toRemove = ScriptLib.GetGroupVariableValue(context, "lastID")
+				local index_toRemove = ScriptLib.GetGroupVariableValue(context, "lastID")
 				if index_toRemove ~= 0 then
 					ScriptLib.RemoveEntityByConfigId(context, defs.group, EntityType.GADGET, defs.mineral[index_toRemove])
 				end
@@ -233,7 +233,7 @@ function action_Gadget_State_Change(context, evt)
 					ScriptLib.SetGroupVariableValue(context,"puzzle_state", 1)
 					ScriptLib.SetGroupVariableValue(context,"next_index", 2)
 					--移除对应的龙血矿
-					index_toRemove = ScriptLib.GetGroupVariableValue(context, "lastID")
+					local index_toRemove = ScriptLib.GetGroupVariableValue(context, "lastID")
 					if index_toRemove ~= 0 then
 						ScriptLib.RemoveEntityByConfigId(context, defs.group, EntityType.GADGET, defs.mineral[index_toRemove])
 					end
@@ -289,7 +289,7 @@ function action_On_TimeAxis(context, evt)
 		LF_Check_AllPlayerSGV(context)
 	end
 	--[[--暖源机关auth保持为主机
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	if #uid_list ~= 0 then
 		ScriptLib.ForceRefreshAuthorityByConfigId(context, defs.main_gadget[1], uid_list[1])
 	end]]
@@ -300,7 +300,7 @@ function LF_Check_AllPlayerSGV(context)
 	--检查暖源状态
 	if ScriptLib.GetGroupVariableValue(context,"puzzle_state") == 2 then
 
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		for k,v in pairs(uid_list) do
 			if ScriptLib.GetTeamServerGlobalValue(context, v, "SGV_WinterCamp_PlayerBuff") == 0 then
 				ScriptLib.SetTeamServerGlobalValue(context, v, "SGV_WinterCamp_PlayerBuff", 1)
@@ -323,14 +323,14 @@ function action_select_option(context, evt)
 		ScriptLib.MarkGroupLuaAction(context, "ActivityWinterCamp_3", "", {})
 		--暖源状态下开挑战，上GV
 		if ScriptLib.GetGroupVariableValue(context,"puzzle_state") == 2 then
-			uid_list = ScriptLib.GetSceneUidList(context)
+			local uid_list = ScriptLib.GetSceneUidList(context)
 			for k,v in pairs(uid_list) do
 				ScriptLib.SetTeamServerGlobalValue(context, v, "SGV_WinterCamp_PlayerBuff", 1)
 			end
 			--用于检查中途加入的玩家
 			ScriptLib.InitTimeAxis(context, "SGV_Checker", {3}, true)
 		else
-			uid_list = ScriptLib.GetSceneUidList(context)
+			local uid_list = ScriptLib.GetSceneUidList(context)
 			for k,v in pairs(uid_list) do
 				ScriptLib.SetTeamServerGlobalValue(context, v, "SGV_WinterCamp_PlayerBuff", 0)
 			end
@@ -375,7 +375,7 @@ end
 --上报运营日志数据  s1286671
 function UpLoadActionLog_Result(context, result)
 
-	log = {
+	local log = {
 		["result"] = result,--0 -成功 1-失败 （具体枚举和TD实现一致， 能区分成功or失败即可）
 	}
 
@@ -385,7 +385,7 @@ function UpLoadActionLog_Result(context, result)
 end
 function UpLoadActionLog_StateChange(context) --寒冷装置变为暖源状态时记录
 	--	放空即可
-	log = {
+	local log = {
 	}
 
 	ScriptLib.MarkGroupLuaAction(context, "ActivityWinterCamp_2", "", log)
@@ -393,7 +393,7 @@ function UpLoadActionLog_StateChange(context) --寒冷装置变为暖源状态�
 	return 0
 end
 function LF_ResetPlayerSGV(context)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for k,v in pairs(uid_list) do
 		ScriptLib.SetTeamServerGlobalValue(context, v, "SGV_WinterCamp_PlayerBuff", 0)
 	end

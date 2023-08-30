@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-       defs = {
+local        defs = {
 	is_movable = 1,
 	--连线形态
 	patterns =

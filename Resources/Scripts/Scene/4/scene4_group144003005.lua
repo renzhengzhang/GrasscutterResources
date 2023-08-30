@@ -4,13 +4,13 @@ base_info = {
 }
 
 -- DEFS_MISCS
-NormalRoundTime = 50
-ShooterConfigID = 5001
-GalleryID = 7006
-TextEnterConfigID = 5002
-GalleryIDList = {7006,7013,7014}
+local NormalRoundTime = 50
+local ShooterConfigID = 5001
+local GalleryID = 7006
+local TextEnterConfigID = 5002
+local GalleryIDList = {7006,7013,7014}
 
-NormalRandomList = {
+local NormalRandomList = {
        {[1] = {1},
         [2] = {3},
         [3] = {5},},
@@ -24,7 +24,7 @@ NormalRandomList = {
         [3] = {17},},
 }
 
-NormalRandomList2 = {
+local NormalRandomList2 = {
        {[1] = {19},
         [2] = {21},
         [3] = {23},},
@@ -38,7 +38,7 @@ NormalRandomList2 = {
         [3] = {35},},
 }
 
-FeverRandomList = {
+local FeverRandomList = {
        {[1] = {2},
         [2] = {4},
         [3] = {6},
@@ -56,7 +56,7 @@ FeverRandomList = {
 
 }
 
-FeverRandomList2 = {
+local FeverRandomList2 = {
        {[1] = {20},
         [2] = {22},
         [3] = {24},
@@ -74,34 +74,34 @@ FeverRandomList2 = {
 
 }
 
-RandomBuffTimeAxis = {
+local RandomBuffTimeAxis = {
         {20,50,80,120,150},
         {15,45,75,115,145},
         {25,50,85,125,155},
 }
 
-BUffList = {
+local BUffList = {
         {buffConfigID = 5033, buffWeight = 10},
         {buffConfigID = 5034, buffWeight = 20},
         {buffConfigID = 5035, buffWeight = 0},
 }
 
-BUffList2 = {
+local BUffList2 = {
         {buffConfigID = 5033, buffWeight = 10},
         {buffConfigID = 5034, buffWeight = 10},
         {buffConfigID = 5035, buffWeight = 20},
 }
 
-BUffList3 = {
+local BUffList3 = {
         {buffConfigID = 5033, buffWeight = 10},
         {buffConfigID = 5034, buffWeight = 10},
         {buffConfigID = 5035, buffWeight = 10},
 }
 
-BuffRegionID = 5036
+local BuffRegionID = 5036
 
-PerDamageScore = 2
-PerShooterScore = 100
+local PerDamageScore = 2
+local PerShooterScore = 100
 
 --================================================================
 --

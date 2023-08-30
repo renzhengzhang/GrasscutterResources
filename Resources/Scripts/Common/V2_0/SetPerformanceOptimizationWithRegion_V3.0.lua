@@ -2,7 +2,7 @@
 使用region进行性能优化
 ]]--
 
-whiteList={
+local whiteList={
 	133220037,
 	133210237,
 }
@@ -10,7 +10,7 @@ whiteList={
 
 
 
-extraTriggers={
+local extraTriggers={
 	{config_id = 9000001, name = "ENTER_REGION", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_EVENT_ENTER_REGION", forbid_guest = false,trigger_count = 0 },
 	{config_id = 9000002,name = "LEAVE_REGION", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_EVENT_LEAVE_REGION", forbid_guest = false, trigger_count = 0 },
 }
@@ -29,8 +29,8 @@ function action_EVENT_ENTER_REGION(context, evt)
 		return 0
 	end
 	--设置视野锚点
-	isInWhiteList=0
-	curGroup=ScriptLib.GetContextGroupId(context)
+	local isInWhiteList=0
+	local curGroup=ScriptLib.GetContextGroupId(context)
 	for i=1,#whiteList do
 		if whiteList[i]==curGroup then
 			isInWhiteList=isInWhiteList+1
@@ -47,7 +47,7 @@ function action_EVENT_ENTER_REGION(context, evt)
 	if defs.bossRegionSpecialOptimization==nil then
 		--设置visiontype
 		ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {0})
-	else
+	else 
 		ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {30010001})
 		ScriptLib.ForbidPlayerRegionVision(context, context.uid)
 	end

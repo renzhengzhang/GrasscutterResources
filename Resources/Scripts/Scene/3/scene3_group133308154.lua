@@ -104,7 +104,7 @@ end
 function condition_EVENT_ENTER_REGION_154002(context, evt)
 	if evt.param1 ~= 154002 then return false end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7305205)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7305205)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -135,8 +135,8 @@ function action_EVENT_QUEST_FINISH_154003(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标{x=-2088.326, y=153.7259, z=4408.542}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-2088.326, y=153.7259, z=4408.542}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-2088.326, y=153.7259, z=4408.542}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = true, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -184,7 +184,7 @@ end
 function condition_EVENT_ENTER_REGION_154007(context, evt)
 	if evt.param1 ~= 154007 then return false end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7305216)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7305216)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -243,7 +243,7 @@ end
 function condition_EVENT_ENTER_REGION_154011(context, evt)
 	if evt.param1 ~= 154011 then return false end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7305251)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7305251)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -307,7 +307,7 @@ function condition_EVENT_ENTER_REGION_154015(context, evt)
 		return false
 	end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7305204)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7305204)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

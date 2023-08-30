@@ -13,7 +13,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-play = {
+local play = {
 	options = {
 		[0] = defs.option_1, --ore
 		[1] = defs.option_2, --mithril
@@ -126,7 +126,7 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_57001(context, evt)
-	ret2 = ScriptLib.SetPlayerEyePointStream(context, 57001, 57004, true)
+	local ret2 = ScriptLib.SetPlayerEyePointStream(context, 57001, 57004, true)
 	ScriptLib.PrintContextLog(context, "## ret2 = "..ret2)
 	return 0
 end
@@ -144,7 +144,7 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_57003(context, evt)
-	ret1 = ScriptLib.SetPlayerEyePointStream(context, 57003, 57004, true)
+	local ret1 = ScriptLib.SetPlayerEyePointStream(context, 57003, 57004, true)
 	ScriptLib.PrintContextLog(context, "## ret1 = "..ret1)
 	return 0
 end

@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-optionPlay ={
+local optionPlay ={
     gadgetCid = 257001, --只确认该物件的GadgetState
     optionCid = 257002, --只修改此物件的操作台
 }

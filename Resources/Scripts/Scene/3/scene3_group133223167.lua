@@ -15,11 +15,11 @@ defs = {
 
 -- DEFS_MISCS
 function GetNextPath(context)
-	path = {}
-	index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
-	stoppoint = defs.pointInfo[index]
+	local path = {}
+	local index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
+	local stoppoint = defs.pointInfo[index]
 	ScriptLib.PrintLog(context, "stop point : "..stoppoint)
-	currentNodeID = ScriptLib.GetGroupVariableValue(context,"currentPathNodeID")
+	local currentNodeID = ScriptLib.GetGroupVariableValue(context,"currentPathNodeID")
 
 	if currentNodeID == defs.maxPointCount then
 		table.insert(path, stoppoint)

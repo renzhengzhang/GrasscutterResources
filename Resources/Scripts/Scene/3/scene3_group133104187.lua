@@ -128,7 +128,7 @@ function action_EVENT_VARIABLE_CHANGE_187002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
 
 	-- 启动移动平台
-	y = ScriptLib.GetGroupVariableValue(context, "isActive")
+	local y = ScriptLib.GetGroupVariableValue(context, "isActive")
 	if y == 1 then
 		if evt.param1 == 1 then
 			ScriptLib.StartPlatform(context, 709)
@@ -153,8 +153,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_187003(context, evt)
-	x = ScriptLib.GetGroupVariableValue(context, "switch")
-	y = ScriptLib.GetGroupVariableValue(context, "isActive")
+	local x = ScriptLib.GetGroupVariableValue(context, "switch")
+	local y = ScriptLib.GetGroupVariableValue(context, "isActive")
 
 	if y == 1 then
 

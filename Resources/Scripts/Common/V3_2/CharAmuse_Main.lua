@@ -34,7 +34,7 @@ defs = {
 
 ]]
 
-cfg = {
+local cfg = {
 	--multistage数量
 	total_stage = 3,
 	--完成wait阶段传送玩家,等待传送完成的延时
@@ -61,7 +61,7 @@ cfg = {
 	}
 
 }
-extraTriggers = {
+local extraTriggers = {
 	{ config_id = 8000001, name = "Group_Load_Main", event= EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_Group_Load_Main", trigger_count = 0 },
 	{ config_id = 8000002, name = "MultiStage_End", event= EventType.EVENT_SCENE_MULTISTAGE_PLAY_STAGE_END, source = "", condition = "", action = "action_MultiStage_End", trigger_count = 0 },
 	{ config_id = 8000003, name = "MPMode_All_PlayerEnter", event = EventType.EVENT_CHAR_AMUSEMENT_DUNGEON_ALL_PLAYER_ENTER, source = "", condition = "", action = "action_MPMode_All_PlayerEnter", trigger_count = 0},
@@ -88,11 +88,11 @@ function action_Group_Load_Main(context, evt)
 	ScriptLib.SetGroupTempValue(context, "stage_num", 1, {})
 
 	--初始化Multistage
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.InitSceneMultistagePlay(context, 1, MultistagePlayType.CharAmusement, { gallery_stage_count = cfg.total_stage }, uid_list)
 
 	--获取gallery_id列表，存为tempValue
-	play_gallery_list = ScriptLib.GetCharAmusementMultistagePlayGalleryIdVec(context, base_info.group_id, 1)
+	local play_gallery_list = ScriptLib.GetCharAmusementMultistagePlayGalleryIdVec(context, base_info.group_id, 1)
 	if nil == play_gallery_list or 0 == #play_gallery_list then
 		ScriptLib.PrintGroupWarning(context,"## [CharAmuse_Main] Get multi stage gallery id list failed.")
 		return 0
@@ -119,8 +119,8 @@ function action_Group_Load_Main(context, evt)
 end
 
 function action_Dungeon_Settle(context, evt)
-	stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
-	cur_gallery = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
+	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
+	local cur_gallery = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
 	ScriptLib.StopGallery(context, cur_gallery, true)
 	ScriptLib.EndSceneMultiStagePlay(context, 1, false)
 	ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] Dungeon settled.")
@@ -129,8 +129,8 @@ end
 
 --联机 通过Event判断玩家全部入场
 function action_MPMode_All_PlayerEnter(context, evt)
-	has_transed = ScriptLib.GetGroupTempValue(context, "has_transed", {})
-	stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
+	local has_transed = ScriptLib.GetGroupTempValue(context, "has_transed", {})
+	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
 	 if 1 == stage_index and 1 ~= has_transed then
 	 	ScriptLib.SetGroupTempValue(context, "has_transed", 1, {})
 		--LF_TranAllPlayerToGalleryPos(context, stage_index) --需要确保客户端Wait界面已经开启，所以首次进场时晚一点传送
@@ -144,12 +144,12 @@ end
 
 --SLC入场传送 目的是用于重连时处理被打断传送的玩家。但进场都会调用，在EX_DoReTransCheck_Single用IsPlayerTransmittable过滤
 function SLC_CharAmuseMain_PlayerEnter(context)
-	stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
+	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
 	if -1 == stage_index then
 		ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] Get level entity ability onstart. Got stage_index failed.")
 		return 0
 	end
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
 	if nil == defs.group_list[gallery_id] then
 		ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] Get level entity ability onstart. Got unexpected gallery_id@"..gallery_id)
 		return 0
@@ -165,7 +165,7 @@ end
 
 function action_All_Avator_Die(context, evt)
 	-- 所有玩家死亡
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 
 	for i,v in ipairs(uid_list) do
 		if ScriptLib.IsPlayerAllAvatarDie(context, v) == false then
@@ -178,14 +178,14 @@ function action_All_Avator_Die(context, evt)
 end
 
 function action_Enter_Scene_Trans(context, evt)
-	stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
+	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
 	LF_TranAllPlayerToGalleryPos(context, stage_index)
 	return 0
 end
 
 function action_Trans_Delay(context, evt)
-	stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
-	stage_num = ScriptLib.GetGroupTempValue(context, "stage_num", {})
+	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
+	local stage_num = ScriptLib.GetGroupTempValue(context, "stage_num", {})
 	--1,4,7是Preview
 	if 1 == stage_num or 4 == stage_num or 7 == stage_num then
 		ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] Trans delay time axis passed. End waitStage@".."WaitStage_"..stage_index)
@@ -195,11 +195,11 @@ function action_Trans_Delay(context, evt)
 end
 
 function action_SwitchTeam_Delay(context, evt)
-	stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
+	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
 	ScriptLib.CharAmusementMultistagePlaySwitchTeam(context, base_info.group_id, 1, stage_index)
 	LF_TranAllPlayerToGalleryPos(context, stage_index)
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
 	--特殊处理1：如果接下来是战斗关，则移除打桩关的suite布设
 	if LF_CheckIsInTable(context, gallery_id, cfg.battle_gallery) then
 		ScriptLib.ExecuteGroupLua(context, 251008012, "EX_ClearPillarSuite", { })
@@ -219,9 +219,9 @@ end
 function action_MultiStage_End(context, evt)
 
 	--玩到第几关了
-	stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
+	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
 	--End的是哪一种Stage
-	name = string.sub(evt.source_name, 1, 9)
+	local name = string.sub(evt.source_name, 1, 9)
 
 	ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] MultiStage_End. stage_index@"..stage_index.." source_name@"..evt.source_name.. " evt.param3@".. evt.param3)
 	--失败
@@ -238,7 +238,7 @@ function action_MultiStage_End(context, evt)
 
 		ScriptLib.EndTimeAxis(context, "trans_delay")
 		--如果首轮传送在WaitStage结束后还没有执行，则在此时传送
-		has_transed = ScriptLib.GetGroupTempValue(context, "has_transed", {})
+		local has_transed = ScriptLib.GetGroupTempValue(context, "has_transed", {})
 		if 1 ~= has_transed then
 			ScriptLib.SetGroupTempValue(context, "has_transed", 1, {})
 			LF_TranAllPlayerToGalleryPos(context, stage_index)
@@ -267,7 +267,7 @@ end
 --换人与传送阶段 先进阶段让客户端开界面 然后延迟两秒换人
 function LF_StartWaitStage(context, stage_index)
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
 
 	--开启阶段
 	ScriptLib.StartSceneMultiStagePlayStage(context, 1, 40, Multistage.CharAmusementPreview, "WaitStage_"..stage_index, { preview_stage_index = stage_index, preview_display_duration = 40})
@@ -294,7 +294,7 @@ end
 --倒计时阶段
 function LF_StartIdleStage(context, stage_index)
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
 	--进行一次超界检测
 	ScriptLib.ExecuteGroupLua(context, defs.group_list[gallery_id], "EX_DoReTransCheck", {})
 
@@ -307,8 +307,8 @@ end
 --开启玩法阶段 通知对应GroupId
 function LF_StartPlayStage(context, stage_index)
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
-	is_last_level = 0
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
+	local is_last_level = 0
 	if stage_index >= ScriptLib.GetGroupTempValue(context, "gallery_num", {}) then
 		is_last_level = 1
 	end
@@ -337,7 +337,7 @@ end
 --外部玩法通知结束玩法阶段
 function EX_EndPlayStage( context, prev_context, is_fail, from_group)
 
-	stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
+	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
 
 	ScriptLib.ExecuteGroupLua(context, from_group, "EX_StopReTransCheck", {})
 
@@ -364,12 +364,12 @@ end
 
 function LF_TranAllPlayerToGalleryPos(context, stage_index)
 	--传送至配置的坐标
-	uid_list = ScriptLib.GetSceneUidList(context)
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
+	local uid_list = ScriptLib.GetSceneUidList(context)
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
 	if uid_list ~= nil then
 		for k,v in pairs(uid_list) do
-			pos = defs.transpoint_list[gallery_id][k].pos
-			rot = defs.transpoint_list[gallery_id][k].rot
+			local pos = defs.transpoint_list[gallery_id][k].pos
+			local rot = defs.transpoint_list[gallery_id][k].rot
 			ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] LF_TranAllPlayerToGalleryPos. Start trans player@"..v.." X@"..pos.x.. " Y@"..pos.y.. " Z@"..pos.z)
 			ScriptLib.TransPlayerToPos(context, { uid_list = {v}, pos = pos, radius = 0, rot = rot , is_skip_ui = true })
 		end
@@ -380,14 +380,14 @@ function LF_TranAllPlayerToGalleryPos(context, stage_index)
 end
 
 function EX_ReTrans(context, prev_context, uid)
-	uid_list = ScriptLib.GetSceneUidList(context)
-	stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
+	local uid_list = ScriptLib.GetSceneUidList(context)
+	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
 	--玩家对应站位
 	for i,v in ipairs(uid_list) do
 		if v == uid then
-			pos = defs.transpoint_list[gallery_id][i].pos
-			rot = defs.transpoint_list[gallery_id][i].rot
+			local pos = defs.transpoint_list[gallery_id][i].pos
+			local rot = defs.transpoint_list[gallery_id][i].rot
 			ScriptLib.TransPlayerToPos(context, { uid_list = {uid}, pos = pos, radius = 0, rot = rot , is_skip_ui = false})
 			ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] Player@"..uid.." ReTransed.")
 		end
@@ -396,8 +396,8 @@ function EX_ReTrans(context, prev_context, uid)
 end
 
 function LF_IsAllStageFinish(context)
-	stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
-	gallery_num = ScriptLib.GetGroupTempValue(context, "gallery_num", {})
+	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
+	local gallery_num = ScriptLib.GetGroupTempValue(context, "gallery_num", {})
 	if stage_index > gallery_num then
 		return true
 	end

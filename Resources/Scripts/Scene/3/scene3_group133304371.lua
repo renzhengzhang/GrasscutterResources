@@ -12,9 +12,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-v = 0
-v_error = 0
-max_bit = #defs.gadget_array
+local v = 0
+local v_error = 0
+local max_bit = #defs.gadget_array
 
 --================================================================
 --
@@ -398,7 +398,7 @@ end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_371012(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7306219)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7306219)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

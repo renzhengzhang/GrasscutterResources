@@ -277,7 +277,7 @@ end
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_220013(context, evt)
 	-- 根据触发的挑战类型决定奖励物品
-	reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
+	local reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
 	if reward == 1 then
 	ScriptLib.CreateGadget(context, {config_id = defs.gadget_chest_1} )
 	-- 向任务返回结果
@@ -315,7 +315,7 @@ end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_220014(context, evt)
-	reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
+	local reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
 	if reward == 1 then
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context, defs.quest_1_fail)

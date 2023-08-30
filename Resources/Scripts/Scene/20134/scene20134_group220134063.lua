@@ -137,7 +137,7 @@ function action_EVENT_SELECT_OPTION_63004(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 63001, 107, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -146,7 +146,7 @@ function action_EVENT_SELECT_OPTION_63004(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 63002, 63, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -171,8 +171,8 @@ function action_EVENT_SELECT_OPTION_63004(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（335.174，631.9067，-1496.881），持续时间为5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=335.174, y=631.9067, z=-1496.881}
-	  pos_follow = {x=2, y=-2, z=-16}
+		local pos = {x=335.174, y=631.9067, z=-1496.881}
+	  local pos_follow = {x=2, y=-2, z=-16}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -203,7 +203,7 @@ function action_EVENT_SELECT_OPTION_63007(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 63001, 107, {3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -212,7 +212,7 @@ function action_EVENT_SELECT_OPTION_63007(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 63002, 63, {3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -237,8 +237,8 @@ function action_EVENT_SELECT_OPTION_63007(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（329.7214，631.2805，-1492.386），持续时间为5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=329.7214, y=631.2805, z=-1492.386}
-	  pos_follow = {x=2, y=-2, z=-16}
+		local pos = {x=329.7214, y=631.2805, z=-1492.386}
+	  local pos_follow = {x=2, y=-2, z=-16}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -269,7 +269,7 @@ function action_EVENT_SELECT_OPTION_63008(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 63001, 107, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -278,7 +278,7 @@ function action_EVENT_SELECT_OPTION_63008(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 63002, 63, {4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -306,8 +306,8 @@ function action_EVENT_SELECT_OPTION_63008(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（329.7214，631.2805，-1492.386），持续时间为5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=329.7214, y=631.2805, z=-1492.386}
-	  pos_follow = {x=2, y=-2, z=-16}
+		local pos = {x=329.7214, y=631.2805, z=-1492.386}
+	  local pos_follow = {x=2, y=-2, z=-16}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -338,7 +338,7 @@ function action_EVENT_SELECT_OPTION_63009(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 63001, 107, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -347,7 +347,7 @@ function action_EVENT_SELECT_OPTION_63009(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 63002, 63, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -366,8 +366,8 @@ function action_EVENT_SELECT_OPTION_63009(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（329.7214，631.2805，-1492.386），持续时间为5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=329.7214, y=631.2805, z=-1492.386}
-	  pos_follow = {x=2, y=-2, z=-16}
+		local pos = {x=329.7214, y=631.2805, z=-1492.386}
+	  local pos_follow = {x=2, y=-2, z=-16}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

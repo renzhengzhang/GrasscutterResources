@@ -18,11 +18,11 @@ defs = {
 	3 = 奖励被领取后关闭
 ]]
 
-Controllers = {}
-EnvControlGadgets = {}
-Worktops = {}
-DayAppearGadgets = {}
-NightAppearGadgets = {10001,10002,10003,10004,10005}
+local Controllers = {}
+local EnvControlGadgets = {}
+local Worktops = {}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {10001,10002,10003,10004,10005}
 
 SolutionList =
 {
@@ -145,8 +145,8 @@ suites = {
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_10006(context, evt)
-			curchamber = ScriptLib.GetGroupVariableValue(context, "curChamberIndex")
-			curchamberstate = ScriptLib.GetGroupVariableValue(context,"solution_state_"..curchamber)
+			local curchamber = ScriptLib.GetGroupVariableValue(context, "curChamberIndex")
+			local curchamberstate = ScriptLib.GetGroupVariableValue(context,"solution_state_"..curchamber)
 			if curchamber ~= 0 and curchamberstate == 2 then
 				OpenChamber(context,curchamber)
 			end
@@ -158,10 +158,10 @@ function action_EVENT_VARIABLE_CHANGE_10007(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
 
 
-				varname = evt.source_name
-				prevalue = evt.param2
-				curvalue = evt.param1
-				validcheck = 0
+				local varname = evt.source_name
+				local prevalue = evt.param2
+				local curvalue = evt.param1
+				local validcheck = 0
 				ScriptLib.PrintContextLog(context,"[155008010] : "..varname.." = "..curvalue)
 				for i=1, #ChamberList do
 					if varname == ChamberList[i][2] then
@@ -173,7 +173,7 @@ function action_EVENT_VARIABLE_CHANGE_10007(context, evt)
 					return -1
 				end
 
-				index = math.floor(varname:gsub("%D+", ""))
+				local index = math.floor(varname:gsub("%D+", ""))
 				ScriptLib.PrintContextLog(context,"[155008010] : index = "..index)
 				--开启
 				if evt.param1 == 2 then

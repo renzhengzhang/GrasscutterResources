@@ -102,7 +102,7 @@ suites = {
 function action_EVENT_OFFERING_LEVELUP_191002(context, evt)
 
 	-- 将在groupid为 133008191 中的 configid为 191001 的供奉物件根据stateList对应等级设置其状态
-	_stateList = {201,201,201,201,201,201,201,202,202,202,202,203}
+	local _stateList = {201,201,201,201,201,201,201,202,202,202,202,203}
 	if 1 ~= evt.param1 then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_OfferingLevel")
 	  return -1
@@ -158,9 +158,9 @@ end
 -- 触发操作
 function action_EVENT_GROUP_LOAD_191008(context, evt)
 		--保险用机制
-		_offeringLevel = 	ScriptLib.GetOfferingLevel(context, 1)
-		_currentGadgetState = ScriptLib.GetGadgetStateByConfigId(context, 133008191, 191001)
-		_stateList = {901,901,901,901,901,901,901,902,902,902,902,903}
+		local _offeringLevel = 	ScriptLib.GetOfferingLevel(context, 1)
+		local _currentGadgetState = ScriptLib.GetGadgetStateByConfigId(context, 133008191, 191001)
+		local _stateList = {901,901,901,901,901,901,901,902,902,902,902,903}
 
 		if 0 < _offeringLevel then
 			if _stateList[_offeringLevel] ~= _currentGadgetState then

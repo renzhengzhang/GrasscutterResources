@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-group_level_difficulty = {
+local group_level_difficulty = {
 	[133001087] = {level = 1, difficulty = 1},
 	[133001111] = {level = 1, difficulty = 2},
 	[133001115] = {level = 1, difficulty = 3},

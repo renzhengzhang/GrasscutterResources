@@ -11,7 +11,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-towerPrebuild =
+local towerPrebuild =
 {
  [2004]= 1,
  [2017]= 3,

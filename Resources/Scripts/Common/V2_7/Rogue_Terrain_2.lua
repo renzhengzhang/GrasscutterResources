@@ -3,9 +3,9 @@ defs={
     air_wall = 999,
 }
 ]]
-T_Gruop_ID = 246202004
-T_Air_Wall = 4001
-Next_Group_List = {
+local T_Gruop_ID = 246202004
+local T_Air_Wall = 4001
+local Next_Group_List = {
     [246202001] = 246202002,
     [246202002] = 246202003,
     [246202003] = 246202005,
@@ -13,14 +13,14 @@ Next_Group_List = {
     [246202006] = 246202007,
     [246202007] = 246202001,
 }
-temp_Gadget = {
+local temp_Gadget = {
 	{ config_id = 20000991, gadget_id = 70800183, pos = { x = 17.537, y = -43.175, z = 0.008 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1 },
 }
-temp_Variables_Rogue_Terrain_2 = {
+local temp_Variables_Rogue_Terrain_2 = {
 	{  config_id=50000001,name = "Terrain", value = 2, no_refresh = false },
 	{  config_id=50000002,name = "Ready", value = 0, no_refresh = false },
 }
-temp_Tirgger_Rogue_Terrain_2 = {
+local temp_Tirgger_Rogue_Terrain_2 = {
     {event = EventType.EVENT_CHALLENGE_SUCCESS,source = "",condition="",action="action_t2_EVENT_CHALLENGE_SUCCESS",trigger_count=0},
 	{event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_t2_EVENT_GROUP_LOAD",trigger_count = 0},
 	{event = EventType.EVENT_ROGUE_OPEN_ACCESS, source = "", condition = "", action = "action_t2_action_EVENT_ROGUE_OPEN_ACCESS",trigger_count = 0},
@@ -46,7 +46,7 @@ function action_t2_EVENT_GADGET_STATE_CHANGE(context,evt)
 end
 function LF_Notify_Next_Group_Wait(context)
     for k , v in pairs(Next_Group_List) do
-        _targetgroup = 0
+        local _targetgroup = 0
         if k ==base_info.group_id then
             _targetgroup = v
             ScriptLib.SetGroupTempValue(context,"Need_Wait",1,{ group_id = _targetgroup})
@@ -65,19 +65,19 @@ function action_t2_EVENT_SELECT_OPTION(context,evt)
     return 0
 end
 function action_t2_EVENT_VARIABLE_CHANGE_Ready(context,evt)
-    _wait = ScriptLib.GetGroupTempValue(context,"Need_Wait",{})
+    local _wait = ScriptLib.GetGroupTempValue(context,"Need_Wait",{})
     ScriptLib.PrintContextLog(context,"## Rogue_Terraion_2 action_t2_EVENT_VARIABLE_CHANGE_Ready: _wait=".._wait)
     if _wait == 1 then
         ScriptLib.SetGroupTempValue(context,"Need_Wait",0,{})
-        _hard = ScriptLib.GetGroupTempValue(context,"operator_is_hard",{})
-        _boss = ScriptLib.GetGroupTempValue(context,"operator_is_boss",{})
+        local _hard = ScriptLib.GetGroupTempValue(context,"operator_is_hard",{})
+        local _boss = ScriptLib.GetGroupTempValue(context,"operator_is_boss",{})
 		LF_Create_Fight_Operator(context,_hard,_boss)
-		_vec = ScriptLib.GetRogueDiaryRoundAndRoom(context)
+		local _vec = ScriptLib.GetRogueDiaryRoundAndRoom(context)
         --地城2特殊处理：创建操作台时给个reminder
 		if #_vec == 2 then
-			_stage = _vec[1]
-			_cell = _vec[2]
-            _uidlist = ScriptLib.GetSceneUidList(context)
+			local _stage = _vec[1]
+			local _cell = _vec[2]
+            local _uidlist = ScriptLib.GetSceneUidList(context)
 			ScriptLib.AssignPlayerShowTemplateReminder(context, 167+_stage, {param_vec={_cell},param_uid_vec={},uid_vec={_uidlist[1]}})
 		else
 			ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ENTER_REGION[Warning]:#_vec="..#_vec)

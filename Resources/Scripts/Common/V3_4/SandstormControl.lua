@@ -3,20 +3,20 @@
 ||	owner: 		luyao.huang
 ||	description:	3.3沙尘爆发控制group（白盒）
 ||	LogName:	SandstormControl
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 
 
 ------
-local_defs = {
+local local_defs = {
     forecast_time = 10
 }
 
 
 
 
-sandstorm_Tri = {
+local sandstorm_Tri = {
     [1] = { name = "group_load", config_id = 10000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     [2] = { name = "time_axis_pass", config_id = 10000002, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0},
     [3] = { name = "group_will_unload", config_id = 10000003, event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload", trigger_count = 0},
@@ -104,17 +104,17 @@ function action_time_axis_pass(context,evt)
 
     if (evt.source_name == "SANDSTORM_FORECAST_TIME_AXIS") then
         ScriptLib.PrintContextLog(context,"## [SandstormControl] action_time_axis_pass：沙尘暴预告时间轴tick，向team写SGV")
-        host = ScriptLib.GetSceneOwnerUid(context)
+        local host = ScriptLib.GetSceneOwnerUid(context)
         LF_Change_Team_SGV(context,host,"SGV_Is_Sandstorm_Coming",1)
     end
 
     --GM模式，每3秒打印一次自己所在圈的信息
     if (evt.source_name == "GM_SHOW_REGION_AXIS") and ScriptLib.GetGroupVariableValue(context,"GM_Show_Player_Region") == 1 then
 
-        legal_uid = LF_Get_Legal_Player_Uid_In_SandStorm_Region(context)
+        local legal_uid = LF_Get_Legal_Player_Uid_In_SandStorm_Region(context)
         if legal_uid ~= -1 then
-            current_region = LF_Get_Legal_Player_Region_In_SandStorm_Region(context)
-            is_in_sandworm_region = LF_Is_In_Legal_Sandworm_Region(context,legal_uid)
+            local current_region = LF_Get_Legal_Player_Region_In_SandStorm_Region(context)
+            local is_in_sandworm_region = LF_Is_In_Legal_Sandworm_Region(context,legal_uid)
             ScriptLib.PrintContextLog(context,"## [GM] =========================================")
             ScriptLib.PrintContextLog(context,"## [GM] action_time_axis_pass：当前圈内第一名合法玩家为"..legal_uid)
             ScriptLib.PrintContextLog(context,"## [GM] action_time_axis_pass：所在沙尘暴圈为"..current_region)
@@ -180,7 +180,7 @@ function LF_On_Sandstorm_Start(context)
     LF_Set_Sandstorm_Weather(context,true)
     --启动沙虫阶段
     --LF_Start_Sandworm_Phase(context)
-
+    
 end
 
 function LF_On_Sandstorm_Stop(context)
@@ -210,22 +210,22 @@ end
 --记录剩余时间轴（CD或沙尘暴）的时间
 function LF_Save_Time_Axis(context)
     ScriptLib.PrintContextLog(context,"## [SandstormControl] LF_Save_Time_Axis：开始存储当前时间轴状态")
-    current_time = ScriptLib.GetServerTime(context)
-    last_start_time = ScriptLib.GetGroupVariableValue(context,"sandstorm_last_axis_start_time")
-    last_last_time = ScriptLib.GetGroupVariableValue(context,"sandstorm_last_axis_last_time")
-    remain_time = last_last_time - (current_time - last_start_time)
+    local current_time = ScriptLib.GetServerTime(context)
+    local last_start_time = ScriptLib.GetGroupVariableValue(context,"sandstorm_last_axis_start_time")
+    local last_last_time = ScriptLib.GetGroupVariableValue(context,"sandstorm_last_axis_last_time")
+    local remain_time = last_last_time - (current_time - last_start_time)
 
     ScriptLib.PrintContextLog(context,"## [SandstormControl] LF_Save_Time_Axis：剩余时间为"..remain_time)
     if remain_time > 0.5 then
         ScriptLib.SetGroupVariableValue(context,"sandstorm_last_axis_remain_time",remain_time)
-
+    
         ScriptLib.PrintContextLog(context,"## [SandstormControl] LF_Save_Time_Axis：下次应恢复时间轴")
         --记录存在时间轴存档状态为状态1（下次应恢复时间轴）
         ScriptLib.SetGroupVariableValue(context,"axis_saves_state",1)
     else
-
+        
         ScriptLib.SetGroupVariableValue(context,"sandstorm_last_axis_remain_time",0)
-
+    
         ScriptLib.PrintContextLog(context,"## [SandstormControl] LF_Save_Time_Axis：下次应开启下一段时间轴")
         --记录存在时间轴存档状态为状态2（下次进入下一段时间轴）
         ScriptLib.SetGroupVariableValue(context,"axis_saves_state",2)
@@ -236,7 +236,7 @@ end
 function LF_Load_Time_Axis(context)
 
     ScriptLib.PrintContextLog(context,"## [SandstormControl] LF_Load_Time_Axis：开始恢复当前时间轴状态")
-    axis_saves_state = ScriptLib.GetGroupVariableValue(context,"axis_saves_state")
+    local axis_saves_state = ScriptLib.GetGroupVariableValue(context,"axis_saves_state")
 
     --保底，防止多触发产生问题，直接返回
     if axis_saves_state == 0 then
@@ -246,14 +246,14 @@ function LF_Load_Time_Axis(context)
 
     --玩家生涯首次触发，先默认开一段CD
     if axis_saves_state == -1 then
-
+        
         ScriptLib.PrintContextLog(context,"## [SandstormControl] LF_Load_Time_Axis：这是玩家生涯首次进入沙尘暴区域")
         if LF_Is_Any_Player_In_SandStorm_Region(context) then
             ScriptLib.PrintContextLog(context,"## [SandstormControl] LF_Load_Time_Axis：圈内有人，允许开启")
 
             --生涯首次触发，默认先开一段CD
             LF_Set_Time_Axis(context,"SANDSTORM_CD_AXIS",{save_prefix = "sandstorm"})
-
+            
             --开一个沙尘暴预告的时间轴
             LF_Set_Time_Axis(context,"SANDSTORM_FORECAST_AXIS")
 
@@ -266,11 +266,11 @@ function LF_Load_Time_Axis(context)
 
 
     if axis_saves_state == 1 then
-
-        remain_time = ScriptLib.GetGroupVariableValue(context,"sandstorm_last_axis_remain_time")
+        
+        local remain_time = ScriptLib.GetGroupVariableValue(context,"sandstorm_last_axis_remain_time")
         ScriptLib.PrintContextLog(context,"## [SandstormControl] LF_Load_Time_Axis：状态1：恢复之前的时间轴，剩余时间为"..remain_time)
 
-        time_axis_name
+        local time_axis_name
 
         if LF_Is_In_Sandstorm_State(context) then
             time_axis_name = "SANDSTORM_TIME_AXIS"
@@ -284,7 +284,7 @@ function LF_Load_Time_Axis(context)
 
         --重置一下记录的时间轴状态
         ScriptLib.SetGroupVariableValue(context,"axis_saves_state",0)
-        return
+        return 
     end
 
     if axis_saves_state == 2 then
@@ -295,7 +295,7 @@ function LF_Load_Time_Axis(context)
             if LF_Is_In_Sandstorm_State(context) then
                 LF_Set_Time_Axis(context,"SANDSTORM_CD_AXIS",{save_prefix = "sandstorm"})
                 LF_On_Sandstorm_Stop(context)
-
+                
                 --开一个沙尘暴预告的时间轴
                 LF_Set_Time_Axis(context,"SANDSTORM_FORECAST_AXIS")
             else
@@ -303,7 +303,7 @@ function LF_Load_Time_Axis(context)
                 LF_Set_Time_Axis(context,"SANDSTORM_TIME_AXIS",{save_prefix = "sandstorm"})
                 LF_On_Sandstorm_Start(context)
             end
-
+            
             --重置一下记录的时间轴状态
             ScriptLib.SetGroupVariableValue(context,"axis_saves_state",0)
         else
@@ -323,7 +323,7 @@ end
 -----------------------------------------------------------------]]--
 
 function LF_Set_Sandstorm_Weather(context,is_on)
-
+        
     if is_on then
         ScriptLib.PrintContextLog(context,"## [SandstormControl] LF_Set_Sandstorm_Weather：设置沙尘暴天气为：开启")
 	    ScriptLib.SetWeatherAreaState(context, weather_region_config["SandStorm_InnerRegion"].weather, 1)
@@ -352,10 +352,10 @@ function LF_Skip_Current_Sandstorm(context)
             ScriptLib.PrintContextLog(context,"## [SandstormControl]LF_Skip_Current_Sandstorm：没有玩家在沙尘暴区域，直接结束当前沙尘暴，并存档")
             ScriptLib.EndTimeAxis(context, "STORM_TIME_AXIS")
             LF_On_Sandstorm_Stop(context)
-
+            
             --手动修改一次之前存的当前时间轴时间，确保下次进入区域时可以加载一个正确的时间轴
-            current_time = ScriptLib.GetServerTime(context)
-            last_start_time = ScriptLib.GetGroupVariableValue(context,"sandstorm_last_axis_start_time")
+            local current_time = ScriptLib.GetServerTime(context)
+            local last_start_time = ScriptLib.GetGroupVariableValue(context,"sandstorm_last_axis_start_time")
             ScriptLib.SetGroupVariableValue(context,"sandstorm_last_axis_last_time", current_time - last_start_time)
 
             LF_Save_Time_Axis(context)
@@ -389,7 +389,7 @@ end
 
 
 function LF_Change_Team_SGV(context,uid,key,delta)
-    v = ScriptLib.GetTeamServerGlobalValue(context,uid,key)
+    local v = ScriptLib.GetTeamServerGlobalValue(context,uid,key)
     ScriptLib.SetTeamServerGlobalValue(context,uid,key,v+delta)
 end
 
@@ -418,7 +418,7 @@ function LF_Set_Sandstorm_State_By_Name(context,state_name)
         ScriptLib.SetGroupVariableValue(context,"sandstorm_state",2)
         return
     end
-
+    
     ScriptLib.PrintGroupWarning(context,"## [Warning] [SandstormControl] LF_Set_Sandstorm_State_By_Id：传入非法沙尘暴状态名"..state_name)
 end
 
@@ -435,12 +435,12 @@ end
 
 --根据时间轴配置，生成一个随机时间进行返回
 function LF_Get_Axis_Config_By_Time_Config(context,name,type)
-    GM_time_scale_down = ScriptLib.GetGroupVariableValue(context,"GM_Time_Scale_Down")
-    GM_time_scale_up = ScriptLib.GetGroupVariableValue(context,"GM_Time_Scale_Up")
+    local GM_time_scale_down = ScriptLib.GetGroupVariableValue(context,"GM_Time_Scale_Down")
+    local GM_time_scale_up = ScriptLib.GetGroupVariableValue(context,"GM_Time_Scale_Up")
 
-    min = time_configs[type][name].min
-    max = time_configs[type][name].max
-    rtime = math.ceil(math.random(min,max) / GM_time_scale_down * GM_time_scale_up)
+    local min = time_configs[type][name].min
+    local max = time_configs[type][name].max
+    local rtime = math.ceil(math.random(min,max) / GM_time_scale_down * GM_time_scale_up)
     if rtime <= 0 then
         rtime = 1
     end
@@ -455,22 +455,22 @@ end
 --save_prefix：如果填了，会在开启时间轴时记录一个当前时间轴的开始时间和预计持续时间，方便存档这个时间轴
 --target_time：如果填了，会根据传入的target_time来决定时间轴的长度而不是随机一个时间轴
 function LF_Set_Time_Axis(context,axis_name,params)
-    axis = {}
-    target_time
-    save_prefix
+    local axis = {}
+    local target_time
+    local save_prefix
     if params ~= nil then
         target_time = params.target_time
         save_prefix = params.save_prefix
     end
 
     if axis_name == "SANDSTORM_FORECAST_AXIS" then
-        remain_time = 0
+        local remain_time = 0
         if target_time == nil then
             remain_time = ScriptLib.GetGroupVariableValue(context,"sandstorm_last_axis_last_time")
         else
             remain_time = target_time
         end
-        if remain_time - local_defs.forecast_time > 0 then
+        if remain_time - local_defs.forecast_time > 0 then 
             --开一个沙尘暴预告的时间轴
             ScriptLib.InitTimeAxis(context,"SANDSTORM_FORECAST_TIME_AXIS",{remain_time-local_defs.forecast_time},false)
         end
@@ -479,7 +479,7 @@ function LF_Set_Time_Axis(context,axis_name,params)
 
 
     if target_time == nil then
-        current_region = LF_Get_Legal_Player_Region_In_SandStorm_Region(context)
+        local current_region = LF_Get_Legal_Player_Region_In_SandStorm_Region(context)
         if current_region ~= "SandStorm_Outside" then
             axis = LF_Get_Axis_Config_By_Time_Config(context,current_region,axis_name)
         else
@@ -506,8 +506,8 @@ end
 -----------------------------------------------------------------]]--
 
 function SLC_Reset_Weather_Wizard_Forecast_State(context)
-
-    host = ScriptLib.GetSceneOwnerUid(context)
+    
+    local host = ScriptLib.GetSceneOwnerUid(context)
     ScriptLib.SetTeamServerGlobalValue(context, host, "SGV_Is_Sandstorm_Coming", 0)
     return 0
 end

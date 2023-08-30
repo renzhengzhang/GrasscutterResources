@@ -26,7 +26,7 @@ defs = {
 }
 ]]--
 
-define = {
+local define = {
 	gadgetList = {},
 	groupID = defs.group_id,
 	starter_configID = defs.starter_configID,
@@ -34,7 +34,7 @@ define = {
 	random_thunderhole_sum = defs.random_thunderhole_sum,
 }
 
-extraTriggers={
+local extraTriggers={
 	initialtrigger =
 	{
 		--["Select_Option"] = { config_id = 8000001, name = "Select_Option", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },

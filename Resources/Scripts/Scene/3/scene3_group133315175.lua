@@ -18,9 +18,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = { 1,2}
+local RequireSuite = { 1,2}
 
-GopherArray = {
+local GopherArray = {
     [1] =
     {-- time里面有两个值，一个是指延时多久出现，一个是指延时多久消失。譬如{1,5}是指第1秒后出现，第5秒后消失。
         [1] = { array = { 1, 0, 1, 0, 2}, time = {1,4}},

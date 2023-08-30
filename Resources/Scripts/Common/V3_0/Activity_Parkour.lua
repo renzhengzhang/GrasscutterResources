@@ -36,13 +36,13 @@ defs = {
 }
 ]]--
 
-global =
+local global =
 {
     father_challengeID = 2010050,
     total_coin_count = 0,
 }
 
-triggers_start =
+local triggers_start =
 {
 	--测试用
 	--{ config_id = 8000000, name = "Test_GM",  event = EventType.EVENT_VARIABLE_CHANGE, source = "testGM", condition = "", action = "", trigger_count = 0, tag = "100"},
@@ -61,7 +61,7 @@ triggers_start =
     { config_id = 40000008, name = "Enter_Tutorial_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_TutorialRegion", trigger_count = 0 },
 }
 
-triggers_end =
+local triggers_end =
 {
  	--终点的trigger
     { config_id = 40000009, name = "Enter_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_enter_final", action = "", trigger_count = 0, tag = "666" },
@@ -71,7 +71,7 @@ triggers_end =
 ---------- Basic Functions -------------
 -- 打印日志
 function PrintLog(context, content)
-	log = "## [Activity_Parkour] TD: "..content
+	local log = "## [Activity_Parkour] TD: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
@@ -85,7 +85,7 @@ function CheckIsInTable(context, value, check_table)
 	return false
 end
 
---------- Functions -----------
+--------- Local Functions -----------
 function LF_Initialize_Group(triggers, suites)
 	--起点用触发器
 	for k,v in pairs(triggers_start) do
@@ -110,7 +110,7 @@ end
 
 -- 统计关卡的金币总数
 function LF_Calculate_Coin_Num()
-    sum = 0
+    local sum = 0
     for _, gadgetInfo in pairs(gadgets) do
         if gadgetInfo.gadget_id == 70220121 then
             sum = sum + 1
@@ -146,7 +146,7 @@ end
 
 function LF_Try_StartTutorial(context)
 
-    --ownerUid = context.owner_uid
+    --local ownerUid = context.owner_uid
 
     if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,192,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
         PrintLog(context, "弹教程失败")
@@ -170,7 +170,7 @@ function LF_FailChallenge(context, reason)
 end
 
 function LF_RevertVisionType(context)
-	uidList = ScriptLib.GetSceneUidList(context)
+	local uidList = ScriptLib.GetSceneUidList(context)
 	for k, v in pairs(uidList) do
         if 0 == ScriptLib.RevertPlayerRegionVision(context, v) then
             PrintLog(context, "Revert Vision成功"..v)
@@ -187,7 +187,7 @@ function CameraAction(context)
 	if defs.look_pos and defs.duration then
 
 		--触发镜头注目，强制注目形式，不广播其他玩家
-		pos_follow = {x=0, y=0, z=0}
+		local pos_follow = {x=0, y=0, z=0}
 		ScriptLib.BeginCameraSceneLook(context, { look_pos = defs.look_pos, is_allow_input = false, duration = defs.duration, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                            is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                            is_set_screen_XY = false, screen_x = 0, screen_y = 0 })
@@ -416,7 +416,7 @@ function action_leave_OptimizRegion(context,evt)
         PrintLog(context, "出赛道区域"..evt.param1)
 
 		--如果完全出圈了，触发挑战失败
-		is_in_region = ScriptLib.GetGroupTempValue(context, "is_in_region", {})
+		local is_in_region = ScriptLib.GetGroupTempValue(context, "is_in_region", {})
 		if is_in_region <= 0 then
 			LF_FailChallenge(context, 4)
 		end

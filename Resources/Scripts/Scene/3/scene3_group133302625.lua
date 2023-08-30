@@ -195,7 +195,7 @@ function condition_EVENT_ENTER_REGION_625017(context, evt)
 		return false
 	end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,defs.fquestid*100+3)
+	local curQuestState = ScriptLib.GetHostQuestState(context,defs.fquestid*100+3)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -203,7 +203,7 @@ function condition_EVENT_ENTER_REGION_625017(context, evt)
 	   return true
 	end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,defs.fquestid*100+5)
+	local curQuestState = ScriptLib.GetHostQuestState(context,defs.fquestid*100+5)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

@@ -10,7 +10,7 @@ base_info = {
 -- mutex中填只能填两两互斥，如果同时在两个中，优先算前一个范围的值
 --================================================================
 
-vision_def = {
+local vision_def = {
 	{ vision_id = 321301, enter = 25002, leave = 25002 },
 	{ vision_id = 321302, enter = 25003, leave = 25003 },
 	{ vision_id = 321303, enter = 25001, leave = 25001 },
@@ -76,7 +76,7 @@ vision_def = {
 	{ vision_id = 321708, enter = 25057, leave = 25057 },
 	{ vision_id = 321709, enter = 25058, leave = 25058 },
 }
-vision_mutex = {
+local vision_mutex = {
         {321302,321301},
 		{321217,321218},
 		{321219,321220},

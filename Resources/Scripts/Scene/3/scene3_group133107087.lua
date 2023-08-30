@@ -116,10 +116,10 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_87010(context, evt)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	if #uid_list ~= 0 and uid_list ~= nil then
-	        avatar_eid = ScriptLib.GetAvatarEntityIdByUid(context, uid_list[1])
-	        _qs = ScriptLib.GetQuestState(context, avatar_eid, 101610)
+	        local avatar_eid = ScriptLib.GetAvatarEntityIdByUid(context, uid_list[1])
+	        local _qs = ScriptLib.GetQuestState(context, avatar_eid, 101610)
 	        if _qs == 3 then
 	                ScriptLib.RefreshGroup(context, {group_id = 133107087, suite = 1})
 	        end

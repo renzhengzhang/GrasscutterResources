@@ -5,9 +5,9 @@ base_info = {
 
 -- DEFS_MISCS
 function LF_CheckAllValve(context)
-    state1 = ScriptLib.GetGadgetStateByConfigId(context, 0, 118002)
-    state2 = ScriptLib.GetGadgetStateByConfigId(context, 0, 118004)
-    state3 = ScriptLib.GetGadgetStateByConfigId(context, 0, 118003)
+    local state1 = ScriptLib.GetGadgetStateByConfigId(context, 0, 118002)
+    local state2 = ScriptLib.GetGadgetStateByConfigId(context, 0, 118004)
+    local state3 = ScriptLib.GetGadgetStateByConfigId(context, 0, 118003)
     if 201 == state1 then
         ScriptLib.SetGroupLogicStateValue(context, "SGV_VarunaStone01", 1)
     else

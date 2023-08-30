@@ -358,8 +358,8 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_488017(context, evt)
-	x = ScriptLib.GetGroupVariableValue(context,"correct")
-								y = ScriptLib.GetGroupVariableValue(context,"incorrect")
+	local x = ScriptLib.GetGroupVariableValue(context,"correct")
+								local y = ScriptLib.GetGroupVariableValue(context,"incorrect")
 
 								if defs.switch_type == 0 then--0为火把类有两个可控状态的Gadget
 									if ScriptLib.GetGroupVariableValue(context, "activeCount") == 3 then

@@ -22,7 +22,7 @@ defs =
 }
 
 -- 各玩法阶段配置
-play_stage =
+local play_stage =
 {
     [1] =
     {
@@ -61,14 +61,14 @@ play_stage =
 }
 
 -- 备用元素微粒的configID
-extra_elements =
+local extra_elements =
 {
     73017,73018,73019,73020,73021,73022,73023,73024
 }
 
 ]]--
 
-extraTriggers =
+local extraTriggers =
 {
     --测试用
     --{ config_id = 41000001, name = "Gallery_Stop", event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_gallery_stop", trigger_count = 0 },
@@ -108,7 +108,7 @@ extraTriggers =
 ---------- Basic Functions -------------
 -- 打印日志
 function PrintLog(context, content)
-    log = "## [Activity_TreasureSeelie] TD: "..content
+    local log = "## [Activity_TreasureSeelie] TD: "..content
     ScriptLib.PrintContextLog(context, log)
 end
 
@@ -198,7 +198,7 @@ end
 -- 与configID探查点交互（开启玩法）
 function LF_Search_Point_Interacted(context, configID)
 
-    stage = 1
+    local stage = 1
     for i = 1, #play_stage do
         if play_stage[i].starter_operator_configID == configID then
             stage = i
@@ -216,8 +216,8 @@ end
 
 -- 与挖掘点交互（挖出宝箱）
 function LF_Dig_Point_Interacted(context, configID)
-    --widget_equipped = ScriptLib.GetGroupVariableValue(context, "seelie_equipped")
-    widget_equipped = ScriptLib.GetTeamAbilityFloatValue(context, context.owner_uid, "_SeekerSeelieV3_equipped")
+    --local widget_equipped = ScriptLib.GetGroupVariableValue(context, "seelie_equipped")
+    local widget_equipped = ScriptLib.GetTeamAbilityFloatValue(context, context.owner_uid, "_SeekerSeelieV3_equipped")
     if widget_equipped == nil then
         widget_equipped = 0
     end
@@ -227,7 +227,7 @@ function LF_Dig_Point_Interacted(context, configID)
         return
     end
 
-    stage = 1
+    local stage = 1
     for i = 1, #play_stage do
         if play_stage[i].dig_operator_configID == configID then
             stage = i
@@ -263,7 +263,7 @@ function LF_Objects_Display(context, is_display)
 
         -- 恢复所有未完成的探查点
         for i = 1, #play_stage do
-            progress = ScriptLib.GetGroupVariableValue(context, "stage_progress"..i)
+            local progress = ScriptLib.GetGroupVariableValue(context, "stage_progress"..i)
             if progress == 1 then
                 LF_Show_Search_Point(context, i, true)
             -- 如果宝箱未开启,则额外标记mark by siyu.li
@@ -277,7 +277,7 @@ function LF_Objects_Display(context, is_display)
 
         -- 隐藏全部探查点
         for i = 1, #play_stage do
-            progress = ScriptLib.GetGroupVariableValue(context, "stage_progress"..i)
+            local progress = ScriptLib.GetGroupVariableValue(context, "stage_progress"..i)
             LF_Show_Search_Point(context, i, false)
             -- 若宝箱未开启,同时隐藏mark by siyu.li
             if progress == 3 then
@@ -306,7 +306,7 @@ function LF_Start_Play(context, stage)
     -- 加载玩法suite
     LF_Show_Level(context, stage, true)
 
-    configID = play_stage[stage].starter_operator_configID
+    local configID = play_stage[stage].starter_operator_configID
     --切探查点状态（发射子弹）
     ScriptLib.SetGadgetStateByConfigId(context, configID, 201)
     ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, configID, defs.starter_option_id)
@@ -323,11 +323,11 @@ function LF_Start_Play(context, stage)
 
 
     -- 开Gallery
-    gallery_id = play_stage[stage].gallery_id
+    local gallery_id = play_stage[stage].gallery_id
     if 0 ~= ScriptLib.StartGallery(context, gallery_id) then
         PrintLog(context, "开启Gallery失败")
     end
-    progress_tbl = {0, play_stage[stage].element_target}
+    local progress_tbl = {0, play_stage[stage].element_target}
     PrintLog(context, "进度需求："..play_stage[stage].element_target)
     ScriptLib.InitGalleryProgressScore(context, "Seelie", gallery_id, progress_tbl, GalleryProgressScoreUIType.GALLERY_PROGRESS_SCORE_UI_TYPE_TREASURE, GalleryProgressScoreType.GALLERY_PROGRESS_SCORE_NO_DEGRADE)
 
@@ -347,9 +347,9 @@ function LF_Stop_Play(context, stage, success)
     LF_Show_Level(context, stage, false)
 
     -- 移除动态添加的元素微粒
-    num = ScriptLib.GetGroupVariableValue(context, "element_used")
+    local num = ScriptLib.GetGroupVariableValue(context, "element_used")
     for i = 1, num do
-        cid = extra_elements[i]
+        local cid = extra_elements[i]
         ScriptLib.KillEntityByConfigId(context, { config_id = cid })
     end
 
@@ -362,21 +362,21 @@ function LF_Player_Can_See(context)
     if not ScriptLib.IsInRegion(context, context.owner_uid, suites[1].regions[1]) then
         return false
     end
-    seelie_out = ScriptLib.GetGroupVariableValue(context, "seelie_out")
+    local seelie_out = ScriptLib.GetGroupVariableValue(context, "seelie_out")
     PrintLog(context, "小道具离体:"..seelie_out)
 
-    --widget_equipped = ScriptLib.GetGroupVariableValue(context, "seelie_equipped")
+    --local widget_equipped = ScriptLib.GetGroupVariableValue(context, "seelie_equipped")
     --[[if context.owner_uid == nil then
         PrintLog(context, "LF_Player_Can_See : owner_uid=nil")
     else
         PrintLog(context, "LF_Player_Can_See : owner_uid="..context.owner_uid)
     end--]]
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     host_uid = context.owner_uid
     if uid_list[1] ~= nil then
         host_uid = uid_list[1]
     end
-    widget_equipped = ScriptLib.GetTeamAbilityFloatValue(context, host_uid, "_SeekerSeelieV3_equipped")
+    local widget_equipped = ScriptLib.GetTeamAbilityFloatValue(context, host_uid, "_SeekerSeelieV3_equipped")
     if widget_equipped == nil then
         widget_equipped = 0
     end
@@ -390,8 +390,8 @@ function LF_Player_Can_See(context)
 end
 
 -- function LF_Get_Owner_UID(context)
---     UidList = ScriptLib.GetSceneUidList(context)
---     ownerUid = UidList[1]
+--     local UidList = ScriptLib.GetSceneUidList(context)
+--     local ownerUid = UidList[1]
 --     PrintLog(context, "OWNER_UID:"..ownerUid)
 --     return ownerUid
 -- end
@@ -407,7 +407,7 @@ end
 
 -- 显示/隐藏某阶段的【探查点】
 function LF_Show_Search_Point(context, stage, show)
-    configID = play_stage[stage].starter_operator_configID
+    local configID = play_stage[stage].starter_operator_configID
     if show == true then
         ScriptLib.SetGadgetStateByConfigId(context, configID, 0)
         ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, configID, {defs.starter_option_id})
@@ -420,8 +420,8 @@ end
 -- 显示/隐藏某阶段的【挖掘点】
 function LF_Show_Dig_Point(context, stage, show)
 
-    suite_index = play_stage[stage].dig_operator_suite
-    configID = play_stage[stage].dig_operator_configID
+    local suite_index = play_stage[stage].dig_operator_suite
+    local configID = play_stage[stage].dig_operator_configID
 
     if show == true then
         ScriptLib.AddExtraGroupSuite(context, base_info.group_id, suite_index)
@@ -440,7 +440,7 @@ end
 -- 显示/隐藏某阶段的【关卡内容】
 function LF_Show_Level(context, stage, show)
 
-    suite_index = play_stage[stage].level_suite
+    local suite_index = play_stage[stage].level_suite
 
     if show == true then
         ScriptLib.AddExtraGroupSuite(context, base_info.group_id, suite_index)
@@ -452,10 +452,10 @@ end
 
 function LF_Init_Challenge(context, stage)
 
-    challenge_time = play_stage[stage].challenge_time
-    target = play_stage[stage].element_target
+    local challenge_time = play_stage[stage].challenge_time
+    local target = play_stage[stage].element_target
     --参数1：限时时间 参数2：event_type所在枚举序号； 参数3： trigger_tag；参数4：次数
-    c_index = 1       --跑酷
+    local c_index = 1       --跑酷
     if #suites[play_stage[stage].level_suite].monsters > 0 then
         c_index = 2             --战斗
     end
@@ -463,7 +463,7 @@ function LF_Init_Challenge(context, stage)
     if 0 ~= ScriptLib.StartChallenge(context, c_index, defs.challenge_id, {challenge_time, 3, 666, target}) then
         PrintLog(context, "开启挑战失败")
     else
-        uid_list = ScriptLib.GetSceneUidList(context)
+        local uid_list = ScriptLib.GetSceneUidList(context)
         for i,uid in ipairs(uid_list) do
             if ScriptLib.IsInRegion(context, uid, play_stage[stage].optimize_region) then
                 ScriptLib.SetPlayerGroupVisionType(context, {uid}, {0})
@@ -474,8 +474,8 @@ function LF_Init_Challenge(context, stage)
 end
 
 function LF_Set_Seelie_Light_Level(context, light_level)
-    --ownerUid = LF_Get_Owner_UID(context)
-    ownerUid = ScriptLib.GetSceneOwnerUid(context)
+    --local ownerUid = LF_Get_Owner_UID(context)
+    local ownerUid = ScriptLib.GetSceneOwnerUid(context)
     if 0 == ScriptLib.SetTeamServerGlobalValue(context, ownerUid, "SGV_SeelieLightLevel", light_level) then
         PrintLog(context, "设置仙灵亮度等级："..light_level)
     end
@@ -507,16 +507,16 @@ function LF_Load_Level(context)
 
     -- 加载所有探查点suite。（探查点的可见性与物件状态关联）
     for i = 1, #play_stage do
-        suite_index = play_stage[i].starter_operator_suite
+        local suite_index = play_stage[i].starter_operator_suite
         ScriptLib.AddExtraGroupSuite(context, base_info.group_id, suite_index)
     end
 
     -- 根据存档加载挖掘点&宝箱
     for i = 1, #play_stage do
-        progress = ScriptLib.GetGroupVariableValue(context, "stage_progress"..i)
+        local progress = ScriptLib.GetGroupVariableValue(context, "stage_progress"..i)
         -- 宝箱未开恢复mark by siyu.li
         if progress == 2 or progress == 3 then
-            suite_index = play_stage[i].dig_operator_suite
+            local suite_index = play_stage[i].dig_operator_suite
             ScriptLib.AddExtraGroupSuite(context, base_info.group_id, suite_index)
             if progress == 3 then
                 if ScriptLib.IsInRegion(context, context.owner_uid, suites[1].regions[1]) then
@@ -527,7 +527,7 @@ function LF_Load_Level(context)
             end
         end
        --[[ if progress == 3 then
-            suite_index = play_stage[i].treasure_suite
+            local suite_index = play_stage[i].treasure_suite
             ScriptLib.AddExtraGroupSuite(context, base_info.group_id, suite_index)
         end--]]
     end
@@ -539,7 +539,7 @@ end
 function SLC_Activity_TreasureSeelie_PickEnergyBall(context)
 
     -- 能量球计数
-    num = ScriptLib.GetGroupVariableValue(context, "energy_ball_counter")
+    local num = ScriptLib.GetGroupVariableValue(context, "energy_ball_counter")
     num = num + 1
     ScriptLib.SetGroupVariableValue(context, "energy_ball_counter", num)
 
@@ -547,7 +547,7 @@ function SLC_Activity_TreasureSeelie_PickEnergyBall(context)
 
 
     -- 仙灵表现（亮度）
-    light_level = num % 3
+    local light_level = num % 3
 
     if light_level == 0 then
         light_level = 3
@@ -557,10 +557,10 @@ function SLC_Activity_TreasureSeelie_PickEnergyBall(context)
         -- 显示能量球进度的定制REMINDER "x/3"
         ScriptLib.TreasureSeelieCollectOrbsNotify(context, light_level, 3)
 
-    order = ScriptLib.GetTreasureSeelieDayByGroupId(context, 0)
+    local order = ScriptLib.GetTreasureSeelieDayByGroupId(context, 0)
     -- 发现新的探查点
     if num == 3 or num == 6 or num == 9 then
-        stage = math.floor(num/3)
+        local stage = math.floor(num/3)
         LF_SearchPoint_Found(context, stage)
 
         -- 运营埋点：能量球进度 & 探查点发现进度
@@ -576,17 +576,17 @@ end
 -- 拾取元素微粒
 function SLC_Activity_TreasureSeelie_PickElementParticle(context)
 
-    num = ScriptLib.GetGroupVariableValue(context, "element_counter")
+    local num = ScriptLib.GetGroupVariableValue(context, "element_counter")
     num = num + 1
     ScriptLib.SetGroupVariableValue(context, "element_counter", num)
     PrintLog(context, "拾元素微粒"..num)
 
     -- Gallery通信
-    stage = ScriptLib.GetGroupVariableValue(context, "current_challenge_stage")
+    local stage = ScriptLib.GetGroupVariableValue(context, "current_challenge_stage")
     PrintLog(context, "stage:"..stage)
 
     if stage > 0 then
-        gallery_id = play_stage[stage].gallery_id
+        local gallery_id = play_stage[stage].gallery_id
         PrintLog(context, "galleryID:"..gallery_id)
         ScriptLib.AddGalleryProgressScore(context, "Seelie", gallery_id, 1)
     end
@@ -602,9 +602,9 @@ function SLC_Activity_TreasureSeelie_SeelieEquipStateChanged(context, equipped)
     if equipped == 1 then
         if LF_Player_Can_See(context) == true then
             if ScriptLib.GetGroupTempValue(context, "widget_first_used", {}) == 0 then
-                _r = suites[1].regions[1]
+                local _r = suites[1].regions[1]
                 if ScriptLib.IsInRegion(context, context.owner_uid, _r) then
-                    order = ScriptLib.GetTreasureSeelieDayByGroupId(context, base_info.group_id)
+                    local order = ScriptLib.GetTreasureSeelieDayByGroupId(context, base_info.group_id)
                     ScriptLib.MarkGroupLuaAction(context, "ActivityTreasureSeelie2", "", {["region_order"] = order, ["widget_first_use"] = ScriptLib.GetServerTime(context)})
                     ScriptLib.SetGroupTempValue(context, "widget_first_used", 1, {})
                 end
@@ -651,12 +651,12 @@ function action_enter_region(context, evt)
         ScriptLib.SetTeamServerGlobalValue(context, context.owner_uid, "SGV_SeelieGameplayGroup", 1)
 
         -- 根据关卡进度通知team仙灵是否可见
-        seelie_out = ScriptLib.GetGroupVariableValue(context, "seelie_out")
+        local seelie_out = ScriptLib.GetGroupVariableValue(context, "seelie_out")
         ScriptLib.SetTeamServerGlobalValue(context, context.owner_uid, "SGV_SeelieInvisible", seelie_out)
 
         -- 根据关卡进度还原仙灵亮度
-        num = ScriptLib.GetGroupVariableValue(context, "energy_ball_counter")
-        light_level = num % 3
+        local num = ScriptLib.GetGroupVariableValue(context, "energy_ball_counter")
+        local light_level = num % 3
         LF_Set_Seelie_Light_Level(context, light_level)
 
         --
@@ -667,10 +667,10 @@ function action_enter_region(context, evt)
         end
 
         for i = 1, #play_stage do
-            progress = ScriptLib.GetGroupVariableValue(context, "stage_progress"..i)
+            local progress = ScriptLib.GetGroupVariableValue(context, "stage_progress"..i)
             if progress == 3 then
                 ScriptLib.SetGadgetStateByConfigId(context, play_stage[i].dig_operator_configID, 201)
-                suite_index = play_stage[i].treasure_suite
+                local suite_index = play_stage[i].treasure_suite
                 ScriptLib.AddExtraGroupSuite(context, base_info.group_id, suite_index)
             end
         end
@@ -694,7 +694,7 @@ end
 
 -- 离开玩法区域
 function action_leave_region(context, evt)
-    stage = ScriptLib.GetGroupVariableValue(context, "current_challenge_stage")
+    local stage = ScriptLib.GetGroupVariableValue(context, "current_challenge_stage")
     if evt.param1 == suites[1].regions[1] then
         if context.uid ~= context.owner_uid then
             return -1
@@ -722,7 +722,7 @@ function action_leave_region(context, evt)
                 return -1
             end
             -- 将未结束的挑战设置失败
-            c_index = 1
+            local c_index = 1
             if #suites[play_stage[stage].level_suite].monsters > 0 then
                 c_index = 2
             end
@@ -737,11 +737,11 @@ end
 
 function action_gadget_create(context, evt)
 
-    configID = evt.param1
+    local configID = evt.param1
 
     -- 给探查点和挖掘点分别上选项
     for i = 1, #play_stage do
-        progress = ScriptLib.GetGroupVariableValue(context, "stage_progress"..i)
+        local progress = ScriptLib.GetGroupVariableValue(context, "stage_progress"..i)
         if configID == play_stage[i].starter_operator_configID then
             if progress == 1 and LF_Player_Can_See(context) == true then
                 LF_Show_Search_Point(context, i, true)
@@ -770,8 +770,8 @@ function action_select_option(context, evt)
 
     PrintLog(context, "操作台选项事件")
 
-    config_id = evt.param1
-    option_id = evt.param2
+    local config_id = evt.param1
+    local option_id = evt.param2
 
     if option_id == defs.starter_option_id then
         LF_Search_Point_Interacted(context, config_id)
@@ -785,8 +785,8 @@ function action_select_option(context, evt)
 end
 
 function action_challenge_success(context, evt)
-    stage = ScriptLib.GetGroupVariableValue(context, "current_challenge_stage")
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local stage = ScriptLib.GetGroupVariableValue(context, "current_challenge_stage")
+    local uid_list = ScriptLib.GetSceneUidList(context)
     for i,uid in ipairs(uid_list) do
         -- 防止联机玩家提前出圈被强迫处理视野
         if ScriptLib.IsInRegion(context, uid, play_stage[stage].optimize_region) then
@@ -794,8 +794,8 @@ function action_challenge_success(context, evt)
             ScriptLib.RevertPlayerRegionVision(context, uid)
         end
     end
-    stage = ScriptLib.GetGroupVariableValue(context, "current_challenge_stage")
-    order = ScriptLib.GetTreasureSeelieDayByGroupId(context, 0)
+    local stage = ScriptLib.GetGroupVariableValue(context, "current_challenge_stage")
+    local order = ScriptLib.GetTreasureSeelieDayByGroupId(context, 0)
     -- 运营埋点：探查点stage完成
     ScriptLib.MarkGroupLuaAction(context, "ActivityTreasureSeelie2", "", {["region_order"] = order, ["region_progress_type"] = 3, ["challenge_order"] = stage})
 
@@ -809,8 +809,8 @@ function action_challenge_success(context, evt)
 end
 
 function action_challenge_fail(context, evt)
-    stage = ScriptLib.GetGroupVariableValue(context, "current_challenge_stage")
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local stage = ScriptLib.GetGroupVariableValue(context, "current_challenge_stage")
+    local uid_list = ScriptLib.GetSceneUidList(context)
     for i,uid in ipairs(uid_list) do
         -- 防止联机玩家提前出圈被强迫处理视野
         if ScriptLib.IsInRegion(context, uid, play_stage[stage].optimize_region) then
@@ -825,7 +825,7 @@ function action_challenge_fail(context, evt)
     ScriptLib.SetGroupVariableValue(context, "seelie_out", 0)
     LF_Objects_Display(context, true)
     -- 联机不能确保情况
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     --PrintLog(context, "离开玩法区域")
     return 0
 end
@@ -840,15 +840,15 @@ end
 
 function action_gadget_state_change(context, evt)
 
-    new_state = evt.param1
+    local new_state = evt.param1
 
     if new_state == 102 then
         PrintLog(context, "宝箱打开")
 
         -- 宝箱的configID
-        configID = evt.param2
+        local configID = evt.param2
 
-        stage = 1
+        local stage = 1
         for i = 1, #play_stage do
             if play_stage[i].treasure_configID == configID then
                 stage = i
@@ -863,9 +863,9 @@ function action_gadget_state_change(context, evt)
 
         -- 总进度+1
         ScriptLib.ChangeGroupVariableValue(context, "stage_counter", 1)
-        counter = ScriptLib.GetGroupVariableValue(context, "stage_counter")
+        local counter = ScriptLib.GetGroupVariableValue(context, "stage_counter")
         PrintLog(context, "区域完成进度:"..counter)
-        order = ScriptLib.GetTreasureSeelieDayByGroupId(context, 0)
+        local order = ScriptLib.GetTreasureSeelieDayByGroupId(context, 0)
         -- Reminder "显示宝箱进度"
         if counter == 1 then
             ScriptLib.ShowReminder(context, 600129)
@@ -902,18 +902,18 @@ end
 
 function action_monster_die(context, evt)
 
-    eid = evt.source_eid
+    local eid = evt.source_eid
 
-    pos = ScriptLib.GetPosByEntityId(context, eid)
+    local pos = ScriptLib.GetPosByEntityId(context, eid)
 
 
-    index = ScriptLib.GetGroupVariableValue(context, "element_used")
+    local index = ScriptLib.GetGroupVariableValue(context, "element_used")
     index = index + 1
     ScriptLib.SetGroupVariableValue(context, "element_used", index)
 
-    cid = extra_elements[index]
+    local cid = extra_elements[index]
 
-    ret = ScriptLib.CreateGadgetByConfigIdByPos(context, cid, {x=pos.x,y=pos.y,z=pos.z}, {x=0.000,y=0.000,z=0.000})
+    local ret = ScriptLib.CreateGadgetByConfigIdByPos(context, cid, {x=pos.x,y=pos.y,z=pos.z}, {x=0.000,y=0.000,z=0.000})
     --PrintLog(context, "ret"..ret)
 
     -- if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, cid, 201) then

@@ -13,25 +13,25 @@ defs = {
 }
 
 -- DEFS_MISCS
-score = {
+local score = {
     checkpoint = 20,
     monster = 5,
 }
 
-stage_berth_windzone = {
+local stage_berth_windzone = {
     [1] = {berth_num = 5, berth = {65005,65006,65253,65254,65308}, windzone = {65008,65009,65163,65164,65165}},
     [3] = {berth_num = 7, berth = {65053,65054,65055,65309,65310,65311,65312}, windzone = {65027,65028,65029,65181,65182,65183}},
     [5] = {berth_num = 8, berth = {65056,65057,65058,65059,65314,65315,65316,65317}, windzone = {65050,65051,65063,65061}},
 }
 
 
-start_boat_points =
+local start_boat_points =
 {
 	65223,65224,65225,65226
 }
 
 
-stage =
+local stage =
 {
     [1] = {monster_suites = {2},start_suites = {2}, tag = "Sail", region = 65148,revive_point =65329, boat_point = 65330},
     [2] = {monster_suites = {3},start_suites = {3}, tag = "Battle",revive_point =65228, boat_point = 65328},
@@ -41,7 +41,7 @@ stage =
     [6] = {monster_suites = {7,8},start_suites = {7}, tag = "Battle",revive_point =65232, boat_point = 65340},
 }
 
-monster_suite_chain =
+local monster_suite_chain =
 {
 
         [7] = {8}

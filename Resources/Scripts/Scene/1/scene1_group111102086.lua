@@ -11,7 +11,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-WatcherList ={
+local WatcherList ={
 	[86001] = { pointArray = 110200024,pointArrayList = {1,2,3}},
 }
 

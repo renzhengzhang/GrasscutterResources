@@ -11,15 +11,15 @@ defs = {
 }
 
 -- DEFS_MISCS
-monster_list = {
+local monster_list = {
 2002,2003,2004,2005,2006
 }
 
-optimize_monster_list = {
+local optimize_monster_list = {
 2007,2008,2009,2010,2011
 }
 
-light_monster_list = {
+local light_monster_list = {
 2012,2013,2014,2015,2016
 }
 

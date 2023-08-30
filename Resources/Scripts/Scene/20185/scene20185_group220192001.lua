@@ -73,7 +73,7 @@ suites = {
 
 
 function PrintLog(context, content)
-	log = "## [Boss_Battle_Process_Apep_Quest]"
+	local log = "## [Boss_Battle_Process_Apep_Quest]"
 	ScriptLib.PrintContextLog(context, log)
 end
 

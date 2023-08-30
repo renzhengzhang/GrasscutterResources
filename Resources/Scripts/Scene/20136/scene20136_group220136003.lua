@@ -1537,7 +1537,7 @@ end
 function action_EVENT_ENTER_REGION_3083(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=290, y=71.6, z=876}
+	    local t_pos = {x=290, y=71.6, z=876}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=180, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -1683,7 +1683,7 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_3096(context, evt)
-	p = 0
+	local p = 0
 	p=ScriptLib.GetGroupVariableValue(context, "position")
 
 	ScriptLib.SetPlatformPointArray(context, 3002, 1, {p}, {route_type=RouteType.OneWay, record_mode=RouteRecordMode.Prereach})

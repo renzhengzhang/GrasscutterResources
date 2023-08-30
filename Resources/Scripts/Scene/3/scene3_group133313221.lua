@@ -4,40 +4,40 @@ base_info = {
 }
 
 -- DEFS_MISCS
-fans =
+local fans =
 {
     221001
 }
 
-sandpiles =
+local sandpiles =
 {
     221002,
     221005
 }
 
-shutters =
+local shutters =
 {
 
 }
 
-shutter_switches =
+local shutter_switches =
 {
 
 }
 
-FanToPointArray =
+local FanToPointArray =
 {
     [fans[1]] = 331300005
 }
 
-FanToSandpile =
+local FanToSandpile =
 {
     [sandpiles[1]] = {fan = fans[1], dir_state = 201, pos = 1},
     [sandpiles[2]] = {fan = fans[1], dir_state = 203, pos = 2}
 }
 
 
-SwitchToShutter =
+local SwitchToShutter =
 {
 
 }

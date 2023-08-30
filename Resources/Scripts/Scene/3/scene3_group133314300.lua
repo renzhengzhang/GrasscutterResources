@@ -4,13 +4,13 @@ base_info = {
 }
 
 -- DEFS_MISCS
-JamshidRocks =
+local JamshidRocks =
 {
     300001,
     300003
 }
 
-CorrectAnswer =
+local CorrectAnswer =
 {
     3,2
 }

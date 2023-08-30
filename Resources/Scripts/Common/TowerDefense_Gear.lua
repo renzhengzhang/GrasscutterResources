@@ -1,17 +1,17 @@
 --[[
 setmetatable(_ENV,{__index=function() return {} end })
 --]]
-define = {
+local define = {
 	group_id = defs.group_id or 250030001,
 	gear_list = --[[defs.gear_list or]] {70350107,70350099,70350100,70350101,70350102,70350103,70350129,70350111,70350108},
 	option_list = --[[defs.option_list or]] {41,42,43,44,45,48,49,50,46},
-	option_revert = 46,
+	option_revert = 46,   
 	option_points = --[[defs.option_points or]] {20,20,20,20,20,20,20,20,20},
 	monster_points = defs.monster_points or 10,
 	max_points = defs.max_points or 100
 }
 
-extraTriggers={
+local extraTriggers={
 	{ config_id = 8000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0},
 	{ config_id = 8000002, name = "GADGET_CREATE", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_GADGET_CREATE", trigger_count = 0},
 	{ config_id = 8000003, name = "GADGET_DIE", event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_GADGET_DIE", trigger_count = 0},
@@ -103,7 +103,7 @@ function action_EVENT_GROUP_LOAD(context, evt)
 end
 
 function Initialize_Fundations(context, prev_context, param1, param2, param3)
-    uidList=ScriptLib.GetSceneUidList(context)
+    local uidList=ScriptLib.GetSceneUidList(context)
     for i=1,math.min(#gadgets,#points) do
         if gadgets[i].gadget_id == defs.fundation_id then
             ScriptLib.CreateFoundation(context, uidList, gadgets[i].config_id, points[i].config_id,defs.challange_group_id,999)

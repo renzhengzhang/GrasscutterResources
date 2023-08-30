@@ -13,20 +13,20 @@ defs = {
 	pursina_tip = 630087,
 	fail_region = 630038
 }
-mud_list = {
+local mud_list = {
 	[630009] = 630063,
 	[630012] = 630062,
 	[630023] = 630028,
 
 }
-extra_infos = {
+local extra_infos = {
 	start_operator = 630002,
 	mud_cover = 630096,
 }
 
 --======================================================================================================================]]
 
-LumenWipeout_Triggers = {
+local LumenWipeout_Triggers = {
 	{config_id = 8002001, name = "pursina_state",  event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_pursina_state", trigger_count = 0},
 	{config_id = 8002002, name = "challenge_success", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0 },
 	{config_id = 8002003, name = "challenge_fail", event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail", trigger_count = 0 },
@@ -68,10 +68,10 @@ end
 function action_challenge_success(context, evt)
 	ScriptLib.PrintContextLog(context,"##[LumenWipeout]:挑战成功")
 	--运营用的埋点数据
-	used_time = 300 - evt.param2
-	remove_mud  = ScriptLib.GetGroupTempValue(context, "MUD_REMOVED", {})
-	transaction = evt.param_str1
-	lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
+	local used_time = 300 - evt.param2
+	local remove_mud  = ScriptLib.GetGroupTempValue(context, "MUD_REMOVED", {})
+	local transaction = evt.param_str1
+	local lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
 	ScriptLib.PrintContextLog(context,"##[LumenWipeout]:埋点数据,挑战成功,流水号"..transaction.."耗时"..used_time.."清除黑泥总数"..remove_mud.."流明石等级"..lumen_level)
     ScriptLib.MarkGroupLuaAction(context, "Luminous_challenge_2", transaction, {["challenge_id"] = 2009002,["end_reason"] = 1,["use_time"]= used_time ,["remove_mud"]= remove_mud,["luminous_level"] = lumen_level})
 
@@ -98,10 +98,10 @@ end
 function action_challenge_fail(context, evt)
 	ScriptLib.PrintContextLog(context,"##[LumenWipeout]:挑战失败")
 	--运营用的埋点数据
-	used_time = 300 - evt.param2
-	remove_mud  = ScriptLib.GetGroupTempValue(context, "MUD_REMOVED", {})
-	lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
-	transaction = evt.param_str1
+	local used_time = 300 - evt.param2
+	local remove_mud  = ScriptLib.GetGroupTempValue(context, "MUD_REMOVED", {})
+	local lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
+	local transaction = evt.param_str1
 	if evt.param2 <= 0 then
 		ScriptLib.PrintContextLog(context,"##[LumenWipeout]:埋点数据,时间用尽,流水号"..transaction.."耗时"..used_time.."清除黑泥总数"..remove_mud.."流明石等级"..lumen_level)
     	ScriptLib.MarkGroupLuaAction(context, "Luminous_challenge_2", transaction, {["challenge_id"] = 2009002,["end_reason"] = 2,["use_time"]= used_time ,["remove_mud"]= remove_mud, ["luminous_level"] = lumen_level})
@@ -155,7 +155,7 @@ function action_select_option(context, evt)
 	--刷第一波怪
 	ScriptLib.AddExtraGroupSuite(context, 166001630, 2)
 	ScriptLib.ShowReminder(context, 400012)
-	pos = {x=993, y=737, z=409}
+	local pos = {x=993, y=737, z=409}
 	ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false })
 	return 0
 end

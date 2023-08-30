@@ -111,7 +111,7 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_223003(context, evt)
-		state = ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs.gadget_Teleport_2)
+		local state = ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs.gadget_Teleport_2)
 		if state == 0 then
 			return -1
 		elseif state == 201 then
@@ -134,7 +134,7 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_223004(context, evt)
-		state = ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs.gadget_Teleport_2)
+		local state = ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs.gadget_Teleport_2)
 		if state == 0 then
 			return -1
 		elseif state == 201 then

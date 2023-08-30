@@ -126,7 +126,7 @@ function condition_EVENT_ENTER_REGION_199002(context, evt)
 				return false
 		end
 
-		current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context,1)[1]
+		local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context,1)[1]
 		if (current_env_state_id == 2) then
 			return false
 		end

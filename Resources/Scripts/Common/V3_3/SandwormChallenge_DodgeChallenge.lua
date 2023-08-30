@@ -2,14 +2,14 @@
 --[[======================================
 ||	filename:	SandwormChallenge_DodgeChallenge
 ||	owner: 		luyao.huang
-||	description:
+||	description:	
 ||	LogName:	SandwormChallenge_DodgeChallenge
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 
 
-local_defs =
+local local_defs = 
 {
     challenge_index = 666,
     challenge_id = 2012004,
@@ -22,7 +22,7 @@ local_defs =
 
 
 
-challenge_Tri = {
+local challenge_Tri = {
     [1] = { name = "select_option_dodge_challenge", config_id = 200010001, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option_dodge_challenge", trigger_count = 0},
     [2] = { name = "group_load_dodge_challenge", config_id = 200010002, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load_dodge_challenge", trigger_count = 0},
     [3] = { name = "challenge_fail_dodge_challenge", config_id = 200010003, event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail_dodge_challenge", trigger_count = 0},
@@ -68,7 +68,7 @@ function action_select_option_dodge_challenge(context,evt)
         --开挑战
 	    --ScriptLib.ActiveChallenge(context, local_defs.challenge_index, local_defs.challenge_id, defs.challenge_time, defs.max_hit_times, 0, 0)
 
-        uid = ScriptLib.GetSceneOwnerUid(context)
+        local uid = ScriptLib.GetSceneOwnerUid(context)
         ScriptLib.CreateFatherChallenge(context, local_defs.challenge_index, local_defs.challenge_id, defs.challenge_time, {success = 10, fail = 5, fail_on_wipe = true})
         ScriptLib.StartFatherChallenge(context, local_defs.challenge_index)
         ScriptLib.AttachChildChallenge(context, local_defs.challenge_index, local_defs.dodge_challenge_index, local_defs.dodge_challenge_id,
@@ -77,7 +77,7 @@ function action_select_option_dodge_challenge(context,evt)
                 {defs.challenge_time},{},{success=10, fail=5})
 
         --转操作台状态
-        ScriptLib.SetGadgetStateByConfigId(context, defs.worktop_id, GadgetState.GearStart)
+        ScriptLib.SetGadgetStateByConfigId(context, defs.worktop_id, GadgetState.GearStart) 
 
 
         --开启挑战时立刻召一次沙虫
@@ -116,7 +116,7 @@ function action_challenge_fail_dodge_challenge(context,evt)
     if evt.param1 == local_defs.live_challenge_id then
         ScriptLib.StopChallenge(context,local_defs.challenge_index,1)
 
-
+        
         --记一个变量，方便下次恢复
         ScriptLib.SetGroupVariableValue(context, "is_success", 1)
 
@@ -147,8 +147,8 @@ end
 
 
 function action_group_load_dodge_challenge(context,evt)
-
-    is_success = ScriptLib.GetGroupVariableValue(context,"is_success") == 1
+    
+    local is_success = ScriptLib.GetGroupVariableValue(context,"is_success") == 1
     if is_success then
         ScriptLib.PrintContextLog(context,"## [SandwormChallenge_DodgeChallenge] group_load：group加载，之前已成功")
         --如果之前已成功，将操作台直接转到完成状态

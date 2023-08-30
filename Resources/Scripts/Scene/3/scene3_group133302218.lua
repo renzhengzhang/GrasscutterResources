@@ -16,9 +16,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {1} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+local RequireSuite = {1} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-DeathField ={
+local DeathField ={
 	CoreID = defs.gadget_CoreID,
 	BossID = defs.monster_BossID,
 	BossSuite = 2,
@@ -27,7 +27,7 @@ DeathField ={
                 NoProtect = true,
 }
 
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 0,
     blend_duration = 1.5,
     is_force_walk = false,

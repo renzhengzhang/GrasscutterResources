@@ -12,7 +12,7 @@ defs = {
 
 -- DEFS_MISCS
 --注目相关参数
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 1,
     blend_duration = 1.5,
     is_force_walk = false,

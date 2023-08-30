@@ -18,9 +18,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-EnvControlGadgets = {13012,13013,}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local EnvControlGadgets = {13012,13013,}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
 
 MaxSize = 12
@@ -64,7 +64,7 @@ TargetSolution =
 	3=宝箱开启
 ]]
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -102,7 +102,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 

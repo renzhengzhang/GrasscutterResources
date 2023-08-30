@@ -39,7 +39,7 @@ GROUP SETVAR 133301106 GM_Reset 1
 --]]
 
 -- 田有多大，绘制在9*9的方格中
-PhasePlay = {
+local PhasePlay = {
     [1] = {
         FloorArray = {
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -604,7 +604,7 @@ PhasePlay = {
     },
 
 }
-LevelInfo = {
+local LevelInfo = {
     -- 需要用到的Cid
     StartCid = defs.gadget_StarCid,
     TreeCid = defs.gadget_TreeCid,
@@ -626,7 +626,7 @@ LevelInfo = {
     followPos = {x=0, y=0, z=0},
 }
 
-VarInfo = {
+local VarInfo = {
     -- 值String
     CurStep = "CurPlayStep",
     CurNum = "CurrentFloorNum",
@@ -634,20 +634,20 @@ VarInfo = {
     LastCid = "LastFloorCid",
 }
 
-PlayStep = {
+local PlayStep = {
     Loaded = 1,
     Start = 2,
     End = 3,
     Over = 4,
     ReStart = 5,
 }
-ObjState = {
+local ObjState = {
     Start = { idle = 0, over = 201, ending = 902},
     Floor = { hide = 0, bud = 201, bfFlee = 202, bfFly = 203, fail = 204, success = 901,ending = 902 },
     Tree = { hide = 0, bud = 201, fruit = 202, over = 203, fail = 204, success = 901},
 }
 
-SumeruOneLineDraw_Trigger = {
+local SumeruOneLineDraw_Trigger = {
     -- 检查Event
     { keyWord = "RegionCheck",event = EventType.EVENT_ENTER_REGION, source = "", trigger_count = 0},
     { keyWord = "GadgetCheck",event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", trigger_count = 0},
@@ -673,7 +673,7 @@ SumeruOneLineDraw_Trigger = {
 }
 
 function LF_Initialize_SumeruOneLineDraw()
-    startConfigID = 50010001
+    local startConfigID = 50010001
     for _,v in pairs(SumeruOneLineDraw_Trigger) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -693,15 +693,15 @@ function LF_Initialize_SumeruOneLineDraw()
         LF_SetGadgetsToTargetSuite(i)
     end
 
-    var = { config_id= 50010101, name = VarInfo.LevelIdx, value = 0, no_refresh = true }
+    local var = { config_id= 50010101, name = VarInfo.LevelIdx, value = 0, no_refresh = true }
     variables[var.name] = var
-    var = { config_id= 50010102, name = VarInfo.CurNum, value = 0, no_refresh = false }
+    local var = { config_id= 50010102, name = VarInfo.CurNum, value = 0, no_refresh = false }
     variables[var.name] = var
-    var = { config_id= 50010103, name = VarInfo.LastCid, value = 0, no_refresh = false }
+    local var = { config_id= 50010103, name = VarInfo.LastCid, value = 0, no_refresh = false }
     variables[var.name] = var
-    var = { config_id= 50010104, name = VarInfo.CurStep, value = 1, no_refresh = true }
+    local var = { config_id= 50010104, name = VarInfo.CurStep, value = 1, no_refresh = true }
     variables[var.name] = var
-    var = { config_id= 50010105, name = "GM_Reset", value = 0, no_refresh = false }
+    local var = { config_id= 50010105, name = "GM_Reset", value = 0, no_refresh = false }
     variables[var.name] = var
 
     return 0
@@ -709,7 +709,7 @@ end
 
 function action_GMReset(context,evt)
     -- 重置陈列室
-    uid = ScriptLib.GetSceneOwnerUid(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
     ScriptLib.ClearExhibitionReplaceableData(context, uid, LevelInfo.Exhibition.key)
     ScriptLib.SetGroupVariableValue(context, VarInfo.LevelIdx,0)
 
@@ -736,7 +736,7 @@ end
 
 -- EnterRegion 检查玩法是否要刷新
 function action_CheckPlay(context,evt)
-    regionConfigID = evt.param1
+    local regionConfigID = evt.param1
     if regionConfigID ~= LevelInfo.InitRegion then
         return 0
     end
@@ -759,7 +759,7 @@ end
 -- LeaveRegion 游戏失败
 function action_ReStart(context,evt)
 
-    regionConfigID = evt.param1
+    local regionConfigID = evt.param1
     if regionConfigID ~= LevelInfo.PlayRegion then
         return 0
     end
@@ -783,7 +783,7 @@ function action_StartPlay(context,evt)
         return 0
     end
 
-    curPhasePlay = LF_GetCurPhasePlay(context)
+    local curPhasePlay = LF_GetCurPhasePlay(context)
 
     -- 初始化地板
     ScriptLib.SetGroupVariableValue(context, VarInfo.CurNum,curPhasePlay.FloorNum)
@@ -815,24 +815,24 @@ function action_ChangeWave(context,evt)
     end
 
     -- 会被时间轴触发个几次（次数与值有关） FloorPlay
-    curPhasePlay = LF_GetCurPhasePlay(context)
-    curWave = curPhasePlay.ChangeWave
-    curWaveNum= ScriptLib.GetGroupTempValue(context, "curWaveNum", {})
+    local curPhasePlay = LF_GetCurPhasePlay(context)
+    local curWave = curPhasePlay.ChangeWave
+    local curWaveNum= ScriptLib.GetGroupTempValue(context, "curWaveNum", {})
     curWaveNum = Fix(curWaveNum,curWave,"action_ChangeWave:curWaveNum")
 
-    curWaveIdxList = curWave[curWaveNum]
+    local curWaveIdxList = curWave[curWaveNum]
     ScriptLib.PrintContextLog(context, "## TD_SOLD curChangeWave =" .. LF_ArrayToString(curWaveIdxList))
     -- 地板在过程中逐步新芽
     for i = 1,#curWaveIdxList do
-        floorCid = LF_GetFloorCidByIdx(curWaveIdxList[i])
+        local floorCid = LF_GetFloorCidByIdx(curWaveIdxList[i])
         ScriptLib.SetGadgetStateByConfigId(context, floorCid, ObjState.Floor.bud)
     end
 
     if curWaveNum == #curWave then
         -- 蝴蝶转移
-        butterflyIdx = curPhasePlay.ButterFlyIdx
+        local butterflyIdx = curPhasePlay.ButterFlyIdx
         for i = 1,#butterflyIdx do
-            butterFlyCid =  LF_GetFloorCidByIdx(butterflyIdx[i])
+            local butterFlyCid =  LF_GetFloorCidByIdx(butterflyIdx[i])
             ScriptLib.SetGadgetStateByConfigId(context, butterFlyCid, ObjState.Floor.bfFly)
         end
         -- 树成长
@@ -853,9 +853,9 @@ function action_ReturnWave(context,evt)
         return 0
     end
     -- 会被时间轴触发个几次（次数与值有关） FloorPlay
-    curPhasePlay = LF_GetCurPhasePlay(context)
-    curWave = curPhasePlay.ReturnWave
-    curWaveNum= ScriptLib.GetGroupTempValue(context, "curWaveNum", {})
+    local curPhasePlay = LF_GetCurPhasePlay(context)
+    local curWave = curPhasePlay.ReturnWave
+    local curWaveNum= ScriptLib.GetGroupTempValue(context, "curWaveNum", {})
 
     if curWaveNum == #curWave + 1 then
         -- Start还原
@@ -867,11 +867,11 @@ function action_ReturnWave(context,evt)
     end
 
     curWaveNum = Fix(curWaveNum,curWave,"action_ReturnWave:curWaveNum")
-    curWaveIdxList = curWave[curWaveNum]
+    local curWaveIdxList = curWave[curWaveNum]
     ScriptLib.PrintContextLog(context, "## TD_SOLD curChangeWave =" .. LF_ArrayToString(curWaveIdxList))
     -- 地板在过程中逐步枯萎
     for i = 1,#curWaveIdxList do
-        floorCid = LF_GetFloorCidByIdx(curWaveIdxList[i])
+        local floorCid = LF_GetFloorCidByIdx(curWaveIdxList[i])
         ScriptLib.SetGadgetStateByConfigId(context, floorCid, ObjState.Floor.fail)
     end
 
@@ -887,7 +887,7 @@ end
 
 function action_PlayEnd(context,evt)
     -- 任务推进
-    questParam = "GardenFinish_" .. LevelInfo.QuestId
+    local questParam = "GardenFinish_" .. LevelInfo.QuestId
     ScriptLib.AddQuestProgress(context, questParam)
     -- 果树开花动画
     ScriptLib.SetGadgetStateByConfigId(context, LevelInfo.TreeCid, ObjState.Tree.over)
@@ -919,10 +919,10 @@ function action_LastWaveDelay(context,evt)
     -- 移除旧压草片
     ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, LevelInfo.Volume01Cid )
     -- 添加新压草片
-    curPhasePlay = LF_GetCurPhasePlay(context)
-    treeFloorCid = LF_GetFloorCidByIdx(curPhasePlay.TreeIdx)
-    tempPos = gadgets[treeFloorCid].pos
-    tempRot = gadgets[treeFloorCid].rot
+    local curPhasePlay = LF_GetCurPhasePlay(context)
+    local treeFloorCid = LF_GetFloorCidByIdx(curPhasePlay.TreeIdx)
+    local tempPos = gadgets[treeFloorCid].pos
+    local tempRot = gadgets[treeFloorCid].rot
     ScriptLib.CreateGadgetByConfigIdByPos(context, LevelInfo.Volume02Cid, tempPos, tempRot)
 
     ScriptLib.SetGroupTempValue(context, "curWaveNum", 1, {})
@@ -940,7 +940,7 @@ function action_LastWave(context,evt)
         return 0
     end
     -- 会被时间轴触发个几次（次数与值有关） FloorPlay
-    curWaveNum= ScriptLib.GetGroupTempValue(context, "curWaveNum", {})
+    local curWaveNum= ScriptLib.GetGroupTempValue(context, "curWaveNum", {})
 
     -- 一口气切换所有田
     if curWaveNum == 1 then
@@ -949,10 +949,10 @@ function action_LastWave(context,evt)
         -- 释放成功效果
         -- ScriptLib.SetGadgetStateByConfigId(context, LevelInfo.TreeCid, ObjState.Tree.success)
         -- 草消失
-        selectLevel = ScriptLib.GetGroupVariableValue(context, VarInfo.LevelIdx)
-        gadgetList = suites[selectLevel].gadgets
+        local selectLevel = ScriptLib.GetGroupVariableValue(context, VarInfo.LevelIdx)
+        local gadgetList = suites[selectLevel].gadgets
         for i = 1,#gadgetList do
-            tempCid = gadgetList[i]
+            local tempCid = gadgetList[i]
             if 70330241 == gadgets[tempCid].gadget_id then
                 ScriptLib.SetGadgetStateByConfigId(context, tempCid, ObjState.Floor.ending)
             end
@@ -984,16 +984,16 @@ end
 --======================================]]
 function LF_TreeLook(context)
     -- 触发镜头注目，注目位置为坐标（-1747.105，336.1454，3702.49），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-    startPos = LF_GetEntityPos(context,0,LevelInfo.StartCid)
-    treePos = LF_GetEntityPos(context,0,LevelInfo.TreeCid)
+    local startPos = LF_GetEntityPos(context,0,LevelInfo.StartCid)
+    local treePos = LF_GetEntityPos(context,0,LevelInfo.TreeCid)
     -- 抬高起点pos,做摄像机位置支点，最终用于瞄准树
     startPos.y = startPos.y + 2
-    dirVector = LF_GetNormalizedDirection(treePos,startPos)
-    dirNum = 6.85
+    local dirVector = LF_GetNormalizedDirection(treePos,startPos)
+    local dirNum = 6.85
     dirVector = LF_VectorMultiply(dirVector,dirNum)
-    cameraPos = LF_VectorAdd(startPos,dirVector)
+    local cameraPos = LF_VectorAdd(startPos,dirVector)
 
-    followPos = {x=0, y=0, z=0}
+    local followPos = {x=0, y=0, z=0}
     if nil ~= LevelInfo.followPos then
         followPos = LevelInfo.followPos
     end
@@ -1017,18 +1017,18 @@ end
 
 function LF_TryRefresh(context)
     -- 根据当前玩法，在指定位置创建Start
-    curSuite = ScriptLib.GetGroupSuite(context, base_info.group_id)
-    levelData = LF_Exhibition_GetLevelData(context)
+    local curSuite = ScriptLib.GetGroupSuite(context, base_info.group_id)
+    local levelData = LF_Exhibition_GetLevelData(context)
     ScriptLib.PrintContextLog(context, "## TD_SOLD : LF_TryRefresh| curSuite = " .. curSuite .. " dataValue = " .. levelData)
 
-    selectLevel = ScriptLib.GetGroupVariableValue(context, VarInfo.LevelIdx)
-    isLevelCompleted = LF_Exhibition_CheckTargetComplete(selectLevel,levelData)
+    local selectLevel = ScriptLib.GetGroupVariableValue(context, VarInfo.LevelIdx)
+    local isLevelCompleted = LF_Exhibition_CheckTargetComplete(selectLevel,levelData)
     ScriptLib.PrintContextLog(context, "## TD_SOLD : LF_TryRefresh| curSelectLevel = " .. selectLevel .."||isLevelCompleted = " .. isLevelCompleted)
 
 
     if selectLevel == 0 or isLevelCompleted == 1 then
         -- 尝试选关
-        selectNewLevel = LF_SelectTargetLevel(context,levelData)
+        local selectNewLevel = LF_SelectTargetLevel(context,levelData)
         if selectNewLevel == 0 then
             -- 无可选关卡时
             ScriptLib.PrintContextLog(context, "## TD_SOLD : LF_TryRefresh 异常，所有可用已全部完成，保底刷新到已完成")
@@ -1038,7 +1038,7 @@ function LF_TryRefresh(context)
         end
         -- 如果返回可用关卡
         -- 成功选出的场合
-        selectSuite = LevelInfo.LevelSuite[selectNewLevel]
+        local selectSuite = LevelInfo.LevelSuite[selectNewLevel]
         ScriptLib.SetGroupVariableValue(context, VarInfo.LevelIdx,selectNewLevel)
         ScriptLib.PrintContextLog(context, "## TD_SOLD : LF_TryRefresh 重新选择关卡| selectSuite = " .. selectSuite)
         ScriptLib.RefreshGroup(context, { group_id = base_info.group_id, suite = selectSuite })
@@ -1053,14 +1053,14 @@ end
 -- 实际是一个快速刷新的流程
 function LF_QuickReturn(context)
     -- 快速刷新关卡，同时将当前步骤设置为Loaded
-    selectLevel = ScriptLib.GetGroupVariableValue(context, VarInfo.LevelIdx)
+    local selectLevel = ScriptLib.GetGroupVariableValue(context, VarInfo.LevelIdx)
     if selectLevel <= 0 or selectLevel >= 13 then
         -- 无可选关卡时
         ScriptLib.PrintContextLog(context, "## TD_SOLD : LF_QuickReturn 异常，刷新到TryRefresh中统一处理")
         LF_SetPlayStep(context,PlayStep.Loaded,"LF_QuickReturn")
         return 0
     end
-    selectSuite = LevelInfo.LevelSuite[selectLevel]
+    local selectSuite = LevelInfo.LevelSuite[selectLevel]
     LF_SetPlayStep(context,PlayStep.Loaded,"LF_QuickReturn")
     ScriptLib.RefreshGroup(context, { group_id = base_info.group_id, suite = selectSuite })
     ScriptLib.PrintContextLog(context, "## TD_SOLD : LF_QuickReturn| selectSuite = " .. selectSuite)
@@ -1069,12 +1069,12 @@ end
 
 -- 选择关卡
 function LF_SelectTargetLevel(context,dataValue)
-    dataArray = LF_DecToBin(dataValue)
-    selectLevel = {}
-    totalLevelNum = 0
+    local dataArray = LF_DecToBin(dataValue)
+    local selectLevel = {}
+    local totalLevelNum = 0
     for i = 1,#LevelInfo.LevelSuite,1 do
 
-        index = Fix(i,dataArray)
+        local index = Fix(i,dataArray)
         if dataArray[index] == 0 then
             table.insert(selectLevel,index)
             totalLevelNum = totalLevelNum + 1
@@ -1084,8 +1084,8 @@ function LF_SelectTargetLevel(context,dataValue)
         if i== 1 or i== 6 or i==10 or i==12 then
             if totalLevelNum >0 then
                 math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-                selectIndex = math.random(1,#selectLevel)
-                selectSuiteNum = selectLevel[selectIndex]
+                local selectIndex = math.random(1,#selectLevel)
+                local selectSuiteNum = selectLevel[selectIndex]
                 return selectSuiteNum
             end
         end
@@ -1096,9 +1096,9 @@ end
 
 -- 在Group上创建初始的起点和树
 function LF_CreateInitLevel(context)
-    phasePlay = LF_GetCurPhasePlay(context)
+    local phasePlay = LF_GetCurPhasePlay(context)
     -- 创建起点
-    startFloorCid = LF_GetFloorCidByIdx(phasePlay.StartIdx)
+    local startFloorCid = LF_GetFloorCidByIdx(phasePlay.StartIdx)
     ScriptLib.PrintContextLog(context, "## TD_SOLD : startFloorCid = " .. startFloorCid)
     if gadgets[startFloorCid] ~= nil then
         -- 创建Start
@@ -1107,12 +1107,12 @@ function LF_CreateInitLevel(context)
     end
 
     -- 创建终点
-    treeFloorCid = LF_GetFloorCidByIdx(phasePlay.TreeIdx)
+    local treeFloorCid = LF_GetFloorCidByIdx(phasePlay.TreeIdx)
     ScriptLib.PrintContextLog(context, "## TD_SOLD : treeFloorCid = " .. treeFloorCid)
     if gadgets[treeFloorCid] ~= nil then
         -- 创建树和Volume
-        tempPos = gadgets[treeFloorCid].pos
-        tempRot = gadgets[treeFloorCid].rot
+        local tempPos = gadgets[treeFloorCid].pos
+        local tempRot = gadgets[treeFloorCid].rot
         ScriptLib.CreateGadgetByConfigIdByPos(context, LevelInfo.TreeCid, tempPos, tempRot)
         -- Volume01不再创建
         --[[
@@ -1128,7 +1128,7 @@ function LF_CreateInitLevel(context)
 end
 
 function LF_ReStart(context)
-    curPhasePlay = LF_GetCurPhasePlay(context)
+    local curPhasePlay = LF_GetCurPhasePlay(context)
     if LF_CheckPlayStep(context,{PlayStep.ReStart},"LF_ReStart") then
         ScriptLib.PrintContextLog(context, "## TD_SOLD : ReInit 重复触发")
         return 0
@@ -1146,23 +1146,23 @@ end
 
 -- 设置状态
 function LF_SetButterFlyRoad(context,config_id)
-    curPhasePlay = LF_GetCurPhasePlay(context)
-    butterflyIdx = curPhasePlay.ButterFlyIdx
+    local curPhasePlay = LF_GetCurPhasePlay(context)
+    local butterflyIdx = curPhasePlay.ButterFlyIdx
 
-    targetRoad = 1
+    local targetRoad = 1
     for i = 1,#butterflyIdx do
-        butterFlyCid =  LF_GetFloorCidByIdx(butterflyIdx[i])
+        local butterFlyCid =  LF_GetFloorCidByIdx(butterflyIdx[i])
         if  config_id == butterFlyCid then
             targetRoad = i
         end
     end
 
     targetRoad = Fix(targetRoad,curPhasePlay.ButterFlyRoads)
-    butterFlyRoad = curPhasePlay.ButterFlyRoads[targetRoad]
-    butterFlyRoadList = butterFlyRoad.IdxList
+    local butterFlyRoad = curPhasePlay.ButterFlyRoads[targetRoad]
+    local butterFlyRoadList = butterFlyRoad.IdxList
 
     for i = 1,#butterFlyRoadList do
-        cid  = LF_GetFloorCidByIdx(butterFlyRoadList[i])
+        local cid  = LF_GetFloorCidByIdx(butterFlyRoadList[i])
         -- 改变物件的状态
         ScriptLib.SetGadgetStateByConfigId(context, cid, ObjState.Floor.bfFlee)
         -- 给目标复制用于ability的演出
@@ -1172,21 +1172,21 @@ end
 
 -- 返回当前的PhasePlay
 function LF_GetCurPhasePlay(context)
-    levelIdx = ScriptLib.GetGroupVariableValue(context, VarInfo.LevelIdx)
+    local levelIdx = ScriptLib.GetGroupVariableValue(context, VarInfo.LevelIdx)
     levelIdx = Fix(levelIdx,PhasePlay,"action_StartPlay:levelIdx")
-    curPhasePlay = PhasePlay[levelIdx]
+    local curPhasePlay = PhasePlay[levelIdx]
 
     return curPhasePlay
 end
 
 -- 完成关卡
 function LF_CompleteCurLevel(context)
-    selectLevel = ScriptLib.GetGroupVariableValue(context, VarInfo.LevelIdx)
-    levelData = LF_Exhibition_GetLevelData(context)
-    changeLevelData = LF_Exhibition_SetTargetLevel(levelData,selectLevel,1)
+    local selectLevel = ScriptLib.GetGroupVariableValue(context, VarInfo.LevelIdx)
+    local levelData = LF_Exhibition_GetLevelData(context)
+    local changeLevelData = LF_Exhibition_SetTargetLevel(levelData,selectLevel,1)
 
-    msg1 = " |changeLevelDataArray = " .. LF_ArrayToString(LF_DecToBin(changeLevelData))
-    msg2 = " | selectLevel = " .. selectLevel
+    local msg1 = " |changeLevelDataArray = " .. LF_ArrayToString(LF_DecToBin(changeLevelData))
+    local msg2 = " | selectLevel = " .. selectLevel
     ScriptLib.PrintContextLog(context, "## TD_SOLD : LF_CompleteCurLevel"..msg1..msg2)
 
     LF_Exhibition_SetLevelData(context,changeLevelData)
@@ -1201,8 +1201,8 @@ function SLC_EnterFloor(context)
         return 0
     end
 
-    config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
-    curGadgetState = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, config_id)
+    local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+    local curGadgetState = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, config_id)
 
     ScriptLib.PrintContextLog(context, "## TD_SOLD action_EnterFloor：触发Cid = " .. config_id)
 
@@ -1220,7 +1220,7 @@ end
 
 -- 确认地板状态
 function LF_AnalyzeFloorByOrder(context,currentConfigID)
-    lastConfigID = ScriptLib.GetGroupVariableValue(context, VarInfo.LastCid) --上一个踩中地板的ConfigID
+    local lastConfigID = ScriptLib.GetGroupVariableValue(context, VarInfo.LastCid) --上一个踩中地板的ConfigID
 
     ScriptLib.PrintContextLog(context, "## TD_SOLD LF_AnalyzeFloorByOrder lastCid = " .. lastConfigID .. " currentCid = " .. currentConfigID)
 
@@ -1246,7 +1246,7 @@ end
 
 function LF_EnterSuccess(context)
 
-    curFloorNum = ScriptLib.GetGroupVariableValue(context, VarInfo.CurNum)
+    local curFloorNum = ScriptLib.GetGroupVariableValue(context, VarInfo.CurNum)
     if curFloorNum <= 1 then
         -- 树结果
         ScriptLib.SetGadgetStateByConfigId(context, LevelInfo.TreeCid, ObjState.Tree.fruit)
@@ -1263,7 +1263,7 @@ end
 
 -- 步骤检查
 function LF_CheckPlayStep(context,phase,functionName)
-    curPlayStep = ScriptLib.GetGroupVariableValue(context, VarInfo.CurStep)
+    local curPlayStep = ScriptLib.GetGroupVariableValue(context, VarInfo.CurStep)
     for _,v in pairs(phase) do
         if v == curPlayStep then
             ScriptLib.PrintContextLog(context, "## TD_SOLD From:" .. functionName .." ||  当前[Phase:".. curPlayStep .."]符合目标进度" ..LF_ArrayToString(phase)  )
@@ -1287,14 +1287,14 @@ end
 -- 写入陈列室值
 function LF_Exhibition_SetLevelData(context,levelDataDec)
     --拿陈列室的值，并且做加法操作
-    exhibition = LevelInfo.Exhibition
-    uid = ScriptLib.GetSceneOwnerUid(context)
-    msg = "## TD_SOLD : LF_Exhibition_SetLevelData"
+    local exhibition = LevelInfo.Exhibition
+    local uid = ScriptLib.GetSceneOwnerUid(context)
+    local msg = "## TD_SOLD : LF_Exhibition_SetLevelData"
     msg = msg .. " |uid = " .. uid
     msg = msg .. " |LevelInfo.Exhibition.id = " .. exhibition.id
     ScriptLib.PrintContextLog(context, msg)
 
-    curDataDec = ScriptLib.GetExhibitionReplaceableData(context, uid, exhibition.id)
+    local curDataDec = ScriptLib.GetExhibitionReplaceableData(context, uid, exhibition.id)
 
     msg = "## TD_SOLD : LF_Exhibition_SetLevelData"
     msg = msg .. " |levelDataDec = " .. levelDataDec
@@ -1306,14 +1306,14 @@ end
 
 -- 返回当前的陈列室值
 function LF_Exhibition_GetLevelData(context)
-    exhibition = LevelInfo.Exhibition
-    uid = ScriptLib.GetSceneOwnerUid(context)
-    msg = "## TD_SOLD : LF_Exhibition_GetLevelData"
+    local exhibition = LevelInfo.Exhibition
+    local uid = ScriptLib.GetSceneOwnerUid(context)
+    local msg = "## TD_SOLD : LF_Exhibition_GetLevelData"
     msg = msg .. " |uid = " .. uid
     msg = msg .. " |LevelInfo.Exhibition.id = " .. exhibition.id
     ScriptLib.PrintContextLog(context, msg)
 
-    levelDataDec = ScriptLib.GetExhibitionReplaceableData(context, uid, exhibition.id)
+    local levelDataDec = ScriptLib.GetExhibitionReplaceableData(context, uid, exhibition.id)
 
     msg = "## TD_SOLD : LF_Exhibition_GetLevelData"
     msg = msg .. " |levelDataDec = " .. levelDataDec
@@ -1324,21 +1324,21 @@ end
 
 -- 返回当前的陈列室值导出的数组
 function LF_Exhibition_GetLevelDataArray(context)
-    levelDataDec = LF_Exhibition_GetLevelData(context)
-    levelDataArray = LF_DecToBin(levelDataDec)
+    local levelDataDec = LF_Exhibition_GetLevelData(context)
+    local levelDataArray = LF_DecToBin(levelDataDec)
     return levelDataArray
 end
 
 -- 修改bin中指定Index数据
 function LF_Exhibition_SetTargetLevel(levelDataDec,targetIndex,value)
-    dataArray = LF_DecToBin(levelDataDec)
+    local dataArray = LF_DecToBin(levelDataDec)
     if value ~= 0 and value ~=1 then
         ScriptLib.PrintLog("Error: LF_Exhibition_SetTargetCompelete: value = " .. value)
         value = 0
     end
     -- 指定关卡设为完成
     dataArray[targetIndex] = value
-    changeLevelData = LF_BinToDec(dataArray)
+    local changeLevelData = LF_BinToDec(dataArray)
 
 
     return changeLevelData
@@ -1346,11 +1346,11 @@ end
 
 -- 通过bin查询对应Index的关卡情况
 function LF_Exhibition_CheckTargetComplete(targetIndex,levelDataDec)
-    dataArray = LF_DecToBin(levelDataDec)
+    local dataArray = LF_DecToBin(levelDataDec)
 
     if targetIndex == 0 or nil == dataArray[targetIndex] then
-        msg1 = " |dataArray = " .. LF_ArrayToString(dataArray)
-        msg2 = " | index = " .. targetIndex
+        local msg1 = " |dataArray = " .. LF_ArrayToString(dataArray)
+        local msg2 = " | index = " .. targetIndex
         ScriptLib.PrintLog("Error: LF_Exhibition_CheckTargetCompelete" .. msg1 .. msg2)
         return 0
     end
@@ -1367,9 +1367,9 @@ end
 --======================================]]
 -- 取目标点
 function LF_GetEntityPos(context, uid, cid)
-    logInfo = "## TD_SOLD :"
+    local logInfo = "## TD_SOLD :"
     ScriptLib.PrintContextLog(context, logInfo .. "LF_GetEntityPos")
-    _eid = 0
+    local _eid = 0
     --转译entityId
     if uid ~= 0 then
         _eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
@@ -1377,8 +1377,8 @@ function LF_GetEntityPos(context, uid, cid)
         _eid = ScriptLib.GetEntityIdByConfigId(context, cid)
     end
     --若无法取到Pos会给零点作为保底并报错
-    _array = ScriptLib.GetPosByEntityId(context, _eid)
-    _res = { x=0,y=0,z=0}
+    local _array = ScriptLib.GetPosByEntityId(context, _eid)
+    local _res = { x=0,y=0,z=0}
     if _array.x == 0 and _array.y == 0 and _array.z == 0 then
         ScriptLib.PrintContextLog(context, logInfo .. "LF_GetEntityPos : Get Pos Fail !!! | uid="..uid.." | cid="..cid)
         _res.error = 1
@@ -1392,33 +1392,33 @@ end
 
 -- 向量方向
 function LF_GetNormalizedDirection(fromVector,toVector)
-    dirX = toVector.x - fromVector.x
-    dirY = toVector.y - fromVector.y
-    dirZ = toVector.z - fromVector.z
-    direction = { x = dirX, y = dirY, z = dirZ}
+    local dirX = toVector.x - fromVector.x
+    local dirY = toVector.y - fromVector.y
+    local dirZ = toVector.z - fromVector.z
+    local direction = { x = dirX, y = dirY, z = dirZ}
     return LF_Normalize(direction)
 end
 
 -- 归一化
 function LF_Normalize(vector3)
-    magnitude = math.sqrt(vector3.x * vector3.x + vector3.y * vector3.y + vector3.z * vector3.z)
-    newVector = { x = vector3.x/magnitude, y = vector3.y / magnitude, z = vector3.z / magnitude}
+    local magnitude = math.sqrt(vector3.x * vector3.x + vector3.y * vector3.y + vector3.z * vector3.z)
+    local newVector = { x = vector3.x/magnitude, y = vector3.y / magnitude, z = vector3.z / magnitude}
     return newVector
 end
 
 function LF_VectorAdd(vectorA,vectorB)
-    X = vectorA.x + vectorB.x
-    Y = vectorA.y + vectorB.y
-    Z = vectorA.z + vectorB.z
-    newVector = {x=X,y=Y,z=Z}
+    local X = vectorA.x + vectorB.x
+    local Y = vectorA.y + vectorB.y
+    local Z = vectorA.z + vectorB.z
+    local newVector = {x=X,y=Y,z=Z}
     return newVector
 end
 -- 数乘向量
 function LF_VectorMultiply(vector3,floatNum)
-    X = vector3.x*floatNum
-    Y = vector3.y*floatNum
-    Z = vector3.z*floatNum
-    newVector = {x=X,y=Y,z=Z}
+    local X = vector3.x*floatNum
+    local Y = vector3.y*floatNum
+    local Z = vector3.z*floatNum
+    local newVector = {x=X,y=Y,z=Z}
     return newVector
 end
 
@@ -1426,7 +1426,7 @@ end
 ||	私有函数
 --======================================]]
 function LF_SetGadgetsToTargetSuite(suiteId)
-    floorArray= PhasePlay[suiteId].FloorArray
+    local floorArray= PhasePlay[suiteId].FloorArray
     for x = 1,#floorArray do
         for y = 1,#floorArray[x] do
             if floorArray[x][y] >= 2 and floorArray[x][y] <= 6 then
@@ -1437,7 +1437,7 @@ function LF_SetGadgetsToTargetSuite(suiteId)
 end
 
 function LF_GetFloorCID(x,y)
-    stepNum = (x-1) * LevelInfo.MaxSize + (y-1)
+    local stepNum = (x-1) * LevelInfo.MaxSize + (y-1)
     return LevelInfo.FloorCid + stepNum
 end
 
@@ -1446,15 +1446,15 @@ function LF_GetFloorCidByIdx(Idx)
 end
 
 function LF_GetXY(cid)
-    stepNum = math.abs(cid - LevelInfo.FloorCid)
-    curX = math.floor(stepNum/ LevelInfo.MaxSize) + 1
-    curY = stepNum% LevelInfo.MaxSize + 1
+    local stepNum = math.abs(cid - LevelInfo.FloorCid)
+    local curX = math.floor(stepNum/ LevelInfo.MaxSize) + 1
+    local curY = stepNum% LevelInfo.MaxSize + 1
     return {x = curX,y = curY}
 end
 
 -- 判定时用来查询是否为合法地板
 function LF_IsNearbyFloor(lastCid,curCid)
-    nearFloor = LF_GetNearbyFloorConfigList(lastCid)
+    local nearFloor = LF_GetNearbyFloorConfigList(lastCid)
     for i = 1,#nearFloor do
         if curCid == nearFloor[i] then
             return true
@@ -1465,11 +1465,11 @@ end
 
 -- 获取周边地板的一个List
 function LF_GetNearbyFloorConfigList(cid)
-    tempPos = LF_GetXY(cid)
-    nearFloor = {}
+    local tempPos = LF_GetXY(cid)
+    local nearFloor = {}
 
-    tempX = tempPos.x
-    tempY = tempPos.y
+    local tempX = tempPos.x
+    local tempY = tempPos.y
 
     ScriptLib.PrintLog(cid .. "'s XY is" .. LF_ArrayToString({ tempX,tempY }))
 
@@ -1488,7 +1488,7 @@ end
 --======================================]]
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    hasRequireSuiteList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    local hasRequireSuiteList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuiteList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -1528,7 +1528,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    s = "{"
+    local s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","
@@ -1555,16 +1555,16 @@ end
 
 -- 顺序0,1数组转十进制保存
 function LF_BinToDec(binArray)
-    decValue = 0
-    bin = table.concat(binArray)
+    local decValue = 0
+    local bin = table.concat(binArray)
     decValue = tonumber(bin,2)
     return decValue
 end
 -- 十进制转成0,1数组，位数对应为1~12
 function LF_DecToBin(decValue)
-    binArray = {}
-    value = decValue
-    bit = #LevelInfo.LevelSuite -1
+    local binArray = {}
+    local value = decValue
+    local bit = #LevelInfo.LevelSuite -1
     for i = bit,0,-1 do
         binArray[#binArray+1] = math.floor(value/2^i)
         value = value % 2^i

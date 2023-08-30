@@ -130,7 +130,7 @@ function action_EVENT_VARIABLE_CHANGE_88002(context, evt)
 	if 0 ~= ScriptLib.ChangeGroupGadget(context, { config_id = defs.gadget_id_1, state = GadgetState.Default }) then
 			return -1
 		end
-		--pos = {x=2257, y=270, z=-259}
+		--local pos = {x=2257, y=270, z=-259}
 
 	    --if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, --duration = 5, is_force = true, is_broadcast = false }) then
 			--return -1

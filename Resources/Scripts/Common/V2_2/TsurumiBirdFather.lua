@@ -9,7 +9,7 @@ defs = {
 	hasChild = false, --表示是否有子Group，true表示有
 	selfSuiteId = 2, --需要切的自己的suite
 	hasMultiStatues = false, --是否有多个雷鸟雕像
-	statuesMap =
+	statuesMap = 
 	{
 		[config_id] = suite_id, --雷鸟雕像和需要切出来的Suite的对应表
 	},
@@ -19,7 +19,7 @@ defs = {
 --雷鸟小像执行的SLC，调用此SLC来刷新对应的Group
 --子Group在场上处于空Suite的隐藏状态，在收到SLC时发消息给子Group切换suite
 --每个子Group配置一个变量Finished
-Triggers_TBird = {
+local Triggers_TBird = {
 	[1] = { name = "group_load", config_id = 9000101, event = EventType.EVENT_GROUP_LOAD, source = "",condition = "",action = "action_group_load",trigger_count= 0},
 	[2] = { name = "group_will_unload", config_id = 9000102, event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "",condition = "",action = "action_group_will_unload",trigger_count= 0},
 }
@@ -28,7 +28,7 @@ Triggers_TBird = {
 function SLC_CallTsurumiGroup(context)
 	ScriptLib.PrintContextLog(context, "@@ LUA_Tsurumi : Receive_SLC")
 	--拿到发消息的雕像的id
-	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	--如果需要通知任务就改Group里的变量，1的时候就不再改变
 	if defs.notifyQuest == true then
 		if 0 ~= ScriptLib.GetGroupVariableValueByGroup(context, "Notified", defs.group_id) then
@@ -68,11 +68,11 @@ function GotoRandomSuiteByDay( context )
 	if 0 ~= ScriptLib.GetGroupTempValue(context, "HasRefreshed", {}) then
 		return -1
 	end
-	child_unfinshed = {}
+	local child_unfinshed = {}
 	--这里写一个For循环拿到子group的状态
 	for child_id,suite_id in pairs(defs.child_group) do
 		--把Group不是完成状态的子Group加进去
-		child_state = ScriptLib.GetGroupVariableValueByGroup(context, "Finished", child_id)
+		local child_state = ScriptLib.GetGroupVariableValueByGroup(context, "Finished", child_id)
 		--完成的Group会将自己的值置为1
 		if child_state ~= 1 then
 			table.insert(child_unfinshed, child_id)
@@ -87,20 +87,20 @@ function GotoRandomSuiteByDay( context )
 	--这里拿到当天更新的随机种子，通过种子对Group取余，获得今天刷新的Group
 	--每天只会刷新一个Group，那么需要一个东西来记录今天已经有Group完成过了，
 	--每天的随机种子同步，当种子是偶数时代表今天的未完成可以刷新，当种子是奇数时表示今天的已经完成了，不再刷新
-	seed = ScriptLib.GetGroupVariableValue(context, "Seed")
+	local seed = ScriptLib.GetGroupVariableValue(context, "Seed")
 	ScriptLib.PrintContextLog(context, "@@ LUA_Tsurumi : SEED_"..seed)
 	if seed%2 ~= 0 then
 		return -1
 	end
 	--拿到未完成的Group长度
-	length = #child_unfinshed
+	local length = #child_unfinshed
 	--拿到今天刷新的Group的ID
-	index = seed%length + 1
-	child_group_id = child_unfinshed[index]
-	child_suite_id = defs.child_group[child_group_id]
---[[
-	isStoneSeq = ScriptLib.GetGroupVariableValueByGroup(context, "TsurumiStone", child_group_id)
-	isPillarMove = ScriptLib.GetGroupVariableValueByGroup(context, "isPillarMove", child_group_id)
+	local index = seed%length + 1
+	local child_group_id = child_unfinshed[index]
+	local child_suite_id = defs.child_group[child_group_id] 
+--[[	
+	local isStoneSeq = ScriptLib.GetGroupVariableValueByGroup(context, "TsurumiStone", child_group_id)
+	local isPillarMove = ScriptLib.GetGroupVariableValueByGroup(context, "isPillarMove", child_group_id)
 	--如果不是符文石组
 	if 0 == isStoneSeq then
 	--拿到今天需要刷新的Group，给这个Group发一个消息，来切换Group的Suite
@@ -111,14 +111,14 @@ function GotoRandomSuiteByDay( context )
 			--切子Group的变量来控制刷新
 			ScriptLib.SetGroupVariableValueByGroup(context, "TsurumiStone", isStoneSeq+1, child_group_id)
 			ScriptLib.PrintContextLog(context, "@@ LUA_Tsurumi : CHILD_GROUP_STONE_"..child_group_id.."_SUITE_")
-		else
+		else 
 			--切子Group的变量来控制刷新
 			ScriptLib.SetGroupVariableValueByGroup(context, "isPillarMove", isStoneSeq+1, child_group_id)
 			ScriptLib.PrintContextLog(context, "@@ LUA_Tsurumi : CHILD_GROUP_STONE_"..child_group_id.."_SUITE_")
 		end
 	end
 ]]--
-	isNeedNotify = ScriptLib.GetGroupVariableValueByGroup(context, "isNeedNotify", child_group_id)
+	local isNeedNotify = ScriptLib.GetGroupVariableValueByGroup(context, "isNeedNotify", child_group_id)
 	--如果是不需要通知的，就直接切Suite2
 	if isNeedNotify == 0 then
 		ScriptLib.AddExtraGroupSuite(context,child_group_id,child_suite_id)
@@ -144,7 +144,7 @@ function action_group_load( context, evt )
 	end
 	--每天自然刷新的时候更新Group里的随机数，保证每天刷新的Group是同一个，这是一个Persistent的GroupVariable
 	--自然刷新的随机数是一个整数偶数
-	GenerateSeed = os.time()
+	local GenerateSeed = os.time()
 	if GenerateSeed%2 ~=0 then
 		GenerateSeed = GenerateSeed + 1
 	end

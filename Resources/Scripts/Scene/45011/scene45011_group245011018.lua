@@ -19,23 +19,23 @@ route_map={
   --[4]={route_points={1,2,3,4,5,6,7,8,9,10},tags=16},
 }
 
-entrance_point_map={
+local entrance_point_map={
   [1]=13,
   [2]=12,
   [3]=11,
 }
 
 
-entrance_map={
+local entrance_map={
   [2]=13,
   [4]=12,
   [8]=11,
 }
 
-exit_point_list={10}
+local exit_point_list={10}
 
 --对应的刷怪策略
-monster_programme={
+local monster_programme={
   [1]=stage_thug_threeway,
   [2]=stage_hunter_threeway,
   --[3]=stage_hunter_threeway,

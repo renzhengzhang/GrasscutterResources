@@ -4,11 +4,11 @@ base_info = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {311001}
-Worktops = {}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local Controllers = {}
+local EnvControlGadgets = {311001}
+local Worktops = {}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
 --================================================================
 --

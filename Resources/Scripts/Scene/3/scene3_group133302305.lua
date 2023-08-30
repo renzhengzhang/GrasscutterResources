@@ -9,9 +9,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {1}
+local RequireSuite = {1}
 
-HookLookPlay = {
+local HookLookPlay = {
     HookPoint = defs.gadget_LookHookCid,
     Duration = 3,
 }

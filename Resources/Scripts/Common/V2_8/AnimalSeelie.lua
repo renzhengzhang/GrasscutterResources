@@ -21,7 +21,7 @@ defs = {
 
 ]]
 
-Triggers_AnimalSeelie = {
+local Triggers_AnimalSeelie = {
 	{ config_id = 8000001, name = "Avatar_Near_Platform", event = EventType.EVENT_AVATAR_NEAR_PLATFORM, source = "", condition = "", action = "action_Avatar_Near_Platform", trigger_count = 0 },
 	{ config_id = 8000002, name = "Platform_Reach", event = EventType.EVENT_PLATFORM_ARRIVAL, source = "", condition = "", action = "action_Platform_Reach", trigger_count = 0 },
 	{ config_id = 8000003, name = "AnimalSeelie_Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_AnimalSeelie_Group_Load", trigger_count = 0 },
@@ -81,10 +81,10 @@ end
 
 function LF_GetNextPath(context)
 
-  path = {}
+  local path = {}
 
   --当前在pointArray的第几个点
-  cur_point = ScriptLib.GetGroupVariableValue(context, "cur_point_index")
+  local cur_point = ScriptLib.GetGroupVariableValue(context, "cur_point_index")
   --范围检查 cur_point是否不在table内,则设为初始点
   if false == LF_CheckIsInTable(context, cur_point, defs.pointInfo) then
   	cur_point = defs.pointInfo[1]
@@ -92,12 +92,12 @@ function LF_GetNextPath(context)
   end
 
   --下次要停在defs.pointInfo的第几个点
-  next_index = ScriptLib.GetGroupVariableValue(context, "next_index")
+  local next_index = ScriptLib.GetGroupVariableValue(context, "next_index")
   if 0 > next_index then
   	next_index = 1
   end
 
-	stop_point = cur_point
+	local stop_point = cur_point
   ScriptLib.PrintContextLog(context, "## [AnimalSeelie] LF_GetNextPath: Set path. cur_point_index@"..cur_point.." next_index@"..next_index)
 
   --范围检查
@@ -159,7 +159,7 @@ function action_Platform_Reach(context, evt)
 		return 0
 	end
 	--是否需要停下
-	next = ScriptLib.GetGroupVariableValue(context, "next_index")
+	local next = ScriptLib.GetGroupVariableValue(context, "next_index")
 	if evt.param3 == defs.pointInfo[next] then
 		ScriptLib.StopPlatform(context, defs.gadget_animal)
 		next = next + 1
@@ -181,7 +181,7 @@ function action_Avatar_Near_Platform(context, evt)
 	end
 
 	--903底座状态,kill 结束
-	state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, defs.gadget_animal)
+	local state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, defs.gadget_animal)
 	if state == 903 then
 		ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_animal })
 		return 0
@@ -204,7 +204,7 @@ function action_Avatar_Near_Platform(context, evt)
 end
 
 function LF_SetAnimaState(context)
-	next = ScriptLib.GetGroupVariableValue(context, "next_index")
+	local next = ScriptLib.GetGroupVariableValue(context, "next_index")
 	--范围修正
 	if next > #defs.animal_state then
 		next = #defs.animal_state

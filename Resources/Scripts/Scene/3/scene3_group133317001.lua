@@ -8,7 +8,7 @@ defs = {
  bloom_time = 10, --石中花激活后到闭合的时间
 }
 
-flower_core = {
+local flower_core = {
  [1001] = 1002, --索引使用石中花的ConfigID，对应拾取物的ConfigID
 }
 

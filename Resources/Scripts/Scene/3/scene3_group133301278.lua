@@ -318,7 +318,7 @@ end
 
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_278025(context, evt)
-	value = ScriptLib.GetGroupLogicStateValue(context,"SGV_WellUnlock")
+	local value = ScriptLib.GetGroupLogicStateValue(context,"SGV_WellUnlock")
 	ScriptLib.SetGroupLogicStateValue(context,"SGV_WellUnlock",value +1)
 
 	return 0

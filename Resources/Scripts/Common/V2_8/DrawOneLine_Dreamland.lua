@@ -46,7 +46,7 @@ defs =
 
 }
 ]]
-cfg = {
+local cfg = {
 	--玩法中，最多存在多少石板
 	--tile_limit = 25,
 	--矩阵在哪个suite中
@@ -54,7 +54,7 @@ cfg = {
 }
 
 
-extraTriggers={
+local extraTriggers={
 
     { config_id = 8000001, name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_Group_Load", trigger_count = 0 },
     { config_id = 8000002,name = "Leave_Region", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_Leave_Region", trigger_count = 0 },
@@ -74,12 +74,12 @@ end
 
 function SLC_DrawOneLine_Start(context)
 
-	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	--SLC来源没有配置为起点 return
 	if config_id ~= defs.starter then
 		return 0
 	end
-	state = ScriptLib.GetGroupTempValue(context, "puzzle_state", {})
+	local state = ScriptLib.GetGroupTempValue(context, "puzzle_state", {})
 	ScriptLib.PrintContextLog(context, "## [DrawOneLine] Get SLC_DrawOneLine_Start. state@"..state)
 
 	if 0 == state then
@@ -99,20 +99,20 @@ function SLC_DrawOneLine_Start(context)
 end
 --5.26迭代 未失败时触发起点格重置
 function SLC_DrawOneLine_Reset(context)
-	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	--SLC来源没有配置为起点 return
 	if config_id ~= defs.starter then
 		return 0
 	end
-	state = ScriptLib.GetGroupTempValue(context, "puzzle_state", {})
+	local state = ScriptLib.GetGroupTempValue(context, "puzzle_state", {})
 	ScriptLib.PrintContextLog(context, "## [DrawOneLine] Get SLC_DrawOneLine_Reset. state@"..state)
 	if 1 ~= state then
 		return 0
 	end
 	--如果已经离开了起点 则重置
-	cur_tile = ScriptLib.GetGroupTempValue(context, "cur_tile", {})
-	x = math.floor(cur_tile/10)
-	y = cur_tile%10
+	local cur_tile = ScriptLib.GetGroupTempValue(context, "cur_tile", {})
+	local x = math.floor(cur_tile/10)
+	local y = cur_tile%10
 	if defs.matrix[x][y] ~= config_id then
 		LF_SetCurTileIndex(context, config_id)
 		LF_RestartMatrix(context)
@@ -178,11 +178,11 @@ end
 function SLC_DrawOneLine_Fail(context)
 
 	if 1 == ScriptLib.GetGroupTempValue(context, "puzzle_state", {}) then
-		config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+		local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 		ScriptLib.PrintContextLog(context, "## [DrawOneLine] SLC_DrawOneLine_Fail. config_id@"..config_id)
 		--检查是否是当前格
-		cur_tile = ScriptLib.GetGroupTempValue(context, "cur_tile", {})
-		is_adjust = LF_CheckTwoGadgetIsAdjacent(context, cur_tile, config_id)
+		local cur_tile = ScriptLib.GetGroupTempValue(context, "cur_tile", {})
+		local is_adjust = LF_CheckTwoGadgetIsAdjacent(context, cur_tile, config_id)
 		if 2 ~= is_adjust then
 			if config_id == defs.starter then
 				--如果是起点格 重开
@@ -199,11 +199,11 @@ end
 --param1：格子类型 0-普通和离散 1-移动 2-还原
 function SLC_DrawOneLine_LightOn(context, param1)
 
-	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 
 	--如果当前格，无事发生
-	cur_tile = ScriptLib.GetGroupTempValue(context, "cur_tile", {})
-	is_adjust = LF_CheckTwoGadgetIsAdjacent(context, cur_tile, config_id)
+	local cur_tile = ScriptLib.GetGroupTempValue(context, "cur_tile", {})
+	local is_adjust = LF_CheckTwoGadgetIsAdjacent(context, cur_tile, config_id)
 	ScriptLib.PrintContextLog(context, "## [DrawOneLine] SLC_DrawOneLine_LightOn. config_id@"..config_id.." cur_tile@"..cur_tile.. " is_adjust@"..is_adjust)
 	if 2 == is_adjust then
 		return 0
@@ -239,18 +239,18 @@ function SLC_DrawOneLine_LightOn(context, param1)
 end
 --终点格踩亮
 function SLC_DrawOneLine_CheckSuccess(context)
-	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	ScriptLib.PrintContextLog(context, "## [DrawOneLine] SLC_DrawOneLine_CheckSuccess. config_id@"..config_id)
 	--是否相邻
-	cur_tile = ScriptLib.GetGroupTempValue(context, "cur_tile", {})
-	is_adjust = LF_CheckTwoGadgetIsAdjacent(context, cur_tile, config_id)
+	local cur_tile = ScriptLib.GetGroupTempValue(context, "cur_tile", {})
+	local is_adjust = LF_CheckTwoGadgetIsAdjacent(context, cur_tile, config_id)
 	if 0 == is_adjust then
 		LF_FailProgress(context, 1)
 		return 0
 	end
 	ScriptLib.SetGadgetStateByConfigId(context, config_id, 201)
 	--是否已成功
-	ret = LF_CheckSuccess(context)
+	local ret = LF_CheckSuccess(context)
 	ScriptLib.PrintContextLog(context, "## [DrawOneLine] SLC_DrawOneLine_CheckSuccess called. ret@"..ret)
 	if 1 == ret then
 		LF_SuccessProgress(context)
@@ -267,14 +267,14 @@ function LF_HandleMoveTile(context, config_id)
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, defs.lines[config_id])
 	end
 	--route
-	ret = ScriptLib.StartPlatform(context, config_id)
+	local ret = ScriptLib.StartPlatform(context, config_id)
 	if -1 == ret then
 		ScriptLib.PrintContextLog(context, "## [DrawOneLine] LF_HandleMoveTile. StartPlatform failed!")
 		return 0
 	end
 	--设置新cur_tile
 	ScriptLib.SetGroupTempValue(context, "cur_tile", defs.movable_pos[config_id].new_pos, {})
-	cur_tile = ScriptLib.GetGroupTempValue(context, "cur_tile", {})
+	local cur_tile = ScriptLib.GetGroupTempValue(context, "cur_tile", {})
 	ScriptLib.PrintContextLog(context, "## [DrawOneLine] LF_HandleMoveTile done. cur_tile@".. cur_tile)
 	return 0
 end
@@ -354,7 +354,7 @@ end
 function LF_SuccessProgress(context)
 	ScriptLib.PrintContextLog(context, "## [DrawOneLine] LF_SuccessProgress called.")
 	--2022.3.3迭代：玩法完成，所有板子消失
-	finish_gadget_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, defs.finish_gadget)
+	local finish_gadget_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, defs.finish_gadget)
 	if 202 == finish_gadget_state then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.finish_gadget, 0)
 	end
@@ -472,8 +472,8 @@ end
 --返回值 0-不相邻 1-相邻 2-当前格
 function LF_CheckTwoGadgetIsAdjacent(context, current_idx, config_step_in)
 
-	x = math.floor(current_idx/10)
-	y = current_idx%10
+	local x = math.floor(current_idx/10)
+	local y = current_idx%10
 	ScriptLib.PrintContextLog(context, "## [DrawOneLine] LF_CheckTwoGadgetIsAdjacent. cur_x@"..x.." cur_y@"..y.." step_in@"..config_step_in)
 
 	if defs.matrix[x][y] == config_step_in then
@@ -483,7 +483,7 @@ function LF_CheckTwoGadgetIsAdjacent(context, current_idx, config_step_in)
 	if y > 1 then
 		--上方
 		if defs.matrix[x][y-1] == config_step_in then
-			new_idx = x*10+y-1
+			local new_idx = x*10+y-1
 			ScriptLib.SetGroupTempValue(context, "cur_tile", new_idx, {})
 			return 1
 		end
@@ -491,7 +491,7 @@ function LF_CheckTwoGadgetIsAdjacent(context, current_idx, config_step_in)
 	if y < #defs.matrix[x] then
 		--下方
 		if defs.matrix[x][y+1] == config_step_in then
-			new_idx = x*10+y+1
+			local new_idx = x*10+y+1
 			ScriptLib.SetGroupTempValue(context, "cur_tile", new_idx, {})
 			return 1
 		end
@@ -499,7 +499,7 @@ function LF_CheckTwoGadgetIsAdjacent(context, current_idx, config_step_in)
 	if x > 1 then
 		--左侧
 		if defs.matrix[x-1][y] == config_step_in then
-			new_idx = (x-1)*10+y
+			local new_idx = (x-1)*10+y
 			ScriptLib.SetGroupTempValue(context, "cur_tile", new_idx, {})
 			return 1
 		end
@@ -507,7 +507,7 @@ function LF_CheckTwoGadgetIsAdjacent(context, current_idx, config_step_in)
 	if x < #defs.matrix then
 		--右侧
 		if defs.matrix[x+1][y] == config_step_in then
-			new_idx = (x+1)*10+y
+			local new_idx = (x+1)*10+y
 			ScriptLib.SetGroupTempValue(context, "cur_tile", new_idx, {})
 			return 1
 		end
@@ -528,7 +528,7 @@ end
 
 --检查物件数量是否超标，超过数量则玩法逻辑不work。（锁dev后可以考虑不再调用）
 function LF_CheckGadgetCount(context)
-	sum = 0
+	local sum = 0
 	for k, v in pairs(defs.matrix) do
 		for ik, iv in pairs(v) do
 			if iv ~= 0 then
@@ -546,9 +546,9 @@ end
 function LF_TryShowGuide(context)
 	--在NewActivityPushTipsData配置中查找对应id, 并通过lua添加进活动中
 	--重复添加已有push tips返回-1 成功添加返回0
-	ret = ScriptLib.TryRecordActivityPushTips(context, 2014011)
+	local ret = ScriptLib.TryRecordActivityPushTips(context, 2014011)
 	if 0 == ret then
-		uid = ScriptLib.GetSceneOwnerUid(context)
+		local uid = ScriptLib.GetSceneOwnerUid(context)
 		ScriptLib.ShowClientTutorial(context, 1182, {uid})
 	end
 	return 0

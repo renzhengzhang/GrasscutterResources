@@ -11,7 +11,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-HourGlass_ConfigIDList = {defs.gadget_1,defs.gadget_2,defs.gadget_3}
+local HourGlass_ConfigIDList = {defs.gadget_1,defs.gadget_2,defs.gadget_3}
 
 --================================================================
 --

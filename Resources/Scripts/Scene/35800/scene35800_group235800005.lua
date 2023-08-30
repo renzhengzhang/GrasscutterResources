@@ -9,29 +9,29 @@ defs = {
 	hurt_floor_id = 5293
 }
 
-hurt_floor_delay = 5
+local hurt_floor_delay = 5
 
-random_flower_time_axis = {20,50,80}
+local random_flower_time_axis = {20,50,80}
 
-random_flower_sum = {min = 3, max = 5}
+local random_flower_sum = {min = 3, max = 5}
 
-flower_life_time = 10
+local flower_life_time = 10
 
-flower_suite_index = 8
+local flower_suite_index = 8
 
-wind_force_time_axis = {1,30,60}
+local wind_force_time_axis = {1,30,60}
 
-wind_force_suites = {2,3,4,5,6,7}
+local wind_force_suites = {2,3,4,5,6,7}
 
-regionIndex = 5102
+local regionIndex = 5102
 
 --飞行接花
 --飞行接花玩法结束时达到关卡积分目标后奖励的能量值
-WindFlower_Flight_Clear_Bonus = 60
+local WindFlower_Flight_Clear_Bonus = 60
 --飞行接花玩法结束时未达到关卡积分目标扣除的能量值
-WindFlower_Flight_Failed_Deduction = -10
+local WindFlower_Flight_Failed_Deduction = -10
 
-Catch_Flower_Score = 10
+local Catch_Flower_Score = 10
 
 --================================================================
 --

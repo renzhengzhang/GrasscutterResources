@@ -22,7 +22,7 @@ defs = {
     }
 }
 
-challengeParam = {
+local challengeParam = {
     90, -- Time
     72, -- 72//EVENT_TIME_AXIS_PASS
     666,-- TAG
@@ -30,7 +30,7 @@ challengeParam = {
 }
 --]]
 ---------------------
-tempTrigger = {
+local tempTrigger = {
     --监听GadgetState变化
     --监听值变化
     { config_id = 2330001, name = "EVENT_VARIABLE_CHANGE_A", event = EventType.EVENT_VARIABLE_CHANGE, source = "ovenATemp",
@@ -102,7 +102,7 @@ function action_CHALLENGESTART(context,evt)
     ScriptLib.SetGroupVariableValue(context, "ovenBTempDirection", 1)
     ScriptLib.SetGroupVariableValue(context, "ovenCTempDirection", 2)
     --开启挑战
-    challengeTime = challengeParam[1]
+    local challengeTime = challengeParam[1]
     ScriptLib.StartChallenge(context, 888, 245, challengeParam)
 
     -- 每秒统计温度计时器
@@ -137,17 +137,17 @@ function action_PLATFORM_REACH_POINT_STOVE(context, evt)
         return 0
     end
 
-    routeID = evt.param2
-    tempDirs = defs.PlatFormRoute[routeID].tempDirs
-    reachPos = defs.PlatFormRoute[routeID].reachPos
-    fireDirection = ScriptLib.GetGroupVariableValue(context, "fireDirection")
+    local routeID = evt.param2
+    local tempDirs = defs.PlatFormRoute[routeID].tempDirs
+    local reachPos = defs.PlatFormRoute[routeID].reachPos
+    local fireDirection = ScriptLib.GetGroupVariableValue(context, "fireDirection")
 
     ScriptLib.PrintContextLog(context, "## TD ImmortalPot : 炉子移动到" .. reachPos .. "。fireDirection为".. fireDirection..",当前各炉子温度方向为" .. arrayToString(tempDirs))
 
     ScriptLib.SetGroupVariableValue(context, "curPos", reachPos)
 
     -- 尝试移动炉子
-    moveState = StoveMove(context,reachPos,fireDirection)
+    local moveState = StoveMove(context,reachPos,fireDirection)
     -- 炉子无法移动 或者 玩家已经离开按钮时 需要重新计算温度变化
     if -1 == moveState or 0 == fireDirection then
         -- 到底指定地点温度变化
@@ -165,7 +165,7 @@ function action_BUTTON_STATE_CHANGE(context, evt)
         return 0
     end
 
-    startOrNot = ScriptLib.GetGroupVariableValue(context, "startOrNot")
+    local startOrNot = ScriptLib.GetGroupVariableValue(context, "startOrNot")
     if startOrNot == 0 then
         ScriptLib.PrintContextLog(context, "## TD ImmortalPot : 挑战没开的场合，无法移动炉子")
         return 0
@@ -179,7 +179,7 @@ end
 -- 锅子状态侦测，一旦某个锅子爆炸了，立刻重置挑战并处理挑战存档
 function action_POT_STATE_CHANGE(context,evt)
     -- Gadget是锅子且爆了，开始处理逻辑
-    potName = GetPotName(context,evt.param2)
+    local potName = GetPotName(context,evt.param2)
     if 0 ~= potName and (202 == evt.param1 or 203 == evt.param1) then
         ScriptLib.PrintContextLog(context, "## TD ImmortalPot : 锅子" .. potName .. "炸了，关卡开始设置状态")
         -- 切挑战失败
@@ -191,9 +191,9 @@ end
 -- 计时器结束时，关闭锅子全部状态
 function action_CHALLENGE_SUCCESS_LevelChange(context,evt)
     ScriptLib.PrintContextLog(context, "## TD ImmortalPot : 挑战胜利，设置关卡状态")
-    potList = {defs.PotConfigIDA,defs.PotConfigIDB,defs.PotConfigIDC}
+    local potList = {defs.PotConfigIDA,defs.PotConfigIDB,defs.PotConfigIDC}
     for i = 1,#potList do
-        targetPot = potList[i]
+        local targetPot = potList[i]
         -- 全部锅子进入状态 0
         ScriptLib.SetGadgetStateByConfigId(context,targetPot, 901)
         -- 关闭全锅子的嘲讽
@@ -205,13 +205,13 @@ end
 
 function action_CHALLENGE_FAIL_LevelChange(context,evt)
     ScriptLib.PrintContextLog(context, "## TD ImmortalPot : 挑战失败，重置关卡状态")
-    potList = {defs.PotConfigIDA,defs.PotConfigIDB,defs.PotConfigIDC}
+    local potList = {defs.PotConfigIDA,defs.PotConfigIDB,defs.PotConfigIDC}
 
     -- 切其它锅子进入State0
     for i = 1,#potList do
-        targetPot = potList[i]
+        local targetPot = potList[i]
         -- 只要锅子不是处于202或203
-        targetPotState = ScriptLib.GetGadgetStateByConfigId(context, 0, targetPot)
+        local targetPotState = ScriptLib.GetGadgetStateByConfigId(context, 0, targetPot)
         if 202 ~= targetPotState and 203 ~= targetPotState then
             ScriptLib.SetGadgetStateByConfigId(context,targetPot, 0)
         end
@@ -247,8 +247,8 @@ function RecoverLevel(context)
     ScriptLib.SetGroupVariableValue(context, "ovenCTemp", defs.StartTemp[3])
 
     -- 让炉子回到中间
-    curPos = ScriptLib.GetGroupVariableValue(context, "curPos")
-    fireDirection = 2 - curPos
+    local curPos = ScriptLib.GetGroupVariableValue(context, "curPos")
+    local fireDirection = 2 - curPos
     ScriptLib.StopPlatform(context, defs.StoveConfig)
     StoveMove(context,curPos,fireDirection)
     ScriptLib.SetGroupVariableValue(context, "curPos", 2)
@@ -278,21 +278,21 @@ end
 
 -- 过冷过热双检查
 function action_PotOverState(context, evt)
-    state = GetKeyWord(evt.source_name) -- 返回值为 “Cold" or "Heat"
-    characterState = GetCharacterKeyWord(state)[1] -- 返回值为 冷 or 热
-    overStateValue = GetCharacterKeyWord(state)[2] -- 返回值为 203 or 202
-    targetConfigID = GetTargetConfigID(context,evt.source_name)
+    local state = GetKeyWord(evt.source_name) -- 返回值为 “Cold" or "Heat"
+    local characterState = GetCharacterKeyWord(state)[1] -- 返回值为 冷 or 热
+    local overStateValue = GetCharacterKeyWord(state)[2] -- 返回值为 203 or 202
+    local targetConfigID = GetTargetConfigID(context,evt.source_name)
 
     if (targetConfigID == 0) then
         ScriptLib.PrintContextLog(context, "## TD ImmortalPot : source_name = ".. evt.source_name .. "非法")
         return 0
     end
 
-    targetPotName = GetPotName(context,targetConfigID)
-    tickTimeKey = "Over".. state .."Time"..targetPotName
-    timeAxisKey = "PotOver" ..state.. targetPotName
-    targetTime = defs.targetColdTime
-    currentTime = ScriptLib.GetGroupTempValue(context, tickTimeKey, {}) + 1 --增加1秒计时
+    local targetPotName = GetPotName(context,targetConfigID)
+    local tickTimeKey = "Over".. state .."Time"..targetPotName
+    local timeAxisKey = "PotOver" ..state.. targetPotName
+    local targetTime = defs.targetColdTime
+    local currentTime = ScriptLib.GetGroupTempValue(context, tickTimeKey, {}) + 1 --增加1秒计时
 
     if 201 ~= ScriptLib.GetGadgetStateByConfigId(context, 0, targetConfigID) then
         -- 如果锅子已经切进其它状态，关闭当前TimeAxis
@@ -313,7 +313,7 @@ function action_PotOverState(context, evt)
         ScriptLib.EndTimeAxis(context, timeAxisKey)
         return 0
     else
-        IsOverState = false
+        local IsOverState = false
         if state == "Cold" then
             IsOverState = IsOverCold(context,targetConfigID)
         end
@@ -340,11 +340,11 @@ end
 
 -- 侦测LD调用
 function action_StartPotTaunt(context, evt)
-    actionName = evt.source_name
+    local actionName = evt.source_name
     ScriptLib.PrintContextLog(context, "## TD ImmortalPot : 嘲讽开启判定 actionName = "..actionName .. " tempValue = " .. evt.param1 - evt.param2)
     if 1 == evt.param1 - evt.param2 then
-        functionParam1 = ScriptLib.GetGroupTempValue(context,actionName .. "Param1",{})
-        functionParam2 = ScriptLib.GetGroupTempValue(context,actionName .. "Param2",{})
+        local functionParam1 = ScriptLib.GetGroupTempValue(context,actionName .. "Param1",{})
+        local functionParam2 = ScriptLib.GetGroupTempValue(context,actionName .. "Param2",{})
         StartPotTaunt(context,functionParam1,functionParam2)
     end
     return 0
@@ -353,10 +353,10 @@ end
 -- serverLuaCall 锅子挨火打
 function BeHitByFire(context, evt)
     ScriptLib.PrintContextLog(context, "## Immortal 锅子挨火打| source -> "..context.source_entity_id.." | target -> "..context.target_entity_id)
-    configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
-    targetPotName = GetPotName(context,configId)
-    tempKey = "oven".. targetPotName .. "Temp"
-    tempValue = ScriptLib.GetGroupVariableValue(context, tempKey)
+    local configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+    local targetPotName = GetPotName(context,configId)
+    local tempKey = "oven".. targetPotName .. "Temp"
+    local tempValue = ScriptLib.GetGroupVariableValue(context, tempKey)
     ScriptLib.SetGroupVariableValue(context,tempKey,tempValue+defs.BeHitByFireTemp)
     ScriptLib.PrintContextLog(context, "## Immortal 锅子挨火打| Change "..tempKey.." from" .. tempValue ..
             " to ".. tempValue+defs.BeHitByFireTemp)
@@ -366,10 +366,10 @@ end
 -- serverLuaCall 锅子挨冰水打
 function BeHitByIceWater(context, evt)
     ScriptLib.PrintContextLog(context, "## Immortal 锅子挨冰水打| source -> "..context.source_entity_id.." | target -> "..context.target_entity_id)
-    configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
-    targetPotName = GetPotName(context,configId)
-    tempKey = "oven".. targetPotName .. "Temp"
-    tempValue = ScriptLib.GetGroupVariableValue(context, tempKey)
+    local configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+    local targetPotName = GetPotName(context,configId)
+    local tempKey = "oven".. targetPotName .. "Temp"
+    local tempValue = ScriptLib.GetGroupVariableValue(context, tempKey)
     ScriptLib.SetGroupVariableValue(context,tempKey,tempValue+defs.BeHitByIceWaterTemp)
     ScriptLib.PrintContextLog(context, "## Immortal 锅子挨冰水打| Change "..tempKey.." from" .. tempValue ..
             " to ".. tempValue+defs.BeHitByIceWaterTemp)
@@ -398,14 +398,14 @@ end
 
 -- 过冷检测管线
 function Pot_OverColdPipeline(context,config_id)
-    targetPotName = GetPotName(context,config_id)
-    tempKey = "PotOverCold".. targetPotName
-    tickTimeKey = "OverColdTime"..targetPotName
+    local targetPotName = GetPotName(context,config_id)
+    local tempKey = "PotOverCold".. targetPotName
+    local tickTimeKey = "OverColdTime"..targetPotName
     if IsOverCold(context,config_id) and 1 ~= ScriptLib.GetGroupTempValue(context, tempKey, {}) then
         -- 过冷状态且没有开启独立时间轴时
-        coldTimeAxis = {}
-        timeValue = 1
-        targetColdTime = math.ceil(defs.targetColdTime/timeValue)
+        local coldTimeAxis = {}
+        local timeValue = 1
+        local targetColdTime = math.ceil(defs.targetColdTime/timeValue)
         -- 解析时间轴数组
         for i = 1, targetColdTime, 1 do
             coldTimeAxis[i] = timeValue
@@ -424,14 +424,14 @@ end
 
 -- 过热检测管线
 function Pot_OverHeatPipeline(context,config_id)
-    targetPotName = GetPotName(context,config_id)
-    tempKey = "PotOverHeat".. targetPotName
-    tickTimeKey = "OverHeatTime"..targetPotName
+    local targetPotName = GetPotName(context,config_id)
+    local tempKey = "PotOverHeat".. targetPotName
+    local tickTimeKey = "OverHeatTime"..targetPotName
     if IsOverHeat(context,config_id) and 1 ~= ScriptLib.GetGroupTempValue(context, tempKey, {}) then
         -- 过冷状态且没有开启独立时间轴时
-        heatTimeAxis = {}
-        timeValue = 1
-        targetColdTime = math.ceil(defs.targetHeatTime/timeValue)
+        local heatTimeAxis = {}
+        local timeValue = 1
+        local targetColdTime = math.ceil(defs.targetHeatTime/timeValue)
         -- 解析时间轴数组
         for i = 1, targetColdTime, 1 do
             heatTimeAxis[i] = timeValue
@@ -453,10 +453,10 @@ function IsOverCold(context,config_id)
     if config_id == nil then
         return true
     end
-    safeFrom = gadgets[config_id].server_global_value_config["SGV_Thermometer_SafeFrom"] * 100
-    targetPotName = GetPotName(context,config_id)
-    tempKey = "oven".. targetPotName .. "Temp"
-    tempValue = ScriptLib.GetGroupVariableValue(context, tempKey)
+    local safeFrom = gadgets[config_id].server_global_value_config["SGV_Thermometer_SafeFrom"] * 100
+    local targetPotName = GetPotName(context,config_id)
+    local tempKey = "oven".. targetPotName .. "Temp"
+    local tempValue = ScriptLib.GetGroupVariableValue(context, tempKey)
     return tempValue<=safeFrom
 end
 
@@ -465,17 +465,17 @@ function IsOverHeat(context,config_id)
     if config_id == nil then
         return true
     end
-    safeTo = gadgets[config_id].server_global_value_config["SGV_Thermometer_SafeTo"] * 100
-    targetPotName = GetPotName(context,config_id)
-    tempKey = "oven".. targetPotName .. "Temp"
-    tempValue = ScriptLib.GetGroupVariableValue(context, tempKey)
+    local safeTo = gadgets[config_id].server_global_value_config["SGV_Thermometer_SafeTo"] * 100
+    local targetPotName = GetPotName(context,config_id)
+    local tempKey = "oven".. targetPotName .. "Temp"
+    local tempValue = ScriptLib.GetGroupVariableValue(context, tempKey)
     return tempValue>=safeTo
 end
 
 -- 根据锅炉当前为加热或降温设置锅子温度
 function CalculateOvenTemp(context,potName)
-    tempDir = ScriptLib.GetGroupVariableValue(context, potName.."TempDirection")
-    temp = ScriptLib.GetGroupVariableValue(context, potName.."Temp")
+    local tempDir = ScriptLib.GetGroupVariableValue(context, potName.."TempDirection")
+    local temp = ScriptLib.GetGroupVariableValue(context, potName.."Temp")
 
     if tempDir > 2 or tempDir < 1 then
         ScriptLib.PrintContextLog(context, "## TD ImmortalPot : 锅子".. potName .."方向不合法，值为" .. tempDir)
@@ -521,11 +521,11 @@ end
 
 -- 根据当前踏板状态控制锅炉移动
 function StoveMoveByButtonState(context)
-    leftState = ScriptLib.GetGadgetStateByConfigId(context, 0, defs.ButtonLeftConfig)
-    rightState = ScriptLib.GetGadgetStateByConfigId(context, 0, defs.ButtonRightConfig)
-    curPos = ScriptLib.GetGroupVariableValue(context, "curPos")
+    local leftState = ScriptLib.GetGadgetStateByConfigId(context, 0, defs.ButtonLeftConfig)
+    local rightState = ScriptLib.GetGadgetStateByConfigId(context, 0, defs.ButtonRightConfig)
+    local curPos = ScriptLib.GetGroupVariableValue(context, "curPos")
     ScriptLib.PrintContextLog(context, "## TD ImmortalPot : LeftState：" .. leftState .. "RightState" .. rightState)
-    fireDirection = 0
+    local fireDirection = 0
     if 201 == leftState and 0 == rightState then
         fireDirection = -1
         ScriptLib.SetGroupVariableValue(context, "fireDirection", fireDirection)
@@ -552,8 +552,8 @@ end
 
 -- 管理炉子移动的方法
 function StoveMove(context,curPos,fireDirection)
-    targetPos = curPos + fireDirection
-    routeID = GetRouteID(curPos,targetPos)
+    local targetPos = curPos + fireDirection
+    local routeID = GetRouteID(curPos,targetPos)
 
     if 0 == routeID then
         ScriptLib.PrintContextLog(context, "## TD ImmortalPot : StoveMove 不成功，参数为 curPos =" .. curPos .. ",fireDirection =" .. fireDirection )
@@ -564,8 +564,8 @@ function StoveMove(context,curPos,fireDirection)
     ScriptLib.SetPlatformRouteId(context, defs.StoveConfig, routeID)
     ScriptLib.StartPlatform(context, defs.StoveConfig)
 
-    potName = GetPotName(context,curPos)
-    targetPotTempDirection = "oven"..potName.."TempDirection"
+    local potName = GetPotName(context,curPos)
+    local targetPotTempDirection = "oven"..potName.."TempDirection"
     ScriptLib.SetGroupVariableValue(context, targetPotTempDirection, 2)
     ScriptLib.PrintContextLog(context, "## TD ImmortalPot : 因为炉子移开，设置锅子" .. potName .. '进入降温状态')
 
@@ -606,7 +606,7 @@ end
 
 -- 简单拆分一个数组
 function arrayToString(array)
-    s = "{"
+    local s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","

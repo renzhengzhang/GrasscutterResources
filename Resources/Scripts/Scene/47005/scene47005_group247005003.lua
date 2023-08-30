@@ -4,28 +4,28 @@ base_info = {
 }
 
 -- DEFS_MISCS
-BossOperatorConfigID = 3001
-QuitPointConfigID = 3005
-BossPoolID = 24001
-GroupId = 247005003
-MainGroupID = 247005001
-RegionID = 3007
-questID = 0
-doorConfigID = 0
-doorBossFrontID = 3002
-doorBossBackID = 3003
-lastDoorConfigID = 0
-ThunderFloorTimeAxis = { 5,10 }
-ThunderFloorList = {3008,3009,3010,3011,3012,3013,3014,3015,3016,3017,3018,3019,3020,3021,3022,3023,3024,3025,3026,3027,3028,3029,3031,3032,3033,3034,3035,3036,3037,3038,3039,3040,3041,3042,3043,3044,3045,3046,3047,3048,3049,3050,3051,3052,3053,3054,3055,3056,3057,3058,3059,3060,3061,3062,3063,3064,3065,3066,3067,3068}
-AirWallConfigID = 3030
-DestinationConfigID = 0
-EnterRoomTrigger = 3007
-PlotRoom = {regionID= 0 , groupID= 0}
-BossDoorPos = {x=0,y=0,z=0}
-BossDoorRot = {0}
-nextQuestID = 0
-DestinationPos = {x=0,y=0,z=0}
-DestinationRot = {0}
+local BossOperatorConfigID = 3001
+local QuitPointConfigID = 3005
+local BossPoolID = 24001
+local GroupId = 247005003
+local MainGroupID = 247005001
+local RegionID = 3007
+local questID = 0
+local doorConfigID = 0
+local doorBossFrontID = 3002
+local doorBossBackID = 3003
+local lastDoorConfigID = 0
+local ThunderFloorTimeAxis = { 5,10 }
+local ThunderFloorList = {3008,3009,3010,3011,3012,3013,3014,3015,3016,3017,3018,3019,3020,3021,3022,3023,3024,3025,3026,3027,3028,3029,3031,3032,3033,3034,3035,3036,3037,3038,3039,3040,3041,3042,3043,3044,3045,3046,3047,3048,3049,3050,3051,3052,3053,3054,3055,3056,3057,3058,3059,3060,3061,3062,3063,3064,3065,3066,3067,3068}
+local AirWallConfigID = 3030
+local DestinationConfigID = 0
+local EnterRoomTrigger = 3007
+local PlotRoom = {regionID= 0 , groupID= 0}
+local BossDoorPos = {x=0,y=0,z=0}
+local BossDoorRot = {0}
+local nextQuestID = 0
+local DestinationPos = {x=0,y=0,z=0}
+local DestinationRot = {0}
 
 --================================================================
 --

@@ -4,8 +4,8 @@ base_info = {
 }
 
 -- DEFS_MISCS
-conchConfigID = 285001
-shadowConfigIDList = {285002}
+local conchConfigID = 285001
+local shadowConfigIDList = {285002}
 
 --================================================================
 --

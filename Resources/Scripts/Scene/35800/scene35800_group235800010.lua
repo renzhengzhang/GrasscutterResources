@@ -4,11 +4,11 @@ base_info = {
 }
 
 -- DEFS_MISCS
---Bubbles = {{10010,10011,10012},{10013,10014,10015},{10016,10017,10018},{10019,10020,10021},{10022,10023,10024},{10025,10026,10027},{10028,10029,10030},{10031,10032,10033},{10034,10035,10036},{10037,10038,10039},{10040,10041,10042},{10043,10044,10045}}
+--local Bubbles = {{10010,10011,10012},{10013,10014,10015},{10016,10017,10018},{10019,10020,10021},{10022,10023,10024},{10025,10026,10027},{10028,10029,10030},{10031,10032,10033},{10034,10035,10036},{10037,10038,10039},{10040,10041,10042},{10043,10044,10045}}
 
-Bubbles = {10001,10002,10003}
+local Bubbles = {10001,10002,10003}
 
-BubbleWeightList = {
+local BubbleWeightList = {
         [1] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
         [2] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
         [3] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
@@ -23,7 +23,7 @@ BubbleWeightList = {
         [12]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 100 }},
 }
 
-BubbleWeightList2 = {
+local BubbleWeightList2 = {
         [1] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
         [2] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
         [3] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
@@ -38,7 +38,7 @@ BubbleWeightList2 = {
         [12]= {{ Num= 1, weight= 0 }, { Num= 2, weight= 100 }, { Num= 3, weight= 0 }},
 }
 
-BubbleWeightList3 = {
+local BubbleWeightList3 = {
         [1] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
         [2] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
         [3] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
@@ -56,7 +56,7 @@ BubbleWeightList3 = {
 
 
 
-BubbleWeightList4 = {
+local BubbleWeightList4 = {
         [1] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
         [2] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
         [3] = {{ Num= 1, weight= 20 }, { Num= 2, weight= 80 }, { Num= 3, weight= 0 }},
@@ -81,40 +81,40 @@ BubbleStep = {{list= BubbleWeightList2 ,BubbleSpSuite=21},{list= BubbleWeightLis
 
 
 
-regionIndex =  10004
+local regionIndex =  10004
 
-BubbleGroupID  = 235800010
+local BubbleGroupID  = 235800010
 
-BubbleWallID = 10055
+local BubbleWallID = 10055
 
-galleryID = 6006
+local galleryID = 6006
 
-TimeAxis = {1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49,52,55,58,61,64,67,70,73}
+local TimeAxis = {1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49,52,55,58,61,64,67,70,73}
 --{1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49,51,53,55,57,59,61,63,65,67,69,71,73}
 
-random_flower_sum = {min=3 , max=5}
+local random_flower_sum = {min=3 , max=5}
 
-flower_suite_index = {17,18,19,20}
+local flower_suite_index = {17,18,19,20}
 
-RegionID = 10046
+local RegionID = 10046
 
-flower_region_id = {10048,10049,10050,10051}
+local flower_region_id = {10048,10049,10050,10051}
 
-bubble_delay_sec = 10  --延迟开门时间,用来先刷泡泡
+local bubble_delay_sec = 10  --延迟开门时间,用来先刷泡泡
 
-Bubble_PerfectScore = 20
+local Bubble_PerfectScore = 20
 
-Bubble_TimeScore = 60
+local Bubble_TimeScore = 60
 
-Bubble_TimeOutScore = -10
+local Bubble_TimeOutScore = -10
 
-collect_energy = "collect_energy_6006"
+local collect_energy = "collect_energy_6006"
 
-complete_timelimit_challenge = "complete_timelimit_challenge_6006"
+local complete_timelimit_challenge = "complete_timelimit_challenge_6006"
 
-perfect_complete_timelimit_challenge = "perfect_complete_timelimit_challenge_6006"
+local perfect_complete_timelimit_challenge = "perfect_complete_timelimit_challenge_6006"
 
-defeated_timelimit_challenge = "defeated_timelimit_challenge_6006"
+local defeated_timelimit_challenge = "defeated_timelimit_challenge_6006"
 
 --================================================================
 --

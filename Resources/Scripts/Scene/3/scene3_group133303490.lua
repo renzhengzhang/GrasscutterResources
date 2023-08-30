@@ -135,7 +135,7 @@ function action_EVENT_GADGET_STATE_CHANGE_490010(context, evt)
 	if evt.param1 == 201 then
 		if evt.param2 == 490003 then
 			ScriptLib.ChangeGroupVariableValue(context, "PuzzleProgress", 1)
-			var_0 = ScriptLib.GetGadgetStateByConfigId(context, 133303490, 490001)
+			local var_0 = ScriptLib.GetGadgetStateByConfigId(context, 133303490, 490001)
 			if var_0 == 0 then
 				ScriptLib.SetGadgetStateByConfigId(context,490001, GadgetState.Action01)
 				return 0
@@ -153,7 +153,7 @@ function action_EVENT_GADGET_STATE_CHANGE_490010(context, evt)
 			end
 		elseif evt.param2 == 490004 then
 			ScriptLib.ChangeGroupVariableValue(context, "PuzzleProgress", 1)
-			var_1 = ScriptLib.GetGadgetStateByConfigId(context, 133303490, 490001)
+			local var_1 = ScriptLib.GetGadgetStateByConfigId(context, 133303490, 490001)
 			if var_1 == 0 then
 				ScriptLib.SetGadgetStateByConfigId(context,490001, GadgetState.Action01)
 				return 0
@@ -171,7 +171,7 @@ function action_EVENT_GADGET_STATE_CHANGE_490010(context, evt)
 			end
 		elseif evt.param2 == 490009 then
 			ScriptLib.ChangeGroupVariableValue(context, "PuzzleProgress", 1)
-			var_2 = ScriptLib.GetGadgetStateByConfigId(context, 133303490, 490001)
+			local var_2 = ScriptLib.GetGadgetStateByConfigId(context, 133303490, 490001)
 			if var_2 == 0 then
 				ScriptLib.SetGadgetStateByConfigId(context,490001, GadgetState.Action01)
 				return 0
@@ -189,7 +189,7 @@ function action_EVENT_GADGET_STATE_CHANGE_490010(context, evt)
 			end
 		elseif evt.param2 == 490014 then
 			ScriptLib.ChangeGroupVariableValue(context, "PuzzleProgress", 1)
-			var_3 = ScriptLib.GetGadgetStateByConfigId(context, 133303490, 490001)
+			local var_3 = ScriptLib.GetGadgetStateByConfigId(context, 133303490, 490001)
 			if var_3 == 0 then
 				ScriptLib.SetGadgetStateByConfigId(context,490001, GadgetState.Action01)
 				return 0

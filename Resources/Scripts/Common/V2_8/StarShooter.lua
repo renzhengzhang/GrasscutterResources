@@ -4,7 +4,7 @@
 ||	owner: 		weiwei.sun
 ||	description:	2.8莫娜梦境地城 弹幕控制
 ||	LogName:	CloudNet
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 --[[defs = {
@@ -15,7 +15,7 @@
 
 }]]
 
-extraTriggers={
+local extraTriggers={
     { config_id = 8000001, name = "TimeAxis_Pass", event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_TimeAxis_Pass", trigger_count = 0 },
     { config_id = 8000002, name = "Variable_Change", event = EventType.EVENT_VARIABLE_CHANGE, source = "star_shooter", condition = "", action = "action_Variable_Change", trigger_count = 0 },
     { config_id = 8000003, name = "PlayerHit_Variable_Change", event = EventType.EVENT_VARIABLE_CHANGE, source = "player_hit", condition = "", action = "", tag = "777",trigger_count = 0},
@@ -27,9 +27,9 @@ extraTriggers={
 function LF_Initialize_Group(triggers, suites)
     for i=1,#extraTriggers do
         table.insert(triggers, extraTriggers[i])
-
+        
         table.insert(suites[1].triggers,extraTriggers[i].name)
-
+         
     end
     --启动 关闭，外部控制
     table.insert(variables, { config_id = 50000001, name = "star_shooter", value = 0})
@@ -49,7 +49,7 @@ end
 
 function action_Variable_Change(context, evt)
      --在关闭状态下，被通知开启
-    if 1 == evt.param1 and 0 == evt.param2 then
+    if 1 == evt.param1 and 0 == evt.param2 then 
         ScriptLib.SetGroupTempValue(context, "action_index", 0, {})
         LF_SequenceAction(context)
     end
@@ -63,13 +63,13 @@ end
 function LF_SequenceAction(context)
 
     ScriptLib.ChangeGroupTempValue(context, "action_index", 1, {})
-    cur_index = ScriptLib.GetGroupTempValue(context, "action_index", {})
+    local cur_index = ScriptLib.GetGroupTempValue(context, "action_index", {})
     if #defs.queue < cur_index then
         ScriptLib.SetGroupVariableValue(context, "star_shooter", 0)
         return 0
     end
 
-    step = defs.queue[cur_index]
+    local step = defs.queue[cur_index]
     ScriptLib.PrintContextLog(context, "## [StartShooter] Sequence actions Set. Step_index@"..cur_index.." cfg_id@"..step.config_id)
 
     --处理SGV
@@ -78,17 +78,17 @@ function LF_SequenceAction(context)
         ScriptLib.SetEntityServerGlobalValueByConfigId(context, step.config_id, "SGV_Shoot_Time", step.shoot_time)
     end
 
-    --处理GadgetState
-    if nil ~= step.bullet_type then
+    --处理GadgetState         
+    if nil ~= step.bullet_type then 
         ScriptLib.PrintContextLog(context, "## [StartShooter] LF_SequenceAction: Try Set GadgetState. ConfigId@"..step.config_id.." bullet_type@"..step.bullet_type)
         --1-单个(201)
         if 1 == step.bullet_type then
             ScriptLib.SetGadgetStateByConfigId(context, step.config_id, 201)
         --2-五个散射(203)
-        elseif 2 == step.bullet_type then
+        elseif 2 == step.bullet_type then 
             ScriptLib.SetGadgetStateByConfigId(context, step.config_id, 203)
         --3-五个一排(204)
-        elseif 3 == step.bullet_type then
+        elseif 3 == step.bullet_type then 
             ScriptLib.SetGadgetStateByConfigId(context, step.config_id, 204)
         end
     end
@@ -111,9 +111,9 @@ function LF_SequenceAction(context)
 end
 
 function action_Challenge_Fail(context, evt)
-    cur_index = ScriptLib.GetGroupTempValue(context, "action_index", {})
-    ScriptLib.EndTimeAxis(context, "duration"..cur_index)
-    ScriptLib.SetGroupVariableValue(context, "player_hit", 0)
+    local cur_index = ScriptLib.GetGroupTempValue(context, "action_index", {})
+    ScriptLib.EndTimeAxis(context, "duration"..cur_index)  
+    ScriptLib.SetGroupVariableValue(context, "player_hit", 0) 
     return 0
 end
 
@@ -126,24 +126,24 @@ function action_Challenge_Success(context, evt)
 end
 
 function SLC_StarShooter_PlayerHit(context)
-
-    ScriptLib.ChangeGroupVariableValue(context,"player_hit", 1)
+   
+    ScriptLib.ChangeGroupVariableValue(context,"player_hit", 1)  
     return 0
 end
 
 function SLC_StarShooter_TryStartChallenge(context)
 
     if ScriptLib.GetHostQuestState(context,4007410)==2 then
-
+    
         ScriptLib.AddExtraGroupSuite(context, 220136004, 3)
 
         ScriptLib.CreateFatherChallenge(context, 260, 262, 61, {success = 1, fail = 1, fail_on_wipe = true})
         ScriptLib.StartFatherChallenge(context, 260)
         ScriptLib.AttachChildChallenge(context, 260, 262, 260,{3, 777, 30, 0, 0},{},{success=1, fail=1})
         ScriptLib.AttachChildChallenge(context, 260, 261, 261,{60, 0},{},{success=1, fail=1})
-
+    
         ScriptLib.SetGroupVariableValue(context, "star_shooter", 1)
-
+    
     end
     return 0
 end

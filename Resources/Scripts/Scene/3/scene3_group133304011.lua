@@ -11,7 +11,7 @@ defs = {
     gadget_GearCid03 = 11014,
 }
 
-LevelInfo = {
+local LevelInfo = {
     ELCid = defs.gadget_ELCid,
     GearCidList = { defs.gadget_GearCid01,defs.gadget_GearCid02,defs.gadget_GearCid03 }, -- defs.GearCid//务必按照电梯最底层排序到电梯最上层
     GearIDList = { 780, 781, 782}, -- defs.GearId//对应去操作台第几层,ID不准重复

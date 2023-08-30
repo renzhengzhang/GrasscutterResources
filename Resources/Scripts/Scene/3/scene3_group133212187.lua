@@ -259,7 +259,7 @@ end
 -- 触发操作
 function action_EVENT_GROUP_LOAD_187058(context, evt)
 	-- 初始化table
-	    suite_table = {}
+	    local suite_table = {}
 
 	-- 需要在group创建时调用，该函数会通过context的groupid读取HuntingData表，来创建entity填充points
 	    if 0~= ScriptLib.RefreshHuntingClueGroup(context) then

@@ -5,7 +5,7 @@ base_info = {
 
 -- DEFS_MISCS
 --第一次交互的option，之后切为2
-optionID = {437}
+local optionID = {437}
 
 --常用ID：
 --{431,432} 开/关门

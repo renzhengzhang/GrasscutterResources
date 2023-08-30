@@ -118,8 +118,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4005(context, evt)
 		end
 
 	-- 触发镜头注目，注目位置为坐标{x=756.23, y=84.19, z=377.53}，持续时间为5秒，并且为强制注目形式，不广播其他玩家
-	pos = {x=702.84, y=62.12, z=343.67}
-	pos_follow = {x=702.677, y=61.278, z=330.835}
+	local pos = {x=702.84, y=62.12, z=343.67}
+	local pos_follow = {x=702.677, y=61.278, z=330.835}
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                              is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                              disable_protect = 1, blend_type = 1, blend_duration = 0,

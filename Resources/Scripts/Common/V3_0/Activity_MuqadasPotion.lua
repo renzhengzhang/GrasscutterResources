@@ -17,7 +17,7 @@
         gallery_id = 25001,
     }
 
-    monster_list =
+    local monster_list =
     {
         -- 第1波怪
         [1] =
@@ -67,11 +67,11 @@
 
 -- 打印日志
 function PrintLog(context, content)
-	log = "## [Activity_MuqadasPotion] TD: "..content
+	local log = "## [Activity_MuqadasPotion] TD: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
-extraTriggers =
+local extraTriggers =
 {
     { name = "tri_group_load", config_id = 40000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
     { name = "tri_select_option", config_id = 40000002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
@@ -131,12 +131,12 @@ end
 
 function action_monster_die_before_leave_scene(context, evt)
 
-    current_wave = ScriptLib.GetGroupVariableValue(context, "current_wave")
-    elites_tbl = monster_list[current_wave].elite_monster
+    local current_wave = ScriptLib.GetGroupVariableValue(context, "current_wave")
+    local elites_tbl = monster_list[current_wave].elite_monster
 
     -- 判断死的是否是精英怪
-    monster_cid = evt.param1
-    is_elite = 0
+    local monster_cid = evt.param1
+    local is_elite = 0
     for _, _configID in pairs(elites_tbl) do
         if _configID == monster_cid then
             is_elite = 1
@@ -148,7 +148,7 @@ function action_monster_die_before_leave_scene(context, evt)
 
     if is_elite == 1 then
         -- SITUATION:精英怪死亡
-        left_elites = ScriptLib.GetGroupVariableValue(context, "left_elites")
+        local left_elites = ScriptLib.GetGroupVariableValue(context, "left_elites")
         left_elites = left_elites - 1
         ScriptLib.SetGroupVariableValue(context, "left_elites", left_elites)
 
@@ -159,10 +159,10 @@ function action_monster_die_before_leave_scene(context, evt)
 
     else
         -- SITUATION:普通小怪死亡
-        left_elites = ScriptLib.GetGroupVariableValue(context, "left_elites")
+        local left_elites = ScriptLib.GetGroupVariableValue(context, "left_elites")
         if left_elites > 0 then
             -- X秒后复活
-            delay_time = monster_list[current_wave].tide_mon_delay
+            local delay_time = monster_list[current_wave].tide_mon_delay
             ScriptLib.CreateGroupTimerEvent(context, base_info.group_id, tostring(monster_cid), delay_time)
         end
     end
@@ -170,7 +170,7 @@ function action_monster_die_before_leave_scene(context, evt)
     -- 如果场上无怪了
     if ScriptLib.GetGroupMonsterCount(context) == 0 then
         -- 刷下一波怪
-        delay_time = monster_list[current_wave].next_delay
+        local delay_time = monster_list[current_wave].next_delay
         ScriptLib.CreateGroupTimerEvent(context, base_info.group_id, "NEXTWAVE", delay_time)
     end
 
@@ -179,17 +179,17 @@ end
 
 -- 计时器
 function action_timer_event(context, evt)
-    timer_name = evt.source_name
+    local timer_name = evt.source_name
     if timer_name == "NEXTWAVE" then
         PrintLog(context, "计时器-刷下一波怪物")
         ScriptLib.ShowReminder(context, defs.reminder_id)
 
-        current_wave = ScriptLib.GetGroupVariableValue(context, "current_wave")
-        next_wave = monster_list[current_wave].next
+        local current_wave = ScriptLib.GetGroupVariableValue(context, "current_wave")
+        local next_wave = monster_list[current_wave].next
         LF_Create_Monster_Wave(context, next_wave)
     else
         PrintLog(context, "计时器-小怪复活"..timer_name)
-        monster_cid = tonumber(timer_name)
+        local monster_cid = tonumber(timer_name)
         ScriptLib.CreateMonster(context, { config_id = monster_cid, delay_time = 0 })
     end
     return 0
@@ -199,10 +199,10 @@ end
 
 function LF_Update_Score(context, is_elite, wave)
 
-    wave_info = monster_list[wave]
+    local wave_info = monster_list[wave]
 
-    score = 0
-    energy = 0
+    local score = 0
+    local energy = 0
 
     if wave_info ~= nil then
         if is_elite == 1 then
@@ -230,25 +230,25 @@ function LF_Create_Monster_Wave(context, wave)
     ScriptLib.SetGroupVariableValue(context, "current_wave", wave)
 
     -- 精英怪
-    elites = monster_list[wave].elite_monster
+    local elites = monster_list[wave].elite_monster
     for _, _configID in pairs(elites) do
         ScriptLib.CreateMonster(context, { config_id = _configID, delay_time = 0 })
     end
 
-    left_elites = #elites or 0
+    local left_elites = #elites or 0
     ScriptLib.SetGroupVariableValue(context, "left_elites", left_elites)
     PrintLog(context, "该波次精英怪数量:"..left_elites)
     --ScriptLib.SetGroupVariableValue(context, "wave_pause", 0)
 
     -- 普通怪
-    monsters = monster_list[wave].tide_mons
+    local monsters = monster_list[wave].tide_mons
     for _, _configID in pairs(monsters) do
         ScriptLib.CreateMonster(context, { config_id = _configID, delay_time = 0 })
     end
 end
 
 function LF_Cancel_Monster_Timers(context, wave)
-    monsters = monster_list[wave].tide_mons
+    local monsters = monster_list[wave].tide_mons
     for _, _cid in pairs(monsters) do
         if 0 ~= ScriptLib.CancelGroupTimerEvent(context, base_info.group_id, tostring(_cid)) then
             PrintLog(context, "找不到Timer:".._cid)
@@ -280,7 +280,7 @@ function LF_Start_Play(context)
         ScriptLib.KillEntityByConfigId(context, {config_id = defs.energy_gadget})
     end
     -- 刷怪
-    next_wave = 1
+    local next_wave = 1
     LF_Create_Monster_Wave(context, next_wave)
 
 end

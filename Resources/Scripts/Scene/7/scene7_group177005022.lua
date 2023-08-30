@@ -4,26 +4,26 @@ base_info = {
 }
 
 -- DEFS_MISCS
-BlackBall = {22020,22021,22022,22023,22024,22025,22027}
+local BlackBall = {22020,22021,22022,22023,22024,22025,22027}
 
-wall_1 = 22004
-wall_2 = 22005
-wall_3 = 22006
+local wall_1 = 22004
+local wall_2 = 22005
+local wall_3 = 22006
 
-monster_1 = 22001
-monster_2 = 22002
+local monster_1 = 22001
+local monster_2 = 22002
 
-bright_area = 22019
+local bright_area = 22019
 
-enter_battle_region = 22003
+local enter_battle_region = 22003
 
-groupID = 177005022
+local groupID = 177005022
 
-questID = 400511301
+local questID = 400511301
 
-vision_region = 22028
+local vision_region = 22028
 
-vision_type_id = 70050001
+local vision_type_id = 70050001
 
 --================================================================
 --

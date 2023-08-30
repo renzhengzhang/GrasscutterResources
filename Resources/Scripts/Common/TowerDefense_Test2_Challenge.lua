@@ -9,9 +9,9 @@ tide_group_defs ={
 --]]
 
 function LF_Init_Challenge_Group()
-	g1 = { config_id = 1, gadget_id = 70360002, pos = points[1].pos, rot = points[1].rot, level = 1 }
-	g2 = { config_id = 2, gadget_id = 70360002, pos = points[1].pos, rot = points[1].rot, level = 1 }
-	g3 = { config_id = 3, gadget_id = 70360002, pos = points[1].pos, rot = points[1].rot, level = 1 }
+	g1 = { config_id = 1, gadget_id = 70360002, pos = points[1].pos, rot = points[1].rot, level = 1 } 
+	g2 = { config_id = 2, gadget_id = 70360002, pos = points[1].pos, rot = points[1].rot, level = 1 } 
+	g3 = { config_id = 3, gadget_id = 70360002, pos = points[1].pos, rot = points[1].rot, level = 1 } 
 	table.insert(gadgets, g1)
 	table.insert(gadgets, g2)
 	table.insert(gadgets, g3)
@@ -37,14 +37,14 @@ function action_gadget_create(context, evt)
 		ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, evt.param1, {2902})
 	elseif evt.param1 == 2 or evt.param1 == 3 then
 		--[[
-		array = {}
+		local array = {}
 		for i,v in ipairs(tide_group_defs[wave].buff) do
 			array[i] = v
 		end
 		--]]
-		wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
+		local wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
 		ScriptLib.PrintContextLog(context, "## tide_wave = "..wave)
-		buff = {}
+		local buff = {}
 		for i,v in ipairs(tide_group_defs[wave].buff) do
 			buff[i] = 3000 + v
 		end
@@ -60,7 +60,7 @@ function action_select_option(context, evt)
 		ScriptLib.SetGroupVariableValue(context, "wave_ptr", 1)
 		ScriptLib.DelWorktopOption(context, evt.param2)
 	elseif evt.param1 == 2 or evt.param1 == 3 then
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		if uid_list[evt.param1 - 1] ~= context.uid then
 			ScriptLib.ShowTemplateReminder(context, 123, {evt.param1 - 1})
 			return -1
@@ -69,15 +69,15 @@ function action_select_option(context, evt)
 		ScriptLib.PrintContextLog(context, "## TD_LOG : Uid_"..context.uid.." select_option = "..evt.param2)
 		ScriptLib.ShowTemplateReminder(context, evt.param2-3000+117, {evt.param1 - 1})
 		---[[
-		wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
-		next_wave = tide_group_defs[wave].next_group
+		local wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
+		local next_wave = tide_group_defs[wave].next_group
 		if evt.param2 ~= 3004 then
 			--不知道gear的group，先转发给monster，再转发给gear升级用
 			ScriptLib.ExecuteGroupLua(context, tide_group_defs[next_wave].group, "fix_gear", {evt.param2})
 		elseif evt.param2 == 3004 then
 			--下一波额外添加一个挑战
 			ScriptLib.SetGroupVariableValue(context, "special_challenge", 1)
-		end
+		end 
 		--]]
 		ScriptLib.RemoveEntityByConfigId(context, defs.group_id, EntityType.GADGET, evt.param1)
 	end
@@ -86,7 +86,7 @@ end
 
 --某group结束,进下一阶段
 function tide_done(context, prev_context, param1, param2, param3)
-	wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
+	local wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
 	ScriptLib.PrintContextLog(context, "## wave = "..wave)
 	if tide_group_defs[wave].next_group == 0 then
 		ScriptLib.PrintContextLog(context, "## TD_LOG : All Wave Done")
@@ -104,8 +104,8 @@ end
 
 function action_challenge_success(context, evt)
 	if evt.source_name == "1" then
-		wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
-		next_wave = tide_group_defs[wave].next_group
+		local wave = ScriptLib.GetGroupVariableValue(context, "wave_ptr")
+		local next_wave = tide_group_defs[wave].next_group
 		ScriptLib.SetGroupVariableValue(context, "wave_ptr", next_wave)
 		ScriptLib.RemoveEntityByConfigId(context, defs.group_id, EntityType.GADGET, 2)
 		ScriptLib.RemoveEntityByConfigId(context, defs.group_id, EntityType.GADGET, 3)
@@ -122,18 +122,18 @@ end
 function LF_Buff_Choice(context, wave)
 	--[[
 	math.randomseed(ScriptLib.GetServerTime(context)+wave)
-	buff = {}
+	local buff = {}
 	for i=1,2 do
-		index = math.random(#array)
+		local index = math.random(#array)
 		buff[i] = index + 3000
 		table.remove(array, index)
 	end
 	]]
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		if i <= 2 then
-			eid = ScriptLib.GetAvatarEntityIdByUid(context, v)
-			pos = ScriptLib.GetPosByEntityId(context, eid)
+			local eid = ScriptLib.GetAvatarEntityIdByUid(context, v)
+			local pos = ScriptLib.GetPosByEntityId(context, eid)
 			ScriptLib.CreateGadgetByConfigIdByPos(context, i+1, {x=pos.x,y=pos.y,z=pos.z}, {x=0,y=0,z=0})
 			ScriptLib.PrintContextLog(context, "## TD_LOG : operator of "..i.."P")
 			--ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, i+1, array)

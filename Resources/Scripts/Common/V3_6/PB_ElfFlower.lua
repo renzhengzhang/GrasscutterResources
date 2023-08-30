@@ -12,11 +12,11 @@
 defs = {
 	flower_gadget_id = 70290733,
 }
-elf_flowers = {}
+local elf_flowers = {}
 ]]
 --======================================================================================================================
 --Events || Group内EVENT事件,记得初始化和return 0
-EF_Triggers ={
+local EF_Triggers ={
 	{ name = "group_load", config_id = 8000101, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
 	{ name = "gadget_state_change", config_id = 8000102, event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0 },
 	{ name = "time_axis_pass", config_id = 8000103, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0 },

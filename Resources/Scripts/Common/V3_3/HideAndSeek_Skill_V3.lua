@@ -1,10 +1,10 @@
-_radius = "radius"
+local _radius = "radius"
 ------------------------------------------
 --通用函数区
 --获取球形范围内的u_list
 function LF_Get_Uid_Around(context, radius)
-	list = {}
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local list = {}
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		if 1 == ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {}) then
 			if radius >= LF_Get_Player_Distance_To_Player(context, context.uid, v) then
@@ -17,12 +17,12 @@ end
 
 --获取圆柱范围内的u_list（只找游侠prey）
 function LF_Get_Uid_Cylinder(context, radius)
-	list = {}
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local list = {}
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		if 1 == ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {}) then
 			--if radius >= LF_Get_Player_Distance_To_Player(context, context.uid, v) then
-			if radius >= LF_Get_Player_Distance_To_Player_2D(context, context.uid, v) then
+			if radius >= LF_Get_Player_Distance_To_Player_2D(context, context.uid, v) then	
 				table.insert(list, v)
 			end
 		end
@@ -32,11 +32,11 @@ end
 
 -- 获取某个玩家周围，球形范围内的幽灵诱饵
 function LF_Get_Baits_Around(context, radius)
-	list = {}
+	local list = {}
 	for i,v in ipairs(bait_list) do
 		for m,n in ipairs(v) do
 			if ScriptLib.CheckIsInGroup(context, 0, n) == true then
-				eid = ScriptLib.GetEntityIdByConfigId(context, n)
+				local eid = ScriptLib.GetEntityIdByConfigId(context, n)
 				if radius >= LF_Get_Player_Distance_To_Entity(context, context.uid, eid) then
 					table.insert(list, n)
 				end
@@ -48,10 +48,10 @@ end
 
 -- 【三期新增】获取某个玩家周围，球形范围内的隐身诱饵
 function LF_Get_InvisibleBaits_Around(context, radius)
-	list = {}
+	local list = {}
 	for i,v in ipairs(invisible_bait_list) do
 		if ScriptLib.CheckIsInGroup(context, 0, v) == true then
-			eid = ScriptLib.GetEntityIdByConfigId(context, v)
+			local eid = ScriptLib.GetEntityIdByConfigId(context, v)
 			if radius >= LF_Get_Player_Distance_To_Entity(context, context.uid, eid) then
 				table.insert(list, v)
 			end
@@ -61,19 +61,19 @@ function LF_Get_InvisibleBaits_Around(context, radius)
 end
 
 function LF_Get_Distance_Between_Point(context, pos_1, pos_2)
-	X = pos_1.x - pos_2.x
-	Y = pos_1.y - pos_2.y
-	Z = pos_1.z - pos_2.z
+	local X = pos_1.x - pos_2.x
+	local Y = pos_1.y - pos_2.y
+	local Z = pos_1.z - pos_2.z
 	return math.sqrt(X*X+Y*Y+Z*Z)
 end
 
 -- 【三期新增】获取某个点周围，球形范围内的所有诱饵
 function LF_Get_AllBaits_Around(context, pos, radius)
-	list = {}
+	local list = {}
 	for i,v in ipairs(invisible_bait_list) do
 		if ScriptLib.CheckIsInGroup(context, 0, v) == true then
-			eid = ScriptLib.GetEntityIdByConfigId(context, v)
-			pos_1 = ScriptLib.GetPosByEntityId(context, eid)
+			local eid = ScriptLib.GetEntityIdByConfigId(context, v)
+			local pos_1 = ScriptLib.GetPosByEntityId(context, eid)
 			if radius >= LF_Get_Distance_Between_Point(context, pos_1, pos) then
 				table.insert(list, v)
 			end
@@ -83,8 +83,8 @@ function LF_Get_AllBaits_Around(context, pos, radius)
 	for i,v in ipairs(bait_list) do
 		for m,n in ipairs(v) do
 			if ScriptLib.CheckIsInGroup(context, 0, n) == true then
-				eid = ScriptLib.GetEntityIdByConfigId(context, n)
-				pos_1 = ScriptLib.GetPosByEntityId(context, eid)
+				local eid = ScriptLib.GetEntityIdByConfigId(context, n)
+				local pos_1 = ScriptLib.GetPosByEntityId(context, eid)
 				if radius >= LF_Get_Distance_Between_Point(context, pos_1, pos) then
 					table.insert(list, n)
 				end
@@ -97,10 +97,10 @@ end
 -- =====================【三期新增】计算两个点之间的y轴角度(pos2相对于pos1)-开始===========================
 function LF_Get_YAngle_By_Pos(context, pos1, pos2)
 	-- 其实只需要y轴旋转，即只需要xz平面上旋转
-	p = {}
+	local p = {}
 	p.x = pos2.x - pos1.x
 	p.y = pos2.z - pos1.z
-	r = math.atan2(p.y, p.x) * 180 / math.pi
+	local r = math.atan2(p.y, p.x) * 180 / math.pi
 
 	-- 计算出来的是和x正方向，-180到180的夹角，先转化成0-360（和x轴正方向逆时针）
 	if r < 0 then
@@ -109,7 +109,7 @@ function LF_Get_YAngle_By_Pos(context, pos1, pos2)
 	-- unity里是和x轴正方向顺时针
 	r = 360 - r
 	-- 这个特效默认朝着z轴正方向播，得再加90度
-	actualR = r + 90
+	local actualR = r + 90
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : LF_Get_YAngle_By_Pos, pos1 = ("..pos1.x..","..pos1.y..","..pos1.z.."), pos2 = ("..
 	pos2.x..","..pos2.y..","..pos2.z.."), rot = "..r..", actual rot = "..actualR)
 	return actualR
@@ -117,10 +117,10 @@ end
 
 -- =====================【三期新增】找游侠周围的隐身诱饵-开始===========================
 function LF_Get_Invisible_Baits_Around(context, radius)
-	list = {}
+	local list = {}
 	for i,v in ipairs(invisible_bait_list) do
 		if ScriptLib.CheckIsInGroup(context, 0, v) == true then
-			eid = ScriptLib.GetEntityIdByConfigId(context, v)
+			local eid = ScriptLib.GetEntityIdByConfigId(context, v)
 			if radius >= LF_Get_Player_Distance_To_Entity(context, context.uid, eid) then
 				table.insert(list, v)
 			end
@@ -133,22 +133,22 @@ end
 -- =====================【三期新增】找猎手投掷球周围的游侠-开始===========================
 function LF_Get_Prey_Around_HunterNet(context, pos, radius)
 	-- 找球形范围内的游侠
-	list = {}
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local list = {}
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		if 1 == ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {}) then
 
-			eid_1 = ScriptLib.GetAvatarEntityIdByUid(context, v)
-			pos_1 = ScriptLib.GetPosByEntityId(context, eid_1)
+			local eid_1 = ScriptLib.GetAvatarEntityIdByUid(context, v)
+			local pos_1 = ScriptLib.GetPosByEntityId(context, eid_1)
 
 			ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : prey player id = "..v..", eid = "..eid_1..
 				", pos = ("..pos_1.x..", "..pos_1.y..", "..pos_1.z..")")
 
-			X = pos_1.x - pos.x
-			Y = pos_1.y - pos.y
-			Z = pos_1.z - pos.z
-
-			if radius >= math.sqrt(X*X+Y*Y+Z*Z) then
+			local X = pos_1.x - pos.x
+			local Y = pos_1.y - pos.y
+			local Z = pos_1.z - pos.z
+			
+			if radius >= math.sqrt(X*X+Y*Y+Z*Z) then	
 				table.insert(list, v)
 			end
 		end
@@ -159,44 +159,44 @@ end
 
 -- =====================【三期新增】用新增接口找游侠-开始===========================
 function LF_Get_Prey_List(context)
-	_index = ScriptLib.GetHideAndSeekPlayIndex(context)
+	local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
 	return ScriptLib.GetHideAndSeekPreyUidList(context, _index)
 end
 -- =====================【三期新增】用新增接口找游侠-结束===========================
 
 --判断3D距离
 function LF_Get_Player_Distance_To_Player(context, uid_1, uid_2)
-	eid_1 = ScriptLib.GetAvatarEntityIdByUid(context, uid_1)
-	eid_2 = ScriptLib.GetAvatarEntityIdByUid(context, uid_2)
+	local eid_1 = ScriptLib.GetAvatarEntityIdByUid(context, uid_1)
+	local eid_2 = ScriptLib.GetAvatarEntityIdByUid(context, uid_2)
 	return LF_Get_Distance_By_EntityId(context, eid_1, eid_2)
 end
 
 --判断2D距离
 function LF_Get_Player_Distance_To_Player_2D(context, uid_1, uid_2)
-	eid_1 = ScriptLib.GetAvatarEntityIdByUid(context, uid_1)
-	eid_2 = ScriptLib.GetAvatarEntityIdByUid(context, uid_2)
+	local eid_1 = ScriptLib.GetAvatarEntityIdByUid(context, uid_1)
+	local eid_2 = ScriptLib.GetAvatarEntityIdByUid(context, uid_2)
 	return LF_Get_Distance_By_EntityId_2D(context, eid_1, eid_2)
 end
 
 function LF_Get_Player_Distance_To_Entity(context, uid_1, eid_2)
-	eid_1 = ScriptLib.GetAvatarEntityIdByUid(context, uid_1)
+	local eid_1 = ScriptLib.GetAvatarEntityIdByUid(context, uid_1)
 	return LF_Get_Distance_By_EntityId(context, eid_1, eid_2)
 end
 
 function LF_Get_Distance_By_EntityId(context, eid_1, eid_2)
-	pos_1 = ScriptLib.GetPosByEntityId(context, eid_1)
-	pos_2 = ScriptLib.GetPosByEntityId(context, eid_2)
-	X = pos_1.x - pos_2.x
-	Y = pos_1.y - pos_2.y
-	Z = pos_1.z - pos_2.z
+	local pos_1 = ScriptLib.GetPosByEntityId(context, eid_1)
+	local pos_2 = ScriptLib.GetPosByEntityId(context, eid_2)
+	local X = pos_1.x - pos_2.x
+	local Y = pos_1.y - pos_2.y
+	local Z = pos_1.z - pos_2.z
 	return math.sqrt(X*X+Y*Y+Z*Z)
 end
 
 function LF_Get_Distance_By_EntityId_2D(context, eid_1, eid_2)
-	pos_1 = ScriptLib.GetPosByEntityId(context, eid_1)
-	pos_2 = ScriptLib.GetPosByEntityId(context, eid_2)
-	X = pos_1.x - pos_2.x
-	Z = pos_1.z - pos_2.z
+	local pos_1 = ScriptLib.GetPosByEntityId(context, eid_1)
+	local pos_2 = ScriptLib.GetPosByEntityId(context, eid_2)
+	local X = pos_1.x - pos_2.x
+	local Z = pos_1.z - pos_2.z
 	return math.sqrt(X*X+Z*Z)
 end
 
@@ -213,7 +213,7 @@ function LF_Get_Bait_Owner(context, cid)
 	for i = 1, 3 do
 		for j = 1, 3 do
 			if bait_list[i][j] == cid then
-				player = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+				local player = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 				ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : bait cid = "..cid.." belongs to prey uid = "..player)
 				return player
 			end
@@ -226,7 +226,7 @@ end
 
 ------------------------------------------
 function HideAndSeek_Skill_Init(context)
-	skill = "HideAndSeek_Skill_Init"
+	local skill = "HideAndSeek_Skill_Init"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	return 0
 end
@@ -234,12 +234,12 @@ end
 --hunter技能响应
 --抓捕
 function HideAndSeek_Skill_CatchPrey(context)
-	skill = "HideAndSeek_Skill_CatchPrey"
+	local skill = "HideAndSeek_Skill_CatchPrey"
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG catch_debug | skill = "..skill)
-	radius = LF_Get_Skill_Info(context, skill, _radius)
+	local radius = LF_Get_Skill_Info(context, skill, _radius)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG catch_debug | radius = "..radius)
 	--诱饵队列
-	bait_list = LF_Get_Baits_Around(context, radius)
+	local bait_list = LF_Get_Baits_Around(context, radius)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG catch_debug | #bait = "..#bait_list)
 	if #bait_list ~= 0 then
 		for i,v in ipairs(bait_list) do
@@ -247,7 +247,7 @@ function HideAndSeek_Skill_CatchPrey(context)
 
 			-- 【三期新增翻牌】幽灵放置的诱饵阻碍过几次猎手的视野
 			-- 先判断这个诱饵是哪个游侠的
-			bait_owner = LF_Get_Bait_Owner(context, v)
+			local bait_owner = LF_Get_Bait_Owner(context, v)
 			ScriptLib.AddExhibitionReplaceableData(context, bait_owner, "ghost_blind_hunter_by_bait", 1)
 
 		end
@@ -256,12 +256,12 @@ function HideAndSeek_Skill_CatchPrey(context)
 	end
 
 	-- 【三期新增】隐身诱饵队列
-	invisible_bait_list = LF_Get_InvisibleBaits_Around(context, radius)
+	local invisible_bait_list = LF_Get_InvisibleBaits_Around(context, radius)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG catch_debug | #invisible bait = "..#invisible_bait_list)
 	if #invisible_bait_list ~= 0 then
 		for i,v in ipairs(invisible_bait_list) do
 			-- LF_Handle_Skill(context, skill, 0, v)
-			-- 走上面会导致隐身诱饵被算进幽灵诱饵的陈列室,直接在这里干掉隐身诱饵
+			-- 走上面会导致隐身诱饵被算进幽灵诱饵的陈列室,直接在这里干掉隐身诱饵	
 			ScriptLib.KillEntityByConfigId(context, {config_id = v, entity_type = EntityType.GADGET})
 		end
 
@@ -273,7 +273,7 @@ function HideAndSeek_Skill_CatchPrey(context)
 	end
 
 	--玩家队列catch
-	prey_list = LF_Get_Uid_Around(context, radius)
+	local prey_list = LF_Get_Uid_Around(context, radius)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG catch_debug | #prey = "..#prey_list)
 	if #prey_list ~= 0 then
 		for i,v in ipairs(prey_list) do
@@ -300,7 +300,7 @@ function HideAndSeek_Skill_CatchPrey(context)
 		end
 
 		-- 【三期新增翻牌】翻牌：一次抓到多个prey
-		max = ScriptLib.GetGroupTempValue(context, "catch_multiple_prey_max", {})
+		local max = ScriptLib.GetGroupTempValue(context, "catch_multiple_prey_max", {})
 		if #prey_list >= max then
 			ScriptLib.SetGroupTempValue(context, "catch_multiple_prey_max", #prey_list , {})
 		end
@@ -310,26 +310,26 @@ end
 
 --方向引导
 function HideAndSeek_Skill_Guide(context)
-	skill = "HideAndSeek_Skill_Guide"
+	local skill = "HideAndSeek_Skill_Guide"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	return 0
 end
 
 --方向引导
 function FireDirection(context)
-	skill = "FireDirection"
-	hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
+	local skill = "FireDirection"
+	local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
 	LF_Handle_Skill(context, skill, hunter, 0)
 	return 0
 end
 
 --为侦测到诱饵
 function HideAndSeek_Skill_Detect_F(context)
-	skill = "HideAndSeek_Skill_Detect_F"
-	radius = LF_Get_Skill_Info(context, skill, _radius)
+	local skill = "HideAndSeek_Skill_Detect_F"
+	local radius = LF_Get_Skill_Info(context, skill, _radius)
 	--玩家队列
-	--prey_list = LF_Get_Uid_Around(context, radius)
-	prey_list = LF_Get_Uid_Cylinder(context, radius)
+	--local prey_list = LF_Get_Uid_Around(context, radius)
+	local prey_list = LF_Get_Uid_Cylinder(context, radius)
 	if #prey_list > 0 then
 		LF_Handle_Skill(context, skill, context.uid, 1)
 		--统计：感应光环成功数
@@ -346,20 +346,20 @@ function HideAndSeek_Skill_Detect_F(context)
 end
 --重置上面的技能
 function HideAndSeek_Skill_Detect_F_Reset(context)
-	skill = "HideAndSeek_Skill_Detect_F"
+	local skill = "HideAndSeek_Skill_Detect_F"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	return 0
 end
 
 --无敌定位
 function HideAndSeek_Skill_UltraMark(context)
-	skill = "HideAndSeek_Skill_UltraMark"
-	radius = LF_Get_Skill_Info(context, skill, _radius)
+	local skill = "HideAndSeek_Skill_UltraMark"
+	local radius = LF_Get_Skill_Info(context, skill, _radius)
 	--玩家队列
-	prey_list = LF_Get_Uid_Around(context, radius)
+	local prey_list = LF_Get_Uid_Around(context, radius)
 	if #prey_list ~= 0 then
 		math.randomseed(ScriptLib.GetServerTime(context))
-		ran = math.random(#prey_list)
+		local ran = math.random(#prey_list)
 		LF_Handle_Skill(context, skill, prey_list[ran], 0)
 		LF_Notify_Skill_Info(context, skill, context.uid, prey_list[ran])
 	end
@@ -368,16 +368,16 @@ end
 
 --无敌定位结束
 function HideAndSeek_Out_UltraMark(context)
-	skill = "HideAndSeek_Out_UltraMark"
+	local skill = "HideAndSeek_Out_UltraMark"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	return 0
 end
 
 --全部出来
 function HideAndSeek_Skill_GlobalSight(context)
-	skill = "HideAndSeek_Skill_GlobalSight"
-	radius = LF_Get_Skill_Info(context, skill, _radius)
-	prey_list = LF_Get_Uid_Around(context, radius)
+	local skill = "HideAndSeek_Skill_GlobalSight"
+	local radius = LF_Get_Skill_Info(context, skill, _radius)
+	local prey_list = LF_Get_Uid_Around(context, radius)
 	--V2新增：以前在Action里修改gv，现改为由lua修改
 	LF_Set_Player_State_Value(context, context.uid, HS_State.GlobalSight.name, 0)
 	--V2新增结束
@@ -390,20 +390,20 @@ end
 
 --全不出来
 function HideAndSeek_Out_GlobalSight(context)
-	skill = "HideAndSeek_Out_GlobalSight"
+	local skill = "HideAndSeek_Out_GlobalSight"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	return 0
 end
 
 --超级锁定
 function HideAndSeek_Skill_SuperPrison(context)
-	skill = "HideAndSeek_Skill_SuperPrison"
-	radius = LF_Get_Skill_Info(context, skill, _radius)
+	local skill = "HideAndSeek_Skill_SuperPrison"
+	local radius = LF_Get_Skill_Info(context, skill, _radius)
 	--玩家队列
-	prey_list = LF_Get_Uid_Around(context, radius)
+	local prey_list = LF_Get_Uid_Around(context, radius)
 	if #prey_list ~= 0 then
 		math.randomseed(ScriptLib.GetServerTime(context))
-		ran = math.random(#prey_list)
+		local ran = math.random(#prey_list)
 		LF_Handle_Skill(context, skill, prey_list[ran], 0)
 		LF_Notify_Skill_Info(context, skill, context.uid, prey_list[ran])
 	end
@@ -412,15 +412,15 @@ end
 
 --锁定过期
 function HideAndSeek_Out_SuperPrison(context)
-	skill = "HideAndSeek_Out_SuperPrison"
+	local skill = "HideAndSeek_Out_SuperPrison"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	return 0
 end
 
 --猎人暴走
 function HideAndSeek_Hunter_Rampage(context)
-	skill = "HideAndSeek_Hunter_Rampage"
-	hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
+	local skill = "HideAndSeek_Hunter_Rampage"
+	local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
 	LF_Handle_Skill(context, skill, hunter, 0)
 	LF_Notify_Skill_Info(context, skill, hunter, 0)
 	return 0
@@ -429,14 +429,14 @@ end
 --隐身
 function HideAndSeek_Skill_SelfInvisible(context)
 	--服务器校验，幽灵状态不允许使用
-	_State_Play = ScriptLib.GetGroupTempValue(context,HS_State.Play.name.."_"..context.uid,{})
-	if _State_Play == 2 then
+	local _State_Play = ScriptLib.GetGroupTempValue(context,HS_State.Play.name.."_"..context.uid,{})
+	if _State_Play == 2 then 
 		ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_WARNING "..context.uid .."尝试使用隐身技能失败：服务器校验，幽灵状态不允许使用")
-		return 0
+		return 0 
 	end
 	--校验结束
 
-	skill = "HideAndSeek_Skill_SelfInvisible"
+	local skill = "HideAndSeek_Skill_SelfInvisible"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	--LF_Change_Temp_Value(context, "prey_win_without_skill_"..context.uid, 1)
 	return 0
@@ -448,7 +448,7 @@ end
 function SLC_HideAndSeek_Skill_InvisibleBait_Place(context)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG "..context.uid .."called SLC_HideAndSeek_Skill_InvisibleBait_Place")
 
-	skill = "HideAndSeek_Skill_InvisibleBait_Place"
+	local skill = "HideAndSeek_Skill_InvisibleBait_Place"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	return 0
 end
@@ -456,14 +456,14 @@ end
 -- 隐身诱饵-判周围游侠玩家
 function SLC_HideAndSeek_Skill_InvisibleBait_Check(context)
 	--服务器校验，非游侠状态不允许隐身(3是准备阶段，也允许隐身)
-	_State_Play = ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..context.uid, {})
-	if _State_Play == 0 or _State_Play == 2 then
+	local _State_Play = ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..context.uid, {})
+	if _State_Play == 0 or _State_Play == 2 then 
 		ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_WARNING player id = "..context.uid .." is near a invisible bait, playerState = ".._State_Play..", invisible not allowed")
-		return 0
+		return 0 
 	end
 
 	-- 状态合法的玩家是否是游侠（state 3的猎人也不能隐身）
-	legal = false
+	local legal = false
 	for i = 1,3 do
 		if context.uid == ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {}) then
 			legal = true
@@ -475,11 +475,11 @@ function SLC_HideAndSeek_Skill_InvisibleBait_Check(context)
 	--校验结束
 
 	-- 放置幽灵诱饵之后，如果游侠判断自己周围有隐身诱饵，触发这个slc，服务器再判一次
-	skill = "HideAndSeek_Skill_InvisibleBait_Check"
-	radius = LF_Get_Skill_Info(context, skill, _radius)
+	local skill = "HideAndSeek_Skill_InvisibleBait_Check"
+	local radius = LF_Get_Skill_Info(context, skill, _radius)
 
 	-- 游侠旁边的隐身诱饵list
-	invisible_bait_list = LF_Get_Invisible_Baits_Around(context, radius)
+	local invisible_bait_list = LF_Get_Invisible_Baits_Around(context, radius)
 	LF_PrintList(context, "## HideAndSeek_V3_LOG uid = "..context.uid..", invisible baits", invisible_bait_list)
 
 	if #invisible_bait_list ~= 0 then
@@ -498,7 +498,7 @@ function SLC_HideAndSeek_Skill_InvisibleBait_Check(context)
 end
 
 function SLC_HideAndSeek_Skill_InvisibleBait_Quit(context)
-	skill = "HideAndSeek_Skill_InvisibleBait_Quit"
+	local skill = "HideAndSeek_Skill_InvisibleBait_Quit"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	return 0
 end
@@ -507,14 +507,14 @@ function SLC_HideAndSeek_Invisible_Real_Quit(context, param1)
 	-- 真正退出隐身
 	-- 如果param1 == 2，看玩家是不是在主动隐身技能生效过程中（为了处理先主动隐身再离开隐身诱饵时的回包顺序问题）
 	if param1 == 2 then
-		temp = ScriptLib.GetGroupTempValue(context, "Visible"..context.uid, {})
+		local temp = ScriptLib.GetGroupTempValue(context, "Visible"..context.uid, {})
 		if temp == 1 then
 			ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_WARNING uid = "..context.uid..", SLC_HideAndSeek_Skill_InvisibleBait_Quit is called during invisible skill, return immediately")
 			return 0
 		end
 	end
 
-	skill = "HideAndSeek_Skill_Invisible_Real_Quit"
+	local skill = "HideAndSeek_Skill_Invisible_Real_Quit"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	return 0
 end
@@ -524,7 +524,7 @@ end
 -- =========================【三期新增】(原游侠自选技能)幽灵-放置诱饵-开始===================================
 --诱饵放置
 function SLC_HideAndSeek_Skill_PlaceBait(context)
-	skill = "HideAndSeek_Skill_PlaceBait"
+	local skill = "HideAndSeek_Skill_PlaceBait"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	--LF_Change_Temp_Value(context, "prey_win_without_skill_"..context.uid, 1)
 
@@ -537,14 +537,14 @@ end
 
 -- =========================【三期新增】猎人-四方八方之网-开始===================================
 function SLC_HideAndSeek_Skill_HunterNet(context, param1, param2, param3)
-	skill = "HideAndSeek_Skill_HunterNet"
-	pos = {x = param1, y = param2, z = param3}
+	local skill = "HideAndSeek_Skill_HunterNet"
+	local pos = {x = param1, y = param2, z = param3}
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG hunter net bullet landed, pos = ("..param1..", "..param2..", "..param3..")")
 
-	radius = LF_Get_Skill_Info(context, skill, _radius)
+	local radius = LF_Get_Skill_Info(context, skill, _radius)
 
 	-- 找投掷球落地位置周围的玩家
-	prey_list = LF_Get_Prey_Around_HunterNet(context, pos, radius)
+	local prey_list = LF_Get_Prey_Around_HunterNet(context, pos, radius)
 	for i,v in ipairs(prey_list) do
 		LF_Handle_Skill(context, skill, v, 0)
 	end
@@ -552,12 +552,12 @@ function SLC_HideAndSeek_Skill_HunterNet(context, param1, param2, param3)
 	if #prey_list > 0 then
 		ScriptLib.AddTeamEntityGlobalFloatValue(context, {context.uid}, "HideAndSeek_HunterNet_Notify", 1)
 	end
-
+	
 	-- 【三期新增翻牌】猎人-使用捕网累计侦查到几位游侠watcher
 	ScriptLib.AddExhibitionAccumulableData(context, context.uid, "hunter_discover_prey_by_hunter_net", #prey_list)
 
 	-- 找投掷球落地位置周围的所有诱饵
-	all_bait_list = LF_Get_AllBaits_Around(context, pos, radius)
+	local all_bait_list = LF_Get_AllBaits_Around(context, pos, radius)
 	for i,v in ipairs(all_bait_list) do
 		ScriptLib.KillEntityByConfigId(context, {config_id = v, entity_type = EntityType.GADGET})
 	end
@@ -573,26 +573,26 @@ end
 --伪装
 function HideAndSeek_Skill_Transfer(context)
 	--服务器校验，超级标记状态不允许使用
-	_temp = ScriptLib.GetGroupTempValue(context,HS_State.UltraMark.name.."_"..context.uid,{})
-	if _temp == 1 then
+	local _temp = ScriptLib.GetGroupTempValue(context,HS_State.UltraMark.name.."_"..context.uid,{})
+	if _temp == 1 then 
 		ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_WARNING"..context.uid .."尝试使用变身技能失败：服务器校验，超级标记状态不允许使用")
-		return 0
+		return 0 
 	end
 	--服务器校验，被洞察状态不允许使用
-	_temp = ScriptLib.GetGroupTempValue(context,HS_State.GlobalSight.name.."_"..context.uid,{})
-	if _temp == 1 then
+	local _temp = ScriptLib.GetGroupTempValue(context,HS_State.GlobalSight.name.."_"..context.uid,{})
+	if _temp == 1 then 
 		ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_WARNING"..context.uid .."尝试使用变身技能失败：服务器校验，被洞察状态不允许使用")
-		return 0
+		return 0 
 	end
 	--服务器校验，幽灵状态不允许使用
-	_temp = ScriptLib.GetGroupTempValue(context,HS_State.Play.name.."_"..context.uid,{})
-	if _temp == 2 then
+	local _temp = ScriptLib.GetGroupTempValue(context,HS_State.Play.name.."_"..context.uid,{})
+	if _temp == 2 then 
 		ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_WARNING"..context.uid .."尝试使用变身技能失败：服务器校验，幽灵状态不允许使用")
-		return 0
+		return 0 
 	end
 	--校验结束
 
-	skill = "HideAndSeek_Skill_Transfer"
+	local skill = "HideAndSeek_Skill_Transfer"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	LF_Change_Temp_Value(context, "prey_win_without_skill_"..context.uid, 1)
 	return 0
@@ -600,14 +600,14 @@ end
 
 --解除伪装
 function HideAndSeek_Skill_Transfer_Quit(context)
-	skill = "HideAndSeek_Skill_Transfer_Quit"
+	local skill = "HideAndSeek_Skill_Transfer_Quit"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	return 0
 end
 
 --获取能量
 function HideAndSeek_Skill_Get_Energy(context)
-	skill = "HideAndSeek_Skill_Get_Energy"
+	local skill = "HideAndSeek_Skill_Get_Energy"
 	--统计：眷顾之能
 	ScriptLib.AddExhibitionReplaceableData(context, context.uid, "player_get_energy", 1)
 	LF_Notify_Skill_Info(context, skill, context.uid, 0)
@@ -616,7 +616,7 @@ end
 
 --疾跑
 function HideAndSeek_Skill_Sprint(context)
-	skill = "HideAndSeek_Skill_Sprint"
+	local skill = "HideAndSeek_Skill_Sprint"
 	LF_Notify_Skill_Info(context, skill, context.uid, 0)
 	--翻牌 局内变量 是否处于疾跑状态
 	ScriptLib.SetGroupTempValue(context, "prey_is_in_sprint_"..context.uid, 1, {})
@@ -627,7 +627,7 @@ function HideAndSeek_Skill_Sprint(context)
 end
 --疾跑结束
 function HideAndSeek_Skill_Sprint_Quit(context)
-	skill = "HideAndSeek_Skill_Sprint_Quit"
+	local skill = "HideAndSeek_Skill_Sprint_Quit"
 	LF_Notify_Skill_Info(context, skill, context.uid, 0)
 	--翻牌 局内变量 是否处于疾跑状态
 	ScriptLib.SetGroupTempValue(context, "prey_is_in_sprint_"..context.uid, 0, {})
@@ -641,7 +641,7 @@ function HideAndSeek_Skill_Blind(context, config_id)
 	for i,v in ipairs(bait_list) do
 		for p,q in ipairs(v) do
 			if q == config_id then
-				_prey = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+				local _prey = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 				ScriptLib.AddExhibitionReplaceableData(context, _prey, "prey_cheat_hunter", 1)
 				ScriptLib.AddExhibitionAccumulableData(context, _prey, "prey_cheat_hunter", 1)
 				return 0
@@ -653,17 +653,17 @@ end
 
 --退出被侦测状态（当被抓方被扫描后，进行移动时调用；或者被侦测状态时间到）
 function HideAndSeek_Skill_Is_Detected_Quit(context)
-	skill = "HideAndSeek_Skill_Is_Detected_Quit"
+	local skill = "HideAndSeek_Skill_Is_Detected_Quit"
 	LF_Handle_Skill(context, skill, context.uid, 0)
 	return 0
 end
 function LF_Change_Temp_Value(context, key, delta)
-	cnt = ScriptLib.GetGroupTempValue(context, key, {})
+	local cnt = ScriptLib.GetGroupTempValue(context, key, {})
 	ScriptLib.SetGroupTempValue(context, key, cnt + delta, {})
 end
 --退出隐身状态（游侠的5秒隐身）
 function HideAndSeek_Skill_SelfInvisible_Quit(context)
-	skill = "HideAndSeek_Skill_SelfInvisible_Quit"
+	local skill = "HideAndSeek_Skill_SelfInvisible_Quit"
 	LF_Handle_Skill(context,skill,context.uid,0)
 	return 0
 end
@@ -690,7 +690,7 @@ function LF_Handle_Skill(context, skill, uid, cid)
 		end
 
 		--先判断游侠玩家有没有注册成功（应该在逃跑阶段一开始就注册）
-		reg = 0
+		local reg = 0
 		for i=1,3 do
 			if uid == ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {}) then
 				reg = 1
@@ -708,7 +708,7 @@ function LF_Handle_Skill(context, skill, uid, cid)
 			ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_WARNING [准备阶段bug] : if reg == 0 then else!")
 			--对已经在入场的玩家还原客户端状态
 			for k,v in pairs(HS_State) do
-				_temp = ScriptLib.GetGroupTempValue(context, v.name.."_"..uid, {})
+				local _temp = ScriptLib.GetGroupTempValue(context, v.name.."_"..uid, {})
 				--重连直接清隐身保平安
 				if k ~= "Visible" then
 					LF_Set_Player_State_Value(context, uid, v.name, _temp)
@@ -727,22 +727,22 @@ function LF_Handle_Skill(context, skill, uid, cid)
 		end
 	elseif skill == "HideAndSeek_Skill_Guide" then
 		ScriptLib.SetGroupTempValue(context, "guide_cnt", 0, {})
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		-- for i,v in ipairs(uid_list) do
-		-- 	_playValue = ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {})
+		-- 	local _playValue = ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {})
 		-- 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : skill_debug "..skill.." | uid = "..v.." | key = "..HS_State.Play.name.." | value = ".._playValue)
 		-- 	if 1 == _playValue then
 		-- 		--创建guide gadget之前刷一下authority为猎人。
-		-- 		hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
+		-- 		local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
 		-- 		ScriptLib.ForceRefreshAuthorityByConfigId(context, defs.gadget_prison, hunter)
 		-- 		--对存活的玩家执行action
 		-- 		for j=1,3 do
 		-- 			if v == ScriptLib.GetGroupTempValue(context, "prey_"..j, {}) then
 		-- 				ScriptLib.KillEntityByConfigId(context, {config_id=defs.gadget_guide[j], entity_type=EntityType.GADGET})
-		-- 				eid = ScriptLib.GetAvatarEntityIdByUid(context, v)
-		-- 				pos = ScriptLib.GetPosByEntityId(context, eid)
+		-- 				local eid = ScriptLib.GetAvatarEntityIdByUid(context, v)
+		-- 				local pos = ScriptLib.GetPosByEntityId(context, eid)
 		-- 				ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : skill_debug "..skill.." | prey_"..j.." = "..v.." | cid = "..defs.gadget_guide[j])
-		-- 				ret = ScriptLib.CreateGadgetByConfigIdByPos(context, defs.gadget_guide[j], {x=pos.x,y=pos.y,z=pos.z}, {x=0,y=0,z=0})
+		-- 				local ret = ScriptLib.CreateGadgetByConfigIdByPos(context, defs.gadget_guide[j], {x=pos.x,y=pos.y,z=pos.z}, {x=0,y=0,z=0})
 		-- 				ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : Create_Gadget_Guide_"..j.." -> "..ret)
 		-- 			end
 		-- 		end
@@ -751,26 +751,26 @@ function LF_Handle_Skill(context, skill, uid, cid)
 
 		-- 【三期新增】新增了协议，直接由lua通知客户端在指定pos,rot播指定特效
 		-- 先存猎人的pos
-		hunter_eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
-		hunter_pos = ScriptLib.GetPosByEntityId(context, hunter_eid)
-
+		local hunter_eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
+		local hunter_pos = ScriptLib.GetPosByEntityId(context, hunter_eid)
+		
 		for i,v in ipairs(uid_list) do
-			_playValue = ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {})
+			local _playValue = ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {})
 			ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : skill_debug "..skill.." | uid = "..v.." | key = "..HS_State.Play.name.." | value = ".._playValue)
-
+			
 			-- 找所有游侠
 			if 1 == _playValue then
 				--每个活着的游侠存pos，计算出一个rotation传给客户端播特效
 				for j = 1,3 do
 					if v == ScriptLib.GetGroupTempValue(context, "prey_"..j, {}) then
-						eid = ScriptLib.GetAvatarEntityIdByUid(context, v)
-						pos = ScriptLib.GetPosByEntityId(context, eid)
+						local eid = ScriptLib.GetAvatarEntityIdByUid(context, v)
+						local pos = ScriptLib.GetPosByEntityId(context, eid)
 
-						rot = LF_Get_YAngle_By_Pos(context, hunter_pos, pos)
+						local rot = LF_Get_YAngle_By_Pos(context, hunter_pos, pos)
 						ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : skill_debug "..skill.." | prey_"..j.." = "..v.." | rot = "..rot)
 						-- 在猎人的team上播特效
-						teamEntityId = ScriptLib.GetTeamEntityIdByUid(context, uid)
-						ret = ScriptLib.NotifyAllPlayerPerformOperation(context, teamEntityId, 1, j, {x=hunter_pos.x,y=hunter_pos.y,z=hunter_pos.z}, {x=0,y=rot,z=0})
+						local teamEntityId = ScriptLib.GetTeamEntityIdByUid(context, uid)
+						local ret = ScriptLib.NotifyAllPlayerPerformOperation(context, teamEntityId, 1, j, {x=hunter_pos.x,y=hunter_pos.y,z=hunter_pos.z}, {x=0,y=rot,z=0})
 						ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : Create_Effect_Guide | effect_index = "..j.."| hunter team = "..teamEntityId.."| ret = "..ret)
 					end
 				end
@@ -778,9 +778,9 @@ function LF_Handle_Skill(context, skill, uid, cid)
 		end
 	elseif skill == "FireDirection" then
 		ScriptLib.ChangeGroupTempValue(context, "guide_cnt", 1, {})
-		guide_cnt = ScriptLib.GetGroupTempValue(context, "guide_cnt", {})
-		catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
-		prey_sum = ScriptLib.GetGroupTempValue(context, "prey_sum", {})
+		local guide_cnt = ScriptLib.GetGroupTempValue(context, "guide_cnt", {})
+		local catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
+		local prey_sum = ScriptLib.GetGroupTempValue(context, "prey_sum", {})
 		ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : skill_debug : guide_cnt = "..guide_cnt.." | catch_sum = "..catch_sum.." | prey_sum = "..prey_sum)
 		if guide_cnt == prey_sum - catch_sum then
 			--这个状态不用存档，所以不执行lf_set_player_state
@@ -832,13 +832,13 @@ function LF_Handle_Skill(context, skill, uid, cid)
 		LF_Set_Player_State_Value(context, uid, HS_State.Visible.name, 1)
 		LF_Set_Player_State_Value(context, uid, HS_State.Visible_Mark.name, 1)
 	elseif skill == "HideAndSeek_Skill_PlaceBait" then
-		eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
-		pos = ScriptLib.GetPosByEntityId(context, eid)
-		pos_table = { x = pos.x, y = pos.y, z = pos.z + 0.1 }
-		rot_table = { x = 0, y = 0, z = 0 }
+		local eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
+		local pos = ScriptLib.GetPosByEntityId(context, eid)
+		local pos_table = { x = pos.x, y = pos.y, z = pos.z + 0.1 }
+		local rot_table = { x = 0, y = 0, z = 0 }
 		ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG bait_debug | stage_1 ")
-		for i=  1, 3 do
-			player = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+		for i=  1, 3 do	
+			local player = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 			if player == 0 then
 				break
 			end
@@ -847,7 +847,7 @@ function LF_Handle_Skill(context, skill, uid, cid)
 				-- 只有幽灵状态下才能放
 				if 2 == ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..player, {}) then
 					--这里要处理一个人的复数bait序列问题
-					bait_ptr = 1
+					local bait_ptr = 1
 					--重定位诱饵ptr,遍历比3-8译码效率高
 					for j = 1,#bait_list[i] do
 						if ScriptLib.CheckIsInGroup(context, 0, bait_list[i][j]) == false then
@@ -855,27 +855,27 @@ function LF_Handle_Skill(context, skill, uid, cid)
 							break
 						end
 					end
-					bait = bait_list[i][bait_ptr]
+					local bait = bait_list[i][bait_ptr]
 					ScriptLib.KillEntityByConfigId(context, {config_id=bait, entity_type=EntityType.GADGET})
-					-- _value = ScriptLib.GetGroupTempValue(context, HS_State.TransferCache.name.."_"..player, {})
+					-- local _value = ScriptLib.GetGroupTempValue(context, HS_State.TransferCache.name.."_"..player, {})
 					-- --如果玩家未变身,就用第一个transfer处理
 					-- if _value == 0 then
-					-- 	_index = ScriptLib.GetHideAndSeekPlayIndex(context)
-					-- 	_map = ScriptLib.GetHideAndSeekMap(context, _index)
+					-- 	local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
+					-- 	local _map = ScriptLib.GetHideAndSeekMap(context, _index)
 					-- 	_value = map_info[_map].list[1]
 					-- end
 
 					-- 【三期新增】幽灵放诱饵都随机
-					_index = ScriptLib.GetHideAndSeekPlayIndex(context)
-					_map = ScriptLib.GetHideAndSeekMap(context, _index)
-
+					local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
+					local _map = ScriptLib.GetHideAndSeekMap(context, _index)
+					
 					math.randomseed(ScriptLib.GetServerTime(context))
-					-- baitPool = map_info[_map].list
-					randomIdx = math.random(#disguiseList)
-					_value = disguiseList[randomIdx]
+					-- local baitPool = map_info[_map].list
+					local randomIdx = math.random(#disguiseList)
+					local _value = disguiseList[randomIdx]
 
 					ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : bait_detail_info : player = "..player.." | ptr = "..bait_ptr.." | bait = "..bait.." value = ".._value)
-					ret = ScriptLib.CreateGadgetByParamTable(context, {config_id = bait, pos = pos_table, rot = rot_table, sgv_key = {"SGV_HideAndSeek_Bait_Transfer"}, sgv_value = {_value}})
+					local ret = ScriptLib.CreateGadgetByParamTable(context, {config_id = bait, pos = pos_table, rot = rot_table, sgv_key = {"SGV_HideAndSeek_Bait_Transfer"}, sgv_value = {_value}})
 					ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : bait_detail_ret : "..ret)
 
 					-- 【三期新增翻牌】游侠-使用几次隐身诱饵watcher
@@ -887,9 +887,9 @@ function LF_Handle_Skill(context, skill, uid, cid)
 	elseif skill == "HideAndSeek_Skill_Transfer" then
 		--根据地图翻译next
 		--默认地图变身配置
-		-- list = {0,1,2,3}
-		-- _index = ScriptLib.GetHideAndSeekPlayIndex(context)
-		-- _map = 1
+		-- local list = {0,1,2,3}
+		-- local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
+		-- local _map = 1
 		-- _map = ScriptLib.GetHideAndSeekMap(context, _index)
 		-- ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : Get_Map_Info : ".._map)
 		-- for k,v in pairs(map_info) do
@@ -898,20 +898,20 @@ function LF_Handle_Skill(context, skill, uid, cid)
 		-- 		break
 		-- 	end
 		-- end
-		t = ScriptLib.GetGroupTempValue(context, HS_State.TransferCache.name.."_"..uid, {})
+		local t = ScriptLib.GetGroupTempValue(context, HS_State.TransferCache.name.."_"..uid, {})
 		ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : Get_Player_Transform_Info : uid="..uid.." | value = "..t)
 		--先处理transfer初始值带来的问题
-		t_next = 1
+		local t_next = 1
 		if t ~= 0 then
 			for i,v in ipairs(disguiseList) do
 				if t == v then
 					t_next = i + 1
 					if t_next > #disguiseList then
 						t_next = 1
-					end
+					end	
 				end
 			end
-		end
+		end 
 		LF_Set_Player_State_Value(context, uid, HS_State.Visible.name, 0)
 		LF_Set_Player_State_Value(context, uid, HS_State.Transfer.name, disguiseList[t_next])
 		LF_Set_Player_State_Value(context, uid, HS_State.TransferCache.name, disguiseList[t_next])
@@ -927,13 +927,13 @@ function LF_Handle_Skill(context, skill, uid, cid)
 	-- =========================【三期新增】游侠-隐身诱饵-开始===========================
 	elseif skill == "HideAndSeek_Skill_InvisibleBait_Place" then
 		-- 第一步：游侠放置隐身诱饵（用上一次变身的gadget）
-		eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
-		pos = ScriptLib.GetPosByEntityId(context, eid)
-		pos_table = { x = pos.x, y = pos.y, z = pos.z + 0.1 }
-		rot_table = { x = 0, y = 0, z = 0 }
+		local eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
+		local pos = ScriptLib.GetPosByEntityId(context, eid)
+		local pos_table = { x = pos.x, y = pos.y, z = pos.z + 0.1 }
+		local rot_table = { x = 0, y = 0, z = 0 }
 		for i=1,3 do
 			-- 先判断使用技能的玩家是不是被捕方
-			player = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+			local player = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 			if player == 0 then
 				break
 			end
@@ -941,23 +941,23 @@ function LF_Handle_Skill(context, skill, uid, cid)
 			-- 再判断使用技能的玩家是不是未死亡的游侠（逃跑时间段内游侠的playstate == 3，但是也可以放隐身诱饵）
 			if player == uid then
 				if 2 ~= ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..player, {}) then -- todo这里可能要再看下怎么判更好
-					invisible_bait = invisible_bait_list[i]
+					local invisible_bait = invisible_bait_list[i]
 					if ScriptLib.CheckIsInGroup(context, 0, invisible_bait) == true then
 						-- 如果场上存在这个游侠的隐身诱饵，把上一个干掉
 						ScriptLib.KillEntityByConfigId(context, {config_id=invisible_bait, entity_type=EntityType.GADGET})
 					end
 
-					_value = ScriptLib.GetGroupTempValue(context, HS_State.TransferCache.name.."_"..player, {})
+					local _value = ScriptLib.GetGroupTempValue(context, HS_State.TransferCache.name.."_"..player, {})
 					if _value == 0 then
 						--如果玩家未变身,就用此地图的第一个transfer处理
-						_index = ScriptLib.GetHideAndSeekPlayIndex(context)
-						_map = ScriptLib.GetHideAndSeekMap(context, _index)
+						local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
+						local _map = ScriptLib.GetHideAndSeekMap(context, _index)
 						-- _value = map_info[_map].list[1]
 						_value = disguiseList[1]
 					end
-
+				
 					ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : invisible_bait_detail_info : player = "..player.." | ptr = ".._value.." | bait = "..invisible_bait)
-					ret = ScriptLib.CreateGadgetByParamTable(context, {config_id = invisible_bait, pos = pos_table, rot = rot_table, sgv_key = {"SGV_HideAndSeek_InvisibleBait_Transfer"}, sgv_value = {_value}})
+					local ret = ScriptLib.CreateGadgetByParamTable(context, {config_id = invisible_bait, pos = pos_table, rot = rot_table, sgv_key = {"SGV_HideAndSeek_InvisibleBait_Transfer"}, sgv_value = {_value}})
 					ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : invisible_bait_detail_ret : "..ret)
 
 				end
@@ -972,7 +972,7 @@ function LF_Handle_Skill(context, skill, uid, cid)
 		-- 第三步：隐身诱饵周围的游侠不隐身
 		LF_Set_Player_State_Value(context, uid, HS_State.Visible_Bait.name, 0)
 	-- =========================【三期新增】游侠替换技能：隐身诱饵-结束===========================
-
+	
 	-- =========================【三期新增】真的解除隐身-开始===========================
 	elseif skill == "HideAndSeek_Skill_Invisible_Real_Quit" then
 		LF_Set_Player_State_Value(context, uid, HS_State.Visible_Mark.name, 0)
@@ -1007,7 +1007,7 @@ function LF_Set_Player_State_Value(context, uid, key, value)
 			return 0
 		end
 
-		visible_mark_current = ScriptLib.GetGroupTempValue(context, "Visible_Mark"..uid, {})
+		local visible_mark_current = ScriptLib.GetGroupTempValue(context, "Visible_Mark"..uid, {})
 		ScriptLib.SetGroupTempValue(context, "Visible_Mark"..uid, value, {})
 
 		if visible_mark_current == value then
@@ -1017,7 +1017,7 @@ function LF_Set_Player_State_Value(context, uid, key, value)
 			return 0
 		end
 
-		_escape = ScriptLib.GetGroupTempValue(context, "in_escape", {})
+		local _escape = ScriptLib.GetGroupTempValue(context, "in_escape", {})
 		if _escape == 1 then
 			-- 逃跑阶段不计算
 			ScriptLib.PrintContextLog(context, "HideAndSeek_V3_WARNING : uid = "..uid..", trying to calculate exhibition time during escape stage")
@@ -1026,13 +1026,13 @@ function LF_Set_Player_State_Value(context, uid, key, value)
 
 		if value == 1 then
 			-- 开始隐身
-			startTime = ScriptLib.GetServerTime(context)
+			local startTime = ScriptLib.GetServerTime(context)
 			ScriptLib.SetGroupTempValue(context, "VisibleStart"..uid, startTime, {})
 			ScriptLib.PrintContextLog(context, "HideAndSeek_V3_LOG : visible start : uid = "..uid.." | time = "..startTime)
 		else
 			-- 结束隐身
-			endTime = ScriptLib.GetServerTime(context)
-			startTime = ScriptLib.GetGroupTempValue(context, "VisibleStart"..uid, {})
+			local endTime = ScriptLib.GetServerTime(context)
+			local startTime = ScriptLib.GetGroupTempValue(context, "VisibleStart"..uid, {})
 
 			if startTime == 0 then
 				-- 没开始过，不计算
@@ -1040,7 +1040,7 @@ function LF_Set_Player_State_Value(context, uid, key, value)
 				return 0
 			end
 
-			duration = endTime - startTime
+			local duration = endTime - startTime
 			ScriptLib.AddExhibitionReplaceableData(context, uid, "prey_keep_invisible", duration)
 			ScriptLib.PrintContextLog(context, "HideAndSeek_V3_LOG : uid = "..uid.." | visible start time = "..startTime.." | end time = "..endTime.." | duration = "..duration)
 
@@ -1050,14 +1050,14 @@ end
 
 function LF_Notify_Player_Visible(context)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : Modify_On_Map")
-	list = {}
+	local list = {}
 	for i=1,3 do
-		uid = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
+		local uid = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 		if ScriptLib.GetGroupTempValue(context, HS_State.OnMap.name.."_"..uid, {}) == 1 then
 			table.insert(list, uid)
 		end
 	end
-	_gallery = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local _gallery = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG [b1315327]将玩家显示在地图上，list数量："..#list)
 	ScriptLib.UpdatePlayerGalleryScore(context, _gallery, {["update_type"]="updateVisibleUidList", ["uid_list"] = list})
 	for i,v in ipairs(list) do
@@ -1072,7 +1072,7 @@ end
 
 function LF_Notify_Skill_Info(context, skill, uid_1, uid_2)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : LF_Notify_Skill_Info : skill -> "..skill)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	if skill == "HideAndSeek_Skill_UltraMark" then
 		ScriptLib.AssignPlayerShowTemplateReminder(context, 124, {param_vec={skill_info[skill].duration},param_uid_vec={uid_1,uid_2},uid_vec=uid_list})
 	elseif skill == "HideAndSeek_Skill_GlobalSight" then
@@ -1084,18 +1084,18 @@ function LF_Notify_Skill_Info(context, skill, uid_1, uid_2)
 	elseif skill == "HideAndSeek_Hunter_Rampage" then
 		ScriptLib.AssignPlayerUidOpNotify(context, {param_index = 13,param_list={},param_uid_list={uid_1},duration=3,target_uid_list=uid_list})
 	elseif skill == "HideAndSeek_Skill_Get_Energy" then
-		notify_id = 15
+		local notify_id = 15
 		if uid_1 == ScriptLib.GetGroupTempValue(context, "hunter", {}) then
 			notify_id = 14
 		end
-		ScriptLib.AssignPlayerUidOpNotify(context, {param_index = notify_id,param_list={},param_uid_list={uid_1},duration=3,target_uid_list=uid_list})
+		ScriptLib.AssignPlayerUidOpNotify(context, {param_index = notify_id,param_list={},param_uid_list={uid_1},duration=3,target_uid_list=uid_list})	
 	end
 end
 
 function LF_Set_Prey_Die(context, uid)
 	ScriptLib.PrintContextLog(context,"## HideAndSeek_V3_LOG LF_Set_Prey_Die")
-	hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
-	_gallery = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
+	local _gallery = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 	ScriptLib.UpdatePlayerGalleryScore(context, _gallery, {["update_type"]="updateCaughtUid", ["caught_uid"]=uid})
 	LF_Set_Player_State_Value(context, uid, HS_State.Transfer.name, 0)
 	LF_Set_Player_State_Value(context, uid, HS_State.Visible.name, 0)
@@ -1104,8 +1104,8 @@ function LF_Set_Prey_Die(context, uid)
 	LF_Set_Player_State_Value(context, uid, HS_State.OnMap.name, 0)
 	LF_Set_Player_State_Value(context, uid, HS_State.Moveable.name, 0)
 	LF_Set_Player_State_Value(context, uid, HS_State.Play.name, 2)
-	catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
-	prey_sum = ScriptLib.GetGroupTempValue(context, "prey_sum", {})
+	local catch_sum = ScriptLib.GetGroupVariableValue(context, "catch_sum")
+	local prey_sum = ScriptLib.GetGroupTempValue(context, "prey_sum", {})
 	--处理prey死亡的exhibition统计
 	if 1 == ScriptLib.GetGroupTempValue(context, "hunter_catch_by_guide", {}) then
 		--统计：神秘预感后捕获
@@ -1131,26 +1131,26 @@ function LF_Set_Prey_Die(context, uid)
 	end
 	ScriptLib.ChangeGroupVariableValue(context, "catch_sum", 1)
 	--最后执行prey_清档比较安全
-	idx = 0
+	local idx = 0
 	for j = 1,3 do
 		if uid == ScriptLib.GetGroupTempValue(context, "prey_"..j, {}) then
 			idx = j
 			ScriptLib.SetGroupTempValue(context, "prey_"..j, 0, {})
 			break
-		end
+		end	
 	end
 	ScriptLib.StopChallenge(context, idx*math.pow(10,5)+9013, 0)
 end
 -------------------------------------------
 -- 一些通用LF
 function LF_GetTableLength(t)
-    count = 0
+    local count = 0
     for _ in pairs(t) do count = count + 1 end
     return count
 end
 
 function LF_PrintList(context, name, list)
-    emptyStr = name
+    local emptyStr = name
     for k, v in pairs(list) do
         emptyStr = emptyStr..", "..v
     end

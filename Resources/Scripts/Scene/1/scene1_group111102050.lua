@@ -4,9 +4,9 @@ base_info = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-DeathField ={
+local DeathField ={
 	ZoneID = 123,
 	CoreID = 50004,
 	BossID = 50001,

@@ -11,14 +11,14 @@ defs = {
 }
 
 -- DEFS_MISCS
-pools =
+local pools =
 {
     [1] = 329003,
     [2] = 329005,
     [3] = 329004
 }
 
-origin_defs =
+local origin_defs =
 {
     origin_nozzole = 329002,
     origin_pool = pools[1],
@@ -26,7 +26,7 @@ origin_defs =
     origin_time = 20
 }
 
-pool_defs =
+local pool_defs =
 {
     max = 1000,
     overflow_max = 1500,
@@ -35,7 +35,7 @@ pool_defs =
 
 
 --填-1时，说明该池子没有对应的喷口
-nozzoles =
+local nozzoles =
 {
     [pools[1]] = {up_nozzole = 329008, down_nozzole = 329007},
     [pools[2]] = {up_nozzole = -1, down_nozzole = 329006},
@@ -44,7 +44,7 @@ nozzoles =
 
 --填-1时，说明该池子没有对应的喷口
 --填0时，说明该喷口不指向任何下游池子
-pool_connections =
+local pool_connections =
 {
     [pools[1]] = {up_nozzole = 0, down_nozzole = pools[2]},
     [pools[2]] = {up_nozzole = -1, down_nozzole = pools[3]},

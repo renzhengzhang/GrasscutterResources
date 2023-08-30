@@ -100,7 +100,7 @@ suites = {
 -- 触发条件
 function condition_EVENT_SEAL_BATTLE_END_103(context, evt)
 	--获取战斗结果
-	result = evt.param2
+	local result = evt.param2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "SEAL_RESULT", result) then
 
 	return false
@@ -141,7 +141,7 @@ function action_EVENT_SEAL_BATTLE_END_103(context, evt)
 		end
 
 	-- 触发镜头注目，注目位置为坐标（1562，252，-1640），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=1562, y=252, z=-1640}
+		local pos = {x=1562, y=252, z=-1640}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, duration = 2, is_force = true, is_broadcast = false }) then
 					return -1
 				end
@@ -211,7 +211,7 @@ end
 function action_EVENT_SELECT_OPTION_128(context, evt)
 	-- 当option_id为25时，开启封印战斗，战斗区域半径为18，圈内进度每秒增长1，圈外进度每秒衰减5，进度达到100时判定为战斗成功（填0则取默认值100），进度衰减到0后5秒判定为战斗失败
 	    if defs.gadget_id_7 == evt.param2 then
-	        ret = ScriptLib.StartSealBattle(context, 1817, {radius = 18, kill_time = 100, monster_group_id = 133001275, max_progress = 10, battle_type = SealBattleType.KILL_MONSTER})
+	        local ret = ScriptLib.StartSealBattle(context, 1817, {radius = 18, kill_time = 100, monster_group_id = 133001275, max_progress = 10, battle_type = SealBattleType.KILL_MONSTER})
 	        --ScriptLib.PrintLog(context, "StartSealBattle ret: " ..ret)
 	    end
 

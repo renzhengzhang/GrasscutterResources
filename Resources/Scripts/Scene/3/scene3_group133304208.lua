@@ -599,8 +599,8 @@ function action_EVENT_GADGET_CREATE_208047(context, evt)
 
 
 	-- 触发镜头注目，注目位置为坐标{x=-1498.591, y=200.4466, z=2735.619}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1498.591, y=200.4466, z=2735.619}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1498.591, y=200.4466, z=2735.619}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 4,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

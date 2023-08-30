@@ -30,7 +30,7 @@ awardBallGeneratePosition={
 {x=226.620392,y=91,z=211.032684},
 }
 
-custom_level={
+local custom_level={
 [81033]={max_count=9},
 [81012]={max_count=4},
 }

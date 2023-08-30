@@ -94,7 +94,7 @@ function action_EVENT_VARIABLE_CHANGE_88004(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
 
 	ScriptLib.AddExtraGroupSuite(context, 0, 2)
-	ret = ScriptLib.IsInRegion(context, context.owner_uid, 88003)
+	local ret = ScriptLib.IsInRegion(context, context.owner_uid, 88003)
 	if ret == true then
 		ScriptLib.PrintContextLog(context, "ret="..true)
 	end

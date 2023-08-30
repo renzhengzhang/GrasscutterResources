@@ -19,11 +19,11 @@ defs = {
 
 ]]
 
-temp_Variables = {
+local temp_Variables = {
 	{ name = "Start", value = 0, no_refresh = false },
 	{ name = "SET_TRIGGER", value = 0, no_refresh = false },
 }
-temp_Tirgger = {
+local temp_Tirgger = {
 	{event = EventType.EVENT_SELECT_OPTION, source = "", action = "action_EVENT_SELECT_OPTION"},
 	{event = EventType.EVENT_GROUP_LOAD, source = "", action = "action_EVENT_GROUP_LOAD"},
 	{event = EventType.EVENT_GADGET_CREATE, source = "", action = "action_EVENT_GADGET_CREATE"},
@@ -41,7 +41,7 @@ function action_EVENT_GADGET_CREATE(context,evt)
 end
 function action_EVENT_SELECT_OPTION(context,evt)
     ScriptLib.PrintContextLog(context,"## RollerCoaster action_EVENT_SELECT_OPTION")
-    _list = {}
+    local _list = {}
     --配置合法检测
     if defs.speed == nil then
         ScriptLib.PrintContextLog(context,"## RollerCoaster action_EVENT_SELECT_OPTION:[warning]defs.speed == nil")

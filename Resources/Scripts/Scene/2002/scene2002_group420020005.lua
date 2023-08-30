@@ -10,11 +10,11 @@ defs = {
 	PedalCid = 5002,
 	Operator = 5003,
 }
-keyName = "SGV_ScoringShelf_01"
+local keyName = "SGV_ScoringShelf_01"
 
 function EnterField(context, evt)
 	-- 获取ScoreCid的计数
-	countNum = ScriptLib.GetGroupTempValue(context, keyName, {})
+	local countNum = ScriptLib.GetGroupTempValue(context, keyName, {})
 
 	-- 使ScoreCid增加1个计数
 	countNum = countNum + 1

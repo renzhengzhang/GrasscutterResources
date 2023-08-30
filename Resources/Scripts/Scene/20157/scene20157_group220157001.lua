@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-Option_to_Rotation = {
+local Option_to_Rotation = {
         [1001]={
                 [1] = { levelTag = 48, arrayPoint = 1 },
                 [7] = { levelTag = 49, arrayPoint = 2 },
@@ -21,7 +21,7 @@ Option_to_Rotation = {
 }
 
 ------------轴的configID
-AxisList = {
+local AxisList = {
         [1001] = 1011,
         [1002] = 1012,
         [1003] = 1013,
@@ -29,7 +29,7 @@ AxisList = {
 
 
 ------------操作台对应的点阵ID
-ArrayID = {
+local ArrayID = {
         [1001] = 1,
         [1002] = 2,
         [1003] = 3,
@@ -275,9 +275,9 @@ function action_EVENT_SELECT_OPTION_1007(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 220157001, 2)
 
 	-- 锁视角禁移动
-	pos = { x=243.575, y=187.83, z=250.41}
+	local pos = { x=243.575, y=187.83, z=250.41}
 
-	pos_follow = { x=224.658, y=187.252, z=250.407}
+	local pos_follow = { x=224.658, y=187.252, z=250.407}
 
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 8, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0, is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false, screen_x = 0, screen_y = 0, is_set_screenXY = false }) then
 	    ScriptLib.PrintContextLog(context, "@@Lua_warning : active_cameralook_begin")
@@ -329,9 +329,9 @@ function action_EVENT_SELECT_OPTION_1008(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 220157001, 5)
 
 	-- 锁视角禁移动
-	pos = { x=237.764, y=184.13, z=282.625}
+	local pos = { x=237.764, y=184.13, z=282.625}
 
-	pos_follow = { x=255.729, y=180.95, z=282.625}
+	local pos_follow = { x=255.729, y=180.95, z=282.625}
 
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 8, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0, is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false, screen_x = 0, screen_y = 0, is_set_screenXY = false }) then
 	    ScriptLib.PrintContextLog(context, "@@Lua_warning : active_cameralook_begin")
@@ -376,9 +376,9 @@ function action_EVENT_SELECT_OPTION_1009(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 220157001, 6)
 
 	-- 锁视角禁移动
-	pos = { x=171.2, y=186.84, z=282.625}
+	local pos = { x=171.2, y=186.84, z=282.625}
 
-	pos_follow = { x=202.128, y=180.312, z=282.625}
+	local pos_follow = { x=202.128, y=180.312, z=282.625}
 
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 8, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0, is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false, screen_x = 0, screen_y = 0, is_set_screenXY = false }) then
 	    ScriptLib.PrintContextLog(context, "@@Lua_warning : active_cameralook_begin")
@@ -388,7 +388,7 @@ function action_EVENT_SELECT_OPTION_1009(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if ScriptLib.GetGroupVariableValueByGroup(context, "EyeCount", 220157001) ~= 1 then
 	    if 0 ~= ScriptLib.SetPlatformPointArray(context, 1019, 4, {2}, tempParam) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
@@ -438,9 +438,9 @@ function action_EVENT_SELECT_OPTION_1010(context, evt)
 	end
 
 	-- 锁视角禁移动
-	pos = { x=171.2, y=186.84, z=282.625}
+	local pos = { x=171.2, y=186.84, z=282.625}
 
-	pos_follow = { x=202.128, y=180.312, z=282.625}
+	local pos_follow = { x=202.128, y=180.312, z=282.625}
 
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 8, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0, is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false, screen_x = 0, screen_y = 0, is_set_screenXY = false }) then
 	    ScriptLib.PrintContextLog(context, "@@Lua_warning : active_cameralook_begin")
@@ -450,7 +450,7 @@ function action_EVENT_SELECT_OPTION_1010(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if ScriptLib.GetGroupVariableValueByGroup(context, "EyeCount", 220157001) ~= 1 then
 	    if 0 ~= ScriptLib.SetPlatformPointArray(context, 1019, 4, {1}, tempParam) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
@@ -601,9 +601,9 @@ function action_EVENT_SELECT_OPTION_1022(context, evt)
 	end
 
 	-- 锁视角禁移动
-	pos = { x=173.94, y=186.84, z=282.625}
+	local pos = { x=173.94, y=186.84, z=282.625}
 
-	pos_follow = { x=190, y=180, z=282.625}
+	local pos_follow = { x=190, y=180, z=282.625}
 
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0, is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false, screen_x = 0, screen_y = 0, is_set_screenXY = false }) then
 	    ScriptLib.PrintContextLog(context, "@@Lua_warning : active_cameralook_begin")

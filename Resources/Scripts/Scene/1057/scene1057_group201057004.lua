@@ -133,7 +133,7 @@ function action_EVENT_SELECT_OPTION_4003(context, evt)
 
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
-		pos = {x=0, y=-6, z=24}
+		local pos = {x=0, y=-6, z=24}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "sfx_ningguang_coop_door", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1

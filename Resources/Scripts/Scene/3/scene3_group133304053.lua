@@ -15,7 +15,7 @@ defs =
 
 }
 
-play_stage =
+local play_stage =
 {
     [1] =
     {
@@ -74,7 +74,7 @@ play_stage =
 
 }
 
-extra_elements =
+local extra_elements =
 {
     53018,53019,53020,53021,53022,53023,53024
 ,53025,53074,53075,53076,53077,53078,53079,53080,53081

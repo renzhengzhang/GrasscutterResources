@@ -16,13 +16,13 @@ defs ={
 }
 --]]
 
-LanlaluoCommander_Trigger = {
+local LanlaluoCommander_Trigger = {
     { keyWord = "EnterLanlaluoRegion",event = EventType.EVENT_ENTER_REGION, source = "", trigger_count = 0},
     { keyWord = "LeaveLanlaluoRegion",event = EventType.EVENT_LEAVE_REGION, source = "", trigger_count = 0},
 }
 
 function LF_Initialize_LanlaluoCommander()
-    startConfigID = 50030001
+    local startConfigID = 50030001
     for _,v in pairs(LanlaluoCommander_Trigger) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -78,7 +78,7 @@ end
 
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -118,7 +118,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    s = "{"
+    local s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","

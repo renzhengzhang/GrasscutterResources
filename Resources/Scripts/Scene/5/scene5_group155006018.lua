@@ -9,9 +9,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-touchlist = {18009,18010,18011,18012,18013,18014,18015,18016}
+local touchlist = {18009,18010,18011,18012,18013,18014,18015,18016}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -21,7 +21,7 @@ gameplayStateFuncitons =
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 
-		current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+		local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 1) then
 			ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, 18002 )
 
@@ -51,7 +51,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -245,7 +245,7 @@ function condition_EVENT_ENTER_REGION_18007(context, evt)
 	end
 
 	-- 返回渊下宫当前是否为黑夜
-	    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 2) then
 	        return true
 	    else
@@ -258,8 +258,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_18007(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=234.974, y=203.4382, z=-242.7391}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=234.974, y=203.4382, z=-242.7391}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=234.974, y=203.4382, z=-242.7391}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -282,7 +282,7 @@ end
 -- 触发条件
 function condition_EVENT_LEAVE_REGION_18008(context, evt)
 	-- 返回渊下宫当前是否为黑夜
-	    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 2) then
 	        return true
 	    else

@@ -20,7 +20,7 @@ defs = {
 ]]
 --======================================================================================================================
 --Events || Group内EVENT事件,记得初始化和return 0
-CFO_Triggers = {
+local CFO_Triggers = {
 	{ name = "group_load", config_id = 8000101, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
 	{ name = "time_axis_pass", config_id = 8000102, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0 },
 	{ name = "any_gadget_die", config_id = 8000103, event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_any_gadget_die", trigger_count = 0 },
@@ -58,7 +58,7 @@ end
 --检测微粒死亡
 function action_any_gadget_die(context, evt)
 	ScriptLib.PrintContextLog(context, "##[PB_CollectFeatherOrb.lua]:草神羽毛微粒死亡，计数+1")
-	orb_killed_num = ScriptLib.GetGroupTempValue(context, "OrbsCollectNums", {base_info.group_id})
+	local orb_killed_num = ScriptLib.GetGroupTempValue(context, "OrbsCollectNums", {base_info.group_id})
 	ScriptLib.ChangeGroupTempValue(context, "OrbsCollectNums", 1, {base_info.group_id})
 	if orb_killed_num + 1 == defs.orb_nums then
 		ScriptLib.PrintContextLog(context, "##[PB_CollectFeatherOrb.lua]:草神羽毛全部死亡，完成玩法")

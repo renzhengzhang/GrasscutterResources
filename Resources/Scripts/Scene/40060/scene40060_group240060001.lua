@@ -9,7 +9,7 @@ defs = {
         gallery_id = 29032,  --对应gallery的id
         battle_region_id = 1012, --td region的id
         recovergadget_id = 1009,   --恢复gadget的id
-        cleaner_id = 1010,  --gadget（能量球）清理gadget的id
+        cleaner_id = 1010,  --local gadget（能量球）清理gadget的id
         monster_num = 1,  --刷怪总数量
         is_first_group = true   --是否是第一个group
 }

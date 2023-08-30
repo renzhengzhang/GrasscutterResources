@@ -15,14 +15,14 @@ defs = {
 }
 
 -- DEFS_MISCS
-enemy_fungus_born_points=
+local enemy_fungus_born_points=
 {
 	[1]=1005,
 	[2]=1006,
 	[3]=1007,
 	[4]=1008
 }
-partner_fungus_born_points=
+local partner_fungus_born_points=
 {
 	[1]=1001,
 	[2]=1002,
@@ -30,14 +30,14 @@ partner_fungus_born_points=
 	[4]=1004
 }
 
-enemy_fungus_born_points_two=
+local enemy_fungus_born_points_two=
 {
 	[1]=1014,
 	[2]=1015,
 	[3]=1016,
 	[4]=1017
 }
-partner_fungus_born_points_two=
+local partner_fungus_born_points_two=
 {
 	[1]=1018,
 	[2]=1019,
@@ -45,7 +45,7 @@ partner_fungus_born_points_two=
 	[4]=1021
 }
 
-awardball_room_one=
+local awardball_room_one=
 {
 	[1]=1025,
 	[2]=1026,
@@ -53,7 +53,7 @@ awardball_room_one=
 	[4]=1028
 }
 
-awardball_room_two=
+local awardball_room_two=
 {
 	[1]=1029,
 	[2]=1030,
@@ -61,7 +61,7 @@ awardball_room_two=
 	[4]=1032
 }
 
-create_partner_fungus=
+local create_partner_fungus=
 {
 [4008206]={},
 [4008304]={},
@@ -79,7 +79,7 @@ create_partner_fungus=
 }
 }
 
-create_enemy_fungus=
+local create_enemy_fungus=
 {
     [4008206]=
     {
@@ -139,7 +139,7 @@ create_enemy_fungus=
     [4008511]={}
 }
 
-room_two_quests={4008511,4008514}
+local room_two_quests={4008511,4008514}
 
 --================================================================
 --

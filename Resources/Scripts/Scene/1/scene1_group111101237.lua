@@ -9,9 +9,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-EnvControlGadgets = {}
-DayAppearGadgets = {}
-NightAppearGadgets = {237009,237010,237011,237012,237013}
+local EnvControlGadgets = {}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {237009,237010,237011,237012,237013}
 
 SolutionList = {
     {1,2,3,4,5},

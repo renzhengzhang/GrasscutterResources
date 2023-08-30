@@ -4,8 +4,8 @@ base_info = {
 }
 
 -- DEFS_MISCS
-shadowConfigIDList = {82002,82003}
-questID = 7902404
+local shadowConfigIDList = {82002,82003}
+local questID = 7902404
 
 --================================================================
 --

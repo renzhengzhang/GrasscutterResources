@@ -78,7 +78,7 @@ suites = {
 
 -- 触发条件
 function condition_EVENT_USE_WIDGET_TOY_FOX_CAMERA_482008(context, evt)
-	 configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
+	 local configId=ScriptLib.GetGadgetConfigId(context, { gadget_eid =evt.source_eid })
 	if configId==482004 then
 	return true
 	end

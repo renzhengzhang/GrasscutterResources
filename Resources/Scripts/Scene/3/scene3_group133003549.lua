@@ -399,8 +399,8 @@ suites = {
 
 -- 触发操作
 function action_EVENT_GROUP_REFRESH_549075(context, evt)
-	su = ScriptLib.GetGroupVariableValueByGroup(context, "stage_bonus_suite", defs.head_group)
-	st = ScriptLib.GetGroupVariableValueByGroup(context, "stage_counter", defs.head_group)
+	local su = ScriptLib.GetGroupVariableValueByGroup(context, "stage_bonus_suite", defs.head_group)
+	local st = ScriptLib.GetGroupVariableValueByGroup(context, "stage_counter", defs.head_group)
 	for i = 1,#suites[su].monsters do
 		ScriptLib.CreateMonster(context, { config_id = suites[su].monsters[i], delay_time = 0 })
 	end
@@ -410,19 +410,19 @@ function action_EVENT_GROUP_REFRESH_549075(context, evt)
 		return -1
 	end
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1,5))
-	temp_arr1 = {}
-	temp_arr2 = {}
+	local temp_arr1 = {}
+	local temp_arr2 = {}
 	for i=1,#suites[su].gadgets do
 		temp_arr1[i] = suites[su].gadgets[i]
 		temp_arr2[i] = suites[su].gadgets[i]
 	end
 	--configId序列
-	fin_arr1 = {}
+	local fin_arr1 = {}
 	--pos序列
-	fin_arr2 = {}
+	local fin_arr2 = {}
 	for i = 1,defs.stage_sum[st] do
-		j = math.random(1,#temp_arr1)
-		k = math.random(1,#temp_arr2)
+		local j = math.random(1,#temp_arr1)
+		local k = math.random(1,#temp_arr2)
 		fin_arr1[i] = temp_arr1[j]
 		fin_arr2[i] = temp_arr2[k]
 		table.remove(temp_arr1, j)

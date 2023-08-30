@@ -1,5 +1,5 @@
 function OnClientExecuteReq(context, param1, param2, param3)
-	state = ScriptLib.GetGadgetState(context)
+	local state = ScriptLib.GetGadgetState(context)
 	if param1 == 1 then
 		if state == GadgetState.Default then
 			ScriptLib.SetGadgetState(context, GadgetState.Action01)
@@ -20,7 +20,7 @@ function OnClientExecuteReq(context, param1, param2, param3)
 		end
 	end
 
-	cur_state = ScriptLib.GetGadgetState(context)
+	local cur_state = ScriptLib.GetGadgetState(context)
 	--临时发送特殊状态信号
 	--groupLua拦截到此事件时可以做数据清理
 	if param2 == 1 then

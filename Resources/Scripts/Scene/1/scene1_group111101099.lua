@@ -233,7 +233,7 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_99003(context, evt)
 	if evt.param2 == 7 then
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		ScriptLib.SetPlayerGroupVisionType(context, uid_list, {0})
 		ScriptLib.DelWorktopOptionByGroupId(context, 111101099, 99001, 7)
 		ScriptLib.SetWorktopOptionsByGroupId(context, 111101099, 99001, {2905})
@@ -242,7 +242,7 @@ function action_EVENT_SELECT_OPTION_99003(context, evt)
 		ScriptLib.CreateGroupTimerEvent(context, 111101099, "destroy_ballon", 7)
 		ScriptLib.ChangeGroupVariableValue(context, "stage", 1)
 	elseif evt.param2 == 2905 then
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		ScriptLib.SetPlayerGroupVisionType(context, uid_list, {1})
 		ScriptLib.SetWorktopOptionsByGroupId(context, 111101099, 99001, {7})
 	end

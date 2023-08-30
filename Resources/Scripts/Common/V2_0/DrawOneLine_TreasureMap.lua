@@ -3,7 +3,7 @@
 
 ]]--
 
-matrix =
+local matrix = 
 {
 {defs.gadget_11,defs.gadget_12,defs.gadget_13},
 
@@ -14,7 +14,7 @@ matrix =
 
 
 
-extraTriggers={
+local extraTriggers={
 	{config_id = 9000001, name = "GadgetStateChange", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_Gadget_State_Change", trigger_count = 0 },
 	{config_id = 9000002,name = "LEAVE_REGION", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_EVENT_LEAVE_REGION", forbid_guest = false, trigger_count = 0 },
 	{ config_id = 9000003, name = "GADGET_CREATE", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0 },
@@ -29,7 +29,7 @@ function Initialize_Group(triggers, suites)
 		table.insert(triggers, extraTriggers[i])
 		table.insert(suites[init_config.suite].triggers,extraTriggers[i].name)
 	end
-
+	
 	table.insert(variables,{ config_id=50000001,name = "digged", value = 0, no_refresh = true})
 	table.insert(variables,{ config_id=50000002,name = "successed", value = 0, no_refresh = true})
 	table.insert(variables,{ config_id=50000003,name = "challenge_state", value = 0})
@@ -45,13 +45,13 @@ function action_general_reward_taken(context,evt)
 
 	--发一个reminder
 	ScriptLib.ShowReminder(context, 600043)
-
-	targetSolution
+	
+	local targetSolution
 	--向服务器申请获得当前group的解法列（某些情况下可能没走group load，做个保险）
 	targetSolution = ScriptLib.GetBonusTreasureMapSolution(context, defs.group_ID)
 
 	ScriptLib.PrintContextLog(context,"DOL: Target Solution is: ")
-	for i = 1,#targetSolution do
+	for i = 1,#targetSolution do 
 		ScriptLib.PrintContextLog(context,"DOL :"..targetSolution[i])
 	end
 
@@ -71,12 +71,12 @@ function action_group_load(context, evt)
 	ScriptLib.PrintContextLog(context,"DOL: Draw One Line Group Loaded ")
 
 
-	targetSolution
+	local targetSolution
 	--向服务器申请获得当前group的解法列
 	targetSolution = ScriptLib.GetBonusTreasureMapSolution(context, defs.group_ID)
 
 	ScriptLib.PrintContextLog(context,"DOL: Target Solution is: ")
-	for i = 1,#targetSolution do
+	for i = 1,#targetSolution do 
 		ScriptLib.PrintContextLog(context,"DOL :"..targetSolution[i])
 	end
 
@@ -90,7 +90,7 @@ function action_group_load(context, evt)
 		ScriptLib.PrintContextLog(context,"DOL: Reloading from the start!! ")
 		--重置一下挑战状态
 		ScriptLib.SetGroupVariableValue(context,"challenge_state",0)
-		ret = ScriptLib.CreateGadget(context, { config_id = defs.gadget_starter })
+		local ret = ScriptLib.CreateGadget(context, { config_id = defs.gadget_starter })
 		ScriptLib.PrintContextLog(context,"DOL: Building the first brick result:  "..ret)
 	end
 	return 0
@@ -102,22 +102,22 @@ function FaildProcess(context,str)
 	ScriptLib.PrintContextLog(context,"Fiald Process Start : "..str)
 	ScriptLib.SetGroupVariableValue(context, "isProcessFaild", 1)
 	ScriptLib.PrintContextLog(context,str.." Set isPrecessFaild = 1")
-	for k,v in pairs(matrix) do
+	for k,v in pairs(matrix) do 
 		for ik,iv in pairs(v) do
 			ScriptLib.PrintContextLog(context,str.." Loop ".. iv)
-			tempGadgeState = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, iv)
+			local tempGadgeState = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, iv) 
 			ScriptLib.PrintContextLog(context,str.." tempGadgetState = ".. tempGadgeState)
-			if tempGadgeState ~= 903 then
-				if iv ~= defs.gadget_starter then
+			if tempGadgeState ~= 903 then 
+				if iv ~= defs.gadget_starter then 
 					ScriptLib.SetGadgetStateByConfigId(context, iv, 102)
-				else
+				else	
 					ScriptLib.SetGadgetStateByConfigId(context, iv, 201)
 				end
 			end
 		end
 	end
 	ScriptLib.StopChallenge(context,233,0)
-	--ScriptLib.SetGroupVariableValue(context, "activeCount", 0)
+	--ScriptLib.SetGroupVariableValue(context, "activeCount", 0)	
 	ScriptLib.PrintContextLog(context,"DOL: Fiald Process End : "..str)
 	--Fiald process End
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_ID, 2)
@@ -136,20 +136,20 @@ function action_gadget_create(context, evt)
 	if evt.param2==70900304 then
 		ScriptLib.PrintContextLog(context," DOL：Build First Brick！")
 		--if ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, evt.param1)==0 then
-		ret = ScriptLib.SetGadgetStateByConfigId(context, evt.param1, 101)
+		local ret = ScriptLib.SetGadgetStateByConfigId(context, evt.param1, 101)
 		ScriptLib.PrintContextLog(context,"DOL: First brick change state result: "..ret)
-		--end
+		--end 
 	end
 	return 0
 end
 
 function action_Gadget_State_Change(context, evt)
-
+	
 	--未开始挑战，并将一个石板踩亮：说明挑战开始，加载剩余的所有石板、并将challenge_state设置为1（挑战进行中）
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state")==0 and evt.param1==202 then
-
+		
 		--生成第一块石板的时候，同时开启挑战
-		ret = ScriptLib.StartChallenge(context,233,defs.challenge,{0,defs.challenge,1})
+		local ret = ScriptLib.StartChallenge(context,233,defs.challenge,{0,defs.challenge,1})
 		ScriptLib.PrintContextLog(context,"DOL: Challenge active result "..ret)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 		ScriptLib.SetGroupVariableValue(context, "challenge_state", 1)
@@ -167,7 +167,7 @@ function action_Gadget_State_Change(context, evt)
 	--如果是成功踩亮，则检测踩到的是否和current_stone邻接
 	--如果是将石板踩灭，确认是否是重复踩了一块石板
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state")==1 then
-		current_stone_id = ScriptLib.GetGroupVariableValue(context, "current_stone")
+		local current_stone_id = ScriptLib.GetGroupVariableValue(context, "current_stone")
 		--ScriptLib.PrintContextLog(context,"DOL:current stone id: "..current_stone_id)
 		if evt.param1==202 then
 			ScriptLib.PrintContextLog(context,"DOL:step on an DEFAULT stone")
@@ -175,8 +175,8 @@ function action_Gadget_State_Change(context, evt)
 		end
 		if evt.param1==201 and evt.param3==202 then
 			CheckTwoGadgetIsAdjacent(context,ScriptLib.GetGroupVariableValue(context, "current_stone"),evt.param2)
-			current_idx=ScriptLib.GetGroupVariableValue(context, "current_stone")
-			config_one=matrix[math.floor(current_idx/10)][current_idx%10]
+			local current_idx=ScriptLib.GetGroupVariableValue(context, "current_stone")
+			local config_one=matrix[math.floor(current_idx/10)][current_idx%10]
 			if config_one==evt.param2 then
 				ScriptLib.PrintContextLog(context,"DOL:step on the SAME stone")
 				--ScriptLib.SetGadgetStateByConfigId(context, evt.param2, 202)
@@ -201,17 +201,17 @@ end
 --检测玩法是否成功
 function CheckIsSuccess(context)
 	--用到的时候再找服务端要，防止服务器清数据
-	targetSolution = ScriptLib.GetBonusTreasureMapSolution(context, defs.group_ID)
+	local targetSolution = ScriptLib.GetBonusTreasureMapSolution(context, defs.group_ID)
 	--校验一下是否拿到数据，如果没拿到直接返回失败
 	if (#targetSolution == 0) then
 		return 0
 	end
-	score=0
-	state=nil
-	isSuccess = true
+	local score=0
+	local state=nil
+	local isSuccess = true
 	for i=1,#matrix do
 		for j=1,#matrix[i] do
-			state=ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID,matrix[i][j])
+			state=ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID,matrix[i][j]) 
 			--石板激活，但目标解法不为1，说明该次判定失败，直接返回失败
 			ScriptLib.PrintContextLog(context,"DOL : Brick ["..i..","..j.."] is "..state-201)
 			ScriptLib.PrintContextLog(context,"DOL : target index is "..(i-1)*#matrix+j)
@@ -240,8 +240,8 @@ function CheckIsSuccess(context)
 end
 --检测两个方块是否是相邻方块
 function CheckTwoGadgetIsAdjacent(context,current_idx,config_two)
-	x=math.floor(current_idx/10)
-	y=current_idx%10
+	local x=math.floor(current_idx/10)
+	local y=current_idx%10
 	if matrix[x][y]==config_two then
 		return 0
 	end

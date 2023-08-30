@@ -156,15 +156,15 @@ end
 function action_EVENT_SELECT_OPTION_14005(context, evt)
 	ScriptLib.CreateGadget(context, { config_id = 14001 })
 
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	ScriptLib.SetPlatformPointArray(context, 14001, 64, {2}, tempParam)
 
 
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	ScriptLib.SetPlatformPointArray(context, 14002, 66, {1}, tempParam)
 
 
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	ScriptLib.SetPlatformPointArray(context, 14003, 65, {2}, tempParam)
 	ScriptLib.ChangeGroupVariableValueByGroup(context, "count", 1, 220134014)
 
@@ -198,15 +198,15 @@ function action_EVENT_SELECT_OPTION_14006(context, evt)
 	 ScriptLib.CreateGadget(context, { config_id = 14002 })
 
 
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	ScriptLib.SetPlatformPointArray(context, 14001, 64, {1}, tempParam)
 
 
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	ScriptLib.SetPlatformPointArray(context, 14002, 66, {3}, tempParam)
 
 
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	 ScriptLib.SetPlatformPointArray(context, 14003, 65, {2}, tempParam)
 
 	ScriptLib.ChangeGroupVariableValueByGroup(context, "count", 1, 220134014)
@@ -239,15 +239,15 @@ function action_EVENT_SELECT_OPTION_14007(context, evt)
 	 ScriptLib.CreateGadget(context, { config_id = 14003 })
 
 
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	 ScriptLib.SetPlatformPointArray(context, 14001, 64, {1}, tempParam)
 
 
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	 ScriptLib.SetPlatformPointArray(context, 14002, 66, {1}, tempParam)
 
 
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	 ScriptLib.SetPlatformPointArray(context, 14003, 65, {1}, tempParam)
 
 	ScriptLib.ChangeGroupVariableValueByGroup(context, "count", 1, 220134014)
@@ -362,7 +362,7 @@ function action_EVENT_SELECT_OPTION_14017(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 14012, 106, {4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -381,8 +381,8 @@ function action_EVENT_SELECT_OPTION_14017(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（393.7027，699.7061，-1525.28），持续时间为5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=393.7027, y=699.7061, z=-1525.28}
-	  pos_follow = {x=2, y=-2, z=16}
+		local pos = {x=393.7027, y=699.7061, z=-1525.28}
+	  local pos_follow = {x=2, y=-2, z=16}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -413,7 +413,7 @@ function action_EVENT_SELECT_OPTION_14018(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 14010, 106, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -422,7 +422,7 @@ function action_EVENT_SELECT_OPTION_14018(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 14012, 106, {1,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -432,8 +432,8 @@ function action_EVENT_SELECT_OPTION_14018(context, evt)
 	    ScriptLib.RemoveExtraGroupSuite(context, 220134014, 3)
 
 	-- 触发镜头注目，注目位置为坐标（393.7027，699.7061，-1525.28），持续时间为5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=393.7027, y=699.7061, z=-1525.28}
-	  pos_follow = {x=2, y=-2, z=16}
+		local pos = {x=393.7027, y=699.7061, z=-1525.28}
+	  local pos_follow = {x=2, y=-2, z=16}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -481,7 +481,7 @@ function action_EVENT_PLATFORM_REACH_POINT_14021(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 14010, 106, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -490,7 +490,7 @@ function action_EVENT_PLATFORM_REACH_POINT_14021(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 14012, 106, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -615,8 +615,8 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_14025(context, evt)
 	-- 触发镜头注目，注目位置为坐标（393，699，-1525），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=393, y=699, z=-1525}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=393, y=699, z=-1525}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

@@ -110,7 +110,7 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_30(context, evt)
-	p_id = 0
+	local p_id = 0
 	if evt.param1 == 66 then
 		p_id = 63
 	elseif evt.param1 == 67 then

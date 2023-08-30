@@ -270,8 +270,8 @@ function action_EVENT_GADGET_STATE_CHANGE_10017(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标{x=-26.76825, y=201.1469, z=2897.719}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-26.76825, y=201.1469, z=2897.719}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-26.76825, y=201.1469, z=2897.719}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -320,8 +320,8 @@ function action_EVENT_GADGET_STATE_CHANGE_10019(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标{x=-8.175295, y=202.243, z=2848.488}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-8.175295, y=202.243, z=2848.488}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-8.175295, y=202.243, z=2848.488}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -408,8 +408,8 @@ function action_EVENT_GADGET_STATE_CHANGE_10024(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标{x=-66.64964, y=215.2524, z=2877.103}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-66.64964, y=215.2524, z=2877.103}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-66.64964, y=215.2524, z=2877.103}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

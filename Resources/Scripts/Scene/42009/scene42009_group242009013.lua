@@ -11,10 +11,10 @@ defs = {
 }
 
 -- DEFS_MISCS
-light_bridge={
+local light_bridge={
 	{operator_id=13001,effect_id=13002,gadget_id={13003}}
 }
-wind_field={
+local wind_field={
 }
 
 --================================================================

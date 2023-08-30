@@ -114,7 +114,7 @@ end
 function condition_EVENT_ENTER_REGION_220004(context, evt)
 	if evt.param1 ~= 220004 then return false end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7302515)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7302515)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

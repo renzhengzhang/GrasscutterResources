@@ -15,9 +15,9 @@ function MovePlatform(context)
 	ScriptLib.PrintLog(context, "Hit platform to move")
 
 
-	index = ScriptLib.GetGroupVariableValue(context,"route")
+	local index = ScriptLib.GetGroupVariableValue(context,"route")
 	ScriptLib.PrintLog(context, "Hit platform to move : get index = ".. index)
-	route = "route_" ..index
+	local route = "route_" ..index
 	ScriptLib.PrintLog(context, "Hit platform to move : get key = ".. route)
 
 	ScriptLib.SetPlatformPointArray(context, 17002, 110100010, routeInfo[route], { route_type = 0 })
@@ -134,7 +134,7 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_17009(context, evt)
 				ScriptLib.StopPlatform(context, 17002)
 				ScriptLib.SetGadgetStateByConfigId(context, 17002, GadgetState.Default)
-				route = ScriptLib.GetGroupVariableValue(context,"route")
+				local route = ScriptLib.GetGroupVariableValue(context,"route")
 				if route == defs.maxRouteCount then
 
 				end

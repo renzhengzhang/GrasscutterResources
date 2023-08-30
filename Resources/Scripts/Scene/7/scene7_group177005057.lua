@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-refreshGroupIDList = {
+local refreshGroupIDList = {
     --循环营地
     177005155,
     177005156,
@@ -14,7 +14,7 @@ refreshGroupIDList = {
     177008081,
 }
 
-refreshEnergyGroupIDList = {
+local refreshEnergyGroupIDList = {
     --研究所 千灯垂绿
     177006079,
     --狭间之街 千灯垂绿

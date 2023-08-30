@@ -10,7 +10,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-pairsgrouplist =
+local pairsgrouplist =
 {
 	{155008201,1}
 }
@@ -41,7 +41,7 @@ pairsgrouplist =
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -67,7 +67,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -230,11 +230,11 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_187003(context, evt)
-		unid_01 = ScriptLib.GetGroupVariableValue(context, "uniqe_id_01")
-		unid_02 = ScriptLib.GetGroupVariableValue(context, "uniqe_id_02")
+		local unid_01 = ScriptLib.GetGroupVariableValue(context, "uniqe_id_01")
+		local unid_02 = ScriptLib.GetGroupVariableValue(context, "uniqe_id_02")
 
-		group_01 = GetGroup(context,unid_01)
-		group_02 = GetGroup(context,unid_02)
+		local group_01 = GetGroup(context,unid_01)
+		local group_02 = GetGroup(context,unid_02)
 
 		if unid_01 == unid_02 then
 			ScriptLib.SetGroupVariableValueByGroup(context, "CallOnFunction", 2 , group_01)

@@ -14,11 +14,11 @@
 
 ------
 
-local_defs = {
+local local_defs = {
     get_windball_option = 7,
 }
 
-state_defs =
+local state_defs =
 {
     lock = 0,
     on_worktop = 201,
@@ -28,20 +28,20 @@ state_defs =
     finish = 901,
 }
 
-windball_state_defs =
+local windball_state_defs =
 {
     on_worktop = 0,
     on_team = 1,
 }
 
-phase_defs =
+local phase_defs =
 {
     lock = 0,
     playing = 1,
     finish = 2,
 }
 
-Tri = {
+local Tri = {
     [1] = { name = "select_option_windball", config_id = 11000001, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option_windball", trigger_count = 0},
     [2] = { name = "group_load_windball", config_id = 11000002, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load_windball", trigger_count = 0},
     [3] = { name = "gadget_state_change_windball", config_id = 11000003, event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change_windball", trigger_count = 0},
@@ -70,7 +70,7 @@ end
 function action_group_load_windball(context,evt)
     ScriptLib.PrintContextLog(context,"## [WindBall]action_group_load_windball：group加载")
 
-    play_phase = ScriptLib.GetGroupVariableValue(context,"play_phase")
+    local play_phase = ScriptLib.GetGroupVariableValue(context,"play_phase")
 
     if play_phase == phase_defs.lock then
         LF_Lock_Play(context)
@@ -88,8 +88,8 @@ end
 
 function action_gadget_state_change_windball(context,evt)
 
-    new_state = evt.param1
-    old_state = evt.param3
+    local new_state = evt.param1
+    local old_state = evt.param3
 
     if new_state == state_defs.on_worktop then
         ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, evt.param2, {local_defs.get_windball_option})
@@ -113,11 +113,11 @@ function action_gadget_state_change_windball(context,evt)
     if old_state == state_defs.ready_enshrine and new_state == state_defs.taken then
         ScriptLib.PrintContextLog(context,"## [WindBall]action_gadget_state_change_windball：风球从台座："..evt.param2.."被取走")
 
-        current_index = LF_Get_Index_From_List(context,windball_worktops,evt.param2)
+        local current_index = LF_Get_Index_From_List(context,windball_worktops,evt.param2)
         if current_index < #windball_worktops then
             ScriptLib.PrintContextLog(context,"## [WindBall]action_gadget_state_change_windball：第"..current_index.."个操作台")
-            next_worktop = windball_worktops[current_index + 1]
-            dir_index = LF_Get_Dir_Index(context,evt.param2,next_worktop)
+            local next_worktop = windball_worktops[current_index + 1]
+            local dir_index = LF_Get_Dir_Index(context,evt.param2,next_worktop)
             ScriptLib.SetEntityServerGlobalValueByConfigId(context,evt.param2,"SGV_Dir_Light_On",dir_index)
 
         end
@@ -138,12 +138,12 @@ function action_select_option_windball(context,evt)
 
     if evt.param2 == local_defs.get_windball_option then
         ScriptLib.PrintContextLog(context,"## [WindBall]action_select_option_windball：玩家选择选项，获取风球")
-        target_worktop = evt.param1
+        local target_worktop = evt.param1
         ScriptLib.SetEntityServerGlobalValueByConfigId(context,target_worktop,"SGV_Message_Release_WindBall",1)
 
-        current_index = LF_Get_Index_From_List(context,windball_worktops,target_worktop)
-        worktop_eid = ScriptLib.GetEntityIdByConfigId(context, windball_worktops[current_index+1])
-        pos = ScriptLib.GetPosByEntityId(context, worktop_eid)
+        local current_index = LF_Get_Index_From_List(context,windball_worktops,target_worktop)
+        local worktop_eid = ScriptLib.GetEntityIdByConfigId(context, windball_worktops[current_index+1])
+        local pos = ScriptLib.GetPosByEntityId(context, worktop_eid)
         ScriptLib.CreateGadgetByConfigIdByPos(context,defs.hint_gadget_id, {x=pos.x,y=pos.y,z=pos.z}, {x=0,y=0,z=0})
     end
     return 0
@@ -187,7 +187,7 @@ function LF_Finish_Play(context)
     for i = 1, #windball_worktops do
         ScriptLib.SetGadgetStateByConfigId(context,windball_worktops[i],state_defs.finish)
     end
-    uid = ScriptLib.GetSceneOwnerUid(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
     LF_Change_Team_SGV(context,uid,"SGV_Message_Remove_Windball",1)
     ScriptLib.CreateGadget(context,{config_id = defs.chest_id})
 end
@@ -196,7 +196,7 @@ end
 
 
 function LF_Set_All_Worktops_State(context)
-    current_worktop = ScriptLib.GetGroupVariableValue(context,"current_worktop")
+    local current_worktop = ScriptLib.GetGroupVariableValue(context,"current_worktop")
 
 
     ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, defs.hint_gadget_id)
@@ -255,22 +255,22 @@ end
 --返回以gadget_1位基准，对准gadget_2时应亮起的角标id
 function LF_Get_Dir_Index(context,gadget_1,gadget_2)
 
-    eid_1 = ScriptLib.GetEntityIdByConfigId(context, gadget_1)
-    pos_1 = ScriptLib.GetPosByEntityId(context, eid_1)
-    rot_1 = ScriptLib.GetRotationByEntityId(context, eid_1)
-    eid_2 = ScriptLib.GetEntityIdByConfigId(context, gadget_2)
-    pos_2 = ScriptLib.GetPosByEntityId(context, eid_2)
+    local eid_1 = ScriptLib.GetEntityIdByConfigId(context, gadget_1)
+    local pos_1 = ScriptLib.GetPosByEntityId(context, eid_1)
+    local rot_1 = ScriptLib.GetRotationByEntityId(context, eid_1)
+    local eid_2 = ScriptLib.GetEntityIdByConfigId(context, gadget_2)
+    local pos_2 = ScriptLib.GetPosByEntityId(context, eid_2)
 
-    world_angle = math.atan(pos_2.z-pos_1.z, pos_2.x-pos_1.x)
-    local_angle = world_angle - rot_1.y
+    local world_angle = math.atan(pos_2.z-pos_1.z, pos_2.x-pos_1.x)
+    local local_angle = world_angle - rot_1.y
 
-    index = math.ceil((local_angle + 45) / 90)
+    local index = math.ceil((local_angle + 45) / 90)
     return index
 
 end
 
 function LF_Change_Team_SGV(context,uid,key,delta)
-    v = ScriptLib.GetTeamServerGlobalValue(context,uid,key)
+    local v = ScriptLib.GetTeamServerGlobalValue(context,uid,key)
     ScriptLib.SetTeamServerGlobalValue(context,uid,key,v+delta)
 end
 
@@ -281,7 +281,7 @@ end
 -----------------------------------------------------------------]]--
 
 function SLC_Remove_Team_Windball(context)
-    uid = ScriptLib.GetSceneOwnerUid(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
     LF_Change_Team_SGV(context,uid,"SGV_Message_Remove_Windball",1)
     return 0
 end

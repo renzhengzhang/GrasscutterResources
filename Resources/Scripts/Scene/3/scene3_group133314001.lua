@@ -12,12 +12,12 @@ defs = {
 
 -- DEFS_MISCS
 --沙虫区域的参数配置
-special_sandworm_region_defs =
+local special_sandworm_region_defs =
 {
     [1005] = {alert_by_tick_normal = {20,50},alert_by_tick_sandstorm = {200,300}, sandworm_params_config_id = 11}
 }
 
-default_sandworm_region_defs =
+local default_sandworm_region_defs =
 {
     alert_by_tick_normal = {20,50},
 	alert_by_tick_sandstorm = {200,300},
@@ -26,7 +26,7 @@ default_sandworm_region_defs =
 
 
 
-MetaRegions =
+local MetaRegions =
 {
     ["SandStorm_InnerRegion"] = {1003},
     ["SandStorm_MiddleRegion"] = {1002},
@@ -38,14 +38,14 @@ MetaRegions =
 
 
 
-weather_region_config =
+local weather_region_config =
 {
     ["SandStorm_InnerRegion"] = {weather = 4205},
     ["SandStorm_MiddleRegion"] = {weather = 4204},
     ["SandStorm_OuterRegion"] = {weather = 4203}
 }
 
-time_configs =
+local time_configs =
 {
     --玩家生涯第一次的沙尘暴启动cd
     ["SANDSTORM_START_CD_AXIS"] =

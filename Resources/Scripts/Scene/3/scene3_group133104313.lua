@@ -248,7 +248,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_313013(context, evt)
 	ScriptLib.ChangeGroupVariableValue(context, "activeCountDummy", 1)
 
-	count = ScriptLib.GetGroupVariableValue(context, "activeCountDummy")
+	local count = ScriptLib.GetGroupVariableValue(context, "activeCountDummy")
 
 	if count == 1 and defs.gadget_trigger_01 ~= evt.param2 then
 	ScriptLib.SetGroupVariableValue(context,"incorrect",1)

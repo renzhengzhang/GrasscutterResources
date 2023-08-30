@@ -224,10 +224,10 @@ end
 -- 触发操作
 function action_EVENT_TIMER_EVENT_1033(context, evt)
 	ScriptLib.CreateGroupTimerEvent(context, 220101001, "checkheight", 10)
-	uid=ScriptLib.GetSceneUidList(context)
+	local uid=ScriptLib.GetSceneUidList(context)
 	for i=1,#uid do
-	entity=ScriptLib.GetAvatarEntityIdByUid(context, uid[i])
-	pos=ScriptLib.GetPosByEntityId(context, entity)
+	local entity=ScriptLib.GetAvatarEntityIdByUid(context, uid[i])
+	local pos=ScriptLib.GetPosByEntityId(context, entity)
 	if pos.y>= -20 then
 	ScriptLib.MovePlayerToPos(context,  {uid_list ={uid[i]}, pos = {x=-0.2, y=-55.7, z=19.2}, radius = 2, rot = {x=0, y=180, z=0}})
 	end
@@ -237,7 +237,7 @@ end
 
 -- 触发条件
 function condition_EVENT_TIMER_EVENT_1035(context, evt)
-	uid=ScriptLib.GetSceneUidList(context)
+	local uid=ScriptLib.GetSceneUidList(context)
 	if ScriptLib.IsPlayerAllAvatarDie(context, uid[1]) then
 	return false
 	end

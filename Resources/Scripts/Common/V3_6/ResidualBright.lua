@@ -18,7 +18,7 @@ defs = {
 --======================================================================================================================
 --Triggers&Init
 
-BrightTriggers={
+local BrightTriggers={
   	{ config_id = 8000001, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
   	{ config_id = 8000002,name = "leave_region", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_reset_region", forbid_guest = false, trigger_count = 0 },
 --	{ config_id = 8000003, name = "gadget_state_change", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0 },

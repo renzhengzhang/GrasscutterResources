@@ -18,7 +18,7 @@ defs = {
     WatchKey = "save",
 }
 
-Phase ={
+local Phase ={
         [1] = {2,3,6},
         [2] = {2,3,4,6},
         [3] = {2,3,4,5,6},

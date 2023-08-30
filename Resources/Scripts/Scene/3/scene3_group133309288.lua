@@ -4,8 +4,8 @@ base_info = {
 }
 
 -- DEFS_MISCS
-glassNum = 3
-HourGlass_ConfigIDList = {288001,288002,288003}
+local glassNum = 3
+local HourGlass_ConfigIDList = {288001,288002,288003}
 
 --================================================================
 --

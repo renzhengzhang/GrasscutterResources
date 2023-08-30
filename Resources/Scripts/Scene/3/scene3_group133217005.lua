@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-wakuraConfig =
+local wakuraConfig =
 {
     -- 布设时请务必保持上下Rotation相同，需要初始值不同的场合请通过GadgetState控制
     -- Index与Rotation无严格要求，务必锚定红色数字1为第一面，按照逆时钟推算Index即可
@@ -22,7 +22,7 @@ wakuraConfig =
     targetFaceNum = {4,4,3}, -- 设计者关注的最终面的数量
     SGVList = {"SGV_Light_01","SGV_Light_02","SGV_Light_03","SGV_Light_04","SGV_Light_05","SGV_Light_06"}
 }
-stateIndex ={
+local stateIndex ={
     [0] = {index = 1,next = 201},
     [201] ={index = 2,next = 202},
     [202] ={index = 3,next = 203},

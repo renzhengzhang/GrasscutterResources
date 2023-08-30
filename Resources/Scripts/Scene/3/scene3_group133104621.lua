@@ -703,7 +703,7 @@ end
 -- 触发操作
 function action_EVENT_GROUP_LOAD_621053(context, evt)
 	for i=1,9 do
-	                ret = ScriptLib.GetGadgetStateByConfigId(context, 133104621, gadgets[i].config_id)
+	                local ret = ScriptLib.GetGadgetStateByConfigId(context, 133104621, gadgets[i].config_id)
 	                if ret ~= -1 then
 	                        return -1
 	                end

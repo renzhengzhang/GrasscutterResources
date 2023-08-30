@@ -116,7 +116,7 @@ end
 
 -- 触发条件
 function condition_EVENT_QUEST_START_1005(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,300007)
+	local curQuestState = ScriptLib.GetHostQuestState(context,300007)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -163,7 +163,7 @@ end
 
 -- 触发条件
 function condition_EVENT_QUEST_START_1007(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,300005)
+	local curQuestState = ScriptLib.GetHostQuestState(context,300005)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

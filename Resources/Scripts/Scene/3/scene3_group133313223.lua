@@ -5,41 +5,41 @@ base_info = {
 
 -- DEFS_MISCS
 --风扇
-fans =
+local fans =
 {
     223001
 }
 
 --沙堆
-sandpiles =
+local sandpiles =
 {
     223002,
     223005
 }
 
 --百叶窗
-shutters =
+local shutters =
 {
 
 }
 
 
 --百叶窗开关
-shutter_switches =
+local shutter_switches =
 {
 
 }
 
 
 --移动点阵
-FanToPointArray =
+local FanToPointArray =
 {
     [fans[1]] = 331300006
 }
 
 
 --风扇与沙堆映射
-FanToSandpile =
+local FanToSandpile =
 {
     [sandpiles[1]] = {fan = fans[1], dir_state = 202, pos = 1},
     [sandpiles[2]] = {fan = fans[1], dir_state = 204, pos = 2},
@@ -49,7 +49,7 @@ FanToSandpile =
 
 
 --百叶窗与开关映射
-SwitchToShutter =
+local SwitchToShutter =
 {
 
 }

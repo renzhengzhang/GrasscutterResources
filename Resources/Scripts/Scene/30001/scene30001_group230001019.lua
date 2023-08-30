@@ -239,7 +239,7 @@ function action_EVENT_ENTER_REGION_8(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001005) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel5", 1)
-	   c_grouplevel5 = ScriptLib.GetGroupVariableValue(context, "grouplevel5")
+	   local c_grouplevel5 = ScriptLib.GetGroupVariableValue(context, "grouplevel5")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001005, refresh_level_revise = c_grouplevel5}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -247,7 +247,7 @@ function action_EVENT_ENTER_REGION_8(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001005) > 0 then
-	c_grouplevel5 = ScriptLib.GetGroupVariableValue(context, "grouplevel5")
+	local c_grouplevel5 = ScriptLib.GetGroupVariableValue(context, "grouplevel5")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001005, refresh_level_revise = c_grouplevel5}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -294,7 +294,7 @@ function action_EVENT_ENTER_REGION_9(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001003) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel3", 1)
-	   c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
+	   local c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001003, refresh_level_revise = c_grouplevel3}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -302,7 +302,7 @@ function action_EVENT_ENTER_REGION_9(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001003) > 0 then
-	c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
+	local c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001003, refresh_level_revise = c_grouplevel3}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -331,7 +331,7 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel7", 1)
-	   c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
+	   local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -339,7 +339,7 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) > 0 then
-	c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
+	local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -351,7 +351,7 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001009) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel9", 1)
-	   c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
+	   local c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001009, refresh_level_revise = c_grouplevel9}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -359,7 +359,7 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001009) > 0 then
-	c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
+	local c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001009, refresh_level_revise = c_grouplevel9}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -371,7 +371,7 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001003) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel3", 1)
-	   c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
+	   local c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001003, refresh_level_revise = c_grouplevel3}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -379,7 +379,7 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001003) > 0 then
-	c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
+	local c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001003, refresh_level_revise = c_grouplevel3}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -426,7 +426,7 @@ function action_EVENT_ENTER_REGION_11(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001003) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel3", 1)
-	   c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
+	   local c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001003, refresh_level_revise = c_grouplevel3}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -434,7 +434,7 @@ function action_EVENT_ENTER_REGION_11(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001003) > 0 then
-	c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
+	local c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001003, refresh_level_revise = c_grouplevel3}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -446,7 +446,7 @@ function action_EVENT_ENTER_REGION_11(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001009) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel9", 1)
-	   c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
+	   local c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001009, refresh_level_revise = c_grouplevel9}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -454,7 +454,7 @@ function action_EVENT_ENTER_REGION_11(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001009) > 0 then
-	c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
+	local c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001009, refresh_level_revise = c_grouplevel9}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -507,7 +507,7 @@ function action_EVENT_ENTER_REGION_12(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel7", 1)
-	   c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
+	   local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -515,7 +515,7 @@ function action_EVENT_ENTER_REGION_12(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) > 0 then
-	c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
+	local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -527,7 +527,7 @@ function action_EVENT_ENTER_REGION_12(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001009) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel9", 1)
-	   c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
+	   local c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001009, refresh_level_revise = c_grouplevel9}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -535,7 +535,7 @@ function action_EVENT_ENTER_REGION_12(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001009) > 0 then
-	c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
+	local c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001009, refresh_level_revise = c_grouplevel9}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -582,7 +582,7 @@ function action_EVENT_ENTER_REGION_13(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001012) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel12", 1)
-	   c_grouplevel12 = ScriptLib.GetGroupVariableValue(context, "grouplevel12")
+	   local c_grouplevel12 = ScriptLib.GetGroupVariableValue(context, "grouplevel12")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001012, refresh_level_revise = c_grouplevel12}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -590,7 +590,7 @@ function action_EVENT_ENTER_REGION_13(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001012) > 0 then
-	c_grouplevel12 = ScriptLib.GetGroupVariableValue(context, "grouplevel12")
+	local c_grouplevel12 = ScriptLib.GetGroupVariableValue(context, "grouplevel12")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001012, refresh_level_revise = c_grouplevel12}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -637,7 +637,7 @@ function action_EVENT_ENTER_REGION_14(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel7", 1)
-	   c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
+	   local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -645,7 +645,7 @@ function action_EVENT_ENTER_REGION_14(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) > 0 then
-	c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
+	local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -657,7 +657,7 @@ function action_EVENT_ENTER_REGION_14(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001014) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel14", 1)
-	   c_grouplevel14 = ScriptLib.GetGroupVariableValue(context, "grouplevel14")
+	   local c_grouplevel14 = ScriptLib.GetGroupVariableValue(context, "grouplevel14")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001014, refresh_level_revise = c_grouplevel14}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -665,7 +665,7 @@ function action_EVENT_ENTER_REGION_14(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001014) > 0 then
-	c_grouplevel14 = ScriptLib.GetGroupVariableValue(context, "grouplevel14")
+	local c_grouplevel14 = ScriptLib.GetGroupVariableValue(context, "grouplevel14")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001014, refresh_level_revise = c_grouplevel14}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -706,7 +706,7 @@ function action_EVENT_ENTER_REGION_15(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel7", 1)
-	   c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
+	   local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -714,7 +714,7 @@ function action_EVENT_ENTER_REGION_15(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) > 0 then
-	c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
+	local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -726,7 +726,7 @@ function action_EVENT_ENTER_REGION_15(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001012) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel12", 1)
-	   c_grouplevel12 = ScriptLib.GetGroupVariableValue(context, "grouplevel12")
+	   local c_grouplevel12 = ScriptLib.GetGroupVariableValue(context, "grouplevel12")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001012, refresh_level_revise = c_grouplevel12}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -734,7 +734,7 @@ function action_EVENT_ENTER_REGION_15(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001012) > 0 then
-	c_grouplevel12 = ScriptLib.GetGroupVariableValue(context, "grouplevel12")
+	local c_grouplevel12 = ScriptLib.GetGroupVariableValue(context, "grouplevel12")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001012, refresh_level_revise = c_grouplevel12}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -781,7 +781,7 @@ function action_EVENT_ENTER_REGION_16(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001001) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel1", 1)
-	   c_grouplevel1 = ScriptLib.GetGroupVariableValue(context, "grouplevel1")
+	   local c_grouplevel1 = ScriptLib.GetGroupVariableValue(context, "grouplevel1")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001001, refresh_level_revise = c_grouplevel1}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -789,7 +789,7 @@ function action_EVENT_ENTER_REGION_16(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001001) > 0 then
-	c_grouplevel1 = ScriptLib.GetGroupVariableValue(context, "grouplevel1")
+	local c_grouplevel1 = ScriptLib.GetGroupVariableValue(context, "grouplevel1")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001001, refresh_level_revise = c_grouplevel1}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -836,7 +836,7 @@ function action_EVENT_ENTER_REGION_17(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001014) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel14", 1)
-	   c_grouplevel14 = ScriptLib.GetGroupVariableValue(context, "grouplevel14")
+	   local c_grouplevel14 = ScriptLib.GetGroupVariableValue(context, "grouplevel14")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001014, refresh_level_revise = c_grouplevel14}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -844,7 +844,7 @@ function action_EVENT_ENTER_REGION_17(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001014) > 0 then
-	c_grouplevel14 = ScriptLib.GetGroupVariableValue(context, "grouplevel14")
+	local c_grouplevel14 = ScriptLib.GetGroupVariableValue(context, "grouplevel14")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001014, refresh_level_revise = c_grouplevel14}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -885,7 +885,7 @@ function action_EVENT_ENTER_REGION_18(context, evt)
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001001) == 0 then
 
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel1", 1)
-	   c_grouplevel1 = ScriptLib.GetGroupVariableValue(context, "grouplevel1")
+	   local c_grouplevel1 = ScriptLib.GetGroupVariableValue(context, "grouplevel1")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001001, refresh_level_revise = c_grouplevel1}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
@@ -893,7 +893,7 @@ function action_EVENT_ENTER_REGION_18(context, evt)
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001001) > 0 then
-	c_grouplevel1 = ScriptLib.GetGroupVariableValue(context, "grouplevel1")
+	local c_grouplevel1 = ScriptLib.GetGroupVariableValue(context, "grouplevel1")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001001, refresh_level_revise = c_grouplevel1}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1

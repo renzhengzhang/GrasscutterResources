@@ -23,7 +23,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-play = {
+local play = {
 
 
 
@@ -346,7 +346,7 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_584006(context, evt)
-				s = play.colors[evt.param1]
+				local s = play.colors[evt.param1]
 				if evt.source_name == "curColor01" then
 					ScriptLib.SetGroupGadgetStateByConfigId(context, 0, defs.water_1, s)
 				elseif evt.source_name	== "curColor02" then
@@ -362,9 +362,9 @@ function action_EVENT_VARIABLE_CHANGE_584006(context, evt)
 				end
 
 				ScriptLib.SetGroupVariableValue(context, "uniqueColorCount", 0)
-				colorIndex = 0
-				colorCompare = 0
-				temp_flag = 0
+				local colorIndex = 0
+				local colorCompare = 0
+				local temp_flag = 0
 				for i=0,4 do
 					temp_flag = 0
 					colorIndex = ScriptLib.GetGroupVariableValue(context, play.curColorList[i])
@@ -401,7 +401,7 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_584007(context, evt)
-	colorName = ""
+	local colorName = ""
 
 			if evt.param1 == defs.gadget_1 then
 				colorName = "curColor01"
@@ -419,8 +419,8 @@ function action_EVENT_SELECT_OPTION_584007(context, evt)
 
 			for i=0,2 do
 				if evt.param2 == play.options[i] then
-					t = 2^i
-					c = ScriptLib.GetGroupVariableValue(context, colorName)
+					local t = 2^i
+					local c = ScriptLib.GetGroupVariableValue(context, colorName)
 					if c%(2*t) >= t then
 						return 0
 					end

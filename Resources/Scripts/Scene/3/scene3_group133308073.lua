@@ -166,7 +166,7 @@ function condition_EVENT_LEAVE_REGION_73006(context, evt)
 		return false
 	end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7305251)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7305251)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

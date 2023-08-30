@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-       defs = {
+local        defs = {
 
                 --本Group中发射器gadget的configID，最多3个,
                 fireMachineList = {
@@ -277,8 +277,8 @@ end
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_3008(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-80, y=41, z=115}，持续时间为2.5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-80, y=41, z=115}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-80, y=41, z=115}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -331,15 +331,15 @@ function action_EVENT_SELECT_OPTION_3013(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 3007, 2, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
 
 	-- 触发镜头注目，注目位置为坐标{x=0, y=0, z=0}，持续时间为2.5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=0, y=0, z=0}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=0, y=0, z=0}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

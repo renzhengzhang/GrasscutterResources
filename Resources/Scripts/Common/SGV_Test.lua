@@ -1,5 +1,5 @@
-gadget_list = {70350099,70350100,70350101,70350102,70350103,70350108,70350111}
-var = {
+local gadget_list = {70350099,70350100,70350101,70350102,70350103,70350108,70350111}
+local var = {
 	[1] = {config_id=50000001,name="SGV_TDLevel",value=1,no_refresh=true},
 	[2] = {config_id=54000002,name="SGV_TDCanDoAttack",value=1,no_refresh=true},
 	[3] = {config_id=54000003,name="SGV_TDUpGrade_Special",value=0,no_refresh=true},
@@ -12,7 +12,7 @@ var = {
 	[10]= {config_id=54000010,name="SGV_TDAttackSpeed_C",value=0,no_refresh=true},
 	[11]= {config_id=54000011,name="SGV_TDAttackMastery",value=0,no_refresh=true}
 }
-tri = {
+local tri = {
 	[1] = {config_id=10000, name="group_load", event=EventType.EVENT_GROUP_LOAD, source="", condition="", action="action_group_load", trigger_count=0},
 	[2] = {config_id=10001, name="group_refresh", event=EventType.EVENT_GROUP_REFRESH, source="", condition="", action="action_group_load", trigger_count=0},
 	[3] = {config_id=10002, name="variable_change", event=EventType.EVENT_VARIABLE_CHANGE, source="", condition="", action="action_variable_change", trigger_count=0}
@@ -23,7 +23,7 @@ function Initialize()
 		if i > #gadget_list then
 			break
 		end
-
+		
 		if points[i] == nil then
 			break
 		end
@@ -47,9 +47,9 @@ end
 
 function action_group_load(context, evt)
 	ScriptLib.PrintLog("--------------- v4 -----------------")
-	SGV_table = {}
+	local SGV_table = {}
 	for i,v in ipairs(var) do
-		str = v.name
+		local str = v.name
 		SGV_table[str] = v.value
 	end
 	for k,v in pairs(SGV_table) do
@@ -62,7 +62,7 @@ function action_group_load(context, evt)
 end
 
 function action_variable_change(context, evt)
-	--value = ScriptLib.GetGroupVariableValue(context, evt.source_name)
+	--local value = ScriptLib.GetGroupVariableValue(context, evt.source_name)
 	for i,v in ipairs(gadget_list) do
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 8000+i, evt.source_name, evt.param1)
 	end

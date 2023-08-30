@@ -7,20 +7,20 @@ base_info = {
 --ByNum配置内容
 
 --fever进度升级节点
-fever_progress_table = {
+local fever_progress_table = {
     0,40,120,270,570,800
 }
 --各等级fever的下降速率
-fever_attenuation = {
+local fever_attenuation = {
     -1,-1,-2,-2,-3
 }
 --地城对应的天气配置
-DungeonWeather = {
+local DungeonWeather = {
     10112,10113,10114,10115
 }
 
 --怪物潮
-monster_tide = {
+local monster_tide = {
     [1] = {2001,2002,2003,2004,2005,2006},
     [2] = {2007,2008,2009},
     [3] = {2010,2011,2012},
@@ -29,7 +29,7 @@ monster_tide = {
 }
 
 --每轮怪物潮刷怪数量
-tide_suite_config = {
+local tide_suite_config = {
         [1] = {min=2,max=2},
         [2] = {min=1,max=3},
         [3] = {min=1,max=3},

@@ -2,17 +2,17 @@
 --[[======================================
 ||	filename:	SandwormBigworldControl
 ||	owner: 		luyao.huang
-||	description:
+||	description:	
 ||	LogName:	SandwormBigworldControl
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 
 
-business_type = "bigworld"
-priority = 1
+local business_type = "bigworld"
+local priority = 1
 
-local_defs =
+local local_defs = 
 {
     sandworm_manager_group = 133314001,
     alert_max_value = 1000,
@@ -22,7 +22,7 @@ local_defs =
 
 
 
-bigworld_Tri = {
+local bigworld_Tri = {
     [1] = { name = "variable_change_bigworld_sandworm", config_id = 100010001, event = EventType.EVENT_VARIABLE_CHANGE, source = "alert_value", condition = "", action = "action_variable_change_bigworld_sandworm", trigger_count = 0},
     [2] = { name = "group_will_unload_bigworld_sandworm", config_id = 100010002, event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload_bigworld_sandworm", trigger_count = 0},
     [3] = { name = "enter_region_bigworld_sandworm", config_id = 100010003, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region_bigworld_sandworm", trigger_count = 0},
@@ -53,7 +53,7 @@ function action_variable_change_bigworld_sandworm(context,evt)
     ScriptLib.PrintContextLog(context,"## [SandwormBigworldControl] variable_change: 当前沙虫警戒值为"..evt.param1)
     if evt.param1 >= local_defs.alert_max_value then
         ScriptLib.PrintContextLog(context,"## [SandwormAleSandwormBigworldControlrtControl] variable_change: 沙虫警戒度超过最大值，召唤沙虫")
-        target_uid = LF_Get_Target_Uid(context)
+        local target_uid = LF_Get_Target_Uid(context)
         --在攻击圈外移动圈内，召唤巡游沙虫
         if ScriptLib.IsInRegion(context,target_uid,defs.move_region) and not ScriptLib.IsInRegion(context,target_uid,defs.attack_region) then
             ScriptLib.PrintContextLog(context,"## [SandwormBigworldControl] variable_change: 位于攻击圈外演出圈内，召唤巡游沙虫")
@@ -71,9 +71,9 @@ end
 
 
 function action_group_will_unload_bigworld_sandworm(context,evt)
-
+    
     ScriptLib.PrintContextLog(context,"## [SandwormBigworldControl] group即将卸载，重置警戒值以及其他参数")
-    LF_Remove_All_Sandworm(context)
+    LF_Remove_All_Sandworm(context)    
     LF_Set_Alert_Lock(context,false)
     LF_Set_Alert_Value(context,0)
     ScriptLib.EndTimeAxis(context,"sandworm_alert_axis")
@@ -86,16 +86,16 @@ function action_enter_region_bigworld_sandworm(context,evt)
 
     --从外侧进入演出圈
     --开一个时间轴
-    if evt.param1 == defs.move_region then
+    if evt.param1 == defs.move_region then 
         ScriptLib.PrintContextLog(context,"## [SandwormBigworldControl] action_enter_region_bigworld_sandworm：从外侧进入演出圈")
         ScriptLib.InitTimeAxis(context,"sandworm_alert_axis",{1},true)
     end
 
     --从演出圈进入攻击圈
     --命令沙虫进行一次进攻
-    if evt.param1 == defs.attack_region then
-        ScriptLib.PrintContextLog(context,"## [SandwormBigworldControl] action_enter_region_bigworld_sandworm：从演出圈进入攻击圈")
-        alert_value = ScriptLib.GetGroupVariableValue(context,"alert_value")
+    if evt.param1 == defs.attack_region then 
+        ScriptLib.PrintContextLog(context,"## [SandwormBigworldControl] action_enter_region_bigworld_sandworm：从演出圈进入攻击圈") 
+        local alert_value = ScriptLib.GetGroupVariableValue(context,"alert_value")
         if alert_value >= local_defs.alert_max_value then
             --清理一下移动沙虫的生命时间轴
             ScriptLib.EndTimeAxis(context,"move_sandworm_life_axis")
@@ -126,14 +126,14 @@ function action_leave_region_bigworld_sandworm(context,evt)
 
 
         --这里其实是在做一个延时X秒的操作，但为了防止时间轴导致的时序问题，全部转化成警戒值的操作
-        sandstorm_state = ScriptLib.GetGroupVariableValueByGroup(context,"sandstorm_state",local_defs.sandworm_manager_group)
-        alert_by_tick = 0
+        local sandstorm_state = ScriptLib.GetGroupVariableValueByGroup(context,"sandstorm_state",local_defs.sandworm_manager_group)
+        local alert_by_tick = 0
         if sandstorm_state == 1 then
             alert_by_tick = math.floor((region_config.alert_by_tick_normal[1] + region_config.alert_by_tick_normal[2])/2)
         else
             alert_by_tick = math.floor((region_config.alert_by_tick_sandstorm[1] + region_config.alert_by_tick_sandstorm[2])/2)
         end
-        target_alert_value = math.ceil(local_defs.alert_max_value - alert_by_tick * local_defs.outof_attack_region_delay)
+        local target_alert_value = math.ceil(local_defs.alert_max_value - alert_by_tick * local_defs.outof_attack_region_delay)
         if target_alert_value <= 0 then
             target_alert_value = 0
         end
@@ -144,16 +144,16 @@ end
 
 function action_time_axis_pass_bigworld_sandworm(context,evt)
     if (evt.source_name == "sandworm_alert_axis") then
-        region_config = LF_Get_Current_Region_Config(context)
+        local region_config = LF_Get_Current_Region_Config(context)
         if region_config ~= nil then
-            alert_by_tick = {}
-            sandstorm_state = ScriptLib.GetGroupVariableValueByGroup(context,"sandstorm_state",local_defs.sandworm_manager_group)
+            local alert_by_tick = {}
+            local sandstorm_state = ScriptLib.GetGroupVariableValueByGroup(context,"sandstorm_state",local_defs.sandworm_manager_group)
             if sandstorm_state == 1 then
                 alert_by_tick = region_config.alert_by_tick_normal
             else
                 alert_by_tick = region_config.alert_by_tick_sandstorm
             end
-            delta = math.random(alert_by_tick[1],alert_by_tick[2])
+            local delta = math.random(alert_by_tick[1],alert_by_tick[2]) 
             LF_Change_Alert_Value(context,delta)
         end
     end
@@ -187,7 +187,7 @@ function LF_On_Create_Sandworm_Fail(context)
 end
 
 --沙虫控制回调：移除沙虫
-function LF_On_Remove_Sandworm(context)
+function LF_On_Remove_Sandworm(context) 
     ScriptLib.PrintContextLog(context,"## [SandwormBigworldControl]LF_On_Create_Sandworm_Success: 沙虫控制回调：清除沙虫")
     ScriptLib.PrintContextLog(context,"## [SandwormBigworldControl]LF_On_Create_Sandworm_Success: 解锁警戒值变化")
     LF_Set_Alert_Lock(context,false)
@@ -235,7 +235,7 @@ function LF_Set_Alert_Lock(context,is_locked)
 end
 
 function LF_Is_Alert_Locked(context)
-    return ScriptLib.GetGroupVariableValue(context,"is_alert_locked") == 1
+    return ScriptLib.GetGroupVariableValue(context,"is_alert_locked") == 1 
 end
 
 
@@ -262,11 +262,11 @@ end
 
 --获取指定位置的随机近邻位置。分布在min_r~max_r为半径的环上
 function LF_Get_Random_Neighbour(context,pos,min_r,max_r)
-    random_r = math.random(min_r,max_r)
-    random_a = math.random()*math.pi*2
-    rpos_x = pos.x + random_r * math.cos(random_a)
-    rpos_z = pos.z + random_r * math.sin(random_a)
-    rpos = {x = rpos_x,y = pos.y,z = rpos_z}
+    local random_r = math.random(min_r,max_r)
+    local random_a = math.random()*math.pi*2
+    local rpos_x = pos.x + random_r * math.cos(random_a)
+    local rpos_z = pos.z + random_r * math.sin(random_a)
+    local rpos = {x = rpos_x,y = pos.y,z = rpos_z}
     return rpos
 end
 

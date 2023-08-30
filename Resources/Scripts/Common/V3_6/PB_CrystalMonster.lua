@@ -3,20 +3,20 @@
 --||   Filename      ||    PB_CrystalMonster
 --||   RelVersion    ||    V3_6
 --||   Owner         ||    chao-jin
---||   Description   ||
+--||   Description   ||    
 --||   LogName       ||    ##[PB_CrystalMonster]
---||   Protection    ||
+--||   Protection    ||    
 --======================================================================================================================
 --Defs & Miscs || 需要LD配置的内容
 --[[
-crystal_to_monster = {
+local crystal_to_monster = {
 	[126002] = 126001,
 	[126003] = 126004,
 }
 ]]
 --======================================================================================================================
 --Events || Group内EVENT事件,记得初始化和return 0
-CM_Triggers ={
+local CM_Triggers ={
 	{ name = "gadget_state_change", config_id = 8000102, event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0 },
 }
 
@@ -30,9 +30,9 @@ end
 
 CM_Initialize()
 
-function action_gadget_state_change(context, evt)
+function action_gadget_state_change(context, evt) 
 	if crystal_to_monster[evt.param2] ~= nil then
-		if evt.param1 == 201 then
+		if evt.param1 == 201 then 
 			ScriptLib.CreateMonster(context, { config_id = crystal_to_monster[evt.param2], delay_time = 0 })
 		end
 	end
@@ -44,3 +44,6 @@ end
 
 --======================================================================================================================
 --LevelFunctions || 自定义函数
+
+
+

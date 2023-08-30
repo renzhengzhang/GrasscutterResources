@@ -155,15 +155,15 @@ function action_EVENT_GROUP_LOAD_433004(context, evt)
 		end
 
 
-	axis
+	local axis
 	axis = defs.duration + defs.interval
 	-- 创建标识为"fan_state"，时间节点为{defs.interval,defs.duration}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fan_state", {defs.duration,axis}, true)
 
 	-- 将在groupid为 133308433 中的 configid为 433001 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201,0}
-	_key = 0
+	local _gadgetStateList = {0,201,0}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -209,7 +209,7 @@ end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_433005(context, evt)
-	axis
+	local axis
 	axis = defs.duration + defs.interval
 	-- 创建标识为"fan_state"，时间节点为{defs.interval,defs.duration}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fan_state", {defs.duration,axis}, true)
@@ -223,8 +223,8 @@ function action_EVENT_TIME_AXIS_PASS_433006(context, evt)
 
 	-- 将在groupid为 133308433 中的 configid为 433001 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201,0}
-	_key = 0
+	local _gadgetStateList = {0,201,0}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")

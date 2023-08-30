@@ -4,17 +4,17 @@ base_info = {
 }
 
 -- DEFS_MISCS
-BossConfigID = {52001,52002}
-bossReviveTime = 20
-ReviveGadgetID = 52003
-OperatorConfigID = 52004
-OptionID = 175
-ChestID = 52011
+local BossConfigID = {52001,52002}
+local bossReviveTime = 20
+local ReviveGadgetID = 52003
+local OperatorConfigID = 52004
+local OptionID = 175
+local ChestID = 52011
 
-ChallengeID = 2005015
-ChallengeDuration = 180
+local ChallengeID = 2005015
+local ChallengeDuration = 180
 
-GroupID = 177008052
+local GroupID = 177008052
 
 --================================================================
 --

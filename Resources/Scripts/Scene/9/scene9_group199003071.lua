@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-  defs = {
+local   defs = {
 
 
 	guide_region =71010 ,

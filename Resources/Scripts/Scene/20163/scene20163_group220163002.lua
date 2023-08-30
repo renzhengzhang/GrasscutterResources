@@ -11,7 +11,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-CameraLookSetting = {
+local CameraLookSetting = {
 
     blend_type = 0,
 

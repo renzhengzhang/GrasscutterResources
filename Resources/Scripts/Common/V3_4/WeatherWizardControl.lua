@@ -13,7 +13,7 @@
 
 
 ------
-local_defs = {
+local local_defs = {
     max_level = 6,
     chain_id = 100005,
     energy_level_1 = 2,
@@ -33,7 +33,7 @@ local_defs = {
     skip_time = 8
 }
 
-wizard_Tri = {
+local wizard_Tri = {
     [10] = { name = "GM_variable_change_wizard", config_id = 35000001, event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_GM_variable_change_wizard", trigger_count = 0},
 }
 
@@ -61,7 +61,7 @@ end
 function action_GM_variable_change_wizard(context,evt)
     if evt.source_name == "GM_Upgrade_Chain_Level" then
         ScriptLib.PrintContextLog(context,"## [ShelterWorktopControl]action_variable_change_shelter：升级天气精灵的等级")
-	    chain_level = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), local_defs.chain_id)
+	    local chain_level = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), local_defs.chain_id)
         ScriptLib.PrintContextLog(context,"## [ShelterWorktopControl]action_variable_change_shelter：当前的等级为"..chain_level)
 	    if chain_level < local_defs.max_level then
 	    	chain_level = chain_level + 1
@@ -76,7 +76,7 @@ function action_GM_variable_change_wizard(context,evt)
 
     if evt.source_name == "GM_Set_Chain_Level" then
         ScriptLib.PrintContextLog(context,"## [ShelterWorktopControl]action_variable_change_shelter：修改天气精灵的等级")
-        target_level = evt.param1
+        local target_level = evt.param1
         if evt.param1 > local_defs.max_level then
             target_level = local_defs.max_level
         end
@@ -128,7 +128,7 @@ end
 
 
 function SLC_Update_Chain_Level(context)
-    chain_level = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), local_defs.chain_id)
+    local chain_level = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), local_defs.chain_id)
     ScriptLib.SetTeamServerGlobalValue(context,ScriptLib.GetSceneOwnerUid(context),"SGV_Weather_Wizard_Chain_Level",chain_level)
     return 0
 end

@@ -40,16 +40,16 @@ defs = {
 	follow_EntityCid = 333004,
 }
 --]]
---Field
+--Local Field
 
-RefData =
+local RefData =
 {
 	father_challenge_id = 2010050,
 	child01_challenge_id = 2010051,
 	child02_challenge_id = 2010052,
 }
 
-StartTriggers =
+local StartTriggers =
 {
 	--gallery停止tirgger
     { config_id = 34000010, name = "Gallery_Stop", event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_gallery_stop", trigger_count = 0 },
@@ -71,7 +71,7 @@ StartTriggers =
     { config_id = 34000090, name = "Enter_Tutorial_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_TutorialRegion", trigger_count = 0 },
 }
 
-EndTriggers =
+local EndTriggers =
 {
 	--跑酷终点trigger
 	{ config_id = 34000091, name = "Enter_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_enter_final", action = "", trigger_count = 0, tag = "666" },
@@ -165,7 +165,7 @@ function action_select_option(context, evt)
 	-- if 0 ~= ScriptLib.StartGallery(context, defs.gallery_id) then
  --        LF_PrintLog(context, "开启Gallery失败")
  --    else
-    	-- nums = LF_GetCoinsNum()
+    	-- local nums = LF_GetCoinsNum()
  --        LF_PrintLog(context, "金币总数-"..nums)
  --        if 0 ~= ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["total_coin_count"] = nums}) then
  --            LF_PrintLog(context, "Gallery传金币数量失败")
@@ -255,7 +255,7 @@ function action_leave_GameplayRegion(context,evt)
         LF_PrintLog(context, "出赛道区域"..evt.param1)
 
 		--如果完全出圈了，触发挑战失败
-		is_in_region = ScriptLib.GetGroupTempValue(context, "is_in_region", {})
+		local is_in_region = ScriptLib.GetGroupTempValue(context, "is_in_region", {})
 		if is_in_region <= 0 then
 			LF_StopGamePlayByReason(context, 4)
 		end
@@ -290,7 +290,7 @@ function LF_CheckIsInTable(context, value, check_table)
 end
 --打印本活动相关Log
 function LF_PrintLog(context, content)
-	log = "## [Activity_SeaLampParkour] TD: "..content
+	local log = "## [Activity_SeaLampParkour] TD: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 --玩法trigger、var初始化
@@ -318,7 +318,7 @@ function LF_InsertTriggers(TempTrigger,suiteIndex)
 end
 --获取关卡配置的金币数目
 function LF_GetCoinsNum()
-	count = 0
+	local count = 0
 
 	for k, v in pairs(gadgets) do
 		if v.gadget_id == defs.gadget_token_id then
@@ -375,8 +375,8 @@ function LF_CameraAction(context)
 
 	if nil ~= gadgets[defs.look_EntityCid] and nil ~= points[defs.follow_EntityCid] then
 
-		pos = gadgets[defs.look_EntityCid].pos
-		camPos = points[defs.follow_EntityCid].pos
+		local pos = gadgets[defs.look_EntityCid].pos
+		local camPos = points[defs.follow_EntityCid].pos
 
 		--触发镜头注目，强制注目形式，不广播其他玩家
 		ScriptLib.BeginCameraSceneLookWithTemplate(context, 1,
@@ -392,7 +392,7 @@ end
 --弹玩法教程templateReminder
 function LF_TryStartTutorial(context)
 
-    ownerUid = context.owner_uid
+    local ownerUid = context.owner_uid
 
     if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,158,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
         LF_PrintLog(context, "弹教程失败")

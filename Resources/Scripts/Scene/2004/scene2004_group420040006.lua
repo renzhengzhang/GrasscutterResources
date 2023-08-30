@@ -4,17 +4,17 @@ base_info = {
 }
 
 -- DEFS_MISCS
-galleryID = 0
-boardID = 6001
-areaID = 6002
-suitID = 2
-areaID_2 = 6012
-suitID_2 = 3
-groupID = 202001006
-intervalTime = {15}
-lowScore = 20
-highScore = 40
-randomSize = {
+local galleryID = 0
+local boardID = 6001
+local areaID = 6002
+local suitID = 2
+local areaID_2 = 6012
+local suitID_2 = 3
+local groupID = 202001006
+local intervalTime = {15}
+local lowScore = 20
+local highScore = 40
+local randomSize = {
         {weight = 10, size = {x= 3, y= 3, z= 3}},
         {weight = 20, size = {x= 5, y= 3, z= 5}},
         {weight = 10, size = {x= 10, y= 5, z= 10}},

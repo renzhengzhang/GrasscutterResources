@@ -19,7 +19,7 @@ route_map={
   --[4]={route_points={1,2,3,4,5,6,7,8,9,10},tags=16},
 }
 
-entrance_point_map={
+local entrance_point_map={
   [1]=19,
   [2]=20,
   --[3]=19,
@@ -27,18 +27,18 @@ entrance_point_map={
 }
 
 
-entrance_map={
+local entrance_map={
   [2]=20,
   [4]=19,
   --[8]=19,
   --[16]=20,
 }
 
-exit_point_list={21,18}
+local exit_point_list={21,18}
 
 
 --对应的刷怪策略
-monster_programme={
+local monster_programme={
   [1]=stage_electricking_twoway,
   [2]=stage_iceking_twoway,
   [3]=stage_rockking_twoway,

@@ -105,7 +105,7 @@ suites = {
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_120005(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7307416)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7307416)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -129,7 +129,7 @@ end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_120006(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7307416)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7307416)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

@@ -2,7 +2,7 @@
 磁力机关 黑盒
 ServerUploadTool Save to [/root/env/data/lua/common/BlackBoxPlay]
 ]]--
-fundations={
+local fundations={
 	[1]=defs.gadget_fundation01,
 	[2]=defs.gadget_fundation02,
 	[3]=defs.gadget_fundation03,
@@ -10,7 +10,7 @@ fundations={
 	[5]=defs.gadget_fundation05,
 }
 
-hands={
+local hands={
 	[1]=defs.gadget_hand01,
 	[2]=defs.gadget_hand02,
 	[3]=defs.gadget_hand03,
@@ -20,7 +20,7 @@ hands={
 
 
 
-extraTriggers={
+local extraTriggers={
   { config_id = 8000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
    { config_id = 8000002, name = "TIME_AXIS", event = EventType.EVENT_TIME_AXIS_PASS, source = "checkSuccess", condition = "", action = "action_time_axis_pass", trigger_count = 0 },
 }
@@ -36,7 +36,7 @@ function LF_Initialize_Group(triggers, suites)
 end
 
 function NormalizationAngles(input)
-	output=input
+	local output=input
 	return math.abs(180-(180-output)%360)
 end
 
@@ -47,8 +47,8 @@ function action_group_load(context, evt)
 	end
 	ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 	--ScriptLib.PrintContextLog(context, "挑战已经完成")
-	pos={}
-	rot={}
+	local pos={}
+	local rot={}
 	for i=1,5 do
 		if hands[i] ~= 0 then
 			ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, hands[i])
@@ -70,9 +70,9 @@ function action_group_load(context, evt)
 end
 
 function action_time_axis_pass(context, evt)
-	count=0
-	y1=0
-	y2=0
+	local count=0
+	local y1=0
+	local y2=0
 	for i=1,5 do
 		if fundations[i]~=0 then
 			y1=ScriptLib.GetRotationByEntityId(context, ScriptLib.GetEntityIdByConfigId(context, fundations[i])).y

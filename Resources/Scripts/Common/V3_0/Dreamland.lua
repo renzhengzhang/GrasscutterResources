@@ -54,7 +54,7 @@ defs = {
 --]]
 
 
-extraTriggers =
+local extraTriggers =
 {
 	{ config_id = 50000001, name = "GADGET_STATE_CHANGE_DOOR", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_GADGET_STATE_CHANGE_DOOR", trigger_count = 0 },
 	{ config_id = 50000002, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_GROUP_LOAD", trigger_count = 0 },
@@ -70,7 +70,7 @@ extraTriggers =
 
 }
 
-extraVariables =
+local extraVariables =
 {
     -- 记录已获得的梦境之灵数量
     { config_id = 50000101, name = "spiritNum", value = 0, no_refresh = false },
@@ -81,29 +81,29 @@ extraVariables =
 
 }
 
-spirits = {}
-spiritGadgetId = 70220104
+local spirits = {}
+local spiritGadgetId = 70220104
 
-worktopField =
+local worktopField =
 {
 	configId = 50000099,
 	gadgetId = 70950145,
 	optionId = 758,
 }
 
-waitEnd = 2
+local waitEnd = 2
 
-reminderId = 1109002
+local reminderId = 1109002
 
-forbidStartRmd = 33010199
+local forbidStartRmd = 33010199
 
 -- 幻梦之门上的隐形操作台，初始不属于任何suite【目前用不上】
--- worktop = { config_id = worktopField.configId, gadget_id = worktopField.gadgetId, pos = gadgets[defs.door].pos, rot = gadgets[defs.door].rot, level = 1, area_id = gadgets[defs.door].area_id, }
+-- local worktop = { config_id = worktopField.configId, gadget_id = worktopField.gadgetId, pos = gadgets[defs.door].pos, rot = gadgets[defs.door].rot, level = 1, area_id = gadgets[defs.door].area_id, }
 
-spiritActiveTime = 10
+local spiritActiveTime = 10
 
 --================================================================
--- Functions
+-- Local Functions
 --================================================================
 function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
 
@@ -138,7 +138,7 @@ function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
 	-- table.insert(suites[3].gadgets, defs.door)
 
 
-    -- add spirits to list
+    -- add spirits to local list
     for i, v in pairs(gadgets) do
         if v.gadget_id == spiritGadgetId then
             table.insert(spirits, i)
@@ -158,9 +158,9 @@ end
 function LF_ChallengeEnd(context, status)
 	ScriptLib.PrintContextLog(context, "## [DreamlandChallenge] LF_ChallengeEnd is called, fail = "..status)
 
-	-- uid_list = ScriptLib.GetSceneUidList(context)
+	-- local uid_list = ScriptLib.GetSceneUidList(context)
 
-	doorState = 0
+	local doorState = 0
 	if status == 0 then
 		-- 成功
 		doorState = 202
@@ -214,7 +214,7 @@ function LF_ChallengeEnd(context, status)
 end
 
 function LF_ResetVariables(context)
-	-- uid_list = ScriptLib.GetSceneUidList(context)
+	-- local uid_list = ScriptLib.GetSceneUidList(context)
 
 	-- 挑战阶段重置
 	ScriptLib.SetGroupVariableValue(context, "collectionFinished", 0)
@@ -227,7 +227,7 @@ function LF_ResetVariables(context)
 	-- 玩家身上计数归零
 	ScriptLib.SetGroupVariableValue(context, "spiritNum", 0)
 	ScriptLib.AddTeamServerGlobalValue(context, context.owner_uid, "SGV_DreamLand_SpiritNum", 0)
-	var = ScriptLib.SetTeamServerGlobalValue(context, context.owner_uid, "SGV_DreamLand_SpiritNum", 0)
+	local var = ScriptLib.SetTeamServerGlobalValue(context, context.owner_uid, "SGV_DreamLand_SpiritNum", 0)
 	ScriptLib.PrintContextLog(context, "## [DreamlandChallenge] SGV_DreamLand_SpiritNum is created and set to 0, var = "..var)
 
 	-- 所有小精灵高亮取消
@@ -257,7 +257,7 @@ end
 function action_GADGET_STATE_CHANGE_DOOR(context, evt)
     ScriptLib.PrintContextLog(context, "## [DreamlandChallenge] gadget "..evt.param2.." changes from state "..evt.param3.."to state "..evt.param1)
 
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 
 	-- 只管门的状态变化
 	if evt.param2 ~= defs.door then
@@ -325,10 +325,10 @@ function action_GROUP_LOAD(context, evt)
     ScriptLib.PrintContextLog(context, "## [DreamlandChallenge] group is loaded")
 
 	-- 保底关闭天气
-	temp = ScriptLib.SetWeatherAreaState(context, defs.weatherId, 0)
+	local temp = ScriptLib.SetWeatherAreaState(context, defs.weatherId, 0)
 	ScriptLib.PrintContextLog(context, "## [DreamlandChallenge] weather "..defs.weatherId.." stops when group is loaded, succeed = "..temp)
 
-	doorStatus = ScriptLib.GetGroupVariableValue(context, "doorStatus")
+	local doorStatus = ScriptLib.GetGroupVariableValue(context, "doorStatus")
 	if doorStatus == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.door, 902)
 	elseif doorStatus == 2 then
@@ -349,7 +349,7 @@ end
 function action_SPIRIT_PICKUP(context, evt)
     ScriptLib.PrintContextLog(context, "## [DreamlandChallenge] A spirit is picked up")
 
-    configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+    local configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 
 	-- 先判是否允许执行
 	if gadgets[configId].gadget_id ~= spiritGadgetId or ScriptLib.CheckIsInGroup(context, 0, configId) == false then
@@ -364,7 +364,7 @@ function action_SPIRIT_PICKUP(context, evt)
 
 	-- Avatar拿到一个新的spirit
 	ScriptLib.ChangeGroupVariableValue(context, "spiritNum", 1)
-	spiritNumCurrent = ScriptLib.GetGroupVariableValue(context, "spiritNum")
+	local spiritNumCurrent = ScriptLib.GetGroupVariableValue(context, "spiritNum")
 	ScriptLib.PrintContextLog(context, "## [DreamlandChallenge] spiritNum = "..spiritNumCurrent)
 
 	-- 把值同步给SGV
@@ -503,7 +503,7 @@ function SLC_Player_Enter_Door(context, evt)
 		return 0
 	end
 
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	if #uid_list > 1 or ScriptLib.CheckIsInMpMode(context) == true then
 		-- 只有非联机状态下才能开挑战
 		-- 如果联机状态+门在902，弹一个reminder
@@ -521,7 +521,7 @@ end
 
 
 function SLC_ClearAvatarTeamThreat(context, evt)
-    -- uid_list = ScriptLib.GetSceneUidList(context)
+    -- local uid_list = ScriptLib.GetSceneUidList(context)
 
     -- 用SGV清除玩家队伍身上的仇恨
     ScriptLib.PrintContextLog(context, "## [DreamlandChallenge] SGV_CAN_CLEAR_THREAT Set: 1")
@@ -533,8 +533,8 @@ end
 
 function SLC_AvatarIsHitInDreamland(context, evt)
     -- 减挑战时间，只要这个function被触发了就肯定减，cd保护在ability上
-	collectionFinished = ScriptLib.GetGroupVariableValue(context, "collectionFinished")
-	challengeId = 0
+	local collectionFinished = ScriptLib.GetGroupVariableValue(context, "collectionFinished")
+	local challengeId = 0
 	if collectionFinished == 0 then
 		challengeId = defs.childChallenge[1]
 	else
@@ -550,7 +550,7 @@ function SLC_AvatarIsHitInDreamland(context, evt)
 end
 
 function SLC_ReturnAvatarTeamThreat(context, evt)
-    -- uid_list = ScriptLib.GetSceneUidList(context)
+    -- local uid_list = ScriptLib.GetSceneUidList(context)
 
     -- 用SGV回归玩家队伍身上的仇恨
 	ScriptLib.SetTeamServerGlobalValue(context, context.owner_uid, "SGV_CAN_CLEAR_THREAT", 0)

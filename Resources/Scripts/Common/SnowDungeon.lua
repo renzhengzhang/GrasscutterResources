@@ -1,4 +1,4 @@
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Challenge_Fail"] = { config_id = 8000001, name = "Challenge_Fail", event= EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail", trigger_count = 0 },
 		["ALL_PLAYER_DIE"] = { config_id = 8000005, name = "ALL_PLAYER_DIE", event= EventType.EVENT_DUNGEON_ALL_AVATAR_DIE, source = "", condition = "", action = "action_all_avatar_die", trigger_count = 0 },
@@ -18,8 +18,8 @@ function RandomArea(context, mode)
 	math.randomseed(ScriptLib.GetServerTime(context))
 
 	--根据模式不同随机一套冷板、暖板数量
-	randomCold = 0
-	randomWarm = 0
+	local randomCold = 0
+	local randomWarm = 0
 
 	if mode == 0 then
 		randomCold = math.random(2,3)
@@ -49,11 +49,11 @@ function RandomArea(context, mode)
 		randomWarm =1
 		ScriptLib.SetGroupTempValue(context, "WarmFloor", 0, {})
 	end
+	
 
+	local  PlatformTable = {11003,11004,11005,11006,11007,11008,11009,11010,11011}
 
-	 PlatformTable = {11003,11004,11005,11006,11007,11008,11009,11010,11011}
-
-	randomIdx= 0
+	local randomIdx= 0
 
 	--初始化所有场
 	for i=1,9 do
@@ -73,11 +73,11 @@ function RandomArea(context, mode)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0, PlatformTable[randomIdx], 201)
 	end
 	return 0
-end
+end	
 
 
 function action_challenge_fail( context,evt )
-	 PlatformTable = {11003,11004,11005,11006,11007,11008,11009,11010,11011}
+	local  PlatformTable = {11003,11004,11005,11006,11007,11008,11009,11010,11011}
 
 	for i,v in ipairs(PlatformTable) do
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0, v, 0)
@@ -88,9 +88,9 @@ function action_challenge_fail( context,evt )
 end
 
 function action_all_avatar_die( context,evt )
-	 PlatformTable = {11003,11004,11005,11006,11007,11008,11009,11010,11011}
+	local  PlatformTable = {11003,11004,11005,11006,11007,11008,11009,11010,11011}
 	-- 所有角色死亡
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	for i,v in ipairs(UidList) do
 		if ScriptLib.IsPlayerAllAvatarDie(context, v) == false then
@@ -101,7 +101,7 @@ function action_all_avatar_die( context,evt )
 	for i,v in ipairs(PlatformTable) do
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0, v, 0)
 	end
-
+	
 	ScriptLib.CancelGroupTimerEvent(context, GroupID, "Snow_Timer")
 	return 0
 end
@@ -115,3 +115,4 @@ function LF_Initialize_Group()
 end
 
 LF_Initialize_Group()
+

@@ -166,8 +166,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_90(context, evt)
-	c_num_1 = ScriptLib.GetGroupVariableValue(context, "count")
-	c_num = c_num_1 + 1
+	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "count")
+	local c_num = c_num_1 + 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "count", c_num) then
 	    return -1
 	end

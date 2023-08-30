@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-vision_def = {
+local vision_def = {
 	[11] = { enter = 77003, leave = 77003 },
 	[12] = { enter = 77004, leave = 77004 },
       [13] = { enter = 77005, leave = 77005 },

@@ -12,8 +12,8 @@ defs = {
 -- DEFS_MISCS
 --正常获取路径
 function GetPath(context)
-	path = {}
-	targetRouteIndex = ScriptLib.GetGroupVariableValue(context, "target_routeIndex")
+	local path = {}
+	local targetRouteIndex = ScriptLib.GetGroupVariableValue(context, "target_routeIndex")
 	if(targetRouteIndex ~= 0) then
 		table.insert(path, targetRouteIndex)
 	end

@@ -4,14 +4,14 @@
 	gadget_prison_list = {1,2,3,4}
 }--]]
 
-play_param = {
+local play_param = {
 	prepare_time = 20,
 	duration = 240,
 	hunter_skill = {9013,9014,9017},
 	prey_skill = {9015,9016,9018}
 }
 
-Tri = {
+local Tri = {
 	{ name = "gadget_create", config_id = 8000001, event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0},
 	{ name = "select_option", config_id = 8000002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
 	{ name = "challenge_success", config_id = 8000003, event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0},
@@ -21,7 +21,7 @@ Tri = {
 	{ name = "enter_region", config_id = 8000007, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0, forbid_guest = false}
 }
 
-Var = {
+local Var = {
  	{  config_id=50000001,name = "catch_sum", value = 0, no_refresh = false}
 }
 
@@ -86,7 +86,7 @@ function action_enter_region(context, evt)
 	if evt.param1 ~= 471011 then
 		return -1
 	end
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	if ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == #uid_list then
 		if 1 == ScriptLib.GetGroupTempValue(context, "in_prepare", {}) then
 			LF_Prepare_Comp_Challenge(context)
@@ -104,7 +104,7 @@ end
 
 function LF_Stop_Hide_And_Seek(context, value)
 	ScriptLib.PrintContextLog(context, "## HS_Log : LF_Stop_Hide_And_Seek")
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetPlayerGroupVisionType(context, {uid_list}, {1})
 	-------
 	if value == 1 then
@@ -123,10 +123,10 @@ end
 function LF_Assign_Character_Card(context)
 	ScriptLib.PrintContextLog(context, "## HS_Log : LF_Assign_Character_Card")
 	--分配hunter人员
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	math.randomseed(ScriptLib.GetServerTime(context))
-	choice = math.random(#uid_list)
-	hunter = uid_list[choice]
+	local choice = math.random(#uid_list)
+	local hunter = uid_list[choice]
 	ScriptLib.PrintContextLog(context, "## HS_Log : hunter_uid = "..hunter)
 	ScriptLib.ShowTemplateReminder(context, 124, {choice})
 	ScriptLib.SetGroupTempValue(context, "hunter", hunter, {})
@@ -149,7 +149,7 @@ end
 
 function LF_Prepare_Comp_Challenge(context)
 	ScriptLib.PrintContextLog(context, "## HS_Log : LF_Prepare_Comp_Challenge")
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetPlayerGroupVisionType(context, {uid_list}, {0})
 	ScriptLib.CreateFatherChallenge(context, 9011, 9011, play_param.prepare_time, {success=10,fail=10})
 	ScriptLib.AttachChildChallenge(context,9011,9019,9019,{defs.group_id,10},{},{success=1,fail=1})
@@ -161,7 +161,7 @@ end
 
 function LF_Start_Comp_Challenge(context)
 	ScriptLib.PrintContextLog(context, "## HS_Log : LF_Start_Comp_Challenge")
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.StopChallenge(context, 9019, 1)
 	ScriptLib.ModifyFatherChallengeProperty(context, 9011, FatherChallengeProperty.DURATION, play_param.duration)
 	ScriptLib.AttachChildChallenge(context, 9011, 9012, 9012, {0,3,9012,#uid_list-1}, {},{success=10,fail=1})
@@ -169,7 +169,7 @@ function LF_Start_Comp_Challenge(context)
 	for i,v in ipairs(defs.gadget_prison_list) do
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, v, 201)
 	end
-	hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
+	local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
 	ScriptLib.PrintContextLog(context, "## hunter_uid = "..hunter)
 	for i,v in ipairs(uid_list) do
 		ScriptLib.PrintContextLog(context, "## compare_uid = "..v)
@@ -198,7 +198,7 @@ function LF_Bake_Random_Scene(context)
 	end
 end
 ---------------------------------------
-skill_info = {
+local skill_info = {
 	[1] = { name = "HideSeek_Skill_DisguiseRevealing", key = "Disguise_Forbid", radius = 3 },
 	[2] = { name = "HideSeek_Skill_Hunting", key = "Play_Forbid", radius = 3 },
 	[3] = { name = "HideSeek_Skill_Struggle_Succ", key = "Disguise_Forbid"}
@@ -206,14 +206,14 @@ skill_info = {
 
 function HideSeek_Skill_DisguiseRevealing(context)
 	ScriptLib.PrintContextLog(context, "## HS_Log : HideSeek_Skill_DisguiseRevealing")
-	skill_name = "HideSeek_Skill_DisguiseRevealing"
+	local skill_name = "HideSeek_Skill_DisguiseRevealing"
 	LF_Handle_Skill(context, skill_name)
 	return 0
 end
 
 function HideSeek_Skill_Hunting(context)
 	ScriptLib.PrintContextLog(context, "## HS_Log : HideSeek_Skill_Hunting")
-	skill_name = "HideSeek_Skill_Hunting"
+	local skill_name = "HideSeek_Skill_Hunting"
 	LF_Handle_Skill(context, skill_name)
 	return 0
 end
@@ -222,19 +222,19 @@ end
 function LF_Handle_Skill(context, skill_name)
 	ScriptLib.PrintContextLog(context, "## HS_Log : LF_Handle_Skill")
 	ScriptLib.PrintContextLog(context, "## HS_Log : uid = "..context.uid)
-	hunter_eid = ScriptLib.GetAvatarEntityIdByUid(context, context.uid)
+	local hunter_eid = ScriptLib.GetAvatarEntityIdByUid(context, context.uid)
 	ScriptLib.PrintContextLog(context, "## HS_Log : ueid ="..hunter_eid)
-	hunter_pos = ScriptLib.GetPosByEntityId(context, hunter_eid)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local hunter_pos = ScriptLib.GetPosByEntityId(context, hunter_eid)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		ScriptLib.PrintContextLog(context, "## HS_Log : get uid_list to "..v)
 		if v ~= context.uid then
-			prey_eid = ScriptLib.GetAvatarEntityIdByUid(context, v)
-			prey_pos = ScriptLib.GetPosByEntityId(context, prey_eid)
-			info_ = LF_Get_Skill_Info(context, skill_name)
+			local prey_eid = ScriptLib.GetAvatarEntityIdByUid(context, v)
+			local prey_pos = ScriptLib.GetPosByEntityId(context, prey_eid)
+			local info_ = LF_Get_Skill_Info(context, skill_name)
 			ScriptLib.PrintContextLog(context, "## HS_Log : radius = "..info_.radius.." | uid = "..v)
 			if LF_Get_Distance(context, hunter_pos, prey_pos) <= info_.radius then
-				value_ = ScriptLib.GetTeamAbilityFloatValue(context, v, info_.key)
+				local value_ = ScriptLib.GetTeamAbilityFloatValue(context, v, info_.key)
 				ScriptLib.PrintContextLog(context, "## HS_Log : value_ = "..value_)
 				if value_ == 1 then
 					ScriptLib.AddTeamEntityGlobalFloatValue(context, {v}, info_.key, -1)
@@ -246,9 +246,9 @@ function LF_Handle_Skill(context, skill_name)
 end
 
 function LF_Get_Distance(context, pos1, pos2)
-	X = pos1.x - pos2.x
-	Y = pos1.y - pos2.y
-	Z = pos1.z - pos2.z
+	local X = pos1.x - pos2.x
+	local Y = pos1.y - pos2.y
+	local Z = pos1.z - pos2.z
 	ScriptLib.PrintContextLog(context, "## HS_Log : X = "..X.." | Y = "..Y.." | Z = "..Z)
 	return math.sqrt(math.pow(X,2)+math.pow(Y,2)+math.pow(Z,2))
 end
@@ -270,8 +270,8 @@ function LF_Handle_Progress(context, skill_name, uid)
 		if 0 == ScriptLib.GetTeamAbilityFloatValue(context, uid, "Play_Forbid") then
 			ScriptLib.AddTeamEntityGlobalFloatValue(context, {uid}, "Play_Forbid", 1)
 			ScriptLib.ChangeGroupVariableValue(context, "catch_sum", 1)
-			uid_list = ScriptLib.GetSceneUidList(context)
-			idx = 0
+			local uid_list = ScriptLib.GetSceneUidList(context)
+			local idx = 0
 			for i,v in ipairs(uid_list) do
 				if uid == v then
 					idx = i

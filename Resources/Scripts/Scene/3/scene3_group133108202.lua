@@ -10,7 +10,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-Raft_Monster_List = {
+local Raft_Monster_List = {
     [202102] = {202054},
     [202038] = {202056},
     [202001] = {202095},

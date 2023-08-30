@@ -4,17 +4,17 @@ base_info = {
 }
 
 -- DEFS_MISCS
-levelUpOption = 0
-chainId = 100004
-maxLevel = 5
-regionID = 499004
+local levelUpOption = 0
+local chainId = 100004
+local maxLevel = 5
+local regionID = 499004
 
-notifyGroupList = {
+local notifyGroupList = {
 133309370
 }
 
-needCS = true
-CS_ID = 108
+local needCS = true
+local CS_ID = 108
 
 --================================================================
 --

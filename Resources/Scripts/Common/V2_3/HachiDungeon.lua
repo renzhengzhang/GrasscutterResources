@@ -12,7 +12,7 @@ defs = {
 
 ]]
 
-extraTriggers={
+local extraTriggers={
 	{ config_id = 8000001, name = "TimeAxis_Event", event= EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0 },
 	{ config_id = 8000002, name = "Battle_Start", event = EventType.EVENT_ANY_MONSTER_LIVE, source = "", condition = "", action = "action_ResetGroupTempVar", trigger_count = 0 },
 	--{ config_id = 8000000, name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
@@ -34,8 +34,8 @@ function SLC_ActiveRandomPoint(context)
 		return 0
 	end
 
-	last_index = ScriptLib.GetGroupTempValue(context, "last_index",{})
-	list = {table.unpack(defs.target_points)}
+	local last_index = ScriptLib.GetGroupTempValue(context, "last_index",{})
+	local list = {table.unpack(defs.target_points)}
 	ScriptLib.PrintContextLog(context, "[HachiDungeon] Get Random Result: ListCount@"..#list.." Last Index@"..last_index)
 	--如果不是第一次随机
 	if last_index ~= 0 then
@@ -62,7 +62,7 @@ end
 
 function action_time_axis_pass(context, evt)
 
-	last_index = ScriptLib.GetGroupTempValue(context, "last_index",{})
+	local last_index = ScriptLib.GetGroupTempValue(context, "last_index",{})
 	ScriptLib.PrintContextLog(context, "[HachiDungeon] Cool down finished, Reset Point State: configID@"..defs.target_points[last_index])
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.target_points[last_index], 0)
 
@@ -84,7 +84,7 @@ end
 --上报运营日志数据 需求单s1286672
 function UpLoadActionLog(context)
 
-	log = {
+	local log = {
 		["buff_num"] = 0,--本次地城挑战获得的buff个数，若没有获得buff则记0
 	}
 

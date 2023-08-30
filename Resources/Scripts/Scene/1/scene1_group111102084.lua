@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-WatcherList ={
+local WatcherList ={
 	[84001] = { pointArray = 110200022,pointArrayList = {1,2,3}},
 	[84002] = { pointArray = 110200022,pointArrayList = {4,5,6}},
 }

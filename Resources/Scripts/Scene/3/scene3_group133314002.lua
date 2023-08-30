@@ -227,7 +227,7 @@ end
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_2013(context, evt)
 	  --在主机玩家脚下召唤一只沙虫，并攻击若干次。可能失败
-	  uid = ScriptLib.GetSceneOwnerUid(context)
+	  local uid = ScriptLib.GetSceneOwnerUid(context)
 	  LF_Summon_Direct_Sandworm_By_Avatar(context,uid,1)
 
 	return 0

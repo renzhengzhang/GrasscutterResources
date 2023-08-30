@@ -15,11 +15,11 @@ defs = {
 
 -- DEFS_MISCS
 function GetNextPath(context)
-	path = {}
-	index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
-	stoppoint = defs.pointInfo[index]
+	local path = {}
+	local index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
+	local stoppoint = defs.pointInfo[index]
 	ScriptLib.PrintLog(context, "stop point : "..stoppoint)
-	currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
+	local currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
 	for i=currentNodeIndex + 1,stoppoint do
 		table.insert(path,i)
 	end
@@ -164,7 +164,7 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_7005(context, evt)
 			if defs.gadget_thunderThelfID ~= evt.param1 then
 				return false
 			end
-			state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
+			local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
 			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
 			if state == 201 then
 				return false

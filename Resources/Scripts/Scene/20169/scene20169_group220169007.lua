@@ -4,15 +4,15 @@ base_info = {
 }
 
 -- DEFS_MISCS
-EnterConfigID = 7009
+local EnterConfigID = 7009
 
-thunderFloorTimer = {7}
+local thunderFloorTimer = {7}
 
-floorList = {7001,7002,7003,7004,7005,7006,7007,7008}
+local floorList = {7001,7002,7003,7004,7005,7006,7007,7008}
 
-randomNumMin = 8
+local randomNumMin = 8
 
-randomNumMax = 8
+local randomNumMax = 8
 
 --================================================================
 --

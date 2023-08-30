@@ -4,9 +4,9 @@ base_info = {
 }
 
 -- DEFS_MISCS
-BossConfigID = {248001,248002}
-bossReviveTime = 30
-ReviveGadgetID = 248003
+local BossConfigID = {248001,248002}
+local bossReviveTime = 30
+local ReviveGadgetID = 248003
 
 --================================================================
 --

@@ -108,7 +108,7 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_655002(context, evt)
-	t_p_value = ScriptLib.GetOpeningDungeonListByRosterId(context, 1)
+	local t_p_value = ScriptLib.GetOpeningDungeonListByRosterId(context, 1)
 
 	if t_p_value[1] == 110 then
 	    if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 655001, GadgetState.GearAction1) then

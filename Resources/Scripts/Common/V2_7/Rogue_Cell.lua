@@ -9,7 +9,7 @@
     defs.center_point = 111,
 	defs.rogue_exit123
 ]]
-Rogue_Cell = {
+local Rogue_Cell = {
     Monster_Pool_Info =
 	{
 		--丘丘人杂鱼+弓箭手+火斧暴徒+雷斧暴徒
@@ -561,15 +561,15 @@ Rogue_Cell = {
 	Operator_BOSS_Gadget_ID = 70800206,					--BOSS版开怪操作台
 }
 
-
-temp_Variables_Rogue_Cell = {
+  
+local temp_Variables_Rogue_Cell = {
 	{  config_id=51110001,name = "gm_EVENT_ROGUE_OPEN_ACCESS", value = 0, no_refresh = false },
 	{  config_id=51110002,name = "gm_EVENT_ROGUE_CREAGE_REPAIR_GADGET", value = 0, no_refresh = false },
 	{  config_id=51110003,name = "gm_EVENT_ROGUE_CREAGE_FIGHT_GADGET", value = 0, no_refresh = false },
 	{  config_id=51110004,name = "gm_EVENT_ROGUE_START_FIGHT", value = 0, no_refresh = false },
 	{  config_id=51110005,name = "gm_poolid", value = 0, no_refresh = false },
 }
-temp_Tirgger_Rogue_Cell = {
+local temp_Tirgger_Rogue_Cell = {
     {event = EventType.EVENT_CHALLENGE_SUCCESS,source = "",condition="",action="action_EVENT_CHALLENGE_SUCCESS",trigger_count=0},
     {event = EventType.EVENT_ROGUE_OPEN_ACCESS,source = "",condition="",action="action_EVENT_ROGUE_OPEN_ACCESS",trigger_count=0},
     {event = EventType.EVENT_ROGUE_CREAGE_REPAIR_GADGET,source = "",condition="",action="action_EVENT_ROGUE_CREAGE_REPAIR_GADGET",trigger_count=0},
@@ -588,12 +588,12 @@ temp_Tirgger_Rogue_Cell = {
 --靠近操作台时显示reminder
 function action_EVENT_ENTER_REGION(context,evt)
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ENTER_REGION:")
-	if ScriptLib.GetGroupTempValue(context,"ShowReminder",{}) == 1 then
+	if ScriptLib.GetGroupTempValue(context,"ShowReminder",{}) == 1 then 
 		ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ENTER_REGION:ShowReminder="..1)
-		_vec = ScriptLib.GetRogueDiaryRoundAndRoom(context)
-		if #_vec == 2 then
-			_stage = _vec[1]
-			_cell = _vec[2]
+		local _vec = ScriptLib.GetRogueDiaryRoundAndRoom(context)
+		if #_vec == 2 then 
+			local _stage = _vec[1]
+			local _cell = _vec[2]
 			ScriptLib.AssignPlayerShowTemplateReminder(context, 167+_stage, {param_vec={_cell},param_uid_vec={},uid_vec={evt.uid}})
 		else
 			ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ENTER_REGION[Warning]:#_vec="..#_vec)
@@ -604,8 +604,8 @@ end
 --怪物挂sgv【已废弃】
 --[[ function action_EVENT_ANY_MONSTER_LIVE(context,evt)
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ANY_MONSTER_LIVE:")
-	_sgv1 = ScriptLib.GetGroupTempValue(context,"sgv1",{})
-	_sgv2 = ScriptLib.GetGroupTempValue(context,"sgv2",{})
+	local _sgv1 = ScriptLib.GetGroupTempValue(context,"sgv1",{})
+	local _sgv2 = ScriptLib.GetGroupTempValue(context,"sgv2",{})
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ANY_MONSTER_LIVE:p1="..evt.param1.."|sgv1=".._sgv1.."|sgv2=".._sgv2)
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, evt.param1, "SGV_Rogue_Affixes_Level", _sgv1)
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, evt.param1, "SGV_Rogue_Is_Hard", _sgv2)
@@ -614,7 +614,7 @@ end ]]
 --初始化打开所有空气墙门
 function action_EVENT_GROUP_LOAD(context,evt)
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_GROUP_LOAD:[version]2022_3_18_004149")
-	_stage = ScriptLib.GetRogueDiaryDungeonStage(context)
+	local _stage = ScriptLib.GetRogueDiaryDungeonStage(context)
 	ScriptLib.SetGroupTempValue(context,"_stage",_stage,{})
 	ScriptLib.CreateGadget(context,{config_id = Rogue_Cell.Operator_Config_ID})
 	ScriptLib.CreateGadget(context,{config_id = Rogue_Cell.Difficulty_Operator_Config_ID})
@@ -632,10 +632,10 @@ end
 function action_EVENT_ROGUE_OPEN_ACCESS(context,evt)
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ROGUE_OPEN_ACCESS:evt.param1 ="..evt.param1)
 	ScriptLib.SetGadgetStateByConfigId(context, Rogue_Cell.Prepare_Operator_Config_ID, 0)
-	if evt.param1 == 1 then
+	if evt.param1 == 1 then 
 		ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ROGUE_OPEN_ACCESS:defs.rogue_exit ="..defs.rogue_exit)
 		ScriptLib.CreateGadget(context,{config_id = defs.rogue_exit})
-	end
+	end	
 	return 0
 end
 --通知创建备战操作台
@@ -647,7 +647,7 @@ end
 --通知创建刷怪操作台
 function action_EVENT_ROGUE_CREAGE_FIGHT_GADGET(context,evt)
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ROGUE_CREAGE_FIGHT_GADGET: evt.param1 = "..evt.param1)
-	_needwait = ScriptLib.GetGroupTempValue(context,"Need_Wait",{})
+	local _needwait = ScriptLib.GetGroupTempValue(context,"Need_Wait",{})
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ROGUE_CREAGE_FIGHT_GADGET: _needwait = ".._needwait)
 	if _needwait ~= 1 then
 		LF_Create_Fight_Operator(context,evt.param1,evt.param2)
@@ -669,7 +669,7 @@ function LF_Create_Fight_Operator(context,p1,p2)
 		ScriptLib.SetGadgetStateByConfigId(context, Rogue_Cell.Difficulty_Operator_Config_ID, 201)
 		ScriptLib.SetGroupTempValue(context,"operator_config_id",Rogue_Cell.Difficulty_Operator_Config_ID,{})
 	else
-		if p2 == 1 then
+		if p2 == 1 then 
 			ScriptLib.PrintContextLog(context,"## Rogue_Cell LF_Create_Fight_Operator:刷BOSS操作台")
 			ScriptLib.SetGadgetStateByConfigId(context, Rogue_Cell.Operator_BOSS_Config_ID, 201)
 			ScriptLib.SetGroupTempValue(context,"operator_config_id",Rogue_Cell.Operator_BOSS_Config_ID,{})
@@ -684,10 +684,10 @@ end
 --通知刷怪
 function action_EVENT_ROGUE_START_FIGHT(context,evt)
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ROGUE_START_FIGHT:p1="..evt.param1.." | p2="..evt.param2.." | p3="..evt.param3)
-    _poolid = evt.param1
+    local _poolid = evt.param1
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ROGUE_START_FIGHT:_poolid=".._poolid)
 	if _poolid == 0 then _poolid = ScriptLib.GetGroupVariableValue(context,"gm_poolid") end
-	_challengeid = evt.param2
+	local _challengeid = evt.param2
 	if _challengeid == 0 then _challengeid = 111196 end
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ROGUE_START_FIGHT:开挑战")
     --开挑战
@@ -700,25 +700,25 @@ function action_EVENT_ROGUE_START_FIGHT(context,evt)
 	end
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_ROGUE_START_FIGHT:刷怪")
 	--查询并记录sgv
-	_sgv1 = 0
-	_sgv2 = 0
+	local _sgv1 = 0
+	local _sgv2 = 0
 	_sgv1 = evt.param3
-	if Rogue_Cell.HP_ChallengeID == evt.param2 then
+	if Rogue_Cell.HP_ChallengeID == evt.param2 then 
 		_sgv2 = 1
 	else
 		_sgv2 = 0
 	end
 	--特判：彩蛋关无sgv
-	if _poolid == 33169 or _poolid == 33170 then
+	if _poolid == 33169 or _poolid == 33170 then 
 		_sgv1 = 0
 		_sgv2 = 0
 	end
     --刷怪
-    if Rogue_Cell.Monster_Pool_Info[_poolid] == nil then
+    if Rogue_Cell.Monster_Pool_Info[_poolid] == nil then 
         ScriptLib.PrintContextLog(context,"## 【error】 Rogue_Cell action_EVENT_SELECT_OPTION:".."找不到资源包配置")
         return 0
     end
-    _info = Rogue_Cell.Monster_Pool_Info[_poolid]
+    local _info = Rogue_Cell.Monster_Pool_Info[_poolid]
     _info.tag = 2   --point点的tag都是2 加下
 	_info.sgv_map = {
 		SGV_Rogue_Affixes_Level = _sgv1,
@@ -726,7 +726,7 @@ function action_EVENT_ROGUE_START_FIGHT(context,evt)
 	}
     ScriptLib.AutoPoolMonsterTide(context,1,base_info.group_id,{_poolid},0,{},{},_info)
     --销毁操作台
-	_cid = ScriptLib.GetGroupTempValue(context,"operator_config_id",{})
+	local _cid = ScriptLib.GetGroupTempValue(context,"operator_config_id",{})
 	ScriptLib.SetGadgetStateByConfigId(context, _cid, 0)
 	ScriptLib.SetGroupTempValue(context,"ShowReminder",0,{})
     return 0
@@ -735,19 +735,19 @@ end
 function action_EVENT_CHALLENGE_FAIL(context,evt)
     ScriptLib.PrintContextLog(context,"## Rogue_Cell action_EVENT_CHALLENGE_FAIL:")
 	--清空怪物潮
-	_poolid = ScriptLib.GetGroupTempValue(context,"poolid",{})
+	local _poolid = ScriptLib.GetGroupTempValue(context,"poolid",{})
 	ScriptLib.ClearPoolMonsterTide(context, base_info.group_id, 1)
 
 	--通知服务器
 	ScriptLib.FinishRogueDiaryDungeonSingleRoom(context,true)
-	_cid = ScriptLib.GetGroupTempValue(context,"operator_config_id",{})
+	local _cid = ScriptLib.GetGroupTempValue(context,"operator_config_id",{})
 	ScriptLib.SetGadgetStateByConfigId(context, _cid, 201)
     return 0
 end
 --已废弃
 function SLC_Monster_Ready(context)
---[[ 	_sgv1 = ScriptLib.GetGroupTempValue(context,"sgv1",{})
-	_sgv2 = ScriptLib.GetGroupTempValue(context,"sgv2",{})
+--[[ 	local _sgv1 = ScriptLib.GetGroupTempValue(context,"sgv1",{})
+	local _sgv2 = ScriptLib.GetGroupTempValue(context,"sgv2",{})
 	ScriptLib.PrintContextLog(context,"## Rogue_Cell SLC_Monster_Ready:p1="..context.source_entity_id.."|sgv1=".._sgv1.."|sgv2=".._sgv2)
 	ScriptLib.SetEntityServerGlobalValueByEntityId(context, context.source_entity_id, "SGV_Rogue_Affixes_Level", _sgv1)
 	ScriptLib.SetEntityServerGlobalValueByEntityId(context, context.source_entity_id, "SGV_Rogue_Is_Hard", _sgv2) ]]
@@ -755,14 +755,14 @@ function SLC_Monster_Ready(context)
 end
 function SLC_StageReady_Rogue(context)
 	ScriptLib.PrintContextLog(context,"## Rogue_Cell SLC_StageReady_Rogue:")
-	_stage = ScriptLib.GetGroupTempValue(context,"_stage",{})
-	if _stage == 1 then
+	local _stage = ScriptLib.GetGroupTempValue(context,"_stage",{})
+	if _stage == 1 then 
 		ScriptLib.AssignPlayerShowTemplateReminder(context,184,{param_uid_vec={},param_vec={},uid_vec={context.uid}})
-	elseif _stage == 2 then
+	elseif _stage == 2 then 
 		ScriptLib.AssignPlayerShowTemplateReminder(context,185,{param_uid_vec={},param_vec={},uid_vec={context.uid}})
-	elseif _stage == 3 then
+	elseif _stage == 3 then 
 		ScriptLib.AssignPlayerShowTemplateReminder(context,186,{param_uid_vec={},param_vec={},uid_vec={context.uid}})
-	elseif _stage == 4 then
+	elseif _stage == 4 then 
 		ScriptLib.AssignPlayerShowTemplateReminder(context,187,{param_uid_vec={},param_vec={},uid_vec={context.uid}})
 	end
 	return 0
@@ -772,7 +772,7 @@ function Initialize()
     --在中心点加操作台(玩法特有)
     for k,v in pairs(points) do
         if v.config_id == Rogue_Cell.Center_Point_Config_ID then
-			_pos = {x =v.pos.x, y =v.pos.y+2, z = v.pos.z}
+			local _pos = {x =v.pos.x, y =v.pos.y+2, z = v.pos.z}
 			--普通开怪操作台
             table.insert(gadgets,{config_id=Rogue_Cell.Operator_Config_ID,gadget_id=Rogue_Cell.Operator_Gadget_ID,pos=_pos,rot=v.rot,level=1})
 			table.insert(suites[init_config.suite].gadgets,Rogue_Cell.Operator_Config_ID)
@@ -790,9 +790,9 @@ function Initialize()
 			table.insert(suites[init_config.suite].regions,30000001)
         end
     end
-
+    
 	--加触发器
-    if temp_Tirgger_Rogue_Cell ~= nil then
+    if temp_Tirgger_Rogue_Cell ~= nil then 
         for k,v in pairs(temp_Tirgger_Rogue_Cell) do
             v.name = "temp_Tirgger_"..k
             v.config_id = 40000000 + k
@@ -801,7 +801,7 @@ function Initialize()
         end
     end
 	--加变量
-    if temp_Variables_Rogue_Cell ~= nil then
+    if temp_Variables_Rogue_Cell ~= nil then 
         for k,v in pairs(temp_Variables_Rogue_Cell) do
             table.insert(variables,v)
         end

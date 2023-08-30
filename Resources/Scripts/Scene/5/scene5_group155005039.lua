@@ -10,11 +10,11 @@ defs = {
 }
 
 -- DEFS_MISCS
-EnvControlGadgets = {39005}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local EnvControlGadgets = {39005}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		DayNight_Gadget_Lock(context,39005)
@@ -36,7 +36,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -54,7 +54,7 @@ end
 function RotateGate(context,gadget_id,pointarray_id,rotvar,rotstep)
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {1}, {route_type = 0, turn_mode = true})
 	if rotvar ~= '' and rotvar ~= nil then
-		temprot = ScriptLib.GetGroupVariableValue(context, rotvar)
+		local temprot = ScriptLib.GetGroupVariableValue(context, rotvar)
 
 		temprot = rotstep + temprot
 
@@ -67,7 +67,7 @@ end
 
 function InitialRotY(context)
 
-	rot
+	local rot
 	rot = math.floor(ScriptLib.GetGroupVariableValue(context,"Rot")/90)
 
 	if rot ~= 0 then
@@ -220,8 +220,8 @@ function action_EVENT_GADGET_STATE_CHANGE_39012(context, evt)
 
 			ScriptLib.PlayCutScene(context, 53, 0)
 
-			--[[pos = {x=200, y= 173, z=-442}
-			pos_follow = {x=0, y=0, z=0}
+			--[[local pos = {x=200, y= 173, z=-442}
+			local pos_follow = {x=0, y=0, z=0}
 				if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 																is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 																is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -252,7 +252,7 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_39013(context, evt)
-			timeaxisname = "controller_"..evt.param1
+			local timeaxisname = "controller_"..evt.param1
 				ScriptLib.InitTimeAxis(context, timeaxisname, {1}, false)
 				ScriptLib.InitTimeAxis(context, "resetisActing", {1}, false)
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.groupid, evt.param1, 7)

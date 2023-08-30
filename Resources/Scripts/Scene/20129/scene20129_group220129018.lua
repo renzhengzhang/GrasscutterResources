@@ -161,9 +161,9 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_18004(context, evt)
 	-- 取变量"time"
-	temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
-	temp_min=ScriptLib.GetGroupVariableValueByGroup(context, "min_time", defs.group_id)
-	temp_max=ScriptLib.GetGroupVariableValueByGroup(context, "max_time", defs.group_id)
+	local temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
+	local temp_min=ScriptLib.GetGroupVariableValueByGroup(context, "min_time", defs.group_id)
+	local temp_max=ScriptLib.GetGroupVariableValueByGroup(context, "max_time", defs.group_id)
 	ScriptLib.SetGroupVariableValueByGroup(context, "last_time", temp_time, defs.group_id)
 
 	if temp_time==5 then
@@ -221,9 +221,9 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_18005(context, evt)
 	-- 取变量"time"
-	temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
-	temp_min=ScriptLib.GetGroupVariableValueByGroup(context, "min_time", defs.group_id)
-	temp_max=ScriptLib.GetGroupVariableValueByGroup(context, "max_time", defs.group_id)
+	local temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
+	local temp_min=ScriptLib.GetGroupVariableValueByGroup(context, "min_time", defs.group_id)
+	local temp_max=ScriptLib.GetGroupVariableValueByGroup(context, "max_time", defs.group_id)
 	ScriptLib.SetGroupVariableValueByGroup(context, "last_time", temp_time, defs.group_id)
 
 	if temp_time==1 then
@@ -260,7 +260,7 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_18006(context, evt)
 	-- 判断是gadgetid 为 508001的移动平台，是否到达了1 的点集中的 1 点
-	temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
+	local temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
 
 	if defs.pointer ~= evt.param1 then
 	  return false
@@ -280,7 +280,7 @@ end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_18006(context, evt)
-	temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
+	local temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
 	--设置大门的state
 
 	if temp_time==1 then
@@ -320,13 +320,13 @@ function action_EVENT_VARIABLE_CHANGE_18007(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
 
 	-- 取变量"time"
-	temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
-	temp_time1=ScriptLib.GetGroupVariableValueByGroup(context, "last_time", defs.group_id)
+	local temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
+	local temp_time1=ScriptLib.GetGroupVariableValueByGroup(context, "last_time", defs.group_id)
 
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, defs.pointer, defs.pointarray, {temp_time1,temp_time}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -336,7 +336,7 @@ function action_EVENT_VARIABLE_CHANGE_18007(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, defs.operation, defs.pointarray_pointer, {temp_time1,temp_time}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -368,7 +368,7 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_18011(context, evt)
-	temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
+	local temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
 	--设置时间通道的变量
 	ScriptLib.SetGroupVariableValueByGroup(context, "time", temp_time, defs.time_group_id)
 
@@ -390,7 +390,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_CREATE_18012(context, evt)
 	-- 取变量"time"
-	temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
+	local temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
 
 
 	--罗盘刻度特效
@@ -412,13 +412,13 @@ end
 -- 触发操作
 function action_EVENT_GADGET_CREATE_18013(context, evt)
 	-- 取变量"time"
-	temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
+	local temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
 
 
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, defs.pointer, defs.pointarray, {temp_time}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -440,7 +440,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_CREATE_18014(context, evt)
 	-- 取变量"time"
-	temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
+	local temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
 
 
 	--罗盘刻度特效
@@ -471,7 +471,7 @@ function action_EVENT_ENTER_REGION_18015(context, evt)
 
 
 	-- 取变量"time"
-	temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
+	local temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", defs.group_id)
 	if temp_time==1 then
 		--创建指针
 		ScriptLib.CreateGadgetByConfigIdByPos(context, defs.pointer, {x=549.1672,y=279.0,z=309.1}, {x=0,y=269.1,z=230.1391})

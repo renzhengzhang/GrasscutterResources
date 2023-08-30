@@ -439,11 +439,11 @@ end
 -- 触发操作
 function action_EVENT_TIMER_EVENT_1111(context, evt)
 	--创建射线墙
-	count = ScriptLib.GetGroupVariableValue(context, "laser_count")
+	local count = ScriptLib.GetGroupVariableValue(context, "laser_count")
 
 	if count <= 3 then
 
-	        suite_id = ScriptLib.GetGroupVariableValue(context, "current_id")
+	        local suite_id = ScriptLib.GetGroupVariableValue(context, "current_id")
 
 	        ScriptLib.AddExtraGroupSuite(context, 250044001, suite_id)
 
@@ -460,7 +460,7 @@ function action_EVENT_TIMER_EVENT_1111(context, evt)
 
 	elseif count > 3 and count <= 6 then
 
-	        suite_id = ScriptLib.GetGroupVariableValue(context, "current_id")
+	        local suite_id = ScriptLib.GetGroupVariableValue(context, "current_id")
 
 	        ScriptLib.AddExtraGroupSuite(context, 250044001, suite_id)
 
@@ -476,7 +476,7 @@ function action_EVENT_TIMER_EVENT_1111(context, evt)
 	        ScriptLib.CreateGroupTimerEvent(context, 250044001, "active_laser", defs.laser_interval2)
 	elseif count <= 10 then
 
-	        suite_id = ScriptLib.GetGroupVariableValue(context, "current_id")
+	        local suite_id = ScriptLib.GetGroupVariableValue(context, "current_id")
 
 	        ScriptLib.AddExtraGroupSuite(context, 250044001, suite_id)
 
@@ -498,7 +498,7 @@ end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_1112(context, evt)
-	laser_config_id = evt.param1
+	local laser_config_id = evt.param1
 
 	ScriptLib.KillEntityByConfigId(context, { group_id = 250044001, config_id = laser_config_id})
 
@@ -524,7 +524,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_1185(context, evt)
-	gadget_list = suites[14].gadgets
+	local gadget_list = suites[14].gadgets
 
 	for i, v in ipairs(gadget_list) do
 	        ScriptLib.SetGroupGadgetStateByConfigId(context, 250044001, v, 201)

@@ -19,25 +19,25 @@ route_map={
   [4]={route_points={1,2,3,4,5,6,7,8,9,10},tags=16},
 }
 
-entrance_point_map={
+local entrance_point_map={
   [1]=18,
   [2]=19,
   [3]=20,
 }
 
 
-entrance_map={
+local entrance_map={
   [2]=18,
   [4]=18,
   [8]=19,
   [16]=20,
 }
 
-exit_point_list={21,22}
+local exit_point_list={21,22}
 
 
 --对应的刷怪策略
-monster_programme={
+local monster_programme={
   [1]=stage_defender_oneway,
   [2]=stage_dragon_oneway,
   [3]=stage_hunter_oneway,

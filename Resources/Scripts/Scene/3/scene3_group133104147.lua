@@ -149,8 +149,8 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_255(context, evt)
-			targetCount = ScriptLib.GetGroupVariableValue(context, "TargetActive")
-			fakeCount = ScriptLib.GetGroupVariableValue(context, "FakeActive")
+			local targetCount = ScriptLib.GetGroupVariableValue(context, "TargetActive")
+			local fakeCount = ScriptLib.GetGroupVariableValue(context, "FakeActive")
 			if targetCount	~= 0 or fakeCount ~=0 then
 				-- 创建id为509的gadget
 				if targetCount + fakeCount >= 3 then

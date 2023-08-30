@@ -246,7 +246,7 @@ end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_410009(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7330501)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7330501)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -286,8 +286,8 @@ function action_EVENT_ENTER_REGION_410010(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标{x=-1547.823, y=59.63065, z=5632.792}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1547.823, y=59.63065, z=5632.792}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1547.823, y=59.63065, z=5632.792}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = true, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

@@ -303,7 +303,7 @@ function action_EVENT_SELECT_OPTION_147005(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 147009, 400100003, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -343,7 +343,7 @@ function action_EVENT_SELECT_OPTION_147006(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 147009, 400100003, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -435,7 +435,7 @@ function action_EVENT_SELECT_OPTION_147025(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 147009, 400100003, {3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -475,7 +475,7 @@ function action_EVENT_SELECT_OPTION_147029(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 147009, 400100003, {4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -610,9 +610,9 @@ end
 -- 触发操作
 function action_EVENT_TIMER_EVENT_147034(context, evt)
 		-- 设置指定gadget的globalvalue
-	  CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144001147, 147018, "LudiSplitter_Active")
+	  local CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144001147, 147018, "LudiSplitter_Active")
 
-	  DeltaValue = math.ceil(1 - CurValue)
+	  local DeltaValue = math.ceil(1 - CurValue)
 
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {147018}, "LudiSplitter_Active", DeltaValue)
 
@@ -1174,9 +1174,9 @@ function action_EVENT_GADGET_STATE_CHANGE_147059(context, evt)
 		end
 
 		-- 设置指定gadget的globalvalue
-	  CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144001147, 147018, "LudiSplitter_Active")
+	  local CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144001147, 147018, "LudiSplitter_Active")
 
-	  DeltaValue = math.ceil(1 - CurValue)
+	  local DeltaValue = math.ceil(1 - CurValue)
 
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {147018}, "LudiSplitter_Active", DeltaValue)
 
@@ -1207,9 +1207,9 @@ function action_EVENT_GADGET_STATE_CHANGE_147060(context, evt)
 		end
 
 		-- 设置指定gadget的globalvalue
-	  CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144001147, 147018, "LudiSplitter_Active")
+	  local CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144001147, 147018, "LudiSplitter_Active")
 
-	  DeltaValue = math.ceil(0 - CurValue)
+	  local DeltaValue = math.ceil(0 - CurValue)
 
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {147018}, "LudiSplitter_Active", DeltaValue)
 
@@ -1260,9 +1260,9 @@ function action_EVENT_GADGET_STATE_CHANGE_147064(context, evt)
 		end
 
 		-- 设置指定gadget的globalvalue
-	  CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144001147, 147018, "LudiSplitter_Active")
+	  local CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144001147, 147018, "LudiSplitter_Active")
 
-	  DeltaValue = math.ceil(0 - CurValue)
+	  local DeltaValue = math.ceil(0 - CurValue)
 
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {147018}, "LudiSplitter_Active", DeltaValue)
 

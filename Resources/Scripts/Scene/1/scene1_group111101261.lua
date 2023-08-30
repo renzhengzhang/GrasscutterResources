@@ -4,10 +4,10 @@ base_info = {
 }
 
 -- DEFS_MISCS
-boardID = 261001
-areaID = 261002
-suitID = 2
-groupID = 111101261
+local boardID = 261001
+local areaID = 261002
+local suitID = 2
+local groupID = 111101261
 
 --================================================================
 --

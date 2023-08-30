@@ -3,14 +3,14 @@
 --score_per_monster_count = 100,    --LD配置
 --score_per_distance = 1,           --LD配置
 --gallery_id = 14001,               --LD配置
-paramTable_temp={
+local paramTable_temp={
     distance = 0,
     monster_count = 0,
     final_score = 0,
     fail_reason = 0,        --[[0无原因 1挑战成功 2气球抵达终点 3主动放弃 4离开区域 5团灭 6离气球太远]]
 }
 
-temp_Variables = {
+local temp_Variables = {
 	{ config_id=50000001,name = "GalleryStart", value = 0, no_refresh = false },
 	{ config_id=50000002,name = "GalleryFinish", value = 0, no_refresh = false },
 	{ config_id=50000003,name = "ADD_Gallery_monster_count", value = 0, no_refresh = false },
@@ -18,7 +18,7 @@ temp_Variables = {
 	{ config_id=50000005,name = "GalleryStart_Success", value = 0, no_refresh = false },
 }
 
-temp_Tirgger = {
+local temp_Tirgger = {
 	{event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_EVENT_VARIABLE_CHANGE",trigger_count = 0},
 	{event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_EVENT_GALLERY_STOP",trigger_count = 0},
 	{event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD",trigger_count = 0},
@@ -44,7 +44,7 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
         LF_updateScore(context)
         ScriptLib.StopGallery(context, defs.gallery_id, true)
     elseif  evt.source_name == "GalleryStart" and evt.param1 == 1  then
-        uid_list = ScriptLib.GetSceneUidList(context)
+        local uid_list = ScriptLib.GetSceneUidList(context)
 		ScriptLib.SetTeamEntityGlobalFloatValue(context, {uid_list[1]}, "Try_Detect_Skiff", 1)	--向team发消息，等SLC
         --[[ ScriptLib.SetPlayerStartGallery(context, defs.gallery_id,{uid_list[1]})
         ScriptLib.SetGroupTempValue(context,"distance",0,{})
@@ -63,7 +63,7 @@ end
 function action_EVENT_GALLERY_STOP(context,evt)
     ScriptLib.PrintContextLog(context,"action_EVENT_GALLERY_STOP[is_fail]="..evt.param2.."[reason]="..evt.param3)
 
-    group_id = ScriptLib.GetContextGroupId(context)
+    local group_id = ScriptLib.GetContextGroupId(context)
     ScriptLib.RefreshGroup(context, {group_id = group_id, suite = 1})
     return 0
 end
@@ -72,16 +72,16 @@ end
 
 
 function LF_calculateScore(context)
-    fs = ScriptLib.GetGroupTempValue(context,"distance",{}) * defs.score_per_distance + ScriptLib.GetGroupTempValue(context,"monster_count",{}) * defs.score_per_monster_count
+    local fs = ScriptLib.GetGroupTempValue(context,"distance",{}) * defs.score_per_distance + ScriptLib.GetGroupTempValue(context,"monster_count",{}) * defs.score_per_monster_count
     ScriptLib.SetGroupTempValue(context,"final_score",fs,{})
     return 0
 end
 function LF_updateScore(context)
-    l_monster_count = ScriptLib.GetGroupTempValue(context,"monster_count",{})
-    l_fail_reason = ScriptLib.GetGroupTempValue(context,"fail_reason",{})
+    local l_monster_count = ScriptLib.GetGroupTempValue(context,"monster_count",{})
+    local l_fail_reason = ScriptLib.GetGroupTempValue(context,"fail_reason",{})
     ScriptLib.PrintContextLog(context,"LF_updateScore[monster_count]="..l_monster_count.."[fail_resion]="..l_fail_reason)
     uid = ScriptLib.GetSceneUidList(context)
-    paramTable = {
+    local paramTable = {
         ["uid"]=uid[1],
         ["monster_count"]=l_monster_count,
         ["fail_reason"]=l_fail_reason,
@@ -117,11 +117,11 @@ end
 --https://www.tapd.cn/22963631/bugtrace/bugs/view/1122963631001308274
 --通过竹筏在客户端成功创建后进行ServerLuaCall来通知lua侧创建怪物
 function SLC_Raft_Created(context)
-	cfgid = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local cfgid = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
     ScriptLib.PrintContextLog(context,"fuc[SLC_Raft_Created] | cfgid = " .. cfgid)
 	if Raft_Monster_List ~= nil then
 		for k , v in pairs(Raft_Monster_List) do
-			if k == cfgid then
+			if k == cfgid then 
 				for i = 1 , #v do
 					ScriptLib.CreateMonster(context, {config_id = v[i], delay_time = 0})
 				end
@@ -135,7 +135,7 @@ function Set_Raft_SGV()
 	if Raft_Monster_List ~= nil then
 		for k,v in pairs(Raft_Monster_List) do
 			for k2,v2 in pairs(gadgets) do
-				if v2.config_id == k then
+				if v2.config_id == k then 
 					v2.server_global_value_config = {["SGV_Need_SLC"]= 1}
 				end
 			end

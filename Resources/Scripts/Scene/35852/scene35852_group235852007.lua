@@ -90,7 +90,7 @@ end
 function action_EVENT_ENTER_REGION_7001(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=307.8, y=625.1, z=-1671}
+	    local t_pos = {x=307.8, y=625.1, z=-1671}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=-120, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -119,7 +119,7 @@ end
 function action_EVENT_ENTER_REGION_7003(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=197, y=645, z=-1810}
+	    local t_pos = {x=197, y=645, z=-1810}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=-120, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1

@@ -20,9 +20,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-DeathField ={
+local DeathField ={
 	CoreID = defs.gadget_CoreID,
 	BossID = defs.monster_BossID,
 	BossSuite = 2,
@@ -237,8 +237,8 @@ end
 -- 触发操作
 function action_EVENT_LUA_NOTIFY_150031(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-3024.84, y=268.74, z=4872.4}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=defs.target_x, y=defs.target_y, z=defs.target_z}
-	  pos_follow = {x=defs.camera_x, y=defs.camera_y, z=defs.camera_z}
+		local pos = {x=defs.target_x, y=defs.target_y, z=defs.target_z}
+	  local pos_follow = {x=defs.camera_x, y=defs.camera_y, z=defs.camera_z}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = defs.duration, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true,is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

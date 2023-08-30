@@ -109,8 +109,8 @@ end
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_53005(context, evt)
 
-	k=0
-	t=0
+	local k=0
+	local t=0
 
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52001, GadgetState.GearStart)
 	k=ScriptLib.GetGroupVariableValue(context, "key")
@@ -143,8 +143,8 @@ end
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_53006(context, evt)
 
-	k=0
-	t=0
+	local k=0
+	local t=0
 
 
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52002, GadgetState.GearStart)
@@ -178,8 +178,8 @@ end
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_53007(context, evt)
 
-	k=0
-	t=0
+	local k=0
+	local t=0
 
 
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52003, GadgetState.GearStart)
@@ -213,8 +213,8 @@ end
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_53008(context, evt)
 
-	k=0
-	t=0
+	local k=0
+	local t=0
 
 
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52004, GadgetState.GearStart)
@@ -389,8 +389,8 @@ function action_EVENT_GADGET_STATE_CHANGE_53013(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（-747，228，-106），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-747, y=228, z=-106}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-747, y=228, z=-106}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

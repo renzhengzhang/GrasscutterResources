@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-grouplist =
+local grouplist =
 {
 	155009025,
 	155009026,

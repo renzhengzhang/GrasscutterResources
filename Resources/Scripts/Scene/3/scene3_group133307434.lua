@@ -15,9 +15,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-v = 0
-v_error = 0
-max_bit = #defs.gadget_array
+local v = 0
+local v_error = 0
+local max_bit = #defs.gadget_array
 defs.final_point = defs.point_sum - 1
 
 --================================================================

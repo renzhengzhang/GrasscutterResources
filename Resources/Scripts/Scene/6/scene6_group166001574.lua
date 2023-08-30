@@ -20,7 +20,7 @@ defs = {
 
 -- 黑泥配置。每个黑泥核心死亡时，将对应的黑泥物件给remove掉，并且将对应的charge_point_mud_cover_id黑泥包裹物件给清掉
 -- 当出现黑泥核心时，会创生mud_id对应的黑泥物件，会创生charge_point_mud_cover_id对应的黑泥包裹物
-black_mud_list = {
+local black_mud_list = {
     [1] = {core_id = 574028, mud_id = 574034, charge_point_mud_cover_id = 574095},
     [2] = {core_id = 574029, mud_id = 574035, charge_point_mud_cover_id = 574095},
     [3] = {core_id = 574030, mud_id = 574036, charge_point_mud_cover_id = 574095},
@@ -33,7 +33,7 @@ black_mud_list = {
 -- 发光蜜虫配置。
 -- 发光蜜虫初始存在
 -- 当场景中出现对应mud_cover_id的黑泥包裹物时，将发光蜜虫移除；当该黑泥包裹物被清除时，将发光蜜虫刷回来
-charge_point_list = {
+local charge_point_list = {
     [574095] = 574093,
     [574096] = 574094,
 }
@@ -42,7 +42,7 @@ charge_point_list = {
 -- 该波次场上刷出黑泥时，出现黑泥包裹物包裹住光钉，光钉停止运作
 -- 当前场上所有的黑泥被清掉时，杀掉黑泥包裹物，并让光钉回复正常状态
 -- 特殊情况：当之前的波次黑泥没有被干掉，下个波次继续刷，补刷黑泥
-monster_list = {
+local monster_list = {
         ---1波：丘丘人
         { tide_mons = {574002,574003,574004,574005,574006,574050}, mud = {}, next_tide = 2,min = 6, max = 6, next_time = 2},
         --- 黑泥波+史莱姆

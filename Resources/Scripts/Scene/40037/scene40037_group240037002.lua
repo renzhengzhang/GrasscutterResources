@@ -107,12 +107,12 @@ end
 
 -- 触发条件
 function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_2003(context, evt)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 
-	ret = 0
+	local ret = 0
 
 	for i,v in ipairs(uid_list) do
-		is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
+		local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
 		if true ~= is_all_dead then
 			ret = -1
 			break
@@ -145,7 +145,7 @@ end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_LIVE_2004(context, evt)
-	challenge_time = 420
+	local challenge_time = 420
 
 	if -1 ~= ScriptLib.GetEffigyChallengeLimitTime(context) then
 		challenge_time = 420 - ScriptLib.GetEffigyChallengeLimitTime(context)

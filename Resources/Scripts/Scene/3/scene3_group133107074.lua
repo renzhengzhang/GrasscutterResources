@@ -149,7 +149,7 @@ suites = {
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_74003(context, evt)
-	cur_day = ScriptLib.GetServerTimeByWeek(context) ScriptLib.RemoveExtraGroupSuite(context, 133107074, 9)
+	local cur_day = ScriptLib.GetServerTimeByWeek(context) ScriptLib.RemoveExtraGroupSuite(context, 133107074, 9)
 	ScriptLib.AddExtraGroupSuite(context, 133107074, cur_day)
 	return 0
 end

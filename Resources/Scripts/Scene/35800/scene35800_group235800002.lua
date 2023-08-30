@@ -21,9 +21,9 @@ defs = {
     FallScore = -10
 }
 
-regionIndex = 2009
+local regionIndex = 2009
 
-PhasePlay={
+local PhasePlay={
     [1] = {
         FloorArray_Size = { x = 10, y = 10 },
         InitFloorStyle = {
@@ -939,7 +939,7 @@ PhasePlay={
     }
 }
 
-TimeLines ={
+local TimeLines ={
     [1] = {
         WarnTimeLine =  { 3, 9, 15, 21, 26.5, 31.5, 36, 40.5, 45, 49, 52.5, 56 },
         StartTimeLine =  { 5, 11, 17, 23, 28.5, 33, 37.5, 42, 46.5, 50.5, 54, 57.5 },

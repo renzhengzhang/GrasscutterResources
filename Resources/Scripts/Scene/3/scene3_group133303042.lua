@@ -4,13 +4,13 @@ base_info = {
 }
 
 -- DEFS_MISCS
-DreamStonePlay = {
+local DreamStonePlay = {
     LevelTagGroup = 19,
     DreamStoneCid = 42001,
 }
 
 -- 在对应LevelTag中操作梦境石发生的切换
-LevelTagState = {
+local LevelTagState = {
     ["3.0_CaveForest_Dream"] ={
         ChangeTag = 56,
         WeatherStateList = {
@@ -27,7 +27,7 @@ LevelTagState = {
     },
 }
 
-KeyQuest = {
+local KeyQuest = {
     ["Lock"] = {7301712},
     ["Unlock"] ={7301715,7301714},
 }
@@ -133,7 +133,7 @@ end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_42005(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7301704)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7301704)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

@@ -12,7 +12,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-Phase ={
+local Phase ={
         [1] = {4,5,7},
 }
 

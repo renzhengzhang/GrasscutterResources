@@ -12,7 +12,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 1,
   --镜头的移动路径，球面0，直线1
     blend_duration = 2,

@@ -4,9 +4,9 @@ base_info = {
 }
 
 -- DEFS_MISCS
-EnvControlGadgets = {27001}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local EnvControlGadgets = {27001}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 --[[
 	0 = 玩家没有到达图书馆
 	1 = 玩家触发了机关
@@ -16,7 +16,7 @@ NightAppearGadgets = {}
 
 
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -46,7 +46,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 

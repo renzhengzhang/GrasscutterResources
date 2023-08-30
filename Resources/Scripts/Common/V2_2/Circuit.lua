@@ -1,7 +1,7 @@
 --ServerUploadTool Save to [/root/env/data/lua/common/V2_2]
 --电桩解密玩法Require
 --[[
-endLinkMap =
+endLinkMap = 
 {
 	{inPort = {25013},outPort = {25012}},
 	{inPort = {25011},outPort = {25004}},
@@ -16,11 +16,11 @@ endLinkMap =
 function SLC_SyncState(context, param1)
 	ScriptLib.PrintContextLog(context, "@@ Circuit : Receive_SLC")
 
-	call_config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	local call_config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	ScriptLib.SetGroupTempValue(context, "InPortState"..call_config_id, param1, {})
 	ScriptLib.PrintContextLog(context, "@@ Circuit : CONFIG_ID_"..call_config_id)
 	ScriptLib.PrintContextLog(context, "@@ Circuit : CONFIG_STATE_"..param1)
-	index = 0
+	local index = 0
 	for _index, map in pairs(endLinkMap) do
 		for k,cfg_id in pairs(map.inPort) do
 			if call_config_id == cfg_id then
@@ -31,9 +31,9 @@ function SLC_SyncState(context, param1)
 	if index == 0 then
 		return -1
 	end
-	connectCount = 0
+	local connectCount = 0
 	for k,port_cfg in pairs(endLinkMap[index].inPort) do
-		portState = ScriptLib.GetGroupTempValue(context, "InPortState"..port_cfg, {})
+		local portState = ScriptLib.GetGroupTempValue(context, "InPortState"..port_cfg, {})
 		connectCount = connectCount+portState
 	end
 	ScriptLib.PrintContextLog(context, "@@ Circuit : INDEX_"..index)
@@ -49,7 +49,7 @@ function SLC_SyncState(context, param1)
 	if connectCount == 3 then
 		sync_state = 203
 	end
-	out_port = endLinkMap[index].outPort[1]
+	local out_port = endLinkMap[index].outPort[1]
 	ScriptLib.PrintContextLog(context, "@@ Circuit : OUT_PORT_"..out_port)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, out_port, sync_state)
 	return 0

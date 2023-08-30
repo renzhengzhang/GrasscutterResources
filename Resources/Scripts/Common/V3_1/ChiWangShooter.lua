@@ -46,7 +46,7 @@ defs.extraAddSuite = 1
 ---
 ---
 
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		{ config_id = 80000001, name = "OnWorkOptionSelect", event= EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_OnWorkOptionSelect", trigger_count = 0},
 		{ config_id = 80000002, name = "OnPlatformReach", event= EventType.EVENT_PLATFORM_ARRIVAL, source = "", condition = "", action = "action_OnPlatformReach", trigger_count = 0},
@@ -62,7 +62,7 @@ extrTriggers = {
 function action_OnVariableChange(context, evt)
 	--玩法完成
 	if evt.source_name == "isFinished" and evt.param1 == 1 then
-		curMoveIndex = ScriptLib.GetGroupVariableValue(context, "curMoveIndex")
+		local curMoveIndex = ScriptLib.GetGroupVariableValue(context, "curMoveIndex")
 		ScriptLib.SetGroupVariableValue(context, "curMoveIndex", defs.finalShooterPoint or curMoveIndex)
 		ScriptLib.EndTimeAxis(context, "short_stay_timer")
 		ScriptLib.EndTimeAxis(context, "real_move_timer")
@@ -76,11 +76,11 @@ end
 
 function action_OnGroupLoad(context, evt)
 	--点阵不存档所以直接把机关扔过去
-	entityID=ScriptLib.GetEntityIdByConfigId(context, defs.shooterGadgetID)
+	local entityID=ScriptLib.GetEntityIdByConfigId(context, defs.shooterGadgetID)
 	if (entityID ~= 0) then
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, defs.shooterGadgetID)
-		curMoveIndex = ScriptLib.GetGroupVariableValue(context, "curMoveIndex")
-		_ret, pos, rot = ScriptLib.GetPlatformArrayInfoByPointId(context, defs.pointarray_ID, curMoveIndex)
+		local curMoveIndex = ScriptLib.GetGroupVariableValue(context, "curMoveIndex")
+		local _ret, pos, rot = ScriptLib.GetPlatformArrayInfoByPointId(context, defs.pointarray_ID, curMoveIndex)
 		ScriptLib.CreateGadgetByConfigIdByPos(context, defs.shooterGadgetID, { x = pos.x, y = pos.y, z = pos.z }, { x = rot.x, y = rot.y, z = rot.z })
 	end
 	RefreshAll(context)
@@ -91,16 +91,16 @@ end
 function RefreshAll(context)
 	ScriptLib.PrintContextLog(context, "@@ ChiWangShooter : RefreshAll start")
 
-	curMoveIndex = ScriptLib.GetGroupVariableValue(context, "curMoveIndex")
-	isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished")
+	local curMoveIndex = ScriptLib.GetGroupVariableValue(context, "curMoveIndex")
+	local isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished")
 	if(isFinished~=nil and isFinished == 1)then
 		ScriptLib.SetGroupVariableValue(context, "curMoveIndex", defs.finalShooterPoint or curMoveIndex)
 		curMoveIndex = ScriptLib.GetGroupVariableValue(context, "curMoveIndex")
 	end
 
 	--更新发射器
-	hasAuthority = CheckAuthority(context)
-	CanShoot = CheckShootPoint(context,curMoveIndex)
+	local hasAuthority = CheckAuthority(context)
+	local CanShoot = CheckShootPoint(context,curMoveIndex)
 	if CanShoot then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.shooterGadgetID, 201)
 	else
@@ -114,7 +114,7 @@ function RefreshAll(context)
 
 	--更新所有底座
 	for _,ShooterBaseID in pairs(defs.shooterBaseList)do
-		baseState = ScriptLib.GetGadgetStateByConfigId(context, 0, ShooterBaseID)
+		local baseState = ScriptLib.GetGadgetStateByConfigId(context, 0, ShooterBaseID)
 		if(baseState ~= 901)then
 			RefreshShooterBase(context, ShooterBaseID)
 		end
@@ -123,13 +123,13 @@ end
 
 --刷新底座状态
 function RefreshShooterBase(context, ShooterBaseID)
-	hasAuthority = CheckAuthority(context)
-	curMoveIndex = ScriptLib.GetGroupVariableValue(context, "curMoveIndex")
-	curStayBaseID = GetShooterBaseIDByMoveIndex(curMoveIndex)
-	isCurShootBase = (curStayBaseID==ShooterBaseID)
-	isShootPoint = CheckShootPointByBaseID(context,ShooterBaseID,curMoveIndex)
-	isShortStay = CheckIsShortStayByBaseID(ShooterBaseID,curMoveIndex)
-	isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished") or 0
+	local hasAuthority = CheckAuthority(context)
+	local curMoveIndex = ScriptLib.GetGroupVariableValue(context, "curMoveIndex")
+	local curStayBaseID = GetShooterBaseIDByMoveIndex(curMoveIndex)
+	local isCurShootBase = (curStayBaseID==ShooterBaseID)
+	local isShootPoint = CheckShootPointByBaseID(context,ShooterBaseID,curMoveIndex)
+	local isShortStay = CheckIsShortStayByBaseID(ShooterBaseID,curMoveIndex)
+	local isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished") or 0
 	ScriptLib.PrintContextLog(context, "@@ ChiWangShooter : InitShooterBase"
 			.." ShooterBaseID "..tostring(ShooterBaseID)
 			.." isCurShootBase "..tostring(isCurShootBase)
@@ -174,7 +174,7 @@ end
 function action_OnWorkOptionSelect(context, evt)
 	ScriptLib.PrintContextLog(context, "@@ ChiWangShooter : action_OnWorkOptionSelect start ")
 
-	optionID = evt.param2
+	local optionID = evt.param2
 
 	if(optionID==defs.optionID)then
 		TriggerMove(context)
@@ -186,18 +186,18 @@ end
 function TriggerMove(context)
 	ScriptLib.PrintContextLog(context, "@@ ChiWangShooter : TriggerMove start ")
 
-	isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished")
+	local isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished")
 	if(isFinished~=nil and isFinished == 1)then
 		ScriptLib.PrintContextLog(context, "@@ ChiWangShooter : TriggerMove end play is finish ")
 		return 0
 	end
 
-	nextPath = GetNextPath(context)
-	pathLength = #nextPath
+	local nextPath = GetNextPath(context)
+	local pathLength = #nextPath
 	if(pathLength~=0)then
-		nextMovePoint = nextPath[pathLength]
-		toMoveBaseID = GetShooterBaseIDByMoveIndex(nextMovePoint)
-		toMoveBaseState = ScriptLib.GetGadgetStateByConfigId(context, 0, toMoveBaseID)
+		local nextMovePoint = nextPath[pathLength]
+		local toMoveBaseID = GetShooterBaseIDByMoveIndex(nextMovePoint)
+		local toMoveBaseState = ScriptLib.GetGadgetStateByConfigId(context, 0, toMoveBaseID)
 		if(toMoveBaseState==901)then
 			ScriptLib.PrintContextLog(context, "@@ ChiWangShooter : TriggerMove end next base is lock")
 			ScriptLib.ShowReminder(context, 400191)
@@ -210,8 +210,8 @@ function TriggerMove(context)
 
 	ScriptLib.InitTimeAxis(context, "real_move_timer", {0.2}, false)
 
-	curMoveIndex = ScriptLib.GetGroupVariableValue(context, "curMoveIndex")
-	curShooterBaseID = GetShooterBaseIDByMoveIndex(curMoveIndex)
+	local curMoveIndex = ScriptLib.GetGroupVariableValue(context, "curMoveIndex")
+	local curShooterBaseID = GetShooterBaseIDByMoveIndex(curMoveIndex)
 	--设置发射器为0，设置对应底座为0，startplatform
 	ScriptLib.SetGadgetStateByConfigId(context,defs.shooterGadgetID,0)
 	if(curShooterBaseID~=nil)then
@@ -226,14 +226,14 @@ function TriggerMove(context)
 end
 
 function RealMove(context)
-	isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished")
+	local isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished")
 	if(isFinished~=nil and isFinished == 1)then
 		ScriptLib.PrintContextLog(context, "@@ ChiWangShooter : TriggerMove end play is finish ")
 		return 0
 	end
 
-	nextPath = GetNextPath(context)
-	pathLength = #nextPath
+	local nextPath = GetNextPath(context)
+	local pathLength = #nextPath
 	if(pathLength~=0)then
 		ScriptLib.SetPlatformPointArray(context, defs.shooterGadgetID, defs.pointarray_ID, nextPath, { route_type = 0,record_mode=1 })
 	end
@@ -244,12 +244,12 @@ end
 function GetNextPath(context)
 	ScriptLib.PrintContextLog(context, "@@ ChiWangShooter : GetNextPath start ")
 
-	path = {}
-	curMoveIndex = ScriptLib.GetGroupVariableValue(context,"curMoveIndex")
-	pointArrayLength = defs.pointArrayNum
+	local path = {}
+	local curMoveIndex = ScriptLib.GetGroupVariableValue(context,"curMoveIndex")
+	local pointArrayLength = defs.pointArrayNum
 	for k,v in ipairs(defs.stopPoints)do
 		if(curMoveIndex==v)then
-			isLastPoint = (k==#defs.stopPoints)
+			local isLastPoint = (k==#defs.stopPoints)
 			if(not isLastPoint)then
 				for i = curMoveIndex+1,defs.stopPoints[k+1]do
 					table.insert(path,i)
@@ -272,7 +272,7 @@ function GetNextPath(context)
 				.." pointArrayLength "..pointArrayLength
 		)
 	end
-	debugPathInfo = ""
+	local debugPathInfo = ""
 	for k,v in ipairs(path)do
 		debugPathInfo = debugPathInfo.." "..tostring(v)
 	end
@@ -285,23 +285,23 @@ end
 function action_OnPlatformReach(context, evt)
 	ScriptLib.PrintContextLog(context, "@@ ChiWangShooter : chiwang action_OnPlatformReach start")
 
-	config_id = evt.param1
+	local config_id = evt.param1
 
-	hasAuthority = CheckAuthority(context)
+	local hasAuthority = CheckAuthority(context)
 
 	if(config_id == defs.shooterGadgetID)then
 
 		--isFinished
-		isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished")
+		local isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished")
 		if(isFinished~=nil and isFinished == 1)then
 			return 0
 		end
 
-		pointID = evt.param3
-		CanShoot = CheckShootPoint(context,pointID)
-		ShooterBaseID = GetShooterBaseIDByMoveIndex(pointID)
-		isShortStay = CheckIsShortStay(pointID)
-		baseState = ScriptLib.GetGadgetStateByConfigId(context, 0, ShooterBaseID)
+		local pointID = evt.param3
+		local CanShoot = CheckShootPoint(context,pointID)
+		local ShooterBaseID = GetShooterBaseIDByMoveIndex(pointID)
+		local isShortStay = CheckIsShortStay(pointID)
+		local baseState = ScriptLib.GetGadgetStateByConfigId(context, 0, ShooterBaseID)
 
 		ScriptLib.PrintContextLog(context, "@@ ChiWangShooter : chiwang platform reach update"
 				.." ShooterBaseID "..tostring(ShooterBaseID)
@@ -392,7 +392,7 @@ end
 function CheckShootPointByBaseID(context,shooterBaseID,curMoveIndex)
 	for pointID, baseId in pairs(defs.shooterBaseList)do
 		if(curMoveIndex == pointID and baseId == shooterBaseID)then
-			canShoot = CheckShootPoint(context,pointID)
+			local canShoot = CheckShootPoint(context,pointID)
 			if canShoot then
 				return true
 			end
@@ -415,7 +415,7 @@ end
 function CheckIsShortStayByBaseID(shooterBaseID,curMoveIndex)
 	for pointID, baseId in pairs(defs.shooterBaseList)do
 		if(curMoveIndex == pointID and baseId == shooterBaseID)then
-			canShoot = CheckIsShortStay(pointID)
+			local canShoot = CheckIsShortStay(pointID)
 			if canShoot then
 				return true
 			end
@@ -426,7 +426,7 @@ end
 
 --判断是否权限足够
 function CheckAuthority(context)
-	level = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), 100004)
+	local level = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), 100004)
 	ScriptLib.PrintContextLog(context, "@@ ChiWangShooter : chiwang shooter get level "..tostring(level))
 
 	if(level>=2)then
@@ -437,10 +437,10 @@ end
 
 -- 更新物件上的按钮
 function SLC_UpdateInteractBtn( context, value )
-	gadgetID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local gadgetID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 
 	--isFinished
-	isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished")
+	local isFinished = ScriptLib.GetGroupVariableValue(context, "isFinished")
 	if(isFinished~=nil and isFinished == 1)then
 		ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, gadgetID, {})
 		return 0

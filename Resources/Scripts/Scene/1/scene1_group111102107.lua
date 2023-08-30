@@ -10,7 +10,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-windball_worktops =
+local windball_worktops =
 {
     107001,
     107002,

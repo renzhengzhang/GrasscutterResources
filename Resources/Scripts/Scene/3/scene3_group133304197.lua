@@ -23,7 +23,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 0,
     blend_duration = 1.5,
     is_force_walk = false,

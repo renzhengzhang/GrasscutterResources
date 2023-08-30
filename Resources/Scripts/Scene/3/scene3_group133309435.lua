@@ -11,8 +11,8 @@ defs = {
 }
 
 -- DEFS_MISCS
-HourGlass_ConfigIDList = {defs.gadget_1,defs.gadget_2,defs.gadget_3}
-forceStopGroup = {133309372}
+local HourGlass_ConfigIDList = {defs.gadget_1,defs.gadget_2,defs.gadget_3}
+local forceStopGroup = {133309372}
 
 --================================================================
 --

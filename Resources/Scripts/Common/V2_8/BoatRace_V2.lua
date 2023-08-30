@@ -35,7 +35,7 @@ defs = {
 	},
 }
 ]]--
-cfg = {
+local cfg = {
 	--开启挑战选项id
 	start_option = 175,
 	--父挑战ID
@@ -64,7 +64,7 @@ cfg = {
     }
 }
 
-extraTriggers = {
+local extraTriggers = {
 	{ config_id = 8000001, name = "Challenge_Success", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "",condition = "",action = "action_Challenge_Success",trigger_count= 0},
 	{ config_id = 8000002, name = "Challenge_Fail", event = EventType.EVENT_CHALLENGE_FAIL, source = "",condition = "",action = "action_Challenge_Fail",trigger_count= 0},
 	{ config_id = 8000003, name = "Gallery_Stop", event = EventType.EVENT_GALLERY_STOP, source = "",condition = "",action = "action_Gallery_Stop",trigger_count= 0},
@@ -184,10 +184,10 @@ function action_Challenge_Success(context, evt)
 	if evt.param1 ~= cfg.challenge_id then
 		return 0
 	end
-	uid = ScriptLib.GetSceneOwnerUid(context)
+	local uid = ScriptLib.GetSceneOwnerUid(context)
 	LF_ReportSkillExhibition(context, uid)
 
-	time = cfg.total_time - evt.param2
+	local time = cfg.total_time - evt.param2
 	if time > 0 then
 		ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, { ["time"]= time, ["uid"] = uid })
 	else
@@ -213,9 +213,9 @@ function action_Challenge_Fail(context, evt)
 
 	ScriptLib.PrintContextLog(context, "## [BoatRaceV2] Challenge failed.")
 
-	uid = ScriptLib.GetSceneOwnerUid(context)
+	local uid = ScriptLib.GetSceneOwnerUid(context)
 
-	time = cfg.total_time - evt.param2
+	local time = cfg.total_time - evt.param2
 	if time > 0 then
 		ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, { ["time"]= time, ["uid"] = uid  })
 	else
@@ -236,7 +236,7 @@ end
 -- Gallery结束
 function action_Gallery_Stop(context, evt)
 	--恢复VisionType
-	uid = ScriptLib.GetSceneOwnerUid(context)
+	local uid = ScriptLib.GetSceneOwnerUid(context)
 	ScriptLib.SetPlayerGroupVisionType(context, {uid}, {1})
 	ScriptLib.RevertPlayerRegionVision(context, uid)
 	ScriptLib.PrintContextLog(context, "## [BoatRaceV2] Gallery stoped. is_fail@"..evt.param2.." reason@"..evt.param3)
@@ -286,7 +286,7 @@ end
 function LF_ReportSkillExhibition(context, uid)
 
     for i, v in ipairs(cfg.exhiKey_all[base_info.group_id]) do
-        record = ScriptLib.GetGroupTempValue(context, "exhi_counter_"..i, {})
+        local record = ScriptLib.GetGroupTempValue(context, "exhi_counter_"..i, {})
         ScriptLib.PrintContextLog(context, "## [BoatRaceV2] LF_ReportSkillExhibition. exhi_counter_"..i.. "record@"..record)
         if 0 < record then
         	ScriptLib.AddExhibitionReplaceableData(context, uid, v, record)
@@ -310,7 +310,7 @@ function SLC_BoatRaceV2_Counter(context, type)
 	ScriptLib.PrintContextLog(context, "## [BoatRaceV2] SLC_BoatRaceV2_Counter. type@"..type)
 
 	--确认是要加本赛道gallery的哪个param
-	gallery_param = LF_GetGalleryParamName(context, type)
+	local gallery_param = LF_GetGalleryParamName(context, type)
 	if 0 == gallery_param then
 		return 0
 	end
@@ -318,8 +318,8 @@ function SLC_BoatRaceV2_Counter(context, type)
 	--如果是物件破坏，看是否在计数白名单内
 	if 2 == type then
 		if nil ~= defs.gadget_filter then
-			config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
-			gadget_id = gadgets[config_id].gadget_id
+			local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+			local gadget_id = gadgets[config_id].gadget_id
 
 			if LF_CheckIsInTable(context, gadget_id, defs.gadget_filter) then
 				ScriptLib.PrintContextLog(context, "## [BoatRaceV2] SLC_BoatRaceV2_Counter. Count gadget. config_id@"..config_id.." gadget_id@"..gadget_id)
@@ -356,7 +356,7 @@ function action_Enter_Hiden_Region(context, evt)
 	--是否是指定region
 	if LF_CheckIsInTable(context, evt.param1, defs.hiden_region) then
 		--看看计入哪个param
-		gallery_param = 0
+		local gallery_param = 0
 		for k,v in pairs(defs.counter) do
 			if v == 3 then
 				gallery_param = k
@@ -396,11 +396,11 @@ end
 function LF_TryShowGuide(context)
 	--是否弹过
 	--Activity_SummerTimeV2_BoatRace_Guide1
-	havePlayed1  = ScriptLib.GetExhibitionAccumulableData(context, context.uid, 11405108)
+	local havePlayed1  = ScriptLib.GetExhibitionAccumulableData(context, context.uid, 11405108)
 	--Activity_SummerTimeV2_BoatRace_Guide2
-	havePlayed2  = ScriptLib.GetExhibitionAccumulableData(context, context.uid, 11405109)
+	local havePlayed2  = ScriptLib.GetExhibitionAccumulableData(context, context.uid, 11405109)
 	--Activity_SummerTimeV2_BoatRace_Guide3
-	havePlayed3  = ScriptLib.GetExhibitionAccumulableData(context, context.uid, 11405110)
+	local havePlayed3  = ScriptLib.GetExhibitionAccumulableData(context, context.uid, 11405110)
 
 	if 0 < havePlayed3 then
 		return 0

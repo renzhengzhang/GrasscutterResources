@@ -95,8 +95,8 @@ suites = {
 
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_79(context, evt)
-	c_num_1 = ScriptLib.GetGroupVariableValue(context, "num")
-	c_num = c_num_1 +1
+	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "num")
+	local c_num = c_num_1 +1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "num", c_num) then
 	  return -1
 	end

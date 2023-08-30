@@ -1,13 +1,13 @@
-default_time = 6
-Action01_time = 2
-Action02_time = 8
+local default_time = 6
+local Action01_time = 2
+local Action02_time = 8
 
 function OnTimer(context, now)
 	ScriptLib.PrintLog("time = "..now)
-	arguments = ScriptLib.GetGadgetArguments(context)
-	length = #arguments
-	state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
-	state = ScriptLib.GetGadgetState(context)
+	local arguments = ScriptLib.GetGadgetArguments(context)
+	local length = #arguments
+	local state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
+	local state = ScriptLib.GetGadgetState(context)
 
 	-- 获取机关当前状态
 	if state == GadgetState.Default then
@@ -30,3 +30,5 @@ function OnTimer(context, now)
 		end
 	end
 end
+
+

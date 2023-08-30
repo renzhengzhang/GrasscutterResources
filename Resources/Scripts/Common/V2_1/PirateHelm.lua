@@ -1,5 +1,5 @@
 --[[
-connection = {
+local connection = {
 	[194001] = {194004,1,194003,0},
 	[194002] = {194001,1,194004,0},
 	[194003] = {194004,1}
@@ -11,18 +11,18 @@ connection = {
 --key为操作的config_id，v[1] v[2]为关联的config_id和是否同向转动（1同向，0反向）；v[3]v[4]同理，最多关联两个物件
 -----------------------------------------
 
-PirateHelmGadgetID = {
+local PirateHelmGadgetID = {
 70360180,
 70360181,
 70360182,
 70360183,
 }
-OPTION_LEFT = 210
-OPTION_RIGHT = 211
-temp_Variables = {
+local OPTION_LEFT = 210
+local OPTION_RIGHT = 211
+local temp_Variables = {
 	{ config_id=50000001,name = "IsFinished", value = 0, no_refresh = true },	--用于标识是否已完成，初始0，完成时LD需要设置成1，使得机关不可转动
 }
-tempTrigger = {
+local tempTrigger = {
     { config_id = 9000001, name = "EVENT_GADGET_CREATE", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_SetOption", trigger_count = 0},--创建
     { config_id = 9000002, name = "EVENT_SELECT_OPTION", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_SelectOption", trigger_count = 0},
     { config_id = 9000003, name = "EVENT_GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_GroupLoadShowVersion", trigger_count = 0},
@@ -31,7 +31,7 @@ tempTrigger = {
 }
 function action_IsFinished(context,evt)
 	if evt.param1 == 1 then
-		group_id = ScriptLib.GetContextGroupId(context)
+		local group_id = ScriptLib.GetContextGroupId(context)
 		for k,v in pairs(gadgets) do
 			if isPirateHelm(v.gadget_id) then
 				ScriptLib.DelWorktopOptionByGroupId(context, group_id, v.config_id, OPTION_LEFT)
@@ -47,7 +47,7 @@ function action_GroupLoadShowVersion(context,evt)
 end
 function action_RemoveCoolDown(context,evt)
 	if evt.source_name == "CD"  then ScriptLib.SetGroupTempValue(context,"disableInteract",0,{}) end
-	return 0
+	return 0 
 end
 function action_SelectOption(context,evt)
 	if ScriptLib.GetGroupTempValue(context, "disableInteract",{}) == 0 then
@@ -101,15 +101,15 @@ function action_SetOption(context,evt)
 end
 
 function isPirateHelm(gadgetID)
-	result = false
+	local result = false
 	for k,v in pairs(PirateHelmGadgetID) do
 		if gadgetID == v then result = true end
 	end
 	return result
 end
 function turnLeft(context,config_id)
-	groupID = ScriptLib.GetContextGroupId(context)
-	nowState = ScriptLib.GetGadgetStateByConfigId(context, groupID, config_id)
+	local groupID = ScriptLib.GetContextGroupId(context)
+	local nowState = ScriptLib.GetGadgetStateByConfigId(context, groupID, config_id)
 	if nowState ==0 then ScriptLib.SetGroupGadgetStateByConfigId(context, groupID, config_id, 201) end
 	if nowState ==201 then ScriptLib.SetGroupGadgetStateByConfigId(context, groupID, config_id, 202) end
 	if nowState ==202 then ScriptLib.SetGroupGadgetStateByConfigId(context, groupID, config_id, 203) end
@@ -117,8 +117,8 @@ function turnLeft(context,config_id)
 	return 0
 end
 function turnRight(context,config_id)
-	groupID = ScriptLib.GetContextGroupId(context)
-	nowState = ScriptLib.GetGadgetStateByConfigId(context, groupID, config_id)
+	local groupID = ScriptLib.GetContextGroupId(context)
+	local nowState = ScriptLib.GetGadgetStateByConfigId(context, groupID, config_id)
 	if nowState ==0 then ScriptLib.SetGroupGadgetStateByConfigId(context, groupID, config_id, 203) end
 	if nowState ==201 then ScriptLib.SetGroupGadgetStateByConfigId(context, groupID, config_id, 0) end
 	if nowState ==202 then ScriptLib.SetGroupGadgetStateByConfigId(context, groupID, config_id, 201) end

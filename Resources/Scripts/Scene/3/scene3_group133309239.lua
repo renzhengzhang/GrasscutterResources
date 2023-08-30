@@ -15,7 +15,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-markList = {239002,239003,239004,239005}
+local markList = {239002,239003,239004,239005}
 
 --================================================================
 --
@@ -153,7 +153,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_239009(context, evt)
-	sum = 0
+	local sum = 0
 	if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_1) == GadgetState.GearStart then
 	sum = sum + 1
 	end

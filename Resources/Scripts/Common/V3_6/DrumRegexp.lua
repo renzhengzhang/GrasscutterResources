@@ -14,13 +14,13 @@ defs = {
 	reminder_fail = 400113,
 }
 
---music_list = {"100110100101","110101011101","101010011101"}
-music_list = {"11001","11101"}
-music_len = 5
+--local music_list = {"100110100101","110101011101","101010011101"}
+local music_list = {"11001","11101"}
+local music_len = 5
 
 --======================================================================================================================
 --Events
-DrumRegexp_Triggers = {
+local DrumRegexp_Triggers = {
     [1] = { name = "group_load", config_id = 8002001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
 }
 
@@ -56,8 +56,8 @@ function SLC_DrumPercussReg(context, beat_time)
 		return 0
 	end
 	ScriptLib.PrintContextLog(context, "##[DrumRegexp]:敲鼓SLC,敲鼓次数"..beat_time)
-	reg_dec = ScriptLib.GetGroupTempValue(context, "RegDec", {})
-	reg_bin = LF_DecToBinStr(reg_dec)
+	local reg_dec = ScriptLib.GetGroupTempValue(context, "RegDec", {})
+	local reg_bin = LF_DecToBinStr(reg_dec)
 	reg_bin = reg_bin..(math.ceil(beat_time))
 	ScriptLib.PrintContextLog(context, "##[DrumRegexp]:当前谱"..reg_bin)
 	if string.len(reg_bin) == 5 then
@@ -111,7 +111,7 @@ end
 --把信息从十进制转成二进制的字符串
 function LF_DecToBinStr(dec_num)
 	--转进制，字符的长度做一定的限制
-	bin_str = ""
+	local bin_str = ""
 	dec_num = math.ceil(dec_num)
 	for i=1,16 do
 		if dec_num ~= 0 then
@@ -125,8 +125,8 @@ end
 
 --把二进制字符串变成十进制
 function LF_BinStrToDec(bin_str)
-	len = string.len(bin_str)
-	dec_num = 0
+	local len = string.len(bin_str)
+	local dec_num = 0
 	for i=1,len do
 		dec_num = dec_num + (2^(len-i))*tonumber(string.sub(bin_str,i,i))
 	end

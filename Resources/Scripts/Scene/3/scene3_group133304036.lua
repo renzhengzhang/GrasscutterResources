@@ -11,7 +11,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 1,
     blend_duration = 4,
     is_force_walk = false,
@@ -253,7 +253,7 @@ end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_36011(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7302705)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7302705)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

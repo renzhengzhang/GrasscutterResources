@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-CloudNets =
+local CloudNets =
 {
     {net_1 = 38003, pillar_1 = 38001, pillar_2 = 38002}
 }

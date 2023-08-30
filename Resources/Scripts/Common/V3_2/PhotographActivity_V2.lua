@@ -14,14 +14,14 @@
 --    client_judge_id = 1
 --}
 
-local_defs = {
+local local_defs = {
     worktop_option = 190,
     region_out_reminder = 600106,
     region_warning_reminder = 600159,
     begin_fail_reminder=600158,
 }
 
-Tri = {
+local Tri = {
     [1] = { name = "group_load", config_id = 40000000, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     [3] = { name = "select_option", config_id = 40000002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
     [4] = { name = "photo_finish", config_id = 40000003, event = EventType.EVENT_PHOTO_FINISH, source = "", condition = "", action = "action_photo_finish", trigger_count = 0},
@@ -55,7 +55,7 @@ function action_select_option(context,evt)
         LF_Start_Play(context)
     else
         ScriptLib.PrintContextLog(context,"## [PhotographActivity] 未装备【留影机】")
-        uid = ScriptLib.GetSceneUidList(context)
+        local uid = ScriptLib.GetSceneUidList(context)
         if uid[1]~=nil then
             ScriptLib.ShowReminderByUid(context,{uid[1]}, local_defs.begin_fail_reminder)
         end
@@ -83,14 +83,14 @@ end
 function  action_leave_region(context,evt)
     ScriptLib.PrintContextLog(context,"## [PhotographActivity] action_leave_region: 玩家出圈")
     if (evt.param1 == defs.warning_region_id and ScriptLib.IsGalleryStart(context,defs.gallery_id)) then
-        uid = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
+        local uid = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
         if uid[1]~=nil then
             ScriptLib.ShowReminderByUid(context,{uid[1]}, local_defs.region_warning_reminder)
         end
 
     elseif (evt.param1 == defs.region_id and ScriptLib.IsGalleryStart(context,defs.gallery_id)) then
         ScriptLib.PrintContextLog(context,"## [PhotographActivity] action_leave_region: 挑战失败，并回滚group状态")
-        uid = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
+        local uid = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
         if uid[1]~=nil then
             ScriptLib.ShowReminderByUid(context,{uid[1]}, local_defs.region_out_reminder)
         end

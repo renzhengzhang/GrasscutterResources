@@ -395,7 +395,7 @@ function action_EVENT_SELECT_OPTION_36024(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36006, 400200021, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -430,7 +430,7 @@ function action_EVENT_SELECT_OPTION_36025(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36006, 400200021, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -470,7 +470,7 @@ function action_EVENT_SELECT_OPTION_36028(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36006, 400200021, {3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -551,9 +551,9 @@ end
 -- 触发操作
 function action_EVENT_TIMER_EVENT_36033(context, evt)
 		-- 设置指定gadget的globalvalue
-	  CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144002036, 36018, "LudiSplitter_Active")
+	  local CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144002036, 36018, "LudiSplitter_Active")
 
-	  DeltaValue = math.ceil(1 - CurValue)
+	  local DeltaValue = math.ceil(1 - CurValue)
 
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {36018}, "LudiSplitter_Active", DeltaValue)
 
@@ -646,7 +646,7 @@ function action_EVENT_SELECT_OPTION_36037(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36010, 400200024, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -675,7 +675,7 @@ function action_EVENT_SELECT_OPTION_36038(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36010, 400200024, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -866,7 +866,7 @@ function action_EVENT_SELECT_OPTION_36047(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36012, 400200023, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -901,7 +901,7 @@ function action_EVENT_SELECT_OPTION_36048(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36012, 400200023, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1033,7 +1033,7 @@ function action_EVENT_SELECT_OPTION_36053(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36012, 400200023, {3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1133,7 +1133,7 @@ function action_EVENT_SELECT_OPTION_36057(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36015, 400200022, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1168,7 +1168,7 @@ function action_EVENT_SELECT_OPTION_36058(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36015, 400200022, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1233,9 +1233,9 @@ function action_EVENT_GADGET_STATE_CHANGE_36061(context, evt)
 		end
 
 		-- 设置指定gadget的globalvalue
-	  CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144002036, 36018, "LudiSplitter_Active")
+	  local CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144002036, 36018, "LudiSplitter_Active")
 
-	  DeltaValue = math.ceil(1 - CurValue)
+	  local DeltaValue = math.ceil(1 - CurValue)
 
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {36018}, "LudiSplitter_Active", DeltaValue)
 
@@ -1266,9 +1266,9 @@ function action_EVENT_GADGET_STATE_CHANGE_36062(context, evt)
 		end
 
 		-- 设置指定gadget的globalvalue
-	  CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144002036, 36018, "LudiSplitter_Active")
+	  local CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144002036, 36018, "LudiSplitter_Active")
 
-	  DeltaValue = math.ceil(0 - CurValue)
+	  local DeltaValue = math.ceil(0 - CurValue)
 
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {36018}, "LudiSplitter_Active", DeltaValue)
 
@@ -1365,9 +1365,9 @@ function action_EVENT_GADGET_STATE_CHANGE_36066(context, evt)
 		end
 
 		-- 设置指定gadget的globalvalue
-	  CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144002036, 36018, "LudiSplitter_Active")
+	  local CurValue = ScriptLib.GetGadgetAbilityFloatValue(context, 144002036, 36018, "LudiSplitter_Active")
 
-	  DeltaValue = math.ceil(0 - CurValue)
+	  local DeltaValue = math.ceil(0 - CurValue)
 
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {36018}, "LudiSplitter_Active", DeltaValue)
 
@@ -1420,7 +1420,7 @@ function action_EVENT_SELECT_OPTION_36068(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36042, 400200020, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1478,7 +1478,7 @@ function action_EVENT_SELECT_OPTION_36070(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 36042, 400200020, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1

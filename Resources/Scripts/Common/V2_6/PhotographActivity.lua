@@ -14,12 +14,12 @@
 --    client_judge_id = 1
 --}
 
-local_defs = {
+local local_defs = {
     worktop_option = 190,
     region_out_reminder = 600106,
 }
 
-Tri = {
+local Tri = {
     [1] = { name = "group_load", config_id = 40000000, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     [3] = { name = "select_option", config_id = 40000002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
     [4] = { name = "photo_finish", config_id = 40000003, event = EventType.EVENT_PHOTO_FINISH, source = "", condition = "", action = "action_photo_finish", trigger_count = 0},

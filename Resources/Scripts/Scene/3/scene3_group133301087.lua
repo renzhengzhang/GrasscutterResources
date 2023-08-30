@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-ACPlay = {
+local ACPlay = {
     MailBoxCid = 87001,
     OptionCid = 87002,
     PageLevel02 = 2,

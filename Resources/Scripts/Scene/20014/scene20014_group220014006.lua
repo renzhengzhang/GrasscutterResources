@@ -170,7 +170,7 @@ function action_EVENT_ANY_MONSTER_DIE_11(context, evt)
 		return -1
 	end
 	-- 触发镜头注目
-		pos = {x=191, y=57, z=377}
+		local pos = {x=191, y=57, z=377}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, duration = 3, is_force = true, is_broadcast = false }) then
 					return -1
 				end

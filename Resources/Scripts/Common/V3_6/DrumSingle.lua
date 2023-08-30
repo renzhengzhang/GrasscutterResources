@@ -15,16 +15,16 @@ defs = {
 	reminder_fail = 400113,
 }
 --敲鼓的节奏， 0空 1普攻 2下落 70900431鼓ID
-music_staff = {0,1,0,1, 1,0,1,0, 0,1,0,1}
+local music_staff = {0,1,0,1, 1,0,1,0, 0,1,0,1}
 ]]
-OPTION = {
+local OPTION = {
 	SINGLE = 809,
 	REGEXP = 810,
 }
 
 --======================================================================================================================
 --Events
-DrumSingle_Triggers = {
+local DrumSingle_Triggers = {
     [1] = { name = "group_load", config_id = 8001001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_single_group_load", trigger_count = 0},
     [2] = { name = "select_option", config_id = 8001002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_single_select_option", trigger_count = 0},
     [3] = { name = "time_axis_pass", config_id = 8001003, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_single_time_axis_pass", trigger_count = 0},
@@ -82,7 +82,7 @@ function action_single_time_axis_pass(context, evt)
 	if evt.source_name == "MusicPlay" then
 		--处理单曲模式
 --		if OPTION.SINGLE == ScriptLib.GetGroupTempValue(context, "PlayMode", {}) then
-			pre_beat_index = ScriptLib.GetGroupTempValue(context, "BeatIndex", {})
+			local pre_beat_index = ScriptLib.GetGroupTempValue(context, "BeatIndex", {})
 			ScriptLib.PrintContextLog(context, "##[DrumSingle]:上一个节拍"..pre_beat_index)
 			--处理上一个节拍是否错过,如果错过了就直接处理失败
 			if music_staff[pre_beat_index] ~= nil then
@@ -116,7 +116,7 @@ end
 --LevelFunctions
 --玩家攻击敲鼓的SLC
 function SLC_DrumPercussSingle(context, beat_timing, beat_type)
-	play_mode = ScriptLib.GetGroupTempValue(context, "PlayMode", {})
+	local play_mode = ScriptLib.GetGroupTempValue(context, "PlayMode", {})
 	if play_mode == 0 then
 		ScriptLib.PrintContextLog(context, "##[DrumSingle]:演奏未开始，不处理敲击事件")
 		return 0
@@ -124,7 +124,7 @@ function SLC_DrumPercussSingle(context, beat_timing, beat_type)
 	ScriptLib.PrintContextLog(context, "##[DrumSingle]:[SLC]敲鼓")
 
 	--获取是否进行过敲击
-	has_percussed = ScriptLib.GetGroupTempValue(context, "BeatPercussed", {})
+	local has_percussed = ScriptLib.GetGroupTempValue(context, "BeatPercussed", {})
 	if 0 ~= ScriptLib.GetGroupTempValue(context, "BeatPercussed", {}) then
 		ScriptLib.PrintContextLog(context, "##[DrumSingle]:当前节拍重复敲击，失败")
 		LF_SinglePlayFail(context)
@@ -132,7 +132,7 @@ function SLC_DrumPercussSingle(context, beat_timing, beat_type)
 	end
 	ScriptLib.SetGroupTempValue(context, "LastBeatType", beat_type, {})
 	--获取当前的敲击序列
-	staff_index = ScriptLib.GetGroupTempValue(context, "BeatIndex", {})
+	local staff_index = ScriptLib.GetGroupTempValue(context, "BeatIndex", {})
 	--单曲模式校验
 	if play_mode == OPTION.SINGLE then
 		if music_staff[staff_index] ~= 0 then

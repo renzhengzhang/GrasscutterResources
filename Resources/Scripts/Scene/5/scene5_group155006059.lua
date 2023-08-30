@@ -21,16 +21,16 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {}
-Worktops = {}
-DayAppearGadgets = {defs.gadget_mask_01}
-NightAppearGadgets = {defs.gadget_controller}
-TriggerInsertWhitelist = {1}
+local Controllers = {}
+local EnvControlGadgets = {}
+local Worktops = {}
+local DayAppearGadgets = {defs.gadget_mask_01}
+local NightAppearGadgets = {defs.gadget_controller}
+local TriggerInsertWhitelist = {1}
 
 
 
-gadgetlist =
+local gadgetlist =
 {
 	defs.gadget_point_01,
 	defs.gadget_point_02,
@@ -45,7 +45,7 @@ gadgetlist =
 
 defs.totalcount = #gadgetlist
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.PrintContextLog(context, "----GameplayState[0]----")
@@ -67,7 +67,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -329,7 +329,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_CREATE_59024(context, evt)
 
-		current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+		local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 		if (current_env_state_id == 2) then
 			if 2 == ScriptLib.GetGroupVariableValue(context, "gameplayState") then
 				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_controller, 201)

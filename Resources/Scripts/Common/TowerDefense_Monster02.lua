@@ -2,11 +2,11 @@
 --[[
 tide_defs = {
 	[1] = { sum = 40, min = 8, max = 12},
-	[2] = { sum = 40, min = 8, max = 12},
-	[3] = { sum = 40, min = 8, max = 12},
+	[2] = { sum = 40, min = 8, max = 12},	
+	[3] = { sum = 40, min = 8, max = 12},		
 }
 
-guide_point_list=
+local guide_point_list=
 {
 	[1]={1006,1007,1008,1009,1010,1011},
 	[2]={1012,1013,1014,1015,1016,1017},
@@ -31,7 +31,7 @@ function LF_Init_Monster_Group()
 	table.insert(triggers, t2)
 	table.insert(variables, { config_id=50000001,name = "tide_ptr", value = 0})
 	table.insert(variables, { config_id=50000002,name = "challenge_group", value = 0})
-	leftMonsters=0
+	local leftMonsters=0
 	for i=1,#package_tide_defs do
 		for j=1,#package_tide_defs[i] do
 			leftMonsters=leftMonsters+package_tide_defs[i][j].count
@@ -51,7 +51,7 @@ function LF_Init_Monster_Group()
 
 end
 
-gear_group_id = defs.gear_group_id or 0
+local gear_group_id = defs.gear_group_id or 0
 
 --挑战开始时额外创建怪物
 function extra_monster_65(context, prev_context, param1, param2, param3)
@@ -96,7 +96,7 @@ end
 
 function action_monster_die(context, evt)
 	ScriptLib.ExecuteGroupLua(context, ScriptLib.GetGroupVariableValue(context, "challenge_group"), "del_monster_number", {0})
-	monster_kill_count=ScriptLib.GetGroupVariableValue(context, "monster_kill_count")
+	local monster_kill_count=ScriptLib.GetGroupVariableValue(context, "monster_kill_count")
 	monster_kill_count=monster_kill_count+1
 	if monster_kill_count >= ScriptLib.GetGroupVariableValue(context, "left_monsters") then
 		monster_tide_over(context)
@@ -106,14 +106,14 @@ function action_monster_die(context, evt)
 end
 
 function MonsterArrive(context)
-	entityId=context.target_entity_id
+	local entityId=context.target_entity_id
 	ScriptLib.PrintContextLog(context, "TowerDefenseMonsterArrive"..context.target_entity_id)
 	for k,v in pairs(points) do
 		if ScriptLib.GetEntityIdByConfigId(context, v.config_id)==entityId then
 			ScriptLib.RemoveEntityByConfigId(context, defs.group_id, EntityType.MONSTER, v.config_id)
 			ScriptLib.ExecuteGroupLua(context, ScriptLib.GetGroupVariableValue(context, "challenge_group"), "monster_escaped", {0})
 			ScriptLib.ExecuteGroupLua(context, ScriptLib.GetGroupVariableValue(context, "challenge_group"), "del_monster_number", {0})
-			monster_kill_count=ScriptLib.GetGroupVariableValue(context, "monster_kill_count")
+			local monster_kill_count=ScriptLib.GetGroupVariableValue(context, "monster_kill_count")
 			monster_kill_count=monster_kill_count+1
 			if monster_kill_count >= ScriptLib.GetGroupVariableValue(context, "left_monsters") then
 				monster_tide_over(context)
@@ -127,7 +127,7 @@ end
 
 function set_monster_number_req(context, prev_context, param1, param2, param3)
 	ScriptLib.SetGroupVariableValue(context, "challenge_group", param1)
-	monstersLeft=ScriptLib.GetGroupVariableValue(context, "left_monsters")
+	local monstersLeft=ScriptLib.GetGroupVariableValue(context, "left_monsters")
 	if ScriptLib.GetGroupVariableValue(context, "extra_monster_65")==1 then
 		monstersLeft=monstersLeft+1
 	end
@@ -156,8 +156,8 @@ end
 function start_tide(context, prev_context, param1, param2, param3)
 	ScriptLib.SetGroupVariableValue(context, "challenge_group", param1)
 	math.randomseed(ScriptLib.GetServerTime(context))
-	monster_pool_table=ScriptLib.GetMechanicusMonsterPoolVec(context,ScriptLib.GetGroupVariableValue(context, "challenge_group"),999)
-	affix={}
+	local monster_pool_table=ScriptLib.GetMechanicusMonsterPoolVec(context,ScriptLib.GetGroupVariableValue(context, "challenge_group"),999)
+	local affix={}
 	if ScriptLib.GetGroupVariableValue(context, "buff_monster_4112")==1 then
 		table.insert(affix,4112)
 	end
@@ -168,51 +168,51 @@ function start_tide(context, prev_context, param1, param2, param3)
 	for i=1,#affix do
 		ScriptLib.PrintContextLog(context, "## TD_LOG : AFFIX TABLE"..affix[i])
 	end
-	--monstersLeft=ScriptLib.GetGroupVariableValue(context, "left_monsters")
-	index= ScriptLib.GetGroupVariableValue(context, "monster_tide_index")
+	--local monstersLeft=ScriptLib.GetGroupVariableValue(context, "left_monsters")
+	local index= ScriptLib.GetGroupVariableValue(context, "monster_tide_index")
 	for i=1,#package_tide_defs[1] do
 		ScriptLib.AutoPoolMonsterTide(context, index, defs.group_id, {monster_pool_table[index]},package_tide_defs[1][i].route, package_tide_defs[1][i].route_points, affix, {total_count=package_tide_defs[1][i].count, min_count=package_tide_defs[1][i].min, max_count=package_tide_defs[1][i].max, tag=package_tide_defs[1][i].tags,fill_time=package_tide_defs[1][i].fill_time or 5,fill_count=package_tide_defs[1][i].fill_count or 5})
 		index=index+1
 	end
 	--创建翻牌子的怪物
 	if ScriptLib.GetGroupVariableValue(context, "extra_monster_65")==1 then
-		create_route=math.random(#package_tide_defs[1])
+		local create_route=math.random(#package_tide_defs[1])
 		ScriptLib.AutoPoolMonsterTide(context, 65, defs.group_id, {12040},package_tide_defs[1][create_route].route, package_tide_defs[1][create_route].route_points, affix, {total_count=1, min_count=1, max_count=1, tag=package_tide_defs[1][create_route].tags,fill_time=package_tide_defs[1][create_route].fill_time or 5,fill_count=package_tide_defs[1][create_route].fill_count or 2})
 		--monstersLeft=monstersLeft+1
 	end
 
 	if ScriptLib.GetGroupVariableValue(context, "extra_monster_66")==1 then
-		create_route=math.random(#package_tide_defs[1])
+		local create_route=math.random(#package_tide_defs[1])
 		ScriptLib.AutoPoolMonsterTide(context, 66, defs.group_id, {12041},package_tide_defs[1][create_route].route, package_tide_defs[1][create_route].route_points, affix, {total_count=1, min_count=1, max_count=1, tag=package_tide_defs[1][create_route].tags,fill_time=package_tide_defs[1][create_route].fill_time or 5,fill_count=package_tide_defs[1][create_route].fill_count or 2})
 		--monstersLeft=monstersLeft+1
 	end
 
 	if ScriptLib.GetGroupVariableValue(context, "extra_monster_67")==1 then
-		create_route=math.random(#package_tide_defs[1])
+		local create_route=math.random(#package_tide_defs[1])
 		ScriptLib.AutoPoolMonsterTide(context, 67, defs.group_id, {12050},package_tide_defs[1][create_route].route, package_tide_defs[1][create_route].route_points,affix, {total_count=1, min_count=1, max_count=1, tag=package_tide_defs[1][create_route].tags,fill_time=package_tide_defs[1][create_route].fill_time or 5,fill_count=package_tide_defs[1][create_route].fill_count or 2})
 		--monstersLeft=monstersLeft+1
 	end
 
 	if ScriptLib.GetGroupVariableValue(context, "extra_monster_68")==1 then
-		create_route=math.random(#package_tide_defs[1])
+		local create_route=math.random(#package_tide_defs[1])
 		ScriptLib.AutoPoolMonsterTide(context, 68, defs.group_id, {12051},package_tide_defs[1][create_route].route, package_tide_defs[1][create_route].route_points, affix, {total_count=1, min_count=1, max_count=1, tag=package_tide_defs[1][create_route].tags,fill_time=package_tide_defs[1][create_route].fill_time or 5,fill_count=package_tide_defs[1][create_route].fill_count or 2})
 		--monstersLeft=monstersLeft+1
 	end
 
 	if ScriptLib.GetGroupVariableValue(context, "extra_monster_69")==1 then
-		create_route=math.random(#package_tide_defs[1])
+		local create_route=math.random(#package_tide_defs[1])
 		ScriptLib.AutoPoolMonsterTide(context, 69, defs.group_id, {12052},package_tide_defs[1][create_route].route, package_tide_defs[1][create_route].route_points, affix, {total_count=1, min_count=1, max_count=1, tag=package_tide_defs[1][create_route].tags,fill_time=package_tide_defs[1][create_route].fill_time or 5,fill_count=package_tide_defs[1][create_route].fill_count or 2})
 		--monstersLeft=monstersLeft+1
 	end
 
 	if ScriptLib.GetGroupVariableValue(context, "extra_monster_70")==1 then
-		create_route=math.random(#package_tide_defs[1])
+		local create_route=math.random(#package_tide_defs[1])
 		ScriptLib.AutoPoolMonsterTide(context, 70, defs.group_id, {12053},package_tide_defs[1][create_route].route, package_tide_defs[1][create_route].route_points, affix, {total_count=1, min_count=1, max_count=1, tag=package_tide_defs[1][create_route].tags,fill_time=package_tide_defs[1][create_route].fill_time or 5,fill_count=package_tide_defs[1][create_route].fill_count or 2})
 		--monstersLeft=monstersLeft+1
 	end
 
 	ScriptLib.SetGroupVariableValue(context, "monster_tide_index", index)
-
+	
 	return 0
 end
 
@@ -221,8 +221,8 @@ function set_monster_preview(context, prev_context, param1, param2, param3)
 	ScriptLib.SetGroupVariableValue(context, "challenge_group", param1)
 
 	math.randomseed(ScriptLib.GetServerTime(context))
-	randomidx=0
-	monster_preview_table={}
+	local randomidx=0
+	local monster_preview_table={}
 	for i=1,#package_tide_defs do
 		for j=1,#package_tide_defs[i] do
 			randomidx=math.random(#package_tide_defs[i][j].monster_package)
@@ -234,7 +234,7 @@ function set_monster_preview(context, prev_context, param1, param2, param3)
 end
 
 function action_END_DELAY(context, evt)
-	challenge_group = ScriptLib.GetGroupVariableValue(context, "challenge_group")
+	local challenge_group = ScriptLib.GetGroupVariableValue(context, "challenge_group")
 	ScriptLib.PrintContextLog(context, "## challenge_group = "..challenge_group)
 	ScriptLib.ExecuteGroupLua(context, challenge_group, "tide_done", {0})
 	ScriptLib.PrintContextLog(context, "## TD_LOG : Group Monster Tide End -> "..defs.group_id)
@@ -243,9 +243,9 @@ end
 
 function monster_tide_over(context)
 	ScriptLib.PrintContextLog(context, "## monster_tide_over")
-	tide = ScriptLib.GetGroupVariableValue(context, "tide_ptr")
+	local tide = ScriptLib.GetGroupVariableValue(context, "tide_ptr")
 	if tide >= #package_tide_defs then
-		challenge_group = ScriptLib.GetGroupVariableValue(context, "challenge_group")
+		local challenge_group = ScriptLib.GetGroupVariableValue(context, "challenge_group")
 		ScriptLib.PrintContextLog(context, "## challenge_group = "..challenge_group)
 		ScriptLib.ExecuteGroupLua(context, challenge_group, "tide_done", {0})
 		ScriptLib.PrintContextLog(context, "## TD_LOG : Group Monster Tide End -> "..defs.group_id)
@@ -254,9 +254,9 @@ function monster_tide_over(context)
 	--tide自然结束,开启下一tide
 	--if evt.param1 == 0 then
 	tide = tide+1
-	index=ScriptLib.GetGroupVariableValue(context, "monster_tide_index")
-	monster_pool_table=ScriptLib.GetMechanicusMonsterPoolVec(context,ScriptLib.GetGroupVariableValue(context, "challenge_group"),999)
-	affix={}
+	local index=ScriptLib.GetGroupVariableValue(context, "monster_tide_index")
+	local monster_pool_table=ScriptLib.GetMechanicusMonsterPoolVec(context,ScriptLib.GetGroupVariableValue(context, "challenge_group"),999)
+	local affix={}
 	if ScriptLib.GetGroupVariableValue(context, "buff_monster_4112")==1 then
 		table.insert(affix,4112)
 	end

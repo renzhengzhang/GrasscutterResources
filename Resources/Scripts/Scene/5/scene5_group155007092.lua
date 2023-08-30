@@ -19,7 +19,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-gadgetlist =
+local gadgetlist =
 {
 	{defs.gadget_controller_01, defs.gadget_Rune_01, "Rune_01"},
 	{defs.gadget_controller_02, defs.gadget_Rune_02, "Rune_02"},

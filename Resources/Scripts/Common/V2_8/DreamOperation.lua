@@ -22,7 +22,7 @@ defs = {
 
 ]]
 
-Triggers = {
+local Triggers = {
 	{ config_id = 8000001, name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_Group_Load", trigger_count = 0 },
 }
 
@@ -53,7 +53,7 @@ end
 
 --ability Init完成后，再赋值
 function SLC_DreamOperation_GetFlag(context)
-	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, config_id, "SGV_Control_Target", defs.answers[config_id].markflag)
 	ScriptLib.PrintContextLog(context, "## [DreamOperation] LF_InitGear. config_id@"..config_id.." markflag@"..defs.answers[config_id].markflag)
@@ -65,14 +65,14 @@ end
 function SLC_DreamOperation_Turn(context, param)
 
 	--本组解谜是否完成
-	count = LF_CountTableNum(context, defs.answers)
+	local count = LF_CountTableNum(context, defs.answers)
 	if count <= ScriptLib.GetGroupVariableValue(context, "unlock_num") then
 		return 0
 	end
 
 	--是否为组内已被完成的操作台
-	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
-	gadget_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, config_id)
+	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	local gadget_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, config_id)
 	if 202 == gadget_state then
 		return 0
 	end
@@ -90,9 +90,9 @@ end
 function LF_HandleInput(context, config_id, param)
 
 	--获取当前是该操作台的第几次输入
-	index = ScriptLib.GetGroupTempValue(context, "g_"..config_id, {})
+	local index = ScriptLib.GetGroupTempValue(context, "g_"..config_id, {})
 
-	key = defs.answers[config_id].key
+	local key = defs.answers[config_id].key
 
 	ScriptLib.PrintContextLog(context, "## [DreamOperation] LF_HandleInput. input_index@"..index.." input@"..param.." answer@"..key[index])
 
@@ -109,7 +109,7 @@ function LF_HandleInput(context, config_id, param)
 		ScriptLib.SetGadgetStateByConfigId(context, config_id, 202)
 		ScriptLib.ChangeGroupVariableValue(context, "unlock_num", 1)
 
-		num = ScriptLib.GetGroupVariableValue(context, "unlock_num")
+		local num = ScriptLib.GetGroupVariableValue(context, "unlock_num")
 		ScriptLib.PrintContextLog(context, "## [DreamOperation] DreamOperation puzzle done. config_id@"..config_id)
 
 	else
@@ -121,7 +121,7 @@ function LF_HandleInput(context, config_id, param)
 end
 
 function LF_CountTableNum(context, t)
-	count = 0
+	local count = 0
 	for k,v in pairs(t) do
 		count = count + 1
 	end

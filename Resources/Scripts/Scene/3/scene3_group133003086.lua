@@ -138,10 +138,10 @@ end
 function action_EVENT_ENTER_REGION_71(context, evt)
 	--当教学阶段过后，玩家再次游历这片森林会触发遭遇战斗
 	math.randomseed(os.time())
-	n = math.random(1,3)
-	c_tutorialover = ScriptLib.GetGroupVariableValue(context, "is_TutorialOver")
+	local n = math.random(1,3)
+	local c_tutorialover = ScriptLib.GetGroupVariableValue(context, "is_TutorialOver")
 
-	c_direction = ScriptLib.GetGroupVariableValue(context, "from_north")
+	local c_direction = ScriptLib.GetGroupVariableValue(context, "from_north")
 
 	if c_tutorialover ~= 0 then
 	-- 判断玩家从北方进入

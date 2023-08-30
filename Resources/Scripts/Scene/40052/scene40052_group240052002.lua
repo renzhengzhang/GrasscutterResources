@@ -113,8 +113,8 @@ function action_EVENT_SELECT_OPTION_2003(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 240052010, 3)
 
 	-- 触发镜头注目，注目位置为坐标{x=748.0575, y=64.85, z=356.871}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-	pos = {x=748.0575, y=64.85, z=356.871}
-	pos_follow = {x=758.21, y=58.966, z=388.89}
+	local pos = {x=748.0575, y=64.85, z=356.871}
+	local pos_follow = {x=758.21, y=58.966, z=388.89}
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      disable_protect = 1, blend_type = 1, blend_duration = 1,

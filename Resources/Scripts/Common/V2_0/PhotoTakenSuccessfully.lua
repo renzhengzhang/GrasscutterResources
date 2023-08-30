@@ -5,7 +5,7 @@ function LF_Initialize_Group(triggers, suites)
 end
 
 function PhotoTakenSuccessfully(context)
-    entityID=0
+    local entityID=0
 	ScriptLib.ChangeGroupVariableValue(context, "takeCount", 1)
 	for i=1,#gadgets do
 		entityID=ScriptLib.GetEntityIdByConfigId(context, gadgets[i].config_id)

@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-statueConfig =
+local statueConfig =
 {
     ["Statue_Rotated1"] = {config_id = 391001,valueName = "Statue_Rotate1"},
     ["Statue_Rotated2"] = {config_id = 391004,valueName = "Statue_Rotate2"},

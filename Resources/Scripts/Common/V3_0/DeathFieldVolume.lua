@@ -7,7 +7,7 @@
 ||	Protection:     [Protection]
 =======================================]]
 
-DeathFieldVolume_Trigger = {
+local DeathFieldVolume_Trigger = {
     { config_id = 90800001, name = "CheckVolumeLoad_GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "",
       condition = "", action = "action_CheckVolumeLoad", trigger_count = 0},
     { config_id = 90800002, name = "VolumeSuiteChange_DEATH_ZONE_STATUS_CHANGE", event = EventType.EVENT_DEATH_ZONE_STATUS_CHANGE, source = "",
@@ -29,7 +29,7 @@ end
 --======================================]]
 function action_CheckVolumeLoad(context,evt)
     -- 查询死域值并根据死域值设置LogicState
-    curDeathStatus = ScriptLib.GetDeathZoneStatus(context,0)
+    local curDeathStatus = ScriptLib.GetDeathZoneStatus(context,0)
     ScriptLib.PrintContextLog(context, "## TD_DeathFieldVolume GroupLoad: 当前Group"..base_info.group_id.."死域状态为"..curDeathStatus)
     if 0 == curDeathStatus then
         ScriptLib.PrintContextLog(context, "## TD_DeathFieldVolume GroupLoad: 当前Group"..base_info.group_id.."已解除，但是Suite没有修改，切换Suite到2")
@@ -41,7 +41,7 @@ end
 
 function action_VolumeSuiteChange(context,evt)
     -- 查询死域值并根据死域值设置LogicState
-    curDeathStatus = ScriptLib.GetDeathZoneStatus(context,0)
+    local curDeathStatus = ScriptLib.GetDeathZoneStatus(context,0)
     ScriptLib.PrintContextLog(context, "## TD_DeathFieldStandard DeathZoneChange 死域LogicState切换为" .. curDeathStatus)
     if 0 == curDeathStatus then
         ScriptLib.PrintContextLog(context, "## TD_DeathFieldVolume GroupLoad: 当前Group"..base_info.group_id.."已解除，切换Suite到2")
@@ -57,7 +57,7 @@ end
 
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list

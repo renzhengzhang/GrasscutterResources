@@ -146,8 +146,8 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_3007(context, evt)
-	count = ScriptLib.GetGroupVariableValue(context, "puzzle_count")
-	pos = { x = 343, y = -11, z = 285 }
+	local count = ScriptLib.GetGroupVariableValue(context, "puzzle_count")
+	local pos = { x = 343, y = -11, z = 285 }
 
 	if count == 1 then
 	        ScriptLib.SetGroupVariableValue(context, "puzzle_count", 2)
@@ -229,8 +229,8 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_3012(context, evt)
-	count = ScriptLib.GetGroupVariableValue(context, "puzzle_count")
-	pos = { x = 343, y = -11, z = 285 }
+	local count = ScriptLib.GetGroupVariableValue(context, "puzzle_count")
+	local pos = { x = 343, y = -11, z = 285 }
 
 	if count == 2 then
 	        ScriptLib.SetGroupVariableValue(context, "puzzle_count", 3)

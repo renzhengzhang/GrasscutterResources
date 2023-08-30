@@ -4,14 +4,14 @@
 ||	owner: 		luyao.huang
 ||	description:	整合了各类沙虫控制方法，可以直接调用或通过tpl调用
 ||	LogName:	SandwormControlToolkit
-||	Protection:
+||	Protection:	
 =======================================]]--
 
-business_type = 3
-sandworm_params_config_id = 0
+local business_type = 3
+local sandworm_params_config_id = 0
 
 
-business_type_defs =
+local business_type_defs = 
 {
     --大世界
     --目标玩家为沙虫区域内的一个随机合法玩家
@@ -26,7 +26,7 @@ business_type_defs =
 
 --玩法业务类型到优先级
 --不一定非要用这个
-business_type_to_priority =
+local business_type_to_priority = 
 {
     [business_type_defs.bigworld] = 1,
     [business_type_defs.challenge] = 2,
@@ -34,7 +34,7 @@ business_type_to_priority =
 }
 
 
-local_defs =
+local_defs = 
 {
     sandworm_control_group = 133314001,
     alert_max_value = 1000,
@@ -75,7 +75,7 @@ end
 
 --请求新增一组沙虫参数（注意这个方法与是否召唤沙虫无关，沙虫仍然跟随警戒值逻辑进行计算）
 function LF_Create_Sandworm_Params(context,priority)
-    group_id = base_info.group_id
+    local group_id = base_info.group_id
     ScriptLib.ExecuteGroupLua(context,local_defs.sandworm_control_group,"LF_Request_Create_Sandworm_Params",{group_id,priority})
 end
 
@@ -84,20 +84,20 @@ end
 --立刻在玩家身边召唤一只沙虫，如果希望召出来的是指定的参数，则需要填入一个极高的优先级
 --本质是直接填满沙虫警戒值
 function LF_Create_Normal_Sandworm_Immediately(context,priority)
-    group_id = base_info.group_id
+    local group_id = base_info.group_id
     ScriptLib.ExecuteGroupLua(context,local_defs.sandworm_control_group,"LF_Request_Create_Sandworm_Params",{group_id,priority})
     ScriptLib.ExecuteGroupLua(context,local_defs.sandworm_control_group,"LF_Request_Set_Alert_Value",{local_defs.alert_max_value+1})
 end
 
 --根据玩法的业务类型创生一只沙虫，遵循玩法业务类型的优先级
 function LF_Create_Normal_Sandworm_By_Play_Business(context)
-    priority = business_type_to_priority[business_type]
+    local priority = business_type_to_priority[business_type]
     LF_Create_Normal_Sandworm_Immediately(context,priority)
 end
 
 --强制在玩家身边召唤一只沙虫，这个操作带有极高的优先级，注意尽量保证使用的时候环境是干净的
 function LF_Force_Create_Normal_Sandworm_Immediately(context)
-    priority = 99999
+    local priority = 99999
     LF_Create_Normal_Sandworm_Immediately(context,priority)
 end
 
@@ -105,7 +105,7 @@ end
 --立刻在指定位置召唤一只沙虫，如果希望召出来的是指定的参数，则需要填入一个极高的优先级
 --本质是直接填满沙虫警戒值
 function LF_Create_Direct_Sandworm_Immediately(context,priority,pos_x,pos_y,pos_z)
-    group_id = base_info.group_id
+    local group_id = base_info.group_id
     ScriptLib.SetGroupVariableValue(context,"target_pos_x",pos_x)
     ScriptLib.SetGroupVariableValue(context,"target_pos_y",pos_y)
     ScriptLib.SetGroupVariableValue(context,"target_pos_z",pos_z)
@@ -116,14 +116,14 @@ end
 
 --根据玩法的业务类型在指定位置直接召唤一只沙虫，遵循玩法业务类型的优先级
 function LF_Create_Normal_Sandworm_By_Play_Business(context,pos_x,pos_y,pos_z)
-    priority = business_type_to_priority[business_type]
+    local priority = business_type_to_priority[business_type]
     LF_Create_Direct_Sandworm_Immediately(context,priority,pos_x,pos_y,pos_z)
 end
 
 --强制在指定位置召唤一只沙虫，这个操作带有极高的优先级，会占用当前其他区域/挑战召出来的沙虫参数
 --这个行为是一次性的，召唤完成后会清理掉当前的沙虫参数
 function LF_Force_Direct_Sandworm_Immediately(context,pos_x,pos_y,pos_z)
-    priority = 99999
+    local priority = 99999
     LF_Create_Direct_Sandworm_Immediately(context,priority,pos_x,pos_y,pos_z)
 end
 

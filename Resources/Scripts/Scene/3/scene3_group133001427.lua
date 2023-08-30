@@ -10,7 +10,7 @@ defs = {
 
 -- DEFS_MISCS
 --配在阶段Group中
-stage_def = {
+local stage_def = {
         [1] = {
                 --根据阶段创建的group,在阶段group中标记
                 [1] = {2,3,4,5},

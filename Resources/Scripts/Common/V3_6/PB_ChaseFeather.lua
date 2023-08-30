@@ -18,7 +18,7 @@ defs = {
 
 --======================================================================================================================
 --Events || Group内EVENT事件,记得初始化和return 0
-CF_Triggers = {
+local CF_Triggers = {
 	{ name = "group_load", config_id = 8000101, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
 	{ name = "platform_arrival", config_id = 8000102, event = EventType.EVENT_PLATFORM_ARRIVAL, source = "", condition = "", action = "action_platform_arrival", trigger_count = 0 },
 	{ name = "any_gadget_die", config_id = 8000103, event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_any_gadget_die", trigger_count = 0 },
@@ -83,14 +83,14 @@ function SLC_BeChased(context)
 		return 0
 	end
 
-	cur_pos = ScriptLib.GetGroupTempValue(context, "CurrentPos", {base_info.group_id})
+	local cur_pos = ScriptLib.GetGroupTempValue(context, "CurrentPos", {base_info.group_id})
 	if cur_pos == 1 then
 		ScriptLib.PrintContextLog(context, "##[PB_ChaseFeather.lua]:追逐开始,闪现到目标点")
 		ScriptLib.SetGroupTempValue(context, "CurrentPos", 2, {base_info.group_id})
 		ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, defs.feather)
 
-		_ret,R_pos,R_rot = ScriptLib.GetPlatformArrayInfoByPointId(context, defs.pointarray_id, 2)
-		blink_pos = {x = R_pos.x, y = R_pos.y, z = R_pos.z}
+		local _ret,R_pos,R_rot = ScriptLib.GetPlatformArrayInfoByPointId(context, defs.pointarray_id, 2)
+		local blink_pos = {x = R_pos.x, y = R_pos.y, z = R_pos.z}
 		ScriptLib.CreateGadgetByConfigIdByPos(context, defs.feather, blink_pos, {x = 0, y = 0, z = 0})
 		ScriptLib.PrintContextLog(context, "##[PB_ChaseFeather.lua]:闪现结束".._ret)
 		return 0

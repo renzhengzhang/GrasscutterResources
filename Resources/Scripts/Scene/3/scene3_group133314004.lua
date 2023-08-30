@@ -4,22 +4,22 @@ base_info = {
 }
 
 -- DEFS_MISCS
-I_connectors =
+local I_connectors =
 {
     [1] = 4008
 }
 
-L_connectors =
+local L_connectors =
 {
 
 }
 
-containers =
+local containers =
 {
     [1] = 4003
 }
 
-lights =
+local lights =
 {
     [1] = 4005,
     [2] = 4006,
@@ -28,29 +28,29 @@ lights =
     [5] = 4010
 }
 
-streams =
+local streams =
 {
    [containers[1]] = {I_connectors[1],lights[1],lights[2],lights[3],lights[4],lights[5]}
 }
 
-L_connections =
+local L_connections =
 {
 
 }
 
-base_interval = 2
+local base_interval = 2
 
-special_interval =
+local special_interval =
 {
    {upstream = I_connectors[1], downstream = lights[1], interval = 3}
 }
 
-worktops =
+local worktops =
 {
    [1] = 4001
 }
 
-connector_to_worktop =
+local connector_to_worktop =
 {
     [I_connectors[1]] = worktops[1]
 }
@@ -152,7 +152,7 @@ end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_4004(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7316811)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7316811)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

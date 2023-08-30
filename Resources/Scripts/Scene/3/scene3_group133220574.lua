@@ -151,8 +151,8 @@ function action_EVENT_ENTER_REGION_574008(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（-2655.858，204.1，-4562.9），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-2655.858, y=204.1, z=-4562.9}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-2655.858, y=204.1, z=-4562.9}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -332,8 +332,8 @@ function action_EVENT_SELECT_OPTION_574021(context, evt)
 
 	-- 将在groupid为 133220574 中的 configid为 574004 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {203,204,901,902}
-	_key = 0
+	local _gadgetStateList = {203,204,901,902}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -395,8 +395,8 @@ function action_EVENT_SELECT_OPTION_574022(context, evt)
 
 	-- 将在groupid为 133220574 中的 configid为 574005 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {203,204,901,902}
-	_key = 0
+	local _gadgetStateList = {203,204,901,902}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -458,8 +458,8 @@ function action_EVENT_SELECT_OPTION_574023(context, evt)
 
 	-- 将在groupid为 133220574 中的 configid为 574006 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {203,204,901,902}
-	_key = 0
+	local _gadgetStateList = {203,204,901,902}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -521,8 +521,8 @@ function action_EVENT_SELECT_OPTION_574024(context, evt)
 
 	-- 将在groupid为 133220574 中的 configid为 574007 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {203,204,901,902}
-	_key = 0
+	local _gadgetStateList = {203,204,901,902}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -954,8 +954,8 @@ function action_EVENT_GADGET_STATE_CHANGE_574034(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（-2654.943，216.45，-4550.968），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-2654.943, y=216.45, z=-4550.968}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-2654.943, y=216.45, z=-4550.968}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = true, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 5 }) then

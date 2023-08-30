@@ -303,8 +303,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_46012(context, evt)
-	    k=0
-	    t=0
+	    local k=0
+	    local t=0
 
 	        k=ScriptLib.GetGroupVariableValue(context, "key")
 	        t=ScriptLib.GetGroupVariableValue(context, "times")
@@ -335,8 +335,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_46013(context, evt)
-	    k=0
-	    t=0
+	    local k=0
+	    local t=0
 
 	        k=ScriptLib.GetGroupVariableValue(context, "key")
 	        t=ScriptLib.GetGroupVariableValue(context, "times")
@@ -367,8 +367,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_46014(context, evt)
-	    k=0
-	    t=0
+	    local k=0
+	    local t=0
 
 	        k=ScriptLib.GetGroupVariableValue(context, "key")
 	        t=ScriptLib.GetGroupVariableValue(context, "times")
@@ -399,8 +399,8 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_46015(context, evt)
-	    k=0
-	    t=0
+	    local k=0
+	    local t=0
 
 	        k=ScriptLib.GetGroupVariableValue(context, "key")
 	        t=ScriptLib.GetGroupVariableValue(context, "times")
@@ -453,8 +453,8 @@ function action_EVENT_VARIABLE_CHANGE_46016(context, evt)
 		    ScriptLib.RemoveExtraGroupSuite(context, 199003046, 3)
 			    ScriptLib.AddExtraGroupSuite(context, 199003046, 4)
 		ScriptLib.AddQuestProgress(context, "quest7902305finish")
-		pos = {x=-716, y=149, z=-7}
-		  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-716, y=149, z=-7}
+		  local pos_follow = {x=0, y=0, z=0}
 		    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 		                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 		                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -468,8 +468,8 @@ function action_EVENT_VARIABLE_CHANGE_46016(context, evt)
 					ScriptLib.SetGroupVariableValue(context, "key", 0)
 		   ScriptLib.RemoveExtraGroupSuite(context, 199003046, 4)
 					ScriptLib.AddExtraGroupSuite(context, 199003046, 3)
-		pos = {x=-716, y=149, z=-7}
-		  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-716, y=149, z=-7}
+		  local pos_follow = {x=0, y=0, z=0}
 		    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 		                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 		                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

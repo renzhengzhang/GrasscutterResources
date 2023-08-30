@@ -122,7 +122,7 @@ end
 function action_EVENT_ENTER_REGION_75002(context, evt)
 	if ScriptLib.GetHostQuestState(context,4007609)==3 then
 		if evt.uid ~= nil then
-	    t_pos = {x=514, y=847, z=-1205}
+	    local t_pos = {x=514, y=847, z=-1205}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=1, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1

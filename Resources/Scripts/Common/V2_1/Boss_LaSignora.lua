@@ -1,17 +1,17 @@
 -- Trigger变量
 ---[[
-screenGadgetID = { 70310076, 70310077}
-transPos =
+local screenGadgetID = { 70310076, 70310077}
+local transPos =
 {
     [1] = { x = 1.5, y = 0.147, z = -15 },
     [2] = { x = -1.5, y = 0.147, z = -15 },
     [3] = { x = 4.5, y = 0.147, z = -15 },
     [4] = { x = -4.5, y = 0.147, z = -15 },
 }
-bossConfigID = 1004
+local bossConfigID = 1004
 --]]
 --------Boss女士-------------
-tempTrigger = {
+local tempTrigger = {
     { config_id = 2330001, name = "TIME_AXIS_MovieEventSolo", event = EventType.EVENT_TIME_AXIS_PASS, source = "MovieEventSolo",
       condition = "", action = "action_TIME_AXIS_MovieEventSolo", trigger_count = 0},
     { config_id = 2330002, name = "TIME_AXIS_MovieEvent", event = EventType.EVENT_TIME_AXIS_PASS, source = "MovieEvent",
@@ -27,7 +27,7 @@ function LF_Initialize_Level()
         table.insert(suites[1].triggers, v.name)
     end
 
-    var = { config_id=50000001,name = "PhaseStep", value = 0, no_refresh = false }   --阶段数据
+    local var = { config_id=50000001,name = "PhaseStep", value = 0, no_refresh = false }   --阶段数据
     variables[var.name] = var
     return 0
 end
@@ -38,7 +38,7 @@ function PlayCutScene(context)
     ScriptLib.ModifyClimatePolygonParamTable(context, 1, {climate_type=0,meter_inherit_ratio=0})
     ScriptLib.PrintContextLog(context, "## TD LaSignora Boss1已死亡，气候重置，等待创生Boss切换新气候")
 
-    uidList=ScriptLib.GetSceneUidList(context)
+    local uidList=ScriptLib.GetSceneUidList(context)
     if #uidList < 2 then
         ScriptLib.PlayCutScene(context, defs.cutSceneID, 0)
         ScriptLib.InitTimeAxis(context, "MovieEventSolo",{2}, false)
@@ -69,7 +69,7 @@ function ChangeClimateToHotMonster(context)
 end
 --------事件函数----------
 function action_TIME_AXIS_MovieEventSolo(context)
-    uidList=ScriptLib.GetSceneUidList(context)
+    local uidList=ScriptLib.GetSceneUidList(context)
     ScriptLib.CreateMonster(context, { config_id = 1004, delay_time = 0.5 })
     for k,v in pairs(gadgets) do
         if IsGadgetScreen(v.config_id) then
@@ -105,7 +105,7 @@ end
 --------私有函数----------
 -- 是否为屏风Gadget
 function IsGadgetScreen(config_id)
-    gadgetId = gadgets[config_id].gadget_id
+    local gadgetId = gadgets[config_id].gadget_id
     for i = 1, #screenGadgetID, 1 do
         if(screenGadgetID[i] == gadgetId) then
             return true
@@ -116,3 +116,4 @@ end
 
 LF_Initialize_Level()
 --- ServerUploadTool Save to [/root/env/data/lua/common/V2_1]  ---
+

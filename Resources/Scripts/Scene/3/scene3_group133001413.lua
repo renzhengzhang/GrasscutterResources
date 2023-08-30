@@ -14,7 +14,7 @@ defs = {
 
 -- DEFS_MISCS
 --交能量圈的模式，1为动态模式，2为静态模式
-circle_type_defs = {
+local circle_type_defs = {
         [1] = 1,
         [2] = 2,
         [3] = 2,
@@ -22,7 +22,7 @@ circle_type_defs = {
 }
 
 --配在主Group中
-progress_def = {
+local progress_def = {
         ["normal"] = {0,700,1400,2000},
         ["hard"] = {0,700,1400,2000},
         ["nightmare"] = {0,700,1400,2000},
@@ -30,7 +30,7 @@ progress_def = {
 }
 
 --根据progress对应的monster_tide,配在主group中
-tide_defs = {
+local tide_defs = {
         [1] = {
                 [0] = {suite={2,3},weight={50,50},circle=3},
                 [1] = {suite={4,5,6,7},weight={25,25,25,25},circle=5},
@@ -56,7 +56,7 @@ tide_defs = {
 }
 
 --点名buff参数,配在主group中
-buff_def = {
+local buff_def = {
         --difficulty
         [1] = {
                 --stage
@@ -81,7 +81,7 @@ buff_def = {
 
 
 --monster_tide的启动参数,配在主group中
-tide_suite_config = {
+local tide_suite_config = {
         [2] = {total=12,min=1,max=6,next=22,delay=3},
         [3] = {total=12,min=1,max=6,next=23,delay=3},
         [4] = {total=12,min=1,max=6,next=24,delay=3},
@@ -1148,7 +1148,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_413005(context, evt)
-	flag = ScriptLib.GetGroupVariableValue(context, "interact_flag")
+	local flag = ScriptLib.GetGroupVariableValue(context, "interact_flag")
 
 	if flag == 1 then
 	        ScriptLib.SetGadgetEnableInteract(context, defs.group_id, defs.gadget_aster, true)

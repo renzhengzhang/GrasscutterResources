@@ -4,10 +4,10 @@ base_info = {
 }
 
 -- DEFS_MISCS
-GroupId = 247003009
-point_id_list = {}
-MainGroupID = 247003001
-RegionID = 9001
+local GroupId = 247003009
+local point_id_list = {}
+local MainGroupID = 247003001
+local RegionID = 9001
 
 --================================================================
 --

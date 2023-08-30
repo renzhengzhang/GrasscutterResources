@@ -14,11 +14,11 @@ defs = {
 
 -- DEFS_MISCS
 function GetNextPath(context)
-	path = {}
-	index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
-	stoppoint = defs.pointInfo[index]
+	local path = {}
+	local index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
+	local stoppoint = defs.pointInfo[index]
 	ScriptLib.PrintLog(context, "stop point : "..stoppoint)
-	currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
+	local currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
 	for i=currentNodeIndex + 1,stoppoint do
 		table.insert(path,i)
 	end
@@ -275,8 +275,8 @@ function action_EVENT_SELECT_OPTION_24025(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（199，329，2390），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=199, y=329, z=2390}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=199, y=329, z=2390}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -358,7 +358,7 @@ function action_EVENT_PLATFORM_REACH_POINT_24029(context, evt)
 	    return 0
 	end
 
-	next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
+	local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
 	next = next + 1
 	ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
 	ScriptLib.SetGroupVariableValue(context,"currentPathNodeIndex",evt.param3)
@@ -371,7 +371,7 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_24030(context, evt)
 	        if defs.gadget_thunderThelfID ~= evt.param1 then
 	            return false
 	        end
-	        state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
+	        local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
 	        ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
 	        if state == 202 then
 	            return false

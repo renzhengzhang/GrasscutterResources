@@ -20,7 +20,7 @@ defs = {
         operator_group_id = 133004475
 }
 
-point_array_defs = {
+local point_array_defs = {
         [460027] = {point_array_id = 300400001, point_id_list = {1,2}, route_type = 1},
         [460022] = {point_array_id = 300400001, point_id_list = {5,8}, route_type = 1},
         [460023] = {point_array_id = 300400001, point_id_list = {4,7}, route_type = 1},
@@ -72,7 +72,7 @@ point_array_defs = {
         [460148] = {point_array_id = 300400010, point_id_list = {9,1,2,3,4,5,6,7,8}, route_type = 2}
 }
 
-balloon_config = {
+local balloon_config = {
         { gadget_id = 70350174, min = 1, max = 2},
         { gadget_id = 70350175, min = 1, max = 1}
 }

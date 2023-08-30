@@ -15,7 +15,7 @@ defs = {
 -- DEFS_MISCS
 function MovePlatform(context)
 	ScriptLib.PrintLog(context, "platform to move")
-	pathnodeindex = ScriptLib.GetGroupVariableValue(context, "currentPathNode") + 1
+	local pathnodeindex = ScriptLib.GetGroupVariableValue(context, "currentPathNode") + 1
 
 	if pathnodeindex > defs.maxPathNode then
 		pathnodeindex = defs.maxPathNode

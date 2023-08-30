@@ -9,10 +9,10 @@ defs = {
 }
 
 -- DEFS_MISCS
-Worktops = {55005}
-EnvControlGadgets = {55005,55006,55007}
-DayAppearGadgets = {55004}
-NightAppearGadgets = {55002}
+local Worktops = {55005}
+local EnvControlGadgets = {55005,55006,55007}
+local DayAppearGadgets = {55004}
+local NightAppearGadgets = {55002}
 
 --================================================================
 --

@@ -4,28 +4,28 @@ base_info = {
 }
 
 -- DEFS_MISCS
-BulletTypeList = {
+local BulletTypeList = {
 {{gadgetstate= 4, weight= 100}, },
 {{gadgetstate= 5, weight= 100}, },
 {{gadgetstate= 8, weight= 100}, },
 {{gadgetstate= 0, weight= 100}, },
 }
 
-BulletTypeList2 = {
+local BulletTypeList2 = {
 {{gadgetstate= 3, weight= 100}, },
 {{gadgetstate= 6, weight= 100}, },
 {{gadgetstate= 8, weight= 100}, },
 {{gadgetstate= 0, weight= 100}, },
 }
 
-BulletTypeList3 = {
+local BulletTypeList3 = {
 {{gadgetstate= 1, weight= 100}, },
 {{gadgetstate= 7, weight= 100}, },
 {{gadgetstate= 8, weight= 100}, },
 {{gadgetstate= 0, weight= 100}, },
 }
 
-BulletTypeList4 = {
+local BulletTypeList4 = {
 {{gadgetstate= 3, weight= 30}, {gadgetstate= 4, weight= 40}, {gadgetstate= 7, weight= 30}},
 {{gadgetstate= 2, weight= 35}, {gadgetstate= 5, weight= 35}, {gadgetstate= 6, weight= 30}},
 {{gadgetstate= 8, weight= 100},},
@@ -35,31 +35,31 @@ BulletTypeList4 = {
 
 BulletStep = {{list= BulletTypeList},{list = BulletTypeList2},{list = BulletTypeList3} ,{list = BulletTypeList4}}
 
-regionIndex = 9003
+local regionIndex = 9003
 
-Times = 1
+local Times = 1
 
-TripTimes = 1
+local TripTimes = 1
 
-GroupId = 235800009
+local GroupId = 235800009
 
-BulletConfigId = 9001
+local BulletConfigId = 9001
 
-TripConfigID = 1012
+local TripConfigID = 1012
 
-TimeAxis = {1,25,45,55}
+local TimeAxis = {1,25,45,55}
 
-random_flower_time_axis = {1,11,21,31,41}
+local random_flower_time_axis = {1,11,21,31,41}
 
-random_flower_sum = {min=5 , max=8}
+local random_flower_sum = {min=5 , max=8}
 
-flower_life_time = 10
+local flower_life_time = 10
 
-flower_suite_index = 3
+local flower_suite_index = 3
 
-Bullet_PerfectScore = 80
+local Bullet_PerfectScore = 80
 
-Bullet_PerfectScore_count = 5
+local Bullet_PerfectScore_count = 5
 
 --================================================================
 --

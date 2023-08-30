@@ -4,18 +4,18 @@ base_info = {
 }
 
 -- DEFS_MISCS
-EnvControlGadgets = {
+local EnvControlGadgets = {
 231005
 }
 
 --仅在白天出现的gadget（夜晚会默认销毁）
-DayAppearGadgets =
+local DayAppearGadgets =
 {
  231006
 }
 
 --仅在夜晚出现的gadget（白天会默认销毁）
-NightAppearGadgets =
+local NightAppearGadgets =
 {
     231001
 }
@@ -162,7 +162,7 @@ end
 -- 触发操作
 function action_EVENT_GROUP_LOAD_231007(context, evt)
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
-	is_daynight_gadget = false
+	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
 	  if (231005 == EnvControlGadgets[i]) then
 	    is_daynight_gadget = true
@@ -173,8 +173,8 @@ function action_EVENT_GROUP_LOAD_231007(context, evt)
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
 	    return -1
 	end
-	current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
-	current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
+	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
 	if (current_env_state == "2_4_Day") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,231005,202)
 	end

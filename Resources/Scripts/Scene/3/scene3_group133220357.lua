@@ -28,7 +28,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-matrix =
+local matrix =
 {
 {defs.gadget_11,defs.gadget_12,defs.gadget_13,defs.gadget_14},
 
@@ -49,7 +49,7 @@ function FaildProcess(context,str)
 
 	for k,v in pairs(matrix) do
 		for ik,iv in pairs(v) do
-			tempGadgeState = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, iv)
+			local tempGadgeState = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, iv)
 			--除了禁用格和起始格，全部格子下降
 			if tempGadgeState ~= 903 then
 				ScriptLib.SetGadgetStateByConfigId(context, iv, 201)
@@ -73,7 +73,7 @@ function LuaCallFail(context)
 end
 
 function LookUpPosByConfigID(context,config_id)
-	pos
+	local pos
 		for x=1,#matrix do
 			for y=1,#matrix[x] do
 				if config_id == matrix[x][y] then
@@ -86,9 +86,9 @@ end
 
 --检测玩法是否成功
 function CheckIsSuccess(context)
-	score=0
-	state=nil
-	maxscore = #matrix * #matrix[1]
+	local score=0
+	local state=nil
+	local maxscore = #matrix * #matrix[1]
 
 	for i=1,#matrix do
 		for j=1,#matrix[i] do
@@ -118,8 +118,8 @@ end
 
 --检测两个方块是否是相邻方块
 function CheckTwoGadgetIsAdjacent(context,current_idx,config_two)
-	x=math.floor(current_idx/10)
-	y=current_idx%10
+	local x=math.floor(current_idx/10)
+	local y=current_idx%10
 	if matrix[x][y]==config_two then
 		return 0
 	end
@@ -408,7 +408,7 @@ function action_EVENT_GADGET_STATE_CHANGE_357010(context, evt)
 		--将初次激活的地板设置为当前的Current_stone
 		if evt.param1==202 and evt.param3 == 201 and ScriptLib.GetGroupVariableValue(context, "start_enter") == 0 then
 			ScriptLib.SetGroupVariableValue(context, "start_enter", 1)
-			pos = LookUpPosByConfigID(context,evt.param2)
+			local pos = LookUpPosByConfigID(context,evt.param2)
 			ScriptLib.SetGroupVariableValue(context, "current_stone", pos)
 		end
 
@@ -429,8 +429,8 @@ function action_EVENT_GADGET_STATE_CHANGE_357010(context, evt)
 					CheckTwoGadgetIsAdjacent(context,ScriptLib.GetGroupVariableValue(context, "current_stone"),evt.param2)
 				end
 				if evt.param1==201 and evt.param3==202 then
-					current_idx=ScriptLib.GetGroupVariableValue(context, "current_stone")
-					config_one=matrix[math.floor(current_idx/10)][current_idx%10]
+					local current_idx=ScriptLib.GetGroupVariableValue(context, "current_stone")
+					local config_one=matrix[math.floor(current_idx/10)][current_idx%10]
 					if config_one==evt.param2 then
 						ScriptLib.SetGadgetStateByConfigId(context, evt.param2, 202)
 					else

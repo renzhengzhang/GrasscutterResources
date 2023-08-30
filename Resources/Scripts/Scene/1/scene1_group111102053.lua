@@ -15,14 +15,14 @@ defs = {
 }
 
 -- DEFS_MISCS
-score = {
+local score = {
     checkpoint = 20,
     monster = 5,
 }
 
 
 
-stage =
+local stage =
 {
     [1] = {monster_suites = {2}, start_suites = {2}, tag = "Battle"},
     [2] = {monster_suites = {3,4},start_suites = {3,4}, tag = "Battle"},
@@ -30,7 +30,7 @@ stage =
     [4] = {monster_suites = {7},  start_suites = {7},   tag = "Dive"},
 }
 
-mechanism_ball_level_variable =
+local mechanism_ball_level_variable =
 {
 	[53128] = "Ball_1",
 	[53129] = "Ball_2",

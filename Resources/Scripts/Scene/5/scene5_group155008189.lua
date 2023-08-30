@@ -11,16 +11,16 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {}
-Worktops = {}
-DayAppearGadgets = {defs.gadget_sealday}
-NightAppearGadgets = {defs.gadget_sealnight}
+local Controllers = {}
+local EnvControlGadgets = {}
+local Worktops = {}
+local DayAppearGadgets = {defs.gadget_sealday}
+local NightAppearGadgets = {defs.gadget_sealnight}
 
 
 
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -54,7 +54,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -192,7 +192,7 @@ function condition_EVENT_ENTER_REGION_189006(context, evt)
 	end
 
 	-- 返回渊下宫当前是否为黑夜
-	    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 2) then
 	        return true
 	    else

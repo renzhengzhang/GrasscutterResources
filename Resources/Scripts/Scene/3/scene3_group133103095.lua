@@ -26,7 +26,7 @@ defs = {
     }
 }
 
-challengeParam = {
+local challengeParam = {
     90, -- Time
     72, -- 72//EVENT_TIME_AXIS_PASS
     666,-- TAG

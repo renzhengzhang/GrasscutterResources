@@ -16,13 +16,13 @@ defs = {
 
 --接花
 --接花玩法结束时达到关卡积分目标后奖励的能量值
-WindFlower_Clear_Bonus = 70
+local WindFlower_Clear_Bonus = 70
 --接花玩法结束时未达到关卡积分目标扣除的能量值
-WindFlower_Failed_Deduction = -10
+local WindFlower_Failed_Deduction = -10
 
-Catch_Flower_Score = 10
-Bomb_Flower_Deduction = -20
-regionIndex = 4031
+local Catch_Flower_Score = 10
+local Bomb_Flower_Deduction = -20
+local regionIndex = 4031
 
 --================================================================
 --

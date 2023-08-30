@@ -199,7 +199,7 @@ function action_EVENT_SELECT_OPTION_3(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（185，58，343），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=185, y=58, z=343}
+		local pos = {x=185, y=58, z=343}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, duration = 2, is_force = true, is_broadcast = false }) then
 					return -1
 				end
@@ -242,7 +242,7 @@ function action_EVENT_SELECT_OPTION_5(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（185，58，343），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=197, y=59, z=343}
+		local pos = {x=197, y=59, z=343}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, duration = 2, is_force = true, is_broadcast = false }) then
 					return -1
 				end

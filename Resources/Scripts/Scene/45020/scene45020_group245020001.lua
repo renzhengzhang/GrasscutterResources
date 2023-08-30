@@ -19,7 +19,7 @@ defs = {
 monster_group=245020003
 
 --设置怪物指引的点阵路径
-guide_routes={1,2,3}
+local guide_routes={1,2,3}
 --设置指引路径的初始位置以及点阵路径
 
 routes_start_point={

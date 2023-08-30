@@ -6,7 +6,7 @@ base_info = {
 -- DEFS_MISCS
 --key填regionid
 --value为pointid
-    Check_Point_List = {
+    local Check_Point_List = {
         [2059] = 10,
         [2061] = 4,
         [2059] = 11,
@@ -16,7 +16,7 @@ base_info = {
 --定制切换轴物件函数
 function LF_Rotate(context,config_id,rotate_mode)
         ScriptLib.PrintContextLog(context, "【LF_Rotate】config_id="..config_id.."|rotate_mode="..rotate_mode)
-        _v = ScriptLib.GetGroupTempValue(context,"SGV_"..config_id,{})
+        local _v = ScriptLib.GetGroupTempValue(context,"SGV_"..config_id,{})
         if rotate_mode == 201 then
                 if _v <5 then
                         _v2 = _v + 1
@@ -43,7 +43,7 @@ function LF_Rotate(context,config_id,rotate_mode)
         ScriptLib.SetGadgetStateByConfigId(context,config_id,201)
         ScriptLib.SetEntityServerGlobalValueByConfigId(context, config_id, "SGV_Turn", _v2)
         ScriptLib.SetGroupTempValue(context,"SGV_"..config_id,_v2,{})
-        _v2String = string.format("%02d",_v2)
+        local _v2String = string.format("%02d",_v2)
         ScriptLib.ChangeToTargetLevelTag(context, tonumber(config_id .. _v2String))
         ScriptLib.PrintContextLog(context, "【LF_Rotate】|tag="..config_id .. _v2String)
         return 0

@@ -35,7 +35,7 @@
 
 
 
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Interact_Dwon"] = { config_id = 80000002, name = "Interact_Dwon", event= EventType.EVENT_MICHIAE_INTERACT, source = "", condition = "", action = "action_InteractDwon", trigger_count = 0 },
 		["Challenge_Success"] = { config_id = 80000003, name = "Challenge_Success", event= EventType.EVENT_CHALLENGE_SUCCESS, source = "233", condition = "", action = "action_ChallengeSuccess", trigger_count = 0 },
@@ -46,10 +46,10 @@ extrTriggers = {
 	}
 }
 
---challengeID = 0
---groupID = 1
---switchGadgetID = 1
-challengeRange = 50
+--local challengeID = 0
+--local groupID = 1
+--local switchGadgetID = 1
+local challengeRange = 50
 
 function LF_GetPointDistance(x1,y1,x2,y2)
 	return math.sqrt(math.pow((y2-y1),2)+math.pow((x2-x1),2))

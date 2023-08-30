@@ -3,9 +3,9 @@
 --||   Filename      ||    Activity_LumenPursina
 --||   RelVersion    ||    V2_7
 --||   Owner         ||    chao-jin
---||   Description   ||
+--||   Description   ||    
 --||   LogName       ||    ##[Activity_LumenPursina]
---||   Protection    ||
+--||   Protection    ||    
 --======================================================================================================================
 --[[Defs & Miscs
 defs = {
@@ -13,28 +13,28 @@ defs = {
 }
 
 --====================================================================================================================]]
-LumenPursina_Triggers = {
+local LumenPursina_Triggers = {
 	{config_id = 8002001,  name = "pursina_state",  event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_pursina_state", trigger_count = 0},
-	{config_id = 8002002, name = "challenge_success", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0 },
+	{config_id = 8002002, name = "challenge_success", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0 }, 
 
 }
 
 --Events
-function action_pursina_state(context, evt)
-	if evt.source_name == "pursina_state" then
-		if evt.param1 == 0 then
+function action_pursina_state(context, evt) 
+	if evt.source_name == "pursina_state" then 
+		if evt.param1 == 0 then 
 			LF_PursinaStop(context)
 			return 0
 		end
-		if evt.param1 == 1 then
+		if evt.param1 == 1 then 
 			LF_PursinaLow(context)
 			return 0
 		end
-		if evt.param1 == 2 then
+		if evt.param1 == 2 then 
 			LF_PursinaMid(context)
 			return 0
 		end
-		if evt.param3 == 3 then
+		if evt.param3 == 3 then 
 			LF_PursinaHigh(context)
 			return 0
 		end
@@ -42,7 +42,7 @@ function action_pursina_state(context, evt)
 	return 0
 end
 
-function action_challenge_success(context, evt)
+function action_challenge_success(context, evt) 
 	ScriptLib.FinishGroupLinkBundle(context, base_info.group_id)
 	ScriptLib.TryFinishLuminanceStoneChallengeStage(context, base_info.group_id)
 	return 0

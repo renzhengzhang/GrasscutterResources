@@ -5,7 +5,7 @@ base_info = {
 
 -- DEFS_MISCS
 function stage_ready(context)
-        flag = ScriptLib.GetGroupVariableValue(context, "isFirstEntry")
+        local flag = ScriptLib.GetGroupVariableValue(context, "isFirstEntry")
         if flag == 1 then
                 ScriptLib.SetPlayerInteractOption(context, "false DisableXiaoDungeon")
         end
@@ -161,8 +161,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_10005(context, evt)
 	--断线重连后重放大招
-	flag_re = ScriptLib.GetGroupVariableValue(context, "test_re")
-	slip_die = ScriptLib.GetGroupVariableValue(context, "isSlipDie")
+	local flag_re = ScriptLib.GetGroupVariableValue(context, "test_re")
+	local slip_die = ScriptLib.GetGroupVariableValue(context, "isSlipDie")
 	if flag_re == 1 and slip_die == 0 then
 	        ScriptLib.SetPlayerInteractOption(context, "false DisableXiaoDungeon")
 	        ScriptLib.CreateGroupTimerEvent(context, 201032010, "xiao_skill_re", 1)

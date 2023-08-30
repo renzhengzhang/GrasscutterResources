@@ -4,32 +4,32 @@ base_info = {
 }
 
 -- DEFS_MISCS
-ProgressTable = {0,100,200,300,500}
-GalleryID = 8002
-SubScoreTimeAxis = {1}
-GadgetTargetScore = 110
-PerSecondSubScore = {-1,-2,-3,-5}
-MonsterTargetScore = {
+local ProgressTable = {0,100,200,300,500}
+local GalleryID = 8002
+local SubScoreTimeAxis = {1}
+local GadgetTargetScore = 110
+local PerSecondSubScore = {-1,-2,-3,-5}
+local MonsterTargetScore = {
         {monsterID = 26010201, score = 50},
         {monsterID = 22010101, score = 50},
         {monsterID = 21020201, score = 50},
 }
-RandomTimeAxis = {
+local RandomTimeAxis = {
         {20,40,60,80,100,120,140,160,180,200,220,240,260},
         {18,38,58,78,98,118,138,158,178,198,218,238,258},
         {22,42,62,82,102,122,142,162,182,202,222,242,262},
 }
-RandomTargetConfigID = {64002,64003,64004,64027,64049}
+local RandomTargetConfigID = {64002,64003,64004,64027,64049}
 
-configIDList = {64005,64019}
-configIDList2 = {64006,64073}
-configIDList3 = {64007,64074}
-randomNum = 2
+local configIDList = {64005,64019}
+local configIDList2 = {64006,64073}
+local configIDList3 = {64007,64074}
+local randomNum = 2
 
-smallRegion = 64042
-bigRegion = 64058
+local smallRegion = 64042
+local bigRegion = 64058
 
-GroupID = 144001064
+local GroupID = 144001064
 
 --================================================================
 --

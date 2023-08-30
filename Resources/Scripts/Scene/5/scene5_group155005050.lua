@@ -10,12 +10,12 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers  = {defs.gadget_controller}
-EnvControlGadgets = {defs.gadget_controller}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local Controllers  = {defs.gadget_controller}
+local EnvControlGadgets = {defs.gadget_controller}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -29,7 +29,7 @@ gameplayStateFuncitons =
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 		DayNight_Gadget_Unlock(context,defs.gadget_controller)
 
-		current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+		local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
     	if (current_env_state_id == 1) then
 			ScriptLib.SetWorktopOptionsByGroupId(context, 155005050, 50001, {500})
 		elseif (current_env_state_id == 2) then
@@ -44,7 +44,7 @@ gameplayStateFuncitons =
 	end
 }
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 

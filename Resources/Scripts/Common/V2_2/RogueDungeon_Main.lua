@@ -1,4 +1,4 @@
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Room_Ready"] = { config_id = 9000001, name = "Room_Ready", event= EventType.EVENT_TIME_AXIS_PASS, source = "delayToClearMonster", condition = "", action = "ClearMonster", trigger_count = 0 },
 		["ALL_PLAYER_DIE"] = { config_id = 9000002, name = "ALL_PLAYER_DIE", event= EventType.EVENT_DUNGEON_ALL_AVATAR_DIE, source = "", condition = "", action = "action_all_avatar_die", trigger_count = 0 },
@@ -8,11 +8,11 @@ extrTriggers = {
 	}
 }
 
-optionID = 205
+local optionID = 205
 
 function RemoveBUFF( context )
 
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.AddTeamServerGlobalValue(context, UidList[1], "SGV_ROGUE_SR_AreaNoEnemyAtkSpeedUp", -1)
 
@@ -21,11 +21,11 @@ end
 
 
 function RogueStartChallenge( context, prev_context, monsterPool, groupID )
-	hasChallenge = 0
-	UidList = ScriptLib.GetSceneUidList(prev_context)
-	param = {}
+	local hasChallenge = 0
+	local UidList = ScriptLib.GetSceneUidList(prev_context)
+	local param = {}
 
-	MonsterBuff = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUECURSE_MONSTERBUFF")
+	local MonsterBuff = ScriptLib.GetTeamServerGlobalValue(context, UidList[1], "SGV_ROGUECURSE_MONSTERBUFF")
 
 	for i,v in ipairs(challengeList) do
 		if v.monsterPool == monsterPool then
@@ -45,10 +45,10 @@ function RogueStartChallenge( context, prev_context, monsterPool, groupID )
 			ScriptLib.ActiveChallenge(prev_context, param[1], param[2], param[3], param[4], param[5], param[6])
 
 		 -- 	ScriptLib.CreateFatherChallenge(context, 101, 111175, 9999, {success = 1, fail = 1, fail_on_wipe=true})
-
-			-- ScriptLib.AttachChildChallenge(context, 101, 103, 111173, challengeParamList,{},{success=1,fail=1})
-
-			-- ScriptLib.StartFatherChallenge(context, 101)
+		
+			-- ScriptLib.AttachChildChallenge(context, 101, 103, 111173, challengeParamList,{},{success=1,fail=1}) 
+			
+			-- ScriptLib.StartFatherChallenge(context, 101)	
 
 			--放怪
 			if MonsterBuff == 1 then
@@ -63,7 +63,7 @@ function RogueStartChallenge( context, prev_context, monsterPool, groupID )
 					ScriptLib.AutoPoolMonsterTide(prev_context, 2, groupID, {v.extraMonsterPool}, 0, {}, {MonsterAffix}, v.extraMonsterPoolParamList)
 				else
 					ScriptLib.AutoPoolMonsterTide(prev_context, 2, groupID, {v.extraMonsterPool}, 0, {}, {}, v.extraMonsterPoolParamList)
-				end
+				end	
 			end
 		end
 	end
@@ -114,7 +114,7 @@ function action_GadgetCreate( context,evt )
 
 		ScriptLib.PrintContextLog(context, "## RG_LOG : SerchPoint Set Opiton ")
 		ScriptLib.SetWorktopOptionsByGroupId(context, MainGroupID, evt.param1, {optionID})
-
+		
 	end
 
 	return 0
@@ -139,11 +139,11 @@ end
 
 
 function action_EnterRemainderRegion( context,evt )
-	randomReminder = 0
+	local randomReminder = 0
 
 
 	--复制一份remainderList
-	TempReminderList = {}
+	local TempReminderList = {}
 
 	for i,v in ipairs(ReminderList) do
 		table.insert(TempReminderList, v)
@@ -152,7 +152,7 @@ function action_EnterRemainderRegion( context,evt )
 	--去重
 	for i=1,10 do
 
-		curReminder = ScriptLib.GetGroupTempValue(context, "duplicateReminder"..i, {})
+		local curReminder = ScriptLib.GetGroupTempValue(context, "duplicateReminder"..i, {})
 		ScriptLib.PrintContextLog(context, "## RG_LOG : duplicateReminder "..i.." IS "..curReminder)
 
 		if curReminder  == 0 then
@@ -174,7 +174,7 @@ function action_EnterRemainderRegion( context,evt )
 	end
 
 	if randomReminder == 0 then
-		return 0
+		return 0 
 	end
 
 	ScriptLib.PrintContextLog(context, "## RG_LOG : randomReminder IS "..randomReminder)
@@ -201,7 +201,7 @@ end
 
 function action_all_avatar_die( context,evt )
 	-- 所有角色死亡
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	for i,v in ipairs(UidList) do
 		if ScriptLib.IsPlayerAllAvatarDie(context, v) == false then
@@ -216,8 +216,8 @@ end
 
 function ClearMonster( context,evt )
 
-	monsterPool = ScriptLib.GetGroupTempValue(context, "monsterPool", {})
-	groupID = ScriptLib.GetGroupTempValue(context, "groupID", {})
+	local monsterPool = ScriptLib.GetGroupTempValue(context, "monsterPool", {})
+	local groupID = ScriptLib.GetGroupTempValue(context, "groupID", {})
 
 	--停止怪物潮
 

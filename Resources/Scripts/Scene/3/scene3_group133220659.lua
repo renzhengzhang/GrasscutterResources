@@ -120,8 +120,8 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_659006(context, evt)
-		stonestate = {}
-		varname
+		local stonestate = {}
+		local varname
 		table.insert( stonestate, ScriptLib.GetGadgetStateByConfigId(context, 133220659, 659001))
 		table.insert( stonestate, ScriptLib.GetGadgetStateByConfigId(context, 133220659, 659002))
 		table.insert( stonestate, ScriptLib.GetGadgetStateByConfigId(context, 133220659, 659003))

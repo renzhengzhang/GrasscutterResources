@@ -19,25 +19,25 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {277006,277007,277008}
-Worktops = {}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local Controllers = {}
+local EnvControlGadgets = {277006,277007,277008}
+local Worktops = {}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
-gadgetinfo =
+local gadgetinfo =
 {
 	{defs.gadget_controller_01, defs.gadget_lamp_01,defs.gadget_sound_01},
 	{defs.gadget_controller_02, defs.gadget_lamp_02,defs.gadget_sound_02},
 	{defs.gadget_controller_03, defs.gadget_lamp_03,defs.gadget_sound_03}
 }
 
-stateloopinfo =
+local stateloopinfo =
 {
 	202,203,204
 }
 
-solution =
+local solution =
 {
 	203,202,204
 }
@@ -68,7 +68,7 @@ solution =
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -98,7 +98,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -121,7 +121,7 @@ end
 
 function CheckIfSuccess(context)
 	ScriptLib.PrintContextLog(context,"------check start------")
-	statelist = {}
+	local statelist = {}
 
 	for i=1,#gadgetinfo do
 		table.insert(statelist,ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, gadgetinfo[i][2]))
@@ -147,7 +147,7 @@ end
 
 function FeedBackActive(context,gadgetid)
 	ScriptLib.PrintContextLog(context,"------FeedBack Start------")
-	tempindex
+	local tempindex
 	for i=1,#gadgetinfo do
 		if gadgetinfo[i][2] == gadgetid then
 			tempindex = i
@@ -293,7 +293,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_277010(context, evt)
-		lamp
+		local lamp
 
 			for i=1,#gadgetinfo do
 				if gadgetinfo[i][1] == evt.param2 then
@@ -301,7 +301,7 @@ function action_EVENT_GADGET_STATE_CHANGE_277010(context, evt)
 				end
 			end
 			ScriptLib.PrintContextLog(context, "Lamp = "..lamp)
-			state =  ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, lamp)
+			local state =  ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, lamp)
 			ScriptLib.PrintContextLog(context,"Pre State = "..state)
 			if state ~= 202 and state ~= 203 and  state ~= 204 then
 				return -1

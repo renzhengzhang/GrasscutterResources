@@ -98,7 +98,7 @@ function condition_EVENT_ENTER_REGION_517002(context, evt)
 		return false
 	end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7302712)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7302712)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -125,7 +125,7 @@ end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_517003(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7302712)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7302712)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

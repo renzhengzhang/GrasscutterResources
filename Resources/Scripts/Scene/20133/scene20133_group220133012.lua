@@ -7,7 +7,7 @@ base_info = {
 --激活梦境复苏之门
 --key填regionid
 --value为pointid
-    Check_Point_List = {
+    local Check_Point_List = {
         [12001] = 14
     }
 

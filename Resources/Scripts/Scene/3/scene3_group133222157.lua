@@ -205,8 +205,8 @@ function action_EVENT_SELECT_OPTION_157004(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157001 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {201,202}
-	_key = 0
+	local _gadgetStateList = {201,202}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -242,8 +242,8 @@ function action_EVENT_SELECT_OPTION_157004(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157033 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -279,8 +279,8 @@ function action_EVENT_SELECT_OPTION_157004(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157034 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -316,8 +316,8 @@ function action_EVENT_SELECT_OPTION_157004(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157035 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -353,8 +353,8 @@ function action_EVENT_SELECT_OPTION_157004(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157036 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -390,8 +390,8 @@ function action_EVENT_SELECT_OPTION_157004(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157037 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -427,8 +427,8 @@ function action_EVENT_SELECT_OPTION_157004(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157038 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -464,8 +464,8 @@ function action_EVENT_SELECT_OPTION_157004(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157039 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -541,8 +541,8 @@ function action_EVENT_SELECT_OPTION_157008(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157005 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {201,202}
-	_key = 0
+	local _gadgetStateList = {201,202}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -578,8 +578,8 @@ function action_EVENT_SELECT_OPTION_157008(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157033 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -615,8 +615,8 @@ function action_EVENT_SELECT_OPTION_157008(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157034 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -652,8 +652,8 @@ function action_EVENT_SELECT_OPTION_157008(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157035 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -689,8 +689,8 @@ function action_EVENT_SELECT_OPTION_157008(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157036 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -726,8 +726,8 @@ function action_EVENT_SELECT_OPTION_157008(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157037 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -763,8 +763,8 @@ function action_EVENT_SELECT_OPTION_157008(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157038 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -800,8 +800,8 @@ function action_EVENT_SELECT_OPTION_157008(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157039 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -877,8 +877,8 @@ function action_EVENT_SELECT_OPTION_157012(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157009 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {201,202}
-	_key = 0
+	local _gadgetStateList = {201,202}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -914,8 +914,8 @@ function action_EVENT_SELECT_OPTION_157012(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157033 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -951,8 +951,8 @@ function action_EVENT_SELECT_OPTION_157012(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157034 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -988,8 +988,8 @@ function action_EVENT_SELECT_OPTION_157012(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157035 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1025,8 +1025,8 @@ function action_EVENT_SELECT_OPTION_157012(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157036 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1062,8 +1062,8 @@ function action_EVENT_SELECT_OPTION_157012(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157037 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1099,8 +1099,8 @@ function action_EVENT_SELECT_OPTION_157012(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157038 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1136,8 +1136,8 @@ function action_EVENT_SELECT_OPTION_157012(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157039 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1213,8 +1213,8 @@ function action_EVENT_SELECT_OPTION_157016(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157013 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {201,202}
-	_key = 0
+	local _gadgetStateList = {201,202}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1250,8 +1250,8 @@ function action_EVENT_SELECT_OPTION_157016(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157033 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1287,8 +1287,8 @@ function action_EVENT_SELECT_OPTION_157016(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157034 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1324,8 +1324,8 @@ function action_EVENT_SELECT_OPTION_157016(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157035 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1361,8 +1361,8 @@ function action_EVENT_SELECT_OPTION_157016(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157036 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1398,8 +1398,8 @@ function action_EVENT_SELECT_OPTION_157016(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157037 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1435,8 +1435,8 @@ function action_EVENT_SELECT_OPTION_157016(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157038 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1472,8 +1472,8 @@ function action_EVENT_SELECT_OPTION_157016(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157039 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1549,8 +1549,8 @@ function action_EVENT_SELECT_OPTION_157020(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157017 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {201,202}
-	_key = 0
+	local _gadgetStateList = {201,202}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1586,8 +1586,8 @@ function action_EVENT_SELECT_OPTION_157020(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157040 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1623,8 +1623,8 @@ function action_EVENT_SELECT_OPTION_157020(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157041 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1660,8 +1660,8 @@ function action_EVENT_SELECT_OPTION_157020(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157042 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1697,8 +1697,8 @@ function action_EVENT_SELECT_OPTION_157020(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157043 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1734,8 +1734,8 @@ function action_EVENT_SELECT_OPTION_157020(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157044 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1771,8 +1771,8 @@ function action_EVENT_SELECT_OPTION_157020(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157045 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1848,8 +1848,8 @@ function action_EVENT_SELECT_OPTION_157024(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157021 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {201,202}
-	_key = 0
+	local _gadgetStateList = {201,202}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1885,8 +1885,8 @@ function action_EVENT_SELECT_OPTION_157024(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157040 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1922,8 +1922,8 @@ function action_EVENT_SELECT_OPTION_157024(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157041 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1959,8 +1959,8 @@ function action_EVENT_SELECT_OPTION_157024(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157042 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1996,8 +1996,8 @@ function action_EVENT_SELECT_OPTION_157024(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157043 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2033,8 +2033,8 @@ function action_EVENT_SELECT_OPTION_157024(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157044 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2070,8 +2070,8 @@ function action_EVENT_SELECT_OPTION_157024(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157045 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2147,8 +2147,8 @@ function action_EVENT_SELECT_OPTION_157028(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157025 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {201,202}
-	_key = 0
+	local _gadgetStateList = {201,202}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2184,8 +2184,8 @@ function action_EVENT_SELECT_OPTION_157028(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157040 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2221,8 +2221,8 @@ function action_EVENT_SELECT_OPTION_157028(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157041 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2258,8 +2258,8 @@ function action_EVENT_SELECT_OPTION_157028(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157042 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2295,8 +2295,8 @@ function action_EVENT_SELECT_OPTION_157028(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157043 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2332,8 +2332,8 @@ function action_EVENT_SELECT_OPTION_157028(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157044 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2369,8 +2369,8 @@ function action_EVENT_SELECT_OPTION_157028(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157045 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2446,8 +2446,8 @@ function action_EVENT_SELECT_OPTION_157032(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157029 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {201,202}
-	_key = 0
+	local _gadgetStateList = {201,202}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2483,8 +2483,8 @@ function action_EVENT_SELECT_OPTION_157032(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157046 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2520,8 +2520,8 @@ function action_EVENT_SELECT_OPTION_157032(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157047 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -2557,8 +2557,8 @@ function action_EVENT_SELECT_OPTION_157032(context, evt)
 
 	-- 将在groupid为 133222157 中的 configid为 157048 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,201}
-	_key = 0
+	local _gadgetStateList = {0,201}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")

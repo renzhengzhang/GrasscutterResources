@@ -164,8 +164,8 @@ function action_EVENT_GADGET_STATE_CHANGE_68006(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "open2", 199003068) == 1
 	then
 	ScriptLib.SetGadgetStateByConfigId(context, 68012, GadgetState.GearStart)
-	pos = {x=-718, y=220, z=-25}
-	  pos_follow = {x=0, y=0, z=0}
+	local pos = {x=-718, y=220, z=-25}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -192,8 +192,8 @@ function action_EVENT_GADGET_STATE_CHANGE_68020(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "open1", 199003068) == 1
 	then
 	ScriptLib.SetGadgetStateByConfigId(context, 68012, GadgetState.GearStart)
-	pos = {x=-718, y=220, z=-25}
-	  pos_follow = {x=0, y=0, z=0}
+	local pos = {x=-718, y=220, z=-25}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -374,7 +374,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_68034(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-718,y=211,z=-39}
+	local pos = {x=-718,y=211,z=-39}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1111350, pos, 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
@@ -402,7 +402,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_68035(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-718,y=211,z=-39}
+	local pos = {x=-718,y=211,z=-39}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1111351, pos, 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1

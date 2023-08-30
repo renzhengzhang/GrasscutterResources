@@ -19,12 +19,12 @@ defs = {
     fail_region = 581197,
 }
 
-extra_info = {
+local extra_info = {
     start_operator = 581002,
     lantern = 581011,
 }
 
-mud_list = {
+local mud_list = {
 --普通黑泥
 [581016] = { mud_id = 581009, cover_list= {}, respawn_time = 8, mutex_id = 0, score = 6, cover_content = {} },
 [581014] = { mud_id = 581008, cover_list= {}, respawn_time = 8, mutex_id = 0, score = 6, cover_content = {} },
@@ -87,7 +87,7 @@ mud_list = {
 --====================================================================================================================]]
 --======================================================================================================================
 
-LumenCharge_Triggers = {
+local LumenCharge_Triggers = {
     { config_id = 9100401, name = "group_load",  event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     { config_id = 9100402, name = "add_charge_progress", event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "condition_add_charge_progress", action = "", trigger_count = 0, tag = "1001" },
     { config_id = 9100403, name = "variable_change", event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change", trigger_count = 0,},
@@ -212,7 +212,7 @@ function action_time_axis_pass(context, evt)
         ScriptLib.ChangeGroupVariableValue(context, "energy", 1)
     end
     --黑泥重生的时间轴
-    core_id = tonumber(evt.source_name)
+    local core_id = tonumber(evt.source_name)
     if core_id ~= nil then
         if mud_list[core_id] ~= nil then
             --普通黑泥，没有互斥，直接创生核心和黑泥
@@ -244,7 +244,7 @@ function action_any_gadget_die(context,evt)
         ScriptLib.PrintContextLog(context,"##[LumenCharge]:挑战未開啟，不處理")
         return 0
     end
-    core_id = evt.param1
+    local core_id = evt.param1
     --确定死亡的是黑泥核心
     if mud_list[core_id] ~= nil then
         ScriptLib.PrintContextLog(context,"##[LumenCharge]:增加清除黑泥的总计数")
@@ -278,10 +278,10 @@ function action_challenge_success(context, evt)
     end
     ScriptLib.PrintContextLog(context,"##[LumenCharge]:总挑战成功")
     --处理运营数据
-    transaction = evt.param_str1
-    used_time = defs.challenge_time - evt.param2
-    remove_mud  = ScriptLib.GetGroupTempValue(context, "MUD_REMOVED", {})
-    lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
+    local transaction = evt.param_str1
+    local used_time = defs.challenge_time - evt.param2
+    local remove_mud  = ScriptLib.GetGroupTempValue(context, "MUD_REMOVED", {})
+    local lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
     ScriptLib.PrintContextLog(context,"##[LumenCharge]:埋点数据, 挑战成功,流水号"..transaction.."耗时"..used_time.."清除黑泥总数"..remove_mud.."流明石等级"..lumen_level)
     ScriptLib.MarkGroupLuaAction(context, "Luminous_challenge_2", transaction, {["challenge_id"] = 2009007,["end_reason"] = 1,["use_time"]= used_time ,["remove_mud"]= remove_mud,["luminous_level"] = lumen_level})
 
@@ -303,10 +303,10 @@ function action_challenge_fail(context, evt)
     end
     ScriptLib.PrintContextLog(context,"##[LumenCharge]:总挑战失败")
     --处理运营数据
-    transaction = evt.param_str1
-    used_time = defs.challenge_time - evt.param2
-    remove_mud  = ScriptLib.GetGroupTempValue(context, "MUD_REMOVED", {})
-    lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
+    local transaction = evt.param_str1
+    local used_time = defs.challenge_time - evt.param2
+    local remove_mud  = ScriptLib.GetGroupTempValue(context, "MUD_REMOVED", {})
+    local lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
     if evt.param2 <= 0 then
         ScriptLib.PrintContextLog(context,"##[LumenCharge]:埋点数据,时间用尽,流水号"..transaction.."耗时"..used_time.."清除黑泥总数"..remove_mud.."流明石等级"..lumen_level)
         ScriptLib.MarkGroupLuaAction(context, "Luminous_challenge_2", transaction, {["challenge_id"] = 2009007,["end_reason"] = 2,["use_time"]= used_time ,["remove_mud"]= remove_mud, ["luminous_level"] = lumen_level})
@@ -400,8 +400,8 @@ end
 --创建黑泥套组
 function LF_CreateMudSet(context, core_id)
     if mud_list[core_id] ~= nil then
-        covers = mud_list[core_id].cover_list
-        content = mud_list[core_id].cover_content
+        local covers = mud_list[core_id].cover_list
+        local content = mud_list[core_id].cover_content
         ScriptLib.PrintContextLog(context,"##[LumenCharge]:创建黑泥，黑泥白盒")
         ScriptLib.CreateGadget(context, {config_id = core_id})
         ScriptLib.CreateGadget(context, {config_id = mud_list[core_id].mud_id})
@@ -412,7 +412,7 @@ function LF_CreateMudSet(context, core_id)
             end
         end
         if #content ~= 0 then
-        --  cur_stage = ScriptLib.GetGroupVariableValue(context, "stage")
+        --  local cur_stage = ScriptLib.GetGroupVariableValue(context, "stage")
             ScriptLib.PrintContextLog(context,"##[LumenCharge]:遍历移除包裹内容物")
         -- 这里遍历了所有stage的包裹物，全部尝试进行一次移除
             for stage_index=1,5 do
@@ -431,8 +431,8 @@ end
 --移除黑泥套组
 function LF_RemoveMudSet(context, core_id)
     if mud_list[core_id] ~= nil then
-        covers = mud_list[core_id].cover_list
-        content= mud_list[core_id].cover_content
+        local covers = mud_list[core_id].cover_list
+        local content= mud_list[core_id].cover_content
         ScriptLib.PrintContextLog(context,"##[LumenCharge]:移除黑泥白盒")
         if 0 ~= ScriptLib.GetEntityIdByConfigId(context, mud_list[core_id].mud_id) then
             ScriptLib.KillEntityByConfigId(context, { group_id = base_info.group_id, config_id = mud_list[core_id].mud_id, entity_type = EntityType.GADGET })
@@ -447,7 +447,7 @@ function LF_RemoveMudSet(context, core_id)
             end
         end
 
-        cur_stage = ScriptLib.GetGroupVariableValue(context, "stage")
+        local cur_stage = ScriptLib.GetGroupVariableValue(context, "stage")
         if content[cur_stage] ~= nil then
             ScriptLib.PrintContextLog(context,"##[LumenCharge]:创建包裹内容物")
             for k,content_id in pairs(content[cur_stage]) do

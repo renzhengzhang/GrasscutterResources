@@ -12,9 +12,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-shootLightMap={[134003]=134015,[134004]=134016,[134006]=134017}
+local shootLightMap={[134003]=134015,[134004]=134016,[134006]=134017}
 
-lawfulGadgets =
+local lawfulGadgets =
 {
         [1]={134004},
         [2]={134003},

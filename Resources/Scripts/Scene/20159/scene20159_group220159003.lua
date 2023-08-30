@@ -137,8 +137,8 @@ function action_EVENT_GADGET_STATE_CHANGE_3008(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 220159003, 2)
 
 	-- 触发镜头注目，注目位置为坐标（475.541，105.4302，510.5094），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=475.541, y=105.4302, z=510.5094}
-	  pos_follow = {x=1, y=-1, z=3}
+		local pos = {x=475.541, y=105.4302, z=510.5094}
+	  local pos_follow = {x=1, y=-1, z=3}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = true,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

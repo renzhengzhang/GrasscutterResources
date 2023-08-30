@@ -5,7 +5,7 @@ base_info = {
 
 -- DEFS_MISCS
 require "V3_2/Activity_BattleMushroomMonster_MonsterConfig"
-random_strategy_info={
+local random_strategy_info={
         [1]=random_strategy_02,
         [2]=random_strategy_03,
         [3]=random_strategy_04,

@@ -167,8 +167,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_181005(context, evt)
 	     	if context.uid~=0 then
-			small_region={}
-			big_region={}
+			local small_region={}
+			local big_region={}
 			for i=1,#regions do
 				if regions[i].config_id==181005 then
 					small_region=regions[i]

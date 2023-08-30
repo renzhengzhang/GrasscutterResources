@@ -80,8 +80,8 @@ suites = {
 -- 使用注目镜头
 function TLA_active_cameralook_begin(context, evt, x, y, z, is_allow_input, duration, delay_time, is_set_follow_pos, x_follow, y_follow, z_follow, is_force_walk, is_change_play_mode, is_set_screen_XY, screen_x, screen_y)
 	-- 触发镜头注目，注目位置为坐标（x，y，z），持续时间为duration秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=x, y=y, z=z}
-	  pos_follow = {x=x_follow, y=y_follow, z=z_follow}
+		local pos = {x=x, y=y, z=z}
+	  local pos_follow = {x=x_follow, y=y_follow, z=z_follow}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = is_allow_input, duration = duration, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = delay_time,
 	                                                      is_set_follow_pos = is_set_follow_pos, follow_pos = pos_follow, is_force_walk = is_force_walk, is_change_play_mode = is_change_play_mode,
 	                                                      is_set_screen_XY = is_set_screen_XY, screen_x = screen_x, screen_y = screen_y }) then

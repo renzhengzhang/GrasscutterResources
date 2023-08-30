@@ -299,7 +299,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_39038(context, evt)
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
-	        pos = {x=326, y=223, z=174}
+	        local pos = {x=326, y=223, z=174}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_02_True", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 	                                return -1
@@ -385,7 +385,7 @@ function action_EVENT_PLATFORM_REACH_POINT_39050(context, evt)
 
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
-	        pos = {x=326, y=223, z=174}
+	        local pos = {x=326, y=223, z=174}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_02_True", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 	                                return -1
@@ -564,7 +564,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_39084(context, evt)
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
-	        pos = {x=326, y=223, z=174}
+	        local pos = {x=326, y=223, z=174}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_02_True", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 	                                return -1

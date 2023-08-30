@@ -9,14 +9,14 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {}
-Worktops = {}
-DayAppearGadgets = {4008,4009}
-NightAppearGadgets = {4003,4005}
-TriggerInsertWhitelist = {1}
+local Controllers = {}
+local EnvControlGadgets = {}
+local Worktops = {}
+local DayAppearGadgets = {4008,4009}
+local NightAppearGadgets = {4003,4005}
+local TriggerInsertWhitelist = {1}
 
-battleinfo =
+local battleinfo =
 {
 	{4003,"battle_01",3,155009007,155009025},
 	{4004,"battle_02",4,155009008,155009026},
@@ -64,7 +64,7 @@ function ALLBattleCompleted(context)
 		ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, 4009 )
 end
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -106,7 +106,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -270,7 +270,7 @@ suites = {
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_4001(context, evt)
-				isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155009001)
+				local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155009001)
 
 				if isactive == 1 then
 					if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then
@@ -314,7 +314,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4007(context, evt)
-				value = ScriptLib.GetGroupVariableValue(context, "battleState")
+				local value = ScriptLib.GetGroupVariableValue(context, "battleState")
 				if value ~= 0 then
 					return -1
 				end
@@ -323,8 +323,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4007(context, evt)
 				ScriptLib.SetGroupVariableValue(context, "battleindex", 1)
 				ScriptLib.SetGroupVariableValue(context, "gameplayState", 2)
 
-				--[[pos = {x=-758, y=139, z=-226}
-				pos_follow = {x=0, y=0, z=0}
+				--[[local pos = {x=-758, y=139, z=-226}
+				local pos_follow = {x=0, y=0, z=0}
 					if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 																	is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 																	is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -466,7 +466,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_4031(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
 
-			value = ScriptLib.GetGroupVariableValue(context, "battleState")
+			local value = ScriptLib.GetGroupVariableValue(context, "battleState")
 
 			if value == 0 then
 				BattleStart(context,ScriptLib.GetGroupVariableValue(context, "battleindex") )

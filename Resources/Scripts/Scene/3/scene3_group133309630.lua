@@ -4,9 +4,9 @@ base_info = {
 }
 
 -- DEFS_MISCS
-engineerLaserConfigID = 630001
-turnOption = 435
-correctState = 0
+local engineerLaserConfigID = 630001
+local turnOption = 435
+local correctState = 0
 
 --================================================================
 --

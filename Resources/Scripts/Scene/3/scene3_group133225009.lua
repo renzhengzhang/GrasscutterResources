@@ -15,7 +15,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-Pursina = {
+local Pursina = {
 	{9002,9005},
 	{9003,9006},
 	{9004,9007},
@@ -259,9 +259,9 @@ function action_EVENT_VARIABLE_CHANGE_9012(context, evt)
 	--根据激活矿机数量计算刷怪数量
 
 	math.randomseed(ScriptLib.GetServerTime(context))
-	tempValue = math.random(3,5)
+	local tempValue = math.random(3,5)
 
-	monsterArray = defs.monsterWave[1]
+	local monsterArray = defs.monsterWave[1]
 
 	if ScriptLib.GetGroupVariableValue(context, "Active_Count") == 2 then
 		monsterArray = defs.monsterWave[2]

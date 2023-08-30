@@ -288,8 +288,8 @@ function action_EVENT_SELECT_OPTION_165013(context, evt)
 
 	-- 将在groupid为 133107165 中的 configid为 165004 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {901,902,903}
-	_key = 0
+	local _gadgetStateList = {901,902,903}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -522,8 +522,8 @@ function action_EVENT_TIMER_EVENT_165019(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标（-470，212，328），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-470, y=212, z=328}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-470, y=212, z=328}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -696,8 +696,8 @@ function action_EVENT_SELECT_OPTION_165025(context, evt)
 
 	-- 将在groupid为 133107165 中的 configid为 165005 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {901,902,903}
-	_key = 0
+	local _gadgetStateList = {901,902,903}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -759,8 +759,8 @@ function action_EVENT_SELECT_OPTION_165026(context, evt)
 
 	-- 将在groupid为 133107165 中的 configid为 165006 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {901,902,903}
-	_key = 0
+	local _gadgetStateList = {901,902,903}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -822,8 +822,8 @@ function action_EVENT_SELECT_OPTION_165027(context, evt)
 
 	-- 将在groupid为 133107165 中的 configid为 165004 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {901,902,903}
-	_key = 0
+	local _gadgetStateList = {901,902,903}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -885,8 +885,8 @@ function action_EVENT_SELECT_OPTION_165028(context, evt)
 
 	-- 将在groupid为 133107165 中的 configid为 165006 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {901,902,903}
-	_key = 0
+	local _gadgetStateList = {901,902,903}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -948,8 +948,8 @@ function action_EVENT_SELECT_OPTION_165029(context, evt)
 
 	-- 将在groupid为 133107165 中的 configid为 165005 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {901,902,903}
-	_key = 0
+	local _gadgetStateList = {901,902,903}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")

@@ -16,13 +16,13 @@ defs = {
 }
 
 -- DEFS_MISCS
-monster_tide_config =
+local monster_tide_config =
 {
     [1] = {pool_id = 21002,total_num = 70, min = 5,max = 5},
     [2] = {pool_id = 21002,total_num = 30, min = 2,max = 2},
 }
 
-elite_list =
+local elite_list =
 {
     [1] = {168002,168004}
 }

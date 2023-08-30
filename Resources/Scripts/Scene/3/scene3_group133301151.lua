@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -31,7 +31,7 @@ gameplayStateFuncitons =
 	end
 }
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -167,7 +167,7 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_151004(context, evt)
-		leveltag = ScriptLib.GetCurrentLevelTagVec(context, 12)[1]
+		local leveltag = ScriptLib.GetCurrentLevelTagVec(context, 12)[1]
 
 		if leveltag == 39 then
 			ScriptLib.SetGroupVariableValue(context, "gameplayState", 3)

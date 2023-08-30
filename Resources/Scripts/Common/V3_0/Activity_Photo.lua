@@ -18,11 +18,11 @@ defs =
 
 -- 打印日志
 function PrintLog(context, content)
-	log = "## [Activity_Photo] TD: "..content
+	local log = "## [Activity_Photo] TD: "..content
 	ScriptLib.PrintContextLog(context, log)
 end
 
-extraTriggers =
+local extraTriggers =
 {
     --{ config_id = 40000001, name = "tri_group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
     --{ config_id = 40000002, name = "tri_group_will_unload", event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_EVENT_GROUP_WILL_UNLOAD", trigger_count = 0 },

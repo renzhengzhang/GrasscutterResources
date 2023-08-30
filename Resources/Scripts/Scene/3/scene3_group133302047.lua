@@ -210,8 +210,8 @@ function action_EVENT_GADGET_CREATE_47008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: start gallery fails")
 	    return -1
 	end
-	target_entity_id = ScriptLib.GetEntityIdByConfigId(context,47006)
-	target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
+	local target_entity_id = ScriptLib.GetEntityIdByConfigId(context,47006)
+	local target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
 	if 0~=  ScriptLib.SetHandballGalleryBallPosAndRot(context, 9001, {x=target_pos.x,y=target_pos.y,z=target_pos.z}, {x=0,y=0,z=0}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1

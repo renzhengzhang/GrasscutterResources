@@ -16,13 +16,13 @@ defs = {
 	rotor_bot = 91001,
 	reminder_success = 400112,
 }
-rotor_map = {
+local rotor_map = {
 	[91001] = {init_state = 1, end_state = 3},
 	[91002] = {init_state = 3, end_state = 2},
 	[91003] = {init_state = 4, end_state = 4},
 }
 ]]
-CodedLock_Triggers = {
+local CodedLock_Triggers = {
     [1] = { name = "group_load", config_id = 8001001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     [2] = { name = "select_option", config_id = 8001002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
     [3] = { name = "gadget_state_change", config_id = 8001003, event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0},
@@ -86,7 +86,7 @@ function LF_RotateRotor(context, rotor_id)
 	for i=1,4 do
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, rotor_id, "SGV_Surface0"..i, 0)
 	end
-	rotor_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, rotor_id)
+	local rotor_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, rotor_id)
 	if rotor_state < 3 then
 		ScriptLib.SetGadgetStateByConfigId(context, rotor_id, rotor_state+1)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, rotor_id, "SGV_Surface0"..(rotor_state+2), 1)

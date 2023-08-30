@@ -873,7 +873,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4096(context, evt)
-	bigRunes_west = { 4018, 4019, 4027, 4028 }
+	local bigRunes_west = { 4018, 4019, 4027, 4028 }
 
 	for i,v in ipairs(bigRunes_west) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default and ScriptLib.GetGroupVariableValue(context, "big_west") < 4 then
@@ -892,7 +892,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4097(context, evt)
-	bigRunes_east = { 4037, 4038, 4046, 4047 }
+	local bigRunes_east = { 4037, 4038, 4046, 4047 }
 
 	for i,v in ipairs(bigRunes_east) do
 	         if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default and ScriptLib.GetGroupVariableValue(context, "big_east") < 4 then
@@ -911,7 +911,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4098(context, evt)
-	bigRunes_north = { 4054, 4055, 4056, 4057 }
+	local bigRunes_north = { 4054, 4055, 4056, 4057 }
 
 	for i,v in ipairs(bigRunes_north) do
 	         if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default and ScriptLib.GetGroupVariableValue(context, "big_north") < 4 then
@@ -930,7 +930,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4099(context, evt)
-	bigRunes_south = { 4086, 4087, 4088, 4089 }
+	local bigRunes_south = { 4086, 4087, 4088, 4089 }
 
 	for i,v in ipairs(bigRunes_south) do
 	         if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default and ScriptLib.GetGroupVariableValue(context, "big_south") < 4 then
@@ -949,7 +949,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4100(context, evt)
-	smallRunes_west = { 4014, 4015, 4020, 4021 }
+	local smallRunes_west = { 4014, 4015, 4020, 4021 }
 
 	for i,v in ipairs(smallRunes_west) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
@@ -964,7 +964,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4101(context, evt)
-	smallRunes_east = { 4033, 4034, 4039, 4040 }
+	local smallRunes_east = { 4033, 4034, 4039, 4040 }
 
 	for i,v in ipairs(smallRunes_east) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
@@ -979,7 +979,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4102(context, evt)
-	smallRunes_north = { 4058, 4059, 4060, 4061 }
+	local smallRunes_north = { 4058, 4059, 4060, 4061 }
 
 	for i,v in ipairs(smallRunes_north) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
@@ -994,7 +994,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4103(context, evt)
-	smallRunes_south = { 4073, 4074, 4075, 4076 }
+	local smallRunes_south = { 4073, 4074, 4075, 4076 }
 
 	for i,v in ipairs(smallRunes_south) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
@@ -1262,7 +1262,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4122(context, evt)
-	burstRunes_south = { 4077, 4078, 4079, 4080, 4081, 4082, 4083, 4084, 4085 }
+	local burstRunes_south = { 4077, 4078, 4079, 4080, 4081, 4082, 4083, 4084, 4085 }
 
 	for i,v in ipairs(burstRunes_south) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
@@ -1276,7 +1276,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4123(context, evt)
-	burstRunes_north = { 4062, 4063, 4064, 4065, 4066, 4067, 4068, 4069, 4070 }
+	local burstRunes_north = { 4062, 4063, 4064, 4065, 4066, 4067, 4068, 4069, 4070 }
 
 	for i,v in ipairs(burstRunes_north) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
@@ -1290,7 +1290,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4124(context, evt)
-	burstRunes_east = { 4041, 4042, 4043, 4044, 4045, 4048, 4049, 4050, 4051 }
+	local burstRunes_east = { 4041, 4042, 4043, 4044, 4045, 4048, 4049, 4050, 4051 }
 
 	for i,v in ipairs(burstRunes_east) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
@@ -1304,7 +1304,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4125(context, evt)
-	burstRunes_west = { 4022, 4023, 4024, 4025, 4026, 4029, 4030, 4031, 4032 }
+	local burstRunes_west = { 4022, 4023, 4024, 4025, 4026, 4029, 4030, 4031, 4032 }
 
 	for i,v in ipairs(burstRunes_west) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
@@ -1366,8 +1366,8 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_4127(context, evt)
-	pos_follow = {x=0, y=40, z=0}
-	target_config_id = 4013
+	local pos_follow = {x=0, y=40, z=0}
+	local target_config_id = 4013
 	ScriptLib.BeginCameraSceneLook(context, { look_configid = target_config_id, lis_allow_input = false, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                              is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                              is_set_screen_XY = false, screen_x = 0, screen_y = 0 })
@@ -1389,8 +1389,8 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_4128(context, evt)
-	pos_follow = {x=0, y=40, z=0}
-	target_config_id = 4013
+	local pos_follow = {x=0, y=40, z=0}
+	local target_config_id = 4013
 	ScriptLib.BeginCameraSceneLook(context, { look_configid = target_config_id, lis_allow_input = false, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                              is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                              is_set_screen_XY = false, screen_x = 0, screen_y = 0 })
@@ -1412,8 +1412,8 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_4129(context, evt)
-	pos_follow = {x=0, y=40, z=0}
-	target_config_id = 4013
+	local pos_follow = {x=0, y=40, z=0}
+	local target_config_id = 4013
 	ScriptLib.BeginCameraSceneLook(context, { look_configid = target_config_id, lis_allow_input = false, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                              is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                              is_set_screen_XY = false, screen_x = 0, screen_y = 0 })
@@ -1435,8 +1435,8 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_4130(context, evt)
-	pos_follow = {x=0, y=40, z=0}
-	target_config_id = 4013
+	local pos_follow = {x=0, y=40, z=0}
+	local target_config_id = 4013
 	ScriptLib.BeginCameraSceneLook(context, { look_configid = target_config_id, lis_allow_input = false, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                              is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                              is_set_screen_XY = false, screen_x = 0, screen_y = 0 })

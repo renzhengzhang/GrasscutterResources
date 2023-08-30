@@ -12,13 +12,13 @@ defs = {
 }
 
 -- DEFS_MISCS
-mud_list = {
+local mud_list = {
 	[630009] = 630063,
 	[630012] = 630062,
 	[630023] = 630028,
 
 }
-extra_infos = {
+local extra_infos = {
 	start_operator = 630002,
 	mud_cover = 630096,
 }

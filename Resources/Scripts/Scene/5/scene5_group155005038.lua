@@ -9,13 +9,13 @@ defs = {
 }
 
 -- DEFS_MISCS
-EnvControlGadgets = {38001}
-Worktops = {38001}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local EnvControlGadgets = {38001}
+local Worktops = {38001}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		DayNight_Gadget_Lock(context,38001)
@@ -49,7 +49,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -188,9 +188,9 @@ function condition_EVENT_ENTER_REGION_38002(context, evt)
 	end
 
 	-- 返回渊下宫当前是否为黑夜
-	    uid_List = ScriptLib.GetSceneUidList(context)
-	    host_id = uid_List[1]
-	    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	    local uid_List = ScriptLib.GetSceneUidList(context)
+	    local host_id = uid_List[1]
+	    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 2) then
 	        return false
 	    else
@@ -253,7 +253,7 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_38005(context, evt)
-			state_1 = ScriptLib.GetGadgetStateByConfigId(context, 155005038, 38001)
+			local state_1 = ScriptLib.GetGadgetStateByConfigId(context, 155005038, 38001)
 
 
 					if state_1 == 312  then

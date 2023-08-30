@@ -9,11 +9,11 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {275004}
+local Controllers = {}
+local EnvControlGadgets = {275004}
 
-DayAppearGadgets = {}
-NightAppearGadgets = {275003}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {275003}
 
 
 --[[
@@ -43,7 +43,7 @@ NightAppearGadgets = {275003}
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -69,7 +69,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 

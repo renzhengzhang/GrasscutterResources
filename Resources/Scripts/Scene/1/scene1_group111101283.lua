@@ -4,9 +4,9 @@ base_info = {
 }
 
 -- DEFS_MISCS
-HourGlass_ConfigIDList = {283001}
-ChallengeID = 63
-ChallengeParam = {50,4,999,1}
+local HourGlass_ConfigIDList = {283001}
+local ChallengeID = 63
+local ChallengeParam = {50,4,999,1}
 
 --================================================================
 --

@@ -11,7 +11,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-Raft_Monster_List = {
+local Raft_Monster_List = {
     [201106] = {201004, 201038},
     [201047] = {201048},
     [201049] = {201050},
@@ -453,7 +453,7 @@ function action_EVENT_VARIABLE_CHANGE_201016(context, evt)
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133108201, 8)
 
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 
 	-- 显示id为159的reminder
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,159,{param_uid_vec={},param_vec={},uid_vec={uid_list[1]}}) then

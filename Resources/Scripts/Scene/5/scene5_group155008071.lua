@@ -26,11 +26,11 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {71001,71003,71013,71014}
-Worktops = {}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local Controllers = {}
+local EnvControlGadgets = {71001,71003,71013,71014}
+local Worktops = {}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
 MaxSize = 17
 
@@ -73,7 +73,7 @@ TargetSolution =
 	3,9,15
 }
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -105,7 +105,7 @@ gameplayStateFuncitons =
 	end
 }
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -229,10 +229,10 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_71004(context, evt)
 	ScriptLib.PrintContextLog(context, "SelectOption : GadgetID = "..evt.param1..", OptionID = "..evt.param2)
-				eventMsg = "Wait_"..evt.param1
+				local eventMsg = "Wait_"..evt.param1
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.groupid, evt.param1, 7)
 
-				state = ScriptLib.GetGadgetStateByConfigId(context, 0, defs.gadget_blocker_2)
+				local state = ScriptLib.GetGadgetStateByConfigId(context, 0, defs.gadget_blocker_2)
 				if (LF_Can_Block_State_Change(context,defs.gadget_blocker_2,201-state)) then
 					GadgetStateSwitcher(context,defs.groupid,defs.gadget_blocker_2,{0,201})
 					GadgetStateSwitcher(context,defs.groupid,defs.gadget_blocker_controller_2,{0,201})
@@ -286,11 +286,11 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_71023(context, evt)
 	ScriptLib.PrintContextLog(context, "SelectOption : GadgetID = "..evt.param1..", OptionID = "..evt.param2)
-				eventMsg = "Wait_"..evt.param1
+				local eventMsg = "Wait_"..evt.param1
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.groupid, evt.param1, 7)
 
 
-				state = ScriptLib.GetGadgetStateByConfigId(context, 0, defs.gadget_blocker_1)
+				local state = ScriptLib.GetGadgetStateByConfigId(context, 0, defs.gadget_blocker_1)
 				if (LF_Can_Block_State_Change(context,defs.gadget_blocker_1,201-state)) then
 					GadgetStateSwitcher(context,defs.groupid,defs.gadget_blocker_1,{0,201})
 					GadgetStateSwitcher(context,defs.groupid,defs.gadget_blocker_controller_1,{0,201})

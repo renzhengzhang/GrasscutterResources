@@ -123,7 +123,7 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_55005(context, evt)
-	temp=ScriptLib.GetGroupLogicStateValue(context,"SGV_InitialPose")
+	local temp=ScriptLib.GetGroupLogicStateValue(context,"SGV_InitialPose")
 	temp=temp+1
 	ScriptLib.SetGroupLogicStateValue(context,"SGV_InitialPose",temp)
 	return 0

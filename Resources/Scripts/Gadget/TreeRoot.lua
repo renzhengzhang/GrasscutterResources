@@ -1,5 +1,5 @@
 function OnClientExecuteReq(context, param1, param2, param3)
-	this_target = ScriptLib.GetContextGadgetConfigId(context)
+	local this_target = ScriptLib.GetContextGadgetConfigId(context)
 
 	if 201 == param1 then
 		ScriptLib.SetGadgetStateByConfigId(context,this_target, GadgetState.GearStart)
@@ -8,6 +8,6 @@ function OnClientExecuteReq(context, param1, param2, param3)
 	if 0 == param1 then
 		ScriptLib.SetGadgetStateByConfigId(context,this_target, GadgetState.Default)
 	end
-
+	
 
 end

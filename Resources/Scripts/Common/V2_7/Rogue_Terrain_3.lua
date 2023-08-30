@@ -8,27 +8,27 @@ defs={
     air_wall = 999,
 }
 ]]
-t3_last_group = {
+local t3_last_group = {
     [246203001] = 246203004,
     [246203002] = 246203001,
     [246203003] = 246203002,
     [246203004] = 246203003,
 }
-t3_next_group = {
+local t3_next_group = {
     [246203001] = 246203002,
     [246203002] = 246203003,
     [246203003] = 246203004,
     [246203004] = 246203001,
 }
-t3_time_order = {
+local t3_time_order = {
     {1,2,3,4}
 }
-temp_Variables_Rogue_Terrain_3 = {
+local temp_Variables_Rogue_Terrain_3 = {
 	{  config_id=50000001,name = "Is_Inited", value = 0, no_refresh = false },
 	{  config_id=50000002,name = "Unload", value = 0, no_refresh = false },
 	{  config_id=50000003,name = "Can_Be_Inited", value = 1, no_refresh = false },
 }
-temp_Tirgger_Rogue_Terrain_3 = {
+local temp_Tirgger_Rogue_Terrain_3 = {
 --[[
     {event = EventType.EVENT_CHALLENGE_SUCCESS,source = "",condition="",action="action_t3_EVENT_CHALLENGE_SUCCESS",trigger_count=0},
     {event = EventType.EVENT_ROGUE_START_FIGHT,source = "",condition="",action="action_t3_EVENT_ROGUE_START_FIGHT",trigger_count=0},
@@ -59,7 +59,7 @@ end
 function action_t3_EVENT_PLATFORM_REACH_POINT(context,evt)
     ScriptLib.PrintContextLog(context,"## Rogue_Terraion_3 action_t3_EVENT_PLATFORM_REACH_POINT:p1="..evt.param1)
     --罗盘刻度
-    _t = defs.pointarray +1
+    local _t = defs.pointarray +1
     if _t == 5 then _t = 1 end
     ScriptLib.SetEntityServerGlobalValueByConfigId(context,defs.clock,"SGV_Time",_t)
     --传送门贴图
@@ -99,15 +99,15 @@ function action_t3_EVENT_ROGUE_OPEN_ACCESS(context,evt)
     if evt.param1 == 1 then return 0 end --通关后不需要开通路
     --创建streaming物件，预加载目标位置场景
     ScriptLib.CreateGadget(context,{config_id = defs.Streaming_Gadget})
-    _t = defs.pointarray +1
+    local _t = defs.pointarray +1
     if _t == 5 then _t = 1 end
     --开始拨动指针
     ScriptLib.SetPlatformPointArray(context, defs.pointer, defs.pointarray, {defs.pointarray,_t}, {route_type = 0, turn_mode = false})
     --如果是第一间，那么注目天空轮盘
-    _vec = ScriptLib.GetRogueDiaryRoundAndRoom(context)
+    local _vec = ScriptLib.GetRogueDiaryRoundAndRoom(context)
     if #_vec == 2 then
-        _stage = _vec[1]
-        _cell = _vec[2]
+        local _stage = _vec[1]
+        local _cell = _vec[2]
         ScriptLib.PrintContextLog(context,"## Rogue_Terraion_3 action_t3_EVENT_ROGUE_OPEN_ACCESS:_stage=".._stage .."|_cell=".._cell)
         if _stage == 1 and _cell == 2 then  --此时cell已经变成2 因为打完了第一间
             for k,v in pairs(gadgets) do

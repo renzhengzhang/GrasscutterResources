@@ -13,7 +13,7 @@ defs = {
 }
 --]]
 -----------------------
-Tri = {
+local Tri = {
 	--{ config_id = 8000001, name = "select_option", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
 	{ config_id = 8000002, name = "enter_region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0, forbid_guest = false },
 	{ config_id = 8000003, name = "leave_region", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "condition_leave_region", action = "action_leave_region", trigger_count = 0, forbid_guest = false },
@@ -23,7 +23,7 @@ Tri = {
 	{ config_id = 8000007, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0}
 }
 
-Var = {
+local Var = {
 	--{name = "timer_ptr", value = 0, no_refresh = false}
 }
 
@@ -55,7 +55,7 @@ function action_enter_region(context, evt)
 	if context.uid == 0 then
 		return -1
 	end
-	position = ScriptLib.GetPosByEntityId(context, context.target_entity_id)
+	local position = ScriptLib.GetPosByEntityId(context, context.target_entity_id)
 	for i,v in ipairs(regions) do
 		if math.abs(v.pos.y - position.y) <= v.size.y/2 then
 			return LF_SET_VISION_TYPE(context, v.config_id)
@@ -68,9 +68,9 @@ function condition_leave_region(context, evt)
 	if context.uid == 0 then
 		return false
 	end
-	position = ScriptLib.GetPosByEntityId(context, context.target_entity_id)
-	bottom = 0
-	top = 0
+	local position = ScriptLib.GetPosByEntityId(context, context.target_entity_id)
+	local bottom = 0
+	local top = 0
 	for i,v in ipairs(regions) do
 		if v.config_id == defs.bottom then
 			bottom = i
@@ -117,8 +117,8 @@ function action_gallery_start(context, evt)
 	if evt.param1 ~= defs.gallery_id then
 		return -1
 	end
-	act_time = ScriptLib.GetActivityOpenAndCloseTimeByScheduleId(context, 2003001)
-	cur_time = ScriptLib.GetServerTime(context)
+	local act_time = ScriptLib.GetActivityOpenAndCloseTimeByScheduleId(context, 2003001)
+	local cur_time = ScriptLib.GetServerTime(context)
 	if cur_time >= act_time[1] and cur_time < act_time[2] - 86400*7 then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.operator_group_id, defs.gadget_operator, 901)
 	end
@@ -127,8 +127,8 @@ function action_gallery_start(context, evt)
 end
 
 function action_gallery_stop(context, evt)
-	act_time = ScriptLib.GetActivityOpenAndCloseTimeByScheduleId(context, 2003001)
-	cur_time = ScriptLib.GetServerTime(context)
+	local act_time = ScriptLib.GetActivityOpenAndCloseTimeByScheduleId(context, 2003001)
+	local cur_time = ScriptLib.GetServerTime(context)
 	if cur_time >= act_time[1] and cur_time < act_time[2] - 86400*7 then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.operator_group_id, defs.gadget_operator, 0)
 	end
@@ -143,7 +143,7 @@ function action_group_load(context, evt)
 end
 --------------------------
 function LF_SET_VISION_TYPE(context, cid)
-	layer = 0
+	local layer = 0
 	for i,v in ipairs(defs.region_list) do
 		if v == cid then
 			layer = i
@@ -153,7 +153,7 @@ function LF_SET_VISION_TYPE(context, cid)
 	if layer < 1 or layer > #defs.region_list then
 		return -1
 	end
-	array = {}
+	local array = {}
 	--[[
 	--常规的区间分布
 	for i=-1,0,1 do
@@ -177,7 +177,7 @@ end
 
 function LF_GALLERY_START(context, evt)
 	ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, defs.gadget_airwall)
-	--uid_arr = ScriptLib.GetSceneUidList(context)
+	--local uid_arr = ScriptLib.GetSceneUidList(context)
 	--ScriptLib.TransPlayerToPos(context, {uid_list=uid_arr, pos = defs.trans_pos, rot = {x=0,y=0,z=0}})
 	--ScriptLib.SetGadgetEnableInteract(context, 0, defs.gadget_operator, false)
 	ScriptLib.AddExtraGroupSuite(context, 0, 2)
@@ -197,7 +197,7 @@ function LF_GALLERY_STOP(context, evt)
 	for i,v in ipairs(defs.group_list) do
 		ScriptLib.RemoveExtraGroupSuite(context, v, 2)
 	end
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetPlayerGroupVisionType(context, uid_list, {1})
 end
 
@@ -223,8 +223,8 @@ end
 
 function FlyBalloonLanding(context)
 	ScriptLib.PrintContextLog(context, "## FlyBalloonLanding | uid -> "..context.uid.." | source -> "..context.source_entity_id.." | target -> "..context.target_entity_id)
-	eid = ScriptLib.GetAvatarEntityIdByUid(context, context.uid)
-	pos = ScriptLib.GetPosByEntityId(context, eid)
+	local eid = ScriptLib.GetAvatarEntityIdByUid(context, context.uid)
+	local pos = ScriptLib.GetPosByEntityId(context, eid)
 	if defs.landing_Y == nil or pos.y <= defs.landing_Y then
 		--ScriptLib.AddTeamEntityGlobalFloatValue(context, {context.uid}, "has_end_game", 1)
 		ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["has_end_game"]=true})

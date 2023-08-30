@@ -355,12 +355,12 @@ function action_EVENT_SELECT_OPTION_33064(context, evt)
 	end
 
 	-- 挑战开启将'ElectricCorePlayHasStarted'改为1
-	challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
+	local challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 1, {group_id = grp_id})
 	    end
 
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetGroupTempValue(context, "optimize_"..uid_list[1], 1, { group_id = 133212033})
 	ScriptLib.SetPlayerGroupVisionType(context, {uid_list[1]}, {0})
 
@@ -417,13 +417,13 @@ end
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_33070(context, evt)
 	-- 挑战结束将'ElectricCorePlayHasStarted'改为0
-	challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
+	local challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 0, {group_id = grp_id})
 	    end
 
 
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	       	ScriptLib.SetGroupTempValue(context, "optimize_"..uid_list[1], 0, { group_id = 133212033})
 
 		-- 重新生成指定group，指定suite
@@ -439,13 +439,13 @@ end
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_33071(context, evt)
 	-- 挑战结束将'ElectricCorePlayHasStarted'改为0
-	challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
+	local challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 0, {group_id = grp_id})
 	    end
 
 
-	        uid_list = ScriptLib.GetSceneUidList(context)
+	        local uid_list = ScriptLib.GetSceneUidList(context)
 	        ScriptLib.SetGroupTempValue(context, "optimize_"..uid_list[1], 0, { group_id = 133212033})
 
 		-- 重新生成指定group，指定suite

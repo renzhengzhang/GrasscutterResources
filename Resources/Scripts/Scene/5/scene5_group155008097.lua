@@ -10,11 +10,11 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {97011,97012}
-Worktops = {}
-DayAppearGadgets = {97013}
-NightAppearGadgets = {97005,97006}
+local Controllers = {}
+local EnvControlGadgets = {97011,97012}
+local Worktops = {}
+local DayAppearGadgets = {97013}
+local NightAppearGadgets = {97005,97006}
 
 
 --[[
@@ -44,7 +44,7 @@ NightAppearGadgets = {97005,97006}
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -68,7 +68,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -77,7 +77,7 @@ end
 function RotateGate(context,gadget_id,pointarray_id,rotvar,rotstep)
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {1}, {route_type = 0, turn_mode = true})
 	if rotvar ~= '' and rotvar ~= nil then
-		temprot = ScriptLib.GetGroupVariableValue(context, rotvar)
+		local temprot = ScriptLib.GetGroupVariableValue(context, rotvar)
 
 		temprot = rotstep + temprot
 

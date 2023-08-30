@@ -1,10 +1,10 @@
 ﻿
-FirecrackerChest_ID = 70800056
-option_id = 68
-watcherCountDownTime_1 = 150 --多少秒内完成
-watcherCountDownTime_2 = 120 --多少秒内完成
+local FirecrackerChest_ID = 70800056
+local option_id = 68
+local watcherCountDownTime_1 = 150 --多少秒内完成
+local watcherCountDownTime_2 = 120 --多少秒内完成
 
-challenge_index_list = {  --埋点用
+local challenge_index_list = {  --埋点用
     [133108233]=2200,
     [133108234]=2200,
     [133108235]=2200,
@@ -30,12 +30,12 @@ challenge_index_list = {  --埋点用
     [133108231]=2040,
 }
 
-temp_Variables = {
+local temp_Variables = {
     { config_id=50000001,name = "Variable_EndGame", value = 0, no_refresh = false },
     { config_id=50000002,name = "Variable_StartWatcherCountDown", value = 0, no_refresh = false },
 }
 
-temp_Tirgger = {
+local temp_Tirgger = {
     --正式trigger
 	{event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_EVENT_SELECT_OPTION",trigger_count = 0},
 	{event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_EVENT_VARIABLE_CHANGE",trigger_count = 0},
@@ -45,17 +45,17 @@ temp_Tirgger = {
 function action_EVENT_CHALLENGE_SUCCESS(context,evt)
 	ScriptLib.PrintContextLog(context,"[action_EVENT_CHALLENGE_SUCCESS]")
     --F4 BOSS group的watcher处理
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     if ScriptLib.GetContextGroupId(context) == 133108198 then
         ScriptLib.PrintContextLog(context,"[GetContextGroupId]=133108198")
         --完成挑战
         ScriptLib.AddExhibitionAccumulableData(context,uid_list[1],"Activity_SalvageBoss_watcher_1",1)
         --剩余[watcherCountDownTime_1]秒完成挑战
-        if ScriptLib.GetGroupTempValue(context,"WatcherTimeOut_1",{}) == 0 then
+        if ScriptLib.GetGroupTempValue(context,"WatcherTimeOut_1",{}) == 0 then 
             ScriptLib.AddExhibitionAccumulableData(context,uid_list[1],"Activity_SalvageBoss_watcher_2",1)
         end
         --剩余[watcherCountDownTime_2]秒完成挑战
-        if ScriptLib.GetGroupTempValue(context,"WatcherTimeOut_2",{}) == 0 then
+        if ScriptLib.GetGroupTempValue(context,"WatcherTimeOut_2",{}) == 0 then 
             ScriptLib.AddExhibitionAccumulableData(context,uid_list[1],"Activity_SalvageBoss_watcher_3",1)
         end
     end
@@ -69,15 +69,15 @@ function action_EVENT_TIME_AXIS_PASS(context,evt)
     if evt.source_name == "WatcherCountDown_2" then
         ScriptLib.SetGroupTempValue(context,"WatcherTimeOut_2",1,{})
     end
-    return 0
+    return 0 
 end
 function action_EVENT_VARIABLE_CHANGE(context,evt)
-    if evt.source_name == "Variable_EndGame" then
-        uid_list = ScriptLib.GetSceneUidList(context)
+    if evt.source_name == "Variable_EndGame" then 
+        local uid_list = ScriptLib.GetSceneUidList(context)
         --挑战结束 关掉所有箱子交互
         for k,v in pairs(gadgets) do
             if v.gadget_id == FirecrackerChest_ID then
-                group_id = ScriptLib.GetContextGroupId(context)
+                local group_id = ScriptLib.GetContextGroupId(context)
                 ScriptLib.DelWorktopOptionByGroupId(context, group_id, v.config_id, option_id)
                 ScriptLib.SetEntityServerGlobalValueByConfigId(context, v.config_id, "SGV_Show_Mark", 0)
             end
@@ -96,7 +96,7 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
             ScriptLib.SetGroupTempValue(context,"WatcherTimeOut_2",0,{})
         end
         --挑战开始 补满箱子，加option
-        group_id = ScriptLib.GetContextGroupId(context)
+        local group_id = ScriptLib.GetContextGroupId(context)
         for k,v in pairs(gadgets) do
             if v.gadget_id == FirecrackerChest_ID then
                 ScriptLib.SetGroupGadgetStateByConfigId(context, group_id, v.config_id, 0)
@@ -105,7 +105,7 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
             end
         end
         --通知manager(任务group除外)
-        if group_id ~= 133108196 and group_id ~= 133108197 then
+        if group_id ~= 133108196 and group_id ~= 133108197 then 
             SeaLamp_Challenge_Manager_Start(context)
         end
     end
@@ -117,7 +117,7 @@ function action_EVENT_SELECT_OPTION(context,evt)
     if ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid) ~= FirecrackerChest_ID then return 0 end
     --如果身上已经有T技能，则reminder提示。
     uid = ScriptLib.GetSceneUidList(context)
-    key = ScriptLib.GetTeamAbilityFloatValue(context, context.uid, "AVATAR_Firecracker_Play")
+    local key = ScriptLib.GetTeamAbilityFloatValue(context, context.uid, "AVATAR_Firecracker_Play")
     if key == 1 then
         ScriptLib.AssignPlayerShowTemplateReminder(context, 154, {param_vec={},param_uid_vec={},uid_vec={context.uid}})
         return 0
@@ -128,9 +128,9 @@ function action_EVENT_SELECT_OPTION(context,evt)
     ScriptLib.SetGroupTempValue(context,"Enable_SLC",1,{})
     --使该爆竹箱 爆竹数量减少
     action_Reduce_Firecracker(context,evt.param1)
-    group_id = ScriptLib.GetContextGroupId(context)
-    trans
-    if challenge_index_list[group_id] ~=nil then
+    local group_id = ScriptLib.GetContextGroupId(context)
+    local trans
+    if challenge_index_list[group_id] ~=nil then 
         trans = ScriptLib.GetChallengeTransaction(context, challenge_index_list[group_id])
     else
         trans = ""
@@ -139,8 +139,8 @@ function action_EVENT_SELECT_OPTION(context,evt)
     return 0
 end
 function action_Reduce_Firecracker(context,config_id)
-    group_id = ScriptLib.GetContextGroupId(context)
-    nowState = ScriptLib.GetGadgetStateByConfigId(context, group_id, config_id)
+    local group_id = ScriptLib.GetContextGroupId(context)
+    local nowState = ScriptLib.GetGadgetStateByConfigId(context, group_id, config_id)
     --使被交互的这个数量-1
     if nowState == 0 then ScriptLib.SetGroupGadgetStateByConfigId(context, group_id, config_id, 101)
     elseif nowState == 101 then ScriptLib.SetGroupGadgetStateByConfigId(context, group_id, config_id, 102)
@@ -162,7 +162,7 @@ function SLC_Firecracker_Used(context)--使用T技能后
 	ScriptLib.PrintContextLog(context,"[SLC_Firecracker_Used]")
     --SLC等待标记重置
     ScriptLib.SetGroupTempValue(context,"Enable_SLC",0,{})
-    group_id = ScriptLib.GetContextGroupId(context)
+    local group_id = ScriptLib.GetContextGroupId(context)
     --给能捡的箱子恢复交互选项
     for k,v in pairs(gadgets) do
         if v.gadget_id == FirecrackerChest_ID then
@@ -172,14 +172,14 @@ function SLC_Firecracker_Used(context)--使用T技能后
             end
         end
     end
-    trans
-    if challenge_index_list[group_id] ~=nil then
+    local trans
+    if challenge_index_list[group_id] ~=nil then 
         trans = ScriptLib.GetChallengeTransaction(context, challenge_index_list[group_id])
     else
         trans = ""
     end
     ScriptLib.MarkGroupLuaAction(context, "LanternRite_2", trans , {[""] = 0,})
-    return 0
+    return 0 
 end
 --已作废
 function SLC_watcher_hit3(context)
@@ -196,21 +196,21 @@ end
 
 --专项补丁开始：性能优化圈。（仅当LD配置了defs.eyepoint时生效）
 function Insert_EyePoint_Trigger()  --专用trigger
-    if defs ~= nil then
+    if defs ~= nil then 
         if defs.eyepoint ~= nil then
             table.insert(temp_Tirgger,{event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_SetEyePoint",trigger_count = 0})
             table.insert(temp_Tirgger,{event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_ClearEyePoint",trigger_count = 0})
         end
     end
     return 0
-end
+end 
 Insert_EyePoint_Trigger()
 function action_SetEyePoint(context,evt)
 	ScriptLib.PrintContextLog(context,"[action_EVENT_ENTER_REGION]")
     if evt.param1 == defs.eyepoint then
         ScriptLib.SetPlayerEyePoint(context, defs.eyepoint, defs.eyepoint)
     end
-    return 0
+    return 0 
 end
 function action_ClearEyePoint(context,evt)
 	ScriptLib.PrintContextLog(context,"[action_EVENT_LEAVE_REGION]")

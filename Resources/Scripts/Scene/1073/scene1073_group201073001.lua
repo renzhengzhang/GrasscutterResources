@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-questLockInfo=
+local questLockInfo=
 {
     [1]={------默认全关
         [2]={uplock=true,downlock=true }

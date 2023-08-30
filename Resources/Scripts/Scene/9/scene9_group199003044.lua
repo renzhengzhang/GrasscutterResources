@@ -310,8 +310,8 @@ function action_EVENT_TIME_AXIS_PASS_44015(context, evt)
 	 ScriptLib.SetPlatformRouteId(context, 44016, 900300044)
 	 ScriptLib.StartPlatform(context, 44016)
 
-	pos = {x=-953, y=410, z=-114.5}
-	  pos_follow = {x=0, y=0, z=0}
+	local pos = {x=-953, y=410, z=-114.5}
+	  local pos_follow = {x=0, y=0, z=0}
 	 ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 5.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 6,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 })

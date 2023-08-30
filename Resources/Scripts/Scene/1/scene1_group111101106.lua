@@ -136,13 +136,13 @@ function action_EVENT_GADGET_STATE_CHANGE_106004(context, evt)
 		--ScriptLib.PrintLog(evt.param2.."---".."GadgetStateChange Start")
 		--ScriptLib.PrintLog(evt.param2.."---".."GadgetStateChange isActive ~= 1")
 		--ScriptLib.CreateGadget(context, { config_id = 106008 })
-				gadgetDefsName=""
-				gadgetID = 0
-				gadgetIndex = 0
-				gadgetRightDefsName = ""
-				gadgetRightIndex = 0
-				gadgetLeftDefsName = ""
-				gadgetLeftIndex = 0
+				local gadgetDefsName=""
+				local gadgetID = 0
+				local gadgetIndex = 0
+				local gadgetRightDefsName = ""
+				local gadgetRightIndex = 0
+				local gadgetLeftDefsName = ""
+				local gadgetLeftIndex = 0
 
 				gadgetID = evt.param2
 				--检测是哪个Gadget被触发了,并且获取对应的defs中定义的名称
@@ -265,7 +265,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_106014(context, evt)
 			--检测玩法是否完成
-			allEqual = 1
+			local allEqual = 1
 
 			for i=1,defs.maxCount do
 				if ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs[gadgetInfo[i].name]) ~= evt.param1 then
@@ -320,7 +320,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_106015(context, evt)
 			--检测玩法是否完成
-			allEqual = 1
+			local allEqual = 1
 
 			for i=1,defs.maxCount do
 				if ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs[gadgetInfo[i].name]) ~= evt.param1 then

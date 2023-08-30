@@ -9,7 +9,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-       defs =
+local        defs =
 {
 
         --行动序列

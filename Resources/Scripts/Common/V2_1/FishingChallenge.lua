@@ -25,11 +25,11 @@
 -- }
 
 --2021.7.14迭代：部分挑战时长改为2分钟，其余为3分钟
-shortChallenges = {
+local shortChallenges = {
 	111178,
 	111180
 }
-extraTriggers = {
+local extraTriggers = {
 	--检测挑战结束了的情况
 	{ name = "challenge_success", config_id = 8000001, event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0},
 	{ name = "challenge_fail", config_id = 8000002, event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail", trigger_count = 0},
@@ -59,7 +59,7 @@ function action_fishing_start(context, evt)
 	ScriptLib.PrintContextLog(context, "[fishing] action_fishing_start.")
 	if  ScriptLib.GetGroupTempValue(context, "fishing_state", {}) == 0 then
 
-		timeLimit = 180 --默认挑战时长
+		local timeLimit = 180 --默认挑战时长
 
 		--重置计分
 		ScriptLib.SetGroupTempValue(context, "tempScore", 0, {})
@@ -104,7 +104,7 @@ function action_gallery_stop(context, evt)
 		end
 
 		--退出钓鱼
-		fisher_uid = ScriptLib.GetGroupTempValue(context, "fisher_uid", {})
+		local fisher_uid = ScriptLib.GetGroupTempValue(context, "fisher_uid", {})
 		ScriptLib.PrintContextLog(context, "[fishing] Gallery stopped while fishing. StopFishing UID@"..fisher_uid)
 		ScriptLib.StopFishing(context,fisher_uid)
 	end
@@ -126,7 +126,7 @@ function action_challenge_fail(context, evt)
 		end
 
 		--退出钓鱼
-		fisher_uid = ScriptLib.GetGroupTempValue(context, "fisher_uid", {})
+		local fisher_uid = ScriptLib.GetGroupTempValue(context, "fisher_uid", {})
 		ScriptLib.StopFishing(context,fisher_uid)
 	end
 	return 0
@@ -146,7 +146,7 @@ function action_challenge_success(context, evt)
 		end
 
 		--退出钓鱼
-		fisher_uid = ScriptLib.GetGroupTempValue(context, "fisher_uid", {})
+		local fisher_uid = ScriptLib.GetGroupTempValue(context, "fisher_uid", {})
 		ScriptLib.StopFishing(context,fisher_uid)
 	end
 	return 0
@@ -169,9 +169,9 @@ end
 	--evt.param3 0-未进包（即背包满/到达活动要求的获取上限）1-进包
 	--evt.param4 本次QTE中，bonus最长持续时间
 function action_fishing_qte_finish(context, evt)
-	target_fish = evt.param1
-	score = 0
-	fishing_score = {}
+	local target_fish = evt.param1
+	local score = 0
+	local fishing_score = {}
 	ScriptLib.PrintContextLog(context, "[fishing] fishing_qte_finish. target_fish is @"..target_fish.." is_Free @".. evt.param3)
 ------计分模式0：钓鱼成功直接计数
 	if defs.fishing_type == 0 then
@@ -194,7 +194,7 @@ function action_fishing_qte_finish(context, evt)
 				fishing_score = {score}
 			end
 			--处理是否放生
-			is_free = false
+			local is_free = false
 			if evt.param3 ~= 1 then
 				is_free = true
 			end
@@ -211,8 +211,8 @@ function action_fishing_qte_finish(context, evt)
 			--单局计数+1
 			ScriptLib.ChangeGroupTempValue(context, "tempScore", 1, {})
 
-			tempUnmissScore = ScriptLib.GetGroupTempValue(context, "tempUnmissScore", {})
-			tempScore = ScriptLib.GetGroupTempValue(context, "tempScore", {})
+			local tempUnmissScore = ScriptLib.GetGroupTempValue(context, "tempUnmissScore", {})
+			local tempScore = ScriptLib.GetGroupTempValue(context, "tempScore", {})
 
 			--检查是不是该刷新最大连续记录
 			if tempUnmissScore < tempScore then
@@ -225,9 +225,9 @@ function action_fishing_qte_finish(context, evt)
 
 			--更新Gallery分数
 			--["fishing_score"]:{钓鱼个数, 最大连续数, 最大Bonus时长} 单目标挑战传单元素就行
-			score = ScriptLib.GetGroupTempValue(context, "tempUnmissScore", {})
+			local score = ScriptLib.GetGroupTempValue(context, "tempUnmissScore", {})
 			fishing_score = {score}
-			is_free = false
+			local is_free = false
 			if evt.param3 ~= 1 then
 				is_free = true
 			end
@@ -262,7 +262,7 @@ function action_leave_region(context, evt)
 		end
 
 		--退出钓鱼
-		fisher_uid = ScriptLib.GetGroupTempValue(context, "fisher_uid", {})
+		local fisher_uid = ScriptLib.GetGroupTempValue(context, "fisher_uid", {})
 		ScriptLib.PrintContextLog(context, "[fishing] Leave challenge region. StopFishing UID@"..fisher_uid)
 		ScriptLib.StopFishing(context,fisher_uid)
 	end

@@ -204,8 +204,8 @@ end
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_162015(context, evt)
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-	randomTemp = math.random(1, 3)
-	--randomTemp = 1
+	local randomTemp = math.random(1, 3)
+	--local randomTemp = 1
 
 	if randomTemp == 1 then
 	        ScriptLib.AddExtraGroupSuite(context, defs.group_id, 3)
@@ -236,8 +236,8 @@ end
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_162016(context, evt)
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-	randomTemp = math.random(1, 3)
-	--randomTemp = 1
+	local randomTemp = math.random(1, 3)
+	--local randomTemp = 1
 
 	if randomTemp == 1 then
 	        ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
@@ -268,8 +268,8 @@ end
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_162017(context, evt)
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-	randomTemp = math.random(1, 3)
-	--randomTemp = 1
+	local randomTemp = math.random(1, 3)
+	--local randomTemp = 1
 
 	if randomTemp == 1 then
 	        ScriptLib.AddExtraGroupSuite(context, defs.group_id, 4)

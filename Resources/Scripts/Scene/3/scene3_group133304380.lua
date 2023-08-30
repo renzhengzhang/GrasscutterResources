@@ -130,7 +130,7 @@ end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_380007(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7302905)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7302905)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

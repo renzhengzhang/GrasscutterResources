@@ -153,7 +153,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_327(context, evt)
-	p = ScriptLib.GetGroupVariableValue(context, "dvalin_progress")
+	local p = ScriptLib.GetGroupVariableValue(context, "dvalin_progress")
 	if p >= 1 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.seal_hint_1, GadgetState.GearStart)
 	end
@@ -169,7 +169,7 @@ end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_337(context, evt)
-	v = ScriptLib.GetGroupVariableValue(context, "dvalin_progress")
+	local v = ScriptLib.GetGroupVariableValue(context, "dvalin_progress")
 	if v == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.seal_hint_1, GadgetState.GearStart)
 	elseif v == 2 then

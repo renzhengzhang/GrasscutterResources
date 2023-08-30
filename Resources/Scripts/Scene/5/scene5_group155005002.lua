@@ -125,7 +125,7 @@ suites = {
 -- 触发操作
 function action_EVENT_QUEST_START_2001(context, evt)
 	ScriptLib.SetGroupVariableValue(context,"isActiveAll",1)
-	state
+	local state
 			for	i=1, #gadgetList do
 				state = ScriptLib.GetGroupVariableValueByGroup(context, "gameplayState", gadgetList[i])
 				if state ~= 2 then
@@ -149,7 +149,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_2002(context, evt)
-	state
+	local state
 			for	i=1, #gadgetList do
 				state = ScriptLib.GetGroupVariableValueByGroup(context, "gameplayState", gadgetList[i])
 				if state ~= 2 then

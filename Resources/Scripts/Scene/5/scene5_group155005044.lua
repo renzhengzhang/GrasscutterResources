@@ -90,7 +90,7 @@ end
 function action_EVENT_GROUP_LOAD_44001(context, evt)
 	-- 延迟0秒刷怪
 		math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-		randomTemp = math.random(1, 3)
+		local randomTemp = math.random(1, 3)
 		if randomTemp == 1 then
 			ScriptLib.CreateMonster(context, { config_id = 44002, delay_time = 0 })
 			return 0

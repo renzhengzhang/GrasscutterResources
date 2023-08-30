@@ -24,7 +24,7 @@ defs ={
 
 
 --[]内为大疾风微粒id，后面为要刷的suit
-windball_list = {
+local windball_list = {
 [1049]=2,
 [1113]=5,
 [1159]=6,
@@ -32,7 +32,7 @@ windball_list = {
 
 
 --[]内为关闭/加强机关id，后面为控制的吹风机id
-operator_list = {
+local operator_list = {
 
 [1020]={1016},
 [1021]={1017,1135,1136,1156},
@@ -44,7 +44,7 @@ operator_list = {
 }
 
 
-transfer_list = {
+local transfer_list = {
         --[region_configid] = point_id,
         [1180] =1080,
         [1181] =1081,
@@ -56,7 +56,7 @@ transfer_list = {
 
 
 --[]内为region，后面为控制的pointid,进入region后会会切换到对应的point
-revivepoint_list={
+local revivepoint_list={
 [1087]=1080,
 [1088]=1081,
 [1089]=1082,
@@ -550,8 +550,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_1143(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-402.7935，23.5，-429.9759），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-402.7935, y=23.5, z=-429.9759}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-402.7935, y=23.5, z=-429.9759}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -577,8 +577,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_1144(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-428，28，-342.5），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-428, y=28, z=-342.5}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-428, y=28, z=-342.5}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -629,8 +629,8 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1188(context, evt)
-	list = {ScriptLib.GetSceneUidList(context),}
-	count = 0
+	local list = {ScriptLib.GetSceneUidList(context),}
+	local count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
@@ -659,8 +659,8 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1189(context, evt)
-	list = {ScriptLib.GetSceneUidList(context),}
-	count = 0
+	local list = {ScriptLib.GetSceneUidList(context),}
+	local count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
@@ -689,8 +689,8 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1190(context, evt)
-	list = {ScriptLib.GetSceneUidList(context),}
-	count = 0
+	local list = {ScriptLib.GetSceneUidList(context),}
+	local count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
@@ -719,8 +719,8 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1191(context, evt)
-	list = {ScriptLib.GetSceneUidList(context),}
-	count = 0
+	local list = {ScriptLib.GetSceneUidList(context),}
+	local count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end

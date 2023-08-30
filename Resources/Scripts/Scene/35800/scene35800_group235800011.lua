@@ -4,11 +4,11 @@ base_info = {
 }
 
 -- DEFS_MISCS
-Bubbles = {11001,11002,11003,11004,11005}
---Bubbles = {{11013,11014,11015,11016,11017},{11018,11019,11020,11021,11022},{11023,11024,11025,11026,11027},{11028,11029,11030,11031,11032},{11033,11034,11035,11036,11037},{11038,11039,11040,11041,11042},{11043,11044,11045,11046,11047},{11048,11049,11050,11051,11052},{11053,11054,11055,11056,11057},{11058,11059,11060,11061,11062},{11063,11064,11065,11066,11067},{11068,11069,11070,11071,11072}}
+local Bubbles = {11001,11002,11003,11004,11005}
+--local Bubbles = {{11013,11014,11015,11016,11017},{11018,11019,11020,11021,11022},{11023,11024,11025,11026,11027},{11028,11029,11030,11031,11032},{11033,11034,11035,11036,11037},{11038,11039,11040,11041,11042},{11043,11044,11045,11046,11047},{11048,11049,11050,11051,11052},{11053,11054,11055,11056,11057},{11058,11059,11060,11061,11062},{11063,11064,11065,11066,11067},{11068,11069,11070,11071,11072}}
 
 
-BubbleWeightList = {
+local BubbleWeightList = {
 	[1] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[2] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[3] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
@@ -24,7 +24,7 @@ BubbleWeightList = {
 }
 
 
-BubbleWeightList2 = {
+local BubbleWeightList2 = {
 	[1] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[2] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[3] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
@@ -41,7 +41,7 @@ BubbleWeightList2 = {
 }
 
 
-BubbleWeightList3 = {
+local BubbleWeightList3 = {
 	[1] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 20 }, { Num= 4, weight= 80 }, { Num= 5, weight= 0 }},
 	[2] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 50 }, { Num= 4, weight= 50 }, { Num= 5, weight= 0 }},
 	[3] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 50 }, { Num= 4, weight= 50 }, { Num= 5, weight= 0 }},
@@ -56,7 +56,7 @@ BubbleWeightList3 = {
 	[12] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 0 }, { Num= 4, weight= 50 }, { Num= 5, weight= 50 }},
 }
 
-BubbleWeightList4 = {
+local BubbleWeightList4 = {
 	[1] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[2] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[3] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
@@ -78,39 +78,39 @@ BubbleStep = {{list= BubbleWeightList4 ,BubbleSpSuite=0},{list= BubbleWeightList
 
 --1.固定波次封路  2--不封路带光墙  3.随机封路+横移泡泡  4.固定封路+横移泡泡
 
-regionIndex =  11006
+local regionIndex =  11006
 
-BubbleGroupID  = 235800011
+local BubbleGroupID  = 235800011
 
-BubbleWallID = 11007
+local BubbleWallID = 11007
 
-galleryID = 6007
+local galleryID = 6007
 
-TimeAxis = {1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49,52,55,58,61,64,67,70,73}
+local TimeAxis = {1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49,52,55,58,61,64,67,70,73}
 
-random_flower_sum = {min=3 , max=5}
+local random_flower_sum = {min=3 , max=5}
 
-flower_suite_index = {17,18,19,20}
+local flower_suite_index = {17,18,19,20}
 
-RegionID = 11073
+local RegionID = 11073
 
-flower_region_id = {11075,11076,11077,11078}
+local flower_region_id = {11075,11076,11077,11078}
 
-bubble_delay_sec = 10
+local bubble_delay_sec = 10
 
-Bubble_PerfectScore = 20
+local Bubble_PerfectScore = 20
 
-Bubble_TimeScore = 60
+local Bubble_TimeScore = 60
 
-Bubble_TimeOutScore = -10
+local Bubble_TimeOutScore = -10
 
-collect_energy = "collect_energy_6007"
+local collect_energy = "collect_energy_6007"
 
-complete_timelimit_challenge = "complete_timelimit_challenge_6007"
+local complete_timelimit_challenge = "complete_timelimit_challenge_6007"
 
-perfect_complete_timelimit_challenge = "perfect_complete_timelimit_challenge_6007"
+local perfect_complete_timelimit_challenge = "perfect_complete_timelimit_challenge_6007"
 
-defeated_timelimit_challenge = "defeated_timelimit_challenge_6007"
+local defeated_timelimit_challenge = "defeated_timelimit_challenge_6007"
 
 --================================================================
 --

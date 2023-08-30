@@ -116,7 +116,7 @@ function action_EVENT_GADGET_STATE_CHANGE_199003(context, evt)
 	end
 
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=1302.883,y=200.0026,z=211.5309}
+	local pos = {x=1302.883,y=200.0026,z=211.5309}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110426, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
@@ -163,7 +163,7 @@ function action_EVENT_GADGET_CREATE_199005(context, evt)
 	end
 
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=1304.458,y=201.6607,z=210.9731}
+	local pos = {x=1304.458,y=201.6607,z=210.9731}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110424, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1

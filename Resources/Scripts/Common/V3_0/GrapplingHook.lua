@@ -5,21 +5,21 @@
 ||	LogName:	TD_GrapplingHook
 ||	Protection:
 =======================================]]--
-GrapplingHook=
+local GrapplingHook=
 {
     RegionConfigId = 8100001,
     GadgetId = 70900403
 }
 
 function LF_Initialize_Level_ForHook()
-	initRegionConfigId=GrapplingHook.RegionConfigId
-	regionRelated = {}
+	local initRegionConfigId=GrapplingHook.RegionConfigId
+	local regionRelated = {}
     for k,v in ipairs(gadgets) do
-	    gadgetConfig = v
+	    local gadgetConfig = v
 	    if gadgetConfig.gadget_id == GrapplingHook.GadgetId then
-		    gadgetConfigID = gadgetConfig.config_id
+		    local gadgetConfigID = gadgetConfig.config_id
 		    -- 插入regions ， //GrapplingHookSkill_GroupPlay
-		    insertRegion={ config_id = initRegionConfigId, shape = RegionShape.SPHERE, radius = 30, pos=gadgetConfig.pos, area_id = gadgetConfig.area_id,ability_group_list = { "GrapplingHookSkill_GroupPlay" } }
+		    local insertRegion={ config_id = initRegionConfigId, shape = RegionShape.SPHERE, radius = 30, pos=gadgetConfig.pos, area_id = gadgetConfig.area_id,ability_group_list = { "GrapplingHookSkill_GroupPlay" } }
 		    table.insert(regions,insertRegion)
 		    -- 关联钩爪与region
 		    regionRelated[gadgetConfigID] = {gadgetConfigID = gadgetConfigID,regionConfigID = initRegionConfigId}

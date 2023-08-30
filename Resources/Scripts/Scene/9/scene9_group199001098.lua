@@ -715,7 +715,7 @@ function action_EVENT_ANY_GADGET_DIE_98009(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98120, 900100009, {1,2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -724,7 +724,7 @@ function action_EVENT_ANY_GADGET_DIE_98009(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98123, 900100009, {2,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -733,7 +733,7 @@ function action_EVENT_ANY_GADGET_DIE_98009(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98122, 900100009, {3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -742,7 +742,7 @@ function action_EVENT_ANY_GADGET_DIE_98009(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98121, 900100009, {4,1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -892,7 +892,7 @@ function action_EVENT_ANY_GADGET_DIE_98019(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98220, 900100010, {1,2,3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -901,7 +901,7 @@ function action_EVENT_ANY_GADGET_DIE_98019(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98223, 900100010, {2,3,4,1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -910,7 +910,7 @@ function action_EVENT_ANY_GADGET_DIE_98019(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98222, 900100010, {3,4,1,2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -919,7 +919,7 @@ function action_EVENT_ANY_GADGET_DIE_98019(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98221, 900100010, {4,1,2,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -973,7 +973,7 @@ function action_EVENT_ANY_GADGET_DIE_98184(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98044, 900100008, {1,2,3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -982,7 +982,7 @@ function action_EVENT_ANY_GADGET_DIE_98184(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98047, 900100008, {2,3,4,1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -991,7 +991,7 @@ function action_EVENT_ANY_GADGET_DIE_98184(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98046, 900100008, {3,4,1,2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1000,7 +1000,7 @@ function action_EVENT_ANY_GADGET_DIE_98184(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98045, 900100008, {4,1,2,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1081,7 +1081,7 @@ function action_EVENT_ANY_GADGET_DIE_98235(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98226, 900100011, {1,2,3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1090,7 +1090,7 @@ function action_EVENT_ANY_GADGET_DIE_98235(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98229, 900100011, {2,3,4,1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1099,7 +1099,7 @@ function action_EVENT_ANY_GADGET_DIE_98235(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98228, 900100011, {3,4,1,2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1108,7 +1108,7 @@ function action_EVENT_ANY_GADGET_DIE_98235(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 2, turn_mode = false}
+	local tempParam = {route_type = 2, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 98227, 900100011, {4,1,2,3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1

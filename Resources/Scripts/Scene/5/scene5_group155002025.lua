@@ -12,7 +12,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -37,7 +37,7 @@ ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_fire })
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -171,7 +171,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_25004(context, evt)
-		isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", defs.managerGroupID)
+		local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", defs.managerGroupID)
 
 		if isactive == 1 then
 			if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then

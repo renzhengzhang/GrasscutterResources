@@ -11,7 +11,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 1,
   --镜头的移动路径，球面0，直线1
     blend_duration = 1,
@@ -118,7 +118,7 @@ function condition_EVENT_SELECT_OPTION_11003(context, evt)
 	end
 
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7318631)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7318631)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

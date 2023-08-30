@@ -63,7 +63,7 @@ defs = {
 }
 ]]
 
-cfg = {
+local cfg = {
     --1-万叶 2-辛焱 3-菲谢尔 4-莫娜
     challenge_id = {2010037,2010046,2010048,2010047},
     --持续刷buff时，间隔时间
@@ -120,7 +120,7 @@ cfg = {
         [4] = 600126,--星星按键可踩时
     }
 }
-extra_Triggers = {
+local extra_Triggers = {
 
     { config_id = 8000001, name = "Monster_Tide_Die", event = EventType.EVENT_MONSTER_TIDE_DIE, source = "", condition = "", action = "action_Monster_Tide_Die", trigger_count = 0},
     --每30秒一刷，直到开始新的一波怪
@@ -193,7 +193,7 @@ end
 
 --每次挑战清除翻牌子的陈列室替换值
 function LF_ClearReplacableExhibition(context)
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     for k, v in pairs(uid_list) do
         for ik, iv in pairs(cfg.exhiKey_all_replace[defs.type]) do
             ScriptLib.ClearExhibitionReplaceableData(context, v, iv)
@@ -203,7 +203,7 @@ function LF_ClearReplacableExhibition(context)
 end
 
 function LF_SetRandIndex(context)
-    rand_index = 1
+    local rand_index = 1
     --若配置了复数个，则随机一个
     if 1 < #defs.rand_table then
         math.randomseed(ScriptLib.GetServerTime(context))
@@ -222,11 +222,11 @@ function action_RoutineBuff_TimeAxis_Pass(context)
 end
 
 function LF_InitChallenge(context)
-    rand_index = ScriptLib.GetGroupVariableValue(context, "rand_index")
+    local rand_index = ScriptLib.GetGroupVariableValue(context, "rand_index")
 
     --计算怪物数量
-    tide_queue = defs.rand_table[rand_index]
-    sum = 0
+    local tide_queue = defs.rand_table[rand_index]
+    local sum = 0
     for k,v in pairs(tide_queue) do
         for ik, iv in pairs(v) do
             sum = sum + #defs.tide_cfg[iv].monsters
@@ -239,9 +239,9 @@ end
 
 function action_Dungeon_All_Avatar_Die(context, evt)
 
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     for k,v in pairs(uid_list) do
-        is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
+        local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
         if false == is_all_dead then
             return 0
         end
@@ -255,9 +255,9 @@ end
 function LF_ClearAllMonsterTide(context)
 
     --取得rand_index
-    rand_index = ScriptLib.GetGroupVariableValue(context, "rand_index")
+    local rand_index = ScriptLib.GetGroupVariableValue(context, "rand_index")
     --取得波次。找已刷出的，所以应该-1
-    wave = ScriptLib.GetGroupTempValue(context, "wave", {}) - 1
+    local wave = ScriptLib.GetGroupTempValue(context, "wave", {}) - 1
 
     --数值越界 由于tide_index获取不正确，所以直接return不清怪了
     if nil == defs.rand_table[rand_index] or nil == defs.rand_table[rand_index][wave] then
@@ -267,7 +267,7 @@ function LF_ClearAllMonsterTide(context)
     --正常值 clear指定的怪物潮
     for k,v in pairs(defs.rand_table[rand_index][wave]) do
         --怪物潮索引
-        tide_index = wave*1000 + v
+        local tide_index = wave*1000 + v
         ScriptLib.PrintContextLog(context, "## [DLDungeon] Clear monster tide. tide_cfg@"..v.." tide_index@"..tide_index)
         ScriptLib.KillMonsterTide(context, base_info.group_id, tide_index)
     end
@@ -294,7 +294,7 @@ function LF_StartMonsterTide(context, wave)
         LF_ActiveMonaStar(context)
     end
 
-    rand_index = ScriptLib.GetGroupVariableValue(context, "rand_index")
+    local rand_index = ScriptLib.GetGroupVariableValue(context, "rand_index")
     --越界修正
     --rand_index异常直接取1
     if rand_index > #defs.rand_table then
@@ -306,7 +306,7 @@ function LF_StartMonsterTide(context, wave)
         return 0
     end
     --本轮有几个并行怪物潮
-    tide_num = #defs.rand_table[rand_index][wave]
+    local tide_num = #defs.rand_table[rand_index][wave]
 
     --莫娜用 标记并行怪物潮的第一位
     ScriptLib.SetGroupTempValue(context, "mona_buff_idx", defs.rand_table[rand_index][wave][1],{})
@@ -316,7 +316,7 @@ function LF_StartMonsterTide(context, wave)
     --启动并行怪物潮
     for k,v in pairs(defs.rand_table[rand_index][wave]) do
         --设置怪物潮索引
-        tide_index = wave*1000 + v
+        local tide_index = wave*1000 + v
         ScriptLib.PrintContextLog(context, "## [DLDungeon] Start monster tide. tide_cfg@"..v.." tide_index@"..tide_index)
         --创建怪物潮
         ScriptLib.AutoMonsterTide(context, tide_index, base_info.group_id, defs.tide_cfg[v].monsters, #defs.tide_cfg[v].monsters, defs.tide_cfg[v].min, defs.tide_cfg[v].max)
@@ -339,9 +339,9 @@ end
 
 function action_Monster_Tide_Die(context, evt)
 
-    tide_index = tonumber(evt.source_name)
-    wave = ScriptLib.GetGroupTempValue(context, "wave", {})
-    tide_cfg_index = tide_index%10
+    local tide_index = tonumber(evt.source_name)
+    local wave = ScriptLib.GetGroupTempValue(context, "wave", {})
+    local tide_cfg_index = tide_index%10
     ScriptLib.PrintContextLog(context, "## [DLDungeon]: Tide monster die. tide_index@".. tide_index.." die_count@".. evt.param1)
     --是否杀光了一tide 如果tide_index异常，没有修正的办法了直接终止挑战
     if nil == defs.tide_cfg[tide_cfg_index] then
@@ -356,10 +356,10 @@ function action_Monster_Tide_Die(context, evt)
     ScriptLib.ChangeGroupTempValue(context, "tide_num", -1, {})
 
     --检查本轮怪物潮都已经结束
-    tide_num = ScriptLib.GetGroupTempValue(context, "tide_num", {})
+    local tide_num = ScriptLib.GetGroupTempValue(context, "tide_num", {})
     ScriptLib.PrintContextLog(context, "## [DLDungeon]: Tide index ".. tide_index.." all monster die. remain_tide_num@".. tide_num)
     if 0 >= tide_num then
-        rand_index = ScriptLib.GetGroupVariableValue(context, "rand_index")
+        local rand_index = ScriptLib.GetGroupVariableValue(context, "rand_index")
         if wave > #defs.rand_table[rand_index] then
             --全部完成
         else
@@ -449,7 +449,7 @@ function LF_AddRandomSuite(context)
 
     math.randomseed(ScriptLib.GetServerTime(context))
 
-    rand_index = math.random(#defs.rand_suites)
+    local rand_index = math.random(#defs.rand_suites)
     ScriptLib.SetGroupVariableValue(context, "rand_suite", rand_index)
     ScriptLib.AddExtraGroupSuite(context, base_info.group_id, defs.rand_suites[rand_index])
     ScriptLib.PrintContextLog(context, "## [DLDungeon]: LF_AddRandomSuite. suite_index@".. rand_index)
@@ -470,12 +470,12 @@ end
 --创建随机buff，调用之前需要清场 保证所有point都是可用的
 function LF_CreateRandomBuff(context, count)
 
-    spawn_queue = {table.unpack(defs.buff_pool)}
+    local spawn_queue = {table.unpack(defs.buff_pool)}
 
     --需求：先刷0~2个限定buff(无、A、B、A+B)，其余部分刷普通buff。不需要再对buff种类做随机了
     if nil ~= defs.buff_pool_spec and 2 <= #defs.buff_pool_spec then
         math.randomseed(ScriptLib.GetServerTime(context))
-        spec_num = math.random(0, 3)
+        local spec_num = math.random(0, 3)
         --数量确定，只枚举情况不洗牌了
         if 3 == spec_num then
             table.insert(spawn_queue, 1, defs.buff_pool_spec[1])
@@ -487,10 +487,10 @@ function LF_CreateRandomBuff(context, count)
     --检测count上限
     count = math.min(count, #spawn_queue)
     --依次创建spawn_queue中的buff物件，直到达到count
-    point_list = LF_Get_RandomPointList(context)
+    local point_list = LF_Get_RandomPointList(context)
     for i = 1, count do
         --获取生成点位
-        point_configID = point_list[i]
+        local point_configID = point_list[i]
         ScriptLib.PrintContextLog(context, "## [DLDungeon] To Create gadget. gadget@"..spawn_queue[i].." at Point@"..point_configID)
         ScriptLib.CreateGadgetByConfigIdByPos(context, spawn_queue[i], gadgets[point_configID].pos, gadgets[point_configID].rot)
     end
@@ -506,10 +506,10 @@ function LF_Get_RandomPointList(context)
 
     math.randomseed(ScriptLib.GetServerTime(context))
 
-    shuffled = {table.unpack(defs.point_list)}
+    local shuffled = {table.unpack(defs.point_list)}
     for i = #shuffled, 1, -1 do
-        j = math.random(i)
-        tmp = shuffled[i]
+        local j = math.random(i)
+        local tmp = shuffled[i]
         shuffled[i] = shuffled[j]
         shuffled[j] = tmp
     end
@@ -545,19 +545,19 @@ function LF_ActiveMonaStar(context)
     LF_CloseMonaStar(context)
 
     ScriptLib.SetGroupTempValue(context, "mona_btn", 1,{})
-    suite_index = ScriptLib.GetGroupVariableValue(context, "rand_suite")
+    local suite_index = ScriptLib.GetGroupVariableValue(context, "rand_suite")
     --越界修正
     if nil == defs.rand_suites[suite_index] then
         suite_index = 1
         ScriptLib.SetGroupVariableValue(context, "rand_suite", suite_index)
     end
-    star_list = defs.stars[defs.rand_suites[suite_index]]
+    local star_list = defs.stars[defs.rand_suites[suite_index]]
     --越界修正
     if nil == star_list then
         star_list = defs.stars[1]
     end
     math.randomseed(ScriptLib.GetServerTime(context))
-    star_idx = math.random(#star_list)
+    local star_idx = math.random(#star_list)
 
     ScriptLib.SetGadgetStateByConfigId(context, star_list[star_idx][1], 201)
     ScriptLib.SetGadgetStateByConfigId(context, star_list[star_idx][2], 201)
@@ -573,8 +573,8 @@ end
 --莫娜 关闭星星与石板
 function LF_CloseMonaStar(context)
 
-    suite_index = ScriptLib.GetGroupVariableValue(context, "rand_suite")
-    star_list = defs.stars[defs.rand_suites[suite_index]]
+    local suite_index = ScriptLib.GetGroupVariableValue(context, "rand_suite")
+    local star_list = defs.stars[defs.rand_suites[suite_index]]
     for k, v in pairs(star_list) do
         ScriptLib.SetGadgetStateByConfigId(context, v[1], 0)
         ScriptLib.SetGadgetStateByConfigId(context, v[2], 0)
@@ -600,14 +600,14 @@ end
 --莫娜 施加当前怪物潮对应的buff，并行怪物潮取第一个
 function LF_ActiveMonaBuff(context)
 
-    monster_tide_idx = ScriptLib.GetGroupTempValue(context, "mona_buff_idx", {})
-    buff_list = defs.tide_cfg[monster_tide_idx].mona_buffs
+    local monster_tide_idx = ScriptLib.GetGroupTempValue(context, "mona_buff_idx", {})
+    local buff_list = defs.tide_cfg[monster_tide_idx].mona_buffs
     if nil == buff_list then
         return 0
     end
     math.randomseed(ScriptLib.GetServerTime(context))
 
-    buff_idx = math.random(#buff_list)
+    local buff_idx = math.random(#buff_list)
     ScriptLib.PrintContextLog(context, "## [DLDungeon] LF_ActiveMonaBuff. buff@"..buff_list[buff_idx])
     --开启弹飞buff
     if 1 == buff_list[buff_idx] then
@@ -640,8 +640,8 @@ end
 
 --请求获取联机玩家数量
 function SLC_Get_PlayerCount(context)
-    uidList = ScriptLib.GetSceneUidList(context)
-    num = #uidList
+    local uidList = ScriptLib.GetSceneUidList(context)
+    local num = #uidList
     ScriptLib.PrintContextLog(context, "[DLDungeon] SLC_Get_PlayerCount. result@"..num)
     LF_SetSGV_AllTeam(context,"SGV_DLDungeon_PlayerNum", num)
     return 0
@@ -700,14 +700,14 @@ function SLC_DLActivityDungeon_Fischl(context, param1)
 end
 --招奥兹需要冲物件SLC，所以陈列室另起一个SLC
 function SLC_DLActivityDungeon_FischlOzSummon(context)
-    position = { x = 0, y = 0, z = 0}
-    pos_raw = ScriptLib.GetPosByEntityId(context, context.source_entity_id)
+    local position = { x = 0, y = 0, z = 0}
+    local pos_raw = ScriptLib.GetPosByEntityId(context, context.source_entity_id)
     position.x = pos_raw.x - pos_raw.x % 0.01
     position.y = pos_raw.y - pos_raw.y % 0.01
     position.z = pos_raw.z - pos_raw.z % 0.01
     if nil ~= defs.crow_id then
         for k , v in pairs(defs.crow_id) do
-            ret = ScriptLib.CreateGadgetByConfigIdByPos(context, v, position, gadgets[v].rot)
+            local ret = ScriptLib.CreateGadgetByConfigIdByPos(context, v, position, gadgets[v].rot)
             if 0 == ret then
                 break
             end
@@ -724,9 +724,9 @@ function LF_HandleMonaWater(context, dir)
 end
 
 function LF_TriggerSGVChangeAllTeam(context, key)
-    value = ScriptLib.GetGroupTempValue(context, "sgv_changer", {})
+    local value = ScriptLib.GetGroupTempValue(context, "sgv_changer", {})
 
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, key, value)
     ScriptLib.PrintContextLog(context, "## [DLDungeon] LF_TriggerSGVChangeAllTeam. key@"..key.." value@"..value)
     if value > 1000 then
@@ -737,13 +737,13 @@ function LF_TriggerSGVChangeAllTeam(context, key)
     return 0
 end
 function LF_SetGV_AllMonster(context, key, value)
-    mon_list = ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id)
+    local mon_list = ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id)
     ScriptLib.AddEntityGlobalFloatValueByConfigId(context, mon_list, key, value)
     ScriptLib.PrintContextLog(context, "## [DLDungeon] LF_SetGV_AllMonster. key@"..key.." value@"..value)
     return 0
 end
 function LF_SetGV_AllTeam(context, key, value)
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, key, value)
     ScriptLib.PrintContextLog(context, "## [DLDungeon] LF_SetGV_AllTeam. key@"..key.." value@"..value)
     return 0
@@ -755,7 +755,7 @@ function LF_SetGV_OnePlayer(context, key, value)
     return 0
 end
 function LF_SetSGV_AllTeam(context, key, value)
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     for k,v in pairs(uid_list) do
         ScriptLib.SetTeamServerGlobalValue(context, v, key, value)
     end
@@ -765,9 +765,9 @@ end
 
 --群体都加的陈列室统一处理，减少遍历次数
 function LF_ReportSkillExhibition(context)
-     uid_list = ScriptLib.GetSceneUidList(context)
+     local uid_list = ScriptLib.GetSceneUidList(context)
     for k, v in pairs(cfg.exhiKey_all) do
-        record = ScriptLib.GetGroupTempValue(context, v, {})
+        local record = ScriptLib.GetGroupTempValue(context, v, {})
         if 0 < record then
             for ik,iv in pairs(uid_list) do
                 ScriptLib.AddExhibitionAccumulableData(context, iv, v, record)
@@ -781,7 +781,7 @@ function LF_Exhibition_Succ(context)
     if nil ~= defs.is_tutorial then
         return 0
     end
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     for k,v in pairs(uid_list) do
         ScriptLib.AddExhibitionAccumulableData(context, v, cfg.exhiKey_succ[defs.type][1], 1)
         ScriptLib.AddExhibitionReplaceableData(context, v, cfg.exhiKey_succ[defs.type][2], 1)
@@ -909,7 +909,7 @@ end
 --用于辛焱单人watcher 因为挑战完成才计数，所以缓存一下
 function  LF_Init_XinyanWatcherCounter(context)
     --对每个玩家，以uid为key，创建tempValue
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     for k,v in pairs(uid_list) do
         ScriptLib.SetGroupTempValue(context, tostring(v), 0, {})
     end
@@ -917,9 +917,9 @@ function  LF_Init_XinyanWatcherCounter(context)
 end
 
 function LF_Report_XinyanWatcherCounter(context)
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     for k,v in pairs(uid_list) do
-        result = ScriptLib.GetGroupTempValue(context, tostring(v), {})
+        local result = ScriptLib.GetGroupTempValue(context, tostring(v), {})
         if 0 <  result then
             ScriptLib.AddExhibitionAccumulableData(context, v, "Activity_SummerTimeV2_Xinyan_FallAttack", result)
         end

@@ -202,7 +202,7 @@ function action_EVENT_ENTER_REGION_225011(context, evt)
 	-- 开始父挑战2004001，识别号2040，全灭时失败
 	ScriptLib.CreateFatherChallenge(context,2040,2004001,99999999, {success=2, fail=100,fail_on_wipe=true})
 
-	uid = ScriptLib.GetSceneUidList(context)
+	local uid = ScriptLib.GetSceneUidList(context)
 
 	-- #1 boss，子挑战2004002，识别号2041，触发1次，tag20491
 	ScriptLib.AttachChildChallenge(context,2040,2041,2004002,{1,20491,1},{uid[1]},{success=1, fail=100})

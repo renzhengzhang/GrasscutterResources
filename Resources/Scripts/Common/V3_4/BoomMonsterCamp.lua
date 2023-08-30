@@ -25,7 +25,7 @@ defs = {
     FireworkID = 25005,
 }
 
-Phase ={
+local Phase ={
     [1] = {2},
     [2] = {3},
     [3] = {4},
@@ -33,7 +33,7 @@ Phase ={
 }
 
 ---------------------
-tempTrigger_BoomMonsterCamp = {
+local tempTrigger_BoomMonsterCamp = {
 
     { config_id = 2230000, name = "RISE_CHALLENGE", event = EventType.EVENT_ENTER_REGION, source = "1",
     condition = "", action = "action_RISE_CHALLENGE", trigger_count = 0},
@@ -70,7 +70,7 @@ function action_RISE_CHALLENGE(context, evt)
     if -1 == LF_CheckChallenge(context) then return 0 end
 
     -- 检查Group中怪物是否已经全死
-    MDNum = ScriptLib.GetGroupVariableValue(context,"MonsterDieNum")
+    local MDNum = ScriptLib.GetGroupVariableValue(context,"MonsterDieNum")
     if 0 ~=  LF_CheckMonsterNum(context,MDNum) then
         return 0
     end
@@ -139,7 +139,7 @@ function action_ChallengeLose(context, evt)
 end
 
 function LF_CheckChallenge(context)
-    haveStartChallenge = ScriptLib.GetGroupTempValue(context, "haveStartChallenge",{})
+    local haveStartChallenge = ScriptLib.GetGroupTempValue(context, "haveStartChallenge",{})
     if 1 == haveStartChallenge then
         ScriptLib.PrintContextLog(context, "## TD_BoomMonsterCamp : 挑战已触发，不再重复触发 ")
         return -1
@@ -173,7 +173,7 @@ end
 --记录当前刷新的怪物的波次，方便下次挑战
 function LF_RefreshPhaseSuit(context)
 
-    stage = ScriptLib.GetGroupVariableValue(context, "stage")
+    local stage = ScriptLib.GetGroupVariableValue(context, "stage")
 
     if nil == Phase then
         ScriptLib.PrintContextLog(context, "## TD_BoomMonsterCamp : Group: " .. defs.GroupID .. "没有对应Phase")
@@ -186,7 +186,7 @@ function LF_RefreshPhaseSuit(context)
     end
 
 
-    needRefreshSuit = Phase[stage]
+    local needRefreshSuit = Phase[stage]
 
     ScriptLib.PrintContextLog(context, "## TD_BoomMonsterCamp : PhaseStage= " .. stage .. "需要刷新的suit为：" .. LF_arrayToString(needRefreshSuit))
 
@@ -209,7 +209,7 @@ end
 
 
 function LF_arrayToString(array)
-    s = "{"
+    local s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","

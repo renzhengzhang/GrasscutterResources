@@ -173,7 +173,7 @@ function action_EVENT_ENTER_REGION_17(context, evt)
 
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
-		pos = {x=291, y=43, z=4}
+		local pos = {x=291, y=43, z=4}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
@@ -322,8 +322,8 @@ end
 -- 触发操作
 function action_EVENT_TIMER_EVENT_14003(context, evt)
 	-- 触发镜头注目，注目位置为坐标（298，44，4），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=298, y=44, z=4}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=298, y=44, z=4}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

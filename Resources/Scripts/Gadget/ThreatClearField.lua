@@ -29,14 +29,17 @@ end
 --烟雾弹物件会serverLuaCall处理玩家清仇恨的SGV。清仇恨功能详见单子s1260223。这里仅限单机。
 function GadgetCallSetThreat(context)
 	ScriptLib.PrintContextLog(context, "[HachiSneak] SGV_CAN_CLEAR_THREAT Set: 0")
-	uidList = ScriptLib.GetSceneUidList(context)
+	local uidList = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetTeamServerGlobalValue(context, uidList[1], "SGV_CAN_CLEAR_THREAT", 0)
 	return 0
 end
 --烟雾弹物件会serverLuaCall处理玩家清仇恨的SGV。清仇恨功能详见单子s1260223。这里仅限单机。
 function GadgetCallClearThreat(context)
 	ScriptLib.PrintContextLog(context, "[HachiSneak] SGV_CAN_CLEAR_THREAT Set: 1")
-	uidList = ScriptLib.GetSceneUidList(context)
+	local uidList = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetTeamServerGlobalValue(context, uidList[1], "SGV_CAN_CLEAR_THREAT", 1)
 	return 0
 end
+
+
+

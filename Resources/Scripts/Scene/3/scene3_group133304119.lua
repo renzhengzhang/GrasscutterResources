@@ -224,8 +224,8 @@ function action_EVENT_QUEST_START_119007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: start gallery fails")
 	    return -1
 	end
-	target_entity_id = ScriptLib.GetEntityIdByConfigId(context,119002)
-	target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
+	local target_entity_id = ScriptLib.GetEntityIdByConfigId(context,119002)
+	local target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
 	if 0~=  ScriptLib.SetHandballGalleryBallPosAndRot(context, 9001, {x=target_pos.x,y=target_pos.y,z=target_pos.z}, {x=0,y=0,z=0}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
@@ -289,8 +289,8 @@ function action_EVENT_QUEST_START_119011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: start gallery fails")
 	    return -1
 	end
-	target_entity_id = ScriptLib.GetEntityIdByConfigId(context,119006)
-	target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
+	local target_entity_id = ScriptLib.GetEntityIdByConfigId(context,119006)
+	local target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
 	if 0~=  ScriptLib.SetHandballGalleryBallPosAndRot(context, 9001, {x=target_pos.x,y=target_pos.y,z=target_pos.z}, {x=0,y=0,z=0}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
@@ -377,8 +377,8 @@ function action_EVENT_QUEST_START_119022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: start gallery fails")
 	    return -1
 	end
-	target_entity_id = ScriptLib.GetEntityIdByConfigId(context,119014)
-	target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
+	local target_entity_id = ScriptLib.GetEntityIdByConfigId(context,119014)
+	local target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
 	if 0~=  ScriptLib.SetHandballGalleryBallPosAndRot(context, 9001, {x=target_pos.x,y=target_pos.y,z=target_pos.z}, {x=0,y=0,z=0}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
@@ -442,8 +442,8 @@ function action_EVENT_QUEST_START_119028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: start gallery fails")
 	    return -1
 	end
-	target_entity_id = ScriptLib.GetEntityIdByConfigId(context,119020)
-	target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
+	local target_entity_id = ScriptLib.GetEntityIdByConfigId(context,119020)
+	local target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
 	if 0~=  ScriptLib.SetHandballGalleryBallPosAndRot(context, 9001, {x=target_pos.x,y=target_pos.y,z=target_pos.z}, {x=0,y=0,z=0}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
@@ -484,8 +484,8 @@ function action_EVENT_QUEST_START_119030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: start gallery fails")
 	    return -1
 	end
-	target_entity_id = ScriptLib.GetEntityIdByConfigId(context,119026)
-	target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
+	local target_entity_id = ScriptLib.GetEntityIdByConfigId(context,119026)
+	local target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
 	if 0~=  ScriptLib.SetHandballGalleryBallPosAndRot(context, 9001, {x=target_pos.x,y=target_pos.y,z=target_pos.z}, {x=0,y=0,z=0}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1

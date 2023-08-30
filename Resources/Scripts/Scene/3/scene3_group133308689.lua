@@ -5,7 +5,7 @@ base_info = {
 
 -- DEFS_MISCS
 --第一次交互的option，之后切为2
-optionID = {431}
+local optionID = {431}
 
 --常用ID：
 --{431,432} 开/关门
@@ -112,8 +112,8 @@ function action_EVENT_SELECT_OPTION_689003(context, evt)
 		end
 
 	-- 触发镜头注目，注目位置为坐标{x=-2254.699, y=63.49479, z=4486.453}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-2254.699, y=63.49479, z=4486.453}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-2254.699, y=63.49479, z=4486.453}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = true, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

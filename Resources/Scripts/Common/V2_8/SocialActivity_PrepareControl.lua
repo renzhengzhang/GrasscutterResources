@@ -3,11 +3,11 @@
 ||	owner: 		luyao.huang
 ||	description:	2.8社交活动-用于处理开场空气墙等开场的逻辑
 ||	LogName:	SocialActivity_PrepareControl
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 
-prepare_Tri={
+local prepare_Tri={
 	{config_id = 14000001, name = "group_load_prepare", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load_prepare",trigger_count = 1 },
 	--{config_id = 14000002, name = "leave_region_prepare", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_region_prepare", forbid_guest = false,trigger_count = 0 },
 	{config_id = 14000003, name = "variable_change_prepare", event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change_prepare",trigger_count = 0 },
@@ -16,7 +16,7 @@ prepare_Tri={
 }
 
 
-local_defs =
+local_defs = 
 {
     prepare_airwall = 70380323,
     day_weather = 9019
@@ -49,11 +49,11 @@ function action_group_load_prepare(context,evt)
 end
 
 
-function action_variable_change_prepare(context,evt)
+function action_variable_change_prepare(context,evt)  
     if evt.source_name == "prepare_state" and evt.param1 == 1 then
         ScriptLib.PrintContextLog(context,"## [SocialActivity_PrepareControl]action_variable_change_prepare：进入等待状态，开启空气墙")
         LF_Create_Prepare_Airwall(context)
-
+        
         --设置全局白天天气
         --LF_Set_Weather(context,local_defs.day_weather,true)
     end
@@ -79,8 +79,8 @@ end
 --    if evt.param1 == defs.prepare_region then
 --        if LF_Is_In_Prepare_Stage(context) then
 --            ScriptLib.PrintContextLog(context,"## [SocialActivity_PrepareControl]action_enter_region_prepare：处于等待阶段，并离开圈子")
---            prepare_point = LF_Get_Point_Config(context,defs.prepare_point)
---            ret = ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = prepare_point.pos, radius = 0, rot = prepare_point.rot})
+--            local prepare_point = LF_Get_Point_Config(context,defs.prepare_point)
+--            local ret = ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = prepare_point.pos, radius = 0, rot = prepare_point.rot})
 --            ScriptLib.PrintContextLog(context,"## [SocialActivity_PrepareControl]action_enter_region_prepare：传送的结果为"..ret)
 --        end
 --    end
@@ -90,7 +90,7 @@ end
 
 --保底恢复大世界天气
 function action_group_will_unload_prepare(context,evt)
-
+    
     if LF_Is_In_Prepare_Stage(context) then
         ScriptLib.PrintContextLog(context,"## [SocialActivity_PrepareControl] action_group_will_unload_prepare：group保底卸载，恢复天气")
         --group卸载时，如果玩法未开启，保底恢复天气
@@ -103,7 +103,7 @@ end
 
 
 function LF_Create_Prepare_Airwall(context)
-    ret = ScriptLib.CreateGadget(context, {config_id = defs.prepare_airwall})
+    local ret = ScriptLib.CreateGadget(context, {config_id = defs.prepare_airwall})
     ScriptLib.PrintContextLog(context,"## [SocialActivity_PrepareControl]LF_Create_Prepare_Airwall：创建空气墙的结果为"..ret)
 end
 
@@ -115,7 +115,7 @@ end
 
 
 function LF_Is_In_Prepare_Stage(context)
-    return ScriptLib.GetGroupVariableValue(context,"prepare_state") == 1
+    return ScriptLib.GetGroupVariableValue(context,"prepare_state") == 1 
 end
 
 function LF_Get_Point_Config(context,point_id)

@@ -7,20 +7,20 @@ base_info = {
 --ByTime配置内容
 
 --fever进度升级节点
-fever_progress_table = {
+local fever_progress_table = {
     0,40,120,270,570,800
 }
 --各等级fever的下降速率
-fever_attenuation = {
+local fever_attenuation = {
     -1,-1,-2,-2,-3
 }
 
-DungeonWeather = {
+local DungeonWeather = {
     10116,10117,10118,10119
 }
 
 --怪物潮
-monster_tide = {
+local monster_tide = {
     [1] = {2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2035,2036,2107,2108,2109,2110,2111,2112,2113,2114},
     [2] = {2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2037,2068,2069,2070,2071,2080,2081,2082,2115,2116},
     [3] = {2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2083,2084,2085,2086,2087,2088,2089,2090,2091,2094},
@@ -28,7 +28,7 @@ monster_tide = {
 }
 
 --每轮怪物潮刷怪数量
-tide_suite_config = {
+local tide_suite_config = {
         [1] = {min=5,max=5},
         [2] = {min=5,max=5},
         [3] = {min=5,max=5},
@@ -36,7 +36,7 @@ tide_suite_config = {
 }
 
 --精英怪
-elite = {
+local elite = {
     [1] = {2030},
     [2] = {2031},
     [3] = {2032},
@@ -44,7 +44,7 @@ elite = {
 }
 
 --精英怪创生点
-elite_born_points = {
+local elite_born_points = {
     2022,2023,2024,2025,2026,2027,2028,2029
 }
 

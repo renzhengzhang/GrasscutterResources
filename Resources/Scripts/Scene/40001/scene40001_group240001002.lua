@@ -103,7 +103,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_1(context, evt)
 		-- 重新生成指定group，指定suite
 	math.randomseed(os.time())
-	suite_id = math.random(2,4)
+	local suite_id = math.random(2,4)
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 240001003, suite = suite_id }) then
 			return -1
 		end
@@ -111,7 +111,7 @@ function action_EVENT_ANY_MONSTER_DIE_1(context, evt)
 
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
-		pos = {x=7, y=42, z=96}
+		local pos = {x=7, y=42, z=96}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 					return -1
 		end

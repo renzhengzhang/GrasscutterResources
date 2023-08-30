@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-HourGlass_ConfigIDList = {284001}
+local HourGlass_ConfigIDList = {284001}
 
 --================================================================
 --

@@ -15,13 +15,13 @@ defs = {
 defs.final_point = defs.point_sum - 1
 
 
-Controllers = {}
-EnvControlGadgets = {}
-Worktops = {}
-DayAppearGadgets = {154010}
-NightAppearGadgets = {154002}
+local Controllers = {}
+local EnvControlGadgets = {}
+local Worktops = {}
+local DayAppearGadgets = {154010}
+local NightAppearGadgets = {154002}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -38,7 +38,7 @@ gameplayStateFuncitons =
 	end,
 }
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -222,9 +222,9 @@ function condition_EVENT_ENTER_REGION_154007(context, evt)
 	end
 
 	-- 返回渊下宫当前是否为黑夜
-	    uid_List = ScriptLib.GetSceneUidList(context)
-	    host_id = uid_List[1]
-	    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	    local uid_List = ScriptLib.GetSceneUidList(context)
+	    local host_id = uid_List[1]
+	    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 2) then
 	        return true
 	    else

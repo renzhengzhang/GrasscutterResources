@@ -82,7 +82,7 @@ suites = {
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_48001(context, evt)
-	count = ScriptLib.GetGroupVariableValue(context, "activeCount")
+	local count = ScriptLib.GetGroupVariableValue(context, "activeCount")
 
 				if count == 1 then
 					ScriptLib.SetGadgetStateByConfigId(context, 48010, 101)
@@ -108,7 +108,7 @@ function action_EVENT_VARIABLE_CHANGE_48008(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
 
 
-			count = ScriptLib.GetGroupVariableValue(context, "activeCount")
+			local count = ScriptLib.GetGroupVariableValue(context, "activeCount")
 
 			if count == 1 then
 				ScriptLib.SetGadgetStateByConfigId(context, 48010, 101)

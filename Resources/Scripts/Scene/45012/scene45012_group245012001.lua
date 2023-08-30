@@ -15,7 +15,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-delay=30
+local delay=30
 
 --怪物group的ID
 monster_group=245012003
@@ -27,7 +27,7 @@ tide_defs_01 ={
         [5] = {guide_routes={1,2,3,4}},
 }
 
-challenge_programme={
+local challenge_programme={
   [1]=tide_defs_01,
   [2]=tide_defs_01,
   [3]=tide_defs_01,

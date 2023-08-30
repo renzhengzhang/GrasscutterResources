@@ -468,8 +468,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_259007(context, evt)
 	    --ScriptLib.SetPlayerEyePoint(context, 259007)
-		small_region={}
-			big_region={}
+		local small_region={}
+			local big_region={}
 			for i=1,#regions do
 				if regions[i].config_id==259007 then
 					small_region=regions[i]
@@ -494,7 +494,7 @@ function action_EVENT_LEAVE_REGION_259008(context, evt)
 	ScriptLib.ClearPlayerEyePoint(context, 259007)
 	if 0 == ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) then
 		ScriptLib.SetWeatherAreaState(context, 4, 0)
-		x = ScriptLib.GetGroupVariableValue(context, "boss_exist")
+		local x = ScriptLib.GetGroupVariableValue(context, "boss_exist")
 		if x == 1 then
 			ScriptLib.AddExtraGroupSuite(context, 133002259,5)
 		end

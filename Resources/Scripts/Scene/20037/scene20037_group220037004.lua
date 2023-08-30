@@ -157,7 +157,7 @@ function action_EVENT_ENTER_REGION_4001(context, evt)
 		end
 
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=295,y=42,z=3}
+	local pos = {x=295,y=42,z=3}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110176, pos, 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
@@ -194,7 +194,7 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_4005(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 220037004, 3)
 
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=285,y=42,z=1.27}
+	local pos = {x=285,y=42,z=1.27}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110176, pos, 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
@@ -213,7 +213,7 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_4005(context, evt)
 		end
 
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=284,y=42,z=3}
+	local pos = {x=284,y=42,z=3}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 200370201, pos, 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
@@ -238,7 +238,7 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_4006(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 220037004, 4)
 
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=285,y=42,z=1.27}
+	local pos = {x=285,y=42,z=1.27}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110176, pos, 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
@@ -255,7 +255,7 @@ end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_4007(context, evt)
-	uid=ScriptLib.GetSceneUidList(context)
+	local uid=ScriptLib.GetSceneUidList(context)
 	if ScriptLib.IsPlayerAllAvatarDie(context,uid[1]) then
 		if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220037004, "CheckAvatarDie1", 2) then
 			ScriptLib.PrintContextLog(context, "@@LUA_WARNING : create_timerevent_by_group")
@@ -326,7 +326,7 @@ end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_4013(context, evt)
-	uid=ScriptLib.GetSceneUidList(context)
+	local uid=ScriptLib.GetSceneUidList(context)
 	if ScriptLib.IsPlayerAllAvatarDie(context,uid[1]) then
 		if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220037004, "CheckAvatarDie0", 2) then
 			ScriptLib.PrintContextLog(context, "@@LUA_WARNING : create_timerevent_by_group")

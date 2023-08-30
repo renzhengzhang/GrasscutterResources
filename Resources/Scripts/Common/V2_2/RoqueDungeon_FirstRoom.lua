@@ -1,4 +1,4 @@
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Quest_Finish"] = { config_id = 8000001, name = "Quest_Finish", event= EventType.EVENT_QUEST_FINISH, source = "", condition = "", action = "action_questFinish", trigger_count = 0 },
 		["Gadget_Create"] = { config_id = 8000002, name = "Gadget_Create", event= EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadgetCreate", trigger_count = 0 },
@@ -8,7 +8,7 @@ extrTriggers = {
 }
 
 function action_questFinish( context,evt )
-
+	
 	if evt.param1 ~= QuestID then
 		return 0
 	end
@@ -22,13 +22,13 @@ function action_questFinish( context,evt )
 	--设置引导点
 	ScriptLib.CreateGadget(context, { config_id = DestinationConfigID })
 
-	return 0
+	return 0 
 end
 
 function action_RoomReady( context,evt )
-	uidList = ScriptLib.GetSceneUidList(context)
-	avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
-
+	local uidList = ScriptLib.GetSceneUidList(context)
+	local avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
+	
 	--如果任务完成
 	if DestinationConfigID ~= 0 and QuestID ~= 0 and ScriptLib.GetQuestState(context, avatar_entity, QuestID) == QuestState.FINISHED then
 
@@ -43,9 +43,9 @@ end
 
 
 function action_gadgetCreate( context,evt )
-
-	uidList = ScriptLib.GetSceneUidList(context)
-	avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
+	
+	local uidList = ScriptLib.GetSceneUidList(context)
+	local avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
 
 
 	--ScriptLib.PrintContextLog(context, "## RG_LOG : First Room QuestState is "..ScriptLib.GetQuestState(context, avatar_entity, QuestID))
@@ -85,3 +85,5 @@ function LF_Initialize_Group()
 end
 
 LF_Initialize_Group()
+
+

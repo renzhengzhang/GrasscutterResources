@@ -11,7 +11,7 @@ defs = {
     reverse_time = 10,--回溯倒计时，整数秒
 }
 ]]
-extraTriggers={
+local extraTriggers={
     { config_id = 8000001, name = "TimeAxis_Pass", event = EventType.EVENT_TIME_AXIS_PASS, source = "reverse", condition = "", action = "action_TimeAxis_Pass", trigger_count = 0 },
     { config_id = 8000002, name = "Gadget_State_Change", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_Gadget_State_Change", trigger_count = 0 },
     { config_id = 8000003, name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_Group_Load", trigger_count = 0 },
@@ -43,7 +43,7 @@ function action_Group_Load(context, evt)
 end
 
 function action_Device_Gadget_State_Change(context, evt)
-    gadget_id = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
+    local gadget_id = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
     if 70310390 ~= gadget_id then
         return  0
     end
@@ -98,7 +98,7 @@ function action_Revert_VariableChange(context, evt)
     return 0
 end
 function LF_TryInitReverseTimeAxis(context)
-    state = -1
+    local state = -1
     --根据GadgetState判断是否要准备回溯
     for k, v in pairs(gadgets) do
         if 70310390 == v.gadget_id then

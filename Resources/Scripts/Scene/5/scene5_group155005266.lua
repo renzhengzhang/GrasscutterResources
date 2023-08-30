@@ -4,9 +4,9 @@ base_info = {
 }
 
 -- DEFS_MISCS
-EnvControlGadgets = {266001}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local EnvControlGadgets = {266001}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
 --================================================================
 --

@@ -1,4 +1,4 @@
-triggers_lib = {
+local triggers_lib = {
 	["Group_Load"] = { config_id = 8000001, name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
 	["Load_Protect"] = { config_id = 8000002, name = "Load_Protect", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_load_protect", trigger_count = 0},
 	["Gadget_Create"] = { config_id = 8000003, name = "Gadget_Create", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0},
@@ -14,7 +14,7 @@ triggers_lib = {
 	["Any_Gadget_Die"] = { config_id = 8000013, name = "Any_Gadget_Die", event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_any_gadget_die", trigger_count = 0 }
 }
 
-gid = defs.group_id or 0
+local gid = defs.group_id or 0
 --雪山营地A
 function Initialize_Group()
 	for k,v in pairs(triggers_lib) do
@@ -67,16 +67,16 @@ defs = {
 --]]
 
 function LF_Active_Challenge(context)
-	max = 0
+	local max = 0
 	for i,v in ipairs(defs.challenge) do
 		max = max + v.weight
 	end
 	math.randomseed(ScriptLib.GetServerTime(context))
-	ran = math.random(max)
+	local ran = math.random(max)
 	for i,v in ipairs(defs.challenge) do
 		ran = ran - v.weight
 		if ran <= 0 then
-			sum = #suites[3].monsters + #suites[5].monsters + #suites[6].monsters
+			local sum = #suites[3].monsters + #suites[5].monsters + #suites[6].monsters
 			ScriptLib.ActiveChallenge(context, 1, v.id, 0, sum, 0, 0)
 			ScriptLib.ShowTemplateReminder(context, v.temp_r, {0,0})
 			break

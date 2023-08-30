@@ -17,31 +17,31 @@ defs = {
 	operator_3 = 90006,
 }
 
-pillar_decals = {
+local pillar_decals = {
 	[90001] = {"E","F","F"},
 	[90002] = {"C","D","C"},
 	[90003] = {"A","B","A"},
 }
 
-pillar_answers = {
+local pillar_answers = {
 	[1] = "FCA",
 	[2] = "ECB",
 	[3] = "FDA",
 }
 
-pillar_state_map = {
+local pillar_state_map = {
 	[90004] ={ {state = 0, sgv = "SGV_Surface01"}, {state = 1, sgv = "SGV_Surface02"},{state = 2, sgv = "SGV_Surface03"}},
 	[90005] ={ {state = 0, sgv = "SGV_Surface02"}, {state = 1, sgv = "SGV_Surface03"},{state = 2, sgv = "SGV_Surface01"}},
 	[90006] ={ {state = 0, sgv = "SGV_Surface03"}, {state = 1, sgv = "SGV_Surface01"},{state = 2, sgv = "SGV_Surface02"}},
 }
 
-OPTION = {
+local OPTION = {
 	TOP = 811,
 	MID = 812,
 	BOT = 813,
 }
 --======================================================================================================================
-EP_Triggers = {
+local EP_Triggers = {
 	{ name = "group_load", config_id = 8000101, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
 	{ name = "select_option", config_id = 8000102, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
 }
@@ -78,7 +78,7 @@ end
 --======================================================================================================================
 --LevelFunctions
 function LF_TurnPillar(context, pillar_id)
-	gadget_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, pillar_id)
+	local gadget_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, pillar_id)
 	if gadget_state == 0 then
 		ScriptLib.SetGadgetStateByConfigId(context, pillar_id, 1)
 		return 0
@@ -95,7 +95,7 @@ end
 
 --通过gadgetstate来拿一个转子的排列顺序，以State0的初始方向为基准
 function LF_GetPillarDecalSeq(context, pillar_id)
-	state_pillar = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, pillar_id)
+	local state_pillar = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, pillar_id)
 	if state_pillar == 0 then
 		return 	{
 					{decal = pillar_decals[pillar_id][1], sgv_key = "SGV_Surface01", p_id = pillar_id},
@@ -127,13 +127,13 @@ function LF_CheckCombine(context)
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, pillar_id, "SGV_Surface03", 0)
 	end
 	--拿到每个转子的状态
-	pillar_map = {}
+	local pillar_map = {}
 
 	for pillar_id, decal_str in pairs(pillar_decals) do
 		table.insert( pillar_map, LF_GetPillarDecalSeq(context, pillar_id))
 	end
 --[[
-	pillar_map = {
+	local pillar_map = {
 	[1] = 	{   --转子1
 				{decal = a, sgv_key = 1, p_id = 1},
 				{decal = b, sgv_key = 2, p_id = 1},
@@ -154,11 +154,11 @@ function LF_CheckCombine(context)
 
 ]]
 	--把三个转子的纵向面连接起来，做一个StringList
-	pillar_combines = {}
+	local pillar_combines = {}
 	for i=1,3 do
 		pillar_combines[i] = pillar_map[1][i].decal..pillar_map[2][i].decal..pillar_map[3][i].decal
 	end
-	right_indexs = {}
+	local right_indexs = {}
 
 	--每个StringList去和解做比较，符合解就把这组压到答案组里
 	for i=1,3 do
@@ -175,7 +175,7 @@ function LF_CheckCombine(context)
 	--有匹配的就会去找对应的面
 		if #right_indexs < 3 then
 			for i=1,#right_indexs  do
-				idx = right_indexs[i]
+				local idx = right_indexs[i]
 				ScriptLib.SetEntityServerGlobalValueByConfigId(context, pillar_map[1][idx].p_id, pillar_map[1][idx].sgv_key, 1)
 				ScriptLib.SetEntityServerGlobalValueByConfigId(context, pillar_map[2][idx].p_id, pillar_map[2][idx].sgv_key, 1)
 				ScriptLib.SetEntityServerGlobalValueByConfigId(context, pillar_map[3][idx].p_id, pillar_map[3][idx].sgv_key, 1)

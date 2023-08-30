@@ -1,17 +1,17 @@
 -- 机关初始化配置
 -- 初始状态
-state_ = GadgetState.GearStart
+local state_ = GadgetState.GearStart
 -- 启动元素
-start_elem_type_ = ElementType.Electric
+local start_elem_type_ = ElementType.Electric
 -- 停止元素
-stop_elem_type_ = ElementType.None
+local stop_elem_type_ = ElementType.None
 
 
 -- 机关被攻击
 function OnBeHurt(context, element_type, strike_type, is_host)
 	if is_host == true then
 		-- 获取机关当前状态
-		state = ScriptLib.GetGadgetState(context)
+		local state = ScriptLib.GetGadgetState(context)
 		if state == GadgetState.Default or state == GadgetState.GearAction1 then
 			if start_elem_type_ == element_type then
 				ScriptLib.SetGadgetState(context, GadgetState.GearStart)
@@ -24,3 +24,5 @@ function OnBeHurt(context, element_type, strike_type, is_host)
 		end
 	end
 end
+
+

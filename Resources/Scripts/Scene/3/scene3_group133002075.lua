@@ -458,7 +458,7 @@ end
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_75021(context, evt)
 	math.randomseed(os.time())
-	t = math.random(3)
+	local t = math.random(3)
 	if t == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context,75001,201)
 	end
@@ -483,7 +483,7 @@ end
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_75023(context, evt)
 	math.randomseed(os.time())
-	t = math.random(3)
+	local t = math.random(3)
 	if t == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context,75001,201)
 	end
@@ -508,7 +508,7 @@ end
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_75026(context, evt)
 	math.randomseed(os.time())
-	t = math.random(3)
+	local t = math.random(3)
 	if t == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context,75001,201)
 		ScriptLib.SetGadgetStateByConfigId(context,75018,201)

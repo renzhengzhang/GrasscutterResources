@@ -15,18 +15,18 @@ defs ={
         ability_region = 1169,
     }
 
-windball_list = {
+local windball_list = {
  [1014] = 2,
  [1080] = 4,
  [1054] = 12,
 }
 
 
-operator_list = {
+local operator_list = {
 
 }
 
-revivepoint_list = {
+local revivepoint_list = {
         [1109] =1110,
         [1111] =1112,
         [1113] =1114,
@@ -35,7 +35,7 @@ revivepoint_list = {
         [1119] =1120,
 }
 
-transfer_list = {
+local transfer_list = {
         --[region_configid] = point_id,
         [1134] =1112,
         [1135] =1114,
@@ -510,8 +510,8 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1013(context, evt)
-	list = {ScriptLib.GetSceneUidList(context),}
-	count = 0
+	local list = {ScriptLib.GetSceneUidList(context),}
+	local count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
@@ -685,8 +685,8 @@ function action_EVENT_ANY_MONSTER_DIE_1067(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标{x=-471.5702, y=9.746119, z=-387.4375}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-471.5702, y=9.746119, z=-387.4375}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-471.5702, y=9.746119, z=-387.4375}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -763,8 +763,8 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1131(context, evt)
-	list = {ScriptLib.GetSceneUidList(context),}
-	count = 0
+	local list = {ScriptLib.GetSceneUidList(context),}
+	local count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
@@ -1271,8 +1271,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_1170(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-392.6119, y=-1.743446, z=-387.7961}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-392.6119, y=-1.743446, z=-387.7961}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-392.6119, y=-1.743446, z=-387.7961}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

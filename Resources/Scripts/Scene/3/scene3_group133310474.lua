@@ -10,21 +10,21 @@ defs = {
 }
 
 -- DEFS_MISCS
-pointStateList = {474001, 474002, 474003, 474005, 0, 0, 0, 0}
-challengeOptionConfigID = 474006
-challengeOptionID = 188
+local pointStateList = {474001, 474002, 474003, 474005, 0, 0, 0, 0}
+local challengeOptionConfigID = 474006
+local challengeOptionID = 188
 
-holeConfigID = {474001, 474002, 474003, 474005}
-checkOptionID = 916
+local holeConfigID = {474001, 474002, 474003, 474005}
+local checkOptionID = 916
 
-arrayID = {331000020
+local arrayID = {331000020
 , 331000021}
 
-randomVez = {min = 3, max = 5}
+local randomVez = {min = 3, max = 5}
 
-successCount = 2
+local successCount = 2
 
-unmovenum = 0
+local unmovenum = 0
 
 --================================================================
 --

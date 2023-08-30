@@ -97,7 +97,7 @@ function action_EVENT_LEAVE_REGION_556002(context, evt)
 	if evt.param1 ~= 556005 and evt.param1 ~= 556008 then
 		return -1
 	end
-	position = ScriptLib.GetPosByEntityId(context, context.target_entity_id)
+	local position = ScriptLib.GetPosByEntityId(context, context.target_entity_id)
 	if math.abs(position.x - regions[5].pos.x) <= regions[5].size.x/2 then
 		if math.abs(position.z - regions[5].pos.z) <= regions[5].size.z/2 then
 			if position.y < regions[8].pos.y + regions[8].size.y/2 and position.y > regions[5].pos.y - regions[5].size.y/2 then

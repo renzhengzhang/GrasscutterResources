@@ -4,11 +4,11 @@ base_info = {
 }
 
 -- DEFS_MISCS
-RoomSwitchGadget = 25001
-GroupId = 250056025
-point_id_list = {}
-MainGroupID = 250056020
-RegionID = 25013
+local RoomSwitchGadget = 25001
+local GroupId = 250056025
+local point_id_list = {}
+local MainGroupID = 250056020
+local RegionID = 25013
 
 --================================================================
 --

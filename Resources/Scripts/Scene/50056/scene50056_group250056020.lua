@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-challengeList = {
+local challengeList = {
 { monsterPool = 17001, challengeParamList = {2, 1, -1, 15, 0, 0}, monsterPoolParamList = {total_count=15, min_count=6, max_count=6, fill_time=0, fill_count=0}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 17002, challengeParamList = {2, 1, -1, 12, 0, 0}, monsterPoolParamList = {total_count=12, min_count=5, max_count=5, fill_time=0, fill_count=0}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 17003, challengeParamList = {2, 1, -1, 13, 0, 0}, monsterPoolParamList = {total_count=13, min_count=6, max_count=6, fill_time=0, fill_count=0}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },

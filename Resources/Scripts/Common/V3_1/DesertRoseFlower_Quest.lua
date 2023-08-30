@@ -12,7 +12,7 @@
 --defs.ActivateQuest1_Event
 --defs.ActivateQuest2_Event
 ----]]
---extrTriggers = {
+--local extrTriggers = {
 --	initialtrigger = {
 --		{ config_id = 80000001, name = "OnGroupLoad", event= EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_GroupLoad", trigger_count = 0},
 --	}
@@ -20,7 +20,7 @@
 --
 --function RefreshGroup(context, evt)
 --
---	Finished = ScriptLib.GetGroupVariableValue(context, "Finished")
+--	local Finished = ScriptLib.GetGroupVariableValue(context, "Finished")
 --	if(Finished==1)then
 --		ScriptLib.SetGadgetStateByConfigId(context,defs.flowerGadgetID,302)
 --		return 0

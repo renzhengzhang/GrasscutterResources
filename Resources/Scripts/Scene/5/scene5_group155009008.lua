@@ -12,15 +12,15 @@ defs = {
 }
 
 -- DEFS_MISCS
-EnvControlGadgets = {}
+local EnvControlGadgets = {}
 
-DayAppearGadgets = {defs.gadget_sealday}
-NightAppearGadgets = {defs.gadget_sealnight}
-
-
+local DayAppearGadgets = {defs.gadget_sealday}
+local NightAppearGadgets = {defs.gadget_sealnight}
 
 
-gameplayStateFuncitons =
+
+
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -46,7 +46,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -144,7 +144,7 @@ suites = {
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_8003(context, evt)
-		isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", defs.managerGroupID)
+		local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", defs.managerGroupID)
 
 		if isactive == 1 then
 			if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then

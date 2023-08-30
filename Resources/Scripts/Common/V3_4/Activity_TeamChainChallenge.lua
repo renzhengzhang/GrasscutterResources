@@ -31,7 +31,7 @@
 --======================================================================================================================
 --LevelFunctions || 自定义函数
 
-Tri = {
+local Tri = {
 
     --主控group加载 初始化所有玩法group
     { config_id = 34000010, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
@@ -66,12 +66,12 @@ end
 
 --判断是否所有玩家都死了
 function condition_dungeon_all_avatar_die(context,evt)
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
 
-    ret = 0
+    local ret = 0
 
     for i,v in ipairs(uid_list) do
-        is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
+        local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
         if true ~= is_all_dead then
             ret = -1
             break
@@ -117,7 +117,7 @@ end
 --时间轴结束 加载下一玩法group
 function action_time_axis_pass(context,evt)
     if evt.source_name == "teleport" then
-        index = LF_GetGroupIndex(context)
+        local index = LF_GetGroupIndex(context)
 
         if index == -1 then
             LF_PrintLog(context,"Axis Pass Failed: table越界")
@@ -141,7 +141,7 @@ end
 
 --LF Func
 function LF_PrintLog(context, content)
-    log = "## [Activity_TeamChainChallenge] TD: "..content
+    local log = "## [Activity_TeamChainChallenge] TD: "..content
     ScriptLib.PrintContextLog(context, log)
 end
 
@@ -167,7 +167,7 @@ function LF_StartPlay(context)
 
     LF_PrintLog(context,"开启gallery"..defs.gallery_id)
 
-    index = LF_GetGroupIndex(context)
+    local index = LF_GetGroupIndex(context)
 
     if index == -1 then
         LF_PrintLog(context,"StartPlay Failed: table越界")
@@ -183,7 +183,7 @@ function LF_StartPlay(context)
 end
 --结束玩法 成功初始化下一group 失败直接cause dungeon fail
 function LF_StopPlay(context, is_success)
-    index = LF_GetGroupIndex(context)
+    local index = LF_GetGroupIndex(context)
 
     if index == -1 then
         LF_PrintLog(context,"StopPlay Failed: table越界")
@@ -195,7 +195,7 @@ function LF_StopPlay(context, is_success)
         LF_PrintLog(context,"成功通关阶段"..(index))
         ScriptLib.StopGalleryByReason(context,defs.gallery_id,3)
 
-        mPos = {x=LF_GetPointPos(context, defs.teleportPos_id).x,
+        local mPos = {x=LF_GetPointPos(context, defs.teleportPos_id).x,
         y=LF_GetPointPos(context, defs.teleportPos_id).y,
         z=LF_GetPointPos(context, defs.teleportPos_id).z,}
 
@@ -297,7 +297,7 @@ end
 
 --获取当前group index 越界返回-1
 function LF_GetGroupIndex(context)
-    index = ScriptLib.GetGroupVariableValue(context, "GROUP_INDEX")
+    local index = ScriptLib.GetGroupVariableValue(context, "GROUP_INDEX")
 
     if index > 4 or index < 1 then
         --reset

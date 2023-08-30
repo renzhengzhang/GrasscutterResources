@@ -468,8 +468,8 @@ function action_EVENT_SELECT_OPTION_1028(context, evt)
 	end
 
 	--电梯开门镜头
-	pos = { x=225.815, y=165.119, z=364.989}
-	pos_follow = { x=244.54, y=166.77, z=364.989}
+	local pos = { x=225.815, y=165.119, z=364.989}
+	local pos_follow = { x=244.54, y=166.77, z=364.989}
 
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0, is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false, screen_x = 0, screen_y = 0, is_set_screenXY = false }) then
 	    ScriptLib.PrintContextLog(context, "@@Lua_warning : active_cameralook_begin")

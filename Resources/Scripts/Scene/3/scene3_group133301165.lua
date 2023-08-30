@@ -193,7 +193,7 @@ end
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_165009(context, evt)
 		-- 检查当前LevelTag是否为现实
-		    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 12)[1]
+		    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 12)[1]
 		    if current_env_state_id ~= 39 then
 		        return false
 		    end

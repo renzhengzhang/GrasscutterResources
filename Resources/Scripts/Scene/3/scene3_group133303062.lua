@@ -165,8 +165,8 @@ function action_EVENT_GADGET_STATE_CHANGE_62013(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 133303062, 2)
 
 	-- 触发镜头注目，注目位置为坐标{x=-1187.817, y=268.154, z=3323.198}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1187.817, y=268.154, z=3323.198}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1187.817, y=268.154, z=3323.198}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -186,7 +186,7 @@ function condition_EVENT_ENTER_REGION_62014(context, evt)
 		return false
 	end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,defs.fquestid*100+3)
+	local curQuestState = ScriptLib.GetHostQuestState(context,defs.fquestid*100+3)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -194,7 +194,7 @@ function condition_EVENT_ENTER_REGION_62014(context, evt)
 	   return true
 	end
 
-	curQuestState = ScriptLib.GetHostQuestState(context,defs.fquestid*100+5)
+	local curQuestState = ScriptLib.GetHostQuestState(context,defs.fquestid*100+5)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
@@ -228,8 +228,8 @@ function action_EVENT_GADGET_STATE_CHANGE_62015(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 133303062, 2)
 
 	-- 触发镜头注目，注目位置为坐标{x=-1314.938, y=243.1991, z=3308.813}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1314.938, y=243.1991, z=3308.813}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1314.938, y=243.1991, z=3308.813}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

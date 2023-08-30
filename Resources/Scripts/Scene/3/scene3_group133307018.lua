@@ -5,38 +5,38 @@ base_info = {
 
 -- DEFS_MISCS
 --风扇
-fans =
+local fans =
 {
     18006
 }
 --沙堆
-sandpiles =
+local sandpiles =
 {
     18005
 }
 --百叶窗
-shutters =
+local shutters =
 {
 
 }
 --百叶窗开关
-shutter_switches =
+local shutter_switches =
 {
 
 }
 --每个风扇对应点阵
-FanToPointArray =
+local FanToPointArray =
 {
 
 }
 --沙堆风扇方向位置
-FanToSandpile =
+local FanToSandpile =
 {
     [sandpiles[1]] = {fan = fans[1], dir_state = 204, pos = 1}
 }
 
 --百叶窗开关和百叶窗对应
-SwitchToShutter =
+local SwitchToShutter =
 {
 
 }
@@ -219,7 +219,7 @@ function condition_EVENT_SELECT_OPTION_18010(context, evt)
 	end
 
 
-	curQuestState = ScriptLib.GetHostQuestState(context,7321916)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7321916)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end

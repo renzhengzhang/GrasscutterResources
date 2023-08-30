@@ -1,8 +1,8 @@
-define = {
+local define = {
 	linkCount = "RoleElectricPowerSourceConnectCount",  --连线时，玩家被上的global_value
 }
 
-extraTriggers={
+local extraTriggers={
 	{ config_id = 8000001, name = "EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE", event = EventType.EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE, source = "", condition = "", action = "action_EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE", trigger_count = 0 }
 }
 

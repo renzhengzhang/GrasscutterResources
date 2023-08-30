@@ -169,7 +169,7 @@ function condition_EVENT_GADGET_CREATE_284016(context, evt)
 	if 284008 ~= evt.param1 then
 		return false
 	end
-	state = ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1)
+	local state = ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1)
 	        if state == 201 or state == 202  then
 	                return true
 	        end

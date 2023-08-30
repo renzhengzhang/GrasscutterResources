@@ -14,7 +14,7 @@ defs = {
 }
 
 ]]
-cfg = {
+local cfg = {
 	--主控GroupID
 	main_group = 251008007,
 
@@ -28,7 +28,7 @@ cfg = {
     }
 }
 
-extraTriggers = {
+local extraTriggers = {
 	{ config_id = 8000001, name = "TimeAxis_StopGallery", event = EventType.EVENT_TIME_AXIS_PASS, source = "StopGallery", condition = "", action = "action_TimeAxis_StopGallery", trigger_count = 0 },
 	{ config_id = 8000002, name = "Enter_Play_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_Enter_Play_Region", trigger_count = 1, forbid_guest = false},
 	{ config_id = 8000004, name = "Gallery_Stop", event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_Gallery_Stop", trigger_count = 0 },
@@ -54,7 +54,7 @@ function EX_StartGallery(context, prev_context, gallery_id, is_last_level)
 			ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v)
 		end
 	end
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})
 
 	ScriptLib.SetGroupTempValue(context, "is_last_level", is_last_level, {})
@@ -107,11 +107,11 @@ function action_Gallery_Stop(context, evt)
 		end
 	end
 	if 3 ~= evt.param3 then
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		--ScriptLib.InitTimeAxis(context, "StopGallery_Fail", { 3 } , false) 9.21修改 失败不要延时结束
 		ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {1, base_info.group_id})
 	else
-		is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)--最后一关无等待
 		if is_last_level then
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
@@ -125,11 +125,11 @@ end
 
 function action_Enter_Play_Region(context, evt)
 
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})
 
 	--根据当前人数加载suite
-	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
 	if nil ~= defs.enter_suites and nil ~= defs.enter_suites[player_count] then
 		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, defs.enter_suites[player_count])
 	end
@@ -218,10 +218,10 @@ end
 ---------------------------------------------------------------------------------------------------------------
 function LF_Start_Play(context)
 
-	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
+	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
 
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
-	target = 0
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local target = 0
 	if player_count > 1 then
 		target = ScriptLib.GetCharAmusementGalleryTarget(context, gallery_id, true)
 	else
@@ -292,13 +292,13 @@ end
 --DoActionOnGlobalValueChange
 function SLC_CharAmusePillar_BrickCount(context, param1)
 
-	cur_num = ScriptLib.GetGroupTempValue(context, "cur_num", {})
-	gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
+	local cur_num = ScriptLib.GetGroupTempValue(context, "cur_num", {})
+	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_BrickWall] SLC_CharAmusePillar_BrickCount. cur_count@"..cur_num.. " param1@"..param1)
 
 	if 0 < param1 and param1 < 999 then
-		diff = param1 -cur_num
+		local diff = param1 -cur_num
 		if 0 <= diff then
 			ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["add_score"]= diff} )
 			ScriptLib.CharAmusementUpdateScore(context, cfg.main_group, 1, diff)--给MultStage更新分数 服务器侧埋点用
@@ -310,7 +310,7 @@ function SLC_CharAmusePillar_BrickCount(context, param1)
 
 		ScriptLib.ChangeGroupTempValue(context, "cur_score", -1*diff, {})
 		if 0 >= ScriptLib.GetGroupTempValue(context, "cur_score", {}) then
-			is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+			local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 			ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["is_last_level"] = is_last_level, ["is_finish"] = true, ["is_success"] = true } )
 			--通知砖墙上报埋点计数
 			ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.wall, "SGV_BrickWall_Report", 1)

@@ -584,7 +584,7 @@ end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_53005(context, evt)
-					loccount = ScriptLib.GetGroupVariableValue(context,"count")
+					local loccount = ScriptLib.GetGroupVariableValue(context,"count")
 					if loccount == 1 then
 						ScriptLib.ShowReminder(context, 31040111)
 					elseif loccount == 2 then
@@ -637,7 +637,7 @@ function action_EVENT_ENTER_REGION_53007(context, evt)
 					ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 				end
 			end
-			loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
+			local loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
 
 			if loccount == 1 then
 				ScriptLib.ShowReminder(context, 31040190)
@@ -702,7 +702,7 @@ function action_EVENT_ENTER_REGION_53011(context, evt)
 								ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							end
 						end
-						loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
+						local loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
 						if loccount == 1 then
 							ScriptLib.ShowReminder(context, 31040190)
 						elseif loccount == 2 then
@@ -796,7 +796,7 @@ function action_EVENT_ENTER_REGION_53014(context, evt)
 								ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							end
 						end
-						loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
+						local loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
 
 						if loccount == 1 then
 							ScriptLib.ShowReminder(context, 31040190)
@@ -962,7 +962,7 @@ function action_EVENT_ENTER_REGION_53017(context, evt)
 								ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							end
 						end
-						loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
+						local loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
 
 						if loccount == 1 then
 							ScriptLib.ShowReminder(context, 31040190)
@@ -1018,7 +1018,7 @@ function action_EVENT_ENTER_REGION_53018(context, evt)
 								ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							end
 						end
-						loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
+						local loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
 
 						if loccount == 1 then
 							ScriptLib.ShowReminder(context, 31040190)
@@ -1130,7 +1130,7 @@ end
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_53025(context, evt)
-	id = ScriptLib.GetGroupVariableValue(context, "Temp_GadgetID")
+	local id = ScriptLib.GetGroupVariableValue(context, "Temp_GadgetID")
 	ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, id, {171})
 
 	return 0

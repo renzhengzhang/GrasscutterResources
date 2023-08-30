@@ -368,7 +368,7 @@ end
 
 -- 触发条件
 function condition_EVENT_LUA_NOTIFY_7015(context, evt)
-	configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+	local configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 	if 7011 ~= configId then
 	        return false
 	end
@@ -382,8 +382,8 @@ function action_EVENT_LUA_NOTIFY_7015(context, evt)
 
 	-- 将在groupid为 220163007 中的 configid为 7002 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,102,104,106,108,110,112,114,116,118,120,122}
-	_key = 0
+	local _gadgetStateList = {0,102,104,106,108,110,112,114,116,118,120,122}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -445,7 +445,7 @@ end
 
 -- 触发条件
 function condition_EVENT_LUA_NOTIFY_7016(context, evt)
-	configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+	local configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 	if 7012 ~= configId then
 	        return false
 	end
@@ -459,8 +459,8 @@ function action_EVENT_LUA_NOTIFY_7016(context, evt)
 
 	-- 将在groupid为 220163007 中的 configid为 7003 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,102,104,106,108,110,112,114,116,118,120,122}
-	_key = 0
+	local _gadgetStateList = {0,102,104,106,108,110,112,114,116,118,120,122}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -516,7 +516,7 @@ end
 
 -- 触发条件
 function condition_EVENT_LUA_NOTIFY_7017(context, evt)
-	configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+	local configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 	if 7013 ~= configId then
 	        return false
 	end
@@ -530,8 +530,8 @@ function action_EVENT_LUA_NOTIFY_7017(context, evt)
 
 	-- 将在groupid为 220163007 中的 configid为 7004 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124}
-	_key = 0
+	local _gadgetStateList = {0,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -587,7 +587,7 @@ end
 
 -- 触发条件
 function condition_EVENT_LUA_NOTIFY_7018(context, evt)
-	configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+	local configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 	if 7014 ~= configId then
 	        return false
 	end
@@ -601,8 +601,8 @@ function action_EVENT_LUA_NOTIFY_7018(context, evt)
 
 	-- 将在groupid为 220163007 中的 configid为 7005 的物件根据当前GadgetStateList以及index_Step设置GadgetState
 	--
-	_gadgetStateList = {0,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124}
-	_key = 0
+	local _gadgetStateList = {0,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124}
+	local _key = 0
 
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
@@ -1304,7 +1304,7 @@ function action_EVENT_ENTER_REGION_7055(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 7054, 1, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1378,7 +1378,7 @@ function action_EVENT_ENTER_REGION_7060(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 7054, 1, {3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1540,7 +1540,7 @@ function action_EVENT_ENTER_REGION_7069(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 7001, 1, {3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1600,7 +1600,7 @@ function action_EVENT_ENTER_REGION_7071(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 7078, 1, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
@@ -1794,7 +1794,7 @@ function action_EVENT_ENTER_REGION_7080(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 7078, 1, {3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1

@@ -6,33 +6,33 @@
 ||	Owner         ||	xudong.sun
 ||	Description   ||	3.1脏器瓮升级
 ||	LogName       ||    ## SetChainLevel_LOG
-||	Protection    ||
+||	Protection    ||	
 =====================================================================================================================
-levelUpOption = 0
-chainId = 0
+local levelUpOption = 0
+local chainId = 0
 lcoal maxLevel = 5
 
-notifyGroupList = {}
+local notifyGroupList = {}
 
-needCS = true
-CS_ID = 1
+local needCS = true
+local CS_ID = 1
 
-regionID = 0
+local regionID = 0
 
 =======================================================================================]]
 
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Varibale_Change"] = { config_id = 80000001, name = "Varibale_Change", event= EventType.EVENT_VARIABLE_CHANGE, source = "Variable_Setchain", condition = "", action = "action_variable_change", trigger_count = 0},
 		["Enter_Region"] = { config_id = 80000002, name = "Enter_Region", event= EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0},
 	}
 }
 
-chainList = {100004,100006,100007,100008}
+local chainList = {100004,100006,100007,100008}
 
-normalQuestID = {7305246, 7305442, 7322101, 7322201, 7308305}
-sp_1_QuestID = 7305437
-sp_2_QuestID = 7308301
+local normalQuestID = {7305246, 7305442, 7322101, 7322201, 7308305}
+local sp_1_QuestID = 7305437
+local sp_2_QuestID = 7308301
 
 function action_variable_change( context, evt )
 
@@ -40,17 +40,17 @@ function action_variable_change( context, evt )
 		return 0
 	end
 
-	perLevel = {}
-	afterLevel = {}
+	local perLevel = {}
+	local afterLevel = {}
 
 	for i,v in ipairs(chainList) do
 		ScriptLib.PrintContextLog(context, "## SetChainLevel_LOG : 升级前等级： "..ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), v))
 		table.insert(perLevel,ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), v))
 	end
 
-
-	targetLevel = maxLevel
-	tempLevel = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), chainId)
+	
+	local targetLevel = maxLevel
+	local tempLevel = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), chainId)
 	if tempLevel < maxLevel then
 		targetLevel = tempLevel + 1
 	end
@@ -98,10 +98,10 @@ function action_enter_region( context, evt )
 		return 0
 	end
 
-	avatar_eid = ScriptLib.GetAvatarEntityIdByUid(context, ScriptLib.GetSceneOwnerUid(context))
+	local avatar_eid = ScriptLib.GetAvatarEntityIdByUid(context, ScriptLib.GetSceneOwnerUid(context))
 
 	--普通等级保底
-	tempLevel = 0
+	local tempLevel = 0
 	for i,v in ipairs(normalQuestID) do
 		if ScriptLib.GetQuestState(context, avatar_eid, v) == QuestState.FINISHED then
 			tempLevel = tempLevel + 1

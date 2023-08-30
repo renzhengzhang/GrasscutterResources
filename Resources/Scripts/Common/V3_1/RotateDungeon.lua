@@ -8,7 +8,7 @@
 ||	LogName       ||    ## RotateDungeon_LOG
 ||	Protection    ||	每次进地城的角度初始化，在leveltagdata中配置
 =====================================================================================================================
-Option_to_Rotation = {
+local Option_to_Rotation = {
 	[操作台ConfigID]={
 		[OptionID] = { levelTag = "qingtian", arrayPoint = 1 },
 		[OptionID] = { levelTag = "qingtian", arrayPoint = 2 },
@@ -21,22 +21,22 @@ Option_to_Rotation = {
 		[OptionID] = { levelTag = "qingtian", arrayPoint = 1 },
 		[OptionID] = { levelTag = "qingtian", arrayPoint = 2 },
 		[OptionID] = { levelTag = "qingtian", arrayPoint = 3 },
-	},
+	},	
 }
 
-AxisList = {
+local AxisList = {
 	[操作台configID] = 轴ConfigID,
 	[操作台configID] = 轴ConfigID,
 	[操作台configID] = 轴ConfigID,
 }
 
-ArrayID = {
+local ArrayID = {
 	[操作台ConfigID] = 1
 }
 
 =======================================================================================]]
 
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Option_Down"] = { config_id = 80000001, name = "Option_Down", event= EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_option_down", trigger_count = 0},
 		--["Group_load"] = { config_id = 80000002, name = "Group_load", event= EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
@@ -67,10 +67,10 @@ function action_option_down( context, evt )
 
 
 	--获取轴的configID
-	_axisConfigID = AxisList[evt.param1]
+	local _axisConfigID = AxisList[evt.param1]
 
 	--获取当前需要调整的旋转角度
-	_nextRotate = Option_to_Rotation[evt.param1][evt.param2]
+	local _nextRotate = Option_to_Rotation[evt.param1][evt.param2]
 
 	if _nextRotate == nil or _axisConfigID == nil then
 		ScriptLib.PrintContextLog(context, "## RotateDungeon_LOG : 判定未通过 2 ")

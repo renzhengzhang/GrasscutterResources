@@ -164,7 +164,7 @@ end
 function action_EVENT_QUEST_FINISH_908011(context, evt)
 			-- 重新生成指定group，排除之前选择的suite
 			math.randomseed(tostring(os.time()):reverse():sub(1, 7))
-			n = math.random(2,6)
+			local n = math.random(2,6)
 			if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133103908, suite = n }) then
 				return -1
 			end

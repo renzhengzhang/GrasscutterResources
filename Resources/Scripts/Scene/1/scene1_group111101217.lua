@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-test_config = {
+local test_config = {
 	[2] = { sum = 10, max = 5, min = 3}
 }
 

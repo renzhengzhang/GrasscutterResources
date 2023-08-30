@@ -150,8 +150,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_186001(context, evt)
 	-- 触发镜头注目，注目位置为坐标（320.0499，227.2974，202.4648），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=320.0499, y=227.2974, z=202.4648}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=320.0499, y=227.2974, z=202.4648}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -194,8 +194,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_186002(context, evt)
 	-- 触发镜头注目，注目位置为坐标（223.4622，195.1101，167.9539），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=223.4622, y=195.1101, z=167.9539}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=223.4622, y=195.1101, z=167.9539}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -238,8 +238,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_186003(context, evt)
 	-- 触发镜头注目，注目位置为坐标（233.6515，200.9646，313.6678），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=233.6515, y=200.9646, z=313.6678}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=233.6515, y=200.9646, z=313.6678}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -287,8 +287,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_186004(context, evt)
 	-- 触发镜头注目，注目位置为坐标（240.8238，181.9558，419.0165），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=240.8238, y=181.9558, z=419.0165}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=240.8238, y=181.9558, z=419.0165}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -331,8 +331,8 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_186005(context, evt)
 	-- 触发镜头注目，注目位置为坐标（353.885，179.5354，410.7048），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=353.885, y=179.5354, z=410.7048}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=353.885, y=179.5354, z=410.7048}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

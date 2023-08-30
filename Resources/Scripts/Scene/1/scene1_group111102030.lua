@@ -151,7 +151,7 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_30015(context, evt)
 			--gadget_Teleport_1 trigger
-			teleportid = defs["gadget_Teleport_1"]
+			local teleportid = defs["gadget_Teleport_1"]
 			TeleportAction(context, teleportid)
 			return 0
 end
@@ -171,7 +171,7 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_30016(context, evt)
 			--gadget_Teleport_2 trigger
-			teleportid = defs["gadget_Teleport_2"]
+			local teleportid = defs["gadget_Teleport_2"]
 			TeleportAction(context, teleportid)
 			return 0
 end
@@ -191,7 +191,7 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_30017(context, evt)
 			--gadget_Teleport_3 trigger
-			teleportid = defs["gadget_Teleport_3"]
+			local teleportid = defs["gadget_Teleport_3"]
 			TeleportAction(context, teleportid)
 			return 0
 end
@@ -211,7 +211,7 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_30018(context, evt)
 			--gadget_Teleport_4 trigger
-			teleportid = defs["gadget_Teleport_4"]
+			local teleportid = defs["gadget_Teleport_4"]
 			TeleportAction(context, teleportid)
 			return 0
 end

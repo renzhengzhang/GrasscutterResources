@@ -191,8 +191,8 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_22005(context, evt)
 	-- 设置气候特效偏移
-	floatParam={1,0,2}
-	intParam={1}
+	local floatParam={1,0,2}
+	local intParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
@@ -235,8 +235,8 @@ end
 -- 触发操作
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_22007(context, evt)
 	-- 设置气候特效偏移
-	floatParam={1,0,15}
-	intParam={1}
+	local floatParam={1,0,15}
+	local intParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
@@ -259,14 +259,14 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_22008(context, evt)
 	-- 设置气候特效偏移
-	ratioParam={-1}
+	local ratioParam={-1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 3, "Eff_Weather_HeavyRainTBS_DqTBS", ratioParam, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
 
 	-- 设置气候特效偏移
-	floatParam={0,1,2}
-	intParam={1}
+	local floatParam={0,1,2}
+	local intParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
@@ -292,14 +292,14 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_22009(context, evt)
 	end
 
 	-- 设置气候特效偏移
-	ratioParam={-1}
+	local ratioParam={-1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 3, "Eff_Weather_HeavyRainTBS_DqTBS", ratioParam, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
 
 	-- 设置气候特效偏移
-	floatParam={0,1,20}
-	intParam={2}
+	local floatParam={0,1,20}
+	local intParam={2}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
@@ -348,14 +348,14 @@ function action_EVENT_GROUP_LOAD_22011(context, evt)
 	end
 
 	-- 设置气候特效偏移
-	ratioParam={1}
+	local ratioParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 3, "Eff_Weather_HeavyRainTBS_DqTBS", ratioParam, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
 
 	-- 设置气候特效偏移
-	floatParam={0,1,0.1}
-	intParam={1}
+	local floatParam={0,1,0.1}
+	local intParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
@@ -371,14 +371,14 @@ function action_EVENT_LEAVE_REGION_22012(context, evt)
 	end
 
 	-- 设置气候特效偏移
-	floatParam={0,1,0.1}
-	intParam={1}
+	local floatParam={0,1,0.1}
+	local intParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
 
 	-- 设置气候特效偏移
-	ratioParam={1}
+	local ratioParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 3, "Eff_Weather_HeavyRainTBS_DqTBS", ratioParam, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end

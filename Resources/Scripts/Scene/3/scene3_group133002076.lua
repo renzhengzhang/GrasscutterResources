@@ -117,9 +117,9 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_71(context, evt)
-	c_down = ScriptLib.GetGroupVariableValue(context, "down")
+	local c_down = ScriptLib.GetGroupVariableValue(context, "down")
 	math.randomseed(os.time())
-	n = math.random(1,6)
+	local n = math.random(1,6)
 
 	if c_down == 1 then
 

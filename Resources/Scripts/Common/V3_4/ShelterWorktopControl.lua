@@ -13,7 +13,7 @@
 
 
 ------
-local_defs = {
+local local_defs = {
     max_level = 6,
     chain_id = 100005,
     energy_level_1 = 2,
@@ -35,7 +35,7 @@ local_defs = {
     skip_time = 8
 }
 
-Tri = {
+local Tri = {
     [1] = { name = "group_load_shelter", config_id = 11000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load_shelter", trigger_count = 0},
     [2] = { name = "select_option_shelter", config_id = 11000002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option_shelter", trigger_count = 0},
     [3] = { name = "time_axis_pass_shelter", config_id = 11000003, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass_shelter", trigger_count = 0},
@@ -86,10 +86,10 @@ function action_select_option_shelter(context,evt)
         ScriptLib.SetGroupVariableValue(context,"is_skipping_time",1)
 
         --调用沙尘暴控制group跳过当前沙尘暴
-        sandstorm_state = ScriptLib.GetGroupVariableValueByGroup(context,"sandstorm_state",local_defs.sandstorm_control_group)
+        local sandstorm_state = ScriptLib.GetGroupVariableValueByGroup(context,"sandstorm_state",local_defs.sandstorm_control_group)
         ScriptLib.PrintContextLog(context,"## [ShelterWorktopControl]action_select_option_shelter：当前沙尘暴状态为"..sandstorm_state)
         if sandstorm_state == 1 then
-            ret = ScriptLib.ExecuteGroupLua(context, local_defs.sandstorm_control_group, "LF_Skip_Current_Sandstorm", {})
+            local ret = ScriptLib.ExecuteGroupLua(context, local_defs.sandstorm_control_group, "LF_Skip_Current_Sandstorm", {})
             if ret == -1 then
                 ScriptLib.PrintGroupWarning(context,"## [Warning] [ShelterWorktopControl] action_select_option_shelter：调用控制group的跳过沙尘暴天气功能失败")
             end
@@ -109,10 +109,10 @@ function action_select_option_shelter(context,evt)
         ScriptLib.SetGroupVariableValue(context,"is_skipping_time",1)
 
         --调用沙尘暴控制group跳过当前沙尘暴
-        sandstorm_state = ScriptLib.GetGroupVariableValueByGroup(context,"sandstorm_state",local_defs.sandstorm_control_group)
+        local sandstorm_state = ScriptLib.GetGroupVariableValueByGroup(context,"sandstorm_state",local_defs.sandstorm_control_group)
         ScriptLib.PrintContextLog(context,"## [ShelterWorktopControl]action_select_option_shelter：当前沙尘暴状态为"..sandstorm_state)
         if sandstorm_state == 2 then
-            ret = ScriptLib.ExecuteGroupLua(context, local_defs.sandstorm_control_group, "LF_Start_Sanstorm", {})
+            local ret = ScriptLib.ExecuteGroupLua(context, local_defs.sandstorm_control_group, "LF_Start_Sanstorm", {})
             if ret == -1 then
                 ScriptLib.PrintGroupWarning(context,"## [Warning] [ShelterWorktopControl] action_select_option_shelter：调用控制group的开启沙尘暴天气功能失败")
             end
@@ -124,7 +124,7 @@ end
 
 function action_time_axis_pass_shelter(context,evt)
     ScriptLib.PrintContextLog(context,"## [ShelterWorktopControl]action_time_axis_pass_shelter：时间轴tick，给精灵台座恢复选项")
-    chain_level = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), local_defs.chain_id)
+    local chain_level = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), local_defs.chain_id)
     if chain_level >= local_defs.unlock_worktop_level then
         LF_Set_Worktop_Option(context)
         ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.gadget_worktop_id, "SGV_Gear_Option", 0)
@@ -156,9 +156,9 @@ end
 -----------------------------------------------------------------]]--
 
 function LF_Set_Worktop_Option(context)
-    chain_level = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), local_defs.chain_id)
+    local chain_level = ScriptLib.GetChainLevel(context, ScriptLib.GetSceneOwnerUid(context), local_defs.chain_id)
     if chain_level >= local_defs.unlock_worktop_level then
-        sandstorm_state = ScriptLib.GetGroupVariableValueByGroup(context,"sandstorm_state",local_defs.sandstorm_control_group)
+        local sandstorm_state = ScriptLib.GetGroupVariableValueByGroup(context,"sandstorm_state",local_defs.sandstorm_control_group)
         --在沙尘暴中
         if sandstorm_state == 1 then
             ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, defs.gadget_worktop_id, {local_defs.skip_sandstorm_option})

@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-regionsearch_region_id = 3101001
+local regionsearch_region_id = 3101001
 
 --================================================================
 --

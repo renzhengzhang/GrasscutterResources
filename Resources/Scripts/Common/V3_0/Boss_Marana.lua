@@ -75,7 +75,7 @@ Property_Ani_Unique_Marana_01
 --]]
 
 --[[
-BattleCfg = {
+local BattleCfg = {
     -- RegionConfigID
     NearMaranaRegion = 38016,   --靠近无留坨播放CS的区域
     RanaroStartMoveRegion = 38017,  --玩家进入后，兰那罗引导玩家前往各个岛的区域
@@ -127,7 +127,7 @@ BattleCfg = {
     }
 }
 
-QuestCfg = {
+local QuestCfg = {
     MissionStart01 = "7303704",
     MissionStart02 = "7303705",
     BossAppear = "7303704",
@@ -139,7 +139,7 @@ QuestCfg = {
 }
 --]]
 
-BossState = {
+local BossState = {
     StandBy = { State = 0},
     Battle = { State = 201},
     Weak = { State = 202},
@@ -149,7 +149,7 @@ BossState = {
     WaitHit = { State = 902},
 }
 
-ProgressTable = {
+local ProgressTable = {
     [0] = { showString = "Boss战任务开始时，在特定位置创建兰那罗", group = "BossMissionStart"},
     [1] = { showString = "进入Boss区域时。Boss入战，进入Skill1(1/3)", group = "FirstNearMarana"},
     [2] = { showString = "玩家尝试攻击Boss,被驱离。兰那罗引导(1/3)", group = "TryAttackBoss"},
@@ -172,7 +172,7 @@ ProgressTable = {
     [19] = { showString = "无时点。Boss战斗已结束。", group = "BossBattleEnd"},
 }
 
-ProgressGroup = {
+local ProgressGroup = {
     BossMissionStart = {0},
     FirstNearMarana = {1},
     TryAttackBoss = {2},
@@ -187,7 +187,7 @@ ProgressGroup = {
     BossBattleEnd = {19},
 }
 
-BossMarana_Trigger = {
+local BossMarana_Trigger = {
     -- Boss战的初始化
     { keyWord = "BossBattleInit",event = EventType.EVENT_GROUP_LOAD, source = "", trigger_count = 0},
     -- 检查Event
@@ -244,7 +244,7 @@ BossMarana_Trigger = {
 }
 
 function LF_Initialize_BossMarana()
-    startConfigID = 50000001
+    local startConfigID = 50000001
     for _,v in pairs(BossMarana_Trigger) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -259,33 +259,33 @@ function LF_Initialize_BossMarana()
     end
     LF_InsertTriggers(BossMarana_Trigger,{ 1})
 
-    var = { config_id= 50000101, name = "BossBattleProgress", value = 0, no_refresh = false }  --Boss战的步骤计数器
+    local var = { config_id= 50000101, name = "BossBattleProgress", value = 0, no_refresh = false }  --Boss战的步骤计数器
     variables[var.name] = var
-    var = { config_id= 50000102, name = "State_Island01", value = 0, no_refresh = false }  --岛A的状态 1表示进入 2表示完成
+    local var = { config_id= 50000102, name = "State_Island01", value = 0, no_refresh = false }  --岛A的状态 1表示进入 2表示完成
     variables[var.name] = var
-    var = { config_id= 50000103, name = "State_Island02", value = 0, no_refresh = false }  --岛B的状态 1表示进入 2表示完成 3表示切换技能
+    local var = { config_id= 50000103, name = "State_Island02", value = 0, no_refresh = false }  --岛B的状态 1表示进入 2表示完成 3表示切换技能
     variables[var.name] = var
-    var = { config_id= 50000104, name = "State_Island03", value = 0, no_refresh = false }  --岛C的状态 1表示进入 2表示完成
+    local var = { config_id= 50000104, name = "State_Island03", value = 0, no_refresh = false }  --岛C的状态 1表示进入 2表示完成
     variables[var.name] = var
-    var = { config_id= 50000105, name = "SGV_NextSkill", value = 1, no_refresh = false }  --Boss的下一个技能(弃用)
+    local var = { config_id= 50000105, name = "SGV_NextSkill", value = 1, no_refresh = false }  --Boss的下一个技能(弃用)
     variables[var.name] = var
-    var = { config_id= 50000106, name = "CurrentSkill", value = 0, no_refresh = false }  --Boss当前释放的技能
+    local var = { config_id= 50000106, name = "CurrentSkill", value = 0, no_refresh = false }  --Boss当前释放的技能
     variables[var.name] = var
-    var = { config_id= 50000107, name = "RanaroPointIndex", value = 0, no_refresh = false }  -- 兰纳罗的线路
+    local var = { config_id= 50000107, name = "RanaroPointIndex", value = 0, no_refresh = false }  -- 兰纳罗的线路
     variables[var.name] = var
-    var = { config_id= 50000108, name = "RanaroPointStep", value = 1, no_refresh = false }  -- 兰纳罗线路的步数
+    local var = { config_id= 50000108, name = "RanaroPointStep", value = 1, no_refresh = false }  -- 兰纳罗线路的步数
     variables[var.name] = var
-    var = { config_id= 50000109, name = "SGV_BattleState", value = 0, no_refresh = false }  -- 天驹可能需要使用的独立SGV
+    local var = { config_id= 50000109, name = "SGV_BattleState", value = 0, no_refresh = false }  -- 天驹可能需要使用的独立SGV
     variables[var.name] = var
-    var = { config_id= 50000110, name = "Protect", value = 0, no_refresh = true }  -- 保底刷新
+    local var = { config_id= 50000110, name = "Protect", value = 0, no_refresh = true }  -- 保底刷新
     variables[var.name] = var
-    var = { config_id= 50000210, name = "TempTest00", value = 0, no_refresh = false }
+    local var = { config_id= 50000210, name = "TempTest00", value = 0, no_refresh = false }
     variables[var.name] = var
-    var = { config_id= 50000211, name = "TempTest01", value = 0, no_refresh = false }
+    local var = { config_id= 50000211, name = "TempTest01", value = 0, no_refresh = false }
     variables[var.name] = var
-    var = { config_id= 50000212, name = "TempTest02", value = 0, no_refresh = false }
+    local var = { config_id= 50000212, name = "TempTest02", value = 0, no_refresh = false }
     variables[var.name] = var
-    var = { config_id= 50000213, name = "TempTest03", value = 0, no_refresh = false }
+    local var = { config_id= 50000213, name = "TempTest03", value = 0, no_refresh = false }
     variables[var.name] = var
 
     gadgets[BattleCfg.BossCid].server_global_value_config = {["SGV_BattleState"] = 0}
@@ -330,7 +330,7 @@ function action_BossMissionStart(context,evt)
     if LF_CheckProgressNoMatchGroup(context,ProgressGroup.BossMissionStart, "action_BossMissionStart") then
         return 0
     end
-
+    
     --进度推进
     LF_ProgressPush(context,"action_BossMissionStart")
     -- 创建兰那罗
@@ -342,7 +342,7 @@ end
 -- 进度0:第一次接近Marana，Boss出现。Var记录Boss情况
 function action_FirstNearMarana(context,evt)
 
-    regionConfigID = evt.param1
+    local regionConfigID = evt.param1
     if regionConfigID ~= BattleCfg.NearMaranaRegion then
         return 0
     end
@@ -424,7 +424,7 @@ end
 -- 离开主岛,不推进    ["EnterLittleIsland"] = {2,7,13},
 function action_LeaveMainIslandRegion(context,evt)
 
-    regionConfigID = evt.param1
+    local regionConfigID = evt.param1
     if regionConfigID ~= BattleCfg.LeaveMainIslandRegion then
         return 0
     end
@@ -433,7 +433,7 @@ function action_LeaveMainIslandRegion(context,evt)
         return 0
     end
 
-    waveNum = LF_GetWaveNum(context,ProgressGroup.EnterLittleIsland,"action_LeaveMainIslandRegion")
+    local waveNum = LF_GetWaveNum(context,ProgressGroup.EnterLittleIsland,"action_LeaveMainIslandRegion")
 
     ScriptLib.SetEntityServerGlobalValueByConfigId(context, BattleCfg.BossCid,"SGV_BattleState", 2)
 
@@ -444,7 +444,7 @@ end
 -- 重新返回主岛，不推进     ["EnterLittleIsland"] = {2,7,13},
 function action_EnterMainIslandRegion(context,evt)
 
-    regionConfigID = evt.param1
+    local regionConfigID = evt.param1
     if regionConfigID ~= BattleCfg.EnterMainIslandRegion then
         return 0
     end
@@ -473,7 +473,7 @@ function action_EnterLittleIsland(context,evt)
         return 0
     end
 
-    waveNum = LF_GetWaveNum(context,ProgressGroup.CompleteLittleIsland,"action_EnterLittleIsland")
+    local waveNum = LF_GetWaveNum(context,ProgressGroup.CompleteLittleIsland,"action_EnterLittleIsland")
 
     if waveNum ~= LF_GetKeyWordNum(evt.source_name) then
         ScriptLib.PrintContextLog(context, "## TD_BossMarana EnterLittleIsland 玩家进了当前进度不对应的岛 waveNum =" .. waveNum .. " ,keyName = " .. evt.source_name )
@@ -516,7 +516,7 @@ function action_CompleteLittleIsland(context,evt)
         return 0
     end
 
-    waveNum = LF_GetWaveNum(context,ProgressGroup.CompleteLittleIsland,"action_CompleteLittleIsland")
+    local waveNum = LF_GetWaveNum(context,ProgressGroup.CompleteLittleIsland,"action_CompleteLittleIsland")
 
     if waveNum ~= LF_GetKeyWordNum(evt.source_name) then
         -- 正常逻辑中不应出现的操作，需关注
@@ -562,7 +562,7 @@ end
 -- 玩家返回Boss区域时。Boss弱点暴露    ["ReturnMain"] = {4,10,15},
 function action_ReturnMainIsland(context,evt)
 
-    regionConfigID = evt.param1
+    local regionConfigID = evt.param1
     if regionConfigID ~= BattleCfg.NearMaranaRegion then
         return 0
     end
@@ -571,7 +571,7 @@ function action_ReturnMainIsland(context,evt)
         return 0
     end
 
-    waveNum = LF_GetWaveNum(context,ProgressGroup.ReturnMain,"action_ReturnMainIsland")
+    local waveNum = LF_GetWaveNum(context,ProgressGroup.ReturnMain,"action_ReturnMainIsland")
     LF_ProgressPush(context,"action_ReturnMainIsland")
 
     -- 移除钩爪
@@ -579,7 +579,7 @@ function action_ReturnMainIsland(context,evt)
     -- 移除兰纳罗仓鼠球
     ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, BattleCfg.RanaroCid )
     -- 兰纳罗仓鼠球重新创生
-    pointCid = BattleCfg.RanaroJumpPoint[4]
+    local pointCid = BattleCfg.RanaroJumpPoint[4]
     ScriptLib.CreateGadgetByConfigIdByPos(context, BattleCfg.RanaroCid, points[pointCid].pos, points[pointCid].rot)
 
     return 0
@@ -592,7 +592,7 @@ function action_BossRecover(context,evt)
         return 0
     end
 
-    waveNum = LF_GetWaveNum(context,ProgressGroup.BossRecover,"action_BossRecover")
+    local waveNum = LF_GetWaveNum(context,ProgressGroup.BossRecover,"action_BossRecover")
 
     LF_ProgressPush(context,"action_BossRecover")
 
@@ -650,7 +650,7 @@ function action_LastBattle(context,evt)
     LF_ProgressPush(context,"action_LastBattle")
 
     -- 发消息
-    questMsg = LF_CurBattleMSG(QuestCfg.BossThirdDefeat01)
+    local questMsg = LF_CurBattleMSG(QuestCfg.BossThirdDefeat01)
     ScriptLib.AddQuestProgress(context, questMsg)
     -- 发消息
     questMsg = LF_CurBattleMSG(QuestCfg.BossThirdDefeat02)
@@ -671,8 +671,8 @@ function action_SecondMonsterWave( context, evt )
         return 0
     end
 
-    nextWave = ScriptLib.GetGroupTempValue(context, "NextWave", {})
-    tempList = ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id)
+    local nextWave = ScriptLib.GetGroupTempValue(context, "NextWave", {})
+    local tempList = ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id)
 
     if next(tempList)==nil and nextWave > 0 then
         nextWave = nextWave +1
@@ -692,7 +692,7 @@ function action_DelaySummon(context)
     if LF_CheckProgressNoMatchGroup(context,ProgressGroup.BossDie,"action_BossDie") then
         return 0
     end
-    nextWave = ScriptLib.GetGroupTempValue(context, "NextWave", {})
+    local nextWave = ScriptLib.GetGroupTempValue(context, "NextWave", {})
     ScriptLib.AddExtraGroupSuite(context, base_info.group_id, BattleCfg.MonsterLoopSuite[nextWave])
 
     return 0
@@ -739,7 +739,7 @@ function action_BossDieEnd(context,evt)
     -- 移除兰纳罗仓鼠球
     ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, BattleCfg.RanaroCid )
     -- 推进指定任务
-    questMsg = LF_CurBattleMSG(QuestCfg.BossDie)
+    local questMsg = LF_CurBattleMSG(QuestCfg.BossDie)
     ScriptLib.AddQuestProgress(context, questMsg)
     -- 角色关闭花环功能
     ScriptLib.SetTeamServerGlobalValue(context, context.uid, "SGV_Ability_ForestWQ", 0)
@@ -770,10 +770,10 @@ function action_BossBattleEnd(context,evt)
     end
 
     -- 发消息
-    questMsg = LF_CurBattleMSG(QuestCfg.MissionOver)
+    local questMsg = LF_CurBattleMSG(QuestCfg.MissionOver)
     ScriptLib.AddQuestProgress(context, questMsg)
     ScriptLib.PrintContextLog(context, "## TD_BossMarana action_BossBattleEnd 莎兰树CS结束，切SceneTag、任务"..questMsg.."进度推进、切Suite")
-
+    
     -- 切Suite(压草片调整)
     ScriptLib.RefreshGroup(context, { group_id = base_info.group_id, suite = BattleCfg.SalanSuite })
     -- 任务切SceneTag(走LevelTag或者任务）
@@ -821,15 +821,15 @@ function action_RanaroReach(context,evt)
         return 0
     end
 
-    currentPointIndex= ScriptLib.GetGroupVariableValue(context, "RanaroPointIndex")
+    local currentPointIndex= ScriptLib.GetGroupVariableValue(context, "RanaroPointIndex")
     ScriptLib.PrintContextLog(context, "## TD_BossMarana RanaroReach currentPointIndex = " .. currentPointIndex)
     if currentPointIndex > #BattleCfg.RanaroPointList then
         ScriptLib.PrintContextLog(context, "## TD_BossMarana RanaroReach currentPointIndex 不在RanaroPointList 中")
         return 0
     end
 
-    reachPointArray = BattleCfg.RanaroPointList[currentPointIndex].list
-    curStep = ScriptLib.GetGroupVariableValue(context, "RanaroPointStep")
+    local reachPointArray = BattleCfg.RanaroPointList[currentPointIndex].list
+    local curStep = ScriptLib.GetGroupVariableValue(context, "RanaroPointStep")
 
     ScriptLib.PrintContextLog(context, "## TD_BossMarana RanaroReach curStep =" .. curStep .. " || evt.param3 = " .. evt.param3)
 
@@ -918,16 +918,16 @@ end
 -- 向下一个点移动
 function LF_MoveToNextPoint(context,functionName)
     -- 向下一个点移动
-    currentPointIndex= ScriptLib.GetGroupVariableValue(context, "RanaroPointIndex")
+    local currentPointIndex= ScriptLib.GetGroupVariableValue(context, "RanaroPointIndex")
     ScriptLib.PrintContextLog(context, "## TD_BossMarana From：" .. functionName .."  || 兰纳罗点阵移动 currentPointIndex = " .. currentPointIndex)
     if currentPointIndex > #BattleCfg.RanaroPointList then
         return 0
     end
 
-    reachPointArray = BattleCfg.RanaroPointList[currentPointIndex].list
-    pointArrayID = BattleCfg.RanaroPointList[currentPointIndex].id
+    local reachPointArray = BattleCfg.RanaroPointList[currentPointIndex].list
+    local pointArrayID = BattleCfg.RanaroPointList[currentPointIndex].id
     -- 更新RanaroPointStep
-    nextStep = ScriptLib.GetGroupVariableValue(context, "RanaroPointStep") + 1
+    local nextStep = ScriptLib.GetGroupVariableValue(context, "RanaroPointStep") + 1
     if nextStep > #reachPointArray then
         -- 已经转移到终点
         ScriptLib.PrintContextLog(context, "## TD_BossMaranaFrom：" .. functionName .."  || 兰纳罗点阵移动 兰纳罗已抵达当前reachPointArray的终点")
@@ -937,7 +937,7 @@ function LF_MoveToNextPoint(context,functionName)
     ScriptLib.SetGroupVariableValue(context,"RanaroPointStep",nextStep)
     ScriptLib.PrintContextLog(context, "## TD_BossMarana From：" .. functionName .."  || 兰纳罗点阵移动 reachPointArray =" .. LF_ArrayToString(reachPointArray)  .. " ,nextStep = " .. nextStep)
 
-    curPath = LF_GetNextPath(reachPointArray,nextStep)
+    local curPath = LF_GetNextPath(reachPointArray,nextStep)
 
     -- 向下一个点进发
 
@@ -949,17 +949,17 @@ end
 
 -- 快速移动到终点，实际上只移动最后一小段
 function LF_MoveToPointEnd(context,functionName)
-    currentPointIndex= ScriptLib.GetGroupVariableValue(context, "RanaroPointIndex")
+    local currentPointIndex= ScriptLib.GetGroupVariableValue(context, "RanaroPointIndex")
     ScriptLib.PrintContextLog(context, "## TD_BossMarana From：" .. functionName .."  || 兰纳罗快速移动 currentPointIndex = " .. currentPointIndex)
     if currentPointIndex > #BattleCfg.RanaroPointList then
         return 0
     end
 
-    reachPointArray = BattleCfg.RanaroPointList[currentPointIndex].list
+    local reachPointArray = BattleCfg.RanaroPointList[currentPointIndex].list
     ScriptLib.PrintContextLog(context, "## TD_BossMarana From：" .. functionName .."  || 兰纳罗快速移动 reachPointArray =" .. LF_ArrayToString(reachPointArray))
 
     -- step直接跳到最终步
-    curStep = ScriptLib.GetGroupVariableValue(context, "RanaroPointStep")
+    local curStep = ScriptLib.GetGroupVariableValue(context, "RanaroPointStep")
 
     if curStep == #reachPointArray then
         ScriptLib.PrintContextLog(context, "## TD_BossMarana From：" .. functionName .."  || 兰纳罗快速移动 已移动至终点不触发此Action")
@@ -971,7 +971,7 @@ function LF_MoveToPointEnd(context,functionName)
     -- 移除兰纳罗仓鼠球
     ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, BattleCfg.RanaroCid )
     -- 兰纳罗仓鼠球重新创生
-    pointCid = BattleCfg.RanaroJumpPoint[currentPointIndex]
+    local pointCid = BattleCfg.RanaroJumpPoint[currentPointIndex]
     ScriptLib.CreateGadgetByConfigIdByPos(context, BattleCfg.RanaroCid, points[pointCid].pos, points[pointCid].rot)
     ScriptLib.PrintContextLog(context, "## TD_BossMarana From：" .. functionName .."  || 兰纳罗快速移动 强行移除后创生")
 
@@ -979,9 +979,9 @@ end
 
 -- 检查最小进度是否不匹配
 function LF_CheckProgressNoMatchGroup(context,groupKey,functionName)
-    targetProgressList = groupKey
-    bossBattleProgress = ScriptLib.GetGroupVariableValue(context, "BossBattleProgress")
-    targetProgress = targetProgressList[#targetProgressList]
+    local targetProgressList = groupKey
+    local bossBattleProgress = ScriptLib.GetGroupVariableValue(context, "BossBattleProgress")
+    local targetProgress = targetProgressList[#targetProgressList]
     for i = #targetProgressList,1,-1 do
         if bossBattleProgress <= targetProgressList[i] then
             targetProgress = targetProgressList[i]
@@ -998,10 +998,10 @@ end
 
 -- 获取对应Group的波次
 function LF_GetWaveNum(context,groupKey,functionName)
-    targetProgressList = groupKey
-    bossBattleProgress = ScriptLib.GetGroupVariableValue(context, "BossBattleProgress")
+    local targetProgressList = groupKey
+    local bossBattleProgress = ScriptLib.GetGroupVariableValue(context, "BossBattleProgress")
 
-    waveNum = #targetProgressList
+    local waveNum = #targetProgressList
     for i = #targetProgressList,1,-1 do
         if bossBattleProgress <= targetProgressList[i] then
             waveNum = i
@@ -1013,8 +1013,8 @@ end
 
 -- 进度推进流程
 function LF_ProgressPush(context,functionName)
-    bossBattleProgress = ScriptLib.GetGroupVariableValue(context, "BossBattleProgress")
-    showString = ProgressTable[bossBattleProgress + 1].group
+    local bossBattleProgress = ScriptLib.GetGroupVariableValue(context, "BossBattleProgress")
+    local showString = ProgressTable[bossBattleProgress + 1].group
     ScriptLib.ChangeGroupVariableValue(context, "BossBattleProgress", 1)
     ScriptLib.PrintContextLog(context, "## TD_BossMarana From：" .. functionName .."  || 流程进度推进，当前[Progress:"..bossBattleProgress + 1 .."] : " .. showString )
     return 0
@@ -1029,7 +1029,7 @@ end
 --======================================]]
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -1069,7 +1069,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    s = "{"
+    local s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","
@@ -1082,15 +1082,15 @@ function LF_ArrayToString(array)
 end
 -- 根据点阵获得一个简单路径
 function LF_GetNextPath(pointArray, step)
-    path = {}
+    local path = {}
 
     if step == 1 or step > #pointArray then
         path = { pointArray[step] }
         return path
     end
 
-    pointFrom = pointArray[step - 1]
-    pointTo = pointArray[step]
+    local pointFrom = pointArray[step - 1]
+    local pointTo = pointArray[step]
     for i=  pointFrom,pointTo do
         table.insert(path,i)
     end

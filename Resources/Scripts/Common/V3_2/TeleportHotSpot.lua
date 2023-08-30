@@ -27,7 +27,7 @@ defs = {
 ]]
 
 
-extraTriggers = {
+local extraTriggers = {
 	{ config_id = 8000001, name = "Enter_Teleport_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_Enter_Teleport_Region", trigger_count = 0 },
 	{ config_id = 8000002, name = "Time_Axis_RemoveHotSpot", event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_Time_Axis_RemoveHotSpot", trigger_count = 0 },
 	{ config_id = 8000004, name = "Gadget_Create", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_Gadget_Create", trigger_count = 0 },
@@ -73,7 +73,7 @@ function action_Quest_Notify_CreateHotSpot(context, evt)
 	--先清除
 	LF_ClearAllHotSpot(context)
 	--创建
-	ret = ScriptLib.CreateGadget(context, { config_id = defs.hotspot_cs })
+	local ret = ScriptLib.CreateGadget(context, { config_id = defs.hotspot_cs })
 	if 0 == ret then
 		ScriptLib.PrintContextLog(context,"## [TeleportHotSpot] action_Quest_Notify_CreateHotSpot.")
 		return 0
@@ -91,7 +91,7 @@ function action_Quest_Notify_DelHotSpot(context, evt)
 end
 
 function SLC_TeleportHotSpot_NeedRemove(context)
-	config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
+	local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 	--校验来源
 	if 70320041 ~= gadgets[config_id].gadget_id then
 		return 0
@@ -123,7 +123,7 @@ function LF_CreateHotSpot(context, region_id)
 	--先清除
 	LF_ClearAllHotSpot(context)
 	--创建
-	ret = ScriptLib.CreateGadget(context, { config_id = defs.hot_spots[region_id].hot_spot })
+	local ret = ScriptLib.CreateGadget(context, { config_id = defs.hot_spots[region_id].hot_spot })
 	if 0 == ret then
 		ScriptLib.PrintContextLog(context,"## [TeleportHotSpot] LF_CreateHotSpot. region_id@"..region_id.." Create spot@"..defs.hot_spots[region_id].hot_spot)
 	end
@@ -135,7 +135,7 @@ function LF_CreateHotSpotByGadget(context, config_id)
 	ScriptLib.PrintContextLog(context,"## [TeleportHotSpot] LF_CreateHotSpotByGadget. config_id@"..config_id)
 	for k,v in pairs(defs.hot_spots) do
 		if v.teleport_gadget == config_id then
-			--[[region_eid = ScriptLib.GetEntityIdByConfigId(context, k)
+			--[[local region_eid = ScriptLib.GetEntityIdByConfigId(context, k)
 			ScriptLib.PrintContextLog(context,"## [TeleportHotSpot] LF_CreateHotSpotByGadget. region_eid@"..region_eid .. " configID@"..k)
 			if 1 <= ScriptLib.GetRegionEntityCount(context, { region_eid = region_eid, entity_type = EntityType.AVATAR }) then]]
 				LF_CreateHotSpot(context, k)
@@ -159,16 +159,16 @@ end
 
 function action_Time_Axis_RemoveHotSpot(context, evt)
 
-	name = string.sub(evt.source_name, 1, 6)
+	local name = string.sub(evt.source_name, 1, 6)
 	if "remove" ~= name then
 		return 0
 	end
 
-	div = string.find(evt.source_name, "_")
+	local div = string.find(evt.source_name, "_")
 	if nil == div then
 		return 0
 	end
-	config_id = tonumber(string.sub(evt.source_name, div + 1, #evt.source_name))
+	local config_id = tonumber(string.sub(evt.source_name, div + 1, #evt.source_name))
 	if nil == config_id then
 		return 0
 	end

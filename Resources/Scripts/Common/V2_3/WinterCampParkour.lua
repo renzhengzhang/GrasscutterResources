@@ -41,7 +41,7 @@ defs = {
 }
 
 ]]
-triggers_start={
+local triggers_start={
 	--测试用
 	--[[{ config_id = 8000000, name = "Test_GM",  event = EventType.EVENT_VARIABLE_CHANGE, source = "testGM", condition = "", action = "", trigger_count = 0, tag = "100"},
 	{ config_id = 80000010, name = "Challenge_SuccessTest", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "",condition = "",action = "action_challenge_success",trigger_count= 0},]]
@@ -56,10 +56,10 @@ triggers_start={
   { config_id = 8000007, name = "Group_Will_Unload", event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload", trigger_count = 0},
   { config_id = 8000008, name = "Enter_Tutorial_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_TutorialRegion", trigger_count = 0},
 }
---[[triggers_optimiz = {
+--[[local triggers_optimiz = {
 
 }]]
-triggers_end={
+local triggers_end={
  	--终点的trigger单独拿出来，以备同一赛道需要多个Group
   { config_id = 8100001, name = "Enter_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_enter_final", action = "", trigger_count = 0, tag = "666" },
   { config_id = 8100002, name = "Challenge_Success", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "",condition = "",action = "action_challenge_success",trigger_count= 0}
@@ -103,9 +103,9 @@ end
 
 function LF_Try_StartTutorial(context)
 
-    UidList = ScriptLib.GetSceneUidList(context)
-    ownerUid = UidList[1]
-    havePlayed  = ScriptLib.GetExhibitionAccumulableData(context, ownerUid, 10901102)
+    local UidList = ScriptLib.GetSceneUidList(context)
+    local ownerUid = UidList[1]
+    local havePlayed  = ScriptLib.GetExhibitionAccumulableData(context, ownerUid, 10901102)
 
     if 0 == havePlayed then
         ScriptLib.ShowClientTutorial(context, 834, {ownerUid})
@@ -141,8 +141,8 @@ function action_select_option(context, evt)
 	end
 	--检查是否单机
 	if true == ScriptLib.CheckIsInMpMode(context) then
-		--starter_entity = ScriptLib.GetEntityIdByConfigId(context, defs.starter_gadget)
-		--center = ScriptLib.GetPosByEntityId(context, starter_entity)--这个接口取到的小数位数太多 没法直接用
+		--local starter_entity = ScriptLib.GetEntityIdByConfigId(context, defs.starter_gadget)
+		--local center = ScriptLib.GetPosByEntityId(context, starter_entity)--这个接口取到的小数位数太多 没法直接用
 		for k,v in pairs(gadgets) do
 			if k == defs.starter_gadget then
 				center = v.pos
@@ -299,12 +299,12 @@ end
 --group bundle没在不会报错，返回0 ，活动没开有warnin
 function LF_Close_OtherHintCircle(context)
 
-    explore_id = ScriptLib.WinterCampGetExploreGroupBundleId(context)
+    local explore_id = ScriptLib.WinterCampGetExploreGroupBundleId(context)
     if explore_id ~= 0 then
     	ScriptLib.DeactivateGroupLinkBundleByBundleId(context, explore_id)
 	end
 
-  	battle_id = ScriptLib.WinterCampGetBattleGroupBundleId(context)
+  	local battle_id = ScriptLib.WinterCampGetBattleGroupBundleId(context)
   	if battle_id ~= 0 then
   	  	ScriptLib.DeactivateGroupLinkBundleByBundleId(context, battle_id)
   	end
@@ -314,12 +314,12 @@ end
 --跑酷结束，恢复其他两种活动营地的黄圈
 function LF_Open_OtherHintCircle(context)
 
-    explore_id = ScriptLib.WinterCampGetExploreGroupBundleId(context)
+    local explore_id = ScriptLib.WinterCampGetExploreGroupBundleId(context)
     if explore_id ~= 0 then
    		ScriptLib.ActivateGroupLinkBundleByBundleId(context, explore_id)
     end
 
-  	battle_id = ScriptLib.WinterCampGetBattleGroupBundleId(context)
+  	local battle_id = ScriptLib.WinterCampGetBattleGroupBundleId(context)
   	if battle_id ~= 0 then
   		ScriptLib.ActivateGroupLinkBundleByBundleId(context, battle_id)
   	end
@@ -329,7 +329,7 @@ end
 --含金币冰柱破碎，通知对应的金币gadget切状态
 function SLC_SpecialIcePillarBreak(context)
 
-	cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 
 	ScriptLib.PrintContextLog(context, "[WinterCampParkour] Break Special IcePillar. cfg_id@"..cfg_id)
 
@@ -389,7 +389,7 @@ function action_leave_OptimizRegion(context,evt)
 		--ScriptLib.ClearPlayerEyePoint(context, evt.param1)
 
 		--如果完全出圈了，触发挑战失败
-		is_in_region = ScriptLib.GetGroupTempValue(context, "is_in_region", {})
+		local is_in_region = ScriptLib.GetGroupTempValue(context, "is_in_region", {})
 		ScriptLib.PrintContextLog(context, "[WinterCamp] Leave optimiz_region. Region_config_id@"..evt.param1.." is_in_region@"..is_in_region)
 		if is_in_region <= 0 then
 			LF_FailChallenge(context,2)
@@ -426,7 +426,7 @@ function action_group_will_unload(context,evt)
 end
 
 function LF_RevertVisionType(context)
-	uidList = ScriptLib.GetSceneUidList(context)
+	local uidList = ScriptLib.GetSceneUidList(context)
 	for k,v in pairs(uidList) do
 		ScriptLib.RevertPlayerRegionVision(context, v)
 	end
@@ -438,7 +438,7 @@ function CameraAction(context)
 	if defs.look_pos and defs.duration then
 
 		--触发镜头注目，强制注目形式，不广播其他玩家
-		pos_follow = {x=0, y=0, z=0}
+		local pos_follow = {x=0, y=0, z=0}
 		ScriptLib.BeginCameraSceneLook(context, { look_pos = defs.look_pos, is_allow_input = false, duration = defs.duration, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                            is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                            is_set_screen_XY = false, screen_x = 0, screen_y = 0 })

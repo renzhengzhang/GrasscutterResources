@@ -109,7 +109,7 @@ end
 -- 触发条件
 function condition_EVENT_QUEST_START_290002(context, evt)
 	-- 判断变量"slabcount"为1234时
-	count = ScriptLib.GetGroupVariableValue(context, "slabcount")
+	local count = ScriptLib.GetGroupVariableValue(context, "slabcount")
 	if count < 1 and count > 4  then
 		return false
 	end
@@ -181,7 +181,7 @@ end
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_290005(context, evt)
 	-- 判断变量"slabcount"为123时
-	count = ScriptLib.GetGroupVariableValue(context, "slabcount")
+	local count = ScriptLib.GetGroupVariableValue(context, "slabcount")
 	if count < 1 and count >= 4  then
 		return false
 	end

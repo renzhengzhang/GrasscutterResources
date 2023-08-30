@@ -4,26 +4,26 @@ base_info = {
 }
 
 -- DEFS_MISCS
-LowBossID = {75001,75002}
-MidBossID = {75019,75020}
-HighBossID = {75021,75022}
+local LowBossID = {75001,75002}
+local MidBossID = {75019,75020}
+local HighBossID = {75021,75022}
 
-wall_1 = 75003
-wall_2 = 75004
-wall_3 = 75005
+local wall_1 = 75003
+local wall_2 = 75004
+local wall_3 = 75005
 
-LowChallengeID = 2005006
-MidChallengeID = 2005007
-HighChallengeID = 2005008
+local LowChallengeID = 2005006
+local MidChallengeID = 2005007
+local HighChallengeID = 2005008
 
-SwitchGadgetID = 75031
-MovePlatID = 75018
+local SwitchGadgetID = 75031
+local MovePlatID = 75018
 
-vision_region = 75035
+local vision_region = 75035
 
-vision_type_id = 70050001
+local vision_type_id = 70050001
 
-BlackBall = {75023,75024,75025,75026,75027,75028,75029,75030}
+local BlackBall = {75023,75024,75025,75026,75027,75028,75029,75030}
 
 --================================================================
 --

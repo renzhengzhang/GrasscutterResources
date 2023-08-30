@@ -289,7 +289,7 @@ end
 function action_EVENT_SELECT_OPTION_198022(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=458.0256, y=485.8586, z=496.9355}
+	    local t_pos = {x=458.0256, y=485.8586, z=496.9355}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=0, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -341,7 +341,7 @@ end
 function action_EVENT_SELECT_OPTION_198031(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=479.8875, y=486.0628, z=523.9214}
+	    local t_pos = {x=479.8875, y=486.0628, z=523.9214}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=270, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -393,7 +393,7 @@ end
 function action_EVENT_SELECT_OPTION_198033(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=457.3582, y=486.1387, z=546.7478}
+	    local t_pos = {x=457.3582, y=486.1387, z=546.7478}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=180, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -445,7 +445,7 @@ end
 function action_EVENT_SELECT_OPTION_198035(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=431.4753, y=486.0044, z=523.6866}
+	    local t_pos = {x=431.4753, y=486.0044, z=523.6866}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=90, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -497,7 +497,7 @@ end
 function action_EVENT_SELECT_OPTION_198037(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=456.6474, y=475.6726, z=470.1434}
+	    local t_pos = {x=456.6474, y=475.6726, z=470.1434}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=180, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -549,7 +549,7 @@ end
 function action_EVENT_SELECT_OPTION_198039(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=508.0991, y=475.2943, z=523.9422}
+	    local t_pos = {x=508.0991, y=475.2943, z=523.9422}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=90, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -601,7 +601,7 @@ end
 function action_EVENT_SELECT_OPTION_198041(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=456.8852, y=475.2943, z=576.7661}
+	    local t_pos = {x=456.8852, y=475.2943, z=576.7661}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=0, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -653,7 +653,7 @@ end
 function action_EVENT_SELECT_OPTION_198043(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=403.0299, y=475.2078, z=523.4894}
+	    local t_pos = {x=403.0299, y=475.2078, z=523.4894}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=270, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1

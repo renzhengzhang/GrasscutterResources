@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-       defs =
+local        defs =
 {
 	--幕布Group
 	curtain_group = 199002077,

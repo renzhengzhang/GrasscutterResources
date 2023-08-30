@@ -26,39 +26,39 @@ defs = {
 
 -- DEFS_MISCS
 --fever进度升级节点
-fever_progress_table = {
+local fever_progress_table = {
     0,40,120,280,600,800
 }
 --各等级fever的下降速率
-fever_attenuation = {
+local fever_attenuation = {
     -2,-3,-4,-6,-6
 }
 
 --怪物潮定义
-monster_tide = {
+local monster_tide = {
     {2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018},
     {2023,2024,2025,2026,2027,2028},
 }
 --
 --精英怪定义
-elite = {
+local elite = {
     {2001},
     {2002}
 }
 --怪物潮最大最小数量定义
-monster_tide_count =
+local monster_tide_count =
 {
     {min = 2,max = 2},
     {min = 1,max = 1}
 }
 --精英怪随机创生点列表，请按照每波精英怪最大可能数量填写
-elite_born_points =
+local elite_born_points =
 {
     {2031},
     {2032},
 }
 
-ReactionGems =
+local ReactionGems =
 {
     {2019,2029},
     {2020,2030},

@@ -4,10 +4,10 @@ base_info = {
 }
 
 -- DEFS_MISCS
-Worktops = {52004}
-EnvControlGadgets = {52004}
-DayAppearGadgets = {52002}
-NightAppearGadgets = {52001}
+local Worktops = {52004}
+local EnvControlGadgets = {52004}
+local DayAppearGadgets = {52002}
+local NightAppearGadgets = {52001}
 
 --================================================================
 --

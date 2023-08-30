@@ -243,8 +243,8 @@ function action_EVENT_GADGET_STATE_CHANGE_2013(context, evt)
 		end
 
 	-- 触发镜头注目，注目位置为坐标{x=269.5, y=494.74, z=212.63}，持续时间为1.5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=269.5, y=494.74, z=212.63}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=269.5, y=494.74, z=212.63}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 1.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -608,7 +608,7 @@ function action_EVENT_VARIABLE_CHANGE_2025(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 
 
 
@@ -627,7 +627,7 @@ function action_EVENT_VARIABLE_CHANGE_2026(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 
 
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2010, 700200005, {5}, tempParam) then
@@ -645,7 +645,7 @@ function action_EVENT_VARIABLE_CHANGE_2027(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 
 
 
@@ -698,8 +698,8 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_2034(context, evt)
 	-- 触发镜头注目，注目位置为坐标（1357.81，266.33，700.91），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=1357.81, y=266.33, z=700.91}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=1357.81, y=266.33, z=700.91}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -728,8 +728,8 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_2035(context, evt)
 	-- 触发镜头注目，注目位置为坐标（1357.81，259.01，700.91），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=1357.81, y=259.01, z=700.91}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=1357.81, y=259.01, z=700.91}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -758,8 +758,8 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_2036(context, evt)
 	-- 触发镜头注目，注目位置为坐标（1357.81，248.82，700.91），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=1357.81, y=248.82, z=700.91}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=1357.81, y=248.82, z=700.91}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -773,7 +773,7 @@ end
 -- 触发操作
 function action_EVENT_GROUP_LOAD_2037(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count")~=3 then
-	  temp_count=0
+	  local temp_count=0
 	  if ScriptLib.GetGroupVariableValue(context, "state1")==3 then
 	    temp_count=temp_count+1
 	  end

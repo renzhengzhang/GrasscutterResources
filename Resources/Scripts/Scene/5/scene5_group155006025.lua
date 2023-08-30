@@ -13,13 +13,13 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {}
-Worktops = {}
-DayAppearGadgets = {defs.gadget_mask}
-NightAppearGadgets = {defs.gadget_airforce,defs.gadget_windforce}
+local Controllers = {}
+local EnvControlGadgets = {}
+local Worktops = {}
+local DayAppearGadgets = {defs.gadget_mask}
+local NightAppearGadgets = {defs.gadget_airforce,defs.gadget_windforce}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -39,7 +39,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -180,7 +180,7 @@ function condition_EVENT_ENTER_REGION_25005(context, evt)
 	if evt.param1 ~= 25005 then return false end
 
 	-- 返回渊下宫当前是否为黑夜
-	    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 2) then
 	        return true
 	    else
@@ -214,9 +214,9 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_25006(context, evt)
 	-- 返回渊下宫当前是否为黑夜
-	    uid_List = ScriptLib.GetSceneUidList(context)
-	    host_id = uid_List[1]
-	    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	    local uid_List = ScriptLib.GetSceneUidList(context)
+	    local host_id = uid_List[1]
+	    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 2) then
 	        return true
 	    else
@@ -270,7 +270,7 @@ function condition_EVENT_ENTER_REGION_25009(context, evt)
 			return false
 		end
 
-		current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+		local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 		if (current_env_state_id == 2) then
 			return true
 		else

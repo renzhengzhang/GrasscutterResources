@@ -15,7 +15,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-JamshidRocks =
+local JamshidRocks =
 {
     281001,
     281002,
@@ -26,13 +26,13 @@ JamshidRocks =
     281005
 }
 
-CorrectAnswer =
+local CorrectAnswer =
 {
     2,2,2,2,2,2,2
 }
-v = 0
-v_error = 0
-max_bit = #defs.gadget_array
+local v = 0
+local v_error = 0
+local max_bit = #defs.gadget_array
 defs.final_point = defs.point_sum - 1
 
 --================================================================

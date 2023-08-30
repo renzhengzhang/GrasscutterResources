@@ -12,7 +12,7 @@ defs = {
 
 -- DEFS_MISCS
 --配在计时group中
-timer_def = {
+local timer_def = {
         [1] = {
                 --根据时间创建的group
                 [1] = {2,6},

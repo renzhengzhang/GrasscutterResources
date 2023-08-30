@@ -10,7 +10,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-windball_list = {
+local windball_list = {
     [1005] = 2,
     [1006] = 3,
 }

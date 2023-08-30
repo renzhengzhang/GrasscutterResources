@@ -14,7 +14,7 @@ defs = {
 }
 
 --地形信息：0-墙面,1-地面,2-空气墙
-level_map = {
+local level_map = {
 	{0,0,2,1,1,1,1,0,0},
 	{0,0,2,0,1,1,1,1,0},
 	{2,1,1,0,1,2,2,2,2},
@@ -23,7 +23,7 @@ level_map = {
 }
 
 --点阵id信息
-point_map = {
+local point_map = {
 	{ 0, 0, 0, 1, 2, 3, 4, 0, 0},
 	{ 0, 0, 0, 0, 5, 6, 7, 8, 0},
 	{ 0, 9,10, 0,11, 0, 0, 0, 0},
@@ -32,7 +32,7 @@ point_map = {
 }
 
 --箱子起始信息
-box_config = {
+local box_config = {
 	[1] = {config_id = 4005, pos = {x=2,z=3}},
 	[2] = {config_id = 4006, pos = {x=4,z=1}},
 	[3] = {config_id = 4008, pos = {x=5,z=2}},
@@ -295,7 +295,7 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_4018(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-44,y=-578,z=-84}
+	local pos = {x=-44,y=-578,z=-84}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 500660180, pos, 80) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1

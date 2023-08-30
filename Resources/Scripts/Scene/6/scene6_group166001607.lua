@@ -75,7 +75,7 @@ suites = {
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_607002(context, evt)
-	        uidList=ScriptLib.GetSceneUidList(context)
+	        local uidList=ScriptLib.GetSceneUidList(context)
 	        if uidList[1]~=evt.uid then
 	                ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=290.5259, y=65.54035, z=1296.58093}, rot = {x=0, y=48.5509644, z=0}})
 	        end

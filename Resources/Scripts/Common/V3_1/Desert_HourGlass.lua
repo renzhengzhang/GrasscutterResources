@@ -8,16 +8,16 @@
 ||	LogName       ||    ## Desert_HourGlass_LOG
 ||	Protection    ||	按下按键时自动检查当前是否可以开启挑战
 =====================================================================================================================
-HourGlass_ConfigIDList = {}
-glassNum = 4
+local HourGlass_ConfigIDList = {}
+local glassNum = 4
 
 --8.25新增  防止多个挑战叠加
-forceStopGroup = {}
+local forceStopGroup = {}
 
 =======================================================================================]]
-glassNum = #HourGlass_ConfigIDList
+local glassNum = #HourGlass_ConfigIDList
 
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["Enter_Region"] = { config_id = 80000001, name = "Enter_Region", event= EventType.EVENT_ENTER_REGION, source = "1", condition = "", action = "action_player_in_region", trigger_count = 0, tag = "999" },
 		["challenge_Success"] = { config_id = 80000002, name = "challenge_Success", event= EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challengeSuccess", trigger_count = 0 },
@@ -52,7 +52,7 @@ function action_GroupLoad( context, evt )
 				ScriptLib.PrintContextLog(context, "## Desert_HourGlass_LOG : 初始化 configID:"..v)
 				ScriptLib.SetGroupGadgetStateByConfigId(context, 0, v, 0)
 			end
-
+			
 		end
 	end
 
@@ -135,13 +135,13 @@ function SLC_HourGlass_SetSGV( context, value )
 
 	ScriptLib.PrintContextLog(context, "## Desert_HourGlass_LOG : target_eid = "..context.target_entity_id)
 
-	configID = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+	local configID = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 
 	--客户端按下按键，纯计时版
 	if value == 3 then
 		--检查是否有建筑师版
 		for i,v in ipairs(HourGlass_ConfigIDList) do
-			entityID = ScriptLib.GetEntityIdByConfigId(context, v)
+			local entityID = ScriptLib.GetEntityIdByConfigId(context, v)
 			if ScriptLib.GetGadgetIdByEntityId(context, entityID) == 70330310 and ScriptLib.GetGadgetStateByConfigId(context, 0, v) == 204 then
 				ScriptLib.ShowReminderByUid(context, {context.owner_uid}, 33010076)
 				return 0
@@ -164,12 +164,12 @@ function SLC_HourGlass_SetSGV( context, value )
 	--客户端按下按键，寻找沙漏玩法
 	if value == 1 or value == 2 then
 		--设置沙漏开始计时
-
+	
 		ScriptLib.PrintContextLog(context, "## Desert_HourGlass_LOG : configID = "..configID)
 
 		--检查是否有建筑师版
 		for i,v in ipairs(HourGlass_ConfigIDList) do
-			entityID = ScriptLib.GetEntityIdByConfigId(context, v)
+			local entityID = ScriptLib.GetEntityIdByConfigId(context, v)
 			if ScriptLib.GetGadgetIdByEntityId(context, entityID) == 70330310 and ScriptLib.GetGadgetStateByConfigId(context, 0, v) == 204 then
 				ScriptLib.PrintContextLog(context, "## Desert_HourGlass_LOG : configID "..v.." 失败")
 				ScriptLib.ShowReminderByUid(context, {context.owner_uid}, 33010076)
@@ -255,7 +255,7 @@ function SLC_HourGlass_SetSGV( context, value )
 		ScriptLib.StopChallenge(context, 1, 1)
 
 	end
-
+	
 	return 0
 end
 

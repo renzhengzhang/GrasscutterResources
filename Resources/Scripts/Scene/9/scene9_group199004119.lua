@@ -127,7 +127,7 @@ end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_119001(context, evt)
-	rmd_id = LF_GetRandomResult(context, defs.rmd_list)
+	local rmd_id = LF_GetRandomResult(context, defs.rmd_list)
 
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 199004119, 2) then
@@ -136,7 +136,7 @@ function action_EVENT_ENTER_REGION_119001(context, evt)
 	end
 
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-136.9,y=120,z=-878}
+	local pos = {x=-136.9,y=120,z=-878}
 	if 0 ~= ScriptLib.ShowReminderRadius(context,  rmd_id, pos, 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1

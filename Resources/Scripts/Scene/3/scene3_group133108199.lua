@@ -173,7 +173,7 @@ function action_EVENT_SELECT_OPTION_199010(context, evt)
 		end
 
 	-- 给浪船加特效
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, "GV_Mark_Skiff", 1)
 	ScriptLib.SetTeamServerGlobalValue(context, uid_list[1], "SGV_Box_Count", 1);
 

@@ -12,7 +12,7 @@ defs = {
  reminder_success = 400112,
 }
 
-rotor_map = {
+local rotor_map = {
  [49001] = {init_state = 1, end_state = 2}, --开关对应的开始和正确位置
  [49002] = {init_state = 1, end_state = 2},
  [49003] = {init_state = 1, end_state = 2},

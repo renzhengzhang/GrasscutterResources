@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-shadowConfigIDList = {75002,75003}
+local shadowConfigIDList = {75002,75003}
 
 --================================================================
 --

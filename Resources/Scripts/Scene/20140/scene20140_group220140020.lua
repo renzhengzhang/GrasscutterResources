@@ -4,7 +4,7 @@ base_info = {
 }
 
 -- DEFS_MISCS
-       defs = {
+local        defs = {
 
                 --本Group中发射器gadget的configID，最多3个,
                 fireMachineList = {

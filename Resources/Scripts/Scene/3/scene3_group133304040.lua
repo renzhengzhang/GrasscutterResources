@@ -173,7 +173,7 @@ end
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_40008(context, evt)
-	isMP = ScriptLib.CheckIsInMpMode(context)
+	local isMP = ScriptLib.CheckIsInMpMode(context)
 	if isMP == true then
 		return false
 	end

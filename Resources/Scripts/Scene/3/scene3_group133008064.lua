@@ -172,9 +172,9 @@ function action_EVENT_GROUP_LOAD_64003(context, evt)
 	--suite 3是三只狐狸
 	--suite 4是巢穴奖励
 	--suite 5是宝箱
-	day = ScriptLib.GetGroupVariableValue(context, "day")
-	yB = ScriptLib.GetGroupVariableValue(context, "yesterdayBehavior")
-	pG = ScriptLib.GetGroupVariableValue(context, "prizeGiven")
+	local day = ScriptLib.GetGroupVariableValue(context, "day")
+	local yB = ScriptLib.GetGroupVariableValue(context, "yesterdayBehavior")
+	local pG = ScriptLib.GetGroupVariableValue(context, "prizeGiven")
 
 	if day >5 then
 		return 0

@@ -4,11 +4,11 @@ base_info = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {17001}
-Worktops = {}
-DayAppearGadgets = {}
-NightAppearGadgets = {}
+local Controllers = {}
+local EnvControlGadgets = {17001}
+local Worktops = {}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {}
 
 --================================================================
 --
@@ -127,14 +127,14 @@ function action_EVENT_GROUP_LOAD_17002(context, evt)
 
 			--线上玩家保护
 
-			uidList = ScriptLib.GetSceneUidList(context)
+			local uidList = ScriptLib.GetSceneUidList(context)
 
 			if (uidList == nil or #uidList == 0) then
 				return 0
 			end
 
-			avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context,uidList[1])
-			quest_state = ScriptLib.GetQuestState(context, avatar_entity, 7217716)
+			local avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context,uidList[1])
+			local quest_state = ScriptLib.GetQuestState(context, avatar_entity, 7217716)
 
 			if quest_state == QuestState.FINISHED then
 				ScriptLib.GoToFlowSuite(context, 155005017, 3)
@@ -162,8 +162,8 @@ end
 function action_EVENT_SELECT_OPTION_17003(context, evt)
 			ScriptLib.DelWorktopOptionByGroupId(context, 155005017, 17001, 7)
 			ScriptLib.SetGadgetStateByConfigId(context, 17001, 312)
-			uid_List = ScriptLib.GetSceneUidList(context)
-			host_id = uid_List[1]
+			local uid_List = ScriptLib.GetSceneUidList(context)
+			local host_id = uid_List[1]
 
 			ScriptLib.AddQuestProgress(context,"72177_UnlockTokoEngine")
 			--ScriptLib.InitTimeAxis(context, "StartEngine", {5}, false)

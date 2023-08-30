@@ -327,7 +327,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_617018(context, evt)
-	_active = 0
+	local _active = 0
 
 	if defs.gadget_1 ~= 0 then
 		if GadgetState.Action02 == ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_1) then

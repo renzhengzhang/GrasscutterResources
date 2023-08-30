@@ -5,7 +5,7 @@ base_info = {
 
 -- DEFS_MISCS
 --每个房间传送点坐标列表
-ProtalPointList = {
+local ProtalPointList = {
         --消失路面
         [6001] = {
                 [1] = {pos = {x = 224.4635, y = 21.55999, z = 17.19053}, rot = {x = 0, y = 180, z = 0}},
@@ -66,7 +66,7 @@ ProtalPointList = {
 }
 
 --每个小活动关卡Group列表
-WindFloraGroupList = {
+local WindFloraGroupList = {
         --消失路面
         [6001] = 235800006,
         --接花
@@ -86,7 +86,7 @@ WindFloraGroupList = {
 }
 
 --每个子关卡限时
-LevelTimeLimits = {
+local LevelTimeLimits = {
         --消失路面
         [6001] = 63,
         --接花
@@ -106,7 +106,7 @@ LevelTimeLimits = {
 }
 
 --每个Boss关卡限时
-BossTimeLimits = {
+local BossTimeLimits = {
         --一阶段Boss战
         [1] = 603,
         --二阶段Boss战
@@ -118,7 +118,7 @@ BossTimeLimits = {
 }
 
 --Boss战玩家传送点
-BossPointList = {
+local BossPointList = {
         --一阶段Boss战
         [1] = {
                 [1] = {pos = {x = -139.183, y = 20.52047, z = 5.445455}, rot = {x = 0, y = 180, z = 0}},
@@ -150,7 +150,7 @@ BossPointList = {
 }
 
 --四阶段Boss_Group列表
-BossGroupList = {
+local BossGroupList = {
                 [1] = 235800008,
                 [2] = 235800007,
                 [3] = 235800012,
@@ -161,23 +161,23 @@ BossGroupList = {
 --配在Main里面
 --全局
 --进入地城时初始能量值
-Initialize_Energy = 100
+local Initialize_Energy = 100
 --每次采集随机花时奖励的能量值
-RandomFlower_Bonus = 5
+local RandomFlower_Bonus = 5
 --躲弹幕玩法
 --被弹幕打中扣除的能量值
-Bullet_Hit_Dedection = -2
+local Bullet_Hit_Dedection = -2
 --水泡长廊
 --被碰到水泡后扣除的能量值
-Bubble_Hit_Deduction = -2
+local Bubble_Hit_Deduction = -2
 --飞行接花
 --站在烫脚地板上每秒扣除的能量值
-WindFlower_HurtFloor_Deduction = -5
+local WindFlower_HurtFloor_Deduction = -5
 
 --小游戏准备和结算阶段缓冲时间
-PreviewTime = {10,10,10,10,10,10,10,10,10}
-PreviewShowTime = {5,5,5,5,5,5,5,5,5}
-TransDelayTime = {12,1,1,1,1,1,1,1,1}
+local PreviewTime = {10,10,10,10,10,10,10,10,10}
+local PreviewShowTime = {5,5,5,5,5,5,5,5,5}
+local TransDelayTime = {12,1,1,1,1,1,1,1,1}
 
 --================================================================
 --

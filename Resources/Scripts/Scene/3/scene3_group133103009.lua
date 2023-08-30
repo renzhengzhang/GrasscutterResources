@@ -201,8 +201,8 @@ function condition_EVENT_ENTER_REGION_9005(context, evt)
 
 
 	--判断子任务7214407未完成
-	uidList = ScriptLib.GetSceneUidList(context)
-	avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
+	local uidList = ScriptLib.GetSceneUidList(context)
+	local avatar_entity = ScriptLib.GetAvatarEntityIdByUid(context, uidList[1])
 
 	if ScriptLib.GetQuestState(context, avatar_entity, 7214407) ~= QuestState.UNFINISHED then
 		return false

@@ -139,7 +139,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_54(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
 
-	value = ScriptLib.GetGroupVariableValue(context, "State_Flag")
+	local value = ScriptLib.GetGroupVariableValue(context, "State_Flag")
 	if value < 0 or value > 4 then
 	return -1
 	end
@@ -162,7 +162,7 @@ function action_EVENT_NONE_55(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.riddle_hint) then
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
 	end
-	sum = 0
+	local sum = 0
 	if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.riddle_1) == GadgetState.GearStart then
 	sum = sum + 1
 	end

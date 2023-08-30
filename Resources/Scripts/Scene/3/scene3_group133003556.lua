@@ -12,7 +12,7 @@ defs = {
 
 -- DEFS_MISCS
 --元素类型字典
-elemType_Reverse = {
+local elemType_Reverse = {
 	["Water"] = 1,
 	["Fire"] = 2,
 	["Electric"] = 3,

@@ -3,15 +3,15 @@
 ||	owner: 		chen.chen
 ||	description:	用于楔子玩法管理玩法阶段和回滚逻辑，之前做八方向射击导致文件名比较无关，但已经有多处引用就先不改了
 ||	LogName:	##[CalculateBulletForward]
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 --[[
-shootLightMap={
+local shootLightMap={
 	[10024]=23334
 }
 
-lawfulGadgets=
+local lawfulGadgets=
 {
 	[1]={1002,1003},
 	[3]={1004,1005}
@@ -19,7 +19,7 @@ lawfulGadgets=
 
 ]]--
 
-extraTriggers={
+local extraTriggers={
   { config_id = 40000000, name = "EVENT_GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
   { config_id = 40000001, name = "VARIABLE_CHANGE", event = EventType.EVENT_VARIABLE_CHANGE, source = "MoveStep", condition = "", action = "action_variable_change", trigger_count = 0},
   { config_id = 40000002, name = "EVENT_GADGET_STATE_CHANGE", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0},
@@ -56,13 +56,13 @@ function WedgeOfSealBreak(context)
 		ScriptLib.PrintContextLog(context, "##[CalculateBulletForward]楔子玩法：source_entity_id="..context.source_entity_id)
 	end
 	--找触发者
-	configID = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
-	--configID = ScriptLib.GetConfigIdByEntityId(context, context.source_entity_id )
+	local configID = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+	--local configID = ScriptLib.GetConfigIdByEntityId(context, context.source_entity_id )
 	ScriptLib.PrintContextLog(context, "##[CalculateBulletForward]楔子玩法：configID="..configID)
 	for k,v in pairs(gadgets) do
 		if v.config_id==configID then
 			if lawfulGadgets~=nil then
-				tempValue=ScriptLib.GetGroupVariableValue(context, "MoveStep")
+				local tempValue=ScriptLib.GetGroupVariableValue(context, "MoveStep")
 				if tempValue<defs.steps then
 					tempValue=tempValue+1
 					if lawfulGadgets[tempValue]==nil or LF_CheckContainGonfigID(lawfulGadgets[tempValue],configID) then
@@ -76,7 +76,7 @@ function WedgeOfSealBreak(context)
 					ScriptLib.PrintContextLog(context, "##[CalculateBulletForward]楔子玩法：路径已走完")
 				end
 			else
-				tempValue=ScriptLib.GetGroupVariableValue(context, "MoveStep")
+				local tempValue=ScriptLib.GetGroupVariableValue(context, "MoveStep")
 				if tempValue<defs.steps then
 					tempValue=tempValue+1
 					ScriptLib.SetGroupGadgetStateByConfigId(context, 0, configID, 203)

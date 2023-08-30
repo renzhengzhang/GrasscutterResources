@@ -27,7 +27,7 @@ defs.teleportPointRangeMap ={
 }
 
 
-local_defs = {
+local local_defs = {
 	worktop_option = 30110,
 	progress_key = 1,
 	team_global_value = "FEVER_LEVEL",
@@ -41,7 +41,7 @@ local_defs = {
 }
 
 
-Tri = {
+local Tri = {
 	[1] = { name = "group_load", config_id = 8000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
 	[2] = { name = "gadget_talk_done", config_id = 8000002, event = EventType.EVENT_GADGETTALK_DONE, source = "", condition = "", action = "action_gadget_talk_done", trigger_count = 0},
 	[3] = { name = "gallery_pre_start", config_id = 8000003, event = EventType.EVENT_GALLERY_PRE_START, source = "", condition = "", action = "action_gallery_pre_start", trigger_count = 0},
@@ -68,8 +68,8 @@ end
 function action_gadget_talk_done(context,evt)
 	ScriptLib.PrintContextLog(context,"PacMan action_gadget_talk_done")
 	--
-	--talkName = evt.source_name
-	--talkID = evt.param2
+	--local talkName = evt.source_name
+	--local talkID = evt.param2
 	--if talkID == 6800419 or talkName == 6800419 then
 	--	ScriptLib.CreateGadget(context, { config_id = defs.gadget_teleport })
 	--end
@@ -79,7 +79,7 @@ end
 function action_gallery_pre_start(context,evt)
 	ScriptLib.PrintContextLog(context,"PacMan action_gallery_pre_start")
 
-	--curGallery = evt.param1
+	--local curGallery = evt.param1
 	--ScriptLib.SetGroupTempValue(context, "curGallery", curGallery, {})
 	--
 	--if defs then
@@ -96,7 +96,7 @@ end
 function action_dungeon_settle(context,evt)
 	ScriptLib.PrintContextLog(context,"PacMan action_dungeon_settle")
 	--
-	--curGallery = ScriptLib.GetGroupTempValue(context, "curGallery", {})
+	--local curGallery = ScriptLib.GetGroupTempValue(context, "curGallery", {})
 	--ScriptLib.StopGallery(context, curGallery, true)
 
 	return 0
@@ -112,7 +112,7 @@ end
 
 function SLC_TeleportBack(context)
 	ScriptLib.PrintContextLog(context,"PacMan SLC_TeleportBack "..tostring(context.uid).." "..tostring(defs.moveback_pointarray_id))
-	selectedPoint = LF_GetNearPoint(context)
+	local selectedPoint = LF_GetNearPoint(context)
 	if(selectedPoint~=-1)then
 		ScriptLib.PrintContextLog(context,"PacMan Move Back Point "..tostring(selectedPoint))
 		ScriptLib.MoveAvatarByPointArray(context, context.uid, defs.moveback_pointarray_id or 1, {selectedPoint,2,1}, {speed=10}, "{\"MarkType\":1,\"IgnoreCollisionWhenEnter\":true}")
@@ -122,23 +122,23 @@ end
 
 function LF_GetNearPoint(context)
 	ScriptLib.PrintContextLog(context,"PacMan LF_GetNearPoint In")
-	selectedPoint = -1
-	avatarUid = context.uid
-	avatarEntity = ScriptLib.GetAvatarEntityIdByUid(context, avatarUid)
+	local selectedPoint = -1
+	local avatarUid = context.uid
+	local avatarEntity = ScriptLib.GetAvatarEntityIdByUid(context, avatarUid)
 	if avatarEntity==0 then
 		return selectedPoint
 	end
-	avatarPoint = ScriptLib.GetPosByEntityId(context, avatarEntity)
-	pointRangeMin = defs.teleportPointRangeMap[defs.moveback_pointarray_id][1]
-	pointRangeMax = defs.teleportPointRangeMap[defs.moveback_pointarray_id][2]
-	curPointDistance = 100000
+	local avatarPoint = ScriptLib.GetPosByEntityId(context, avatarEntity)
+	local pointRangeMin = defs.teleportPointRangeMap[defs.moveback_pointarray_id][1]
+	local pointRangeMax = defs.teleportPointRangeMap[defs.moveback_pointarray_id][2]
+	local curPointDistance = 100000
 	for i = pointRangeMin, pointRangeMax do
-		arrayPointRet,arrayPointPos,arrayPointRot=ScriptLib.GetPlatformArrayInfoByPointId(context, defs.moveback_pointarray_id, i)
+		local arrayPointRet,arrayPointPos,arrayPointRot=ScriptLib.GetPlatformArrayInfoByPointId(context, defs.moveback_pointarray_id, i)
 		if(arrayPointRet~=-1)then
-			deltaX = arrayPointPos.x - avatarPoint.x
-			deltaY = arrayPointPos.y - avatarPoint.y
-			deltaZ = arrayPointPos.z - avatarPoint.z
-			distance = deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ
+			local deltaX = arrayPointPos.x - avatarPoint.x
+			local deltaY = arrayPointPos.y - avatarPoint.y
+			local deltaZ = arrayPointPos.z - avatarPoint.z
+			local distance = deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ
 			if(distance<curPointDistance)then
 				selectedPoint = i
 				curPointDistance = distance
@@ -152,3 +152,4 @@ end
 
 ------------------------------------------------------------------
 Initialize()
+

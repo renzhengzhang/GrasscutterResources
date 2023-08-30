@@ -11,13 +11,13 @@ defs = {
 }
 
 -- DEFS_MISCS
-mushroomBeastInfo =
+local mushroomBeastInfo =
 {
 	[1]={configId=85006,maxProgress=300,normal=100,active=200,dieOut=300,patrolRoute={1,2,3,4,5,6}},
 	[2]={configId=85007,maxProgress=300,normal=100,active=200,dieOut=300,patrolRoute={7,8,9,10,11,12,13}}
 }
 
-groupInfo =
+local groupInfo =
 {
 	pointArrayId = 110200025,
 	playRegion =85005

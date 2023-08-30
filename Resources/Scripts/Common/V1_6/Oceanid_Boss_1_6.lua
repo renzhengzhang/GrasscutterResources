@@ -7,13 +7,13 @@ defs = {
 }
 --]]
 
-Tri = {
+local Tri = {
 	{ name = "variable_change", config_id = 8000001, event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change", trigger_count = 0	},
 	{ name = "time_axis_pass", config_id = 8000002, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0 },
 	{ name = "any_monster_die", config_id = 8000003, event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_any_monster_die", trigger_count = 0 },
 }
 
-other_Tri = {
+local other_Tri = {
 	[1] = { name = "enter_region", config_id = 8000010, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", forbid_guest = false, trigger_count = 0 }
 }
 
@@ -46,9 +46,9 @@ function action_time_axis_pass(context, evt)
 	ScriptLib.PrintContextLog(context, "## BossDungeon : time axis pass : "..evt.source_name.." | param1 = "..evt.param1)
 	--依次召唤阶段的处理逻辑
 	if evt.source_name == "summon" then
-		SummonStep_ = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
+		local SummonStep_ = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
 		for i=2,4 do
-			temp_ = SummonStep_
+			local temp_ = SummonStep_
 			if temp_%math.pow(10,i)//math.pow(10,i-1) == 0 then
 				LF_Summon_Action(context, i)
 				break
@@ -57,7 +57,7 @@ function action_time_axis_pass(context, evt)
 	elseif evt.source_name == "summon_delay" then
 		SLC_Summon_Start(context)
 	elseif evt.source_name == "stage_1" then
-		stage = ScriptLib.GetGroupTempValue(context, "Oceanid_State", {})
+		local stage = ScriptLib.GetGroupTempValue(context, "Oceanid_State", {})
 		ScriptLib.PrintContextLog(context, "## BossDungeon : stage = "..stage)
 		if 1 == stage then
 			SLC_Stage_To_2(context)
@@ -86,12 +86,12 @@ function action_any_monster_die(context, evt)
 		LF_Clear_Battle_Arena(context)
 	else
 		--根据召唤的suite自行换算行为
-		noob = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMALSELECT")
-		noob_suite = noob + 4
+		local noob = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMALSELECT")
+		local noob_suite = noob + 4
 		for k,v in ipairs(suites[noob_suite].monsters) do
 			if evt.param1 == v then
 				--怪死了立即召唤下一只
-				temp_ = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
+				local temp_ = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
 				for i=2,4 do
 					if temp_ == 0 then
 						break
@@ -102,7 +102,7 @@ function action_any_monster_die(context, evt)
 					end
 				end
 				ScriptLib.ChangeGroupTempValue(context, "Oceanid_HP", -10, {})
-				hp_ = ScriptLib.GetGroupTempValue(context, "Oceanid_HP", {})
+				local hp_ = ScriptLib.GetGroupTempValue(context, "Oceanid_HP", {})
 				ScriptLib.PrintContextLog(context, "## ACT_OCEANID_LOG : boss_cur_hp = "..hp_)
 				ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.monster_boss, "SGV_Oceanid_HP", hp_)
 				--血量40则进入3阶段
@@ -121,12 +121,12 @@ function action_any_monster_die(context, evt)
 end
 ---------------------------------------
 function LF_Get_Distance(context, uid, config_id)
-	eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
-	pos1 = ScriptLib.GetPosByEntityId(context, eid)
-	pos2 = gadgets[config_id].pos
-	X = pos1.x - pos2.x
-	Y = pos1.y - pos2.y
-	Z = pos1.z - pos2.z
+	local eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
+	local pos1 = ScriptLib.GetPosByEntityId(context, eid)
+	local pos2 = gadgets[config_id].pos
+	local X = pos1.x - pos2.x
+	local Y = pos1.y - pos2.y
+	local Z = pos1.z - pos2.z
 	return math.sqrt(X*X+Y*Y+Z*Z)
 end
 
@@ -153,14 +153,14 @@ end
 
 function LF_Random_Attack_Platform(context)
 	math.randomseed(ScriptLib.GetServerTime(context))
-	p={}
-	array = {1,2,3,4,5,6,7,8,9}
-	_max = 3
+	local p={}
+	local array = {1,2,3,4,5,6,7,8,9}
+	local _max = 3
 	if 0 ~= ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_PLATFORMDAMAGE_SUM_UP") then
 		_max = 5
 	end
 	for j=1,_max do
-		ran = math.random(#array)
+		local ran = math.random(#array)
 		for k,v in pairs(array) do
 			if ran == k then
 				p[j] = array[k]
@@ -171,7 +171,7 @@ function LF_Random_Attack_Platform(context)
 	end
 	ScriptLib.PrintContextLog(context, "## BossDungeon : Platform_Sum = "..#p)
 	for i,v in ipairs(defs.gadget_operator_list) do
-		is_match = false
+		local is_match = false
 		for m,n in ipairs(p) do
 			if i == n then
 				is_match = true
@@ -188,18 +188,18 @@ end
 
 function LF_Summon_Action(context, idx)
 	--根据召唤的suite自行换算行为
-	noob = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMALSELECT")
-	noob_suite = noob + 4
-	noob_heal = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP")
-	noob_bomb = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMAL_DEATHEXPLODE")
-	noob_level = ScriptLib.GetEffigyChallengeMonsterLevel(context) + 1
+	local noob = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMALSELECT")
+	local noob_suite = noob + 4
+	local noob_heal = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP")
+	local noob_bomb = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMAL_DEATHEXPLODE")
+	local noob_level = ScriptLib.GetEffigyChallengeMonsterLevel(context) + 1
 	ScriptLib.PrintContextLog(context, "## ACT_OCEANID_LOG : noob = "..noob.." | noob_heal = "..noob_heal)
 	ScriptLib.CreateMonster(context, {config_id=suites[noob_suite].monsters[idx], level=noob_level, delay_time=0, server_global_value={["SGV_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP"]=noob_heal,["SGV_MONSTERAFFIX_OCEANID_02_ANIMAL_DEATHEXPLODE"]=noob_bomb}})
 	--remove相应的region
 	if idx ~= 1 then
 		ScriptLib.RemoveExtraGroupSuite(context, 0, idx+5)
 	end
-	value = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
+	local value = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
 	value = value - value%math.pow(10,idx) + value%math.pow(10,idx-1) + math.pow(10,idx-1)
 	ScriptLib.SetGroupTempValue(context, "SummonStep", value, {})
 	if value ~= 1111 then
@@ -230,11 +230,11 @@ function SLC_Summon_Start(context)
 	ScriptLib.EndTimeAxis(context, "summon_delay")
 	ScriptLib.InitTimeAxis(context, "summon", {defs.summon_interval}, true)
 	--0001b为第一只怪的标识
-	noob = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMALSELECT")
-	noob_suite = noob + 4
-	noob_heal = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP")
-	noob_bomb = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMAL_DEATHEXPLODE")
-	noob_level = ScriptLib.GetEffigyChallengeMonsterLevel(context) + 1
+	local noob = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMALSELECT")
+	local noob_suite = noob + 4
+	local noob_heal = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP")
+	local noob_bomb = ScriptLib.GetMonsterAbilityFloatValue(context, 0, defs.monster_boss, "_MONSTERAFFIX_OCEANID_02_ANIMAL_DEATHEXPLODE")
+	local noob_level = ScriptLib.GetEffigyChallengeMonsterLevel(context) + 1
 	ScriptLib.PrintContextLog(context, "## ACT_OCEANID_LOG : noob = "..noob.." | noob_heal = "..noob_heal)
 	ScriptLib.CreateMonster(context, {config_id=suites[noob_suite].monsters[1], level=noob_level, delay_time=0, server_global_value={["SGV_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP"]=noob_heal,["SGV_MONSTERAFFIX_OCEANID_02_ANIMAL_DEATHEXPLODE"]=noob_bomb}})
 	ScriptLib.AddExtraGroupSuite(context, 0, 7)

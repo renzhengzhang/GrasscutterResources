@@ -9,7 +9,7 @@ function OnClientExecuteReq(context, param1, param2, param3)
 		ScriptLib.SetGadgetState(context, 102)
 	end
 
-	if param1 == 201 then
+	if param1 == 201 then		
 		if CheckGroupChallengeState(context) then
 			ScriptLib.SetGadgetState(context, GadgetState.GearStart)
 		end
@@ -22,7 +22,7 @@ function OnClientExecuteReq(context, param1, param2, param3)
 	if param1 == 203 then
 		ScriptLib.SetGadgetState(context, GadgetState.GearAction1)
 	end
-	if param1 == 204 then
+	if param1 == 204 then		
 		if CheckGroupChallengeState(context) then
 			ScriptLib.SetGadgetState(context, GadgetState.GearAction2)
 		end
@@ -44,7 +44,7 @@ end
 function CheckGroupChallengeState(context)
 	ScriptLib.PrintContextLog(context,"CheckGroupChallengeState")
 	--challenge_state 0-等待开始 1-正在进行 2-完成 3-失败流程中
-	state = ScriptLib.GetGroupVariableValue(context, "challenge_state")
+	local state = ScriptLib.GetGroupVariableValue(context, "challenge_state")
 
 	if state == 1 then
 		--ScriptLib.PrintContextLog(context,"Cube Set Active Check Ok")
@@ -56,7 +56,9 @@ function CheckGroupChallengeState(context)
 		else
 			--ScriptLib.PrintContextLog(context,"Cube Pressed Before Challenge But Not Starter")
 			return false
-		end
-	end
+		end		
+	end		
 	return false
 end
+
+

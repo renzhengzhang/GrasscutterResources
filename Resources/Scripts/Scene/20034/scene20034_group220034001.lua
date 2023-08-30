@@ -169,7 +169,7 @@ end
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_1006(context, evt)
 
-	uidList=ScriptLib.GetSceneUidList(context)
+	local uidList=ScriptLib.GetSceneUidList(context)
 	if #uidList < 2 then
 	ScriptLib.PlayCutScene(context, 220101003, 0)
 	ScriptLib.CreateGroupTimerEvent(context, 220034001, "move", 2)
@@ -235,10 +235,10 @@ end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_1035(context, evt)
-	uid=ScriptLib.GetSceneUidList(context)
+	local uid=ScriptLib.GetSceneUidList(context)
 	for i=1,#uid do
-	entity=ScriptLib.GetAvatarEntityIdByUid(context, uid[i])
-	pos=ScriptLib.GetPosByEntityId(context, entity)
+	local entity=ScriptLib.GetAvatarEntityIdByUid(context, uid[i])
+	local pos=ScriptLib.GetPosByEntityId(context, entity)
 	if pos.y>= -20 then
 	ScriptLib.MovePlayerToPos(context,  {uid_list ={uid[i]}, pos = {x=-0.2, y=-55.7, z=19.2}, radius = 2, rot = {x=0, y=180, z=0}})
 	end

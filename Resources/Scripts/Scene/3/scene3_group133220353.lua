@@ -5,7 +5,7 @@ base_info = {
 
 -- DEFS_MISCS
 function ShogunChallengeBeHit(context)
-	beHitTime = ScriptLib.GetGroupVariableValue(context,"beHitTimes")
+	local beHitTime = ScriptLib.GetGroupVariableValue(context,"beHitTimes")
 	ScriptLib.ChangeGroupVariableValue(context, "beHitTimes", 1)
 	ScriptLib.PrintContextLog(context, "ShogunChallengeFailed BeHitTime = " .. beHitTime)
 	return 0

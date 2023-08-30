@@ -32,14 +32,14 @@ defs = {
 
 ]]
 
-cfg = {
+local cfg = {
 	group_id = 133002108,
 
 	--play_type = 5,
 	--play_id = 5,
 }
 
-optimizSuite = {
+local optimizSuite = {
 	{
 		monsters = { },
 		gadgets = { },
@@ -49,7 +49,7 @@ optimizSuite = {
 	}
 }
 
-extraTriggers={
+local extraTriggers={
 
 	{ name = "Monster_Die", config_id = 8000001, event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_any_monster_die", trigger_count = 0 },
 	{ name = "Enter_Optimiz_Region", config_id = 8000002, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_OptimizRegion", trigger_count = 0 },
@@ -119,8 +119,8 @@ end
 
 --Boss请求获取联机玩家数量
 function SLC_Get_PlayerCount(context)
-	uidList = ScriptLib.GetSceneUidList(context)
-	num = #uidList
+	local uidList = ScriptLib.GetSceneUidList(context)
+	local num = #uidList
 	ScriptLib.PrintContextLog(context, "[WinterCampMimik] SLC_Get_PlayerCount. result@"..num)
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.boss_id, "SGV_Mimik_PlayerNum", num)
 	return 0
@@ -217,9 +217,9 @@ end
 --以性能圈的内圈判断，玩家是否全部离场
 function LF_Check_AllPlayer_OutRegion(context)
 
-	eid = ScriptLib.GetEntityIdByConfigId(context, 108024)
+	local eid = ScriptLib.GetEntityIdByConfigId(context, 108024)
 
-	count = ScriptLib.GetRegionEntityCount(context, { region_eid = eid, entity_type = EntityType.AVATAR })
+	local count = ScriptLib.GetRegionEntityCount(context, { region_eid = eid, entity_type = EntityType.AVATAR })
 
 	ScriptLib.PrintContextLog(context, "[WinterCampMimik] Count player in Battle Field: Count@".. count)
 
@@ -230,8 +230,8 @@ function LF_Check_AllPlayer_OutRegion(context)
 end
 --Boss通知在点位上创建Gadget，param1：0-招怪物件 1-发子弹物件
 function SLC_TryCreateGadget(context, param1)
-	point_index = 0
-	point_configID = 0
+	local point_index = 0
+	local point_configID = 0
 
 	point_index = LF_Get_RandomAvailiblePoint_Index(context, param1)
 	if point_index == 0 then
@@ -264,13 +264,13 @@ function SLC_GadgetTryCreateMonster(context, param1)
 		return 0
 	end
 
-	pos = ScriptLib.GetPosByEntityId(context, context.source_entity_id)
-	--rot = ScriptLib.GetRotationByEntityId(context, context.source_entity_id)
-	rot =  { x = 0, y = 0, z = 0 }
-	r = 5
+	local pos = ScriptLib.GetPosByEntityId(context, context.source_entity_id)
+	--local rot = ScriptLib.GetRotationByEntityId(context, context.source_entity_id)
+	local rot =  { x = 0, y = 0, z = 0 }
+	local r = 5
 
 	for i = 1, param1 do
-		summon_pos = LF_GetRandomPosition(context, r, pos)
+		local summon_pos = LF_GetRandomPosition(context, r, pos)
 		ScriptLib.PrintContextLog(context, "[WinterCampMimik] LF_GetRandomPosition. X@"..summon_pos.x.." Y@"..summon_pos.y.." Z@"..summon_pos.z)
 		--ScriptLib.PrintContextLog(context, "[WinterCampMimik] GetRotationByEntityId. rotX@"..rot.x.." rotY@"..rot.y.." rotZ@"..rot.z)
 		--ScriptLib.PrintContextLog(context, "[WinterCampMimik] LF_Try_SummonMonster. posX@"..pos_list[i].x .." posZ@"..pos_list[i].z .." rot@"..rot)
@@ -281,7 +281,7 @@ function SLC_GadgetTryCreateMonster(context, param1)
 end
 --返回五个随机点
 function LF_GetRandomPosition(context, radius, pos)
-	pos_result = {x = 0, y = 0, z = 0}
+	local pos_result = {x = 0, y = 0, z = 0}
 
 	math.randomseed(ScriptLib.GetServerTime(context))
 
@@ -295,8 +295,8 @@ end
 function LF_Try_SummonMonster(context,pos,rot)
 	--如果config_id已存在，接口会返回-2
 	for i = 1, #defs.monster_list do
-		config_id =  defs.monster_list[i]
-		ret = ScriptLib.CreateMonsterByConfigIdByPos(context, config_id, pos, rot)
+		local config_id =  defs.monster_list[i]
+		local ret = ScriptLib.CreateMonsterByConfigIdByPos(context, config_id, pos, rot)
 		ScriptLib.PrintContextLog(context, "[WinterCampMimik] LF_Try_SummonMonster. configID@"..config_id.." ret@"..ret)
 		if ret == 0 then
 			--成功创建了就停 通知怪物入战
@@ -310,7 +310,7 @@ end
 function SLC_KillBossGadget(context,param1) --param1 1射击物件 0招怪物件
 
 	if param1 == 0 or param1 == 1 then
-		configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+		local configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 		ScriptLib.KillGroupEntity(context,{ group_id = cfg.group_id, gadgets = {configId}})
 		LF_Set_PointAvailible_OnGadgetDie(context, param1, evt.param1)
 	else
@@ -322,7 +322,7 @@ end
 
 function action_gadget_die(context,evt)
 
-	gadget_id = gadgets[evt.param1].gadget_id
+	local gadget_id = gadgets[evt.param1].gadget_id
 	ScriptLib.PrintContextLog(context, "[WinterCampMimik] Get Gadget_Die. gadgetID@"..gadget_id)
 	--42601027 射击物件
 	if gadget_id == 42601027 then
@@ -337,7 +337,7 @@ end
 --从point_list中返回一个随机的、gadgetState为0的点,并把这个点gadgetState设为非零（
 -- 占用状态 201 物件池中的物件index各自对应一个点
 function LF_Get_RandomAvailiblePoint_Index(context, gadget_type)
-	availible_points = {}
+	local availible_points = {}
 	--找所有空闲的点
 	for k,v in pairs(defs.point_list) do
 		if ScriptLib.GetGadgetStateByConfigId(context, 0, v) == 0 then
@@ -346,7 +346,7 @@ function LF_Get_RandomAvailiblePoint_Index(context, gadget_type)
 	end
 	if #availible_points > 0 then
 		--抓个壮丁
-		rand_index = 0
+		local rand_index = 0
 		math.randomseed(ScriptLib.GetServerTime(context))
 		rand_index = math.random(#availible_points)
 
@@ -362,7 +362,7 @@ function LF_Get_RandomAvailiblePoint_Index(context, gadget_type)
 		end
 
 		--返回被mark的point的原始Index
-		mark_index = GetIndexByValue(context, availible_points[rand_index],defs.point_list)
+		local mark_index = GetIndexByValue(context, availible_points[rand_index],defs.point_list)
 		ScriptLib.PrintContextLog(context, "[WinterCampMimik] mark_index @"..mark_index)
 		return mark_index
 	else
@@ -375,7 +375,7 @@ end
 function LF_Set_PointAvailible_OnGadgetDie(context, gadget_type, die_gadget)
 
 	ScriptLib.PrintContextLog(context, "[WinterCampMimik] LF_Set_PointAvailible_OnGadgetDie. die_gadget@"..die_gadget)
-	point_index = 0
+	local point_index = 0
 	if gadget_type == 1 then
 		point_index = GetIndexByValue(context, die_gadget,defs.shooter_list)
 	else

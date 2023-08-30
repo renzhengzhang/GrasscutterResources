@@ -10,7 +10,7 @@ defs = {
 
 -- DEFS_MISCS
 function SLC_Active_Portal(context)
-	temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", 220129014)
+	local temp_time=ScriptLib.GetGroupVariableValueByGroup(context, "time", 220129014)
 
 	if temp_time==1 then
 	    ScriptLib.CreateGadget(context, { config_id = 20001 })

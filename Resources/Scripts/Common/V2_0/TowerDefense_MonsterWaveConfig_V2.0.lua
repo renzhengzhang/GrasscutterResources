@@ -13,7 +13,7 @@
 
 -----无属性阵容
 wave01_noelement_oneway={
-  [1]={{monster_package={16001,16002,16003},count=30,max=5,min=5,route={1}}},
+  [1]={{monster_package={16001,16002,16003},count=30,max=5,min=5,route={1}}}, 
 }
 
 
@@ -21,38 +21,38 @@ wave01_noelement_oneway={
 
 -----无属性阵容
 wave02_noelement_oneway={
-  [1]={{monster_package={16011},count=20,max=5,min=5,route={1}}},
+  [1]={{monster_package={16011},count=20,max=5,min=5,route={1}}}, 
 }
 -----冰属性阵容
 wave02_ice_oneway={
-  [1]={{monster_package={16020},count=30,max=5,min=5,route={1}}},
+  [1]={{monster_package={16020},count=30,max=5,min=5,route={1}}}, 
 }
 -----火属性阵容
 wave02_fire_oneway={
-  [1]={{monster_package={16017},count=10,max=5,min=5,route={1}}},
+  [1]={{monster_package={16017},count=10,max=5,min=5,route={1}}}, 
 }
 -----雷属性阵容
 wave02_electricity_oneway={
-  [1]={{monster_package={16021},count=30,max=5,min=5,route={1}}},
+  [1]={{monster_package={16021},count=30,max=5,min=5,route={1}}}, 
 }
 
 --第三波
 
 -----无属性阵容
 wave03_noelement_oneway={
-  [1]={{monster_package={16033,16034,16035},count=20,max=5,min=5,route={1}}},
+  [1]={{monster_package={16033,16034,16035},count=20,max=5,min=5,route={1}}}, 
 }
 -----冰属性阵容
 wave03_ice_oneway={
-  [1]={{monster_package={16031},count=30,max=5,min=5,route={1}}},
+  [1]={{monster_package={16031},count=30,max=5,min=5,route={1}}}, 
 }
 -----火属性阵容
 wave03_fire_oneway={
-  [1]={{monster_package={16030},count=30,max=5,min=5,route={1}}},
+  [1]={{monster_package={16030},count=30,max=5,min=5,route={1}}}, 
 }
 -----雷属性阵容
 wave03_electricity_oneway={
-  [1]={{monster_package={16032},count=30,max=5,min=5,route={1}}},
+  [1]={{monster_package={16032},count=30,max=5,min=5,route={1}}}, 
 }
 
 
@@ -60,23 +60,23 @@ wave03_electricity_oneway={
 
 -----无属性阵容
 wave04_noelement_oneway={
-  [1]={{monster_package={16044,16045},count=30,max=5,min=5,route={1}}},
+  [1]={{monster_package={16044,16045},count=30,max=5,min=5,route={1}}}, 
 }
 -----小宝
 wave04_defender_oneway={
-  [1]={{monster_package={16043},count=3,max=1,min=1,route={1}}},
+  [1]={{monster_package={16043},count=3,max=1,min=1,route={1}}}, 
 }
 -----冰属性阵容
 wave04_ice_oneway={
-  [1]={{monster_package={16042},count=30,max=5,min=5,route={1}}},
+  [1]={{monster_package={16042},count=30,max=5,min=5,route={1}}}, 
 }
 -----火属性阵容
 wave04_fire_oneway={
-  [1]={{monster_package={16040},count=30,max=5,min=5,route={1}}},
+  [1]={{monster_package={16040},count=30,max=5,min=5,route={1}}}, 
 }
 -----雷属性阵容
 wave04_electricity_oneway={
-  [1]={{monster_package={16041},count=30,max=5,min=5,route={1}}},
+  [1]={{monster_package={16041},count=30,max=5,min=5,route={1}}}, 
 }
 
 --第五波
@@ -117,14 +117,14 @@ wave05_boss_electricking_oneway={
 -----------------------
 
 -----无属性小宝阵容
-stage_defender_oneway={
+local stage_defender_oneway={
   [1]=wave01_noelement_oneway,
   [2]=wave02_noelement_oneway,
   [3]=wave03_noelement_oneway,
   [4]=wave04_defender_oneway,
 }
 -----无属性龙蜥阵容
-stage_dragon_oneway={
+local stage_dragon_oneway={
   [1]=wave01_noelement_oneway,
   [2]=wave02_noelement_oneway,
   [3]=wave03_noelement_oneway,
@@ -132,7 +132,7 @@ stage_dragon_oneway={
   [5]=wave05_boss_dragon_oneway,
 }
 -----无属性猎者阵容
-stage_hunter_oneway={
+local stage_hunter_oneway={
   [1]=wave01_noelement_oneway,
   [2]=wave02_noelement_oneway,
   [3]=wave03_noelement_oneway,
@@ -140,7 +140,7 @@ stage_hunter_oneway={
   [5]=wave05_boss_hunter_oneway,
 }
 -----冰属性阵容
-stage_iceking_oneway={
+local stage_iceking_oneway={
   [1]=wave01_noelement_oneway,
   [2]=wave02_ice_oneway,
   [3]=wave03_ice_oneway,
@@ -148,7 +148,7 @@ stage_iceking_oneway={
   [5]=wave05_boss_iceking_oneway,
 }
 -----火属性阵容
-stage_rockking_oneway={
+local stage_rockking_oneway={
   [1]=wave01_noelement_oneway,
   [2]=wave02_fire_oneway,
   [3]=wave03_fire_oneway,
@@ -157,7 +157,7 @@ stage_rockking_oneway={
 }
 
 -----雷属性阵容
-stage_electricking_oneway={
+local stage_electricking_oneway={
   [1]=wave01_noelement_oneway,
   [2]=wave02_electricity_oneway,
   [3]=wave03_electricity_oneway,
@@ -166,7 +166,7 @@ stage_electricking_oneway={
 }
 
 -----教学
-stage_teachstage_oneway={
+local stage_teachstage_oneway={
   [1]=wave01_noelement_oneway,
   [2]=wave02_fire_oneway,
 }
@@ -187,61 +187,61 @@ stage_teachstage_oneway={
 
 -----无属性阵容
 wave01_noelement_twoway={
-  [1]={{monster_package={16001,16002,16003},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16001,16002,16003},count=15,max=5,min=5,route={1,2}}}, 
 }
 
 --第二波
 
 -----无属性阵容
 wave02_noelement_twoway={
-  [1]={{monster_package={16010,16011,16012,16013,16014,16015},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16010,16011,16012,16013,16014,16015},count=15,max=5,min=5,route={1,2}}}, 
 }
 -----冰属性阵容
 wave02_ice_twoway={
-  [1]={{monster_package={16020},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16020},count=15,max=5,min=5,route={1,2}}}, 
 }
 -----火属性阵容
 wave02_fire_twoway={
-  [1]={{monster_package={16017},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16017},count=15,max=5,min=5,route={1,2}}}, 
 }
 -----雷属性阵容
 wave02_electricity_twoway={
-  [1]={{monster_package={16021},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16021},count=15,max=5,min=5,route={1,2}}}, 
 }
 
 --第三波
 
 -----无属性阵容
 wave03_noelement_twoway={
-  [1]={{monster_package={16033,16034,16035},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16033,16034,16035},count=15,max=5,min=5,route={1,2}}}, 
 }
 -----冰属性阵容
 wave03_ice_twoway={
-  [1]={{monster_package={16031},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16031},count=15,max=5,min=5,route={1,2}}}, 
 }
 -----火属性阵容
 wave03_fire_twoway={
-  [1]={{monster_package={16030},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16030},count=15,max=5,min=5,route={1,2}}}, 
 }
 -----雷属性阵容
 wave03_electricity_twoway={
-  [1]={{monster_package={16032},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16032},count=15,max=5,min=5,route={1,2}}}, 
 }
 
 
 -----[双色]雷属性阵容+冰属性阵容
 wave03_electricity_ice_twoway={
-  [1]={{monster_package={16032},count=15,max=5,min=5,route={1}},{monster_package={16031},count=15,max=5,min=5,route={2} }},
+  [1]={{monster_package={16032},count=15,max=5,min=5,route={1}},{monster_package={16031},count=15,max=5,min=5,route={2} }}, 
 }
 
 -----[双色]雷属性阵容+火属性阵容
 wave03_electricity_fire_twoway={
-  [1]={{monster_package={16032},count=15,max=5,min=5,route={1}},{monster_package={16030},count=15,max=5,min=5,route={2} }},
+  [1]={{monster_package={16032},count=15,max=5,min=5,route={1}},{monster_package={16030},count=15,max=5,min=5,route={2} }}, 
 }
 
 -----[双色]冰属性阵容+火属性阵容
 wave03_ice_fire_twoway={
-  [1]={{monster_package={16031},count=15,max=5,min=5,route={1}},{monster_package={16030},count=15,max=5,min=5,route={2} }},
+  [1]={{monster_package={16031},count=15,max=5,min=5,route={1}},{monster_package={16030},count=15,max=5,min=5,route={2} }}, 
 }
 
 
@@ -250,40 +250,40 @@ wave03_ice_fire_twoway={
 
 -----无属性阵容
 wave04_noelement_twoway={
-  [1]={{monster_package={16044,16045},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16044,16045},count=15,max=5,min=5,route={1,2}}}, 
 }
 -----无属性阵容
 wave04_defender_twoway={
-  [1]={{monster_package={16043},count=3,max=1,min=1,route={1,2}}},
+  [1]={{monster_package={16043},count=3,max=1,min=1,route={1,2}}}, 
 }
 -----冰属性阵容
 wave04_ice_twoway={
-  [1]={{monster_package={16042},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16042},count=15,max=5,min=5,route={1,2}}}, 
 }
 -----火属性阵容
 wave04_fire_twoway={
-  [1]={{monster_package={16040},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16040},count=15,max=5,min=5,route={1,2}}}, 
 }
 -----雷属性阵容
 wave04_electricity_twoway={
-  [1]={{monster_package={16041},count=15,max=5,min=5,route={1,2}}},
+  [1]={{monster_package={16041},count=15,max=5,min=5,route={1,2}}}, 
 }
 
 
 
 -----[双色]雷属性阵容+冰属性阵容
 wave04_electricity_ice_twoway={
-  [1]={{monster_package={16041},count=15,max=5,min=5,route={1}},{monster_package={16042},count=15,max=5,min=5,route={2} }},
+  [1]={{monster_package={16041},count=15,max=5,min=5,route={1}},{monster_package={16042},count=15,max=5,min=5,route={2} }}, 
 }
 
 -----[双色]雷属性阵容+火属性阵容
 wave04_electricity_fire_twoway={
-  [1]={{monster_package={16041},count=15,max=5,min=5,route={1}},{monster_package={16040},count=15,max=5,min=5,route={2} }},
+  [1]={{monster_package={16041},count=15,max=5,min=5,route={1}},{monster_package={16040},count=15,max=5,min=5,route={2} }}, 
 }
 
 -----[双色]冰属性阵容+火属性阵容
 wave04_ice_fire_twoway={
-  [1]={{monster_package={16042},count=15,max=5,min=5,route={1}},{monster_package={16040},count=15,max=5,min=5,route={2} }},
+  [1]={{monster_package={16042},count=15,max=5,min=5,route={1}},{monster_package={16040},count=15,max=5,min=5,route={2} }}, 
 }
 
 
@@ -369,7 +369,7 @@ wave05_boss_iceking_hil_twoway={
 -----------------------
 
 -----无属性小宝阵容
-stage_defender_twoway={
+local stage_defender_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_noelement_twoway,
   [3]=wave03_noelement_twoway,
@@ -378,7 +378,7 @@ stage_defender_twoway={
   ban_card_tag_list={6,7},
 }
 -----无属性龙蜥阵容
-stage_dragon_twoway={
+local stage_dragon_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_noelement_twoway,
   [3]=wave03_noelement_twoway,
@@ -387,7 +387,7 @@ stage_dragon_twoway={
   ban_card_tag_list={1,4},
 }
 -----无属性猎者阵容
-stage_hunter_twoway={
+local stage_hunter_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_noelement_twoway,
   [3]=wave03_noelement_twoway,
@@ -396,7 +396,7 @@ stage_hunter_twoway={
   ban_card_tag_list={4,6},
 }
 -----冰属性阵容
-stage_iceking_twoway={
+local stage_iceking_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_ice_twoway,
   [3]=wave03_ice_twoway,
@@ -405,7 +405,7 @@ stage_iceking_twoway={
   ban_card_tag_list={1,3},
 }
 -----火属性阵容
-stage_rockking_twoway={
+local stage_rockking_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_fire_twoway,
   [3]=wave03_fire_twoway,
@@ -415,7 +415,7 @@ stage_rockking_twoway={
 }
 
 -----雷属性阵容
-stage_electricking_twoway={
+local stage_electricking_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_electricity_twoway,
   [3]=wave03_electricity_twoway,
@@ -427,7 +427,7 @@ stage_electricking_twoway={
 
 
 -----[双色]雷+冰属性阵容
-stage_electricking_iceking_twoway={
+local stage_electricking_iceking_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_noelement_twoway,
   [3]=wave03_electricity_ice_twoway,
@@ -437,27 +437,27 @@ stage_electricking_iceking_twoway={
 }
 
 -----[双色]雷+火属性阵容
-stage_electricking_rockking_twoway={
+local stage_electricking_rockking_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_noelement_twoway,
   [3]=wave03_electricity_fire_twoway,
   [4]=wave04_electricity_fire_twoway,
   [5]=wave05_boss_electricking_rockking_twoway,
-  ban_card_tag_list={4,6},
+  ban_card_tag_list={4,6},    
 }
 
 -----[双色]冰+火属性阵容
-stage_iceking_rockking_twoway={
+local stage_iceking_rockking_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_noelement_twoway,
   [3]=wave03_ice_fire_twoway,
   [4]=wave04_ice_fire_twoway,
   [5]=wave05_boss_iceking_rockking_twoway,
-  ban_card_tag_list={5,6},
+  ban_card_tag_list={5,6},  
 }
 
 -----无属性暴徒阵容
-stage_thug_twoway={
+local stage_thug_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_noelement_twoway,
   [3]=wave03_noelement_twoway,
@@ -467,7 +467,7 @@ stage_thug_twoway={
 }
 
 -----嘲讽雷暴王+小怪阵容
-stage_electricking_hil_twoway={
+local stage_electricking_hil_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_noelement_twoway,
   [3]=wave03_noelement_twoway,
@@ -477,7 +477,7 @@ stage_electricking_hil_twoway={
 }
 
 -----嘲讽岩盔王+小怪阵容
-stage_rockking_hil_twoway={
+local stage_rockking_hil_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_noelement_twoway,
   [3]=wave03_noelement_twoway,
@@ -487,7 +487,7 @@ stage_rockking_hil_twoway={
 }
 
 -----嘲讽霜铠王+小怪阵容
-stage_iceking_hil_twoway={
+local stage_iceking_hil_twoway={
   [1]=wave01_noelement_twoway,
   [2]=wave02_noelement_twoway,
   [3]=wave03_noelement_twoway,
@@ -510,7 +510,7 @@ stage_iceking_hil_twoway={
 
 -----无属性阵容
 wave01_noelement_threeway={
-  [1]={{monster_package={16001,16002,16003},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16001,16002,16003},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 
 
@@ -518,38 +518,38 @@ wave01_noelement_threeway={
 
 -----无属性阵容
 wave02_noelement_threeway={
-  [1]={{monster_package={16010,16011,16012,16013,16014,16015},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16010,16011,16012,16013,16014,16015},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 -----冰属性阵容
 wave02_ice_threeway={
-  [1]={{monster_package={16020},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16020},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 -----火属性阵容
 wave02_fire_threeway={
-  [1]={{monster_package={16017},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16017},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 -----雷属性阵容
 wave02_electricity_threeway={
-  [1]={{monster_package={16021},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16021},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 
 --第三波
 
 -----无属性阵容
 wave03_noelement_threeway={
-  [1]={{monster_package={16033,16034,16035},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16033,16034,16035},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 -----冰属性阵容
 wave03_ice_threeway={
-  [1]={{monster_package={16031},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16031},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 -----火属性阵容
 wave03_fire_threeway={
-  [1]={{monster_package={16030},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16030},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 -----雷属性阵容
 wave03_electricity_threeway={
-  [1]={{monster_package={16032},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16032},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 
 
@@ -557,23 +557,23 @@ wave03_electricity_threeway={
 
 -----无属性阵容
 wave04_noelement_threeway={
-  [1]={{monster_package={16044,16045},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16044,16045},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 -----无属性阵容
 wave04_defender_threeway={
-  [1]={{monster_package={16043},count=2,max=1,min=1,route={1,2}},{monster_package={16043},count=2,max=1,min=1,route={3}}},
+  [1]={{monster_package={16043},count=2,max=1,min=1,route={1,2}},{monster_package={16043},count=2,max=1,min=1,route={3}}}, 
 }
 -----冰属性阵容
 wave04_ice_threeway={
-  [1]={{monster_package={16042},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16042},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 -----火属性阵容
 wave04_fire_threeway={
-  [1]={{monster_package={16040},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16040},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 -----雷属性阵容
 wave04_electricity_threeway={
-  [1]={{monster_package={16041},count=10,max=5,min=5,route={1,2,3}}},
+  [1]={{monster_package={16041},count=10,max=5,min=5,route={1,2,3}}}, 
 }
 
 --第五波
@@ -636,7 +636,7 @@ wave05_boss_iceking_hil_threeway={
 -----------------------
 
 -----无属性小宝阵容
-stage_defender_threeway={
+local stage_defender_threeway={
   [1]=wave01_noelement_threeway,
   [2]=wave02_noelement_threeway,
   [3]=wave03_noelement_threeway,
@@ -645,7 +645,7 @@ stage_defender_threeway={
   ban_card_tag_list={6,7},
 }
 -----无属性龙蜥阵容
-stage_dragon_threeway={
+local stage_dragon_threeway={
   [1]=wave01_noelement_threeway,
   [2]=wave02_noelement_threeway,
   [3]=wave03_noelement_threeway,
@@ -654,7 +654,7 @@ stage_dragon_threeway={
   ban_card_tag_list={1,4},
 }
 -----无属性猎者阵容
-stage_hunter_threeway={
+local stage_hunter_threeway={
   [1]=wave01_noelement_threeway,
   [2]=wave02_noelement_threeway,
   [3]=wave03_noelement_threeway,
@@ -663,7 +663,7 @@ stage_hunter_threeway={
   ban_card_tag_list={4,6},
 }
 -----冰属性阵容
-stage_iceking_threeway={
+local stage_iceking_threeway={
   [1]=wave01_noelement_threeway,
   [2]=wave02_ice_threeway,
   [3]=wave03_ice_threeway,
@@ -672,7 +672,7 @@ stage_iceking_threeway={
   ban_card_tag_list={1,3},
 }
 -----火属性阵容
-stage_rockking_threeway={
+local stage_rockking_threeway={
   [1]=wave01_noelement_threeway,
   [2]=wave02_fire_threeway,
   [3]=wave03_fire_threeway,
@@ -682,7 +682,7 @@ stage_rockking_threeway={
 }
 
 -----雷属性阵容
-stage_electricking_threeway={
+local stage_electricking_threeway={
   [1]=wave01_noelement_threeway,
   [2]=wave02_electricity_threeway,
   [3]=wave03_electricity_threeway,
@@ -693,17 +693,17 @@ stage_electricking_threeway={
 
 
 -----[三色]火+冰属性阵容
-stage_iceking_rockking_electricking_threeway={
+local stage_iceking_rockking_electricking_threeway={
   [1]=wave01_noelement_threeway,
   [2]=wave02_noelement_threeway,
   [3]=wave03_noelement_threeway,
   [4]=wave04_noelement_threeway,
   [5]=wave05_boss_rockking_iceking_threeway,
-  ban_card_tag_list={1,4},
+  ban_card_tag_list={1,4},  
 }
 
 -----无属性暴徒阵容
-stage_thug_threeway={
+local stage_thug_threeway={
   [1]=wave01_noelement_threeway,
   [2]=wave02_noelement_threeway,
   [3]=wave03_noelement_threeway,
@@ -713,7 +713,7 @@ stage_thug_threeway={
 }
 
 -----嘲讽雷暴王+小怪阵容
-stage_electricking_hil_threeway={
+local stage_electricking_hil_threeway={
   [1]=wave01_noelement_threeway,
   [2]=wave02_noelement_threeway,
   [3]=wave03_noelement_threeway,
@@ -723,7 +723,7 @@ stage_electricking_hil_threeway={
 }
 
 -----嘲讽岩盔王+小怪阵容
-stage_rockking_hil_threeway={
+local stage_rockking_hil_threeway={
   [1]=wave01_noelement_threeway,
   [2]=wave02_noelement_threeway,
   [3]=wave03_noelement_threeway,
@@ -733,7 +733,7 @@ stage_rockking_hil_threeway={
 }
 
 -----嘲讽霜铠王+小怪阵容
-stage_iceking_hil_threeway={
+local stage_iceking_hil_threeway={
   [1]=wave01_noelement_threeway,
   [2]=wave02_noelement_threeway,
   [3]=wave03_noelement_threeway,
@@ -755,7 +755,7 @@ stage_iceking_hil_threeway={
 
 -----无属性阵容
 wave01_noelement_fourway={
-  [1]={{monster_package={16001,16002,16003},count=10,max=5,min=5,route={1,2}},{monster_package={16001,16002,16003},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16001,16002,16003},count=10,max=5,min=5,route={1,2}},{monster_package={16001,16002,16003},count=5,max=2,min=2,route={3,4}}}, 
 }
 
 
@@ -763,25 +763,25 @@ wave01_noelement_fourway={
 
 -----无属性阵容
 wave02_noelement_fourway={
-  [1]={{monster_package={16010,16011,16012,16013,16014,16015},count=10,max=5,min=5,route={1,2}},{monster_package={16010,16011,16012,16013,16014,16015},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16010,16011,16012,16013,16014,16015},count=10,max=5,min=5,route={1,2}},{monster_package={16010,16011,16012,16013,16014,16015},count=5,max=2,min=2,route={3,4}}}, 
 }
 -----冰属性阵容
 wave02_ice_fourway={
-  [1]={{monster_package={16020},count=10,max=5,min=5,route={1,2}},{monster_package={16020},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16020},count=10,max=5,min=5,route={1,2}},{monster_package={16020},count=5,max=2,min=2,route={3,4}}}, 
 }
 -----火属性阵容
 wave02_fire_fourway={
-  [1]={{monster_package={16017},count=10,max=5,min=5,route={1,2}},{monster_package={16017},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16017},count=10,max=5,min=5,route={1,2}},{monster_package={16017},count=5,max=2,min=2,route={3,4}}}, 
 }
 -----雷属性阵容
 wave02_electricity_fourway={
-  [1]={{monster_package={16021},count=10,max=5,min=5,route={1,2}},{monster_package={16021},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16021},count=10,max=5,min=5,route={1,2}},{monster_package={16021},count=5,max=2,min=2,route={3,4}}}, 
 }
 
 
 -----[四色]冰+火属性阵容
 wave02_ice_fire_fourway={
-  [1]={{monster_package={16020},count=10,max=5,min=5,route={1,2}},{monster_package={16017},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16020},count=10,max=5,min=5,route={1,2}},{monster_package={16017},count=5,max=2,min=2,route={3,4}}}, 
 }
 
 
@@ -789,26 +789,26 @@ wave02_ice_fire_fourway={
 
 -----无属性阵容
 wave03_noelement_fourway={
-  [1]={{monster_package={16033,16034,16035},count=10,max=5,min=5,route={1,2}},{monster_package={16033,16034,16035},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16033,16034,16035},count=10,max=5,min=5,route={1,2}},{monster_package={16033,16034,16035},count=5,max=2,min=2,route={3,4}}}, 
 }
 -----冰属性阵容
 wave03_ice_fourway={
-  [1]={{monster_package={16031},count=10,max=5,min=5,route={1,2}},{monster_package={16031},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16031},count=10,max=5,min=5,route={1,2}},{monster_package={16031},count=5,max=2,min=2,route={3,4}}}, 
 }
 -----火属性阵容
 wave03_fire_fourway={
-  [1]={{monster_package={16030},count=10,max=5,min=5,route={1,2}},{monster_package={16030},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16030},count=10,max=5,min=5,route={1,2}},{monster_package={16030},count=5,max=2,min=2,route={3,4}}}, 
 }
 -----雷属性阵容
 wave03_electricity_fourway={
-  [1]={{monster_package={16032},count=10,max=5,min=5,route={1,2}},{monster_package={16032},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16032},count=10,max=5,min=5,route={1,2}},{monster_package={16032},count=5,max=2,min=2,route={3,4}}}, 
 }
 
 
 
 -----[四色]冰+火属性阵容
 wave03_ice_fire_fourway={
-  [1]={{monster_package={16031},count=10,max=5,min=5,route={1,2}},{monster_package={16030},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16031},count=10,max=5,min=5,route={1,2}},{monster_package={16030},count=5,max=2,min=2,route={3,4}}}, 
 }
 
 
@@ -817,29 +817,29 @@ wave03_ice_fire_fourway={
 
 -----无属性阵容
 wave04_noelement_fourway={
-  [1]={{monster_package={16044,16045},count=10,max=5,min=5,route={1,2}},{monster_package={16044,16045},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16044,16045},count=10,max=5,min=5,route={1,2}},{monster_package={16044,16045},count=5,max=2,min=2,route={3,4}}}, 
 }
 -----无属性阵容
 wave04_defender_fourway={
-  [1]={{monster_package={16043},count=2,max=1,min=1,route={1,2}},{monster_package={16043},count=2,max=1,min=1,route={3,4}}},
+  [1]={{monster_package={16043},count=2,max=1,min=1,route={1,2}},{monster_package={16043},count=2,max=1,min=1,route={3,4}}}, 
 }
 -----冰属性阵容
 wave04_ice_fourway={
-  [1]={{monster_package={16042},count=10,max=5,min=5,route={1,2}},{monster_package={16042},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16042},count=10,max=5,min=5,route={1,2}},{monster_package={16042},count=5,max=2,min=2,route={3,4}}}, 
 }
 -----火属性阵容
 wave04_fire_fourway={
-  [1]={{monster_package={16040},count=10,max=5,min=5,route={1,2}},{monster_package={16040},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16040},count=10,max=5,min=5,route={1,2}},{monster_package={16040},count=5,max=2,min=2,route={3,4}}}, 
 }
 -----雷属性阵容
 wave04_electricity_fourway={
-  [1]={{monster_package={16041},count=10,max=5,min=5,route={1,2}},{monster_package={16041},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16041},count=10,max=5,min=5,route={1,2}},{monster_package={16041},count=5,max=2,min=2,route={3,4}}}, 
 }
 
 
 -----[四色]冰+火属性阵容
 wave04_ice_fire_fourway={
-  [1]={{monster_package={16042},count=10,max=5,min=5,route={1,2}},{monster_package={16040},count=5,max=2,min=2,route={3,4}}},
+  [1]={{monster_package={16042},count=10,max=5,min=5,route={1,2}},{monster_package={16040},count=5,max=2,min=2,route={3,4}}}, 
 }
 
 --第五波
@@ -887,7 +887,7 @@ wave05_boss_iceking_rockking_fourway={
 
 
 -----无属性小宝阵容
-stage_defender_fourway={
+local stage_defender_fourway={
   [1]=wave01_noelement_fourway,
   [2]=wave02_noelement_fourway,
   [3]=wave03_noelement_fourway,
@@ -896,7 +896,7 @@ stage_defender_fourway={
   ban_card_tag_list={6,7},
 }
 -----无属性龙蜥阵容
-stage_dragon_fourway={
+local stage_dragon_fourway={
   [1]=wave01_noelement_fourway,
   [2]=wave02_noelement_fourway,
   [3]=wave03_noelement_fourway,
@@ -905,7 +905,7 @@ stage_dragon_fourway={
   ban_card_tag_list={1,4},
 }
 -----无属性猎者阵容
-stage_hunter_fourway={
+local stage_hunter_fourway={
   [1]=wave01_noelement_fourway,
   [2]=wave02_noelement_fourway,
   [3]=wave03_noelement_fourway,
@@ -914,7 +914,7 @@ stage_hunter_fourway={
   ban_card_tag_list={4,6},
 }
 -----冰属性阵容
-stage_iceking_fourway={
+local stage_iceking_fourway={
   [1]=wave01_noelement_fourway,
   [2]=wave02_ice_fourway,
   [3]=wave03_ice_fourway,
@@ -923,7 +923,7 @@ stage_iceking_fourway={
   ban_card_tag_list={1,3},
 }
 -----火属性阵容
-stage_rockking_fourway={
+local stage_rockking_fourway={
   [1]=wave01_noelement_fourway,
   [2]=wave02_fire_fourway,
   [3]=wave03_fire_fourway,
@@ -933,7 +933,7 @@ stage_rockking_fourway={
 }
 
 -----雷属性阵容
-stage_electricking_fourway={
+local stage_electricking_fourway={
   [1]=wave01_noelement_fourway,
   [2]=wave02_electricity_fourway,
   [3]=wave03_electricity_fourway,
@@ -943,11 +943,20 @@ stage_electricking_fourway={
 }
 
 -----[四色]冰+火属性阵容
-stage_iceking_rockking_fourway={
+local stage_iceking_rockking_fourway={
   [1]=wave01_noelement_fourway,
   [2]=wave02_ice_fire_fourway,
   [3]=wave03_ice_fire_fourway,
   [4]=wave04_ice_fire_fourway,
   [5]=wave05_boss_iceking_rockking_fourway,
-  ban_card_tag_list={4,5}
+  ban_card_tag_list={4,5}    
 }
+
+
+
+
+
+
+
+
+

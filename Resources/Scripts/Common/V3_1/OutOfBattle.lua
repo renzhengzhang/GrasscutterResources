@@ -6,17 +6,17 @@
 ||	Owner         ||	xudong.sun
 ||	Description   ||	3.1脱战任务玩法
 ||	LogName       ||    ## OutOfBattle_LOG
-||	Protection    ||
+||	Protection    ||	
 =====================================================================================================================
-levelUpOption = 0
-chainId = 0
+local levelUpOption = 0
+local chainId = 0
 lcoal maxLevel = 5
 
-notifyGroupList = {}
+local notifyGroupList = {}
 
 =======================================================================================]]
 
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["LeaveRegion"] = { config_id = 80000001, name = "LeaveRegion", event= EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_region", trigger_count = 0},
 		["GroupUnLoad"] = { config_id = 80000002, name = "GroupUnLoad", event= EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_unload", trigger_count = 0},

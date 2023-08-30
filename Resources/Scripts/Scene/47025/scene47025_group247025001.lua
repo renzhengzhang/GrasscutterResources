@@ -14,19 +14,19 @@ defs ={
         abililty_region = 1149,
     }
 
-stage_challenge_id = {27,25,31,29,33}
+local stage_challenge_id = {27,25,31,29,33}
 
-stage_challenge_time = {90,60,90,60,90}
+local stage_challenge_time = {90,60,90,60,90}
 
 --[]内为关闭/加强机关id，后面为控制的吹风机id
-operator_list = {
+local operator_list = {
         [1034] = {1022,1023,1024,1026,1036,1041},
         [1043] = {1022,1023,1024,1026,1036,1041},
         [1082] = {1133,1136,1112,1079,1080,1088,1089,1091},
         [1085] = {1133,1136,1112,1079,1080,1088,1089,1091},
 }
 
-revivepoint_list = {
+local revivepoint_list = {
         [1142] =1148,
 }
 
@@ -510,8 +510,8 @@ function action_EVENT_TIME_AXIS_PASS_1008(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 247025001, 4)
 
 	-- 触发镜头注目，注目位置为坐标{x=-584.4177, y=90.42826, z=-242.7002}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-584.4177, y=90.42826, z=-242.7002}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-584.4177, y=90.42826, z=-242.7002}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -553,8 +553,8 @@ end
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_1009(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-584.4177, y=90.42826, z=-242.7002}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-584.4177, y=90.42826, z=-242.7002}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-584.4177, y=90.42826, z=-242.7002}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -918,8 +918,8 @@ function action_EVENT_ANY_MONSTER_DIE_1072(context, evt)
 	end
 
 	-- 触发镜头注目，注目位置为坐标{x=-560.1932, y=90.48592, z=-243.5361}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-560.1932, y=90.48592, z=-243.5361}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-560.1932, y=90.48592, z=-243.5361}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -1436,8 +1436,8 @@ function action_EVENT_TIME_AXIS_PASS_1144(context, evt)
 	    ScriptLib.AddExtraGroupSuite(context, 247025001, 7)
 
 	-- 触发镜头注目，注目位置为坐标{x=-560.4197, y=89.883, z=-243.7889}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-560.4197, y=89.883, z=-243.7889}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-560.4197, y=89.883, z=-243.7889}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

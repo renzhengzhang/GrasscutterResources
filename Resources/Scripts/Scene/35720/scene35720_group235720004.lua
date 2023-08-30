@@ -116,7 +116,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_4004(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer1_gv")
 
-	uid = ScriptLib.GetSceneUidList(context)
+	local uid = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "LevelEntityTowerBuff_EnergyChangeMode", 1)
 
@@ -208,7 +208,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_4009(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer_init")
 
-	uid = ScriptLib.GetSceneUidList(context)
+	local uid = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "LevelEntityTowerBuff_EnergyChangeMode", 1)
 
@@ -230,7 +230,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_4011(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer2_gv")
 
-	uid = ScriptLib.GetSceneUidList(context)
+	local uid = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "LevelEntityTowerBuff_EnergyChangeMode", -1)
 

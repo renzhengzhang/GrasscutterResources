@@ -56,9 +56,9 @@ function GetTeleportNameByConfigID(context, config_id)
 end
 
 function InitialTeleportRotationY(context)
-	rot
-	name
-	localtarget
+	local rot
+	local name
+	local localtarget
 	ScriptLib.PrintLog(context, "Initial starting...")
 	ScriptLib.SetGroupVariableValue(context,"isInitial",1)
 	for i=1,#TeleportOwnerShip do
@@ -84,8 +84,8 @@ function InitialTeleportRotationY(context)
 end
 
 function InitialTeleportState(context)
-	tempname
-	localtarget
+	local tempname
+	local localtarget
 	for i=1,#TeleportOwnerShip do
 		tempname = "gadget_Teleport_"..i.."_isActive"
 		localtarget = TeleportOwnerShip[i][2]
@@ -103,14 +103,14 @@ function InitialTeleportState(context)
 end
 
 function isTeleportValid(context,teleportID)
-	result = false
+	local result = false
 	if teleportID == 0 then return false end
-	state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, teleportID)
+	local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, teleportID)
 
 	if state ~= -1 then
 		result = true
 	end
---[[ 	suiteindex = ScriptLib.GetGroupSuite(context, defs.group_ID)
+--[[ 	local suiteindex = ScriptLib.GetGroupSuite(context, defs.group_ID)
 	for i=1, #suites[suiteindex].gadgets do
 		if teleportID == suites[suiteindex].gadgets[i] then
 			result = true
@@ -128,37 +128,37 @@ function CheckIsConnected(context,teleport_aID,teleport_bID)
 
 	--获取角度
 	ScriptLib.PrintLog(context, "CheckConnected from "..teleport_aID .. " to "..teleport_bID)
-	yrotation_a = ScriptLib.GetRotationByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_aID)).y
-	yrotation_b = ScriptLib.GetRotationByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_bID)).y
+	local yrotation_a = ScriptLib.GetRotationByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_aID)).y
+	local yrotation_b = ScriptLib.GetRotationByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_bID)).y
 	ScriptLib.PrintLog(context, "yrotation_a = "..yrotation_a .. "| yrotation_a =  "..yrotation_b)
 	--转换为弧度
-	yrad_a = math.rad(yrotation_a)
-	yrad_b = math.rad(yrotation_b)
+	local yrad_a = math.rad(yrotation_a)
+	local yrad_b = math.rad(yrotation_b)
 	ScriptLib.PrintLog(context, "yrad_a = "..yrad_a .. "| yrad_b =  "..yrad_b)
 
 	--编辑器中的XZ和运行下的对应关系是反的,所以这里XZ左边调换了一下
-	dir_a = {x = math.sin(yrad_a), y = 0, z = math.cos(yrad_a)}
-	dir_b = {x = math.sin(yrad_b), y = 0, z = math.cos(yrad_b)}
+	local dir_a = {x = math.sin(yrad_a), y = 0, z = math.cos(yrad_a)}
+	local dir_b = {x = math.sin(yrad_b), y = 0, z = math.cos(yrad_b)}
 	ScriptLib.PrintLog(context, "dir_a : x = "..dir_a.x.." , y = "..dir_a.y.." , z = "..dir_a.z)
 	ScriptLib.PrintLog(context, "dir_b : x = "..dir_b.x.." , y = "..dir_b.y.." , z = "..dir_b.z)
 
 	--获取两个点位置
-	pos_a = ScriptLib.GetPosByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_aID))
+	local pos_a = ScriptLib.GetPosByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_aID))
 	ScriptLib.PrintLog(context, "pos_a : x = "..pos_a.x.." , y = "..pos_a.y.." , z = "..pos_a.z)
-	pos_b = ScriptLib.GetPosByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_bID))
+	local pos_b = ScriptLib.GetPosByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_bID))
 	ScriptLib.PrintLog(context, "pos_b : x = "..pos_b.x.." , y = "..pos_b.y.." , z = "..pos_b.z)
 
 	--计算两个点之间的方向,并且Normalize
-	diratob = {x = pos_b.x - pos_a.x,y = 0,z = pos_b.z - pos_a.z}
-	norDirAtoB = Normalize({x = pos_b.x - pos_a.x,y = 0,z = pos_b.z - pos_a.z})
+	local diratob = {x = pos_b.x - pos_a.x,y = 0,z = pos_b.z - pos_a.z}
+	local norDirAtoB = Normalize({x = pos_b.x - pos_a.x,y = 0,z = pos_b.z - pos_a.z})
 	ScriptLib.PrintLog(context, "norDirAtoB : x = "..norDirAtoB.x.." , y = "..norDirAtoB.y.." , z = "..norDirAtoB.z)
-	dirbtoa = {x = pos_a.x - pos_b.x,y = 0,z = pos_a.z - pos_b.z}
-	norDirBtoA = Normalize({x = pos_a.x - pos_b.x,y = 0,z = pos_a.z - pos_b.z})
+	local dirbtoa = {x = pos_a.x - pos_b.x,y = 0,z = pos_a.z - pos_b.z}
+	local norDirBtoA = Normalize({x = pos_a.x - pos_b.x,y = 0,z = pos_a.z - pos_b.z})
 	ScriptLib.PrintLog(context, "norDirBtoA : x = "..norDirBtoA.x.." , y = "..norDirBtoA.y.." , z = "..norDirBtoA.z)
 
 	--计算两个点的点乘结果
-	dotvalue_a = dir_a.x * norDirAtoB.x + dir_a.y * norDirAtoB.y + dir_a.z * norDirAtoB.z
-	dotvalue_b = dir_b.x * norDirBtoA.x + dir_b.y * norDirBtoA.y + dir_b.z * norDirBtoA.z
+	local dotvalue_a = dir_a.x * norDirAtoB.x + dir_a.y * norDirAtoB.y + dir_a.z * norDirAtoB.z
+	local dotvalue_b = dir_b.x * norDirBtoA.x + dir_b.y * norDirBtoA.y + dir_b.z * norDirBtoA.z
 
 	ScriptLib.PrintLog(context, "dotvalue_a "..dotvalue_a)
 	ScriptLib.PrintLog(context, "dotvalue_b "..dotvalue_b)
@@ -176,7 +176,7 @@ end
 
 --获取所有关联的传送点
 function FindRelatedTargets(context,teleport_ID)
-	relatedtarget ={}
+	local relatedtarget ={}
 	for i=1,#connectInfo do
 		if connectInfo[i][1] == teleport_ID or connectInfo[i][2] == teleport_ID then
 			if connectInfo[i][1] == teleport_ID then
@@ -192,7 +192,7 @@ end
 
 --在所有关联传送点中找到激活链接的,如果没有则返回nil
 function GetConnectedTeleport(context,teleport_id)
-	related
+	local related
 	related = FindRelatedTargets(context,teleport_id)
 
 	for i=1,#related do
@@ -205,17 +205,17 @@ end
 
 --数学计算归一化
 function Normalize(vet)
-	magnitude = math.sqrt(vet.x * vet.x + vet.y * vet.y + vet.z * vet.z)
-	newvect = {x = vet.x/magnitude, y = vet.y / magnitude, z = vet.z / magnitude}
+	local magnitude = math.sqrt(vet.x * vet.x + vet.y * vet.y + vet.z * vet.z)
+	local newvect = {x = vet.x/magnitude, y = vet.y / magnitude, z = vet.z / magnitude}
 	return newvect
 end
 
 --更新所有传送门的状态表现
 function UpdateTeleportState(context)
 
-	teleportname
+	local teleportname
 	for i=1,#TeleportOwnerShip do
-			connect = GetConnectedTeleport(context,TeleportOwnerShip[i][2])
+			local connect = GetConnectedTeleport(context,TeleportOwnerShip[i][2])
 
 		if connect == nil then
 
@@ -242,7 +242,7 @@ end
 
 --传送玩家, 只要给到对应的Teleportid就可以
 function TeleportAction(context,teleport_id)
-	related = FindRelatedTargets(context, teleport_id)
+	local related = FindRelatedTargets(context, teleport_id)
 	for i=1,#related do
 		if CheckIsConnected(context,teleport_id,related[i][1]) == true then
 			ScriptLib.MoveAvatarByPointArray(context, context.uid, related[i][2], related[i][3], {speed=related[i][4]}, "{\"MarkType\":1}")
@@ -393,7 +393,7 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_262006(context, evt)
 			--gadget_Teleport_5 trigger
-			teleportid = defs["gadget_Teleport_5"]
+			local teleportid = defs["gadget_Teleport_5"]
 			TeleportAction(context, teleportid)
 			return 0
 end
@@ -435,7 +435,7 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_262015(context, evt)
 			--gadget_Teleport_1 trigger
-			teleportid = defs["gadget_Teleport_1"]
+			local teleportid = defs["gadget_Teleport_1"]
 			TeleportAction(context, teleportid)
 			return 0
 end
@@ -455,7 +455,7 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_262016(context, evt)
 			--gadget_Teleport_2 trigger
-			teleportid = defs["gadget_Teleport_2"]
+			local teleportid = defs["gadget_Teleport_2"]
 			TeleportAction(context, teleportid)
 			return 0
 end
@@ -475,7 +475,7 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_262017(context, evt)
 			--gadget_Teleport_3 trigger
-			teleportid = defs["gadget_Teleport_3"]
+			local teleportid = defs["gadget_Teleport_3"]
 			TeleportAction(context, teleportid)
 			return 0
 end
@@ -495,14 +495,14 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_262018(context, evt)
 			--gadget_Teleport_4 trigger
-			teleportid = defs["gadget_Teleport_4"]
+			local teleportid = defs["gadget_Teleport_4"]
 			TeleportAction(context, teleportid)
 			return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_262023(context, evt)
-			result = false
+			local result = false
 			for i = 1, #TeleportOwnerShip do
 				if TeleportOwnerShip[i][1] ~= evt.param1 then
 					result = false
@@ -520,8 +520,8 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_262023(context, evt)
-		localtarget
-			localoption
+		local localtarget
+			local localoption
 
 				for i=1,#TeleportOwnerShip do
 					if TeleportOwnerShip[i][1] == evt.param1 then
@@ -551,7 +551,7 @@ end
 function condition_EVENT_PLATFORM_REACH_POINT_262024(context, evt)
 		ScriptLib.PrintLog(context, "Reachpoint_condition : "..evt.param1)
 
-		result = false
+		local result = false
 		for i = 1, #TeleportOwnerShip do
 			if TeleportOwnerShip[i][2] ~= evt.param1 then
 				result = false
@@ -579,9 +579,9 @@ function action_EVENT_PLATFORM_REACH_POINT_262024(context, evt)
 		UpdateTeleportState(context)
 
 		-- set teleprot rotation and save to group variable
-		name = GetTeleportNameByConfigID(context,evt.param1).."_state"
+		local name = GetTeleportNameByConfigID(context,evt.param1).."_state"
 		ScriptLib.PrintLog(context, "gadgetname = "..name)
-		prerot = ScriptLib.GetGroupVariableValue(context,name)
+		local prerot = ScriptLib.GetGroupVariableValue(context,name)
 		ScriptLib.PrintLog(context, "prerot = ".. prerot)
 		prerot = prerot + defs.rotStep
 		if prerot >= 360 then

@@ -56,7 +56,7 @@ QUEST State 7315701
 --]]
 
 -- 数据结构
-FarmPlay = {
+local FarmPlay = {
     FirstFarm = defs.gadget_farm13,
     FirstCropQuest = 7306805,
     SuccessQuest = 7307502,
@@ -68,15 +68,15 @@ FarmPlay = {
     Exhibition = {id = 11601102, key = "Permanent_SumeruNurseryPlay_FarmCount"},
 }
 
-FarmState = {
+local FarmState = {
     Hole = 0,
     Seedling = 201,
     Hide = 202,
     CSShowHole = 203,
 }
-FarmIndex = {} -- [cid] = index
-QuestIndex = {} -- [questid] = index
-FarmDic = {
+local FarmIndex = {} -- [cid] = index
+local QuestIndex = {} -- [questid] = index
+local FarmDic = {    
     [1] = {cid = defs.gadget_farm01, quest = 73146, index = 1},
     [2] = {cid = defs.gadget_farm02, quest = 73147, index = 2},
     [3] = {cid = defs.gadget_farm03, quest = 73148, index = 3},
@@ -92,7 +92,7 @@ FarmDic = {
     [13] = {cid = defs.gadget_farm13, quest = 73145, index = 13},
 }
 
-SumeruFarm_Trigger = {
+local SumeruFarm_Trigger = {
     { keyWord = "FirstCrop", event = EventType.EVENT_QUEST_START, source = "7306805", trigger_count = 0},
     { keyWord = "PlayerCrop", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", trigger_count = 0},
     { keyWord = "CheckFarm", event = EventType.EVENT_GROUP_LOAD, source = "", trigger_count = 0},
@@ -103,7 +103,7 @@ SumeruFarm_Trigger = {
 }
 
 function LF_Initialize_Level()
-    startConfigID = 40000001
+    local startConfigID = 40000001
     for _,v in pairs(SumeruFarm_Trigger) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -120,11 +120,11 @@ function LF_Initialize_Level()
     LF_InsertTriggers(SumeruFarm_Trigger,{1})
     LF_GenFarmIndex()
 
-    var = { config_id= 40000100, name = FarmPlay.ExhibitionKey, value = 0, no_refresh = true }
+    local var = { config_id= 40000100, name = FarmPlay.ExhibitionKey, value = 0, no_refresh = true }
     variables[var.name] = var
-    var = { config_id= 40000101, name = "GM_Reset", value = 0, no_refresh = false }
+    local var = { config_id= 40000101, name = "GM_Reset", value = 0, no_refresh = false }
     variables[var.name] = var
-    var = { config_id= 40000102, name = "QA_Watcher01", value = 0, no_refresh = true }
+    local var = { config_id= 40000102, name = "QA_Watcher01", value = 0, no_refresh = true }
     variables[var.name] = var
 
     return 0
@@ -144,7 +144,7 @@ end
 --======================================]]
 function action_GMReset(context,evt)
     -- 重置陈列室
-    uid = ScriptLib.GetSceneOwnerUid(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
     -- ScriptLib.ClearExhibitionReplaceableData(context, uid, FarmPlay.Exhibition.key)
     LF_KnowQuestState(context)
     return 0
@@ -153,7 +153,7 @@ end
 -- 由任务触发的种植流程
 function action_FirstCrop(context,evt)
     -- 初始田201
-    msg = "## TD_SumeruFarm : 将" .. FarmPlay.FirstFarm
+    local msg = "## TD_SumeruFarm : 将" .. FarmPlay.FirstFarm
     msg = msg .. "的状态切到201"
     ScriptLib.PrintContextLog(context, msg)
     ScriptLib.PrintContextLog(context, "## TD_SumeruFarm : FirstCrop 将Group切至Suite2")
@@ -181,8 +181,8 @@ function action_PlayerCrop(context,evt)
         return 0
     end
 
-    curIndex = FarmIndex[evt.param2]
-    questID = LF_CurFarmMSG(curIndex)
+    local curIndex = FarmIndex[evt.param2]
+    local questID = LF_CurFarmMSG(curIndex)
     -- 推送对应任务消息
     ScriptLib.AddQuestProgress(context, questID)
     ScriptLib.PrintContextLog(context, "## TD_SumeruFarm: PlayerCrop 任务流转。ID：" .. questID .. "|Index = ".. curIndex)
@@ -210,9 +210,9 @@ function action_CropGrow(context,evt)
         return 0
     end
 
-    curFarmIndex = QuestIndex[math.floor(evt.param1/100)]
+    local curFarmIndex = QuestIndex[math.floor(evt.param1/100)]
     ScriptLib.PrintContextLog(context, "## TD_SumeruFarm: CropGrow 在线监听到任务完成。 Index = " .. curFarmIndex)
-
+    
     LF_FarmGrow(context,curFarmIndex)
 
     return 0
@@ -220,7 +220,7 @@ end
 
 -- 针对计时任务特性的时间轴保底
 function action_DelayFarmGrow(context,evt)
-    uidList=ScriptLib.GetSceneUidList(context)
+    local uidList=ScriptLib.GetSceneUidList(context)
     if 0 == #uidList then
         --当前没有玩家，无法修改陈列室，开启一个时间轴延后处理
         ScriptLib.InitTimeAxis(context,"DelayFarmGrow",{1},false)
@@ -238,7 +238,7 @@ function action_PlayEnd(context,evt)
         return 0
     end
 
-    levelData = LF_Exhibition_GetLevelData(context)
+    local levelData = LF_Exhibition_GetLevelData(context)
     if 8191 ~= levelData then
         ScriptLib.PrintContextLog(context, "## TD_SumeruFarm action_PlayEnd 数据异常,levelData应为8191")
         return 0
@@ -253,7 +253,7 @@ end
 --======================================]]
 -- 查看指定任务，确认Group是否结束自身生命
 function LF_GroupDieProgress(context)
-    levelData = LF_Exhibition_GetLevelData(context)
+    local levelData = LF_Exhibition_GetLevelData(context)
 
     if 3 == ScriptLib.GetHostQuestState(context,FarmPlay.SuccessQuest) then
         if 8191 ~= levelData then
@@ -277,17 +277,17 @@ end
 -- Todo：删
 function LF_KnowQuestState(context)
     msg = "## TD_SumeruFarm : LF_KnowQuestState"
-    questStateA = ScriptLib.GetHostQuestState(context,73145)
+    local questStateA = ScriptLib.GetHostQuestState(context,73145)
     msg = msg .. " |73145 = " .. questStateA
-    questStateA01 = ScriptLib.GetHostQuestState(context,7314501)
+    local questStateA01 = ScriptLib.GetHostQuestState(context,7314501)
     msg = msg .. " |7314501 = " .. questStateA01
-    questStateA02 = ScriptLib.GetHostQuestState(context,7314502)
+    local questStateA02 = ScriptLib.GetHostQuestState(context,7314502)
     msg = msg .. " |7314502 = " .. questStateA02
-    questStateB = ScriptLib.GetHostQuestState(context,73068)
+    local questStateB = ScriptLib.GetHostQuestState(context,73068)
     msg = msg .. " |73068 = " .. questStateB
-    questStateB01 = ScriptLib.GetHostQuestState(context,7306805)
+    local questStateB01 = ScriptLib.GetHostQuestState(context,7306805)
     msg = msg .. " |7306805 = " .. questStateB01
-    questStateB02 = ScriptLib.GetHostQuestState(context,7306806)
+    local questStateB02 = ScriptLib.GetHostQuestState(context,7306806)
     msg = msg .. " |7306806 = " .. questStateB02
     ScriptLib.PrintContextLog(context, msg)
     return 0
@@ -295,22 +295,22 @@ end
 
 -- 检查幼苗田是否需要切状态，同时核对数据是否正确。
 function LF_CheckSeedling(context)
-    successCount = 0
+    local successCount = 0
     -- 陈列室复写，不用陈列室不再复写
     -- LF_OverrideExhibition(context)
     -- 查询bin，获取所有已种植list
-    levelDataArray = LF_Exhibition_GetLevelDataArray(context)
-    msg = "| levelDataArray = " .. LF_ArrayToString(levelDataArray)
+    local levelDataArray = LF_Exhibition_GetLevelDataArray(context)
+    local msg = "| levelDataArray = " .. LF_ArrayToString(levelDataArray)
     ScriptLib.PrintContextLog(context, "## TD_SumeruFarm : LF_CheckSeedling"..msg)
     for k,v in pairs(levelDataArray) do
-        farmIndex = k
+        local farmIndex = k
         if 0 == v then
-            cid = FarmDic[farmIndex].cid
-            quest = FarmDic[farmIndex].quest
-            state = ScriptLib.GetGadgetStateByConfigId(context, 0, cid)
+            local cid = FarmDic[farmIndex].cid
+            local quest = FarmDic[farmIndex].quest
+            local state = ScriptLib.GetGadgetStateByConfigId(context, 0, cid)
             if 201 == state then
                 -- 所有201Gadget：对应任务若完成，切202。
-                questState = ScriptLib.GetHostQuestState(context,quest*100+2)
+                local questState = ScriptLib.GetHostQuestState(context,quest*100+2)
                 msg = "## TD_SumeruFarm : LF_CheckSeedling quest =" .. quest*100+2
                 msg = msg .. "|questState = " .. questState
                 msg = msg .. "|farmIndex = " .. farmIndex
@@ -318,7 +318,7 @@ function LF_CheckSeedling(context)
                 ScriptLib.PrintContextLog(context, msg)
 
                 -- 补发推送任务消息
-                questID = LF_CurFarmMSG(farmIndex)
+                local questID = LF_CurFarmMSG(farmIndex)
                 ScriptLib.AddQuestProgress(context, questID)
 
                 if  3 == questState then
@@ -330,11 +330,11 @@ function LF_CheckSeedling(context)
             successCount = successCount + 1
         end
     end
-    curSuccessCount = ScriptLib.GetGroupVariableValue(context, FarmPlay.SuccessKey)
+    local curSuccessCount = ScriptLib.GetGroupVariableValue(context, FarmPlay.SuccessKey)
 
     if successCount ~= curSuccessCount then
-        msg1 = " |successCount = " .. successCount
-        msg2 = " |curSuccessCount = " .. curSuccessCount
+        local msg1 = " |successCount = " .. successCount
+        local msg2 = " |curSuccessCount = " .. curSuccessCount
         ScriptLib.PrintContextLog(context, "## TD_SumeruFarm action_CheckFarm 数据异常。" .. msg1 .. msg2)
     end
     return 0
@@ -342,12 +342,12 @@ end
 
 function LF_OverrideExhibition(context)
     --获取陈列室值复写到Group上
-    uid = ScriptLib.GetSceneOwnerUid(context)
-    oldDataDec = ScriptLib.GetExhibitionReplaceableData(context, uid, FarmPlay.Exhibition.id)
-    oldLevelDataArray = LF_DecToBin(oldDataDec)
-    curLevelDataArray = LF_Exhibition_GetLevelDataArray(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
+    local oldDataDec = ScriptLib.GetExhibitionReplaceableData(context, uid, FarmPlay.Exhibition.id)
+    local oldLevelDataArray = LF_DecToBin(oldDataDec)
+    local curLevelDataArray = LF_Exhibition_GetLevelDataArray(context)
 
-    msg = "## TD_SumeruFarm : LF_OverrideExhibition"
+    local msg = "## TD_SumeruFarm : LF_OverrideExhibition"
     msg = msg .. " |oldLevelDataArray = " .. LF_ArrayToString(oldLevelDataArray)
     msg = msg .. " |curLevelDataArray = " .. LF_ArrayToString(curLevelDataArray)
     ScriptLib.PrintContextLog(context, msg)
@@ -357,8 +357,8 @@ function LF_OverrideExhibition(context)
             curLevelDataArray[k] = 1
         end
     end
-    newLevelDataDec = LF_BinToDec(curLevelDataArray)
-    msg = "## TD_SumeruFarm : LF_OverrideExhibition"
+    local newLevelDataDec = LF_BinToDec(curLevelDataArray)
+    local msg = "## TD_SumeruFarm : LF_OverrideExhibition"
     msg = msg .. " |oldDataDec = " .. oldDataDec
     msg = msg .. " |newLevelDataDec = " .. newLevelDataDec
     ScriptLib.PrintContextLog(context, msg)
@@ -368,7 +368,7 @@ function LF_OverrideExhibition(context)
 end
 function LF_FarmGrow(context,index)
     -- 对应田切202
-    cid = FarmDic[index].cid
+    local cid = FarmDic[index].cid
     ScriptLib.SetGadgetStateByConfigId(context, cid, FarmState.Hide)
     ScriptLib.PrintContextLog(context, "## TD_SumeruFarm : LF_FarmGrow| cid = " .. cid)
     -- 计数+1
@@ -380,10 +380,10 @@ end
 
 -- 写入指定农田
 function LF_CompleteCurLevel(context,index)
-    levelData = LF_Exhibition_GetLevelData(context)
-    changeLevelData = LF_Exhibition_SetTargetLevel(levelData,index,1)
-    msg1 = " |changeLevelDataArray = " .. LF_ArrayToString(LF_DecToBin(changeLevelData))
-    msg2 = " | index = " .. index
+    local levelData = LF_Exhibition_GetLevelData(context)
+    local changeLevelData = LF_Exhibition_SetTargetLevel(levelData,index,1)
+    local msg1 = " |changeLevelDataArray = " .. LF_ArrayToString(LF_DecToBin(changeLevelData))
+    local msg2 = " | index = " .. index
     ScriptLib.PrintContextLog(context, "## TD_SumeruFarm : LF_CompleteCurFarm"..msg1..msg2)
     LF_Exhibition_SetLevelData(context,changeLevelData)
     return 0
@@ -404,9 +404,9 @@ end
 -- 写入陈列室值
 function LF_Exhibition_SetLevelData(context,levelDataDec)
 
-    curDataDec = ScriptLib.GetGroupVariableValue(context,FarmPlay.ExhibitionKey)
+    local curDataDec = ScriptLib.GetGroupVariableValue(context,FarmPlay.ExhibitionKey)
 
-    msg = "## TD_SumeruFarm : LF_Exhibition_SetLevelData"
+    local msg = "## TD_SumeruFarm : LF_Exhibition_SetLevelData"
     msg = msg .. " |levelDataDec = " .. levelDataDec
     msg = msg .. " |curDataDec = " .. curDataDec
     ScriptLib.PrintContextLog(context, msg)
@@ -417,9 +417,9 @@ end
 -- 返回当前的陈列室值
 function LF_Exhibition_GetLevelData(context)
 
-    levelDataDec = ScriptLib.GetGroupVariableValue(context,FarmPlay.ExhibitionKey)
+    local levelDataDec = ScriptLib.GetGroupVariableValue(context,FarmPlay.ExhibitionKey)
 
-    msg = "## TD_SumeruFarm : LF_Exhibition_GetLevelData"
+    local msg = "## TD_SumeruFarm : LF_Exhibition_GetLevelData"
     msg = msg .. " |levelDataDec = " .. levelDataDec
     ScriptLib.PrintContextLog(context, msg)
 
@@ -428,21 +428,21 @@ end
 
 -- 返回当前的陈列室值导出的数组
 function LF_Exhibition_GetLevelDataArray(context)
-    levelDataDec = LF_Exhibition_GetLevelData(context)
-    levelDataArray = LF_DecToBin(levelDataDec)
+    local levelDataDec = LF_Exhibition_GetLevelData(context)
+    local levelDataArray = LF_DecToBin(levelDataDec)
     return levelDataArray
 end
 
 -- 修改bin中指定Index数据
 function LF_Exhibition_SetTargetLevel(levelDataDec,targetIndex,value)
-    dataArray = LF_DecToBin(levelDataDec)
+    local dataArray = LF_DecToBin(levelDataDec)
     if value ~= 0 and value ~=1 then
         ScriptLib.PrintLog("Error: LF_Exhibition_SetTargetCompelete: value = " .. value)
         value = 0
     end
     -- 指定关卡设为完成
     dataArray[targetIndex] = value
-    changeLevelData = LF_BinToDec(dataArray)
+    local changeLevelData = LF_BinToDec(dataArray)
 
 
     return changeLevelData
@@ -450,11 +450,11 @@ end
 
 -- 通过bin查询对应Index的关卡情况
 function LF_Exhibition_CheckTargetComplete(targetIndex,levelDataDec)
-    dataArray = LF_DecToBin(levelDataDec)
+    local dataArray = LF_DecToBin(levelDataDec)
 
     if targetIndex == 0 or nil == dataArray[targetIndex] then
-        msg1 = " |dataArray = " .. LF_ArrayToString(dataArray)
-        msg2 = " | index = " .. targetIndex
+        local msg1 = " |dataArray = " .. LF_ArrayToString(dataArray)
+        local msg2 = " | index = " .. targetIndex
         ScriptLib.PrintLog("Error: LF_Exhibition_CheckTargetCompelete" .. msg1 .. msg2)
         return 0
     end
@@ -472,7 +472,7 @@ end
 
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -513,7 +513,7 @@ end
 
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    s = "{"
+    local s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","
@@ -527,13 +527,13 @@ end
 
 -- 根据数组的长度修饰num
 function Fix(value,array,error)
-    arrayType= type(array)
+    local arrayType= type(array)
     if arrayType ~= "table" then
         ScriptLib.PrintLog(error .. "array 非法")
         return 1
     end
 
-    valueType= type(value)
+    local valueType= type(value)
     if valueType ~= "number" then
         ScriptLib.PrintLog(error .. "value 非法")
         return 1
@@ -553,17 +553,17 @@ end
 
 -- 顺序0,1数组转十进制保存
 function LF_BinToDec(binArray)
-    decValue = 0
-    bin = table.concat(binArray)
+    local decValue = 0
+    local bin = table.concat(binArray)
     decValue = tonumber(bin,2)
     return decValue
 end
 
 -- 十进制转成0,1数组，位数对应为1~13
 function LF_DecToBin(decValue)
-    binArray = {}
-    value = decValue
-    bit = 13 -1 --按需设置对应位数,当前需要13个数据
+    local binArray = {}
+    local value = decValue
+    local bit = 13 -1 --按需设置对应位数,当前需要13个数据
     for i = bit,0,-1 do
         binArray[#binArray+1] = math.floor(value/2^i)
         value = value % 2^i

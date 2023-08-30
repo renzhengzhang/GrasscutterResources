@@ -4,9 +4,9 @@ base_info = {
 }
 
 -- DEFS_MISCS
-MainGroupID = 247010001
-MonsterAffix = 1009
-challengeList = {
+local MainGroupID = 247010001
+local MonsterAffix = 1009
+local challengeList = {
 { monsterPool = 29043, challengeParamList = {2, 2017, -1, 7, 0, 0}, monsterPoolParamList = {total_count=7, min_count=4, max_count=4, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 29044, challengeParamList = {2, 2017, -1, 6, 0, 0}, monsterPoolParamList = {total_count=6, min_count=4, max_count=4, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },
 { monsterPool = 29045, challengeParamList = {2, 2017, -1, 15, 0, 0}, monsterPoolParamList = {total_count=15, min_count=5, max_count=5, fill_time=0, fill_count=0, is_ordered = true}, extraMonsterPool = 0, extraMonsterPoolParamList = {} },

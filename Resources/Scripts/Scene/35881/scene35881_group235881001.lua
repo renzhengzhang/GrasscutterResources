@@ -208,7 +208,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_1006(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer_init")
 
-	uid = ScriptLib.GetSceneUidList(context)
+	local uid = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "_IN_HIGH_TIDE_V3.4", 1)
 
@@ -250,7 +250,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_1008(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer2_gv")
 
-	uid = ScriptLib.GetSceneUidList(context)
+	local uid = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "_IN_HIGH_TIDE_V3.4", -1)
 
@@ -292,7 +292,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_1010(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer1_gv")
 
-	uid = ScriptLib.GetSceneUidList(context)
+	local uid = ScriptLib.GetSceneUidList(context)
 
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "_IN_HIGH_TIDE_V3.4", 1)
 

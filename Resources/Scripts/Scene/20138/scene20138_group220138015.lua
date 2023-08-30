@@ -314,16 +314,16 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_15010(context, evt)
-			rotate_index = ScriptLib.GetGroupVariableValue(context, "rotate_index")
+			local rotate_index = ScriptLib.GetGroupVariableValue(context, "rotate_index")
 
 			if rotate_index >= #defs.rotate_queue or rotate_index < 0 then
 				rotate_index = 0
 			end
-			next_index = rotate_index + 1
+			local next_index = rotate_index + 1
 			-- 设置移动平台点阵,点阵id为point_array_id
 			-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 			-- turn_mode = true/false 开启/关闭
-			tempParam = {route_type = 0, turn_mode = true}
+			local tempParam = {route_type = 0, turn_mode = true}
 			if 0 ~= ScriptLib.SetPlatformPointArray(context, 15014, 3, {defs.rotate_queue[next_index]}, tempParam) then
 			  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 			  return -1
@@ -351,16 +351,16 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_15011(context, evt)
-			rotate_index = ScriptLib.GetGroupVariableValue(context, "rotate_index")
+			local rotate_index = ScriptLib.GetGroupVariableValue(context, "rotate_index")
 
 			if rotate_index >= #defs.rotate_queue or rotate_index < 0 then
 				rotate_index = 0
 			end
-			next_index = rotate_index + 1
+			local next_index = rotate_index + 1
 			-- 设置移动平台点阵,点阵id为point_array_id
 			-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 			-- turn_mode = true/false 开启/关闭
-			tempParam = {route_type = 0, turn_mode = true}
+			local tempParam = {route_type = 0, turn_mode = true}
 			if 0 ~= ScriptLib.SetPlatformPointArray(context, 15014, 3, {defs.rotate_queue[next_index]}, tempParam) then
 			  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 			  return -1
@@ -388,16 +388,16 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_15012(context, evt)
-			rotate_index = ScriptLib.GetGroupVariableValue(context, "rotate_index")
+			local rotate_index = ScriptLib.GetGroupVariableValue(context, "rotate_index")
 
 			if rotate_index >= #defs.rotate_queue or rotate_index < 0 then
 				rotate_index = 0
 			end
-			next_index = rotate_index + 1
+			local next_index = rotate_index + 1
 			-- 设置移动平台点阵,点阵id为point_array_id
 			-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 			-- turn_mode = true/false 开启/关闭
-			tempParam = {route_type = 0, turn_mode = true}
+			local tempParam = {route_type = 0, turn_mode = true}
 			if 0 ~= ScriptLib.SetPlatformPointArray(context, 15014, 3, {defs.rotate_queue[next_index]}, tempParam) then
 			  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 			  return -1
@@ -502,8 +502,8 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_15020(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-9.28，-17.28，-38.32），持续时间为6秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-9.28, y=-17.28, z=-38.32}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-9.28, y=-17.28, z=-38.32}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 6, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -532,8 +532,8 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_15021(context, evt)
 	-- 触发镜头注目，注目位置为坐标（3.77，19.03，-65.71），持续时间为6秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=3.77, y=19.03, z=-65.71}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=3.77, y=19.03, z=-65.71}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 6, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
@@ -562,8 +562,8 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_15022(context, evt)
 	-- 触发镜头注目，注目位置为坐标（43.79，34.47，-24.79），持续时间为6秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=43.79, y=34.47, z=-24.79}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=43.79, y=34.47, z=-24.79}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 6, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then

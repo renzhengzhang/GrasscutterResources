@@ -16,11 +16,11 @@
 --    gallery_id = 123456,
 --    swordmaster_id = 120,
 --}
-local_defs =
+local local_defs =
 {
     swordmaster_reminder_hp_ratio = 50
 }
-Tri = {
+local Tri = {
     [1] = { name = "select_difficulty", config_id = 8000001, event = EventType.EVENT_SELECT_DIFFICULTY, source = "", condition = "", action = "action_select_difficulty", trigger_count = 0},
     [2] = { name = "irodori_master_ready", config_id = 8000002, event = EventType.EVENT_IRODORI_MASTER_READY, source = "", condition = "", action = "action_irodori_master_ready", trigger_count = 0},
     [3] = { name = "challenge_success", config_id = 8000003, event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0},
@@ -47,7 +47,7 @@ end
 function action_select_difficulty(context,evt)
     ScriptLib.PrintContextLog(context,"## [IrodoriMaster] action_select_difficulty： 玩家选择挑战难度，加载对应suite")
 
-    difficulty = evt.param3
+    local difficulty = evt.param3
     ScriptLib.SetGroupTempValue(context, "current_difficulty", difficulty, { group_id = base_info.group_id})
     ScriptLib.PrintContextLog(context,"## [IrodoriMaster] action_select_difficulty： 选择的难度为"..difficulty)
     LF_Init_Play(context,difficulty)
@@ -59,8 +59,8 @@ function action_irodori_master_ready(context,evt)
 
     ScriptLib.PrintContextLog(context,"## [IrodoriMaster] action_cutscene_end: 前置工作完成，开启挑战")
 
-    uidList = ScriptLib.GetSceneUidList(context)
-    difficulty = ScriptLib.GetGroupTempValue(context, "current_difficulty", { group_id = base_info.group_id})
+    local uidList = ScriptLib.GetSceneUidList(context)
+    local difficulty = ScriptLib.GetGroupTempValue(context, "current_difficulty", { group_id = base_info.group_id})
 
     --播完cutscene之后，创建剑道大师怪物
 	ScriptLib.CreateMonster(context, { config_id = swordmaster_id[difficulty], delay_time = 0 })
@@ -80,7 +80,7 @@ end
 
 --处理挑战成功
 function  action_challenge_success(context,evt)
-    success_challenge_id = evt.param1
+    local success_challenge_id = evt.param1
     if (success_challenge_id == defs.normal_challenge_id) then
         ScriptLib.PrintContextLog(context,"## [IrodoriMaster] action_challenge_success： 普通挑战成功")
         LF_Clear_Stage(context)
@@ -98,7 +98,7 @@ end
 
 --处理挑战失败
 function  action_challenge_fail(context,evt)
-    fail_challenge_id = evt.param1
+    local fail_challenge_id = evt.param1
     if (fail_challenge_id == defs.father_challenge_id) then
         ScriptLib.PrintContextLog(context,"## [IrodoriMaster] action_challenge_fail： 父挑战失败")
         LF_Clear_Stage(context)
@@ -162,11 +162,11 @@ function LF_Clear_Stage(context)
     ScriptLib.RefreshGroup(context, { group_id = defs.NPC_group_id, suite = 1})
     ScriptLib.PrintContextLog(context,"## [IrodoriMaster] LF_Reset_Play：开始重置玩法")
     --移除空气墙
-    ret1 = ScriptLib.RemoveEntityByConfigId(context,0,EntityType.GADGET, defs.airwall_id)
+    local ret1 = ScriptLib.RemoveEntityByConfigId(context,0,EntityType.GADGET, defs.airwall_id)
     ScriptLib.PrintContextLog(context,"## [IrodoriMaster] LF_Reset_Play：移除空气墙"..ret1)
     --移除怪物
-    --difficulty = ScriptLib.GetGroupTempValue(context,"current_difficulty",{})
-    --ret2 = ScriptLib.RemoveEntityByConfigId(context,0,EntityType.MONSTER, swordmaster_id[difficulty])
+    --local difficulty = ScriptLib.GetGroupTempValue(context,"current_difficulty",{})
+    --local ret2 = ScriptLib.RemoveEntityByConfigId(context,0,EntityType.MONSTER, swordmaster_id[difficulty])
     --ScriptLib.PrintContextLog(context,"## [IrodoriMaster] LF_Reset_Play：移除怪物"..ret2)
     --开启天气
 	ScriptLib.SetWeatherAreaState(context, defs.weather_id, 0)

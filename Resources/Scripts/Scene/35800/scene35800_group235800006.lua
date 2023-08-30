@@ -34,15 +34,15 @@ defs ={
         OverRegionConfigID = 6311
 }
 
-regionIndex =  6190
+local regionIndex =  6190
 
 --消失路面
 --到达终点后奖励的能量值
-InvisibleFloor_Clear_Bonus = 70
+local InvisibleFloor_Clear_Bonus = 70
 --限时未到达终点时扣除的能量值
-InvisibleFloor_Failed_Deduction = -10
+local InvisibleFloor_Failed_Deduction = -10
 --每次落水扣除的能量值
-InvisibleFloor_Falling_Deduction = -2
+local InvisibleFloor_Falling_Deduction = -2
 
 --================================================================
 --
