@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199001211
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -81,9 +81,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -91,7 +91,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_211004(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199001211, 211001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -99,7 +99,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_211004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199001211, 2)
-
+	
 	return 0
 end
 
@@ -108,7 +108,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_211005(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 199001211, 211001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -116,6 +116,6 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_211005(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199001211, 2)
-
+	
 	return 0
 end

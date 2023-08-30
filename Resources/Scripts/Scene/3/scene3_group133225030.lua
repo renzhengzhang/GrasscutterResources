@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133225030
 }
 
 -- DEFS_MISCS
-defs =
+defs = 
 {
 	group_id = 133225030,
 	Lightup_Seq = {30006,30007,30004,30005,30003}
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -94,20 +94,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_30001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"FailCount"为2
 	if ScriptLib.GetGroupVariableValue(context, "FailCount") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -118,17 +118,17 @@ function action_EVENT_VARIABLE_CHANGE_30001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（-6424，203，-2774），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-6424, y=203, z=-2774}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-6424, y=203, z=-2774}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_QUEST_START_30002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isQuestNotify") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -149,19 +149,19 @@ function action_EVENT_QUEST_START_30002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_30008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Finished"为1
 	if ScriptLib.GetGroupVariableValue(context, "Finished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -172,19 +172,19 @@ function action_EVENT_VARIABLE_CHANGE_30008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_30009(context, evt)
 	if evt.param1 ~= 30009 then return false end
-
+	
 	-- 判断变量"isQuestNotify"为1
 	if ScriptLib.GetGroupVariableValue(context, "isQuestNotify") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -195,19 +195,19 @@ function action_EVENT_ENTER_REGION_30009(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_30010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"FailCount"为1
 	if ScriptLib.GetGroupVariableValue(context, "FailCount") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -218,7 +218,7 @@ function action_EVENT_VARIABLE_CHANGE_30010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 

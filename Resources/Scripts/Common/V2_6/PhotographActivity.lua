@@ -3,30 +3,30 @@
 ||	owner: 		luyao.huang
 ||	description:	2.6拍照活动
 ||	LogName:	PhotographActivity
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 ------
---defs = {
+--local defs = {
 --    worktop_id = 10001,
 --    gallery_id = 18001,
 --    region_id = 20001,
 --    client_judge_id = 1
 --}
 
-local_defs = {
+local local_defs = {
     worktop_option = 190,
     region_out_reminder = 600106,
 }
 
-Tri = {
+local Tri = {
     [1] = { name = "group_load", config_id = 40000000, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     [3] = { name = "select_option", config_id = 40000002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0},
     [4] = { name = "photo_finish", config_id = 40000003, event = EventType.EVENT_PHOTO_FINISH, source = "", condition = "", action = "action_photo_finish", trigger_count = 0},
     [5] = { name = "leave_region", config_id = 40000004, event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_region", trigger_count = 0},
     [6] = { name = "group_will_unload", config_id = 40000005, event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload", trigger_count = 0},
     [7] = { name = "gallery_stop", config_id = 40000006, event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_gallery_stop", trigger_count = 0},
-
+    
 }
 
 function Initialize()
@@ -138,7 +138,7 @@ function LF_Stop_Play(context, is_success)
     --卸载打点suite
     --LF_Set_Photo_Point_Suite(context,false)
     --关闭黄圈
-    ScriptLib.DeactivateGroupLinkBundle(context, base_info.group_id)
+    ScriptLib.DeactivateGroupLinkBundle(context, base_info.group_id) 
     if (is_success) then
         --关闭操作台
         --LF_Set_Worktop(context,false)

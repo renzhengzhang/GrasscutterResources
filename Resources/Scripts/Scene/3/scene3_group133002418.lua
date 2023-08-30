@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133002418
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	randomPositions = {418014,418021,418022},
 	groupId = 133002418,
 	specialice1 = 418009,
@@ -28,9 +28,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -172,9 +172,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -185,9 +185,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -275,9 +275,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -285,7 +285,7 @@ function condition_EVENT_ANY_GADGET_DIE_418029(context, evt)
 	if 418009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -296,7 +296,7 @@ function action_EVENT_ANY_GADGET_DIE_418029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -305,7 +305,7 @@ function condition_EVENT_ANY_GADGET_DIE_418030(context, evt)
 	if 418010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -316,7 +316,7 @@ function action_EVENT_ANY_GADGET_DIE_418030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -325,7 +325,7 @@ function condition_EVENT_ANY_GADGET_DIE_418031(context, evt)
 	if 418011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -336,19 +336,19 @@ function action_EVENT_ANY_GADGET_DIE_418031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_418033(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"killedIcePillar"为3
 	if ScriptLib.GetGroupVariableValue(context, "killedIcePillar") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -358,11 +358,11 @@ function action_EVENT_VARIABLE_CHANGE_418033(context, evt)
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 418007 }) then
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002418, 4)
-
+	
 	--怪物转阶段
 	    ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {418001}, "_SERVER_REGISVINE_ICE_ACTIVITY_FLAG_PHASE02", 1)
 	ScriptLib.CreateGroupTimerEvent(context, defs.groupId, "phasetwocheck", 1)
@@ -376,19 +376,19 @@ function condition_EVENT_GADGET_CREATE_418035(context, evt)
 	if 418012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_418035(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=1080,y=285,z=-439}
+	local pos = {x=1080,y=285,z=-439}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400010, pos, 25) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -397,7 +397,7 @@ function condition_EVENT_GADGET_CREATE_418063(context, evt)
 	if 418062 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -408,7 +408,7 @@ function action_EVENT_GADGET_CREATE_418063(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -416,21 +416,21 @@ end
 function condition_EVENT_SELECT_OPTION_418064(context, evt)
 	-- 判断是gadgetid 418062 option_id 2905
 	if 418062 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2905 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_418064(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=1097.705, y= 285.8612, z=-438.728}, radius = 2, rot = {x=0, y=269.461, z=0}})
-
+	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=1097.705, y= 285.8612, z=-438.728}, radius = 2, rot = {x=0, y=269.461, z=0}}) 
+	
 	return 0
 end
 

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133104488
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_1 = 488006,
 	gadget_2 = 488007,
 	gadget_3 = 488008,
@@ -23,9 +23,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -73,9 +73,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +86,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -133,9 +133,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -143,13 +143,13 @@ function condition_EVENT_GADGET_CREATE_488003(context, evt)
 	if 488001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_488003(context, evt)
-					 if ScriptLib.GetGroupVariableValue(context, "isActive") == 0 then
+					 if ScriptLib.GetGroupVariableValue(context, "isActive") == 0 then 
 					 	--没有激活开关
 					 	ScriptLib.SetWorktopOptionsByGroupId(context, 133104488, 488001, {7})
 					 	defs.isInital = 1
@@ -157,24 +157,24 @@ function action_EVENT_GADGET_CREATE_488003(context, evt)
 							ScriptLib.SetGroupVariableValue(context, "activeCount",0)
 							ScriptLib.SetGroupVariableValue(context, "correct",0)
 							ScriptLib.SetGroupVariableValue(context, "incorrect",0)
-						ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStop)
+						ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStop)	
 						ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_2, GadgetState.GearStop)
-						ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.GearStop)
-						ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_4, GadgetState.GearStop)
+						ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.GearStop) 
+						ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_4, GadgetState.GearStop)	
 						ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_5, GadgetState.GearStop)
 						ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_6, GadgetState.GearStop)
 						ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_7, GadgetState.GearStop)
 						ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_8, GadgetState.GearStop)
 						defs.isInital = 0
-
+				
 					 elseif ScriptLib.GetGroupVariableValue(context, "isActive") == 1 then
 					 	--已经激活开关
 					 	if ScriptLib.GetGroupVariableValue(context, "isFinished") == 1 then
 					 		ScriptLib.SetGadgetStateByConfigId(context, 488001, GadgetState.GearStart)
-							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStart)
+							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStart)	
 							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_2, GadgetState.GearStart)
-							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.GearStart)
-							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_4, GadgetState.GearStart)
+							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.GearStart) 
+							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_4, GadgetState.GearStart)	
 							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_5, GadgetState.GearStart)
 							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_6, GadgetState.GearStart)
 							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_7, GadgetState.GearStart)
@@ -187,23 +187,23 @@ function action_EVENT_GADGET_CREATE_488003(context, evt)
 							ScriptLib.SetGroupVariableValue(context, "activeCount",0)
 							ScriptLib.SetGroupVariableValue(context, "correct",0)
 							ScriptLib.SetGroupVariableValue(context, "incorrect",0)
-
-							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.Default)
+							
+							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.Default)	
 							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_2, GadgetState.Default)
-							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.Default)
-							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_4, GadgetState.Default)
+							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.Default) 
+							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_4, GadgetState.Default)	
 							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_5, GadgetState.Default)
 							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_6, GadgetState.Default)
 							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_7, GadgetState.Default)
 							ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_8, GadgetState.Default)
 							defs.isInital = 0
 					 	end
-
-
-
-
+			
+			
+				
+				
 					 end
-
+				
 					return 0
 end
 
@@ -211,14 +211,14 @@ end
 function condition_EVENT_SELECT_OPTION_488014(context, evt)
 	-- 判断是gadgetid 488001 option_id 7
 	if 488001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -234,10 +234,10 @@ function action_EVENT_SELECT_OPTION_488014(context, evt)
 				ScriptLib.SetGroupVariableValue(context, "activeCount",0)
 				ScriptLib.SetGroupVariableValue(context, "correct",0)
 				ScriptLib.SetGroupVariableValue(context, "incorrect",0)
-				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.Default)
+				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.Default)	
 				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_2, GadgetState.Default)
-				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.Default)
-				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_4, GadgetState.Default)
+				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.Default) 
+				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_4, GadgetState.Default)	
 				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_5, GadgetState.Default)
 				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_6, GadgetState.Default)
 				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_7, GadgetState.Default)
@@ -250,19 +250,19 @@ end
 function condition_EVENT_SELECT_OPTION_488015(context, evt)
 	-- 判断是gadgetid 488001 option_id 171
 	if 488001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 171 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"isFinished"为0
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -273,7 +273,7 @@ function action_EVENT_SELECT_OPTION_488015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -282,7 +282,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_488016(context, evt)
 				if defs.isInital == 1 then
 					return false
 				end
-
+	
 				if defs.gadget_1 ~= evt.param2 and
 				defs.gadget_2 ~= evt.param2 and
 				defs.gadget_3 ~= evt.param2 and
@@ -293,11 +293,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_488016(context, evt)
 				defs.gadget_8 ~= evt.param2 then
 					return false
 				end
-
+			
 				if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 					return false
 				end
-
+				
 				return true
 end
 
@@ -308,7 +308,7 @@ function action_EVENT_GADGET_STATE_CHANGE_488016(context, evt)
 								if ScriptLib.GetGroupVariableValue(context, "correct") > 0 then
 									ScriptLib.ChangeGroupVariableValue(context, "correct", -1)
 								end
-
+								
 						elseif defs.gadget_4 == evt.param2 or --如果改变的gadget是错误的其中一个
 							defs.gadget_5 == evt.param2 or
 							defs.gadget_6 == evt.param2 or
@@ -345,11 +345,11 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_488017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 			if defs.isInital == 1 then
 				return false
 			end
-
+			
 			if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 				return false
 			end
@@ -358,9 +358,9 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_488017(context, evt)
-	x = ScriptLib.GetGroupVariableValue(context,"correct")
-								y = ScriptLib.GetGroupVariableValue(context,"incorrect")
-
+	local x = ScriptLib.GetGroupVariableValue(context,"correct")
+								local y = ScriptLib.GetGroupVariableValue(context,"incorrect")
+							
 								if defs.switch_type == 0 then--0为火把类有两个可控状态的Gadget
 									if ScriptLib.GetGroupVariableValue(context, "activeCount") == 3 then
 											if x == 3 and y == 0 then
@@ -368,9 +368,9 @@ function action_EVENT_VARIABLE_CHANGE_488017(context, evt)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_seal, GadgetState.GearStart)
 												ScriptLib.DelWorktopOptionByGroupId(context, 133104488, 488001, 171)
 												--ScriptLib.PlayCutScene(context, 133104488, 0)
-
-
-
+												
+			
+												
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStart)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_2, GadgetState.GearStart)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.GearStart)
@@ -379,10 +379,10 @@ function action_EVENT_VARIABLE_CHANGE_488017(context, evt)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_6, GadgetState.GearStart)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_7, GadgetState.GearStart)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_8, GadgetState.GearStart)
-
+												
 												--ScriptLib.RemoveEntityByConfigId(context, 133104488, EntityType.GADGET, 488002 )
 												ScriptLib.GoToGroupSuite(context,133104488, 2)
-											end
+											end 
 									end
 								elseif defs.switch_type ==1 then--1为元素机关类有1个不可控状态的Gadget
 									if ScriptLib.GetGroupVariableValue(context, "activeCount") == 3 then
@@ -391,8 +391,8 @@ function action_EVENT_VARIABLE_CHANGE_488017(context, evt)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_seal, GadgetState.GearStart)
 												ScriptLib.DelWorktopOptionByGroupId(context, 133104488, 488001, 171)
 												--ScriptLib.PlayCutScene(context, 133104488, 0)
-
-
+												
+			
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStart)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_2, GadgetState.GearStart)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.GearStart)
@@ -401,10 +401,10 @@ function action_EVENT_VARIABLE_CHANGE_488017(context, evt)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_6, GadgetState.GearStart)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_7, GadgetState.GearStart)
 												ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_8, GadgetState.GearStart)
-
+			
 												--ScriptLib.RemoveEntityByConfigId(context, 133104488, EntityType.GADGET, 488002 )
 												ScriptLib.GoToGroupSuite(context,133104488, 2)
-											end
+											end 
 											--如果为元素机关类，则到达4个最大激活数量后，会复位
 									elseif ScriptLib.GetGroupVariableValue(context, "activeCount") >= 4 then
 											ScriptLib.ShowReminder(context, 31040602)
@@ -413,7 +413,7 @@ function action_EVENT_VARIABLE_CHANGE_488017(context, evt)
 											ScriptLib.SetGroupVariableValue(context, "activeCount",0)
 											ScriptLib.SetGroupVariableValue(context, "correct",0)
 											ScriptLib.SetGroupVariableValue(context, "incorrect",0)
-
+											
 											ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.Default)
 											ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_2, GadgetState.Default)
 											ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_3, GadgetState.Default)
@@ -423,7 +423,7 @@ function action_EVENT_VARIABLE_CHANGE_488017(context, evt)
 											ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_7, GadgetState.Default)
 											ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_8, GadgetState.Default)
 											defs.isInital = 0
-									end
+									end	
 								end
 								return 0
 end

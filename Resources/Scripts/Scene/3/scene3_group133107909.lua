@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133107909
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -179,36 +179,36 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_909010(context, evt)
 	-- 将configid为 909001 的物件更改为状态 GadgetState.GearAction1
-	ScriptLib.SetGadgetStateByConfigId(context, 909001, GadgetState.GearAction1)
-
+	ScriptLib.SetGadgetStateByConfigId(context, 909001, GadgetState.GearAction1) 
+	
 	-- 将configid为 909006 的物件更改为状态 GadgetState.GearAction1
-	ScriptLib.SetGadgetStateByConfigId(context, 909006, GadgetState.GearAction1)
-
+	ScriptLib.SetGadgetStateByConfigId(context, 909006, GadgetState.GearAction1) 
+	
 	-- 将configid为 909007 的物件更改为状态 GadgetState.GearAction1
 	ScriptLib.SetGadgetStateByConfigId(context, 909007, GadgetState.GearAction1)
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_909011(context, evt)
 	-- 将configid为 909005 的物件更改为状态 GadgetState.GearAction1
-	ScriptLib.SetGadgetStateByConfigId(context, 909005, GadgetState.GearAction1)
-
+	ScriptLib.SetGadgetStateByConfigId(context, 909005, GadgetState.GearAction1) 
+	
 	-- 将configid为 909008 的物件更改为状态 GadgetState.GearAction1
-	ScriptLib.SetGadgetStateByConfigId(context, 909008, GadgetState.GearAction1)
-
+	ScriptLib.SetGadgetStateByConfigId(context, 909008, GadgetState.GearAction1) 
+	
 	-- 将configid为 909002 的物件更改为状态 GadgetState.GearAction1
-	ScriptLib.SetGadgetStateByConfigId(context, 909002, GadgetState.GearAction1)
-
+	ScriptLib.SetGadgetStateByConfigId(context, 909002, GadgetState.GearAction1) 
+	
 	return 0
 end
 
@@ -216,13 +216,13 @@ end
 function action_EVENT_QUEST_FINISH_909012(context, evt)
 	-- 将configid为 909004 的物件更改为状态 GadgetState.GearAction1
 	ScriptLib.SetGadgetStateByConfigId(context, 909004, GadgetState.GearAction1)
-
+	
 	-- 将configid为 909009 的物件更改为状态 GadgetState.GearAction1
 	ScriptLib.SetGadgetStateByConfigId(context, 909009, GadgetState.GearAction1)
-
+	
 	-- 将configid为 909003 的物件更改为状态 GadgetState.GearAction1
-	ScriptLib.SetGadgetStateByConfigId(context, 909003, GadgetState.GearAction1)
-
+	ScriptLib.SetGadgetStateByConfigId(context, 909003, GadgetState.GearAction1) 
+	
 	return 0
 end
 
@@ -231,7 +231,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_909013(context, evt)
 	if 909001 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -242,7 +242,7 @@ function action_EVENT_GADGET_STATE_CHANGE_909013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -251,7 +251,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_909014(context, evt)
 	if 909002 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -262,7 +262,7 @@ function action_EVENT_GADGET_STATE_CHANGE_909014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -271,7 +271,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_909015(context, evt)
 	if 909003 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -282,7 +282,7 @@ function action_EVENT_GADGET_STATE_CHANGE_909015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -291,7 +291,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_909016(context, evt)
 	if 909004 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -302,7 +302,7 @@ function action_EVENT_GADGET_STATE_CHANGE_909016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -311,7 +311,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_909017(context, evt)
 	if 909005 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -322,7 +322,7 @@ function action_EVENT_GADGET_STATE_CHANGE_909017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -331,7 +331,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_909018(context, evt)
 	if 909006 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -342,7 +342,7 @@ function action_EVENT_GADGET_STATE_CHANGE_909018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -351,7 +351,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_909019(context, evt)
 	if 909007 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -362,7 +362,7 @@ function action_EVENT_GADGET_STATE_CHANGE_909019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -371,7 +371,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_909020(context, evt)
 	if 909008 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -382,7 +382,7 @@ function action_EVENT_GADGET_STATE_CHANGE_909020(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -391,7 +391,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_909021(context, evt)
 	if 909009 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -402,6 +402,6 @@ function action_EVENT_GADGET_STATE_CHANGE_909021(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
