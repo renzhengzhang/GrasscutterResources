@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240016005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,9 +114,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -124,7 +124,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_5005(context, evt)
 	if 5001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -134,10 +134,10 @@ function action_EVENT_GADGET_STATE_CHANGE_5005(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 240016005, {5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020}, 15, 6, 6) then
 		return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 240016005, 2)
-	
+
 	return 0
 end
 
@@ -146,7 +146,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_5021(context, evt)
 	if 5006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_ANY_MONSTER_LIVE_5021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -165,7 +165,7 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_5022(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240016005, 4)
-	
+
 	return 0
 end
 
@@ -176,9 +176,9 @@ function action_EVENT_CHALLENGE_FAIL_5023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240016005, 2)
-	
+
 	return 0
 end

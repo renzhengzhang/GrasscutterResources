@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133213162
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 	group_id = 133213162,
 	thunder1_id = 162011,
 	thunder2_id = 162012,
@@ -12,9 +12,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -79,9 +79,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -92,9 +92,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -155,40 +155,40 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_162014(context, evt)
 	if evt.param1 ~= 162014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"hasStarted"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasStarted") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_162014(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "hasStarted", 1)
-	
+
 	ScriptLib.CreateFatherChallenge(context, 100, 67, 99999, {success=400, fail=100, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 100, 1001, 68, {2,998,3}, {},{success=100,fail=100})
-	
+
 	ScriptLib.StartFatherChallenge(context, 100)
-	
+
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 6)
-	
+
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_ANY_GADGET_DIE_162015(context, evt)
 	if 162007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_ANY_GADGET_DIE_162015(context, evt)
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
 	local randomTemp = math.random(1, 3)
 	--local randomTemp = 1
-	
+
 	if randomTemp == 1 then
 	        ScriptLib.AddExtraGroupSuite(context, defs.group_id, 3)
 	        ScriptLib.AttachChildChallenge(context, 100, 1002, 69, {1,101,1}, {},{success=100,fail=100})
@@ -218,9 +218,9 @@ function action_EVENT_ANY_GADGET_DIE_162015(context, evt)
 	        ScriptLib.ModifyFatherChallengeProperty(context, 100, FatherChallengeProperty.CUR_SUCC, 100)
 	        ScriptLib.PrintContextLog(context, "## ModifyFatherChallengeProperty!!!" )
 	end
-	
+
 	ScriptLib.KillEntityByConfigId(context, { config_id = 162004 })
-	
+
 	return 0
 end
 
@@ -229,7 +229,7 @@ function condition_EVENT_ANY_GADGET_DIE_162016(context, evt)
 	if 162008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -238,7 +238,7 @@ function action_EVENT_ANY_GADGET_DIE_162016(context, evt)
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
 	local randomTemp = math.random(1, 3)
 	--local randomTemp = 1
-	
+
 	if randomTemp == 1 then
 	        ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
 	        ScriptLib.AttachChildChallenge(context, 100, 1003, 69, {1,102,2}, {},{success=100,fail=100})
@@ -250,9 +250,9 @@ function action_EVENT_ANY_GADGET_DIE_162016(context, evt)
 	        ScriptLib.ModifyFatherChallengeProperty(context, 100, FatherChallengeProperty.CUR_SUCC, 100)
 	        ScriptLib.PrintContextLog(context, "## ModifyFatherChallengeProperty!!!" )
 	end
-	
+
 	ScriptLib.KillEntityByConfigId(context, { config_id = 162021 })
-	
+
 	return 0
 end
 
@@ -261,7 +261,7 @@ function condition_EVENT_ANY_GADGET_DIE_162017(context, evt)
 	if 162009 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -270,7 +270,7 @@ function action_EVENT_ANY_GADGET_DIE_162017(context, evt)
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
 	local randomTemp = math.random(1, 3)
 	--local randomTemp = 1
-	
+
 	if randomTemp == 1 then
 	        ScriptLib.AddExtraGroupSuite(context, defs.group_id, 4)
 	        ScriptLib.AttachChildChallenge(context, 100, 1004, 69, {1,103,2}, {},{success=100,fail=100})
@@ -282,9 +282,9 @@ function action_EVENT_ANY_GADGET_DIE_162017(context, evt)
 	        ScriptLib.ModifyFatherChallengeProperty(context, 100, FatherChallengeProperty.CUR_SUCC, 100)
 	        ScriptLib.PrintContextLog(context, "## ModifyFatherChallengeProperty!!!" )
 	end
-	
+
 	ScriptLib.KillEntityByConfigId(context, { config_id = 162022 })
-	
+
 	return 0
 end
 
@@ -295,31 +295,31 @@ function action_EVENT_CHALLENGE_SUCCESS_162018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133213162, 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_162019(context, evt)
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 6)
-	
+
 	ScriptLib.RefreshGroup(context, {group_id = defs.group_id, suite = 1})
-	
+
 	ScriptLib.SetGroupVariableValue(context, "hasStarted", 0)
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_162020(context, evt)
 	ScriptLib.PrintContextLog(context, "## ChallengeSuccess 1001!!!")
-	
+
 	return 0
 end
 
@@ -328,7 +328,7 @@ function condition_EVENT_ANY_MONSTER_DIE_162023(context, evt)
 	if 162001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -337,7 +337,7 @@ function condition_EVENT_ANY_MONSTER_DIE_162024(context, evt)
 	if 162002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -346,7 +346,7 @@ function condition_EVENT_ANY_MONSTER_DIE_162025(context, evt)
 	if 162003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -355,7 +355,7 @@ function condition_EVENT_ANY_MONSTER_DIE_162026(context, evt)
 	if 162005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -364,7 +364,7 @@ function condition_EVENT_ANY_MONSTER_DIE_162027(context, evt)
 	if 162006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -374,15 +374,15 @@ function condition_EVENT_GROUP_LOAD_162028(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "hasStarted") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_162028(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "hasStarted", 0)
-	
+
 	ScriptLib.RefreshGroup(context, {group_id = defs.group_id, suite = 1})
-	
+
 	return 0
 end

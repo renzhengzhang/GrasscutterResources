@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210299
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -73,20 +73,20 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_299002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"GadgetCreate"为1
 	if ScriptLib.GetGroupVariableValue(context, "GadgetCreate") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -97,27 +97,27 @@ function action_EVENT_VARIABLE_CHANGE_299002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_299003(context, evt)
 	-- 判断是gadgetid 为 299001的移动平台，是否到达了321000066 的路线中的 4 点
-	
+
 	if 299001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 321000066 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 4 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -128,7 +128,7 @@ function action_EVENT_PLATFORM_REACH_POINT_299003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end

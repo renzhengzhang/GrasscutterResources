@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 245000001
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_id = 245000001,
 	gear_group_id = 245000002,
 	route_guide_timer = 5,
@@ -37,9 +37,9 @@ routes_start_point={
 guide_point_pool={1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1016,1017,1018,1019,1020,1021,1022,1023,1024,1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,1037,1038,1039,1040}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -114,9 +114,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -127,9 +127,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -145,20 +145,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1044(context, evt)
 	if evt.param1 ~= 1044 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -169,13 +169,13 @@ function action_EVENT_ENTER_REGION_1044(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 显示id为137的reminder
 		if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,143,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  		return -1
 		end
-	
-	
+
+
 	return 0
 end
 

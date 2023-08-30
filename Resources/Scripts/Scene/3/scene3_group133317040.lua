@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133317040
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -94,9 +94,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 使用reminderUI
@@ -143,7 +143,7 @@ function condition_EVENT_GADGET_CREATE_40002(context, evt)
 	if 40001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -157,27 +157,27 @@ function action_EVENT_GADGET_CREATE_40002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_40003(context, evt)
 	-- 判断是gadgetid 为 40001的移动平台，是否到达了331700009 的点集中的 14 点
-	
+
 	if 40001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 331700009 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 14 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -185,33 +185,33 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_40003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133317040, 2)
-	
+
 	-- 调用提示id为 1000230014 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1000230014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_40004(context, evt)
 	-- 判断是gadgetid 为 40001的移动平台，是否到达了331700009 的点集中的 19 点
-	
+
 	if 40001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 331700009 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 19 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -221,20 +221,20 @@ function action_EVENT_PLATFORM_ARRIVAL_40004(context, evt)
 		TLA_set_platform_pointarray(context, evt, 40001, 331700009, {20,21,22}, 0, false)
 	else
 		TLA_active_reminder_ui(context, evt, 1000230016)
-		
+
 		TLA_add_groupsuite(context, evt, 133317040, 3)
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_40005(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133317040) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -248,19 +248,19 @@ function action_EVENT_ANY_MONSTER_DIE_40005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_40009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"obstructQ"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "obstructQ", 133317040) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -274,27 +274,27 @@ function action_EVENT_VARIABLE_CHANGE_40009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_40010(context, evt)
 	-- 判断是gadgetid 为 40001的移动平台，是否到达了331700009 的点集中的 22 点
-	
+
 	if 40001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 331700009 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 22 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -305,6 +305,6 @@ function action_EVENT_PLATFORM_ARRIVAL_40010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

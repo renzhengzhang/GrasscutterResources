@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133310375
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -111,9 +111,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -124,9 +124,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -142,20 +142,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_375012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone01"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone01") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -166,19 +166,19 @@ function action_EVENT_VARIABLE_CHANGE_375012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_375013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone02"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone02") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -189,19 +189,19 @@ function action_EVENT_VARIABLE_CHANGE_375013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_375014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone03"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone03") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -212,19 +212,19 @@ function action_EVENT_VARIABLE_CHANGE_375014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_375015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone04"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone04") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -235,19 +235,19 @@ function action_EVENT_VARIABLE_CHANGE_375015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_375016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone05"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone05") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -258,19 +258,19 @@ function action_EVENT_VARIABLE_CHANGE_375016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_375017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone06"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone06") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -281,19 +281,19 @@ function action_EVENT_VARIABLE_CHANGE_375017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_375018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone07"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone07") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -304,19 +304,19 @@ function action_EVENT_VARIABLE_CHANGE_375018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_375019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone08"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone08") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -327,19 +327,19 @@ function action_EVENT_VARIABLE_CHANGE_375019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_375020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone09"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone09") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -350,19 +350,19 @@ function action_EVENT_VARIABLE_CHANGE_375020(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_375021(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone10"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone10") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -373,19 +373,19 @@ function action_EVENT_VARIABLE_CHANGE_375021(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_375022(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone11"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone11") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -396,7 +396,7 @@ function action_EVENT_VARIABLE_CHANGE_375022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -406,7 +406,7 @@ function condition_EVENT_GROUP_LOAD_375023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "stone01") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -417,7 +417,7 @@ function action_EVENT_GROUP_LOAD_375023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -427,7 +427,7 @@ function condition_EVENT_GROUP_LOAD_375024(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "stone02") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -438,7 +438,7 @@ function action_EVENT_GROUP_LOAD_375024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -448,7 +448,7 @@ function condition_EVENT_GROUP_LOAD_375025(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "stone03") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -459,7 +459,7 @@ function action_EVENT_GROUP_LOAD_375025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -469,7 +469,7 @@ function condition_EVENT_GROUP_LOAD_375026(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "stone04") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -480,7 +480,7 @@ function action_EVENT_GROUP_LOAD_375026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -490,7 +490,7 @@ function condition_EVENT_GROUP_LOAD_375027(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "stone05") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -501,7 +501,7 @@ function action_EVENT_GROUP_LOAD_375027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -511,7 +511,7 @@ function condition_EVENT_GROUP_LOAD_375028(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "stone06") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -522,7 +522,7 @@ function action_EVENT_GROUP_LOAD_375028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -532,7 +532,7 @@ function condition_EVENT_GROUP_LOAD_375029(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "stone07") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -543,7 +543,7 @@ function action_EVENT_GROUP_LOAD_375029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -553,7 +553,7 @@ function condition_EVENT_GROUP_LOAD_375030(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "stone08") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -564,7 +564,7 @@ function action_EVENT_GROUP_LOAD_375030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -574,7 +574,7 @@ function condition_EVENT_GROUP_LOAD_375031(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "stone09") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -585,7 +585,7 @@ function action_EVENT_GROUP_LOAD_375031(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -595,7 +595,7 @@ function condition_EVENT_GROUP_LOAD_375032(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "stone10") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -606,7 +606,7 @@ function action_EVENT_GROUP_LOAD_375032(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -616,7 +616,7 @@ function condition_EVENT_GROUP_LOAD_375033(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "stone11") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -627,6 +627,6 @@ function action_EVENT_GROUP_LOAD_375033(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end

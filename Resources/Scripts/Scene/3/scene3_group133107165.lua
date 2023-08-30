@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133107165
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -75,9 +75,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -88,9 +88,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -106,35 +106,35 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_165008(context, evt)
 	-- 第三章判定
-	
+
 	--物件发生状态改变时开始判断，缩小判定范围至物件ID
 	if 165004 ~= evt.param2 and 165005 ~= evt.param2 and 165006 ~= evt.param2 then
 	        return false
 	end
-	
+
 	--当某物件状态为Action01时，向下执行
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 165004) ~= GadgetState.Action01 then
 	        return false
-	end 
-	
+	end
+
 	--当某物件状态为Action01时，向下执行
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 165005) ~= GadgetState.Action01 then
 	        return false
-	end        
-	
+	end
+
 	--当某物件状态为Action01时，向下执行
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 165006) ~= GadgetState.Action01 then
 	        return false
-	end        
-	
+	end
+
 	return true
 end
 
@@ -145,49 +145,49 @@ function action_EVENT_GADGET_STATE_CHANGE_165008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：133107165的对象,请求一次调用,并将string参数："findelay" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133107165, "findelay", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 将configid为 165001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 165002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 165003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133107165 ；指定config：165001；物件身上指定option：51；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133107165, 165001, 51) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 133107165 ；指定config：165002；物件身上指定option：52；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133107165, 165002, 52) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 133107165 ；指定config：165003；物件身上指定option：53；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133107165, 165003, 53) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_GROUP_LOAD_165009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -208,37 +208,37 @@ function action_EVENT_GROUP_LOAD_165009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将configid为 165004 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165004, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "guancha3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "guancha3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 165005 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165005, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 165006 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165006, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 165012 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -247,7 +247,7 @@ function condition_EVENT_GADGET_CREATE_165010(context, evt)
 	if 165032 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -258,7 +258,7 @@ function action_EVENT_GADGET_CREATE_165010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -266,14 +266,14 @@ end
 function condition_EVENT_SELECT_OPTION_165013(context, evt)
 	-- 判断是gadgetid 165001 option_id 51
 	if 165001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 51 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -283,45 +283,45 @@ function action_EVENT_SELECT_OPTION_165013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
-	
+		end
+
+
 	-- 将在groupid为 133107165 中的 configid为 165004 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {901,902,903}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133107165, 165004) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 165004 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165004, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165004, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 165004 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -331,11 +331,11 @@ function condition_EVENT_GADGET_CREATE_165014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 0 then
 			return false
 	end
-	
+
 	if 165001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -346,7 +346,7 @@ function action_EVENT_GADGET_CREATE_165014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -356,11 +356,11 @@ function condition_EVENT_GADGET_CREATE_165015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 0 then
 			return false
 	end
-	
+
 	if 165002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -371,7 +371,7 @@ function action_EVENT_GADGET_CREATE_165015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -381,11 +381,11 @@ function condition_EVENT_GADGET_CREATE_165016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 0 then
 			return false
 	end
-	
+
 	if 165003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -396,7 +396,7 @@ function action_EVENT_GADGET_CREATE_165016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -404,14 +404,14 @@ end
 function condition_EVENT_SELECT_OPTION_165017(context, evt)
 	-- 判断是gadgetid 165032 option_id 188
 	if 165032 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 188 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -422,32 +422,32 @@ function action_EVENT_SELECT_OPTION_165017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 165032 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将本组内变量名为 "guancha3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "guancha3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 延迟9秒后,向groupId为：133107165的对象,请求一次调用,并将string参数："guanchahou3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133107165, "guanchahou3", 9) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1110191 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110191) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -455,14 +455,14 @@ end
 function condition_EVENT_SELECT_OPTION_165018(context, evt)
 	-- 判断是gadgetid 165003 option_id 53
 	if 165003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 53 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -473,7 +473,7 @@ function action_EVENT_SELECT_OPTION_165018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -483,44 +483,44 @@ function action_EVENT_TIMER_EVENT_165019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "finish_133107165") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "fin" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "fin", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "guancha3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "guancha3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 133107165 ；指定config：165001；物件身上指定option：51；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133107165, 165001, 51) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 133107165 ；指定config：165002；物件身上指定option：52；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133107165, 165002, 52) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 133107165 ；指定config：165003；物件身上指定option：53；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133107165, 165003, 53) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-470，212，328），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-470, y=212, z=328}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -529,14 +529,14 @@ function action_EVENT_TIMER_EVENT_165019(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 创建id为165032的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 165032 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -546,12 +546,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_165020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 0 then
 			return false
 	end
-	
+
 	-- 检测config_id为165001的gadget是否从GadgetState.GearStop变为GadgetState.GearStart
 	if 165001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.GearStop ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -562,7 +562,7 @@ function action_EVENT_GADGET_STATE_CHANGE_165020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -572,12 +572,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_165021(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 0 then
 			return false
 	end
-	
+
 	-- 检测config_id为165002的gadget是否从GadgetState.GearStop变为GadgetState.GearStart
 	if 165002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.GearStop ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -588,7 +588,7 @@ function action_EVENT_GADGET_STATE_CHANGE_165021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -598,12 +598,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_165022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 0 then
 			return false
 	end
-	
+
 	-- 检测config_id为165003的gadget是否从GadgetState.GearStop变为GadgetState.GearStart
 	if 165003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.GearStop ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -614,7 +614,7 @@ function action_EVENT_GADGET_STATE_CHANGE_165022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -622,14 +622,14 @@ end
 function condition_EVENT_SELECT_OPTION_165023(context, evt)
 	-- 判断是gadgetid 165001 option_id 51
 	if 165001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 51 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -640,7 +640,7 @@ function action_EVENT_SELECT_OPTION_165023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -648,14 +648,14 @@ end
 function condition_EVENT_SELECT_OPTION_165024(context, evt)
 	-- 判断是gadgetid 165002 option_id 52
 	if 165002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 52 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -666,7 +666,7 @@ function action_EVENT_SELECT_OPTION_165024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -674,14 +674,14 @@ end
 function condition_EVENT_SELECT_OPTION_165025(context, evt)
 	-- 判断是gadgetid 165002 option_id 52
 	if 165002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 52 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -691,45 +691,45 @@ function action_EVENT_SELECT_OPTION_165025(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
-	
+		end
+
+
 	-- 将在groupid为 133107165 中的 configid为 165005 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {901,902,903}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133107165, 165005) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 165005 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165005, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165005, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 165005 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -737,14 +737,14 @@ end
 function condition_EVENT_SELECT_OPTION_165026(context, evt)
 	-- 判断是gadgetid 165002 option_id 52
 	if 165002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 52 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -754,45 +754,45 @@ function action_EVENT_SELECT_OPTION_165026(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165003, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
-	
+		end
+
+
 	-- 将在groupid为 133107165 中的 configid为 165006 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {901,902,903}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133107165, 165006) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 165006 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165006, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165006, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 165006 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -800,14 +800,14 @@ end
 function condition_EVENT_SELECT_OPTION_165027(context, evt)
 	-- 判断是gadgetid 165003 option_id 53
 	if 165003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 53 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -817,45 +817,45 @@ function action_EVENT_SELECT_OPTION_165027(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
-	
+		end
+
+
 	-- 将在groupid为 133107165 中的 configid为 165004 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {901,902,903}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133107165, 165004) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 165004 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165004, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165004, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 165004 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -863,14 +863,14 @@ end
 function condition_EVENT_SELECT_OPTION_165028(context, evt)
 	-- 判断是gadgetid 165003 option_id 53
 	if 165003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 53 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -880,45 +880,45 @@ function action_EVENT_SELECT_OPTION_165028(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165003, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
-	
+		end
+
+
 	-- 将在groupid为 133107165 中的 configid为 165006 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {901,902,903}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133107165, 165006) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 165006 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165006, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165006, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 165006 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -926,14 +926,14 @@ end
 function condition_EVENT_SELECT_OPTION_165029(context, evt)
 	-- 判断是gadgetid 165001 option_id 51
 	if 165001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 51 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -943,45 +943,45 @@ function action_EVENT_SELECT_OPTION_165029(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
-	
+		end
+
+
 	-- 将在groupid为 133107165 中的 configid为 165005 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {901,902,903}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133107165, 165005) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 165005 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165005, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133107165, 165005, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 165005 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -992,7 +992,7 @@ function action_EVENT_TIMER_EVENT_165030(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1002,7 +1002,7 @@ function condition_EVENT_GROUP_LOAD_165031(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "guancha3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1013,6 +1013,6 @@ function action_EVENT_GROUP_LOAD_165031(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

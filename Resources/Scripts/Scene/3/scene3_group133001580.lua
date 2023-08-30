@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001580
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 	RegionID =  580013
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -128,9 +128,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -138,22 +138,22 @@ function condition_EVENT_ANY_MONSTER_LIVE_580002(context, evt)
 	if 580001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_LIVE_580002(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 502, 110175, 240, {success = 1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 502, 110276, 110176, {240,133001580,1,0},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 502, 110277, 110177, {240,5,580,1,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 502, 110278, 110178, {240,1,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 502)
-	
+
 	return 0
 end
 
@@ -162,22 +162,22 @@ function condition_EVENT_ANY_MONSTER_LIVE_580003(context, evt)
 	if 580001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_LIVE_580003(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 501, 110175, 300, {success = 1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 501, 110176, 110176, {300,133001580,1,0},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 501, 110177, 110177, {300,5,580,1,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 501, 110178, 110178, {300,2,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 501)
-	
+
 	return 0
 end
 
@@ -188,7 +188,7 @@ function action_EVENT_CHALLENGE_SUCCESS_580004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -199,7 +199,7 @@ function action_EVENT_CHALLENGE_FAIL_580005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -208,22 +208,22 @@ function condition_EVENT_ANY_MONSTER_LIVE_580006(context, evt)
 	if 580020 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_LIVE_580006(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 503, 110175, 90, {success = 1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 503, 110376, 110176, {90,133001580,1,0},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 503, 110377, 110177, {90,5,580,1,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 503, 110378, 110179, {90,0,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 503)
-	
+
 	return 0
 end
 
@@ -234,7 +234,7 @@ function action_EVENT_CHALLENGE_SUCCESS_580007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -245,7 +245,7 @@ function action_EVENT_CHALLENGE_SUCCESS_580008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -256,7 +256,7 @@ function action_EVENT_CHALLENGE_FAIL_580009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -267,7 +267,7 @@ function action_EVENT_CHALLENGE_FAIL_580010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -276,7 +276,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_580018(context, evt)
 	if 580015 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -287,13 +287,13 @@ function action_EVENT_GADGET_STATE_CHANGE_580018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 延迟10秒后,向groupId为：133001580的对象,请求一次调用,并将string参数："first" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133001580, "first", 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -302,7 +302,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_580019(context, evt)
 	if 580014 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -313,13 +313,13 @@ function action_EVENT_GADGET_STATE_CHANGE_580019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 延迟10秒后,向groupId为：133001580的对象,请求一次调用,并将string参数："second" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133001580, "second", 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -328,7 +328,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_580025(context, evt)
 	if 580017 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -339,13 +339,13 @@ function action_EVENT_GADGET_STATE_CHANGE_580025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 延迟10秒后,向groupId为：133001580的对象,请求一次调用,并将string参数："third" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133001580, "third", 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -356,7 +356,7 @@ function action_EVENT_TIMER_EVENT_580026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -367,7 +367,7 @@ function action_EVENT_TIMER_EVENT_580027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -378,7 +378,7 @@ function action_EVENT_TIMER_EVENT_580028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -387,7 +387,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_580029(context, evt)
 	if 580016 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -398,7 +398,7 @@ function action_EVENT_GADGET_STATE_CHANGE_580029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 

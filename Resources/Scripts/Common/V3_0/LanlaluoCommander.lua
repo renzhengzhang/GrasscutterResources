@@ -9,7 +9,7 @@
 
 -- 特定Region或者Group可以写，每次EnterRegion会检测
 --[[
-local defs ={
+defs ={
     regionList = {123},
     -- 1,2,3,4对应4套等级
     curCommander =1,

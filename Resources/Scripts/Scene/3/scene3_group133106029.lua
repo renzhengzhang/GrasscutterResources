@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133106029
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	region_Enter = 29008,
 	region_Leave = 29009,
 	group_id = 133106029,
@@ -16,15 +16,15 @@ local defs = {
 
 -- DEFS_MISCS
 local Pursina = {
-	{29002,29005},	
+	{29002,29005},
 	{29003,29006},
 	{29004,29007},
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -130,9 +130,9 @@ sight_groups = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -143,9 +143,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -161,23 +161,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_29010(context, evt)
 	-- 判断是gadgetid 29001 option_id 175
 	if 29001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 175 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -187,15 +187,15 @@ function action_EVENT_SELECT_OPTION_29010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 29001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_29011(context, evt)
 	-- 判断剩余怪物数量是否是0.
-	
+
 	-- 如果不为0设置超时标记，返回0
 	--if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 	--	ScriptLib.SetGroupVariableValue(context, "isTimeout", 1)
@@ -206,20 +206,20 @@ function action_EVENT_TIME_AXIS_PASS_29011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "refreshMonster") ~= ScriptLib.GetGroupVariableValue(context, "finalWave") then
 		ScriptLib.ChangeGroupVariableValue(context, "refreshMonster", 1)
 	else
-		ScriptLib.SetGroupVariableValue(context, "refreshMonster", 1)	
+		ScriptLib.SetGroupVariableValue(context, "refreshMonster", 1)
 	end
 	--end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_29012(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
-	
-	
-	
+
+
+
+
 	--三个电桩进度全满跳出
 	if ScriptLib.GetGalleryProgressScore(context, "digProgress0", defs.gallery_id)>=100 and ScriptLib.GetGalleryProgressScore(context, "digProgress1", defs.gallery_id)>=100 and ScriptLib.GetGalleryProgressScore(context, "digProgress2", defs.gallery_id)>=100 then
 		return 0
@@ -228,14 +228,14 @@ function action_EVENT_VARIABLE_CHANGE_29012(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.prospect_id[1]) ~= GadgetState.GearStop and ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.prospect_id[2]) ~= GadgetState.GearStop and ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.prospect_id[3]) ~= GadgetState.GearStop then
 		return 0
 	end
-	
+
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 1)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 2)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 3)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 4)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 5)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 6)
-	
+
 	-- refreshMonster=1，刷第1波.A点刷新
 	if ScriptLib.GetGroupVariableValue(context, "refreshMonster") == 1 then
 		if ScriptLib.GetGalleryProgressScore(context, "digProgress0", defs.gallery_id)>=100 or ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.prospect_id[1]) ~= GadgetState.GearStop then
@@ -273,12 +273,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_29019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"IsFinished"为1
 	if ScriptLib.GetGroupVariableValue(context, "IsFinished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -293,7 +293,7 @@ function action_EVENT_VARIABLE_CHANGE_29019(context, evt)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 4)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 5)
 	ScriptLib.ClearPoolMonsterTide(context, defs.group_id, 6)
-	
+
 	return 0
 end
 
@@ -301,26 +301,26 @@ end
 function action_EVENT_TIMER_EVENT_29056(context, evt)
 	-- 创建标识为"looptime"，时间节点为{60,120}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "looptime", {60,120}, true)
-	
-	
+
+
 	-- 针对当前group内变量名为 "refreshMonster" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "refreshMonster", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_29057(context, evt)
 	if evt.param1 ~= 29057 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -330,7 +330,7 @@ function action_EVENT_ENTER_REGION_29057(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,146,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -339,7 +339,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_29058(context, evt)
 	if (defs.prospect_id[1] ~= evt.param2 and defs.prospect_id[2] ~= evt.param2 and defs.prospect_id[3] ~= evt.param2) or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -350,7 +350,7 @@ function action_EVENT_GADGET_STATE_CHANGE_29058(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

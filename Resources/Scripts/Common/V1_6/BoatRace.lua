@@ -1,16 +1,16 @@
 --[[
-local defs = {
+defs = {
 	need_kill_hint = true,
 	group_id = 144001108, --对应的GroupID
 	gadget_init = {108013, 108014},	--defs.gadget_init里按顺序填入 开启挑战机关ConfigID、 限时终点ConfigID
 	challenge_time = 181, --挑战持续的时间
-	gadget_suites = { 
+	gadget_suites = {
 		[4] = {108015,108023},	--suites每波需要销毁的指示路点和光柱,结构为[suite_id] = {gadget1,gadget2},id从4开始
 		[5] = {108017,108024},
 		[6] = {108019,108025},
 	},
 	--怪物死亡时刷新对应的Suites里的纹章,结构为[configid] = suiteid,
-	suites_heraldry_loot = { 
+	suites_heraldry_loot = {
 		[108075] = 7,
 		[108077] = 8,
 	},
@@ -50,7 +50,7 @@ end
 --机关开启条件及开启处理
 function action_select_option(context, evt)
 	if defs.gadget_init[1] ~= evt.param1 or 175 ~= evt.param2 then
-		return -1	
+		return -1
 	end
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
@@ -87,7 +87,7 @@ function action_select_option(context, evt)
 	ScriptLib.StartFatherChallenge(context, 2011)
 	ScriptLib.SetChallengeEventMark(context, 2011, ChallengeEventMarkType.SUMMER_TIME_SPRINT_BOAT_TIME)
 	ScriptLib.SetChallengeEventMark(context, 2013, ChallengeEventMarkType.SUMMER_TIME_SPRINT_BOAT_GATHER_POINT)
-	ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, defs.gadget_init[1], 175) 
+	ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, defs.gadget_init[1], 175)
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 	-- 添加suite4的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, defs.suites_chain[1])
@@ -96,19 +96,19 @@ function action_select_option(context, evt)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_id, 10)
 	end
 	-- 将configid为 defs.gadget_init[1] 的物件更改为状态 GadgetState.GearStart
-	ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_init[1], GadgetState.GearStart) 
+	ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_init[1], GadgetState.GearStart)
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_GearStart")
 	return 0
 end
 
 -- 处理成功
 function action_challenge_success(context, evt)
-	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : success_process_start")	
+	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : success_process_start")
 	if evt.param1 ~= 2011 then
 		return -1
 	end
 	for i=1,#defs.gadget_init do
-		ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_init[i] })	
+		ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_init[i] })
 	end
 
 	for i= 2, #suites do
@@ -118,7 +118,7 @@ function action_challenge_success(context, evt)
 	for k,grp_id in pairs(boat_groups) do
 		ScriptLib.SetGroupTempValue(context, "flagHasStarted", 0, {group_id = grp_id})
 	end
-	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : success_kill_all_entity")	
+	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : success_kill_all_entity")
 	ScriptLib.RefreshGroup(context, { group_id = defs.group_id, suite = 1 })
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : success_process_end")
 	return 0
@@ -142,10 +142,10 @@ function action_challenge_fail(context, evt)
 	-- 设置操作台选项
 	ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, defs.gadget_init[1], {175})
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
-	
+
 	for i= 2, #suites do --目前第三组为空，从第四组开始
 	    ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, i)
-	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_groupsuites")	
+	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_groupsuites")
 	end
 
 	-- 将configid为 defs.gadget_init[1] 的物件更改为状态 GadgetState.Default
@@ -170,7 +170,7 @@ end
 -- 进入最终区域,suite2
 function condition_enter_final_region(context, evt)
 	-- 判断角色数量不少于1
-	if evt.param1 ~= suites[2].regions[1] then 
+	if evt.param1 ~= suites[2].regions[1] then
 		return false
 	end
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
@@ -191,7 +191,7 @@ function action_enter_region(context, evt)
 	if evt.param1 ~= suites[suite_seq].regions[1] then
 		return -1
 	end
-	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then 
+	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return -1
 	end
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : Enter"..suite_seq)

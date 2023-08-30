@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133310387
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -78,20 +78,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_387007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -102,7 +102,7 @@ function action_EVENT_VARIABLE_CHANGE_387007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -112,7 +112,7 @@ function condition_EVENT_GROUP_LOAD_387008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -123,17 +123,17 @@ function action_EVENT_GROUP_LOAD_387008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_387010(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0 
+	-- 判断指定group组剩余gadget数量是否是0
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133310387}) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -144,7 +144,7 @@ function action_EVENT_ANY_GADGET_DIE_387010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_ANY_GADGET_DIE_387012(context, evt)
 	if 387006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -164,6 +164,6 @@ function action_EVENT_ANY_GADGET_DIE_387012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133106437
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -144,9 +144,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -154,7 +154,7 @@ function condition_EVENT_GADGET_CREATE_437001(context, evt)
 	if 437008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -165,7 +165,7 @@ function action_EVENT_GADGET_CREATE_437001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -173,11 +173,11 @@ end
 function action_EVENT_SELECT_OPTION_437007(context, evt)
 	ScriptLib.DelWorktopOptionByGroupId(context, 133106437, 437008, 750)
 	ScriptLib.CreateGroupTimerEvent(context, 133106437, "cooldown", 5)
-	
+
 	local _curTime = ScriptLib.GetGameHour(context)
 	if _curTime >= 0 and _curTime <2 and ScriptLib.GetGroupVariableValue(context, "dahuangjin") <1 then
 	        --创高级盗宝鼬
-	        ScriptLib.AddExtraGroupSuite(context,133106437,2)                
+	        ScriptLib.AddExtraGroupSuite(context,133106437,2)
 	elseif _curTime >= 2 and _curTime <12 and ScriptLib.GetGroupVariableValue(context, "cangjin") <4 then
 	        --创中级盗宝鼬
 	        ScriptLib.AddExtraGroupSuite(context,133106437,3)
@@ -185,7 +185,7 @@ function action_EVENT_SELECT_OPTION_437007(context, evt)
 	        --创低级盗宝鼬
 	        ScriptLib.AddExtraGroupSuite(context,133106437,4)
 	end
-	return 0 
+	return 0
 end
 
 -- 触发操作
@@ -195,19 +195,19 @@ function action_EVENT_TIMER_EVENT_437009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_437018(context, evt)
 	if evt.param1 ~= 437018 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -218,7 +218,7 @@ function action_EVENT_ENTER_REGION_437018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-883.9609, y=184.8571, z=1642.806}，持续时间为1秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-883.9609, y=184.8571, z=1642.806}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -227,20 +227,20 @@ function action_EVENT_ENTER_REGION_437018(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_437019(context, evt)
 	if evt.param1 ~= 437019 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -251,7 +251,7 @@ function action_EVENT_ENTER_REGION_437019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-884.6059, y=182.7242, z=1656.779}，持续时间为1秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-884.6059, y=182.7242, z=1656.779}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -260,20 +260,20 @@ function action_EVENT_ENTER_REGION_437019(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_437020(context, evt)
 	if evt.param1 ~= 437020 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -284,7 +284,7 @@ function action_EVENT_ENTER_REGION_437020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-878.9308, y=184.2747, z=1645.634}，持续时间为1秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-878.9308, y=184.2747, z=1645.634}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -293,8 +293,8 @@ function action_EVENT_ENTER_REGION_437020(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -303,15 +303,15 @@ function condition_EVENT_ANY_MONSTER_DIE_437021(context, evt)
 	if 437012 ~= evt.param1 then
 		return false
 	end
-	
+
 	if evt.param2 ~= 0 then
 	    return false
 	 end
-	
+
 	if ScriptLib.GetHostQuestState(context,7106601) == 3 then
 		return true
 	end
-	
+
 	return false
 end
 
@@ -322,7 +322,7 @@ function action_EVENT_ANY_MONSTER_DIE_437021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -331,15 +331,15 @@ function condition_EVENT_ANY_MONSTER_DIE_437022(context, evt)
 	if 437012 ~= evt.param1 then
 		return false
 	end
-	
+
 	if evt.param2 ~= 0 then
 	    return false
 	 end
-	
+
 	if ScriptLib.GetHostQuestState(context,7106601) ~= 3 then
 		return true
 	end
-	
+
 	return false
 end
 
@@ -350,7 +350,7 @@ function action_EVENT_ANY_MONSTER_DIE_437022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -358,19 +358,19 @@ end
 function action_EVENT_QUEST_FINISH_437023(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106437, 5)
-	
+
 	-- 调用提示id为 310643701 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310643701) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：133106437的对象,请求一次调用,并将string参数："cameralook" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133106437, "cameralook", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -380,14 +380,14 @@ function condition_EVENT_ANY_MONSTER_DIE_437024(context, evt)
 	if evt.param1 ~= 437012 then
 	    return false
 	 end
-	  
-	
+
+
 	--判断死亡怪物的死亡类型是否为0，0为普通死亡（比如被击杀），1为普通地被killself杀死，2为消失（比如小动物逃跑消失，北风狼脱战消失）
 	if evt.param2 ~= 0 then
 	    return false
 	 end
-	
-	
+
+
 	return true
 end
 
@@ -398,25 +398,25 @@ function action_EVENT_ANY_MONSTER_DIE_437024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133106437, EntityType.GADGET, 437008 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133106437, EntityType.GADGET, 437028 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133106437, "cooldown") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -426,14 +426,14 @@ function condition_EVENT_ANY_MONSTER_DIE_437025(context, evt)
 	if evt.param1 ~= 437011 then
 	    return false
 	 end
-	  
-	
+
+
 	--判断死亡怪物的死亡类型是否为0，0为普通死亡（比如被击杀），1为普通地被killself杀死，2为消失（比如小动物逃跑消失，北风狼脱战消失）
 	if evt.param2 ~= 0 then
 	    return false
 	 end
-	
-	
+
+
 	return true
 end
 
@@ -444,7 +444,7 @@ function action_EVENT_ANY_MONSTER_DIE_437025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -454,14 +454,14 @@ function condition_EVENT_ANY_MONSTER_DIE_437026(context, evt)
 	if evt.param1 ~= 437010 then
 	    return false
 	 end
-	  
-	
+
+
 	--判断死亡怪物的死亡类型是否为0，0为普通死亡（比如被击杀），1为普通地被killself杀死，2为消失（比如小动物逃跑消失，北风狼脱战消失）
 	if evt.param2 ~= 0 then
 	    return false
 	 end
-	
-	
+
+
 	return true
 end
 
@@ -472,7 +472,7 @@ function action_EVENT_ANY_MONSTER_DIE_437026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -480,14 +480,14 @@ end
 function condition_EVENT_SELECT_OPTION_437029(context, evt)
 	-- 判断是gadgetid 437008 option_id 750
 	if 437008 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 750 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -499,8 +499,8 @@ function action_EVENT_SELECT_OPTION_437029(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "Audio_lua_quest_WQ_cengYanJuYuan_whistle", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -514,7 +514,7 @@ function action_EVENT_TIMER_EVENT_437030(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end

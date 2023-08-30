@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133104060
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -101,7 +101,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_101(context, evt)
 	if 131 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -109,7 +109,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_101(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104060, 2)
-	
+
 	return 0
 end
 
@@ -118,7 +118,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_102(context, evt)
 	if 131 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -126,7 +126,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_102(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104060, 2)
-	
+
 	return 0
 end
 
@@ -135,7 +135,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_103(context, evt)
 	if 132 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -143,15 +143,15 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_103(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104060, 2)
-	
+
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104060, 1)
-	
+
 	-- 销毁group存档，不影响当前场景，但卸载后group就永别了
 	if 0 ~= ScriptLib.SetGroupDead(context, 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_group_die")
 		return -1
 	end
-	
+
 	return 0
 end

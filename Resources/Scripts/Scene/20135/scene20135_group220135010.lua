@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220135010
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -97,54 +97,54 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_10002(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) == 0 then
 		ScriptLib.SetGroupVariableValue(context, "temp", 1)
-		
+
 		ScriptLib.SetGroupVariableValue(context, "door", 1)
-		
+
 		ScriptLib.ChangeToTargetLevelTag(context, 37)
-		
+
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 220135010, 10006, GadgetState.GearStart)
-		
+
 		ScriptLib.AddQuestProgress(context, "4006612")
-		
+
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 220135010, 10001, GadgetState.Default)
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10007(context, evt)
 	if evt.param1 ~= 10007 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"temp"为0
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"start"为1
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"test"为0
 	if ScriptLib.GetGroupVariableValue(context, "test") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -155,16 +155,16 @@ function action_EVENT_ENTER_REGION_10007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 10006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220135010, 2)
-	
+
 	return 0
 end
 
@@ -172,22 +172,22 @@ end
 function action_EVENT_GROUP_LOAD_10008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 1 then
 		ScriptLib.ChangeToTargetLevelTag(context, 37)
-		
+
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 220135010, 10006, GadgetState.GearStart)
-		
+
 		ScriptLib.AddQuestProgress(context, "4006612")
-		
+
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 220135010, 10001, GadgetState.Default)
 	else
 		ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=1})
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "door") == 1 then
 			ScriptLib.SetGadgetStateByConfigId(context,10006, GadgetState.GearStart)
 		else
 			ScriptLib.SetGadgetStateByConfigId(context,10006, GadgetState.Default)
 		end
 	end
-	
+
 	return 0
 end
 
@@ -198,59 +198,59 @@ function action_EVENT_QUEST_START_10011(context, evt)
 	else
 		if ScriptLib.GetGroupVariableValue(context, "start") == 0 then
 			ScriptLib.SetGroupVariableValue(context, "door", 1)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "start", 1)
-			
+
 			ScriptLib.SetGadgetStateByConfigId(context,10006, GadgetState.GearStart)
 		end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_DUNGEON_ALL_AVATAR_DIE_10012(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "test", 0)
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context,10001, GadgetState.Default)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "door") == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context,10006, GadgetState.GearStart)
 	else
 		ScriptLib.SetGadgetStateByConfigId(context,10006, GadgetState.Default)
 	end
-	
+
 	ScriptLib.RemoveExtraGroupSuite(context, 220135010, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10013(context, evt)
 	if evt.param1 ~= 10013 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"temp"为0
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"start"为1
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"voice"为0
 	if ScriptLib.GetGroupVariableValue(context, "voice") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -261,30 +261,30 @@ function action_EVENT_ENTER_REGION_10013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 60010374 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 60010374) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_DUNGEON_AVATAR_SLIP_DIE_10014(context, evt)
 	ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=1})
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "temp") == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context,10001, GadgetState.Default)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "door") == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context,10006, GadgetState.GearStart)
 	else
 		ScriptLib.SetGadgetStateByConfigId(context,10006, GadgetState.Default)
 	end
-	
+
 	return 0
 end
 
@@ -294,7 +294,7 @@ function condition_EVENT_GROUP_LOAD_10015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -305,6 +305,6 @@ function action_EVENT_GROUP_LOAD_10015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133104672
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -65,9 +65,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -78,9 +78,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -168,9 +168,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -178,7 +178,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672013(context, evt)
 	if 672001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -189,13 +189,13 @@ function action_EVENT_GADGET_STATE_CHANGE_672013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133104672, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -204,7 +204,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672014(context, evt)
 	if 672002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -215,13 +215,13 @@ function action_EVENT_GADGET_STATE_CHANGE_672014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133104672, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -230,7 +230,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672015(context, evt)
 	if 672003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -241,13 +241,13 @@ function action_EVENT_GADGET_STATE_CHANGE_672015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133104672, suite = 4 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -256,7 +256,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672016(context, evt)
 	if 672004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -267,13 +267,13 @@ function action_EVENT_GADGET_STATE_CHANGE_672016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133104672, suite = 6 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -282,7 +282,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672017(context, evt)
 	if 672005 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -293,13 +293,13 @@ function action_EVENT_GADGET_STATE_CHANGE_672017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133104672, suite = 5 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -308,7 +308,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672018(context, evt)
 	if 672006 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -319,13 +319,13 @@ function action_EVENT_GADGET_STATE_CHANGE_672018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133104672, suite = 7 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -334,7 +334,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672019(context, evt)
 	if 672007 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -345,13 +345,13 @@ function action_EVENT_GADGET_STATE_CHANGE_672019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133104672, suite = 6 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -360,7 +360,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672020(context, evt)
 	if 672008 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -371,13 +371,13 @@ function action_EVENT_GADGET_STATE_CHANGE_672020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133104672, suite = 7 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -386,7 +386,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672021(context, evt)
 	if 672009 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -397,13 +397,13 @@ function action_EVENT_GADGET_STATE_CHANGE_672021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133104672, suite = 5 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -412,7 +412,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672022(context, evt)
 	if 672010 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -423,7 +423,7 @@ function action_EVENT_GADGET_STATE_CHANGE_672022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -432,7 +432,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672023(context, evt)
 	if 672011 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -443,7 +443,7 @@ function action_EVENT_GADGET_STATE_CHANGE_672023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -452,7 +452,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672024(context, evt)
 	if 672012 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -463,7 +463,7 @@ function action_EVENT_GADGET_STATE_CHANGE_672024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -473,7 +473,7 @@ function condition_EVENT_GROUP_REFRESH_672025(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stone_progress", 133104629) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -484,7 +484,7 @@ function action_EVENT_GROUP_REFRESH_672025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -494,7 +494,7 @@ function condition_EVENT_GROUP_REFRESH_672026(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stone_progress", 133104629) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -505,7 +505,7 @@ function action_EVENT_GROUP_REFRESH_672026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -515,7 +515,7 @@ function condition_EVENT_GROUP_REFRESH_672027(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stone_progress", 133104629) ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -526,7 +526,7 @@ function action_EVENT_GROUP_REFRESH_672027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -536,7 +536,7 @@ function condition_EVENT_GROUP_REFRESH_672028(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stone_progress", 133104629) ~= 5 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -547,7 +547,7 @@ function action_EVENT_GROUP_REFRESH_672028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -557,7 +557,7 @@ function condition_EVENT_GROUP_REFRESH_672029(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stone_progress", 133104629) ~= 6 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -568,7 +568,7 @@ function action_EVENT_GROUP_REFRESH_672029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -578,7 +578,7 @@ function condition_EVENT_GROUP_REFRESH_672030(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stone_progress", 133104629) ~= 7 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -589,7 +589,7 @@ function action_EVENT_GROUP_REFRESH_672030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -599,7 +599,7 @@ function condition_EVENT_GROUP_REFRESH_672031(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stone_progress", 133104629) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -610,6 +610,6 @@ function action_EVENT_GROUP_REFRESH_672031(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

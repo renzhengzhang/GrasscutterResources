@@ -1,4 +1,4 @@
---[[local defs = {
+--[[defs = {
 	group_id = xxx,
 	gadget_prison_list = {1,2,3,4},
 	gadget_guide = {1,2,3},
@@ -11,7 +11,7 @@
 	rampage_time = 40,
 	gadget_energy = 1,
 }--]]
- 
+
 --[[local energy_info = {
 	[1] = { time = 80, points = {1,2,3,4,5,6}},
 	[2] = { time = 160, points = {1,2,3,4,5,6}}
@@ -259,9 +259,9 @@ function action_avatar_die(context, evt)
 			if prey == context.uid then
 				--prey提前死亡不参与游戏
 				LF_Set_Prey_Die(context, context.uid)
-				return 0	
+				return 0
 			end
-		end 
+		end
 		--hunter提前死亡直接结算prey胜利
 		local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
 		ScriptLib.EndSceneMultiStagePlayStage(context, _index, "null", true)
@@ -425,13 +425,13 @@ function LF_Start_Comp_Challenge(context)
 	for i,v in ipairs(uid_list) do
 		if v == hunter then
 			LF_Set_Player_State_Value(context, v, HS_State.Play.name, 0)
-		else 
+		else
 			local idx = 0
 			for j = 1,3 do
 				if v == ScriptLib.GetGroupTempValue(context, "prey_"..j, {}) then
 					idx = j
 					break
-				end	
+				end
 			end
 			--只有非死亡状态的游侠才继续游戏
 			if ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {}) == 3 then

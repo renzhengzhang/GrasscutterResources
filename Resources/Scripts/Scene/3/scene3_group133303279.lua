@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133303279
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_CoreID = 279005,
 	monster_BossID = 279002,
 	gadget_Point_1 = 279006,
@@ -35,9 +35,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -109,9 +109,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -122,9 +122,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -167,9 +167,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -177,7 +177,7 @@ function condition_EVENT_MONSTER_BATTLE_279009(context, evt)
 	if 279002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -187,38 +187,38 @@ function action_EVENT_MONSTER_BATTLE_279009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 279012, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为279013的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 279013 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为279014的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 279014 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为279015的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 279015 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为279016的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 279016 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为279018的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 279018 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -227,7 +227,7 @@ function condition_EVENT_ANY_MONSTER_DIE_279010(context, evt)
 	if 279002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -237,8 +237,8 @@ function action_EVENT_ANY_MONSTER_DIE_279010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 279012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -247,7 +247,7 @@ function condition_EVENT_ANY_GADGET_DIE_279025(context, evt)
 	if 279006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -258,8 +258,8 @@ function action_EVENT_ANY_GADGET_DIE_279025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -268,7 +268,7 @@ function condition_EVENT_ANY_GADGET_DIE_279026(context, evt)
 	if 279007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -279,8 +279,8 @@ function action_EVENT_ANY_GADGET_DIE_279026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -289,7 +289,7 @@ function condition_EVENT_ANY_GADGET_DIE_279027(context, evt)
 	if 279008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -300,8 +300,8 @@ function action_EVENT_ANY_GADGET_DIE_279027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -310,7 +310,7 @@ function condition_EVENT_ANY_GADGET_DIE_279030(context, evt)
 	if 279005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -318,7 +318,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_279030(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303279, 4)
-	
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 144003013
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,9 +114,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -124,7 +124,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13005(context, evt)
 	if 13002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -135,20 +135,20 @@ function action_EVENT_GADGET_STATE_CHANGE_13005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "Gear1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Gear1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 13010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13006(context, evt)
 	if 13004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -168,20 +168,20 @@ function action_EVENT_GADGET_STATE_CHANGE_13006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "Gear3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Gear3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 13012 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -190,7 +190,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13007(context, evt)
 	if 13003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -201,32 +201,32 @@ function action_EVENT_GADGET_STATE_CHANGE_13007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "Gear2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Gear2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 13011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_13008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"SealGear"为3
 	if ScriptLib.GetGroupVariableValue(context, "SealGear") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -237,7 +237,7 @@ function action_EVENT_VARIABLE_CHANGE_13008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -246,7 +246,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13013(context, evt)
 	if 13010 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -256,8 +256,8 @@ function action_EVENT_GADGET_STATE_CHANGE_13013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -266,7 +266,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13014(context, evt)
 	if 13011 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -276,8 +276,8 @@ function action_EVENT_GADGET_STATE_CHANGE_13014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -286,7 +286,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13015(context, evt)
 	if 13012 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -296,8 +296,8 @@ function action_EVENT_GADGET_STATE_CHANGE_13015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -305,7 +305,7 @@ end
 function action_EVENT_QUEST_START_13016(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144003013, 2)
-	
+
 	return 0
 end
 
@@ -315,8 +315,8 @@ function action_EVENT_QUEST_FINISH_13017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -326,8 +326,8 @@ function action_EVENT_QUEST_FINISH_13018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -337,7 +337,7 @@ function condition_EVENT_QUEST_START_13019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Gear1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -348,7 +348,7 @@ function action_EVENT_QUEST_START_13019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -358,7 +358,7 @@ function condition_EVENT_QUEST_START_13020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Gear2") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -369,7 +369,7 @@ function action_EVENT_QUEST_START_13020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -379,7 +379,7 @@ function condition_EVENT_QUEST_START_13021(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Gear1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -390,7 +390,7 @@ function action_EVENT_QUEST_START_13021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -400,7 +400,7 @@ function condition_EVENT_QUEST_START_13022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Gear3") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -411,7 +411,7 @@ function action_EVENT_QUEST_START_13022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -421,7 +421,7 @@ function condition_EVENT_TIMER_EVENT_13023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "SealGear") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -432,13 +432,13 @@ function action_EVENT_TIMER_EVENT_13023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 144003013, "AddQuestProgress") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -448,7 +448,7 @@ function condition_EVENT_QUEST_START_13024(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "SealGear") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -459,6 +459,6 @@ function action_EVENT_QUEST_START_13024(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308088
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_id = 133308088,
 	gadget_riddle_hint = 88001,
 	gadget_riddle_1 = 88002,
@@ -18,9 +18,9 @@ local defs = {
 local markList = {88003,88005}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -91,15 +91,15 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_88007(context, evt)
 	if evt.param2 ~= defs.gadget_riddle_1 and evt.param2 ~= defs.gadget_riddle_2 and evt.param2 ~= defs.gadget_riddle_3 and evt.param2 ~= defs.gadget_riddle_4 then
-	return false 
+	return false
 	end
 	return true
 end
@@ -110,7 +110,7 @@ function action_EVENT_GADGET_STATE_CHANGE_88007(context, evt)
 	ScriptLib.ChangeGroupVariableValue(context, "State_Flag", 1)
 	if 0 == ScriptLib.GetCurTriggerCount(context) then
 	ScriptLib.MarkPlayerAction(context, 1003, 1, 1)
-	end 
+	end
 	elseif evt.param1 == GadgetState.Default then
 	ScriptLib.ChangeGroupVariableValue(context, "State_Flag", -1)
 	end
@@ -120,7 +120,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_88008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 < 0 or evt.param1 > 4 then
 	return false
 	end
@@ -133,16 +133,16 @@ function action_EVENT_VARIABLE_CHANGE_88008(context, evt)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Default)
 	elseif evt.param1 == 1 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action01)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 2) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 2)
 	elseif evt.param1 == 2 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action02)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 3) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 3)
 	elseif evt.param1 == 3 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action03)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 4) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 4)
 	elseif evt.param1 == 4 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.GearStart)
-	ScriptLib.MarkPlayerAction(context, 1003, 3, 5) 
+	ScriptLib.MarkPlayerAction(context, 1003, 3, 5)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_chest, GadgetState.Default)
 	end
 	return 0
@@ -172,7 +172,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_88010(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133308088, 88006) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -182,8 +182,8 @@ function action_EVENT_GADGET_STATE_CHANGE_88010(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133308258, 258001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标{x=-2360.184, y=48.62147, z=4246.94}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-2360.184, y=48.62147, z=4246.94}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -192,8 +192,8 @@ function action_EVENT_GADGET_STATE_CHANGE_88010(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133310061
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -93,15 +93,15 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_61001(context, evt)
 	if evt.param1 ~= 61001 then return false end
-	
+
 	local curQuestState = ScriptLib.GetHostQuestState(context,7308403)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -109,12 +109,12 @@ function condition_EVENT_ENTER_REGION_61001(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -125,11 +125,11 @@ function action_EVENT_ENTER_REGION_61001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建标识为"reminder"，时间节点为{30}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "reminder", {30}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -140,14 +140,14 @@ function action_EVENT_QUEST_START_61002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_61003(context, evt)
 	if evt.param1 ~= 61003 then return false end
-	
+
 	local curQuestState = ScriptLib.GetHostQuestState(context,7308404)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -155,12 +155,12 @@ function condition_EVENT_ENTER_REGION_61003(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -171,19 +171,19 @@ function action_EVENT_ENTER_REGION_61003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_61004(context, evt)
 	if evt.param1 ~= 61004 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -194,7 +194,7 @@ function action_EVENT_ENTER_REGION_61004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-2953.98, y=60.76698, z=4612.459}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-2953.98, y=60.76698, z=4612.459}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -203,8 +203,8 @@ function action_EVENT_ENTER_REGION_61004(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -215,7 +215,7 @@ function action_EVENT_QUEST_START_61005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_QUEST_FINISH_61006(context, evt)
 	if curQuestState == 3 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -239,7 +239,7 @@ function action_EVENT_QUEST_FINISH_61006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -252,7 +252,7 @@ function condition_EVENT_QUEST_FINISH_61007(context, evt)
 	if curQuestState ~= 3 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -263,7 +263,7 @@ function action_EVENT_QUEST_FINISH_61007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -274,7 +274,7 @@ function action_EVENT_QUEST_FINISH_61008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -285,7 +285,7 @@ function action_EVENT_QUEST_FINISH_61009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -294,7 +294,7 @@ function condition_EVENT_TIME_AXIS_PASS_61010(context, evt)
 	if "reminder" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	local curQuestState = ScriptLib.GetHostQuestState(context,7308403)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -302,7 +302,7 @@ function condition_EVENT_TIME_AXIS_PASS_61010(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -313,7 +313,7 @@ function action_EVENT_TIME_AXIS_PASS_61010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-2982.271, y=21.09952, z=4436.112}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-2982.271, y=21.09952, z=4436.112}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -322,12 +322,12 @@ function action_EVENT_TIME_AXIS_PASS_61010(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 停止标识为"reminder"的时间轴
 	ScriptLib.EndTimeAxis(context, "reminder")
-	
-	
+
+
 	return 0
 end
 
@@ -338,6 +338,6 @@ function action_EVENT_QUEST_START_61011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

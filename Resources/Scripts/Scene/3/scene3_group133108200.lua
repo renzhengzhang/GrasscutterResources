@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133108200
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -132,20 +132,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_200003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	--检测当前改变的variable是否在预设区间
 	if 1 > evt.param1 or 3 < evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -156,7 +156,7 @@ function action_EVENT_VARIABLE_CHANGE_200003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -164,14 +164,14 @@ end
 function condition_EVENT_SELECT_OPTION_200009(context, evt)
 	-- 判断是gadgetid 0 option_id 0
 	if 70800060 ~= ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid) then
-		return false	
+		return false
 	end
-	
+
 	if 68 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -181,17 +181,17 @@ function action_EVENT_SELECT_OPTION_200009(context, evt)
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133108200, evt.param1, 68) then
 		return -1
 	end
-	
-	
+
+
 	-- 根据不同的选项做不同的操作
 	if 68 == evt.param2 then
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, evt.param1, GadgetState.GearStop) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_option")
 			return -1
-		end 
+		end
 		return 0
 	end
-	
+
 	return 0
 end
 
@@ -200,7 +200,7 @@ function condition_EVENT_GADGET_CREATE_200010(context, evt)
 	if 70800060 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -211,7 +211,7 @@ function action_EVENT_GADGET_CREATE_200010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -220,7 +220,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_200014(context, evt)
 	if 70800060 ~= ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid) or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -231,19 +231,19 @@ function action_EVENT_GADGET_STATE_CHANGE_200014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_200015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"picked"为3
 	if ScriptLib.GetGroupVariableValue(context, "picked") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -251,8 +251,8 @@ end
 function action_EVENT_VARIABLE_CHANGE_200015(context, evt)
 	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, "GV_Mark_Skiff", 1)
-	ScriptLib.SetTeamServerGlobalValue(context, uid_list[1], "SGV_Box_Count", 4); 
-	
+	ScriptLib.SetTeamServerGlobalValue(context, uid_list[1], "SGV_Box_Count", 4);
+
 	return 0
 end
 
@@ -262,7 +262,7 @@ function condition_EVENT_GROUP_LOAD_200019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "picked") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -273,19 +273,19 @@ function action_EVENT_GROUP_LOAD_200019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "13310820001") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "13310820001") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -295,7 +295,7 @@ function condition_EVENT_GROUP_LOAD_200021(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "pick1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -306,7 +306,7 @@ function action_EVENT_GROUP_LOAD_200021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -316,7 +316,7 @@ function condition_EVENT_GROUP_LOAD_200022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "pick2") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -327,7 +327,7 @@ function action_EVENT_GROUP_LOAD_200022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -337,7 +337,7 @@ function condition_EVENT_GROUP_LOAD_200023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "pick3") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -348,7 +348,7 @@ function action_EVENT_GROUP_LOAD_200023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -357,7 +357,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_200024(context, evt)
 	if 200001 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -368,7 +368,7 @@ function action_EVENT_GADGET_STATE_CHANGE_200024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -377,7 +377,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_200025(context, evt)
 	if 200002 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -388,7 +388,7 @@ function action_EVENT_GADGET_STATE_CHANGE_200025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -397,7 +397,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_200026(context, evt)
 	if 200005 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -408,7 +408,7 @@ function action_EVENT_GADGET_STATE_CHANGE_200026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -419,18 +419,18 @@ function action_EVENT_GROUP_REFRESH_200027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为200002的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 200002 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为200005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 200005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

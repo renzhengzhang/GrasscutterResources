@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199003012
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	point_sum = 9,
 	route_2 = 900300038,
 	gadget_seelie = 12007
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -92,23 +92,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_12003(context, evt)
 	-- 判断是gadgetid 12002 option_id 411
 	if 12002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 411 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -119,63 +119,63 @@ function action_EVENT_SELECT_OPTION_12003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 199003012, EntityType.GADGET, 12001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 删除指定group： 199003012 ；指定config：12002；物件身上指定option：411；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 199003012, 12002, 411) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 199003012, EntityType.GADGET, 12002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 创建id为12007的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 12007 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 12007, 900300038) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 12007) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_12004(context, evt)
 	-- 判断是gadgetid 为 12007的移动平台，是否到达了900300038 的路线中的 8 点
-	
+
 	if 12007 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 900300038 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 8 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -186,20 +186,20 @@ function action_EVENT_PLATFORM_REACH_POINT_12004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "star" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "star", 1, 199003100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 12007 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -208,15 +208,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_12005(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-	
+
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-	
+
 	if defs.final_point == evt.param3 then
 	return false
 	end
-	
+
 	return true
 end
 
@@ -225,24 +225,24 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_12005(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, 12007) then
 	return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= evt.param3 then
 	ScriptLib.MarkPlayerAction(context, 2005, 2, evt.param3 + 1)
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12006(context, evt)
 	if evt.param1 ~= 12006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -253,13 +253,13 @@ function action_EVENT_ENTER_REGION_12006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 12007) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -269,7 +269,7 @@ function condition_EVENT_GROUP_LOAD_12008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "reach") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -280,7 +280,7 @@ function action_EVENT_GROUP_LOAD_12008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -290,7 +290,7 @@ function condition_EVENT_GROUP_LOAD_12009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "reach") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -301,6 +301,6 @@ function action_EVENT_GROUP_LOAD_12009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

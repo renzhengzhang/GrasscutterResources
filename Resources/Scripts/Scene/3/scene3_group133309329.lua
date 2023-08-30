@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309329
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	interactOptionID = 430,
 	gadget_fireTorch = 329002,
 	gadget_fireBase1 = 329001,
@@ -18,9 +18,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -95,9 +95,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -108,9 +108,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -126,25 +126,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_329007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"activeCount1"为1
 	if ScriptLib.GetGroupVariableValue(context, "activeCount1") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"activeCount2"为1
 	if ScriptLib.GetGroupVariableValue(context, "activeCount2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -155,13 +155,13 @@ function action_EVENT_VARIABLE_CHANGE_329007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 31004, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -171,12 +171,12 @@ function condition_EVENT_GROUP_LOAD_329008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "activeCount1") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"activeCount2"为1
 	if ScriptLib.GetGroupVariableValue(context, "activeCount2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -187,7 +187,7 @@ function action_EVENT_GROUP_LOAD_329008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -195,14 +195,14 @@ end
 function condition_EVENT_SELECT_OPTION_329009(context, evt)
 	-- 判断是gadgetid 329001 option_id 430
 	if 329001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 430 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -213,7 +213,7 @@ function action_EVENT_SELECT_OPTION_329009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -222,7 +222,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_329010(context, evt)
 	if 329004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -233,7 +233,7 @@ function action_EVENT_GADGET_STATE_CHANGE_329010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -242,7 +242,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_329011(context, evt)
 	if 329001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -253,7 +253,7 @@ function action_EVENT_GADGET_STATE_CHANGE_329011(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -262,7 +262,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_329012(context, evt)
 	if 329004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -273,7 +273,7 @@ function action_EVENT_GADGET_STATE_CHANGE_329012(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -282,7 +282,7 @@ function condition_EVENT_ANY_GADGET_DIE_329013(context, evt)
 	if 329003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -293,24 +293,24 @@ function action_EVENT_ANY_GADGET_DIE_329013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_329014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isLocked"为0
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"sparkAlive"为1
 	if ScriptLib.GetGroupVariableValue(context, "sparkAlive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -320,25 +320,25 @@ function action_EVENT_VARIABLE_CHANGE_329014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 329001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_329015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isLocked"为0
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"sparkAlive"为0
 	if ScriptLib.GetGroupVariableValue(context, "sparkAlive") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -348,26 +348,26 @@ function action_EVENT_VARIABLE_CHANGE_329015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 329001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_329016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isLocked"为1
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 1 then
 			return false
 	end
-	
+
 	if GadgetState.GearStop == ScriptLib.GetGadgetStateByConfigId(context, 133309329, 329001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -377,8 +377,8 @@ function action_EVENT_VARIABLE_CHANGE_329016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 329001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -387,7 +387,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_329017(context, evt)
 	if 329002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -398,7 +398,7 @@ function action_EVENT_GADGET_STATE_CHANGE_329017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -407,7 +407,7 @@ function condition_EVENT_GROUP_LOAD_329018(context, evt)
 	if 329002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -418,19 +418,19 @@ function action_EVENT_GROUP_LOAD_329018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_329020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isLocked"为2
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -440,8 +440,8 @@ function action_EVENT_VARIABLE_CHANGE_329020(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 329001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

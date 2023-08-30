@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 246001001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -84,17 +84,17 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_1004(context, evt)
 	local uid_list = ScriptLib.GetSceneUidList(context)
-	
+
 	local ret = 0
-	
+
 	for i,v in ipairs(uid_list) do
 	        local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
 	        if true ~= is_all_dead then
@@ -102,11 +102,11 @@ function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_1004(context, evt)
 	                break
 	        end
 	end
-	
+
 	if ret ~= 0 then
 	        return false
 	end
-	
+
 	return true
 end
 
@@ -117,7 +117,7 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE_1004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -126,7 +126,7 @@ function condition_EVENT_GADGET_CREATE_1007(context, evt)
 	if 1006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -137,7 +137,7 @@ function action_EVENT_GADGET_CREATE_1007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -145,14 +145,14 @@ end
 function condition_EVENT_SELECT_OPTION_1008(context, evt)
 	-- 判断是gadgetid 1006 option_id 175
 	if 1006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 175 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -163,22 +163,22 @@ function action_EVENT_SELECT_OPTION_1008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将configid为 1006 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1006, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 246001001, 2)
-	
+
 	-- 创建编号为101（该挑战的识别id),挑战内容为111176的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 101, 111176, 246001001, 1, 0, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -189,13 +189,13 @@ function action_EVENT_CHALLENGE_FAIL_1009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 246001001, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_CHALLENGE_SUCCESS_1010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 144001122
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -159,44 +159,44 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_122002(context, evt)
 	if evt.param1 ~= 122002 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"finishyishi"为0
 	if ScriptLib.GetGroupVariableValue(context, "finishyishi") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_122002(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=-726.158, y= 90.28499, z=406.1588}, radius = 2, rot = {x=0, y=0, z=1}}) 
-	
+	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=-726.158, y= 90.28499, z=406.1588}, radius = 2, rot = {x=0, y=0, z=1}})
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_122003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"finishyishi"为1
 	if ScriptLib.GetGroupVariableValue(context, "finishyishi") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -207,28 +207,28 @@ function action_EVENT_VARIABLE_CHANGE_122003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 144001122, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_122004(context, evt)
 	if evt.param1 ~= 122004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"finishyishi"为0
 	if ScriptLib.GetGroupVariableValue(context, "finishyishi") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -239,24 +239,24 @@ function action_EVENT_ENTER_REGION_122004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_122006(context, evt)
 	if evt.param1 ~= 122006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"finishyishi"为0
 	if ScriptLib.GetGroupVariableValue(context, "finishyishi") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -267,7 +267,7 @@ function action_EVENT_ENTER_REGION_122006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -277,7 +277,7 @@ function condition_EVENT_GROUP_LOAD_122008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finishyishi") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -285,31 +285,31 @@ end
 function action_EVENT_GROUP_LOAD_122008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144001122, 2)
-	
+
 	-- 延迟1秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："start" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "start", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："start1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "start1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："start2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "start2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："start3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "start3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -320,19 +320,19 @@ function action_EVENT_TIMER_EVENT_122009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "2", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -343,19 +343,19 @@ function action_EVENT_TIMER_EVENT_122010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "3", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -366,19 +366,19 @@ function action_EVENT_TIMER_EVENT_122011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "1", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122012 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -389,25 +389,25 @@ function action_EVENT_TIMER_EVENT_122015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122012 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 延迟1秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -418,19 +418,19 @@ function action_EVENT_TIMER_EVENT_122018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："5" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "5", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122017 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -441,19 +441,19 @@ function action_EVENT_TIMER_EVENT_122019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："6" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "6", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122014 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -464,19 +464,19 @@ function action_EVENT_TIMER_EVENT_122020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "4", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -487,19 +487,19 @@ function action_EVENT_TIMER_EVENT_122024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："8" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "8", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122023 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -510,19 +510,19 @@ function action_EVENT_TIMER_EVENT_122025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："9" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "9", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122021 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -533,19 +533,19 @@ function action_EVENT_TIMER_EVENT_122026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："7" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "7", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122022 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -556,19 +556,19 @@ function action_EVENT_TIMER_EVENT_122030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："11" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "11", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122029 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -579,19 +579,19 @@ function action_EVENT_TIMER_EVENT_122031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："12" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "12", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122027 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -602,19 +602,19 @@ function action_EVENT_TIMER_EVENT_122032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："10" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "10", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122028 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -625,25 +625,25 @@ function action_EVENT_TIMER_EVENT_122033(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122017 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 延迟1秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -654,25 +654,25 @@ function action_EVENT_TIMER_EVENT_122034(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122022 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122023 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 延迟1秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："7" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "7", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -683,24 +683,24 @@ function action_EVENT_TIMER_EVENT_122035(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122028 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 144001122, EntityType.GADGET, 122029 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 延迟1秒后,向groupId为：144001122的对象,请求一次调用,并将string参数："10" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001122, "10", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

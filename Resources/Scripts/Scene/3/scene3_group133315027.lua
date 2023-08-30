@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133315027
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -74,9 +74,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -85,8 +85,8 @@ function condition_EVENT_ANY_MONSTER_DIE_27002(context, evt)
 	if evt.param1 ~= 27003 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -97,13 +97,13 @@ function action_EVENT_ANY_MONSTER_DIE_27002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "baodi" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "baodi", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -113,7 +113,7 @@ function condition_EVENT_GROUP_LOAD_27005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "baodi") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -124,6 +124,6 @@ function action_EVENT_GROUP_LOAD_27005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

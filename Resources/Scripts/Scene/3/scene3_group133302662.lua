@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133302662
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -135,37 +135,37 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_662010(context, evt)
 	if evt.param1 ~= 662010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_662010(context, evt)
 	ScriptLib.AddExtraGroupSuite(context, 133302662, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_662030(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133302662) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -173,17 +173,17 @@ end
 function action_EVENT_ANY_MONSTER_DIE_662030(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302662, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_662031(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133302662) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -191,7 +191,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_662031(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302662, 4)
-	
+
 	return 0
 end
 
@@ -200,22 +200,22 @@ function condition_EVENT_GADGET_CREATE_662032(context, evt)
 	if 662028 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_662032(context, evt)
 	ScriptLib.InitTimeAxis(context, "T1", {15}, false)
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_662033(context, evt)
 	ScriptLib.AddExtraGroupSuite(context, 133302662, 5)
-	
+
 	ScriptLib.RemoveExtraGroupSuite(context, 133302662, 4)
-	
+
 	return 0
 end

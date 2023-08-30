@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220151004
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	elevatorOptionID = 491,
 	gadget_elevatorID = 4001,
 	finalMovePoints = {1,2,3,4,5,6}
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -73,9 +73,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +86,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -113,20 +113,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"success1"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "success1", 220151004) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -134,42 +134,42 @@ end
 function action_EVENT_VARIABLE_CHANGE_4004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220151004, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4005(context, evt)
 	if evt.param1 ~= 4005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_4005(context, evt)
 	-- 前往A4点1
-	
+
 	SetElevator(context, 4,1)
-	
-	ScriptLib.BeginCameraSceneLookWithTemplate(context, 3,{look_configid=0, look_pos = {x = -30,y = 3,z = 73},  follow_type =2, follow_pos = {x=-40,y=15,z=80},is_broadcast =false, delay = 0, }) 
-	
+
+	ScriptLib.BeginCameraSceneLookWithTemplate(context, 3,{look_configid=0, look_pos = {x = -30,y = 3,z = 73},  follow_type =2, follow_pos = {x=-40,y=15,z=80},is_broadcast =false, delay = 0, })
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4008(context, evt)
 	if evt.param1 ~= 4008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -180,8 +180,8 @@ function action_EVENT_ENTER_REGION_4008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -190,7 +190,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4009(context, evt)
 	if 4001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -200,8 +200,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -210,7 +210,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4010(context, evt)
 	if 4001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -220,8 +220,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

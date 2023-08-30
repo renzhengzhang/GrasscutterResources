@@ -48,7 +48,7 @@ end
 Initialize_Group()
 ----------------------------------------------
 --[[
-local defs = {
+defs = {
 	operator = 431009,
 	blossom_chest = 431010,
 	ice_storm = 431011,

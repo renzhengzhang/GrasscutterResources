@@ -8,7 +8,7 @@
 
 --需求misc
 --[[
-    local defs ={
+    defs ={
         gallery_id = 27004,
         finish_region = 111,
     }
@@ -52,13 +52,13 @@ end
 function action_EVENT_DUNGEON_SETTLE(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Battle action_EVENT_DUNGEON_SETTLE" )
     LF_Try_End(context,true)
-    return 0 
+    return 0
 end
 --团灭检测器
 function action_EVENT_DUNGEON_ALL_AVATAR_DIE(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Battle action_EVENT_DUNGEON_ALL_AVATAR_DIE|evt.uid="..evt.uid)
     local _uidlist = ScriptLib.GetSceneUidList(context)
-    for i = 1 ,#_uidlist do 
+    for i = 1 ,#_uidlist do
         if ScriptLib.IsPlayerAllAvatarDie(context,_uidlist[i]) == false then --任一活着则结束
             return 0
         end
@@ -82,7 +82,7 @@ function action_EVENT_GALLERY_STOP(context,evt)
         GALLERY_STOP_FINISHED = 9;          // 完成gallery
         GALLERY_STOP_FUNGUS_ALL_DIE = 10;   // 3.2新增蕈兽团灭发起gallery stop
     } ]]
-    if evt.param3 == 3 or evt.param3 == 9 then 
+    if evt.param3 == 3 or evt.param3 == 9 then
         ScriptLib.CauseDungeonSuccess(context)
     else
         ScriptLib.CauseDungeonFail(context)
@@ -93,9 +93,9 @@ function action_EVENT_ANY_MONSTER_DIE(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Battle action_EVENT_ANY_MONSTER_DIE")
     --watcher累计杀怪
     local _uidlist = ScriptLib.GetSceneUidList(context)
-    for i = 1 , #_uidlist do 
+    for i = 1 , #_uidlist do
         ScriptLib.AddExhibitionAccumulableDataAfterSuccess(context, _uidlist[i], "Activity_WindField_5_Monster", 1, {play_type=ExhibitionPlayType.Gallery,gallery_id=defs.gallery_id})
-    end        
+    end
     ScriptLib.ChangeGroupVariableValue(context,"killed_monster",1)
     return 0
 end
@@ -109,7 +109,7 @@ function action_EVENT_ANY_GADGET_DIE(context,evt)--吃金币
     --查询gadgetid
     local _gadgetid = 0
     for k,v in pairs(gadgets) do
-        if v.config_id == evt.param1 then 
+        if v.config_id == evt.param1 then
             _gadgetid = v.gadget_id
             break
         end
@@ -121,26 +121,26 @@ function action_EVENT_ANY_GADGET_DIE(context,evt)--吃金币
         ScriptLib.ChangeGroupTempValue(context,"level_5_coin_sum",1,{})
         --watcher单局吃金币
         local _uidlist = ScriptLib.GetSceneUidList(context)
-        for i = 1 , #_uidlist do 
+        for i = 1 , #_uidlist do
             ScriptLib.AddExhibitionReplaceableDataAfterSuccess(context, _uidlist[i], "Activity_WindField_5_Coin", 1, {play_type=ExhibitionPlayType.Gallery,gallery_id=defs.gallery_id})
-        end        
+        end
     end
     return 0
-end 
+end
 function action_EVENT_VARIABLE_CHANGE(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Battle action_EVENT_VARIABLE_CHANGE:"..evt.source_name.." = "..evt.param1)
     if evt.source_name == "cur_stage" then
         local _uidlist = ScriptLib.GetSceneUidList(context)
-        if evt.param1 == 1 then 
+        if evt.param1 == 1 then
             --第一阶段先开gallery
             ScriptLib.SetPlayerStartGallery(context,defs.gallery_id,_uidlist)
             --设置复活点
             ScriptLib.SetGalleryRevivePoint(context, defs.gallery_id, base_info.group_id, Stage_Battle.Revive_Point)
         elseif evt.param1 == 6 then
             --watcher完成
-            for i = 1 , #_uidlist do 
+            for i = 1 , #_uidlist do
                 ScriptLib.AddExhibitionReplaceableDataAfterSuccess(context, _uidlist[i], "Activity_WindField_5_LevelFinish", 1, {play_type=ExhibitionPlayType.Gallery,gallery_id=defs.gallery_id})
-            end        
+            end
             --最后完成
             LF_Try_End(context,false)
         elseif evt.param1 == 0 then
@@ -175,23 +175,23 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
         end
         ScriptLib.SetGroupVariableValue(context,"killed_monster",0)
         ScriptLib.SetGroupVariableValue(context,"coin",0)
-    elseif evt.source_name == "killed_monster" then 
+    elseif evt.source_name == "killed_monster" then
         ScriptLib.UpdatePlayerGalleryScore(context,defs.gallery_id,{[evt.source_name] = evt.param1})
-    elseif evt.source_name == "coin" then 
+    elseif evt.source_name == "coin" then
         ScriptLib.UpdatePlayerGalleryScore(context,defs.gallery_id,{[evt.source_name] = evt.param1})
         --二阶段吃金币奖励buff
-        if ScriptLib.GetGroupVariableValue(context,"cur_stage") == 2 and evt.param1 == defs.stage2_coin_goal then 
+        if ScriptLib.GetGroupVariableValue(context,"cur_stage") == 2 and evt.param1 == defs.stage2_coin_goal then
             local _uidlist = ScriptLib.GetSceneUidList(context)
-            for i = 1 , #_uidlist do 
+            for i = 1 , #_uidlist do
                 --ScriptLib.AttachGalleryTeamAbilityGroup(context, {_uidlist[i]}, defs.gallery_id, 0)
                 ScriptLib.SetTeamServerGlobalValue(context, _uidlist[i], "SGV_WindField_Buff_1", 1)
             end
             ScriptLib.ChangeGroupTempValue(context,"data_buff_times",1,{})
         end
         --三阶段吃金币奖励buff
-        if ScriptLib.GetGroupVariableValue(context,"cur_stage") == 4 and evt.param1 == defs.stage4_coin_goal then 
+        if ScriptLib.GetGroupVariableValue(context,"cur_stage") == 4 and evt.param1 == defs.stage4_coin_goal then
             local _uidlist = ScriptLib.GetSceneUidList(context)
-            for i = 1 , #_uidlist do 
+            for i = 1 , #_uidlist do
                 --ScriptLib.AttachGalleryTeamAbilityGroup(context, {_uidlist[i]}, defs.gallery_id, 0)
                 ScriptLib.SetTeamServerGlobalValue(context, _uidlist[i], "SGV_WindField_Buff_2", 1)
             end
@@ -210,7 +210,7 @@ end
 --初始化
 function Initialize()
 	--加触发器
-    if temp_Tirgger ~= nil then 
+    if temp_Tirgger ~= nil then
         for k,v in pairs(temp_Tirgger) do
             v.name = v.action
             v.config_id = 40000000 + k
@@ -221,7 +221,7 @@ function Initialize()
         end
     end
 	--加变量
-    if temp_Variables ~= nil then 
+    if temp_Variables ~= nil then
         for k,v in pairs(temp_Variables) do
             v.config_id = 50000000 + k
             table.insert(variables,v)

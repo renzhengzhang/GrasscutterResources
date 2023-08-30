@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 177006080
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	pointarray_1 = 700600012,
 	gadget_1 = 80002,
 	gadget_2 = 80003,
@@ -19,9 +19,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -105,9 +105,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -118,9 +118,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -136,9 +136,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -146,7 +146,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_80011(context, evt)
 	if 80033 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -157,19 +157,19 @@ function action_EVENT_GADGET_STATE_CHANGE_80011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_80013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"flag"为1
 	if ScriptLib.GetGroupVariableValue(context, "flag") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -180,7 +180,7 @@ function action_EVENT_VARIABLE_CHANGE_80013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_GADGET_CREATE_80019(context, evt)
 	if defs.gadget_controller_4 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -200,7 +200,7 @@ function action_EVENT_GADGET_CREATE_80019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -208,14 +208,14 @@ end
 function condition_EVENT_SELECT_OPTION_80027(context, evt)
 	-- 判断是gadgetid 470005 option_id 31
 	if defs.gadget_controller_4 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 31 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -226,7 +226,7 @@ function action_EVENT_SELECT_OPTION_80027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -235,13 +235,13 @@ function action_EVENT_SELECT_OPTION_80027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：139998470的对象,请求一次调用,并将string参数："route1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, defs.group_id, "route4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -252,7 +252,7 @@ function action_EVENT_TIMER_EVENT_80028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -261,7 +261,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_80031(context, evt)
 	if 80004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -272,19 +272,19 @@ function action_EVENT_GADGET_STATE_CHANGE_80031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_80034(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"flag"为2
 	if ScriptLib.GetGroupVariableValue(context, "flag") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -295,13 +295,13 @@ function action_EVENT_VARIABLE_CHANGE_80034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将configid为 80032 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 80032, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240004004
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 13,
 	gadget_id_2 = 12
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -74,9 +74,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -84,7 +84,7 @@ function condition_EVENT_GADGET_CREATE_40(context, evt)
 	if 13 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -95,7 +95,7 @@ function action_EVENT_GADGET_CREATE_40(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -104,7 +104,7 @@ function condition_EVENT_SELECT_OPTION_41(context, evt)
 	if 13 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -115,21 +115,21 @@ function action_EVENT_SELECT_OPTION_41(context, evt)
 		-- 将configid为 13 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.GearStart) then
 			return -1
-		end 
-	
+		end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 240004007, suite = 1 }) then
 			return -1
 		end
-	
+
 	-- 删除指定group： 240004004 ；指定config：13；物件身上指定option：12；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240004004, defs.gadget_id_1, 12) then
 		return -1
 	end
-	
+
 		return 0
 	end
-	
-	
+
+
 	return 0
 end

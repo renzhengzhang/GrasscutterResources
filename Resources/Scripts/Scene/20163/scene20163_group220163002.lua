@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220163002
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	point_camera = 2024,
 	gadget_lookEntity = 2025,
 	look_duration = 6
@@ -26,9 +26,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -142,9 +142,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -155,9 +155,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -272,20 +272,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2002(context, evt)
 	if evt.param1 ~= 2002 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -293,25 +293,25 @@ end
 function action_EVENT_ENTER_REGION_2002(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163002, 3)
-	
+
 	-- 调用提示id为 201630101 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 201630101) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2005(context, evt)
 	if evt.param1 ~= 2005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -319,19 +319,19 @@ end
 function action_EVENT_ENTER_REGION_2005(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163002, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2006(context, evt)
 	if evt.param1 ~= 2006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -346,12 +346,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2008(context, evt)
 	if evt.param1 ~= 2008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -362,19 +362,19 @@ function action_EVENT_ENTER_REGION_2008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2009(context, evt)
 	if evt.param1 ~= 2009 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -382,25 +382,25 @@ end
 function action_EVENT_ENTER_REGION_2009(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163002, 7)
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220163002, EntityType.GADGET, 2007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"fightRoom2"为1
 	if ScriptLib.GetGroupVariableValue(context, "fightRoom2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -408,19 +408,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_2012(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163002, 8)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2014(context, evt)
 	if evt.param1 ~= 2014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -431,28 +431,28 @@ function action_EVENT_ENTER_REGION_2014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建id为2022的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2022 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163002, 12)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"discSuccess2"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "discSuccess2", 220163004) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -460,19 +460,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_2015(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163002, 9)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"fightRoom3"为1
 	if ScriptLib.GetGroupVariableValue(context, "fightRoom3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -480,7 +480,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_2018(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163002, 11)
-	
+
 	return 0
 end
 
@@ -489,7 +489,7 @@ function condition_EVENT_TIME_AXIS_PASS_2020(context, evt)
 	if "R" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -500,11 +500,11 @@ function action_EVENT_TIME_AXIS_PASS_2020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建标识为"r2"，时间节点为{8}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "r2", {8}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -513,7 +513,7 @@ function condition_EVENT_TIME_AXIS_PASS_2021(context, evt)
 	if "r2" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -521,19 +521,19 @@ end
 function action_EVENT_TIME_AXIS_PASS_2021(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163002, 5)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2023(context, evt)
 	if evt.param1 ~= 2023 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -544,31 +544,31 @@ function action_EVENT_ENTER_REGION_2023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 创建id为2016的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2016 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为2027的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2027 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2028(context, evt)
 	if evt.param1 ~= 2028 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -579,25 +579,25 @@ function action_EVENT_ENTER_REGION_2028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220163014, EntityType.GADGET, 14022 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2029(context, evt)
 	if evt.param1 ~= 2029 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -608,25 +608,25 @@ function action_EVENT_ENTER_REGION_2029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220163011, EntityType.GADGET, 11012 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2030(context, evt)
 	if evt.param1 ~= 2030 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -637,7 +637,7 @@ function action_EVENT_ENTER_REGION_2030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 

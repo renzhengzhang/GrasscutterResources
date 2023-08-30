@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133004088
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 342
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -87,7 +87,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_118(context, evt)
 	if 342 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -98,10 +98,10 @@ function action_EVENT_GADGET_STATE_CHANGE_118(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 解除当前场景中pointid 为%force_id%的地城入口的groupLimit状态
 		ScriptLib.UnfreezeGroupLimit(context, 50)
-	
+
 	return 0
 end
 
@@ -109,19 +109,19 @@ end
 function action_EVENT_GROUP_REFRESH_88001(context, evt)
 	-- 变量"unlock_1"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "unlock_1", 0)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_88002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"unlock_1"为4
 	if ScriptLib.GetGroupVariableValue(context, "unlock_1") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -131,7 +131,7 @@ function action_EVENT_VARIABLE_CHANGE_88002(context, evt)
 			return -1
 		end
 		--local pos = {x=2257, y=270, z=-259}
-		
+
 	    --if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, --duration = 5, is_force = true, is_broadcast = false }) then
 			--return -1
 		--end

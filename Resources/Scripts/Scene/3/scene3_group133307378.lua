@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133307378
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -89,9 +89,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 设置此group的variable
@@ -109,32 +109,32 @@ function condition_EVENT_GADGET_STATE_CHANGE_378008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133307378, 378001) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133307378, 378002) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133307378, 378003) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133307378, 378004) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133307378, 378005) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133307378, 378006) then
 		return false
 	end
-	
+
 	-- 判断变量"progress"为0
 	if ScriptLib.GetGroupVariableValue(context, "progress") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -142,13 +142,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_378008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133307378, 2)
-	
+
 	-- 将本组内变量名为 "progress" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "progress", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -158,16 +158,16 @@ function condition_EVENT_ANY_MONSTER_DIE_378011(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_378011(context, evt)
 	ScriptLib.CreateGadget(context, {config_id=378007})
-	
+
 	TLA_set_groupvariable(context, evt, "progress", 2)
-	
+
 	return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_GROUP_LOAD_378012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "progress") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -188,6 +188,6 @@ function action_EVENT_GROUP_LOAD_378012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

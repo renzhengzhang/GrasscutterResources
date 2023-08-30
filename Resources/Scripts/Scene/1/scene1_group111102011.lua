@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111102011
 }
 
 -- DEFS_MISCS
 local        defs = {
 
-        gear_info = 
+        gear_info =
         {        --connect: 每个物件各个旋转档位可连接的对象 0表示无可连接
                 [1] = { config_id=11002 , connect = {11003,11004,11005}, point_array_id = 110200001 },
                 [2] = { config_id=11003 , connect = {11008,11007,11004, 11002}, point_array_id = 110200002 },
@@ -21,7 +21,7 @@ local        defs = {
         },
 
         --几种解
-        solutions = 
+        solutions =
         {
                 --[解法x] = {gear_info[1]切到它的第x档, gear_info[2]切到它的第y档...}
                 [1] = { connection = {1,3,2,4,4,3,2,1,3,1}, ends = {11006, }},
@@ -31,9 +31,9 @@ turn_option = 31,
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -74,9 +74,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -87,9 +87,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,22 +114,22 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_11013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"solution"大于1
 	if ScriptLib.GetGroupVariableValue(context, "solution") >= 1 then
 			return true
 	end
-	
+
 	return false
 end
 
@@ -137,7 +137,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_11013(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111102011, 2)
-	
+
 	return 0
 end
 

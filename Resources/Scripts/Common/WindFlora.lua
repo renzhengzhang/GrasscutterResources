@@ -24,7 +24,7 @@ local WindFloraPlay ={
 
 local SumScore = 0
 
--- local defs = {
+-- defs = {
 -- 	area_flower_suites = 2,
 -- 	static_flower_suites = {3,4,5},
 -- 	area_flower_timer = {2,12,22,32,42,52},
@@ -144,7 +144,7 @@ function GalleryWinBonus( context )
 		ScriptLib.AddFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, v, WindFlower_Clear_Bonus)
 
 		ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "complete_timelimit_challenge_6004", v, WindFlower_Clear_Bonus)
-	
+
 		ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Player Who AddSocre Is -> "..v)
 	end
 
@@ -164,7 +164,7 @@ function GalleryLosePunish( context )
 		ScriptLib.AddFleurFairMultistagePlayBuffEnergy(context, 235800001, 1, v, WindFlower_Failed_Deduction)
 
 		ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "defeated_timelimit_challenge_6004", v, WindFlower_Failed_Deduction)
-	
+
 		ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Player Who AddSocre Is -> "..v)
 	end
 
@@ -221,7 +221,7 @@ function LF_Static_Flower(context, stage)
 	ScriptLib.PrintContextLog(context, "@@ Require_WARNING : Init static_sequence_flower !!!")
 
 	return 0
-end	
+end
 
 
 Initialize()

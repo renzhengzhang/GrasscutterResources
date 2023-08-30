@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220111005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -81,25 +81,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5008(context, evt)
 	if evt.param1 ~= 5008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"alive"为0
 	if ScriptLib.GetGroupVariableValue(context, "alive") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -109,24 +109,24 @@ function action_EVENT_ENTER_REGION_5008(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111005, 5001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "alive" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "alive", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_5009(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 220111005) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -136,43 +136,43 @@ function action_EVENT_ANY_MONSTER_DIE_5009(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111005, 5002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220111005中， configid为5001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111005, 5001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220111005中， configid为5011的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111005, 5011, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "alive" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "alive", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5010(context, evt)
 	if evt.param1 ~= 5010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"alive"为1
 	if ScriptLib.GetGroupVariableValue(context, "alive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -182,25 +182,25 @@ function action_EVENT_ENTER_REGION_5010(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111005, 5001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5012(context, evt)
 	if evt.param1 ~= 5012 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"alive"为1
 	if ScriptLib.GetGroupVariableValue(context, "alive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -210,7 +210,7 @@ function action_EVENT_ENTER_REGION_5012(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111005, 5001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

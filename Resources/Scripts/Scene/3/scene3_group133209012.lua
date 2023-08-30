@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133209012
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 	RegionID =  12049,
 	group_1 = 133209012
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -69,9 +69,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -82,9 +82,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -136,9 +136,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -146,33 +146,33 @@ function condition_EVENT_GADGET_CREATE_12001(context, evt)
 	if 12037 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_12001(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 744, 111151, 100, {success =1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 744, 701, 111152, {100,defs.group_1,2,0},{},{success=1,fail=1})
-	
+
 	--ScriptLib.AttachChildChallenge(context, 744, 702, 111153, --{100,5,580,1,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 744, 703, 111165, {100,0,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 744)
-	
+
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 12006, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 12007, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -183,7 +183,7 @@ function action_EVENT_CHALLENGE_SUCCESS_12002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -194,7 +194,7 @@ function action_EVENT_CHALLENGE_FAIL_12003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -203,7 +203,7 @@ function condition_EVENT_ANY_MONSTER_DIE_12012(context, evt)
 	if 12010 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -214,7 +214,7 @@ function action_EVENT_ANY_MONSTER_DIE_12012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -223,28 +223,28 @@ function condition_EVENT_GADGET_CREATE_12040(context, evt)
 	if 12037 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_12040(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 722, 111151, 240, {success =1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 722, 701, 111152, {240,defs.group_1,1,0},{},{success=1,fail=1})
-	
+
 	--ScriptLib.AttachChildChallenge(context, 722, 702, 111153, --{240,5,580,1,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 722, 703, 111154, {240,1,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 722)
-	
+
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 12004, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -255,7 +255,7 @@ function action_EVENT_CHALLENGE_SUCCESS_12041(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -266,7 +266,7 @@ function action_EVENT_CHALLENGE_FAIL_12042(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -275,28 +275,28 @@ function condition_EVENT_GADGET_CREATE_12043(context, evt)
 	if 12037 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_12043(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 733, 111151, 180, {success =1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 733, 701, 111152, {180,defs.group_1,2,0},{},{success=1,fail=1})
-	
+
 	--ScriptLib.AttachChildChallenge(context, 733, 702, 111153, --{180,5,580,1,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 733, 703, 111165, {180,0,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 733)
-	
+
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 12010, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -307,7 +307,7 @@ function action_EVENT_CHALLENGE_SUCCESS_12044(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -316,28 +316,28 @@ function condition_EVENT_GADGET_CREATE_12045(context, evt)
 	if 12037 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_12045(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 711, 111151, 300, {success =1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 711, 701, 111152, {300,defs.group_1,1,0},{},{success=1,fail=1})
-	
+
 	--ScriptLib.AttachChildChallenge(context, 711, 702, 111153, --{300,5,580,1,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 711, 703, 111154, {300,2,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 711)
-	
+
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 12004, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -348,7 +348,7 @@ function action_EVENT_CHALLENGE_FAIL_12046(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -359,7 +359,7 @@ function action_EVENT_CHALLENGE_SUCCESS_12047(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -370,6 +370,6 @@ function action_EVENT_CHALLENGE_FAIL_12048(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

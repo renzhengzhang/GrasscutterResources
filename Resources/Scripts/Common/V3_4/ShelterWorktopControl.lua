@@ -3,10 +3,10 @@
 ||	owner: 		luyao.huang
 ||	description:	避难所精灵台座控制
 ||	LogName:	ShelterWorktopControl
-||	Protection:	
+||	Protection:
 =======================================]]--
 
---local defs = 
+--defs =
 --{
 --    gadget_worktop_id = 100001,
 --}
@@ -90,7 +90,7 @@ function action_select_option_shelter(context,evt)
         ScriptLib.PrintContextLog(context,"## [ShelterWorktopControl]action_select_option_shelter：当前沙尘暴状态为"..sandstorm_state)
         if sandstorm_state == 1 then
             local ret = ScriptLib.ExecuteGroupLua(context, local_defs.sandstorm_control_group, "LF_Skip_Current_Sandstorm", {})
-            if ret == -1 then 
+            if ret == -1 then
                 ScriptLib.PrintGroupWarning(context,"## [Warning] [ShelterWorktopControl] action_select_option_shelter：调用控制group的跳过沙尘暴天气功能失败")
             end
         end
@@ -113,7 +113,7 @@ function action_select_option_shelter(context,evt)
         ScriptLib.PrintContextLog(context,"## [ShelterWorktopControl]action_select_option_shelter：当前沙尘暴状态为"..sandstorm_state)
         if sandstorm_state == 2 then
             local ret = ScriptLib.ExecuteGroupLua(context, local_defs.sandstorm_control_group, "LF_Start_Sanstorm", {})
-            if ret == -1 then 
+            if ret == -1 then
                 ScriptLib.PrintGroupWarning(context,"## [Warning] [ShelterWorktopControl] action_select_option_shelter：调用控制group的开启沙尘暴天气功能失败")
             end
         end
@@ -188,14 +188,14 @@ function SLC_Try_Set_Option(context)
     if ScriptLib.GetGroupVariableValue(context,"is_skipping_time") ~= 1 then
         LF_Set_Worktop_Option(context)
     end
-    return 0 
+    return 0
 end
 
 function SLC_Try_Remove_Option(context)
     ScriptLib.PrintContextLog(context,"## [ShelterWorktopControl]SLC_Try_Set_Option：玩家进入台座范围，没带天气精灵，下选项选项")
     ScriptLib.DelWorktopOptionByGroupId(context,base_info.group_id, defs.gadget_worktop_id, local_defs.skip_sandstorm_option)
     ScriptLib.DelWorktopOptionByGroupId(context,base_info.group_id, defs.gadget_worktop_id, local_defs.start_sandstorm_option)
-    return 0 
+    return 0
 end
 
 ------------------------------------------------------------------

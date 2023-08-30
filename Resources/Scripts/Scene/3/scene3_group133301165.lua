@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301165
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -90,9 +90,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -100,7 +100,7 @@ function condition_EVENT_GADGET_CREATE_165003(context, evt)
 	if 165001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -111,7 +111,7 @@ function action_EVENT_GADGET_CREATE_165003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -119,14 +119,14 @@ end
 function condition_EVENT_SELECT_OPTION_165004(context, evt)
 	-- 判断是gadgetid 165001 option_id 169
 	if 165001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 169 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -137,19 +137,19 @@ function action_EVENT_SELECT_OPTION_165004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2011, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133301165, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -158,7 +158,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_165005(context, evt)
 	if 165002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -168,14 +168,14 @@ function action_EVENT_GADGET_STATE_CHANGE_165005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 165001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 33010064 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 33010064) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -186,7 +186,7 @@ function action_EVENT_LEVEL_TAG_CHANGE_165006(context, evt)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 133301165, 1)
 	end
-	
+
 	return 0
 end
 
@@ -196,8 +196,8 @@ function condition_EVENT_GROUP_LOAD_165009(context, evt)
 		    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 12)[1]
 		    if current_env_state_id ~= 39 then
 		        return false
-		    end 
-		
+		    end
+
 		return true
 end
 
@@ -205,6 +205,6 @@ end
 function action_EVENT_GROUP_LOAD_165009(context, evt)
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301165, 1)
-	
+
 	return 0
 end

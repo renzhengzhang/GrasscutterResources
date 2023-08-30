@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155005036
 }
 
@@ -16,12 +16,12 @@ local NightAppearGadgets = {}
 	3 = 机关解除开启大门
 	4 = 玩法完成
 ]]
-local gameplayStateFuncitons = 
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		DayNight_Gadget_Lock(context,36001)
 
-		
+
 	end,
 	["1"] = function(context)
 		ScriptLib.AddExtraGroupSuite(context, 155005036, 2)
@@ -29,17 +29,17 @@ local gameplayStateFuncitons =
 
 	end,
 	["2"] = function(context)
-		
+
 		DayNight_Gadget_Unlock(context,36001)
 
-		
-		
+
+
 	end,
 	["3"] = function(context)
 		ScriptLib.AddQuestProgress(context, "72192_DefeatMonster")
 		DayNight_Gadget_Unlock(context,36001)
 
-		
+
 	end,
 	["4"] = function(context)
 		DayNight_Gadget_Unlock(context,36001)
@@ -61,16 +61,16 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -135,9 +135,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -148,9 +148,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -184,27 +184,27 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_36005(context, evt)
 	UpdateGamePlayState(context)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"activecount"为1
 	if ScriptLib.GetGroupVariableValue(context, "activecount") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -215,16 +215,16 @@ function action_EVENT_VARIABLE_CHANGE_36006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_36008(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	UpdateGamePlayState(context)
-	
+
 	return 0
 end
 
@@ -235,13 +235,13 @@ function action_EVENT_QUEST_START_36015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_QUEST_START_36016(context, evt)
-	
+
 	 ScriptLib.SetGroupVariableValue(context, "gameplayState", 6)
 	return 0
 end
@@ -251,12 +251,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_36020(context, evt)
 	if 322 ~= ScriptLib.GetGadgetStateByConfigId(context, 155005036, 36001) then
 		return false
 	end
-	
+
 	-- 判断变量"gameplayState"为4
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -267,19 +267,19 @@ function action_EVENT_GADGET_STATE_CHANGE_36020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_36021(context, evt)
 	if evt.param1 ~= 36021 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -290,7 +290,7 @@ function action_EVENT_ENTER_REGION_36021(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -301,24 +301,24 @@ function action_EVENT_QUEST_START_36023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_36024(context, evt)
 	if evt.param1 ~= 36024 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	-- 判断变量"gameplayState"为1
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 	end
-	
+
 	-- 返回渊下宫当前是否为黑夜
 	    local uid_List = ScriptLib.GetSceneUidList(context)
 	    local host_id = uid_List[1]
@@ -327,8 +327,8 @@ function condition_EVENT_ENTER_REGION_36024(context, evt)
 	        return false
 	    else
 	        return true
-	    end 
-	
+	    end
+
 	return true
 end
 
@@ -339,17 +339,17 @@ function action_EVENT_ENTER_REGION_36024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "ReminderTimer" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "ReminderTimer", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"reactiveReminder"，时间节点为{10}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "reactiveReminder", {10}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -360,7 +360,7 @@ function action_EVENT_TIME_AXIS_PASS_36025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

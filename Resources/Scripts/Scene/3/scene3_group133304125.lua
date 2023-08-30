@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133304125
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -74,9 +74,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -87,9 +87,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -132,9 +132,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -144,13 +144,13 @@ function action_EVENT_GROUP_LOAD_125005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133304125, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -159,7 +159,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_125009(context, evt)
 	if 125025 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -169,8 +169,8 @@ function action_EVENT_GADGET_STATE_CHANGE_125009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 125004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -179,7 +179,7 @@ function condition_EVENT_ANY_GADGET_DIE_125038(context, evt)
 	if 125026 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -190,13 +190,13 @@ function action_EVENT_ANY_GADGET_DIE_125038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为125001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 125001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -205,7 +205,7 @@ function condition_EVENT_ANY_GADGET_DIE_125039(context, evt)
 	if 125027 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -216,13 +216,13 @@ function action_EVENT_ANY_GADGET_DIE_125039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为125002的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 125002 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -231,7 +231,7 @@ function condition_EVENT_ANY_GADGET_DIE_125040(context, evt)
 	if 125028 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -242,13 +242,13 @@ function action_EVENT_ANY_GADGET_DIE_125040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为125003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 125003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -257,7 +257,7 @@ function condition_EVENT_ANY_GADGET_DIE_125041(context, evt)
 	if 125029 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -268,13 +268,13 @@ function action_EVENT_ANY_GADGET_DIE_125041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q7325903_fail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -283,7 +283,7 @@ function condition_EVENT_ANY_GADGET_DIE_125042(context, evt)
 	if 125030 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -294,13 +294,13 @@ function action_EVENT_ANY_GADGET_DIE_125042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q7325903_fail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -309,7 +309,7 @@ function condition_EVENT_ANY_GADGET_DIE_125043(context, evt)
 	if 125031 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -320,25 +320,25 @@ function action_EVENT_ANY_GADGET_DIE_125043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q7325903_fail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_125044(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为3
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -349,7 +349,7 @@ function action_EVENT_VARIABLE_CHANGE_125044(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -358,7 +358,7 @@ function condition_EVENT_TIME_AXIS_PASS_125046(context, evt)
 	if "duration" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -369,13 +369,13 @@ function action_EVENT_TIME_AXIS_PASS_125046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133304125, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -384,7 +384,7 @@ function condition_EVENT_GADGET_CREATE_125047(context, evt)
 	if 125001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -392,8 +392,8 @@ end
 function action_EVENT_GADGET_CREATE_125047(context, evt)
 	-- 创建标识为"duration"，时间节点为{16}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "duration", {16}, false)
-	
-	
+
+
 	-- 触发镜头注目，注目位置为坐标{x=-1866.886, y=252.8797, z=2920.835}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-1866.886, y=252.8797, z=2920.835}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -402,7 +402,7 @@ function action_EVENT_GADGET_CREATE_125047(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end

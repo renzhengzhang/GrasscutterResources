@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001090
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 1717
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -82,9 +82,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -92,7 +92,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_93(context, evt)
 	if GadgetState.GearStart ~= evt.param1 or defs.gadget_id_1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -103,16 +103,16 @@ function action_EVENT_GADGET_STATE_CHANGE_93(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 设置指定Group为可竞争
 	    ScriptLib.SetGroupReplaceable(context, 133001090, true)
-	
+
 	-- 通知场景上的所有玩家播放名字为9 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 9, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -122,7 +122,7 @@ function condition_EVENT_ANY_MONSTER_DIE_100(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -132,8 +132,8 @@ function action_EVENT_ANY_MONSTER_DIE_100(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1717, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标（1267，260，-1689），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=1267, y=260, z=-1689}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -142,26 +142,26 @@ function action_EVENT_ANY_MONSTER_DIE_100(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将configid为 3038 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3038, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_180(context, evt)
 	if evt.param1 ~= 180 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -172,19 +172,19 @@ function action_EVENT_ENTER_REGION_180(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- 通知groupid为133001090中,configid为：537的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 537, 133001090) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- 通知groupid为133001090中,configid为：429的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 429, 133001090) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_TIMER_EVENT_199(context, evt)
 	if "KillPZ1" ~= evt.source_name then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_TIMER_EVENT_199(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -213,7 +213,7 @@ function condition_EVENT_GADGET_CREATE_90001(context, evt)
 	if 1717 ~= evt.param1 or GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -224,6 +224,6 @@ function action_EVENT_GADGET_CREATE_90001(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end

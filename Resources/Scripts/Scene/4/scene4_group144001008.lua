@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 144001008
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_up = 8003,
 	gadget_down = 8002,
 	gadget_water = 8001,
@@ -21,9 +21,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -118,9 +118,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -131,9 +131,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -203,9 +203,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -213,7 +213,7 @@ function condition_EVENT_ANY_GADGET_DIE_8049(context, evt)
 	if 8048 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -223,34 +223,34 @@ function action_EVENT_ANY_GADGET_DIE_8049(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8047, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 8047) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_8050(context, evt)
 	-- 判断是gadgetid 为 8047的移动平台，是否到达了400100001 的路线中的 1 点
-	
+
 	if 8047 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 400100001 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -261,26 +261,26 @@ function action_EVENT_PLATFORM_REACH_POINT_8050(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 8047 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8047, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 8047 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 144001008, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -290,7 +290,7 @@ function condition_EVENT_GROUP_LOAD_8051(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "hasWaterfallDisappeared") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -301,19 +301,19 @@ function action_EVENT_GROUP_LOAD_8051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为8047的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 8047 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将configid为 8047 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8047, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

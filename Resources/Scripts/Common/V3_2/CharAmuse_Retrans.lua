@@ -5,11 +5,11 @@
 ||	owner: 		weiwei.sun
 ||	description: 	3.2奇趣秘园 局内逻辑 战斗
 ||	LogName:	## [CharAmuse_Retrans]
-||	Protection:	
+||	Protection:
 =======================================]]
 --[[
 
-local defs = {
+defs = {
 	--玩法范围region，玩法进行期间，不在此Region内的玩家会被拉回
 	play_region = ,
 }
@@ -74,7 +74,7 @@ function EX_DoReTransCheck_Single(context, prev_context, uid)
 end
 
 function LF_DoReTransCheck(context, uid)
-	if nil == regions[defs.play_region] then 
+	if nil == regions[defs.play_region] then
 		return 0
 	end
 	if false == ScriptLib.IsPlayerTransmittable(context, uid) then

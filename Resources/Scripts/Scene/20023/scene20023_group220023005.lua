@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220023005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -72,20 +72,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7(context, evt)
 	if evt.param1 ~= 7 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -95,8 +95,8 @@ function action_EVENT_ENTER_REGION_7(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -104,17 +104,17 @@ end
 function condition_EVENT_QUEST_FINISH_21(context, evt)
 	--检查ID为2010103的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 2010103 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -125,7 +125,7 @@ function action_EVENT_QUEST_FINISH_21(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -134,7 +134,7 @@ function condition_EVENT_SELECT_OPTION_22(context, evt)
 	if 5003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -144,35 +144,35 @@ function action_EVENT_SELECT_OPTION_22(context, evt)
 	if 1003 == evt.param2 then
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5001, GadgetState.GearStart) then
 			return -1
-		end 
-		
+		end
+
 	end
-	
+
 	-- 根据不同的选项做不同的操作
 	if 1003 == evt.param2 then
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5002, GadgetState.GearStart) then
 			return -1
-		end 
-		
+		end
+
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "220023005") then
 	  return -1
 	end
-	
+
 	-- 根据不同的选项做不同的操作
 	if 1003 == evt.param2 then
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5003, GadgetState.GearStart) then
 			return -1
-		end 
-		
+		end
+
 	end
-	
+
 	-- 删除指定group： 220023012 ；指定config：36；物件身上指定option：1002；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220023005, 5003, 1003) then
 		return -1
 	end
-	
+
 	return 0
 end

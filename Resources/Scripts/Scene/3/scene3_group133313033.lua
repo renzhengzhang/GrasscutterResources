@@ -1,26 +1,26 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133313033
 }
 
 -- DEFS_MISCS
-local I_connectors = 
+local I_connectors =
 {
     [1] = 33009
 }
 
-local L_connectors = 
+local L_connectors =
 {
     [1] = 33006
 }
 
-local containers = 
+local containers =
 {
     [1] = 33005,
     [2] = 33002
 }
 
-local lights = 
+local lights =
 {
     [1] = 33010,
     [2] = 33011,
@@ -30,37 +30,37 @@ local lights =
     [6] = 33016
 }
 
-local streams = 
+local streams =
 {
    [containers[1]] = {I_connectors[1],lights[1],L_connectors[1],lights[6]},
    [containers[2]] = {I_connectors[1],lights[1],L_connectors[1],lights[2],lights[3],lights[4],lights[5]}
 }
 
-local L_connections = 
+local L_connections =
 {
     [L_connectors[1]] = {[202] = lights[2], [201] = lights[6]}
 }
 
 local base_interval = 1
 
-local special_interval = 
+local special_interval =
 {
 }
 
-local worktops = 
+local worktops =
 {
     [1] = 33001
 }
 
-local connector_to_worktop = 
+local connector_to_worktop =
 {
     [L_connectors[1]] = worktops[1]
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -113,9 +113,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -126,9 +126,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -144,9 +144,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -154,11 +154,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_33003(context, evt)
 	if 33002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133313033, 33015) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -168,14 +168,14 @@ function action_EVENT_GADGET_STATE_CHANGE_33003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33015, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133313033, 33015, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -184,7 +184,7 @@ function condition_EVENT_GADGET_CREATE_33004(context, evt)
 	if 33015 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -195,7 +195,7 @@ function action_EVENT_GADGET_CREATE_33004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -205,7 +205,7 @@ function condition_EVENT_GROUP_LOAD_33007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -215,14 +215,14 @@ function action_EVENT_GROUP_LOAD_33007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 33015 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33015, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -230,14 +230,14 @@ end
 function condition_EVENT_SELECT_OPTION_33017(context, evt)
 	-- 判断是gadgetid 33015 option_id 7
 	if 33015 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -248,19 +248,19 @@ function action_EVENT_SELECT_OPTION_33017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 33015 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33015, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 33008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -269,7 +269,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_33018(context, evt)
 	if 33005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -280,7 +280,7 @@ function action_EVENT_GADGET_STATE_CHANGE_33018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -289,7 +289,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_33019(context, evt)
 	if 33006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -300,7 +300,7 @@ function action_EVENT_GADGET_STATE_CHANGE_33019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

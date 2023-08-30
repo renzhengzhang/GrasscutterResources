@@ -1,5 +1,5 @@
 --[[
-local defs = {
+defs = {
 	--开启操作台configID
 	starter_gadget = ,
 	--终点Region的ConfigID
@@ -14,8 +14,8 @@ local defs = {
 	--计数定义。
 	--这个赛道中，每种行为写入哪个param
 	--行为：1-持续加速20秒 2-障碍破坏 3-（未定义）
-	counter = 
-	{ 
+	counter =
+	{
 		["param1"] = 2,
 		["param2"] = 0,
 		["param3"] = 0,
@@ -23,13 +23,13 @@ local defs = {
 
 	father_challenge = 父挑战挑战ID,
 
-	child_time_challenge = 
+	child_time_challenge =
 	{
 		{challenge_id = 计时挑战1挑战ID, aim = 时间限制秒},
 		{challenge_id = 计时挑战2挑战ID, aim = 时间限制秒},
 	},
 
-	child_count_challenge = 
+	child_count_challenge =
 	{
 		{challenge_id = 计数挑战1挑战ID, aim = 目标数},
 	},
@@ -98,7 +98,7 @@ end
 --机关开启条件及开启处理
 function action_Select_Option(context, evt)
 	if defs.starter_gadget ~= evt.param1 or cfg.start_option ~= evt.param2 then
-		return 0	
+		return 0
 	end
 	--检查玩家处于开船状态
 	if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
@@ -131,21 +131,21 @@ function action_Select_Option(context, evt)
 	ScriptLib.StartFatherChallenge(context, cfg.challenge_id)
 
 	--填加计时类子挑战
-	for k,v in pairs(defs.child_time_challenge) do 
+	for k,v in pairs(defs.child_time_challenge) do
 		ScriptLib.AttachChildChallenge(context, cfg.challenge_id, v.challenge_id*10 + k, v.challenge_id, { v.aim, 4, 666, 1},{},{success = 10,fail = 0})
 	end
 	--填加计数类子挑战
-	for k,v in pairs(defs.child_count_challenge) do 
+	for k,v in pairs(defs.child_count_challenge) do
 		--参数1： event_type所在枚举序号； 参数2： trigger_tag；参数3： 次数；参数4：Bool，次数达成是否计为成功；参数5：初始次数值
-		ScriptLib.AttachChildChallenge(context, cfg.challenge_id, v.challenge_id*10 + k, v.challenge_id, { 3, k, v.aim},{},{success = 0,fail = 0}) 
+		ScriptLib.AttachChildChallenge(context, cfg.challenge_id, v.challenge_id*10 + k, v.challenge_id, { 3, k, v.aim},{},{success = 0,fail = 0})
 		ScriptLib.PrintContextLog(context, "## [BoatRaceV2] Challenge started. start galleryID@"..defs.gallery_id.." father_challengeID@"..cfg.challenge_id)
 	end
 	--不限时抵达终点隐藏挑战
 	ScriptLib.AttachChildChallenge(context, cfg.challenge_id, cfg.child_end, cfg.child_end, { 4, 666, 1, 1},{},{success = 10,fail = 0})
 
 	--处理操作台
-	ScriptLib.SetGadgetStateByConfigId(context,  defs.starter_gadget, GadgetState.GearStart) 
-	ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, defs.starter_gadget, cfg.start_option) 
+	ScriptLib.SetGadgetStateByConfigId(context,  defs.starter_gadget, GadgetState.GearStart)
+	ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, defs.starter_gadget, cfg.start_option)
 
 	--开Gallery
 	ScriptLib.StartGallery(context, defs.gallery_id)
@@ -168,10 +168,10 @@ end
 
 function action_Enter_Tutorial_Region(context, evt)
 	if nil == defs.guide_region then
-		return 0 
+		return 0
 	end
 	if evt.param1 ~= defs.guide_region then
-		return 0 
+		return 0
 	end
 	LF_TryShowGuide(context)
 	return 0
@@ -180,7 +180,7 @@ end
 -- 处理成功
 function action_Challenge_Success(context, evt)
 
-	ScriptLib.PrintContextLog(context, "## [BoatRaceV2] Challenge success.")	
+	ScriptLib.PrintContextLog(context, "## [BoatRaceV2] Challenge success.")
 	if evt.param1 ~= cfg.challenge_id then
 		return 0
 	end
@@ -188,13 +188,13 @@ function action_Challenge_Success(context, evt)
 	LF_ReportSkillExhibition(context, uid)
 
 	local time = cfg.total_time - evt.param2
-	if time > 0 then 
+	if time > 0 then
 		ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, { ["time"]= time, ["uid"] = uid })
 	else
 		ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, { ["time"]= 0, ["uid"] = uid })
 		ScriptLib.PrintContextLog(context, "## [BoatRaceV2] #WARN# Get unexpected time usage.")
 	end
-	
+
 	ScriptLib.RefreshGroup(context, { group_id = base_info.group_id, suite = 1 })
 
 	--设置操作台选项
@@ -216,7 +216,7 @@ function action_Challenge_Fail(context, evt)
 	local uid = ScriptLib.GetSceneOwnerUid(context)
 
 	local time = cfg.total_time - evt.param2
-	if time > 0 then 
+	if time > 0 then
 		ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, { ["time"]= time, ["uid"] = uid  })
 	else
 		ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, { ["time"]= 0, ["uid"] = uid })
@@ -251,7 +251,7 @@ end
 -- 进入最终区域
 function condition_Enter_Final_Region(context, evt)
 	-- 判断角色数量不少于1
-	if evt.param1 ~= defs.end_region then 
+	if evt.param1 ~= defs.end_region then
 		return false
 	end
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
@@ -275,7 +275,7 @@ function action_Group_Will_Unload( context,evt )
 end
 
 function action_Leave_Play_Region(context, evt)
-	if defs.play_region ~= evt.param1 then 
+	if defs.play_region ~= evt.param1 then
 		return 0
 	end
 	ScriptLib.PrintContextLog(context, "## [BoatRaceV2] Player leave play region.")
@@ -288,7 +288,7 @@ function LF_ReportSkillExhibition(context, uid)
     for i, v in ipairs(cfg.exhiKey_all[base_info.group_id]) do
         local record = ScriptLib.GetGroupTempValue(context, "exhi_counter_"..i, {})
         ScriptLib.PrintContextLog(context, "## [BoatRaceV2] LF_ReportSkillExhibition. exhi_counter_"..i.. "record@"..record)
-        if 0 < record then 
+        if 0 < record then
         	ScriptLib.AddExhibitionReplaceableData(context, uid, v, record)
         end
     end
@@ -296,7 +296,7 @@ function LF_ReportSkillExhibition(context, uid)
 end
 
 function LF_GetGalleryParamName(context, type)
-	for k,v in pairs(defs.counter) do 
+	for k,v in pairs(defs.counter) do
 		if v == type then
 			return k
 		end
@@ -311,38 +311,38 @@ function SLC_BoatRaceV2_Counter(context, type)
 
 	--确认是要加本赛道gallery的哪个param
 	local gallery_param = LF_GetGalleryParamName(context, type)
-	if 0 == gallery_param then 
+	if 0 == gallery_param then
 		return 0
 	end
 
 	--如果是物件破坏，看是否在计数白名单内
-	if 2 == type then 
+	if 2 == type then
 		if nil ~= defs.gadget_filter then
 			local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
 			local gadget_id = gadgets[config_id].gadget_id
 
-			if LF_CheckIsInTable(context, gadget_id, defs.gadget_filter) then 
+			if LF_CheckIsInTable(context, gadget_id, defs.gadget_filter) then
 				ScriptLib.PrintContextLog(context, "## [BoatRaceV2] SLC_BoatRaceV2_Counter. Count gadget. config_id@"..config_id.." gadget_id@"..gadget_id)
 			else
 				return 0
 			end
 		end
 	end
-	
+
 	--update gallery
 	if 0 ~= gallery_param then
 		ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, { [gallery_param]= 1 , ["uid"] = ScriptLib.GetSceneOwnerUid(context)})
 		ScriptLib.PrintContextLog(context, "## [BoatRaceV2] Update gallery. param@"..gallery_param)
-	end	
+	end
 
 	--设置陈列室缓存、触发挑战计数
-	if "param1" == gallery_param then 
+	if "param1" == gallery_param then
 		ScriptLib.ChangeGroupTempValue(context, "exhi_counter_1", 1, {})
 		ScriptLib.ChangeGroupVariableValue(context, "counter_1", 1)
-	elseif "param2" == gallery_param then 
+	elseif "param2" == gallery_param then
 		ScriptLib.ChangeGroupTempValue(context, "exhi_counter_2", 1, {})
 		ScriptLib.ChangeGroupVariableValue(context, "counter_2", 1)
-	elseif "param3" == gallery_param then 
+	elseif "param3" == gallery_param then
 		ScriptLib.ChangeGroupTempValue(context, "exhi_counter_3", 1, {})
 		ScriptLib.ChangeGroupVariableValue(context, "counter_3", 1)
 	end
@@ -350,14 +350,14 @@ function SLC_BoatRaceV2_Counter(context, type)
 end
 --进入隐藏赛道的计数
 function action_Enter_Hiden_Region(context, evt)
-	if nil == defs.hiden_region then 
+	if nil == defs.hiden_region then
 		return 0
 	end
 	--是否是指定region
 	if LF_CheckIsInTable(context, evt.param1, defs.hiden_region) then
-		--看看计入哪个param 
+		--看看计入哪个param
 		local gallery_param = 0
-		for k,v in pairs(defs.counter) do 
+		for k,v in pairs(defs.counter) do
 			if v == 3 then
 				gallery_param = k
 			end
@@ -367,15 +367,15 @@ function action_Enter_Hiden_Region(context, evt)
 		if 0 ~= gallery_param then
 			ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, { [gallery_param]= 1 })
 			ScriptLib.PrintContextLog(context, "## [BoatRaceV2] Updata gallery. param@"..gallery_param)
-		end	
+		end
 		--设置陈列室缓存、触发挑战计数
-		if "param1" == gallery_param then 
+		if "param1" == gallery_param then
 			ScriptLib.ChangeGroupTempValue(context, "exhi_counter_1", 1, {})
 			ScriptLib.ChangeGroupVariableValue(context, "counter_1", 1)
-		elseif "param2" == gallery_param then 
+		elseif "param2" == gallery_param then
 			ScriptLib.ChangeGroupTempValue(context, "exhi_counter_2", 1, {})
 			ScriptLib.ChangeGroupVariableValue(context, "counter_2", 1)
-		elseif "param3" == gallery_param then 
+		elseif "param3" == gallery_param then
 			ScriptLib.ChangeGroupTempValue(context, "exhi_counter_3", 1, {})
 			ScriptLib.ChangeGroupVariableValue(context, "counter_3", 1)
 		end
@@ -383,8 +383,8 @@ function action_Enter_Hiden_Region(context, evt)
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.REGION, evt.param1)
 	else
 		return 0
-	end	
-		
+	end
+
 	return 0
 end
 --[[
@@ -402,23 +402,23 @@ function LF_TryShowGuide(context)
 	--Activity_SummerTimeV2_BoatRace_Guide3
 	local havePlayed3  = ScriptLib.GetExhibitionAccumulableData(context, context.uid, 11405110)
 
-	if 0 < havePlayed3 then 
+	if 0 < havePlayed3 then
 		return 0
 	end
 
 	--如果弹过第一关
     if 0 < havePlayed1 then
     	--第二关1175
-    	if 199004061 == base_info.group_id and 1 > havePlayed2 then 
+    	if 199004061 == base_info.group_id and 1 > havePlayed2 then
     		ScriptLib.ShowClientTutorial(context, 1175, {context.uid})
     		ScriptLib.AddExhibitionAccumulableData(context,context.uid, "Activity_SummerTimeV2_BoatRace_Guide2", 1)
     	else
     	--第二关以外其他关不弹
     	end
-    --如果没弹过第一关 
+    --如果没弹过第一关
     else
     	--第一关 1174
-    	if 199003065 == base_info.group_id then 
+    	if 199003065 == base_info.group_id then
 	    	ScriptLib.ShowClientTutorial(context, 1174, {context.uid})
 	        ScriptLib.AddExhibitionAccumulableData(context,context.uid, "Activity_SummerTimeV2_BoatRace_Guide1", 1)
     	else
@@ -428,15 +428,15 @@ function LF_TryShowGuide(context)
 	    		ScriptLib.AddExhibitionAccumulableData(context,context.uid, "Activity_SummerTimeV2_BoatRace_Guide3", 1)
     		end
     	end
-    	
-    end	
+
+    end
 
 	return 0
 end
 
 --船行为埋点
 function SLC_BoatRace_LuaMark(context, param1, param2, param3)
-	ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Boat_1", "", {["change_type"] = param1, ["change_num"] = param2, ["after_num"] = param3})	
+	ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Boat_1", "", {["change_type"] = param1, ["change_num"] = param2, ["after_num"] = param3})
 	return 0
 end
 

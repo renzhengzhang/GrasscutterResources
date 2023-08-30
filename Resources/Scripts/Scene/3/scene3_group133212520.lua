@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133212520
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 133212520,
 	gadget_11 = 520001,
 	gadget_12 = 520002,
@@ -37,9 +37,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -96,9 +96,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -109,9 +109,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -145,20 +145,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_520028(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"successed"为1
 	if ScriptLib.GetGroupVariableValue(context, "successed") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -169,7 +169,7 @@ function action_EVENT_VARIABLE_CHANGE_520028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -180,7 +180,7 @@ function action_EVENT_GROUP_LOAD_520029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

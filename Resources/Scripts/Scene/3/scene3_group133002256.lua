@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002256
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -135,28 +135,28 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_301(context, evt)
 	-- 判断是gadgetid 为 2171的移动平台，是否到达了3002189 的路线中的 2 点
-	
+
 	if 2171 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3002189 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -167,45 +167,45 @@ function action_EVENT_PLATFORM_REACH_POINT_301(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 创建id为2173的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2173 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为2174的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2174 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为2172的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2172 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_302(context, evt)
 	-- 判断是gadgetid 为 2171的移动平台，是否到达了3002189 的路线中的 3 点
-	
+
 	if 2171 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3002189 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -216,27 +216,27 @@ function action_EVENT_PLATFORM_REACH_POINT_302(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_303(context, evt)
 	-- 判断是gadgetid 为 2171的移动平台，是否到达了3002189 的路线中的 4 点
-	
+
 	if 2171 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3002189 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 4 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -247,27 +247,27 @@ function action_EVENT_PLATFORM_REACH_POINT_303(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_304(context, evt)
 	-- 判断是gadgetid 为 2171的移动平台，是否到达了3002189 的路线中的 5 点
-	
+
 	if 2171 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3002189 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 5 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -278,19 +278,19 @@ function action_EVENT_PLATFORM_REACH_POINT_304(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 创建id为2202的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2202 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为2203的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2203 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -299,12 +299,12 @@ function condition_EVENT_ANY_GADGET_DIE_305(context, evt)
 	if 2172 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"iskill"为0
 	if ScriptLib.GetGroupVariableValue(context, "iskill") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -315,13 +315,13 @@ function action_EVENT_ANY_GADGET_DIE_305(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -330,7 +330,7 @@ function condition_EVENT_ANY_GADGET_DIE_306(context, evt)
 	if 2174 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -340,32 +340,32 @@ function action_EVENT_ANY_GADGET_DIE_306(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "2174", 1) then
 	  return -1
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "2174") + ScriptLib.GetGroupVariableValue(context, "2173") == 2 then
-	
+
 	-- 将本组内变量名为 "iskill" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "iskill", 1) then
 	  return -1
 	end
-	
-	
+
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2171, 3002191) then
 	  return -1
 	end
-	
-	
+
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2171) then
 	  return -1
 	end
-	
-	
+
+
 	end
-	
-	
-	
-	
+
+
+
+
 	return 0
 end
 
@@ -374,7 +374,7 @@ function condition_EVENT_ANY_GADGET_DIE_307(context, evt)
 	if 2173 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -384,71 +384,71 @@ function action_EVENT_ANY_GADGET_DIE_307(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "2173", 1) then
 	  return -1
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "2174") + ScriptLib.GetGroupVariableValue(context, "2173") == 2 then
-	
+
 	-- 将本组内变量名为 "iskill" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "iskill", 1) then
 	  return -1
 	end
-	
-	
+
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2171, 3002191) then
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2171) then
 	  return -1
 	end
-	
-	
+
+
 	end
-	
-	
-	
-	
+
+
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_308(context, evt)
 	-- 判断是gadgetid 为 2171的移动平台，是否到达了3002191 的路线中的 0 点
-	
+
 	if 2171 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3002191 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_309(context, evt)
 	-- 判断是gadgetid 为 2171的移动平台，是否到达了3002191 的路线中的 1 点
-	
+
 	if 2171 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3002191 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -459,27 +459,27 @@ function action_EVENT_PLATFORM_REACH_POINT_309(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_310(context, evt)
 	-- 判断是gadgetid 为 2171的移动平台，是否到达了3002191 的路线中的 2 点
-	
+
 	if 2171 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3002191 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -490,27 +490,27 @@ function action_EVENT_PLATFORM_REACH_POINT_310(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_311(context, evt)
 	-- 判断是gadgetid 为 2171的移动平台，是否到达了3002191 的路线中的 4 点
-	
+
 	if 2171 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3002191 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 4 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -521,25 +521,25 @@ function action_EVENT_PLATFORM_REACH_POINT_311(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟4秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 904, delay_time = 4 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟4秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 905, delay_time = 4 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟4秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 907, delay_time = 4 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -548,7 +548,7 @@ function condition_EVENT_ANY_MONSTER_DIE_312(context, evt)
 	if 903 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -559,20 +559,20 @@ function action_EVENT_ANY_MONSTER_DIE_312(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133002256, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -581,7 +581,7 @@ function condition_EVENT_GADGET_CREATE_313(context, evt)
 	if 2171 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -592,7 +592,7 @@ function action_EVENT_GADGET_CREATE_313(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -601,7 +601,7 @@ function condition_EVENT_ANY_GADGET_DIE_314(context, evt)
 	if 2172 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -612,51 +612,51 @@ function action_EVENT_ANY_GADGET_DIE_314(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 892, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 895, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 890, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 898, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_315(context, evt)
 	-- 判断是gadgetid 为 2171的移动平台，是否到达了3002192 的路线中的 3 点
-	
+
 	if 2171 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3002192 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -667,7 +667,7 @@ function action_EVENT_PLATFORM_REACH_POINT_315(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -676,7 +676,7 @@ function condition_EVENT_ANY_GADGET_DIE_319(context, evt)
 	if 2171 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -687,7 +687,7 @@ function action_EVENT_ANY_GADGET_DIE_319(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -695,17 +695,17 @@ end
 function condition_EVENT_QUEST_FINISH_328(context, evt)
 	--检查ID为48801的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 48801 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -716,27 +716,27 @@ function action_EVENT_QUEST_FINISH_328(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_329(context, evt)
 	-- 判断是gadgetid 为 2171的移动平台，是否到达了3002192 的路线中的 4 点
-	
+
 	if 2171 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3002192 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 4 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -747,7 +747,7 @@ function action_EVENT_PLATFORM_REACH_POINT_329(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -755,17 +755,17 @@ end
 function condition_EVENT_QUEST_FINISH_330(context, evt)
 	--检查ID为48803的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 48803 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -776,7 +776,7 @@ function action_EVENT_QUEST_FINISH_330(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -786,7 +786,7 @@ function condition_EVENT_SPECIFIC_GADGET_HP_CHANGE_332(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_GADGET_HP_CHANGE or evt.param3 > 80 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -796,8 +796,8 @@ function action_EVENT_SPECIFIC_GADGET_HP_CHANGE_332(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2171, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -807,7 +807,7 @@ function condition_EVENT_SPECIFIC_GADGET_HP_CHANGE_333(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_GADGET_HP_CHANGE or evt.param3 > 20 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -817,7 +817,7 @@ function action_EVENT_SPECIFIC_GADGET_HP_CHANGE_333(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2171, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

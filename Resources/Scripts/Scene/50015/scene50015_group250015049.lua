@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250015049
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -73,20 +73,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_49005(context, evt)
 	if evt.param1 ~= 49005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -97,17 +97,17 @@ function action_EVENT_ENTER_REGION_49005(context, evt)
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110022, pos, 20) then
 		return -1
 	end
-	
+
 	-- 锁住configid为 49001 的怪物的血量信息，直至解锁，期间怪物无敌
 	if 0 ~= ScriptLib.LockMonsterHp(context, 49001) then
 		return -1
 	end
-	
+
 	-- 锁住configid为 49002 的怪物的血量信息，直至解锁，期间怪物无敌
 	if 0 ~= ScriptLib.LockMonsterHp(context, 49002) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -117,8 +117,8 @@ function condition_EVENT_ANY_MONSTER_DIE_49006(context, evt)
 	if evt.param1 ~= 49003 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -129,23 +129,23 @@ function action_EVENT_ANY_MONSTER_DIE_49006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : unlock_monster_hp_by_configId")
 		return -1
 	end
-	
+
 	--解锁configid 为 49002 的怪物的血量
 	if 0 ~= ScriptLib.UnlockMonsterHp(context, 49002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : unlock_monster_hp_by_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_49007(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 250015049) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -156,6 +156,6 @@ function action_EVENT_ANY_MONSTER_DIE_49007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

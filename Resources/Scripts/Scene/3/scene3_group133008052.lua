@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008052
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_id = 133008052,
 	gadget_riddle_hint = 52011,
 	gadget_riddle_1 = 52012,
@@ -15,9 +15,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -93,9 +93,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -103,7 +103,7 @@ function condition_EVENT_GADGET_CREATE_52003(context, evt)
 	if 52004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -114,7 +114,7 @@ function action_EVENT_GADGET_CREATE_52003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -122,14 +122,14 @@ end
 function condition_EVENT_SELECT_OPTION_52005(context, evt)
 	-- 判断是gadgetid 52004 option_id 24
 	if 52004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 24 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -139,51 +139,51 @@ function action_EVENT_SELECT_OPTION_52005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 52001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 52004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 52002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133008054, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133008379, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "canopen" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "canopen", 1, 133008053) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知场景上的所有玩家播放名字为300805201 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 300805201, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_GROUP_LOAD_52006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -204,14 +204,14 @@ function action_EVENT_GROUP_LOAD_52006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_52017(context, evt)
 	if evt.param2 ~= defs.gadget_riddle_1 and evt.param2 ~= defs.gadget_riddle_2 and evt.param2 ~= defs.gadget_riddle_3 and evt.param2 ~= defs.gadget_riddle_4 then
-	return false 
+	return false
 	end
 	return true
 end
@@ -222,7 +222,7 @@ function action_EVENT_GADGET_STATE_CHANGE_52017(context, evt)
 	ScriptLib.ChangeGroupVariableValue(context, "State_Flag", 1)
 	if 0 == ScriptLib.GetCurTriggerCount(context) then
 	ScriptLib.MarkPlayerAction(context, 1003, 1, 1)
-	end 
+	end
 	elseif evt.param1 == GadgetState.Default then
 	ScriptLib.ChangeGroupVariableValue(context, "State_Flag", -1)
 	end
@@ -232,7 +232,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_52018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 < 0 or evt.param1 > 4 then
 	return false
 	end
@@ -245,16 +245,16 @@ function action_EVENT_VARIABLE_CHANGE_52018(context, evt)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Default)
 	elseif evt.param1 == 1 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action01)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 2) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 2)
 	elseif evt.param1 == 2 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action02)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 3) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 3)
 	elseif evt.param1 == 3 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.Action03)
-	ScriptLib.MarkPlayerAction(context, 1003, 2, 4) 
+	ScriptLib.MarkPlayerAction(context, 1003, 2, 4)
 	elseif evt.param1 == 4 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_hint, GadgetState.GearStart)
-	ScriptLib.MarkPlayerAction(context, 1003, 3, 5) 
+	ScriptLib.MarkPlayerAction(context, 1003, 3, 5)
 	ScriptLib.CreateGadget(context, { config_id = 52004 })
 	ScriptLib.SetGadgetStateByConfigId(context, 52001, GadgetState.Default)
 	end
@@ -283,20 +283,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_52020(context, evt)
 	-- 判断是gadgetid 为 52002的移动平台，是否到达了300800001 的路线中的 1 点
-	
+
 	if 52002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800001 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -307,6 +307,6 @@ function action_EVENT_PLATFORM_REACH_POINT_52020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

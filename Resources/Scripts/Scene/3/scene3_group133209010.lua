@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133209010
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 	RegionID =  10015,
 	group_1 = 133209010
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -158,9 +158,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -171,9 +171,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -225,9 +225,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -235,40 +235,40 @@ function condition_EVENT_GADGET_CREATE_10005(context, evt)
 	if 10016 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_10005(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 322, 111131, 240, {success = 2, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 322, 301, 111132, {240,defs.group_1,20,0},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 322, 302, 111133, {240,3,582,1},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 322, 303, 111134, {240,1,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 322)
-	
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, defs.group_1, {10001,10002,10017,10018,10019,10020}, 99, 2, 2) then
 		return -1
 	end
-	
-	
-	
-	
+
+
+
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 3, defs.group_1, {10027,10028,10029,10030}, 99, 2, 2) then
 		return -1
 	end
-	
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 4, defs.group_1, {10031,10032}, 99, 1, 1) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -277,40 +277,40 @@ function condition_EVENT_GADGET_CREATE_10006(context, evt)
 	if 10016 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_10006(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 311, 111131, 300, {success = 2, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 311, 301, 111132, {300,defs.group_1,15,0},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 311, 302, 111133, {300,3,582,1},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 311, 303, 111134, {300,2,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 311)
-	
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, defs.group_1, {10001,10002,10017,10018,10019,10020}, 99, 2, 2) then
 		return -1
 	end
-	
-	
-	
-	
+
+
+
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 3, defs.group_1, {10027,10028,10029,10030}, 99, 2, 2) then
 		return -1
 	end
-	
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 4, defs.group_1, {10031,10032}, 99, 1, 1) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -321,7 +321,7 @@ function action_EVENT_CHALLENGE_SUCCESS_10007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -332,7 +332,7 @@ function action_EVENT_CHALLENGE_FAIL_10008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -343,7 +343,7 @@ function action_EVENT_CHALLENGE_SUCCESS_10009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -354,7 +354,7 @@ function action_EVENT_CHALLENGE_FAIL_10010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -363,39 +363,39 @@ function condition_EVENT_GADGET_CREATE_10011(context, evt)
 	if 10016 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_10011(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 333, 111131, 180, {success = 2, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 333, 301, 111132, {180,defs.group_1,25,0},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 333, 302, 111133, {180,3,582,2},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 333, 303, 111165, {180,0,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 333)
-	
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, defs.group_1, {10033,10034,10035,10036,10037,10038}, 99, 2, 2) then
 		return -1
 	end
-	
-	
-	
+
+
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 3, defs.group_1, {10045,10046,10047,10048}, 99, 2, 2) then
 		return -1
 	end
-	
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 4, defs.group_1, {10049,10050}, 99, 1, 1) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -406,7 +406,7 @@ function action_EVENT_CHALLENGE_SUCCESS_10012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -417,7 +417,7 @@ function action_EVENT_CHALLENGE_FAIL_10013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -428,7 +428,7 @@ function action_EVENT_CHALLENGE_FAIL_10051(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -439,7 +439,7 @@ function action_EVENT_CHALLENGE_SUCCESS_10052(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -448,39 +448,39 @@ function condition_EVENT_GADGET_CREATE_10054(context, evt)
 	if 10055 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_10054(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 344, 111131, 130, {success = 2, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 344, 301, 111132, {130,defs.group_1,20,0},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 344, 302, 111135, {130,3,582,2},{},{success=1,fail=1})
-	
+
 	ScriptLib.AttachChildChallenge(context, 344, 303, 111165, {130,0,0,0},{},{success=0,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 344)
-	
-	
-	
+
+
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 2, defs.group_1, {10056,10057,10058,10060,10061}, 99, 3, 3) then
 		return -1
 	end
-	
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 3, defs.group_1, {10072,10073,10068,10069}, 99, 1, 1) then
 		return -1
 	end
-	
+
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 4, defs.group_1, {10070,10071}, 99, 1, 1) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -489,7 +489,7 @@ function condition_EVENT_ANY_MONSTER_DIE_10074(context, evt)
 	if 10031 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -500,7 +500,7 @@ function action_EVENT_ANY_MONSTER_DIE_10074(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -509,7 +509,7 @@ function condition_EVENT_ANY_MONSTER_DIE_10075(context, evt)
 	if 10032 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -520,7 +520,7 @@ function action_EVENT_ANY_MONSTER_DIE_10075(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -529,7 +529,7 @@ function condition_EVENT_ANY_MONSTER_DIE_10076(context, evt)
 	if 10049 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -540,7 +540,7 @@ function action_EVENT_ANY_MONSTER_DIE_10076(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -549,7 +549,7 @@ function condition_EVENT_ANY_MONSTER_DIE_10077(context, evt)
 	if 10050 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -560,7 +560,7 @@ function action_EVENT_ANY_MONSTER_DIE_10077(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -569,7 +569,7 @@ function condition_EVENT_ANY_MONSTER_DIE_10078(context, evt)
 	if 10070 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -580,7 +580,7 @@ function action_EVENT_ANY_MONSTER_DIE_10078(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -589,7 +589,7 @@ function condition_EVENT_ANY_MONSTER_DIE_10079(context, evt)
 	if 10071 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -600,6 +600,6 @@ function action_EVENT_ANY_MONSTER_DIE_10079(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133007232
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -78,9 +78,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -89,12 +89,12 @@ function condition_EVENT_SPECIFIC_GADGET_HP_CHANGE_324(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_GADGET_HP_CHANGE or evt.param3 > 50 then
 		return false
 	end
-	
+
 	-- 判断剩余怪物数量是否是2
 	if ScriptLib.GetGroupMonsterCount(context) > 2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -106,27 +106,27 @@ function action_EVENT_SPECIFIC_GADGET_HP_CHANGE_324(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=2041,y=209,z=-59}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400004, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 445, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 446, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -136,12 +136,12 @@ function condition_EVENT_SPECIFIC_GADGET_HP_CHANGE_325(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_GADGET_HP_CHANGE or evt.param3 > 50 then
 		return false
 	end
-	
+
 	-- 判断剩余怪物数量是否是2
 	if ScriptLib.GetGroupMonsterCount(context) > 2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -153,26 +153,26 @@ function action_EVENT_SPECIFIC_GADGET_HP_CHANGE_325(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=2042,y=209,z=-36}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400004, pos, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 443, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 444, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end

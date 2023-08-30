@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220133026
 }
 
 -- DEFS_MISCS
-local defs = 
+defs =
 {
                 guide_region = 26034,
 	--玩法完成时 这个gadget如果为GearStop则会被设为Default
@@ -14,9 +14,9 @@ local defs =
 	--终点格configid
 	ender = 26033,
 	--矩阵 用于踩格子时判断是否相邻
-	matrix = 
+	matrix =
 	{
-	
+
 		{       0,       0,       0,26018,26017,       0,       0,       0,       0},
 
 		{       0,       0,26030,26003,26015,       0,       0,26010,26002},
@@ -31,7 +31,7 @@ local defs =
 
 		{       0,       0,26029,26033,       0,       0,       0,       0,       0},
 
-	},	
+	},
 	--每个还原格控制哪些离散格
 	reveal_tiles=
 	{
@@ -49,10 +49,10 @@ local defs =
 	},
 
        	        --移动格的目标位置和使用的点阵
-        movable_pos = 
+        movable_pos =
         {--[移动格子configID] = new_pos: 两位数字的矩阵坐标，x是十位，y是个位
- [26010] = { new_pos = 26 }, 
- [26028] = { new_pos = 41 }, 
+ [26010] = { new_pos = 26 },
+ [26028] = { new_pos = 41 },
         },
 	        lines=
         {
@@ -62,9 +62,9 @@ local defs =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -144,9 +144,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -157,9 +157,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -184,9 +184,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -194,7 +194,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_26013(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 220133026, 26011) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -204,8 +204,8 @@ function action_EVENT_GADGET_STATE_CHANGE_26013(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 201330104, 22) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -213,12 +213,12 @@ end
 function action_EVENT_CUTSCENE_END_26014(context, evt)
 	if evt.param1 == 201330104 and evt.param2 == 1 then
 		ScriptLib.ShowReminder(context, 1111288)
-		
+
 		ScriptLib.SetGroupVariableValueByGroup(context, "GadgetADie", 1, 220133091)
-		
+
 		ScriptLib.KillEntityByConfigId(context, {group_id=220133091, config_id=91001, entity_type=EntityType.GADGET})
 	end
-	
+
 	return 0
 end
 

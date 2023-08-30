@@ -8,7 +8,7 @@
 
 --需求defs
 --[[
-    local defs = {
+    defs = {
         challenge_id = 111,
         enter_region = 1,
         leave_region = 1,
@@ -110,7 +110,7 @@ function action_EVENT_ENTER_REGION(context,evt)
     end
 
     local _cur_count = ScriptLib.GetGroupVariableValue(context,"SET_TRIGGER")
-    if _cur_count >= defs.trigger_time then 
+    if _cur_count >= defs.trigger_time then
         ScriptLib.PrintContextLog(context, "## CampChallenge : action_EVENT_ENTER_REGION:".."_cur_count >= defs.trigger_time")
         ScriptLib.FinishGroupLinkBundle(context, base_info.group_id)--保底再次finish一下
         return 0    --进度已完成，不开挑战
@@ -123,9 +123,9 @@ function action_EVENT_ENTER_REGION(context,evt)
     --https://www.tapd.cn/22963631/prong/stories/view/1122963631001540454
     local _trans =  ScriptLib.GetChallengeTransaction(context, defs.challenge_id)
     ScriptLib.MarkGroupLuaAction(context, "Vintage_Camp_1",_trans,{})
-    
+
     --恢复suite内容
-    if Phase == nil then 
+    if Phase == nil then
         ScriptLib.PrintContextLog(context, "## CampChallenge : action_EVENT_ENTER_REGION LD注意：没有配置Phase")
         return 0
     end
@@ -134,7 +134,7 @@ function action_EVENT_ENTER_REGION(context,evt)
         ScriptLib.PrintContextLog(context, "## CampChallenge : action_EVENT_ENTER_REGION LD注意：没有找到Variable:STAGE")
         return 0
     end
-    if Phase[_p] == nil then 
+    if Phase[_p] == nil then
         ScriptLib.PrintContextLog(context, "## CampChallenge : action_EVENT_ENTER_REGION LD注意：没有找到STAGE=".._p.."对应的suite配置")
         return 0
     end
@@ -147,7 +147,7 @@ end
 function action_EVENT_LEAVE_REGION(context,evt)
     ScriptLib.PrintContextLog(context, "## CampChallenge : action_EVENT_LEAVE_REGION evt.param1="..evt.param1 .. "|defs.leave_region = "..defs.leave_region)
     if evt.param1 ~= defs.leave_region then return 0 end
-    
+
     --主客机离开恢复visionType
 	ScriptLib.SetPlayerGroupVisionType(context, {evt.uid}, {1})
 
@@ -156,7 +156,7 @@ function action_EVENT_LEAVE_REGION(context,evt)
     end
 
     --主机离开关挑战
-    if ScriptLib.IsChallengeStartedByChallengeIndex(context,base_info.group_id,defs.challenge_id) == true then 
+    if ScriptLib.IsChallengeStartedByChallengeIndex(context,base_info.group_id,defs.challenge_id) == true then
         ScriptLib.StopChallenge(context, defs.challenge_id, 0)
     end
     return 0
@@ -164,7 +164,7 @@ end
 --初始化
 function Initialize()
 	--加触发器
-    if temp_Tirgger ~= nil then 
+    if temp_Tirgger ~= nil then
         for k,v in pairs(temp_Tirgger) do
             v.name = v.action
             v.config_id = 40000000 + k
@@ -175,7 +175,7 @@ function Initialize()
         end
     end
 	--加变量
-    if temp_Variables ~= nil then 
+    if temp_Variables ~= nil then
         for k,v in pairs(temp_Variables) do
             table.insert(variables,v)
         end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 244007001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -122,9 +122,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -132,7 +132,7 @@ function condition_EVENT_GADGET_CREATE_1002(context, evt)
 	if 1001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -143,7 +143,7 @@ function action_EVENT_GADGET_CREATE_1002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -151,14 +151,14 @@ end
 function condition_EVENT_SELECT_OPTION_1012(context, evt)
 	-- 判断是gadgetid 1001 option_id 175
 	if 1001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 175 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -167,86 +167,86 @@ function action_EVENT_SELECT_OPTION_1012(context, evt)
 	-- 初始化时间变量
 	local challenge_time = 0
 	local shock_wave = 0
-	
+
 	--------------------------------------------------------------------------------
 	-- 判断选择时间因子
 	if (0 or -1) ~= ScriptLib.GetChannellerSlabLoopDungeonLimitTime(context) then
 	        challenge_time = ScriptLib.GetChannellerSlabLoopDungeonLimitTime(context)
 	end
-	
+
 	------------------------------------------------------------
 	-- 判断是否每波需要额外的怪物，如果是的话改变变量
 	if false ~= ScriptLib.IsChannellerSlabLoopDungeonConditionSelected(context, 114) then
 	        ScriptLib.SetGroupVariableValue(context, "EXTRA_MONSTER", 1)
 	end
-	
+
 	------------------------------------------------------------
 	-- 判断是否每波需要额外的怪物，如果是的话改变变量
 	if false ~= ScriptLib.IsChannellerSlabLoopDungeonConditionSelected(context, 111) then
 	        shock_wave = 1
 	end
-	
-	
+
+
 	--  在Group244007001从怪物潮池{13031}或{13039}（带额外词缀）中随机创建一个TideIndex为1的怪物潮，创建怪物总数为1，场上怪物最少1只，最多1只, pointTag 为 2  每0尝试填充一次，填充数量为0
 	if shock_wave == 0 then
 	        ScriptLib.AddExtraGroupSuite(context, 244007001, 3)
 	    else
 	        ScriptLib.AddExtraGroupSuite(context, 244007001, 4)
 	end
-	
-	
+
+
 	-- 将configid为 1001 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 	        return -1
-	    end 
-	
+	    end
+
 	-- 删除指定group： 244007001 ；指定config：1001；物件身上指定option：175；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 244007001, 1001, 175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 	    return -1
 	end
-	
+
 	----------------------------------------------------------------------------------------------------------------------------
 	-- 创建编号为110180父挑战，indexID为101
 	if 0 ~= ScriptLib.CreateFatherChallenge(context, 101, 110180, 999999, {success = 1, fail = 1, fail_on_wipe=false}) then
 	        return -1
 	end
-	
-	
+
+
 	-- 创建编号为201的子挑战：杀怪挑战，消灭1个boss怪
 	if 0 ~= ScriptLib.AttachChildChallenge(context, 101, 201, 110184, {244007001,1},{},{success=0,fail=0}) then
 	        return -1
 	end
-	
-	
+
+
 	-- 创建编号为202的子挑战：限时积分.如果没有选择不会开启
 	if 0 ~= challenge_time then
 	        ScriptLib.AttachChildChallenge(context, 101, 202, 110182, {challenge_time,244007001,1},{},{success=0,fail=0})
 	    else
 	        ScriptLib.AddExtraGroupSuite(context, 244007001, 2)
 	end
-	
+
 	-- 开始父挑战
 	if 0 ~= ScriptLib.StartFatherChallenge(context, 101) then
 	        return -1
 	end
-	
-	
+
+
 	-- 延迟3秒后,向groupId为：244007001的对象,请求一次调用,并将string参数："T1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 244007001, "T1", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
-	
+
+
 	-- 卸载回血gadget
 	if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 244007001, EntityType.GADGET, 1013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 	        return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -254,7 +254,7 @@ end
 function action_EVENT_TIMER_EVENT_1014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 244007002, 2)
-	
+
 	return 0
 end
 
@@ -265,16 +265,16 @@ function action_EVENT_CHALLENGE_SUCCESS_1015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "IS_BOSS_DEAD" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "IS_BOSS_DEAD", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 终止识别id为101的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 101, 1)
-	
+
 	return 0
 end
 
@@ -285,10 +285,10 @@ function action_EVENT_CHALLENGE_FAIL_1016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 244007001, 2)
-	
+
 	return 0
 end
 
@@ -299,19 +299,19 @@ function action_EVENT_CHALLENGE_SUCCESS_1017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 终止识别id为101的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 101, 1)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_1019(context, evt)
 	local uid_list = ScriptLib.GetSceneUidList(context)
-	
+
 	local ret = 0
-	
+
 	for i,v in ipairs(uid_list) do
 	        local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
 	        if true ~= is_all_dead then
@@ -319,11 +319,11 @@ function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_1019(context, evt)
 	                break
 	        end
 	end
-	
+
 	if ret ~= 0 then
 	        return false
 	end
-	
+
 	return true
 end
 
@@ -331,13 +331,13 @@ end
 function action_EVENT_DUNGEON_ALL_AVATAR_DIE_1019(context, evt)
 	-- 终止识别id为101的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 101, 0)
-	
+
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -348,31 +348,31 @@ function action_EVENT_CHALLENGE_FAIL_1020(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 244007003, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 244007004, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 244007005, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 244007001, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -382,7 +382,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1023(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 20 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -393,35 +393,35 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244007002, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244007003, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244007004, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244007005, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -431,7 +431,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1024(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 20 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -442,34 +442,34 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244007002, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244007003, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244007004, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244007005, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	return 0
 end

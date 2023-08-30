@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220140004
 }
 
@@ -32,7 +32,7 @@ local        defs = {
                         [4009] = {0, 102, 103, 104},
                         [4010] = {0, 102, 103, 104},
                         [4011] = {0, 102, 103, 104},
-                        [4012] = {0, 102, 103, 104},	        
+                        [4012] = {0, 102, 103, 104},
                         [4013] = {0, 102, 103, 104},
                         [4014] = {0, 102, 103, 104},
                 },
@@ -46,15 +46,15 @@ local        defs = {
                         [4012] = {0, 302, 303, 304},
                         [4013] = {0, 302, 303, 304},
                         [4014] = {0, 302, 303, 304},
- 	        
+
                 },
               serve_items = {4017,4019}
         }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -161,9 +161,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -174,9 +174,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -201,28 +201,28 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_4003(context, evt)
 	-- 判断是gadgetid 为 4027的移动平台，是否到达了15 的路线中的 0 点
-	
+
 	if 4027 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 15 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -233,23 +233,23 @@ function action_EVENT_PLATFORM_ARRIVAL_4003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140020, 2)
-	
+
 	-- 创建id为4050的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4050 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4027 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -257,10 +257,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_4004(context, evt)
 	if evt.source_name == "test1" then
 		ScriptLib.SetGadgetStateByConfigId(context,4001, GadgetState.GearStart)
-		
+
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	end
-	
+
 	return 0
 end
 
@@ -269,7 +269,7 @@ function condition_EVENT_TIME_AXIS_PASS_4011(context, evt)
 	if "test1" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -280,30 +280,30 @@ function action_EVENT_TIME_AXIS_PASS_4011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"plat"为3
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"extra"为1
 	if ScriptLib.GetGroupVariableValue(context, "extra") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -314,25 +314,25 @@ function action_EVENT_VARIABLE_CHANGE_4013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"plat"为4
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -343,13 +343,13 @@ function action_EVENT_VARIABLE_CHANGE_4014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -358,7 +358,7 @@ function condition_EVENT_ANY_GADGET_DIE_4022(context, evt)
 	if 4016 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -368,8 +368,8 @@ function action_EVENT_ANY_GADGET_DIE_4022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4015, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -378,7 +378,7 @@ function condition_EVENT_ANY_GADGET_DIE_4024(context, evt)
 	if 4018 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -389,13 +389,13 @@ function action_EVENT_ANY_GADGET_DIE_4024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 4017 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -403,32 +403,32 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_4025(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 4005) == 201 and ScriptLib.GetGadgetStateByConfigId(context, 0, 4006) == 201 and ScriptLib.GetGroupVariableValue(context, "door") == 0 then
 		ScriptLib.SetGroupVariableValue(context, "door", 1)
-		
+
 		ScriptLib.ChangeToTargetLevelTag(context, 31)
-		
+
 		ScriptLib.InitTimeAxis(context, "test1", {1,4}, false)
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_4026(context, evt)
 	-- 判断是gadgetid 为 4027的移动平台，是否到达了6 的路线中的 4 点
-	
+
 	if 4027 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 4 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -439,30 +439,30 @@ function action_EVENT_PLATFORM_ARRIVAL_4026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4028(context, evt)
 	if evt.param1 ~= 4028 then return false end
-	
+
 	-- 判断变量"plat"为0
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -473,31 +473,31 @@ function action_EVENT_ENTER_REGION_4028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 4027, 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4029(context, evt)
 	if evt.param1 ~= 4029 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -508,19 +508,19 @@ function action_EVENT_ENTER_REGION_4029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4031(context, evt)
 	if evt.param1 ~= 4031 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -531,7 +531,7 @@ function action_EVENT_ENTER_REGION_4031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -540,12 +540,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4032(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 220140004, 4019) then
 		return false
 	end
-	
+
 	-- 判断变量"plat"为1
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -556,37 +556,37 @@ function action_EVENT_GADGET_STATE_CHANGE_4032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "plat" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "plat", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 4027, 6) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4033(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"plat"为5
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 5 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -597,25 +597,25 @@ function action_EVENT_VARIABLE_CHANGE_4033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4034(context, evt)
 	if evt.param1 ~= 4034 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -626,7 +626,7 @@ function action_EVENT_ENTER_REGION_4034(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -636,7 +636,7 @@ function condition_EVENT_GROUP_LOAD_4035(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "door", 220140004) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -644,25 +644,25 @@ end
 function action_EVENT_GROUP_LOAD_4035(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140004, 2)
-	
+
 	-- 将configid为 4001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4037(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"plat"为6
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 6 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -673,25 +673,25 @@ function action_EVENT_VARIABLE_CHANGE_4037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4038(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"plat"为7
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 7 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -702,25 +702,25 @@ function action_EVENT_VARIABLE_CHANGE_4038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4039(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"plat"为8
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 8 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -731,25 +731,25 @@ function action_EVENT_VARIABLE_CHANGE_4039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4040(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"plat"为9
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 9 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -760,25 +760,25 @@ function action_EVENT_VARIABLE_CHANGE_4040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4041(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"plat"为10
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 10 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -789,33 +789,33 @@ function action_EVENT_VARIABLE_CHANGE_4041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4050) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_4042(context, evt)
 	-- 判断是gadgetid 为 4050的移动平台，是否到达了1 的路线中的 1 点
-	
+
 	if 4050 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -826,64 +826,64 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_4042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "temp" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "temp", 1, 220140021) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 4050, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4050) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140013, 2)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140021, 2)
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220140013, monsters = {}, gadgets = {13008} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4043(context, evt)
 	if evt.param1 ~= 4043 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"plat"为11
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 11 then
 			return false
 	end
-	
+
 	-- 判断变量"fire"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "fire", 220140021) ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"test"为0
 	if ScriptLib.GetGroupVariableValue(context, "test") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -894,31 +894,31 @@ function action_EVENT_ENTER_REGION_4043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 4050, 16) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4050) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4044(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"plat"为12
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 12 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -929,33 +929,33 @@ function action_EVENT_VARIABLE_CHANGE_4044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4050) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_4045(context, evt)
 	-- 判断是gadgetid 为 4050的移动平台，是否到达了17 的路线中的 2 点
-	
+
 	if 4050 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 17 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -966,40 +966,40 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_4045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 4050, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4050) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140013, 3)
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220140013, monsters = {}, gadgets = {13014} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4046(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"plat"为14
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 14 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1010,33 +1010,33 @@ function action_EVENT_VARIABLE_CHANGE_4046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4050) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_4047(context, evt)
 	-- 判断是gadgetid 为 4050的移动平台，是否到达了3 的路线中的 3 点
-	
+
 	if 4050 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1047,30 +1047,30 @@ function action_EVENT_PLATFORM_ARRIVAL_4047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将configid为 4050 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4050, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4049(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"extra"为2
 	if ScriptLib.GetGroupVariableValue(context, "extra") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"plat"为3
 	if ScriptLib.GetGroupVariableValue(context, "plat") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1081,33 +1081,33 @@ function action_EVENT_VARIABLE_CHANGE_4049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_4051(context, evt)
 	-- 判断是gadgetid 为 4050的移动平台，是否到达了16 的路线中的 5 点
-	
+
 	if 4050 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 16 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 5 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1118,7 +1118,7 @@ function action_EVENT_PLATFORM_ARRIVAL_4051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1127,7 +1127,7 @@ function condition_EVENT_QUEST_START_4052(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220140004, 4001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1138,7 +1138,7 @@ function action_EVENT_QUEST_START_4052(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1147,7 +1147,7 @@ function condition_EVENT_GROUP_LOAD_4053(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220140004, 4001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1158,7 +1158,7 @@ function action_EVENT_GROUP_LOAD_4053(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1166,94 +1166,94 @@ end
 function action_EVENT_GROUP_LOAD_4054(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 1 then
 		ScriptLib.SetPlatformRouteId(context, 4027, 20)
-		
+
 		ScriptLib.StartPlatform(context, 4027)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 2 and ScriptLib.GetGroupVariableValue(context, "door") == 0 then
 		ScriptLib.SetPlatformRouteId(context, 4027, 21)
-		
+
 		ScriptLib.StartPlatform(context, 4027)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 2 and ScriptLib.GetGroupVariableValue(context, "door") == 1 then
 		ScriptLib.SetPlatformRouteId(context, 4027, 34)
-		
+
 		ScriptLib.StartPlatform(context, 4027)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 3 and ScriptLib.GetGroupVariableValue(context, "extra") == 1 then
 		ScriptLib.SetPlatformRouteId(context, 4027, 22)
-		
+
 		ScriptLib.StartPlatform(context, 4027)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 3 and ScriptLib.GetGroupVariableValue(context, "extra") == 2 then
 		ScriptLib.SetPlatformRouteId(context, 4027, 23)
-		
+
 		ScriptLib.StartPlatform(context, 4027)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 4 then
 		ScriptLib.SetPlatformRouteId(context, 4027, 24)
-		
+
 		ScriptLib.StartPlatform(context, 4027)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 5 then
 		ScriptLib.SetPlatformRouteId(context, 4027, 25)
-		
+
 		ScriptLib.StartPlatform(context, 4027)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 6 then
 		ScriptLib.SetPlatformRouteId(context, 4027, 26)
-		
+
 		ScriptLib.StartPlatform(context, 4027)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 7 then
 		ScriptLib.SetPlatformRouteId(context, 4027, 27)
-		
+
 		ScriptLib.StartPlatform(context, 4027)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 8 then
 		ScriptLib.SetPlatformRouteId(context, 4027, 28)
-		
+
 		ScriptLib.StartPlatform(context, 4027)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 9 and ScriptLib.GetGroupVariableValueByGroup(context, "temp", 220140020) == 0 then
 		ScriptLib.SetGroupVariableValueByGroup(context, "temp", 1, 220140020)
-		
+
 		ScriptLib.AddExtraGroupSuite(context, 220140020, 2)
-		
+
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140004, config_id=4027, entity_type=EntityType.GADGET})
-		
+
 		ScriptLib.CreateGadget(context, {config_id=4050})
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_4055(context, evt)
 	-- 判断是gadgetid 为 4027的移动平台，是否到达了21 的路线中的 0 点
-	
+
 	if 4027 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 21 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1264,13 +1264,13 @@ function action_EVENT_PLATFORM_ARRIVAL_4055(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1278,68 +1278,68 @@ end
 function action_EVENT_GROUP_LOAD_4056(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 10 then
 		ScriptLib.SetPlatformRouteId(context, 4050, 29)
-		
+
 		ScriptLib.StartPlatform(context, 4050)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 11 and ScriptLib.GetGroupVariableValueByGroup(context, "fire", 220140021) == 0 then
 		if ScriptLib.GetGroupVariableValue(context, "test") == 0 then
 			ScriptLib.SetPlatformRouteId(context, 4050, 35)
-			
+
 			ScriptLib.StartPlatform(context, 4050)
 		else
 			ScriptLib.SetPlatformRouteId(context, 4050, 30)
-			
+
 			ScriptLib.StartPlatform(context, 4050)
-			
+
 			ScriptLib.SetGroupVariableValueByGroup(context, "fire", 1, 220140021)
 		end
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 11 and ScriptLib.GetGroupVariableValueByGroup(context, "fire", 220140021) == 1 then
 		ScriptLib.StartPlatform(context, 4050)
-		
+
 		ScriptLib.SetPlatformRouteId(context, 4050, 30)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 12 then
 		ScriptLib.SetPlatformRouteId(context, 4050, 31)
-		
+
 		ScriptLib.StartPlatform(context, 4050)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 13 then
 		ScriptLib.SetPlatformRouteId(context, 4050, 32)
-		
+
 		ScriptLib.StartPlatform(context, 4050)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "plat") == 14 then
 		ScriptLib.SetPlatformRouteId(context, 4050, 33)
-		
+
 		ScriptLib.StartPlatform(context, 4050)
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_4057(context, evt)
 	-- 判断是gadgetid 为 4050的移动平台，是否到达了29 的路线中的 0 点
-	
+
 	if 4050 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 29 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1350,57 +1350,57 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_4057(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "plat" 的变量设置为 11
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "plat", 11) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 4050, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4050) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140013, 2)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140021, 2)
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220140013, monsters = {}, gadgets = {13008} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_4059(context, evt)
 	-- 判断是gadgetid 为 4050的移动平台，是否到达了31 的路线中的 0 点
-	
+
 	if 4050 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 31 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1411,48 +1411,48 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_4059(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 4050, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4050) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140013, 3)
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220140013, monsters = {}, gadgets = {13014} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_4060(context, evt)
 	-- 判断是gadgetid 为 4050的移动平台，是否到达了33 的路线中的 0 点
-	
+
 	if 4050 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 33 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 0 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1463,13 +1463,13 @@ function action_EVENT_PLATFORM_ARRIVAL_4060(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将configid为 4050 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4050, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1478,7 +1478,7 @@ function condition_EVENT_GROUP_LOAD_4061(context, evt)
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 220140004, 4015) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1488,8 +1488,8 @@ function action_EVENT_GROUP_LOAD_4061(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4015, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308439
 }
 
@@ -7,9 +7,9 @@ local base_info = {
 local HourGlass_ConfigIDList = {439001}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -88,20 +88,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_439006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"HourGlass_InTime"为1
 	if ScriptLib.GetGroupVariableValue(context, "HourGlass_InTime") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -109,7 +109,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_439006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308439, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-1492.04, y=37.00696, z=4631.544}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-1492.04, y=37.00696, z=4631.544}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -118,20 +118,20 @@ function action_EVENT_VARIABLE_CHANGE_439006(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_439007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"HourGlass_InTime"为0
 	if ScriptLib.GetGroupVariableValue(context, "HourGlass_InTime") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -139,19 +139,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_439007(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133308439, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_439010(context, evt)
 	if evt.param1 ~= 439010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -162,7 +162,7 @@ function action_EVENT_ENTER_REGION_439010(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 

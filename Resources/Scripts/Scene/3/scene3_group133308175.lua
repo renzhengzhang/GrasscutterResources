@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308175
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -89,9 +89,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -100,14 +100,14 @@ function action_EVENT_QUEST_FINISH_175003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 175001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 175002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 175002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -120,7 +120,7 @@ function condition_EVENT_GROUP_LOAD_175004(context, evt)
 	if curQuestState ~= 3 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -130,14 +130,14 @@ function action_EVENT_GROUP_LOAD_175004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 175001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 175002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 175002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -148,13 +148,13 @@ function action_EVENT_QUEST_FINISH_175005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 为特定175001物件设置其SGV:"SGV_XST_GLOW1"为1
 	if 0 ~= ScriptLib.SetEntityServerGlobalValueByConfigId(context, 175001, "SGV_XST_GLOW1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -165,13 +165,13 @@ function action_EVENT_QUEST_FINISH_175006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 为特定175001物件设置其SGV:"SGV_XST_GLOW2"为1
 	if 0 ~= ScriptLib.SetEntityServerGlobalValueByConfigId(context, 175001, "SGV_XST_GLOW2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -182,13 +182,13 @@ function action_EVENT_QUEST_FINISH_175007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 为特定175001物件设置其SGV:"SGV_XST_GLOW4"为1
 	if 0 ~= ScriptLib.SetEntityServerGlobalValueByConfigId(context, 175001, "SGV_XST_GLOW4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -199,13 +199,13 @@ function action_EVENT_QUEST_FINISH_175008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 为特定175001物件设置其SGV:"SGV_XST_GLOW3"为1
 	if 0 ~= ScriptLib.SetEntityServerGlobalValueByConfigId(context, 175001, "SGV_XST_GLOW3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -215,7 +215,7 @@ function condition_EVENT_GROUP_LOAD_175009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fi1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -226,7 +226,7 @@ function action_EVENT_GROUP_LOAD_175009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -236,7 +236,7 @@ function condition_EVENT_GROUP_LOAD_175010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fi2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -247,7 +247,7 @@ function action_EVENT_GROUP_LOAD_175010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -257,7 +257,7 @@ function condition_EVENT_GROUP_LOAD_175011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fi3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -268,7 +268,7 @@ function action_EVENT_GROUP_LOAD_175011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -278,7 +278,7 @@ function condition_EVENT_GROUP_LOAD_175012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fi4") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -289,6 +289,6 @@ function action_EVENT_GROUP_LOAD_175012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-	
+
 	return 0
 end

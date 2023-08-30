@@ -1,6 +1,6 @@
 --ServerUploadTool Save to [/root/env/data/lua/common/V2_2]
 --[[
-local defs = {
+defs = {
 	region_Enter = 191004,
 	region_Leave = 191006
 	Boss = 222,
@@ -71,7 +71,7 @@ function action_CreateBoss(context,evt)
 	ScriptLib.SetGadgetStateByConfigId(context, Pursina[1][1], GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, Pursina[2][1], GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, Pursina[3][1], GadgetState.Default)
-	if evt.param1 == 1 then 
+	if evt.param1 == 1 then
 		for k,v in pairs(gadgets) do
 			if v.gadget_id == 70800055 then
 				ScriptLib.CreateGadget(context,{config_id = v.config_id})
@@ -110,14 +110,14 @@ function enterRegion(context,evt)
 		ScriptLib.ForbidPlayerRegionVision(context, context.uid)
 		ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {0})
 	end
-	return 0 
+	return 0
 end
 function action_Active_Count(context,evt)	--纯reminder 用 无逻辑
-	if defs.Boss ~= nil then 
+	if defs.Boss ~= nil then
 		if evt.param1 == 2 and evt.param1 > evt.param2 then ScriptLib.ShowReminder(context,600081) end
 		if evt.param1 == 3 and evt.param1 > evt.param2 then ScriptLib.ShowReminder(context,600080) end
 	end
-	return 0 
+	return 0
 end
 function action_Boss_SetBattle(context,evt)
 	local groupID = ScriptLib.GetContextGroupId(context)
@@ -175,7 +175,7 @@ function leaveRegion(context,evt)
 		ScriptLib.RevertPlayerRegionVision(context, context.uid)
 		ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {1})
 		if ScriptLib.GetGroupVariableValue(context,"IsFinished") == 0 then --该then内为 未完成玩法时离开region时执行的操作
-			log_ActivityDig_2(context,4) 
+			log_ActivityDig_2(context,4)
 			fail(context)
 		end
 	end
@@ -261,7 +261,7 @@ function Finteract(context, evt)
 		ScriptLib.SetGroupTempValue(context,"Progress_To_Add_1",0,{})	--挖掘进度中转变量
 		ScriptLib.SetGroupTempValue(context,"Progress_To_Add_2",0,{})	--挖掘进度中转变量
 		ScriptLib.SetGroupTempValue(context,"Progress_To_Add_3",0,{})	--挖掘进度中转变量
-		
+
 		-- 卸载操作台
 		if defs.Boss == nil then ScriptLib.SetGadgetStateByConfigId(context, evt.param1, GadgetState.GearStart) end
 		ScriptLib.DelWorktopOptionByGroupId(context, groupID, evt.param1, 175)
@@ -277,7 +277,7 @@ function Finteract(context, evt)
 		ScriptLib.InitTimeAxis(context, "tick", {1}, true)
 		--5秒后显示reminder
 		ScriptLib.InitTimeAxis(context, "reminder", {6}, false)
-	end 
+	end
 	return 0
 end
 function tick(context,evt)--每tick计算进度  "Progress_To_Add_"..i
@@ -286,13 +286,13 @@ function tick(context,evt)--每tick计算进度  "Progress_To_Add_"..i
 		FinishPursina[i] = ScriptLib.GetGroupTempValue(context,"FinishPursina_"..i,{})
 		if FinishPursina[i] ~= 1 then
 			local Progress_wait_for_Add = ScriptLib.GetGroupTempValue(context, "Progress_To_Add_"..i,{})	--取当前待增加进度
-			if Progress_wait_for_Add >= 10 then 
+			if Progress_wait_for_Add >= 10 then
 				local real_add = math.floor(Progress_wait_for_Add/10)
 				ScriptLib.AddGalleryProgressScore(context, "digProgress"..i-1, GALLERY_ID, real_add)
 				ScriptLib.SetGroupTempValue(context,"Progress_To_Add_"..i,Progress_wait_for_Add - real_add*10,{})
 
-				local nowProgress = ScriptLib.GetGalleryProgressScore(context,"digProgress".. i-1,GALLERY_ID) 
-				if nowProgress >= 100 then 
+				local nowProgress = ScriptLib.GetGalleryProgressScore(context,"digProgress".. i-1,GALLERY_ID)
+				if nowProgress >= 100 then
 					local groupID = ScriptLib.GetContextGroupId(context)
 					ScriptLib.SetGadgetStateByConfigId(context,Pursina[i][1], GadgetState.GearAction1)
 					ScriptLib.RemoveEntityByConfigId(context, groupID, EntityType.GADGET, Pursina[i][2])
@@ -348,11 +348,11 @@ function finishPlay(context)
 		--2.2挖矿活动__完成且击倒boss不少于n次
 		local temp_result = ScriptLib.GetGroupTempValue(context,"watcher5",{})
 		ScriptLib.PrintContextLog(context, "[通关计数]击倒boss".. temp_result.. "次")
-		if temp_result >= Watcher_Condition[5] then 
+		if temp_result >= Watcher_Condition[5] then
 			ScriptLib.AddExhibitionAccumulableData(context,  uid[1], "Activity_PursinaChallenge_watcher_5", 1)
 		end
 		--2.2挖矿活动__完成且未击倒boss
-		if temp_result == 0 then 
+		if temp_result == 0 then
 			ScriptLib.AddExhibitionAccumulableData(context,  uid[1], "Activity_PursinaChallenge_watcher_4", 1)
 		end
 		--完成后，等待一段时间refreshgroup
@@ -361,7 +361,7 @@ function finishPlay(context)
 		ScriptLib.AddExhibitionAccumulableData(context, uid[1], "Activity_Pursina_Group_".. groupID,1)
 		ScriptLib.FinishGroupLinkBundle(context, groupID)
 	end
-	
+
 	log_ActivityDig_2(context,0)
 	return 0
 end
@@ -371,7 +371,7 @@ function gallerytimeout(context,evt)
 	ScriptLib.PrintContextLog(context, "【[gallerytimeout]】evt.param2="..evt.param2)
 	ScriptLib.PrintContextLog(context, "【[gallerytimeout]】GALLERY_ID="..GALLERY_ID)
 	if evt.param1 == GALLERY_ID and evt.param2 == 0 then
-		if evt.param3 == 1 then 
+		if evt.param3 == 1 then
 			ScriptLib.PrintContextLog(context, "【[gallerytimeout]】evt.param3="..evt.param3)
 			--埋点
 			log_ActivityDig_2(context,2)
@@ -433,13 +433,13 @@ function LowPower(context)
 	ScriptLib.PrintContextLog(context, "【[LowPower]】")
 	local configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	ScriptLib.MarkGroupLuaAction(context, "ActivityDig_3",ScriptLib.GetGalleryTransaction(context, GALLERY_ID), {["Pursina_ID"] = configID,["change_type"]=4})
-	return 0 
+	return 0
 end
 function MediumPower(context)
 	ScriptLib.PrintContextLog(context, "【[MediumPower]】")
  	local configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	ScriptLib.MarkGroupLuaAction(context, "ActivityDig_3",ScriptLib.GetGalleryTransaction(context, GALLERY_ID) , {["Pursina_ID"] = configID,["change_type"]=3})
-	return 0 
+	return 0
 end
 function HighPower(context)
 	ScriptLib.PrintContextLog(context, "【[HighPower]】")
@@ -454,8 +454,8 @@ function SLC_ShowUI(context)
 	local configID = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	for i = 1, #Pursina do
 		if Pursina[i][2] == configID then ScriptLib.CreateGadget(context, {config_id = 888880 + i}) end
-	end	
-	return 0 
+	end
+	return 0
 end
 function SLC_HideUI(context)
 	ScriptLib.PrintContextLog(context, "【[SLC_HideUI]】")
@@ -463,8 +463,8 @@ function SLC_HideUI(context)
 	local groupID = ScriptLib.GetContextGroupId(context)
 	for i = 1, #Pursina do
 		if Pursina[i][2] == configID then ScriptLib.RemoveEntityByConfigId(context, groupID, EntityType.GADGET, 888880+i) end
-	end	
-	return 0 
+	end
+	return 0
 end
 function ServerLuaCall_Pursina_Start(context)--桩子物件用，用于当前激活桩子的计数,顺便埋个点
 	ScriptLib.ChangeGroupVariableValue(context, "Active_Count", 1)
@@ -540,21 +540,20 @@ function Initialize()
 		if v.gadget_id == 70800047 then
 			table.insert(gadgets , {config_id = 888881 , gadget_id = 70800050, pos = v.pos, rot = v.rot, level = v.level, area_id = v.area_id })
 			break
-		end 
+		end
 	end
 	for k,v in pairs(gadgets) do
 		if v.gadget_id == 70800048 then
 			table.insert(gadgets , {config_id = 888882 , gadget_id = 70800051, pos = v.pos, rot = v.rot, level = v.level, area_id = v.area_id })
 			break
-		end 
+		end
 	end
 	for k,v in pairs(gadgets) do
 		if v.gadget_id == 70800049 then
 			table.insert(gadgets , {config_id = 888883 , gadget_id = 70800052, pos = v.pos, rot = v.rot, level = v.level, area_id = v.area_id })
 			break
-		end 
+		end
 	end
 	return 0
 end
 Initialize()
-

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220132009
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,20 +114,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9003(context, evt)
 	if evt.param1 ~= 9003 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -138,25 +138,25 @@ function action_EVENT_ENTER_REGION_9003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220132002, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9006(context, evt)
 	if evt.param1 ~= 9006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -167,25 +167,25 @@ function action_EVENT_ENTER_REGION_9006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9008(context, evt)
 	if evt.param1 ~= 9008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_9008(context, evt)
-	
+
 	if ScriptLib.GetGroupVariableValueByGroup(context, "KeyCount", 220132011) ~= 3 then
 	    if ScriptLib.GetGroupVariableValueByGroup(context, "KeyU", 220132011) ~= 1 then
 	        ScriptLib.RefreshGroup(context, { group_id = 220132002, suite = 5 })
@@ -195,21 +195,21 @@ function action_EVENT_ENTER_REGION_9008(context, evt)
 	else
 	    ScriptLib.RefreshGroup(context, { group_id = 220132011, suite = 2 })
 	end
-	
+
 	ScriptLib.RefreshGroup(context, { group_id = 220132009, suite = 1 })
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9009(context, evt)
 	if evt.param1 ~= 9009 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -220,12 +220,12 @@ function action_EVENT_ENTER_REGION_9009(context, evt)
 	else
 	    ScriptLib.RefreshGroup(context, { group_id = 220132011, suite = 2 })
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220132009, suite = 1 }) then
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 	    return -1
 	end
-	
+
 	return 0
 end

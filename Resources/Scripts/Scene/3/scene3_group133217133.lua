@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133217133
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -80,21 +80,21 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_133003(context, evt)
 	-- 创建标识为"Finish"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Finish", {2}, false)
-	
-	
+
+
 	-- 创建标识为"Sound"，时间节点为{1,4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Sound", {1,4}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -103,7 +103,7 @@ function condition_EVENT_TIME_AXIS_PASS_133004(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -114,7 +114,7 @@ function action_EVENT_TIME_AXIS_PASS_133004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -123,7 +123,7 @@ function condition_EVENT_TIME_AXIS_PASS_133005(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -135,8 +135,8 @@ function action_EVENT_TIME_AXIS_PASS_133005(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "Sfx_Quest_underConstruction", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -145,7 +145,7 @@ function condition_EVENT_TIME_AXIS_PASS_133006(context, evt)
 	if 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_TIME_AXIS_PASS_133006(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "Sfx_Quest_underConstruction", play_type= 2, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end

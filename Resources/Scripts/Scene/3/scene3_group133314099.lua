@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133314099
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	duration = 120,
 	kill_sum = 7,
 	group_id = 133314099,
@@ -12,9 +12,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -128,23 +128,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_99012(context, evt)
 	-- 判断是gadgetid 99011 option_id 177
 	if 99011 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 177 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -154,23 +154,23 @@ function action_EVENT_SELECT_OPTION_99012(context, evt)
 	if 0 ~= ScriptLib.ActiveChallenge(context, 180, 13, defs.duration, defs.group_id, defs.kill_sum, 0) then
 	return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
-	
+
 		--永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 	if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_controller_id }) then
 	return -1
 	end
-		
-	
+
+
 	-- 将configid为 2002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 99008, GadgetState.GearStart) then
 	return -1
-	end 
-	
+	end
+
 	return 0
-	
+
 end
 
 -- 触发操作
@@ -179,14 +179,14 @@ function action_EVENT_CHALLENGE_SUCCESS_99013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 99008, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "hasFinished" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "hasFinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -196,23 +196,23 @@ function action_EVENT_CHALLENGE_FAIL_99014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 99008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为99011的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 99011 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133314099, 2)
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133314099, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -221,7 +221,7 @@ function condition_EVENT_GADGET_CREATE_99016(context, evt)
 	if 99011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -232,7 +232,7 @@ function action_EVENT_GADGET_CREATE_99016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -242,7 +242,7 @@ function condition_EVENT_ANY_MONSTER_DIE_99017(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -250,10 +250,10 @@ end
 function action_EVENT_ANY_MONSTER_DIE_99017(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133314099, 3)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133314099, 2)
-	
+
 	return 0
 end
 
@@ -263,7 +263,7 @@ function condition_EVENT_ANY_MONSTER_DIE_99018(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -271,9 +271,9 @@ end
 function action_EVENT_ANY_MONSTER_DIE_99018(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133314099, 4)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133314099, 3)
-	
+
 	return 0
 end

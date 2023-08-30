@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 166001630
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	pursina = 630015,
 	pursina_tip = 630087,
 	fail_region = 630038,
@@ -24,9 +24,9 @@ local extra_infos = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -127,7 +127,7 @@ regions = {
 triggers = {
 	-- ShowTemplateReminder
 	{ config_id = 1630001, name = "ENTER_REGION_630001", event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_EVENT_ENTER_REGION_630001", action = "action_EVENT_ENTER_REGION_630001" },
-	-- 怪死光，创生岩柱 
+	-- 怪死光，创生岩柱
 	{ config_id = 1630007, name = "ANY_MONSTER_DIE_630007", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "condition_EVENT_ANY_MONSTER_DIE_630007", action = "action_EVENT_ANY_MONSTER_DIE_630007" },
 	-- 怪死光 计时
 	{ config_id = 1630008, name = "ANY_MONSTER_DIE_630008", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "condition_EVENT_ANY_MONSTER_DIE_630008", action = "action_EVENT_ANY_MONSTER_DIE_630008" },
@@ -145,7 +145,7 @@ triggers = {
 	{ config_id = 1630047, name = "TIME_AXIS_PASS_630047", event = EventType.EVENT_TIME_AXIS_PASS, source = "wave1Delay", condition = "condition_EVENT_TIME_AXIS_PASS_630047", action = "action_EVENT_TIME_AXIS_PASS_630047" },
 	-- 15s 延时加入第三波怪
 	{ config_id = 1630067, name = "TIME_AXIS_PASS_630067", event = EventType.EVENT_TIME_AXIS_PASS, source = "wave2Delay", condition = "condition_EVENT_TIME_AXIS_PASS_630067", action = "action_EVENT_TIME_AXIS_PASS_630067" },
-	-- 3s 岩柱开始下落 
+	-- 3s 岩柱开始下落
 	{ config_id = 1630069, name = "TIME_AXIS_PASS_630069", event = EventType.EVENT_TIME_AXIS_PASS, source = "wave1Delay", condition = "condition_EVENT_TIME_AXIS_PASS_630069", action = "action_EVENT_TIME_AXIS_PASS_630069" },
 	-- 4s 岩柱落地，生成630012
 	{ config_id = 1630075, name = "TIME_AXIS_PASS_630075", event = EventType.EVENT_TIME_AXIS_PASS, source = "wave1Delay", condition = "condition_EVENT_TIME_AXIS_PASS_630075", action = "action_EVENT_TIME_AXIS_PASS_630075" },
@@ -194,9 +194,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -207,9 +207,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -306,20 +306,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_630001(context, evt)
 	if evt.param1 ~= 630001 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -329,17 +329,17 @@ function action_EVENT_ENTER_REGION_630001(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,181,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_630007(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 166001630) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -350,33 +350,33 @@ function action_EVENT_ANY_MONSTER_DIE_630007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630033的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630033 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630044的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630044 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建标识为"wave1Delay"，时间节点为{3,4,5,6,16}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "wave1Delay", {3,4,5,6,16}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_630008(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 166001630) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -384,8 +384,8 @@ end
 function action_EVENT_ANY_MONSTER_DIE_630008(context, evt)
 	-- 创建标识为"wave2Delay"，时间节点为{3,7,11,15}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "wave2Delay", {3,7,11,15}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -394,7 +394,7 @@ function condition_EVENT_TIME_AXIS_PASS_630013(context, evt)
 	if "wave1Delay" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -405,29 +405,29 @@ function action_EVENT_TIME_AXIS_PASS_630013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630009的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630009 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630063的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630063 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_630016(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 166001630) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -435,20 +435,20 @@ end
 function action_EVENT_ANY_MONSTER_DIE_630016(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001630, 3)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001630, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_630017(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 166001630) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -456,20 +456,20 @@ end
 function action_EVENT_ANY_MONSTER_DIE_630017(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001630, 5)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001630, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_630018(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 166001630) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -477,20 +477,20 @@ end
 function action_EVENT_ANY_MONSTER_DIE_630018(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001630, 7)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001630, 6)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_630019(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 166001630) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -498,18 +498,18 @@ end
 function action_EVENT_ANY_MONSTER_DIE_630019(context, evt)
 	-- 创建标识为"wave3Delay"，时间节点为{3,5,7,15}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "wave3Delay", {3,5,7,15}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_630020(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 166001630) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -517,7 +517,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_630020(context, evt)
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001630, 8)
-	
+
 	return 0
 end
 
@@ -526,11 +526,11 @@ function condition_EVENT_TIME_AXIS_PASS_630029(context, evt)
 	if "wave3Delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	if -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 166001630, 630009) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -541,13 +541,13 @@ function action_EVENT_TIME_AXIS_PASS_630029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630063的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630063 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -556,7 +556,7 @@ function condition_EVENT_TIME_AXIS_PASS_630047(context, evt)
 	if "wave1Delay" ~= evt.source_name or 5 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -564,16 +564,16 @@ end
 function action_EVENT_TIME_AXIS_PASS_630047(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001630, 4)
-	
+
 	-- 调用提示id为 400013 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001630, 3)
-	
+
 	return 0
 end
 
@@ -582,7 +582,7 @@ function condition_EVENT_TIME_AXIS_PASS_630067(context, evt)
 	if "wave2Delay" ~= evt.source_name or 4 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -590,16 +590,16 @@ end
 function action_EVENT_TIME_AXIS_PASS_630067(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001630, 6)
-	
+
 	-- 调用提示id为 400014 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001630, 5)
-	
+
 	return 0
 end
 
@@ -608,7 +608,7 @@ function condition_EVENT_TIME_AXIS_PASS_630069(context, evt)
 	if "wave1Delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -618,20 +618,20 @@ function action_EVENT_TIME_AXIS_PASS_630069(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 630032, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 630033 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 630033, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 630044 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 630044, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -640,7 +640,7 @@ function condition_EVENT_TIME_AXIS_PASS_630075(context, evt)
 	if "wave1Delay" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -651,19 +651,19 @@ function action_EVENT_TIME_AXIS_PASS_630075(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630012的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630012 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630062的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630062 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -672,7 +672,7 @@ function condition_EVENT_TIME_AXIS_PASS_630079(context, evt)
 	if "wave1Delay" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -683,19 +683,19 @@ function action_EVENT_TIME_AXIS_PASS_630079(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630023的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630023 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630028的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630028 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -704,7 +704,7 @@ function condition_EVENT_TIME_AXIS_PASS_630081(context, evt)
 	if "wave3Delay" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -715,13 +715,13 @@ function action_EVENT_TIME_AXIS_PASS_630081(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001630, 8)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001630, 7)
-	
+
 	return 0
 end
 
@@ -730,11 +730,11 @@ function condition_EVENT_TIME_AXIS_PASS_630084(context, evt)
 	if "wave2Delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	if -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 166001630, 630009) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -745,13 +745,13 @@ function action_EVENT_TIME_AXIS_PASS_630084(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630063的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630063 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -760,11 +760,11 @@ function condition_EVENT_TIME_AXIS_PASS_630085(context, evt)
 	if "wave2Delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	if -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 166001630, 630012) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -775,13 +775,13 @@ function action_EVENT_TIME_AXIS_PASS_630085(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630062的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630062 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -790,11 +790,11 @@ function condition_EVENT_TIME_AXIS_PASS_630086(context, evt)
 	if "wave2Delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	if -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 166001630, 630023) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -805,13 +805,13 @@ function action_EVENT_TIME_AXIS_PASS_630086(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630028的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630028 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -820,11 +820,11 @@ function condition_EVENT_TIME_AXIS_PASS_630088(context, evt)
 	if "wave3Delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	if -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 166001630, 630012) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -835,13 +835,13 @@ function action_EVENT_TIME_AXIS_PASS_630088(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630062的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630062 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -850,11 +850,11 @@ function condition_EVENT_TIME_AXIS_PASS_630089(context, evt)
 	if "wave3Delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	if -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 166001630, 630023) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -865,13 +865,13 @@ function action_EVENT_TIME_AXIS_PASS_630089(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为630028的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 630028 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

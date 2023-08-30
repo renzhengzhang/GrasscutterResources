@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133220357
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 133220357,
 	gadget_11 = 357001,
 	gadget_12 = 357002,
@@ -28,7 +28,7 @@ local defs = {
 }
 
 -- DEFS_MISCS
-local matrix = 
+local matrix =
 {
 {defs.gadget_11,defs.gadget_12,defs.gadget_13,defs.gadget_14},
 
@@ -47,11 +47,11 @@ function FaildProcess(context,str)
 	ScriptLib.PrintContextLog(context,"Faild Process Start : "..str)
 	ScriptLib.SetGroupVariableValue(context, "challenge_state", 3)
 
-	for k,v in pairs(matrix) do 
+	for k,v in pairs(matrix) do
 		for ik,iv in pairs(v) do
-			local tempGadgeState = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, iv) 
+			local tempGadgeState = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, iv)
 			--除了禁用格和起始格，全部格子下降
-			if tempGadgeState ~= 903 then 
+			if tempGadgeState ~= 903 then
 				ScriptLib.SetGadgetStateByConfigId(context, iv, 201)
 			end
 		end
@@ -76,7 +76,7 @@ function LookUpPosByConfigID(context,config_id)
 	local pos
 		for x=1,#matrix do
 			for y=1,#matrix[x] do
-				if config_id == matrix[x][y] then 
+				if config_id == matrix[x][y] then
 					pos = x*10+y
 				end
 			end
@@ -92,7 +92,7 @@ function CheckIsSuccess(context)
 
 	for i=1,#matrix do
 		for j=1,#matrix[i] do
-			state=ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID,matrix[i][j]) 
+			state=ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID,matrix[i][j])
 			if state==202 or state==903 then
 				score=score+1
 			end
@@ -109,7 +109,7 @@ function CheckIsSuccess(context)
 		end
 		ScriptLib.SetGroupVariableValue(context, "challenge_state", 2)
 		--ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
-		
+
 		ScriptLib.SetGroupVariableValue(context, "successed", 1)
 		ScriptLib.InitTimeAxis(context, "Finish", {2}, false)
 	end
@@ -152,9 +152,9 @@ function CheckTwoGadgetIsAdjacent(context,current_idx,config_two)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -241,9 +241,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -255,9 +255,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -362,20 +362,20 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_357005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"challenge_state"为1
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -383,13 +383,13 @@ end
 function action_EVENT_VARIABLE_CHANGE_357005(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133220357, 2)
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133220659, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -399,7 +399,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_357010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -411,7 +411,7 @@ function action_EVENT_GADGET_STATE_CHANGE_357010(context, evt)
 			local pos = LookUpPosByConfigID(context,evt.param2)
 			ScriptLib.SetGroupVariableValue(context, "current_stone", pos)
 		end
-		
+
 		if evt.param1==202 and evt.param3==204 and ScriptLib.GetGroupVariableValue(context, "challenge_state")==1 then
 				--先检查是不是从相邻的格子踩进终点格
 				CheckTwoGadgetIsAdjacent(context,ScriptLib.GetGroupVariableValue(context, "current_stone"),evt.param2)
@@ -422,7 +422,7 @@ function action_EVENT_GADGET_STATE_CHANGE_357010(context, evt)
 				end
 				return 0
 			end
-		
+
 			--如果挑战状态是已开始（challenge_state=1），则检查格子有效性
 			if ScriptLib.GetGroupVariableValue(context, "challenge_state")==1 then
 				if evt.param1==202 then
@@ -440,14 +440,14 @@ function action_EVENT_GADGET_STATE_CHANGE_357010(context, evt)
 				CheckIsSuccess(context)
 				return 0
 			end
-			
-			
+
+
 		return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_357015(context, evt)
-		if ScriptLib.GetGroupVariableValue(context, "successed") == 1 then 
+		if ScriptLib.GetGroupVariableValue(context, "successed") == 1 then
 			ScriptLib.InitTimeAxis(context, "Finish", {2}, false)
 		end
 		return 0
@@ -456,17 +456,17 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_357020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"challenge_state"为0
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"stone1"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -476,25 +476,25 @@ function action_EVENT_VARIABLE_CHANGE_357020(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 357007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_357021(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"challenge_state"为0
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"stone2"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -504,25 +504,25 @@ function action_EVENT_VARIABLE_CHANGE_357021(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 357012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_357022(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"challenge_state"为0
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"stone3"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -532,25 +532,25 @@ function action_EVENT_VARIABLE_CHANGE_357022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 357013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_357023(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"challenge_state"为0
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"stone4"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone4") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -560,8 +560,8 @@ function action_EVENT_VARIABLE_CHANGE_357023(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 357008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -571,23 +571,23 @@ function condition_EVENT_LEAVE_REGION_357027(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"successed"为0
 	if ScriptLib.GetGroupVariableValue(context, "successed") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_LEAVE_REGION_357027(context, evt)
-		if evt.param1~=defs.trigger_boarder or 
-			ScriptLib.GetGroupVariableValue(context, "successed")==1 or 
+		if evt.param1~=defs.trigger_boarder or
+			ScriptLib.GetGroupVariableValue(context, "successed")==1 or
 			ScriptLib.GetGroupVariableValue(context, "challenge_state")==0 then
-			ScriptLib.PrintContextLog(context, "Safe LEAVE REGION")	
+			ScriptLib.PrintContextLog(context, "Safe LEAVE REGION")
 			return 0
-		else	
+		else
 			FaildProcess(context,"出圈")
 		end
 		return 0
@@ -596,12 +596,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_357028(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"successed"为1
 	if ScriptLib.GetGroupVariableValue(context, "successed") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -611,20 +611,20 @@ function action_EVENT_VARIABLE_CHANGE_357028(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 357031, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "open" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "open", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1332203571") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -634,7 +634,7 @@ function condition_EVENT_GROUP_LOAD_357032(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -644,24 +644,24 @@ function action_EVENT_GROUP_LOAD_357032(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 357031, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1332203571") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_TIME_AXIS_PASS_357033(context, evt)
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 1 then
 			return true
 	end
-	
+
 	return false
 end
 
@@ -672,7 +672,7 @@ function action_EVENT_TIME_AXIS_PASS_357033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -680,7 +680,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_357034(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133220357, 3)
-	
+
 	return 0
 end
 
@@ -689,19 +689,19 @@ function condition_EVENT_GADGET_STATE_CHANGE_357035(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133220357, 357007) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133220357, 357008) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133220357, 357012) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133220357, 357013) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -712,7 +712,7 @@ function action_EVENT_GADGET_STATE_CHANGE_357035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -722,7 +722,7 @@ function condition_EVENT_GROUP_LOAD_357040(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -730,12 +730,12 @@ end
 function action_EVENT_GROUP_LOAD_357040(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133220357, 2)
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133220659, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end

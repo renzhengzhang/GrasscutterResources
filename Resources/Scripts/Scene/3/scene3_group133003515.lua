@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133003515
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -72,18 +72,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_515005(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0 
+	-- 判断指定group组剩余gadget数量是否是0
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133003515}) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -94,13 +94,13 @@ function action_EVENT_ANY_GADGET_DIE_515005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 1011, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -109,7 +109,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_515007(context, evt)
 	if 515001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -120,6 +120,6 @@ function action_EVENT_GADGET_STATE_CHANGE_515007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_group_die")
 		return -1
 	end
-	
+
 	return 0
 end

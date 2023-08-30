@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133007184
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -82,25 +82,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_186(context, evt)
 	if evt.param1 ~= 186 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"status"为1
 	if ScriptLib.GetGroupVariableValue(context, "status") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -111,30 +111,30 @@ function action_EVENT_ENTER_REGION_186(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	-- 创建id为651的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 651 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187(context, evt)
 	if evt.param1 ~= 187 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"status"为1
 	if ScriptLib.GetGroupVariableValue(context, "status") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -145,31 +145,31 @@ function action_EVENT_ENTER_REGION_187(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 创建id为652的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 652 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_188(context, evt)
 	if evt.param1 ~= 188 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"status"为1
 	if ScriptLib.GetGroupVariableValue(context, "status") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -180,31 +180,31 @@ function action_EVENT_ENTER_REGION_188(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 创建id为653的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 653 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_189(context, evt)
 	if evt.param1 ~= 189 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"status"为1
 	if ScriptLib.GetGroupVariableValue(context, "status") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -215,19 +215,19 @@ function action_EVENT_ENTER_REGION_189(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	-- 创建id为958的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 958 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "status" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "status", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -235,17 +235,17 @@ end
 function condition_EVENT_QUEST_FINISH_190(context, evt)
 	--检查ID为38903的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 38903 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -256,25 +256,25 @@ function action_EVENT_QUEST_FINISH_190(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "status" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "status", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_191(context, evt)
 	if evt.param1 ~= 191 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -285,12 +285,12 @@ function action_EVENT_ENTER_REGION_191(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "status" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "status", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

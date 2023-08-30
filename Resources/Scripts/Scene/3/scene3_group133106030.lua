@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133106030
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -89,9 +89,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -99,7 +99,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_30009(context, evt)
 	if 30001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -110,17 +110,17 @@ function action_EVENT_GADGET_STATE_CHANGE_30009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 310603003 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310603003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建标识为"lookatshockwave"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "lookatshockwave", {3}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -129,7 +129,7 @@ function condition_EVENT_TIME_AXIS_PASS_30010(context, evt)
 	if "lookatshockwave" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -143,31 +143,31 @@ function action_EVENT_TIME_AXIS_PASS_30010(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 调用提示id为 310603004 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310603004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_30011(context, evt)
 	if evt.param1 ~= 30011 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"hasTriggered"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggered") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -178,7 +178,7 @@ function action_EVENT_ENTER_REGION_30011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-575.8529, y=173.5302, z=1798.937}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-575.8529, y=173.5302, z=1798.937}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -187,8 +187,8 @@ function action_EVENT_ENTER_REGION_30011(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_ANY_GADGET_DIE_30012(context, evt)
 	if 30007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -208,17 +208,17 @@ function action_EVENT_ANY_GADGET_DIE_30012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"achieved"，时间节点为{7}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "achieved", {7}, false)
-	
-	
+
+
 	-- 通知场景上的所有玩家播放名字为310603001 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310603001, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -227,7 +227,7 @@ function condition_EVENT_TIME_AXIS_PASS_30013(context, evt)
 	if "achieved" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -238,13 +238,13 @@ function action_EVENT_TIME_AXIS_PASS_30013(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 调用提示id为 310603005 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 310603005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -254,7 +254,7 @@ function condition_EVENT_GROUP_LOAD_30014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "achieved") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -265,7 +265,7 @@ function action_EVENT_GROUP_LOAD_30014(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -274,7 +274,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_30015(context, evt)
 	if 30001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -285,6 +285,6 @@ function action_EVENT_GADGET_STATE_CHANGE_30015(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end

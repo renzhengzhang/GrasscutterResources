@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220027002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -82,18 +82,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_4(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 220027002) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -103,8 +103,8 @@ function action_EVENT_ANY_MONSTER_DIE_4(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标（-45，-20，33），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-45, y=-20, z=33}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -113,8 +113,8 @@ function action_EVENT_ANY_MONSTER_DIE_4(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -123,7 +123,7 @@ function condition_EVENT_ANY_MONSTER_DIE_13(context, evt)
 	if 8 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -134,6 +134,6 @@ function action_EVENT_ANY_MONSTER_DIE_13(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

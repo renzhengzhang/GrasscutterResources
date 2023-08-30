@@ -1,11 +1,11 @@
 
--- local defs_laser_stages = {
+-- defs_laser_stages = {
 -- 	[1] = {5,6,7,8},
 -- 	[2] = {9,10,11,12,13},
 -- 	[3] =  {14,15,16,17,18,19}
 -- }
 
--- local defs = { 
+-- defs = {
 -- 	laser_group_id = 235800005,
 -- 	hurt_floor_id = 5293,
 -- 	active_laser_timer = {5,13,21,27,33,39,43,47,51}
@@ -114,7 +114,7 @@ function GalleryWinBonus( context )
 		ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "complete_timelimit_challenge_6002", v, WindFlower_Flight_Clear_Bonus)
 
 		--ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "hit_counts_falldown_6002", v, -5 * ScriptLib.GetSceneMultiStagePlayUidValue(context,235800001, 1, "hit_by_floor", v))
-	
+
 		ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : GALLERY WIN BONUS UID IS -> "..v)
 	end
 
@@ -138,7 +138,7 @@ function GalleryLosePunish( context )
 		ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "defeated_timelimit_challenge_6002", v, WindFlower_Flight_Failed_Deduction)
 
 		--ScriptLib.SetSceneMultiStagePlayUidValue(context,235800001, 1, "hit_counts_falldown_6002", v, -5 * ScriptLib.GetSceneMultiStagePlayUidValue(context,235800001, 1, "hit_by_floor", v))
-	
+
 		ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : GALLERY LOSE UID IS-> "..v)
 	end
 
@@ -230,7 +230,7 @@ function action_flower_lifetime( context,evt )
 end
 
 function action_platform_reach_point(context, evt)
-	ScriptLib.KillEntityByConfigId(context, { group_id = defs.laser_group_id, config_id = evt.param1}) 
+	ScriptLib.KillEntityByConfigId(context, { group_id = defs.laser_group_id, config_id = evt.param1})
 	-- ScriptLib.PrintContextLog(context, "@@ Require_WARNING : KillEntityByConfigId >>> "..evt.param1)
 	return 0
 end

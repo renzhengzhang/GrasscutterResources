@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201052009
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -85,9 +85,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -98,9 +98,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -188,9 +188,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -198,7 +198,7 @@ function condition_EVENT_GADGET_CREATE_9013(context, evt)
 	if 9001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -209,7 +209,7 @@ function action_EVENT_GADGET_CREATE_9013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -217,19 +217,19 @@ end
 function condition_EVENT_SELECT_OPTION_9014(context, evt)
 	-- 判断是gadgetid 9001 option_id 177
 	if 9001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 177 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"step"为0
 	if ScriptLib.GetGroupVariableValue(context, "step") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -240,7 +240,7 @@ function action_EVENT_SELECT_OPTION_9014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-136，101，121），持续时间为8秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-136, y=101, z=121}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -249,31 +249,31 @@ function action_EVENT_SELECT_OPTION_9014(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201052010, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为3
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"type"为1
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -281,19 +281,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_9015(context, evt)
 	-- 终止识别id为100的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 100, 1)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"type"为1
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -304,17 +304,17 @@ function action_EVENT_VARIABLE_CHANGE_9016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 2)
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 9011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -323,12 +323,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_9017(context, evt)
 	if 9002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为1
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -339,10 +339,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 3)
-	
+
 	return 0
 end
 
@@ -351,17 +351,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9018(context, evt)
 	if 9006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为1
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"count"为1
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -372,10 +372,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 4)
-	
+
 	return 0
 end
 
@@ -384,17 +384,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9019(context, evt)
 	if 9005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为1
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"count"为2
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -405,10 +405,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 5)
-	
+
 	return 0
 end
 
@@ -418,17 +418,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 1 then
 			return false
 	end
-	
-	
+
+
 	if 9002 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -436,7 +436,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9020(context, evt)
 	-- 终止识别id为100的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 100, 0)
-	
+
 	return 0
 end
 
@@ -446,17 +446,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9021(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 1 then
 			return false
 	end
-	
-	
+
+
 	if 9006 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -464,7 +464,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9021(context, evt)
 	-- 终止识别id为100的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 100, 0)
-	
+
 	return 0
 end
 
@@ -474,17 +474,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 1 then
 			return false
 	end
-	
-	
+
+
 	if 9005 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -492,7 +492,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9022(context, evt)
 	-- 终止识别id为100的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 100, 0)
-	
+
 	return 0
 end
 
@@ -503,25 +503,25 @@ function action_EVENT_CHALLENGE_SUCCESS_9026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201052009, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 改变指定group组201052015中， configid为15001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201052015, 15001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为9011的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 9011 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -532,19 +532,19 @@ function action_EVENT_CHALLENGE_FAIL_9027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 调用提示id为 10520401 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 10520401) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建id为9011的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 9011 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -552,19 +552,19 @@ end
 function condition_EVENT_SELECT_OPTION_9028(context, evt)
 	-- 判断是gadgetid 9001 option_id 177
 	if 9001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 177 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"step"为1
 	if ScriptLib.GetGroupVariableValue(context, "step") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -575,7 +575,7 @@ function action_EVENT_SELECT_OPTION_9028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-136，101，121），持续时间为11秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-136, y=101, z=121}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -584,14 +584,14 @@ function action_EVENT_SELECT_OPTION_9028(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201052011, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -600,12 +600,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_9029(context, evt)
 	if 9004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为2
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -616,10 +616,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 3)
-	
+
 	return 0
 end
 
@@ -628,17 +628,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9030(context, evt)
 	if 9006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为2
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"count"为1
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -649,10 +649,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 4)
-	
+
 	return 0
 end
 
@@ -661,17 +661,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9031(context, evt)
 	if 9002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为2
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"count"为2
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -682,10 +682,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 5)
-	
+
 	return 0
 end
 
@@ -694,17 +694,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9032(context, evt)
 	if 9005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为2
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"count"为3
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -715,10 +715,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 6)
-	
+
 	return 0
 end
 
@@ -728,17 +728,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9034(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 2 then
 			return false
 	end
-	
-	
+
+
 	if 9004 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -746,7 +746,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9034(context, evt)
 	-- 终止识别id为101的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 101, 0)
-	
+
 	return 0
 end
 
@@ -756,17 +756,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9035(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 2 then
 			return false
 	end
-	
-	
+
+
 	if 9006 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -774,7 +774,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9035(context, evt)
 	-- 终止识别id为101的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 101, 0)
-	
+
 	return 0
 end
 
@@ -784,17 +784,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9036(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 2 then
 			return false
 	end
-	
-	
+
+
 	if 9002 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -802,7 +802,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9036(context, evt)
 	-- 终止识别id为101的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 101, 0)
-	
+
 	return 0
 end
 
@@ -812,17 +812,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9037(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 2 then
 			return false
 	end
-	
-	
+
+
 	if 9005 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -830,19 +830,19 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9037(context, evt)
 	-- 终止识别id为101的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 101, 0)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9039(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"type"为2
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -853,34 +853,34 @@ function action_EVENT_VARIABLE_CHANGE_9039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 2)
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 9011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9040(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为4
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 4 then
 			return false
 	end
-	
+
 	-- 判断变量"type"为2
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -888,7 +888,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_9040(context, evt)
 	-- 终止识别id为101的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 101, 1)
-	
+
 	return 0
 end
 
@@ -899,25 +899,25 @@ function action_EVENT_CHALLENGE_SUCCESS_9041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201052009, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 创建id为9011的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 9011 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 改变指定group组201052015中， configid为15002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201052015, 15002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -928,19 +928,19 @@ function action_EVENT_CHALLENGE_FAIL_9042(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 调用提示id为 10520401 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 10520401) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建id为9011的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 9011 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -948,19 +948,19 @@ end
 function condition_EVENT_SELECT_OPTION_9043(context, evt)
 	-- 判断是gadgetid 9001 option_id 177
 	if 9001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 177 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"step"为2
 	if ScriptLib.GetGroupVariableValue(context, "step") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -971,7 +971,7 @@ function action_EVENT_SELECT_OPTION_9043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-136，101，121），持续时间为13秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-136, y=101, z=121}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -980,26 +980,26 @@ function action_EVENT_SELECT_OPTION_9043(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201052012, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9044(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"type"为3
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1010,34 +1010,34 @@ function action_EVENT_VARIABLE_CHANGE_9044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 2)
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 9011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9045(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为5
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 5 then
 			return false
 	end
-	
+
 	-- 判断变量"type"为3
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1045,7 +1045,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_9045(context, evt)
 	-- 终止识别id为102的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 102, 1)
-	
+
 	return 0
 end
 
@@ -1053,10 +1053,10 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_9046(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052005, 2)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201052004, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标（-76，84，190），持续时间为1.5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-76, y=84, z=190}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -1065,21 +1065,21 @@ function action_EVENT_CHALLENGE_SUCCESS_9046(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 改变指定group组201052015中， configid为15003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201052015, 15003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 9011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -1090,19 +1090,19 @@ function action_EVENT_CHALLENGE_FAIL_9047(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 调用提示id为 10520401 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 10520401) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建id为9011的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 9011 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1111,12 +1111,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_9048(context, evt)
 	if 9003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为3
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1127,10 +1127,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 3)
-	
+
 	return 0
 end
 
@@ -1139,17 +1139,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9049(context, evt)
 	if 9005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为3
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"count"为1
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1160,10 +1160,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 4)
-	
+
 	return 0
 end
 
@@ -1172,17 +1172,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9050(context, evt)
 	if 9002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为3
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"count"为2
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1193,10 +1193,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9050(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 5)
-	
+
 	return 0
 end
 
@@ -1205,17 +1205,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9051(context, evt)
 	if 9006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为3
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"count"为3
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1226,10 +1226,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 6)
-	
+
 	return 0
 end
 
@@ -1238,17 +1238,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9052(context, evt)
 	if 9004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"type"为3
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"count"为4
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1259,10 +1259,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9052(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201052009, 7)
-	
+
 	return 0
 end
 
@@ -1272,17 +1272,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9054(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
-	
+
+
 	if 9003 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1290,7 +1290,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9054(context, evt)
 	-- 终止识别id为102的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 102, 0)
-	
+
 	return 0
 end
 
@@ -1300,17 +1300,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9055(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
-	
+
+
 	if 9005 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1318,7 +1318,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9055(context, evt)
 	-- 终止识别id为102的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 102, 0)
-	
+
 	return 0
 end
 
@@ -1328,17 +1328,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9056(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
-	
+
+
 	if 9002 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1346,7 +1346,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9056(context, evt)
 	-- 终止识别id为102的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 102, 0)
-	
+
 	return 0
 end
 
@@ -1356,17 +1356,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9057(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
-	
+
+
 	if 9006 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1374,7 +1374,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9057(context, evt)
 	-- 终止识别id为102的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 102, 0)
-	
+
 	return 0
 end
 
@@ -1384,17 +1384,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_9058(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "type") ~= 3 then
 			return false
 	end
-	
-	
+
+
 	if 9004 == evt.param2 then
 		return false
 	end
-	
+
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1402,6 +1402,6 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9058(context, evt)
 	-- 终止识别id为102的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 102, 0)
-	
+
 	return 0
 end

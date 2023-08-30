@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155002003
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155002003,
 	pointarray_route = 500200009
 }
@@ -17,11 +17,11 @@ local DayAppearGadgets = {3004}
 local NightAppearGadgets = {}
 
 
-local gameplayStateFuncitons = 
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-		
+
 	end,
 	["1"] = function(context)
 
@@ -30,21 +30,21 @@ local gameplayStateFuncitons =
 		ScriptLib.PrintContextLog(context, "[155002003] : " .." add suit 2")
 		DayNight_Gadget_Unlock(context,3002)
 
-	
+
 	end,
 	["2"] = function(context)
-		
+
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 		ScriptLib.AddExtraGroupSuite(context, 155002003, 2)
 		DayNight_Gadget_Finish(context,3002)
-		
-	
+
+
 	end
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 	ScriptLib.PrintContextLog(context, "[155002003] : " .." update gameplay state")
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -56,9 +56,9 @@ function MovePlatform(context,platform_id,pointarray_id,routelist,routemode,turn
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -94,9 +94,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -134,20 +134,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_3001(context, evt)
 		local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155002001)
-		
-		if isactive == 1 then 
-			if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then 
+
+		if isactive == 1 then
+			if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then
 				ScriptLib.SetGroupVariableValue(context,"gameplayState", 1)
 			end
-			
+
 		end
 	UpdateGamePlayState(context)
 		return 0
@@ -164,38 +164,38 @@ function condition_EVENT_GADGET_STATE_CHANGE_3006(context, evt)
 		if 322 ~= ScriptLib.GetGadgetStateByConfigId(context, 155002003, 3002) then
 			return false
 		end
-		
+
 		return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_3006(context, evt)
-	
-	
+
+
 	MovePlatform(context,3003,defs.pointarray_route,{2},0,false)
-	
-		
+
+
 		return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_3007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"gameplayState"为0
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_3007(context, evt)
 	UpdateGamePlayState(context)
-	
+
 	return 0
 end
 

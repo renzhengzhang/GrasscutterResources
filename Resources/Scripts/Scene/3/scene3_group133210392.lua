@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210392
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -68,9 +68,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -79,12 +79,12 @@ function condition_EVENT_ANY_MONSTER_DIE_392002(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"Times"为0
 	if ScriptLib.GetGroupVariableValue(context, "Times") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -95,7 +95,7 @@ function action_EVENT_ANY_MONSTER_DIE_392002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-3783.693，201.55，-1335.96），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-3783.693, y=201.55, z=-1335.96}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -104,13 +104,13 @@ function action_EVENT_ANY_MONSTER_DIE_392002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "Times" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Times", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

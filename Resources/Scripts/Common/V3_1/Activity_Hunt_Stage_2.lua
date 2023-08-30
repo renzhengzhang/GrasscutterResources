@@ -8,7 +8,7 @@
 
 --需求defs
 --[[
-    local defs = {
+    defs = {
         target_group = 111
     }
 ]]
@@ -74,10 +74,10 @@ function action_EVENT_ANY_MONSTER_DIE(context,evt)
     local _count = ScriptLib.GetGroupMonsterCount(context)
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_ANY_MONSTER_DIE:_count=".._count)
     --1解锁2，2解锁3
-    if _count == 2 and base_info.group_id == stage_2_group_id[1] then 
+    if _count == 2 and base_info.group_id == stage_2_group_id[1] then
         ScriptLib.ActivateGroupLinkBundle(context, stage_2_group_id[2])
         ScriptLib.AddExtraGroupSuite(context, stage_2_group_id[2], 2)
-    elseif _count == 2 and base_info.group_id == stage_2_group_id[2] then 
+    elseif _count == 2 and base_info.group_id == stage_2_group_id[2] then
         ScriptLib.ActivateGroupLinkBundle(context, stage_2_group_id[3])
         ScriptLib.AddExtraGroupSuite(context, stage_2_group_id[3], 2)
     end
@@ -89,16 +89,16 @@ function action_EVENT_ANY_MONSTER_DIE(context,evt)
         ScriptLib.SetGroupVariableValueByGroup(context, "left_num", _count, defs.target_group)
     end
     --如果数量为0，关闭黄圈
-    if _count == 0 then 
+    if _count == 0 then
         ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_ENTER_REGION:DeactivateGroupLinkBundle")
         ScriptLib.DeactivateGroupLinkBundle(context,base_info.group_id)
     end
     return 0
 end
---三阶段用 定时激活捕网机关 
+--三阶段用 定时激活捕网机关
 function action_EVENT_TIME_AXIS_PASS_Active_Trap(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_TIME_AXIS_PASS_Active_Trap:")
-    if evt.param1 == 1 then 
+    if evt.param1 == 1 then
         ScriptLib.ShowReminder(context, 400174)
         --随机挑选一个未激活的trap，记录config_id，生成倒三角箭头
         local _list = {}
@@ -134,7 +134,7 @@ function action_EVENT_ENTER_REGION(context,evt)
         return 0
     end
     --是否走进黄圈
-    if evt.param1 ~= defs.circle_region then 
+    if evt.param1 ~= defs.circle_region then
         ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_ENTER_REGION:是否走进黄圈")
         return 0
     end
@@ -158,7 +158,7 @@ function action_EVENT_GROUP_LOAD(context,evt)
         --二阶段额外初始化下变量
         ScriptLib.SetGroupTempValue(context,"catched",0,{})
     end
-    
+
     if base_info.group_id == stage_3_group_id then
         --三阶段帮忙激活下八方网
 		ScriptLib.AssignPlayerShowTemplateReminder(context,196,{param_uid_vec={},param_vec={},uid_vec={_uid}})
@@ -193,13 +193,13 @@ function action2_EVENT_VARIABLE_CHANGE(context,evt)
             end
         end
     end
-    if evt.source_name == "create_monster_1" then 
+    if evt.source_name == "create_monster_1" then
         LF_Create_Monster_By_Random_Point(context,28020310,evt.param1)
     end
-    if evt.source_name == "create_monster_2" then 
+    if evt.source_name == "create_monster_2" then
         LF_Create_Monster_By_Random_Point(context,28020311,evt.param1)
     end
-    if evt.source_name == "create_monster_3" then 
+    if evt.source_name == "create_monster_3" then
         LF_Create_Monster_By_Random_Point(context,28020312,evt.param1)
     end
     return 0
@@ -211,10 +211,10 @@ function LF_Create_Monster_By_Random_Point(context,m_id,num)
     local _count = 0
     local _list = {}
     for k,v in pairs(monsters) do
-        if v.monster_id == m_id then 
+        if v.monster_id == m_id then
             local _isalive = false
-            for i = 1 , #_alivelist do 
-                if _alivelist[i] == v.config_id then 
+            for i = 1 , #_alivelist do
+                if _alivelist[i] == v.config_id then
                     _isalive = true
                     break
                 end
@@ -244,7 +244,7 @@ function LF_Create_Monster_By_Random_Point(context,m_id,num)
             local _t = math.random(#_list)
             ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 LF_Create_Monster_By_Random_Point:_list[_t]=".._list[_t])
             --创建且给小猪、野林猪加初始sgv 设为0 （只有一阶段）其他阶段会默认1
-            if m_id == 28020310 or m_id == 28020311 then 
+            if m_id == 28020310 or m_id == 28020311 then
                 ScriptLib.CreateMonsterWithGlobalValue(context, _list[_t], {["SGV_STAGE"] = 0})
             else
                 ScriptLib.CreateMonster(context, {config_id = _list[_t], delay_time = 0})
@@ -263,7 +263,7 @@ function action_EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE(context,evt)
         --一阶段
         local _id = ScriptLib.GetMonsterIdByEntityId(context, evt.source_eid)
         --一阶段 林野猪和雪猪，不看v直接算分(他们不会逃跑，死了肯定都是捕捉)
-        if _id == 28020311 or _id == 28020312 then 
+        if _id == 28020311 or _id == 28020312 then
             ScriptLib.SetGroupVariableValueByGroup(context, monster_list[_id], 1, defs.target_group)
         elseif _id == 28020310 then--一阶段小猪
             if _v ~= 0 then --非0都算捕捉
@@ -277,7 +277,7 @@ function action_EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE(context,evt)
         ScriptLib.SetGroupVariableValueByGroup(context, "is_finish", 1, defs.target_group)
     else
         --二阶段
-        if _v ~= 0 then 
+        if _v ~= 0 then
             --走到这里的怪都是抓到的，发monsterid
             local _monster_id = ScriptLib.GetMonsterIdByEntityId(context, evt.source_eid)
             ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_2 action_EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE:_monster_id=".._monster_id)
@@ -315,18 +315,18 @@ end
 --初始化
 function Initialize()
 	--加触发器
-    if temp_Tirgger ~= nil then 
+    if temp_Tirgger ~= nil then
         for k,v in pairs(temp_Tirgger) do
             v.name = v.action
             v.config_id = 40000000 + k
             v.trigger_count = 0
             v.condition = ""
-            table.insert(triggers, v) 
+            table.insert(triggers, v)
             table.insert(suites[init_config.suite].triggers, v.name)
         end
     end
 	--加变量
-    if temp_Variables ~= nil then 
+    if temp_Variables ~= nil then
         for k,v in pairs(temp_Variables) do
             table.insert(variables,v)
         end

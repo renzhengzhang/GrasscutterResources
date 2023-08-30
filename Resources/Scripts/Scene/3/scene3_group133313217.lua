@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133313217
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -95,9 +95,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 玩家行为埋点
@@ -116,19 +116,19 @@ function TLA_set_gadget_state_by_configid(context, evt, config_id, state)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, config_id, state) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
+		end
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_217005(context, evt)
 	if evt.param1 ~= 217005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -138,47 +138,47 @@ function action_EVENT_ENTER_REGION_217005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217004, GadgetState.ChestLocked) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133313217, 2)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 1002, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 将configid为 217002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 217009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 217009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -188,19 +188,19 @@ function condition_EVENT_ANY_MONSTER_DIE_217006(context, evt)
 	if evt.param1 ~= 217001 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_217006(context, evt)
 	TLA_set_gadget_state_by_configid(context, evt, 217004, GadgetState.Default)
-	
+
 	TLA_mark_playeraction(context, evt, 1002, 3, 1)
-	
+
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 133313174, 174002, GadgetState.Default)
-	
+
 	return 0
 end
 
@@ -210,8 +210,8 @@ function condition_EVENT_ANY_MONSTER_DIE_217011(context, evt)
 	if evt.param1 ~= 217010 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -219,6 +219,6 @@ end
 function action_EVENT_ANY_MONSTER_DIE_217011(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133313217, 3)
-	
+
 	return 0
 end

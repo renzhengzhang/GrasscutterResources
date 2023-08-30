@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133303059
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	fquestid = 73111
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -135,9 +135,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -145,7 +145,7 @@ function condition_EVENT_GADGET_CREATE_59010(context, evt)
 	if 59003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -155,8 +155,8 @@ function action_EVENT_GADGET_CREATE_59010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 59001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -165,7 +165,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_59013(context, evt)
 	if 59001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -173,7 +173,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_59013(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303059, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-1439.556, y=281.5717, z=3898.089}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-1439.556, y=281.5717, z=3898.089}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -182,20 +182,20 @@ function action_EVENT_GADGET_STATE_CHANGE_59013(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_59014(context, evt)
 	if evt.param1 ~= 59014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	local curQuestState = ScriptLib.GetHostQuestState(context,defs.fquestid*100+3)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -203,7 +203,7 @@ function condition_EVENT_ENTER_REGION_59014(context, evt)
 	if curQuestState == 3 then
 	   return true
 	end
-	
+
 	local curQuestState = ScriptLib.GetHostQuestState(context,defs.fquestid*100+5)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -211,7 +211,7 @@ function condition_EVENT_ENTER_REGION_59014(context, evt)
 	if curQuestState == 3 then
 	   return true
 	end
-	
+
 	return false
 end
 
@@ -219,7 +219,7 @@ end
 function action_EVENT_ENTER_REGION_59014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303059, 2)
-	
+
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_59015(context, evt)
 	if 59005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -236,7 +236,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_59015(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303059, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-1197.939, y=263.3465, z=3963.803}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-1197.939, y=263.3465, z=3963.803}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -245,8 +245,8 @@ function action_EVENT_GADGET_STATE_CHANGE_59015(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -256,7 +256,7 @@ function condition_EVENT_GROUP_LOAD_59016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "first") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -264,7 +264,7 @@ end
 function action_EVENT_GROUP_LOAD_59016(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303059, 3)
-	
+
 	return 0
 end
 
@@ -274,7 +274,7 @@ function condition_EVENT_GROUP_LOAD_59017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "second") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -282,7 +282,7 @@ end
 function action_EVENT_GROUP_LOAD_59017(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303059, 4)
-	
+
 	return 0
 end
 
@@ -291,7 +291,7 @@ function condition_EVENT_GADGET_CREATE_59022(context, evt)
 	if 59003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -301,7 +301,7 @@ function action_EVENT_GADGET_CREATE_59022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 59005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301145
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -97,9 +97,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -110,9 +110,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -155,9 +155,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -166,8 +166,8 @@ function condition_EVENT_ANY_MONSTER_DIE_145006(context, evt)
 	if evt.param1 ~= 145001 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -178,14 +178,14 @@ function action_EVENT_ANY_MONSTER_DIE_145006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 145007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -194,7 +194,7 @@ function condition_EVENT_MONSTER_BATTLE_145009(context, evt)
 	if 145001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -205,19 +205,19 @@ function action_EVENT_MONSTER_BATTLE_145009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7303616_fin") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将configid为 145022 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145022, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -228,25 +228,25 @@ function action_EVENT_LUA_NOTIFY_145010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "down1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "down1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 145018 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145018, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 145019 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145019, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -257,29 +257,29 @@ function action_EVENT_LUA_NOTIFY_145011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "down1" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "down1", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"delay1"，时间节点为{13}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "delay1", {13}, false)
-	
-	
+
+
 	-- 将configid为 145020 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145020, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 145021 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145021, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -288,7 +288,7 @@ function condition_EVENT_TIME_AXIS_PASS_145012(context, evt)
 	if "delay1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -296,24 +296,24 @@ end
 function action_EVENT_TIME_AXIS_PASS_145012(context, evt)
 	-- 停止标识为"delay1"的时间轴
 	ScriptLib.EndTimeAxis(context, "delay1")
-	
-	
+
+
 	-- 创建标识为"delay2"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "delay2", {1}, false)
-	
-	
+
+
 	-- 将configid为 145023 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145023, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7303639_fin") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -322,7 +322,7 @@ function condition_EVENT_TIME_AXIS_PASS_145015(context, evt)
 	if "delay2" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -330,14 +330,14 @@ end
 function action_EVENT_TIME_AXIS_PASS_145015(context, evt)
 	-- 停止标识为"delay2"的时间轴
 	ScriptLib.EndTimeAxis(context, "delay2")
-	
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133301145, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-599.0242, y=-42.22353, z=3811.309}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-599.0242, y=-42.22353, z=3811.309}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -346,42 +346,42 @@ function action_EVENT_TIME_AXIS_PASS_145015(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 调用提示id为 33010044 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 33010044) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建标识为"delay3"，时间节点为{15}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "delay3", {15}, false)
-	
-	
+
+
 	-- 将configid为 145018 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145018, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 145019 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145019, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 145020 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 145021 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145021, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -390,7 +390,7 @@ function condition_EVENT_TIME_AXIS_PASS_145016(context, evt)
 	if "delay3" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -398,26 +398,26 @@ end
 function action_EVENT_TIME_AXIS_PASS_145016(context, evt)
 	-- 停止标识为"delay3"的时间轴
 	ScriptLib.EndTimeAxis(context, "delay3")
-	
-	
+
+
 	-- 将configid为 145007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_145034(context, evt)
 	if evt.param1 ~= 145034 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -427,8 +427,8 @@ function action_EVENT_ENTER_REGION_145034(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145022, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -437,7 +437,7 @@ function condition_EVENT_ANY_MONSTER_DIE_145035(context, evt)
 	if 145001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -448,7 +448,7 @@ function action_EVENT_ANY_MONSTER_DIE_145035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -458,7 +458,7 @@ function condition_EVENT_GROUP_LOAD_145036(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "die") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -468,8 +468,8 @@ function action_EVENT_GROUP_LOAD_145036(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 145007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -480,7 +480,7 @@ function action_EVENT_GROUP_LOAD_145037(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 

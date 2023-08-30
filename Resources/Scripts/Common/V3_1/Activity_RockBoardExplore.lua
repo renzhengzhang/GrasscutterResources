@@ -8,7 +8,7 @@
 
 --需求defs
 --[[
-    local defs = {
+    defs = {
         enter_region = 111,
         leave_region = 111,
     }
@@ -68,7 +68,7 @@ function action_EVENT_GADGET_STATE_CHANGE(context,evt)
     return 0
 end
 function action_EVENT_VARIABLE_CHANGE_FindRock_Trigger(context,evt)
-    if ScriptLib.IsChallengeStartedByChallengeIndex(context,base_info.group_id,father_challenge_id) then 
+    if ScriptLib.IsChallengeStartedByChallengeIndex(context,base_info.group_id,father_challenge_id) then
         ScriptLib.StopChallenge(context, father_challenge_id, 1)
     end
     --父挑战完成
@@ -92,15 +92,15 @@ function action_EVENT_VARIABLE_CHANGE_FindRock_Trigger(context,evt)
     ScriptLib.RevokePlayerShowTemplateReminder(context, 199, {_hostuid})
     --关挑战用时检测器
     ScriptLib.EndTimeAxis(context, "challenge_timer")
-    return 0 
+    return 0
 end
 function action_EVENT_VARIABLE_CHANGE_BeatMonster_Trigger(context,evt) return 0 end
 function action_EVENT_VARIABLE_CHANGE_FindClue_Trigger(context,evt) return 0 end
 function action_EVENT_VARIABLE_CHANGE_PuzzleProgress_Trigger(context,evt) return 0 end
 function action_EVENT_CHALLENGE_FAIL(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_RockBoardExplore action_EVENT_CHALLENGE_FAIL")
-    if evt.param1 ~= father_challenge_id then 
-        return 0 
+    if evt.param1 ~= father_challenge_id then
+        return 0
     end
     --结束挑战时(失败)，发埋点
     --[[【3.1 backlog内】数据埋点 - 探索活动（TD）相关运营埋点】
@@ -130,14 +130,14 @@ end
 function action_EVENT_VARIABLE_CHANGE(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_RockBoardExplore action_EVENT_VARIABLE_CHANGE:evt.source_name = ".. evt.source_name.."| value = "..evt.param1)
     for k,v in pairs(challenge_list) do
-        if evt.source_name == k then 
-            if evt.param1 == 0 then 
+        if evt.source_name == k then
+            if evt.param1 == 0 then
                 local _uidlist = ScriptLib.GetSceneUidList(context)
-                if ScriptLib.IsChallengeStartedByChallengeIndex(context,base_info.group_id,father_challenge_id) then 
+                if ScriptLib.IsChallengeStartedByChallengeIndex(context,base_info.group_id,father_challenge_id) then
                    ScriptLib.AttachChildChallenge(context,father_challenge_id,v,v,{3,v,challenge_goal[k],1,0},_uidlist,{success=1,fail=1})
                 end
             end
-            if evt.param1 > 0 then 
+            if evt.param1 > 0 then
                 ScriptLib.SetGroupVariableValue(context,k.."_Trigger",1)
             end
 
@@ -168,7 +168,7 @@ function action_EVENT_TIME_AXIS_PASS_tick(context,evt)
     end
     if _iswiget == false then
         ScriptLib.PrintContextLog(context,"## Activity_RockBoardExplore action_EVENT_TIME_AXIS_PASS_tick:_iswiget == false")
-        if _isshow == 0 then 
+        if _isshow == 0 then
             ScriptLib.PrintContextLog(context,"## Activity_RockBoardExplore action_EVENT_TIME_AXIS_PASS_tick:ShowTemplateReminder")
             ScriptLib.AssignPlayerShowTemplateReminder(context,199,{param_uid_vec={},param_vec={},uid_vec={_hostuid}})
             ScriptLib.SetGroupTempValue(context,"isshow",1,{})
@@ -187,11 +187,11 @@ end
 function action_EVENT_ENTER_REGION(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_RockBoardExplore action_EVENT_ENTER_REGION:evt.uid"..evt.uid)
     --判断是否目标region
-    if evt.param1 ~= defs.enter_region then 
+    if evt.param1 ~= defs.enter_region then
         return 0
     end
     --判断是否已开挑战
-    if ScriptLib.IsChallengeStartedByChallengeIndex(context,base_info.group_id,father_challenge_id) then 
+    if ScriptLib.IsChallengeStartedByChallengeIndex(context,base_info.group_id,father_challenge_id) then
         return 0
     end
     --开挑战，从存档进度开始
@@ -205,7 +205,7 @@ function action_EVENT_ENTER_REGION(context,evt)
     for k,v in pairs(challenge_list) do
         local _score = ScriptLib.GetGroupVariableValue(context,k)
         ScriptLib.PrintContextLog(context,"## Activity_RockBoardExplore action_EVENT_ENTER_REGION:"..k .."=".. _score.."|v="..v)
-        if _score >= 0 then 
+        if _score >= 0 then
             if _score < challenge_goal[k] then
                 ScriptLib.AttachChildChallenge(context,father_challenge_id,v,v,{3,v,challenge_goal[k],1,_score},_uidlist,{success=1,fail=1})
             end
@@ -226,7 +226,7 @@ function action_EVENT_ENTER_REGION(context,evt)
 end
 function action_EVENT_LEAVE_REGION(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_RockBoardExplore action_EVENT_LEAVE_REGION:")
-    if evt.param1 == defs.leave_region then 
+    if evt.param1 == defs.leave_region then
         if ScriptLib.IsChallengeStartedByChallengeIndex(context,base_info.group_id,father_challenge_id) then
             ScriptLib.StopChallenge(context, father_challenge_id, 0)
         end
@@ -259,7 +259,7 @@ end
 --初始化
 function Initialize()
 	--加触发器
-    if temp_Tirgger ~= nil then 
+    if temp_Tirgger ~= nil then
         for k,v in pairs(temp_Tirgger) do
             v.name = v.action
             v.config_id = 40000000 + k
@@ -270,7 +270,7 @@ function Initialize()
         end
     end
 	--加变量
-    if temp_Variables ~= nil then 
+    if temp_Variables ~= nil then
         for k,v in pairs(temp_Variables) do
             table.insert(variables,v)
         end

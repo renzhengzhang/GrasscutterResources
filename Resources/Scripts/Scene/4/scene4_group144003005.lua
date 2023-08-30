@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 144003005
 }
 
@@ -18,7 +18,7 @@ local NormalRandomList = {
        {[1] = {7},
         [2] = {9},
         [3] = {11},},
-        
+
        {[1] = {13},
         [2] = {15},
         [3] = {17},},
@@ -32,7 +32,7 @@ local NormalRandomList2 = {
        {[1] = {25},
         [2] = {27},
         [3] = {29},},
-        
+
        {[1] = {31},
         [2] = {33},
         [3] = {35},},
@@ -41,30 +41,36 @@ local NormalRandomList2 = {
 local FeverRandomList = {
        {[1] = {2},
         [2] = {4},
-        [3] = {6},},
+        [3] = {6},
+},
 
        {[1] = {8},
         [2] = {10},
-        [3] = {12},},
+        [3] = {12},
+},
 
        {[1] = {14},
         [2] = {16},
-        [3] = {18},},
+        [3] = {18},
+},
 
 }
 
 local FeverRandomList2 = {
        {[1] = {20},
         [2] = {22},
-        [3] = {24},},
+        [3] = {24},
+},
 
        {[1] = {26},
         [2] = {28},
-        [3] = {30},},
+        [3] = {30},
+},
 
        {[1] = {32},
         [2] = {34},
-        [3] = {36},},
+        [3] = {36},
+},
 
 }
 
@@ -98,9 +104,9 @@ local PerDamageScore = 2
 local PerShooterScore = 100
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -170,9 +176,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -183,9 +189,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -201,9 +207,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -212,8 +218,8 @@ function action_EVENT_GALLERY_STOP_5038(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -223,8 +229,8 @@ function action_EVENT_GALLERY_START_5041(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

@@ -3,19 +3,19 @@
 ||  owner:      shuyi.chang
 ||  description:    回流之柱
 ||  LogName:    ## [VarunaWaterspout]
-||  Protection: 
+||  Protection:
 =======================================]]
 --[[
-local defs = 
+defs =
 {
 	-- 受回流之柱控制的group id
-	groupTable = 
+	groupTable =
 	{
 
 	},
 
 	-- 回流之柱副中枢所在的group id
-	deviceGroupTable = 
+	deviceGroupTable =
 	{
 
 	},
@@ -40,7 +40,7 @@ local defs =
 }
 --]]
 
-local extraTriggers = 
+local extraTriggers =
 {
 	{ config_id = 50000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
 	{ config_id = 50000002, name = "TIME_AXIS_PASS", event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_EVENT_TIME_AXIS_PASS", trigger_count = 0 },
@@ -50,7 +50,7 @@ local extraTriggers =
 
 }
 
-local extraVariables = 
+local extraVariables =
 {
 	-- 0雨天，1晴天，不要在其他group里改这个变量的值！
 	{ config_id = 50000101, name = "SGV_WeatherState", value = 0, no_refresh = true },
@@ -63,7 +63,7 @@ local extraVariables =
 
 }
 
-local weatherTable = 
+local weatherTable =
 {
 	clearBefore = 4013,
 	rainBefore = 4014,
@@ -113,12 +113,12 @@ function LF_CheckTime(context, destTime)
 
 	local curGameMinutePassed = time[3]
 	local destTimePassed = destTime[1] * 60 + destTime[2]
-	
+
 	-- 允许前后2s内的误差
 	if math.abs(curGameMinutePassed - destTimePassed) < 2 then
 		temp = true
 	end
-	
+
 	return temp
 end
 
@@ -140,7 +140,7 @@ function LF_SetSpoutGadgetState(context, gadgetState)
 		ScriptLib.SetGadgetStateByConfigId(context, defs.photoTable[i], photoState)
 		photoIdList = photoIdList..defs.photoTable[i].." state = "..photoState..","
 	end
-	
+
 	ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] water spout gadget state is set to "..gadgetState..
 		", "..photoIdList)
 
@@ -155,13 +155,13 @@ function LF_CheckSpoutStatusByTime(context, hour, minute)
 		LF_SetSpoutGadgetState(context, 901)
 		LF_WaterSpoutTimeAxis(context, false, hour, minute)
 	end
-	
+
 	local temp = hour % 12
 	if temp == 0 then
 		-- 是起水柱的那个小时，0或12
 		if minute == 0 then
 			-- 暂时不走这里，走上面，允许一点误差
-			
+
 		elseif minute < defs.waterRise + defs.waterStayup then
 			-- 如果还没到该下落的时间，保持循环状态(通常是调时间之后走这里，先等几秒不出特效，等镜头上移之后从物件层进201)
 			LF_SetSpoutGadgetState(context, 903)
@@ -187,7 +187,7 @@ function LF_WaterSpoutTimeAxis(context, temp, hour, minute)
 		ScriptLib.InitTimeAxis(context, "waterSpout_"..LF_TempAxisValue(context, 3), {defs.waterRise, defs.waterRise + defs.waterStayup, defs.waterRise + defs.waterStayup + defs.waterDown}, false)
 		ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] start a time axis, name = waterSpout_"..LF_TempAxisValue(context, 3)..", time = "..hour..":"..minute)
 	end
-	
+
 end
 
 
@@ -229,7 +229,7 @@ function LF_Check_Weather_Status(context)
 			return
 		end
 	end
-	
+
 	-- 只要进了这个function，就一定会起新的tempWeather时间轴，所以一定要把所有时间轴都取消掉
 	LF_CancelAllAxis(context)
 
@@ -384,7 +384,7 @@ function LF_TempAxisValue(context, type)
 		tempName = "axis_waterSpout"
 		tempValue = ScriptLib.GetGroupTempValue(context, "axis_waterSpout", {})
 	end
-	
+
 	if tempValue == 1 then
 		ScriptLib.SetGroupTempValue(context, tempName, 0, {})
 		return 0
@@ -400,7 +400,7 @@ end
 --================================================================
 
 function action_EVENT_GROUP_LOAD(context, evt)
-	
+
 	ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] group is loaded")
 
 	ScriptLib.SetGroupTempValue(context, "axis_tempWeather", 0, {})
@@ -424,7 +424,7 @@ function action_EVENT_ENTER_REGION(context, evt)
 		-- 更新当前天气
 		LF_Check_Weather_Status(context)
 	end
-	
+
 	return 0
 end
 
@@ -438,7 +438,7 @@ function action_VARIABLE_CHANGE(context, evt)
                 ScriptLib.GetGroupVariableValue(context, "questStatus"))
 		return 0
 	end
-	
+
 	if evt.source_name == "finalWeatherState" then
 
 		-- 通知中枢所在组
@@ -472,10 +472,10 @@ function action_VARIABLE_CHANGE(context, evt)
 		local curWeather = ScriptLib.GetGroupVariableValue(context,"SGV_WeatherState")
 		LF_ChangeWeather(context, curWeather)
 		ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] quest finished, weather changes to "..curWeather)
-	
+
 	end
 
-	
+
 	return 0
 end
 
@@ -487,7 +487,7 @@ function action_EVENT_SET_GAME_TIME(context, evt)
 	return 0
 end
 
-function action_EVENT_TIME_AXIS_PASS(context, evt)	
+function action_EVENT_TIME_AXIS_PASS(context, evt)
 	ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] Time axis "..evt.source_name..", stage "..evt.param1.." is finished")
 
 	-- 只要时间轴走完一个阶段，一定切换天气状态
@@ -497,21 +497,21 @@ function action_EVENT_TIME_AXIS_PASS(context, evt)
 
 		ScriptLib.PrintContextLog(context, "## [VarunaWaterspout] game hour = "..ScriptLib.GetGameHour(context)..
 			", current weather state = "..ScriptLib.GetGroupVariableValue(context, "SGV_WeatherState"))
-			
-	elseif string.sub(evt.source_name, 0, 10) == "waterSpout" then		
+
+	elseif string.sub(evt.source_name, 0, 10) == "waterSpout" then
 		if evt.param1 == 1 then
 			-- if LF_CheckTime(context, {0, 5}) == false and LF_CheckTime(context, {12, 5}) == false then
 			-- 	LF_CheckSpoutStatusByMinute(context, curGameMinute)
 			-- 	return 0
 			-- else
 				LF_SetSpoutGadgetState(context, 201)
-			-- end 
+			-- end
 		elseif evt.param1 == 2 then
 			LF_SetSpoutGadgetState(context, 902)
 		elseif evt.param1 == 3 then
 			LF_SetSpoutGadgetState(context, 0)
 		end
-	
+
 	elseif string.sub(evt.source_name, 0, 14) == "tempWaterSpout" then
 		if evt.param1 == 1 then
 			LF_SetSpoutGadgetState(context, 902)

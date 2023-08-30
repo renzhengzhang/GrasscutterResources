@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210002
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	active_step = 201,
 	inactive_step = 0,
 	gadget_array = {2001,2002,2003,2004},
@@ -17,9 +17,9 @@ local v_error = 0
 local max_bit = #defs.gadget_array
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -82,9 +82,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -95,9 +95,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -122,20 +122,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2006(context, evt)
 	if evt.param1 ~= 2006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -146,7 +146,7 @@ function action_EVENT_ENTER_REGION_2006(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -172,7 +172,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2007(context, evt)
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break 
+	                        break
 	                end
 	                if i == max_bit and defs.gadget_array[i] ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
@@ -197,7 +197,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2007(context, evt)
 	        if v_error ~= 1 then
 	                v_error = -1
 	        end
-	        ScriptLib.SetGroupVariableValue(context, "sort", v) 
+	        ScriptLib.SetGroupVariableValue(context, "sort", v)
 	        ScriptLib.SetGroupVariableValue(context, "gear_reset", v_error)
 	        ScriptLib.SetGroupVariableValue(context, "v_error", 0)
 	end
@@ -207,7 +207,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_2008(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if evt.param1 == 1 then
 		if #defs.reset_gear_list == 0 then
 	                        defs.reset_gear_list = suites[1].gadgets
@@ -228,8 +228,8 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
-	
+
+
 	if evt.param1 == -1 then
 		return true
 	end
@@ -239,7 +239,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 > 0 then
 		return true
 	end
@@ -253,22 +253,22 @@ function action_EVENT_VARIABLE_CHANGE_2010(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 创建id为2015的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2015 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210427, 2)
-	
+
 	-- 将本组内变量名为 "Success" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Success", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -278,7 +278,7 @@ function condition_EVENT_GROUP_LOAD_2011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "GadgetState") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -288,20 +288,20 @@ function action_EVENT_GROUP_LOAD_2011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"GadgetState"为1
 	if ScriptLib.GetGroupVariableValue(context, "GadgetState") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -311,24 +311,24 @@ function action_EVENT_VARIABLE_CHANGE_2012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"Thunder"，时间节点为{3,5,7,9}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Thunder", {3,5,7,9}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"GadgetState"为0
 	if ScriptLib.GetGroupVariableValue(context, "GadgetState") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -338,12 +338,12 @@ function action_EVENT_VARIABLE_CHANGE_2013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 停止标识为"Thunder"的时间轴
 	ScriptLib.EndTimeAxis(context, "Thunder")
-	
-	
+
+
 	return 0
 end
 
@@ -353,7 +353,7 @@ function condition_EVENT_GROUP_LOAD_2014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Success") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -363,14 +363,14 @@ function action_EVENT_GROUP_LOAD_2014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "GadgetState" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "GadgetState", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -380,7 +380,7 @@ function condition_EVENT_GROUP_LOAD_2016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Success") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -391,7 +391,7 @@ function action_EVENT_GROUP_LOAD_2016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -409,8 +409,8 @@ function action_EVENT_TIME_AXIS_PASS_2021(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -428,8 +428,8 @@ function action_EVENT_TIME_AXIS_PASS_2022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -447,8 +447,8 @@ function action_EVENT_TIME_AXIS_PASS_2023(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -466,7 +466,7 @@ function action_EVENT_TIME_AXIS_PASS_2024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133220430
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -96,20 +96,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_430001(context, evt)
 	if evt.param1 ~= 430001 then return false end
-	
+
 	-- 判断变量"done"为0
 	if ScriptLib.GetGroupVariableValue(context, "done") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -120,30 +120,30 @@ function action_EVENT_ENTER_REGION_430001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "done" 的变量设置为 5
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "done", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_430002(context, evt)
 	if evt.param1 ~= 430002 then return false end
-	
+
 	-- 判断变量"done"为1
 	if ScriptLib.GetGroupVariableValue(context, "done") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -154,30 +154,30 @@ function action_EVENT_ENTER_REGION_430002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "finish" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finish", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_430003(context, evt)
 	if evt.param1 ~= 430003 then return false end
-	
+
 	-- 判断变量"done"为2
 	if ScriptLib.GetGroupVariableValue(context, "done") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -188,24 +188,24 @@ function action_EVENT_ENTER_REGION_430003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_430005(context, evt)
 	if evt.param1 ~= 430005 then return false end
-	
+
 	-- 判断变量"finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -216,30 +216,30 @@ function action_EVENT_ENTER_REGION_430005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "done" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "done", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_430006(context, evt)
 	if evt.param1 ~= 430006 then return false end
-	
+
 	-- 判断变量"finish"为2
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -250,6 +250,6 @@ function action_EVENT_ENTER_REGION_430006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

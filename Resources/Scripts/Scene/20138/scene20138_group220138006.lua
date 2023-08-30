@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220138006
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -107,7 +107,7 @@ function condition_EVENT_TIME_AXIS_PASS_6001(context, evt)
 	if "dooropen" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -118,8 +118,8 @@ function action_EVENT_TIME_AXIS_PASS_6001(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -128,7 +128,7 @@ function condition_EVENT_TIME_AXIS_PASS_6002(context, evt)
 	if "dooropen" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -139,7 +139,7 @@ function action_EVENT_TIME_AXIS_PASS_6002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -148,7 +148,7 @@ function action_EVENT_GROUP_LOAD_6003(context, evt)
 	if ScriptLib.GetHostQuestState(context,4007211) == 3 or ScriptLib.GetGroupVariableValue(context, "doorOpen") == 1 then
 		ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=3})
 	end
-	
+
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_GADGET_CREATE_6006(context, evt)
 	if 6008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -168,7 +168,7 @@ function action_EVENT_GADGET_CREATE_6006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -176,14 +176,14 @@ end
 function condition_EVENT_SELECT_OPTION_6007(context, evt)
 	-- 判断是gadgetid 6008 option_id 197
 	if 6008 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 197 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -194,22 +194,22 @@ function action_EVENT_SELECT_OPTION_6007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 调用提示id为 60010368 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 60010368) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建标识为"dooropen"，时间节点为{3,8}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "dooropen", {3,8}, false)
-	
-	
+
+
 	-- 将本组内变量名为 "doorOpen" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "doorOpen", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

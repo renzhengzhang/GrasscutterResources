@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220133050
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -71,9 +71,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -111,9 +111,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -121,17 +121,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_50002(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133050, 50001) then
 		return false
 	end
-	
+
 	-- 判断变量"StoneReadyA"为0
 	if ScriptLib.GetGroupVariableValue(context, "StoneReadyA") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"StoneReadyB"为0
 	if ScriptLib.GetGroupVariableValue(context, "StoneReadyB") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -142,25 +142,25 @@ function action_EVENT_GADGET_STATE_CHANGE_50002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "StoneReadyA" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "StoneReadyA", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "StoneReadyB" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "StoneReadyB", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -169,7 +169,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_50003(context, evt)
 	if 50001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -183,8 +183,8 @@ function action_EVENT_GADGET_STATE_CHANGE_50003(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -193,17 +193,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_50005(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133050, 50004) then
 		return false
 	end
-	
+
 	-- 判断变量"StoneReadyA"为0
 	if ScriptLib.GetGroupVariableValue(context, "StoneReadyA") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"StoneReadyB"为0
 	if ScriptLib.GetGroupVariableValue(context, "StoneReadyB") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -214,25 +214,25 @@ function action_EVENT_GADGET_STATE_CHANGE_50005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 50013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "StoneReadyA" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "StoneReadyA", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "StoneReadyB" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "StoneReadyB", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -243,13 +243,13 @@ function action_EVENT_GROUP_LOAD_50016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "StoneReadyB" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "StoneReadyB", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -258,17 +258,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_50017(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133050, 50001) then
 		return false
 	end
-	
+
 	-- 判断变量"StoneReadyA"为0
 	if ScriptLib.GetGroupVariableValue(context, "StoneReadyA") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"StoneReadyB"为0
 	if ScriptLib.GetGroupVariableValue(context, "StoneReadyB") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -279,7 +279,7 @@ function action_EVENT_GADGET_STATE_CHANGE_50017(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -288,17 +288,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_50018(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133050, 50004) then
 		return false
 	end
-	
+
 	-- 判断变量"StoneReadyA"为0
 	if ScriptLib.GetGroupVariableValue(context, "StoneReadyA") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"StoneReadyB"为0
 	if ScriptLib.GetGroupVariableValue(context, "StoneReadyB") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -309,27 +309,27 @@ function action_EVENT_GADGET_STATE_CHANGE_50018(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_50019(context, evt)
 	-- 判断是gadgetid 为 50013的移动平台，是否到达了7 的路线中的 3 点
-	
+
 	if 50013 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -340,45 +340,45 @@ function action_EVENT_PLATFORM_ARRIVAL_50019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "StoneReadyB" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "StoneReadyB", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 50001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 50001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 50004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 50004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_50020(context, evt)
 	-- 判断是gadgetid 为 50012的移动平台，是否到达了15 的路线中的 3 点
-	
+
 	if 50012 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 15 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -389,24 +389,24 @@ function action_EVENT_PLATFORM_ARRIVAL_50020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "StoneReadyB" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "StoneReadyB", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 50001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 50001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 50004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 50004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

@@ -1,16 +1,16 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133223436
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 133223436,
 	gadget_thunderThelfID = 436001,
 	pointarray_ID = 322300055,
 	maxPointCount = 39,
 	gadget_Reward_1 = 436002,
-	pointInfo = {7,26,39} 
+	pointInfo = {7,26,39}
 }
 
 -- DEFS_MISCS
@@ -39,9 +39,9 @@ function MovePlatform(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -87,9 +87,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -101,9 +101,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -151,9 +151,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -162,7 +162,7 @@ function condition_EVENT_GROUP_REFRESH_436003(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "feather02", 133223001) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -170,10 +170,10 @@ end
 function action_EVENT_GROUP_REFRESH_436003(context, evt)
 		-- 将flowGroup的某个flowSuite移除，不会触发物件和怪物死亡
 	  ScriptLib.RemoveExtraFlowSuite(context, 133223436, 1, FlowSuiteOperatePolicy.DEFAULT)
-	
+
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133223436, 2)
-	
+
 	return 0
 end
 
@@ -182,25 +182,25 @@ function condition_EVENT_PLATFORM_REACH_POINT_436004(context, evt)
 	if 436001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_436004(context, evt)
-	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)                
+	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isMoving", 0) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	        return -1
-	end        
+	end
 	ScriptLib.StopPlatform(context, defs.gadget_thunderThelfID)
 	if evt.param3 == defs.maxPointCount then
 	        ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
 	        ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_thunderThelfID, GadgetState.GearStart)
-	        ScriptLib.GoToFlowSuite(context, defs.group_ID, 2)                
+	        ScriptLib.GoToFlowSuite(context, defs.group_ID, 2)
 	        return 0
 	end
-	                
+
 	local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
 	next = next + 1
 	ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
@@ -215,14 +215,14 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_436005(context, evt)
 				return false
 			end
 			local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
-			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state) 
-			if state == 201 then 
+			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
+			if state == 201 then
 				return false
 			end
-			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then 
+			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then
 				return false
 			end
-			
+
 			return true
 end
 
@@ -237,7 +237,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_436006(context, evt)
 	if 436002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -248,23 +248,23 @@ function action_EVENT_GADGET_STATE_CHANGE_436006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "featherfinish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "featherfinish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将Group001组内变量名为 "feather01" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "feather02", 1, 133223001)  then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "progress", 1, 133223515)  then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

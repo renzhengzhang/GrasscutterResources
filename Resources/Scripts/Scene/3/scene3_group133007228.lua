@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133007228
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	seal_id = 980,
 	light_1 = 966,
 	light_2 = 967,
@@ -14,9 +14,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -96,9 +96,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -117,7 +117,7 @@ function action_EVENT_GADGET_STATE_CHANGE_304(context, evt)
 				t_p_value = 2
 			elseif evt.param2 == defs.light_3 then
 				t_p_value = 4
-			end	
+			end
 			ScriptLib.ChangeGroupVariableValue(context, "Temp_Point_Value", t_p_value)
 			return 0
 		end
@@ -128,7 +128,7 @@ function action_EVENT_GADGET_STATE_CHANGE_304(context, evt)
 				t_p_value = ScriptLib.GetGroupVariableValue(context, "Temp_Point_Value")
 				ScriptLib.SetGroupVariableValue(context, "Point_Value", t_p_value)
 				ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.seal_model, evt.param1)
-			end	
+			end
 		elseif evt.param1 == GadgetState.ChestLocked then
 			-- 玩家出界，group数据清理
 			local p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
@@ -164,7 +164,7 @@ function condition_EVENT_GADGET_CREATE_307(context, evt)
 	if evt.param1 ~= defs.seal_id then
 		return false
 	end
-	
+
 	return true
 end
 

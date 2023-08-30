@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 144001004
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -157,9 +157,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -170,9 +170,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -251,9 +251,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -261,12 +261,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4021(context, evt)
 	if 4002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001001) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -278,8 +278,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4021(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_05_False_B", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -288,12 +288,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4022(context, evt)
 	if 4002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001001) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -305,8 +305,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4022(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_05_True", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -315,12 +315,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4023(context, evt)
 	if 4002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001001) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -332,8 +332,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4023(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_05_False_A", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -342,12 +342,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4025(context, evt)
 	if 4003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001009) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -359,8 +359,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4025(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_01_False_B", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -369,12 +369,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4026(context, evt)
 	if 4003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001009) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -386,8 +386,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4026(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_01_False_A", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -396,12 +396,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4027(context, evt)
 	if 4003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001009) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -413,8 +413,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4027(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_01_True", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -423,12 +423,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4029(context, evt)
 	if 4004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001006) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -440,8 +440,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4029(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_02_True", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -450,12 +450,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4030(context, evt)
 	if 4004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001006) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -467,8 +467,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4030(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_02_False_B", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -477,12 +477,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4031(context, evt)
 	if 4004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001006) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -494,8 +494,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4031(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_02_False_A", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -504,12 +504,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4033(context, evt)
 	if 4005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001007) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -521,8 +521,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4033(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_04_False_B", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -531,12 +531,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4034(context, evt)
 	if 4005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001007) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -548,8 +548,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4034(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_04_True", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -558,12 +558,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4035(context, evt)
 	if 4005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001007) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -575,8 +575,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4035(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_04_False_A", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -585,12 +585,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4037(context, evt)
 	if 4001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001008) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -602,8 +602,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4037(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_03_False_B", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -612,12 +612,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4038(context, evt)
 	if 4001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001008) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -629,8 +629,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4038(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_03_False_A", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -639,12 +639,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4039(context, evt)
 	if 4001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001008) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -656,8 +656,8 @@ function action_EVENT_GADGET_STATE_CHANGE_4039(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_03_True", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -666,17 +666,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_4041(context, evt)
 	if 4002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001001) ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"times"为4
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -687,7 +687,7 @@ function action_EVENT_GADGET_STATE_CHANGE_4041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -696,17 +696,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_4043(context, evt)
 	if 4004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001006) ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"times"为1
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -717,7 +717,7 @@ function action_EVENT_GADGET_STATE_CHANGE_4043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -726,17 +726,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_4044(context, evt)
 	if 4005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001007) ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"times"为3
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -747,7 +747,7 @@ function action_EVENT_GADGET_STATE_CHANGE_4044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -756,17 +756,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_4045(context, evt)
 	if 4001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001008) ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"times"为2
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -777,24 +777,24 @@ function action_EVENT_GADGET_STATE_CHANGE_4045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4046(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为1
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"correct"为0
 	if ScriptLib.GetGroupVariableValue(context, "correct") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -802,27 +802,27 @@ end
 function action_EVENT_VARIABLE_CHANGE_4046(context, evt)
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 变量"correct"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "correct", 0)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4047(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为2
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"correct"为1
 	if ScriptLib.GetGroupVariableValue(context, "correct") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -830,27 +830,27 @@ end
 function action_EVENT_VARIABLE_CHANGE_4047(context, evt)
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 变量"correct"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "correct", 0)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4048(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为3
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"correct"为2
 	if ScriptLib.GetGroupVariableValue(context, "correct") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -858,27 +858,27 @@ end
 function action_EVENT_VARIABLE_CHANGE_4048(context, evt)
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 变量"correct"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "correct", 0)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4049(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为4
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 4 then
 			return false
 	end
-	
+
 	-- 判断变量"correct"为3
 	if ScriptLib.GetGroupVariableValue(context, "correct") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -886,27 +886,27 @@ end
 function action_EVENT_VARIABLE_CHANGE_4049(context, evt)
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 变量"correct"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "correct", 0)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4050(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为5
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 5 then
 			return false
 	end
-	
+
 	-- 判断变量"correct"为4
 	if ScriptLib.GetGroupVariableValue(context, "correct") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -914,32 +914,32 @@ end
 function action_EVENT_VARIABLE_CHANGE_4050(context, evt)
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 变量"correct"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "correct", 0)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4051(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为5
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 5 then
 			return false
 	end
-	
+
 	-- 判断变量"correct"为5
 	if ScriptLib.GetGroupVariableValue(context, "correct") ~= 5 then
 			return false
 	end
-	
+
 	-- 判断变量"complete"为0
 	if ScriptLib.GetGroupVariableValue(context, "complete") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -950,57 +950,57 @@ function action_EVENT_VARIABLE_CHANGE_4051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为4059的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4059 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为4060的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4060 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "complete" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "complete", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "times" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "times", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "correct" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "correct", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 通知场景上的所有玩家播放名字为144001011 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 144001011, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
 		local pos = {x=271, y=214, z=304}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Phrase_Complate", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	-- 延迟18秒后,向groupId为：144001004的对象,请求一次调用,并将string参数："paimengkaiche" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001004, "paimengkaiche", 18) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1009,7 +1009,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4053(context, evt)
 	if 4001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1020,7 +1020,7 @@ function action_EVENT_GADGET_STATE_CHANGE_4053(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1029,7 +1029,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4054(context, evt)
 	if 4002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1040,7 +1040,7 @@ function action_EVENT_GADGET_STATE_CHANGE_4054(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1049,12 +1049,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4055(context, evt)
 	if 4003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001009) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1062,10 +1062,10 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_4055(context, evt)
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 变量"correct"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "correct", 0)
-	
+
 	return 0
 end
 
@@ -1074,7 +1074,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4056(context, evt)
 	if 4004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1085,7 +1085,7 @@ function action_EVENT_GADGET_STATE_CHANGE_4056(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1094,7 +1094,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4057(context, evt)
 	if 4005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1105,7 +1105,7 @@ function action_EVENT_GADGET_STATE_CHANGE_4057(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1116,7 +1116,7 @@ function action_EVENT_TIMER_EVENT_4058(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1125,12 +1125,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4061(context, evt)
 	if 4003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001009) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1138,10 +1138,10 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_4061(context, evt)
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 变量"correct"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "correct", 0)
-	
+
 	return 0
 end
 
@@ -1150,12 +1150,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_4062(context, evt)
 	if 4003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"tune"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "tune", 144001009) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1166,12 +1166,12 @@ function action_EVENT_GADGET_STATE_CHANGE_4062(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "correct" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "correct", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

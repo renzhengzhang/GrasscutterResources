@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301522
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_temple = 522001,
 	gadget_chest = 522002,
 	group_ID = 133301522
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -79,9 +79,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -89,7 +89,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_522003(context, evt)
 	if 522001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -99,15 +99,15 @@ function action_EVENT_GADGET_STATE_CHANGE_522003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 522002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 522001 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -115,7 +115,7 @@ end
 function condition_EVENT_GADGET_CREATE_522004(context, evt)
 	-- 打印创建日志
 	    ScriptLib.PrintContextLog(context, "## TEMPLE_LOG : Gadget_Create | "..evt.param1)
-	
+
 	return true
 end
 
@@ -123,7 +123,7 @@ end
 function condition_EVENT_ANY_GADGET_DIE_522005(context, evt)
 	-- 打印死亡日志
 	    ScriptLib.PrintContextLog(context, "## TEMPLE_LOG : Gadget_Die | "..evt.param1)
-	
+
 	return true
 end
 
@@ -131,16 +131,16 @@ end
 function condition_EVENT_GADGET_STATE_CHANGE_522006(context, evt)
 	-- 打印创建日志
 	    ScriptLib.PrintContextLog(context, "## TEMPLE_LOG : Gadget_State_Change | "..evt.param2.." : "..evt.param3.." -> "..evt.param1)
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_522007(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_temple) == -1 or ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_temple) == GadgetState.GearStart then
-	        ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, defs.gadget_chest, GadgetState.Default) 
+	        ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, defs.gadget_chest, GadgetState.Default)
 	        ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_temple})
 	end
-	
+
 	return 0
 end

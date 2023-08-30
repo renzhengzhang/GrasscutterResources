@@ -2,13 +2,13 @@
 ||	filename:		||	YeLan_BoxPusher
 ||	owner: 			||	siyu.li
 ||	description: 	||	根据夜兰地城需求增加了路径屏蔽的功能
-||	LogName:		||	
+||	LogName:		||
 ||	Protection:		||	TimeAxisPass检测箱子到达点位
 =======================================]]
 --[[
 设置var: level_start为1以开启推箱子流程
 用var_change接source为"level_finish"即可响应箱子推完的结果
-local defs = {
+defs = {
 	box_gadget_id_1 = 1, 	--可推箱子的gadget_id
 	box_gadget_id_2 = 2, 	--可推箱子的gadget_id
 	config_suites = {1}		--注册逻辑的suite队列
@@ -160,7 +160,7 @@ function LF_Get_Push_Direction(context, avatar, target)
 				_direct = "left"
 			else _direct = "right"
 			end
-		end  
+		end
 	end
 	ScriptLib.PrintContextLog(context, "## YeLan_BoxPusher : LF_Get_Entity_Pos | _direct = ".._direct)
 	return _direct
@@ -200,7 +200,7 @@ function LF_Check_Target_Position(context, x, z, forward)
 	local _forward = forward
 	--由于关卡方向与地图方向可能不一致,需要额外做一次旋转
 	--[[if forward == "up" then	_forward = "left"
-		elseif forward == "left" then _forward = "down" 
+		elseif forward == "left" then _forward = "down"
 		elseif forward == "down" then _forward = "right"
 		else _forward = "up"
 	end--]]
@@ -303,7 +303,7 @@ function LF_Check_Is_Correct_Target_Point(context, box_id, x, z)
 			end
 			if is_pos_correct == false then
 				ScriptLib.SetGroupGadgetStateByConfigId(context, 0, box_config[box_id].config_id, 201)
-			end	
+			end
 		end
 	end
 	return true
@@ -323,7 +323,7 @@ function LF_Check_Is_Level_Finish(context)
 				is_right_pos = true
 			end
 		end
-		if is_right_pos == false then	
+		if is_right_pos == false then
 			return false
 		end
 	end

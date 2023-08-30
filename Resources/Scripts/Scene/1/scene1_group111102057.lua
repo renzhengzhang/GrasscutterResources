@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111102057
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -94,9 +94,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -134,28 +134,28 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_57007(context, evt)
 	-- 判断是gadgetid 57005 option_id 35
 	if 57005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 35 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"Count"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Count", 111102057) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -163,13 +163,13 @@ end
 function action_EVENT_SELECT_OPTION_57007(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111102057, 2)
-	
+
 	-- 将本组内变量名为 "Count" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -177,19 +177,19 @@ end
 function condition_EVENT_SELECT_OPTION_57058(context, evt)
 	-- 判断是gadgetid 57005 option_id 35
 	if 57005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 35 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"Count"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Count", 111102057) <= 0 then
 			return false
 	end
-	
+
 	return true
 end
 

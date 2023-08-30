@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133302010
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -110,9 +110,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -123,9 +123,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -141,20 +141,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10003(context, evt)
 	if evt.param1 ~= 10003 then return false end
-	
+
 	-- 判断是区域10003
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 10003 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -165,7 +165,7 @@ function action_EVENT_ENTER_REGION_10003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -174,7 +174,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10005(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302010, 10032) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -184,8 +184,8 @@ function action_EVENT_GADGET_STATE_CHANGE_10005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -194,7 +194,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10010(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302010, 10033) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -204,8 +204,8 @@ function action_EVENT_GADGET_STATE_CHANGE_10010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -214,7 +214,7 @@ function condition_EVENT_ANY_GADGET_DIE_10014(context, evt)
 	if 10013 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -225,19 +225,19 @@ function action_EVENT_ANY_GADGET_DIE_10014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10015(context, evt)
 	if evt.param1 ~= 10015 then return false end
-	
+
 	-- 判断是区域10015
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 10015 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -248,7 +248,7 @@ function action_EVENT_ENTER_REGION_10015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -257,7 +257,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10017(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302010, 10033) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -268,7 +268,7 @@ function action_EVENT_GADGET_STATE_CHANGE_10017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-26.76825, y=201.1469, z=2897.719}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-26.76825, y=201.1469, z=2897.719}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -277,8 +277,8 @@ function action_EVENT_GADGET_STATE_CHANGE_10017(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -287,7 +287,7 @@ function condition_EVENT_MONSTER_BATTLE_10018(context, evt)
 	if 10025 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -298,7 +298,7 @@ function action_EVENT_MONSTER_BATTLE_10018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -307,7 +307,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10019(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302010, 10034) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -318,7 +318,7 @@ function action_EVENT_GADGET_STATE_CHANGE_10019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-8.175295, y=202.243, z=2848.488}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-8.175295, y=202.243, z=2848.488}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -327,8 +327,8 @@ function action_EVENT_GADGET_STATE_CHANGE_10019(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -337,7 +337,7 @@ function condition_EVENT_ANY_GADGET_DIE_10021(context, evt)
 	if 10011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -348,7 +348,7 @@ function action_EVENT_ANY_GADGET_DIE_10021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -357,7 +357,7 @@ function condition_EVENT_ANY_GADGET_DIE_10023(context, evt)
 	if 10012 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -368,25 +368,25 @@ function action_EVENT_ANY_GADGET_DIE_10023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 10026, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 10027, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 创建id为10032的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 10032 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -395,7 +395,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10024(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302010, 10032) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -406,7 +406,7 @@ function action_EVENT_GADGET_STATE_CHANGE_10024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-66.64964, y=215.2524, z=2877.103}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-66.64964, y=215.2524, z=2877.103}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -415,8 +415,8 @@ function action_EVENT_GADGET_STATE_CHANGE_10024(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -425,7 +425,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10028(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133302010, 10034) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -435,20 +435,20 @@ function action_EVENT_GADGET_STATE_CHANGE_10028(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10036(context, evt)
 	if evt.param1 ~= 10036 then return false end
-	
+
 	-- 判断是区域10036
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 10036 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -459,6 +459,6 @@ function action_EVENT_ENTER_REGION_10036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

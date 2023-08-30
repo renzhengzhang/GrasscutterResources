@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133225034
 }
 
@@ -12,16 +12,16 @@ defs = {
         hasChild = true, --表示是否切当前Group的suite，true表示切自己的
         selfSuiteId = 2, --需要切的自己的suite
         hasMultiStatues = false, --是否有多个雷鸟雕像
-        statuesMap = 
+        statuesMap =
         {
                 [10001] = 2, --雷鸟雕像和需要切出来的Suite的对应表
         },
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -95,7 +95,7 @@ function condition_EVENT_QUEST_START_34002(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133225034, 34001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -105,20 +105,20 @@ function action_EVENT_QUEST_START_34002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 34001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_34003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Notified"为1
 	if ScriptLib.GetGroupVariableValue(context, "Notified") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -129,25 +129,25 @@ function action_EVENT_VARIABLE_CHANGE_34003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "start" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "start", 1, 133225129) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "start" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "start", 1, 133225128) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "start" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "start", 1, 133225093) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

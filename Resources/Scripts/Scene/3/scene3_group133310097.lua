@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133310097
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	interactOptionID = 430,
 	gadget_fireTorch = 97002,
 	gadget_fireBase1 = 97001,
@@ -18,9 +18,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -84,9 +84,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -97,9 +97,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -115,9 +115,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -125,7 +125,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_97007(context, evt)
 	if 97002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -136,25 +136,25 @@ function action_EVENT_GADGET_STATE_CHANGE_97007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "reminder4" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "reminder4", 1, 133310287) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7305314") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 31004, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -163,7 +163,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_97008(context, evt)
 	if 97010 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -174,19 +174,19 @@ function action_EVENT_GADGET_STATE_CHANGE_97008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 97006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 97006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5011, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -196,7 +196,7 @@ function condition_EVENT_GROUP_LOAD_97009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "opendoor") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -206,14 +206,14 @@ function action_EVENT_GROUP_LOAD_97009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 97006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5011, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -222,7 +222,7 @@ function condition_EVENT_GROUP_LOAD_97012(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133310097, 97002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -233,7 +233,7 @@ function action_EVENT_GROUP_LOAD_97012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -242,7 +242,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_97013(context, evt)
 	if 97001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -253,7 +253,7 @@ function action_EVENT_GADGET_STATE_CHANGE_97013(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -262,7 +262,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_97014(context, evt)
 	if 97004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -273,7 +273,7 @@ function action_EVENT_GADGET_STATE_CHANGE_97014(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -282,7 +282,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_97015(context, evt)
 	if 97010 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -293,7 +293,7 @@ function action_EVENT_GADGET_STATE_CHANGE_97015(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -303,12 +303,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_97016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "reminder") ~= 1 then
 			return false
 	end
-	
+
 	-- 检测config_id为97004的gadget是否从GadgetState.Default变为GadgetState.GearStart
 	if 97004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -319,7 +319,7 @@ function action_EVENT_GADGET_STATE_CHANGE_97016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -328,7 +328,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_97017(context, evt)
 	if 97004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -339,7 +339,7 @@ function action_EVENT_GADGET_STATE_CHANGE_97017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -349,7 +349,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_97018(context, evt)
 	if 97001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -360,7 +360,7 @@ function action_EVENT_GADGET_STATE_CHANGE_97018(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250047003
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
     FloorArrays = {
         [1] = {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -70,9 +70,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -111,9 +111,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -124,9 +124,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -142,9 +142,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -152,7 +152,7 @@ function condition_EVENT_GADGET_CREATE_3002(context, evt)
 	if 3001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -163,7 +163,7 @@ function action_EVENT_GADGET_CREATE_3002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -171,23 +171,23 @@ end
 function condition_EVENT_SELECT_OPTION_3003(context, evt)
 	-- 判断是gadgetid 3001 option_id 175
 	if 3001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 175 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_3003(context, evt)
 	ScriptLib.DelWorktopOption(context, 175)
-	
+
 	StartGallery(context, context)
-	
+
 	return 0
 end
 
@@ -196,7 +196,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3005(context, evt)
 	if 100001 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -206,8 +206,8 @@ function action_EVENT_GADGET_STATE_CHANGE_3005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3004, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -216,7 +216,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3006(context, evt)
 	if 200001 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -226,8 +226,8 @@ function action_EVENT_GADGET_STATE_CHANGE_3006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3004, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -236,7 +236,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3007(context, evt)
 	if 300001 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -246,8 +246,8 @@ function action_EVENT_GADGET_STATE_CHANGE_3007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3004, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -256,7 +256,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3008(context, evt)
 	if 400001 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -266,8 +266,8 @@ function action_EVENT_GADGET_STATE_CHANGE_3008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3004, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -276,7 +276,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3009(context, evt)
 	if 500001 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -286,8 +286,8 @@ function action_EVENT_GADGET_STATE_CHANGE_3009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3004, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -296,7 +296,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3010(context, evt)
 	if 600001 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -306,8 +306,8 @@ function action_EVENT_GADGET_STATE_CHANGE_3010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3004, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -316,7 +316,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3011(context, evt)
 	if 700001 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -326,7 +326,7 @@ function action_EVENT_GADGET_STATE_CHANGE_3011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3004, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

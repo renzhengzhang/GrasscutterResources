@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133103475
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_riddle_1 = 475001,
 	gadget_riddle_2 = 475002,
 	gadget_riddle_3 = 475003,
@@ -17,9 +17,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -92,15 +92,15 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_475007(context, evt)
 	if evt.param2 ~= defs.gadget_riddle_1 and evt.param2 ~= defs.gadget_riddle_2 and evt.param2 ~= defs.gadget_riddle_3 and evt.param2 ~= defs.gadget_riddle_4 and evt.param2 ~= defs.gadget_riddle_5 and evt.param2 ~= defs.gadget_riddle_6 then
-	return false 
+	return false
 	end
 	return true
 end
@@ -109,7 +109,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_475007(context, evt)
 	if ScriptLib.GetCurTriggerCount(context) == 0 then
 	    ScriptLib.MarkPlayerAction(context, 5006, 1, 1)
-	end 
+	end
 	if evt.param2 == defs.gadget_riddle_1 and evt.param1 == GadgetState.GearStart  then
 	    if ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_4) == GadgetState.GearStart then
 	        ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_riddle_4, GadgetState.Default)
@@ -254,8 +254,8 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_475008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
-	
+
+
 	if evt.param1 < 0 or evt.param1 > 6 then
 	return false
 	end
@@ -265,7 +265,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_475008(context, evt)
 	if evt.param1 == 6 then
-	    ScriptLib.MarkPlayerAction(context, 5006, 2, 2) 
+	    ScriptLib.MarkPlayerAction(context, 5006, 2, 2)
 	    ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_chest, GadgetState.Default)
 	    ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_gate, GadgetState.GearStart)
 	    ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, 475011, GadgetState.GearStart)
@@ -296,6 +296,6 @@ function action_EVENT_GROUP_LOAD_475009(context, evt)
 	end
 	ScriptLib.SetGroupVariableValue(context, "State_Flag", sum)
 	return 0
-	
-	
+
+
 end

@@ -4,7 +4,7 @@
 ]]
 --[[
 
-local defs = {
+defs = {
 	--战斗开始加载suit（空气墙等）
 	add_onStart = {2},
 	--开启流程的操作台configID
@@ -16,12 +16,12 @@ local defs = {
 	--Boss的ConfigID
 	boss_id = 66005,
                 --暖源的IDlist
-                heat_id = 
+                heat_id =
 {66009,66010,66011},
 
 	--点位configID
 	point_list = {66012,66013,66014},
-	
+
 	--招怪池
 	monster_list = {66025,66026,66027,66028,66029},
 	--招gadget池-召唤
@@ -36,7 +36,7 @@ local cfg = {
 	group_id = 133002066,
 
 	play_type = 5,
-	play_id = 5,	
+	play_id = 5,
 }
 
 local optimizSuite = {
@@ -97,7 +97,7 @@ end
 --监听战斗阶段变化
 function condition_battle_state(context, evt)
 	ScriptLib.PrintContextLog(context, "[WinterCampMimik] Battle State Notify: play_type@"..evt.param1.." play_id@"..evt.param2.." state@"..evt.param3)
-	if evt.param1 == cfg.play_type and evt.param2 == cfg.play_id then 
+	if evt.param1 == cfg.play_type and evt.param2 == cfg.play_id then
 		return true
 	end
 	return false
@@ -107,14 +107,14 @@ function action_battle_state(context, evt)
 	--BATTLE_PREPARE
 	if evt.param3 == 2 then
 
-		ScriptLib.SetGadgetEnableInteract(context, cfg.group_id, defs.gadget_starter, false)	
+		ScriptLib.SetGadgetEnableInteract(context, cfg.group_id, defs.gadget_starter, false)
 		--ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_starter, 201)
 		ScriptLib.KillGroupEntity(context,{ group_id = cfg.group_id, gadgets = {defs.gadget_starter}})
 
 	--BATTLE_READY
 	elseif evt.param3 == 3 then
 		ScriptLib.PrestartScenePlayBattle(context, {duration = 600, start_cd = 3, progress_stage = {1}, group_id = cfg.group_id})
-		
+
 
 		--加载优化圈所在suit 取最后一个suit
 		ScriptLib.AddExtraGroupSuite(context, cfg.group_id, #suites)
@@ -168,8 +168,8 @@ end
 --Boss通知关闭暖源，禁止交互
 function SLC_Close_WarmPoint(context, evt)
 
-	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then 
-		for k,v in pairs(defs.heat_id) do 
+	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then
+		for k,v in pairs(defs.heat_id) do
 			ScriptLib.SetGadgetStateByConfigId(context, v, GadgetState.Default)
 			ScriptLib.SetGadgetEnableInteract(context, cfg.group_id, v, false)
 		end
@@ -190,7 +190,7 @@ end
 
 function LF_Reset_WarmPoint(context,evt)
 
-	for k,v in pairs(defs.heat_id) do 
+	for k,v in pairs(defs.heat_id) do
 		ScriptLib.SetGadgetStateByConfigId(context, v, GadgetState.GearStart)
 		ScriptLib.SetGadgetEnableInteract(context, cfg.group_id, v, true)
 	end
@@ -265,12 +265,12 @@ function action_all_player_die(context, evt)
 	end
 	--检查全部离场
 
-	if LF_Check_AllPlayer_OutRegion(context, 66004) then 
+	if LF_Check_AllPlayer_OutRegion(context, 66004) then
 		ScriptLib.PrintContextLog(context, "[WinterCampMimik] All Player Out Region.")
 		ScriptLib.FailScenePlayBattle(context, cfg.group_id)
 		return 0
 	end
-	
+
 	return 0
 end
 
@@ -279,7 +279,7 @@ function action_any_monster_die(context, evt)
 	ScriptLib.PrintContextLog(context, "[WinterCampMimik] Monster Die Triggered. ConfigID@"..evt.param1)
 
 	if evt.param1 == defs.boss_id then
-		
+
 		ScriptLib.AddScenePlayBattleProgress(context, cfg.group_id, 1)
 	else
 
@@ -311,12 +311,12 @@ function action_leave_OptimizRegion(context,evt)
 	ScriptLib.PrintContextLog(context, "[WinterCampMimik] Leave optimiz_region. UID@"..context.uid.." RegionID@"..evt.param1)
 
 	--小圈检查场内玩家数量
-	if evt.param1 == 66004 then 
+	if evt.param1 == 66004 then
 		if LF_Check_AllPlayer_OutRegion(context,66004) then
 			ScriptLib.FailScenePlayBattle(context, cfg.group_id)
 		end
 	--大圈清eyePoint
-	elseif evt.param1 == 66008 then 
+	elseif evt.param1 == 66008 then
 		ScriptLib.ClearPlayerEyePoint(context, 66004)
 		ScriptLib.SetLimitOptimization(context, context.uid, false)
 	end
@@ -330,7 +330,7 @@ function SLC_Boss_OutOfBattle(context)
 end
 --卸载保护
 function action_group_will_unload( context, evt )
-	
+
 	ScriptLib.RemoveEntityByConfigId(context, cfg.group_id, EntityType.REGION, 66008)
 	ScriptLib.FailScenePlayBattle(context, cfg.group_id)
 
@@ -340,7 +340,7 @@ end
 --以性能圈判断，玩家是否全部离场
 function LF_Check_AllPlayer_OutRegion(context,region_id)
 	--非战斗阶段 跳过
-	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 1 then 
+	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 1 then
 		return false
 	end
 	local eid = ScriptLib.GetEntityIdByConfigId(context, region_id)
@@ -349,9 +349,9 @@ function LF_Check_AllPlayer_OutRegion(context,region_id)
 
 	ScriptLib.PrintContextLog(context, "[WinterCampMimik] Count player in Battle Field: RegionID@"..region_id.. "PlayerCount@".. count)
 
-	if count < 1 then	
+	if count < 1 then
 		return true
-	end	
+	end
 	return false
 end
 
@@ -365,12 +365,12 @@ function SLC_TryCreateGadget(context, param1)
 		return 0
 	end
 
-	if param1 == 0 then		
+	if param1 == 0 then
 		point_configID = defs.point_list[point_index]
 		ScriptLib.PrintContextLog(context, "[WinterCampMimik] To Create gadget. gadget@"..defs.summoner_list[point_index].." at Point@"..point_configID.." (Index@"..point_index..")")
 		--pointIndex和gadget池index对应
 		ScriptLib.CreateGadgetByConfigIdByPos(context, defs.summoner_list[point_index], gadgets[point_configID].pos, gadgets[point_configID].rot)
-	elseif param1 == 1 then 
+	elseif param1 == 1 then
 		point_configID = defs.point_list[point_index]
 		ScriptLib.PrintContextLog(context, "[WinterCampMimik] To Create gadget. gadget@"..defs.shooter_list[point_index].." at Point@"..point_configID.." (Index@"..point_index..")")
 		--pointIndex和gadget池index对应
@@ -386,7 +386,7 @@ function SLC_GadgetTryCreateMonster(context, param1)
 
 	ScriptLib.PrintContextLog(context, "[WinterCampMimik] Get SLC_GadgetTryCreateMonster. MonsterCount@"..param1)
 
-	if param1 >5 then 
+	if param1 >5 then
 		ScriptLib.PrintContextLog(context, "[WinterCampMimik] #WARN# SLC_GadgetTryCreateMonster param cannot larger than 5. Please check ability.")
 		return 0
 	end
@@ -401,9 +401,9 @@ function SLC_GadgetTryCreateMonster(context, param1)
 		ScriptLib.PrintContextLog(context, "[WinterCampMimik] LF_GetRandomPosition. X@"..summon_pos.x.." Y@"..summon_pos.y.." Z@"..summon_pos.z)
 		--ScriptLib.PrintContextLog(context, "[WinterCampMimik] GetRotationByEntityId. rotX@"..rot.x.." rotY@"..rot.y.." rotZ@"..rot.z)
 		--ScriptLib.PrintContextLog(context, "[WinterCampMimik] LF_Try_SummonMonster. posX@"..pos_list[i].x .." posZ@"..pos_list[i].z .." rot@"..rot)
-		LF_Try_SummonMonster(context,summon_pos,rot)		
+		LF_Try_SummonMonster(context,summon_pos,rot)
 	end
-	
+
 	return 0
 end
 --返回五个随机点
@@ -411,11 +411,11 @@ function LF_GetRandomPosition(context, radius, pos)
 	local pos_result = {x = 0, y = 0, z = 0}
 
 	math.randomseed(ScriptLib.GetServerTime(context))
-	
+
 	pos_result.x = math.floor(pos.x + (2*math.random()-1)*radius)
 	pos_result.y = math.floor(pos.y)
 	pos_result.z = math.floor(pos.z + (2*math.random()-1)*radius)
-	
+
 	return pos_result
 end
 
@@ -423,9 +423,9 @@ function LF_Try_SummonMonster(context,pos,rot)
 	--如果config_id已存在，接口会返回-2
 	for i = 1, #defs.monster_list do
 		local config_id =  defs.monster_list[i]
-		local ret = ScriptLib.CreateMonsterByConfigIdByPos(context, config_id, pos, rot)		
+		local ret = ScriptLib.CreateMonsterByConfigIdByPos(context, config_id, pos, rot)
 		ScriptLib.PrintContextLog(context, "[WinterCampMimik] LF_Try_SummonMonster. configID@"..config_id.." ret@"..ret)
-		if ret == 0 then 					
+		if ret == 0 then
 			--成功创建了就停 通知怪物入战
 			ScriptLib.SetMonsterBattleByGroup(context, config_id, cfg.group_id)
 			break
@@ -436,14 +436,14 @@ end
 
 function SLC_KillBossGadget(context,param1) --param1 1射击物件 0招怪物件
 
-	if param1 == 0 or param1 == 1 then 
+	if param1 == 0 or param1 == 1 then
 		local configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 		ScriptLib.KillGroupEntity(context,{ group_id = cfg.group_id, gadgets = {configId}})
 		LF_Set_PointAvailible_OnGadgetDie(context, param1, evt.param1)
 	else
 		ScriptLib.PrintContextLog(context, "[WinterCampMimik] #WARN# SLC_KillBossGadget Get Unknown Param: @"..param1)
 	end
-	
+
 	return 0
 end
 
@@ -452,7 +452,7 @@ function action_gadget_die(context,evt)
 	local gadget_id = gadgets[evt.param1].gadget_id
 	ScriptLib.PrintContextLog(context, "[WinterCampMimik] Get Gadget_Die. gadgetID@"..gadget_id)
 	--42601027 射击物件
-	if gadget_id == 42601027 then 
+	if gadget_id == 42601027 then
 		LF_Set_PointAvailible_OnGadgetDie(context, 1, evt.param1)
 	--42601028 招怪物件
 	elseif gadget_id == 42601028 then
@@ -466,22 +466,22 @@ end
 function LF_Get_RandomAvailiblePoint_Index(context, gadget_type)
 	local availible_points = {}
 	--找所有空闲的点
-	for k,v in pairs(defs.point_list) do 
+	for k,v in pairs(defs.point_list) do
 		if ScriptLib.GetGadgetStateByConfigId(context, 0, v) == 0 then
 			table.insert(availible_points, v)
 		end
 	end
-	if #availible_points > 0 then 
+	if #availible_points > 0 then
 		--抓个壮丁
-		local rand_index = 0	
+		local rand_index = 0
 		math.randomseed(ScriptLib.GetServerTime(context))
 		rand_index = math.random(#availible_points)
 
 		--mark他
-		if gadget_type == 0 then 			
+		if gadget_type == 0 then
 			ScriptLib.SetGadgetStateByConfigId(context, availible_points[rand_index], 201)
 			ScriptLib.PrintContextLog(context, "[WinterCampMimik] Set Point Usage Mark. configID@"..availible_points[rand_index].." gadget_type@"..gadget_type)
-		elseif gadget_type == 1 then 			
+		elseif gadget_type == 1 then
 			ScriptLib.SetGadgetStateByConfigId(context, availible_points[rand_index], 201)
 			ScriptLib.PrintContextLog(context, "[WinterCampMimik] Set Point Usage Mark. configID@"..availible_points[rand_index].." gadget_type@"..gadget_type)
 		else
@@ -503,7 +503,7 @@ function LF_Set_PointAvailible_OnGadgetDie(context, gadget_type, die_gadget)
 
 	ScriptLib.PrintContextLog(context, "[WinterCampMimik] LF_Set_PointAvailible_OnGadgetDie. die_gadget@"..die_gadget)
 	local point_index = 0
-	if gadget_type == 1 then 
+	if gadget_type == 1 then
 		point_index = GetIndexByValue(context, die_gadget,defs.shooter_list)
 	else
 		point_index = GetIndexByValue(context, die_gadget,defs.summoner_list)
@@ -516,7 +516,7 @@ end
 
 function GetIndexByValue(context, value, check_table)
 	for i=1, #check_table do
-		if value == check_table[i] then 
+		if value == check_table[i] then
 			return i
 		end
 	end

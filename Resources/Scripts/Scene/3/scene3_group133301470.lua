@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301470
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_CoreID = 470005,
 	monster_BossID = 470002,
 	gadget_Point_1 = 470006,
@@ -35,9 +35,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -98,9 +98,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -111,9 +111,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -156,9 +156,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -173,8 +173,8 @@ function action_EVENT_GROUP_LOAD_470009(context, evt)
 	if 0 ~= ScriptLib.ChangeDeathZone(context,0,{is_open = true}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_deatzone")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -185,13 +185,13 @@ function action_EVENT_GROUP_LOAD_470013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将configid为 470019 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 470019, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -200,7 +200,7 @@ function condition_EVENT_ANY_GADGET_DIE_470023(context, evt)
 	if 470005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -208,13 +208,13 @@ end
 function action_EVENT_ANY_GADGET_DIE_470023(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301470, 4)
-	
+
 	-- 将configid为 470019 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 470019, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -223,7 +223,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_470024(context, evt)
 	if 470006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -234,8 +234,8 @@ function action_EVENT_GADGET_STATE_CHANGE_470024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -244,7 +244,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_470025(context, evt)
 	if 470007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -255,8 +255,8 @@ function action_EVENT_GADGET_STATE_CHANGE_470025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -265,7 +265,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_470026(context, evt)
 	if 470008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -276,8 +276,8 @@ function action_EVENT_GADGET_STATE_CHANGE_470026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -288,19 +288,19 @@ function action_EVENT_QUEST_START_470028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 470003, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 470027, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 

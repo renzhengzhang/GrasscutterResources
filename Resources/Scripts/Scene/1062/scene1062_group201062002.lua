@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201062002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -77,9 +77,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -90,9 +90,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -153,9 +153,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -163,7 +163,7 @@ function condition_EVENT_ANY_MONSTER_DIE_2006(context, evt)
 	if 2024 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -173,29 +173,29 @@ function action_EVENT_ANY_MONSTER_DIE_2006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201062010, 2)
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062002, 3)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201062012, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2007(context, evt)
 	if evt.param1 ~= 2007 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -205,25 +205,25 @@ function action_EVENT_ENTER_REGION_2007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2014(context, evt)
 	if evt.param1 ~= 2014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"trap"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "trap", 201062008) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -233,8 +233,8 @@ function action_EVENT_ENTER_REGION_2014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_2015(context, evt)
 	if 2008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -254,7 +254,7 @@ function action_EVENT_ANY_MONSTER_LIVE_2015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -264,43 +264,43 @@ function action_EVENT_CHALLENGE_SUCCESS_2016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 2001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062010, 3)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062003, 2)
-	
+
 	-- 将本组内变量名为 "trap" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "trap", 1, 201062008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2021(context, evt)
 	if evt.param1 ~= 2021 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"trap"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "trap", 201062008) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -310,8 +310,8 @@ function action_EVENT_ENTER_REGION_2021(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -322,13 +322,13 @@ function action_EVENT_CHALLENGE_FAIL_2022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062002, 2)
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062012, 3)
-	
+
 	return 0
 end
 
@@ -338,12 +338,12 @@ function condition_EVENT_ANY_MONSTER_DIE_2029(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "key") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -354,16 +354,16 @@ function action_EVENT_ANY_MONSTER_DIE_2029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062002, 4)
-	
+
 	-- 针对当前group内变量名为 "key" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "key", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -373,12 +373,12 @@ function condition_EVENT_ANY_MONSTER_DIE_2030(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "key") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -389,16 +389,16 @@ function action_EVENT_ANY_MONSTER_DIE_2030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062002, 5)
-	
+
 	-- 针对当前group内变量名为 "key" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "key", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -408,12 +408,12 @@ function condition_EVENT_ANY_MONSTER_DIE_2031(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "key") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -424,15 +424,15 @@ function action_EVENT_ANY_MONSTER_DIE_2031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201062002, 6)
-	
+
 	-- 针对当前group内变量名为 "key" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "key", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

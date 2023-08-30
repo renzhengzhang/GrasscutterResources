@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133105167
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -93,9 +93,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -103,7 +103,7 @@ function condition_EVENT_GADGET_CREATE_216(context, evt)
 	if 521 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -114,13 +114,13 @@ function action_EVENT_GADGET_CREATE_216(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5005, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -130,7 +130,7 @@ function condition_EVENT_SELECT_OPTION_217(context, evt)
 	if 521 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -141,20 +141,20 @@ function action_EVENT_SELECT_OPTION_217(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 521 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133105174, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -164,7 +164,7 @@ function condition_EVENT_SELECT_OPTION_218(context, evt)
 	if 522 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -175,20 +175,20 @@ function action_EVENT_SELECT_OPTION_218(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 522 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133105173, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_GADGET_CREATE_219(context, evt)
 	if 522 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -208,7 +208,7 @@ function action_EVENT_GADGET_CREATE_219(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -218,7 +218,7 @@ function condition_EVENT_SELECT_OPTION_220(context, evt)
 	if 523 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -229,20 +229,20 @@ function action_EVENT_SELECT_OPTION_220(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 523 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133105172, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -251,7 +251,7 @@ function condition_EVENT_GADGET_CREATE_221(context, evt)
 	if 523 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -262,7 +262,7 @@ function action_EVENT_GADGET_CREATE_221(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -272,7 +272,7 @@ function condition_EVENT_SELECT_OPTION_222(context, evt)
 	if 524 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -283,20 +283,20 @@ function action_EVENT_SELECT_OPTION_222(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 524 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133105171, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -305,7 +305,7 @@ function condition_EVENT_GADGET_CREATE_223(context, evt)
 	if 524 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -316,7 +316,7 @@ function action_EVENT_GADGET_CREATE_223(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -325,7 +325,7 @@ function condition_EVENT_GADGET_CREATE_227(context, evt)
 	if 521 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -336,7 +336,7 @@ function action_EVENT_GADGET_CREATE_227(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -345,7 +345,7 @@ function condition_EVENT_GADGET_CREATE_228(context, evt)
 	if 522 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -356,7 +356,7 @@ function action_EVENT_GADGET_CREATE_228(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -365,7 +365,7 @@ function condition_EVENT_GADGET_CREATE_229(context, evt)
 	if 524 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -376,7 +376,7 @@ function action_EVENT_GADGET_CREATE_229(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -385,7 +385,7 @@ function condition_EVENT_GADGET_CREATE_230(context, evt)
 	if 523 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -396,6 +396,6 @@ function action_EVENT_GADGET_CREATE_230(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

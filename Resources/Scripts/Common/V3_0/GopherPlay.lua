@@ -8,7 +8,7 @@
 ||	Protection:     [Protection]
 =======================================]]
 
--- local defs = 
+-- defs =
 -- {
 --     regionId = 12345,
 --     targetScore = 3,
@@ -181,7 +181,7 @@ function action_TempVariableChange(context, evt)
     if evt.param1 >= largeMushroomCount and ScriptLib.GetGroupTempValue(context, "score", {}) < defs.targetScore then
         LF_GopherDisappear(context)
     end
-  
+
     return 0
 end
 
@@ -192,7 +192,7 @@ end
 --     local gadget_id = ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid)
 --     local gadgetState = ScriptLib.GetGadgetStateByConfigId(context, 0, config_id)
 --     ScriptLib.PrintContextLog(context, "## TD_GopherPlay configId = ".. config_id .. ", gadgetId = "..gadget_id..", gadgetState change from "..evt.param2.." to "..gadgetState)
-    
+
 --     if 202 == gadgetState and  gadget_id == GopherPlay.LargeMushroomId then
 --         return true
 --     end
@@ -241,13 +241,13 @@ function LF_StopChallenge(context, success)
 
     -- 设置所有蘑菇钻地
     LF_SetArrayGadgetState(context,GopherPlay.ZeroArray)
-    
+
     if success == true then
         -- 成功，删除操作台选项，操作台进202
         ScriptLib.DelWorktopOptionByGroupId(context, 0, defs.startId, GopherPlay.OptionId)
         ScriptLib.SetGadgetStateByConfigId(context, defs.startId, 202)
     else
-        -- 失败，重置回suite 1	
+        -- 失败，重置回suite 1
         ScriptLib.RefreshGroup(context, { group_id = base_info.group_id, suite = 1 })
         ScriptLib.SetWorktopOptionsByGroupId(context, 0, defs.startId, {GopherPlay.OptionId})
 
@@ -288,7 +288,7 @@ function LF_CalLargeMushroom(context, array)
     end
     return temp
 end
-    
+
 
 function LF_GopherDisappear(context)
     -- 地鼠消失
@@ -348,7 +348,7 @@ function SLC_AddScore(context,evt)
     local before = ScriptLib.GetGroupTempValue(context, "last", {})
     ScriptLib.SetGroupTempValue(context, "last", configId, {})
     local last = ScriptLib.GetGroupTempValue(context, "last", {})
-    
+
     if before == last then
         -- 防止短时间内被打两次
         ScriptLib.PrintContextLog(context, "## TD_GopherPlay : SLC_AddScore is called, configId = "..configId..", before = "..before..

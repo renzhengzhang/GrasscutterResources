@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133003086
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -74,20 +74,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_69(context, evt)
 	if evt.param1 ~= 69 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -95,19 +95,19 @@ end
 function action_EVENT_ENTER_REGION_69(context, evt)
 	-- 变量"is_TutorialOver"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "is_TutorialOver", 1)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_70(context, evt)
 	if evt.param1 ~= 70 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -118,19 +118,19 @@ function action_EVENT_ENTER_REGION_70(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_71(context, evt)
 	if evt.param1 ~= 71 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -140,18 +140,18 @@ function action_EVENT_ENTER_REGION_71(context, evt)
 	math.randomseed(os.time())
 	local n = math.random(1,3)
 	local c_tutorialover = ScriptLib.GetGroupVariableValue(context, "is_TutorialOver")
-	
+
 	local c_direction = ScriptLib.GetGroupVariableValue(context, "from_north")
-	
+
 	if c_tutorialover ~= 0 then
 	-- 判断玩家从北方进入
 	if c_direction ~= 0 then
 		-- 重新生成指定group，指定suite
-	
+
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133003087, suite = n }) then
 			return -1
 		end
-	
+
 	end
 	end
 	return 0

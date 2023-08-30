@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133102367
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -80,9 +80,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -90,7 +90,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_367003(context, evt)
 	if 367001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -101,7 +101,7 @@ function action_EVENT_GADGET_STATE_CHANGE_367003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : unlock_gadget")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -110,7 +110,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_367004(context, evt)
 	if 367001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -120,8 +120,8 @@ function action_EVENT_GADGET_STATE_CHANGE_367004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 367002, GadgetState.ChestLocked) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -130,7 +130,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_367005(context, evt)
 	if 367002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -140,13 +140,13 @@ function action_EVENT_GADGET_STATE_CHANGE_367005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 367001, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 销毁group存档，不影响当前场景，但卸载后group就永别了
 	if 0 ~= ScriptLib.SetGroupDead(context, 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_group_die")
 		return -1
 	end
-	
+
 	return 0
 end

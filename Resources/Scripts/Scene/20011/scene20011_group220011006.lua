@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220011006
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -81,37 +81,37 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_8(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220011007, 3)
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220011007, 4)
-	
+
 	-- 改变指定group组220011001中， configid为1006的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220011001, 1006, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220011001中， configid为1022的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220011001, 1022, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220011001中， configid为1023的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220011001, 1023, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标（406，-17，81），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=406, y=-17, z=81}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -120,14 +120,14 @@ function action_EVENT_CHALLENGE_SUCCESS_8(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 改变指定group组220011001中， configid为1048的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220011001, 1048, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -137,14 +137,14 @@ function action_EVENT_CHALLENGE_FAIL_61(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220011001, 1047, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220011006, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_65(context, evt)
 	if 9 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -164,6 +164,6 @@ function action_EVENT_ANY_MONSTER_LIVE_65(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end

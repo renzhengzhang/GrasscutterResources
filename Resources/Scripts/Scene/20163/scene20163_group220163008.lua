@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220163008
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 
     option_turn = 613,
     option_start = 7,
@@ -14,7 +14,7 @@ local defs = {
     play_region = 8017,
     --运输装置config_id
     carrier_list = {8001,8002,8004,8013,8014,8016},
-    switcher_control = 
+    switcher_control =
     {--[操作台configID] = {被控岔路装置1, 被控岔路装置2},
 
     },
@@ -28,10 +28,10 @@ local defs = {
     --option_gadget = 8015,
 
     --几条路 注意是point_list有向的 倒数第二个点为岔路判定点
-    way_info = 
+    way_info =
     {
                 --key为路径几 顺序无所谓
-        [1] = 
+        [1] =
         {
             point_list = {1,2,9,3,4,5,6,7,8},
 
@@ -45,13 +45,13 @@ local defs = {
                 [201] = 0,
                 [202] = 0,
                 [203] = 0,
-            }, 
+            },
         },
 
     },
 
     --停车点 到此点时会判断是否需要停车
-    stop_points = 
+    stop_points =
     {
         3
     },
@@ -64,9 +64,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -123,9 +123,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -136,9 +136,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -154,20 +154,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"first_station"为1
 	if ScriptLib.GetGroupVariableValue(context, "first_station") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -178,13 +178,13 @@ function action_EVENT_VARIABLE_CHANGE_8005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "guideFinish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "guideFinish", 1, 220163002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

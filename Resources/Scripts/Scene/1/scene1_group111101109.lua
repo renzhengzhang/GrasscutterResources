@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101109
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_1 = 109001,
 	gadget_2 = 109002,
 	gadget_3 = 109003,
@@ -16,9 +16,9 @@ local defs = {
 gadgetInfo = {{index = 1,name = "gadget_1"},{index = 2,name = "gadget_2"},{index = 3,name = "gadget_3"}}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -98,35 +98,35 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_109005(context, evt)
-		
+
 		if evt.param1 ~= 101 and evt.param1 ~= 102 and evt.param1 ~= 103 and evt.param1 ~= 104 then
 			ScriptLib.PrintLog(context, "Block Event ".." : Gadget state = ".. evt.param1)
 			return 0
 		end
-	
+
 		ScriptLib.PrintLog(context, "Beging Execute ".." : Gadget state = ".. evt.param1)
-		
+
 		local state = {0, 0, 0}
 		local allEquale = 1
-	
+
 		for k,v in pairs(gadgetInfo) do
-	
+
 			state[v.index] = ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs[v.name])
 		end
 		ScriptLib.PrintLog(context, "Gadget State = "..state[1].."_"..state[2].."_"..state[3])
-	
+
 		local haschange = {0,0,0}
-	
-		for i = 1, #state, 1 do 
+
+		for i = 1, #state, 1 do
 			if i == #state then
-				if state[i] == state[i-1] or state[i] == state[i-1] - 200 then 
+				if state[i] == state[i-1] or state[i] == state[i-1] - 200 then
 					haschange[i] = 1
 				end
 			else
@@ -138,11 +138,11 @@ function action_EVENT_GADGET_STATE_CHANGE_109005(context, evt)
 			end
 		end
 		ScriptLib.PrintLog(context, "has change = "..haschange[1].."_"..haschange[2].."_"..haschange[3])
-		for i = 1, #haschange, 1 do 
+		for i = 1, #haschange, 1 do
 			local n = state[i]
 			if haschange[i] == 1 then
-				
-				if n < 300 then 
+
+				if n < 300 then
 					n = state[i] + 200
 				end
 			else
@@ -153,9 +153,9 @@ function action_EVENT_GADGET_STATE_CHANGE_109005(context, evt)
 			end
 			ScriptLib.SetGadgetStateByConfigId(context, defs[gadgetInfo[i].name], n)
 		end
-	
+
 		ScriptLib.PrintLog(context, "Check Linked cube and change state ")
-		
+
 		if allEquale == 1 then
 			ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
 			for k,v in pairs(gadgetInfo) do

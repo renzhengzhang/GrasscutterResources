@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133213361
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -82,9 +82,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -92,7 +92,7 @@ function condition_EVENT_ANY_MONSTER_DIE_361002(context, evt)
 	if 361001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -103,7 +103,7 @@ function action_EVENT_ANY_MONSTER_DIE_361002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -112,7 +112,7 @@ function condition_EVENT_MONSTER_BATTLE_361003(context, evt)
 	if 361001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -123,13 +123,13 @@ function action_EVENT_MONSTER_BATTLE_361003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : challenge_KilMonster_InTime")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1110372 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110372) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -140,7 +140,7 @@ function action_EVENT_CHALLENGE_SUCCESS_361004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -151,12 +151,12 @@ function action_EVENT_CHALLENGE_FAIL_361005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133213361, EntityType.MONSTER, 361001)
-	
-		
-	
+
+
+
 	return 0
 end
 
@@ -166,7 +166,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_361006(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 10 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -174,7 +174,7 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_361006(context, evt)
 	-- 终止识别id为180的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 180, 1)
-	
+
 	return 0
 end
 
@@ -185,11 +185,11 @@ function action_EVENT_GROUP_LOAD_361008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133213361, EntityType.MONSTER, 361001)
-	
-		
-	
+
+
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240025001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -69,9 +69,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -79,7 +79,7 @@ function condition_EVENT_GADGET_CREATE_1003(context, evt)
 	if 1001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -90,7 +90,7 @@ function action_EVENT_GADGET_CREATE_1003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -98,38 +98,38 @@ end
 function condition_EVENT_SELECT_OPTION_1004(context, evt)
 	-- 判断是gadgetid 1001 option_id 177
 	if 1001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 177 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_1004(context, evt)
-	
+
 	local monster_level = 60
-	
+
 	if -1 ~= ScriptLib.GetEffigyChallengeMonsterLevel(context) then
-	
+
 		monster_level = ScriptLib.GetEffigyChallengeMonsterLevel(context)
 	end
-	
+
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 240025002, suite = 2, refresh_level_revise = monster_level, exclude_prev = true }) then
 		return -1
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240025001, 1001, GadgetState.GearStop) then
 		return -1
 	end
-	
+
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240025001, 1001, 177) then
 		return -1
 	end
-	
+
 	return 0
 end

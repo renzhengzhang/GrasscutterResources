@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220134014
 }
 
@@ -10,9 +10,9 @@ function SLC_Try_Trans_Player(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -78,9 +78,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -91,9 +91,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -127,49 +127,49 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_14005(context, evt)
 	-- 判断是gadgetid 14004 option_id 413
 	if 14004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 413 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"count"为2
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_14005(context, evt)
-	ScriptLib.CreateGadget(context, { config_id = 14001 }) 
-	
+	ScriptLib.CreateGadget(context, { config_id = 14001 })
+
 	local tempParam = {route_type = 0, turn_mode = false}
-	ScriptLib.SetPlatformPointArray(context, 14001, 64, {2}, tempParam) 
-	
-	
+	ScriptLib.SetPlatformPointArray(context, 14001, 64, {2}, tempParam)
+
+
 	local tempParam = {route_type = 0, turn_mode = false}
-	ScriptLib.SetPlatformPointArray(context, 14002, 66, {1}, tempParam) 
-	
-	
+	ScriptLib.SetPlatformPointArray(context, 14002, 66, {1}, tempParam)
+
+
 	local tempParam = {route_type = 0, turn_mode = false}
-	ScriptLib.SetPlatformPointArray(context, 14003, 65, {2}, tempParam) 
+	ScriptLib.SetPlatformPointArray(context, 14003, 65, {2}, tempParam)
 	ScriptLib.ChangeGroupVariableValueByGroup(context, "count", 1, 220134014)
-	
-		
-	
+
+
+
 	return 0
 end
 
@@ -177,40 +177,40 @@ end
 function condition_EVENT_SELECT_OPTION_14006(context, evt)
 	-- 判断是gadgetid 14004 option_id 413
 	if 14004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 413 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"count"为3
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_14006(context, evt)
 	 ScriptLib.CreateGadget(context, { config_id = 14002 })
-	
-	
+
+
 	local tempParam = {route_type = 0, turn_mode = false}
-	ScriptLib.SetPlatformPointArray(context, 14001, 64, {1}, tempParam) 
-	
-	
+	ScriptLib.SetPlatformPointArray(context, 14001, 64, {1}, tempParam)
+
+
 	local tempParam = {route_type = 0, turn_mode = false}
-	ScriptLib.SetPlatformPointArray(context, 14002, 66, {3}, tempParam) 
-	
-	
+	ScriptLib.SetPlatformPointArray(context, 14002, 66, {3}, tempParam)
+
+
 	local tempParam = {route_type = 0, turn_mode = false}
-	 ScriptLib.SetPlatformPointArray(context, 14003, 65, {2}, tempParam) 
-	
+	 ScriptLib.SetPlatformPointArray(context, 14003, 65, {2}, tempParam)
+
 	ScriptLib.ChangeGroupVariableValueByGroup(context, "count", 1, 220134014)
-	
+
 	return 0
 end
 
@@ -218,55 +218,55 @@ end
 function condition_EVENT_SELECT_OPTION_14007(context, evt)
 	-- 判断是gadgetid 14004 option_id 413
 	if 14004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 413 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"count"为1
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_14007(context, evt)
 	 ScriptLib.CreateGadget(context, { config_id = 14003 })
-	
-	
+
+
 	local tempParam = {route_type = 0, turn_mode = false}
-	 ScriptLib.SetPlatformPointArray(context, 14001, 64, {1}, tempParam) 
-	
-	
+	 ScriptLib.SetPlatformPointArray(context, 14001, 64, {1}, tempParam)
+
+
 	local tempParam = {route_type = 0, turn_mode = false}
-	 ScriptLib.SetPlatformPointArray(context, 14002, 66, {1}, tempParam) 
-	
-	
+	 ScriptLib.SetPlatformPointArray(context, 14002, 66, {1}, tempParam)
+
+
 	local tempParam = {route_type = 0, turn_mode = false}
-	 ScriptLib.SetPlatformPointArray(context, 14003, 65, {1}, tempParam) 
-	
-	ScriptLib.ChangeGroupVariableValueByGroup(context, "count", 1, 220134014) 
-	
-		
+	 ScriptLib.SetPlatformPointArray(context, 14003, 65, {1}, tempParam)
+
+	ScriptLib.ChangeGroupVariableValueByGroup(context, "count", 1, 220134014)
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_14008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"count"为4
 	if ScriptLib.GetGroupVariableValue(context, "count") <4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -277,32 +277,32 @@ function action_EVENT_VARIABLE_CHANGE_14008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_14014(context, evt)
 	-- 判断是gadgetid 为 14002的移动平台，是否到达了66 的点集中的 3 点
-	
+
 	if 14002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 66 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -310,27 +310,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_14014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220134014, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_14015(context, evt)
 	-- 判断是gadgetid 为 14002的移动平台，是否到达了66 的点集中的 3 点
-	
+
 	if 14002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 66 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 or 2 ~= evt.param3  then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -338,7 +338,7 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_14015(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220134014, 2)
-	
+
 	return 0
 end
 
@@ -346,14 +346,14 @@ end
 function condition_EVENT_SELECT_OPTION_14017(context, evt)
 	-- 判断是gadgetid 14016 option_id 416
 	if 14016 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 416 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -367,19 +367,19 @@ function action_EVENT_SELECT_OPTION_14017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 创建id为14013的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 14013 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为14020的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 14020 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（393.7027，699.7061，-1525.28），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=393.7027, y=699.7061, z=-1525.28}
 	  local pos_follow = {x=2, y=-2, z=16}
@@ -388,8 +388,8 @@ function action_EVENT_SELECT_OPTION_14017(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -397,14 +397,14 @@ end
 function condition_EVENT_SELECT_OPTION_14018(context, evt)
 	-- 判断是gadgetid 14019 option_id 410
 	if 14019 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 410 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -418,7 +418,7 @@ function action_EVENT_SELECT_OPTION_14018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -427,10 +427,10 @@ function action_EVENT_SELECT_OPTION_14018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220134014, 3)
-	
+
 	-- 触发镜头注目，注目位置为坐标（393.7027，699.7061，-1525.28），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=393.7027, y=699.7061, z=-1525.28}
 	  local pos_follow = {x=2, y=-2, z=16}
@@ -439,40 +439,40 @@ function action_EVENT_SELECT_OPTION_14018(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220134014, EntityType.GADGET, 14013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220134014, EntityType.GADGET, 14020 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_14021(context, evt)
 	-- 判断是gadgetid 为 14012的移动平台，是否到达了106 的点集中的 4 点
-	
+
 	if 14012 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 106 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 4 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -486,7 +486,7 @@ function action_EVENT_PLATFORM_REACH_POINT_14021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -495,27 +495,27 @@ function action_EVENT_PLATFORM_REACH_POINT_14021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_14022(context, evt)
 	-- 判断是gadgetid 为 14001的移动平台，是否到达了64 的点集中的 1 点
-	
+
 	if 14001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 64 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -526,27 +526,27 @@ function action_EVENT_PLATFORM_REACH_POINT_14022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_14023(context, evt)
 	-- 判断是gadgetid 为 14002的移动平台，是否到达了66 的点集中的 1 点
-	
+
 	if 14002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 66 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -557,27 +557,27 @@ function action_EVENT_PLATFORM_REACH_POINT_14023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_14024(context, evt)
 	-- 判断是gadgetid 为 14003的移动平台，是否到达了65 的点集中的 2 点
-	
+
 	if 14003 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 65 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -588,7 +588,7 @@ function action_EVENT_PLATFORM_REACH_POINT_14024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -596,19 +596,19 @@ end
 function condition_EVENT_SELECT_OPTION_14025(context, evt)
 	-- 判断是gadgetid 14004 option_id 413
 	if 14004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 413 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"camera"为0
 	if ScriptLib.GetGroupVariableValue(context, "camera") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -622,34 +622,34 @@ function action_EVENT_SELECT_OPTION_14025(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "camera" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "camera", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_14027(context, evt)
 	-- 判断是gadgetid 为 14012的移动平台，是否到达了106 的点集中的 2 点
-	
+
 	if 14012 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 106 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -657,7 +657,7 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_14027(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220134014, 3)
-	
+
 	return 0
 end
 
@@ -665,6 +665,6 @@ end
 function action_EVENT_GROUP_LOAD_14028(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220134014, 3)
-	
+
 	return 0
 end

@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220134011
 }
 
@@ -7,7 +7,7 @@ local base_info = {
 local        defs = {
 
 
-        gear_info = 
+        gear_info =
         {        --connect: 每个物件各个旋转档位可连接的对象 0表示无可连接
                  [1] = { config_id=11001 , connect = {11002,11003,11004}, point_array_id = 14 },
                 [2] = { config_id=11002 , connect = {11007,11006,11003, 11001}, point_array_id = 15 },
@@ -18,11 +18,11 @@ local        defs = {
                 [7] = { config_id=11007 , connect = {11008,11006,11002}, point_array_id = 20 },
                 [8] = { config_id=11008 , connect = {11007,11006,11009}, point_array_id = 21 },
                 [9] = { config_id=11009 , connect = {11010,11005, 11006,11007}, point_array_id = 22 },
-                [10] = { config_id=11010 , connect = {11005,11009}, point_array_id = 23 }, 
+                [10] = { config_id=11010 , connect = {11005,11009}, point_array_id = 23 },
         },
 
         --几种解
-        solutions = 
+        solutions =
         {
                 --[解法x] = {gear_info[1]切到它的第x档, gear_info[2]切到它的第y档...}
                 [1] = { connection = {1,3,2,4,4,3,2,1,3,2}, ends = {11005 }},
@@ -35,15 +35,15 @@ local        defs = {
 				[8] = { connection = {1,3,1,1,4,2,2,1,1,2}, ends = {11009}},
 				[9] = { connection = {1,3,1,1,4,1,1,1,3,2}, ends = {11008 }},
 				[10] = { connection = {1,3,1,1,4,1,1,1,3,2}, ends = {11007 }},
-		
+
         },
 turn_option = 31,
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -87,9 +87,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -100,9 +100,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -127,23 +127,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_11012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"solution"为3
-	if ScriptLib.GetGroupVariableValue(context, "solution") < 1 
+	if ScriptLib.GetGroupVariableValue(context, "solution") < 1
 	 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -151,13 +151,13 @@ end
 function action_EVENT_VARIABLE_CHANGE_11012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220134011, 2)
-	
+
 	-- 将本组内变量名为 "finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -166,7 +166,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_11013(context, evt)
 	if 11011 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -177,23 +177,23 @@ function action_EVENT_GADGET_STATE_CHANGE_11013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220134017, 2)
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 220134011, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 11014 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 

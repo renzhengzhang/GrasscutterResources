@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 177006060
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -100,9 +100,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -113,9 +113,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -140,9 +140,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -151,7 +151,7 @@ function condition_EVENT_ANY_MONSTER_DIE_60008(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -161,26 +161,26 @@ function action_EVENT_ANY_MONSTER_DIE_60008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60021, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 60006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 60022 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60022, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "isUnlock" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isUnlock", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_GADGET_CREATE_60012(context, evt)
 	if 60007 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -200,7 +200,7 @@ function action_EVENT_GADGET_CREATE_60012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -209,7 +209,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_60013(context, evt)
 	if 60007 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -220,7 +220,7 @@ function action_EVENT_GADGET_STATE_CHANGE_60013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -228,14 +228,14 @@ end
 function condition_EVENT_SELECT_OPTION_60014(context, evt)
 	-- 判断是gadgetid 60007 option_id 7
 	if 60007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -246,46 +246,46 @@ function action_EVENT_SELECT_OPTION_60014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将configid为 60007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 改变指定monster的globalvalue
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {60017}, "_MONSTERAFFIX_AIHITFEELING_LEVELTRIGGER", 1)
-	
+
 	-- 通知groupid为177006060中,configid为：60017的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 60017, 177006060) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- 将configid为 60018 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60018, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 60019 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60019, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 60020 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "isUnlock" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isUnlock", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -294,7 +294,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_60023(context, evt)
 	if 60002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -305,7 +305,7 @@ function action_EVENT_GADGET_STATE_CHANGE_60023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -314,7 +314,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_60024(context, evt)
 	if 60003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -325,7 +325,7 @@ function action_EVENT_GADGET_STATE_CHANGE_60024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -334,7 +334,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_60025(context, evt)
 	if 60004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -345,7 +345,7 @@ function action_EVENT_GADGET_STATE_CHANGE_60025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -354,7 +354,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_60026(context, evt)
 	if 60005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -365,19 +365,19 @@ function action_EVENT_GADGET_STATE_CHANGE_60026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_60027(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"default"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "default", 177006060) ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -387,14 +387,14 @@ function action_EVENT_VARIABLE_CHANGE_60027(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 60001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -404,7 +404,7 @@ function condition_EVENT_GROUP_LOAD_60028(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isUnlock") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -412,25 +412,25 @@ end
 function action_EVENT_GROUP_LOAD_60028(context, evt)
 		-- 改变指定monster的globalvalue
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {60017}, "_MONSTERAFFIX_AIHITFEELING_LEVELTRIGGER", 1)
-	
+
 	-- 通知groupid为177006060中,configid为：60017的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 60017, 177006060) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_60029(context, evt)
 	if evt.param1 ~= 60029 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -438,13 +438,13 @@ end
 function action_EVENT_ENTER_REGION_60029(context, evt)
 		-- 改变指定monster的globalvalue
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {60017}, "_MONSTERAFFIX_AIHITFEELING_LEVELTRIGGER", 1)
-	
+
 	-- 通知groupid为177006060中,configid为：60017的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 60017, 177006060) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -453,7 +453,7 @@ function condition_EVENT_GADGET_CREATE_60030(context, evt)
 	if 60007 ~= evt.param1 or GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -461,19 +461,19 @@ end
 function action_EVENT_GADGET_CREATE_60030(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177006060, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_60032(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"default"为1
 	if ScriptLib.GetGroupVariableValue(context, "default") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -483,20 +483,20 @@ function action_EVENT_VARIABLE_CHANGE_60032(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_60033(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"default"为2
 	if ScriptLib.GetGroupVariableValue(context, "default") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -506,20 +506,20 @@ function action_EVENT_VARIABLE_CHANGE_60033(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60001, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_60034(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"default"为3
 	if ScriptLib.GetGroupVariableValue(context, "default") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -529,8 +529,8 @@ function action_EVENT_VARIABLE_CHANGE_60034(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60001, GadgetState.Action03) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -539,7 +539,7 @@ function condition_EVENT_GADGET_CREATE_60035(context, evt)
 	if 60003 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -550,7 +550,7 @@ function action_EVENT_GADGET_CREATE_60035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -559,7 +559,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_60036(context, evt)
 	if 60003 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -570,7 +570,7 @@ function action_EVENT_GADGET_STATE_CHANGE_60036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -580,7 +580,7 @@ function condition_EVENT_GROUP_LOAD_60037(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isUnlock") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -590,19 +590,19 @@ function action_EVENT_GROUP_LOAD_60037(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60018, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 60019 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60019, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 60020 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

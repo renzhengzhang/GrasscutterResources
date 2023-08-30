@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 244002006
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -95,9 +95,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -106,7 +106,7 @@ function condition_EVENT_ANY_MONSTER_DIE_6006(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -114,7 +114,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_6006(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 244002006, 3)
-	
+
 	return 0
 end
 
@@ -123,7 +123,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_6007(context, evt)
 	if 6001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -134,7 +134,7 @@ function action_EVENT_ANY_MONSTER_LIVE_6007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -144,42 +144,42 @@ function action_EVENT_CHALLENGE_SUCCESS_6008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6010, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 6010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 改变指定group组244002001中， configid为1020的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1020, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组244002001中， configid为1021的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1021, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组244002001中， configid为1022的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1022, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组244002001中， configid为1023的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1023, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 244002009, 4)
-	
+
 	-- 触发镜头注目，注目位置为坐标（343，-18，323），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=343, y=-18, z=323}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -188,14 +188,14 @@ function action_EVENT_CHALLENGE_SUCCESS_6008(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 杀死Group内所有gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 244002006, kill_policy = GroupKillPolicy.GROUP_KILL_GADGET }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -205,42 +205,42 @@ function action_EVENT_CHALLENGE_FAIL_6009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6010, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 6010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 改变指定group组244002001中， configid为1022的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1022, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组244002001中， configid为1023的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1023, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 244002005, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 244002006, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 244002009, 3)
-	
+
 	return 0
 end
 
@@ -249,7 +249,7 @@ function condition_EVENT_GADGET_CREATE_6012(context, evt)
 	if 6010 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -259,7 +259,7 @@ function action_EVENT_GADGET_CREATE_6012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6010, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

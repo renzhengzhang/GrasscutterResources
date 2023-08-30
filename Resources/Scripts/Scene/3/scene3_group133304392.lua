@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133304392
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -99,9 +99,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -109,7 +109,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_392010(context, evt)
 	if 392004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -120,19 +120,19 @@ function action_EVENT_GADGET_STATE_CHANGE_392010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 392003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 392003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为392007的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 392007 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -141,7 +141,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_392011(context, evt)
 	if 392005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -152,19 +152,19 @@ function action_EVENT_GADGET_STATE_CHANGE_392011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 392001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 392001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为392008的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 392008 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -173,7 +173,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_392012(context, evt)
 	if 392006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -184,31 +184,31 @@ function action_EVENT_GADGET_STATE_CHANGE_392012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 392002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 392002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为392009的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 392009 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_392013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"init"为1
 	if ScriptLib.GetGroupVariableValue(context, "init") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -216,8 +216,8 @@ end
 function action_EVENT_VARIABLE_CHANGE_392013(context, evt)
 	-- 创建标识为"pass"，时间节点为{50}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "pass", {50}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -226,7 +226,7 @@ function condition_EVENT_TIME_AXIS_PASS_392014(context, evt)
 	if "pass" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -237,13 +237,13 @@ function action_EVENT_TIME_AXIS_PASS_392014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "init" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "init", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -252,15 +252,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_392015(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133304392, 392001) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133304392, 392002) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133304392, 392003) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -271,26 +271,26 @@ function action_EVENT_GADGET_STATE_CHANGE_392015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 改变指定group组133304026中， configid为26002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133304026, 26002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为392016的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 392016 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133304392, 2)
-	
+
 	-- 停止标识为"pass"的时间轴
 	ScriptLib.EndTimeAxis(context, "pass")
-	
-	
+
+
 	return 0
 end
 
@@ -300,7 +300,7 @@ function condition_EVENT_GROUP_LOAD_392017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "success") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -311,7 +311,7 @@ function action_EVENT_GROUP_LOAD_392017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -321,7 +321,7 @@ function condition_EVENT_GROUP_LOAD_392018(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "success") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -332,6 +332,6 @@ function action_EVENT_GROUP_LOAD_392018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

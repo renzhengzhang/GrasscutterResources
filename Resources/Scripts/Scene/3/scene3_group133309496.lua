@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309496
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_id = 133309496,
 	point_camera = 496006,
 	gadget_lookEntity = 496002,
@@ -13,17 +13,22 @@ local defs = {
 
 -- DEFS_MISCS
 local CameraLookSetting = {
-    blend_type = 1,  --镜头的移动路径，球面0，直线1
-    blend_duration = 2, --镜头的移动时间
-    is_force_walk = false, --强制玩家行走
-    is_allow_input = false, --允许输入
-    delay = 0, --触发延迟
+    blend_type = 1,
+  --镜头的移动路径，球面0，直线1
+    blend_duration = 2,
+ --镜头的移动时间
+    is_force_walk = false,
+ --强制玩家行走
+    is_allow_input = false,
+ --允许输入
+    delay = 0,
+ --触发延迟
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -61,9 +66,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +79,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -92,35 +97,35 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_496001(context, evt)
 	if evt.param1 ~= 496001 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_496001(context, evt)
 	LF_PointLook(context)
-	
-	
-	
+
+
+
 	-- 调用提示id为 7305314 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7305314) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -131,7 +136,7 @@ function action_EVENT_ENTER_REGION_496003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 

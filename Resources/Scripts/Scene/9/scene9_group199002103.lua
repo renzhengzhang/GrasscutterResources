@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199002103
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -89,28 +89,28 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_103006(context, evt)
 	-- 判断是gadgetid 103007 option_id 420
 	if 103007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 420 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"turnoff"为0
 	if ScriptLib.GetGroupVariableValue(context, "turnoff") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -121,13 +121,13 @@ function action_EVENT_SELECT_OPTION_103006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 103002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 103002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -136,33 +136,33 @@ function action_EVENT_SELECT_OPTION_103006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 199002103, EntityType.GADGET, 103007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_103008(context, evt)
 	-- 判断是gadgetid 为 103001的移动平台，是否到达了900200133 的点集中的 5 点
-	
+
 	if 103001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 900200133 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 5 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -172,28 +172,28 @@ function action_EVENT_PLATFORM_REACH_POINT_103008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 103002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_103009(context, evt)
 	-- 判断是gadgetid 为 103001的移动平台，是否到达了900200133 的点集中的 9 点
-	
+
 	if 103001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 900200133 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 9 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -204,32 +204,32 @@ function action_EVENT_PLATFORM_REACH_POINT_103009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_103010(context, evt)
 	-- 判断是gadgetid 为 103001的移动平台，是否到达了900200133 的点集中的 9 点
-	
+
 	if 103001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 900200133 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 9 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"turnoff"为3
 	if ScriptLib.GetGroupVariableValue(context, "turnoff") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -240,19 +240,19 @@ function action_EVENT_PLATFORM_REACH_POINT_103010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	-- 调用提示id为 1111343 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1111343) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 199002103, EntityType.GADGET, 103007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -262,7 +262,7 @@ function condition_EVENT_GROUP_LOAD_103011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "turnoff") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -273,13 +273,13 @@ function action_EVENT_GROUP_LOAD_103011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	-- 将configid为 103002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 103002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -289,7 +289,7 @@ function condition_EVENT_GROUP_LOAD_103012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "turnoff") >= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -300,13 +300,13 @@ function action_EVENT_GROUP_LOAD_103012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将configid为 103002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 103002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -314,19 +314,19 @@ end
 function condition_EVENT_SELECT_OPTION_103013(context, evt)
 	-- 判断是gadgetid 103007 option_id 420
 	if 103007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 420 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"turnoff"为1
 	if ScriptLib.GetGroupVariableValue(context, "turnoff") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -337,13 +337,13 @@ function action_EVENT_SELECT_OPTION_103013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 103002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 103002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -352,13 +352,13 @@ function action_EVENT_SELECT_OPTION_103013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 199002103, EntityType.GADGET, 103007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -366,19 +366,19 @@ end
 function condition_EVENT_SELECT_OPTION_103014(context, evt)
 	-- 判断是gadgetid 103007 option_id 420
 	if 103007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 420 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"turnoff"为2
 	if ScriptLib.GetGroupVariableValue(context, "turnoff") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -389,13 +389,13 @@ function action_EVENT_SELECT_OPTION_103014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 103002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 103002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -404,12 +404,12 @@ function action_EVENT_SELECT_OPTION_103014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 199002103, EntityType.GADGET, 103007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end

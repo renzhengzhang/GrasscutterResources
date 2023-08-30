@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133315070
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -116,20 +116,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_70001(context, evt)
 	if evt.param1 ~= 70001 then return false end
-	
+
 	-- 判断是区域70001
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 70001 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -140,7 +140,7 @@ function action_EVENT_ENTER_REGION_70001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=526.3626, y=135.7622, z=2384.884}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=526.3626, y=135.7622, z=2384.884}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -149,20 +149,20 @@ function action_EVENT_ENTER_REGION_70001(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_70002(context, evt)
 	if evt.param1 ~= 70002 then return false end
-	
+
 	-- 判断是区域70002
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 70002 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -173,7 +173,7 @@ function action_EVENT_ENTER_REGION_70002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=578.5963, y=138.5344, z=2574.38}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=578.5963, y=138.5344, z=2574.38}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -182,30 +182,30 @@ function action_EVENT_ENTER_REGION_70002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_70003(context, evt)
 	if evt.param1 ~= 70003 then return false end
-	
+
 	-- 判断是gadgetid 为 217002的移动平台，是否到达了331500071 的路线中的 41 点
-	
+
 	if 217002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 331500071 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 41 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -216,7 +216,7 @@ function action_EVENT_ENTER_REGION_70003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=466.6422, y=138.3822, z=2481.92}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=466.6422, y=138.3822, z=2481.92}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -225,20 +225,20 @@ function action_EVENT_ENTER_REGION_70003(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_70004(context, evt)
 	if evt.param1 ~= 70004 then return false end
-	
+
 	-- 判断是区域70004
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 70004 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -249,7 +249,7 @@ function action_EVENT_ENTER_REGION_70004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=550.8134, y=139.8226, z=2431.255}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=550.8134, y=139.8226, z=2431.255}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -258,20 +258,20 @@ function action_EVENT_ENTER_REGION_70004(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_70005(context, evt)
 	if evt.param1 ~= 70005 then return false end
-	
+
 	-- 判断是区域70005
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 70005 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -282,7 +282,7 @@ function action_EVENT_ENTER_REGION_70005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=481.3546, y=136.2254, z=2508.021}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=481.3546, y=136.2254, z=2508.021}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -291,8 +291,8 @@ function action_EVENT_ENTER_REGION_70005(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -300,7 +300,7 @@ end
 function action_EVENT_QUEST_START_70006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315070, 2)
-	
+
 	return 0
 end
 
@@ -308,7 +308,7 @@ end
 function action_EVENT_QUEST_START_70007(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315070, 3)
-	
+
 	return 0
 end
 
@@ -316,7 +316,7 @@ end
 function action_EVENT_QUEST_START_70008(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315070, 4)
-	
+
 	return 0
 end
 

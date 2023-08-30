@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250008017
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_id = 250008017,
 	riddle_hint = 90,
 	riddle_1 = 92,
@@ -14,9 +14,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -96,15 +96,15 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_52(context, evt)
 	if evt.param2 ~= defs.riddle_1 and evt.param2 ~= defs.riddle_2 and evt.param2 ~= defs.riddle_3 and evt.param2 ~= defs.riddle_4 then
-	return false 
+	return false
 	end
 	return true
 end
@@ -138,11 +138,11 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_54(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	local value = ScriptLib.GetGroupVariableValue(context, "State_Flag")
 	if value < 0 or value > 4 then
 	return -1
-	end 
+	end
 	if value == 4 then
 	ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.riddle_hint, GadgetState.Default)
 	elseif value == 3 then

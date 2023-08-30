@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133004270
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -136,23 +136,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_327(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0 
+	-- 判断指定group组剩余gadget数量是否是0
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133004270}) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"isfail"为0
 	if ScriptLib.GetGroupVariableValue(context, "isfail") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -163,13 +163,13 @@ function action_EVENT_ANY_GADGET_DIE_327(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1110034 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110034) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -179,7 +179,7 @@ function condition_EVENT_ANY_GADGET_DIE_270001(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isfail") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -190,17 +190,17 @@ function action_EVENT_ANY_GADGET_DIE_270001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_TIMER_EVENT_270002(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0 
+	-- 判断指定group组剩余gadget数量是否是0
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133004270})  == 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -211,19 +211,19 @@ function action_EVENT_TIMER_EVENT_270002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1110033 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110033) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：133004270的对象,请求一次调用,并将string参数："delaymessage" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133004270, "delaymessage", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -232,7 +232,7 @@ function condition_EVENT_GADGET_CREATE_270003(context, evt)
 	if 1558 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -243,22 +243,22 @@ function action_EVENT_GADGET_CREATE_270003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_270009(context, evt)
-	-- 判断指定group组剩余gadget数量是否是1 
+	-- 判断指定group组剩余gadget数量是否是1
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133004270}) ~= 1 then
 		return false
 	end
-	
+
 	-- 判断变量"isfail"为0
 	if ScriptLib.GetGroupVariableValue(context, "isfail") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -269,23 +269,23 @@ function action_EVENT_ANY_GADGET_DIE_270009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1110034 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110034) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_TIMER_EVENT_270010(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0 
+	-- 判断指定group组剩余gadget数量是否是0
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133004270})  == 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -296,19 +296,19 @@ function action_EVENT_TIMER_EVENT_270010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 1110033 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110033) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：133004270的对象,请求一次调用,并将string参数："delaymessage" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133004270, "delaymessage", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -317,7 +317,7 @@ function condition_EVENT_GADGET_CREATE_270016(context, evt)
 	if 1558 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -328,7 +328,7 @@ function action_EVENT_GADGET_CREATE_270016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -337,7 +337,7 @@ function condition_EVENT_GADGET_CREATE_270022(context, evt)
 	if 270019 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -348,7 +348,7 @@ function action_EVENT_GADGET_CREATE_270022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -359,6 +359,6 @@ function action_EVENT_TIMER_EVENT_270023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

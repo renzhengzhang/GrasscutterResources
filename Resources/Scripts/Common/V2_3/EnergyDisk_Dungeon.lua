@@ -10,7 +10,7 @@
 
 --[[
 
-local defs = {
+defs = {
 	buff_gadget = ,
 }
 
@@ -42,9 +42,9 @@ end
 
 function action_EVENT_SELECT_OPTION(context,evt)
 	if 1001 ~= evt.param1 then
-		return 0	
+		return 0
 	end
-	
+
 	if 175 ~= evt.param2 then
 		return 0
 	end
@@ -59,7 +59,7 @@ end
 --param1：变化值
 function SLC_Change_EnhanceLevel(context, param1)
 	ScriptLib.PrintContextLog(context, "[EnergyDisk] Get SLC_Change_EnhanceLevel. param1@"..param1.." from@"..context.source_entity_id)
-	if defs.buff_gadget == nil then 
+	if defs.buff_gadget == nil then
 		return 0
 	end
 	--先将中央物件置为可触发
@@ -67,7 +67,7 @@ function SLC_Change_EnhanceLevel(context, param1)
 
 	local cur_level = ScriptLib.GetGroupVariableValue(context,"buff_level")
 	local tmp = cur_level + param1
-	if tmp < 0 or tmp > 4 then 
+	if tmp < 0 or tmp > 4 then
 		ScriptLib.PrintContextLog(context, "[EnergyDisk] #WARN# Get SLC at cur_level@"..cur_level.." change value@"..param1)
 		return 0
 	else
@@ -77,19 +77,19 @@ function SLC_Change_EnhanceLevel(context, param1)
 		--通知刷一次buff （怪物侧会监听，此处不用）
 		--LF_Trigger_BuffGadget(context)
 	end
-	
+
 	return 0
 end
 --[[
 function action_Monster_Tide_Create(context, evt)
 	ScriptLib.PrintContextLog(context, "[EnergyDisk] Monster_Tide_Create. Index@"..evt.source_eid)
-	if defs.buff_gadget == nil then 
+	if defs.buff_gadget == nil then
 		return 0
 	end
 	--if evt.source_eid == 2 then
 		--如果招出来是怪，则触发一次中央物件
 		LF_Trigger_BuffGadget(context)
-	--elseif evt.source_eid == 1 then 
+	--elseif evt.source_eid == 1 then
 		--如果招出来是漂浮灵，则将中央物件置为可触发
 		--LF_DisTrigger_BuffGadget(context)
 	--end
@@ -97,14 +97,14 @@ function action_Monster_Tide_Create(context, evt)
 end
 
 function action_Monster_Tide_Die(context, evt)
-	if defs.buff_gadget == nil then 
+	if defs.buff_gadget == nil then
 		return 0
 	end
 	if evt.source_eid == 2 then
 		--如果是怪，则触发一次中央物件
 		LF_Trigger_BuffGadget(context)
 	end
-	
+
 	return 0
 end
 ]]
@@ -127,4 +127,3 @@ end
 end]]
 
 LF_Initialize_Group(triggers, suites)
-

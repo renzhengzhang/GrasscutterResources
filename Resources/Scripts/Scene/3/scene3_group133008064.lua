@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008064
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -129,9 +129,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -139,7 +139,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_64002(context, evt)
 	if 64001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -150,10 +150,10 @@ function action_EVENT_GADGET_STATE_CHANGE_64002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 变量"prizeGiven"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "prizeGiven", 0)
-	
+
 	return 0
 end
 
@@ -162,7 +162,7 @@ function condition_EVENT_GROUP_LOAD_64003(context, evt)
 	if evt.param1 == 1 then
 		return true
 	end
-	
+
 	return false
 end
 
@@ -175,11 +175,11 @@ function action_EVENT_GROUP_LOAD_64003(context, evt)
 	local day = ScriptLib.GetGroupVariableValue(context, "day")
 	local yB = ScriptLib.GetGroupVariableValue(context, "yesterdayBehavior")
 	local pG = ScriptLib.GetGroupVariableValue(context, "prizeGiven")
-	
+
 	if day >5 then
 		return 0
 	end
-	
+
 	if day == 5 then
 		--第五天了,杀掉喂食盆，创三只小狐狸和宝箱
 		ScriptLib.AddExtraGroupSuite(context, 133008064, 3)
@@ -189,7 +189,7 @@ function action_EVENT_GROUP_LOAD_64003(context, evt)
 		--如果不是第五天
 		if yB == 2 then
 			--yB==2是昨天鲨了，yB==1是昨天没鲨，昨天鲨了那今天就没有狐狸了
-			ScriptLib.SetGroupVariableValueByGroup(context, "yesterdayBehavior", 1, 133008064) 
+			ScriptLib.SetGroupVariableValueByGroup(context, "yesterdayBehavior", 1, 133008064)
 		elseif yB == 1 then
 			--如果昨天没鲨狐狸，那除非今天是第四天，否则都把狐狸创出来
 			if day ~= 4 then
@@ -210,8 +210,8 @@ function condition_EVENT_ANY_MONSTER_DIE_64004(context, evt)
 	if evt.param2 ~= 0 then
 	    return false
 	 end
-	
-	
+
+
 	return true
 end
 
@@ -222,7 +222,7 @@ function action_EVENT_ANY_MONSTER_DIE_64004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -231,12 +231,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_64014(context, evt)
 	if 64001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"day"为0
 	if ScriptLib.GetGroupVariableValue(context, "day") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -247,7 +247,7 @@ function action_EVENT_GADGET_STATE_CHANGE_64014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -256,14 +256,14 @@ function condition_EVENT_GADGET_CREATE_64015(context, evt)
 	if 64012 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_64015(context, evt)
 	ScriptLib.SetGadgetEnableInteract(context, 133008064, 64012, false)
-	
+
 	return 0
 end
 
@@ -272,7 +272,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_64016(context, evt)
 	if 64010 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -283,12 +283,12 @@ function action_EVENT_GADGET_STATE_CHANGE_64016(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 针对当前group内变量名为 "day" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "day", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

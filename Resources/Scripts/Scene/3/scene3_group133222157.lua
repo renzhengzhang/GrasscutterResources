@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133222157
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -129,9 +129,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -142,9 +142,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -160,9 +160,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -170,7 +170,7 @@ function condition_EVENT_GADGET_CREATE_157003(context, evt)
 	if 157002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -181,7 +181,7 @@ function action_EVENT_GADGET_CREATE_157003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -189,315 +189,315 @@ end
 function condition_EVENT_SELECT_OPTION_157004(context, evt)
 	-- 判断是gadgetid 157002 option_id 7
 	if 157002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_157004(context, evt)
-	
+
 	-- 将在groupid为 133222157 中的 configid为 157001 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {201,202}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157001) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157001 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157001, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157001, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157001 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157033 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157033) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157033 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157033, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157033, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157033 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157034 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157034) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157034 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157034, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157034, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157034 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157035 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157035) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157035 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157035, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157035, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157035 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157036 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157036) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157036 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157036, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157036, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157036 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157037 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157037) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157037 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157037, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157037, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157037 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157038 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157038) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157038 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157038, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157038, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157038 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157039 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157039) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157039 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157039, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157039, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157039 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -506,7 +506,7 @@ function condition_EVENT_GADGET_CREATE_157007(context, evt)
 	if 157006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -517,7 +517,7 @@ function action_EVENT_GADGET_CREATE_157007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -525,315 +525,315 @@ end
 function condition_EVENT_SELECT_OPTION_157008(context, evt)
 	-- 判断是gadgetid 157006 option_id 7
 	if 157006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_157008(context, evt)
-	
+
 	-- 将在groupid为 133222157 中的 configid为 157005 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {201,202}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157005) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157005 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157005, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157005, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157005 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157033 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157033) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157033 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157033, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157033, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157033 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157034 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157034) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157034 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157034, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157034, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157034 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157035 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157035) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157035 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157035, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157035, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157035 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157036 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157036) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157036 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157036, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157036, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157036 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157037 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157037) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157037 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157037, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157037, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157037 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157038 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157038) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157038 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157038, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157038, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157038 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157039 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157039) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157039 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157039, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157039, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157039 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -842,7 +842,7 @@ function condition_EVENT_GADGET_CREATE_157011(context, evt)
 	if 157010 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -853,7 +853,7 @@ function action_EVENT_GADGET_CREATE_157011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -861,315 +861,315 @@ end
 function condition_EVENT_SELECT_OPTION_157012(context, evt)
 	-- 判断是gadgetid 157010 option_id 7
 	if 157010 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_157012(context, evt)
-	
+
 	-- 将在groupid为 133222157 中的 configid为 157009 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {201,202}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157009) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157009 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157009, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157009, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157009 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157033 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157033) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157033 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157033, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157033, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157033 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157034 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157034) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157034 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157034, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157034, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157034 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157035 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157035) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157035 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157035, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157035, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157035 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157036 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157036) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157036 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157036, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157036, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157036 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157037 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157037) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157037 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157037, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157037, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157037 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157038 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157038) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157038 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157038, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157038, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157038 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157039 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157039) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157039 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157039, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157039, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157039 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -1178,7 +1178,7 @@ function condition_EVENT_GADGET_CREATE_157015(context, evt)
 	if 157014 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1189,7 +1189,7 @@ function action_EVENT_GADGET_CREATE_157015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1197,315 +1197,315 @@ end
 function condition_EVENT_SELECT_OPTION_157016(context, evt)
 	-- 判断是gadgetid 157014 option_id 7
 	if 157014 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_157016(context, evt)
-	
+
 	-- 将在groupid为 133222157 中的 configid为 157013 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {201,202}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157013) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157013 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157013, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157013, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157013 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157033 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157033) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157033 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157033, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157033, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157033 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157034 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157034) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157034 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157034, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157034, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157034 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157035 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157035) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157035 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157035, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157035, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157035 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157036 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157036) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157036 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157036, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157036, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157036 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157037 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157037) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157037 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157037, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157037, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157037 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157038 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157038) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157038 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157038, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157038, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157038 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157039 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157039) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157039 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157039, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157039, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157039 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -1514,7 +1514,7 @@ function condition_EVENT_GADGET_CREATE_157019(context, evt)
 	if 157018 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1525,7 +1525,7 @@ function action_EVENT_GADGET_CREATE_157019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1533,278 +1533,278 @@ end
 function condition_EVENT_SELECT_OPTION_157020(context, evt)
 	-- 判断是gadgetid 157018 option_id 7
 	if 157018 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_157020(context, evt)
-	
+
 	-- 将在groupid为 133222157 中的 configid为 157017 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {201,202}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157017) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157017 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157017, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157017, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157017 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157040 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157040) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157040 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157040, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157040, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157040 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157041 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157041) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157041 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157041, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157041, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157041 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157042 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157042) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157042 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157042, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157042, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157042 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157043 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157043) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157043 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157043, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157043, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157043 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157044 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157044) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157044 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157044, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157044, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157044 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157045 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157045) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157045 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157045, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157045, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157045 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -1813,7 +1813,7 @@ function condition_EVENT_GADGET_CREATE_157023(context, evt)
 	if 157022 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1824,7 +1824,7 @@ function action_EVENT_GADGET_CREATE_157023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1832,278 +1832,278 @@ end
 function condition_EVENT_SELECT_OPTION_157024(context, evt)
 	-- 判断是gadgetid 157022 option_id 7
 	if 157022 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_157024(context, evt)
-	
+
 	-- 将在groupid为 133222157 中的 configid为 157021 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {201,202}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157021) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157021 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157021, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157021, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157021 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157040 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157040) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157040 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157040, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157040, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157040 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157041 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157041) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157041 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157041, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157041, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157041 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157042 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157042) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157042 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157042, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157042, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157042 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157043 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157043) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157043 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157043, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157043, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157043 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157044 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157044) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157044 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157044, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157044, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157044 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157045 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157045) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157045 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157045, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157045, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157045 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -2112,7 +2112,7 @@ function condition_EVENT_GADGET_CREATE_157027(context, evt)
 	if 157026 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -2123,7 +2123,7 @@ function action_EVENT_GADGET_CREATE_157027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -2131,278 +2131,278 @@ end
 function condition_EVENT_SELECT_OPTION_157028(context, evt)
 	-- 判断是gadgetid 157026 option_id 7
 	if 157026 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_157028(context, evt)
-	
+
 	-- 将在groupid为 133222157 中的 configid为 157025 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {201,202}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157025) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157025 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157025, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157025, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157025 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157040 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157040) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157040 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157040, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157040, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157040 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157041 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157041) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157041 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157041, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157041, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157041 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157042 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157042) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157042 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157042, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157042, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157042 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157043 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157043) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157043 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157043, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157043, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157043 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157044 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157044) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157044 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157044, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157044, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157044 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157045 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157045) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157045 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157045, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157045, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157045 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
@@ -2411,7 +2411,7 @@ function condition_EVENT_GADGET_CREATE_157031(context, evt)
 	if 157030 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -2422,7 +2422,7 @@ function action_EVENT_GADGET_CREATE_157031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -2430,179 +2430,179 @@ end
 function condition_EVENT_SELECT_OPTION_157032(context, evt)
 	-- 判断是gadgetid 157030 option_id 7
 	if 157030 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_157032(context, evt)
-	
+
 	-- 将在groupid为 133222157 中的 configid为 157029 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {201,202}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157029) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157029 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157029, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157029, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157029 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157046 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157046) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157046 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157046, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157046, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157046 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157047 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157047) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157047 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157047, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157047, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157047 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
-	
+
+
+
 	-- 将在groupid为 133222157 中的 configid为 157048 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	-- 
+	--
 	local _gadgetStateList = {0,201}
 	local _key = 0
-	
+
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-	
+
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133222157, 157048) then
 	    _key = k
 	    break
 	  end
 	end
-	
+
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 157048 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157048, _gadgetStateList[1])
 	  return 0
 	end
-	
+
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-	
+
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222157, 157048, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 157048 .."State没有成功")
-	
+
 	  return -1
 	end
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_157049(context, evt)
 	if evt.param1 ~= 157049 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -2612,50 +2612,50 @@ function action_EVENT_ENTER_REGION_157049(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157035, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 157036 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157036, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 157042 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157042, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 157043 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157043, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 157037 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157037, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "Last" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Last", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_157050(context, evt)
 	if evt.param1 ~= 157050 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -2665,67 +2665,67 @@ function action_EVENT_ENTER_REGION_157050(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157046, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 157044 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157044, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 157038 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157038, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 157047 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157047, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 157039 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157039, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 157045 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157045, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 157048 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157048, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "Last" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Last", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_157055(context, evt)
 	if evt.param1 ~= 157055 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	-- 判断变量"Last"为2
 	if ScriptLib.GetGroupVariableValue(context, "Last") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2735,43 +2735,43 @@ function action_EVENT_ENTER_REGION_157055(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 157056, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133222038中， configid为38003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222038, 38003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "Last" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Last", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 6061, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_157057(context, evt)
 	if evt.param1 ~= 157057 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	-- 判断变量"Last"为0
 	if ScriptLib.GetGroupVariableValue(context, "Last") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2782,24 +2782,24 @@ function action_EVENT_ENTER_REGION_157057(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_157058(context, evt)
 	if evt.param1 ~= 157058 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	-- 判断变量"Last"为1
 	if ScriptLib.GetGroupVariableValue(context, "Last") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -2810,7 +2810,7 @@ function action_EVENT_ENTER_REGION_157058(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -2820,7 +2820,7 @@ function condition_EVENT_GROUP_LOAD_157061(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Finish", 133222244) ~= 1 then
 			return true
 	end
-	
+
 	return false
 end
 
@@ -2831,6 +2831,6 @@ function action_EVENT_GROUP_LOAD_157061(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

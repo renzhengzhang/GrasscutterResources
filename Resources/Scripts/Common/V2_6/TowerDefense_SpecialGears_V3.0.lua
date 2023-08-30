@@ -15,7 +15,7 @@
 --[[
 
 	-- Trigger变量
-	local defs = {
+	defs = {
 		group_id = 245002013,
 		challenge_group_id = 245002001,
 		close_cd = 5,
@@ -25,7 +25,7 @@
 	-- DEFS_MISCS
 	-- 特殊机关
 	-- 关卡1光桥专用，且只会放一组
-	local specialGears = 
+	local specialGears =
 	{
 		-- operatorConfigId
 		[1001] = {operatorEffectConfigId = 1002, bridgeConfigId = 1003},
@@ -36,7 +36,7 @@
 -- 打印日志
 function PrintLog(context, content)
 	local print = 1
-	if print > 0 then 
+	if print > 0 then
 		local log = "## [TowerDefence_SpecialGears_V3.0] TD_V3: "..content
 		ScriptLib.PrintContextLog(context, log)
 	end
@@ -45,7 +45,7 @@ end
 -- 初始化Group
 function LF_Initialize_Group(triggers, suites)
 
-	local extraTriggers = 
+	local extraTriggers =
 	{
 		{ config_id = 40000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0},
 		{ config_id = 40000002, name = "GADGET_CREATE", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_GADGET_CREATE", trigger_count = 0 },
@@ -78,12 +78,12 @@ function action_EVENT_GROUP_LOAD(context, evt)
 	return 0
 end
 
--- 
+--
 function action_GADGET_CREATE(context, evt)
 
 	-- 初始化所有操作台（其实只有一个）
 	for operatorConfigId, info in pairs(specialGears) do
-		if evt.param1 == operatorConfigId then 
+		if evt.param1 == operatorConfigId then
 			ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, operatorConfigId, {4007})
 		end
 	end
@@ -110,7 +110,7 @@ function action_EVENT_SELECT_OPTION(context, evt)
 	-- 操作台激活
 	ScriptLib.SetGadgetStateByConfigId(context, operatorConfigId, 201)
 
-	if specialGears[operatorConfigId] == nil then 
+	if specialGears[operatorConfigId] == nil then
 		return 0
 	end
 
@@ -125,11 +125,11 @@ function action_EVENT_SELECT_OPTION(context, evt)
 
 	-- TIMER_CLOSE
 	ScriptLib.CreateGroupTimerEvent(context, defs.group_id, "close", defs.close_cd)
-	
+
 	-- TIMER_RESET
 	local resetCd = defs.reset_cd
 	local card_picked = ScriptLib.GetGroupVariableValueByGroup(context, "CardPicked_GearCoolDown", defs.challenge_group_id)
-	if card_picked > 0 then 
+	if card_picked > 0 then
 		resetCd = resetCd * 0.5
 	end
 	ScriptLib.CreateGroupTimerEvent(context, defs.group_id, "reset", resetCd)

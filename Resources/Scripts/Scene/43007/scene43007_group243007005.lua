@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 243007005
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 
                 --galleryID
                 gallery_id = 7035,
@@ -46,9 +46,9 @@ local defs = {
         }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -134,9 +134,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -147,9 +147,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -174,9 +174,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -186,62 +186,62 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE_5001(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007001, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007008, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007009, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007010, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007011, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007016, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
-	
+
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007017, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 挑战失败触发结算
 	if 0 ~= ScriptLib.FailMistTrialDungeonChallenge(context, 999) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 结束挑战失败！！！！")
 		return -1
 	end
-	
+
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -252,21 +252,21 @@ function action_EVENT_TIME_AXIS_PASS_5002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"runes"为3
 	if ScriptLib.GetGroupVariableValue(context, "runes") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -277,30 +277,30 @@ function action_EVENT_VARIABLE_CHANGE_5003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "runes" 的变量设置为 99
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "runes", 99) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_1, defs.gadget_switch, {59}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 创建id为5008的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 5008 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	--子挑战 打开地板
 	ScriptLib.AttachChildChallenge(context, 999, 902, 230, {7,902,1,1},{},{success=1,fail=1})
-	
+
 	ScriptLib.PrintContextLog(context, "操作台子挑战挂载!!!!!!!!")
-	
+
 	return 0
 end
 
@@ -308,14 +308,14 @@ end
 function condition_EVENT_SELECT_OPTION_5006(context, evt)
 	-- 判断是gadgetid 5013 option_id 30
 	if defs.gadget_switch ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 58 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -326,7 +326,7 @@ function action_EVENT_SELECT_OPTION_5006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -337,30 +337,30 @@ function action_EVENT_TIMER_EVENT_5007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5010(context, evt)
 	if evt.param1 ~= 5010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_5010(context, evt)
-	
+
 	--修改天气为boss区域
 	--ScriptLib.SetWeatherAreaState(context, 10017 ,1)
-	
+
 	--ScriptLib.PrintContextLog(context, "修改天气成功!!!!!!!!")
-	
+
 	return 0
 end
 
@@ -369,7 +369,7 @@ function condition_EVENT_GADGET_CREATE_5011(context, evt)
 	if defs.gadget_switch ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -380,13 +380,13 @@ function action_EVENT_GADGET_CREATE_5011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	 ScriptLib.PrintContextLog(context, "操作台选项!!!!!!!!")
-	
+
 	-- 创建标识为"randball"，时间节点为{30}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "randball", {30}, true)
-	
-	
+
+
 	return 0
 end
 
@@ -394,14 +394,14 @@ end
 function condition_EVENT_SELECT_OPTION_5012(context, evt)
 	-- 判断是gadgetid 5013 option_id 7
 	if defs.gadget_switch ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 59 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -411,84 +411,84 @@ function action_EVENT_SELECT_OPTION_5012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5016, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 5008 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 创建id为5009的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 5009 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟2秒后,向groupId为：243007005的对象,请求一次调用,并将string参数："floor" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 243007005, "floor", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 243007005 ；指定config：5013；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 243007005, 5013, 59) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	--子挑战 完成最终试练
 	ScriptLib.AttachChildChallenge(context, 999, 903, 231, {3,903,1,1},{},{success=99999,fail=1})
-	
+
 	ScriptLib.PrintContextLog(context, "操作台子挑战挂载!!!!!!!!")
-	
+
 	-- 调用提示id为 43001011 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 43001011) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5014(context, evt)
 	if evt.param1 ~= 5014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_5014(context, evt)
-	ScriptLib.CreateFatherChallenge(context, 999, 228, 1800, {success = 99999, fail = 99999, fail_on_wipe=true}) 
-	
+	ScriptLib.CreateFatherChallenge(context, 999, 228, 1800, {success = 99999, fail = 99999, fail_on_wipe=true})
+
 	ScriptLib.AttachChildChallenge(context, 999, 901, 229, {3,901,3,1},{},{success=0,fail=0})
-	
+
 	ScriptLib.PrintContextLog(context, "挂载符文子挑战!!!!!!!!")
-	
+
 	ScriptLib.StartFatherChallenge(context, 999)
-	
+
 	ScriptLib.PrintContextLog(context, "父挑战开始!!!!!!!!")
-	
+
 	ScriptLib.StartGallery(context, 7035)
-	
+
 	ScriptLib.PrintContextLog(context, "游廊启动!!!!!!!!")
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_5015(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	ScriptLib.PrintContextLog(context, "符文计数改变了!!!!!!!!!!!!")
-	
+
 	return 0
 end
 
@@ -499,86 +499,86 @@ function action_EVENT_DUNGEON_SETTLE_5020(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007001, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007008, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007009, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007010, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007011, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007016, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
-	
+
+
 	-- 重新生成指定group，指定suite
 	if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 243007017, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 		return -1
 	end
-	
+
 	-- 挑战失败触发结算
 	if 0 ~= ScriptLib.FailMistTrialDungeonChallenge(context, 999) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 结束挑战失败！！！！")
 		return -1
 	end
-	
-	
+
+
 	--判断gallery状态
 	if 1 ~= evt.param1 then
-	
+
 		ScriptLib.StopGallery(context, defs.gallery_id, true)
 		ScriptLib.PrintContextLog(context, "gallery失败结算!!!!!!!!")
-	
-		
-	
+
+
+
 	else
-	
+
 		ScriptLib.StopGallery(context, defs.gallery_id, false)
 		ScriptLib.PrintContextLog(context, "galllery胜利结算!!!!!!!!")
-	
-	
-	
+
+
+
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5021(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"runes"为1
 	if ScriptLib.GetGroupVariableValue(context, "runes") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -589,19 +589,19 @@ function action_EVENT_VARIABLE_CHANGE_5021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5022(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"runes"为3
 	if ScriptLib.GetGroupVariableValue(context, "runes") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -612,19 +612,19 @@ function action_EVENT_VARIABLE_CHANGE_5022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5023(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"runes"为2
 	if ScriptLib.GetGroupVariableValue(context, "runes") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -635,7 +635,7 @@ function action_EVENT_VARIABLE_CHANGE_5023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -644,34 +644,34 @@ function condition_EVENT_GADGET_STATE_CHANGE_5024(context, evt)
 	if 5016 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_5024(context, evt)
 	ScriptLib.PrintContextLog(context, "地板状态改变了!!!!!!!!")
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_5025(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"success"为1
 	if ScriptLib.GetGroupVariableValue(context, "success") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_5025(context, evt)
 	ScriptLib.PrintContextLog(context, "BOSS挑战完成!!!!!!!!")
-	
-	
+
+
 	return 0
 end
 

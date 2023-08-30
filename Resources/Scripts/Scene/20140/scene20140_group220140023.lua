@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220140023
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -71,9 +71,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -138,9 +138,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -148,15 +148,15 @@ function action_EVENT_ENTER_REGION_23001(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "load") == 1 then
 		if ScriptLib.GetGroupVariableValue(context, "temp") == 0 or ScriptLib.GetGroupVariableValue(context, "temp") == 1 or ScriptLib.GetGroupVariableValue(context, "temp") == 2 then
 			ScriptLib.SetGroupVariableValue(context, "temp", 0)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "load", 0)
-			
+
 			ScriptLib.AddExtraGroupSuite(context, 0, 2)
-			
+
 			ScriptLib.ShowReminder(context, 60010370)
 		end
 	end
-	
+
 	return 0
 end
 
@@ -166,7 +166,7 @@ function condition_EVENT_QUEST_START_23006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -177,19 +177,19 @@ function action_EVENT_QUEST_START_23006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_23007(context, evt)
 	if evt.param1 ~= 23007 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -205,12 +205,12 @@ function condition_EVENT_ANY_MONSTER_DIE_23009(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"temp"为0
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -221,10 +221,10 @@ function action_EVENT_ANY_MONSTER_DIE_23009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140023, 3)
-	
+
 	return 0
 end
 
@@ -235,13 +235,13 @@ function action_EVENT_GROUP_LOAD_23011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220140023, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -251,7 +251,7 @@ function condition_EVENT_GROUP_LOAD_23015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -261,14 +261,14 @@ function action_EVENT_GROUP_LOAD_23015(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220140023, 23014, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "4006711") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -278,12 +278,12 @@ function condition_EVENT_ANY_MONSTER_DIE_23016(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"temp"为1
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -294,10 +294,10 @@ function action_EVENT_ANY_MONSTER_DIE_23016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140023, 5)
-	
+
 	return 0
 end
 
@@ -307,12 +307,12 @@ function condition_EVENT_ANY_MONSTER_DIE_23029(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"temp"为2
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -323,18 +323,18 @@ function action_EVENT_ANY_MONSTER_DIE_23029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 23014 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 23014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "4006711") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

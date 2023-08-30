@@ -2,7 +2,7 @@
 
 -- DEFS_MISCS
 
-local defs = {
+defs = {
     duration = 30,
     kill_sum = 1,
     GroupID = 111102025,
@@ -13,7 +13,7 @@ local defs = {
 
 
 --]]
-local defs = {
+defs = {
     duration = 30,
     kill_sum = 1,
     GroupID = 111102025,
@@ -44,7 +44,7 @@ local tempTrigger_BoomMonsterCamp = {
       condition = "", action = "action_LEAVE_REGION_Challenge", trigger_count = 0},
     { config_id = 2330005, name = "VARIABLE_CHANGE_BundleEnd", event = EventType.EVENT_VARIABLE_CHANGE, source = "StartNextGroup",
       condition = "", action = "action_VARIABLE_CHANGE_BundleEnd", trigger_count = 0},
-    
+
 }
 
 --------初始化----------
@@ -60,7 +60,7 @@ LF_Initialize_BoomMonsterCamp()
 --------公用函数----------
 --  Gadget发送事件后触发对应挑战
 function action_RISE_CHALLENGE(context, evt)
-  
+
     if evt.param1 ~= defs.ChallengeStartRegion or ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
         ScriptLib.PrintContextLog(context,evt.param1, "## TD_BoomMonsterCamp : 非对应挑战Region触发 ")
         return 0
@@ -76,7 +76,7 @@ function action_RISE_CHALLENGE(context, evt)
     end
 
     ScriptLib.PrintContextLog(context, "## TD_BoomMonsterCamp : 准备开启挑战")
-    
+
     --ScriptLib.PrintContextLog(context,  "## MDNum" .. MDNum .. "")
     ScriptLib.StartChallenge(context, 10*defs.ChallengeID, defs.ChallengeID, {1, 25015, 4, 1, MDNum})
 
@@ -94,11 +94,11 @@ end
 --[[
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_25015(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 111102025) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 --]]
@@ -110,11 +110,11 @@ function action_EVENT_ANY_MONSTER_DIE_25015(context, evt)
     if ScriptLib.GetGroupMonsterCountByGroupId(context, 111102025) ~= 0 then
 		return 0
 	end
-	
+
     ScriptLib.PrintContextLog(context, "## TD_BoomMonsterCamp : 怪物死亡，stage变更")
     ScriptLib.ChangeGroupVariableValue(context, "stage", 1)
     LF_RefreshPhaseSuit(context)
-	
+
 	return 0
 end
 

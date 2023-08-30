@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133105301
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	point_sum = 11,
 	route_2 = 310500090,
 	gadget_seelie = 301002
@@ -14,9 +14,9 @@ local defs = {
 defs.final_point = defs.point_sum - 1
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -120,28 +120,28 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_301004(context, evt)
 	-- 判断是gadgetid 为 301002的移动平台，是否到达了310500090 的路线中的 6 点
-	
+
 	if 301002 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 310500090 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -152,19 +152,19 @@ function action_EVENT_PLATFORM_REACH_POINT_301004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0.1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 301012, delay_time = 0.1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0.1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 301010, delay_time = 0.1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -173,15 +173,15 @@ function condition_EVENT_PLATFORM_REACH_POINT_301005(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-	
+
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-	
+
 	if  defs.final_point ~= evt.param3 then
 	return false
 	end
-	
+
 	return true
 end
 
@@ -191,33 +191,33 @@ function action_EVENT_PLATFORM_REACH_POINT_301005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 301001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 停止移动平台
 	if 0 ~= ScriptLib.StopPlatform(context, 301002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 301002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2013, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "133105301") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -226,15 +226,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_301006(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-	
+
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-	
+
 	if defs.final_point == evt.param3 then
 	return false
 	end
-	
+
 	return true
 end
 
@@ -243,24 +243,24 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_301006(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, 301002) then
 	return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= evt.param3 then
 	ScriptLib.MarkPlayerAction(context, 2013, 2, evt.param3 + 1)
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_301007(context, evt)
 	if evt.param1 ~= 301007 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -271,20 +271,20 @@ function action_EVENT_ENTER_REGION_301007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 301003 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2013, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -293,7 +293,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_301008(context, evt)
 	if 301001 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -304,7 +304,7 @@ function action_EVENT_GADGET_STATE_CHANGE_301008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -313,7 +313,7 @@ function condition_EVENT_GADGET_CREATE_301009(context, evt)
 	if 301001 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -323,8 +323,8 @@ function action_EVENT_GADGET_CREATE_301009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 301001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -334,7 +334,7 @@ function condition_EVENT_QUEST_START_301013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "quest") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -345,7 +345,7 @@ function action_EVENT_QUEST_START_301013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -355,7 +355,7 @@ function condition_EVENT_QUEST_START_301014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "quest") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -366,7 +366,7 @@ function action_EVENT_QUEST_START_301014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -377,7 +377,7 @@ function action_EVENT_QUEST_FINISH_301015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -388,6 +388,6 @@ function action_EVENT_QUEST_FINISH_301016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

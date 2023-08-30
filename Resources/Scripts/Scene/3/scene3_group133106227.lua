@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133106227
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	steps = 3,
 	config_id = 227009,
 	routes = { [1]={route=310600002,points={1,2,3}},  [2]={route=310600002,points={3,6,7}},  [3]={route=310600002,points={7,8,9}},  },
@@ -22,9 +22,9 @@ local lawfulGadgets =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -125,9 +125,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -137,7 +137,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_227006(context, evt)
 			return true
 		end
 	end
-	
+
 	return false
 end
 
@@ -148,7 +148,7 @@ function action_EVENT_GADGET_STATE_CHANGE_227006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -158,7 +158,7 @@ function condition_EVENT_QUEST_START_227010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MoveStep") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -169,25 +169,25 @@ function action_EVENT_QUEST_START_227010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 227003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 227004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 227005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_PLATFORM_REACH_POINT_227011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MoveStep") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -208,40 +208,40 @@ function action_EVENT_PLATFORM_REACH_POINT_227011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "questFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "questFinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"killlightriver"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "killlightriver", {3}, false)
-	
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133106630, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_227012(context, evt)
 	if evt.param1 ~= 227012 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"questStarted"为1
 	if ScriptLib.GetGroupVariableValue(context, "questStarted") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -252,7 +252,7 @@ function action_EVENT_ENTER_REGION_227012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-528.177, y=138.35, z=1841.646}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-528.177, y=138.35, z=1841.646}
 	  local pos_follow = {x=-528.177, y=138.35, z=1841.646}
@@ -261,8 +261,8 @@ function action_EVENT_ENTER_REGION_227012(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -271,7 +271,7 @@ function condition_EVENT_TIME_AXIS_PASS_227021(context, evt)
 	if "killlightriver" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -282,7 +282,7 @@ function action_EVENT_TIME_AXIS_PASS_227021(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -292,7 +292,7 @@ function condition_EVENT_GROUP_LOAD_227022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "questFinished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -303,13 +303,13 @@ function action_EVENT_GROUP_LOAD_227022(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133106492, monsters = {}, gadgets = {492002} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 

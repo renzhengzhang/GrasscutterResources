@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199001085
 }
 
@@ -8,9 +8,9 @@ local shadowConfigIDList = {85002,85003}
 local questID = 7902405
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -95,16 +95,16 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_START_85005(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199001085, 2)
-	
+
 	return 0
 end
 
@@ -112,18 +112,18 @@ end
 function action_EVENT_QUEST_START_85006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199001085, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_85008(context, evt)
 	if -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 199001085, 85001) then
-	
+
 	    return false
-	
+
 	end
-	
+
 	return true
 end
 

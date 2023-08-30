@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002085
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	monster_id_1 = 192,
 	monster_id_2 = 190
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -85,18 +85,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_92(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133002084) == 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -107,24 +107,24 @@ function action_EVENT_ANY_MONSTER_DIE_92(context, evt)
 		local pos = {x=1653, y=267, z=-758}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 					return -1
-		end 
-	
+		end
+
 	if 0 ~= ScriptLib.ShowReminder(context, 1005) then
 		return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_1, delay_time = 0 }) then
 	  return -1
 	end
-	
+
 	-- 延迟0.5秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_2, delay_time = 0.5 }) then
 	  return -1
 	end
-	
-	
-	
+
+
+
 	return 0
 end
 
@@ -134,7 +134,7 @@ function condition_EVENT_ANY_MONSTER_DIE_94(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -145,6 +145,6 @@ function action_EVENT_ANY_MONSTER_DIE_94(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : unlock_gadget")
 		return -1
 	end
-	
+
 	return 0
 end

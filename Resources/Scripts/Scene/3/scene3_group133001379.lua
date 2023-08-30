@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001379
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -98,9 +98,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -111,9 +111,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -174,20 +174,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_379077(context, evt)
 	if evt.param1 ~= 379077 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -197,24 +197,24 @@ function action_EVENT_ENTER_REGION_379077(context, evt)
 	if 0 ~= ScriptLib.StartChallenge(context, 666, 203, {26, 888, 8, 2,999,1}) then
 		return -1
 	end
-	
+
 	-- 将configid为 379015 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 379015, GadgetState.GearStart) then
 			return -1
-		end 
-		
-	
+		end
+
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001379, 2)
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001379, 3)
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 379015) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -222,56 +222,56 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_379078(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001379, 2)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001379, 3)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001379, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001379, 5)
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 379040 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 379041 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133001379, 6) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_379079(context, evt)
 	-- 判断是gadgetid 为 379015的移动平台，是否到达了300100252 的路线中的 38 点
-	
+
 	if 379015 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100252 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 38 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -282,11 +282,11 @@ function action_EVENT_PLATFORM_REACH_POINT_379079(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-	
+
 	return 0
 end
 
@@ -297,25 +297,25 @@ function action_EVENT_CHALLENGE_FAIL_379080(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001379, 2)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001379, 3)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001379, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001379, 5)
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133001379, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -324,7 +324,7 @@ function condition_EVENT_ANY_GADGET_DIE_379081(context, evt)
 	if 379015 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -332,27 +332,27 @@ end
 function action_EVENT_ANY_GADGET_DIE_379081(context, evt)
 	-- 终止识别id为666的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 666, 1)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_379082(context, evt)
 	-- 判断是gadgetid 为 379015的移动平台，是否到达了300100252 的路线中的 12 点
-	
+
 	if 379015 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100252 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 12 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -363,43 +363,43 @@ function action_EVENT_PLATFORM_REACH_POINT_379082(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133001379, EntityType.MONSTER, 379001)
-	
-		
-	
+
+
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133001379, EntityType.MONSTER, 379018)
-	
-		
-	
+
+
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133001379, EntityType.MONSTER, 379016)
-	
-		
-	
+
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_379085(context, evt)
 	-- 判断是gadgetid 为 379015的移动平台，是否到达了300100252 的路线中的 8 点
-	
+
 	if 379015 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100252 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 8 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -410,31 +410,31 @@ function action_EVENT_PLATFORM_REACH_POINT_379085(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001379, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_379086(context, evt)
 	-- 判断是gadgetid 为 379015的移动平台，是否到达了300100252 的路线中的 18 点
-	
+
 	if 379015 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100252 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 18 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -445,31 +445,31 @@ function action_EVENT_PLATFORM_REACH_POINT_379086(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001379, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_379087(context, evt)
 	-- 判断是gadgetid 为 379015的移动平台，是否到达了300100252 的路线中的 22 点
-	
+
 	if 379015 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100252 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 22 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -480,74 +480,74 @@ function action_EVENT_PLATFORM_REACH_POINT_379087(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001379, 5)
-	
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133001379, EntityType.MONSTER, 379032)
-	
-		
-	
+
+
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133001379, EntityType.MONSTER, 379003)
-	
-		
-	
+
+
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133001379, EntityType.MONSTER, 379054)
-	
-		
-	
+
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 379017 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 379013 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 379011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 379006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_379088(context, evt)
 	-- 判断是gadgetid 为 379015的移动平台，是否到达了300100252 的路线中的 24 点
-	
+
 	if 379015 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100252 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 24 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -558,28 +558,28 @@ function action_EVENT_PLATFORM_REACH_POINT_379088(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_379089(context, evt)
 	-- 判断是gadgetid 为 379015的移动平台，是否到达了300100252 的路线中的 26 点
-	
+
 	if 379015 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100252 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 26 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -590,31 +590,31 @@ function action_EVENT_PLATFORM_REACH_POINT_379089(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001379, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_379090(context, evt)
 	-- 判断是gadgetid 为 379015的移动平台，是否到达了300100252 的路线中的 32 点
-	
+
 	if 379015 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300100252 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 32 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -625,7 +625,7 @@ function action_EVENT_PLATFORM_REACH_POINT_379090(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133313207
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -69,9 +69,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -79,14 +79,14 @@ function condition_EVENT_GADGET_CREATE_207002(context, evt)
 	if 207001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_207002(context, evt)
 	ScriptLib.SetWorktopOptionsByGroupId(context, 133313207, 207001, {7})
-	
+
 	return 0
 end
 
@@ -94,22 +94,22 @@ end
 function condition_EVENT_SELECT_OPTION_207003(context, evt)
 	-- 判断是gadgetid 207001 option_id 7
 	if 207001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_207003(context, evt)
 	ScriptLib.AddQuestProgress(context, "7318349")
-	
+
 	ScriptLib.DelWorktopOptionByGroupId(context, 133313207, 207001, 7)
-	
+
 	return 0
 end

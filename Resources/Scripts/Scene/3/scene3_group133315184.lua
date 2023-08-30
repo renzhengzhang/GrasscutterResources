@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133315184
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -108,9 +108,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -118,11 +118,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_184006(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315184, 184001) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315184, 184002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -130,7 +130,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_184006(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133315184, 3)
-	
+
 	return 0
 end
 
@@ -139,7 +139,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_184007(context, evt)
 	if 184003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -147,6 +147,6 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_184007(context, evt)
 		-- 添加某个flowSuite里的要素，不会更改当前场上已存在的物件/怪物状态
 	  ScriptLib.AddExtraFlowSuite(context, 133315184, 2, FlowSuiteOperatePolicy.DEFAULT)
-	
+
 	return 0
 end

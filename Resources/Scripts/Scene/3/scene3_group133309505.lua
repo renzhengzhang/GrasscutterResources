@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309505
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_door = 505002,
 	gadget_switch = 505001,
 	group_id = 133309505,
@@ -15,17 +15,22 @@ local defs = {
 
 -- DEFS_MISCS
 local CameraLookSetting = {
-    blend_type = 0,  --镜头的移动路径，球面0，直线1
-    blend_duration = 1, --镜头的移动时间
-    is_force_walk = false, --强制玩家行走
-    is_allow_input = false, --允许输入
-    delay = 0, --触发延迟
+    blend_type = 0,
+  --镜头的移动路径，球面0，直线1
+    blend_duration = 1,
+ --镜头的移动时间
+    is_force_walk = false,
+ --强制玩家行走
+    is_allow_input = false,
+ --允许输入
+    delay = 0,
+ --触发延迟
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -78,9 +83,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -91,9 +96,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -109,9 +114,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -119,20 +124,20 @@ function condition_EVENT_TIME_AXIS_PASS_505003(context, evt)
 	if "open_door" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_505003(context, evt)
-	
+
 	-- 将configid为 defs.gadget_door 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_door, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
-	
+		end
+
+
 	return 0
 end
 
@@ -140,14 +145,14 @@ end
 function condition_EVENT_SELECT_OPTION_505004(context, evt)
 	-- 判断是gadgetid 505001 option_id 1
 	if 505001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -155,28 +160,28 @@ end
 function action_EVENT_SELECT_OPTION_505004(context, evt)
 	-- 创建标识为"open_door"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "open_door", {1}, false)
-	
+
 	-- 将configid为 defs.gadget_switch 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_switch, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： defs.group_id ；指定config：defs.gadget_switch；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, defs.gadget_switch, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "isLocked" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isLocked", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
-	
+
+
 	return 0
-	
+
 end
 
 -- 触发条件
@@ -184,7 +189,7 @@ function condition_EVENT_GROUP_LOAD_505005(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133309505, 505001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -194,32 +199,32 @@ function action_EVENT_GROUP_LOAD_505005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 505002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133309505 ；指定config：505001；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133309505, 505001, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "isLocked" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isLocked", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_505007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"isLocked"为0
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -229,14 +234,14 @@ function action_EVENT_VARIABLE_CHANGE_505007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 505001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133309505, 505001, {1}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -246,7 +251,7 @@ function condition_EVENT_GROUP_LOAD_505008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -256,14 +261,14 @@ function action_EVENT_GROUP_LOAD_505008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 505001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133309505, 505001, {1}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 

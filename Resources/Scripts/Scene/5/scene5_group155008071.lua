@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155008071
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	groupid = 155008071,
 	gadget_wall_1 = 71006,
 	gadget_wall_2 = 71007,
@@ -34,14 +34,14 @@ local NightAppearGadgets = {}
 
 MaxSize = 17
 
-ControllerWallMap = 
+ControllerWallMap =
 {
 	{defs.gadget_controller_1,
 		{
 			{defs.gadget_wall_1,{3,4,5}},
 			{defs.gadget_wall_2,{8,9,10}},
 			{defs.gadget_wall_3,{13,14,15}}
-	
+
 		}
 	},
 	{defs.gadget_controller_2,
@@ -53,7 +53,7 @@ ControllerWallMap =
 	}
 }
 
-StartWallMap = 
+StartWallMap =
 {
 	{defs.gadget_wall_1,5},
 	{defs.gadget_wall_2,10},
@@ -62,18 +62,18 @@ StartWallMap =
 }
 
 
-StartBlockerMap = 
+StartBlockerMap =
 {
 	{defs.gadget_blocker_1,4,0},
 	{defs.gadget_blocker_2,14,0}
 }
 
-TargetSolution = 
+TargetSolution =
 {
 	3,9,15
 }
 
-local gameplayStateFuncitons = 
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 
@@ -86,26 +86,26 @@ local gameplayStateFuncitons =
 
 		ScriptLib.SetWorktopOptionsByGroupId(context, defs.groupid, 71019, {7})
 		ScriptLib.SetWorktopOptionsByGroupId(context, defs.groupid, 71002, {7})
-	
+
 
 	end,
 	["2"] = function(context)
 		DayNight_Gadget_Finish(context,defs.gadget_controller_1)
 		DayNight_Gadget_Finish(context,defs.gadget_controller_2)
 		ScriptLib.SetGroupVariableValue(context,"hasFinished", 1)
-		ScriptLib.SetPlatformPointArray(context, defs.gadget_wall_1, defs.pointarray_route, {3}, {route_type = 0, turn_mode = false}) 
-		ScriptLib.SetPlatformPointArray(context, defs.gadget_wall_2, defs.pointarray_route, {9}, {route_type = 0, turn_mode = false}) 
-		ScriptLib.SetPlatformPointArray(context, defs.gadget_wall_3, defs.pointarray_route, {15}, {route_type = 0, turn_mode = false}) 
+		ScriptLib.SetPlatformPointArray(context, defs.gadget_wall_1, defs.pointarray_route, {3}, {route_type = 0, turn_mode = false})
+		ScriptLib.SetPlatformPointArray(context, defs.gadget_wall_2, defs.pointarray_route, {9}, {route_type = 0, turn_mode = false})
+		ScriptLib.SetPlatformPointArray(context, defs.gadget_wall_3, defs.pointarray_route, {15}, {route_type = 0, turn_mode = false})
 
 
-		
+
 
 
 
 	end
 }
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -113,17 +113,17 @@ end
 --state = {}
 function GadgetStateSwitcher(context,groupid,gadget_id,state)
 
-	if ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[1] then 
+	if ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[1] then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, groupid, gadget_id, state[2])
-	elseif ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[2] then 
+	elseif ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[2] then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, groupid, gadget_id, state[1])
-	end 
+	end
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -176,9 +176,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -189,9 +189,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -207,22 +207,22 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_71004(context, evt)
 	if defs.gadget_blocker_controller_2 ~= evt.param1 then
-			return false	
+			return false
 		end
-		
+
 		if 7 ~= evt.param2 then
 			return false
 		end
-		
-		
+
+
 		return true
 end
 
@@ -231,14 +231,14 @@ function action_EVENT_SELECT_OPTION_71004(context, evt)
 	ScriptLib.PrintContextLog(context, "SelectOption : GadgetID = "..evt.param1..", OptionID = "..evt.param2)
 				local eventMsg = "Wait_"..evt.param1
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.groupid, evt.param1, 7)
-				
+
 				local state = ScriptLib.GetGadgetStateByConfigId(context, 0, defs.gadget_blocker_2)
 				if (LF_Can_Block_State_Change(context,defs.gadget_blocker_2,201-state)) then
 					GadgetStateSwitcher(context,defs.groupid,defs.gadget_blocker_2,{0,201})
 					GadgetStateSwitcher(context,defs.groupid,defs.gadget_blocker_controller_2,{0,201})
 					LF_Set_Block_After_State_Change(context,defs.gadget_blocker_2,201-state)
 				end
-				
+
 				ScriptLib.InitTimeAxis(context, eventMsg, {1}, false)
 				return 0
 end
@@ -250,7 +250,7 @@ function action_EVENT_TIME_AXIS_PASS_71010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -263,23 +263,23 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_71022(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	UpdateGamePlayState(context)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_71023(context, evt)
 	if defs.gadget_blocker_controller_1 ~= evt.param1 then
-			return false	
+			return false
 		end
-		
+
 		if 7 ~= evt.param2 then
 			return false
 		end
-		
-		
+
+
 		return true
 end
 
@@ -288,15 +288,15 @@ function action_EVENT_SELECT_OPTION_71023(context, evt)
 	ScriptLib.PrintContextLog(context, "SelectOption : GadgetID = "..evt.param1..", OptionID = "..evt.param2)
 				local eventMsg = "Wait_"..evt.param1
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.groupid, evt.param1, 7)
-	
-	
+
+
 				local state = ScriptLib.GetGadgetStateByConfigId(context, 0, defs.gadget_blocker_1)
 				if (LF_Can_Block_State_Change(context,defs.gadget_blocker_1,201-state)) then
 					GadgetStateSwitcher(context,defs.groupid,defs.gadget_blocker_1,{0,201})
 					GadgetStateSwitcher(context,defs.groupid,defs.gadget_blocker_controller_1,{0,201})
 					LF_Set_Block_After_State_Change(context,defs.gadget_blocker_1,201-state)
 				end
-				
+
 				ScriptLib.InitTimeAxis(context, eventMsg, {1}, false)
 				return 0
 end
@@ -308,33 +308,33 @@ function action_EVENT_TIME_AXIS_PASS_71025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_71026(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"gameplayState"为1
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_71026(context, evt)
-		if ScriptLib.GetGroupVariableValue(context, "has_succeeded") == 1 then 
-	
+		if ScriptLib.GetGroupVariableValue(context, "has_succeeded") == 1 then
+
 			ScriptLib.SetGroupVariableValueByGroup(context, "iswallmatch", 1, 155008070)
-	
-		elseif ScriptLib.GetGroupVariableValue(context, "has_succeeded") == 0 then 
-	
+
+		elseif ScriptLib.GetGroupVariableValue(context, "has_succeeded") == 0 then
+
 			ScriptLib.SetGroupVariableValueByGroup(context, "iswallmatch", 0, 155008070)
 		end
-	
+
 		return 0
 end
 

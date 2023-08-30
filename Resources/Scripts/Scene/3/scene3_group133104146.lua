@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133104146
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_1 = 146011,
 	gadget_2 = 146012,
 	gadget_3 = 146013
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -108,20 +108,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_146014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"flag"为3
 	if ScriptLib.GetGroupVariableValue(context, "flag") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -129,13 +129,13 @@ end
 function action_EVENT_VARIABLE_CHANGE_146014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104146, 2)
-	
+
 	-- 将本组内变量名为 "PuzzleFinish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "PuzzleFinish", 1, 133104146) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -144,7 +144,7 @@ function condition_EVENT_ANY_GADGET_DIE_146015(context, evt)
 	if defs.gadget_1 ~= evt.param1 and defs.gadget_2 ~= evt.param1 and defs.gadget_3 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -155,19 +155,19 @@ function action_EVENT_ANY_GADGET_DIE_146015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_146016(context, evt)
 	if evt.param1 ~= 146016 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -179,7 +179,7 @@ function action_EVENT_ENTER_REGION_146016(context, evt)
 	elseif 1 == ScriptLib.GetGroupVariableValue(context, "PuzzleFinish") then
 	    ScriptLib.ExpeditionChallengeEnterRegion(context, true)
 	end
-	
+
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_ANY_MONSTER_DIE_146017(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -197,12 +197,12 @@ end
 function action_EVENT_ANY_MONSTER_DIE_146017(context, evt)
 	-- 完成派遣挑战，发奖
 	ScriptLib.FinishExpeditionChallenge(context)
-	
-	
+
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133104146, 3) then
 		return -1
 	end
-	
+
 	return 0
 end

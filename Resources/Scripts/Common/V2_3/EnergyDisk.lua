@@ -4,7 +4,7 @@
 
 --[[
 
-local defs = {
+defs = {
 }
 
 ]]
@@ -55,4 +55,3 @@ function action_Refresh_SGV(context,evt)
 end
 
 LF_Initialize_Group(triggers, suites)
-

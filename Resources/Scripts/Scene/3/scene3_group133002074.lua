@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002074
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -83,9 +83,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -93,7 +93,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_74002(context, evt)
 	if 74001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -101,7 +101,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_74002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002074, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标（1627，266，-440），持续时间为4秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=1627, y=266, z=-440}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -110,8 +110,8 @@ function action_EVENT_GADGET_STATE_CHANGE_74002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -120,7 +120,7 @@ function condition_EVENT_GATHER_74004(context, evt)
 	if 74003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -128,6 +128,6 @@ end
 function action_EVENT_GATHER_74004(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133002074, 2)
-	
+
 	return 0
 end

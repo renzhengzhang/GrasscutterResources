@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101231
 }
 
@@ -9,19 +9,21 @@ local EnvControlGadgets = {
 }
 
 --仅在白天出现的gadget（夜晚会默认销毁）
-local DayAppearGadgets = {
+local DayAppearGadgets =
+{
  231006
 }
 
 --仅在夜晚出现的gadget（白天会默认销毁）
-local NightAppearGadgets = {
+local NightAppearGadgets =
+{
     231001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -58,9 +60,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +73,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -89,9 +91,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -99,7 +101,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_231003(context, evt)
 	if 231005 ~= evt.param2 or 322 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -107,36 +109,36 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_231003(context, evt)
 	-- 停止标识为"wait_to_move"的时间轴
 	ScriptLib.EndTimeAxis(context, "wait_to_move")
-	
-	
+
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 111101231, EntityType.GADGET, 231001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 111101231, EntityType.GADGET, 231002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 创建id为231001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 231001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将configid为 231001 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 231001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"wait_to_move"，时间节点为{4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "wait_to_move", {4}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -147,13 +149,13 @@ function action_EVENT_TIME_AXIS_PASS_231004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 231001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -166,10 +168,10 @@ function action_EVENT_GROUP_LOAD_231007(context, evt)
 	    is_daynight_gadget = true
 	  end
 	end
-	
-	if (not is_daynight_gadget) then 
+
+	if (not is_daynight_gadget) then
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1 
+	    return -1
 	end
 	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
@@ -179,8 +181,8 @@ function action_EVENT_GROUP_LOAD_231007(context, evt)
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,231005,302)
 	end
-	
-	
+
+
 	return 0
 end
 

@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155005027
 }
 
@@ -8,29 +8,29 @@ local EnvControlGadgets = {27001}
 local DayAppearGadgets = {}
 local NightAppearGadgets = {}
 --[[
-	0 = 玩家没有到达图书馆 
-	1 = 玩家触发了机关 
-	2 = 玩家打败了敌人 
+	0 = 玩家没有到达图书馆
+	1 = 玩家触发了机关
+	2 = 玩家打败了敌人
 	3 = 玩家解锁了机关
 ]]
 
 
 
-local gameplayStateFuncitons = 
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
-		
+
 	end,
 	["1"] = function(context)
 		DayNight_Gadget_Lock(context,27001)
 		ScriptLib.AddExtraGroupSuite(context, 155005027, 2)
-		
-		
+
+
 	end,
 	["2"] = function(context)
 		ScriptLib.AddExtraGroupSuite(context, 155005027, 3)
 		DayNight_Gadget_Lock(context,27001)
-	
+
 	end,
 	["3"] = function(context)
 		ScriptLib.AddExtraGroupSuite(context, 155005027, 4)
@@ -46,16 +46,16 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -105,9 +105,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -118,9 +118,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -163,15 +163,15 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_27002(context, evt)
 	UpdateGamePlayState(context)
-	
+
 	return 0
 end
 
@@ -180,11 +180,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_27003(context, evt)
 		if 222 ~= ScriptLib.GetGadgetStateByConfigId(context, 155005027, 27001) then
 			return false
 		end
-		
-		if 3 ~=  ScriptLib.GetGroupVariableValue(context, "gameplayState") then 
+
+		if 3 ~=  ScriptLib.GetGroupVariableValue(context, "gameplayState") then
 			return false
 		end
-		
+
 		return true
 end
 
@@ -197,9 +197,9 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_27004(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	UpdateGamePlayState(context)
-	
+
 	return 0
 end
 
@@ -209,12 +209,12 @@ function condition_EVENT_ANY_MONSTER_DIE_27011(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"gameplayState"为2
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -231,7 +231,7 @@ function action_EVENT_QUEST_START_27012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -242,7 +242,7 @@ function action_EVENT_QUEST_START_27013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -253,7 +253,7 @@ function action_EVENT_QUEST_START_27015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

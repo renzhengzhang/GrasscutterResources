@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201058002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -115,9 +115,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -125,7 +125,7 @@ function condition_EVENT_GADGET_CREATE_2002(context, evt)
 	if 2001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -136,7 +136,7 @@ function action_EVENT_GADGET_CREATE_2002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -144,19 +144,19 @@ end
 function condition_EVENT_SELECT_OPTION_2003(context, evt)
 	-- 判断是gadgetid 2001 option_id 210
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 210 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"stage1state"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage1state", 201058008) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -167,13 +167,13 @@ function action_EVENT_SELECT_OPTION_2003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201058002 ；指定config：2001；物件身上指定option：211；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201058002, 2001, 211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-21，72，84），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-21, y=72, z=84}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -182,56 +182,56 @@ function action_EVENT_SELECT_OPTION_2003(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "stage1" 的变量设置为 102
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage1", 102, 201058008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟5秒后,向groupId为：201058002的对象,请求一次调用,并将string参数："finish" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201058002, "finish", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 改变指定group组201058008中， configid为8001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8009的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2006(context, evt)
 	if evt.param1 ~= 2006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -242,11 +242,11 @@ function action_EVENT_ENTER_REGION_2006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201058016, 3)
-	
+
 	return 0
 end
 
@@ -254,19 +254,19 @@ end
 function condition_EVENT_SELECT_OPTION_2007(context, evt)
 	-- 判断是gadgetid 2001 option_id 210
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 210 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"stage1state"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage1state", 201058008) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -277,13 +277,13 @@ function action_EVENT_SELECT_OPTION_2007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201058002 ；指定config：2001；物件身上指定option：211；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201058002, 2001, 211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-21，72，84），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-21, y=72, z=84}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -292,44 +292,44 @@ function action_EVENT_SELECT_OPTION_2007(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "stage1" 的变量设置为 203
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage1", 203, 201058008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟5秒后,向groupId为：201058002的对象,请求一次调用,并将string参数："finish" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201058002, "finish", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 改变指定group组201058008中， configid为8001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8009的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -337,19 +337,19 @@ end
 function condition_EVENT_SELECT_OPTION_2008(context, evt)
 	-- 判断是gadgetid 2001 option_id 210
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 210 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"stage1state"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage1state", 201058008) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -360,13 +360,13 @@ function action_EVENT_SELECT_OPTION_2008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201058002 ；指定config：2001；物件身上指定option：211；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201058002, 2001, 211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-21，72，84），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-21, y=72, z=84}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -375,44 +375,44 @@ function action_EVENT_SELECT_OPTION_2008(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "stage1" 的变量设置为 304
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage1", 304, 201058008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟5秒后,向groupId为：201058002的对象,请求一次调用,并将string参数："finish" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201058002, "finish", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 改变指定group组201058008中， configid为8001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8009的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -420,19 +420,19 @@ end
 function condition_EVENT_SELECT_OPTION_2009(context, evt)
 	-- 判断是gadgetid 2001 option_id 210
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 210 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"stage1state"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage1state", 201058008) ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -443,13 +443,13 @@ function action_EVENT_SELECT_OPTION_2009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201058002 ；指定config：2001；物件身上指定option：211；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201058002, 2001, 211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-21，72，84），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-21, y=72, z=84}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -458,44 +458,44 @@ function action_EVENT_SELECT_OPTION_2009(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "stage1" 的变量设置为 401
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage1", 401, 201058008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟5秒后,向groupId为：201058002的对象,请求一次调用,并将string参数："finish" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201058002, "finish", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 改变指定group组201058008中， configid为8001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8009的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -503,19 +503,19 @@ end
 function condition_EVENT_SELECT_OPTION_2010(context, evt)
 	-- 判断是gadgetid 2001 option_id 211
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 211 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"stage1state"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage1state", 201058008) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -526,13 +526,13 @@ function action_EVENT_SELECT_OPTION_2010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201058002 ；指定config：2001；物件身上指定option：211；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201058002, 2001, 211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-21，72，84），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-21, y=72, z=84}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -541,44 +541,44 @@ function action_EVENT_SELECT_OPTION_2010(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "stage1" 的变量设置为 104
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage1", 104, 201058008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟5秒后,向groupId为：201058002的对象,请求一次调用,并将string参数："finish" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201058002, "finish", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 改变指定group组201058008中， configid为8001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8009的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -586,19 +586,19 @@ end
 function condition_EVENT_SELECT_OPTION_2011(context, evt)
 	-- 判断是gadgetid 2001 option_id 211
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 211 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"stage1state"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage1state", 201058008) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -609,13 +609,13 @@ function action_EVENT_SELECT_OPTION_2011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201058002 ；指定config：2001；物件身上指定option：211；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201058002, 2001, 211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-21，72，84），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-21, y=72, z=84}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -624,44 +624,44 @@ function action_EVENT_SELECT_OPTION_2011(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "stage1" 的变量设置为 201
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage1", 201, 201058008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟5秒后,向groupId为：201058002的对象,请求一次调用,并将string参数："finish" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201058002, "finish", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 改变指定group组201058008中， configid为8001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8009的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -669,19 +669,19 @@ end
 function condition_EVENT_SELECT_OPTION_2012(context, evt)
 	-- 判断是gadgetid 2001 option_id 211
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 211 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"stage1state"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage1state", 201058008) ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -692,13 +692,13 @@ function action_EVENT_SELECT_OPTION_2012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201058002 ；指定config：2001；物件身上指定option：211；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201058002, 2001, 211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-21，72，84），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-21, y=72, z=84}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -707,44 +707,44 @@ function action_EVENT_SELECT_OPTION_2012(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "stage1" 的变量设置为 302
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage1", 302, 201058008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟5秒后,向groupId为：201058002的对象,请求一次调用,并将string参数："finish" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201058002, "finish", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 改变指定group组201058008中， configid为8001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8009的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -752,19 +752,19 @@ end
 function condition_EVENT_SELECT_OPTION_2013(context, evt)
 	-- 判断是gadgetid 2001 option_id 211
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 211 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	-- 判断变量"stage1state"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage1state", 201058008) ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -775,13 +775,13 @@ function action_EVENT_SELECT_OPTION_2013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201058002 ；指定config：2001；物件身上指定option：211；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201058002, 2001, 211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-21，72，84），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-21, y=72, z=84}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -790,44 +790,44 @@ function action_EVENT_SELECT_OPTION_2013(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "stage1" 的变量设置为 403
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage1", 403, 201058008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟5秒后,向groupId为：201058002的对象,请求一次调用,并将string参数："finish" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201058002, "finish", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 改变指定group组201058008中， configid为8001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组201058008中， configid为8009的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058008, 8009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -838,25 +838,25 @@ function action_EVENT_TIMER_EVENT_2014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：201058002的对象,请求一次调用,并将string参数："tip2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201058002, "tip2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2015(context, evt)
 	if evt.param1 ~= 2015 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -870,14 +870,14 @@ function action_EVENT_ENTER_REGION_2015(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 创建id为2004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -888,7 +888,7 @@ function action_EVENT_TIMER_EVENT_2016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -897,7 +897,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2018(context, evt)
 	if 2017 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -907,7 +907,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2018(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 2018, 201058014, {14001,14002,14003,14004,14005,14006,14007,14008,14009,14010}, 10, 2, 5) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -917,17 +917,17 @@ function condition_EVENT_SELECT_OPTION_2019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "hasStartedChallenge") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断是gadgetid 2001 option_id 210
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 210 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -938,13 +938,13 @@ function action_EVENT_SELECT_OPTION_2019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "startChallenge" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "startChallenge", 1, 201058016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -954,17 +954,17 @@ function condition_EVENT_SELECT_OPTION_2020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "hasStartedChallenge") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断是gadgetid 2001 option_id 211
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 211 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -975,12 +975,12 @@ function action_EVENT_SELECT_OPTION_2020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "startChallenge" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "startChallenge", 1, 201058016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

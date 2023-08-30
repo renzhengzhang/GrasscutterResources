@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210115
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -118,20 +118,20 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_115001(context, evt)
 	if evt.param1 ~= 115001 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -142,7 +142,7 @@ function action_EVENT_ENTER_REGION_115001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -151,7 +151,7 @@ function condition_EVENT_GADGET_CREATE_115002(context, evt)
 	if 115005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -162,7 +162,7 @@ function action_EVENT_GADGET_CREATE_115002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -170,14 +170,14 @@ end
 function condition_EVENT_SELECT_OPTION_115004(context, evt)
 	-- 判断是gadgetid 115005 option_id 63
 	if 115005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 63 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -187,8 +187,8 @@ function action_EVENT_SELECT_OPTION_115004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 115003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -196,7 +196,7 @@ end
 function action_EVENT_QUEST_START_115006(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210115, 3)
-	
+
 	return 0
 end
 
@@ -206,7 +206,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_115007(context, evt)
 	if 115003 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -217,22 +217,22 @@ function action_EVENT_GADGET_STATE_CHANGE_115007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 133210115 ；指定config：115005；物件身上指定option：63；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133210115, 115005, 63) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "SucCount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "SucCount", 1, 133210416) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210115, 4)
-	
+
 	return 0
 end
 
@@ -240,7 +240,7 @@ end
 function action_EVENT_QUEST_START_115008(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210115, 2)
-	
+
 	return 0
 end
 
@@ -251,7 +251,7 @@ function action_EVENT_QUEST_FINISH_115009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -267,7 +267,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_115010(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210115, 3)
-	
+
 	return 0
 end
 
@@ -275,6 +275,6 @@ end
 function action_EVENT_QUEST_FINISH_115011(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210115, 4)
-	
+
 	return 0
 end

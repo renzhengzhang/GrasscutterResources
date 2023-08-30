@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220104005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -154,25 +154,25 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_5016(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220104005, 3)
-	
+
 	-- 延迟5秒后,向groupId为：220104005的对象,请求一次调用,并将string参数："S2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220104005, "S2", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220104005, 4)
-	
+
 	return 0
 end
 
@@ -180,16 +180,16 @@ end
 function action_EVENT_TIMER_EVENT_5017(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220104005, 4)
-	
+
 	-- 延迟5秒后,向groupId为：220104005的对象,请求一次调用,并将string参数："S3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220104005, "S3", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220104005, 5)
-	
+
 	return 0
 end
 
@@ -197,16 +197,16 @@ end
 function action_EVENT_TIMER_EVENT_5018(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220104005, 5)
-	
+
 	-- 延迟5秒后,向groupId为：220104005的对象,请求一次调用,并将string参数："S4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220104005, "S4", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220104005, 6)
-	
+
 	return 0
 end
 
@@ -214,16 +214,16 @@ end
 function action_EVENT_TIMER_EVENT_5019(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220104005, 6)
-	
+
 	-- 延迟5秒后,向groupId为：220104005的对象,请求一次调用,并将string参数："S5" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220104005, "S5", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220104005, 7)
-	
+
 	return 0
 end
 
@@ -231,28 +231,28 @@ end
 function action_EVENT_TIMER_EVENT_5020(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220104005, 7)
-	
+
 	-- 延迟5秒后,向groupId为：220104005的对象,请求一次调用,并将string参数："S1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220104005, "S1", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220104005, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5021(context, evt)
 	if evt.param1 ~= 5021 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -263,49 +263,49 @@ function action_EVENT_ENTER_REGION_5021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220104005, "S2") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220104005, "S3") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220104005, "S4") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220104005, "S5") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220104005, "SSS1") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5030(context, evt)
 	if evt.param1 ~= 5030 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -313,12 +313,12 @@ end
 function action_EVENT_ENTER_REGION_5030(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220104005, 2)
-	
+
 	-- 延迟4秒后,向groupId为：220104005的对象,请求一次调用,并将string参数："S1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220104005, "S1", 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240012006
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -95,9 +95,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -106,8 +106,8 @@ function condition_EVENT_ANY_MONSTER_DIE_1(context, evt)
 	if evt.param1 ~= 6007 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -118,7 +118,7 @@ function action_EVENT_ANY_MONSTER_DIE_1(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -128,8 +128,8 @@ function condition_EVENT_ANY_MONSTER_DIE_14(context, evt)
 	if evt.param1 ~= 6006 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -140,7 +140,7 @@ function action_EVENT_ANY_MONSTER_DIE_14(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -150,8 +150,8 @@ function condition_EVENT_ANY_MONSTER_DIE_20(context, evt)
 	if evt.param1 ~= 6005 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -162,7 +162,7 @@ function action_EVENT_ANY_MONSTER_DIE_20(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -172,8 +172,8 @@ function condition_EVENT_ANY_MONSTER_DIE_25(context, evt)
 	if evt.param1 ~= 6004 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -184,7 +184,7 @@ function action_EVENT_ANY_MONSTER_DIE_25(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -194,8 +194,8 @@ function condition_EVENT_ANY_MONSTER_DIE_28(context, evt)
 	if evt.param1 ~= 6003 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -206,19 +206,19 @@ function action_EVENT_ANY_MONSTER_DIE_28(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_33(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Key"为5
 	if ScriptLib.GetGroupVariableValue(context, "Key") ~= 5 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -229,19 +229,19 @@ function action_EVENT_VARIABLE_CHANGE_33(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 6009, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 6010, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -250,7 +250,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_34(context, evt)
 	if 6003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -261,7 +261,7 @@ function action_EVENT_ANY_MONSTER_LIVE_34(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -271,8 +271,8 @@ function action_EVENT_CHALLENGE_SUCCESS_35(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240012007, 5, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -282,14 +282,14 @@ function action_EVENT_CHALLENGE_FAIL_36(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240012005, 3, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 240012006, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -299,8 +299,8 @@ function action_EVENT_CHALLENGE_SUCCESS_6001(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240012007, 6, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -310,7 +310,7 @@ function action_EVENT_CHALLENGE_SUCCESS_6002(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240012007, 7, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

@@ -5,11 +5,11 @@
 ||	owner: 		weiwei.sun
 ||	description: 	2.8愚人众操作台旋转输密码逻辑
 ||	LogName:	## [DreamOperation]
-||	Protection:	
+||	Protection:
 =======================================]]
 --[[
 
-local defs = {
+defs = {
 	--每个操作台config_id, 控制的markfalg和它的解，最多5位数字。
 	--玩家按按钮，左转写2 右转写3。
 	--例如“左左右左”即为“{2,2,3,2}”
@@ -17,7 +17,7 @@ local defs = {
 		[操作台config_id1] = { markflag = 1, key = {2,2,3,2},
 		[操作台config_id2] = { markflag = 2, key = {2,2,3,2},
 	}
-	
+
 }
 
 ]]
@@ -57,7 +57,7 @@ function SLC_DreamOperation_GetFlag(context)
 
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, config_id, "SGV_Control_Target", defs.answers[config_id].markflag)
 	ScriptLib.PrintContextLog(context, "## [DreamOperation] LF_InitGear. config_id@"..config_id.." markflag@"..defs.answers[config_id].markflag)
-		
+
 	return 0
 end
 
@@ -116,12 +116,12 @@ function LF_HandleInput(context, config_id, param)
 		--继续
 		ScriptLib.SetGroupTempValue(context, "g_"..config_id, index, {})
 	end
-	
+
 	return 0
 end
 
 function LF_CountTableNum(context, t)
-	local count = 0 
+	local count = 0
 	for k,v in pairs(t) do
 		count = count + 1
 	end

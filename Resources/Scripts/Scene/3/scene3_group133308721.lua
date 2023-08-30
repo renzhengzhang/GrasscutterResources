@@ -1,24 +1,24 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308721
 }
 
 -- DEFS_MISCS
-local JamshidRocks = 
+local JamshidRocks =
 {
     721001,
     721003
 }
 
-local CorrectAnswer = 
+local CorrectAnswer =
 {
     2,3
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -87,20 +87,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_721005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"is_success"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_success") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -111,19 +111,19 @@ function action_EVENT_VARIABLE_CHANGE_721005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将configid为 721001 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 721001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 721003 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 721003, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -133,7 +133,7 @@ function condition_EVENT_GROUP_LOAD_721006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "is_success") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -144,19 +144,19 @@ function action_EVENT_GROUP_LOAD_721006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将configid为 721001 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 721001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 721003 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 721003, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

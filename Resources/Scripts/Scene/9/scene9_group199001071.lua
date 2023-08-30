@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199001071
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -79,9 +79,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -92,9 +92,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -128,9 +128,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -142,21 +142,21 @@ function action_EVENT_LUA_NOTIFY_71002(context, evt)
 	        if ScriptLib.CheckSceneTag(context, 9,1015 ) then
 		ScriptLib.SetGroupVariableValue(context, "need_rmd", 1)
 	                ScriptLib.ChangeToTargetLevelTagWithParamTable(context, 17, {pos = {x=335.5424 ,y=119.5716 ,z=305.879 }, radius = 2, rot = {x=0 , y=-82.73 , z=0 }})
-	
-	
+
+
 	        else
 	                if ScriptLib.CheckSceneTag(context, 9,1016 ) then
 	                       ScriptLib.SetGroupVariableValue(context, "need_rmd", 1) ScriptLib.ChangeToTargetLevelTagWithParamTable(context, 16, {pos = {x=335.5424 ,y=119.5716 ,z=305.879 }, radius = 2, rot = {x=0 , y=-82.73 , z=0 }})
 	                end
-	
+
 	        end
-	ScriptLib.AddEntityGlobalFloatValueByConfigId(context, 71016, "GV_ThronDrum_ShowReminder", 1) 
+	ScriptLib.AddEntityGlobalFloatValueByConfigId(context, 71016, "GV_ThronDrum_ShowReminder", 1)
 	        return 0
 end
 
 -- 触发操作
 function action_EVENT_LUA_NOTIFY_71005(context, evt)
-	    if true == ScriptLib.CheckIsInMpMode(context) then        
+	    if true == ScriptLib.CheckIsInMpMode(context) then
 	        ScriptLib.ShowReminderRadius(context, 321700501, { x= 331.94, y = 119.3747, z=306.3788}, 5)
 	        return 0
 	    end
@@ -164,25 +164,25 @@ function action_EVENT_LUA_NOTIFY_71005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 71015, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	if ScriptLib.CheckSceneTag(context, 9,1015 )  then
-	
-	
-		ScriptLib.ChangeToTargetLevelTag(context, 17)
-	
-	
-		else
-		
 		end
-	
-	
-	
-	
+	if ScriptLib.CheckSceneTag(context, 9,1015 )  then
+
+
+		ScriptLib.ChangeToTargetLevelTag(context, 17)
+
+
+		else
+
+		end
+
+
+
+
 	return 0
-	
-	
-	
-	
+
+
+
+
 end
 
 -- 触发条件
@@ -191,7 +191,7 @@ function condition_EVENT_LUA_NOTIFY_71020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "need_rmd") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -203,13 +203,13 @@ function action_EVENT_LUA_NOTIFY_71020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "need_rmd" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "need_rmd", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -218,6 +218,6 @@ function action_EVENT_ENTER_REGION_71021(context, evt)
 	if ScriptLib.TryRecordActivityPushTips(context, 2014012) == 0 then
 		ScriptLib.ShowClientTutorial(context, 1185, {})
 	end
-	
+
 	return 0
 end

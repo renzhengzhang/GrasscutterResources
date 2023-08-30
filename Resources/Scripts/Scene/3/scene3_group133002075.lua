@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002075
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	target_group = 133002146,
 	monster_max_1 = 20,
 	monster_max_2 = 4,
@@ -12,9 +12,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -165,9 +165,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -178,9 +178,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -250,20 +250,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_75002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"start"为1
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -271,30 +271,30 @@ end
 function action_EVENT_VARIABLE_CHANGE_75002(context, evt)
 	-- 创建标识为"monster"，时间节点为{10}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "monster", {10}, true)
-	
-	
+
+
 	-- 创建标识为"monster1"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "monster1", {3}, false)
-	
-	
+
+
 	-- 创建标识为"trap"，时间节点为{27,30,57,60,87,90}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "trap", {27,30,57,60,87,90}, false)
-	
-	
+
+
 	-- 创建标识为"Reinforce"，时间节点为{7,12,20,25,37,42,67,72,97,102}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Reinforce", {7,12,20,25,37,42,67,72,97,102}, false)
-	
-	
+
+
 	-- 创建标识为"Snow"，时间节点为{33,60,93}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Snow", {33,60,93}, false)
-	
-	
+
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002075, 2)
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002075, 3)
-	
+
 	return 0
 end
 
@@ -303,7 +303,7 @@ function condition_EVENT_TIME_AXIS_PASS_75012(context, evt)
 	if "monster" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -314,13 +314,13 @@ function action_EVENT_TIME_AXIS_PASS_75012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "create_monster_2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_monster_2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -329,7 +329,7 @@ function condition_EVENT_TIME_AXIS_PASS_75013(context, evt)
 	if "monster1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -340,13 +340,13 @@ function action_EVENT_TIME_AXIS_PASS_75013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "create_monster_2" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_monster_2", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -355,7 +355,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_75014(context, evt)
 	if 75001 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -363,12 +363,12 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_75014(context, evt)
 	-- 创建标识为"add"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "add", {5}, false)
-	
-	
+
+
 	-- 暂停标识为"monster"的时间轴
 	ScriptLib.PauseTimeAxis(context, "monster")
-	
-	
+
+
 	return 0
 end
 
@@ -377,7 +377,7 @@ function condition_EVENT_TIME_AXIS_PASS_75015(context, evt)
 	if "add" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -388,17 +388,17 @@ function action_EVENT_TIME_AXIS_PASS_75015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "create_monster_2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_monster_2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 重启标识为"monster"的时间轴
 	ScriptLib.ContinueTimeAxis(context, "monster")
-	
-	
+
+
 	return 0
 end
 
@@ -407,7 +407,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_75016(context, evt)
 	if 75018 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -415,12 +415,12 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_75016(context, evt)
 	-- 创建标识为"add"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "add", {5}, false)
-	
-	
+
+
 	-- 暂停标识为"monster"的时间轴
 	ScriptLib.PauseTimeAxis(context, "monster")
-	
-	
+
+
 	return 0
 end
 
@@ -429,7 +429,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_75017(context, evt)
 	if 75022 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -437,12 +437,12 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_75017(context, evt)
 	-- 创建标识为"add"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "add", {5}, false)
-	
-	
+
+
 	-- 暂停标识为"monster"的时间轴
 	ScriptLib.PauseTimeAxis(context, "monster")
-	
-	
+
+
 	return 0
 end
 
@@ -451,7 +451,7 @@ function condition_EVENT_TIME_AXIS_PASS_75021(context, evt)
 	if "trap" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -476,7 +476,7 @@ function condition_EVENT_TIME_AXIS_PASS_75023(context, evt)
 	if "trap" ~= evt.source_name or 4 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -501,7 +501,7 @@ function condition_EVENT_TIME_AXIS_PASS_75026(context, evt)
 	if "trap" ~= evt.source_name or 6 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -529,7 +529,7 @@ function condition_EVENT_TIME_AXIS_PASS_75029(context, evt)
 	if "Reinforce" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -537,13 +537,13 @@ end
 function action_EVENT_TIME_AXIS_PASS_75029(context, evt)
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133002075, 5)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133002075, 6)
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002075, 4)
-	
+
 	return 0
 end
 
@@ -552,7 +552,7 @@ function condition_EVENT_TIME_AXIS_PASS_75031(context, evt)
 	if "Reinforce" ~= evt.source_name or 6 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -560,13 +560,13 @@ end
 function action_EVENT_TIME_AXIS_PASS_75031(context, evt)
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133002075, 4)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133002075, 7)
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002075, 5)
-	
+
 	return 0
 end
 
@@ -575,7 +575,7 @@ function condition_EVENT_TIME_AXIS_PASS_75032(context, evt)
 	if "Reinforce" ~= evt.source_name or 8 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -583,10 +583,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_75032(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002075, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133002075, 5)
-	
+
 	return 0
 end
 
@@ -595,7 +595,7 @@ function condition_EVENT_TIME_AXIS_PASS_75035(context, evt)
 	if "Reinforce" ~= evt.source_name or 10 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -603,13 +603,13 @@ end
 function action_EVENT_TIME_AXIS_PASS_75035(context, evt)
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133002075, 4)
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133002075, 7)
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002075, 5)
-	
+
 	return 0
 end
 
@@ -618,7 +618,7 @@ function condition_EVENT_TIME_AXIS_PASS_75038(context, evt)
 	if "Snow" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -629,13 +629,13 @@ function action_EVENT_TIME_AXIS_PASS_75038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "create_monster_3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_monster_3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -644,7 +644,7 @@ function condition_EVENT_TIME_AXIS_PASS_75042(context, evt)
 	if "Snow" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -655,19 +655,19 @@ function action_EVENT_TIME_AXIS_PASS_75042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "create_monster_3" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_monster_3", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "change" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "change", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -676,7 +676,7 @@ function condition_EVENT_TIME_AXIS_PASS_75043(context, evt)
 	if "Reinforce" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -687,10 +687,10 @@ function action_EVENT_TIME_AXIS_PASS_75043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002075, 6)
-	
+
 	return 0
 end
 
@@ -699,7 +699,7 @@ function condition_EVENT_TIME_AXIS_PASS_75045(context, evt)
 	if "Reinforce" ~= evt.source_name or 5 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -710,10 +710,10 @@ function action_EVENT_TIME_AXIS_PASS_75045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002075, 7)
-	
+
 	return 0
 end
 
@@ -722,7 +722,7 @@ function condition_EVENT_TIME_AXIS_PASS_75046(context, evt)
 	if "Reinforce" ~= evt.source_name or 7 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -733,7 +733,7 @@ function action_EVENT_TIME_AXIS_PASS_75046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -742,7 +742,7 @@ function condition_EVENT_TIME_AXIS_PASS_75047(context, evt)
 	if "Reinforce" ~= evt.source_name or 9 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -753,10 +753,10 @@ function action_EVENT_TIME_AXIS_PASS_75047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002075, 7)
-	
+
 	return 0
 end
 
@@ -765,7 +765,7 @@ function condition_EVENT_TIME_AXIS_PASS_75048(context, evt)
 	if "trap" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -776,7 +776,7 @@ function action_EVENT_TIME_AXIS_PASS_75048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -785,7 +785,7 @@ function condition_EVENT_TIME_AXIS_PASS_75049(context, evt)
 	if "trap" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -796,7 +796,7 @@ function action_EVENT_TIME_AXIS_PASS_75049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -805,7 +805,7 @@ function condition_EVENT_TIME_AXIS_PASS_75050(context, evt)
 	if "trap" ~= evt.source_name or 5 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -816,7 +816,7 @@ function action_EVENT_TIME_AXIS_PASS_75050(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -825,7 +825,7 @@ function condition_EVENT_ANY_MONSTER_DIE_75051(context, evt)
 	if 75010 ~= evt.param1 and 75079 ~= evt.param1 and 75083 ~= evt.param1 and 75071 ~= evt.param1 and 75072 ~= evt.param1 and 75073 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -833,8 +833,8 @@ end
 function action_EVENT_ANY_MONSTER_DIE_75051(context, evt)
 	-- 创建标识为"addSnow"，时间节点为{15}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "addSnow", {15}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -843,12 +843,12 @@ function condition_EVENT_TIME_AXIS_PASS_75076(context, evt)
 	if "addSnow" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"change"为0
 	if ScriptLib.GetGroupVariableValue(context, "change") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -859,13 +859,13 @@ function action_EVENT_TIME_AXIS_PASS_75076(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "create_monster_3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_monster_3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

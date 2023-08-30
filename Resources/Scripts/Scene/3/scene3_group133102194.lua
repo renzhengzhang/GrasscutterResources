@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133102194
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -84,9 +84,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -94,7 +94,7 @@ function condition_EVENT_GADGET_CREATE_194007(context, evt)
 	if 194004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -105,7 +105,7 @@ function action_EVENT_GADGET_CREATE_194007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -113,14 +113,14 @@ end
 function condition_EVENT_SELECT_OPTION_194008(context, evt)
 	-- 判断是gadgetid 194004 option_id 68
 	if 194004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 68 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -131,31 +131,31 @@ function action_EVENT_SELECT_OPTION_194008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102194, EntityType.GADGET, 194001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102194, EntityType.GADGET, 194004 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102194, EntityType.GADGET, 194011 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "check" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "check", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -164,7 +164,7 @@ function condition_EVENT_GADGET_CREATE_194009(context, evt)
 	if 194005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -175,7 +175,7 @@ function action_EVENT_GADGET_CREATE_194009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -183,14 +183,14 @@ end
 function condition_EVENT_SELECT_OPTION_194013(context, evt)
 	-- 判断是gadgetid 194005 option_id 68
 	if 194005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 68 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -201,31 +201,31 @@ function action_EVENT_SELECT_OPTION_194013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102194, EntityType.GADGET, 194010 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102194, EntityType.GADGET, 194005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102194, EntityType.GADGET, 194002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "check" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "check", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -234,7 +234,7 @@ function condition_EVENT_GADGET_CREATE_194014(context, evt)
 	if 194006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -245,7 +245,7 @@ function action_EVENT_GADGET_CREATE_194014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -253,14 +253,14 @@ end
 function condition_EVENT_SELECT_OPTION_194015(context, evt)
 	-- 判断是gadgetid 194006 option_id 68
 	if 194006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 68 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -271,43 +271,43 @@ function action_EVENT_SELECT_OPTION_194015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102194, EntityType.GADGET, 194006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102194, EntityType.GADGET, 194003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102194, EntityType.GADGET, 194012 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "check" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "check", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_194016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"check"为1
 	if ScriptLib.GetGroupVariableValue(context, "check") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -319,19 +319,19 @@ function action_EVENT_VARIABLE_CHANGE_194016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_194017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"check"为2
 	if ScriptLib.GetGroupVariableValue(context, "check") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -343,19 +343,19 @@ function action_EVENT_VARIABLE_CHANGE_194017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_194018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"check"为3
 	if ScriptLib.GetGroupVariableValue(context, "check") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -367,12 +367,12 @@ function action_EVENT_VARIABLE_CHANGE_194018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1331021941") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

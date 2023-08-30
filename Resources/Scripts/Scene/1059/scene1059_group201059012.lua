@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201059012
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -74,9 +74,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -85,12 +85,12 @@ function condition_EVENT_QUEST_START_12001(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "loop0", 201059004) ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"loss"为1
 	if ScriptLib.GetGroupVariableValue(context, "loss") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -101,13 +101,13 @@ function action_EVENT_QUEST_START_12001(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "loop0" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "loop0", -1, 201059004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -117,12 +117,12 @@ function condition_EVENT_QUEST_START_12002(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "loop1", 201059004) ~= 5 then
 			return false
 	end
-	
+
 	-- 判断变量"loss"为1
 	if ScriptLib.GetGroupVariableValue(context, "loss") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -133,13 +133,13 @@ function action_EVENT_QUEST_START_12002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "loop1" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "loop1", -1, 201059004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -149,12 +149,12 @@ function condition_EVENT_QUEST_START_12003(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "loop2", 201059004) ~= 5 then
 			return false
 	end
-	
+
 	-- 判断变量"loss"为1
 	if ScriptLib.GetGroupVariableValue(context, "loss") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -165,13 +165,13 @@ function action_EVENT_QUEST_START_12003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "loop2" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "loop2", -1, 201059004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -181,12 +181,12 @@ function condition_EVENT_QUEST_START_12004(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "loop3", 201059004) ~= 5 then
 			return false
 	end
-	
+
 	-- 判断变量"loss"为1
 	if ScriptLib.GetGroupVariableValue(context, "loss") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -197,25 +197,25 @@ function action_EVENT_QUEST_START_12004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "loop3" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "loop3", -1, 201059004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12005(context, evt)
 	if evt.param1 ~= 12005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -226,19 +226,19 @@ function action_EVENT_ENTER_REGION_12005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12006(context, evt)
 	if evt.param1 ~= 12006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -249,6 +249,6 @@ function action_EVENT_ENTER_REGION_12006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

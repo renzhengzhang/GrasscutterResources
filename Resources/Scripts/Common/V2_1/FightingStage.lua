@@ -26,7 +26,7 @@
 
 
 ------
---local defs = {
+--defs = {
 --    group_id = 235801002,
 --    worktop_id = 123,
 --    minion_fever = 5,
@@ -83,7 +83,7 @@ local Tri = {
     [8] = { name = "sumo_switch_team", config_id = 8000008, event = EventType.EVENT_SUMO_SWITCH_TEAM_EVENT, source = "", condition = "", action = "action_sumo_switch_team", trigger_count = 0},
     [9] = { name = "dungeon_all_avatar_die", config_id = 8000009, event = EventType.EVENT_DUNGEON_ALL_AVATAR_DIE, source = "", condition = "", action = "action_dungeon_all_avatar_die", trigger_count = 0},
     [10] = { name = "dungeon_settle", config_id = 8000010, event = EventType.EVENT_DUNGEON_SETTLE, source = "", condition = "", action = "action_dungeon_settle", trigger_count = 0},
-    
+
 }
 
 function Initialize()
@@ -117,7 +117,7 @@ function action_group_load(context,evt)
     --ScriptLib.PrintContextLog(context,"FS: The result of starting weather".. DungeonWeather[1].."is "..ret)
     --ret = ScriptLib.EnterWeatherArea(context, DungeonWeather[1])
     --ScriptLib.PrintContextLog(context,"FS: The result of entering weather".. DungeonWeather[1].."is "..ret)
-   
+
     return 0
 end
 
@@ -170,7 +170,7 @@ function action_time_axis_pass(context,evt)
         --ScriptLib.PrintContextLog(context,"FS: Showing reminder "..local_defs.team_noswitch_pubishment_reminder)
         ScriptLib.ShowTemplateReminder(context, local_defs.team_noswitch_pubishment_reminder, {0})
         --ScriptLib.ShowReminder(context, local_defs.team_noswitch_pubishment_reminder)
-        
+
         ScriptLib.SetGroupVariableValue(context,"is_noswitch_punishment",1)
         LF_Set_Team_Global_Value(context,local_defs.team_noswitch_pubishment,1)
     end
@@ -225,7 +225,7 @@ function action_monster_die_before_leave_scene(context,evt)
         LF_Update_Fever(context,defs.minion_fever*fever_ratio)
     else
         LF_Update_Fever(context,defs.elite_fever*fever_ratio)
-        
+
         --精英死亡时，重新开始计时
         ScriptLib.EndTimeAxis(context,"ELITE_AXIS")
         ScriptLib.InitTimeAxis(context,"ELITE_AXIS",time_axis.elite_axis,false)
@@ -268,7 +268,7 @@ function action_sumo_switch_team(context,evt)
     ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["uid"] = uid_list[1], ["noswitch_time"] = defs.noswitch_punishment_interval})
 
     --清除当前显示的换队惩罚的reminder
-    
+
     local uid_list = ScriptLib.GetSceneUidList(context)
     local ret = ScriptLib.RevokePlayerShowTemplateReminder(context, local_defs.team_noswitch_pubishment_reminder, {})
 
@@ -277,7 +277,7 @@ function action_sumo_switch_team(context,evt)
     --换队的时候修改team的gv，重新刷一下新的avatar身上的加成效果
     --ScriptLib.PrintContextLog(context,"FS: team has changed, team_has_change = 1")
     LF_Set_Team_Global_Value(context,local_defs.team_has_switch,1)
-    
+
     ScriptLib.SetGroupVariableValue(context,"is_noswitch_punishment",0)
 
     return 0
@@ -332,7 +332,7 @@ end
 
 --终止玩法方法，关掉各种东西
 function LF_Stop_Play(context)
-    
+
     local current_monster_tide = LF_Get_Current_Monster_Tide(context)
     --清理一下空气墙，防止其他问题
 	ScriptLib.RemoveEntityByConfigId(context, defs.group_id, EntityType.GADGET, defs.airwall)
@@ -354,7 +354,7 @@ function LF_Create_Monster_Tide(context,monster_tide_index)
     local monster_config_id_list = monster_tide[monster_tide_index]
 
     --增加怪物潮的计数，下一次开启时index会+1，防止索引到同一波怪物潮
-    local tide_num = LF_Get_Current_Tide_Num(context)    
+    local tide_num = LF_Get_Current_Tide_Num(context)
     LF_Set_Current_Tide_Num(context,tide_num+1)
 
     ScriptLib.AutoMonsterTide(context, tide_num+1, defs.group_id, monster_config_id_list, #monster_config_id_list, defs.min_monster_count,defs.max_monster_count)
@@ -390,7 +390,7 @@ function LF_Activate_Environment_Gadget(context,fever_level)
         local config_id = suites[defs.environment_suite].gadgets[i]
         local gadget_id = LF_Get_Gadget_Id_By_Config_Id(context,config_id)
         --大小火盆
-        if (gadget_id == 70350306 or gadget_id == 70350307) then 
+        if (gadget_id == 70350306 or gadget_id == 70350307) then
             if (fever_level<local_defs.burn_effect_level) then
                 --点燃小火
                 --ScriptLib.PrintContextLog(context,"FS: Burn little fire!")
@@ -401,21 +401,21 @@ function LF_Activate_Environment_Gadget(context,fever_level)
                 --ScriptLib.PrintContextLog(context,"FS: Burn middle fire!")
                 local ret = ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, config_id, 201)
             end
-            if (fever_level >= #fever_progress_table-2) then 
+            if (fever_level >= #fever_progress_table-2) then
                  --持续喷大火
                 --ScriptLib.PrintContextLog(context,"FS: Burn super fire!")
                 ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, config_id, 202)
             end
         end
         --挂灯
-        if (gadget_id == 70350308) then 
+        if (gadget_id == 70350308) then
             if (fever_level>=local_defs.burn_effect_level) then
                 --点燃小火
                 ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, config_id, 201)
             end
         end
          --场景氛围
-         if (gadget_id == 70350309) then 
+         if (gadget_id == 70350309) then
             --转到对应的gadgetState：default-0、phase1-201、phase2-202、phase3-203、phase4-204
             ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, config_id, 200+fever_level)
         end
@@ -526,23 +526,23 @@ end
 --server lua call-------------------------------------------------
 
 function SLC_Update_Fever_Ratio(context,new_fever_ratio)
-    
+
     ScriptLib.PrintContextLog(context,"FS: SERVER_LUA_CALL: Changing fever ratio to: "..new_fever_ratio)
     ScriptLib.SetGroupVariableValue(context,"fever_ratio",new_fever_ratio)
 
-    return 0 
+    return 0
 end
 
 --向客户端下发当前的惩罚状态和fever值，用于客户端重连时请求
 function SLC_Refresh_Team_State(context)
-    
+
     ScriptLib.PrintContextLog(context,"FS: SERVER_LUA_CALL: Request for refresh punishment state: ")
     local is_noswitch_punishment = ScriptLib.GetGroupVariableValue(context,"is_noswitch_punishment")
     LF_Set_Team_Global_Value(context,"NOSWITCH_PUNISHMENT",is_noswitch_punishment)
-    
+
     local fever = ScriptLib.GetGalleryProgressScore(context, "fever", defs.gallery_id)
     LF_Set_Team_Global_Value(context,"fever",fever)
-    return 0 
+    return 0
 end
 
 ------------------------------------------------------------------

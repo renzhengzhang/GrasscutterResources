@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220133002
 }
 
@@ -15,7 +15,7 @@ local	defs = {
 		--定义左右旋转的步长,key为传音花configID，value为旋转角对应的GadgetState
 --GadgetState不可重复
 		horizon_steps = {
-			
+
 		},
 
 		--定义上下俯仰的步长,key为传音花configID，value为旋转角对应的GadgetState
@@ -26,9 +26,9 @@ local	defs = {
 	}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -72,9 +72,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +85,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -112,24 +112,24 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"big_flower"为1
 	if ScriptLib.GetGroupVariableValue(context, "big_flower") ~= 1 then
 			return false
 	end
-	
+
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 220133002, 2004) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -137,11 +137,11 @@ end
 function action_EVENT_VARIABLE_CHANGE_2010(context, evt)
 	-- 创建标识为"WindTimeA"，时间节点为{15}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "WindTimeA", {15}, false)
-	
-	
+
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220133002, 2)
-	
+
 	return 0
 end
 
@@ -150,7 +150,7 @@ function condition_EVENT_TIME_AXIS_PASS_2012(context, evt)
 	if "WindTimeA" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -158,10 +158,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_2012(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220133002, 2)
-	
+
 	-- 变量"big_flower"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "big_flower", 0)
-	
+
 	return 0
 end
 

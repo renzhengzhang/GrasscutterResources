@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133220664
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -117,22 +117,22 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_664005(context, evt)
 	-- 初始化table
 	    local suite_table = {}
-	
+
 	-- 需要在group创建时调用，该函数会通过context的groupid读取HuntingData表，来创建entity填充points
 	    if 0~= ScriptLib.RefreshHuntingClueGroup(context) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_hunting_clue_group")
 	        return -1
 	    end
-	
+
 	-- 根据HuntingData表的配置来激活对应的suite
 	    if 0~= ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context) then
 	        suite_table = ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context)
@@ -140,7 +140,7 @@ function action_EVENT_GROUP_LOAD_664005(context, evt)
 	            ScriptLib.AddExtraGroupSuite(context, 133220664, suite_id)
 	        end
 	    end
-	
+
 	return 0
 end
 
@@ -151,19 +151,19 @@ function action_EVENT_HUNTING_FINISH_FINAL_664006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_664007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 133220664) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -171,19 +171,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_664007(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220664, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_664008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 133220664) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -191,19 +191,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_664008(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220664, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_664009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 133220664) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -211,19 +211,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_664009(context, evt)
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220664, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_664010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 133220664) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -231,6 +231,6 @@ end
 function action_EVENT_VARIABLE_CHANGE_664010(context, evt)
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220664, 5)
-	
+
 	return 0
 end

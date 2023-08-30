@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008595
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -106,9 +106,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -118,13 +118,13 @@ function action_EVENT_GROUP_LOAD_595004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "is_open" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "is_open", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -134,7 +134,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_595013(context, evt)
 	if 595009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -145,7 +145,7 @@ function action_EVENT_GADGET_STATE_CHANGE_595013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -155,7 +155,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_595014(context, evt)
 	if 595010 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -166,7 +166,7 @@ function action_EVENT_GADGET_STATE_CHANGE_595014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -176,7 +176,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_595015(context, evt)
 	if 595011 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -187,19 +187,19 @@ function action_EVENT_GADGET_STATE_CHANGE_595015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_595016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"is_open"为3
 	if ScriptLib.GetGroupVariableValue(context, "is_open") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -209,14 +209,14 @@ function action_EVENT_VARIABLE_CHANGE_595016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 595012, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133008595, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -225,7 +225,7 @@ function condition_EVENT_GADGET_CREATE_595017(context, evt)
 	if 595009 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -235,8 +235,8 @@ function action_EVENT_GADGET_CREATE_595017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 595009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -245,7 +245,7 @@ function condition_EVENT_GADGET_CREATE_595018(context, evt)
 	if 595010 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -255,8 +255,8 @@ function action_EVENT_GADGET_CREATE_595018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 595010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -265,7 +265,7 @@ function condition_EVENT_GADGET_CREATE_595019(context, evt)
 	if 595011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -275,8 +275,8 @@ function action_EVENT_GADGET_CREATE_595019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 595011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -286,7 +286,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_595020(context, evt)
 	if 595012 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 or GadgetState.Action01 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -294,13 +294,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_595020(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133008595, 3)
-	
+
 	-- 延迟120秒后,向groupId为：133008595的对象,请求一次调用,并将string参数："delay" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008595, "delay", 120) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -308,24 +308,24 @@ end
 function action_EVENT_TIMER_EVENT_595021(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133008595, 3)
-	
+
 	-- 将configid为 595012 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 595012, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_595022(context, evt)
 	if -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008595, 595001) then
-	
+
 	return false
-	
+
 	end
-	
+
 	return true
 end
 
@@ -335,13 +335,13 @@ function action_EVENT_GROUP_LOAD_595022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 595012, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133008595, "delay") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

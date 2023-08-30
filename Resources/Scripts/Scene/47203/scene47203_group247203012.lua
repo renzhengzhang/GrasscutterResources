@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 247203012
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
     gadget_1 = 12001,
     group_1 = 247203012,
     group_core = 247203001,
@@ -15,9 +15,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -109,38 +109,38 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12002(context, evt)
 	if evt.param1 ~= 12002 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_12002(context, evt)
-	
+
 	-- 将configid为 12001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 	    return -1
-	end 
-	
+	end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_1, defs.gadget_1, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -148,56 +148,56 @@ end
 function condition_EVENT_SELECT_OPTION_12003(context, evt)
 	-- 判断是gadgetid 12001 option_id 7
 	if 12001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_12003(context, evt)
 	--向编号999的父挑战挂接子挑战
-	
+
 	ScriptLib.ExecuteGroupLua(context,defs.group_core,"SetKillMonsterTarget" ,{defs.group_1, defs.MonsterCount})
 	ScriptLib.ExecuteGroupLua(context,defs.group_core,"StartSubChallengeKillMonster" ,{defs.challenge1, defs.challenge_kill})
-	
+
 	-- 添加suite2的新内容，刷怪空气墙
 	    ScriptLib.AddExtraGroupSuite(context, 247203012, 2)
-	
+
 	-- 删除指定group： 247203012 ；指定config：12001；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, defs.group_1, defs.gadget_1, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 	  return -1
 	end
-	
+
 	-- 将configid为 12001 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 	    return -1
-	end 
-	
+	end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_12004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"success"为1
 	if ScriptLib.GetGroupVariableValue(context, "success") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"success"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "success", 247203001) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -208,7 +208,7 @@ function action_EVENT_VARIABLE_CHANGE_12004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -216,7 +216,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_12005(context, evt)
 	--发送怪物死亡通知
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "AddMistTrialChildChallengeScore", {1})
-	
+
 	return 0
 end
 
@@ -226,7 +226,7 @@ function condition_EVENT_ANY_MONSTER_DIE_12013(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -234,6 +234,6 @@ end
 function action_EVENT_ANY_MONSTER_DIE_12013(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247203012, 3)
-	
+
 	return 0
 end

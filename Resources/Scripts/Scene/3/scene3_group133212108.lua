@@ -1,16 +1,16 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133212108
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 133212108,
 	gadget_thunderThelfID = 108001,
 	pointarray_ID = 321200020,
 	maxPointCount = 9,
 	gadget_Reward_1 = 108002,
-	pointInfo = {2,3,5,7,9} 
+	pointInfo = {2,3,5,7,9}
 }
 
 -- DEFS_MISCS
@@ -41,9 +41,9 @@ function MovePlatform(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -88,9 +88,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -102,9 +102,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -148,9 +148,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -158,27 +158,27 @@ function condition_EVENT_PLATFORM_REACH_POINT_108004(context, evt)
 	if 108001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_108004(context, evt)
-	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)		
+	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isMoving", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
-	end	
+	end
 	ScriptLib.StopPlatform(context, defs.gadget_thunderThelfID)
 	if evt.param3 == defs.maxPointCount then
 		ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
-		ScriptLib.CreateGadget(context, { config_id = defs.gadget_Reward_1 }) 
+		ScriptLib.CreateGadget(context, { config_id = defs.gadget_Reward_1 })
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_thunderThelfID, GadgetState.GearStart)
-		ScriptLib.SetFlowSuite(context, defs.group_ID, 2)		
-		ScriptLib.MarkPlayerAction(context, 2014, 3, 1)	
+		ScriptLib.SetFlowSuite(context, defs.group_ID, 2)
+		ScriptLib.MarkPlayerAction(context, 2014, 3, 1)
 		return 0
 	end
-			
+
 	local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
 	next = next + 1
 	ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
@@ -193,14 +193,14 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_108005(context, evt)
 				return false
 			end
 			local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
-			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state) 
-			if state == 201 then 
+			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
+			if state == 201 then
 				return false
 			end
-			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then 
+			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then
 				return false
 			end
-			
+
 			return true
 end
 

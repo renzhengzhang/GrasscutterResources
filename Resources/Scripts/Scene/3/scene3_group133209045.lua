@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133209045
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -78,9 +78,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -88,7 +88,7 @@ function condition_EVENT_GADGET_CREATE_45003(context, evt)
 	if 45001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -99,7 +99,7 @@ function action_EVENT_GADGET_CREATE_45003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -107,14 +107,14 @@ end
 function condition_EVENT_SELECT_OPTION_45004(context, evt)
 	-- 判断是gadgetid 45001 option_id 76
 	if 45001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 76 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -131,12 +131,12 @@ function action_EVENT_SELECT_OPTION_45004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q72809_JVMINGQUCHUANSONG") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

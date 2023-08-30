@@ -1,6 +1,6 @@
 -- Trigger变量
 --[[
-local defs = {
+defs = {
     PotConfigIDA =148004,
     PotConfigIDB =148005,
     PotConfigIDC =148006,

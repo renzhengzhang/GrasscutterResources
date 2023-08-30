@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133105134
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -83,9 +83,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -93,7 +93,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_170(context, evt)
 	if 330 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -104,7 +104,7 @@ function action_EVENT_GADGET_STATE_CHANGE_170(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -113,7 +113,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_171(context, evt)
 	if 331 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -124,7 +124,7 @@ function action_EVENT_GADGET_STATE_CHANGE_171(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -133,7 +133,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_172(context, evt)
 	if 332 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -144,7 +144,7 @@ function action_EVENT_GADGET_STATE_CHANGE_172(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_173(context, evt)
 	if 334 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -164,7 +164,7 @@ function action_EVENT_GADGET_STATE_CHANGE_173(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -175,13 +175,13 @@ function action_EVENT_ANY_MONSTER_DIE_174(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "num", c_num) then
 	  return -1
 	end
-	
+
 	if c_num == 4 then
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 232, delay_time = 0 }) then
 	  return -1
 	end
-	
-	
+
+
 	end
 	return 0
 end
@@ -191,7 +191,7 @@ function condition_EVENT_ANY_MONSTER_DIE_175(context, evt)
 	if 232 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -202,6 +202,6 @@ function action_EVENT_ANY_MONSTER_DIE_175(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

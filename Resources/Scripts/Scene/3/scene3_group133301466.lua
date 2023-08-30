@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301466
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_CoreID = 466005,
 	monster_BossID = 466002,
 	gadget_Point_1 = 466006,
@@ -35,9 +35,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -126,9 +126,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -139,9 +139,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -211,9 +211,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -228,8 +228,8 @@ function action_EVENT_GROUP_LOAD_466011(context, evt)
 	if 0 ~= ScriptLib.ChangeDeathZone(context,0,{is_open = true}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_deatzone")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -240,30 +240,30 @@ function action_EVENT_GROUP_LOAD_466012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将configid为 466009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 466009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_466014(context, evt)
 	if evt.param1 ~= 466014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"tutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "tutorial") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -274,24 +274,24 @@ function action_EVENT_ENTER_REGION_466014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_466015(context, evt)
 	if evt.param1 ~= 466015 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"tutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "tutorial") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -302,24 +302,24 @@ function action_EVENT_ENTER_REGION_466015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_466016(context, evt)
 	if evt.param1 ~= 466016 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"tutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "tutorial") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -330,7 +330,7 @@ function action_EVENT_ENTER_REGION_466016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -341,13 +341,13 @@ function action_EVENT_QUEST_START_466019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 466003, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -356,7 +356,7 @@ function condition_EVENT_ANY_GADGET_DIE_466023(context, evt)
 	if 466005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -364,19 +364,19 @@ end
 function action_EVENT_ANY_GADGET_DIE_466023(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301466, 4)
-	
+
 	-- 将configid为 466009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 466009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133301466, EntityType.GADGET, 466031 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -385,7 +385,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_466024(context, evt)
 	if 466006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -396,14 +396,14 @@ function action_EVENT_GADGET_STATE_CHANGE_466024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将本组内变量名为 "tutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -412,7 +412,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_466025(context, evt)
 	if 466007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -423,14 +423,14 @@ function action_EVENT_GADGET_STATE_CHANGE_466025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将本组内变量名为 "tutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -439,7 +439,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_466026(context, evt)
 	if 466008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -450,14 +450,14 @@ function action_EVENT_GADGET_STATE_CHANGE_466026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将本组内变量名为 "tutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -466,7 +466,7 @@ function condition_EVENT_ANY_MONSTER_DIE_466030(context, evt)
 	if 466002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -477,7 +477,7 @@ function action_EVENT_ANY_MONSTER_DIE_466030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

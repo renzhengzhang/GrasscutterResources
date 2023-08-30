@@ -1,20 +1,20 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133302068
 }
 
 -- DEFS_MISCS
 -- 特定Region或者Group可以写，每次EnterRegion会检测
-local defs ={
-    regionList = {68001}, 
+defs ={
+    regionList = {68001},
     -- 1,2,3,4对应4套等级
     curCommander =1,
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -99,20 +99,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_68002(context, evt)
 	if evt.param1 ~= 68002 then return false end
-	
+
 	-- 判断是区域68002
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 68002 then
 		return false
 	end
-	
+
 	local curQuestState = ScriptLib.GetHostQuestState(context,7306108)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -120,7 +120,7 @@ function condition_EVENT_ENTER_REGION_68002(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -134,18 +134,18 @@ function action_EVENT_ENTER_REGION_68002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 创建标识为"rmd"，时间节点为{4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "rmd", {4}, false)
-	
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 7015, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_TIME_AXIS_PASS_68003(context, evt)
 	if "rmd" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -165,7 +165,7 @@ function action_EVENT_TIME_AXIS_PASS_68003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -176,10 +176,10 @@ function action_EVENT_QUEST_START_68004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302068, 2)
-	
+
 	return 0
 end
 
@@ -190,7 +190,7 @@ function action_EVENT_QUEST_START_68007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 

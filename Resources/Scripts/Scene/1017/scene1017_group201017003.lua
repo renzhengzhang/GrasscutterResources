@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201017003
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -73,18 +73,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_3007(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 201017003) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -94,14 +94,14 @@ function action_EVENT_ANY_MONSTER_DIE_3007(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201017002, 2006, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 201017002, 2006, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-136，37，132），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-136, y=37, z=132}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -110,10 +110,10 @@ function action_EVENT_ANY_MONSTER_DIE_3007(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201017002, 2)
-	
+
 	return 0
 end

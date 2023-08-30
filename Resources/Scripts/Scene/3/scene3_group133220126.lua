@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133220126
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -75,9 +75,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -88,9 +88,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -115,50 +115,50 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_126005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"1_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "1_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"2_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "2_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"3_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "3_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"4_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "4_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"5_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "5_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"6_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "6_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"7_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "7_die") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -169,7 +169,7 @@ function action_EVENT_VARIABLE_CHANGE_126005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -180,7 +180,7 @@ function action_EVENT_ANY_GADGET_DIE_126006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_ANY_GADGET_DIE_126013(context, evt)
 	if 126007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -200,13 +200,13 @@ function action_EVENT_ANY_GADGET_DIE_126013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220126, EntityType.GADGET, 126003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -215,7 +215,7 @@ function condition_EVENT_ANY_GADGET_DIE_126014(context, evt)
 	if 126008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -226,13 +226,13 @@ function action_EVENT_ANY_GADGET_DIE_126014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220126, EntityType.GADGET, 126002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_ANY_GADGET_DIE_126015(context, evt)
 	if 126009 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -252,13 +252,13 @@ function action_EVENT_ANY_GADGET_DIE_126015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220126, EntityType.GADGET, 126004 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -267,7 +267,7 @@ function condition_EVENT_ANY_GADGET_DIE_126016(context, evt)
 	if 126010 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -278,13 +278,13 @@ function action_EVENT_ANY_GADGET_DIE_126016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220126, EntityType.GADGET, 126011 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -293,7 +293,7 @@ function condition_EVENT_ANY_GADGET_DIE_126017(context, evt)
 	if 126001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -304,13 +304,13 @@ function action_EVENT_ANY_GADGET_DIE_126017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220126, EntityType.GADGET, 126012 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -320,7 +320,7 @@ function condition_EVENT_QUEST_START_126018(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "1_die") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -331,7 +331,7 @@ function action_EVENT_QUEST_START_126018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -341,7 +341,7 @@ function condition_EVENT_QUEST_START_126019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "2_die") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -352,7 +352,7 @@ function action_EVENT_QUEST_START_126019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -362,7 +362,7 @@ function condition_EVENT_QUEST_START_126020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "3_die") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -373,7 +373,7 @@ function action_EVENT_QUEST_START_126020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -383,7 +383,7 @@ function condition_EVENT_QUEST_START_126021(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "4_die") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -394,7 +394,7 @@ function action_EVENT_QUEST_START_126021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -404,7 +404,7 @@ function condition_EVENT_QUEST_START_126022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "5_die") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -415,7 +415,7 @@ function action_EVENT_QUEST_START_126022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -425,7 +425,7 @@ function condition_EVENT_QUEST_START_126027(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "6_die") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -436,7 +436,7 @@ function action_EVENT_QUEST_START_126027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -446,7 +446,7 @@ function condition_EVENT_QUEST_START_126028(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "7_die") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -457,7 +457,7 @@ function action_EVENT_QUEST_START_126028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -466,7 +466,7 @@ function condition_EVENT_ANY_GADGET_DIE_126029(context, evt)
 	if 126023 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -477,13 +477,13 @@ function action_EVENT_ANY_GADGET_DIE_126029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220126, EntityType.GADGET, 126025 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -492,7 +492,7 @@ function condition_EVENT_ANY_GADGET_DIE_126030(context, evt)
 	if 126024 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -503,13 +503,13 @@ function action_EVENT_ANY_GADGET_DIE_126030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220126, EntityType.GADGET, 126026 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -519,37 +519,37 @@ function condition_EVENT_QUEST_START_126031(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "1_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"2_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "2_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"3_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "3_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"4_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "4_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"5_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "5_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"6_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "6_die") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"7_die"为1
 	if ScriptLib.GetGroupVariableValue(context, "7_die") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -560,6 +560,6 @@ function action_EVENT_QUEST_START_126031(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

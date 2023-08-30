@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309409
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -72,9 +72,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +85,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -112,9 +112,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -122,17 +122,17 @@ function condition_EVENT_GADGET_CREATE_409014(context, evt)
 	if 409012 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"die1"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "die1", 133309409) ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"die2"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "die2", 133309409) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -142,18 +142,18 @@ function action_EVENT_GADGET_CREATE_409014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 409012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_409015(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133309409) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -163,8 +163,8 @@ function action_EVENT_ANY_MONSTER_DIE_409015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 409012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -173,12 +173,12 @@ function condition_EVENT_GADGET_CREATE_409016(context, evt)
 	if 409012 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"die1"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "die1", 133309409) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -189,7 +189,7 @@ function action_EVENT_GADGET_CREATE_409016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -198,12 +198,12 @@ function condition_EVENT_GADGET_CREATE_409017(context, evt)
 	if 409012 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"die2"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "die2", 133309409) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -214,7 +214,7 @@ function action_EVENT_GADGET_CREATE_409017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -223,7 +223,7 @@ function condition_EVENT_ANY_MONSTER_DIE_409018(context, evt)
 	if 409002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -234,7 +234,7 @@ function action_EVENT_ANY_MONSTER_DIE_409018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_ANY_MONSTER_DIE_409019(context, evt)
 	if 409011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -254,6 +254,6 @@ function action_EVENT_ANY_MONSTER_DIE_409019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

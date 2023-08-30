@@ -4,10 +4,10 @@
 ||  owner:      weiwei.sun
 ||  description:    2.8莫娜梦境 传送门
 ||  LogName:    MonaPortal
-||  Protection: 
+||  Protection:
 =======================================]]--
 --[[
-local defs = {
+defs = {
     target_leveltag = 22,
     pos = { x=-677.9, y=135, z=-16},
     rot = {x=0, y=0, z=1},
@@ -16,7 +16,7 @@ local defs = {
 ]]
 
 function SLC_MonaPortal_Start(context)
-    if true == ScriptLib.CheckIsInMpMode(context) then        
+    if true == ScriptLib.CheckIsInMpMode(context) then
         local cfg_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
         ScriptLib.ShowReminderRadius(context, 321700501, gadgets[cfg_id].pos, 5)
         return 0
@@ -32,7 +32,7 @@ end
 
 function SLC_MonaPortal_TryShowReminder(context)
     local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.source_entity_id })
-    if 22 == defs.target_leveltag then 
+    if 22 == defs.target_leveltag then
         ScriptLib.ShowReminderRadius(context, 1111377, gadgets[config_id].pos, 5)
     end
 

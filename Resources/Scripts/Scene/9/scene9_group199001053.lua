@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199001053
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
         --每个操作台config_id, 控制的markflag和它的解，最多5位数字。
         --玩家按按钮，左转写2 右转写3。
         --例如“左左右左”即为“{2,2,3,2}”
@@ -16,9 +16,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -77,9 +77,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -90,9 +90,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -108,20 +108,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_53015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"unlock_num"为2
 	if ScriptLib.GetGroupVariableValue(context, "unlock_num") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -131,28 +131,28 @@ function action_EVENT_VARIABLE_CHANGE_53015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 53001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 53002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 53002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 53010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 53023 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 触发镜头注目，注目位置为坐标（75.438，141.6627，-757.0629），持续时间为4秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=75.438, y=141.6627, z=-757.0629}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -161,8 +161,8 @@ function action_EVENT_VARIABLE_CHANGE_53015(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -174,10 +174,10 @@ function action_EVENT_GADGET_STATE_CHANGE_53025(context, evt)
 		else
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 53024, {68})
 		end
-		
+
 		ScriptLib.SetGroupVariableValue(context, "Open", 1)
 	end
-	
+
 	return 0
 end
 
@@ -185,14 +185,14 @@ end
 function condition_EVENT_SELECT_OPTION_53026(context, evt)
 	-- 判断是gadgetid 53024 option_id 68
 	if 53024 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 68 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_SELECT_OPTION_53026(context, evt)
 		ScriptLib.DelWorktopOptionByGroupId(context, 199001053, 53024, 68)
 		ScriptLib.AddQuestProgress(context, "4007704")
 		ScriptLib.SetGroupVariableValue(context, "Open", 2)
-	
+
 	end
 	return 0
 end
@@ -216,7 +216,7 @@ function action_EVENT_GROUP_LOAD_53027(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Open") == 1 and (not ScriptLib.CheckIsInMpMode(context)) then
 		ScriptLib.SetWorktopOptionsByGroupId(context, 0, 53024, {68})
 	end
-	
+
 	return 0
 end
 

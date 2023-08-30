@@ -1,11 +1,11 @@
-local defs = {
+defs = {
 	player_energy = "AVATAR_ASTER_SCORE"
 }
 
 --接收来自abilityAction的消息，启动玩法进度更新逻辑
 function OnClientExecuteReq(context, param1, param2, param3)
 	--玩家提交param2->1
-	if param2 == 1 then 
+	if param2 == 1 then
 		--获取玩家当前能量
 		local uid = ScriptLib.GetUidByTeamEntityId(context, param3)
 		local energy = ScriptLib.GetTeamAbilityFloatValue(context, uid, defs.player_energy)

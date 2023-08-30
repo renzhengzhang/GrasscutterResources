@@ -3,17 +3,17 @@
 --||   Filename      ||    Activity_TeamChainChallenge
 --||   RelVersion    ||    V3_4
 --||   Owner         ||    shuo-yu
---||   Description   ||    
+--||   Description   ||
 --||   LogName       ||    ##[Activity_TeamChainChallenge]
---||   Protection    ||    
+--||   Protection    ||
 --======================================================================================================================
 --Defs & Miscs || 需要LD配置的内容
--- local defs =
+-- defs =
 -- {
 --     starter_gadget = 0,
 --     gallery_id = 0,
 --     teleportPos_id = 0,
---     groups_info = 
+--     groups_info =
 --     {
 --         [1] = {id = 1, monster_num = 10,},
 --         [2] = {id = 2, monster_num = 10,},
@@ -32,10 +32,10 @@
 --LevelFunctions || 自定义函数
 
 local Tri = {
-    
+
     --主控group加载 初始化所有玩法group
     { config_id = 34000010, name = "group_load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
-    --所有玩家死掉 触发关卡失败 
+    --所有玩家死掉 触发关卡失败
     { config_id = 34000020, name = "dungeon_all_avatar_die", event = EventType.EVENT_DUNGEON_ALL_AVATAR_DIE, source = "", condition = "condition_dungeon_all_avatar_die", action = "action_dungeon_all_avatar_die", trigger_count = 0 },
     --变量变化 开启或停止玩法 GALLERY_STATE： 0未开启 1开启 2子阶段成功 3子阶段失败
     { config_id = 34000030, name = "variable_change", event = EventType.EVENT_VARIABLE_CHANGE, source = "GALLERY_STATE", condition = "", action = "action_variable_change", trigger_count = 0 },
@@ -46,7 +46,7 @@ local Tri = {
 }
 
 function TeamChain_Initialize()
-    
+
     LF_InsertTriggers(Tri,1)
     --子阶段开启结束Var 0未开启 1开启 2子阶段成功 3子阶段失败
     --table.insert(variables,{ config_id=50000001,name = "GALLERY_STATE", value = 0, no_refresh = true})
@@ -69,19 +69,19 @@ function condition_dungeon_all_avatar_die(context,evt)
     local uid_list = ScriptLib.GetSceneUidList(context)
 
     local ret = 0
-    
+
     for i,v in ipairs(uid_list) do
         local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
-        if true ~= is_all_dead then 
+        if true ~= is_all_dead then
             ret = -1
             break
         end
     end
-    
+
     if ret ~= 0 then
         return false
     end
-    
+
     return true
 end
 
@@ -96,11 +96,11 @@ end
 --有怪物死亡更新显示
 function action_any_monster_die(context,evt)
     ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["kill_monster_cnt"] = 1})
-    
+
     return 0
 end
 
---GALLERY_STATE变化 0待机 1开启玩法 2结束玩法并设置成功 3结束玩法并设置失败 
+--GALLERY_STATE变化 0待机 1开启玩法 2结束玩法并设置成功 3结束玩法并设置失败
 function action_variable_change(context,evt)
     LF_PrintLog(context,"设置参数")
     LF_PrintLog(context,tostring(evt.param1))
@@ -152,7 +152,7 @@ function LF_InitPlay(context)
         ScriptLib.RefreshGroup(context, { group_id = v.id, suite = 1 })
         LF_PrintLog(context,"加载玩法group,id: ".. v.id)
     end
-    
+
     LF_InitNextGroup(context,1)
 
     return 0
@@ -164,7 +164,7 @@ function LF_StartPlay(context)
     if (ScriptLib.SetPlayerStartGallery(context, defs.gallery_id, ScriptLib.GetSceneUidList(context)) ~= 0) then
         return 0
     end
-    
+
     LF_PrintLog(context,"开启gallery"..defs.gallery_id)
 
     local index = LF_GetGroupIndex(context)
@@ -200,11 +200,11 @@ function LF_StopPlay(context, is_success)
         z=LF_GetPointPos(context, defs.teleportPos_id).z,}
 
         if index < 4 then
-            ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context), 
+            ScriptLib.TransPlayerToPos(context, {uid_list =ScriptLib.GetSceneUidList(context),
                 pos = mPos,
                 radius = 0, rot = LF_GetPointRot(context, defs.teleportPos_id)})
             ScriptLib.InitTimeAxis(context, "teleport", {1}, false)
-           
+
         elseif index == 4 then
             LF_PrintLog(context,"成功通关大关")
             LF_ResetAllVars(context)
@@ -244,9 +244,9 @@ end
 function LF_SetWorkTopActive(context, is_active)
     LF_PrintLog(context, "更新gadget信息")
     if (is_active) then
-        ScriptLib.SetGadgetStateByConfigId(context, defs.starter_gadget, GadgetState.Default) 
+        ScriptLib.SetGadgetStateByConfigId(context, defs.starter_gadget, GadgetState.Default)
     else
-        ScriptLib.SetGadgetStateByConfigId(context, defs.starter_gadget, GadgetState.GearStop) 
+        ScriptLib.SetGadgetStateByConfigId(context, defs.starter_gadget, GadgetState.GearStop)
     end
     LF_PrintLog(context,"设置操作台"..(is_active and "显示" or "隐藏"))
     LF_PrintLog(context, "更新gadget信息完毕")
@@ -260,7 +260,7 @@ function LF_ResetAllVars(context)
 end
 
 --插入trigger
-function LF_InsertTriggers(TempTrigger,suiteIndex) 
+function LF_InsertTriggers(TempTrigger,suiteIndex)
     if suiteIndex <= 0 or suiteIndex > #suites then
         return -1
     end
@@ -275,7 +275,7 @@ end
 --获取Point Pos Vec3
 function LF_GetPointPos(context,point_id)
     for k,v in pairs(points) do
-        if v.config_id == point_id then 
+        if v.config_id == point_id then
             return v.pos
         end
     end
@@ -287,7 +287,7 @@ end
 function LF_GetPointRot(context,point_id)
 
     for k,v in pairs(points) do
-        if v.config_id == point_id then 
+        if v.config_id == point_id then
             return v.rot
         end
     end

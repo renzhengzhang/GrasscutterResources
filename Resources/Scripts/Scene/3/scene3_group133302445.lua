@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133302445
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -87,9 +87,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -97,15 +97,15 @@ function condition_EVENT_GROUP_LOAD_445007(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133302445, 445012) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133302445, 445013) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133302445, 445014) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -116,7 +116,7 @@ function action_EVENT_GROUP_LOAD_445007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -125,15 +125,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_445015(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133302445, 445012) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133302445, 445013) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133302445, 445014) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -144,7 +144,7 @@ function action_EVENT_GADGET_STATE_CHANGE_445015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -166,8 +166,8 @@ function condition_EVENT_GADGET_STATE_CHANGE_445016(context, evt)
 	if 1 == 3 and 300 ~= evt.param1 and 301 ~= evt.param1 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -177,20 +177,20 @@ function action_EVENT_GADGET_STATE_CHANGE_445016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 445013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 445003, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 445004, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -212,8 +212,8 @@ function condition_EVENT_GADGET_STATE_CHANGE_445017(context, evt)
 	if 1 == 3 and 300 ~= evt.param1 and 301 ~= evt.param1 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -223,20 +223,20 @@ function action_EVENT_GADGET_STATE_CHANGE_445017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 445012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 445001, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 445002, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -258,8 +258,8 @@ function condition_EVENT_GADGET_STATE_CHANGE_445018(context, evt)
 	if 1 == 3 and 300 ~= evt.param1 and 301 ~= evt.param1 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -269,7 +269,7 @@ function action_EVENT_GADGET_STATE_CHANGE_445018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 445014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

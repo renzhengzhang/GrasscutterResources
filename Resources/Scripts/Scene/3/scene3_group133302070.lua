@@ -1,20 +1,20 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133302070
 }
 
 -- DEFS_MISCS
 -- 特定Region或者Group可以写，每次EnterRegion会检测
-local defs ={
-    regionList = {70001}, 
+defs ={
+    regionList = {70001},
     -- 1,2,3,4对应4套等级
     curCommander =2,
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -98,20 +98,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_70002(context, evt)
 	if evt.param1 ~= 70002 then return false end
-	
+
 	-- 判断是区域70002
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 70002 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -122,13 +122,13 @@ function action_EVENT_ENTER_REGION_70002(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 将本组内变量名为 "Gteach" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Gteach", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -136,13 +136,13 @@ end
 function action_EVENT_QUEST_START_70003(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302070, 2)
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133302070, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -152,7 +152,7 @@ function condition_EVENT_GROUP_LOAD_70004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Gteach") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -163,7 +163,7 @@ function action_EVENT_GROUP_LOAD_70004(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -174,7 +174,7 @@ function action_EVENT_QUEST_START_70007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001196
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	challenge_id = 2010062,
 	enter_region = 196015,
 	leave_region = 196019,
@@ -17,9 +17,9 @@ local Phase ={
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -80,9 +80,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -93,9 +93,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -165,9 +165,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -177,7 +177,7 @@ function action_EVENT_ANY_MONSTER_DIE_196011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -185,8 +185,8 @@ end
 function action_EVENT_MONSTER_BATTLE_196016(context, evt)
 	-- 创建标识为"T1"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T1", {3}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -196,7 +196,7 @@ function condition_EVENT_ANY_MONSTER_DIE_196018(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -207,11 +207,11 @@ function action_EVENT_ANY_MONSTER_DIE_196018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001196, 7)
-	
+
 	return 0
 end
 
@@ -222,7 +222,7 @@ function action_EVENT_TIME_AXIS_PASS_196023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 

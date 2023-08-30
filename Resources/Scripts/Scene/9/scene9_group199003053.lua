@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199003053
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -92,9 +92,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -102,28 +102,28 @@ function condition_EVENT_GADGET_STATE_CHANGE_53005(context, evt)
 	if 53001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_53005(context, evt)
-	
+
 	local k=0
 	local t=0
-	 
+
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52001, GadgetState.GearStart)
 	k=ScriptLib.GetGroupVariableValue(context, "key")
 	t=ScriptLib.GetGroupVariableValue(context, "times")
-	  
+
 		 k=k+1*10^t
 		t=t+1
-	  
+
 	 if 0 ~= ScriptLib.SetGroupVariableValue(context, "key", k) then
 	 ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 				  return -1
 				end
-	  
+
 	  if 0 ~= ScriptLib.SetGroupVariableValue(context, "times", t) then
 	 ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_t")
 				  return -1
@@ -136,29 +136,29 @@ function condition_EVENT_GADGET_STATE_CHANGE_53006(context, evt)
 	if 53002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_53006(context, evt)
-	
+
 	local k=0
 	local t=0
-	  
-	 
+
+
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52002, GadgetState.GearStart)
 	k=ScriptLib.GetGroupVariableValue(context, "key")
 	t=ScriptLib.GetGroupVariableValue(context, "times")
-	  
+
 		 k=k+2*10^t
 		t=t+1
-	  
+
 	 if 0 ~= ScriptLib.SetGroupVariableValue(context, "key", k) then
 	 ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 				  return -1
 				end
-	  
+
 	  if 0 ~= ScriptLib.SetGroupVariableValue(context, "times", t) then
 	 ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_t")
 				  return -1
@@ -171,29 +171,29 @@ function condition_EVENT_GADGET_STATE_CHANGE_53007(context, evt)
 	if 53003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_53007(context, evt)
-	
+
 	local k=0
 	local t=0
-	  
-	 
+
+
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52003, GadgetState.GearStart)
 	k=ScriptLib.GetGroupVariableValue(context, "key")
 	t=ScriptLib.GetGroupVariableValue(context, "times")
-	  
+
 		 k=k+3*10^t
 		t=t+1
-	  
+
 	 if 0 ~= ScriptLib.SetGroupVariableValue(context, "key", k) then
 	 ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 				  return -1
 				end
-	  
+
 	  if 0 ~= ScriptLib.SetGroupVariableValue(context, "times", t) then
 	 ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_t")
 				  return -1
@@ -206,29 +206,29 @@ function condition_EVENT_GADGET_STATE_CHANGE_53008(context, evt)
 	if 53004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_53008(context, evt)
-	
+
 	local k=0
 	local t=0
-	  
-	 
+
+
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52004, GadgetState.GearStart)
 	k=ScriptLib.GetGroupVariableValue(context, "key")
 	t=ScriptLib.GetGroupVariableValue(context, "times")
-	  
+
 		 k=k+4*10^t
 		t=t+1
-	  
+
 	 if 0 ~= ScriptLib.SetGroupVariableValue(context, "key", k) then
 	 ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 				  return -1
 				end
-	  
+
 	  if 0 ~= ScriptLib.SetGroupVariableValue(context, "times", t) then
 	 ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_t")
 				  return -1
@@ -239,45 +239,45 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_53009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"times"为4
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_53009(context, evt)
-	if 
-	ScriptLib.GetGroupVariableValueByGroup(context, "key", 199003053) == 1342 
+	if
+	ScriptLib.GetGroupVariableValueByGroup(context, "key", 199003053) == 1342
 	then
-	
+
 	--创建id为53010的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 53010 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	else
-	
-				ScriptLib.SetGadgetStateByConfigId(context, 53001, GadgetState.Default) 
+
+				ScriptLib.SetGadgetStateByConfigId(context, 53001, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 53002, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 53003, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 53004, GadgetState.Default)
-	 
+
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52001, GadgetState.Default)
-	 
-	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52002, GadgetState.Default)		
-	 
-	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52003, GadgetState.Default)		
-	 
-	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52004, GadgetState.Default)					ScriptLib.SetGroupVariableValue(context, "times", 0) 
+
+	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52002, GadgetState.Default)
+
+	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52003, GadgetState.Default)
+
+	ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52004, GadgetState.Default)					ScriptLib.SetGroupVariableValue(context, "times", 0)
 	 ScriptLib.SetGroupVariableValue(context, "key", 0)
 	end
-	
-				
+
+
 	return 0
 end
 
@@ -287,7 +287,7 @@ function condition_EVENT_GROUP_LOAD_53011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -295,58 +295,58 @@ end
 function action_EVENT_GROUP_LOAD_53011(context, evt)
 	-- 变量"key"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "key", 0)
-	
+
 	-- 变量"times"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-	
+
 	-- 将configid为 53001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 53001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 53002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 53002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 53003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 53003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 53004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 53004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组199003052中， configid为52001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组199003052中， configid为52002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组199003052中， configid为52003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组199003052中， configid为52004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 199003052, 52004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -355,7 +355,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_53012(context, evt)
 	if 53010 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -366,7 +366,7 @@ function action_EVENT_GADGET_STATE_CHANGE_53012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -376,7 +376,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_53013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "camera") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -387,7 +387,7 @@ function action_EVENT_GADGET_STATE_CHANGE_53013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-747，228，-106），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-747, y=228, z=-106}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -396,7 +396,7 @@ function action_EVENT_GADGET_STATE_CHANGE_53013(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end

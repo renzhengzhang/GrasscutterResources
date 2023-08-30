@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155002011
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155002011
 }
 
@@ -15,28 +15,28 @@ local Worktops = {}
 local DayAppearGadgets = {}
 local NightAppearGadgets = {11002}
 
-local gameplayStateFuncitons = 
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-		
+
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 
-	
+
 	end,
 	["2"] = function(context)
-		
+
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 	end
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -44,17 +44,17 @@ end
 
 function GadgetStateSwitcher(context,groupid,gadget_id,state)
 
-	if ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[1] then 
+	if ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[1] then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, groupid, gadget_id, state[2])
-	elseif ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[2] then 
+	elseif ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[2] then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, groupid, gadget_id, state[1])
-	end 
+	end
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -95,9 +95,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -108,9 +108,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -135,22 +135,22 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_11005(context, evt)
 				local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155002001)
-			
-				if isactive == 1 then 
-					if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then 
+
+				if isactive == 1 then
+					if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then
 						ScriptLib.SetGroupVariableValue(context,"gameplayState", 1)
 					end
-					
+
 				end
-			
+
 	UpdateGamePlayState(context)
 		return 0
 end
@@ -158,7 +158,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_11006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 		if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 				return false
 		end

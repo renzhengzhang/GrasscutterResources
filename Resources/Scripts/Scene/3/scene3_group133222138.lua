@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133222138
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -95,9 +95,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -106,7 +106,7 @@ function condition_EVENT_ANY_MONSTER_DIE_138003(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -117,13 +117,13 @@ function action_EVENT_ANY_MONSTER_DIE_138003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 4000, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -132,7 +132,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_138010(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133222138, 138002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -140,7 +140,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_138010(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133222141, 1)
-	
+
 	return 0
 end
 
@@ -150,8 +150,8 @@ function condition_EVENT_ANY_MONSTER_DIE_138013(context, evt)
 	if evt.param1 ~= 138001 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -159,7 +159,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_138013(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133222138, 2)
-	
+
 	return 0
 end
 
@@ -168,7 +168,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_138014(context, evt)
 	if 138002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -182,13 +182,13 @@ function action_EVENT_GADGET_STATE_CHANGE_138014(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "unlock2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "unlock2", 1, 133222338) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

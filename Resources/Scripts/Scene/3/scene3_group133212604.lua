@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133212604
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -85,18 +85,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_604004(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133212604) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -107,17 +107,17 @@ function action_EVENT_ANY_MONSTER_DIE_604004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"delay"，时间节点为{5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "delay", {5}, false)
-	
-	
+
+
 	-- 调用提示id为 7228702 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7228702) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -126,7 +126,7 @@ function condition_EVENT_TIME_AXIS_PASS_604005(context, evt)
 	if "delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -137,17 +137,17 @@ function action_EVENT_TIME_AXIS_PASS_604005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_604006(context, evt)
-	-- 判断指定group组剩余怪物数量是否是1 
+	-- 判断指定group组剩余怪物数量是否是1
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133212604) ~= 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_ANY_MONSTER_DIE_604006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -168,7 +168,7 @@ function condition_EVENT_GROUP_LOAD_604007(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "dead", 133212604) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -179,6 +179,6 @@ function action_EVENT_GROUP_LOAD_604007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

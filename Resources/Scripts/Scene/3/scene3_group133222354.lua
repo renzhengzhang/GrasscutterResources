@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133222354
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_Teleport_1 = 354001,
 	gadget_Teleport_2 = 354002,
 	gadget_Teleport_3 = 0,
@@ -23,16 +23,16 @@ local defs = {
 }
 
 -- DEFS_MISCS
-connectInfo = 
+connectInfo =
 {
 	{defs.gadget_Teleport_1,defs.gadget_Teleport_2,defs.pointarray_1,10}
 
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -100,9 +100,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -113,9 +113,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -131,20 +131,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_354015(context, evt)
 	if evt.param1 ~= 354015 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_1_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_1_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -159,12 +159,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_354016(context, evt)
 	if evt.param1 ~= 354016 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_2_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_2_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 

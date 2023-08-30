@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133310474
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	pointarray_normal = 331000020,
 	pointarray_hard = 331000021
 }
@@ -17,7 +17,8 @@ local challengeOptionID = 188
 local holeConfigID = {474001, 474002, 474003, 474005}
 local checkOptionID = 916
 
-local arrayID = {331000020, 331000021}
+local arrayID = {331000020
+, 331000021}
 
 local randomVez = {min = 3, max = 5}
 
@@ -26,9 +27,9 @@ local successCount = 2
 local unmovenum = 0
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -68,9 +69,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +82,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -108,34 +109,34 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_474007(context, evt)
 	-- 判断是gadgetid 474006 option_id 188
 	if 474006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 188 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_474007(context, evt)
-	
+
 	ScriptLib.RemoveExtraGroupSuite(context, 133310474, 2)
-	
-	
-	ScriptLib.StartChallenge(context, 666, 85, {3, 666, 2}) 
-	
+
+
+	ScriptLib.StartChallenge(context, 666, 85, {3, 666, 2})
+
 	return 0
 end
 
@@ -144,7 +145,7 @@ function condition_EVENT_GADGET_CREATE_474008(context, evt)
 	if 474006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -152,25 +153,25 @@ end
 function action_EVENT_GADGET_CREATE_474008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133310474, 2)
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133310474, 474006, {188}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_474009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	--检测当前改变的variable是否在预设区间
 	if 0 > evt.param1 or 5 < evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -181,13 +182,13 @@ function action_EVENT_CHALLENGE_FAIL_474010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133310474, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -195,8 +196,8 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_474011(context, evt)
 	-- 创建标识为"timer"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer", {3}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -205,7 +206,7 @@ function condition_EVENT_TIME_AXIS_PASS_474012(context, evt)
 	if "timer" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -216,7 +217,7 @@ function action_EVENT_TIME_AXIS_PASS_474012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 

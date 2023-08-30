@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220147009
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	active_step = 201,
 	inactive_step = 0,
 	gadget_array = {9002,9003,9004},
@@ -17,9 +17,9 @@ local v_error = 0
 local max_bit = #defs.gadget_array
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -113,9 +113,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -123,7 +123,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9010(context, evt)
 	if 9001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -134,14 +134,14 @@ function action_EVENT_GADGET_STATE_CHANGE_9010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220147009, 2)
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220147009, 3)
-	
+
 	return 0
 end
 
@@ -167,7 +167,7 @@ function action_EVENT_GADGET_STATE_CHANGE_9011(context, evt)
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break 
+	                        break
 	                end
 	                if i == max_bit and defs.gadget_array[i] ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
@@ -192,7 +192,7 @@ function action_EVENT_GADGET_STATE_CHANGE_9011(context, evt)
 	        if v_error ~= 1 then
 	                v_error = -1
 	        end
-	        ScriptLib.SetGroupVariableValue(context, "sort", v) 
+	        ScriptLib.SetGroupVariableValue(context, "sort", v)
 	        ScriptLib.SetGroupVariableValue(context, "gear_reset", v_error)
 	        ScriptLib.SetGroupVariableValue(context, "v_error", 0)
 	end
@@ -202,7 +202,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_9012(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if evt.param1 == 1 then
 		if #defs.reset_gear_list == 0 then
 	                        defs.reset_gear_list = defs.gadget_array
@@ -223,8 +223,8 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
-	
+
+
 	if evt.param1 == -1 then
 		return true
 	end
@@ -235,26 +235,26 @@ end
 function action_EVENT_VARIABLE_CHANGE_9013(context, evt)
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 220147009, 2)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220147009, 3)
-	
+
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220147009, 1)
-	
+
 	-- 将本组内变量名为 "trigger_output" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "trigger_output", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 > 0 then
 		return true
 	end
@@ -271,16 +271,16 @@ function action_EVENT_VARIABLE_CHANGE_9014(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220147010, 2)
-	
+
 	-- 改变指定group组220147010中， configid为10002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220147010, 10002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

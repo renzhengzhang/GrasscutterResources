@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308220
 }
 
@@ -14,9 +14,9 @@ local optionID = {440}
 --{440} 权限操作台解除物件锁定
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -94,23 +94,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_220003(context, evt)
 	-- 判断是gadgetid 220002 option_id 440
 	if 220002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 440 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -120,8 +120,8 @@ function action_EVENT_SELECT_OPTION_220003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 220002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标{x=-1299.117, y=68.65953, z=4546.569}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-1299.117, y=68.65953, z=4546.569}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -130,8 +130,8 @@ function action_EVENT_SELECT_OPTION_220003(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -140,7 +140,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_220004(context, evt)
 	if 220002 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -150,8 +150,8 @@ function action_EVENT_GADGET_STATE_CHANGE_220004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 220001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -160,7 +160,7 @@ function condition_EVENT_GROUP_LOAD_220005(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133308220, 220002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -170,8 +170,8 @@ function action_EVENT_GROUP_LOAD_220005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 220001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -181,8 +181,8 @@ function action_EVENT_QUEST_FINISH_220006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 220002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

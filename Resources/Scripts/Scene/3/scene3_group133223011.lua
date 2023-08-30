@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133223011
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -75,20 +75,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_11003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"progress"为3
 	if ScriptLib.GetGroupVariableValue(context, "progress") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -99,24 +99,24 @@ function action_EVENT_VARIABLE_CHANGE_11003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 11002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 创建id为11001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 11001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建标识为"CS_Start"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "CS_Start", {3}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -125,7 +125,7 @@ function condition_EVENT_TIME_AXIS_PASS_11004(context, evt)
 	if "CS_Start" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -135,12 +135,12 @@ function action_EVENT_TIME_AXIS_PASS_11004(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 322310001, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 停止标识为"CS_Start"的时间轴
 	ScriptLib.EndTimeAxis(context, "CS_Start")
-	
-	
+
+
 	return 0
 end
 
@@ -150,7 +150,7 @@ function condition_EVENT_GROUP_LOAD_11006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "water_level_A") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -161,6 +161,6 @@ function action_EVENT_GROUP_LOAD_11006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end

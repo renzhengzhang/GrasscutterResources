@@ -3,12 +3,12 @@
 --||   Filename      ||    Activity_LumenCharge
 --||   RelVersion    ||    V2_7
 --||   Owner         ||    chao-jin
---||   Description   ||    
+--||   Description   ||
 --||   LogName       ||    ##[Activity_LumenCharge]
---||   Protection    ||    
+--||   Protection    ||
 --======================================================================================================================
 --[[Defs & Miscs
-local defs = {
+defs = {
     challenge_time = 300,
     pursina = 581032,
     pursina_tip = 581105,
@@ -31,59 +31,59 @@ local mud_list = {
 
 --黑泥核心1
 [581066] = { mud_id = 581082, cover_list= {581094}, respawn_time = 4, mutex_id = 581067, score = 3,
-    cover_content = { 
-        [1] = {581025}, 
-        [2] = {581033}, 
-        [3] = {581051}, 
+    cover_content = {
+        [1] = {581025},
+        [2] = {581033},
+        [3] = {581051},
         [4] = {581079},
         [5] = {581123},}
 },
 --黑泥核心2
 [581068]  = { mud_id = 581081, cover_list= {581095,581096}, respawn_time = 4, mutex_id = 581071, score = 3,
-    cover_content = { 
-    [1] = {581020,581026}, 
-    [2] = {581049,581044}, 
-    [3] = {581054,581055}, 
+    cover_content = {
+    [1] = {581020,581026},
+    [2] = {581049,581044},
+    [3] = {581054,581055},
     [4] = {581108,581080},
     [5] = {581127,581124},}
 },
 --黑泥核心3
 [581069] = { mud_id = 581083, cover_list= {581093}, respawn_time = 4, mutex_id = 581070, score = 3,
-    cover_content = { 
-        [1] = {581022}, 
-        [2] = {581045}, 
-        [3] = {581099}, 
+    cover_content = {
+        [1] = {581022},
+        [2] = {581045},
+        [3] = {581099},
         [4] = {581098},
         [5] = {581125},}
-}, 
+},
 --黑泥核心4
 [581067] = {mud_id = 581084, cover_list = {581091, 581092}, respawn_time = 6, mutex_id = 581066, score = 3,
-    cover_content = { 
+    cover_content = {
         [1] = {581031,581036},
         [2] = {581053,581046},
         [3] = {581056,581100},
         [4] = {581101,581113},
-        [5] = {581126,581128},}, 
+        [5] = {581126,581128},},
 },
 --黑泥核心5
 [581070] = {mud_id = 581085, cover_list = {581087, 581088}, respawn_time = 6, mutex_id = 581069, score = 3,
-    cover_content = { 
+    cover_content = {
         [1] = {581029,581039},
         [2] = {581047,581048},
         [3] = {581102,581103},
         [4] = {581115,581116},
-        [5] = {581129,581130},}, 
+        [5] = {581129,581130},},
 },
 --黑泥核心6
 [581071] = {mud_id = 581086, cover_list = {581017,581019,581089, 581090}, respawn_time = 6, mutex_id = 581068, score = 3,
-    cover_content = { 
+    cover_content = {
         [1] = {581040,581041,581042,581043},
         [2] = {581052,581058,581059,581050},
         [3] = {581104,581106,581057,581076},
         [4] = {581078,581119,581118,581117},
-        [5] = {581122,581131,581132,581139},}, 
+        [5] = {581122,581131,581132,581139},},
 },
-}  
+}
 --====================================================================================================================]]
 --======================================================================================================================
 
@@ -100,7 +100,7 @@ local LumenCharge_Triggers = {
 }
 --Events
 --Group加载时处理内容
-function action_group_load(context, evt) 
+function action_group_load(context, evt)
     ScriptLib.PrintContextLog(context,"##[LumenCharge]:加载Group")
     ScriptLib.ActivateGroupLinkBundle(context, base_info.group_id)
     LF_ResetAllValues(context)
@@ -117,10 +117,10 @@ function condition_add_charge_progress(context, evt)
 end
 
 --处理能量进度变化时的进度显示
-function action_variable_change(context, evt) 
-    if evt.source_name == "energy" then 
+function action_variable_change(context, evt)
+    if evt.source_name == "energy" then
         --充能进度10%刷怪
-        if evt.param1 == 10 then 
+        if evt.param1 == 10 then
             ScriptLib.PrintContextLog(context,"##[LumenCharge]:刷新第1波怪")
             ScriptLib.ChangeGroupVariableValue(context, "stage", 1)
             ScriptLib.ShowReminder(context, 4000144)
@@ -129,7 +129,7 @@ function action_variable_change(context, evt)
         --  ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, 9)
         end
         --充能进度35%刷怪
-        if evt.param1 == 35 then 
+        if evt.param1 == 35 then
             ScriptLib.PrintContextLog(context,"##[LumenCharge]:刷新第2波怪")
             ScriptLib.ChangeGroupVariableValue(context, "stage", 1)
             ScriptLib.ShowReminder(context, 4000144)
@@ -137,7 +137,7 @@ function action_variable_change(context, evt)
         --  ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, 11)
         end
         --充能进度60%刷怪
-        if evt.param1 == 60 then 
+        if evt.param1 == 60 then
             ScriptLib.PrintContextLog(context,"##[LumenCharge]:刷新第3波怪")
             ScriptLib.ChangeGroupVariableValue(context, "stage", 1)
             ScriptLib.ShowReminder(context, 4000144)
@@ -145,7 +145,7 @@ function action_variable_change(context, evt)
         --  ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, 13)
         end
         --充能进度85%刷怪
-        if evt.param1 == 85 then 
+        if evt.param1 == 85 then
             ScriptLib.PrintContextLog(context,"##[LumenCharge]:刷新第4波怪")
             ScriptLib.ChangeGroupVariableValue(context, "stage", 1)
             ScriptLib.ShowReminder(context, 4000144)
@@ -163,8 +163,8 @@ end
 
 
 --玩家与操作台交互
-function action_select_option(context, evt) 
-    if extra_info.start_operator ~= evt.param1 then 
+function action_select_option(context, evt)
+    if extra_info.start_operator ~= evt.param1 then
         return 0
     end
 
@@ -176,11 +176,11 @@ function action_select_option(context, evt)
     ScriptLib.AttachChildChallenge(context, 1,  2009010, 2009010, { defs.challenge_time, 3, 1003, 100},{},{success = 1,fail = 1})
     ScriptLib.AttachChildChallenge(context, 1,  2009008, 2009008, { defs.challenge_time, 3, 1001, 100},{},{success = 10,fail = 5})
     ScriptLib.StartFatherChallenge(context,1)
-    
+
     --启动reminder，开灯
     ScriptLib.ShowReminder(context, 4000143)
     ScriptLib.SetGadgetStateByConfigId(context, extra_info.lantern, GadgetState.GearStart)
-    
+
     --刷新黑泥对应Group
     ScriptLib.AddExtraGroupSuite(context, 166001581, 2)
     ScriptLib.AddExtraGroupSuite(context, 166001581, 3)
@@ -196,8 +196,8 @@ function action_select_option(context, evt)
 end
 
 --玩家距离过远挑战失败
-function action_leave_fail_region(context, evt) 
-    if evt.param1 == defs.fail_region then 
+function action_leave_fail_region(context, evt)
+    if evt.param1 == defs.fail_region then
         ScriptLib.PrintContextLog(context,"##[LumenCharge]:玩家脱离战斗区域，手动结束挑战")
         ScriptLib.StopChallenge(context, 1, 0)
     end
@@ -205,18 +205,18 @@ function action_leave_fail_region(context, evt)
 end
 
 --处理时间轴
-function action_time_axis_pass(context, evt) 
+function action_time_axis_pass(context, evt)
     --充能的时间轴
-    if evt.source_name == "energyBasic" then 
+    if evt.source_name == "energyBasic" then
         --增加进度
         ScriptLib.ChangeGroupVariableValue(context, "energy", 1)
-    end 
+    end
     --黑泥重生的时间轴
-    local core_id = tonumber(evt.source_name) 
-    if core_id ~= nil then 
+    local core_id = tonumber(evt.source_name)
+    if core_id ~= nil then
         if mud_list[core_id] ~= nil then
             --普通黑泥，没有互斥，直接创生核心和黑泥
-            if mud_list[core_id].mutex_id == 0 then 
+            if mud_list[core_id].mutex_id == 0 then
                 ScriptLib.PrintContextLog(context,"##[LumenCharge]:[普通黑泥]时间轴触发")
                 LF_CreateMudSet(context, core_id)
             else
@@ -226,7 +226,7 @@ function action_time_axis_pass(context, evt)
                     LF_CreateMudSet(context, core_id)
                     ScriptLib.EndTimeAxis(context, tostring(core_id))
                     ScriptLib.PrintContextLog(context,"##[LumenCharge]:[核心黑泥]复活完成,关闭自身时间轴")
-                else 
+                else
             --互斥黑泥存在
                     ScriptLib.PrintContextLog(context,"##[LumenCharge]:[核心黑泥]互斥黑泥存在，此次不刷新"..(mud_list[core_id].mutex_id ))
                     return 0
@@ -241,16 +241,16 @@ end
 --处理黑泥死亡，加进度，计入统计
 function action_any_gadget_die(context,evt)
     if not ScriptLib.IsChallengeStartedByChallengeId(context, 2009007) then
-        ScriptLib.PrintContextLog(context,"##[LumenCharge]:挑战未開啟，不處理") 
+        ScriptLib.PrintContextLog(context,"##[LumenCharge]:挑战未開啟，不處理")
         return 0
     end
     local core_id = evt.param1
     --确定死亡的是黑泥核心
-    if mud_list[core_id] ~= nil then 
-        ScriptLib.PrintContextLog(context,"##[LumenCharge]:增加清除黑泥的总计数") 
+    if mud_list[core_id] ~= nil then
+        ScriptLib.PrintContextLog(context,"##[LumenCharge]:增加清除黑泥的总计数")
         ScriptLib.ChangeGroupTempValue(context, "MUD_REMOVED", 1, {})
-        if 1 ~= ScriptLib.GetGroupTempValue(context, "PURSINA_WORKING", {}) then 
-            ScriptLib.PrintContextLog(context,"##[LumenCharge]:光钉损坏中，清除黑泥不增加进度") 
+        if 1 ~= ScriptLib.GetGroupTempValue(context, "PURSINA_WORKING", {}) then
+            ScriptLib.PrintContextLog(context,"##[LumenCharge]:光钉损坏中，清除黑泥不增加进度")
         else
             ScriptLib.PrintContextLog(context,"##[LumenCharge]:清除黑泥，增加进度")
             for i=1,mud_list[core_id].score do
@@ -260,20 +260,20 @@ function action_any_gadget_die(context,evt)
         --移除黑泥对应的组件
         LF_RemoveMudSet(context,core_id)
         if mud_list[core_id].mutex_id == 0 then
-            ScriptLib.PrintContextLog(context,"##[LumenCharge]:创建普通黑泥复生时间轴") 
+            ScriptLib.PrintContextLog(context,"##[LumenCharge]:创建普通黑泥复生时间轴")
             ScriptLib.InitTimeAxis(context, tostring(core_id), {mud_list[core_id].respawn_time}, false)
         else
-            ScriptLib.PrintContextLog(context,"##[LumenCharge]:创建核心黑泥复生时间轴") 
+            ScriptLib.PrintContextLog(context,"##[LumenCharge]:创建核心黑泥复生时间轴")
             ScriptLib.InitTimeAxis(context, tostring(core_id), {mud_list[core_id].respawn_time}, true)
         end
-    end 
+    end
     return 0
 end
 
 
 --处理挑战成功
-function action_challenge_success(context, evt) 
-    if evt.param1 ~= 2009007 then 
+function action_challenge_success(context, evt)
+    if evt.param1 ~= 2009007 then
         return 0
     end
     ScriptLib.PrintContextLog(context,"##[LumenCharge]:总挑战成功")
@@ -297,8 +297,8 @@ end
 
 
 --处理挑战失败
-function action_challenge_fail(context, evt) 
-    if evt.param1 ~= 2009007 then 
+function action_challenge_fail(context, evt)
+    if evt.param1 ~= 2009007 then
         return 0
     end
     ScriptLib.PrintContextLog(context,"##[LumenCharge]:总挑战失败")
@@ -380,7 +380,7 @@ function LF_SetPursinaHighSpeed(context)
     ScriptLib.SetGroupTempValue(context, "PURSINA_WORKING", 1, {})
 end
 --启动光钉，打开嘲讽
-function LF_StartPursina(context, evt) 
+function LF_StartPursina(context, evt)
     ScriptLib.PrintContextLog(context,"##[LumenCharge]:启动光钉")
     ScriptLib.SetGadgetStateByConfigId(context, defs.pursina, 202)
     ScriptLib.SetGroupTempValue(context, "PURSINA_WORKING", 1, {})
@@ -390,7 +390,7 @@ function LF_StartPursina(context, evt)
 end
 --停止光钉，关闭嘲讽
 function LF_StopPursina(context, evt)
-    ScriptLib.PrintContextLog(context,"##[LumenCharge]:关闭光钉") 
+    ScriptLib.PrintContextLog(context,"##[LumenCharge]:关闭光钉")
     ScriptLib.SetGadgetStateByConfigId(context, defs.pursina, 203)
     ScriptLib.SetGroupTempValue(context, "PURSINA_WORKING", 0, {})
     ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.pursina, "SGV_PURSINA_TAUNT", 0)
@@ -399,10 +399,10 @@ end
 
 --创建黑泥套组
 function LF_CreateMudSet(context, core_id)
-    if mud_list[core_id] ~= nil then 
+    if mud_list[core_id] ~= nil then
         local covers = mud_list[core_id].cover_list
         local content = mud_list[core_id].cover_content
-        ScriptLib.PrintContextLog(context,"##[LumenCharge]:创建黑泥，黑泥白盒") 
+        ScriptLib.PrintContextLog(context,"##[LumenCharge]:创建黑泥，黑泥白盒")
         ScriptLib.CreateGadget(context, {config_id = core_id})
         ScriptLib.CreateGadget(context, {config_id = mud_list[core_id].mud_id})
         if #covers ~= 0 then
@@ -411,7 +411,7 @@ function LF_CreateMudSet(context, core_id)
                 ScriptLib.CreateGadget(context, {config_id = cover_id})
             end
         end
-        if #content ~= 0 then 
+        if #content ~= 0 then
         --  local cur_stage = ScriptLib.GetGroupVariableValue(context, "stage")
             ScriptLib.PrintContextLog(context,"##[LumenCharge]:遍历移除包裹内容物")
         -- 这里遍历了所有stage的包裹物，全部尝试进行一次移除
@@ -424,27 +424,27 @@ function LF_CreateMudSet(context, core_id)
             end
         end
     else
-        ScriptLib.PrintContextLog(context,"##[LumenCharge]:[WARINING] 使用了错误的黑泥核心ID，注意检查") 
+        ScriptLib.PrintContextLog(context,"##[LumenCharge]:[WARINING] 使用了错误的黑泥核心ID，注意检查")
     end
 end
 
 --移除黑泥套组
 function LF_RemoveMudSet(context, core_id)
-    if mud_list[core_id] ~= nil then 
+    if mud_list[core_id] ~= nil then
         local covers = mud_list[core_id].cover_list
         local content= mud_list[core_id].cover_content
-        ScriptLib.PrintContextLog(context,"##[LumenCharge]:移除黑泥白盒") 
+        ScriptLib.PrintContextLog(context,"##[LumenCharge]:移除黑泥白盒")
         if 0 ~= ScriptLib.GetEntityIdByConfigId(context, mud_list[core_id].mud_id) then
             ScriptLib.KillEntityByConfigId(context, { group_id = base_info.group_id, config_id = mud_list[core_id].mud_id, entity_type = EntityType.GADGET })
 --          ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, mud_list[core_id].mud_id)
         end
-    
+
         ScriptLib.PrintContextLog(context,"##[LumenCharge]:移除黑泥包裹物")
         for k,cover_id in pairs(covers) do
             if 0 ~= ScriptLib.GetEntityIdByConfigId(context, cover_id) then
                 ScriptLib.KillEntityByConfigId(context, { group_id = base_info.group_id, config_id = cover_id, entity_type = EntityType.GADGET })
             --    ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, cover_id)
-            end               
+            end
         end
 
         local cur_stage = ScriptLib.GetGroupVariableValue(context, "stage")
@@ -455,7 +455,7 @@ function LF_RemoveMudSet(context, core_id)
             end
         end
     else
-        ScriptLib.PrintContextLog(context,"##[LumenCharge]:[WARINING] 使用了错误的黑泥核心ID，注意检查") 
+        ScriptLib.PrintContextLog(context,"##[LumenCharge]:[WARINING] 使用了错误的黑泥核心ID，注意检查")
     end
 end
 
@@ -471,7 +471,7 @@ end
 
 function SLC_ResumePursina(context)
     if not ScriptLib.IsChallengeStartedByChallengeId(context, 2009007) then
-        ScriptLib.PrintContextLog(context,"##[LumenCharge]:挑战已结束，不再恢复时间轴") 
+        ScriptLib.PrintContextLog(context,"##[LumenCharge]:挑战已结束，不再恢复时间轴")
         return 0
     end
     LF_SetPursinaMidSpeed(context)

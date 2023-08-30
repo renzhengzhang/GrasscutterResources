@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 144002012
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -107,9 +107,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -119,7 +119,7 @@ function action_EVENT_QUEST_START_12001(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -127,14 +127,14 @@ end
 function condition_EVENT_SELECT_OPTION_12002(context, evt)
 	-- 判断是gadgetid 12005 option_id 39
 	if 12005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 39 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -145,25 +145,25 @@ function action_EVENT_SELECT_OPTION_12002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 144002012, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 删除指定group： 144002012 ；指定config：12005；物件身上指定option：39；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 144002012, 12005, 39) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 创建id为12007的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 12007 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -172,7 +172,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_12003(context, evt)
 	if 12007 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -183,13 +183,13 @@ function action_EVENT_GADGET_STATE_CHANGE_12003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144002012, 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -198,7 +198,7 @@ function condition_EVENT_GADGET_CREATE_12004(context, evt)
 	if 12005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -209,7 +209,7 @@ function action_EVENT_GADGET_CREATE_12004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -219,8 +219,8 @@ function action_EVENT_QUEST_FINISH_12006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -231,6 +231,6 @@ function action_EVENT_QUEST_START_12009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end

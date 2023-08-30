@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308124
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_CoreID = 124007,
 	monster_BossID = 124002,
 	gadget_Point_1 = 124008,
@@ -36,9 +36,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -107,9 +107,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -120,9 +120,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -165,9 +165,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -176,20 +176,20 @@ function action_EVENT_GROUP_LOAD_124001(context, evt)
 	if 0 ~= ScriptLib.ChangeDeathZone(context,0,{is_open = true}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_deatzone")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_124019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"PlayPhase"为3
 	if ScriptLib.GetGroupVariableValue(context, "PlayPhase") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -199,14 +199,14 @@ function action_EVENT_VARIABLE_CHANGE_124019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 124014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "siyu" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "siyu", 1, 133308669) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -216,8 +216,8 @@ function action_EVENT_GROUP_LOAD_124020(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 124014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -227,14 +227,14 @@ function action_EVENT_GROUP_REFRESH_124021(context, evt)
 	if 0 ~= ScriptLib.ChangeDeathZone(context,0,{is_open = true}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_deatzone")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "PlayPhase" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "PlayPhase", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_ANY_GADGET_DIE_124025(context, evt)
 	if 124008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -254,8 +254,8 @@ function action_EVENT_ANY_GADGET_DIE_124025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -264,7 +264,7 @@ function condition_EVENT_ANY_GADGET_DIE_124026(context, evt)
 	if 124009 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -275,8 +275,8 @@ function action_EVENT_ANY_GADGET_DIE_124026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -285,7 +285,7 @@ function condition_EVENT_ANY_GADGET_DIE_124027(context, evt)
 	if 124010 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -296,8 +296,8 @@ function action_EVENT_ANY_GADGET_DIE_124027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 

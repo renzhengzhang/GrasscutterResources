@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133003550
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -96,9 +96,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -109,9 +109,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -199,9 +199,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -209,7 +209,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550015(context, evt)
 	if 550003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -220,7 +220,7 @@ function action_EVENT_ANY_MONSTER_DIE_550015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -229,7 +229,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550016(context, evt)
 	if 550004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -240,7 +240,7 @@ function action_EVENT_ANY_MONSTER_DIE_550016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -249,7 +249,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550017(context, evt)
 	if 550005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -260,7 +260,7 @@ function action_EVENT_ANY_MONSTER_DIE_550017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -269,7 +269,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550018(context, evt)
 	if 550006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -280,7 +280,7 @@ function action_EVENT_ANY_MONSTER_DIE_550018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -289,7 +289,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550019(context, evt)
 	if 550007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -300,7 +300,7 @@ function action_EVENT_ANY_MONSTER_DIE_550019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -309,7 +309,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550020(context, evt)
 	if 550008 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -320,7 +320,7 @@ function action_EVENT_ANY_MONSTER_DIE_550020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -329,7 +329,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550021(context, evt)
 	if 550009 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -340,7 +340,7 @@ function action_EVENT_ANY_MONSTER_DIE_550021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -349,7 +349,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550022(context, evt)
 	if 550010 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -360,7 +360,7 @@ function action_EVENT_ANY_MONSTER_DIE_550022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -369,7 +369,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550023(context, evt)
 	if 550011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -380,7 +380,7 @@ function action_EVENT_ANY_MONSTER_DIE_550023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -389,7 +389,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550024(context, evt)
 	if 550012 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -400,7 +400,7 @@ function action_EVENT_ANY_MONSTER_DIE_550024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -409,7 +409,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550025(context, evt)
 	if 550013 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -420,7 +420,7 @@ function action_EVENT_ANY_MONSTER_DIE_550025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -429,7 +429,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550026(context, evt)
 	if 550014 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -440,7 +440,7 @@ function action_EVENT_ANY_MONSTER_DIE_550026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -449,7 +449,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550090(context, evt)
 	if 550001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -460,7 +460,7 @@ function action_EVENT_ANY_MONSTER_DIE_550090(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -469,7 +469,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550091(context, evt)
 	if 550068 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -480,7 +480,7 @@ function action_EVENT_ANY_MONSTER_DIE_550091(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -489,7 +489,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550092(context, evt)
 	if 550082 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -500,7 +500,7 @@ function action_EVENT_ANY_MONSTER_DIE_550092(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -509,7 +509,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550093(context, evt)
 	if 550083 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -520,7 +520,7 @@ function action_EVENT_ANY_MONSTER_DIE_550093(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -529,7 +529,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550094(context, evt)
 	if 550084 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -540,7 +540,7 @@ function action_EVENT_ANY_MONSTER_DIE_550094(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -549,7 +549,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550095(context, evt)
 	if 550086 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -560,7 +560,7 @@ function action_EVENT_ANY_MONSTER_DIE_550095(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -569,7 +569,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550096(context, evt)
 	if 550087 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -580,7 +580,7 @@ function action_EVENT_ANY_MONSTER_DIE_550096(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -589,7 +589,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550097(context, evt)
 	if 550088 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -600,7 +600,7 @@ function action_EVENT_ANY_MONSTER_DIE_550097(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -609,7 +609,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550098(context, evt)
 	if 550089 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -620,7 +620,7 @@ function action_EVENT_ANY_MONSTER_DIE_550098(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -629,7 +629,7 @@ function condition_EVENT_ANY_MONSTER_DIE_550099(context, evt)
 	if 550085 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -640,6 +640,6 @@ function action_EVENT_ANY_MONSTER_DIE_550099(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end

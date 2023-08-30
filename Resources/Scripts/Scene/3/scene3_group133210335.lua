@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210335
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_Teleport_1 = 335001,
 	gadget_Teleport_2 = 335002,
 	gadget_Teleport_3 = 335003,
@@ -23,7 +23,7 @@ local defs = {
 }
 
 -- DEFS_MISCS
-connectInfo = 
+connectInfo =
 {
 	{defs.gadget_Teleport_1,defs.gadget_Teleport_2,defs.pointarray_1,10},
 	{defs.gadget_Teleport_2,defs.gadget_Teleport_3,defs.pointarray_2,10},
@@ -31,9 +31,9 @@ connectInfo =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -99,9 +99,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -112,9 +112,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -130,20 +130,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_335009(context, evt)
 	if evt.param1 ~= 335009 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_1_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_1_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -158,12 +158,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_335010(context, evt)
 	if evt.param1 ~= 335010 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_2_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_2_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -178,12 +178,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_335011(context, evt)
 	if evt.param1 ~= 335011 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_3_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_3_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -198,12 +198,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_335012(context, evt)
 	if evt.param1 ~= 335012 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_4_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_4_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 

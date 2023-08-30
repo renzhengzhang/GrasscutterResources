@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199002147
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -128,9 +128,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -141,9 +141,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -177,20 +177,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_147035(context, evt)
 	if evt.param1 ~= 147035 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -202,7 +202,7 @@ function condition_EVENT_ENTER_REGION_147035(context, evt)
 	    else
 	      return true
 	    end
-	
+
 	return true
 end
 
@@ -213,7 +213,7 @@ function action_EVENT_ENTER_REGION_147035(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -227,20 +227,20 @@ function action_EVENT_QUEST_START_147036(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_147037(context, evt)
 	if evt.param1 ~= 147037 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -252,7 +252,7 @@ function condition_EVENT_ENTER_REGION_147037(context, evt)
 	    else
 	      return true
 	    end
-	
+
 	return true
 end
 
@@ -264,14 +264,14 @@ function action_EVENT_ENTER_REGION_147037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_147038(context, evt)
 	if evt.param1 ~= 147038 then return false end
-	
+
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -283,12 +283,12 @@ function condition_EVENT_ENTER_REGION_147038(context, evt)
 	    else
 	      return true
 	    end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -300,19 +300,19 @@ function action_EVENT_ENTER_REGION_147038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_147099(context, evt)
 	if evt.param1 ~= 147099 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -320,19 +320,19 @@ end
 function action_EVENT_ENTER_REGION_147099(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002147, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_147100(context, evt)
 	if evt.param1 ~= 147100 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -340,6 +340,6 @@ end
 function action_EVENT_ENTER_REGION_147100(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002147, 3)
-	
+
 	return 0
 end

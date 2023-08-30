@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133103571
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -154,9 +154,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -167,9 +167,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -257,9 +257,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -267,7 +267,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571045(context, evt)
 	if 571044 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -278,25 +278,25 @@ function action_EVENT_GADGET_STATE_CHANGE_571045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "groupfin" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "groupfin", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_571047(context, evt)
 	if evt.param1 ~= 571047 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -308,7 +308,7 @@ function action_EVENT_ENTER_REGION_571047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -317,7 +317,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571049(context, evt)
 	if 571041 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -328,13 +328,13 @@ function action_EVENT_GADGET_STATE_CHANGE_571049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "groupfin" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "groupfin", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -342,19 +342,19 @@ end
 function action_EVENT_QUEST_FINISH_571052(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103571, 9)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_571059(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"groupfin"为3
 	if ScriptLib.GetGroupVariableValue(context, "groupfin") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -365,19 +365,19 @@ function action_EVENT_VARIABLE_CHANGE_571059(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_571062(context, evt)
 	if evt.param1 ~= 571062 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -385,7 +385,7 @@ end
 function action_EVENT_ENTER_REGION_571062(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103571, 5)
-	
+
 	return 0
 end
 
@@ -394,7 +394,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571066(context, evt)
 	if 571003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -405,13 +405,13 @@ function action_EVENT_GADGET_STATE_CHANGE_571066(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133103571, EntityType.GADGET, 571004 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -420,7 +420,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571067(context, evt)
 	if 571006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -431,13 +431,13 @@ function action_EVENT_GADGET_STATE_CHANGE_571067(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133103571, EntityType.GADGET, 571007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -446,7 +446,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571068(context, evt)
 	if 571008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -457,25 +457,25 @@ function action_EVENT_GADGET_STATE_CHANGE_571068(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103571, 9)
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103571, 6)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_571069(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"group1"为2
 	if ScriptLib.GetGroupVariableValue(context, "group1") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -483,7 +483,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_571069(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103571, 3)
-	
+
 	return 0
 end
 
@@ -492,7 +492,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571070(context, evt)
 	if 571019 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -503,13 +503,13 @@ function action_EVENT_GADGET_STATE_CHANGE_571070(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "group2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "group2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -518,7 +518,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571071(context, evt)
 	if 571022 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -528,32 +528,32 @@ function action_EVENT_GADGET_STATE_CHANGE_571071(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 571021, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "group3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "group3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "bridge1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "bridge1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_571072(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"group2"为1
 	if ScriptLib.GetGroupVariableValue(context, "group2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -561,10 +561,10 @@ end
 function action_EVENT_VARIABLE_CHANGE_571072(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103571, 3)
-	
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103571, 7)
-	
+
 	return 0
 end
 
@@ -573,7 +573,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571073(context, evt)
 	if 571035 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -584,19 +584,19 @@ function action_EVENT_GADGET_STATE_CHANGE_571073(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "group3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "group3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "bridge1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "bridge1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -605,7 +605,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571074(context, evt)
 	if 571033 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -616,31 +616,31 @@ function action_EVENT_GADGET_STATE_CHANGE_571074(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "group3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "group3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "bridge1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "bridge1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_571075(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"bridge1"为3
 	if ScriptLib.GetGroupVariableValue(context, "bridge1") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -650,26 +650,26 @@ function action_EVENT_VARIABLE_CHANGE_571075(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 571037, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 571038 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 571038, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_571076(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"group3"为3
 	if ScriptLib.GetGroupVariableValue(context, "group3") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -677,10 +677,10 @@ end
 function action_EVENT_VARIABLE_CHANGE_571076(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103571, 6)
-	
+
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103571, 8)
-	
+
 	return 0
 end
 
@@ -689,7 +689,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571077(context, evt)
 	if 571040 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -699,23 +699,23 @@ function action_EVENT_GADGET_STATE_CHANGE_571077(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 571039, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为571042的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 571042 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "group4" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "group4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103571, 7)
-	
+
 	return 0
 end
 
@@ -724,7 +724,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571078(context, evt)
 	if 571048 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -735,22 +735,22 @@ function action_EVENT_GADGET_STATE_CHANGE_571078(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "group4" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "group4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 571092 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 571092, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103571, 4)
-	
+
 	return 0
 end
 
@@ -759,7 +759,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_571079(context, evt)
 	if 571050 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -770,31 +770,31 @@ function action_EVENT_GADGET_STATE_CHANGE_571079(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 针对当前group内变量名为 "group4" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "group4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "groupfin" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "groupfin", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_571080(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"group4"为5
 	if ScriptLib.GetGroupVariableValue(context, "group4") ~= 5 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -802,30 +802,30 @@ end
 function action_EVENT_VARIABLE_CHANGE_571080(context, evt)
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103571, 7)
-	
+
 	-- 终止识别id为888的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 888, 1)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103571, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103571, 5)
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 571055 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 571057 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -836,7 +836,7 @@ function action_EVENT_CHALLENGE_SUCCESS_571082(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -847,13 +847,13 @@ function action_EVENT_CHALLENGE_FAIL_571083(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133103571, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -864,19 +864,19 @@ function action_EVENT_QUEST_FINISH_571084(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_571085(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"bridge1"为3
 	if ScriptLib.GetGroupVariableValue(context, "bridge1") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -888,6 +888,6 @@ function action_EVENT_VARIABLE_CHANGE_571085(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end

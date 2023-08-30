@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133217283
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	duration = 105,
 	group_id = 133217283,
 	gadget_sum = 34
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -112,9 +112,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -125,9 +125,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -179,9 +179,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -190,51 +190,51 @@ function action_EVENT_CHALLENGE_SUCCESS_283006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 283002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 283005 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133217283, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3003, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133217283, 2)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133217283, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133217283, 5)
-	
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133217283, EntityType.MONSTER, 283034)
-	
-		
-	
+
+
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133217283, EntityType.MONSTER, 283035)
-	
-		
-	
+
+
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133217283, EntityType.MONSTER, 283036)
-	
-		
-	
+
+
+
 	return 0
 end
 
@@ -244,50 +244,50 @@ function action_EVENT_CHALLENGE_FAIL_283007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 283002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133217283, 2)
-	
+
 	-- 创建id为283005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 283005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3003, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 将本组内变量名为 "gadget_start" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gadget_start", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133217283, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133217283, 5)
-	
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133217283, EntityType.MONSTER, 283034)
-	
-		
-	
+
+
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133217283, EntityType.MONSTER, 283035)
-	
-		
-	
+
+
+
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133217283, EntityType.MONSTER, 283036)
-	
-		
-	
+
+
+
 	return 0
 end
 
@@ -296,7 +296,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_283008(context, evt)
 	if 283002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -306,17 +306,17 @@ function action_EVENT_GADGET_STATE_CHANGE_283008(context, evt)
 	if 0 ~= ScriptLib.ActiveChallenge(context, 56, 201, defs.duration, 2, 201, defs.gadget_sum) then
 	return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= ScriptLib.MarkPlayerAction(context, 3003, 1, 1) then
 	return -1
 	end
-	
+
 	return 0
-	
+
 end
 
 -- 触发条件
@@ -324,7 +324,7 @@ function condition_EVENT_GADGET_CREATE_283010(context, evt)
 	if 283005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -335,7 +335,7 @@ function action_EVENT_GADGET_CREATE_283010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -343,14 +343,14 @@ end
 function condition_EVENT_SELECT_OPTION_283011(context, evt)
 	-- 判断是gadgetid 283005 option_id 177
 	if 283005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 177 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -361,14 +361,14 @@ function action_EVENT_SELECT_OPTION_283011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将configid为 283002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 283002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -378,41 +378,41 @@ function action_EVENT_GROUP_LOAD_283012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 283002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133217283, 2)
-	
+
 	-- 创建id为283005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 283005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3003, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 将本组内变量名为 "gadget_start" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gadget_start", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_283039(context, evt)
 	if evt.param1 ~= 283039 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -423,29 +423,29 @@ function action_EVENT_ENTER_REGION_283039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 283035, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 283036, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_283045(context, evt)
-	-- 判断指定group组剩余gadget数量是否是6 
+	-- 判断指定group组剩余gadget数量是否是6
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133217283}) ~= 6 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -453,9 +453,9 @@ end
 function action_EVENT_ANY_GADGET_DIE_283045(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133217283, 4)
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133217283, 5)
-	
+
 	return 0
 end

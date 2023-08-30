@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155005304
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155005304
 }
 
@@ -43,18 +43,18 @@ local NightAppearGadgets = {304004,304005}
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-local gameplayStateFuncitons = 
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
-		
+
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-		
+
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
-		
-		
+
+
 	end,
 	["2"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -62,23 +62,23 @@ local gameplayStateFuncitons =
 		ScriptLib.SetGadgetStateByConfigId(context, 304003, GadgetState.GearStart)
 		ScriptLib.SetGadgetStateByConfigId(context, 304004, GadgetState.GearStart)
 		ScriptLib.SetGadgetStateByConfigId(context, 304005, GadgetState.GearStart)
-		
+
 	end
 
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -117,9 +117,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -130,9 +130,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -166,9 +166,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -180,7 +180,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_304002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 		-- 判断变量"gameplayState"为0
 		if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 				return false
@@ -199,11 +199,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_304008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155005304, 304004) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155005304, 304005) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -213,14 +213,14 @@ function action_EVENT_GADGET_STATE_CHANGE_304008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 304003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "gameplayState" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gameplayState", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133315107
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	point_sum = 39,
 	route_2 = 331500061,
 	gadget_seelie = 107002
@@ -14,9 +14,9 @@ local defs = {
 defs.final_point = defs.point_sum - 1
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -96,9 +96,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -106,15 +106,15 @@ function condition_EVENT_PLATFORM_REACH_POINT_107004(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-	
+
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-	
+
 	if  defs.final_point ~= evt.param3 then
 	return false
 	end
-	
+
 	return true
 end
 
@@ -124,27 +124,27 @@ function action_EVENT_PLATFORM_REACH_POINT_107004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 107001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 停止移动平台
 	if 0 ~= ScriptLib.StopPlatform(context, 107002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 107002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -153,20 +153,20 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_107005(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-	
+
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-	
+
 	if defs.final_point == evt.param3 then
 	return false
 	end
-	
-	if 32 == evt.param3 and 
+
+	if 32 == evt.param3 and
 	ScriptLib.GetGroupVariableValue(context, "go") ~= 1 then
 	return false
 	end
-	
+
 	return true
 end
 
@@ -175,29 +175,29 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_107005(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, 107002) then
 	return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= evt.param3 then
 	ScriptLib.MarkPlayerAction(context, 2005, 2, evt.param3 + 1)
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_107006(context, evt)
 	if evt.param1 ~= 107006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断是区域107006
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 107006 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -208,20 +208,20 @@ function action_EVENT_ENTER_REGION_107006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 107003 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -230,7 +230,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_107007(context, evt)
 	if 107001 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -241,13 +241,13 @@ function action_EVENT_GADGET_STATE_CHANGE_107007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "unlock" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "unlock", 1, 133315089) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -256,7 +256,7 @@ function condition_EVENT_GADGET_CREATE_107008(context, evt)
 	if 107001 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -266,20 +266,20 @@ function action_EVENT_GADGET_CREATE_107008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 107001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_107009(context, evt)
 	if evt.param1 ~= 107009 then return false end
-	
+
 	-- 判断是区域107009
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 107009 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -290,7 +290,7 @@ function action_EVENT_ENTER_REGION_107009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=164.1792, y=100.2031, z=2980.093}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=164.1792, y=100.2031, z=2980.093}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -299,7 +299,7 @@ function action_EVENT_ENTER_REGION_107009(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end

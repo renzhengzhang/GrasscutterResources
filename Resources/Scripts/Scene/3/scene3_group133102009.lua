@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133102009
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -122,20 +122,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9003(context, evt)
 	if evt.param1 ~= 9003 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -147,7 +147,7 @@ function action_EVENT_ENTER_REGION_9003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_ANY_MONSTER_DIE_9010(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -165,22 +165,22 @@ end
 function action_EVENT_ANY_MONSTER_DIE_9010(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133102009, 4)
-	
+
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=1754,y=220,z=864}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400004, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
 		local pos = {x=1754, y=220, z=864}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9015(context, evt)
 	if 9014 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -200,19 +200,19 @@ function action_EVENT_GADGET_STATE_CHANGE_9015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102009, EntityType.GADGET, 9017 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102009, EntityType.GADGET, 9004 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -221,7 +221,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9016(context, evt)
 	if 9013 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -232,19 +232,19 @@ function action_EVENT_GADGET_STATE_CHANGE_9016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102009, EntityType.GADGET, 9022 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102009, EntityType.GADGET, 9005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -253,7 +253,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9018(context, evt)
 	if 9011 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -264,31 +264,31 @@ function action_EVENT_GADGET_STATE_CHANGE_9018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102009, EntityType.GADGET, 9012 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133102009, EntityType.GADGET, 9001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"chestnum"为3
 	if ScriptLib.GetGroupVariableValue(context, "chestnum") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -299,26 +299,26 @@ function action_EVENT_VARIABLE_CHANGE_9019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=1752,y=220,z=864}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31021006, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"chestnum"为1
 	if ScriptLib.GetGroupVariableValue(context, "chestnum") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -330,19 +330,19 @@ function action_EVENT_VARIABLE_CHANGE_9020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_9021(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"chestnum"为2
 	if ScriptLib.GetGroupVariableValue(context, "chestnum") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -354,7 +354,7 @@ function action_EVENT_VARIABLE_CHANGE_9021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -364,7 +364,7 @@ function condition_EVENT_ANY_MONSTER_DIE_9023(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -375,13 +375,13 @@ function action_EVENT_ANY_MONSTER_DIE_9023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=1754,y=220,z=864}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31021003, pos, 60) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end

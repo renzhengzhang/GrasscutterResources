@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301306
 }
 
@@ -39,9 +39,9 @@ local KeyQuest = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -116,9 +116,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -129,9 +129,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -147,9 +147,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -190,8 +190,8 @@ function action_EVENT_QUEST_START_306004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -201,8 +201,8 @@ function action_EVENT_QUEST_START_306005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -212,8 +212,8 @@ function action_EVENT_QUEST_START_306006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -223,8 +223,8 @@ function action_EVENT_QUEST_FINISH_306007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -234,8 +234,8 @@ function action_EVENT_QUEST_START_306008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -245,8 +245,8 @@ function action_EVENT_QUEST_FINISH_306009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -256,8 +256,8 @@ function action_EVENT_QUEST_START_306010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -267,8 +267,8 @@ function action_EVENT_QUEST_START_306011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -278,8 +278,8 @@ function action_EVENT_QUEST_FINISH_306012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -289,8 +289,8 @@ function action_EVENT_QUEST_START_306013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -300,8 +300,8 @@ function action_EVENT_QUEST_FINISH_306014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -311,8 +311,8 @@ function action_EVENT_QUEST_START_306015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -322,8 +322,8 @@ function action_EVENT_QUEST_START_306016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -333,8 +333,8 @@ function action_EVENT_QUEST_FINISH_306017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -344,8 +344,8 @@ function action_EVENT_QUEST_START_306018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -355,8 +355,8 @@ function action_EVENT_QUEST_FINISH_306019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -366,8 +366,8 @@ function action_EVENT_QUEST_START_306020(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -380,7 +380,7 @@ function condition_EVENT_GROUP_LOAD_306022(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -390,8 +390,8 @@ function action_EVENT_GROUP_LOAD_306022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -404,7 +404,7 @@ function condition_EVENT_LEVEL_TAG_CHANGE_306023(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -414,15 +414,15 @@ function action_EVENT_LEVEL_TAG_CHANGE_306023(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_306024(context, evt)
 	if evt.param1 ~= 306024 then return false end
-	
+
 	local curQuestState = ScriptLib.GetHostQuestState(context,7321304)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -430,7 +430,7 @@ function condition_EVENT_ENTER_REGION_306024(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -440,8 +440,8 @@ function action_EVENT_ENTER_REGION_306024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 306001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

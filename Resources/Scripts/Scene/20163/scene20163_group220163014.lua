@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220163014
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -93,9 +93,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -106,9 +106,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -160,30 +160,30 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14002(context, evt)
 	if evt.param1 ~= 14002 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"fightFinish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "fightFinish1") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"cam1"为0
 	if ScriptLib.GetGroupVariableValue(context, "cam1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -191,13 +191,13 @@ end
 function action_EVENT_ENTER_REGION_14002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163014, 2)
-	
+
 	-- 将本组内变量名为 "cam1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "cam1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -207,12 +207,12 @@ function condition_EVENT_LEAVE_REGION_14003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fightFinish1") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"cam1"为1
 	if ScriptLib.GetGroupVariableValue(context, "cam1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -220,35 +220,35 @@ end
 function action_EVENT_LEAVE_REGION_14003(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220163014, 2)
-	
+
 	-- 将本组内变量名为 "cam1" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "cam1", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14005(context, evt)
 	if evt.param1 ~= 14005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"fightFinish2"为0
 	if ScriptLib.GetGroupVariableValue(context, "fightFinish2") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"cam2"为0
 	if ScriptLib.GetGroupVariableValue(context, "cam2") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -256,13 +256,13 @@ end
 function action_EVENT_ENTER_REGION_14005(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163014, 3)
-	
+
 	-- 将本组内变量名为 "cam2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "cam2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -272,12 +272,12 @@ function condition_EVENT_LEAVE_REGION_14006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fightFinish2") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"cam2"为1
 	if ScriptLib.GetGroupVariableValue(context, "cam2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -285,35 +285,35 @@ end
 function action_EVENT_LEAVE_REGION_14006(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220163014, 3)
-	
+
 	-- 将本组内变量名为 "cam2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "cam2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14008(context, evt)
 	if evt.param1 ~= 14008 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"fightFinish3"为1
 	if ScriptLib.GetGroupVariableValue(context, "fightFinish3") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"cam3"为0
 	if ScriptLib.GetGroupVariableValue(context, "cam3") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -321,13 +321,13 @@ end
 function action_EVENT_ENTER_REGION_14008(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163014, 4)
-	
+
 	-- 将本组内变量名为 "cam3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "cam3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -337,7 +337,7 @@ function condition_EVENT_LEAVE_REGION_14009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "cam3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -345,35 +345,35 @@ end
 function action_EVENT_LEAVE_REGION_14009(context, evt)
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220163014, 4)
-	
+
 	-- 将本组内变量名为 "cam3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "cam3", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14011(context, evt)
 	if evt.param1 ~= 14011 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"fightFinish4"为0
 	if ScriptLib.GetGroupVariableValue(context, "fightFinish4") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"cam4"为0
 	if ScriptLib.GetGroupVariableValue(context, "cam4") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -381,13 +381,13 @@ end
 function action_EVENT_ENTER_REGION_14011(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163014, 5)
-	
+
 	-- 将本组内变量名为 "cam4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "cam4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -397,12 +397,12 @@ function condition_EVENT_LEAVE_REGION_14012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fightFinish4") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"cam4"为1
 	if ScriptLib.GetGroupVariableValue(context, "cam4") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -410,25 +410,25 @@ end
 function action_EVENT_LEAVE_REGION_14012(context, evt)
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220163014, 5)
-	
+
 	-- 将本组内变量名为 "cam4" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "cam4", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_14013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"eleFinish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "eleFinish1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -436,20 +436,20 @@ end
 function action_EVENT_VARIABLE_CHANGE_14013(context, evt)
 	-- 创建标识为"f1"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "f1", {2}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_14014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"eleFinish2"为1
 	if ScriptLib.GetGroupVariableValue(context, "eleFinish2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -457,26 +457,26 @@ end
 function action_EVENT_VARIABLE_CHANGE_14014(context, evt)
 	-- 创建标识为"f2"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "f2", {2}, false)
-	
-	
+
+
 	-- 将本组内变量名为 "fightFinish2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "fightFinish2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_14015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"eleFinish3"为1
 	if ScriptLib.GetGroupVariableValue(context, "eleFinish3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -484,26 +484,26 @@ end
 function action_EVENT_VARIABLE_CHANGE_14015(context, evt)
 	-- 创建标识为"f3"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "f3", {2}, false)
-	
-	
+
+
 	-- 将本组内变量名为 "fightFinish3" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "fightFinish3", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_14016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"eleFinish4"为1
 	if ScriptLib.GetGroupVariableValue(context, "eleFinish4") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -514,11 +514,11 @@ function action_EVENT_VARIABLE_CHANGE_14016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"f4"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "f4", {2}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -527,7 +527,7 @@ function condition_EVENT_TIME_AXIS_PASS_14017(context, evt)
 	if "f1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -538,19 +538,19 @@ function action_EVENT_TIME_AXIS_PASS_14017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 创建id为14021的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 14021 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "fightFinish1" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "fightFinish1", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -559,7 +559,7 @@ function condition_EVENT_TIME_AXIS_PASS_14018(context, evt)
 	if "f2" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -570,13 +570,13 @@ function action_EVENT_TIME_AXIS_PASS_14018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 创建id为14022的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 14022 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -585,7 +585,7 @@ function condition_EVENT_TIME_AXIS_PASS_14019(context, evt)
 	if "f3" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -596,13 +596,13 @@ function action_EVENT_TIME_AXIS_PASS_14019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 创建id为14023的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 14023 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -611,7 +611,7 @@ function condition_EVENT_TIME_AXIS_PASS_14020(context, evt)
 	if "f4" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -622,19 +622,19 @@ function action_EVENT_TIME_AXIS_PASS_14020(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14025(context, evt)
 	if evt.param1 ~= 14025 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -645,19 +645,19 @@ function action_EVENT_ENTER_REGION_14025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14026(context, evt)
 	if evt.param1 ~= 14026 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -668,19 +668,19 @@ function action_EVENT_ENTER_REGION_14026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14027(context, evt)
 	if evt.param1 ~= 14027 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -691,6 +691,6 @@ function action_EVENT_ENTER_REGION_14027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end

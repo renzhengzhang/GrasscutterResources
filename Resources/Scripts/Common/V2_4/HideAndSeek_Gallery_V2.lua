@@ -1,4 +1,4 @@
---[[local defs = {
+--[[defs = {
 	group_id = xxx,
 	gadget_prison_list = {1,2,3,4},
 	gadget_guide = {1,2,3},
@@ -11,7 +11,7 @@
 	rampage_time = 40,
 	gadget_energy = 1,
 }--]]
- 
+
 --[[local energy_info = {
 	[1] = { time = 80, points = {1,2,3,4,5,6}},
 	[2] = { time = 160, points = {1,2,3,4,5,6}}
@@ -244,7 +244,7 @@ function action_time_axis_pass(context, evt)
 	elseif evt.source_name == "hunter_win_by_EX" or evt.source_name == "hunter_win_in_time" or evt.source_name == "hunter_catch_by_guide" then
 		--相关陈列室统计
 		ScriptLib.SetGroupTempValue(context, evt.source_name, 0, {})
-	elseif evt.source_name == "final_time" then 
+	elseif evt.source_name == "final_time" then
 		--抓捕阶段第180秒后为决胜时间，猎手在该时间内抓两人，记录翻牌
 		ScriptLib.SetGroupTempValue(context,"is_in_final_time",1,{})
 	else
@@ -283,9 +283,9 @@ function action_avatar_die(context, evt)
 			if prey == context.uid then
 				--prey提前死亡不参与游戏
 				LF_Set_Prey_Die(context, context.uid)
-				return 0	
+				return 0
 			end
-		end 
+		end
 		--hunter提前死亡直接结算prey胜利
 		local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
 		ScriptLib.EndSceneMultiStagePlayStage(context, _index, "null", true)
@@ -355,8 +355,8 @@ function LF_Stop_Hide_And_Seek(context, value)
 		ScriptLib.EndTimeAxis(context, tostring(_uid))
 	end
 	--这个watcher比较特殊，需要在胜利时检测prey的state，所以要写在还原state之前。
-	if value == 2 then 
-		for i = 1 , 3 do 
+	if value == 2 then
+		for i = 1 , 3 do
 			local _prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
 			local _const = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 			if _const ~= 0 then
@@ -484,13 +484,13 @@ function LF_Start_Comp_Challenge(context)
 	for i,v in ipairs(uid_list) do
 		if v == hunter then
 			LF_Set_Player_State_Value(context, v, HS_State.Play.name, 0)
-		else 
+		else
 			local idx = 0
 			for j = 1,3 do
 				if v == ScriptLib.GetGroupTempValue(context, "prey_"..j, {}) then
 					idx = j
 					break
-				end	
+				end
 			end
 			--只有非死亡状态的游侠才继续游戏
 			if ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {}) == 3 then
@@ -533,10 +533,10 @@ end
 function LF_Bake_Random_Scene(context)
 	ScriptLib.PrintContextLog(context, "## HS_Log : LF_Bake_Random_Scene")
 	--根据ld需求进行调整
-	
+
 	--开启天气
 	for i = 1 , #weather_id_list do
-		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 1) 
+		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 1)
 	end
 
 	--suite 2按权重随机创建
@@ -573,12 +573,12 @@ function LF_Clear_Random_Scene(context)
 		ScriptLib.KillEntityByConfigId(context, {config_id = v, entity_type = EntityType.GADGET})
 	end
 
-	
+
 	--关闭天气
 	for i = 1 , #weather_id_list do
-		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 0) 
+		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 0)
 	end
-	
+
 end
 
 function LF_Init_Player_State(context, uid)

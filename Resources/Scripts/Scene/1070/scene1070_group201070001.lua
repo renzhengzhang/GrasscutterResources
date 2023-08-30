@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201070001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -129,23 +129,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_1002(context, evt)
 	-- 判断是gadgetid 1001 option_id 184
 	if 1001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 184 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -155,41 +155,41 @@ function action_EVENT_SELECT_OPTION_1002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：184；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 184) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：185；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 185) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：186；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 186) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：10；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：11；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 11) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201070001, 2)
-	
+
 	return 0
 end
 
@@ -197,14 +197,14 @@ end
 function condition_EVENT_SELECT_OPTION_1003(context, evt)
 	-- 判断是gadgetid 1001 option_id 185
 	if 1001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 185 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -214,41 +214,41 @@ function action_EVENT_SELECT_OPTION_1003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：185；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 185) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：184；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 184) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：186；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 186) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：10；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：11；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 11) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201070001, 3)
-	
+
 	return 0
 end
 
@@ -257,7 +257,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_1010(context, evt)
 	if 1004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -268,7 +268,7 @@ function action_EVENT_ANY_MONSTER_LIVE_1010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -279,7 +279,7 @@ function action_EVENT_CHALLENGE_SUCCESS_1013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -290,13 +290,13 @@ function action_EVENT_CHALLENGE_FAIL_1014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -304,14 +304,14 @@ end
 function condition_EVENT_SELECT_OPTION_1044(context, evt)
 	-- 判断是gadgetid 1001 option_id 186
 	if 1001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 186 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -321,41 +321,41 @@ function action_EVENT_SELECT_OPTION_1044(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：186；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 186) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：185；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 185) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：184；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 184) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：10；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：11；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 11) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201070001, 4)
-	
+
 	return 0
 end
 
@@ -363,14 +363,14 @@ end
 function condition_EVENT_SELECT_OPTION_1045(context, evt)
 	-- 判断是gadgetid 1001 option_id 10
 	if 1001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 10 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -380,41 +380,41 @@ function action_EVENT_SELECT_OPTION_1045(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：185；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 185) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：184；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 184) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：10；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：11；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 11) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：186；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 186) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201070001, 5)
-	
+
 	return 0
 end
 
@@ -422,14 +422,14 @@ end
 function condition_EVENT_SELECT_OPTION_1046(context, evt)
 	-- 判断是gadgetid 1001 option_id 11
 	if 1001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 11 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -439,40 +439,40 @@ function action_EVENT_SELECT_OPTION_1046(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：185；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 185) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：184；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 184) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：186；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 186) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：10；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 201070001 ；指定config：1001；物件身上指定option：11；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201070001, 1001, 11) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201070001, 6)
-	
+
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199003060
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_animal = 60001,
 	pointarray_ID = 900300001,
 	maxPointCount = 19,
@@ -15,9 +15,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -61,9 +61,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -122,19 +122,19 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_60007(context, evt)
 		  if ScriptLib.GetGroupVariableValueByGroup(context, "weather", 199003100) == 1 then
 	 ScriptLib.GoToFlowSuite(context, 199003060, 1)
-	
+
 		  else
 			 ScriptLib.GoToFlowSuite(context, 199003060, 2)
-	
+
 			end
 	return 0
 end
@@ -144,7 +144,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_60008(context, evt)
 	if 60002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -155,7 +155,7 @@ function action_EVENT_GADGET_STATE_CHANGE_60008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308154
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -84,9 +84,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -96,14 +96,14 @@ function action_EVENT_QUEST_FINISH_154001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_154002(context, evt)
 	if evt.param1 ~= 154002 then return false end
-	
+
 	local curQuestState = ScriptLib.GetHostQuestState(context,7305205)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -111,7 +111,7 @@ function condition_EVENT_ENTER_REGION_154002(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -122,7 +122,7 @@ function action_EVENT_ENTER_REGION_154002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -133,7 +133,7 @@ function action_EVENT_QUEST_FINISH_154003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-2088.326, y=153.7259, z=4408.542}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-2088.326, y=153.7259, z=4408.542}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -142,8 +142,8 @@ function action_EVENT_QUEST_FINISH_154003(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -154,7 +154,7 @@ function action_EVENT_QUEST_FINISH_154004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -165,7 +165,7 @@ function action_EVENT_QUEST_FINISH_154005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -176,14 +176,14 @@ function action_EVENT_QUEST_FINISH_154006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_154007(context, evt)
 	if evt.param1 ~= 154007 then return false end
-	
+
 	local curQuestState = ScriptLib.GetHostQuestState(context,7305216)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -191,7 +191,7 @@ function condition_EVENT_ENTER_REGION_154007(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -202,7 +202,7 @@ function action_EVENT_ENTER_REGION_154007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -213,7 +213,7 @@ function action_EVENT_QUEST_FINISH_154008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -224,7 +224,7 @@ function action_EVENT_QUEST_START_154009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -235,14 +235,14 @@ function action_EVENT_QUEST_FINISH_154010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_154011(context, evt)
 	if evt.param1 ~= 154011 then return false end
-	
+
 	local curQuestState = ScriptLib.GetHostQuestState(context,7305251)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -250,7 +250,7 @@ function condition_EVENT_ENTER_REGION_154011(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -261,7 +261,7 @@ function action_EVENT_ENTER_REGION_154011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -272,7 +272,7 @@ function action_EVENT_QUEST_FINISH_154012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -283,7 +283,7 @@ function action_EVENT_QUEST_FINISH_154013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -294,19 +294,19 @@ function action_EVENT_QUEST_FINISH_154014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_154015(context, evt)
 	if evt.param1 ~= 154015 then return false end
-	
+
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-	
+
 	local curQuestState = ScriptLib.GetHostQuestState(context,7305204)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -314,7 +314,7 @@ function condition_EVENT_ENTER_REGION_154015(context, evt)
 	if curQuestState ~= 3 then
 	   return false
 	end
-	
+
 	return true
 end
 
@@ -325,6 +325,6 @@ function action_EVENT_ENTER_REGION_154015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

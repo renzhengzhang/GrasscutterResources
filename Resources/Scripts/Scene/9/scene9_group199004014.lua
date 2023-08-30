@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199004014
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,9 +114,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -126,7 +126,7 @@ function action_EVENT_QUEST_FINISH_14007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -137,8 +137,8 @@ function action_EVENT_QUEST_FINISH_14008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -148,7 +148,7 @@ function condition_EVENT_QUEST_START_14009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -159,7 +159,7 @@ function action_EVENT_QUEST_START_14009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -169,7 +169,7 @@ function condition_EVENT_QUEST_START_14010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -180,7 +180,7 @@ function action_EVENT_QUEST_START_14010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_ANY_GADGET_DIE_14011(context, evt)
 	if 14004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -200,14 +200,14 @@ function action_EVENT_ANY_GADGET_DIE_14011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199004014, 3)
-	
+
 	-- 创建标识为"temp"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "temp", {1}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_QUEST_START_14012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -228,7 +228,7 @@ function action_EVENT_QUEST_START_14012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -238,7 +238,7 @@ function condition_EVENT_QUEST_START_14013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -249,7 +249,7 @@ function action_EVENT_QUEST_START_14013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -257,7 +257,7 @@ end
 function action_EVENT_QUEST_START_14014(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199004014, 4)
-	
+
 	return 0
 end
 
@@ -267,7 +267,7 @@ function condition_EVENT_QUEST_START_14016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -278,7 +278,7 @@ function action_EVENT_QUEST_START_14016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -288,7 +288,7 @@ function condition_EVENT_QUEST_START_14017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "kill") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -299,10 +299,10 @@ function action_EVENT_QUEST_START_14017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199004014, 3)
-	
+
 	return 0
 end
 
@@ -310,20 +310,20 @@ end
 function action_EVENT_ENTER_REGION_14018(context, evt)
 	if ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 then
 		ScriptLib.SetGroupVariableValue(context, "temp", 1)
-		
+
 		ScriptLib.AddQuestProgress(context, "Q7902517finish")
-		
+
 		ScriptLib.RemoveExtraGroupSuite(context, 199004014, 2)
-		
+
 		ScriptLib.AddQuestProgress(context, "7902514fail")
-		
+
 		ScriptLib.AddQuestProgress(context, "7902515fail")
-		
+
 		ScriptLib.AddQuestProgress(context, "7902516fail")
-		
+
 		ScriptLib.AddQuestProgress(context, "7902513fail")
 	end
-	
+
 	return 0
 end
 
@@ -332,7 +332,7 @@ function condition_EVENT_TIME_AXIS_PASS_14019(context, evt)
 	if "temp" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -343,6 +343,6 @@ function action_EVENT_TIME_AXIS_PASS_14019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

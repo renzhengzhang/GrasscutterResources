@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 243002016
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_1 = 16006,
 	group_1 = 243002016,
 	monster_1 = 16014,
@@ -23,9 +23,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -106,20 +106,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_16001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"key"为1
 	if ScriptLib.GetGroupVariableValue(context, "key") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -130,25 +130,25 @@ function action_EVENT_VARIABLE_CHANGE_16001(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	    return -1
 	  end
-	
-	
+
+
 	-- 将本组内变量名为 "key" 的变量设置为 99
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "key", 99) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	ScriptLib.ChangeGroupVariableValueByGroup(context, "runes", 1, defs.group_core)
-	
+
 	-- 改变指定group组243002008中， configid为5000的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_core, defs.gadget_rune, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
 		end
-	
+
 	ScriptLib.PrintContextLog(context, "2号符文射线!!!!!!!!")
-	
-	
+
+
 	--[[ 触发镜头注目，注目位置为坐标（0，0，0），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=74.6, y=52, z=-71.3}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -157,10 +157,10 @@ function action_EVENT_VARIABLE_CHANGE_16001(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	--]]
-	
+
 	return 0
 end
 
@@ -170,7 +170,7 @@ function condition_EVENT_ANY_MONSTER_DIE_16002(context, evt)
 	if 0 >= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -181,10 +181,10 @@ function action_EVENT_ANY_MONSTER_DIE_16002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	    return -1
 	end
-	  
+
 	--通知父挑战积分+1
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "AddChildChallengeScore", {1})
-	  
+
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_GADGET_CREATE_16007(context, evt)
 	if defs.gadget_1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_GADGET_CREATE_16007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -212,34 +212,34 @@ end
 function condition_EVENT_SELECT_OPTION_16008(context, evt)
 	-- 判断是gadgetid 1003 option_id 177
 	if defs.gadget_1 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_16008(context, evt)
-	--刷新suite2    
+	--刷新suite2
 	ScriptLib.AddExtraGroupSuite(context, defs.group_1, 2)
-	
+
 	-- 删除指定group： 243002001 ；指定config：1003；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, defs.group_1, defs.gadget_1, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将configid为 1003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
 	end
-	
+
 	return 0
 end
 
@@ -248,7 +248,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_16009(context, evt)
 	if defs.monster_1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -258,14 +258,14 @@ function action_EVENT_ANY_MONSTER_LIVE_16009(context, evt)
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "DefineFatherIndex",{defs.challenge_father})
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "DefineChildChallengeScore",{ 1, 1})
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "AttachChildChallengeFromDiffGroup",{defs.challenge1, 233, 1})
-	
+
 	-- 改变指定group组243002008中， configid为5000的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_core, defs.gadget_rune, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
 		end
 	 ScriptLib.PrintContextLog(context, "2号符文点亮!!!!!!!!")
-	
+
 		-- 调用提示id为 43001009 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 		if 0 ~= ScriptLib.ShowReminder(context, 43001009) then
 		  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
@@ -278,42 +278,42 @@ end
 function action_EVENT_CHALLENGE_FAIL_16010(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, defs.group_1, 2)
-	
+
 	-- 改变指定group组243002001中， configid为1003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_1, defs.gadget_1, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_1, defs.gadget_1, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 改变指定group组243002008中， configid为5000的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_core, defs.gadget_rune, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_16011(context, evt)
-	
-	
+
+
 	ScriptLib.ChangeGroupVariableValueByGroup(context, "runes", 1, defs.group_core)
-	
+
 	-- 改变指定group组243002008中， configid为5000的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_core, defs.gadget_rune, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
 		end
-	
+
 	ScriptLib.PrintContextLog(context, "2号符文射线!!!!!!!!")
-	
+
 	return 0
 end
 
@@ -323,12 +323,12 @@ function condition_EVENT_LEAVE_REGION_16015(context, evt)
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= defs.Region1 then
 		return false
 	end
-	
+
 	-- 判断变量"success"为0
 	if ScriptLib.GetGroupVariableValue(context, "success") ~= 0 then
 	    return false
 	end
-	
+
 	return true
 end
 
@@ -336,34 +336,34 @@ end
 function action_EVENT_LEAVE_REGION_16015(context, evt)
 	--离开区域 挑战失败
 	ScriptLib.ExecuteGroupLua(context, defs.group_core, "StopChildChallengeFromDiffGroup", {defs.challenge1,0})
-	
+
 	-- 将本组内变量名为 "success" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "key", 0) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	    return -1
 	  end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, defs.group_1, 2)
-	
+
 	-- 改变指定group组243002001中， configid为1003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_1, defs.gadget_1, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_1, defs.gadget_1, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 改变指定group组243002008中， configid为5000的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_core, defs.gadget_rune, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
 		end
-	
+
 	return 0
-	
+
 end

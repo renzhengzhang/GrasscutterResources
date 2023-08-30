@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133315297
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -121,9 +121,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -132,7 +132,7 @@ function condition_EVENT_GROUP_LOAD_297017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isfinish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -140,10 +140,10 @@ end
 function action_EVENT_GROUP_LOAD_297017(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315297, 3)
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315297, 4)
-	
+
 	return 0
 end
 
@@ -152,7 +152,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_297025(context, evt)
 	if 297001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -160,7 +160,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_297025(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315297, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=295.4289, y=405, z=2433.166}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=295.4289, y=405, z=2433.166}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -169,8 +169,8 @@ function action_EVENT_GADGET_STATE_CHANGE_297025(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -179,7 +179,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_297027(context, evt)
 	if 297005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -187,7 +187,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_297027(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315297, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=166.1629, y=395, z=2165.459}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=166.1629, y=395, z=2165.459}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -196,7 +196,7 @@ function action_EVENT_GADGET_STATE_CHANGE_297027(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end

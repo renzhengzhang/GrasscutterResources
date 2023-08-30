@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155006059
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155006059,
 	gadget_controller = 59006,
 	gadget_point_01 = 59014,
@@ -30,7 +30,7 @@ local TriggerInsertWhitelist = {1}
 
 
 
-local gadgetlist = 
+local gadgetlist =
 {
 	defs.gadget_point_01,
 	defs.gadget_point_02,
@@ -45,7 +45,7 @@ local gadgetlist =
 
 defs.totalcount = #gadgetlist
 
-local gameplayStateFuncitons = 
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.PrintContextLog(context, "----GameplayState[0]----")
@@ -67,7 +67,7 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -86,7 +86,7 @@ function Reset(context)
 	ScriptLib.SetGroupVariableValue(context, "activecount", 0)
 	ScriptLib.SetGroupVariableValue(context, "activeindex", 1)
 	--ScriptLib.RemoveEntityByConfigId(context, 305011009, EntityType.GADGET, 9001 )
-	if  ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_controller) ~= -1 then 
+	if  ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_controller) ~= -1 then
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_controller, GadgetState.Action01)
 	end
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_ID, 3)
@@ -94,9 +94,9 @@ function Reset(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -150,9 +150,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -163,9 +163,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -217,9 +217,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -231,7 +231,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_59002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -241,19 +241,19 @@ function condition_EVENT_GADGET_STATE_CHANGE_59003(context, evt)
 	if GadgetState.Action02 ~= ScriptLib.GetGadgetStateByConfigId(context, 155006059, 59006) then
 		return false
 	end
-	
+
 	-- 判断变量"gameplayState"为1
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_59003(context, evt)
 			--ScriptLib.ChangeGroupVariableValue(context, "activecount", 1)
-			
+
 				--CreateGadget(context, {config_id = gadgetlist[ScriptLib.GetGroupVariableValue(context, "activeindex")]})
 				ScriptLib.PrintContextLog(context, "----CountDownStart----")
 				ScriptLib.InitTimeAxis(context, "startcountdown", {defs.countdowntime}, false)
@@ -264,12 +264,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_59004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"activecount"为9
 	if ScriptLib.GetGroupVariableValue(context, "activecount") ~= 9 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -280,11 +280,11 @@ function action_EVENT_VARIABLE_CHANGE_59004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 停止标识为"startcountdown"的时间轴
 	ScriptLib.EndTimeAxis(context, "startcountdown")
-	
-	
+
+
 	return 0
 end
 
@@ -294,14 +294,14 @@ function condition_EVENT_TIME_AXIS_PASS_59008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_59008(context, evt)
 		ScriptLib.PrintContextLog(context, "----TimeUp----")
-	
+
 			Reset(context)
 			return 0
 end
@@ -311,7 +311,7 @@ function condition_EVENT_ANY_GADGET_DIE_59009(context, evt)
 		ScriptLib.PrintContextLog(context, "DIE ID = "..evt.param1)
 		for i=1,#gadgetlist do
 		ScriptLib.PrintContextLog(context, "gadget id = "..gadgetlist[i])
-			if gadgetlist[i] == evt.param1 then 
+			if gadgetlist[i] == evt.param1 then
 				ScriptLib.PrintContextLog(context, "Return true")
 				return true
 			end
@@ -328,18 +328,18 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_59024(context, evt)
-	
+
 		local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 		if (current_env_state_id == 2) then
-			if 2 == ScriptLib.GetGroupVariableValue(context, "gameplayState") then 
+			if 2 == ScriptLib.GetGroupVariableValue(context, "gameplayState") then
 				ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_controller, 201)
 			end
 		elseif (current_env_state_id == 1) then
-			if 1 == ScriptLib.GetGroupVariableValue(context, "gameplayState") then 
+			if 1 == ScriptLib.GetGroupVariableValue(context, "gameplayState") then
 				ScriptLib.PrintContextLog(context, "----Gadget create with reset----")
 				Reset(context)
 			end
-		end 
+		end
 	return 0
 end
 

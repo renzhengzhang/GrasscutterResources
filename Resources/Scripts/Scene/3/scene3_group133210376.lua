@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210376
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -82,20 +82,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_376002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"GadgetCreate"为1
 	if ScriptLib.GetGroupVariableValue(context, "GadgetCreate") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -103,27 +103,27 @@ end
 function action_EVENT_VARIABLE_CHANGE_376002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133210376, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_376003(context, evt)
 	-- 判断是gadgetid 为 376001的移动平台，是否到达了321000081 的路线中的 14 点
-	
+
 	if 376001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 321000081 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 14 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -131,24 +131,24 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_376003(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133210376, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_376004(context, evt)
 	if evt.param1 ~= 376004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"EnterRegion"为0
 	if ScriptLib.GetGroupVariableValue(context, "EnterRegion") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -159,25 +159,25 @@ function action_EVENT_ENTER_REGION_376004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "EnterRegion" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "EnterRegion", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_376005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"GadgetCreate"为0
 	if ScriptLib.GetGroupVariableValue(context, "GadgetCreate") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -188,9 +188,9 @@ function action_EVENT_VARIABLE_CHANGE_376005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133210376, 2)
-	
+
 	return 0
 end

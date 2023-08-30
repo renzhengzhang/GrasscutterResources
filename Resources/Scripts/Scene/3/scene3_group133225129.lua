@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133225129
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	point_sum = 25,
 	route_2 = 322500048,
 	gadget_seelie = 129001,
@@ -14,13 +14,15 @@ local defs = {
 
 -- DEFS_MISCS
 defs.final_point = defs.point_sum - 1
-defs.decal_final_point = 4
-defs.back_point = 4
+
+defs.decal_final_point = 4
+
+defs.back_point = 4
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -65,9 +67,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -78,9 +80,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -114,20 +116,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_129002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone_progress"为2
 	if ScriptLib.GetGroupVariableValue(context, "stone_progress") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -138,13 +140,13 @@ function action_EVENT_VARIABLE_CHANGE_129002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 129001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -153,15 +155,15 @@ function condition_EVENT_PLATFORM_REACH_POINT_129003(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-	
+
 	if defs.route_decal ~= evt.param2 then
 	return false
 	end
-	
+
 	if  defs.decal_final_point ~= evt.param3 then
 	return false
 	end
-	
+
 	return true
 end
 
@@ -172,26 +174,26 @@ function action_EVENT_PLATFORM_REACH_POINT_129003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 129001 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 将本组内变量名为 "decal_finish_3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "decal_finish_3", 1, 133225091) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133225129, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -200,15 +202,15 @@ function condition_EVENT_PLATFORM_REACH_POINT_129004(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-	
+
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-	
+
 	if  defs.final_point ~= evt.param3 then
 	return false
 	end
-	
+
 	return true
 end
 
@@ -217,15 +219,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_129005(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-	
+
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-	
+
 	if defs.final_point == evt.param3 then
 	return false
 	end
-	
+
 	return true
 end
 
@@ -234,24 +236,24 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_129005(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, 129001) then
 	return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= evt.param3 then
 	ScriptLib.MarkPlayerAction(context, 2005, 2, evt.param3 + 1)
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_129006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"start"为1
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -262,7 +264,7 @@ function action_EVENT_VARIABLE_CHANGE_129006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -272,7 +274,7 @@ function condition_EVENT_GROUP_LOAD_129007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -283,19 +285,19 @@ function action_EVENT_GROUP_LOAD_129007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_129008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"stone_progress"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone_progress") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -306,13 +308,13 @@ function action_EVENT_VARIABLE_CHANGE_129008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 129001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -321,12 +323,12 @@ function condition_EVENT_GADGET_CREATE_129009(context, evt)
 	if 129001 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"stone_progress"为1
 	if ScriptLib.GetGroupVariableValue(context, "stone_progress") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -337,7 +339,7 @@ function action_EVENT_GADGET_CREATE_129009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -346,12 +348,12 @@ function condition_EVENT_GADGET_CREATE_129010(context, evt)
 	if 129001 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"stone_progress"为2
 	if ScriptLib.GetGroupVariableValue(context, "stone_progress") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -362,12 +364,12 @@ function action_EVENT_GADGET_CREATE_129010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 129001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end

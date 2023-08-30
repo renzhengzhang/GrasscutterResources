@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 240043001
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
         monster_boss = 1046,
         summon_region_list = {1041,1042,1043}, --region出怪的list
         summon_interval = 15,                        --自动出怪时间
@@ -12,9 +12,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -105,9 +105,9 @@ sight_groups = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -118,9 +118,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -235,9 +235,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -245,7 +245,7 @@ function condition_EVENT_GADGET_CREATE_1008(context, evt)
 	if 1004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -256,7 +256,7 @@ function action_EVENT_GADGET_CREATE_1008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -264,14 +264,14 @@ end
 function condition_EVENT_SELECT_OPTION_1009(context, evt)
 	-- 判断是gadgetid 1004 option_id 175
 	if 1004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 175 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -282,13 +282,13 @@ function action_EVENT_SELECT_OPTION_1009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将configid为 1004 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1004, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -297,7 +297,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1010(context, evt)
 	if 1004 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -305,16 +305,16 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_1010(context, evt)
 	-- 初始化时间变量
 	local challenge_time = 0
-	
+
 	if -1 ~= ScriptLib.GetEffigyChallengeLimitTime(context) then
 		challenge_time = ScriptLib.GetEffigyChallengeLimitTime(context)
 	end
-	
+
 	-- 创建编号为110187父挑战，indexID为1
 	if 0 ~= ScriptLib.CreateFatherChallenge(context, 1, 110187, 999999, {success = 1, fail = 1, fail_on_wipe=false}) then
 		return -1
 	end
-	
+
 	-- 创建编号为202,203,204的子挑战：杀怪挑战
 	if 0 ~= ScriptLib.AttachChildChallenge(context, 1, 202, 110197, {1,12,1},{},{success=0,fail=0})
 	 then
@@ -322,29 +322,29 @@ function action_EVENT_GADGET_STATE_CHANGE_1010(context, evt)
 		return -1
 	end
 	if 0 ~= ScriptLib.AttachChildChallenge(context, 1, 203, 110198, {1,13,1},{},{success=0,fail=0})
-	
+
 	 then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : challenge_203")
 		return -1
 	end
 	if false ~= ScriptLib.IsEffigyChallengeConditionSelected(context, 123) then
 		if 0 ~= ScriptLib.AttachChildChallenge(context, 1, 204, 110199, {1,14,3},{},{success=0,fail=0})
-	
+
 	 then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : challenge_204")
 			return -1
 		end
 	else
 		if 0 ~= ScriptLib.AttachChildChallenge(context, 1, 204, 110199, {1,14,2},{},{success=0,fail=0})
-	
+
 	 then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : challenge_204")
 			return -1
 		end
 	end
-	
+
 	-- 创建编号为201的子挑战：限时积分.如果没有选择不会开启
-	
+
 	if 0 ~= challenge_time then
 		if false ~= ScriptLib.IsEffigyChallengeConditionSelected(context, 123) then
 			if 0 ~= ScriptLib.AttachChildChallenge(context, 1, 201, 110196, {challenge_time,3,11,5},{},{success=0,fail=0}) then
@@ -358,33 +358,33 @@ function action_EVENT_GADGET_STATE_CHANGE_1010(context, evt)
 	else
 		ScriptLib.AddExtraGroupSuite(context, 240043001, 11)
 	end
-	
+
 	-- 开始父挑战
 	if 0 ~= ScriptLib.StartFatherChallenge(context, 1) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : father_challenge")
 		return -1
 	end
-	
+
 	LF_Create_Boss(context)
-	
+
 	--  刷纯水精灵
 	ScriptLib.CreateEffigyChallengeMonster(context, 240043001, {15012})
-	
+
 	-- 卸载回血gadget
 	if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240043001, EntityType.GADGET, 1019 ) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_1011(context, evt)
 	local uid_list = ScriptLib.GetSceneUidList(context)
-	
+
 	local ret = 0
-	
+
 	for i,v in ipairs(uid_list) do
 		local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
 		if true ~= is_all_dead then
@@ -392,11 +392,11 @@ function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_1011(context, evt)
 			break
 		end
 	end
-	
+
 	if ret ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -404,7 +404,7 @@ end
 function action_EVENT_DUNGEON_ALL_AVATAR_DIE_1011(context, evt)
 	-- 终止识别id为1的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 1, 0)
-	
+
 	return 0
 end
 
@@ -415,13 +415,13 @@ function action_EVENT_CHALLENGE_FAIL_1012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -432,7 +432,7 @@ function action_EVENT_CHALLENGE_SUCCESS_1013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -440,7 +440,7 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_1014(context, evt)
 	-- 终止识别id为1的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 1, 1)
-	
+
 	return 0
 end
 
@@ -448,7 +448,7 @@ end
 function action_EVENT_CHALLENGE_FAIL_1015(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240043001, 11)
-	
+
 	return 0
 end
 
@@ -456,7 +456,7 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_1016(context, evt)
 	-- 终止识别id为1的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 1, 1)
-	
+
 	return 0
 end
 
@@ -466,8 +466,8 @@ function condition_EVENT_ANY_MONSTER_DIE_1017(context, evt)
 	if evt.param1 ~= 1046 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -478,16 +478,16 @@ function action_EVENT_ANY_MONSTER_DIE_1017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	--  刷龙蜥
 	ScriptLib.CreateEffigyChallengeMonster(context, 240043001, {15011})
-	
+
 	-- 针对当前group内变量名为 "challenge_count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "challenge_count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -496,7 +496,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1018(context, evt)
 	if 1047 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -508,28 +508,28 @@ function action_EVENT_ANY_MONSTER_DIE_1018(context, evt)
 	else
 		ScriptLib.CreateEffigyChallengeMonster(context, 240043001, {15013,15014})
 	end
-	
+
 	-- 针对当前group内变量名为 "challenge_count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "challenge_count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240043001, 12)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1044(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"challenge_count"为1
 	if ScriptLib.GetGroupVariableValue(context, "challenge_count") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -540,7 +540,7 @@ function action_EVENT_VARIABLE_CHANGE_1044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -551,7 +551,7 @@ function action_EVENT_ANY_MONSTER_DIE_1045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

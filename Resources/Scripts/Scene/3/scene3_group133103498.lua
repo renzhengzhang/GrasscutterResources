@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133103498
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	duration = 40,
 	kill_sum = 4,
 	group_id = 133103498,
@@ -12,9 +12,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -95,9 +95,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -105,7 +105,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_498004(context, evt)
 	if 498002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -116,7 +116,7 @@ function action_EVENT_GADGET_STATE_CHANGE_498004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_group_die")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -126,44 +126,44 @@ function action_EVENT_CHALLENGE_SUCCESS_498005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 498002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3001, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 改变指定group组133103497中， configid为497031的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133103497, 497031, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133103497中， configid为497034的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133103497, 497034, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133103497中， configid为497014的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133103497, 497014, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133103498, EntityType.GADGET, 498010 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 创建id为498013的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 498013 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -173,35 +173,35 @@ function action_EVENT_CHALLENGE_FAIL_498006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 498002, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建id为498003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 498003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103498, 2)
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133103498, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3001, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 改变指定group组133103497中， configid为497034的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133103497, 497034, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -210,7 +210,7 @@ function condition_EVENT_GADGET_CREATE_498007(context, evt)
 	if 498003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -221,7 +221,7 @@ function action_EVENT_GADGET_CREATE_498007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -229,14 +229,14 @@ end
 function condition_EVENT_SELECT_OPTION_498008(context, evt)
 	-- 判断是gadgetid 498003 option_id 177
 	if 498003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 177 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -246,32 +246,32 @@ function action_EVENT_SELECT_OPTION_498008(context, evt)
 	if 0 ~= ScriptLib.ActiveChallenge(context, 180, 180, defs.duration, defs.group_id, defs.kill_sum, 0) then
 	return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
-	
+
 		--永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 	if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_controller_id }) then
 	return -1
 	end
-		
-	
+
+
 	-- 将configid为 2002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 498002, GadgetState.GearStart) then
 	return -1
-	end 
-	
+	end
+
 	-- 改变指定group组133103497中， configid为497034的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133103497, 497034, GadgetState.Default) then
 			return -1
-		end 
-	
-	
+		end
+
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= ScriptLib.MarkPlayerAction(context, 3001, 1, 1) then
 	return -1
 	end
-	
+
 	return 0
-	
+
 end

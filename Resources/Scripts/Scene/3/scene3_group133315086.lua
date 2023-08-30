@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133315086
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -71,20 +71,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_86001(context, evt)
 	if evt.param1 ~= 86001 then return false end
-	
+
 	-- 判断是区域86001
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 86001 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -95,19 +95,19 @@ function action_EVENT_ENTER_REGION_86001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_86002(context, evt)
 	if evt.param1 ~= 86002 then return false end
-	
+
 	-- 判断是区域86002
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 86002 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -121,13 +121,13 @@ function action_EVENT_ENTER_REGION_86002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 调用提示id为 730630902 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 730630902) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

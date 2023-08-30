@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220133091
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -96,9 +96,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -106,7 +106,7 @@ function action_EVENT_GROUP_LOAD_91002(context, evt)
 	if ScriptLib.GetHostQuestState(context,4006815) == 3 then
 		ScriptLib.AddExtraGroupSuite(context, 220133091, 2)
 	end
-	
+
 	return 0
 end
 
@@ -116,7 +116,7 @@ function condition_EVENT_GROUP_LOAD_91004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "GadgetADie") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -127,8 +127,8 @@ function action_EVENT_GROUP_LOAD_91004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_GROUP_LOAD_91005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "GadgetBDie") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -149,7 +149,7 @@ function action_EVENT_GROUP_LOAD_91005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end

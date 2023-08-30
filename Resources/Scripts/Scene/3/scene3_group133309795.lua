@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309795
 }
 
@@ -7,9 +7,9 @@ local base_info = {
 local HourGlass_ConfigIDList = {795001,795011,795012}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -91,20 +91,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_795009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"HourGlass_InTime"为1
 	if ScriptLib.GetGroupVariableValue(context, "HourGlass_InTime") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -112,7 +112,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_795009(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309795, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-2349.4, y=486.862, z=5530}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-2349.4, y=486.862, z=5530}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -121,20 +121,20 @@ function action_EVENT_VARIABLE_CHANGE_795009(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_795010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"HourGlass_InTime"为0
 	if ScriptLib.GetGroupVariableValue(context, "HourGlass_InTime") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -142,7 +142,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_795010(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133309795, 2)
-	
+
 	return 0
 end
 

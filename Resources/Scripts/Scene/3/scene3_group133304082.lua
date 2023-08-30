@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133304082
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -95,20 +95,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_82002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"finished"为1
 	if ScriptLib.GetGroupVariableValue(context, "finished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -119,7 +119,7 @@ function action_EVENT_VARIABLE_CHANGE_82002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -129,7 +129,7 @@ function condition_EVENT_GROUP_LOAD_82003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finished") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -140,19 +140,19 @@ function action_EVENT_GROUP_LOAD_82003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_82004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"left1"为1
 	if ScriptLib.GetGroupVariableValue(context, "left1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -162,20 +162,20 @@ function action_EVENT_VARIABLE_CHANGE_82004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 82001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_82005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"left1"为0
 	if ScriptLib.GetGroupVariableValue(context, "left1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -185,20 +185,20 @@ function action_EVENT_VARIABLE_CHANGE_82005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 82001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_82007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"left2"为1
 	if ScriptLib.GetGroupVariableValue(context, "left2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -208,20 +208,20 @@ function action_EVENT_VARIABLE_CHANGE_82007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 82006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_82008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"left2"为0
 	if ScriptLib.GetGroupVariableValue(context, "left2") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -231,20 +231,20 @@ function action_EVENT_VARIABLE_CHANGE_82008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 82006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_82010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"right"为1
 	if ScriptLib.GetGroupVariableValue(context, "right") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -254,20 +254,20 @@ function action_EVENT_VARIABLE_CHANGE_82010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 82009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_82011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"right"为0
 	if ScriptLib.GetGroupVariableValue(context, "right") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -277,8 +277,8 @@ function action_EVENT_VARIABLE_CHANGE_82011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 82009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -288,7 +288,7 @@ function condition_EVENT_GROUP_LOAD_82012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finished") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -299,6 +299,6 @@ function action_EVENT_GROUP_LOAD_82012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

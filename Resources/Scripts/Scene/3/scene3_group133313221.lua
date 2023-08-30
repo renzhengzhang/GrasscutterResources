@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133313221
 }
 
@@ -43,9 +43,9 @@ local SwitchToShutter =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -95,9 +95,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -108,9 +108,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -126,9 +126,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 设置指定group中指定gadget的state
@@ -137,7 +137,7 @@ function TLA_set_gadget_state_by_groupid_configid(context, evt, config_id, group
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, group_id, config_id, state) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
+		end
 	return 0
 end
 
@@ -146,7 +146,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_221006(context, evt)
 	if 221002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_GADGET_STATE_CHANGE_221006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -166,7 +166,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_221009(context, evt)
 	if 221005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -176,14 +176,14 @@ function action_EVENT_GADGET_STATE_CHANGE_221009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 221008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133313221, 221008, {439}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -191,25 +191,25 @@ end
 function condition_EVENT_SELECT_OPTION_221010(context, evt)
 	-- 判断是gadgetid 221008 option_id 439
 	if 221008 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 439 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_221010(context, evt)
 	TLA_set_gadget_state_by_groupid_configid(context, evt, 221008, 133313221, GadgetState.GearStart)
-	
+
 	TLA_set_gadget_state_by_groupid_configid(context, evt, 221007, 133313221, GadgetState.Default)
-	
+
 	ScriptLib.DelWorktopOptionByGroupId(context, 133313221, 221008, 439)
-	
+
 	return 0
 end
 
@@ -218,11 +218,11 @@ function condition_EVENT_GROUP_LOAD_221011(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133313221, 221008) then
 		return false
 	end
-	
+
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133313221, 221005) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -232,14 +232,14 @@ function action_EVENT_GROUP_LOAD_221011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 221008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133313221, 221008, {439}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -248,7 +248,7 @@ function condition_EVENT_GADGET_CREATE_221012(context, evt)
 	if 221008 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -259,7 +259,7 @@ function action_EVENT_GADGET_CREATE_221012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -268,7 +268,7 @@ function condition_EVENT_GROUP_LOAD_221013(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133313221, 221002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -279,7 +279,7 @@ function action_EVENT_GROUP_LOAD_221013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

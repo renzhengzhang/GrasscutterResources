@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133317034
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_LookHookCid = 34003
 }
 
@@ -17,9 +17,9 @@ local HookLookPlay = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -107,9 +107,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -117,7 +117,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_34005(context, evt)
 	if 34001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -125,7 +125,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_34005(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133317034, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标（552.02，233，5717.98），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=552.02, y=233, z=5717.98}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -134,8 +134,8 @@ function action_EVENT_GADGET_STATE_CHANGE_34005(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 

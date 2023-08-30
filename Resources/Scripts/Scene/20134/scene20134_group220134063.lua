@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220134063
 }
 
@@ -10,9 +10,9 @@ function SLC_Try_Trans_Player(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -112,23 +112,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_63004(context, evt)
 	-- 判断是gadgetid 63003 option_id 416
 	if 63003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 416 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -142,7 +142,7 @@ function action_EVENT_SELECT_OPTION_63004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -151,25 +151,25 @@ function action_EVENT_SELECT_OPTION_63004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 220134063 ；指定config：63003；物件身上指定option：416；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220134063, 63003, 416) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220134063, 63005, {416,410}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 创建id为63010的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 63010 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（335.174，631.9067，-1496.881），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=335.174, y=631.9067, z=-1496.881}
 	  local pos_follow = {x=2, y=-2, z=-16}
@@ -178,8 +178,8 @@ function action_EVENT_SELECT_OPTION_63004(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -187,14 +187,14 @@ end
 function condition_EVENT_SELECT_OPTION_63007(context, evt)
 	-- 判断是gadgetid 63005 option_id 416
 	if 63005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 416 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -208,7 +208,7 @@ function action_EVENT_SELECT_OPTION_63007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -217,25 +217,25 @@ function action_EVENT_SELECT_OPTION_63007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 220134063 ；指定config：63005；物件身上指定option：416；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220134063, 63005, 416) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 220134063 ；指定config：63005；物件身上指定option：410；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220134063, 63005, 410) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220134063, 63006, {410}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（329.7214，631.2805，-1492.386），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=329.7214, y=631.2805, z=-1492.386}
 	  local pos_follow = {x=2, y=-2, z=-16}
@@ -244,8 +244,8 @@ function action_EVENT_SELECT_OPTION_63007(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -253,14 +253,14 @@ end
 function condition_EVENT_SELECT_OPTION_63008(context, evt)
 	-- 判断是gadgetid 63005 option_id 410
 	if 63005 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 410 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -274,7 +274,7 @@ function action_EVENT_SELECT_OPTION_63008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -283,28 +283,28 @@ function action_EVENT_SELECT_OPTION_63008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220134063, 3)
-	
+
 	-- 删除指定group： 220134063 ；指定config：63005；物件身上指定option：416；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220134063, 63005, 416) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 220134063 ；指定config：63005；物件身上指定option：410；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220134063, 63005, 410) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220134063, 63003, {416}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（329.7214，631.2805，-1492.386），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=329.7214, y=631.2805, z=-1492.386}
 	  local pos_follow = {x=2, y=-2, z=-16}
@@ -313,8 +313,8 @@ function action_EVENT_SELECT_OPTION_63008(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -322,14 +322,14 @@ end
 function condition_EVENT_SELECT_OPTION_63009(context, evt)
 	-- 判断是gadgetid 63006 option_id 410
 	if 63006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 410 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -343,7 +343,7 @@ function action_EVENT_SELECT_OPTION_63009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -352,19 +352,19 @@ function action_EVENT_SELECT_OPTION_63009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 220134063 ；指定config：63006；物件身上指定option：410；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220134063, 63006, 410) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220134063, 63005, {416,410}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（329.7214，631.2805，-1492.386），持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=329.7214, y=631.2805, z=-1492.386}
 	  local pos_follow = {x=2, y=-2, z=-16}
@@ -373,28 +373,28 @@ function action_EVENT_SELECT_OPTION_63009(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_63011(context, evt)
 	-- 判断是gadgetid 为 63001的移动平台，是否到达了107 的点集中的 1 点
-	
+
 	if 63001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 107 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 1 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -405,7 +405,7 @@ function action_EVENT_PLATFORM_REACH_POINT_63011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -413,14 +413,14 @@ end
 function condition_EVENT_SELECT_OPTION_63012(context, evt)
 	-- 判断是gadgetid 63003 option_id 416
 	if 63003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 416 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -430,76 +430,76 @@ function action_EVENT_SELECT_OPTION_63012(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134041, 41001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134041中， configid为41002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134041, 41002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134041中， configid为41003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134041, 41003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134041中， configid为41004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134041, 41004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134041中， configid为41005的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134041, 41005, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134041中， configid为41006的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134041, 41006, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134041中， configid为41007的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134041, 41007, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134041中， configid为41008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134041, 41008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220134041中， configid为41009的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220134041, 41009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_63014(context, evt)
 	-- 判断是gadgetid 为 63001的移动平台，是否到达了107 的点集中的 2 点
-	
+
 	if 63001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 107 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -507,7 +507,7 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_63014(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220134063, 3)
-	
+
 	return 0
 end
 
@@ -515,6 +515,6 @@ end
 function action_EVENT_GROUP_LOAD_63015(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220134063, 3)
-	
+
 	return 0
 end

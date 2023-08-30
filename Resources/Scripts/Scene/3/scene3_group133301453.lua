@@ -1,17 +1,17 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301453
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id = 453003
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -121,9 +121,9 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -131,7 +131,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_453006(context, evt)
 	if 453004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -139,13 +139,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_453006(context, evt)
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133301453, 2, FlowSuiteOperatePolicy.COMPLETE)
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 30002, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_453007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") == #suite_disk[2].gadgets then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -165,11 +165,11 @@ function action_EVENT_GADGET_STATE_CHANGE_453007(context, evt)
 	elseif evt.param1 == GadgetState.Default then
 		ScriptLib.ChangeGroupVariableValue(context,"start",-1)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "start") == #suite_disk[2].gadgets then
 		ScriptLib.GoToFlowSuite(context, 133301453, 3)
 	end
-	
+
 	return 0
 end
 
@@ -178,7 +178,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_453008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") == #suite_disk[2].gadgets then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -189,6 +189,6 @@ function action_EVENT_GADGET_STATE_CHANGE_453008(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end

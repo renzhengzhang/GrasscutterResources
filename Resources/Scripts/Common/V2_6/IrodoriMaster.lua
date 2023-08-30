@@ -3,11 +3,11 @@
 ||	owner: 		luyao.huang
 ||	description:	2.6容彩祭-剑道大师挑战
 ||	LogName:	IrodoriMaster
-||	Protection:	
+||	Protection:
 =======================================]]--
 
 ------
---local defs = {
+--defs = {
 --    challenge_time = 240,
 --    hard_challenge_time = 120,
 --    father_challenge_id = 123,
@@ -16,7 +16,7 @@
 --    gallery_id = 123456,
 --    swordmaster_id = 120,
 --}
-local local_defs = 
+local local_defs =
 {
     swordmaster_reminder_hp_ratio = 50
 }
@@ -69,12 +69,12 @@ function action_irodori_master_ready(context,evt)
     ScriptLib.CreateFatherChallenge(context, 1, defs.father_challenge_id, defs.challenge_time, {success = 5, fail = 10})
 	--先开，再attach，给子挑战保序
 	ScriptLib.StartFatherChallenge(context,1)
-	ScriptLib.AttachChildChallenge(context,1, 11, defs.normal_challenge_id,{defs.challenge_time,base_info.group_id,swordmaster_id[difficulty]},{uidList[1]},{success = 5,fail = 10}) --普通挑战	
-	
+	ScriptLib.AttachChildChallenge(context,1, 11, defs.normal_challenge_id,{defs.challenge_time,base_info.group_id,swordmaster_id[difficulty]},{uidList[1]},{success = 5,fail = 10}) --普通挑战
+
     --只有中等难度有两个挑战目标
     if (difficulty == 2) then
-        ScriptLib.AttachChildChallenge(context,1, 10, defs.hard_challenge_id,{defs.hard_challenge_time,base_info.group_id,swordmaster_id[difficulty]},{uidList[1]},{success = 0,fail = 0}) --优秀挑战	
-	end	
+        ScriptLib.AttachChildChallenge(context,1, 10, defs.hard_challenge_id,{defs.hard_challenge_time,base_info.group_id,swordmaster_id[difficulty]},{uidList[1]},{success = 0,fail = 0}) --优秀挑战
+	end
     return 0
 end
 
@@ -100,7 +100,7 @@ end
 function  action_challenge_fail(context,evt)
     local fail_challenge_id = evt.param1
     if (fail_challenge_id == defs.father_challenge_id) then
-        ScriptLib.PrintContextLog(context,"## [IrodoriMaster] action_challenge_fail： 父挑战失败") 
+        ScriptLib.PrintContextLog(context,"## [IrodoriMaster] action_challenge_fail： 父挑战失败")
         LF_Clear_Stage(context)
         --只需要处理父挑战失败：普通挑战失败，则父挑战失败；优秀挑战失败，则无事发生
         if (evt.param2 <= 0) then

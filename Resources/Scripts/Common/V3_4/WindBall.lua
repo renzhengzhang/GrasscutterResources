@@ -3,10 +3,10 @@
 ||	owner: 		luyao.huang
 ||	description:	风球传递玩法
 ||	LogName:	WindBall
-||	Protection:	
+||	Protection:
 =======================================]]--
 
---local defs = 
+--defs =
 --{
 --    gadget_worktop_id = 100001,
 --}
@@ -18,7 +18,7 @@ local local_defs = {
     get_windball_option = 7,
 }
 
-local state_defs = 
+local state_defs =
 {
     lock = 0,
     on_worktop = 201,
@@ -28,13 +28,13 @@ local state_defs =
     finish = 901,
 }
 
-local windball_state_defs = 
+local windball_state_defs =
 {
     on_worktop = 0,
     on_team = 1,
 }
 
-local phase_defs = 
+local phase_defs =
 {
     lock = 0,
     playing = 1,
@@ -140,7 +140,7 @@ function action_select_option_windball(context,evt)
         ScriptLib.PrintContextLog(context,"## [WindBall]action_select_option_windball：玩家选择选项，获取风球")
         local target_worktop = evt.param1
         ScriptLib.SetEntityServerGlobalValueByConfigId(context,target_worktop,"SGV_Message_Release_WindBall",1)
-            
+
         local current_index = LF_Get_Index_From_List(context,windball_worktops,target_worktop)
         local worktop_eid = ScriptLib.GetEntityIdByConfigId(context, windball_worktops[current_index+1])
         local pos = ScriptLib.GetPosByEntityId(context, worktop_eid)
@@ -198,7 +198,7 @@ end
 function LF_Set_All_Worktops_State(context)
     local current_worktop = ScriptLib.GetGroupVariableValue(context,"current_worktop")
 
-            
+
     ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, defs.hint_gadget_id)
     for i = 1, #windball_worktops do
         ScriptLib.SetEntityServerGlobalValueByConfigId(context,windball_worktops[i],"SGV_Dir_Light_On",0)
@@ -254,7 +254,7 @@ end
 
 --返回以gadget_1位基准，对准gadget_2时应亮起的角标id
 function LF_Get_Dir_Index(context,gadget_1,gadget_2)
-    
+
     local eid_1 = ScriptLib.GetEntityIdByConfigId(context, gadget_1)
     local pos_1 = ScriptLib.GetPosByEntityId(context, eid_1)
     local rot_1 = ScriptLib.GetRotationByEntityId(context, eid_1)

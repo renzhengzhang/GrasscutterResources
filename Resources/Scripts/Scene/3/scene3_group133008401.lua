@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008401
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -95,9 +95,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -108,9 +108,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -153,9 +153,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -164,7 +164,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_401005(context, evt)
 	if 401003 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -175,7 +175,7 @@ function action_EVENT_GADGET_STATE_CHANGE_401005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -184,12 +184,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_401011(context, evt)
 	if 401004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"First"为0
 	if ScriptLib.GetGroupVariableValue(context, "First") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -199,56 +199,56 @@ function action_EVENT_GADGET_STATE_CHANGE_401011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401014 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "B" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "B", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "A" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "A", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "C" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "C", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "D" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "D", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 401007, 300800155) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "First" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "First", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -257,12 +257,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_401012(context, evt)
 	if 401003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"First"为0
 	if ScriptLib.GetGroupVariableValue(context, "First") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -272,56 +272,56 @@ function action_EVENT_GADGET_STATE_CHANGE_401012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401014 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "A" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "A", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "B" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "B", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "C" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "C", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "D" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "D", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 401007, 300800156) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "First" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "First", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -330,12 +330,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_401015(context, evt)
 	if 401001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"First"为0
 	if ScriptLib.GetGroupVariableValue(context, "First") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -345,56 +345,56 @@ function action_EVENT_GADGET_STATE_CHANGE_401015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401014 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "C" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "C", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "A" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "A", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "B" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "B", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "D" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "D", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 401007, 300800158) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "First" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "First", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -403,12 +403,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_401016(context, evt)
 	if 401014 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"First"为0
 	if ScriptLib.GetGroupVariableValue(context, "First") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -418,56 +418,56 @@ function action_EVENT_GADGET_STATE_CHANGE_401016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "D" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "D", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "A" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "A", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "B" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "B", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "C" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "C", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 401007, 300800157) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "First" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "First", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -477,7 +477,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_401017(context, evt)
 	if 401004 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -488,7 +488,7 @@ function action_EVENT_GADGET_STATE_CHANGE_401017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -498,7 +498,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_401018(context, evt)
 	if 401014 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -509,7 +509,7 @@ function action_EVENT_GADGET_STATE_CHANGE_401018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -519,7 +519,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_401019(context, evt)
 	if 401001 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -530,24 +530,24 @@ function action_EVENT_GADGET_STATE_CHANGE_401019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"A"为1
 	if ScriptLib.GetGroupVariableValue(context, "A") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Bout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Bout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -558,30 +558,30 @@ function action_EVENT_VARIABLE_CHANGE_401020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 401007, 300800175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401021(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"A"为1
 	if ScriptLib.GetGroupVariableValue(context, "A") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Cout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Cout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -592,30 +592,30 @@ function action_EVENT_VARIABLE_CHANGE_401021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 401007, 300800180) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401022(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"A"为1
 	if ScriptLib.GetGroupVariableValue(context, "A") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Dout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Dout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -626,30 +626,30 @@ function action_EVENT_VARIABLE_CHANGE_401022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 401007, 300800184) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401023(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"C"为1
 	if ScriptLib.GetGroupVariableValue(context, "C") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Aout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Aout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -660,30 +660,30 @@ function action_EVENT_VARIABLE_CHANGE_401023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Aout" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Aout", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401024(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"C"为1
 	if ScriptLib.GetGroupVariableValue(context, "C") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Bout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Bout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -694,30 +694,30 @@ function action_EVENT_VARIABLE_CHANGE_401024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Bout" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Bout", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401025(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"C"为1
 	if ScriptLib.GetGroupVariableValue(context, "C") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Dout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Dout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -728,38 +728,38 @@ function action_EVENT_VARIABLE_CHANGE_401025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Dout" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Dout", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_401026(context, evt)
 	-- 判断是gadgetid 为 401007的移动平台，是否到达了300800185 的路线中的 2 点
-	
+
 	if 401007 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800185 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"Y"为0
 	if ScriptLib.GetGroupVariableValue(context, "Y") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -769,39 +769,39 @@ function action_EVENT_PLATFORM_REACH_POINT_401026(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "Y" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Y", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_401027(context, evt)
 	-- 判断是gadgetid 为 401007的移动平台，是否到达了300800182 的路线中的 6 点
-	
+
 	if 401007 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800182 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"Y"为0
 	if ScriptLib.GetGroupVariableValue(context, "Y") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -811,39 +811,39 @@ function action_EVENT_PLATFORM_REACH_POINT_401027(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "Y" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Y", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_401028(context, evt)
 	-- 判断是gadgetid 为 401007的移动平台，是否到达了300800174 的路线中的 4 点
-	
+
 	if 401007 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800174 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 4 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"X"为0
 	if ScriptLib.GetGroupVariableValue(context, "X") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -853,39 +853,39 @@ function action_EVENT_PLATFORM_REACH_POINT_401028(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "X" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "X", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_401029(context, evt)
 	-- 判断是gadgetid 为 401007的移动平台，是否到达了300800175 的路线中的 4 点
-	
+
 	if 401007 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800175 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 4 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"X"为0
 	if ScriptLib.GetGroupVariableValue(context, "X") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -895,39 +895,39 @@ function action_EVENT_PLATFORM_REACH_POINT_401029(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "X" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "X", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_401030(context, evt)
 	-- 判断是gadgetid 为 401007的移动平台，是否到达了300800183 的路线中的 6 点
-	
+
 	if 401007 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800183 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"Z"为0
 	if ScriptLib.GetGroupVariableValue(context, "Z") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -937,39 +937,39 @@ function action_EVENT_PLATFORM_REACH_POINT_401030(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "Z" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Z", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_401031(context, evt)
 	-- 判断是gadgetid 为 401007的移动平台，是否到达了300800184 的路线中的 2 点
-	
+
 	if 401007 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 300800184 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 2 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	-- 判断变量"Z"为0
 	if ScriptLib.GetGroupVariableValue(context, "Z") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -979,26 +979,26 @@ function action_EVENT_PLATFORM_REACH_POINT_401031(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "Z" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Z", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401032(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"done"为3
 	if ScriptLib.GetGroupVariableValue(context, "done") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1008,8 +1008,8 @@ function action_EVENT_VARIABLE_CHANGE_401032(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标（894，198，-1165），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=894, y=198, z=-1165}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -1018,15 +1018,15 @@ function action_EVENT_VARIABLE_CHANGE_401032(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 401007 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -1035,7 +1035,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_401033(context, evt)
 	if 401002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1046,37 +1046,37 @@ function action_EVENT_GADGET_STATE_CHANGE_401033(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133008401, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	-- 将configid为 401014 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1085,7 +1085,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_401034(context, evt)
 	if 401008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1096,24 +1096,24 @@ function action_EVENT_GADGET_STATE_CHANGE_401034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401036(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"B"为1
 	if ScriptLib.GetGroupVariableValue(context, "B") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Aout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Aout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1124,30 +1124,30 @@ function action_EVENT_VARIABLE_CHANGE_401036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Aout" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Aout", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401037(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"B"为1
 	if ScriptLib.GetGroupVariableValue(context, "B") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Cout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Cout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1158,30 +1158,30 @@ function action_EVENT_VARIABLE_CHANGE_401037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Cout" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Cout", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401038(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"B"为1
 	if ScriptLib.GetGroupVariableValue(context, "B") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Dout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Dout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1192,30 +1192,30 @@ function action_EVENT_VARIABLE_CHANGE_401038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Dout" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Dout", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401039(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"D"为1
 	if ScriptLib.GetGroupVariableValue(context, "D") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Aout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Aout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1226,30 +1226,30 @@ function action_EVENT_VARIABLE_CHANGE_401039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Aout" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Aout", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401040(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"D"为1
 	if ScriptLib.GetGroupVariableValue(context, "D") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Bout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Bout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1260,30 +1260,30 @@ function action_EVENT_VARIABLE_CHANGE_401040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Bout" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Bout", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_401041(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"D"为1
 	if ScriptLib.GetGroupVariableValue(context, "D") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Cout"为1
 	if ScriptLib.GetGroupVariableValue(context, "Cout") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1294,13 +1294,13 @@ function action_EVENT_VARIABLE_CHANGE_401041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Cout" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Cout", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1309,7 +1309,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_401042(context, evt)
 	if 401009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1320,7 +1320,7 @@ function action_EVENT_GADGET_STATE_CHANGE_401042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1329,7 +1329,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_401043(context, evt)
 	if 401010 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1340,7 +1340,7 @@ function action_EVENT_GADGET_STATE_CHANGE_401043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1349,12 +1349,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_401044(context, evt)
 	if 401003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"First"为1
 	if ScriptLib.GetGroupVariableValue(context, "First") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1364,44 +1364,44 @@ function action_EVENT_GADGET_STATE_CHANGE_401044(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401014 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "A" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "A", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "B" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "B", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "C" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "C", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "D" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "D", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1410,12 +1410,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_401045(context, evt)
 	if 401001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"First"为1
 	if ScriptLib.GetGroupVariableValue(context, "First") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1425,44 +1425,44 @@ function action_EVENT_GADGET_STATE_CHANGE_401045(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401014 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "C" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "C", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "B" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "B", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "A" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "A", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "D" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "D", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1471,12 +1471,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_401046(context, evt)
 	if 401004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"First"为1
 	if ScriptLib.GetGroupVariableValue(context, "First") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1486,44 +1486,44 @@ function action_EVENT_GADGET_STATE_CHANGE_401046(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401014 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "B" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "B", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "A" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "A", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "C" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "C", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "D" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "D", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1532,12 +1532,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_401047(context, evt)
 	if 401014 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"First"为1
 	if ScriptLib.GetGroupVariableValue(context, "First") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1547,44 +1547,44 @@ function action_EVENT_GADGET_STATE_CHANGE_401047(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "D" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "D", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "B" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "B", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "C" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "C", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "A" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "A", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1593,7 +1593,7 @@ function condition_EVENT_GADGET_CREATE_401048(context, evt)
 	if 401002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1603,25 +1603,25 @@ function action_EVENT_GADGET_CREATE_401048(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 401010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 401010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

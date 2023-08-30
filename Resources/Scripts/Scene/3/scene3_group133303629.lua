@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133303629
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_LookHookCid = 629002
 }
 
@@ -17,9 +17,9 @@ local HookLookPlay = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -92,9 +92,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -102,7 +102,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_629003(context, evt)
 	if 629001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -110,7 +110,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_629003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303365, 2)
-	
+
 	return 0
 end
 
@@ -119,7 +119,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_629005(context, evt)
 	if 629001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -129,8 +129,8 @@ function action_EVENT_GADGET_STATE_CHANGE_629005(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133303365, 365001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

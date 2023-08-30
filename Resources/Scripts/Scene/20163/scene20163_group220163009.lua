@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220163009
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 
 	option_turn = 613,
 	option_start = 7,
@@ -19,7 +19,7 @@ play_region = 9026,
 recover_points = {15,16,17},
 
 	carrier_list = {9001,9006,9021,9022,9023,9024},
-	switcher_control = 
+	switcher_control =
 	{--[操作台configID] = {被控岔路装置1, 被控岔路装置2},
 		[9007] = {9002},
 		[9008] = {9005},
@@ -32,10 +32,10 @@ recover_points = {15,16,17},
     --option_gadget = 9003,
 
 	--几条路 注意是point_list有向的 倒数第二个点为岔路判定点
-	way_info = 
+	way_info =
 	{
 		--key为路径几 顺序无所谓
-		[1] = 
+		[1] =
 		{
 			point_list = {1,2,3},
 
@@ -49,9 +49,9 @@ recover_points = {15,16,17},
 				[201] = 0,
 				[202] = 0,
 				[203] = 2,
-			}, 
+			},
 		},
-		[2] = 
+		[2] =
 		{
 			point_list = {4,15,5,6},
 
@@ -65,9 +65,9 @@ recover_points = {15,16,17},
 				[201] = 4,
 				[202] = 0,
 				[203] = 0,
-			}, 
+			},
 		},
-		[3] = 
+		[3] =
 		{
 			point_list = {7,17,8,9,10},
 
@@ -81,9 +81,9 @@ recover_points = {15,16,17},
 				[201] = 0,
 				[202] = 0,
 				[203] = 0,
-			}, 
+			},
 		},
-		[4] = 
+		[4] =
 		{
 			point_list = {7,16,11,12,13,14},
 
@@ -97,13 +97,13 @@ recover_points = {15,16,17},
 				[201] = 0,
 				[202] = 0,
 				[203] = 0,
-			}, 
+			},
 		},
 
 	},
 
 	--停车点 到此点时会判断是否需要停车
-	stop_points = 
+	stop_points =
 	{
 		5
 	},
@@ -116,9 +116,9 @@ recover_points = {15,16,17},
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -190,9 +190,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -203,9 +203,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -221,9 +221,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -232,28 +232,28 @@ function action_EVENT_GROUP_LOAD_9009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 9002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_9011(context, evt)
 	-- 判断是gadgetid 为 9001的移动平台，是否到达了3 的点集中的 9 点
-	
+
 	if 9001 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 3 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 9 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -263,8 +263,8 @@ function action_EVENT_PLATFORM_ARRIVAL_9011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 9002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -272,14 +272,14 @@ end
 function condition_EVENT_SELECT_OPTION_9016(context, evt)
 	-- 判断是gadgetid 9007 option_id 613
 	if 9007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 613 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -293,8 +293,8 @@ function action_EVENT_SELECT_OPTION_9016(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -302,14 +302,14 @@ end
 function condition_EVENT_SELECT_OPTION_9017(context, evt)
 	-- 判断是gadgetid 9008 option_id 613
 	if 9008 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 613 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -323,20 +323,20 @@ function action_EVENT_SELECT_OPTION_9017(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9027(context, evt)
 	if evt.param1 ~= 9027 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -346,14 +346,14 @@ function action_EVENT_ENTER_REGION_9027(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 9007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 9008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 9008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

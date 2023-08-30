@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133001043
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
     GroupID = 133001043,
     AGRegionConfigID = 43055,
     AGName = "ActivityAbility_ToMoon_FoodChallenge_Part1",
@@ -25,9 +25,9 @@ local Phase ={
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -110,9 +110,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -123,9 +123,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -195,20 +195,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_43005(context, evt)
 	if evt.param1 ~= 43005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -216,7 +216,7 @@ end
 function action_EVENT_ENTER_REGION_43005(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001043, 2)
-	
+
 	return 0
 end
 
@@ -226,8 +226,8 @@ function condition_EVENT_ANY_MONSTER_DIE_43006(context, evt)
 	if evt.param1 ~= 43001 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -238,13 +238,13 @@ function action_EVENT_ANY_MONSTER_DIE_43006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "IS_BOSS_DEAD" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "IS_BOSS_DEAD", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -252,20 +252,20 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_43007(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001043, 7)
-	
+
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133001043, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133001043, EntityType.GADGET, 43030 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -274,7 +274,7 @@ function condition_EVENT_MONSTER_BATTLE_43015(context, evt)
 	if 43001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -282,20 +282,20 @@ end
 function action_EVENT_MONSTER_BATTLE_43015(context, evt)
 	-- 创建标识为"T1"，时间节点为{60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T1", {60}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_43016(context, evt)
 	if evt.param1 ~= 43016 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -303,8 +303,8 @@ end
 function action_EVENT_ENTER_REGION_43016(context, evt)
 	-- 创建标识为"T2"，时间节点为{60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T2", {60}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -314,12 +314,12 @@ function condition_EVENT_TIME_AXIS_PASS_43017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"stage"为1
 	if ScriptLib.GetGroupVariableValue(context, "stage") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -330,22 +330,22 @@ function action_EVENT_TIME_AXIS_PASS_43017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 400069 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400069) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001043, 5)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133001043, 4)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001043, 4)
-	
+
 	return 0
 end
 
@@ -355,12 +355,12 @@ function condition_EVENT_TIME_AXIS_PASS_43018(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"stage"为2
 	if ScriptLib.GetGroupVariableValue(context, "stage") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -371,22 +371,22 @@ function action_EVENT_TIME_AXIS_PASS_43018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 400069 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400069) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001043, 6)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133001043, 5)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133001043, 5)
-	
+
 	return 0
 end
 
@@ -395,7 +395,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_43021(context, evt)
 	if 43046 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -406,11 +406,11 @@ function action_EVENT_GADGET_STATE_CHANGE_43021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"waitBundleEnd"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "waitBundleEnd", {3}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -424,26 +424,26 @@ function action_EVENT_TIME_AXIS_PASS_43045(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 调用提示id为 400071 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400071) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_43055(context, evt)
 	if evt.param1 ~= 43055 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 

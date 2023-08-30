@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133308061
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -98,9 +98,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -110,7 +110,7 @@ function action_EVENT_GADGET_CREATE_61003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -118,14 +118,14 @@ end
 function condition_EVENT_SELECT_OPTION_61004(context, evt)
 	-- 判断是gadgetid 61002 option_id 779
 	if 61002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 779 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -136,25 +136,25 @@ function action_EVENT_SELECT_OPTION_61004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308061, EntityType.GADGET, 61001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 删除指定group： 133308061 ；指定config：61002；物件身上指定option：779；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308061, 61002, 779) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308061, EntityType.GADGET, 61013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -165,7 +165,7 @@ function action_EVENT_GADGET_CREATE_61009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -173,14 +173,14 @@ end
 function condition_EVENT_SELECT_OPTION_61010(context, evt)
 	-- 判断是gadgetid 61006 option_id 779
 	if 61006 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 779 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -191,25 +191,25 @@ function action_EVENT_SELECT_OPTION_61010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308061, EntityType.GADGET, 61005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 删除指定group： 133308061 ；指定config：61006；物件身上指定option：779；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308061, 61006, 779) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308061, EntityType.GADGET, 61014 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -220,7 +220,7 @@ function action_EVENT_GADGET_CREATE_61011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -228,14 +228,14 @@ end
 function condition_EVENT_SELECT_OPTION_61012(context, evt)
 	-- 判断是gadgetid 61008 option_id 779
 	if 61008 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 779 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -246,24 +246,24 @@ function action_EVENT_SELECT_OPTION_61012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308061, EntityType.GADGET, 61007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 删除指定group： 133308061 ；指定config：61008；物件身上指定option：779；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308061, 61008, 779) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308061, EntityType.GADGET, 61015 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end

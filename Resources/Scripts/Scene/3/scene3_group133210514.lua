@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210514
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -84,9 +84,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -98,9 +98,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -273,20 +273,20 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_514001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ActiveCount1"为1
 	if ScriptLib.GetGroupVariableValue(context, "ActiveCount1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -294,13 +294,13 @@ end
 function action_EVENT_VARIABLE_CHANGE_514001(context, evt)
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133210514, 2, FlowSuiteOperatePolicy.COMPLETE)
-	
+
 	-- 针对当前group内变量名为 "reminder" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "reminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-3802.44，149.4，-1131），持续时间为1秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-3802.44, y=149.4, z=-1131}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -309,20 +309,20 @@ function action_EVENT_VARIABLE_CHANGE_514001(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_514002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ActiveCount2"为1
 	if ScriptLib.GetGroupVariableValue(context, "ActiveCount2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -333,10 +333,10 @@ function action_EVENT_VARIABLE_CHANGE_514002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133210514, 3, FlowSuiteOperatePolicy.COMPLETE)
-	
+
 	-- 触发镜头注目，注目位置为坐标（-3801.2，149.4，-1089.9），持续时间为1秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-3801.2, y=149.4, z=-1089.9}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -345,20 +345,20 @@ function action_EVENT_VARIABLE_CHANGE_514002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_514003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"ActiveCount3"为1
 	if ScriptLib.GetGroupVariableValue(context, "ActiveCount3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -366,13 +366,13 @@ end
 function action_EVENT_VARIABLE_CHANGE_514003(context, evt)
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133210514, 4, FlowSuiteOperatePolicy.COMPLETE)
-	
+
 	-- 针对当前group内变量名为 "reminder" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "reminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-3759.1，149.5，-1091.7），持续时间为1秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-3759.1, y=149.5, z=-1091.7}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -381,20 +381,20 @@ function action_EVENT_VARIABLE_CHANGE_514003(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_514017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Success"为1
 	if ScriptLib.GetGroupVariableValue(context, "Success") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -404,22 +404,22 @@ function action_EVENT_VARIABLE_CHANGE_514017(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1111, 133210514, {514005,514006,514029,514030,514031,514041,514042,514043,514044,514045,514046,514047,514048,514049,514050}, 15, 1, 5) then
 		return -1
 	end
-	
+
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133210514, 5, FlowSuiteOperatePolicy.COMPLETE)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_514018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"reminder"为1
 	if ScriptLib.GetGroupVariableValue(context, "reminder") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -430,7 +430,7 @@ function action_EVENT_VARIABLE_CHANGE_514018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -439,7 +439,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_514028(context, evt)
 	if 15 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -450,7 +450,7 @@ function action_EVENT_MONSTER_TIDE_DIE_514028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -459,7 +459,7 @@ function condition_EVENT_ANY_MONSTER_DIE_514032(context, evt)
 	if 514015 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -470,7 +470,7 @@ function action_EVENT_ANY_MONSTER_DIE_514032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -479,7 +479,7 @@ function condition_EVENT_ANY_MONSTER_DIE_514033(context, evt)
 	if 514016 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -490,19 +490,19 @@ function action_EVENT_ANY_MONSTER_DIE_514033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_514034(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Monster1"为2
 	if ScriptLib.GetGroupVariableValue(context, "Monster1") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -512,14 +512,14 @@ function action_EVENT_VARIABLE_CHANGE_514034(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133210391, 391004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "StatueCount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "StatueCount", 1, 133210391) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -528,7 +528,7 @@ function condition_EVENT_ANY_MONSTER_DIE_514035(context, evt)
 	if 514011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -539,7 +539,7 @@ function action_EVENT_ANY_MONSTER_DIE_514035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -548,7 +548,7 @@ function condition_EVENT_ANY_MONSTER_DIE_514036(context, evt)
 	if 514012 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -559,19 +559,19 @@ function action_EVENT_ANY_MONSTER_DIE_514036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_514037(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Monster2"为2
 	if ScriptLib.GetGroupVariableValue(context, "Monster2") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -581,14 +581,14 @@ function action_EVENT_VARIABLE_CHANGE_514037(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133210391, 391005, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "StatueCount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "StatueCount", 1, 133210391) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -597,7 +597,7 @@ function condition_EVENT_ANY_MONSTER_DIE_514038(context, evt)
 	if 514013 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -608,7 +608,7 @@ function action_EVENT_ANY_MONSTER_DIE_514038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -617,7 +617,7 @@ function condition_EVENT_ANY_MONSTER_DIE_514039(context, evt)
 	if 514014 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -628,19 +628,19 @@ function action_EVENT_ANY_MONSTER_DIE_514039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_514040(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Monster3"为2
 	if ScriptLib.GetGroupVariableValue(context, "Monster3") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -650,13 +650,13 @@ function action_EVENT_VARIABLE_CHANGE_514040(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133210391, 391001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "StatueCount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "StatueCount", 1, 133210391) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

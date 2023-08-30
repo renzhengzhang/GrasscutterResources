@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002414
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -126,9 +126,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -137,7 +137,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_414008(context, evt)
 	if 414007 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -148,7 +148,7 @@ function action_EVENT_GADGET_STATE_CHANGE_414008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_GADGET_CREATE_414019(context, evt)
 	if 414007 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -168,7 +168,7 @@ function action_EVENT_GADGET_CREATE_414019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -176,14 +176,14 @@ end
 function condition_EVENT_SELECT_OPTION_414023(context, evt)
 	-- 判断是gadgetid 414007 option_id 37
 	if 414007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 37 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -191,28 +191,28 @@ end
 function action_EVENT_SELECT_OPTION_414023(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002414, 3)
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002414, 4)
-	
+
 	-- 删除指定group： 133002414 ；指定config：414007；物件身上指定option：37；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133002414, 414007, 37) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将configid为 414007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 414007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建编号为666（该挑战的识别id),挑战内容为62的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 666, 62, 133002414, 6, 0, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -221,7 +221,7 @@ function condition_EVENT_ANY_GADGET_DIE_414028(context, evt)
 	if 414014 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -231,8 +231,8 @@ function action_EVENT_ANY_GADGET_DIE_414028(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 414011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_ANY_GADGET_DIE_414029(context, evt)
 	if 414015 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -251,8 +251,8 @@ function action_EVENT_ANY_GADGET_DIE_414029(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 414012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -261,7 +261,7 @@ function condition_EVENT_ANY_GADGET_DIE_414030(context, evt)
 	if 414016 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -271,18 +271,18 @@ function action_EVENT_ANY_GADGET_DIE_414030(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 414013, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_414031(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133002414) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -290,14 +290,14 @@ end
 function action_EVENT_ANY_MONSTER_DIE_414031(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002414, 5)
-	
+
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=1480,y=268,z=-736}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400004, pos, 25) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -308,13 +308,13 @@ function action_EVENT_CHALLENGE_SUCCESS_414032(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将configid为 414010 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 414010, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -325,12 +325,12 @@ function action_EVENT_CHALLENGE_FAIL_414033(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "4121177") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

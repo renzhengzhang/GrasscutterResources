@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155006048
 }
 
@@ -7,9 +7,9 @@ local base_info = {
 lightinfo = {48001,48002,48003,48004,48005,48006,48007}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -75,61 +75,61 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_48001(context, evt)
-	local count = ScriptLib.GetGroupVariableValue(context, "activeCount") 
-			
-				if count == 1 then 
-					ScriptLib.SetGadgetStateByConfigId(context, 48010, 101) 
+	local count = ScriptLib.GetGroupVariableValue(context, "activeCount")
+
+				if count == 1 then
+					ScriptLib.SetGadgetStateByConfigId(context, 48010, 101)
 				elseif count == 2 then
-					ScriptLib.SetGadgetStateByConfigId(context, 48010, 102) 
-				elseif count == 3 then 
-					ScriptLib.SetGadgetStateByConfigId(context, 48010, 103) 
+					ScriptLib.SetGadgetStateByConfigId(context, 48010, 102)
+				elseif count == 3 then
+					ScriptLib.SetGadgetStateByConfigId(context, 48010, 103)
 				elseif count == 4 then
-					ScriptLib.SetGadgetStateByConfigId(context, 48010, 201) 
-				elseif count == 5 then 
-					ScriptLib.SetGadgetStateByConfigId(context, 48010, 202) 
-				elseif count == 6 then 
-					ScriptLib.SetGadgetStateByConfigId(context, 48010, 203) 
-				elseif count == 7 then 
-					ScriptLib.SetGadgetStateByConfigId(context, 48010, 204) 
+					ScriptLib.SetGadgetStateByConfigId(context, 48010, 201)
+				elseif count == 5 then
+					ScriptLib.SetGadgetStateByConfigId(context, 48010, 202)
+				elseif count == 6 then
+					ScriptLib.SetGadgetStateByConfigId(context, 48010, 203)
+				elseif count == 7 then
+					ScriptLib.SetGadgetStateByConfigId(context, 48010, 204)
 				end
-				
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_48008(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
-		
-			local count = ScriptLib.GetGroupVariableValue(context, "activeCount") 
-		
-			if count == 1 then 
-				ScriptLib.SetGadgetStateByConfigId(context, 48010, 101) 
+
+
+			local count = ScriptLib.GetGroupVariableValue(context, "activeCount")
+
+			if count == 1 then
+				ScriptLib.SetGadgetStateByConfigId(context, 48010, 101)
 			elseif count == 2 then
-				ScriptLib.SetGadgetStateByConfigId(context, 48010, 102) 
-			elseif count == 3 then 
-				ScriptLib.SetGadgetStateByConfigId(context, 48010, 103) 
+				ScriptLib.SetGadgetStateByConfigId(context, 48010, 102)
+			elseif count == 3 then
+				ScriptLib.SetGadgetStateByConfigId(context, 48010, 103)
 			elseif count == 4 then
-				ScriptLib.SetGadgetStateByConfigId(context, 48010, 201) 
-			elseif count == 5 then 
-				ScriptLib.SetGadgetStateByConfigId(context, 48010, 202) 
-			elseif count == 6 then 
-				ScriptLib.SetGadgetStateByConfigId(context, 48010, 203) 
-			elseif count == 7 then 
-				ScriptLib.SetGadgetStateByConfigId(context, 48010, 204) 
+				ScriptLib.SetGadgetStateByConfigId(context, 48010, 201)
+			elseif count == 5 then
+				ScriptLib.SetGadgetStateByConfigId(context, 48010, 202)
+			elseif count == 6 then
+				ScriptLib.SetGadgetStateByConfigId(context, 48010, 203)
+			elseif count == 7 then
+				ScriptLib.SetGadgetStateByConfigId(context, 48010, 204)
 			end
 			return 0
 end
 
 -- 触发操作
 function action_EVENT_QUEST_START_48011(context, evt)
-	ScriptLib.SetGadgetStateByConfigId(context, 48010, 901) 
+	ScriptLib.SetGadgetStateByConfigId(context, 48010, 901)
 		return 0
 end

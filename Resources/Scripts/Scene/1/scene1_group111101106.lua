@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101106
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	groupID = 111101106,
 	rewardChestID = 106004,
 	isLoop = 0,
@@ -26,9 +26,9 @@ gadgetInfo = {	{index = 1, name = "gadget_1"},
 					{index = 5, name = "gadget_5"}}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -111,9 +111,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -122,18 +122,18 @@ function condition_EVENT_GADGET_STATE_CHANGE_106004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"midChecker"为0
 	if ScriptLib.GetGroupVariableValue(context, "midChecker") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_106004(context, evt)
-		--ScriptLib.PrintLog(evt.param2.."---".."GadgetStateChange Start")	
+		--ScriptLib.PrintLog(evt.param2.."---".."GadgetStateChange Start")
 		--ScriptLib.PrintLog(evt.param2.."---".."GadgetStateChange isActive ~= 1")
 		--ScriptLib.CreateGadget(context, { config_id = 106008 })
 				local gadgetDefsName=""
@@ -143,26 +143,26 @@ function action_EVENT_GADGET_STATE_CHANGE_106004(context, evt)
 				local gadgetRightIndex = 0
 				local gadgetLeftDefsName = ""
 				local gadgetLeftIndex = 0
-			
+
 				gadgetID = evt.param2
 				--检测是哪个Gadget被触发了,并且获取对应的defs中定义的名称
 				for k,v in pairs(defs) do
-					if v == gadgetID then 
+					if v == gadgetID then
 						gadgetDefsName = k
 					end
 				end
-			
-					
+
+
 				--根据触发的Gadget计算周围的联动Gadget,并且获取他们的Index
-				for k,v in pairs (gadgetInfo) do 
-					if v.name == gadgetDefsName then 
+				for k,v in pairs (gadgetInfo) do
+					if v.name == gadgetDefsName then
 						gadgetIndex = v.index
-			
+
 						if defs.isLoop == 0 then
 							if v.index <= 1 then
 								gadgetLeftIndex = -1
 								gadgetRightIndex = gadgetIndex + 1
-							elseif v.index >= defs.maxCount then 
+							elseif v.index >= defs.maxCount then
 								gadgetRightIndex = -1
 								gadgetLeftIndex = gadgetIndex - 1
 							else
@@ -173,7 +173,7 @@ function action_EVENT_GADGET_STATE_CHANGE_106004(context, evt)
 							if v.index <= 1 then
 								gadgetLeftIndex = defs.maxCount
 								gadgetRightIndex = gadgetIndex + 1
-							elseif v.index >= defs.maxCount then 
+							elseif v.index >= defs.maxCount then
 								gadgetRightIndex = 1
 								gadgetLeftIndex = gadgetIndex - 1
 							else
@@ -184,31 +184,31 @@ function action_EVENT_GADGET_STATE_CHANGE_106004(context, evt)
 						break
 					end
 				end
-			
+
 				--判断index是否超界，如果超界则设置对应的ID为0
-				if gadgetRightIndex ~= -1 then 
+				if gadgetRightIndex ~= -1 then
 					gadgetRightDefsName = gadgetInfo[gadgetRightIndex].name
 				else
 					gadgetRightDefsName = nil
 				end
-	
-	
+
+
 				if gadgetLeftIndex ~= -1 then
 					gadgetLeftDefsName = gadgetInfo[gadgetLeftIndex].name
 				else
 					gadgetLeftDefsName = nil
 				end
-	
-				
-				
-				
+
+
+
+
 				ScriptLib.SetGroupVariableValue(context, "midChecker", 1)
 				--ScriptLib.PrintLog(evt.param2.."---".."GadgetStateChange Ready to change negiborhold")
 				--ScriptLib.CreateGadget(context, { config_id = 106009 })
 				--设置相连的右边物件状态
 				if gadgetRightDefsName ~= nil and ScriptLib.GetGroupVariableValue(context,"isFinished") == 0 then
 					ScriptLib.SetGroupVariableValue(context, "RightChecker", 1)
-			
+
 					if GadgetState.Default == ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs[gadgetRightDefsName]) then
 						ScriptLib.SetGadgetStateByConfigId(context, defs[gadgetRightDefsName], GadgetState.Action01)
 					elseif GadgetState.Action01 == ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs[gadgetRightDefsName]) then
@@ -219,7 +219,7 @@ function action_EVENT_GADGET_STATE_CHANGE_106004(context, evt)
 						ScriptLib.SetGadgetStateByConfigId(context, defs[gadgetRightDefsName], GadgetState.Action01)
 					end
 				end
-			
+
 				--设置相连的左边物件状态
 				if gadgetLeftDefsName ~= nil and ScriptLib.GetGroupVariableValue(context,"isFinished") == 0 then
 					ScriptLib.SetGroupVariableValue(context, "LeftChecker", 1)
@@ -233,12 +233,12 @@ function action_EVENT_GADGET_STATE_CHANGE_106004(context, evt)
 						ScriptLib.SetGadgetStateByConfigId(context, defs[gadgetLeftDefsName], GadgetState.Action01)
 					end
 				end
-			
-			
+
+
 				--ScriptLib.PrintLog(evt.param2.."---".."GadgetStateChange check allEqual")
 				--ScriptLib.CreateGadget(context, { config_id = 106010 })
-	
-				
+
+
 				--ScriptLib.CreateGadget(context, { config_id = 106011 })
 				--ScriptLib.SetGroupVariableValue(context, "isActive", 0)
 				--ScriptLib.CreateGroupTimerEvent(context, 111101106, "isActiveTimer", 1)
@@ -253,12 +253,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_106014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "RightChecker") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"isFinished"为0
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -266,37 +266,37 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_106014(context, evt)
 			--检测玩法是否完成
 			local allEqual = 1
-						
+
 			for i=1,defs.maxCount do
 				if ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs[gadgetInfo[i].name]) ~= evt.param1 then
 					allEqual = 0
 					break
 				end
 			end
-		
-			
-			if allEqual == 1 and ScriptLib.GetGroupVariableValue(context,"isFinished") ~= 1 then 
+
+
+			if allEqual == 1 and ScriptLib.GetGroupVariableValue(context,"isFinished") ~= 1 then
 				ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
 				ScriptLib.SetGroupVariableValue(context, "midChecker", 2)
 				ScriptLib.SetGroupVariableValue(context, "RightChecker", 2)
 				ScriptLib.SetGroupVariableValue(context, "LeftChecker", 2)
-		
+
 				--ScriptLib.AddExtraGroupSuite(context, defs.groupID, 2)
 				for k,v in pairs(gadgetInfo) do
 					if defs[v.name] ~=0 then
 						ScriptLib.SetGadgetStateByConfigId(context, defs[v], GadgetState.GearStart)
 					end
 				end
-				
+
 				ScriptLib.GoToGroupSuite(context, defs.groupID, 2)
-				
-	
+
+
 				return 0
 			end
 			---如果玩法没有完成
 			ScriptLib.SetGroupVariableValue(context, "RightChecker", 0)
-		
-			if ScriptLib.GetGroupVariableValue(context,"RightChecker") == 0 and ScriptLib.GetGroupVariableValue(context,"LeftChecker") == 0 then 
+
+			if ScriptLib.GetGroupVariableValue(context,"RightChecker") == 0 and ScriptLib.GetGroupVariableValue(context,"LeftChecker") == 0 then
 				ScriptLib.SetGroupVariableValue(context, "midChecker", 0)
 			end
 			return 0
@@ -308,12 +308,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_106015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "LeftChecker") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"isFinished"为0
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -321,39 +321,39 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_106015(context, evt)
 			--检测玩法是否完成
 			local allEqual = 1
-						
+
 			for i=1,defs.maxCount do
 				if ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs[gadgetInfo[i].name]) ~= evt.param1 then
 					allEqual = 0
 					break
 				end
 			end
-		
-			
-			if allEqual == 1 and ScriptLib.GetGroupVariableValue(context,"isFinished") ~= 1 then 
+
+
+			if allEqual == 1 and ScriptLib.GetGroupVariableValue(context,"isFinished") ~= 1 then
 				ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
 				ScriptLib.SetGroupVariableValue(context, "midChecker", 2)
 				ScriptLib.SetGroupVariableValue(context, "RightChecker", 2)
 				ScriptLib.SetGroupVariableValue(context, "LeftChecker", 2)
 				--ScriptLib.AddExtraGroupSuite(context, defs.groupID, 2)
-	
+
 				for k,v in pairs(gadgetInfo) do
 					if defs[v.name] ~=0 then
 						ScriptLib.SetGadgetStateByConfigId(context, defs[v], GadgetState.GearStart)
 					end
 				end
-		
+
 				ScriptLib.GoToGroupSuite(context, defs.groupID, 2)
-				
-	
+
+
 				return 0
 			end
 			---如果玩法没有完成
 			ScriptLib.SetGroupVariableValue(context, "LeftChecker", 0)
-		
-			if ScriptLib.GetGroupVariableValue(context,"RightChecker") == 0 and ScriptLib.GetGroupVariableValue(context,"LeftChecker") == 0 then 
+
+			if ScriptLib.GetGroupVariableValue(context,"RightChecker") == 0 and ScriptLib.GetGroupVariableValue(context,"LeftChecker") == 0 then
 				ScriptLib.SetGroupVariableValue(context, "midChecker", 0)
 			end
-		
+
 			return 0
 end

@@ -3,15 +3,15 @@
 --||   Filename      ||    PB_FireTrail
 --||   RelVersion    ||    V3_6
 --||   Owner         ||    chao-jin
---||   Description   ||    
+--||   Description   ||
 --||   LogName       ||    ##[PB_FireTrail]
---||   Protection    ||    
+--||   Protection    ||
 --======================================================================================================================
 --Defs & Miscs || 需要LD配置的内容
 --[[
-local defs = {
+defs = {
 	fire_seed = 110001,
-	time_limit = 5, 
+	time_limit = 5,
 }
 
 local pillars = {110002,110003,110004,110005,110006}
@@ -34,21 +34,21 @@ end
 
 FT_Initialize()
 
-function action_group_load(context, evt) 
+function action_group_load(context, evt)
 	ScriptLib.PrintContextLog(context, "##[PB_FireTrail.lua]:火传导加载")
 	ScriptLib.SetGroupTempValue(context, "PillarChanged", 0, {base_info.group_id})
 	return 0
 end
 
-function action_gadget_state_change(context, evt) 
-	if evt.param2 == defs.fire_seed and evt.param1 == 201 then 
+function action_gadget_state_change(context, evt)
+	if evt.param2 == defs.fire_seed and evt.param1 == 201 then
 		ScriptLib.PrintContextLog(context, "##[PB_FireTrail.lua]:火种状态变化，开启时间轴")
 		ScriptLib.InitTimeAxis(context, "FireTrail", {defs.time_limit}, false)
 		return 0
-	else 
-		if gadgets[evt.param2].gadget_id == 70800422 and evt.param1 == 201 then 
+	else
+		if gadgets[evt.param2].gadget_id == 70800422 and evt.param1 == 201 then
 			ScriptLib.PrintContextLog(context, "##[PB_FireTrail.lua]:传导柱状态变化，更新数量")
-			if #pillars == ScriptLib.GetGroupTempValue(context, "PillarChanged", {base_info.group_id}) then 
+			if #pillars == ScriptLib.GetGroupTempValue(context, "PillarChanged", {base_info.group_id}) then
 				ScriptLib.EndTimeAxis(context, "FireTrail")
 				ScriptLib.PrintContextLog(context, "##[PB_FireTrail.lua]:挑战完成")
 				ScriptLib.SetGroupVariableValue(context, "Finished", 1)
@@ -63,7 +63,7 @@ function action_gadget_state_change(context, evt)
 end
 
 function action_time_axis_pass(context, evt)
-	if evt.source_name ==  "FireTrail" then 
+	if evt.source_name ==  "FireTrail" then
 		ScriptLib.PrintContextLog(context, "##[PB_FireTrail.lua]:火种监听的时间结束，重置Group")
 		ScriptLib.SetGroupTempValue(context, "PillarChanged", 0, {base_info.group_id})
 		ScriptLib.SetGadgetStateByConfigId(context, defs.fire_seed, 0)
@@ -80,6 +80,3 @@ end
 
 --======================================================================================================================
 --LevelFunctions || 自定义函数
-
-
-

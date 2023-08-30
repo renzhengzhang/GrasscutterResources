@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133217262
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_Teleport_1 = 262001,
 	gadget_Teleport_2 = 262002,
 	gadget_Teleport_3 = 262003,
@@ -25,7 +25,7 @@ local defs = {
 }
 
 -- DEFS_MISCS
-connectInfo = 
+connectInfo =
 {
 	{defs.gadget_Teleport_1,defs.gadget_Teleport_2,defs.pointarray_1,10},
 	{defs.gadget_Teleport_1,defs.gadget_Teleport_3,defs.pointarray_2,10},
@@ -34,7 +34,7 @@ connectInfo =
 }
 
 
-TeleportOwnerShip = 
+TeleportOwnerShip =
 {
 	{defs.gadget_TeleportOperator_1, defs.gadget_Teleport_1},
 	{defs.gadget_TeleportOperator_2, defs.gadget_Teleport_2},
@@ -49,7 +49,7 @@ staticBackwardSet = {10,9,8,7,6,5,4,3,2,1}
 
 function GetTeleportNameByConfigID(context, config_id)
 	for k,v  in pairs(defs)  do
-		if v == config_id then 
+		if v == config_id then
 			return k
 		end
 	end
@@ -69,8 +69,8 @@ function InitialTeleportRotationY(context)
 				name = GetTeleportNameByConfigID(context,localtarget).."_state"
 				rot = ScriptLib.GetGroupVariableValue(context,name)
 				ScriptLib.PrintLog(context, "Initial gadgetName = "..name .. " , Rot = "..rot)
-	
-				if rot == 90 then 
+
+				if rot == 90 then
 					ScriptLib.SetPlatformPointArray(context, localtarget, defs.pointarray_Rotate, { 1 }, { route_type = 0,turn_mode=true })
 				elseif rot == 180 then
 					ScriptLib.SetPlatformPointArray(context, localtarget, defs.pointarray_Rotate, { 2 }, { route_type = 0,turn_mode=true })
@@ -90,7 +90,7 @@ function InitialTeleportState(context)
 		tempname = "gadget_Teleport_"..i.."_isActive"
 		localtarget = TeleportOwnerShip[i][2]
 		if isTeleportValid(context,localtarget)==true then
-			if ScriptLib.GetGroupVariableValue(context,tempname) == 1 then 
+			if ScriptLib.GetGroupVariableValue(context,tempname) == 1 then
 				ScriptLib.SetGadgetStateByConfigId(context, localtarget, GadgetState.GearStart)
 			else
 				ScriptLib.SetGadgetStateByConfigId(context, localtarget, GadgetState.Default)
@@ -99,7 +99,7 @@ function InitialTeleportState(context)
 		end
 
 	end
-	
+
 end
 
 function isTeleportValid(context,teleportID)
@@ -107,15 +107,15 @@ function isTeleportValid(context,teleportID)
 	if teleportID == 0 then return false end
 	local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, teleportID)
 
-	if state ~= -1 then 
+	if state ~= -1 then
 		result = true
 	end
 --[[ 	local suiteindex = ScriptLib.GetGroupSuite(context, defs.group_ID)
 	for i=1, #suites[suiteindex].gadgets do
-		if teleportID == suites[suiteindex].gadgets[i] then 
+		if teleportID == suites[suiteindex].gadgets[i] then
 			result = true
 			return result
-		end 
+		end
 	end ]]
 	return result
 end
@@ -132,7 +132,7 @@ function CheckIsConnected(context,teleport_aID,teleport_bID)
 	local yrotation_b = ScriptLib.GetRotationByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_bID)).y
 	ScriptLib.PrintLog(context, "yrotation_a = "..yrotation_a .. "| yrotation_a =  "..yrotation_b)
 	--转换为弧度
-	local yrad_a = math.rad(yrotation_a) 
+	local yrad_a = math.rad(yrotation_a)
 	local yrad_b = math.rad(yrotation_b)
 	ScriptLib.PrintLog(context, "yrad_a = "..yrad_a .. "| yrad_b =  "..yrad_b)
 
@@ -141,7 +141,7 @@ function CheckIsConnected(context,teleport_aID,teleport_bID)
 	local dir_b = {x = math.sin(yrad_b), y = 0, z = math.cos(yrad_b)}
 	ScriptLib.PrintLog(context, "dir_a : x = "..dir_a.x.." , y = "..dir_a.y.." , z = "..dir_a.z)
 	ScriptLib.PrintLog(context, "dir_b : x = "..dir_b.x.." , y = "..dir_b.y.." , z = "..dir_b.z)
-	
+
 	--获取两个点位置
 	local pos_a = ScriptLib.GetPosByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_aID))
 	ScriptLib.PrintLog(context, "pos_a : x = "..pos_a.x.." , y = "..pos_a.y.." , z = "..pos_a.z)
@@ -165,9 +165,9 @@ function CheckIsConnected(context,teleport_aID,teleport_bID)
 
 	--判断点乘结果是否大于0.5,也就是正负 45度范围
 	if dotvalue_a >= 0.5  and dotvalue_b >= 0.5 then
-		return true 
+		return true
 	end
-	
+
 	ScriptLib.PrintLog(context, "invalid cos = ".. dotvalue_a)
 
 	return false
@@ -192,11 +192,11 @@ end
 
 --在所有关联传送点中找到激活链接的,如果没有则返回nil
 function GetConnectedTeleport(context,teleport_id)
-	local related 
+	local related
 	related = FindRelatedTargets(context,teleport_id)
 
 	for i=1,#related do
-		if CheckIsConnected(context,teleport_id,related[i][1]) == true then 
+		if CheckIsConnected(context,teleport_id,related[i][1]) == true then
 			return related[i]
 		end
 	end
@@ -212,20 +212,20 @@ end
 
 --更新所有传送门的状态表现
 function UpdateTeleportState(context)
-	
+
 	local teleportname
 	for i=1,#TeleportOwnerShip do
 			local connect = GetConnectedTeleport(context,TeleportOwnerShip[i][2])
-			
-		if connect == nil then 
-			
+
+		if connect == nil then
+
 			ScriptLib.SetGadgetStateByConfigId(context, TeleportOwnerShip[i][2], GadgetState.Default)
 			teleportname = GetTeleportNameByConfigID(context, TeleportOwnerShip[i][2])
 			teleportname = teleportname.."_isActive"
 			ScriptLib.SetGroupVariableValue(context, teleportname, 0)
 			ScriptLib.PrintLog(context, "connect nothing : "..i)
 		else
-			
+
 
 			--ScriptLib.PrintLog(context, "connect count = "..#connect)
 			--ScriptLib.PrintLog(context, "connect{"..connect[1].." , "..connect[2].." , "..connect[3].."}")
@@ -234,7 +234,7 @@ function UpdateTeleportState(context)
 			teleportname = teleportname.."_isActive"
 			ScriptLib.SetGroupVariableValue(context, teleportname, 1)
 			ScriptLib.PrintLog(context, "connect something = "..i)
-			
+
 		end
 
 	end
@@ -244,7 +244,7 @@ end
 function TeleportAction(context,teleport_id)
 	local related = FindRelatedTargets(context, teleport_id)
 	for i=1,#related do
-		if CheckIsConnected(context,teleport_id,related[i][1]) == true then 
+		if CheckIsConnected(context,teleport_id,related[i][1]) == true then
 			ScriptLib.MoveAvatarByPointArray(context, context.uid, related[i][2], related[i][3], {speed=related[i][4]}, "{\"MarkType\":1}")
 			return 0
 		end
@@ -252,9 +252,9 @@ function TeleportAction(context,teleport_id)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -342,9 +342,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -355,9 +355,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -373,20 +373,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_262006(context, evt)
 	if evt.param1 ~= 262006 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_5_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_5_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -403,19 +403,19 @@ function action_EVENT_GROUP_LOAD_262007(context, evt)
 		InitialTeleportRotationY(context)
 		InitialTeleportState(context)
 		ScriptLib.InitTimeAxis(context, "InitialEnding", {1}, false)
-				
-		
+
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_262008(context, evt)
 			UpdateTeleportState(context)
-			for i = 1, #TeleportOwnerShip do 
+			for i = 1, #TeleportOwnerShip do
 				if TeleportOwnerShip[i][1] ~= 0 then
 					ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_ID, TeleportOwnerShip[i][1], {31})
 				end
-				
+
 			end
 			return 0
 end
@@ -423,12 +423,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_262015(context, evt)
 	if evt.param1 ~= 262015 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_1_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_1_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -443,12 +443,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_262016(context, evt)
 	if evt.param1 ~= 262016 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_2_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_2_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -463,12 +463,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_262017(context, evt)
 	if evt.param1 ~= 262017 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_3_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_3_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -483,12 +483,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_262018(context, evt)
 	if evt.param1 ~= 262018 then return false end
-	
+
 	-- 判断变量"gadget_Teleport_4_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_4_isActive") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -503,10 +503,10 @@ end
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_262023(context, evt)
 			local result = false
-			for i = 1, #TeleportOwnerShip do 
-				if TeleportOwnerShip[i][1] ~= evt.param1 then 
+			for i = 1, #TeleportOwnerShip do
+				if TeleportOwnerShip[i][1] ~= evt.param1 then
 					result = false
-				else 
+				else
 					result = true
 					if 31 ~= evt.param2 then
 						result = false
@@ -514,7 +514,7 @@ function condition_EVENT_SELECT_OPTION_262023(context, evt)
 					return result
 				end
 			end
-		
+
 		return result
 end
 
@@ -522,7 +522,7 @@ end
 function action_EVENT_SELECT_OPTION_262023(context, evt)
 		local localtarget
 			local localoption
-		
+
 				for i=1,#TeleportOwnerShip do
 					if TeleportOwnerShip[i][1] == evt.param1 then
 						localtarget = TeleportOwnerShip[i][2]
@@ -530,32 +530,32 @@ function action_EVENT_SELECT_OPTION_262023(context, evt)
 					end
 				end
 				--旋转时取消所有的Option
-				for i = 1, #TeleportOwnerShip do 
+				for i = 1, #TeleportOwnerShip do
 					if TeleportOwnerShip[i][1] ~= 0 then
 						ScriptLib.DelWorktopOptionByGroupId(context, defs.group_ID, TeleportOwnerShip[i][1], 31)
 					end
 				end
-				
-	
+
+
 				ScriptLib.SetGroupVariableValue(context,"isInitial",0)
-				
+
 				ScriptLib.PrintLog(context, "evt.gadgetid = "..evt.param1)
 				ScriptLib.PrintLog(context, "localtarget = "..localtarget)
 				ScriptLib.SetPlatformPointArray(context, localtarget, defs.pointarray_Rotate, { 1 }, { route_type = 0,turn_mode=true })
-	
-		
+
+
 				return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_262024(context, evt)
 		ScriptLib.PrintLog(context, "Reachpoint_condition : "..evt.param1)
-	
+
 		local result = false
-		for i = 1, #TeleportOwnerShip do 
-			if TeleportOwnerShip[i][2] ~= evt.param1 then 
+		for i = 1, #TeleportOwnerShip do
+			if TeleportOwnerShip[i][2] ~= evt.param1 then
 				result = false
-			else 
+			else
 				result = true
 				if ScriptLib.GetGroupVariableValue(context,"isInitial") ~= 0 then
 					result =  false
@@ -570,14 +570,14 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_262024(context, evt)
 		ScriptLib.PrintLog(context, "Reachpoint_action : "..evt.param1)
 		--旋转完成后再重新加回所有的Option
-		for i = 1, #TeleportOwnerShip do 
+		for i = 1, #TeleportOwnerShip do
 			if TeleportOwnerShip[i][1] ~= 0 then
 				ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_ID, TeleportOwnerShip[i][1], {31})
 			end
 		end
-	
+
 		UpdateTeleportState(context)
-	
+
 		-- set teleprot rotation and save to group variable
 		local name = GetTeleportNameByConfigID(context,evt.param1).."_state"
 		ScriptLib.PrintLog(context, "gadgetname = "..name)
@@ -589,6 +589,6 @@ function action_EVENT_PLATFORM_REACH_POINT_262024(context, evt)
 		end
 		ScriptLib.PrintLog(context, "prerot ++ = ".. prerot)
 		ScriptLib.SetGroupVariableValue(context,name,prerot)
-	
+
 		return 0
 end

@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220142005
 }
 
@@ -47,7 +47,7 @@ local        defs = {
     levelTagGroupID = 7,
 
     --是否由re-quire控制切suite，填0则不需要配置switchByLevelTag_suites
-    switchByLevelTag = 1, 
+    switchByLevelTag = 1,
 
     --切入该LevelTag时，加载且仅加载的suite。
     --注意，被此操作Remove掉的物件不会保留GadgetState
@@ -56,16 +56,18 @@ local        defs = {
         ["2_8_Kazuha_01"] = {1},
         ["2_8_Kazuha_02"] = {1,2},
         ["2_8_Kazuha_03"] = {1,2},
-        ["2_8_Kazuha_05"] = {1,2},
+        ["2_8_Kazuha_05"] = {1,2},
+
         ["2_8_Kazuha_06"] = {1,2},
         ["2_8_Kazuha_07"] = {1,2},
     },
 
     --需要保存gadgetState的物件configID，最多9个
-    saved_gadget = 
-    {  
+    saved_gadget =
+    {
     	5003,5005,5001
-    },
+    }
+,
     --特判万叶晶石物件，这些物件在GroupLoad时，若为State 202则切成
     spec_gadget=
     {
@@ -74,9 +76,9 @@ local        defs = {
         }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -121,9 +123,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -134,9 +136,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -161,9 +163,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -171,7 +173,7 @@ function action_EVENT_ENTER_REGION_5002(context, evt)
 	if evt.param1 == 5002 and ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 and ScriptLib.TryRecordActivityPushTips(context, 2014002) == 0 then
 		ScriptLib.ShowClientTutorial(context, 1178, {})
 	end
-	
+
 	return 0
 end
 
@@ -180,7 +182,7 @@ function action_EVENT_ENTER_REGION_5007(context, evt)
 	if evt.param1 == 5007 and ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 and ScriptLib.TryRecordActivityPushTips(context, 2014002) == 0 then
 		ScriptLib.ShowClientTutorial(context, 1178, {})
 	end
-	
+
 	return 0
 end
 
@@ -189,7 +191,7 @@ function action_EVENT_ENTER_REGION_5009(context, evt)
 	if evt.param1 == 5009 and ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 and ScriptLib.TryRecordActivityPushTips(context, 2014002) == 0 then
 		ScriptLib.ShowClientTutorial(context, 1178, {})
 	end
-	
+
 	return 0
 end
 
@@ -198,7 +200,7 @@ function condition_EVENT_ANY_GADGET_DIE_5014(context, evt)
 	if 5011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -208,8 +210,8 @@ function action_EVENT_ANY_GADGET_DIE_5014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -218,7 +220,7 @@ function condition_EVENT_ANY_GADGET_DIE_5015(context, evt)
 	if 5004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -228,8 +230,8 @@ function action_EVENT_ANY_GADGET_DIE_5015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133222232
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -84,9 +84,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -97,9 +97,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -133,9 +133,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -143,7 +143,7 @@ function condition_EVENT_GADGET_CREATE_232004(context, evt)
 	if 232003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -154,7 +154,7 @@ function action_EVENT_GADGET_CREATE_232004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -162,14 +162,14 @@ end
 function condition_EVENT_SELECT_OPTION_232005(context, evt)
 	-- 判断是gadgetid 232003 option_id 91
 	if 232003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 91 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -180,25 +180,25 @@ function action_EVENT_SELECT_OPTION_232005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 改变指定group组133222206中， configid为206006的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222206, 206006, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133222232, EntityType.GADGET, 232003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "One" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "One", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_GROUP_LOAD_232007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "One") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -219,7 +219,7 @@ function action_EVENT_GROUP_LOAD_232007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -229,7 +229,7 @@ function condition_EVENT_GROUP_LOAD_232008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Two") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -240,7 +240,7 @@ function action_EVENT_GROUP_LOAD_232008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -250,7 +250,7 @@ function condition_EVENT_GROUP_LOAD_232023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Three") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -261,7 +261,7 @@ function action_EVENT_GROUP_LOAD_232023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -272,7 +272,7 @@ function action_EVENT_QUEST_START_232025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -281,7 +281,7 @@ function condition_EVENT_GADGET_CREATE_232026(context, evt)
 	if 232021 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -292,7 +292,7 @@ function action_EVENT_GADGET_CREATE_232026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -300,14 +300,14 @@ end
 function condition_EVENT_SELECT_OPTION_232027(context, evt)
 	-- 判断是gadgetid 232021 option_id 91
 	if 232021 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 91 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -318,25 +318,25 @@ function action_EVENT_SELECT_OPTION_232027(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 改变指定group组133222206中， configid为206001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222206, 206001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133222232, EntityType.GADGET, 232021 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "Two" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Two", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -345,7 +345,7 @@ function condition_EVENT_GADGET_CREATE_232028(context, evt)
 	if 232022 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -356,7 +356,7 @@ function action_EVENT_GADGET_CREATE_232028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -364,14 +364,14 @@ end
 function condition_EVENT_SELECT_OPTION_232029(context, evt)
 	-- 判断是gadgetid 232022 option_id 91
 	if 232022 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 91 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -382,24 +382,24 @@ function action_EVENT_SELECT_OPTION_232029(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 改变指定group组133222206中， configid为206005的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133222206, 206005, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133222232, EntityType.GADGET, 232022 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 将本组内变量名为 "Three" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Three", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

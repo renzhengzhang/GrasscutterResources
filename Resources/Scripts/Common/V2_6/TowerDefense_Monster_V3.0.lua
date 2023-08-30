@@ -15,7 +15,7 @@
 --编辑器配置
 --[[
 
-	local defs = {
+	defs = {
 		group_id = 245002003,
 		gear_group_id = 245002002
 	}
@@ -47,11 +47,11 @@ end
 -- 初始化一些trigger和var
 function LF_Init_Monster_Group()
 
-	local extraTriggers = 
+	local extraTriggers =
 	{
 		t1 = { config_id = 40000001, name = "monster_die", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_monster_die", trigger_count = 0 },
 		t3 = { config_id = 40000003, name = "MONSTER_WILL_LEAVE_SCENE", event = EventType.EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE, source = "", condition = "", action = "action_MONSTER_DIE_BEFORE_LEAVE_SCENE", trigger_count = 0 },
-		--t4 = { config_id = 40000004, name = "EVENT_ANY_MONSTER_LIVE", event = EventType.EVENT_ANY_MONSTER_LIVE, source = "", condition = "", action = "action_ANY_MONSTER_LIVE", trigger_count = 0 },	
+		--t4 = { config_id = 40000004, name = "EVENT_ANY_MONSTER_LIVE", event = EventType.EVENT_ANY_MONSTER_LIVE, source = "", condition = "", action = "action_ANY_MONSTER_LIVE", trigger_count = 0 },
 	}
 
 	for _, _trigger in pairs(extraTriggers) do
@@ -75,7 +75,7 @@ function action_monster_die(context, evt)
 	ScriptLib.ExecuteGroupLua(context, ScriptLib.GetGroupVariableValue(context, "challenge_group"), "UpdateLeftMonsterNum", {0})
 
 	LF_UpdateMonsterKillCount(context)
-	
+
 	return 0
 end
 
@@ -91,7 +91,7 @@ function action_MONSTER_DIE_BEFORE_LEAVE_SCENE(context, evt)
 	local eliteMonsters = superMonsters or {}
 	local isElite = 0
 	for _, _monsterId in pairs(eliteMonsters) do
-		if mid == _monsterId then 
+		if mid == _monsterId then
 			isElite = 1
 		end
 	end
@@ -112,7 +112,7 @@ end
 function LF_GetDieFallBonusPoints(context, evt, _isElite)
 
 	local dieReason = evt.param3
-	if dieReason == nil then 
+	if dieReason == nil then
 		PrintLog(context, "死亡原因未知")
 		return 0
 	else
@@ -121,8 +121,8 @@ function LF_GetDieFallBonusPoints(context, evt, _isElite)
 
 	local challengeGroup = ScriptLib.GetGroupVariableValue(context, "challenge_group")
 
-	if dieReason == 5 or dieReason == 6 or dieReason == 7 then 
-		-- 地脉异常L1检查 
+	if dieReason == 5 or dieReason == 6 or dieReason == 7 then
+		-- 地脉异常L1检查
 		ScriptLib.ExecuteGroupLua(context, challengeGroup, "LF_SpecialGameplayLevel1", {_isElite})
 	end
 
@@ -133,14 +133,14 @@ end
 function MonsterArrive(context)
 	local entityId = context.target_entity_id
 	ScriptLib.PrintContextLog(context, "TowerDefenseMonsterArrive"..context.target_entity_id)
-	
+
 	-- points是刷怪点位
 	for k, v in pairs(points) do
 		if ScriptLib.GetEntityIdByConfigId(context, v.config_id) == entityId then
 
 			-- ScriptLib.ExecuteGroupLua(context, ScriptLib.GetGroupVariableValue(context, "challenge_group"), "MonsterEscaped", {0})
 			ScriptLib.ExecuteGroupLua(context, ScriptLib.GetGroupVariableValue(context, "challenge_group"), "UpdateLeftMonsterNum", {0})
-			
+
 			-- 直接Remove（不会走掉血死亡流程）
 			ScriptLib.RemoveEntityByConfigId(context, defs.group_id, EntityType.MONSTER, v.config_id)
 
@@ -221,7 +221,7 @@ function LF_StartWave(context, prev_context, param1, param2, param3)
 	PrintLog(context, "WAVE开启！")
 
 	local wave = param2
-	
+
 	ScriptLib.SetGroupVariableValue(context, "challenge_group", param1)
 	ScriptLib.SetGroupVariableValue(context, "monster_wave_ptr", wave)
 	ScriptLib.SetGroupVariableValue(context, "tide_ptr", 1)
@@ -235,11 +235,11 @@ end
 function LF_MonsterTideOver(context)
 
 	ScriptLib.PrintContextLog(context, "TIDE结束")
-	
+
 	-- 当前wave和tide
 	local wave = ScriptLib.GetGroupVariableValue(context, "monster_wave_ptr")
 	local tide = ScriptLib.GetGroupVariableValue(context, "tide_ptr")
-	
+
 	if tide >= #monsterTides then
 		local challenge_group = ScriptLib.GetGroupVariableValue(context, "challenge_group")
 		ScriptLib.ExecuteGroupLua(context, challenge_group, "wave_done", {0})

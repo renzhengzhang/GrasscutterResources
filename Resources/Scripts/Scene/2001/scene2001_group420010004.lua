@@ -1,11 +1,11 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 420010004
 }
 
 -- DEFS_MISCS
 -- 家园Group物件 002 计分器
-local defs = {
+defs = {
 	ScoreCid = 4001,
 	PedalCid = 4002,
 	Operator = 4003,
@@ -31,9 +31,9 @@ function EnterField(context, evt)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -107,11 +107,11 @@ function action_EVENT_GADGET_CREATE_4004(context, evt)
 	if defs.ScoreCid ~= evt.param1 then
 		return 0
 	end
-	
+
 	-- 归零
 	ScriptLib.SetGroupTempValue(context, keyName, 0, {})
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.ScoreCid, keyName, 0)
-	
+
 	return 0
 end
 
@@ -124,6 +124,6 @@ function action_EVENT_SELECT_OPTION_4005(context, evt)
 	-- 归零
 	ScriptLib.SetGroupTempValue(context, keyName, 0, {})
 	ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.ScoreCid, keyName, 0)
-	
+
 	return 0
 end

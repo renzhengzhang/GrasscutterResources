@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155005259
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155005259,
 	pointarray_move = 500500009
 }
@@ -44,32 +44,32 @@ local NightAppearGadgets = {}
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-local gameplayStateFuncitons = 
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
-		
+
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-		
+
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 		DayNight_Gadget_Unlock(context,259005)
 		DayNight_Gadget_Unlock(context,259006)
-		
-		
+
+
 	end,
 	["2"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
-		
+
 	end
 
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -77,27 +77,27 @@ end
 
 function GadgetStateSwitcher(context,gadget_id,state)
 
-	if ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, gadget_id)  == state[1] then 
+	if ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, gadget_id)  == state[1] then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, gadget_id, state[2])
-	elseif ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, gadget_id)  == state[2] then 
+	elseif ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, gadget_id)  == state[2] then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, gadget_id, state[1])
-	end 
+	end
 
 end
 
 function Initial(context)
-	local pos = ScriptLib.GetGroupVariableValue(context, "wallpos") 
-	if pos == 1 then 
+	local pos = ScriptLib.GetGroupVariableValue(context, "wallpos")
+	if pos == 1 then
 		ScriptLib.SetPlatformPointArray(context, 259003, defs.pointarray_move, {1}, {route_type = 0, turn_mode = false})
-	elseif pos == 2 then 
+	elseif pos == 2 then
 		ScriptLib.SetPlatformPointArray(context, 259003, defs.pointarray_move, {2}, {route_type = 0, turn_mode = false})
 	end
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -143,9 +143,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -156,9 +156,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -192,9 +192,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -207,7 +207,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_259002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 		-- 判断变量"gameplayState"为0
 		if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 				return false
@@ -223,56 +223,56 @@ end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_259007(context, evt)
-		if evt.param2 ~= 259005 then 
+		if evt.param2 ~= 259005 then
 			return false
 		end
 	if 222~= ScriptLib.GetGadgetStateByConfigId(context, 155005259, 259005) then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_259007(context, evt)
 		local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, 259004)
-		local pos = ScriptLib.GetGroupVariableValue(context, "wallpos") 
-		if state == 201 then 
-			if pos == 1 then 
+		local pos = ScriptLib.GetGroupVariableValue(context, "wallpos")
+		if state == 201 then
+			if pos == 1 then
 				ScriptLib.SetPlatformPointArray(context, 259003, defs.pointarray_move, {1,2}, {route_type = 0, turn_mode = false})
 				ScriptLib.InitTimeAxis(context, "ReachPoint_02", {1}, false)
-			elseif pos == 2 then 
+			elseif pos == 2 then
 				ScriptLib.SetPlatformPointArray(context, 259003, defs.pointarray_move, {2,1}, {route_type = 0, turn_mode = false})
 				ScriptLib.InitTimeAxis(context, "ReachPoint_01", {1}, false)
 			end
-		
-		elseif state == 0 then 
+
+		elseif state == 0 then
 			ScriptLib.ShowReminder(context, 50050101)
-	
+
 		end
-	
+
 		return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_259008(context, evt)
-		if evt.param2 ~= 259006 then 
+		if evt.param2 ~= 259006 then
 			return false
-		end	
+		end
 	if 322~= ScriptLib.GetGadgetStateByConfigId(context, 155005259, 259006) then
 			return false
 		end
-		
-	
+
+
 		return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_259008(context, evt)
 		local temppos = ScriptLib.GetGroupVariableValue(context, "wallpos")
-		if temppos == 1 then 
+		if temppos == 1 then
 			GadgetStateSwitcher(context,259004,{0,201})
-		elseif temppos ==2 then 
+		elseif temppos ==2 then
 			ScriptLib.ShowReminder(context, 50050101)
 		end
 		return 0
@@ -285,7 +285,7 @@ function action_EVENT_TIME_AXIS_PASS_259009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -296,7 +296,7 @@ function action_EVENT_TIME_AXIS_PASS_259010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

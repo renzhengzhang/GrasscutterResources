@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133107922
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -105,9 +105,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -115,7 +115,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_922012(context, evt)
 	if 922011 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -126,20 +126,20 @@ function action_EVENT_GADGET_STATE_CHANGE_922012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_CREATE_922014(context, evt)
-	if 284008 ~= evt.param1 then 
+	if 284008 ~= evt.param1 then
 		return false
 	end
 	local state = ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1)
 	        if state == 201 or state == 202  then
 	                return true
 	        end
-	        
+
 	        return false
 end
 
@@ -150,6 +150,6 @@ function action_EVENT_GADGET_CREATE_922014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

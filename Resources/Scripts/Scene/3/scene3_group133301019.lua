@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301019
 }
 
 -- DEFS_MISCS
-local defs = 
+defs =
 {
-    
+
     challenge_id = 2010057,
 
     starter_option_id = 175,
@@ -17,12 +17,12 @@ local defs =
 
 local play_stage =
 {
-    [1] = 
+    [1] =
     {
         gallery_id = 26002,
-        challenge_time = 120, 
+        challenge_time = 120,
         optimize_region = 19084,
-        
+
         element_target = 6,
         starter_operator_configID = 19012,
         dig_operator_configID = 19016,
@@ -34,10 +34,10 @@ local play_stage =
         treasure_configID = 19017,
     },
 
-    [2] = 
+    [2] =
     {
         gallery_id = 26002,
-        challenge_time = 120, 
+        challenge_time = 120,
         optimize_region = 19085,
 
         element_target = 8,
@@ -53,10 +53,10 @@ local play_stage =
 
     },
 
-    [3] = 
+    [3] =
     {
         gallery_id = 26002,
-        challenge_time = 120, 
+        challenge_time = 120,
         optimize_region = 19086,
 
         element_target = 10,
@@ -80,9 +80,9 @@ local extra_elements =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -206,9 +206,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -219,9 +219,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -381,9 +381,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -392,7 +392,7 @@ function condition_EVENT_ANY_MONSTER_DIE_19046(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -400,7 +400,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_19046(context, evt)
 	-- 添加suite15的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301019, 15)
-	
+
 	return 0
 end
 
@@ -408,7 +408,7 @@ end
 function action_EVENT_CHALLENGE_FAIL_19058(context, evt)
 	-- 删除suite15的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301019, 15)
-	
+
 	return 0
 end
 
@@ -418,7 +418,7 @@ function condition_EVENT_ANY_MONSTER_DIE_19069(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -426,7 +426,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_19069(context, evt)
 	-- 添加suite17的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301019, 17)
-	
+
 	return 0
 end
 
@@ -436,7 +436,7 @@ function condition_EVENT_ANY_MONSTER_DIE_19070(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -444,7 +444,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_19070(context, evt)
 	-- 添加suite16的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301019, 16)
-	
+
 	return 0
 end
 
@@ -452,7 +452,7 @@ end
 function action_EVENT_CHALLENGE_FAIL_19077(context, evt)
 	-- 删除suite16的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133301019, 16)
-	
+
 	return 0
 end
 

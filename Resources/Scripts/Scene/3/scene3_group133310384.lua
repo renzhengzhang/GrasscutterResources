@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133310384
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_1 = 384001,
 	gadget_2 = 384002,
 	gadget_3 = 384003
@@ -14,9 +14,9 @@ local defs = {
 local HourGlass_ConfigIDList = {defs.gadget_1,defs.gadget_2,defs.gadget_3}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -79,9 +79,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -92,9 +92,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -128,20 +128,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_384009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"HourGlass_Success"为1
 	if ScriptLib.GetGroupVariableValue(context, "HourGlass_Success") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -152,30 +152,30 @@ function action_EVENT_VARIABLE_CHANGE_384009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133310384, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_384010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"HourGlass_Success"为0
 	if ScriptLib.GetGroupVariableValue(context, "HourGlass_Success") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"HourGlass_InChallenge"为0
 	if ScriptLib.GetGroupVariableValue(context, "HourGlass_InChallenge") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -183,19 +183,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_384010(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133310384, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_384011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"HourGlass_InChallenge"为1
 	if ScriptLib.GetGroupVariableValue(context, "HourGlass_InChallenge") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -203,7 +203,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_384011(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133310384, 2)
-	
+
 	return 0
 end
 
@@ -213,7 +213,7 @@ function condition_EVENT_GROUP_LOAD_384012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "HourGlass_Success") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -224,7 +224,7 @@ function action_EVENT_GROUP_LOAD_384012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -233,7 +233,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_384013(context, evt)
 	if 384003 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -244,23 +244,23 @@ function action_EVENT_GADGET_STATE_CHANGE_384013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_384014(context, evt)
 	if evt.param1 ~= 384014 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133310384, 384001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -271,23 +271,23 @@ function action_EVENT_ENTER_REGION_384014(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_384015(context, evt)
 	if evt.param1 ~= 384015 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133310384, 384002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -298,23 +298,23 @@ function action_EVENT_ENTER_REGION_384015(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_384016(context, evt)
 	if evt.param1 ~= 384016 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133310384, 384003) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -325,7 +325,7 @@ function action_EVENT_ENTER_REGION_384016(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -335,7 +335,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_384017(context, evt)
 	if 384001 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -346,7 +346,7 @@ function action_EVENT_GADGET_STATE_CHANGE_384017(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -356,7 +356,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_384018(context, evt)
 	if 384002 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -367,7 +367,7 @@ function action_EVENT_GADGET_STATE_CHANGE_384018(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -377,7 +377,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_384019(context, evt)
 	if 384003 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -388,7 +388,7 @@ function action_EVENT_GADGET_STATE_CHANGE_384019(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133304189
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ sight_groups = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -117,9 +117,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -128,7 +128,7 @@ function condition_EVENT_GROUP_LOAD_189007(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "questfin", 133304189) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -139,7 +139,7 @@ function action_EVENT_GROUP_LOAD_189007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -148,19 +148,19 @@ function condition_EVENT_GADGET_STATE_CHANGE_189010(context, evt)
 	if 202 == ScriptLib.GetGadgetStateByConfigId(context, 133304189, 189004) then
 		return true
 	end
-	
+
 	if 202 == ScriptLib.GetGadgetStateByConfigId(context, 133304189, 189005) then
 		return true
 	end
-	
+
 	if 202 == ScriptLib.GetGadgetStateByConfigId(context, 133304189, 189006) then
 		return true
 	end
-	
+
 	if 202 == ScriptLib.GetGadgetStateByConfigId(context, 133304189, 189008) then
 		return true
 	end
-	
+
 	return false
 end
 
@@ -171,7 +171,7 @@ function action_EVENT_GADGET_STATE_CHANGE_189010(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -180,7 +180,7 @@ function condition_EVENT_TIME_AXIS_PASS_189012(context, evt)
 	if "delay" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -191,13 +191,13 @@ function action_EVENT_TIME_AXIS_PASS_189012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	-- 通知groupid为133304189中,configid为：189002的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 189002, 133304189) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -206,22 +206,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_189014(context, evt)
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133304189, 189004) then
 		return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133304189, 189005) then
 		return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133304189, 189006) then
 		return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133304189, 189008) then
 		return false
 	end
-	
+
 	-- 打印创建日志
 	    ScriptLib.PrintContextLog(context, "## TEMPLE_LOG : Gadget_State_Change | "..evt.param2.." : "..evt.param3.." -> "..evt.param1)
-	
+
 	return true
 end
 
@@ -231,24 +231,24 @@ function action_EVENT_GADGET_STATE_CHANGE_189014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 189003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 189009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 189009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"delay"，时间节点为{2,3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "delay", {2,3}, false)
-	
-	
+
+
 	-- 将本组内变量名为 "alldead" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "alldead", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -258,7 +258,7 @@ function condition_EVENT_ANY_MONSTER_DIE_189015(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -266,25 +266,25 @@ end
 function action_EVENT_ANY_MONSTER_DIE_189015(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304189, 2)
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "wq7307717_fin") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "questfin" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "questfin", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 30001, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -293,7 +293,7 @@ function condition_EVENT_TIME_AXIS_PASS_189016(context, evt)
 	if "delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -303,14 +303,14 @@ function action_EVENT_TIME_AXIS_PASS_189016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 189003, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 189009 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 189009, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 触发镜头注目，注目位置为坐标{x=-1154.87, y=152.3, z=2228.845}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-1154.87, y=152.3, z=2228.845}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -319,25 +319,25 @@ function action_EVENT_TIME_AXIS_PASS_189016(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_189017(context, evt)
 	if evt.param1 ~= 189017 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"alldead"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "alldead", 133304189) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -346,39 +346,39 @@ function action_EVENT_ENTER_REGION_189017(context, evt)
 	-- 通知groupid为133304189中,configid为：189001的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 189001, 133304189) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
-	  
+
 	end
-	
+
 	-- 通知groupid为133304189中,configid为：189002的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 189002, 133304189) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
-	  
+
 	end
-	
+
 	-- 将configid为 189009 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 189009, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-			
-		end 
-	
+
+		end
+
 	-- 将configid为 189003 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 189003, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-			
-		end 
-	
+
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_189018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"qsuite"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "qsuite", 133304189) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -389,7 +389,7 @@ function action_EVENT_VARIABLE_CHANGE_189018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -399,7 +399,7 @@ function condition_EVENT_GROUP_LOAD_189019(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "qsuite", 133304189) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -410,6 +410,6 @@ function action_EVENT_GROUP_LOAD_189019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

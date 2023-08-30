@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133108124
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	challenge_1_duration = 50,
 	challenge_2_duration = 40,
 	challenge_3_duration = 30,
@@ -70,9 +70,9 @@ defs.quest_4_success = defs.group_id.."0401"
 defs.quest_4_fail = defs.group_id.."0402"
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -137,9 +137,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -150,9 +150,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -259,9 +259,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -269,7 +269,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_124013(context, evt)
 	if 124003 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -277,16 +277,16 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_124013(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108124, 2)
-	
+
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108124, 9)
-	
+
 	-- 创建编号为888（该挑战的识别id),挑战内容为127的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 888, 127, 120, 4, 555, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -297,25 +297,25 @@ function action_EVENT_CHALLENGE_FAIL_124015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 将configid为 124003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 124003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_124016(context, evt)
 	if evt.param1 ~= 124016 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -323,10 +323,10 @@ end
 function action_EVENT_ENTER_REGION_124016(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108124, 3)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133108124, 2)
-	
+
 	return 0
 end
 
@@ -335,12 +335,12 @@ function condition_EVENT_GADGET_CREATE_124018(context, evt)
 	if 124024 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"change_num"为0
 	if ScriptLib.GetGroupVariableValue(context, "change_num") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -350,20 +350,20 @@ function action_EVENT_GADGET_CREATE_124018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 124003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 创建编号为888（该挑战的识别id),挑战内容为127的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 888, 127, 120, 4, 555, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108124, 9)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108124, 2)
-	
+
 	return 0
 end
 
@@ -371,14 +371,14 @@ end
 function condition_EVENT_SELECT_OPTION_124019(context, evt)
 	-- 判断是gadgetid 124003 option_id 10
 	if 124003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 10 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -389,25 +389,25 @@ function action_EVENT_SELECT_OPTION_124019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将configid为 124003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 124003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_124020(context, evt)
 	if evt.param1 ~= 124020 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -415,16 +415,16 @@ end
 function action_EVENT_ENTER_REGION_124020(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108126, 6)
-	
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108124, 7)
-	
+
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108124, 8)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133108124, 3)
-	
+
 	return 0
 end
 
@@ -435,28 +435,28 @@ function action_EVENT_CHALLENGE_SUCCESS_124021(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133108124, 3)
-	
+
 	-- 改变指定group组133108126中， configid为126011的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133108126, 126011, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_124026(context, evt)
 	if evt.param1 ~= 124026 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -464,22 +464,22 @@ end
 function action_EVENT_ENTER_REGION_124026(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108124, 4)
-	
+
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133108124, 8)
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7101006_finish") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "change_num" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "change_num", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -493,8 +493,8 @@ function action_EVENT_GADGET_CREATE_124027(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -503,12 +503,12 @@ function condition_EVENT_GADGET_CREATE_124029(context, evt)
 	if 124028 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"change_num"为0
 	if ScriptLib.GetGroupVariableValue(context, "change_num") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -519,7 +519,7 @@ function action_EVENT_GADGET_CREATE_124029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -528,7 +528,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_124030(context, evt)
 	if 124002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -539,6 +539,6 @@ function action_EVENT_GADGET_STATE_CHANGE_124030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

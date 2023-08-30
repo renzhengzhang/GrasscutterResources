@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 111101133
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -112,9 +112,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -125,9 +125,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -251,23 +251,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_133029(context, evt)
 	-- 判断是gadgetid 133011 option_id 211
 	if 133011 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 211 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -281,7 +281,7 @@ function action_EVENT_SELECT_OPTION_133029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -289,28 +289,28 @@ end
 function action_EVENT_GROUP_LOAD_133030(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101133, 5)
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101133, 6)
-	
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101133, 7)
-	
+
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101133, 8)
-	
+
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101133, 9)
-	
+
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101133, 10)
-	
+
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101133, 11)
-	
+
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101133, 12)
-	
+
 	return 0
 end
 
@@ -319,7 +319,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133031(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -329,14 +329,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133031(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -345,7 +345,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133032(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -355,14 +355,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133032(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -371,7 +371,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133033(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -381,8 +381,8 @@ function action_EVENT_GADGET_STATE_CHANGE_133033(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -391,13 +391,13 @@ function action_EVENT_GADGET_STATE_CHANGE_133033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 将configid为 133006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -406,7 +406,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133034(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -416,8 +416,8 @@ function action_EVENT_GADGET_STATE_CHANGE_133034(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -426,13 +426,13 @@ function action_EVENT_GADGET_STATE_CHANGE_133034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 将configid为 133006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -441,7 +441,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133035(context, evt)
 	if 133018 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -451,14 +451,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133035(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133020, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133021 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133021, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -467,7 +467,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133036(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -477,8 +477,8 @@ function action_EVENT_GADGET_STATE_CHANGE_133036(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -487,13 +487,13 @@ function action_EVENT_GADGET_STATE_CHANGE_133036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 将configid为 133008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -502,7 +502,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133037(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -512,8 +512,8 @@ function action_EVENT_GADGET_STATE_CHANGE_133037(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -522,13 +522,13 @@ function action_EVENT_GADGET_STATE_CHANGE_133037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 将configid为 133008 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -537,7 +537,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133038(context, evt)
 	if 133018 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -547,14 +547,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133038(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133020, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133021 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133021, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -563,7 +563,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133039(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -573,14 +573,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133039(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 111101133 ；指定config：133011；物件身上指定option：211；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111101133, 133011, 211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -589,7 +589,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133040(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -599,14 +599,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133040(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 111101133, 133011, {211}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -615,7 +615,7 @@ function condition_EVENT_GADGET_CREATE_133041(context, evt)
 	if 133011 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -626,7 +626,7 @@ function action_EVENT_GADGET_CREATE_133041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -635,7 +635,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133042(context, evt)
 	if 133018 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -645,14 +645,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133042(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133020, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133021 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133021, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -661,7 +661,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133043(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -671,20 +671,20 @@ function action_EVENT_GADGET_STATE_CHANGE_133043(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 111101133 ；指定config：133014；物件身上指定option：217；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111101133, 133014, 217) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 111101133 ；指定config：133014；物件身上指定option：218；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111101133, 133014, 218) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -693,7 +693,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133044(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -703,14 +703,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133044(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 111101133, 133014, {217,218,219}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -719,7 +719,7 @@ function condition_EVENT_GADGET_CREATE_133045(context, evt)
 	if 133014 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -730,7 +730,7 @@ function action_EVENT_GADGET_CREATE_133045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -738,14 +738,14 @@ end
 function condition_EVENT_SELECT_OPTION_133046(context, evt)
 	-- 判断是gadgetid 133014 option_id 217
 	if 133014 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 217 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -759,7 +759,7 @@ function action_EVENT_SELECT_OPTION_133046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -767,14 +767,14 @@ end
 function condition_EVENT_SELECT_OPTION_133047(context, evt)
 	-- 判断是gadgetid 133014 option_id 218
 	if 133014 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 218 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -788,7 +788,7 @@ function action_EVENT_SELECT_OPTION_133047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -797,7 +797,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133048(context, evt)
 	if 133018 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -807,14 +807,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133048(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133020, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133021 的物件更改为状态 GadgetState.Action02
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133021, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -824,7 +824,7 @@ function condition_EVENT_ANY_GADGET_DIE_133049(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "complete") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -835,19 +835,19 @@ function action_EVENT_ANY_GADGET_DIE_133049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_133050(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"killedHoops"为1
 	if ScriptLib.GetGroupVariableValue(context, "killedHoops") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -858,7 +858,7 @@ function action_EVENT_VARIABLE_CHANGE_133050(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -868,7 +868,7 @@ function condition_EVENT_TIMER_EVENT_133051(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "killedHoops") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -876,16 +876,16 @@ end
 function action_EVENT_TIMER_EVENT_133051(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111101133, 2)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101133, 2)
-	
+
 	-- 将本组内变量名为 "killedHoops" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "killedHoops", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -893,14 +893,14 @@ end
 function condition_EVENT_SELECT_OPTION_133052(context, evt)
 	-- 判断是gadgetid 133014 option_id 219
 	if 133014 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 219 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -914,7 +914,7 @@ function action_EVENT_SELECT_OPTION_133052(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -923,7 +923,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133053(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -933,20 +933,20 @@ function action_EVENT_GADGET_STATE_CHANGE_133053(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 111101133 ；指定config：133017；物件身上指定option：215；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111101133, 133017, 215) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 删除指定group： 111101133 ；指定config：133017；物件身上指定option：216；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 111101133, 133017, 216) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -955,7 +955,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133054(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -965,14 +965,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133054(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 111101133, 133017, {215,216}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -981,7 +981,7 @@ function condition_EVENT_GADGET_CREATE_133055(context, evt)
 	if 133017 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -992,7 +992,7 @@ function action_EVENT_GADGET_CREATE_133055(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1000,14 +1000,14 @@ end
 function condition_EVENT_SELECT_OPTION_133056(context, evt)
 	-- 判断是gadgetid 133017 option_id 215
 	if 133017 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 215 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1021,7 +1021,7 @@ function action_EVENT_SELECT_OPTION_133056(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1029,14 +1029,14 @@ end
 function condition_EVENT_SELECT_OPTION_133057(context, evt)
 	-- 判断是gadgetid 133017 option_id 216
 	if 133017 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 216 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1050,19 +1050,19 @@ function action_EVENT_SELECT_OPTION_133057(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_133058(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"killedHoops"为2
 	if ScriptLib.GetGroupVariableValue(context, "killedHoops") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1072,14 +1072,14 @@ function action_EVENT_VARIABLE_CHANGE_133058(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "complete" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "complete", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1088,7 +1088,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133059(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1098,14 +1098,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133059(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133018, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133019 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133019, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1114,7 +1114,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133060(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1124,14 +1124,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133060(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133018, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133019 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133019, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1140,7 +1140,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133061(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1150,20 +1150,20 @@ function action_EVENT_GADGET_STATE_CHANGE_133061(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133022, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133024 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133024, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133025 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133025, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -1172,7 +1172,7 @@ function action_EVENT_GADGET_STATE_CHANGE_133061(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -1181,7 +1181,7 @@ function action_EVENT_GADGET_STATE_CHANGE_133061(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -1190,13 +1190,13 @@ function action_EVENT_GADGET_STATE_CHANGE_133061(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 将configid为 133023 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133023, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1205,7 +1205,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133062(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1215,20 +1215,20 @@ function action_EVENT_GADGET_STATE_CHANGE_133062(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133022, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133024 的物件更改为状态 GadgetState.GearAction2
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133024, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133025 的物件更改为状态 GadgetState.GearAction2
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133025, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -1237,7 +1237,7 @@ function action_EVENT_GADGET_STATE_CHANGE_133062(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -1246,7 +1246,7 @@ function action_EVENT_GADGET_STATE_CHANGE_133062(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -1255,13 +1255,13 @@ function action_EVENT_GADGET_STATE_CHANGE_133062(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	-- 将configid为 133023 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133023, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1270,7 +1270,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133063(context, evt)
 	if 133018 ~= evt.param2 or GadgetState.GearAction2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1280,14 +1280,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133063(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133020, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133021 的物件更改为状态 GadgetState.GearAction2
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133021, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1296,7 +1296,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133064(context, evt)
 	if 133020 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1306,8 +1306,8 @@ function action_EVENT_GADGET_STATE_CHANGE_133064(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133018, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1316,7 +1316,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133065(context, evt)
 	if 133022 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1326,14 +1326,14 @@ function action_EVENT_GADGET_STATE_CHANGE_133065(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133024, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 133025 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133025, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1342,7 +1342,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133066(context, evt)
 	if 133024 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1352,28 +1352,28 @@ function action_EVENT_GADGET_STATE_CHANGE_133066(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133025, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_133067(context, evt)
 	-- 判断是gadgetid 为 133024的移动平台，是否到达了999800005 的路线中的 5 点
-	
+
 	if 133024 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 999800005 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 5 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1387,27 +1387,27 @@ function action_EVENT_PLATFORM_REACH_POINT_133067(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_133068(context, evt)
 	-- 判断是gadgetid 为 133025的移动平台，是否到达了999800005 的路线中的 6 点
-	
+
 	if 133025 ~= evt.param1 then
 	  return false
 	end
-	
+
 	if 999800005 ~= evt.param2 then
 	  return false
 	end
-	
+
 	if 6 ~= evt.param3 then
 	  return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -1421,7 +1421,7 @@ function action_EVENT_PLATFORM_REACH_POINT_133068(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1430,7 +1430,7 @@ function condition_EVENT_ANY_GADGET_DIE_133069(context, evt)
 	if 133026 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1440,14 +1440,14 @@ function action_EVENT_ANY_GADGET_DIE_133069(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "complete" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "complete", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1456,7 +1456,7 @@ function condition_EVENT_ANY_GADGET_DIE_133070(context, evt)
 	if 133002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1467,7 +1467,7 @@ function action_EVENT_ANY_GADGET_DIE_133070(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -1476,12 +1476,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_133071(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"complete"为0
 	if ScriptLib.GetGroupVariableValue(context, "complete") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1489,7 +1489,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_133071(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101133, 2)
-	
+
 	return 0
 end
 
@@ -1498,7 +1498,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_133072(context, evt)
 	if 133001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1506,6 +1506,6 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_133072(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111101133, 2)
-	
+
 	return 0
 end

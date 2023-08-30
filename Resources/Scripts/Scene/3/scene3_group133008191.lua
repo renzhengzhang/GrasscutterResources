@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008191
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -93,14 +93,14 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_OFFERING_LEVELUP_191002(context, evt)
-	
+
 	-- 将在groupid为 133008191 中的 configid为 191001 的供奉物件根据stateList对应等级设置其状态
 	local _stateList = {201,201,201,201,201,201,201,202,202,202,202,203}
 	if 1 ~= evt.param1 then
@@ -111,7 +111,7 @@ function action_EVENT_OFFERING_LEVELUP_191002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_OfferingLevel")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -122,14 +122,14 @@ function action_EVENT_QUEST_START_191005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 延迟14.5秒后,向groupId为：133008191的对象,请求一次调用,并将string参数："ice_destroy_delay" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008191, "ice_destroy_delay", 14.5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -140,7 +140,7 @@ function action_EVENT_TIMER_EVENT_191006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -151,7 +151,7 @@ function action_EVENT_QUEST_FINISH_191007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -161,7 +161,7 @@ function action_EVENT_GROUP_LOAD_191008(context, evt)
 		local _offeringLevel = 	ScriptLib.GetOfferingLevel(context, 1)
 		local _currentGadgetState = ScriptLib.GetGadgetStateByConfigId(context, 133008191, 191001)
 		local _stateList = {901,901,901,901,901,901,901,902,902,902,902,903}
-	
+
 		if 0 < _offeringLevel then
 			if _stateList[_offeringLevel] ~= _currentGadgetState then
 				if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008191, 191001, _stateList[_offeringLevel]) then
@@ -169,7 +169,7 @@ function action_EVENT_GROUP_LOAD_191008(context, evt)
 				end
 			end
 		end
-		
+
 		return 0
 end
 
@@ -180,6 +180,6 @@ function action_EVENT_QUEST_FINISH_191009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

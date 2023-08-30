@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133302487
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -87,20 +87,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_487002(context, evt)
 	if evt.param1 ~= 487002 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -111,7 +111,7 @@ function action_EVENT_ENTER_REGION_487002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-19.45576, y=274.2698, z=2983.669}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-19.45576, y=274.2698, z=2983.669}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -120,20 +120,20 @@ function action_EVENT_ENTER_REGION_487002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_487003(context, evt)
 	if evt.param1 ~= 487003 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -144,7 +144,7 @@ function action_EVENT_ENTER_REGION_487003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-340.0269, y=282.6191, z=2116.862}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-340.0269, y=282.6191, z=2116.862}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -153,20 +153,20 @@ function action_EVENT_ENTER_REGION_487003(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_487004(context, evt)
 	if evt.param1 ~= 487004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -177,7 +177,7 @@ function action_EVENT_ENTER_REGION_487004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=144.146, y=258.4828, z=2299.735}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=144.146, y=258.4828, z=2299.735}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -186,20 +186,20 @@ function action_EVENT_ENTER_REGION_487004(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_487005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"paimon0"为1
 	if ScriptLib.GetGroupVariableValue(context, "paimon0") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -210,19 +210,19 @@ function action_EVENT_VARIABLE_CHANGE_487005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_487006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"paimon0"为2
 	if ScriptLib.GetGroupVariableValue(context, "paimon0") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -233,19 +233,19 @@ function action_EVENT_VARIABLE_CHANGE_487006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_487007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"paimon0"为3
 	if ScriptLib.GetGroupVariableValue(context, "paimon0") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -256,19 +256,19 @@ function action_EVENT_VARIABLE_CHANGE_487007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_487008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"paimon1"为1
 	if ScriptLib.GetGroupVariableValue(context, "paimon1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -279,19 +279,19 @@ function action_EVENT_VARIABLE_CHANGE_487008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_487009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"paimon1"为2
 	if ScriptLib.GetGroupVariableValue(context, "paimon1") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -302,19 +302,19 @@ function action_EVENT_VARIABLE_CHANGE_487009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_487010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"paimon1"为3
 	if ScriptLib.GetGroupVariableValue(context, "paimon1") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -325,6 +325,6 @@ function action_EVENT_VARIABLE_CHANGE_487010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

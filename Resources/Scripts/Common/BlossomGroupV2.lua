@@ -1,6 +1,6 @@
 --地脉花循环营地模板
 
---local defs = {
+--defs = {
 --	group_id = xxx ,
 --    monster_waves = 4,
 --    chest_id = xxx,
@@ -19,7 +19,7 @@ local Tri = {
     --[6] = { name = "chest_die", config_id = 8000006, event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_any_gadget_die", trigger_count = 0 },
     [7] = { name = "select_option", config_id = 8000007, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
     [8] = { name = "blossom_chest_die", config_id = 8000008, event = EventType.EVENT_BLOSSOM_CHEST_DIE, source = "", condition = "", action = "action_blossom_chest_die", trigger_count = 0 },
-    
+
 }
 
 function Initialize()
@@ -33,7 +33,7 @@ function Initialize()
     table.insert(variables,{ config_id=50000002,name = "wave", value = 0, no_refresh = true})
 
 
-    
+
 end
 
 ----------------------------------
@@ -92,7 +92,7 @@ function action_blossom_chest_die(context,evt)
         ScriptLib.SetGroupVariableValue(context,"HasStarted",0)
         ScriptLib.SetGroupVariableValue(context,"wave",0)
         ScriptLib.RefreshBlossomGroup(context, { group_id = 0, suite = 1, exclude_prev = true })
-        
+
     end
     return 0
 end
@@ -102,8 +102,8 @@ function action_select_option(context,evt)
     ScriptLib.PrintContextLog(context,"BG: Option has been selected! Monster waves start!")
     ScriptLib.SetGadgetStateByConfigId(context, LF_Get_Blossom_Operator(context), 201)
     ScriptLib.DelWorktopOptionByGroupId(context,0,LF_Get_Blossom_Operator(context),187)
-    
-    
+
+
     --所有东西成功刷出来了，将group设置为已开始状态
     ScriptLib.SetGroupVariableValue(context,"HasStarted",1)
     LF_Start_Monster_Wave(context)
@@ -140,7 +140,7 @@ function LF_Create_Next_Monster_Wave(context)
     else
         ScriptLib.PrintContextLog(context,"BG: Creating monster wave: "..nextWave)
 		ScriptLib.AddExtraGroupSuite(context, 0, nextWave+1)
-        
+
         ScriptLib.PrintContextLog(context,"BG: We are trying to load suite : "..nextWave+1)
         ScriptLib.SetGroupVariableValue(context,"wave",nextWave)
 		--ScriptLib.SetGroupTempValue(context, "wave", nextWave, {})
@@ -170,7 +170,7 @@ function LF_Init_Blossom_Group(context)
     if (LF_Get_Blossom_Operator(context) == -1) then
         return -1
     end
-    
+
     ScriptLib.PrintContextLog(context,"BG: Current operator config id is: "..LF_Get_Blossom_Operator(context))
 
     --加载地脉淤积的gadget

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133302218
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_CoreID = 218005,
 	monster_BossID = 218002,
 	gadget_Point_1 = 218006,
@@ -36,9 +36,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -140,9 +140,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -153,9 +153,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -207,9 +207,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -225,13 +225,13 @@ function action_EVENT_ENTER_REGION_218009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 218033, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -240,7 +240,7 @@ function condition_EVENT_ANY_GADGET_DIE_218010(context, evt)
 	if 218005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -251,19 +251,19 @@ function action_EVENT_ANY_GADGET_DIE_218010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "baodi" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "baodi", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133302218, EntityType.GADGET, 218042 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -275,7 +275,7 @@ end
 
 -- 触发操作
 function action_EVENT_LUA_NOTIFY_218026(context, evt)
-	
+
 	LF_PointLook(context)
 	return 0
 end
@@ -285,7 +285,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_218028(context, evt)
 	if 218006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -296,20 +296,20 @@ function action_EVENT_GADGET_STATE_CHANGE_218028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 针对当前group内变量名为 "rmd" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "rmd", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "tutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -318,7 +318,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_218029(context, evt)
 	if 218007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -329,20 +329,20 @@ function action_EVENT_GADGET_STATE_CHANGE_218029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 针对当前group内变量名为 "rmd" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "rmd", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "tutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -351,7 +351,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_218030(context, evt)
 	if 218008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -362,37 +362,37 @@ function action_EVENT_GADGET_STATE_CHANGE_218030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 针对当前group内变量名为 "rmd" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "rmd", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "tutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_218034(context, evt)
 	if evt.param1 ~= 218034 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"tutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "tutorial") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -403,19 +403,19 @@ function action_EVENT_ENTER_REGION_218034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_218035(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"rmd"为3
 	if ScriptLib.GetGroupVariableValue(context, "rmd") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -426,7 +426,7 @@ function action_EVENT_VARIABLE_CHANGE_218035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -436,7 +436,7 @@ function condition_EVENT_ANY_MONSTER_DIE_218036(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -447,30 +447,30 @@ function action_EVENT_ANY_MONSTER_DIE_218036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建id为218042的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 218042 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_218037(context, evt)
 	if evt.param1 ~= 218037 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"tutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "tutorial") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -481,7 +481,7 @@ function action_EVENT_ENTER_REGION_218037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -491,7 +491,7 @@ function condition_EVENT_GROUP_LOAD_218039(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "baodi") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -502,24 +502,24 @@ function action_EVENT_GROUP_LOAD_218039(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_218040(context, evt)
 	if evt.param1 ~= 218040 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"tutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "tutorial") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -530,7 +530,7 @@ function action_EVENT_ENTER_REGION_218040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220151003
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	option_id = 494,
 	pointarray_ID = 2,
 	elevatorOptionID = 24,
@@ -18,9 +18,12 @@ defs.gadget_2 = 3002
 defs.gadget_3 = 3003
 
 --方尖碑初始旋转角
-defs.rotation_1 = 120
-defs.rotation_2 = 0
-defs.rotation_3 = 240
+defs.rotation_1
+ = 120
+defs.rotation_2
+ = 0
+defs.rotation_3
+ = 240
 
 --方尖碑旋转影响的configID表
 defs.gadget_connect1= { 3002,3003}
@@ -28,9 +31,9 @@ defs.gadget_connect2 = {3003}
 defs.gadget_connect3=  {}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -73,9 +76,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +89,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -104,20 +107,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_3004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"success"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "success", 220151003) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -128,7 +131,7 @@ function action_EVENT_VARIABLE_CHANGE_3004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

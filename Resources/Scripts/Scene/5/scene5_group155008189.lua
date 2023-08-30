@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155008189
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155008189,
 	gadget_sealday = 189002,
 	gadget_sealnight = 189001
@@ -20,11 +20,11 @@ local NightAppearGadgets = {defs.gadget_sealnight}
 
 
 
-local gameplayStateFuncitons = 
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-		
+
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
@@ -32,17 +32,17 @@ local gameplayStateFuncitons =
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 
 
-	
+
 	end,
 	["2"] = function(context)
-		
+
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, 189005, 101)
 
 	end,
 	["3"] = function(context)
-		
+
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 4)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, 189005, 0)
@@ -54,16 +54,16 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -104,9 +104,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -117,9 +117,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -162,14 +162,14 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_189003(context, evt)
-	
+
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -177,7 +177,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_189004(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -185,20 +185,20 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_189006(context, evt)
 	if evt.param1 ~= 189006 then return false end
-	
+
 	-- 判断变量"enemyspawned"为0
 	if ScriptLib.GetGroupVariableValue(context, "enemyspawned") ~= 0 then
 			return false
 	end
-	
+
 	-- 返回渊下宫当前是否为黑夜
 	    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 2) then
 	        return true
 	    else
 	        return false
-	    end 
-	
+	    end
+
 	return true
 end
 
@@ -206,19 +206,19 @@ end
 function action_EVENT_ENTER_REGION_189006(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 155008189, 3)
-	
+
 	-- 将configid为 189005 的物件更改为状态 GadgetState.ChestLocked
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 189005, GadgetState.ChestLocked) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "enemyspawned" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "enemyspawned", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_ANY_MONSTER_DIE_189010(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -239,7 +239,7 @@ function action_EVENT_ANY_MONSTER_DIE_189010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 

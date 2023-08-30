@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220009001
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 137,
 	gadget_id_2 = 138,
 	gadget_id_3 = 55,
@@ -14,9 +14,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -127,9 +127,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -140,9 +140,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -158,20 +158,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3(context, evt)
 	if evt.param1 ~= 3 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -182,19 +182,19 @@ function action_EVENT_ENTER_REGION_3(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4(context, evt)
 	if evt.param1 ~= 4 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -203,16 +203,16 @@ function action_EVENT_ENTER_REGION_4(context, evt)
 	if 0 ~= ScriptLib.ShowReminder(context, 1002001) then
 		return -1
 	end
-	
+
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_1 }) then
 		return -1
 	end
-	
+
 	pos = {x=-147.3, y=33.0, z=49.9}
 		if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, duration = 2, is_force = true, is_broadcast = false }) then
 				return -1
-			end 
-	
+			end
+
 	return 0
 end
 
@@ -222,7 +222,7 @@ function condition_EVENT_ANY_MONSTER_DIE_6(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -232,7 +232,7 @@ function condition_EVENT_DUNGEON_SETTLE_8(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -242,7 +242,7 @@ function condition_EVENT_GADGET_CREATE_9(context, evt)
 	if 54 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -253,19 +253,19 @@ function action_EVENT_GADGET_CREATE_9(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11(context, evt)
 	if evt.param1 ~= 11 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -273,14 +273,14 @@ end
 function condition_EVENT_SELECT_OPTION_17(context, evt)
 	-- 判断是gadgetid 54 option_id 1
 	if 54 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -290,38 +290,38 @@ function action_EVENT_SELECT_OPTION_17(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220009001, 54, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组220009001中， configid为55的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220009001, 55, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220009001, monsters = {}, gadgets = {133} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 删除指定group： 220009001 ；指定config：54；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220009001, 54, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_23(context, evt)
 	if evt.param1 ~= 23 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -332,13 +332,13 @@ function action_EVENT_ENTER_REGION_23(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220009001, monsters = {}, gadgets = {139} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 触发镜头注目，注目位置为坐标（-148，18，75），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-148, y=18, z=75}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -347,20 +347,20 @@ function action_EVENT_ENTER_REGION_23(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_24(context, evt)
 	if evt.param1 ~= 24 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -371,19 +371,19 @@ function action_EVENT_ENTER_REGION_24(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25(context, evt)
 	if evt.param1 ~= 25 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -392,25 +392,25 @@ function action_EVENT_ENTER_REGION_25(context, evt)
 	 if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_2 }) then
 		return -1
 	end
-	
+
 	if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220009001, monsters = {}, gadgets = {defs.gadget_id_6} }) then
 			return -1
 		end
-	
-	
-	
+
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_31(context, evt)
 	if evt.param1 ~= 31 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -421,25 +421,25 @@ function action_EVENT_ENTER_REGION_31(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 创建id为139的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 139 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_32(context, evt)
 	if evt.param1 ~= 32 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -450,13 +450,13 @@ function action_EVENT_ENTER_REGION_32(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220009001, monsters = {}, gadgets = {140} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -465,7 +465,7 @@ function condition_EVENT_ANY_GADGET_DIE_34(context, evt)
 	if 141 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -476,7 +476,7 @@ function action_EVENT_ANY_GADGET_DIE_34(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -485,7 +485,7 @@ function condition_EVENT_ANY_GADGET_DIE_36(context, evt)
 	if 117 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -496,25 +496,25 @@ function action_EVENT_ANY_GADGET_DIE_36(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 创建id为180的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 180 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_37(context, evt)
 	if evt.param1 ~= 37 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -525,12 +525,12 @@ function action_EVENT_ENTER_REGION_37(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	-- 创建id为179的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 179 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

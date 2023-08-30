@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133307397
 }
 
@@ -12,7 +12,7 @@ local fans =
 --沙堆
 local sandpiles =
 {
-    397003 
+    397003
 }
 --百叶窗
 local shutters =
@@ -42,9 +42,9 @@ local SwitchToShutter =
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -88,9 +88,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -101,9 +101,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -119,9 +119,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -129,7 +129,7 @@ function condition_EVENT_GADGET_CREATE_397008(context, evt)
 	if 397001 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -140,7 +140,7 @@ function action_EVENT_GADGET_CREATE_397008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -148,14 +148,14 @@ end
 function condition_EVENT_SELECT_OPTION_397009(context, evt)
 	-- 判断是gadgetid 397001 option_id 7
 	if 397001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -166,25 +166,25 @@ function action_EVENT_SELECT_OPTION_397009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将configid为 397001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 397001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 397002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 397002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 删除指定group： 133307397 ；指定config：397001；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133307397, 397001, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -194,16 +194,16 @@ function condition_EVENT_GROUP_LOAD_397010(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "open", 133307397) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_397010(context, evt)
 	ScriptLib.SetGadgetStateByConfigId(context,397002, GadgetState.GearStart)
-	
+
 	ScriptLib.SetGadgetStateByConfigId(context,397001, GadgetState.GearStart)
-	
+
 	return 0
 end
 
@@ -212,11 +212,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_397011(context, evt)
 	if 397003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133307397, 397001) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -226,14 +226,14 @@ function action_EVENT_GADGET_STATE_CHANGE_397011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 397001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133307397, 397001, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 

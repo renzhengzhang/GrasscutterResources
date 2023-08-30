@@ -3,13 +3,13 @@
 --||   Filename      ||    ResidualBright
 --||   RelVersion    ||    V3_4
 --||   Owner         ||    chao-jin
---||   Description   ||    
+--||   Description   ||
 --||   LogName       ||    ##[ResidualBright]
---||   Protection    ||    
+--||   Protection    ||
 --======================================================================================================================
 --Defs & Miscs
 --[[
-local defs = {
+defs = {
 	reset_region = 82001,
 	gadget_id_bright = 70310498,
 }
@@ -82,5 +82,3 @@ function LF_RemoveAllRepeater(context)
 	end
 	return 0
 end
-
-

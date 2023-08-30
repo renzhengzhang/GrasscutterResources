@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220134062
 }
 
@@ -9,11 +9,11 @@ local        defs = {
 is_movable = 1,
 reset_onload=1,
 			--连线形态
-			patterns = 
+			patterns =
 			{
-				
+
 					--形态1
-					[1] = 
+					[1] =
 					{
 						[62001] = {connect =62002 , point_array = 89, point_id = {1}} ,
 					[62002] = {connect =62003 , point_array = 90, point_id = {1}} ,
@@ -31,7 +31,7 @@ reset_onload=1,
 					[62015] = {connect =0 , point_array = 102, point_id = {1}} ,
 					},
 					--parta1
-					[2] = 
+					[2] =
 					{
 					[62001] = {connect =62002 , point_array = 89, point_id = {4,5,6,7,8,9,10,11,12,2}} ,
 					[62002] = {connect =62003 , point_array = 90, point_id = {4,5,6,7,8,9,10,11,12,2}} ,
@@ -50,7 +50,7 @@ reset_onload=1,
 					},
 
 										--parta2
-					[3] = 
+					[3] =
 					{
 						[62001] = {connect =62002 , point_array = 89, point_id = {4,5,6,7,8,9,10,11,12,3}} ,
 						[62002] = {connect =62003 , point_array = 90, point_id = {4,5,6,7,8,9,10,11,12,3}} ,
@@ -69,7 +69,7 @@ reset_onload=1,
 					},
 							--parta3
 
-					[4] = 
+					[4] =
 					{
 						[62001] = {connect =62002 , point_array = 89, point_id = {4,5,6,7,8,9,10,11,12,1}} ,
 						[62002] = {connect =62003 , point_array = 90, point_id = {4,5,6,7,8,9,10,11,12,1}} ,
@@ -90,7 +90,7 @@ reset_onload=1,
 
 					--partb1
 
-					[5] = 
+					[5] =
 					{
 						[62001] = {connect =62002 , point_array = 0, point_id = {0}} ,
 						[62002] = {connect =62003 , point_array = 0, point_id = {0}} ,
@@ -108,7 +108,7 @@ reset_onload=1,
 						[62015] = {connect =62010 , point_array = 0, point_id = {0}} ,
 					},
 					--partb2
-					[6] = 
+					[6] =
 					{
 						[62001] = {connect =62002 , point_array = 0, point_id = {0}} ,
 						[62002] = {connect =62003 , point_array = 0, point_id = {0}} ,
@@ -126,7 +126,7 @@ reset_onload=1,
 						[62015] = {connect =62010 , point_array = 0, point_id = {0}} ,
 					},
 					--partb3
-					[7] = 
+					[7] =
 					{
 						[62001] = {connect =62002 , point_array = 0, point_id = {0}} ,
 						[62002] = {connect =62003 , point_array = 0, point_id = {0}} ,
@@ -144,7 +144,7 @@ reset_onload=1,
 						[62015] = {connect =62010 , point_array = 0, point_id = {0}} ,
 					},
 										--partc1
-					[8] = 
+					[8] =
 					{
 						[62001] = {connect =62002 , point_array = 0, point_id = {0}} ,
 						[62002] = {connect =62003 , point_array = 0, point_id = {0}} ,
@@ -162,7 +162,7 @@ reset_onload=1,
 						[62015] = {connect =62010 , point_array = 0, point_id = {0}} ,
 					},
 						--partc2
-					[9] = 
+					[9] =
 					{
 						[62001] = {connect =62002 , point_array = 0, point_id = {0}} ,
 						[62002] = {connect =62003 , point_array = 0, point_id = {0}} ,
@@ -180,7 +180,7 @@ reset_onload=1,
 						[62015] = {connect =62010 , point_array = 0, point_id = {0}} ,
 					},
 						--partc3
-					[10] = 
+					[10] =
 					{
 						[62001] = {connect =62002 , point_array = 0, point_id = {0}} ,
 						[62002] = {connect =62003 , point_array = 0, point_id = {0}} ,
@@ -198,7 +198,7 @@ reset_onload=1,
 						[62015] = {connect =62010 , point_array = 0, point_id = {0}} ,
 					},
 						--partd1
-					[11] = 
+					[11] =
 					{
 						[62001] = {connect =62002 , point_array = 0, point_id = {0}} ,
 						[62002] = {connect =62003 , point_array = 0, point_id = {0}} ,
@@ -217,7 +217,7 @@ reset_onload=1,
 					},
 
 					--partd2
-					[12] = 
+					[12] =
 					{
 						[62001] = {connect =62002 , point_array = 0, point_id = {0}} ,
 						[62002] = {connect =62003 , point_array = 0, point_id = {0}} ,
@@ -235,7 +235,7 @@ reset_onload=1,
 						[62015] = {connect =62010 , point_array = 0, point_id = {0}} ,
 					},
 --partd3
-					[13] = 
+					[13] =
 					{
 						[62001] = {connect =62002 , point_array = 0, point_id = {0}} ,
 						[62002] = {connect =62003 , point_array = 0, point_id = {0}} ,
@@ -255,9 +255,9 @@ reset_onload=1,
 				}}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -356,9 +356,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -369,9 +369,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -387,9 +387,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -397,12 +397,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62007(context, evt)
 	if 62019 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"a"为1
 	if ScriptLib.GetGroupVariableValue(context, "a") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -413,13 +413,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "a" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "a", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -428,12 +428,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62020(context, evt)
 	if 62019 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"a"为2
 	if ScriptLib.GetGroupVariableValue(context, "a") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -444,13 +444,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "a" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "a", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -459,12 +459,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62021(context, evt)
 	if 62019 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"a"为3
 	if ScriptLib.GetGroupVariableValue(context, "a") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -475,13 +475,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "a" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "a", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -490,12 +490,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62022(context, evt)
 	if 62016 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"b"为1
 	if ScriptLib.GetGroupVariableValue(context, "b") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -506,13 +506,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "b" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "b", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -521,12 +521,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62023(context, evt)
 	if 62016 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"b"为2
 	if ScriptLib.GetGroupVariableValue(context, "b") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -537,13 +537,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "b" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "b", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -552,12 +552,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62024(context, evt)
 	if 62016 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"b"为3
 	if ScriptLib.GetGroupVariableValue(context, "b") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -568,13 +568,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "b" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "b", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -583,12 +583,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62025(context, evt)
 	if 62017 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"c"为1
 	if ScriptLib.GetGroupVariableValue(context, "c") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -599,13 +599,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "c" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "c", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -614,12 +614,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62026(context, evt)
 	if 62017 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"c"为2
 	if ScriptLib.GetGroupVariableValue(context, "c") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -630,13 +630,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "c" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "c", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -645,12 +645,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62027(context, evt)
 	if 62017 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"c"为3
 	if ScriptLib.GetGroupVariableValue(context, "c") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -661,13 +661,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "c" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "c", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -676,12 +676,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62028(context, evt)
 	if 62018 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"d"为1
 	if ScriptLib.GetGroupVariableValue(context, "d") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -692,13 +692,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "d" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "d", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -707,12 +707,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62029(context, evt)
 	if 62018 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"d"为2
 	if ScriptLib.GetGroupVariableValue(context, "d") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -723,13 +723,13 @@ function action_EVENT_GADGET_STATE_CHANGE_62029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "d" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "d", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -738,12 +738,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_62030(context, evt)
 	if 62018 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"d"为3
 	if ScriptLib.GetGroupVariableValue(context, "d") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -754,25 +754,25 @@ function action_EVENT_GADGET_STATE_CHANGE_62030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "d" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "d", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_62031(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"a"为4
 	if ScriptLib.GetGroupVariableValue(context, "a") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -783,19 +783,19 @@ function action_EVENT_VARIABLE_CHANGE_62031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_62032(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"b"为4
 	if ScriptLib.GetGroupVariableValue(context, "b") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -806,19 +806,19 @@ function action_EVENT_VARIABLE_CHANGE_62032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_62033(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"c"为4
 	if ScriptLib.GetGroupVariableValue(context, "c") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -829,19 +829,19 @@ function action_EVENT_VARIABLE_CHANGE_62033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_62034(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"d"为4
 	if ScriptLib.GetGroupVariableValue(context, "d") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -852,34 +852,34 @@ function action_EVENT_VARIABLE_CHANGE_62034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_62035(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"a"为3
 	if ScriptLib.GetGroupVariableValue(context, "a") ~= 3 then
 			return false
 	end
-	
+
 	-- 判断变量"b"为1
 	if ScriptLib.GetGroupVariableValue(context, "b") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"c"为2
 	if ScriptLib.GetGroupVariableValue(context, "c") ~= 2 then
 			return false
 	end
-	
+
 	-- 判断变量"d"为3
 	if ScriptLib.GetGroupVariableValue(context, "d") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -889,8 +889,8 @@ function action_EVENT_VARIABLE_CHANGE_62035(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 62036, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -899,7 +899,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_62037(context, evt)
 	if 62016 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -909,14 +909,14 @@ function action_EVENT_GADGET_STATE_CHANGE_62037(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 62016, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "camera" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "camera", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -925,7 +925,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_62038(context, evt)
 	if 62017 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -935,14 +935,14 @@ function action_EVENT_GADGET_STATE_CHANGE_62038(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 62017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "camera" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "camera", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -951,7 +951,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_62039(context, evt)
 	if 62018 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -961,14 +961,14 @@ function action_EVENT_GADGET_STATE_CHANGE_62039(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 62018, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "camera" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "camera", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -977,7 +977,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_62040(context, evt)
 	if 62019 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -987,14 +987,14 @@ function action_EVENT_GADGET_STATE_CHANGE_62040(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 62019, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "camera" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "camera", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -1003,7 +1003,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_62041(context, evt)
 	if 62036 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1011,7 +1011,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_62041(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220134072, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标（106，674，-1854），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=106, y=674, z=-1854}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -1020,20 +1020,20 @@ function action_EVENT_GADGET_STATE_CHANGE_62041(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_62042(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"camera"为1
 	if ScriptLib.GetGroupVariableValue(context, "camera") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1047,8 +1047,8 @@ function action_EVENT_VARIABLE_CHANGE_62042(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 

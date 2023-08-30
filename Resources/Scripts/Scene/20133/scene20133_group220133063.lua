@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220133063
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -69,9 +69,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -80,11 +80,11 @@ function condition_EVENT_GROUP_LOAD_63001(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "isFinished", 220133035) ~= 1 then
 			return false
 	end
-	
+
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 220133063, 63002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -94,8 +94,8 @@ function action_EVENT_GROUP_LOAD_63001(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 63002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -104,7 +104,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_63003(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220133063, 63002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -112,13 +112,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_63003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220133103, 2)
-	
+
 	-- 将本组内变量名为 "DoorCreated" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "DoorCreated", 1, 220133103) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（4302.32，542.1581，290.11），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=4302.32, y=542.1581, z=290.11}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -127,7 +127,7 @@ function action_EVENT_GADGET_STATE_CHANGE_63003(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end

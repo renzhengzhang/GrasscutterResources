@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133225052
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -94,20 +94,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_52001(context, evt)
 	if evt.param1 ~= 52001 then return false end
-	
+
 	-- 判断变量"reminder_trigger"为0
 	if ScriptLib.GetGroupVariableValue(context, "reminder_trigger") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -118,11 +118,11 @@ function action_EVENT_ENTER_REGION_52001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建标识为"Active_Toturial"，时间节点为{6}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Active_Toturial", {6}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -131,7 +131,7 @@ function condition_EVENT_TIME_AXIS_PASS_52003(context, evt)
 	if "Active_Toturial" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -142,25 +142,25 @@ function action_EVENT_TIME_AXIS_PASS_52003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 7009, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_52004(context, evt)
 	if evt.param1 ~= 52004 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -171,24 +171,24 @@ function action_EVENT_ENTER_REGION_52004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_52005(context, evt)
 	if evt.param1 ~= 52005 then return false end
-	
+
 	-- 判断变量"enterFog"为1
 	if ScriptLib.GetGroupVariableValue(context, "enterFog") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -199,29 +199,29 @@ function action_EVENT_ENTER_REGION_52005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_52006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"triggerTalk"为1
 	if ScriptLib.GetGroupVariableValue(context, "triggerTalk") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"Notify"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Notify", 133225232) ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"Notify"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Notify", 133225231) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -232,6 +232,6 @@ function action_EVENT_VARIABLE_CHANGE_52006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

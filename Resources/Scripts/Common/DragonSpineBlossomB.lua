@@ -52,7 +52,7 @@ end
 Initialize_Group()
 ----------------------------------------------
 --[[
-local defs = {
+defs = {
 	operator = 422010,
 	blossom_chest = 422011,
 	platform = 422013
@@ -218,7 +218,7 @@ function action_platform_reach_point(context, evt)
 				ScriptLib.CreateGadget(context, { config_id = v.gadget })
 				break
 			end
-		end	
+		end
 	end
 	return 0
 end

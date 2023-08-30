@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133313114
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -87,7 +87,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_114004(context, evt)
 	if 114001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -97,8 +97,8 @@ function action_EVENT_GADGET_STATE_CHANGE_114004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 114003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -107,7 +107,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_114005(context, evt)
 	if 114001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -117,8 +117,8 @@ function action_EVENT_GADGET_STATE_CHANGE_114005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 114003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -127,7 +127,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_114007(context, evt)
 	if 114002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -137,8 +137,8 @@ function action_EVENT_GADGET_STATE_CHANGE_114007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 114006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_114008(context, evt)
 	if 114002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_GADGET_STATE_CHANGE_114008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 114006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

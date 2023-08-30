@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133210217
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suite_disk = {
@@ -123,16 +123,16 @@ suite_disk = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_START_217001(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210217, 2)
-	
+
 	return 0
 end
 
@@ -142,12 +142,12 @@ function condition_EVENT_ANY_MONSTER_DIE_217002(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"QuestState"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "QuestState", 133210071) ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -158,13 +158,13 @@ function action_EVENT_ANY_MONSTER_DIE_217002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7216504") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -174,12 +174,12 @@ function condition_EVENT_ANY_MONSTER_DIE_217003(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"QuestState"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "QuestState", 133210071) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -190,13 +190,13 @@ function action_EVENT_ANY_MONSTER_DIE_217003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7216504") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -212,7 +212,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_217008(context, evt)
 	-- 判断变量"QuestState"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "QuestState", 133210071) == 0 then
-	
+
 	-- 调用提示id为 32100133 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 32100133) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
@@ -224,7 +224,7 @@ function action_EVENT_TIME_AXIS_PASS_217008(context, evt)
 		return -1
 	end
 	end
-	
+
 	return 0
 end
 
@@ -246,23 +246,23 @@ function action_EVENT_TIME_AXIS_PASS_217009(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210217, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_217010(context, evt)
 	if evt.param1 ~= 217010 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -270,8 +270,8 @@ end
 function action_EVENT_ENTER_REGION_217010(context, evt)
 	-- 创建标识为"addmonster"，时间节点为{1,4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "addmonster", {1,4}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -281,12 +281,12 @@ function condition_EVENT_ANY_MONSTER_DIE_217011(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"QuestState"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "QuestState", 133210071) ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -297,13 +297,13 @@ function action_EVENT_ANY_MONSTER_DIE_217011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7216504") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -311,6 +311,6 @@ end
 function action_EVENT_QUEST_FINISH_217012(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210217, 4)
-	
+
 	return 0
 end

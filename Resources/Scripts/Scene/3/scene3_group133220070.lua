@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133220070
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -105,9 +105,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -116,7 +116,7 @@ function condition_EVENT_MONSTER_BATTLE_70014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isSpawn") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -127,10 +127,10 @@ function action_EVENT_MONSTER_BATTLE_70014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220070, 2)
-	
+
 	return 0
 end
 
@@ -140,7 +140,7 @@ function condition_EVENT_ANY_MONSTER_DIE_70018(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -152,18 +152,18 @@ function action_EVENT_ANY_MONSTER_DIE_70018(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end 
-	
+		end
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220070, 3)
-	
+
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=-1869.674,y=200.1558,z=-4286.487}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400004, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -173,12 +173,12 @@ function condition_EVENT_ANY_MONSTER_DIE_70021(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isSpawn") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -189,9 +189,9 @@ function action_EVENT_ANY_MONSTER_DIE_70021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220070, 2)
-	
+
 	return 0
 end

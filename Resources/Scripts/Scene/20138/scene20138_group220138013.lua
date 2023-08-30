@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220138013
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -89,9 +89,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -100,7 +100,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13003(context, evt)
 	if 13002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -108,7 +108,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_13003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220138013, 2)
-	
+
 	return 0
 end
 
@@ -117,7 +117,7 @@ function condition_EVENT_GROUP_LOAD_13007(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220138013, 13002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -125,7 +125,7 @@ end
 function action_EVENT_GROUP_LOAD_13007(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220138013, 2)
-	
+
 	return 0
 end
 
@@ -133,13 +133,13 @@ end
 function action_EVENT_OBSERVATION_POINT_NOTIFY_13016(context, evt)
 	if 13001 == evt.param1 and 604 == evt.param2 then
 		ScriptLib.SetGadgetStateByConfigId(context,13002, GadgetState.GearStart)
-		
+
 		ScriptLib.SetGroupVariableValueByGroup(context, "eyefinish2", 1, 220138022)
-		
+
 		ScriptLib.SetGadgetStateByConfigId(context,13001, GadgetState.ChestOpened)
-		
+
 		ScriptLib.KillEntityByConfigId(context, {group_id=220138013, config_id=13006, entity_type=EntityType.GADGET})
 	end
-	
+
 	return 0
 end

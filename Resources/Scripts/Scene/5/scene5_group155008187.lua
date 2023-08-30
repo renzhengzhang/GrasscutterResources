@@ -1,16 +1,16 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155008187
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 155008187,
 	CallCheckFunction = 0
 }
 
 -- DEFS_MISCS
-local pairsgrouplist = 
+local pairsgrouplist =
 {
 	{155008201,1}
 }
@@ -41,33 +41,33 @@ local pairsgrouplist =
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-local gameplayStateFuncitons = 
+local gameplayStateFuncitons =
 {
 	["0"] = function(context)
-		
+
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-		
+
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
-		
-		
+
+
 	end,
 	["2"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 
-		ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 2, 155008189) 
-		
-		
+		ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 2, 155008189)
+
+
 	end
 
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -76,7 +76,7 @@ end
 function GetGroup(context,unid)
 
 	for i=1,#pairsgrouplist do
-		if pairsgrouplist[i] == unid then 
+		if pairsgrouplist[i] == unid then
 			return pairsgrouplist[i][1]
 		end
 	end
@@ -95,9 +95,9 @@ function ResetPairGroup(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -137,9 +137,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -150,9 +150,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -186,9 +186,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -200,7 +200,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_187002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 		-- 判断变量"gameplayState"为0
 		if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 				return false
@@ -217,12 +217,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_187003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
-		if evt.source_name ~= "uniqe_id_01" and evt.source_name ~= "uniqe_id_02" then 
+
+		if evt.source_name ~= "uniqe_id_01" and evt.source_name ~= "uniqe_id_02" then
 			return false
 		end
-	
-		if ScriptLib.GetGroupVariableValue(context, "uniqe_id_01") == 0 or ScriptLib.GetGroupVariableValue(context, "uniqe_id_02") == 0 then 
+
+		if ScriptLib.GetGroupVariableValue(context, "uniqe_id_01") == 0 or ScriptLib.GetGroupVariableValue(context, "uniqe_id_02") == 0 then
 			return false
 		end
 		return true
@@ -232,20 +232,20 @@ end
 function action_EVENT_VARIABLE_CHANGE_187003(context, evt)
 		local unid_01 = ScriptLib.GetGroupVariableValue(context, "uniqe_id_01")
 		local unid_02 = ScriptLib.GetGroupVariableValue(context, "uniqe_id_02")
-	
+
 		local group_01 = GetGroup(context,unid_01)
 		local group_02 = GetGroup(context,unid_02)
-	
-		if unid_01 == unid_02 then 
+
+		if unid_01 == unid_02 then
 			ScriptLib.SetGroupVariableValueByGroup(context, "CallOnFunction", 2 , group_01)
-				
+
 			ScriptLib.ChangeGroupVariableValue(context, "activepairscount", 1)
-	
+
 		else
-	
+
 			ScriptLib.SetGroupVariableValueByGroup(context, "CallOnFunction", 1 , group_01)
 			ScriptLib.SetGroupVariableValueByGroup(context, "CallOnFunction", 1 , group_02)
-	
+
 		end
 		return 0
 end
@@ -253,12 +253,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_187004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"activepairscount"为2
 	if ScriptLib.GetGroupVariableValue(context, "activepairscount") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -269,6 +269,6 @@ function action_EVENT_VARIABLE_CHANGE_187004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

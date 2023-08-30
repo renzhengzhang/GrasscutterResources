@@ -1,16 +1,16 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199004116
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	group_ID = 199004116,
 	gadget_thunderThelfID = 116015,
 	pointarray_ID = 900400010,
 	maxPointCount = 16,
 	gadget_Reward_1 = 116002,
-	pointInfo = {3,5,8,10,12,15,16} 
+	pointInfo = {3,5,8,10,12,15,16}
 }
 
 -- DEFS_MISCS
@@ -41,9 +41,9 @@ function MovePlatform(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -114,9 +114,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -127,9 +127,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -190,15 +190,15 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_116003(context, evt)
 	ScriptLib.SetPlatformPointArray(context, 116015, 900400011, {1}, {route_type=RouteType.OneWay, turn_mode=false, record_mode=RouteRecordMode.Prereach, speed_level=0, arrive_range=0})
-	
+
 	return 0
 end
 
@@ -207,27 +207,27 @@ function condition_EVENT_PLATFORM_REACH_POINT_116004(context, evt)
 	if 116015 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_116004(context, evt)
-	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)		
+	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isMoving", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
-	end	
+	end
 	ScriptLib.StopPlatform(context, defs.gadget_thunderThelfID)
 	if evt.param3 == defs.maxPointCount then
 		ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
-		ScriptLib.CreateGadget(context, { config_id = defs.gadget_Reward_1 }) 
+		ScriptLib.CreateGadget(context, { config_id = defs.gadget_Reward_1 })
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_thunderThelfID, GadgetState.GearStart)
 		ScriptLib.GoToGroupSuite(context, base_info.group_id, 3)
-		ScriptLib.MarkPlayerAction(context, 2014, 3, 1)	
+		ScriptLib.MarkPlayerAction(context, 2014, 3, 1)
 		return 0
 	end
-			
+
 	local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
 	next = next + 1
 	ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
@@ -242,14 +242,14 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_116005(context, evt)
 				return false
 			end
 			local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
-			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state) 
-			if state == 201 then 
+			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
+			if state == 201 then
 				return false
 			end
-			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then 
+			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then
 				return false
 			end
-			
+
 			return true
 end
 
@@ -263,57 +263,57 @@ end
 function action_EVENT_LEVEL_TAG_CHANGE_116010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.GetGroupVariableValue(context, "md") == 1 and ScriptLib.GetGroupVariableValue(context, "ly") == 1 and ScriptLib.CheckSceneTag(context, 9,1023 ) then
 		ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=2})
-		
+
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	else
 		if evt.param2 == 7 then
 			ScriptLib.AddExtraGroupSuite(context, 0, 5)
-			
+
 			if ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.GetGroupVariableValue(context, "ly") == 1 then
 				ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-				
+
 				ScriptLib.StartPlatform(context, 116013)
 			else
 				if ScriptLib.GetGroupVariableValue(context, "dq") == 1 then
 					ScriptLib.SetPlatformRouteId(context, 116013, 900400009)
-					
+
 					ScriptLib.StartPlatform(context, 116013)
 				else
 					ScriptLib.SetPlatformRouteId(context, 116013, 900400011)
-					
+
 					ScriptLib.StartPlatform(context, 116013)
 				end
 			end
 		else
 			if evt.param2 == 8 then
 				ScriptLib.AddExtraGroupSuite(context, 0, 5)
-				
+
 				if ScriptLib.GetGroupVariableValue(context, "md") == 1 and ScriptLib.GetGroupVariableValue(context, "dq") == 1 then
 					ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-					
+
 					ScriptLib.StartPlatform(context, 116013)
 				else
 					if ScriptLib.GetGroupVariableValue(context, "dq") == 1 then
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400010)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					else
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400011)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					end
 				end
 			else
 				if ScriptLib.CheckSceneTag(context, 9,1023 ) then
 					ScriptLib.AddExtraGroupSuite(context, 0, 5)
-					
+
 					if ScriptLib.GetGroupVariableValue(context, "dq") == 0 then
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400011)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					else
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					end
 				else
@@ -322,7 +322,7 @@ function action_EVENT_LEVEL_TAG_CHANGE_116010(context, evt)
 			end
 		end
 	end
-	
+
 	return 0
 end
 
@@ -335,16 +335,16 @@ function action_EVENT_GADGET_CREATE_116011(context, evt)
 			if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1026 ) then
 				if ScriptLib.GetGroupVariableValue(context, "ly") == 1 and ScriptLib.GetGroupVariableValue(context, "dq") == 1 then
 					ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-					
+
 					ScriptLib.StartPlatform(context, 116013)
 				else
 					if ScriptLib.GetGroupVariableValue(context, "dq") == 1 then
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400009)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					else
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400011)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					end
 				end
@@ -352,30 +352,30 @@ function action_EVENT_GADGET_CREATE_116011(context, evt)
 				if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1022 ) then
 					if ScriptLib.GetGroupVariableValue(context, "md") == 1 and ScriptLib.GetGroupVariableValue(context, "dq") == 1 then
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					else
 						if ScriptLib.GetGroupVariableValue(context, "dq") == 1 then
 							ScriptLib.SetPlatformRouteId(context, 116013, 900400010)
-							
+
 							ScriptLib.StartPlatform(context, 116013)
 						else
 							ScriptLib.SetPlatformRouteId(context, 116013, 900400011)
-							
+
 							ScriptLib.StartPlatform(context, 116013)
 						end
 					end
 				else
 					if ScriptLib.CheckSceneTag(context, 9,1023 ) then
 						ScriptLib.AddExtraGroupSuite(context, 0, 5)
-						
+
 						if ScriptLib.GetGroupVariableValue(context, "dq") == 0 then
 							ScriptLib.SetPlatformRouteId(context, 116013, 900400011)
-							
+
 							ScriptLib.StartPlatform(context, 116013)
 						else
 							ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-							
+
 							ScriptLib.StartPlatform(context, 116013)
 						end
 					else
@@ -385,49 +385,49 @@ function action_EVENT_GADGET_CREATE_116011(context, evt)
 			end
 		end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_116012(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if evt.source_name == "ly" or evt.source_name == "md" or evt.source_name == "dq" then
 		if ScriptLib.GetGroupVariableValue(context, "ly") == 1 and ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.GetGroupVariableValue(context, "md") == 1 then
 			if ScriptLib.CheckSceneTag(context, 9,1023 ) then
 				ScriptLib.AddExtraGroupSuite(context, 0, 2)
 			end
-			
+
 			if ScriptLib.GetGroupVariableValue(context, "talk") == 3 then
 				ScriptLib.SetGroupVariableValue(context, "talk", 3)
-				
+
 				ScriptLib.ShowReminder(context, 1111369)
 			end
 		else
 			if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1026 ) and ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.GetGroupVariableValue(context, "ly") == 1 then
 				ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-				
+
 				ScriptLib.StartPlatform(context, 116013)
 			else
 				if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1026 ) and ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.GetGroupVariableValue(context, "ly") == 0 then
 					ScriptLib.SetPlatformRouteId(context, 116013, 900400009)
-					
+
 					ScriptLib.StartPlatform(context, 116013)
 				else
 					if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1022 ) and ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.GetGroupVariableValue(context, "md") == 1 then
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					else
 						if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1022 ) and ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.GetGroupVariableValue(context, "md") == 0 then
 							ScriptLib.SetPlatformRouteId(context, 116013, 900400010)
-							
+
 							ScriptLib.StartPlatform(context, 116013)
 						else
 							if ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1024 ) then
 								ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-								
+
 								ScriptLib.StartPlatform(context, 116013)
 							end
 						end
@@ -436,7 +436,7 @@ function action_EVENT_VARIABLE_CHANGE_116012(context, evt)
 			end
 		end
 	end
-	
+
 	return 0
 end
 
@@ -444,64 +444,64 @@ end
 function action_EVENT_GROUP_LOAD_116014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.GetGroupVariableValue(context, "md") == 1 and ScriptLib.GetGroupVariableValue(context, "ly") == 1 and ScriptLib.CheckSceneTag(context, 9,1023 ) then
 		ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=2})
-		
+
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
-		
+
 		if ScriptLib.GetGroupVariableValue(context, "talk") == 3 then
 		else
 			ScriptLib.SetGroupVariableValue(context, "talk", 3)
-			
+
 			ScriptLib.ShowReminder(context, 1111369)
 		end
 	else
 		if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1026 ) then
 			ScriptLib.AddExtraGroupSuite(context, 0, 5)
-			
+
 			if ScriptLib.GetGroupVariableValue(context, "ly") == 1 and ScriptLib.GetGroupVariableValue(context, "dq") == 1 then
 				ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-				
+
 				ScriptLib.StartPlatform(context, 116013)
 			else
 				if ScriptLib.GetGroupVariableValue(context, "dq") == 1 then
 					ScriptLib.SetPlatformRouteId(context, 116013, 900400009)
-					
+
 					ScriptLib.StartPlatform(context, 116013)
 				else
 					ScriptLib.SetPlatformRouteId(context, 116013, 900400011)
-					
+
 					ScriptLib.StartPlatform(context, 116013)
 				end
 			end
 		else
 			if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1022 ) then
 				ScriptLib.AddExtraGroupSuite(context, 0, 5)
-				
+
 				if ScriptLib.GetGroupVariableValue(context, "md") == 1 and ScriptLib.GetGroupVariableValue(context, "dq") == 1 then
 					ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-					
+
 					ScriptLib.StartPlatform(context, 116013)
 				else
 					if ScriptLib.GetGroupVariableValue(context, "dq") == 1 then
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400010)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					else
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400011)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					end
 				end
 			else
 				if ScriptLib.CheckSceneTag(context, 9,1023 ) then
 					ScriptLib.AddExtraGroupSuite(context, 0, 5)
-					
+
 					if ScriptLib.GetGroupVariableValue(context, "dq") == 0 then
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400011)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					else
 						ScriptLib.SetPlatformRouteId(context, 116013, 900400031)
-						
+
 						ScriptLib.StartPlatform(context, 116013)
 					end
 				else
@@ -510,7 +510,7 @@ function action_EVENT_GROUP_LOAD_116014(context, evt)
 			end
 		end
 	end
-	
+
 	return 0
 end
 
@@ -519,7 +519,7 @@ function condition_EVENT_GADGET_CREATE_116016(context, evt)
 	if 116015 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -530,57 +530,57 @@ function action_EVENT_GADGET_CREATE_116016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_116017(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.CheckSceneTag(context, 9,1026 ) then
 		ScriptLib.SetGroupVariableValueByGroup(context, "lock", 1, 199004113)
 	end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.CheckSceneTag(context, 9,1022 ) then
 		ScriptLib.SetGroupVariableValueByGroup(context, "lock", 1, 199004114)
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_116018(context, evt)
 	ScriptLib.SetGadgetStateByConfigId(context,116015, GadgetState.GearStart)
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_116019(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if evt.param1 == 1 and ScriptLib.GetGroupVariableValue(context, "talk") == 0 then
 		if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1024 ) then
 			ScriptLib.SetGroupVariableValue(context, "talk", 1)
-			
+
 			ScriptLib.ShowReminder(context, 1111363)
 		end
-		
+
 		if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1022 ) then
 			ScriptLib.SetGroupVariableValue(context, "talk", 2)
-			
+
 			ScriptLib.ShowReminder(context, 1111367)
 		end
-		
+
 		if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1026 ) then
 			ScriptLib.SetGroupVariableValue(context, "talk", 2)
-			
+
 			ScriptLib.ShowReminder(context, 1111367)
 		end
 	end
-	
+
 	return 0
 end
 
@@ -588,22 +588,22 @@ end
 function action_EVENT_ENTER_REGION_116020(context, evt)
 	if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1024 ) and ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.GetGroupVariableValue(context, "talk") == 0 then
 		ScriptLib.ShowReminder(context, 1111363)
-		
+
 		ScriptLib.SetGroupVariableValue(context, "talk", 1)
 	else
 		if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1022 ) and ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.GetGroupVariableValue(context, "talk") == 1 then
 			ScriptLib.ShowReminder(context, 1111365)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "talk", 2)
 		end
-		
+
 		if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1026 ) and ScriptLib.GetGroupVariableValue(context, "dq") == 1 and ScriptLib.GetGroupVariableValue(context, "talk") == 1 then
 			ScriptLib.ShowReminder(context, 1111365)
-			
+
 			ScriptLib.SetGroupVariableValue(context, "talk", 2)
 		end
 	end
-	
+
 	return 0
 end
 
@@ -614,6 +614,6 @@ function action_EVENT_GROUP_LOAD_116021(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

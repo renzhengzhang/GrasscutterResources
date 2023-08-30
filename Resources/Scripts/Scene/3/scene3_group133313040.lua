@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133313040
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -89,9 +89,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -100,12 +100,12 @@ function condition_EVENT_ANY_MONSTER_DIE_40002(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	-- 判断变量"monsterdie"为1
 	if ScriptLib.GetGroupVariableValue(context, "monsterdie") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -116,7 +116,7 @@ function action_EVENT_ANY_MONSTER_DIE_40002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -127,7 +127,7 @@ function action_EVENT_ENTER_REGION_40006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-1253.736, y=67.61845, z=5139.218}，持续时间为5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-1253.736, y=67.61845, z=5139.218}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -136,8 +136,8 @@ function action_EVENT_ENTER_REGION_40006(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -148,7 +148,7 @@ function action_EVENT_MONSTER_BATTLE_40007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_ANY_MONSTER_DIE_40011(context, evt)
 	if 40001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -165,12 +165,12 @@ end
 function action_EVENT_ANY_MONSTER_DIE_40011(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133313040, 2)
-	
+
 	-- 将本组内变量名为 "monsterdie" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monsterdie", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

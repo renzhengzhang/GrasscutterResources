@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220128004
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	rotate_center_1 = 4009,
 	rotate_center_2 = 4012
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -230,9 +230,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -243,9 +243,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -423,39 +423,39 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_4005(context, evt)
 	-- 判断是gadgetid 4001 option_id 198
 	if 4001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 198 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_4005(context, evt)
 	ScriptLib.DelWorktopOptionByGroupId(context, 220128004, 4001, 198)
-	
+
 	ScriptLib.KillExtraGroupSuite(context, 220128004, 2)
-	
+
 	ScriptLib.KillExtraGroupSuite(context, 220128004, 19)
-	
+
 	--TeleportAction(context,2,{3})
-	
+
 	ScriptLib.SetGroupVariableValue(context, "Turn", 4)
-	
-	
+
+
 	return 0
 end
 
@@ -463,30 +463,30 @@ end
 function condition_EVENT_SELECT_OPTION_4006(context, evt)
 	-- 判断是gadgetid 4002 option_id 198
 	if 4002 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 198 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_4006(context, evt)
 	ScriptLib.DelWorktopOptionByGroupId(context, 220128004, 4002, 198)
-	
+
 	ScriptLib.KillExtraGroupSuite(context, 220128004, 2)
-	
+
 	ScriptLib.KillExtraGroupSuite(context, 220128004, 19)
-	
+
 	--TeleportAction(context,2,{4})
-	
+
 	ScriptLib.SetGroupVariableValue(context, "Turn", 3)
-	
-	
+
+
 	return 0
 end
 
@@ -494,30 +494,30 @@ end
 function condition_EVENT_SELECT_OPTION_4007(context, evt)
 	-- 判断是gadgetid 4003 option_id 198
 	if 4003 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 198 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_4007(context, evt)
 	ScriptLib.DelWorktopOptionByGroupId(context, 220128004, 4003, 198)
-	
+
 	ScriptLib.KillExtraGroupSuite(context, 220128004, 2)
-	
+
 	ScriptLib.KillExtraGroupSuite(context, 220128004, 19)
-	
+
 	--TeleportAction(context,2,{1})
-	
+
 	ScriptLib.SetGroupVariableValue(context, "Turn", 2)
-	
-	
+
+
 	return 0
 end
 
@@ -525,30 +525,30 @@ end
 function condition_EVENT_SELECT_OPTION_4008(context, evt)
 	-- 判断是gadgetid 4004 option_id 198
 	if 4004 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 198 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_4008(context, evt)
 	ScriptLib.DelWorktopOptionByGroupId(context, 220128004, 4004, 198)
-	
+
 	ScriptLib.KillExtraGroupSuite(context, 220128004, 2)
-	
+
 	ScriptLib.KillExtraGroupSuite(context, 220128004, 19)
-	
+
 	--TeleportAction(context,2,{2})
-	
+
 	ScriptLib.SetGroupVariableValue(context, "Turn", 1)
-	
-	
+
+
 	return 0
 end
 
@@ -557,7 +557,7 @@ function condition_EVENT_GADGET_CREATE_4010(context, evt)
 	if 4009 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -565,46 +565,46 @@ end
 function action_EVENT_GADGET_CREATE_4010(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 2)
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 3)
-	
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 4)
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 5)
-	
+
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 6)
-	
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 7)
-	
+
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 8)
-	
+
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 9)
-	
+
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 10)
-	
+
 	-- 添加suite19的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 19)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"Turn"为0
 	if ScriptLib.GetGroupVariableValue(context, "Turn") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -612,22 +612,22 @@ end
 function action_EVENT_VARIABLE_CHANGE_4011(context, evt)
 	-- 添加suite19的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 19)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4092(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"big_west"为4
 	if ScriptLib.GetGroupVariableValue(context, "big_west") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -637,60 +637,60 @@ function action_EVENT_VARIABLE_CHANGE_4092(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4018, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4019 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4019, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4027 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4027, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4028 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4028, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4035 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4035, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4036 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4036, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "temp_sum" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "temp_sum", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"timer_center_west"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_center_west", {3}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4093(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"big_east"为4
 	if ScriptLib.GetGroupVariableValue(context, "big_east") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -700,60 +700,60 @@ function action_EVENT_VARIABLE_CHANGE_4093(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4037, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4038 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4038, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4046 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4046, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4047 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4047, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4016 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4016, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4017 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4017, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "temp_sum" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "temp_sum", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"timer_center_east"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_center_east", {3}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4094(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"big_north"为4
 	if ScriptLib.GetGroupVariableValue(context, "big_north") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -763,60 +763,60 @@ function action_EVENT_VARIABLE_CHANGE_4094(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4054, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4055 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4055, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4056 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4056, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4057 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4057, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4071 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4071, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4072 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4072, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "temp_sum" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "temp_sum", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"timer_center_north"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_center_north", {3}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4095(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"big_south"为4
 	if ScriptLib.GetGroupVariableValue(context, "big_south") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -826,55 +826,55 @@ function action_EVENT_VARIABLE_CHANGE_4095(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4086, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4087 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4087, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4088 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4088, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4089 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4089, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4052 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4052, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4053 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4053, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "temp_sum" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "temp_sum", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 创建标识为"timer_center_south"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_center_south", {3}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4096(context, evt)
 	local bigRunes_west = { 4018, 4019, 4027, 4028 }
-	
+
 	for i,v in ipairs(bigRunes_west) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default and ScriptLib.GetGroupVariableValue(context, "big_west") < 4 then
 	                ScriptLib.ChangeGroupVariableValue(context, "big_west", 1)
@@ -886,14 +886,14 @@ function action_EVENT_GADGET_STATE_CHANGE_4096(context, evt)
 	                ScriptLib.PrintContextLog(context, "@@ current big_west == ".. ScriptLib.GetGroupVariableValue(context, "big_west"))
 	        end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4097(context, evt)
 	local bigRunes_east = { 4037, 4038, 4046, 4047 }
-	
+
 	for i,v in ipairs(bigRunes_east) do
 	         if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default and ScriptLib.GetGroupVariableValue(context, "big_east") < 4 then
 	                ScriptLib.ChangeGroupVariableValue(context, "big_east", 1)
@@ -905,14 +905,14 @@ function action_EVENT_GADGET_STATE_CHANGE_4097(context, evt)
 	                ScriptLib.PrintContextLog(context, "@@ current big_east == ".. ScriptLib.GetGroupVariableValue(context, "big_east"))
 	        end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4098(context, evt)
 	local bigRunes_north = { 4054, 4055, 4056, 4057 }
-	
+
 	for i,v in ipairs(bigRunes_north) do
 	         if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default and ScriptLib.GetGroupVariableValue(context, "big_north") < 4 then
 	                ScriptLib.ChangeGroupVariableValue(context, "big_north", 1)
@@ -924,14 +924,14 @@ function action_EVENT_GADGET_STATE_CHANGE_4098(context, evt)
 	                ScriptLib.PrintContextLog(context, "@@ current big_north == ".. ScriptLib.GetGroupVariableValue(context, "big_north"))
 	        end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4099(context, evt)
 	local bigRunes_south = { 4086, 4087, 4088, 4089 }
-	
+
 	for i,v in ipairs(bigRunes_south) do
 	         if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default and ScriptLib.GetGroupVariableValue(context, "big_south") < 4 then
 	                ScriptLib.ChangeGroupVariableValue(context, "big_south", 1)
@@ -943,14 +943,14 @@ function action_EVENT_GADGET_STATE_CHANGE_4099(context, evt)
 	                ScriptLib.PrintContextLog(context, "@@ current big_south == ".. ScriptLib.GetGroupVariableValue(context, "big_south"))
 	        end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4100(context, evt)
 	local smallRunes_west = { 4014, 4015, 4020, 4021 }
-	
+
 	for i,v in ipairs(smallRunes_west) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
 	                ScriptLib.ChangeGroupVariableValue(context, "small_west", 1)
@@ -958,14 +958,14 @@ function action_EVENT_GADGET_STATE_CHANGE_4100(context, evt)
 	                ScriptLib.PrintContextLog(context, "@@ current small_west == ".. ScriptLib.GetGroupVariableValue(context, "small_west"))
 	        end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4101(context, evt)
 	local smallRunes_east = { 4033, 4034, 4039, 4040 }
-	
+
 	for i,v in ipairs(smallRunes_east) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
 	                ScriptLib.ChangeGroupVariableValue(context, "small_east", 1)
@@ -973,14 +973,14 @@ function action_EVENT_GADGET_STATE_CHANGE_4101(context, evt)
 	                ScriptLib.PrintContextLog(context, "@@ current small_east == ".. ScriptLib.GetGroupVariableValue(context, "small_east"))
 	        end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4102(context, evt)
 	local smallRunes_north = { 4058, 4059, 4060, 4061 }
-	
+
 	for i,v in ipairs(smallRunes_north) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
 	                ScriptLib.ChangeGroupVariableValue(context, "small_north", 1)
@@ -988,14 +988,14 @@ function action_EVENT_GADGET_STATE_CHANGE_4102(context, evt)
 	                ScriptLib.PrintContextLog(context, "@@ current small_north == ".. ScriptLib.GetGroupVariableValue(context, "small_north"))
 	        end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4103(context, evt)
 	local smallRunes_south = { 4073, 4074, 4075, 4076 }
-	
+
 	for i,v in ipairs(smallRunes_south) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
 	                ScriptLib.ChangeGroupVariableValue(context, "small_south", 1)
@@ -1003,19 +1003,19 @@ function action_EVENT_GADGET_STATE_CHANGE_4103(context, evt)
 	                ScriptLib.PrintContextLog(context, "@@ current small_south == ".. ScriptLib.GetGroupVariableValue(context, "small_south"))
 	        end
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4104(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"small_west"为4
 	if ScriptLib.GetGroupVariableValue(context, "small_west") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1023,25 +1023,25 @@ end
 function action_EVENT_VARIABLE_CHANGE_4104(context, evt)
 	-- 添加suite17的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 17)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 220128004, 2)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 220128004, 7)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4105(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"small_east"为4
 	if ScriptLib.GetGroupVariableValue(context, "small_east") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1049,25 +1049,25 @@ end
 function action_EVENT_VARIABLE_CHANGE_4105(context, evt)
 	-- 添加suite18的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 18)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 220128004, 2)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 220128004, 8)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4106(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"small_north"为4
 	if ScriptLib.GetGroupVariableValue(context, "small_north") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1075,25 +1075,25 @@ end
 function action_EVENT_VARIABLE_CHANGE_4106(context, evt)
 	-- 添加suite15的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 15)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 220128004, 2)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 220128004, 9)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4107(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"small_south"为4
 	if ScriptLib.GetGroupVariableValue(context, "small_south") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1101,25 +1101,25 @@ end
 function action_EVENT_VARIABLE_CHANGE_4107(context, evt)
 	-- 添加suite16的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 16)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 220128004, 2)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 220128004, 10)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4108(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"temp_sum"为4
 	if ScriptLib.GetGroupVariableValue(context, "temp_sum") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1127,8 +1127,8 @@ end
 function action_EVENT_VARIABLE_CHANGE_4108(context, evt)
 	-- 创建标识为"timer_final"，时间节点为{6,19}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_final", {6,19}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -1138,33 +1138,33 @@ function condition_EVENT_ANY_MONSTER_DIE_4118(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_4118(context, evt)
 	LF_Clear(context)
-	
+
 	-- 将本组内变量名为 "monster_south" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_south", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 2)
-	
+
 	-- 通知场景上的所有玩家播放名字为63 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 63, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"timer_beam_south"，时间节点为{1,3.5,6}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_beam_south", {1,3.5,6}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -1173,7 +1173,7 @@ function condition_EVENT_TIME_AXIS_PASS_4119(context, evt)
 	if "timer_center_west" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1183,8 +1183,8 @@ function action_EVENT_TIME_AXIS_PASS_4119(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4013, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1194,33 +1194,33 @@ function condition_EVENT_ANY_MONSTER_DIE_4120(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_4120(context, evt)
 	LF_Clear(context)
-	
+
 	-- 将本组内变量名为 "monster_east" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_east", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 2)
-	
+
 	-- 通知场景上的所有玩家播放名字为63 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 63, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"timer_beam_east"，时间节点为{1,3.5,6}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_beam_east", {1,3.5,6}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -1230,89 +1230,89 @@ function condition_EVENT_ANY_MONSTER_DIE_4121(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_4121(context, evt)
 	LF_Clear(context)
-	
+
 	-- 将本组内变量名为 "monster_north" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_north", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 2)
-	
+
 	-- 通知场景上的所有玩家播放名字为63 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 63, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"timer_beam_north"，时间节点为{1,3.5,6}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_beam_north", {1,3.5,6}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4122(context, evt)
 	local burstRunes_south = { 4077, 4078, 4079, 4080, 4081, 4082, 4083, 4084, 4085 }
-	
+
 	for i,v in ipairs(burstRunes_south) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
 	                ScriptLib.SetGadgetStateByConfigId(context, v, 202)
 	                ScriptLib.PrintContextLog(context, "@@ butst small_south")
 	        end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4123(context, evt)
 	local burstRunes_north = { 4062, 4063, 4064, 4065, 4066, 4067, 4068, 4069, 4070 }
-	
+
 	for i,v in ipairs(burstRunes_north) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
 	                ScriptLib.SetGadgetStateByConfigId(context, v, 202)
 	                ScriptLib.PrintContextLog(context, "@@ butst small_north")
 	        end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4124(context, evt)
 	local burstRunes_east = { 4041, 4042, 4043, 4044, 4045, 4048, 4049, 4050, 4051 }
-	
+
 	for i,v in ipairs(burstRunes_east) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
 	                ScriptLib.SetGadgetStateByConfigId(context, v, 202)
 	                ScriptLib.PrintContextLog(context, "@@ butst small_east")
 	        end
 	end
-	
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4125(context, evt)
 	local burstRunes_west = { 4022, 4023, 4024, 4025, 4026, 4029, 4030, 4031, 4032 }
-	
+
 	for i,v in ipairs(burstRunes_west) do
 	        if evt.param1 == GadgetState.GearStart and evt.param2 == v and evt.param3 == GadgetState.Default then
 	                ScriptLib.SetGadgetStateByConfigId(context, v, 202)
 	                ScriptLib.PrintContextLog(context, "@@ butst small_west")
 	        end
 	end
-	
+
 	return 0
 end
 
@@ -1322,45 +1322,45 @@ function condition_EVENT_ANY_MONSTER_DIE_4126(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_4126(context, evt)
 	LF_Clear(context)
-	
+
 	-- 将本组内变量名为 "monster_west" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_west", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 2)
-	
+
 	-- 通知场景上的所有玩家播放名字为63 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 63, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"timer_beam_west"，时间节点为{1,3.5,6}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_beam_west", {1,3.5,6}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4127(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"big_west"为4
 	if ScriptLib.GetGroupVariableValue(context, "big_west") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1371,19 +1371,19 @@ function action_EVENT_VARIABLE_CHANGE_4127(context, evt)
 	ScriptLib.BeginCameraSceneLook(context, { look_configid = target_config_id, lis_allow_input = false, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                              is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                              is_set_screen_XY = false, screen_x = 0, screen_y = 0 })
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4128(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"big_east"为4
 	if ScriptLib.GetGroupVariableValue(context, "big_east") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1394,19 +1394,19 @@ function action_EVENT_VARIABLE_CHANGE_4128(context, evt)
 	ScriptLib.BeginCameraSceneLook(context, { look_configid = target_config_id, lis_allow_input = false, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                              is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                              is_set_screen_XY = false, screen_x = 0, screen_y = 0 })
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4129(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"big_north"为4
 	if ScriptLib.GetGroupVariableValue(context, "big_north") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1417,19 +1417,19 @@ function action_EVENT_VARIABLE_CHANGE_4129(context, evt)
 	ScriptLib.BeginCameraSceneLook(context, { look_configid = target_config_id, lis_allow_input = false, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                              is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                              is_set_screen_XY = false, screen_x = 0, screen_y = 0 })
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4130(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"big_south"为4
 	if ScriptLib.GetGroupVariableValue(context, "big_south") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -1440,7 +1440,7 @@ function action_EVENT_VARIABLE_CHANGE_4130(context, evt)
 	ScriptLib.BeginCameraSceneLook(context, { look_configid = target_config_id, lis_allow_input = false, duration = 4, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                              is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                              is_set_screen_XY = false, screen_x = 0, screen_y = 0 })
-	
+
 	return 0
 end
 
@@ -1449,7 +1449,7 @@ function condition_EVENT_TIME_AXIS_PASS_4132(context, evt)
 	if "timer_center_east" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1459,15 +1459,15 @@ function action_EVENT_TIME_AXIS_PASS_4132(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_4133(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if ScriptLib.GetGroupVariableValue(context, "Current_Room") == 2 and ScriptLib.GetGroupVariableValue(context, "temp_sum") == 4 then
 	        ScriptLib.AddQuestProgress(context, "102903")
 	elseif ScriptLib.GetGroupVariableValue(context, "Current_Room") ~= -2 and ScriptLib.GetGroupVariableValue(context, "Current_Room") ~= 2 then
@@ -1482,7 +1482,7 @@ function action_EVENT_VARIABLE_CHANGE_4133(context, evt)
 	                ScriptLib.SetGroupVariableValue(context, "reminder_seq", 3)
 	        end
 	end
-	
+
 	return 0
 end
 
@@ -1491,7 +1491,7 @@ function condition_EVENT_TIME_AXIS_PASS_4134(context, evt)
 	if "timer_center_north" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1501,8 +1501,8 @@ function action_EVENT_TIME_AXIS_PASS_4134(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4013, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1511,7 +1511,7 @@ function condition_EVENT_TIME_AXIS_PASS_4135(context, evt)
 	if "timer_center_south" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1521,8 +1521,8 @@ function action_EVENT_TIME_AXIS_PASS_4135(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4013, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1531,7 +1531,7 @@ function condition_EVENT_TIME_AXIS_PASS_4136(context, evt)
 	if "timer_beam_north" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1541,14 +1541,14 @@ function action_EVENT_TIME_AXIS_PASS_4136(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4052, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4053 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4053, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1557,7 +1557,7 @@ function condition_EVENT_TIME_AXIS_PASS_4137(context, evt)
 	if "timer_beam_south" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1567,14 +1567,14 @@ function action_EVENT_TIME_AXIS_PASS_4137(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4071, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4072 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4072, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1583,7 +1583,7 @@ function condition_EVENT_TIME_AXIS_PASS_4138(context, evt)
 	if "timer_beam_west" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1593,14 +1593,14 @@ function action_EVENT_TIME_AXIS_PASS_4138(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4016, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4017 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1609,7 +1609,7 @@ function condition_EVENT_TIME_AXIS_PASS_4139(context, evt)
 	if "timer_beam_east" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1619,14 +1619,14 @@ function action_EVENT_TIME_AXIS_PASS_4139(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4035, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4036 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4036, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -1635,18 +1635,18 @@ function condition_EVENT_TIME_AXIS_PASS_4140(context, evt)
 	if "timer_final" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_4140(context, evt)
 	ScriptLib.SetGadgetStateByConfigId(context, 4090, 201)
-	
+
 	ScriptLib.SetGadgetStateByConfigId(context, 4013, 205)
-	
+
 	ScriptLib.PlayCutScene(context, 62, 0)
-	
+
 	return 0
 end
 
@@ -1655,7 +1655,7 @@ function condition_EVENT_TIME_AXIS_PASS_4141(context, evt)
 	if "timer_beam_north" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1663,7 +1663,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_4141(context, evt)
 	-- 添加suite14的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 14)
-	
+
 	return 0
 end
 
@@ -1672,7 +1672,7 @@ function condition_EVENT_TIME_AXIS_PASS_4142(context, evt)
 	if "timer_beam_south" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1680,7 +1680,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_4142(context, evt)
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 13)
-	
+
 	return 0
 end
 
@@ -1689,7 +1689,7 @@ function condition_EVENT_TIME_AXIS_PASS_4143(context, evt)
 	if "timer_beam_west" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1697,7 +1697,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_4143(context, evt)
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 12)
-	
+
 	return 0
 end
 
@@ -1706,7 +1706,7 @@ function condition_EVENT_TIME_AXIS_PASS_4144(context, evt)
 	if "timer_beam_east" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1714,7 +1714,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_4144(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220128004, 11)
-	
+
 	return 0
 end
 
@@ -1723,28 +1723,28 @@ function condition_EVENT_TIME_AXIS_PASS_4145(context, evt)
 	if "timer_beam_north" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_4145(context, evt)
 	ScriptLib.AssignPlayerShowTemplateReminder(context,188,{param_uid_vec={},param_vec={},uid_vec={context.uid}})
-	
+
 	ScriptLib.PrintContextLog(context,  "@@ Trigger Tutorial!!!")
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4146(context, evt)
 	if evt.param1 ~= 4146 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -1754,16 +1754,16 @@ function action_EVENT_ENTER_REGION_4146(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 4012 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	ScriptLib.PrintContextLog(context, "@@ Quest 102905 Finish!!!")
-	
+
 	return 0
 end
 
@@ -1772,14 +1772,14 @@ function condition_EVENT_TIME_AXIS_PASS_4147(context, evt)
 	if "timer_final" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_4147(context, evt)
 	ScriptLib.ShowReminder(context, 201280201)
-	
+
 	return 0
 end
 
@@ -1788,16 +1788,16 @@ function condition_EVENT_TIME_AXIS_PASS_4148(context, evt)
 	if "timer_beam_south" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_4148(context, evt)
 	ScriptLib.AssignPlayerShowTemplateReminder(context,188,{param_uid_vec={},param_vec={},uid_vec={context.uid}})
-	
+
 	ScriptLib.PrintContextLog(context,  "@@ Trigger Tutorial!!!")
-	
+
 	return 0
 end
 
@@ -1806,16 +1806,16 @@ function condition_EVENT_TIME_AXIS_PASS_4149(context, evt)
 	if "timer_beam_west" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_4149(context, evt)
 	ScriptLib.AssignPlayerShowTemplateReminder(context,188,{param_uid_vec={},param_vec={},uid_vec={context.uid}})
-	
+
 	ScriptLib.PrintContextLog(context,  "@@ Trigger Tutorial!!!")
-	
+
 	return 0
 end
 
@@ -1824,16 +1824,16 @@ function condition_EVENT_TIME_AXIS_PASS_4150(context, evt)
 	if "timer_beam_east" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_4150(context, evt)
 	ScriptLib.AssignPlayerShowTemplateReminder(context,188,{param_uid_vec={},param_vec={},uid_vec={context.uid}})
-	
+
 	ScriptLib.PrintContextLog(context,  "@@ Trigger Tutorial!!!")
-	
+
 	return 0
 end
 

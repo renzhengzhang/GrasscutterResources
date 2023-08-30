@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008013
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -87,9 +87,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -97,7 +97,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13001(context, evt)
 	if 13003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -108,13 +108,13 @@ function action_EVENT_GADGET_STATE_CHANGE_13001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 133008089) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -123,7 +123,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13002(context, evt)
 	if 13003 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -134,13 +134,13 @@ function action_EVENT_GADGET_STATE_CHANGE_13002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "remove" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 2, 133008089) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -149,7 +149,7 @@ function condition_EVENT_GADGET_CREATE_13005(context, evt)
 	if 13004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -160,7 +160,7 @@ function action_EVENT_GADGET_CREATE_13005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -168,14 +168,14 @@ end
 function condition_EVENT_SELECT_OPTION_13006(context, evt)
 	-- 判断是gadgetid 13008 option_id 7
 	if 13008 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 7 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -186,13 +186,13 @@ function action_EVENT_SELECT_OPTION_13006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 延迟1秒后,向groupId为：133008013的对象,请求一次调用,并将string参数："delay" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008013, "delay", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -201,7 +201,7 @@ function condition_EVENT_ANY_GADGET_DIE_13007(context, evt)
 	if 13003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -212,19 +212,19 @@ function action_EVENT_ANY_GADGET_DIE_13007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "progress" 的变量设置为 4
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "progress", 4, 133008397) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "remove" 的变量设置为 4
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 4, 133008089) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -233,7 +233,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13009(context, evt)
 	if 13003 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -244,13 +244,13 @@ function action_EVENT_GADGET_STATE_CHANGE_13009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "remove" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 3, 133008089) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -261,18 +261,18 @@ function action_EVENT_TIMER_EVENT_13010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_13011(context, evt)
 	if -1~=ScriptLib.GetGadgetStateByConfigId(context, 133008013, 13003) or -1~= ScriptLib.GetGadgetStateByConfigId(context, 133008013, 13004) then
-		
+
 	return false
-		
+
 	end
-		
+
 	return true
 end
 
@@ -283,6 +283,6 @@ function action_EVENT_GROUP_LOAD_13011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end

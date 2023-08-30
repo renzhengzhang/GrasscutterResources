@@ -1,5 +1,5 @@
 --[[
-local defs={
+defs={
     air_wall = 999,
 }
 ]]
@@ -47,7 +47,7 @@ end
 function LF_Notify_Next_Group_Wait(context)
     for k , v in pairs(Next_Group_List) do
         local _targetgroup = 0
-        if k ==base_info.group_id then 
+        if k ==base_info.group_id then
             _targetgroup = v
             ScriptLib.SetGroupTempValue(context,"Need_Wait",1,{ group_id = _targetgroup})
         end
@@ -67,14 +67,14 @@ end
 function action_t2_EVENT_VARIABLE_CHANGE_Ready(context,evt)
     local _wait = ScriptLib.GetGroupTempValue(context,"Need_Wait",{})
     ScriptLib.PrintContextLog(context,"## Rogue_Terraion_2 action_t2_EVENT_VARIABLE_CHANGE_Ready: _wait=".._wait)
-    if _wait == 1 then 
+    if _wait == 1 then
         ScriptLib.SetGroupTempValue(context,"Need_Wait",0,{})
         local _hard = ScriptLib.GetGroupTempValue(context,"operator_is_hard",{})
         local _boss = ScriptLib.GetGroupTempValue(context,"operator_is_boss",{})
 		LF_Create_Fight_Operator(context,_hard,_boss)
 		local _vec = ScriptLib.GetRogueDiaryRoundAndRoom(context)
         --地城2特殊处理：创建操作台时给个reminder
-		if #_vec == 2 then 
+		if #_vec == 2 then
 			local _stage = _vec[1]
 			local _cell = _vec[2]
             local _uidlist = ScriptLib.GetSceneUidList(context)
@@ -104,13 +104,13 @@ end
 --初始化
 function Initialize_2()
 	--加变量
-    if temp_Variables_Rogue_Terrain_2 ~= nil then 
+    if temp_Variables_Rogue_Terrain_2 ~= nil then
         for k,v in pairs(temp_Variables_Rogue_Terrain_2) do
             table.insert(variables,v)
         end
     end
 	--加触发器
-    if temp_Tirgger_Rogue_Terrain_2 ~= nil then 
+    if temp_Tirgger_Rogue_Terrain_2 ~= nil then
         for k,v in pairs(temp_Tirgger_Rogue_Terrain_2) do
             v.name = "temp_Tirgger2_"..k
             v.config_id = 40200000 + k

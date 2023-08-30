@@ -1,30 +1,30 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 177005021
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	pt1 = 700500032,
 	pt2 = 700500033
 }
 
 -- DEFS_MISCS
-local stair_mode = { 
-        [21021] = { 0, 202 },  
+local stair_mode = {
+        [21021] = { 0, 202 },
         [21028] = { 0, 201 }
 }
 
 function TeleportAction(context,pointarray_id,routelist)
-	
+
 	--context, uid, pointarrayid, pointindex, speed, SFX
-	ScriptLib.MoveAvatarByPointArray(context, context.uid, pointarray_id, routelist, {speed=10}, "{\"MarkType\":2,\"IgnoreCollisionWhenEnter\":true}") 
+	ScriptLib.MoveAvatarByPointArray(context, context.uid, pointarray_id, routelist, {speed=10}, "{\"MarkType\":2,\"IgnoreCollisionWhenEnter\":true}")
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -88,9 +88,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -101,9 +101,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -146,20 +146,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21005(context, evt)
 	if evt.param1 ~= 21005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -170,7 +170,7 @@ function action_EVENT_ENTER_REGION_21005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -180,7 +180,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_21008(context, evt)
 	if 21002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -190,11 +190,11 @@ function action_EVENT_GADGET_STATE_CHANGE_21008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 21001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177005021, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标（-162.3586，302.7277，236.3788），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-162.3586, y=302.7277, z=236.3788}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -203,70 +203,70 @@ function action_EVENT_GADGET_STATE_CHANGE_21008(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "400510801") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 177005021, 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21009(context, evt)
 	if evt.param1 ~= 21009 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_21009(context, evt)
 	TeleportAction(context,defs.pt1,{1,2,3})
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21011(context, evt)
 	if evt.param1 ~= 21011 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_21011(context, evt)
 	TeleportAction(context,defs.pt2,{1,2,3,4})
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21012(context, evt)
 	if evt.param1 ~= 21012 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -276,19 +276,19 @@ function action_EVENT_ENTER_REGION_21012(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,162,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21013(context, evt)
 	if evt.param1 ~= 21013 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -298,7 +298,7 @@ function action_EVENT_ENTER_REGION_21013(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,162,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 	  return -1
 	end
-	
+
 	return 0
 end
 

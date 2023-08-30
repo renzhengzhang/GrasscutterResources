@@ -5,11 +5,11 @@
 --||   Owner         ||    chao-jin
 --||   Description   ||    追逐草神羽毛的玩法
 --||   LogName       ||    ##[PB_ChaseFeather]
---||   Protection    ||    
+--||   Protection    ||
 --======================================================================================================================
 --Defs & Miscs || 需要LD配置的内容
 
-local defs = {
+defs = {
 	feather = 108001, --草神羽毛的ID
 	pointarray_id = 110200030, --草神羽毛移动的点阵ID
 	target_pos = 6, --最后的目标点
@@ -34,7 +34,7 @@ end
 
 CF_Initialize()
 
-function action_group_load(context, evt) 
+function action_group_load(context, evt)
 	ScriptLib.PrintContextLog(context, "##[PB_ChaseFeather.lua]:追逐羽毛Group加载，初始化")
 	ScriptLib.SetGroupTempValue(context, "CurrentPos", 1, {base_info.group_id})
 	ScriptLib.SetGroupTempValue(context, "TargetPos", 2, {base_info.group_id})
@@ -43,37 +43,37 @@ function action_group_load(context, evt)
 end
 
 --羽毛到达目标点
-function action_platform_arrival(context, evt) 
-	if evt.param1 ~= defs.feather then 
+function action_platform_arrival(context, evt)
+	if evt.param1 ~= defs.feather then
 		return 0
 	end
-	if evt.param3 ~= ScriptLib.GetGroupTempValue(context, "TargetPos", {base_info.group_id}) then 
+	if evt.param3 ~= ScriptLib.GetGroupTempValue(context, "TargetPos", {base_info.group_id}) then
 		return 0
 	end
 	ScriptLib.PrintContextLog(context, "##[PB_ChaseFeather.lua]:羽毛到达目标点，更新位置信息"..evt.param3)
-	if evt.param3 == defs.target_pos then 
+	if evt.param3 == defs.target_pos then
 		ScriptLib.PrintContextLog(context, "##[PB_ChaseFeather.lua]:羽毛到达目标点，更新羽毛状态为可以拾取")
 		ScriptLib.SetGadgetStateByConfigId(context, defs.feather, 201)
 		return 0
-	end 
+	end
 	ScriptLib.SetGroupTempValue(context, "CurrentPos", evt.param3, {base_info.group_id})
 	ScriptLib.SetGroupTempValue(context, "ChaseStarted", 0, {base_info.group_id})
 	return 0
 end
 
 --羽毛从201状态死亡，完成玩法
-function action_any_gadget_die(context, evt) 
-	if evt.param1 == defs.feather then 
+function action_any_gadget_die(context, evt)
+	if evt.param1 == defs.feather then
 		ScriptLib.ShowReminder(context, 400112)
 --		ScriptLib.GoToGroupSuite(context, base_info.group_id, defs.end_suite)
-	end 
+	end
 	return 0
 end
 
 --======================================================================================================================
 --ServerLuaCalls || 物件SLC,记得return 0
 --羽毛被追逐
-function SLC_BeChased(context) 
+function SLC_BeChased(context)
 	if 0 ~= ScriptLib.GetGroupTempValue(context, "ChaseStarted", {base_info.group_id}) then
 		ScriptLib.PrintContextLog(context, "##[PB_ChaseFeather.lua]:羽毛正在移动")
 		return 0
@@ -82,9 +82,9 @@ function SLC_BeChased(context)
 		ScriptLib.PrintContextLog(context, "##[PB_ChaseFeather.lua]:羽毛移动完成")
 		return 0
 	end
-	
+
 	local cur_pos = ScriptLib.GetGroupTempValue(context, "CurrentPos", {base_info.group_id})
-	if cur_pos == 1 then 
+	if cur_pos == 1 then
 		ScriptLib.PrintContextLog(context, "##[PB_ChaseFeather.lua]:追逐开始,闪现到目标点")
 		ScriptLib.SetGroupTempValue(context, "CurrentPos", 2, {base_info.group_id})
 		ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, defs.feather)
@@ -105,6 +105,3 @@ end
 
 --======================================================================================================================
 --LevelFunctions || 自定义函数
-
-
-

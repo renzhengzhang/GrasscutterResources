@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133304095
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -89,9 +89,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -102,9 +102,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -161,9 +161,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -173,8 +173,8 @@ function action_EVENT_GROUP_WILL_UNLOAD_95003(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
@@ -209,14 +209,14 @@ function action_EVENT_QUEST_START_95004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-	
-	
+
+
 	-- 创建编号为1001（该挑战的识别id),挑战内容为2001010的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1001, 2001010, 21, 2301203, 1, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -227,8 +227,8 @@ function action_EVENT_CHALLENGE_SUCCESS_95006(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
@@ -239,14 +239,14 @@ function action_EVENT_CHALLENGE_FAIL_95007(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q2301203Fail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -257,8 +257,8 @@ function action_EVENT_GROUP_WILL_UNLOAD_95016(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
@@ -293,14 +293,14 @@ function action_EVENT_QUEST_START_95017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-	
-	
+
+
 	-- 创建编号为1002（该挑战的识别id),挑战内容为2001010的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1002, 2001010, 21, 2301203, 1, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -311,8 +311,8 @@ function action_EVENT_CHALLENGE_SUCCESS_95019(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
@@ -323,14 +323,14 @@ function action_EVENT_CHALLENGE_FAIL_95020(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q2301203Fail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -341,8 +341,8 @@ function action_EVENT_GROUP_WILL_UNLOAD_95021(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
@@ -377,14 +377,14 @@ function action_EVENT_QUEST_START_95022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-	
-	
+
+
 	-- 创建编号为1003（该挑战的识别id),挑战内容为2001010的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1003, 2001010, 21, 2301203, 1, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -395,8 +395,8 @@ function action_EVENT_CHALLENGE_SUCCESS_95024(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
@@ -407,14 +407,14 @@ function action_EVENT_CHALLENGE_FAIL_95025(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q2301203Fail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -425,8 +425,8 @@ function action_EVENT_GROUP_WILL_UNLOAD_95026(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
@@ -461,14 +461,14 @@ function action_EVENT_QUEST_START_95027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-	
-	
+
+
 	-- 创建编号为1004（该挑战的识别id),挑战内容为2001010的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1004, 2001010, 21, 2301203, 1, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -479,8 +479,8 @@ function action_EVENT_CHALLENGE_SUCCESS_95029(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
@@ -491,14 +491,14 @@ function action_EVENT_CHALLENGE_FAIL_95030(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q2301203Fail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -509,8 +509,8 @@ function action_EVENT_GROUP_WILL_UNLOAD_95031(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
@@ -545,14 +545,14 @@ function action_EVENT_QUEST_START_95032(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-	
-	
+
+
 	-- 创建编号为1005（该挑战的识别id),挑战内容为2001010的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1005, 2001010, 21, 2301203, 1, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -563,8 +563,8 @@ function action_EVENT_CHALLENGE_SUCCESS_95034(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	return 0
 end
 
@@ -575,14 +575,14 @@ function action_EVENT_CHALLENGE_FAIL_95035(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-	
-	
+
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q2301203Fail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -593,7 +593,7 @@ function action_EVENT_ENTER_REGION_95036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -604,7 +604,7 @@ function action_EVENT_ENTER_REGION_95037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -615,7 +615,7 @@ function action_EVENT_ENTER_REGION_95038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -626,7 +626,7 @@ function action_EVENT_ENTER_REGION_95039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -637,6 +637,6 @@ function action_EVENT_ENTER_REGION_95040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

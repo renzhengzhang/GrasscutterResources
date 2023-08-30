@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133302280
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_CoreID = 280005,
 	monster_BossID = 280002,
 	gadget_Point_1 = 280006,
@@ -35,9 +35,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -115,9 +115,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -128,9 +128,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -173,9 +173,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -190,7 +190,7 @@ function condition_EVENT_GROUP_LOAD_280025(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "PlayPhase") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -201,7 +201,7 @@ function action_EVENT_GROUP_LOAD_280025(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -210,7 +210,7 @@ function condition_EVENT_ANY_GADGET_DIE_280027(context, evt)
 	if 280005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -218,13 +218,13 @@ end
 function action_EVENT_ANY_GADGET_DIE_280027(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302280, 4)
-	
+
 	-- 将configid为 280031 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 280031, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -233,7 +233,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_280028(context, evt)
 	if 280006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -244,8 +244,8 @@ function action_EVENT_GADGET_STATE_CHANGE_280028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -254,7 +254,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_280029(context, evt)
 	if 280007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -265,8 +265,8 @@ function action_EVENT_GADGET_STATE_CHANGE_280029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -275,7 +275,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_280030(context, evt)
 	if 280008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -286,8 +286,8 @@ function action_EVENT_GADGET_STATE_CHANGE_280030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 

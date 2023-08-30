@@ -1,15 +1,15 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220131020
 }
 
 -- DEFS_MISCS
 --设置var: level_start为1以开启推箱子流程
 --用var_change接source为"level_finish"即可响应箱子推完的结果
-local defs = {
+defs = {
         box_gadget_id_1 = 70290405,
         --box_gadget_id_2 = 70290377,
-        config_suites = {1}, 
+        config_suites = {1},
         point_array_id = 4,
         option_id = 193,
         reminder_level_boarder = 400119,
@@ -85,9 +85,9 @@ local illegal_path = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -119,9 +119,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -132,9 +132,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -150,21 +150,21 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_20003(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	-- 将本组内变量名为 "A" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "A", 1, 220131011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 

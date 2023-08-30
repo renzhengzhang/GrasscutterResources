@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133301102
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -93,9 +93,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -106,9 +106,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -124,9 +124,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -136,15 +136,15 @@ function action_EVENT_QUEST_START_102001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建标识为"shieldwait1"，时间节点为{6}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "shieldwait1", {6}, false)
-	
-	
+
+
 	-- 创建标识为"shieldwait2"，时间节点为{8}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "shieldwait2", {8}, false)
-	
-	
+
+
 	return 0
 end
 
@@ -155,7 +155,7 @@ function action_EVENT_QUEST_START_102006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -166,19 +166,19 @@ function action_EVENT_QUEST_START_102008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_102009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"battle1"为1
 	if ScriptLib.GetGroupVariableValue(context, "battle1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -189,7 +189,7 @@ function action_EVENT_VARIABLE_CHANGE_102009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -200,7 +200,7 @@ function action_EVENT_QUEST_START_102011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -211,7 +211,7 @@ function action_EVENT_QUEST_START_102012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -222,8 +222,8 @@ function action_EVENT_QUEST_START_102013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -234,7 +234,7 @@ function action_EVENT_QUEST_START_102014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -245,8 +245,8 @@ function action_EVENT_QUEST_START_102015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -255,7 +255,7 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_102016(context, evt)
 	if 102004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -266,7 +266,7 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_102016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -275,7 +275,7 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_102017(context, evt)
 	if 102003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -286,7 +286,7 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_102017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -297,8 +297,8 @@ function action_EVENT_QUEST_START_102019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -309,7 +309,7 @@ function action_EVENT_QUEST_START_102020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -320,8 +320,8 @@ function action_EVENT_QUEST_START_102021(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -330,7 +330,7 @@ function condition_EVENT_TIME_AXIS_PASS_102022(context, evt)
 	if "shieldwait1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -340,14 +340,14 @@ function action_EVENT_TIME_AXIS_PASS_102022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 102002, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "go" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "go", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -356,7 +356,7 @@ function condition_EVENT_TIME_AXIS_PASS_102023(context, evt)
 	if "shieldwait2" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -366,25 +366,25 @@ function action_EVENT_TIME_AXIS_PASS_102023(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 102002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_102024(context, evt)
 	if evt.param1 ~= 102024 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"go"为1
 	if ScriptLib.GetGroupVariableValue(context, "go") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -395,13 +395,13 @@ function action_EVENT_ENTER_REGION_102024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 102002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	return 0
 end
 

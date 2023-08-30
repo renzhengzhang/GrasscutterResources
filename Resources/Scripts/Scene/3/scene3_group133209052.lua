@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133209052
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -128,20 +128,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_52001(context, evt)
 	if evt.param1 ~= 52001 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -152,7 +152,7 @@ function action_EVENT_ENTER_REGION_52001(context, evt)
 	elseif 1 == ScriptLib.GetGroupVariableValue(context, "PuzzleFinish") then
 	    ScriptLib.ExpeditionChallengeEnterRegion(context, true)
 	end
-	
+
 	return 0
 end
 
@@ -166,7 +166,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_52012(context, evt)
 	elseif 52005 == evt.param2 and GadgetState.GearStart == evt.param1 and GadgetState.Default == evt.param3 then
 		return true
 	end
-	
+
 	return false
 end
 
@@ -177,19 +177,19 @@ function action_EVENT_GADGET_STATE_CHANGE_52012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_52013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"flag"为3
 	if ScriptLib.GetGroupVariableValue(context, "flag") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -200,20 +200,20 @@ function action_EVENT_VARIABLE_CHANGE_52013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209052, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_52014(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133209052) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -221,25 +221,25 @@ end
 function action_EVENT_ANY_MONSTER_DIE_52014(context, evt)
 	-- 完成派遣挑战，发奖
 	ScriptLib.FinishExpeditionChallenge(context)
-	
-	
+
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133209052, 4) then
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_52016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"flag"为1
 	if ScriptLib.GetGroupVariableValue(context, "flag") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -250,19 +250,19 @@ function action_EVENT_VARIABLE_CHANGE_52016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_52017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"flag"为2
 	if ScriptLib.GetGroupVariableValue(context, "flag") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -273,19 +273,19 @@ function action_EVENT_VARIABLE_CHANGE_52017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_52018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"flag"为3
 	if ScriptLib.GetGroupVariableValue(context, "flag") ~= 3 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -296,7 +296,7 @@ function action_EVENT_VARIABLE_CHANGE_52018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -306,7 +306,7 @@ function condition_EVENT_CHALLENGE_FAIL_52019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "PuzzleFinish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -317,99 +317,99 @@ function action_EVENT_CHALLENGE_FAIL_52019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_52020(context, evt)
 	if evt.param1 ~= 52020 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"PuzzleFinish"为0
 	if ScriptLib.GetGroupVariableValue(context, "PuzzleFinish") ~= 0 then
 			return false
 	end
-	
+
 	-- 判断变量"challenge"为0
 	if ScriptLib.GetGroupVariableValue(context, "challenge") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_52020(context, evt)
-	local int i = ScriptLib.GetGroupVariableValueByGroup(context, "number", 133209052) 
-	
+	local int i = ScriptLib.GetGroupVariableValueByGroup(context, "number", 133209052)
+
 	ScriptLib.CreateFatherChallenge(context, 101, 111175, 9999, {success = 1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 101, 202, 111174, {7,901,i},{},{success=0,fail=0})
-	
+
 	ScriptLib.AttachChildChallenge(context, 101, 201, 111173, {133209052,9},{},{success=1,fail=1})
-	
+
 	ScriptLib.StartFatherChallenge(context, 101)
-	
+
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "challenge", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_52021(context, evt)
 	if evt.param1 ~= 52021 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"PuzzleFinish"为1
 	if ScriptLib.GetGroupVariableValue(context, "PuzzleFinish") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"challenge"为2
 	if ScriptLib.GetGroupVariableValue(context, "challenge") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_52021(context, evt)
-	local int j = ScriptLib.GetGroupVariableValueByGroup(context, "monster", 133209052) 
-	
+	local int j = ScriptLib.GetGroupVariableValueByGroup(context, "monster", 133209052)
+
 	ScriptLib.CreateFatherChallenge(context, 102, 111175, 9999, {success = 1, fail = 1, fail_on_wipe=true})
-	
+
 	ScriptLib.AttachChildChallenge(context, 102, 203, 111173, {133209052,j},{},{success=1,fail=1})
-	
-	
+
+
 	ScriptLib.StartFatherChallenge(context, 102)
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209052, 2)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_52024(context, evt)
-	-- 判断指定group组剩余怪物数量是否是2 
+	-- 判断指定group组剩余怪物数量是否是2
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133209052) ~= 2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -417,7 +417,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_52024(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209052, 3)
-	
+
 	return 0
 end
 
@@ -427,7 +427,7 @@ function condition_EVENT_CHALLENGE_FAIL_52025(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "PuzzleFinish") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -438,19 +438,19 @@ function action_EVENT_CHALLENGE_FAIL_52025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_52026(context, evt)
 	if evt.param1 ~= 52026 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -461,7 +461,7 @@ function action_EVENT_ENTER_REGION_52026(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -470,7 +470,7 @@ function condition_EVENT_ANY_MONSTER_DIE_52027(context, evt)
 	if 52009 == evt.param1 or 52006 == evt.param1 or 52007 == evt.param1 or 52010 == evt.param1 or 52011 == evt.param1 or 52008 == evt.param1 or 52015 == evt.param1 or 52022 == evt.param1 or 52023 == evt.param1 then
 		return true
 	end
-	 
+
 	return false
 end
 
@@ -481,6 +481,6 @@ function action_EVENT_ANY_MONSTER_DIE_52027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end

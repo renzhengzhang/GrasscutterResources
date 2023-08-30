@@ -1,5 +1,5 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201032010
 }
 
@@ -13,9 +13,9 @@ function stage_ready(context)
 end
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -90,9 +90,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -102,13 +102,13 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE_10001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_player_interact_option")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "test_re" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "test_re", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -119,7 +119,7 @@ function action_EVENT_DUNGEON_REVIVE_10002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -129,32 +129,32 @@ function action_EVENT_TIMER_EVENT_10004(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201032001, 1001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟2秒后,向groupId为：201032010的对象,请求一次调用,并将string参数："unlock_input" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201032010, "unlock_input", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "test_re" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "test_re", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10005(context, evt)
 	if evt.param1 ~= 10005 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -171,10 +171,10 @@ function action_EVENT_ENTER_REGION_10005(context, evt)
 	        ScriptLib.SetPlayerInteractOption(context, "false DisableXiaoDungeon")
 	        ScriptLib.CreateGroupTimerEvent(context, 201032010, "xiao_skill_re", 1)
 	        ScriptLib.SetGroupVariableValue(context, "isSlipDie", 0)
-		
+
 	        ScriptLib.ChangeGroupVariableValue(context, "test_slip_enter_region", 1)
 	end
-	
+
 	return 0
 end
 
@@ -184,20 +184,20 @@ function action_EVENT_TIMER_EVENT_10006(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201032001, 1001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 延迟2秒后,向groupId为：201032010的对象,请求一次调用,并将string参数："unlock_input" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201032010, "unlock_input", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 针对当前group内变量名为 "test" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "test", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -208,13 +208,13 @@ function action_EVENT_DUNGEON_AVATAR_SLIP_DIE_10008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 屏蔽战斗主界面UI模块,参数传字符串,参数内容为"bool 屏蔽ui组key"
 	if 0 ~= ScriptLib.SetPlayerInteractOption(context, "false DisableXiaoDungeon") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_player_interact_option")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -225,6 +225,6 @@ function action_EVENT_TIMER_EVENT_10009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_player_interact_option")
 		return -1
 	end
-	
+
 	return 0
 end

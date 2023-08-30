@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220121002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -71,9 +71,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -147,9 +147,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -157,7 +157,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2007(context, evt)
 	if 2001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -171,26 +171,26 @@ function action_EVENT_GADGET_STATE_CHANGE_2007(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "box1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "box1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 创建id为2014的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2014 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220121002, EntityType.GADGET, 2011 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2008(context, evt)
 	if 2002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -210,16 +210,16 @@ function action_EVENT_GADGET_STATE_CHANGE_2008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220121002, EntityType.GADGET, 2012 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220121002, 2)
-	
+
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2009(context, evt)
 	if 2003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -239,35 +239,35 @@ function action_EVENT_GADGET_STATE_CHANGE_2009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220121002, EntityType.GADGET, 2013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"box1"为1
 	if ScriptLib.GetGroupVariableValue(context, "box1") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"box2"为1
 	if ScriptLib.GetGroupVariableValue(context, "box2") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"box3"为1
 	if ScriptLib.GetGroupVariableValue(context, "box3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -277,20 +277,20 @@ function action_EVENT_VARIABLE_CHANGE_2010(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220121006, 6010, GadgetState.ChestLocked) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "2201210021") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 创建id为2026的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2026 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-35.53051, y=-256.1645, z=-30.99733}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-35.53051, y=-256.1645, z=-30.99733}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -299,20 +299,20 @@ function action_EVENT_VARIABLE_CHANGE_2010(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2016(context, evt)
 	if evt.param1 ~= 2016 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -320,19 +320,19 @@ end
 function action_EVENT_ENTER_REGION_2016(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220121002, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2022(context, evt)
 	if evt.param1 ~= 2022 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -340,7 +340,7 @@ end
 function action_EVENT_ENTER_REGION_2022(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220121002, 5)
-	
+
 	return 0
 end
 
@@ -349,7 +349,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2030(context, evt)
 	if 2020 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -360,25 +360,25 @@ function action_EVENT_GADGET_STATE_CHANGE_2030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220121002, EntityType.GADGET, 2021 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2034(context, evt)
 	if evt.param1 ~= 2034 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -386,6 +386,6 @@ end
 function action_EVENT_ENTER_REGION_2034(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220121002, 4)
-	
+
 	return 0
 end

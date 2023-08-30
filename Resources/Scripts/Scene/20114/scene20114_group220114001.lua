@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220114001
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
         groupID = 220114001,
         cutSceneID = 201901
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -111,9 +111,9 @@ sight_groups = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -124,9 +124,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -178,9 +178,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -188,7 +188,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_1002(context, evt)
 	if 1003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -196,7 +196,7 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_1002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220114001, 2)
-	
+
 	return 0
 end
 
@@ -205,7 +205,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_1005(context, evt)
 	if 1004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -217,7 +217,7 @@ function action_EVENT_ANY_MONSTER_LIVE_1005(context, evt)
 	    ScriptLib.RemoveExtraGroupSuite(context, 220114001, 3)
 	-- 添加高温空气墙
 	    ScriptLib.AddExtraGroupSuite(context, 220114001, 4)
-	
+
 	return 0
 end
 
@@ -226,7 +226,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1006(context, evt)
 	if 1003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -236,7 +236,7 @@ function action_EVENT_ANY_MONSTER_DIE_1006(context, evt)
 	PlayCutScene(context)
 	-- 移除低温空气墙
 	    ScriptLib.RemoveExtraGroupSuite(context, 220114001, 2)
-	
+
 	return 0
 end
 
@@ -245,7 +245,7 @@ function condition_EVENT_GADGET_CREATE_1028(context, evt)
 	if 1034 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -253,10 +253,10 @@ end
 function action_EVENT_GADGET_CREATE_1028(context, evt)
 	    ScriptLib.ModifyClimatePolygonParamTable(context, 1, {climate_type=0,meter_inherit_ratio=0})
 	    ScriptLib.PrintContextLog(context, "## LD ：自然气候激活")
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220114001, 3)
-	
+
 	return 0
 end
 
@@ -266,14 +266,14 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1031(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 21 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1031(context, evt)
 	ScriptLib.SetWeatherAreaState(context, 10030,1)
-	
+
 	return 0
 end
 
@@ -282,15 +282,15 @@ function condition_EVENT_ANY_MONSTER_LIVE_1032(context, evt)
 	if 1004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_LIVE_1032(context, evt)
 	ScriptLib.SetWeatherAreaState(context, 10031,1)
-	
-	
+
+
 	return 0
 end
 
@@ -299,7 +299,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1033(context, evt)
 	if 1004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -310,7 +310,7 @@ function action_EVENT_ANY_MONSTER_DIE_1033(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -318,17 +318,17 @@ end
 function condition_EVENT_QUEST_FINISH_1046(context, evt)
 	--检查ID为201901的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-	
+
 	--检查任务ID
 	if 201901 ~= evt.param1 then
 		return false
 	end
-	
+
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -336,10 +336,10 @@ end
 function action_EVENT_QUEST_FINISH_1046(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220114001, 5)
-	
+
 	    ScriptLib.ModifyClimatePolygonParamTable(context, 1, {climate_type=3,meter_inherit_ratio=0})
 	    ScriptLib.PrintContextLog(context, "## LD ：冷气激活")
-	
+
 	return 0
 end
 
@@ -349,7 +349,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1047(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 21 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -360,13 +360,13 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1047(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 创建id为1045的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1045 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -375,7 +375,7 @@ function condition_EVENT_GADGET_CREATE_1048(context, evt)
 	if 1044 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -386,7 +386,7 @@ function action_EVENT_GADGET_CREATE_1048(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 

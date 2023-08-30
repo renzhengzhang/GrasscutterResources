@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 155006054
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	pointarryRot = 500600004
 }
 
@@ -14,9 +14,9 @@ local DayAppearGadgets = {}
 local NightAppearGadgets = {54001}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -107,8 +107,8 @@ function action_EVENT_GADGET_STATE_CHANGE_54005(context, evt)
 	        end
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 			ScriptLib.SetPlatformPointArray(context, 54003, defs.pointarryRot, { 1 }, { route_type = 0,turn_mode=true })
-	
-	      
+
+
 	return 0
 end
 
@@ -125,7 +125,7 @@ function condition_EVENT_GROUP_LOAD_54008(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Door02", 155006054) ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 

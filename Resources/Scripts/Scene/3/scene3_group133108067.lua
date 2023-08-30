@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133108067
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -102,7 +102,7 @@ function condition_EVENT_GADGET_CREATE_67004(context, evt)
 	if 67001 ~= evt.param1 then
 			return false
 		end
-	
+
 	return true
 end
 
@@ -113,7 +113,7 @@ function action_EVENT_GADGET_CREATE_67004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -122,7 +122,7 @@ function condition_EVENT_SELECT_OPTION_67005(context, evt)
 	if 67001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -133,19 +133,19 @@ function action_EVENT_SELECT_OPTION_67005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2011, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133108067, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_67006(context, evt)
 	if 67002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -162,7 +162,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_67006(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108067, 3)
-	
+
 	return 0
 end
 
@@ -171,7 +171,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_67008(context, evt)
 	if 67002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -179,6 +179,6 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_67008(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133108067, 3)
-	
+
 	return 0
 end

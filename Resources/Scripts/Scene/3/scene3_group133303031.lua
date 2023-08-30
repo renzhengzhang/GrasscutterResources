@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133303031
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -96,9 +96,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -107,8 +107,8 @@ function condition_EVENT_ANY_MONSTER_DIE_31002(context, evt)
 	if evt.param1 ~= 31001 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -119,19 +119,19 @@ function action_EVENT_ANY_MONSTER_DIE_31002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	--销毁编号为98（该怪物潮的识别id)的怪物潮
 	if 0 ~= ScriptLib.KillMonsterTide(context, 133303031, 98) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 		return -1
 	end
-	
+
 	-- 将configid为 31013 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 31013, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -140,7 +140,7 @@ function condition_EVENT_MONSTER_BATTLE_31012(context, evt)
 	if 31001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -150,18 +150,18 @@ function action_EVENT_MONSTER_BATTLE_31012(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 98, 133303031, {31003,31004,31005,31006,31007,31008,31009,31010,31011}, 27, 2, 2) then
 		return -1
 	end
-	
+
 	-- 将configid为 31013 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 31013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 调用提示id为 1111403 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1111403) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

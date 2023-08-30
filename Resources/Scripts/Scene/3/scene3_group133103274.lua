@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133103274
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -89,9 +89,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -99,7 +99,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_274003(context, evt)
 	if 274002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -110,13 +110,13 @@ function action_EVENT_GADGET_STATE_CHANGE_274003(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 销毁group存档，不影响当前场景，但卸载后group就永别了
 	if 0 ~= ScriptLib.SetGroupDead(context, 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_group_die")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -125,7 +125,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_274004(context, evt)
 	if 274001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -136,10 +136,10 @@ function action_EVENT_GADGET_STATE_CHANGE_274004(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103274, 2)
-	
+
 	return 0
 end
 
@@ -148,7 +148,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_274005(context, evt)
 	if 274001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -158,17 +158,17 @@ function action_EVENT_GADGET_STATE_CHANGE_274005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 274002, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 1010, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103274, 2)
-	
+
 	return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_GADGET_CREATE_274006(context, evt)
 	if 274001 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -185,6 +185,6 @@ end
 function action_EVENT_GADGET_CREATE_274006(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103274, 2)
-	
+
 	return 0
 end

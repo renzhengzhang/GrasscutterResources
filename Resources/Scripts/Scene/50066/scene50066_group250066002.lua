@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250066002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -90,9 +90,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -100,7 +100,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2007(context, evt)
 	if 2001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -111,7 +111,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -120,7 +120,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2008(context, evt)
 	if 2002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -131,7 +131,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -140,7 +140,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2009(context, evt)
 	if 2003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -151,29 +151,29 @@ function action_EVENT_GADGET_STATE_CHANGE_2009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"box1"为1
 	if ScriptLib.GetGroupVariableValue(context, "box1") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"box2"为1
 	if ScriptLib.GetGroupVariableValue(context, "box2") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"box3"为1
 	if ScriptLib.GetGroupVariableValue(context, "box3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -183,14 +183,14 @@ function action_EVENT_VARIABLE_CHANGE_2010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "2500660021") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2012(context, evt)
 	if 2011 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -210,18 +210,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 250066002, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 250066003, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

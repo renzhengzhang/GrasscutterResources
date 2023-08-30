@@ -1,40 +1,40 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220134046
 }
 
 -- DEFS_MISCS
 local        defs = {
 
-	gear_info = 
+	gear_info =
 			{        --connect: 每个物件各个旋转档位可连接的对象 0表示无可连接
 					 [1] = { config_id=46001 , connect = {46002, 46004, 46007, 46005, 46003}, point_array_id = 46},
 					[2] = { config_id=46002 , connect = {46001, 46003, 46005, 46004, 46006}, point_array_id = 47 },
 					[3] = { config_id= 46003 , connect = {46001, 46002, 46004, 46005, 46008}, point_array_id = 48},
 					[4] = { config_id=46004 , connect = {46002, 46001, 46005, 46007, 46006}, point_array_id = 49},
 					[5] = { config_id= 46005 , connect = {46003, 46001, 46004, 46007, 46008}, point_array_id = 50 },
-					[6] = { config_id=46006 , connect = {46002, 46004, 46005,46007}, point_array_id = 51 },               
-	 [7] = { config_id=46007 , connect = {46006, 46004,46003, 46005, 46008}, point_array_id = 52 },   
+					[6] = { config_id=46006 , connect = {46002, 46004, 46005,46007}, point_array_id = 51 },
+	 [7] = { config_id=46007 , connect = {46006, 46004,46003, 46005, 46008}, point_array_id = 52 },
 	              [8] = { config_id=46008 , connect = {46003, 46005, 46004, 46007}, point_array_id = 53 },
-	}, 
-	
-	
+	},
+
+
 			--几种解
-			solutions = 
+			solutions =
 			{
 					--[解法x] = {gear_info[1]切到它的第x档, gear_info[2]切到它的第y档...}
 					[1] = { connection = {4,1,0,0,4,3,4,0}, ends = {46007}},
 					[2] = { connection = {1,0,0,0,2,3,4,0}, ends = {46002}},
 					[3] = { connection = {0,4,5,5,0,4,3,0}, ends = {46008}},
 					[4] = { connection = {1,5,1,3,3,4,5,2}, ends = {46004}},
-					[5] = { connection = {5,1,1,3,5,1,1,4}, ends = {46003}},				
+					[5] = { connection = {5,1,1,3,5,1,1,4}, ends = {46003}},
 [6] = { connection = {4,1,0,0,0,3,4,0}, ends = {}},
 [7] ={ connection = {0,4,0,5,0,4,3,1}, ends = {46003}},
-[8] = { connection = {1,5,1,3,3,4,5,2}, ends = {46005}},		
-[9] = { connection = {1,5,1,3,5,4,5,2}, ends = {46008}},	
-[10] = { connection = {1,5,1,3,5,4,5,4}, ends = {46007}},	
+[8] = { connection = {1,5,1,3,3,4,5,2}, ends = {46005}},
+[9] = { connection = {1,5,1,3,5,4,5,2}, ends = {46008}},
+[10] = { connection = {1,5,1,3,5,4,5,4}, ends = {46007}},
 [11] = { connection = {1,5,1,3,5,4,1,4}, ends = {46006}},
-[12] = { connection = {1,5,1,3,5,1,1,4}, ends = {46002}},	
+[12] = { connection = {1,5,1,3,5,1,1,4}, ends = {46002}},
 [13] = { connection = {1,1,1,3,5,1,1,4}, ends = {46001}},
 
 
@@ -44,9 +44,9 @@ local        defs = {
 	}
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -94,9 +94,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -134,17 +134,17 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_46012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"solution"为1
 	if ScriptLib.GetGroupVariableValue(context, "solution") == 1 or
 	ScriptLib.GetGroupVariableValue(context, "solution") == 2
@@ -153,7 +153,7 @@ function condition_EVENT_VARIABLE_CHANGE_46012(context, evt)
 	then
 			return true
 	end
-	
+
 	return false
 end
 
@@ -164,7 +164,7 @@ function action_EVENT_VARIABLE_CHANGE_46012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（212，647，-1757），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=212, y=647, z=-1757}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -173,14 +173,14 @@ function action_EVENT_VARIABLE_CHANGE_46012(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "form" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "form", 2, 220134056) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -188,14 +188,14 @@ end
 function condition_EVENT_SELECT_OPTION_46013(context, evt)
 	-- 判断是gadgetid 46010 option_id 411
 	if 46010 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 411 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -206,28 +206,28 @@ function action_EVENT_SELECT_OPTION_46013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-	
+
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 46009) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-	
+
 	-- 删除指定group： 220134046 ；指定config：46010；物件身上指定option：411；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220134046, 46010, 411) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_46014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if ScriptLib.GetGroupVariableValueByGroup(context, "form", 220134056) ~=2 then
 	return false
 	end
@@ -238,7 +238,7 @@ function condition_EVENT_VARIABLE_CHANGE_46014(context, evt)
 	then
 			return true
 	end
-	
+
 	return false
 end
 
@@ -249,7 +249,7 @@ function action_EVENT_VARIABLE_CHANGE_46014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 触发镜头注目，注目位置为坐标（212，647，-1757），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=212, y=647, z=-1757}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -258,23 +258,23 @@ function action_EVENT_VARIABLE_CHANGE_46014(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 将本组内变量名为 "form" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "form", 3, 220134056) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_46015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if ScriptLib.GetGroupVariableValueByGroup(context, "form", 220134056) ~=3 then
 	return false
 	end
@@ -286,7 +286,7 @@ function condition_EVENT_VARIABLE_CHANGE_46015(context, evt)
 	then
 			return true
 	end
-	
+
 	return false
 end
 
@@ -297,28 +297,28 @@ function action_EVENT_VARIABLE_CHANGE_46015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "form" 的变量设置为 4
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "form", 4, 220134056) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220134046, 46010, {411}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220134046, 2)
-	
+
 	-- 触发镜头注目，注目位置为坐标（212，647，-1757），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=212, y=647, z=-1757}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -327,14 +327,14 @@ function action_EVENT_VARIABLE_CHANGE_46015(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 220134046, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -344,7 +344,7 @@ function condition_EVENT_GROUP_LOAD_46016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -355,13 +355,13 @@ function action_EVENT_GROUP_LOAD_46016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 220134046, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 

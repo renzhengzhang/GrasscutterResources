@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 245056001
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	is_offical = true,
 	startpoint = 1061,
 	connect_region = 1065,
@@ -28,39 +28,39 @@ airwall_graph = {
 }
 
 room_infos = {
-         {        
-                room_cur = 1, 
-                room_next = 2, 
+         {
+                room_cur = 1,
+                room_next = 2,
                 wall_connect = 1060, --到下一个房间的空气墙
                 region_enter = 0, --弱网拦截用的
-                region_wall_enter = 0, --弱网拦截用的空气墙 
+                region_wall_enter = 0, --弱网拦截用的空气墙
                 region_self = 1020,      --记录处于所属房间region
                 point_safe = 1066 --传送安全点的configID
          },
-         {        
-                room_cur = 2, 
-                room_next = 3, 
+         {
+                room_cur = 2,
+                room_next = 3,
                 wall_connect = 1058, --到下一个房间的空气墙
                 region_enter =1067, --弱网拦截用的
-                region_wall_enter = 1059, --弱网拦截用的空气墙 
+                region_wall_enter = 1059, --弱网拦截用的空气墙
                 region_self = 1022,      --记录处于所属房间region
                 point_safe = 1068 --传送安全点的configID
          },
-         {        
-                room_cur = 3, 
-                room_next = 0, 
+         {
+                room_cur = 3,
+                room_next = 0,
                 wall_connect = 0, --到下一个房间的空气墙
                 region_enter = 1069, --弱网拦截用的
-                region_wall_enter = 1057, --弱网拦截用的空气墙 
+                region_wall_enter = 1057, --弱网拦截用的空气墙
                 region_self = 1024,      --记录处于所属房间region
                 point_safe = 1070 --传送安全点的configID
-         },		 
+         },
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -147,9 +147,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -160,9 +160,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -214,9 +214,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 require "V2_0/ElectricCore"

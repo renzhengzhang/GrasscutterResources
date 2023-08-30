@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 201032002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -122,9 +122,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -132,7 +132,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2003(context, evt)
 	if 2002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -142,25 +142,25 @@ function action_EVENT_GADGET_STATE_CHANGE_2003(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 201, 201032002, {2019,2020,2021,2022,2023,2024,2025,2026,2028,2029,2039,2040}, 15, 3, 3) then
 		return -1
 	end
-	
+
 	-- 创建编号为202（该怪物潮的识别id)的怪物潮，创建怪物总数为15，场上怪物最少3只，最多3只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 202, 201032002, {2011,2012,2013,2014,2015,2016,2037,2038,2017,2018,2001,2004}, 15, 3, 3) then
 		return -1
 	end
-	
+
 	-- 创建编号为101（该挑战的识别id),挑战内容为5的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 101, 5, 30, 201032002, 30, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 2010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -169,23 +169,23 @@ function action_EVENT_CHALLENGE_FAIL_2008(context, evt)
 	-- 将configid为 2002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-		end 
-	
+		end
+
 	--销毁编号为201（该怪物潮的识别id)的怪物潮
 	if 0 ~= ScriptLib.KillMonsterTide(context, 201032002, 201) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 	end
-	
+
 	--销毁编号为202（该怪物潮的识别id)的怪物潮
 	if 0 ~= ScriptLib.KillMonsterTide(context, 201032002, 202) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 	end
-	
+
 	-- 创建id为2010的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2010 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	end
-	
+
 	return 0
 end
 
@@ -193,30 +193,30 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_2009(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201032003, 4)
-	
+
 	-- 调用提示id为 10320101 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 10320101) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "stageFlag" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stageFlag", 1, 201032003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 改变指定group组201032003中， configid为3004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201032003, 3004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 2041 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 2041, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end

@@ -1,44 +1,48 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199002036
 }
 
 -- DEFS_MISCS
-local        defs = 
+local        defs =
 {
 	--幕布Group
 	curtain_group = 199002071,
         --每个阶段的所有演员物件config_id。用于统一设置可拾取/可对话状态
-        actor_list = 
+        actor_list =
         {
-                [1] = 
-                { 
-                        [36001] = 1110688,
-                        [36002] = 1110732,
+                [1] =
+                {
+                        [36001] = 1110688
+,
+                        [36002] = 1110732
+,
                         [36003] = 1110733,
                         [36004] = 1110734,
                 },
-                [2] = 
-                { 
-                        [36001] = 1110643,
+                [2] =
+                {
+                        [36001] = 1110643
+,
                         [36003] = 1110733,
                         [36004] = 1110734,
                 },
-                [3] = 
-                { 
-                        [36001] = 1110650,
+                [3] =
+                {
+                        [36001] = 1110650
+,
                         [36004] = 1110734,
                 },
         },
         --可拾取的gadget列表，即not in any suite的夜鸦雕像
-        pickable_gadget = 
+        pickable_gadget =
         {
-                [36002] = {0, 36036, 36033, 36033}, 
-                [36003] = {0, 0, 36035, 36034}, 
+                [36002] = {0, 36036, 36033, 36033},
+                [36003] = {0, 0, 36035, 36034},
                 [36004] = {0, 0, 0, 36035},
         },
         --行动序列
-        actions = 
+        actions =
         {
                 {
                           [1] = { config_id = 36001, reminder_id = 1110687, point_array = 0, point_id_list = 0, duration = 18},
@@ -65,7 +69,7 @@ local        defs =
 
         --每段剧情结束时加载的对应suite(放聚光灯和操作台用),和正确的放置槽位config_id
         --key是阶段id
-        question_suits =  
+        question_suits =
         {
                    [1] = { add_suite = 3, correct_slot = 36009, correct_gadget = 36002},
                    [2] = { add_suite = 4, correct_slot = 36010, correct_gadget = 36003},
@@ -76,9 +80,9 @@ no_actor = 36001
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -157,9 +161,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -170,9 +174,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -224,20 +228,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36030(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"is_done"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -248,7 +252,7 @@ function action_EVENT_VARIABLE_CHANGE_36030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -258,7 +262,7 @@ function condition_EVENT_GROUP_LOAD_36032(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -269,7 +273,7 @@ function action_EVENT_GROUP_LOAD_36032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133103461
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_riddle_1 = 461001,
 	gadget_riddle_2 = 461002,
 	gadget_riddle_3 = 461003,
@@ -16,9 +16,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -90,15 +90,15 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_461007(context, evt)
 	if evt.param2 ~= defs.gadget_riddle_1 and evt.param2 ~= defs.gadget_riddle_2 and evt.param2 ~= defs.gadget_riddle_3 and evt.param2 ~= defs.gadget_riddle_4 and evt.param2 ~= defs.gadget_riddle_5 then
-	return false 
+	return false
 	end
 	return true
 end
@@ -226,8 +226,8 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_461008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
-	
+
+
 	if evt.param1 < 0 or evt.param1 > 5 then
 	return false
 	end
@@ -237,7 +237,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_461008(context, evt)
 	if evt.param1 == 5 then
-	    ScriptLib.MarkPlayerAction(context, 5006, 2, 3) 
+	    ScriptLib.MarkPlayerAction(context, 5006, 2, 3)
 	    ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_chest, GadgetState.Default)
 	    ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_gate, GadgetState.GearStart)
 	    ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, 461011, GadgetState.GearStart)
@@ -265,6 +265,6 @@ function action_EVENT_GROUP_LOAD_461009(context, evt)
 	end
 	ScriptLib.SetGroupVariableValue(context, "State_Flag", sum)
 	return 0
-	
-	
+
+
 end

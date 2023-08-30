@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002259
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -80,9 +80,9 @@ sight_groups = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -93,9 +93,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -165,20 +165,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_320(context, evt)
 	if evt.param1 ~= 320 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -189,19 +189,19 @@ function action_EVENT_ENTER_REGION_320(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 创建id为2238的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2238 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟20秒后,向groupId为：133002259的对象,请求一次调用,并将string参数："Prepare" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133002259, "Prepare", 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -210,7 +210,7 @@ function condition_EVENT_GADGET_CREATE_337(context, evt)
 	if 2299 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -221,7 +221,7 @@ function action_EVENT_GADGET_CREATE_337(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -231,8 +231,8 @@ function condition_EVENT_ANY_MONSTER_DIE_338(context, evt)
 	if evt.param1 ~= 913 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -243,22 +243,22 @@ function action_EVENT_ANY_MONSTER_DIE_338(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 2223 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 2238 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -267,7 +267,7 @@ function condition_EVENT_GADGET_CREATE_343(context, evt)
 	if 2222 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -275,19 +275,19 @@ end
 function action_EVENT_GADGET_CREATE_343(context, evt)
 	-- 延迟4秒刷怪
 	ScriptLib.InitTimeAxis(context, "CreateMonster", {4}, false)
-	
+
 	-- 调用提示id为 30020121 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 30020121) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "boss_killself" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "boss_killself", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -297,8 +297,8 @@ function condition_EVENT_ANY_MONSTER_DIE_344(context, evt)
 	if evt.param1 ~= 954 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -324,19 +324,19 @@ function action_EVENT_TIMER_EVENT_345(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为2223的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2223 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 延迟4秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 913, delay_time = 4 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -344,14 +344,14 @@ end
 function condition_EVENT_SELECT_OPTION_359(context, evt)
 	-- 判断是gadgetid 2299 option_id 2902
 	if 2299 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 2902 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -362,13 +362,13 @@ function action_EVENT_SELECT_OPTION_359(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "auth_uid_p2", context.uid%10000)
 	-- 删除指定group： 133002259 ；指定config：2299；物件身上指定option：2902；
 	ScriptLib.DelWorktopOptionByGroupId(context, 133002259, 2299, 2902)
-	
+
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002259, 3)
-	
+
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133002259, 5)
-	
+
 	return 0
 end
 
@@ -379,14 +379,14 @@ function action_EVENT_QUEST_FINISH_401(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-		
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133002259, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -397,36 +397,36 @@ function action_EVENT_GROUP_REFRESH_402(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_gadget_by_group")
 			return -1
 		end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133002259, "Prepare") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟20秒后,向groupId为：133002259的对象,请求一次调用,并将string参数："Prepare" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133002259, "Prepare", 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_259002(context, evt)
 	if evt.param1 ~= 259002 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"boss_exist"为1
 	if ScriptLib.GetGroupVariableValue(context, "boss_exist") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -461,7 +461,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_259007(context, evt)
 	if evt.param1 ~= 259007 then return false end
-	
+
 	return true
 end
 
@@ -479,7 +479,7 @@ function action_EVENT_ENTER_REGION_259007(context, evt)
 				end
 			end
 			ScriptLib.TrySetPlayerEyePoint(context, small_region, big_region, 0, {0})
-	
+
 	return 0
 end
 
@@ -510,7 +510,7 @@ end
 function action_EVENT_GROUP_WILL_UNLOAD_259010(context, evt)
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133002259, 7)
-	
+
 	    ScriptLib.EndTimeAxis(context,"CreateMonster")
 	return 0
 end

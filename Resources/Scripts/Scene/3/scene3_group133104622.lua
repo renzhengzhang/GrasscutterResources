@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133104622
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -186,20 +186,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_622001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"wave1"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave1") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -207,19 +207,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_622001(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104678, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_622002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"wave2"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave2") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -227,22 +227,22 @@ end
 function action_EVENT_VARIABLE_CHANGE_622002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104679, 2)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104678, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_622003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"wave3"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -250,25 +250,25 @@ end
 function action_EVENT_VARIABLE_CHANGE_622003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104680, 2)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104678, 2)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104679, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_622004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"wave3"为2
 	if ScriptLib.GetGroupVariableValue(context, "wave3") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -278,20 +278,20 @@ function action_EVENT_VARIABLE_CHANGE_622004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 622031, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_622006(context, evt)
 	if evt.param1 ~= 622006 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -301,7 +301,7 @@ function action_EVENT_ENTER_REGION_622006(context, evt)
 	if 0 ~= ScriptLib.EnterWeatherArea(context, 2115) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -310,12 +310,12 @@ function condition_EVENT_GADGET_CREATE_622007(context, evt)
 	if 622031 ~= evt.param1 then
 		return false
 	end
-	
+
 	-- 判断变量"wave3"为2
 	if ScriptLib.GetGroupVariableValue(context, "wave3") ~= 2 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -325,25 +325,25 @@ function action_EVENT_GADGET_CREATE_622007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 622031, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_622008(context, evt)
 	if evt.param1 ~= 622008 then return false end
-	
+
 	-- 判断变量"wave1"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave1") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"wave2"为0
 	if ScriptLib.GetGroupVariableValue(context, "wave2") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -354,22 +354,22 @@ function action_EVENT_ENTER_REGION_622008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104678, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_622015(context, evt)
 	if evt.param1 ~= 622015 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -379,19 +379,19 @@ function action_EVENT_ENTER_REGION_622015(context, evt)
 	if 0 ~= ScriptLib.EnterWeatherArea(context, 2015) then
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_622049(context, evt)
 	if evt.param1 ~= 622049 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -402,24 +402,24 @@ function action_EVENT_ENTER_REGION_622049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_622052(context, evt)
 	if evt.param1 ~= 622052 then return false end
-	
+
 	-- 判断变量"wave2"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave2") ~= 1 then
 			return false
 	end
-	
+
 	-- 判断变量"wave3"为0
 	if ScriptLib.GetGroupVariableValue(context, "wave3") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -430,22 +430,22 @@ function action_EVENT_ENTER_REGION_622052(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104679, 2)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_622053(context, evt)
 	if evt.param1 ~= 622053 then return false end
-	
+
 	-- 判断变量"wave3"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave3") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -456,10 +456,10 @@ function action_EVENT_ENTER_REGION_622053(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104680, 2)
-	
+
 	return 0
 end
 
@@ -476,17 +476,17 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_622095(context, evt)
 	if evt.param1 ~= 622095 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	if ScriptLib.GetQuestState(context, evt.target_eid, 7100521) ~= 3
 	 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -497,6 +497,6 @@ function action_EVENT_ENTER_REGION_622095(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

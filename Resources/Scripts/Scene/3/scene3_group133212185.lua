@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133212185
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -128,9 +128,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -141,9 +141,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -222,23 +222,23 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_185020(context, evt)
 	-- 判断是gadgetid 185007 option_id 175
 	if 185007 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 175 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -249,68 +249,68 @@ function action_EVENT_SELECT_OPTION_185020(context, evt)
 	    ScriptLib.ShowReminder(context, 400046)
 	    return 0
 	end
-	
+
 	        if true == ScriptLib.CheckIsInMpMode(context) then
 	                ScriptLib.ShowReminder(context, 400053)
 	                return -1
 	        end
-	
-	
+
+
 	-- 删除指定group： 133220053 ；指定config：53025；物件身上指定option：175；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133212185, 185007, 175) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		  return -1
 	  end
-	  
+
 	  -- 将configid为 53025 的物件更改为状态 GadgetState.GearStart
 	  if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 185007, GadgetState.GearStart) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			  return -1
-		  end 
-	
-	
+		  end
+
+
 	-- 创建编号为111167父挑战，indexID为101
 	if 0 ~= ScriptLib.CreateFatherChallenge(context, 101, 111167, 60, {success = 1, fail = 1, fail_on_wipe=true}) then
 		return -1
 	end
-	
-	
+
+
 	-- 创建编号为201的子挑战：无用子挑战
 	if 0 ~= ScriptLib.AttachChildChallenge(context, 101, 201, 111172, {999,4,53024,1},{},{success=0,fail=0}) then
 		return -1
 	end
-	
+
 	-- 开始父挑战
 	if 0 ~= ScriptLib.StartFatherChallenge(context, 101) then
 		return -1
 	end
-	
+
 	-- 挑战开启将'ElectricCorePlayHasStarted'改为1
 	local challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 1, {group_id = grp_id})
 	    end
-	
+
 	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetGroupTempValue(context, "optimize_"..uid_list[1], 1, { group_id = 133212185})
 	ScriptLib.SetPlayerGroupVisionType(context, {uid_list[1]}, {0})
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1332200531") then
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	return -1
 	end
-	
-	
+
+
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212185, 4)
-	
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212185, 5)
-	
+
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212185, 7)
-	
+
 	return 0
 end
 
@@ -321,19 +321,19 @@ function action_EVENT_CHALLENGE_SUCCESS_185021(context, evt)
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 0, {group_id = grp_id})
 	    end
-	
-	
+
+
 	local uid_list = ScriptLib.GetSceneUidList(context)
 	        ScriptLib.SetGroupTempValue(context, "optimize_"..uid_list[1], 0, { group_id = 133212185})
-	
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133212185, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
-	
+
+
 	return 0
 end
 
@@ -344,31 +344,31 @@ function action_EVENT_CHALLENGE_FAIL_185022(context, evt)
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 0, {group_id = grp_id})
 	    end
-	
-	
+
+
 	local uid_list = ScriptLib.GetSceneUidList(context)
 	        ScriptLib.SetGroupTempValue(context, "optimize_"..uid_list[1], 0, { group_id = 133212185})
-	
-	
+
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133212185, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_185023(context, evt)
 	if evt.param1 ~= 185023 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -376,19 +376,19 @@ end
 function action_EVENT_ENTER_REGION_185023(context, evt)
 	-- 终止识别id为101的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 101, 1)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_185024(context, evt)
 	if evt.param1 ~= 185024 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -399,33 +399,33 @@ function action_EVENT_ENTER_REGION_185024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 185017 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212185, 5)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212185, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_185026(context, evt)
 	if evt.param1 ~= 185026 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -433,28 +433,28 @@ end
 function action_EVENT_ENTER_REGION_185026(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212185, 6)
-	
+
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212185, 8)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212185, 4)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212185, 5)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_185028(context, evt)
 	if evt.param1 ~= 185028 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -462,22 +462,22 @@ end
 function action_EVENT_ENTER_REGION_185028(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212185, 2)
-	
+
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212185, 6)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_185051(context, evt)
-	
+
 	if (185083~= evt.param1) and (185084~= evt.param1) and (185050~= evt.param1) and (185080~= evt.param1) and (185082~= evt.param1) and (185038~= evt.param1) and (185039~= evt.param1) and (185040~= evt.param1) and (185034~= evt.param1) and (185035~= evt.param1) and (185036~= evt.param1) and (185046~= evt.param1) and (185047~= evt.param1) and (185049~= evt.param1) and (185041~= evt.param1) and (185043~= evt.param1) and (185045~= evt.param1) and (185016~= evt.param1) and (185031~= evt.param1) and (185033~= evt.param1) and (185010~= evt.param1) and (185012~= evt.param1) and (185014~= evt.param1) and (185054~= evt.param1) and (185056~= evt.param1) and (185053~= evt.param1) and (185057~= evt.param1) and (185058~= evt.param1) and (185055~= evt.param1) and (185076~= evt.param1)
-	
+
 	then
 	  return false
 	end
-	
+
 	return true
 end
 
@@ -485,7 +485,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_185051(context, evt)
 	-- 增加时间
 	  ScriptLib.ModifyFatherChallengeProperty(context, 101, FatherChallengeProperty.DURATION, 5)
-	
+
 	return 0
 end
 
@@ -494,7 +494,7 @@ function condition_EVENT_GADGET_CREATE_185078(context, evt)
 	if 185007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -505,7 +505,7 @@ function action_EVENT_GADGET_CREATE_185078(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -513,7 +513,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_185079(context, evt)
 	-- 增加时间
 	  ScriptLib.ModifyFatherChallengeProperty(context, 101, FatherChallengeProperty.DURATION, 5)
-	
+
 	return 0
 end
 

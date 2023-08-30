@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133309493
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	interactOptionID = 430,
 	gadget_fireTorch = 493002,
 	gadget_fireBase1 = 493001,
@@ -18,9 +18,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -80,9 +80,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -93,9 +93,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -111,9 +111,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -121,7 +121,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_493007(context, evt)
 	if 493002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -132,37 +132,37 @@ function action_EVENT_GADGET_STATE_CHANGE_493007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "isOn" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "isOn", 1, 133309279) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 创建id为493009的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 493009 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为493006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 493006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为493010的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 493010 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 31004, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 触发镜头注目，注目位置为坐标{x=-2957.591, y=172.9921, z=5482.968}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-2957.591, y=172.9921, z=5482.968}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -171,8 +171,8 @@ function action_EVENT_GADGET_STATE_CHANGE_493007(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -181,7 +181,7 @@ function condition_EVENT_GROUP_LOAD_493008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133309493, 493002) then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -192,7 +192,7 @@ function action_EVENT_GROUP_LOAD_493008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -201,7 +201,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_493011(context, evt)
 	if 493001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -212,13 +212,13 @@ function action_EVENT_GADGET_STATE_CHANGE_493011(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 7022, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -227,7 +227,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_493012(context, evt)
 	if 493004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -238,19 +238,19 @@ function action_EVENT_GADGET_STATE_CHANGE_493012(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_493014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"built"为1
 	if ScriptLib.GetGroupVariableValue(context, "built") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -261,15 +261,15 @@ function action_EVENT_VARIABLE_CHANGE_493014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 493009 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -278,12 +278,12 @@ function condition_EVENT_GROUP_LOAD_493015(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133309493, 493002) then
 		return false
 	end
-	
+
 	-- 判断变量"built"为0
 	if ScriptLib.GetGroupVariableValue(context, "built") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -294,13 +294,13 @@ function action_EVENT_GROUP_LOAD_493015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	-- 创建id为493010的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 493010 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 

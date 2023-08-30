@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 199001100
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	starter_worktop_id = 100038,
 	final_stage = 6,
 	gallery_id = 21201,
@@ -24,12 +24,12 @@ local stage_berth_windzone = {
 }
 
 
-local start_boat_points = 
+local start_boat_points =
 {
 	100301,100300,100299,100298
 }
 
-local stage = 
+local stage =
 {
     [1] = {monster_suites = {2},start_suites = {2}, tag = "Sail", region = 100214,revive_point =100418, boat_point = 100419},
     [2] = {monster_suites = {3},start_suites = {3}, tag = "Battle",revive_point =100295, boat_point = 100302},
@@ -39,15 +39,15 @@ local stage =
     [6] = {monster_suites = {7,8},start_suites = {7}, tag = "Battle",revive_point =100297, boat_point = 100304},
 }
 
-local monster_suite_chain = 
+local monster_suite_chain =
 {
         [7] = {8}
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -407,9 +407,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -420,9 +420,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -501,9 +501,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -512,8 +512,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100120(context, evt)
 	if evt.param1 ~= 100220 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -524,8 +524,8 @@ function action_EVENT_ANY_MONSTER_DIE_100120(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -535,8 +535,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100127(context, evt)
 	if evt.param1 ~= 100225 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -547,8 +547,8 @@ function action_EVENT_ANY_MONSTER_DIE_100127(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -558,8 +558,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100128(context, evt)
 	if evt.param1 ~= 100219 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -570,8 +570,8 @@ function action_EVENT_ANY_MONSTER_DIE_100128(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -581,8 +581,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100129(context, evt)
 	if evt.param1 ~= 100226 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -593,8 +593,8 @@ function action_EVENT_ANY_MONSTER_DIE_100129(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -604,8 +604,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100130(context, evt)
 	if evt.param1 ~= 100227 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -616,20 +616,20 @@ function action_EVENT_ANY_MONSTER_DIE_100130(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_100213(context, evt)
 	if evt.param1 ~= 100213 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -640,20 +640,20 @@ function action_EVENT_ENTER_REGION_100213(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_100217(context, evt)
 	if evt.param1 ~= 100217 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -664,20 +664,20 @@ function action_EVENT_ENTER_REGION_100217(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_100218(context, evt)
 	if evt.param1 ~= 100218 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -688,8 +688,8 @@ function action_EVENT_ENTER_REGION_100218(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -699,8 +699,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100221(context, evt)
 	if evt.param1 ~= 100247 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -711,8 +711,8 @@ function action_EVENT_ANY_MONSTER_DIE_100221(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -722,8 +722,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100222(context, evt)
 	if evt.param1 ~= 100245 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -734,8 +734,8 @@ function action_EVENT_ANY_MONSTER_DIE_100222(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -745,8 +745,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100223(context, evt)
 	if evt.param1 ~= 100195 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -757,8 +757,8 @@ function action_EVENT_ANY_MONSTER_DIE_100223(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -768,8 +768,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100224(context, evt)
 	if evt.param1 ~= 100243 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -780,8 +780,8 @@ function action_EVENT_ANY_MONSTER_DIE_100224(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -791,8 +791,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100228(context, evt)
 	if evt.param1 ~= 100246 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -803,8 +803,8 @@ function action_EVENT_ANY_MONSTER_DIE_100228(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -814,8 +814,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100244(context, evt)
 	if evt.param1 ~= 100051 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -826,8 +826,8 @@ function action_EVENT_ANY_MONSTER_DIE_100244(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -837,8 +837,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100248(context, evt)
 	if evt.param1 ~= 100156 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -849,8 +849,8 @@ function action_EVENT_ANY_MONSTER_DIE_100248(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -860,8 +860,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100249(context, evt)
 	if evt.param1 ~= 100175 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -872,8 +872,8 @@ function action_EVENT_ANY_MONSTER_DIE_100249(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -883,8 +883,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100250(context, evt)
 	if evt.param1 ~= 100101 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -895,8 +895,8 @@ function action_EVENT_ANY_MONSTER_DIE_100250(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -906,8 +906,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100251(context, evt)
 	if evt.param1 ~= 100111 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -918,8 +918,8 @@ function action_EVENT_ANY_MONSTER_DIE_100251(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -929,8 +929,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100273(context, evt)
 	if evt.param1 ~= 100180 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -941,8 +941,8 @@ function action_EVENT_ANY_MONSTER_DIE_100273(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -952,8 +952,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100274(context, evt)
 	if evt.param1 ~= 100269 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -964,8 +964,8 @@ function action_EVENT_ANY_MONSTER_DIE_100274(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -975,8 +975,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100275(context, evt)
 	if evt.param1 ~= 100178 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -987,8 +987,8 @@ function action_EVENT_ANY_MONSTER_DIE_100275(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -998,8 +998,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100276(context, evt)
 	if evt.param1 ~= 100185 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -1010,8 +1010,8 @@ function action_EVENT_ANY_MONSTER_DIE_100276(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 
@@ -1021,8 +1021,8 @@ function condition_EVENT_ANY_MONSTER_DIE_100277(context, evt)
 	if evt.param1 ~= 100179 then
 	    return false
 	 end
-	  
-	
+
+
 	return true
 end
 
@@ -1033,8 +1033,8 @@ function action_EVENT_ANY_MONSTER_DIE_100277(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-		
-	
+
+
 	return 0
 end
 

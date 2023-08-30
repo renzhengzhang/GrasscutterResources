@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220162002
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -132,9 +132,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -145,9 +145,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -235,9 +235,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -245,7 +245,7 @@ function condition_EVENT_GADGET_CREATE_2002(context, evt)
 	if 2001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -256,7 +256,7 @@ function action_EVENT_GADGET_CREATE_2002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -264,14 +264,14 @@ end
 function condition_EVENT_SELECT_OPTION_2003(context, evt)
 	-- 判断是gadgetid 2001 option_id 64
 	if 2001 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 64 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -282,19 +282,19 @@ function action_EVENT_SELECT_OPTION_2003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "220162002") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220162002, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -303,7 +303,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2006(context, evt)
 	if 2004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -314,31 +314,31 @@ function action_EVENT_GADGET_STATE_CHANGE_2006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Var_1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Var_1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220162002, EntityType.GADGET, 2012 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220162002, EntityType.GADGET, 2023 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "2201620020") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -347,7 +347,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_2009(context, evt)
 	if 2007 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -358,31 +358,31 @@ function action_EVENT_GADGET_STATE_CHANGE_2009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Var_2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Var_2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220162002, EntityType.GADGET, 2013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220162002, EntityType.GADGET, 2024 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "2201620020") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -391,7 +391,7 @@ function condition_EVENT_GADGET_CREATE_2014(context, evt)
 	if 2017 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -402,7 +402,7 @@ function action_EVENT_GADGET_CREATE_2014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -410,14 +410,14 @@ end
 function condition_EVENT_SELECT_OPTION_2015(context, evt)
 	-- 判断是gadgetid 2017 option_id 64
 	if 2017 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 64 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -428,31 +428,31 @@ function action_EVENT_SELECT_OPTION_2015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "Var_3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Var_3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220162002, EntityType.GADGET, 2016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220162002, EntityType.GADGET, 2025 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "2201620021") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -461,7 +461,7 @@ function condition_EVENT_GADGET_CREATE_2019(context, evt)
 	if 2018 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -472,7 +472,7 @@ function action_EVENT_GADGET_CREATE_2019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -480,14 +480,14 @@ end
 function condition_EVENT_SELECT_OPTION_2020(context, evt)
 	-- 判断是gadgetid 2018 option_id 64
 	if 2018 ~= evt.param1 then
-		return false	
+		return false
 	end
-	
+
 	if 64 ~= evt.param2 then
 		return false
 	end
-	
-	
+
+
 	return true
 end
 
@@ -498,43 +498,43 @@ function action_EVENT_SELECT_OPTION_2020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 将本组内变量名为 "Var_4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Var_4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220162002, EntityType.GADGET, 2021 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220162002, EntityType.GADGET, 2026 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "2201620021") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2027(context, evt)
 	if evt.param1 ~= 2027 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -542,7 +542,7 @@ end
 function action_EVENT_ENTER_REGION_2027(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220162002, 3)
-	
+
 	return 0
 end
 
@@ -550,24 +550,24 @@ end
 function action_EVENT_LEAVE_REGION_2028(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220162002, 3)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2029(context, evt)
 	if evt.param1 ~= 2029 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"Var_1"为0
 	if ScriptLib.GetGroupVariableValue(context, "Var_1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -575,7 +575,7 @@ end
 function action_EVENT_ENTER_REGION_2029(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220162002, 4)
-	
+
 	return 0
 end
 
@@ -585,7 +585,7 @@ function condition_EVENT_LEAVE_REGION_2030(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Var_1") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -593,24 +593,24 @@ end
 function action_EVENT_LEAVE_REGION_2030(context, evt)
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220162002, 4)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2031(context, evt)
 	if evt.param1 ~= 2031 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"Var_2"为0
 	if ScriptLib.GetGroupVariableValue(context, "Var_2") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -618,7 +618,7 @@ end
 function action_EVENT_ENTER_REGION_2031(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220162002, 5)
-	
+
 	return 0
 end
 
@@ -628,7 +628,7 @@ function condition_EVENT_LEAVE_REGION_2032(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Var_2") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -636,24 +636,24 @@ end
 function action_EVENT_LEAVE_REGION_2032(context, evt)
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220162002, 5)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2033(context, evt)
 	if evt.param1 ~= 2033 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"Var_3"为0
 	if ScriptLib.GetGroupVariableValue(context, "Var_3") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -661,7 +661,7 @@ end
 function action_EVENT_ENTER_REGION_2033(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220162002, 6)
-	
+
 	return 0
 end
 
@@ -671,7 +671,7 @@ function condition_EVENT_LEAVE_REGION_2034(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Var_3") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -679,24 +679,24 @@ end
 function action_EVENT_LEAVE_REGION_2034(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220162002, 6)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2035(context, evt)
 	if evt.param1 ~= 2035 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"Var_4"为0
 	if ScriptLib.GetGroupVariableValue(context, "Var_4") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -704,7 +704,7 @@ end
 function action_EVENT_ENTER_REGION_2035(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220162002, 7)
-	
+
 	return 0
 end
 
@@ -714,7 +714,7 @@ function condition_EVENT_LEAVE_REGION_2036(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Var_4") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -722,19 +722,19 @@ end
 function action_EVENT_LEAVE_REGION_2036(context, evt)
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220162002, 7)
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2037(context, evt)
 	if evt.param1 ~= 2037 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -745,25 +745,25 @@ function action_EVENT_ENTER_REGION_2037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Var_2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Var_2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Var_3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Var_3", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "Var_4" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Var_4", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -772,7 +772,7 @@ function condition_EVENT_GADGET_CREATE_2038(context, evt)
 	if 2004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -780,7 +780,7 @@ end
 function action_EVENT_GADGET_CREATE_2038(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220162002, 8)
-	
+
 	return 0
 end
 
@@ -789,7 +789,7 @@ function condition_EVENT_GADGET_CREATE_2039(context, evt)
 	if 2007 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -797,6 +797,6 @@ end
 function action_EVENT_GADGET_CREATE_2039(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220162002, 9)
-	
+
 	return 0
 end

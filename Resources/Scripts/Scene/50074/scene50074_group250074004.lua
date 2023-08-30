@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 250074004
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -119,9 +119,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
@@ -134,17 +134,17 @@ function action_EVENT_ENTER_REGION_4002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end 
-	
+				end
+
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250074004, 2)
-	
+
 	-- 延迟4秒后,向groupId为：250074004的对象,请求一次调用,并将string参数："1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250074004, "1", 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -152,7 +152,7 @@ end
 function action_EVENT_TIMER_EVENT_4007(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250074004, 3)
-	
+
 	return 0
 end
 
@@ -161,7 +161,7 @@ function condition_EVENT_GADGET_CREATE_4008(context, evt)
 	if 4003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -172,7 +172,7 @@ function action_EVENT_GADGET_CREATE_4008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -180,10 +180,10 @@ end
 function action_EVENT_TIMER_EVENT_4009(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250074004, 4)
-	
+
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 250074004, 2)
-	
+
 	return 0
 end
 
@@ -192,7 +192,7 @@ function condition_EVENT_GADGET_CREATE_4010(context, evt)
 	if 4005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -203,7 +203,7 @@ function action_EVENT_GADGET_CREATE_4010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -211,10 +211,10 @@ end
 function action_EVENT_TIMER_EVENT_4011(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250074004, 2)
-	
+
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 250074004, 4)
-	
+
 	return 0
 end
 
@@ -222,10 +222,10 @@ end
 function action_EVENT_TIMER_EVENT_4012(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250074004, 5)
-	
+
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 250074004, 3)
-	
+
 	return 0
 end
 
@@ -234,7 +234,7 @@ function condition_EVENT_GADGET_CREATE_4013(context, evt)
 	if 4004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -245,7 +245,7 @@ function action_EVENT_GADGET_CREATE_4013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -253,10 +253,10 @@ end
 function action_EVENT_TIMER_EVENT_4014(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250074004, 3)
-	
+
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 250074004, 5)
-	
+
 	return 0
 end
 
@@ -265,7 +265,7 @@ function condition_EVENT_GADGET_CREATE_4015(context, evt)
 	if 4006 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -276,7 +276,7 @@ function action_EVENT_GADGET_CREATE_4015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -287,24 +287,24 @@ function action_EVENT_ENTER_REGION_4016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 250074004, "3") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 250074004, "4") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 250074004, "5") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end

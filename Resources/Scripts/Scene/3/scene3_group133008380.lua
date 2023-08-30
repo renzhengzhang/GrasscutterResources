@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133008380
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	active_step = 201,
 	inactive_step = 0,
 	gadget_array = {380001,380002,380003,380004,380005},
@@ -17,9 +17,9 @@ local v_error = 0
 local max_bit = #defs.gadget_array
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -119,20 +119,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_380006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	--检测当前改变的variable是否在预设区间
 	if 2 > evt.param1 or 99 < evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -143,7 +143,7 @@ function action_EVENT_VARIABLE_CHANGE_380006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -169,7 +169,7 @@ function action_EVENT_GADGET_STATE_CHANGE_380007(context, evt)
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break 
+	                        break
 	                end
 	                if i == max_bit and defs.gadget_array[i] ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
@@ -194,7 +194,7 @@ function action_EVENT_GADGET_STATE_CHANGE_380007(context, evt)
 	        if v_error ~= 1 then
 	                v_error = -1
 	        end
-	        ScriptLib.SetGroupVariableValue(context, "sort", v) 
+	        ScriptLib.SetGroupVariableValue(context, "sort", v)
 	        ScriptLib.SetGroupVariableValue(context, "gear_reset", v_error)
 	        ScriptLib.SetGroupVariableValue(context, "v_error", 0)
 	end
@@ -204,7 +204,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_380008(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	if evt.param1 == 1 then
 		if #defs.reset_gear_list == 0 then
 	                        defs.reset_gear_list = suites[1].gadgets
@@ -225,8 +225,8 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_380009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
-	
+
+
 	if evt.param1 == -1 then
 		return true
 	end
@@ -239,57 +239,57 @@ function action_EVENT_VARIABLE_CHANGE_380009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 380001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 380002 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 380002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 380003 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 380003, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 380004 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 380004, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将configid为 380005 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 380005, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 改变指定group组133008381中， configid为381002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008381, 381002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "fail_count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "fail_count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "trigger_output" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "trigger_output", 0, 133008380) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_380010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	if evt.param1 > 0 then
 		return true
 	end
@@ -303,13 +303,13 @@ function action_EVENT_VARIABLE_CHANGE_380010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133008380, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -318,7 +318,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_380012(context, evt)
 	if 380011 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -329,19 +329,19 @@ function action_EVENT_GADGET_STATE_CHANGE_380012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 延迟5秒后,向groupId为：133008380的对象,请求一次调用,并将string参数："delay" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008380, "delay", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	-- 调用提示id为 30080117 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 30080117) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -350,7 +350,7 @@ function condition_EVENT_GADGET_CREATE_380013(context, evt)
 	if 380001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -360,8 +360,8 @@ function action_EVENT_GADGET_CREATE_380013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 380001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -370,7 +370,7 @@ function condition_EVENT_GADGET_CREATE_380014(context, evt)
 	if 380002 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -380,8 +380,8 @@ function action_EVENT_GADGET_CREATE_380014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 380002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -390,7 +390,7 @@ function condition_EVENT_GADGET_CREATE_380015(context, evt)
 	if 380003 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -400,8 +400,8 @@ function action_EVENT_GADGET_CREATE_380015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 380003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -410,7 +410,7 @@ function condition_EVENT_GADGET_CREATE_380016(context, evt)
 	if 380004 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -420,8 +420,8 @@ function action_EVENT_GADGET_CREATE_380016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 380004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -430,7 +430,7 @@ function condition_EVENT_GADGET_CREATE_380017(context, evt)
 	if 380005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -440,8 +440,8 @@ function action_EVENT_GADGET_CREATE_380017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 380005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -452,6 +452,6 @@ function action_EVENT_TIMER_EVENT_380018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end

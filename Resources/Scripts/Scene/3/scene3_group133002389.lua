@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002389
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -112,20 +112,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_389015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"slimeNum"为4
 	if ScriptLib.GetGroupVariableValue(context, "slimeNum") ~= 4 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -134,7 +134,7 @@ function condition_EVENT_ANY_MONSTER_DIE_389016(context, evt)
 	if 389017 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -145,7 +145,7 @@ function action_EVENT_ANY_MONSTER_DIE_389016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -155,7 +155,7 @@ function condition_EVENT_ANY_MONSTER_DIE_389020(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -166,14 +166,14 @@ function action_EVENT_ANY_MONSTER_DIE_389020(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=1729,y=231,z=-636}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110155, pos, 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -182,7 +182,7 @@ function condition_EVENT_ANY_MONSTER_DIE_389021(context, evt)
 	if 389014 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -193,7 +193,7 @@ function action_EVENT_ANY_MONSTER_DIE_389021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -202,7 +202,7 @@ function condition_EVENT_ANY_MONSTER_DIE_389022(context, evt)
 	if 389019 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -213,7 +213,7 @@ function action_EVENT_ANY_MONSTER_DIE_389022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -222,7 +222,7 @@ function condition_EVENT_ANY_MONSTER_DIE_389023(context, evt)
 	if 389018 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -233,7 +233,7 @@ function action_EVENT_ANY_MONSTER_DIE_389023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_ANY_MONSTER_DIE_389025(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -254,6 +254,6 @@ function action_EVENT_ANY_MONSTER_DIE_389025(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end

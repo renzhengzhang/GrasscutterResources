@@ -1,5 +1,5 @@
 --[[
-local defs = {
+defs = {
 	timer_region = 1,
 	challenge_region = 2,
 	monster_hilichurl = 3,
@@ -36,7 +36,7 @@ end
 function action_enter_region(context, evt)
 	if evt.param1 == defs.challenge_region then
 		--做一个challenge唯一的保护
-		if ScriptLib.GetGroupTempValue(context, "in_challenge", {}) == 0 then	
+		if ScriptLib.GetGroupTempValue(context, "in_challenge", {}) == 0 then
 			local ret = ScriptLib.ActiveChallenge(context, 234, 234, 1, 950, 1, 0)
 			ScriptLib.PrintContextLog(context, "## Hilichurl : hili challenge ret = "..ret)
 			ScriptLib.SetGroupTempValue(context, "in_challenge", 1, {})
@@ -149,7 +149,7 @@ function LF_Handle_Monster_Hilichurl(context)
 	local time = ScriptLib.GetGameHour(context)
 	if defs.exist_hour[2] == 24 then
 		if time == 0 then
-			time = 24 
+			time = 24
 		end
 	end
 	--先校验时间符合区间

@@ -1,19 +1,19 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133217106
 }
 
 -- DEFS_MISCS
-local defs = {
+defs = {
 	-- 该参数用来确认合法对子地板
 	FloorGadgetID = {70310062,70310063,70310064,70310065,70310087,70310088},
 	FloorNum = 6,
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -101,20 +101,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_106010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FloorPlayEnd"为1
 	if ScriptLib.GetGroupVariableValue(context, "FloorPlayEnd") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -124,36 +124,36 @@ function action_EVENT_VARIABLE_CHANGE_106010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 106011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 针对当前group内变量名为 "Finish" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "Finish", 1, 133217259) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-	
+
 	-- 通知场景上的所有玩家播放名字为34 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 34, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	-- 创建标识为"CutScene"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "CutScene", {2}, false)
-	
-	
+
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_106015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-	
+
 	-- 判断变量"FloorPlayEnd"为1
 	if ScriptLib.GetGroupVariableValue(context, "FloorPlayEnd") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -163,8 +163,8 @@ function action_EVENT_VARIABLE_CHANGE_106015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 106011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -173,7 +173,7 @@ function condition_EVENT_TIME_AXIS_PASS_106016(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -184,7 +184,7 @@ function action_EVENT_TIME_AXIS_PASS_106016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -194,7 +194,7 @@ function condition_EVENT_GROUP_LOAD_106018(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "FloorPlayEnd") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -205,7 +205,7 @@ function action_EVENT_GROUP_LOAD_106018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-	
+
 	return 0
 end
 

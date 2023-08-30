@@ -1,18 +1,18 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133002242
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	monster_id_1 = 806,
 	monster_id_2 = 807
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -98,7 +98,7 @@ function condition_EVENT_MONSTER_BATTLE_288(context, evt)
 	if 803 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -108,19 +108,19 @@ function action_EVENT_MONSTER_BATTLE_288(context, evt)
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_1, delay_time = 0 }) then
 	  return -1
 	end
-	
+
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_2, delay_time = 0 }) then
 	  return -1
 	end
-	
+
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
 		local pos = {x=2038, y=210, z=-997}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 					return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -130,7 +130,7 @@ function condition_EVENT_ANY_MONSTER_DIE_289(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -141,6 +141,6 @@ function action_EVENT_ANY_MONSTER_DIE_289(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : unlock_gadget")
 		return -1
 	end
-	
+
 	return 0
 end

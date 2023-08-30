@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220009002
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_id_1 = 205,
 	gadget_id_2 = 235,
 	gadget_id_3 = 236,
@@ -13,9 +13,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -78,9 +78,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -91,9 +91,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -109,20 +109,20 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_15(context, evt)
 	if evt.param1 ~= 15 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -132,26 +132,26 @@ function action_EVENT_ENTER_REGION_15(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 56, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 将本组内变量名为 "isoff" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isoff", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21(context, evt)
 	if evt.param1 ~= 21 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -161,8 +161,8 @@ function action_EVENT_ENTER_REGION_21(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 56, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -172,7 +172,7 @@ function condition_EVENT_ANY_MONSTER_DIE_38(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -183,27 +183,27 @@ function action_EVENT_ANY_MONSTER_DIE_38(context, evt)
 		local pos = {x=-101, y=-6, z=124}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 					return -1
-		end 
-	
-	
-	
+		end
+
+
+
 	-- 调用提示id为 10010101 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 10010101) then
 		return -1
 	end
-	
-	
+
+
 	-- 延迟4秒后,向groupId为：220009002的对象,请求一次调用,并将string参数："start" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220009002, "start", 4) then
 	  return -1
-	
+
 	end
-	
+
 	-- 解锁目标205
 	if 0 ~= ScriptLib.ChangeGroupGadget(context, { config_id = defs.gadget_id_1, state = GadgetState.Default }) then
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -214,24 +214,24 @@ function action_EVENT_TIMER_EVENT_39(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_42(context, evt)
 	if evt.param1 ~= 42 then return false end
-	
+
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-	
+
 	-- 判断变量"isoff"为1
 	if ScriptLib.GetGroupVariableValue(context, "isoff") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -241,8 +241,8 @@ function action_EVENT_ENTER_REGION_42(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 56, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
@@ -251,10 +251,10 @@ function action_EVENT_CLIENT_EXECUTE_43(context, evt)
 	-- 针对groupid为 220009002 中该config对应的物件进行状态改变操作
 	local this_gadget = ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid })
 		--ScriptLib.PrintLog(context, "config_id="..this_gadget)
-	
-		
+
+
 	  ScriptLib.SetGadgetEnableInteract(context, 220009002, this_gadget, true)
-		
-	
+
+
 	return 0
 end

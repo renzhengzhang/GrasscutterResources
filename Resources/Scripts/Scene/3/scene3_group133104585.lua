@@ -1,10 +1,10 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133104585
 }
 
 -- Trigger变量
-local defs = {
+defs = {
 	gadget_seal_id = 585005,
 	gadget_light_1 = 585002,
 	gadget_light_2 = 585003,
@@ -14,9 +14,9 @@ local defs = {
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -102,15 +102,15 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_585006(context, evt)
 	ScriptLib.PrintContextLog(context, "## SEAL_STATE | "..evt.param2.." : "..evt.param3.."->"..evt.param1)
-	
+
 	local t_p_value = 0
 	if evt.param2 == defs.gadget_light_1 or evt.param2 == defs.gadget_light_2 or evt.param2 == defs.gadget_light_3 then
 		-- 光柱触发信息令封印激活玩家身上的子弹
@@ -125,7 +125,7 @@ function action_EVENT_GADGET_STATE_CHANGE_585006(context, evt)
 				t_p_value = 2
 			elseif evt.param2 == defs.gadget_light_3 then
 				t_p_value = 4
-			end	
+			end
 			ScriptLib.ChangeGroupVariableValue(context, "Temp_Point_Value", t_p_value)
 			return 0
 		end
@@ -136,7 +136,7 @@ function action_EVENT_GADGET_STATE_CHANGE_585006(context, evt)
 				t_p_value = ScriptLib.GetGroupVariableValue(context, "Temp_Point_Value")
 				ScriptLib.SetGroupVariableValue(context, "Point_Value", t_p_value)
 				ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_seal_model, evt.param1)
-			end	
+			end
 		elseif evt.param1 == GadgetState.ChestLocked then
 			-- 玩家出界，group数据清理
 			local p_value = ScriptLib.GetGroupVariableValue(context, "Point_Value")
@@ -162,7 +162,7 @@ function action_EVENT_GADGET_STATE_CHANGE_585006(context, evt)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, 133104440, 440008, GadgetState.GearStart)
 			ScriptLib.AddQuestProgress(context, "QuestFinish21025")
 			ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 2)
-		
+
 		end
 		return 0
 	else
@@ -175,7 +175,7 @@ function condition_EVENT_GADGET_CREATE_585007(context, evt)
 	if evt.param1 ~= defs.gadget_seal_id then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -231,9 +231,9 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_585010(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	-- Point_Value变化时判断值的变化
-	
+
 	 if evt.param1 > evt.param2 then
 	                local step = evt.param1 - evt.param2
 	                if step%2 >= 1 then
@@ -259,7 +259,7 @@ function action_EVENT_QUEST_FINISH_585011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -270,7 +270,7 @@ function action_EVENT_TIMER_EVENT_585012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -280,16 +280,16 @@ function action_EVENT_TIMER_EVENT_585013(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 133104585, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end 
-	
+		end
+
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_585014(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-	
+
 	ScriptLib.PrintContextLog(context, "## SEAL_VALUE | "..evt.source_name.." : "..evt.param2.."->"..evt.param1)
-	
+
 	return 0
 end

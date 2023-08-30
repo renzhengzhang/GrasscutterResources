@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 220014005
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -83,9 +83,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -93,7 +93,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_46(context, evt)
 	if 2005 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -104,7 +104,7 @@ function action_EVENT_ANY_MONSTER_LIVE_46(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -114,17 +114,17 @@ function action_EVENT_CHALLENGE_SUCCESS_47(context, evt)
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220014002, 2036, {11})  then
 		return -1
 	end
-	
+
 	if 0 ~= ScriptLib.ShowReminder(context, 10060501) then
 		return -1
 	end
-	
+
 	-- 触发镜头注目
 		local pos = {x=191, y=57, z=377}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, duration = 3, is_force = true, is_broadcast = false }) then
 					return -1
-				end 
-	
+				end
+
 	return 0
 end
 
@@ -135,6 +135,6 @@ function action_EVENT_CHALLENGE_FAIL_48(context, evt)
 	ScriptLib.SetWorktopOptionsByGroupId(context, 220014002, 2036, {10})
 			return -1
 		end
-	
+
 	return 0
 end

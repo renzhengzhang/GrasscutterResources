@@ -5,35 +5,35 @@
 ||	owner: 		weiwei.sun
 ||	description: 	3.2奇趣秘园 局内逻辑 战斗
 ||	LogName:	## [CharAmuse_BattleTide]
-||	Protection:	
+||	Protection:
 =======================================]]
 --[[
 
-local defs = {
+defs = {
 
-	rule = 
+	rule =
 	{
-		[1] = 
+		[1] =
 		{	--[杀怪数] = { 启动的tide， 停止补怪的tide}
 			[10] = { toStart = {}, toStop = {} },
 		},
-		[2] = 
+		[2] =
 		{	--[杀怪数] = { 启动的tide， 停止补怪的tide}
 			[10] = { toStart = {}, toStop = {}},
 		},
-		[3] = 
+		[3] =
 		{	--[杀怪数] = { 启动的tide， 停止补怪的tide}
 			[10] = { toStart = {}, toStop = {}},
 		},
-		[4] = 
+		[4] =
 		{	--[杀怪数] = { 启动的tide， 停止补怪的tide}
 			[10] = { toStart = {}, toStop = {}},
 		},
 	},
 
 	--怪物信息 每个tide每次只出一只，按次序刷出
-	tide = 
-	{	
+	tide =
+	{
 		[1] = { 1001, 1002 },
 		[2] = { 1001, 1002 },
 		[3] = { 1001, 1002 },
@@ -70,10 +70,10 @@ function EX_StartGallery(context, prev_context, gallery_id, is_last_level)
 	if nil ~= defs.play_suites then
 		for k,v in pairs(defs.play_suites) do
 			ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v)
-		end	
+		end
 	end
-	local uid_list = ScriptLib.GetSceneUidList(context)	
-	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})	
+	local uid_list = ScriptLib.GetSceneUidList(context)
+	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})
 	ScriptLib.SetGroupTempValue(context, "is_last_level", is_last_level, {})
 
 	--开启gallery
@@ -111,7 +111,7 @@ function action_AirWallVariable_Change(context, evt)
 	elseif 0 == evt.param1 and 1 == evt.param2 then
 		for i,v in ipairs(defs.air_wall) do
 			ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, v)
-		end	
+		end
 	end
 	return 0
 end
@@ -122,10 +122,10 @@ function action_Gallery_Stop(context, evt)
 	if nil ~= defs.play_suites then
 		for k,v in pairs(defs.play_suites) do
 			ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, v)
-		end	
+		end
 	end
 
-	if 3 ~= evt.param3 then		
+	if 3 ~= evt.param3 then
 		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		--ScriptLib.InitTimeAxis(context, "StopGallery_Fail", { 3 } , false) 9.21修改 失败不要延时结束
 		ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {1, base_info.group_id})
@@ -135,7 +135,7 @@ function action_Gallery_Stop(context, evt)
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
 			ScriptLib.InitTimeAxis(context, "StopGallery", { 3 } , false)
-		end	
+		end
 	end
 
 	--埋点
@@ -145,9 +145,9 @@ function action_Gallery_Stop(context, evt)
 	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 
 	if 28015 == gallery_id or 28016 == gallery_id then
-		ScriptLib.MarkGroupLuaAction(context, "CharAmuse_ElecAttack", ScriptLib.GetDungeonTransaction(context), {["reaction"] = counter_1}) 
+		ScriptLib.MarkGroupLuaAction(context, "CharAmuse_ElecAttack", ScriptLib.GetDungeonTransaction(context), {["reaction"] = counter_1})
 	elseif 28017 == gallery_id or 28018 == gallery_id then
-		ScriptLib.MarkGroupLuaAction(context, "CharAmuse_NormalAttack", ScriptLib.GetDungeonTransaction(context), {["attack"] = counter_2}) 
+		ScriptLib.MarkGroupLuaAction(context, "CharAmuse_NormalAttack", ScriptLib.GetDungeonTransaction(context), {["attack"] = counter_2})
 	end
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_BattleTide] Gallery stoped. reason@".. evt.param3.." --------------")
 	return 0
@@ -160,7 +160,7 @@ function LF_Start_Play(context)
 	ScriptLib.SetGroupTempValue(context, "action_counter_2", 0, {})
 
 	--怪物队列index初始化
-	--0: 关闭 
+	--0: 关闭
 	for k,v in pairs(defs.tide) do
 		ScriptLib.SetGroupTempValue(context, "tide_"..k, 1, {})
 	end

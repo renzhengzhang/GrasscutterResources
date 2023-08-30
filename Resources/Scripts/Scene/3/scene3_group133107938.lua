@@ -1,12 +1,12 @@
 -- 基础信息
-local base_info = {
+base_info = {
 	group_id = 133107938
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -109,9 +109,9 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
@@ -119,7 +119,7 @@ function condition_EVENT_GADGET_CREATE_938002(context, evt)
 	if 938001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -130,7 +130,7 @@ function action_EVENT_GADGET_CREATE_938002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-	
+
 	return 0
 end
 
@@ -139,7 +139,7 @@ function condition_EVENT_SELECT_OPTION_938003(context, evt)
 	if 938001 ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -150,25 +150,25 @@ function action_EVENT_SELECT_OPTION_938003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-	
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2011, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133107938, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133107938, EntityType.GADGET, 938011 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-	
+
 	return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_938005(context, evt)
 	if 938004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -188,23 +188,23 @@ function action_EVENT_GADGET_STATE_CHANGE_938005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	-- 将本组内变量名为 "chest_opened" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "chest_opened", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_938010(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133107938) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -214,14 +214,14 @@ function action_EVENT_ANY_MONSTER_DIE_938010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 938004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end 
-	
+		end
+
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 1002, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-	
+
 	return 0
 end
 
@@ -231,7 +231,7 @@ function condition_EVENT_QUEST_START_938012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "chest_opened") ~= 1 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -242,7 +242,7 @@ function action_EVENT_QUEST_START_938012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-	
+
 	return 0
 end
 
@@ -252,7 +252,7 @@ function condition_EVENT_QUEST_START_938013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "chest_opened") ~= 0 then
 			return false
 	end
-	
+
 	return true
 end
 
@@ -263,6 +263,6 @@ function action_EVENT_QUEST_START_938013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-	
+
 	return 0
 end

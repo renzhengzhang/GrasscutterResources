@@ -1,12 +1,12 @@
 -- 基础信息 (Jadeplume Terrors)
-local base_info = {
+base_info = {
 	group_id = 133301272
 }
 
 --================================================================
--- 
+--
 -- 配置
--- 
+--
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ garbages = {
 }
 
 --================================================================
--- 
+--
 -- 初始化配置
--- 
+--
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
--- 
+--
 -- 小组配置
--- 
+--
 --================================================================
 
 suites = {
@@ -79,18 +79,18 @@ suites = {
 }
 
 --================================================================
--- 
+--
 -- 触发器
--- 
+--
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_272004(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0 
+	-- 判断指定group组剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133301272) ~= 0 then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -101,14 +101,14 @@ function action_EVENT_ANY_MONSTER_DIE_272004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-	
+
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_272005(context, evt)
 	if evt.param1 ~= 272005 then return false end
-	
+
 	return true
 end
 
@@ -128,7 +128,7 @@ function action_EVENT_ENTER_REGION_272005(context, evt)
 			ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : shit lol")
 			ScriptLib.TrySetPlayerEyePoint(context, small_region, big_region, 0, {0})
 		end
-	
+
 	return 0
 end
 
@@ -143,7 +143,7 @@ function action_EVENT_LEAVE_REGION_272006(context, evt)
 	     	if context.uid~=0 then
 			ScriptLib.ClearPlayerEyePoint(context, 272005)
 		end
-	
+
 	return 0
 end
 
