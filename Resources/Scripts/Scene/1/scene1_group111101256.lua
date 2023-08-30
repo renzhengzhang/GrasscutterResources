@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101256
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -126,9 +126,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -137,8 +137,8 @@ function action_EVENT_ENTER_REGION_256009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 256001, GadgetState.ChestLocked) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -149,19 +149,19 @@ function action_EVENT_ANY_MONSTER_DIE_256010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_256011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"_stage1_monster"为3
 	if ScriptLib.GetGroupVariableValue(context, "_stage1_monster") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -171,8 +171,8 @@ function action_EVENT_VARIABLE_CHANGE_256011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 256001, GadgetState.ChestOpened) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -181,7 +181,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_256012(context, evt)
 	if 256001 ~= evt.param2 or GadgetState.ChestLocked ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -189,7 +189,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_256012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101256, 2)
-
+	
 	return 0
 end
 
@@ -198,7 +198,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_256013(context, evt)
 	if 256001 ~= evt.param2 or GadgetState.ChestTrap ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -206,11 +206,11 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_256013(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101256, 3)
-
+	
 	-- 创建标识为"_thunder_tick"，时间节点为{5}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "_thunder_tick", {5}, true)
-
-
+	
+	
 	return 0
 end
 
@@ -219,7 +219,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_256014(context, evt)
 	if 256001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -227,11 +227,11 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_256014(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101256, 4)
-
+	
 	-- 创建标识为"_wave_tick"，时间节点为{8}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "_wave_tick", {8}, true)
-
-
+	
+	
 	return 0
 end
 
@@ -240,7 +240,7 @@ function condition_EVENT_GADGET_CREATE_256015(context, evt)
 	if 256001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -257,19 +257,19 @@ function action_EVENT_ANY_MONSTER_DIE_256016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_256017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"_stage2_monster"为3
 	if ScriptLib.GetGroupVariableValue(context, "_stage2_monster") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -279,8 +279,8 @@ function action_EVENT_VARIABLE_CHANGE_256017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 256001, GadgetState.ChestBramble) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -291,19 +291,19 @@ function action_EVENT_ANY_MONSTER_DIE_256021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_256022(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"_stage3_monster"为3
 	if ScriptLib.GetGroupVariableValue(context, "_stage3_monster") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -313,8 +313,8 @@ function action_EVENT_VARIABLE_CHANGE_256022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 256001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -324,8 +324,8 @@ function action_EVENT_TIME_AXIS_PASS_256024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 256005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -335,7 +335,7 @@ function action_EVENT_TIME_AXIS_PASS_256025(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 256023, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

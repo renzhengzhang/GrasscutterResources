@@ -1,8 +1,8 @@
 function OnBeHurt(context, element_type, unkParam, is_host)
-    state = ScriptLib.GetGadgetState(context)
+    local state = ScriptLib.GetGadgetState(context)
     if state == GadgetState.GearStop then
         if element_type == ElementType.Fire then
-            value = ScriptLib.GetGearStartValue(context)
+            local value = ScriptLib.GetGearStartValue(context)
             value = value + 1
             if value >= 1 then
                 ScriptLib.SetGadgetState(context, GadgetState.GearStart)
@@ -15,7 +15,7 @@ function OnBeHurt(context, element_type, unkParam, is_host)
         end
     elseif state == GadgetState.GearStart then
         if element_type == ElementType.Ice then
-            value = ScriptLib.GetGearStopValue(context)
+            local value = ScriptLib.GetGearStopValue(context)
             value = value + 1
             if value >= 1 then
                 ScriptLib.SetGadgetState(context, GadgetState.GearStop)
@@ -34,9 +34,9 @@ function OnClientExecuteReq(context, param1, param2, param3)
 end
 
 function OnTimer(context, now)
-    state = ScriptLib.GetGadgetState(context)
+    local state = ScriptLib.GetGadgetState(context)
     if state == GadgetState.GearStop then
-        start_time = ScriptLib.GetGadgetStateBeginTime(context)
+        local start_time = ScriptLib.GetGadgetStateBeginTime(context)
         if now >= start_time + 4 then
             ScriptLib.SetGadgetState(context, GadgetState.GearStart)
             ScriptLib.SetGearStopValue(context, 0)

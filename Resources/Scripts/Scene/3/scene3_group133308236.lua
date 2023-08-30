@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308236
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -75,9 +75,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -85,7 +85,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_236003(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133308236, 236001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -96,13 +96,13 @@ function action_EVENT_GADGET_STATE_CHANGE_236003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "WQ7329101") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -112,7 +112,7 @@ function condition_EVENT_GROUP_LOAD_236004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finisha") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -123,7 +123,7 @@ function action_EVENT_GROUP_LOAD_236004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -133,7 +133,7 @@ function condition_EVENT_GROUP_LOAD_236005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finishb") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -144,7 +144,7 @@ function action_EVENT_GROUP_LOAD_236005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_236006(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 133308236, 236002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -164,12 +164,12 @@ function action_EVENT_GADGET_STATE_CHANGE_236006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "WQ7329201") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

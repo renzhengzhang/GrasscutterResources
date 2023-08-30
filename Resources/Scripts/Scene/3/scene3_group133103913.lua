@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103913
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -83,9 +83,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -94,7 +94,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_913005(context, evt)
 	if 913001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -105,7 +105,7 @@ function action_EVENT_GADGET_STATE_CHANGE_913005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -115,7 +115,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_913006(context, evt)
 	if 913002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -126,7 +126,7 @@ function action_EVENT_GADGET_STATE_CHANGE_913006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -134,17 +134,17 @@ end
 function condition_EVENT_QUEST_FINISH_913007(context, evt)
 	--检查ID为100808的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 100808 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -155,24 +155,24 @@ function action_EVENT_QUEST_FINISH_913007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133103913, EntityType.GADGET, 913002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 创建id为913001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 913001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为913002的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 913002 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133102769
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	born_radius = 6,
 	gadget_hp_checker = 769010,
 	gadget_boss_operator = 769011,
@@ -20,11 +20,11 @@ defs = {
 sight_groups = {
 	{769001,769002,769003,769004,769005,769006,769007,769008,769009,769010,769026}
 }
-relevant_group = {
+local relevant_group = {
 	[1] = 133102112
 }
 
-stage_monster = {
+local stage_monster = {
 	[1] = { [1] = { sum = 2, suite = {2,12}}, [2] = { sum = 3, suite = {3,13}}, [3] = { sum = 2, suite = {4,14}}, [4] = { sum = 1, suite = {5,15} } },
 	[2] = { [1] = { sum = 2, suite = {2,12}}, [2] = { sum = 3, suite = {3,13}}, [3] = { sum = 2, suite = {4,14}}, [4] = { sum = 1, suite = {5,15} } },
 	[3] = { [1] = { sum = 2, suite = {2,12}}, [2] = { sum = 3, suite = {3,13}}, [3] = { sum = 2, suite = {4,14}}, [4] = { sum = 1, suite = {5,15} } },
@@ -34,7 +34,7 @@ stage_monster = {
 
 --深拷贝队列
 function LF_Init_Array(array)
-	arr = {}
+	local arr = {}
 	for k,v in pairs(array) do
 		arr[k] = v
 	end
@@ -44,7 +44,7 @@ end
 --获取结算信息
 function LF_Get_Array_Pos(table, value)
 	--LF_Log(context, "## LF_Get_Array_Pos | "..value)
-	index = 0
+	local index = 0
 	for i,v in ipairs(table) do
 		if v == value then
 			index = i
@@ -66,7 +66,7 @@ function LF_Calculate_Monster(context, stage)
 	LF_Log(context, "## LF_Calculate_Monster | stage = "..stage)
 	math.randomseed(ScriptLib.GetServerTime(context) + stage)
 	--前两个阶段随机抽一个就行
-	ran = math.random(1,4)	--记录挑选的怪物序列
+	local ran = math.random(1,4)	--记录挑选的怪物序列
 	--LF_Log(context, "## ran1="..ran)
 	if stage == 1 then
 --第1波随机选怪物
@@ -97,10 +97,10 @@ function LF_Calculate_Monster(context, stage)
 		ScriptLib.SetGroupVariableValue(context, "next_monster2", ran)
 	elseif stage == 4 then
 		--第4波,重新计算选怪逻辑,与第3波不同
-		c1 = ScriptLib.GetGroupVariableValue(context, "next_monster1")
-		c2 = ScriptLib.GetGroupVariableValue(context, "next_monster2")
+		local c1 = ScriptLib.GetGroupVariableValue(context, "next_monster1")
+		local c2 = ScriptLib.GetGroupVariableValue(context, "next_monster2")
 		--5个组合的乘积
-		c_arr = {2,4,6,8,12}
+		local c_arr = {2,4,6,8,12}
 		for i,v in ipairs(c_arr) do
 			if v == c1*c2 then
 				ran = i
@@ -121,8 +121,8 @@ function LF_Calculate_Monster(context, stage)
 			ScriptLib.SetGroupVariableValue(context, "next_monster2", math.floor(c_arr[ran]/4))
 		end
 	elseif stage == 5 then
-		ran1 = math.random(0,2)
-		ran2 = ran1 + math.random(1,2)
+		local ran1 = math.random(0,2)
+		local ran2 = ran1 + math.random(1,2)
 		if ran2 > 2 then
 			ran2 = ran2 - 3
 		end
@@ -139,8 +139,8 @@ end
 function LF_Calculate_Platform(context, stage)
 	LF_Log(context,"## LF_Calculate_Platform | stage = "..stage)
 	math.randomseed(ScriptLib.GetServerTime(context) + stage)
-	p_arr = {2,4,6,8}
-	m1 = ScriptLib.GetGroupVariableValue(context, "next_monster1")
+	local p_arr = {2,4,6,8}
+	local m1 = ScriptLib.GetGroupVariableValue(context, "next_monster1")
 	--LF_Log(context, "## next_monster1="..m1)
 	--任何阶段都有一只怪会挂在m1上
 	if m1 == 1 or m1 == 3 then
@@ -150,13 +150,13 @@ function LF_Calculate_Platform(context, stage)
 	elseif m1 == 2 then
 		p_arr = {1,3,7,9}
 		p_arr = LF_Get_Legal_Platform(context, p_arr)
-		pid = p_arr[math.random(1,#p_arr)]
+		local pid = p_arr[math.random(1,#p_arr)]
 		ScriptLib.SetGroupVariableValue(context, "summon_platform1", pid)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_platform_list[pid], 901)
 		--LF_Log(context, "## summon_platform1="..defs.gadget_platform_list[pid])
 	elseif m1 == 4 then
 		p_arr = LF_Get_Legal_Platform(context, p_arr)
-		pid = p_arr[math.random(1,#p_arr)]
+		local pid = p_arr[math.random(1,#p_arr)]
 		ScriptLib.SetGroupVariableValue(context, "summon_platform1", pid)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_platform_list[pid], 901)
 		--LF_Log(context, "## summon_platform1="..defs.gadget_platform_list[pid])
@@ -165,7 +165,7 @@ function LF_Calculate_Platform(context, stage)
 	if stage >= 3 then
 		p_arr = {2,4,6,8}
 		--任何阶段都有一只怪会挂在m1上
-		m2 = ScriptLib.GetGroupVariableValue(context, "next_monster2")
+		local m2 = ScriptLib.GetGroupVariableValue(context, "next_monster2")
 		if m2 == 1 or m2 == 3 then
 			ScriptLib.SetGroupVariableValue(context, "summon_platform2", 5)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_platform_list[5], 901)
@@ -173,13 +173,13 @@ function LF_Calculate_Platform(context, stage)
 		elseif m2 == 2 then
 			p_arr = {1,3,7,9}
 			p_arr = LF_Get_Legal_Platform(context, p_arr)
-			pid = p_arr[math.random(1,#p_arr)]
+			local pid = p_arr[math.random(1,#p_arr)]
 			ScriptLib.SetGroupVariableValue(context, "summon_platform2", pid)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_platform_list[pid], 901)
 			--LF_Log(context, "## summon_platform2="..defs.gadget_platform_list[pid])
 		elseif m2 == 4 then
 			p_arr = LF_Get_Legal_Platform(context, p_arr)
-			pid = p_arr[math.random(1,#p_arr)]
+			local pid = p_arr[math.random(1,#p_arr)]
 			ScriptLib.SetGroupVariableValue(context, "summon_platform2", pid)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_platform_list[pid], 901)
 			--LF_Log(context, "## summon_platform2="..defs.gadget_platform_list[pid])
@@ -189,9 +189,9 @@ function LF_Calculate_Platform(context, stage)
 end
 
 function LF_Get_Legal_Platform(context, array)
-	arr = array
+	local arr = array
 	for i=1,4 do
-		a = ScriptLib.GetGroupVariableValue(context, "platform"..i)
+		local a = ScriptLib.GetGroupVariableValue(context, "platform"..i)
 		if a == 0 then
 			break
 		end
@@ -200,7 +200,7 @@ function LF_Get_Legal_Platform(context, array)
 				--LF_Log(context, "## illegal_platform = "..a)
 				table.remove(arr, i)
 				break
-			end
+			end 
 		end
 	end
 	return arr
@@ -213,9 +213,9 @@ function LF_Summon_Monster(context, stage, num)
 		return -1
 	end
 	--怪物的类型
-	m_type = 0
+	local m_type = 0
 	--平台的序列
-	platform_id = 0
+	local platform_id = 0
 	if num == 1 then
 		m_type = ScriptLib.GetGroupVariableValue(context, "next_monster1")
 		platform_id = ScriptLib.GetGroupVariableValue(context, "summon_platform1")
@@ -234,19 +234,19 @@ end
 function LF_Summon_Monster_By_Platform(context, m_type, platform_id)
 	math.randomseed(ScriptLib.GetServerTime(context) + platform_id)
 	LF_Log(context, "## LF_Summon_Monster_By_Platform | m_type = "..m_type.." | platform_id = "..platform_id)
-	stage = ScriptLib.GetGroupVariableValue(context, "stage")
+	local stage = ScriptLib.GetGroupVariableValue(context, "stage")
 	--LF_Log(context, "## stage="..stage)
-	sum = stage_monster[stage][m_type].sum
+	local sum = stage_monster[stage][m_type].sum
 	--LF_Log(context, "## sum="..sum)
-	suite_list = stage_monster[stage][m_type].suite
-	suite = suite_list[math.random(1,#suite_list)]
+	local suite_list = stage_monster[stage][m_type].suite
+	local suite = suite_list[math.random(1,#suite_list)]
 	--LF_Log(context, "## suite="..suite)
-	t_arr = LF_Init_Array(suites[suite].monsters)
+	local t_arr = LF_Init_Array(suites[suite].monsters)
 	--取出对应数量,去重选取config_id的monster在对应平台上创建
 	for i=1,sum do
 		math.randomseed(ScriptLib.GetServerTime(context) + platform_id)
-		c = math.random(1,#t_arr)
-		config_id = t_arr[c]
+		local c = math.random(1,#t_arr)
+		local config_id = t_arr[c]
 		LF_Create_Monster_By_Platform(context, config_id, platform_id)
 		table.remove(t_arr, c)
 	end
@@ -256,15 +256,15 @@ end
 --将指定怪物在指定平台创建
 function LF_Create_Monster_By_Platform(context, config_id, platform_id)
 	LF_Log(context, "## LF_Create_Monster_By_Platform | config_id = "..config_id.." | platform_id ="..platform_id)
-	position = {x=0,y=0,z=0}
-	rotation = {x=0,y=0,z=0}
+	local position = {x=0,y=0,z=0}
+	local rotation = {x=0,y=0,z=0}
 	--根据平台计算位置
 	math.randomseed(config_id + ScriptLib.GetServerTime(context))
 	position.x = gadgets[platform_id].pos.x + (2*math.random()-1)*defs.born_radius
 	position.y = gadgets[platform_id].pos.y + 5
 	position.z = gadgets[platform_id].pos.z + (2*math.random()-1)*defs.born_radius
-	x0 = gadgets[5].pos.x - gadgets[platform_id].pos.x
-	z0 = gadgets[5].pos.z - gadgets[platform_id].pos.z
+	local x0 = gadgets[5].pos.x - gadgets[platform_id].pos.x
+	local z0 = gadgets[5].pos.z - gadgets[platform_id].pos.z
 	if z0 == 0 then
 		z0 = 0.01
 	end
@@ -281,7 +281,7 @@ end
 function LF_Notify_Platform_Sink(context, index)
 	LF_Log(context, "## LF_Notify_Platform_Sink | index = "..index)
 	math.randomseed(ScriptLib.GetServerTime(context) + index)
-	p_arr = LF_Init_Array(defs.gadget_platform_list)
+	local p_arr = LF_Init_Array(defs.gadget_platform_list)
 	--5号平台要扣掉
 	table.remove(p_arr, 5)
 	--本轮901的也要扣掉
@@ -290,9 +290,9 @@ function LF_Notify_Platform_Sink(context, index)
 			table.remove(p_arr, i)
 		end
 	end
-	p = 0
+	local p = 0
 	if index == 1 then
-		pid = ScriptLib.GetGroupVariableValue(context, "platform1")
+		local pid = ScriptLib.GetGroupVariableValue(context, "platform1")
 		--如果1号平台存在数据,则需要去重两次,并记录在3中
 		if pid ~= 0 then
 			pid = LF_Get_Array_Pos(p_arr, pid)
@@ -308,16 +308,16 @@ function LF_Notify_Platform_Sink(context, index)
 		end
 	elseif index == 2 then
 		--防止台子全奇数或全偶数
-		p_counter = {}
-		pid = ScriptLib.GetGroupVariableValue(context, "platform2")
+		local p_counter = {}
+		local pid = ScriptLib.GetGroupVariableValue(context, "platform2")
 		--如果2号平台存在数据,则需要去重三次
 		if pid ~= 0 then
 			p_counter[2] = LF_Get_Array_Pos(defs.gadget_platform_list, pid)
-			pid = LF_Get_Array_Pos(p_arr, pid)
+			pid = LF_Get_Array_Pos(p_arr, pid)	
 			table.remove(p_arr, pid)
 			pid = ScriptLib.GetGroupVariableValue(context, "platform1")
 			p_counter[1] = LF_Get_Array_Pos(defs.gadget_platform_list, pid)
-			pid = LF_Get_Array_Pos(p_arr, pid)
+			pid = LF_Get_Array_Pos(p_arr, pid)	
 			table.remove(p_arr, pid)
 			pid = ScriptLib.GetGroupVariableValue(context, "platform3")
 			p_counter[3] = LF_Get_Array_Pos(defs.gadget_platform_list, pid)
@@ -364,8 +364,8 @@ function LF_Create_Boss(context, index)
 	for i,v in ipairs(defs.gadget_platform_list) do
 		ScriptLib.SetGroupTempValue(context, "arrive_"..v, 0, {})
 	end
-	pos = gadgets[4+index].pos
-	rot = gadgets[4+index].rot
+	local pos = gadgets[4+index].pos
+	local rot = gadgets[4+index].rot
 	--pos.y = pos.y
 	LF_Reset_Platform_State(context)
 	ScriptLib.CreateMonsterByConfigIdByPos(context, defs.monster_boss, pos, rot)
@@ -385,11 +385,11 @@ end
 
 function LF_Recover_Platform(context)
 	--LF_Log(context, "## LF_Recover_Platform")
-	p1 = ScriptLib.GetGroupVariableValue(context, "platform1")
-	p2 = ScriptLib.GetGroupVariableValue(context, "platform2")
-	p3 = ScriptLib.GetGroupVariableValue(context, "platform3")
-	p4 = ScriptLib.GetGroupVariableValue(context, "platform4")
-	p_arr = {p1,p2,p3,p4}
+	local p1 = ScriptLib.GetGroupVariableValue(context, "platform1")
+	local p2 = ScriptLib.GetGroupVariableValue(context, "platform2")
+	local p3 = ScriptLib.GetGroupVariableValue(context, "platform3")
+	local p4 = ScriptLib.GetGroupVariableValue(context, "platform4")
+	local p_arr = {p1,p2,p3,p4}
 	for k,v in pairs(p_arr) do
 		if v ~= 0 then
 			LF_Log(context, "## platform_recover="..v)
@@ -473,25 +473,25 @@ function LF_Manage_OceanId_Replacement(context, manage_type)
 	if manage_type == 1 then
 		for i,v in ipairs(relevant_group) do
 			if i == 1 then
-				act_time = ScriptLib.GetActivityOpenAndCloseTimeByScheduleId(context, 5020001)
-				cur_time = ScriptLib.GetServerTime(context)
+				local act_time = ScriptLib.GetActivityOpenAndCloseTimeByScheduleId(context, 5020001)
+				local cur_time = ScriptLib.GetServerTime(context)
 				ScriptLib.PrintContextLog(context, "## cur_time="..cur_time)
 				ScriptLib.PrintContextLog(context, "## act_time=["..act_time[1]..","..act_time[2].."]")
 				if cur_time >= act_time[1] and cur_time < act_time[2] then
 					ScriptLib.SetGroupVariableValueByGroup(context, "is_in_replacement", 1, v)
-				end
+				end 
 			end
 		end
 	elseif manage_type == 0 then
 		for i,v in ipairs(relevant_group) do
 			if i == 1 then
-				act_time = ScriptLib.GetActivityOpenAndCloseTimeByScheduleId(context, 5020001)
-				cur_time = ScriptLib.GetServerTime(context)
+				local act_time = ScriptLib.GetActivityOpenAndCloseTimeByScheduleId(context, 5020001)
+				local cur_time = ScriptLib.GetServerTime(context)
 				ScriptLib.PrintContextLog(context, "## cur_time="..cur_time)
 				ScriptLib.PrintContextLog(context, "## act_time=["..act_time[1]..","..act_time[2].."]")
 				if cur_time >= act_time[1] and cur_time < act_time[2] then
 					ScriptLib.SetGroupVariableValueByGroup(context, "is_in_replacement", 0, v)
-				end
+				end 
 			end
 		end
 	end
@@ -511,9 +511,9 @@ function SLC_OCEANID_ESCAPE(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -643,9 +643,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -656,9 +656,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -809,23 +809,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_769027(context, evt)
 	--LF_Log(context, "## any_monster_die")
 	if 1 == ScriptLib.GetGroupMonsterCount(context) then
-		state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_hp_checker)
+		local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_hp_checker)
 		if state ~= 903 then
 			for i,v in ipairs(defs.hp_stack) do
 				if v == state then
 					--关卡计算阶段年增加,并通知boss
 					ScriptLib.SetGroupVariableValue(context, "stage", i+1)
 					LF_Log(context, "## stage="..i+1)
-					ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_hp_checker, defs.hp_stack[i+1])
+					ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_hp_checker, defs.hp_stack[i+1])		
 					break
 				end
 			end
@@ -850,10 +850,10 @@ function condition_EVENT_GADGET_STATE_CHANGE_769028(context, evt)
 	if evt.param1 == 201 and evt.param2 == defs.gadget_hp_checker then
 		return true
 	end
-	if evt.param1 == 0 and evt.param3 == 901 then
+	if evt.param1 == 0 and evt.param3 == 901 then 
 		return true
 	end
-	if evt.param1 == 0 and evt.param3 == 202 then
+	if evt.param1 == 0 and evt.param3 == 202 then 
 		return true
 	end
 	if evt.param1 == 202 and evt.param3 == 201 then
@@ -871,7 +871,7 @@ function action_EVENT_GADGET_STATE_CHANGE_769028(context, evt)
 	if evt.param1 == 0 then
 		ScriptLib.EndTimeAxis(context, "summon")
 		--获取此platform位置
-		stage = ScriptLib.GetGroupVariableValue(context, "stage")
+		local stage = ScriptLib.GetGroupVariableValue(context, "stage")
 		--获取波次与对应平台信息并创建怪物
 		if evt.param2 == defs.gadget_platform_list[ScriptLib.GetGroupVariableValue(context, "summon_platform1")] then
 			LF_Summon_Monster(context, stage, 1)
@@ -913,7 +913,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_769029(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == 0 then
 		return 0
 	end
@@ -956,11 +956,11 @@ function action_EVENT_GROUP_LOAD_769052(context, evt)
 		if 0 == ScriptLib.GetGroupVariableValue(context, "is_in_replacement") then
 			ScriptLib.AddExtraGroupSuite(context, defs.group_id, 6)
 		else
-			act_time = ScriptLib.GetActivityOpenAndCloseTimeByScheduleId(context, 5020001)
-			cur_time = ScriptLib.GetServerTime(context)
+			local act_time = ScriptLib.GetActivityOpenAndCloseTimeByScheduleId(context, 5020001)
+			local cur_time = ScriptLib.GetServerTime(context)
 			if cur_time > act_time[2] then
 				ScriptLib.SetGroupVariableValue(context, "is_in_replacement", 0)
-			end
+			end 
 		end
 	end
 	return 0
@@ -982,7 +982,7 @@ function action_EVENT_TIME_AXIS_PASS_769056(context, evt)
 	if evt.source_name == "boss_die" then
 		ScriptLib.CreateGadget(context, {config_id=769054})
 	elseif evt.source_name == "sink" then
-		sink = {}
+		local sink = {}
 		sink[1] = ScriptLib.GetGroupVariableValue(context, "platform1")
 		sink[2] = ScriptLib.GetGroupVariableValue(context, "platform2")
 		sink[3] = ScriptLib.GetGroupVariableValue(context, "platform3")
@@ -995,8 +995,8 @@ function action_EVENT_TIME_AXIS_PASS_769056(context, evt)
 			end
 		end
 	elseif evt.source_name == "summon" then
-		sp1 = ScriptLib.GetGroupVariableValue(context, "summon_platform1")
-		sp2 = ScriptLib.GetGroupVariableValue(context, "summon_platform2")
+		local sp1 = ScriptLib.GetGroupVariableValue(context, "summon_platform1")
+		local sp2 = ScriptLib.GetGroupVariableValue(context, "summon_platform2")
 		if sp1 > 0 and 901 == ScriptLib.GetGadgetStateByConfigId(context, 0, defs.gadget_platform_list[sp1]) then
 			ScriptLib.SetGroupGadgetStateByConfigId(context, 0, defs.gadget_platform_list[sp1], 0)
 		end
@@ -1010,12 +1010,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_769057(context, evt)
 	if evt.param1 ~= 769057 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1029,7 +1029,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_769059(context, evt)
 	if evt.param1 ~= 769059 then return false end
-
+	
 	return true
 end
 
@@ -1037,9 +1037,9 @@ end
 function action_EVENT_ENTER_REGION_769059(context, evt)
 	--ScriptLib.SetPlayerEyePoint(context, 769059)
 	--ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {0})
-
-	small_region={}
-			big_region={}
+	
+	local small_region={}
+			local big_region={}
 			for i=1,#regions do
 				if regions[i].config_id==769059 then
 					small_region=regions[i]
@@ -1084,7 +1084,7 @@ end
 function action_EVENT_GROUP_WILL_UNLOAD_769061(context, evt)
 	-- 删除suite16的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133102769, 16)
-
+	
 	return 0
 end
 
@@ -1102,7 +1102,7 @@ end
 function action_EVENT_GADGET_CREATE_769066(context, evt)
 	-- 设置操作台选项
 	ScriptLib.SetWorktopOptionsByGroupId(context, 0, evt.param1, {2901})
-
+	
 	return 0
 end
 
@@ -1120,7 +1120,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_769068(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == 0 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 6)
 	else
@@ -1134,13 +1134,13 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_769069(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == evt.param2 then return -1 end
 	ScriptLib.PrintContextLog(context, "## Oceanid_Log : var_change : "..evt.source_name.." | "..evt.param2.." -> "..evt.param1)
 	if evt.param1 > 1 and evt.param1 <= #stage_monster then
 		LF_Calculate_Monster(context, evt.param1)
 	end
-
+	
 	return 0
 end
 

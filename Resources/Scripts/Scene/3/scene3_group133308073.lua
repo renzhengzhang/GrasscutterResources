@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308073
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -74,20 +74,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_73004(context, evt)
 	if evt.param1 ~= 73004 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -97,26 +97,26 @@ function action_EVENT_ENTER_REGION_73004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 73002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 为特定73002物件设置其SGV:"SGV_BulletType"为1
 	if 0 ~= ScriptLib.SetEntityServerGlobalValueByConfigId(context, 73002, "SGV_BulletType", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-
+	
 	-- 将configid为 73003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 73003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 为特定73003物件设置其SGV:"SGV_BulletType"为1
 	if 0 ~= ScriptLib.SetEntityServerGlobalValueByConfigId(context, 73003, "SGV_BulletType", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -126,7 +126,7 @@ function condition_EVENT_LEAVE_REGION_73005(context, evt)
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) > 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -136,26 +136,26 @@ function action_EVENT_LEAVE_REGION_73005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 73002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 为特定73002物件设置其SGV:"SGV_BulletType"为0
 	if 0 ~= ScriptLib.SetEntityServerGlobalValueByConfigId(context, 73002, "SGV_BulletType", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-
+	
 	-- 将configid为 73003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 73003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 为特定73003物件设置其SGV:"SGV_BulletType"为0
 	if 0 ~= ScriptLib.SetEntityServerGlobalValueByConfigId(context, 73003, "SGV_BulletType", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -165,16 +165,16 @@ function condition_EVENT_LEAVE_REGION_73006(context, evt)
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) > 0 then
 		return false
 	end
-
-	curQuestState = ScriptLib.GetHostQuestState(context,7305251)
+	
+	local curQuestState = ScriptLib.GetHostQuestState(context,7305251)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
 	if curQuestState == 3 then
 	   return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -185,6 +185,6 @@ function action_EVENT_LEAVE_REGION_73006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

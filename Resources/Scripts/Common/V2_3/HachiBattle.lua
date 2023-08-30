@@ -4,7 +4,7 @@
 
 --[[
 
-defs = {
+local defs = {
 
 	group_id = ,
 
@@ -34,7 +34,7 @@ defs = {
 
 ]]
 
-extraTriggers={
+local extraTriggers={
   { config_id = 8000001,name = "Enter_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0 },
   --挑战计数trigger
   { config_id = 8000002, name = "Variable_Change", event = EventType.EVENT_VARIABLE_CHANGE, source = "saved_progress", condition = "", action = "", trigger_count = 0 ,tag = "1000"},
@@ -68,14 +68,14 @@ end
 
 function action_ANY_MONSTER_DIE(context, evt)
 	--排除狗 其他都是要杀的怪
-	monster_id = monsters[evt.param1].monster_id
+	local monster_id = monsters[evt.param1].monster_id
 	if monster_id == 28020403 then
 		return 0
 	end
 	ScriptLib.ChangeGroupVariableValue(context, "kill_count", 1)
 	--检查杀够数量了没
-	if defs.Monster_Count ~= nil then
-		kill_count = ScriptLib.GetGroupVariableValue(context, "kill_count")
+	if defs.Monster_Count ~= nil then 
+		local kill_count = ScriptLib.GetGroupVariableValue(context, "kill_count")
 		if kill_count >= defs.Monster_Count then
 			LF_EnableCageInteract(context)
 		end
@@ -83,7 +83,7 @@ function action_ANY_MONSTER_DIE(context, evt)
 	return 0
 end
 function LF_DisableCageInteract(context)
-	for k, v in pairs(defs.target_id) do
+	for k, v in pairs(defs.target_id) do 
 		--客户端交互
 		ScriptLib.SetGadgetStateByConfigId(context, k, 903)
 		--服务器交互
@@ -93,7 +93,7 @@ function LF_DisableCageInteract(context)
 end
 
 function LF_EnableCageInteract(context)
-	for k, v in pairs(defs.target_id) do
+	for k, v in pairs(defs.target_id) do 
 		--服务器交互
 		ScriptLib.SetGadgetEnableInteract(context, defs.group_id, k, true)
 		--客户端交互
@@ -117,7 +117,7 @@ function action_quest_notify(context,evt)
 		return -1
 	end
 	--检查挑战状态
-	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 0 then
+	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 0 then 
 		return -1
 	else
 		--处理开始挑战
@@ -126,7 +126,7 @@ function action_quest_notify(context,evt)
 
 		ScriptLib.SetGroupTempValue(context, "player_uid", context.uid, {} )
 
-		start_process = ScriptLib.GetGroupVariableValue(context,"saved_progress")
+		local start_process = ScriptLib.GetGroupVariableValue(context,"saved_progress")
 		ScriptLib.PrintContextLog(context, "[HachiBattle] Start Challenge. ChallengeID@ "..defs.challenge_id.." TargetCages@".. defs.taget_score.." CurrentCages@"..start_process)
 		--参数1： event_type所在枚举序号； 参数2： trigger_tag；参数3： 次数；参数4：Bool，次数达成是否计为成功；参数5：初始次数值
 		ScriptLib.StartChallenge(context, defs.ChallengeIndex, defs.challenge_id, {3, 1000, defs.taget_score, 1, start_process})
@@ -137,10 +137,10 @@ function action_quest_notify(context,evt)
 end
 function action_gadgetstate_change(context, evt)
 
-	if evt.param1 ~= 201 then
+	if evt.param1 ~= 201 then 
 		return 0
 	end
-
+	
 	--GadgetLua上已经有这个判断了 做双保险
 	if ScriptLib.CheckIsInMpMode(context) == true then
 		ScriptLib.PrintContextLog(context, "[HachiBattle] Is in MP mode, refuse state cahnge.")
@@ -150,14 +150,14 @@ function action_gadgetstate_change(context, evt)
 		return 0
 	end
 
-	result = CheckTableAndReturnValue(context, evt.param2, defs.target_id)
+	local result = CheckTableAndReturnValue(context, evt.param2, defs.target_id) 
 
 		if result ~= 0 then
 
 			--ScriptLib.PrintContextLog(context, "[HachiSneak] Cage Opend! configID@"..evt.param2)
 			ScriptLib.ChangeGroupVariableValue(context,"saved_progress",1)
 
-			player_uid = ScriptLib.GetGroupTempValue(context, "player_uid", {})
+			local player_uid = ScriptLib.GetGroupTempValue(context, "player_uid", {})
 			ScriptLib.AddExhibitionAccumulableData(context, player_uid, "Activity_Hachi_Group_"..defs.group_id, 1)
 
 			-- 移除老狗
@@ -216,7 +216,7 @@ function action_enter_region(context,evt)
 		return 0
 	end
 	--检查挑战状态
-	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 0 then
+	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 0 then 
 		return 0
 	else
 		--处理开始挑战
@@ -228,15 +228,15 @@ function action_enter_region(context,evt)
 		ScriptLib.SetGroupTempValue(context, "player_uid", context.uid, {} )
 
 
-		start_process = ScriptLib.GetGroupVariableValue(context,"saved_progress")
+		local start_process = ScriptLib.GetGroupVariableValue(context,"saved_progress")		
 		ScriptLib.PrintContextLog(context, "[HachiBattle] Start Challenge. ChallengeID@ "..defs.challenge_id.." TargetCages@".. defs.taget_score.." CurrentCages@"..start_process)
 		--参数1： event_type所在枚举序号； 参数2： trigger_tag；参数3： 次数；参数4：Bool，次数达成是否计为成功；参数5：初始次数值
 		ScriptLib.StartChallenge(context, defs.ChallengeIndex, defs.challenge_id, {3, 1000, defs.taget_score, 1, start_process})
 
 		--重新进圈开挑战时，再检查一次杀怪数量
-		kill_count = ScriptLib.GetGroupVariableValue(context, "kill_count")
+		local kill_count = ScriptLib.GetGroupVariableValue(context, "kill_count")
 		if kill_count >= defs.Monster_Count then
-			for k, v in pairs(defs.target_id) do
+			for k, v in pairs(defs.target_id) do 
 				--客户端可交互的笼子
 				if 0 == ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, k) then
 					--设置服务器可交互
@@ -271,13 +271,13 @@ function CheckTableAndReturnValue(context,key,table)
 end
 
 function action_Will_Unload(context, evt)
-	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then
+	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then 
 		ScriptLib.SetGroupVariableValue(context, "challenge_state", 0)
-	end
+	end	
 	return 0
 end
 function action_Challenge_Fail(context, evt)
-	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then
+	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then 
 		ScriptLib.SetGroupVariableValue(context, "challenge_state", 0)
 	end
 	return 0
@@ -288,9 +288,9 @@ function action_Group_Load(context,evt)
 	if 133212598 == defs.group_id then
 		return 0
 	end
-	kill_count = ScriptLib.GetGroupVariableValue(context, "kill_count")
+	local kill_count = ScriptLib.GetGroupVariableValue(context, "kill_count")
 	ScriptLib.PrintContextLog(context, "[HachiBattle] Group load. kill_count@"..kill_count.." first wave monster@"..#suites[3].monsters)
-	if #suites[3].monsters == kill_count then
+	if #suites[3].monsters == kill_count then 
 		ScriptLib.PrintContextLog(context, "[HachiBattle] Try re-add suite 4.")
 		ScriptLib.AddExtraGroupSuite(context, defs.group_id, 4)
 	end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133302047
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -98,7 +98,7 @@ function condition_EVENT_MONSTER_BATTLE_47002(context, evt)
 	if 47001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -109,14 +109,14 @@ function action_EVENT_MONSTER_BATTLE_47002(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133302047, EntityType.GADGET, 47006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -127,14 +127,14 @@ function action_EVENT_CHALLENGE_SUCCESS_47003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 对于当前玩家，关闭9001的目标物距离指示gallery
 	    if 0 ~=  ScriptLib.StopGallery(context, 9001, true) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	return 0
 end
 
@@ -145,13 +145,13 @@ function action_EVENT_QUEST_START_47004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 创建编号为180（该挑战的识别id),挑战内容为272的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 180, 272, 240, 133302047, 4, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -162,11 +162,11 @@ function action_EVENT_QUEST_START_47005(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 终止识别id为272的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 272, 0)
-
+	
 	return 0
 end
 
@@ -177,20 +177,20 @@ function action_EVENT_CHALLENGE_FAIL_47007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 对于当前玩家，关闭9001的目标物距离指示gallery
 	    if 0 ~=  ScriptLib.StopGallery(context, 9001, true) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133302047, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_GADGET_CREATE_47008(context, evt)
 	if 47006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -210,14 +210,14 @@ function action_EVENT_GADGET_CREATE_47008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: start gallery fails")
 	    return -1
 	end
-	target_entity_id = ScriptLib.GetEntityIdByConfigId(context,47006)
-	target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
+	local target_entity_id = ScriptLib.GetEntityIdByConfigId(context,47006)
+	local target_pos = ScriptLib.GetPosByEntityId(context, target_entity_id)
 	if 0~=  ScriptLib.SetHandballGalleryBallPosAndRot(context, 9001, {x=target_pos.x,y=target_pos.y,z=target_pos.z}, {x=0,y=0,z=0}) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -226,7 +226,7 @@ function condition_EVENT_MONSTER_BATTLE_47011(context, evt)
 	if 47010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -237,24 +237,24 @@ function action_EVENT_MONSTER_BATTLE_47011(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133302047, EntityType.GADGET, 47006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_47014(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133302047) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -265,12 +265,12 @@ function action_EVENT_ANY_MONSTER_DIE_47014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 47013, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end

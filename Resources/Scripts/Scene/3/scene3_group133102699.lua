@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133102699
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -88,8 +88,8 @@ function condition_EVENT_ANY_MONSTER_DIE_699003(context, evt)
 	if evt.param1 ~= 699002 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -99,20 +99,20 @@ function action_EVENT_ANY_MONSTER_DIE_699003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 699001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "133102008_1") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 延迟3秒后,向groupId为：133102699的对象,请求一次调用,并将string参数："start" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133102699, "start", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -123,7 +123,7 @@ function action_EVENT_QUEST_START_699005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -131,19 +131,19 @@ end
 function action_EVENT_QUEST_FINISH_699007(context, evt)
 	-- 解除当前场景中pointid 为%force_id%的地城入口的groupLimit状态
 		ScriptLib.UnfreezeGroupLimit(context, 107)
-
+	
 	-- 创建id为699006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 699006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 延迟15秒后,向groupId为：133102699的对象,请求一次调用,并将string参数："finish" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133102699, "finish", 15) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -152,7 +152,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_699008(context, evt)
 	if 699006 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -163,28 +163,28 @@ function action_EVENT_GADGET_STATE_CHANGE_699008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_699009(context, evt)
 	-- 触发镜头注目，注目位置为坐标（1497，219，579），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=1497, y=219, z=579}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=1497, y=219, z=579}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 31020601 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 31020601) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -195,45 +195,45 @@ function action_EVENT_TIMER_EVENT_699010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_699011(context, evt)
 	if evt.param1 ~= 699011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_699011(context, evt)
 	-- 触发镜头注目，注目位置为坐标（1500，219，581），持续时间为1.5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=1500, y=219, z=581}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=1500, y=219, z=581}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 1.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 31020801 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 31020801) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "open" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "open", 1, 133102249) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end

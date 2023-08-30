@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 166001065
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -82,9 +82,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -93,8 +93,8 @@ function action_EVENT_QUEST_START_65003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 65001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -103,7 +103,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_65004(context, evt)
 	if 65001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -113,20 +113,20 @@ function action_EVENT_GADGET_STATE_CHANGE_65004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 65002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 65001 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 65001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 调用提示id为 60010343 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 60010343) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -135,7 +135,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_65005(context, evt)
 	if 65001 ~= evt.param2 or GadgetState.GearAction2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -146,20 +146,20 @@ function action_EVENT_GADGET_STATE_CHANGE_65005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 65002 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 65002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 166001516, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -168,14 +168,14 @@ function condition_EVENT_GADGET_CREATE_65007(context, evt)
 	if 65001 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_65007(context, evt)
 	ScriptLib.SetGadgetEnableInteract(context, 166001065, 65001, true)
-
+	
 	return 0
 end
 
@@ -184,7 +184,7 @@ function condition_EVENT_GROUP_LOAD_65008(context, evt)
 	if GadgetState.GearAction2 ~= ScriptLib.GetGadgetStateByConfigId(context, 166001065, 65001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -195,6 +195,6 @@ function action_EVENT_GROUP_LOAD_65008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

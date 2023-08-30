@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133003377
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -89,151 +89,151 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_451(context, evt)
 	if evt.param1 ~= 451 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_452(context, evt)
 	if evt.param1 ~= 452 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_453(context, evt)
 	if evt.param1 ~= 453 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_454(context, evt)
 	if evt.param1 ~= 454 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_455(context, evt)
 	if evt.param1 ~= 455 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_456(context, evt)
 	if evt.param1 ~= 456 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_457(context, evt)
 	if evt.param1 ~= 457 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_458(context, evt)
 	if evt.param1 ~= 458 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_459(context, evt)
 	if evt.param1 ~= 459 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_460(context, evt)
 	if evt.param1 ~= 460 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_461(context, evt)
 	if evt.param1 ~= 461 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_462(context, evt)
 	if evt.param1 ~= 462 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end

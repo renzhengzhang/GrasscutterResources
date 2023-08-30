@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304103
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	lensRegion = 103009
 }
 
 -- DEFS_MISCS
-defs_miscs =
+local defs_miscs = 
 {
     -- 死域观测站透镜的config id
-    lensConfigId = 103001,
+    lensConfigId = 103001,    
 
     lnlConfigId = 103004,
 
@@ -21,7 +21,7 @@ defs_miscs =
     hiddenlnlParam = "hiddenlnl_73051",
 
     -- 一个smoke对应一个quest
-    smokeTable =
+    smokeTable = 
     {
         -- 每项格式如下，通常应该只有两项，即一个透镜对应两个黑烟
         --[smoke_id] = {smoke = smoke_config_id, region = region_id, group = group_id, observeQuest = quest_id, finishQuest = quest_id, questParam = "任务定义的进度名"}
@@ -31,9 +31,9 @@ defs_miscs =
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -80,9 +80,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -93,9 +93,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -111,20 +111,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_103007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"smoke_103002"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_103002") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -135,19 +135,19 @@ function action_EVENT_VARIABLE_CHANGE_103007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_103008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"smoke_103003"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_103003") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_VARIABLE_CHANGE_103008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -180,12 +180,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_103010(context, evt)
 	if 2 == 3 and 300 ~= evt.param1 and 301 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if ScriptLib.GetHostQuestState(context,7305101) ~= 2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -196,26 +196,26 @@ function action_EVENT_GADGET_STATE_CHANGE_103010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_103011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"smoke_103002"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_103002") == 1 then
 			return true
 	end
-
+	
 	-- 判断变量"smoke_103003"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_103003") == 1 then
 			return true
 	end
-
+	
 	return false
 end
 
@@ -226,19 +226,19 @@ function action_EVENT_VARIABLE_CHANGE_103011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_103012(context, evt)
 	if evt.param1 ~= 103012 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -249,7 +249,7 @@ function action_EVENT_ENTER_REGION_103012(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 

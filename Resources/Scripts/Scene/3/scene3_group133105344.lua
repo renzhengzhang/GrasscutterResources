@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133105344
 }
 
@@ -11,9 +11,9 @@ function Avatar_Eula_Plot_Fail(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -97,9 +97,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -110,9 +110,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -169,20 +169,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_344001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"youla"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "youla", 133105344) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -190,7 +190,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_344001(context, evt)
 	-- 终止识别id为11的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 11, 0)
-
+	
 	return 0
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_ANY_GADGET_DIE_344025(context, evt)
 	if 344024 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -210,19 +210,19 @@ function action_EVENT_ANY_GADGET_DIE_344025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_344027(context, evt)
 	if evt.param1 ~= 344027 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -230,27 +230,27 @@ end
 function action_EVENT_ENTER_REGION_344027(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133105344, 5)
-
+	
 	-- 将configid为 344026 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 344026, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 344029) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
-		pos = {x=0, y=0, z=0}
+		local pos = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "", play_type= 0, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -258,19 +258,19 @@ end
 function action_EVENT_QUEST_START_344041(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133105344, 2)
-
+	
 	-- 开启编号为888，挑战内容为2的区域挑战
 	ScriptLib.CreateFatherChallenge(context, 1012101, 226, 120, {success = 1, fail =1})
 	ScriptLib.AttachChildChallenge(context, 1012101, 10, 168,{120, 4, 777, 1},{}, {success=1,fail=1})
 	ScriptLib.AttachChildChallenge(context, 1012101, 11, 223,{120, 3, 666, 1},{}, {success=0, fail=1})
 	ScriptLib.StartFatherChallenge(context, 1012101)
-
+	
 	-- 将本组内变量名为 "youla" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "youla", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -281,7 +281,7 @@ function action_EVENT_CHALLENGE_FAIL_344042(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -290,7 +290,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_344044(context, evt)
 	if 344038 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -298,32 +298,32 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_344044(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133105344, 3)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1012115") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 344034 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_344045(context, evt)
 	if evt.param1 ~= 344045 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -331,27 +331,27 @@ end
 function action_EVENT_ENTER_REGION_344045(context, evt)
 	-- 终止识别id为10的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 10, 1)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 344039 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1012117") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 344028 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -360,7 +360,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_344046(context, evt)
 	if 344040 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -371,19 +371,19 @@ function action_EVENT_GADGET_STATE_CHANGE_344046(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133105344, 4)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133105344, 2)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 344014 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end

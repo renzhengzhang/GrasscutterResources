@@ -1,13 +1,13 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303119
 }
 
 -- DEFS_MISCS
 function LF_CheckAllValve(context)
-    state1 = ScriptLib.GetGadgetStateByConfigId(context, 0, 119002)
-    state2 = ScriptLib.GetGadgetStateByConfigId(context, 0, 119004)
-    state3 = ScriptLib.GetGadgetStateByConfigId(context, 0, 119003)
+    local state1 = ScriptLib.GetGadgetStateByConfigId(context, 0, 119002)
+    local state2 = ScriptLib.GetGadgetStateByConfigId(context, 0, 119004)
+    local state3 = ScriptLib.GetGadgetStateByConfigId(context, 0, 119003)
     if 201 == state1 then
         ScriptLib.SetGroupLogicStateValue(context, "SGV_VarunaStone01", 1)
     else
@@ -27,9 +27,9 @@ function LF_CheckAllValve(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -96,9 +96,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -115,9 +115,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -199,9 +199,9 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -209,15 +209,15 @@ function condition_EVENT_LUA_NOTIFY_119005(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303119, 119002) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303119, 119003) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303119, 119004) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -228,16 +228,16 @@ function action_EVENT_LUA_NOTIFY_119005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_LUA_NOTIFY_119006(context, evt)
 	LF_CheckAllValve(context)
-
+	
 	return 0
-
+	
 end
 
 -- 触发条件
@@ -245,7 +245,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_119010(context, evt)
 	if 119002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -256,7 +256,7 @@ function action_EVENT_GADGET_STATE_CHANGE_119010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -265,7 +265,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_119011(context, evt)
 	if 119004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -276,7 +276,7 @@ function action_EVENT_GADGET_STATE_CHANGE_119011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -285,7 +285,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_119012(context, evt)
 	if 119003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -296,7 +296,7 @@ function action_EVENT_GADGET_STATE_CHANGE_119012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -305,7 +305,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_119013(context, evt)
 	if 119002 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -316,7 +316,7 @@ function action_EVENT_GADGET_STATE_CHANGE_119013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -325,7 +325,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_119014(context, evt)
 	if 119002 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -336,7 +336,7 @@ function action_EVENT_GADGET_STATE_CHANGE_119014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -345,7 +345,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_119015(context, evt)
 	if 119004 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -356,7 +356,7 @@ function action_EVENT_GADGET_STATE_CHANGE_119015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -365,7 +365,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_119016(context, evt)
 	if 119004 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -376,7 +376,7 @@ function action_EVENT_GADGET_STATE_CHANGE_119016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -385,7 +385,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_119017(context, evt)
 	if 119003 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -396,7 +396,7 @@ function action_EVENT_GADGET_STATE_CHANGE_119017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -405,7 +405,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_119018(context, evt)
 	if 119003 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -416,6 +416,6 @@ function action_EVENT_GADGET_STATE_CHANGE_119018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

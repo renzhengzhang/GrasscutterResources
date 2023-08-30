@@ -8,14 +8,14 @@
 
 --需求misc
 --[[
-    operator_list = {
+    local operator_list = {
         [1] = {1,2},
 }
 ]]
-Wind = {
+local Wind = {
     Creater_Gadget_ID = 70800246
 }
-temp_Tirgger_wind = {
+local temp_Tirgger_wind = {
 	{event = EventType.EVENT_GROUP_LOAD, source = "", action = "action2_EVENT_GROUP_LOAD"},
 	{event = EventType.EVENT_ENTER_REGION, source = "", action = "action2_EVENT_ENTER_REGION",forbid_guest =false},
 	{event = EventType.EVENT_TIME_AXIS_PASS, source = "Skill_CD", action = "action2_EVENT_TIME_AXIS_PASS_Skill_CD"},
@@ -31,9 +31,9 @@ function action2_EVENT_GALLERY_STOP(context,evt)
 end
 function action2_EVENT_ENTER_REGION(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze action2_EVENT_ENTER_REGION")
-    if revivepoint_list ~= nil then
+    if revivepoint_list ~= nil then 
         for k,v in pairs(revivepoint_list) do
-            if k == evt.param1 then
+            if k == evt.param1 then 
                 ScriptLib.PrintContextLog(context,"## Activity_WindMaze action2_EVENT_ENTER_REGION:尝试设置复活点="..v)
                 if ScriptLib.IsGalleryStart(context,defs.gallery_id) then
                     ScriptLib.SetGalleryRevivePoint(context, defs.gallery_id, base_info.group_id, v)
@@ -46,11 +46,11 @@ function action2_EVENT_ENTER_REGION(context,evt)
     else
         ScriptLib.PrintContextLog(context,"## Activity_WindMaze action2_EVENT_ENTER_REGION:没配复活点！！！=")
     end
-    if transfer_list ~= nil then
+    if transfer_list ~= nil then 
         for k,v in pairs(transfer_list) do
-            if k == evt.param1 then
+            if k == evt.param1 then 
                 for k2,v2 in pairs(points) do
-                    if v2.config_id == v then
+                    if v2.config_id == v then 
                         ScriptLib.PrintContextLog(context,"## Activity_WindMaze action2_EVENT_ENTER_REGION:传送至复活点="..v)
                         ScriptLib.TransPlayerToPos(context, {uid_list={evt.uid}, pos=v2.pos, radius=0, rot=v2.rot})
                     end
@@ -65,7 +65,7 @@ end
 function action2_EVENT_TIME_AXIS_PASS_operator_time_1(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze action2_EVENT_TIME_AXIS_PASS_operator_time_1")
     for k,v in pairs(operator_list) do
-        _k = ScriptLib.GetGroupTempValue(context,"operator_time_1_"..k,{})
+        local _k = ScriptLib.GetGroupTempValue(context,"operator_time_1_"..k,{})
         if _k ~= 0 then
             LF_Operate(context,k,"SGV_Switch_OnOff",1)
             ScriptLib.SetEntityServerGlobalValueByConfigId(context, k, "SGV_Disable", 0)
@@ -78,7 +78,7 @@ end
 function action2_EVENT_TIME_AXIS_PASS_operator_time_2(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze action2_EVENT_TIME_AXIS_PASS_operator_time_2")
     for k,v in pairs(operator_list) do
-        _k = ScriptLib.GetGroupTempValue(context,"operator_time_2_"..k,{})
+        local _k = ScriptLib.GetGroupTempValue(context,"operator_time_2_"..k,{})
         if _k ~= 0 then
             LF_Operate(context,k,"SGV_Switch_StrongWind",0)
             ScriptLib.SetEntityServerGlobalValueByConfigId(context, k, "SGV_Disable", 0)
@@ -91,7 +91,7 @@ end
 function LF_Operate(context,cfgid,sgv,value)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze LF_Operate:sgv="..sgv.."| cfgid="..cfgid.."|value="..value)
     for i = 1 ,#operator_list[cfgid] do
-        for k,v in pairs(gadgets)do
+        for k,v in pairs(gadgets)do 
             if v.config_id == operator_list[cfgid][i] then
                 if Wind.Creater_Gadget_ID == ScriptLib.GetGadgetIdByEntityId(context,ScriptLib.GetEntityIdByConfigId(context, v.config_id)) then
                     --如果是吹风机，要判断是否解锁，否则不受影响
@@ -130,8 +130,8 @@ function action2_EVENT_GROUP_LOAD(context,evt)
 end
 function SLC_Operator_01(context)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze SLC_Operator_01")
-    _cfgid = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
-    _k = ScriptLib.GetGroupTempValue(context,"operator_time_1_".._cfgid,{})
+    local _cfgid = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+    local _k = ScriptLib.GetGroupTempValue(context,"operator_time_1_".._cfgid,{})
     if _k ~= 0 then
         ScriptLib.PrintContextLog(context,"## Activity_WindMaze SLC_Operator_01:重复交互，已拦截")
         return 0
@@ -146,8 +146,8 @@ function SLC_Operator_01(context)
 end
 function SLC_Operator_02(context)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze SLC_Operator_02")
-    _cfgid = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
-    _k = ScriptLib.GetGroupTempValue(context,"operator_time_2_".._cfgid,{})
+    local _cfgid = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+    local _k = ScriptLib.GetGroupTempValue(context,"operator_time_2_".._cfgid,{})
     if _k ~= 0 then
         ScriptLib.PrintContextLog(context,"## Activity_WindMaze SLC_Operator_02:重复交互，已拦截")
         return 0
@@ -185,16 +185,16 @@ function SLC_Creater_UpDown_1(context)
 end
 function SLC_Creater_Dir_Clockwise(context)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze SLC_Creater_Dir_Clockwise")
-    _cfgid = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
-    _dir = ScriptLib.GetGadgetAbilityFloatValue(context, base_info.group_id, _cfgid, "SGV_Switch_Dir")
+    local _cfgid = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+    local _dir = ScriptLib.GetGadgetAbilityFloatValue(context, base_info.group_id, _cfgid, "SGV_Switch_Dir")
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze SLC_Creater_Dir_Clockwise:cfgid=".._cfgid.."|_dir=".._dir)
-    if _dir ==0 then
+    if _dir ==0 then 
         ScriptLib.SetEntityServerGlobalValueByEntityId(context, context.source_entity_id, "SGV_Switch_Dir", 1)
-    elseif _dir == 1 then
+    elseif _dir == 1 then 
         ScriptLib.SetEntityServerGlobalValueByEntityId(context, context.source_entity_id, "SGV_Switch_Dir", 2)
-    elseif _dir == 2 then
+    elseif _dir == 2 then 
         ScriptLib.SetEntityServerGlobalValueByEntityId(context, context.source_entity_id, "SGV_Switch_Dir", 3)
-    elseif _dir == 3 then
+    elseif _dir == 3 then 
         ScriptLib.SetEntityServerGlobalValueByEntityId(context, context.source_entity_id, "SGV_Switch_Dir", 0)
     end
     ScriptLib.ChangeGroupTempValue(context,"data_rotate_times",1,{})
@@ -202,16 +202,16 @@ function SLC_Creater_Dir_Clockwise(context)
 end
 function SLC_Creater_Dir_AntiClockwise(context)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze SLC_Creater_Dir_AntiClockwise")
-    _cfgid = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
-    _dir = ScriptLib.GetGadgetAbilityFloatValue(context, base_info.group_id, _cfgid, "SGV_Switch_Dir")
+    local _cfgid = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+    local _dir = ScriptLib.GetGadgetAbilityFloatValue(context, base_info.group_id, _cfgid, "SGV_Switch_Dir")
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze SLC_Creater_Dir_AntiClockwise:cfgid=".._cfgid.."|_dir=".._dir)
-    if _dir ==0 then
+    if _dir ==0 then 
         ScriptLib.SetEntityServerGlobalValueByEntityId(context, context.source_entity_id, "SGV_Switch_Dir", 3)
-    elseif _dir == 1 then
+    elseif _dir == 1 then 
         ScriptLib.SetEntityServerGlobalValueByEntityId(context, context.source_entity_id, "SGV_Switch_Dir", 0)
-    elseif _dir == 2 then
+    elseif _dir == 2 then 
         ScriptLib.SetEntityServerGlobalValueByEntityId(context, context.source_entity_id, "SGV_Switch_Dir", 1)
-    elseif _dir == 3 then
+    elseif _dir == 3 then 
         ScriptLib.SetEntityServerGlobalValueByEntityId(context, context.source_entity_id, "SGV_Switch_Dir", 2)
     end
     ScriptLib.ChangeGroupTempValue(context,"data_rotate_times",1,{})
@@ -239,11 +239,11 @@ function SLC_Creater_Normal(context)
 end
 function SLC_Trigger_Skill(context)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze SLC_Trigger_Skill:")
-    _cd = ScriptLib.GetGroupTempValue(context,"Is_Skill_CD",{})
+    local _cd = ScriptLib.GetGroupTempValue(context,"Is_Skill_CD",{})
     if _cd == 0 then
         ScriptLib.SetGroupTempValue(context,"Is_Skill_CD",1,{})
         ScriptLib.InitTimeAxis(context, "Skill_CD", {5}, false)
-        _uidlist = ScriptLib.GetSceneUidList(context)
+        local _uidlist = ScriptLib.GetSceneUidList(context)
         ScriptLib.SetTeamEntityGlobalFloatValue(context, _uidlist, "_CD_Type", 1)
         ScriptLib.ChangeGroupTempValue(context,"data_switch_on_times",1,{})
         LF_Switch(context)
@@ -255,9 +255,9 @@ function SLC_Trigger_Skill(context)
 end
 function LF_Switch(context)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze LF_Switch:")
-    _off = ScriptLib.GetGroupTempValue(context,"Skill_Switch",{})
+    local _off = ScriptLib.GetGroupTempValue(context,"Skill_Switch",{})
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze LF_Switch:_off=".._off)
-    if _off == 0 then
+    if _off == 0 then 
         for k,v in pairs(gadgets) do
             if v.gadget_id == Wind.Creater_Gadget_ID then
                 ScriptLib.SetEntityServerGlobalValueByConfigId(context, v.config_id, "SGV_Switch_StrongWind", 1)
@@ -282,7 +282,7 @@ function LF_Switch(context)
 end
 function LF_Data_Handler(context,trans)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze LF_Data_Handler:")
-    _tab = {}
+    local _tab = {}
     --操作吹风机：
     _tab["switch_on_times"] = ScriptLib.GetGroupTempValue(context,"data_switch_on_times",{})
     _tab["switch_off_times"] = ScriptLib.GetGroupTempValue(context,"data_switch_off_times",{})
@@ -306,7 +306,7 @@ end
 --初始化
 function Initialize()
 	--加触发器
-    if temp_Tirgger_wind ~= nil then
+    if temp_Tirgger_wind ~= nil then 
         for k,v in pairs(temp_Tirgger_wind) do
             v.name = v.action
             v.config_id = 40000020 + k
@@ -317,7 +317,7 @@ function Initialize()
         end
     end
 	--加变量
-    if temp_Variables_wind ~= nil then
+    if temp_Variables_wind ~= nil then 
         for k,v in pairs(temp_Variables_wind) do
             v.config_id = 50000020 + k
             table.insert(variables,v)

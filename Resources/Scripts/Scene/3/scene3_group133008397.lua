@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133008397
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,20 +85,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_397005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"index"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "index", 133008089) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -109,19 +109,19 @@ function action_EVENT_VARIABLE_CHANGE_397005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_397006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"index"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "index", 133008089) ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -132,19 +132,19 @@ function action_EVENT_VARIABLE_CHANGE_397006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_397007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"index"为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "index", 133008089) ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -155,19 +155,19 @@ function action_EVENT_VARIABLE_CHANGE_397007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_397008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"index"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "index", 133008089) ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -178,7 +178,7 @@ function action_EVENT_VARIABLE_CHANGE_397008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -189,7 +189,7 @@ function action_EVENT_QUEST_START_397009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -200,34 +200,34 @@ function action_EVENT_TIMER_EVENT_397010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 397002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 397003 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 397004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133008397, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

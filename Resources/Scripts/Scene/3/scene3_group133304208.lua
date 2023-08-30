@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304208
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -69,9 +69,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -82,9 +82,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -127,9 +127,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -139,7 +139,7 @@ function action_EVENT_ANY_GADGET_DIE_208012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -150,13 +150,13 @@ function action_EVENT_GROUP_LOAD_208013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133304208, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -165,7 +165,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_208015(context, evt)
 	if 208025 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -175,8 +175,8 @@ function action_EVENT_GADGET_STATE_CHANGE_208015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 208014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -185,7 +185,7 @@ function condition_EVENT_GADGET_CREATE_208032(context, evt)
 	if 208004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -193,8 +193,8 @@ end
 function action_EVENT_GADGET_CREATE_208032(context, evt)
 	-- 创建标识为"duration2"，时间节点为{34}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "duration2", {34}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -203,7 +203,7 @@ function condition_EVENT_GADGET_CREATE_208033(context, evt)
 	if 208005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -214,19 +214,19 @@ function action_EVENT_GADGET_CREATE_208033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304208, EntityType.GADGET, 208002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304208, EntityType.GADGET, 208013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -235,7 +235,7 @@ function condition_EVENT_GADGET_CREATE_208034(context, evt)
 	if 208009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -246,19 +246,19 @@ function action_EVENT_GADGET_CREATE_208034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304208, EntityType.GADGET, 208003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304208, EntityType.GADGET, 208014 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -267,7 +267,7 @@ function condition_EVENT_GADGET_CREATE_208035(context, evt)
 	if 208010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -278,19 +278,19 @@ function action_EVENT_GADGET_CREATE_208035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304208, EntityType.GADGET, 208015 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304208, EntityType.GADGET, 208006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -299,7 +299,7 @@ function condition_EVENT_GADGET_CREATE_208036(context, evt)
 	if 208011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -310,19 +310,19 @@ function action_EVENT_GADGET_CREATE_208036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304208, EntityType.GADGET, 208016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304208, EntityType.GADGET, 208007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -331,7 +331,7 @@ function condition_EVENT_GADGET_CREATE_208037(context, evt)
 	if 208018 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -342,19 +342,19 @@ function action_EVENT_GADGET_CREATE_208037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304208, EntityType.GADGET, 208017 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304208, EntityType.GADGET, 208008 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -363,7 +363,7 @@ function condition_EVENT_ANY_GADGET_DIE_208038(context, evt)
 	if 208004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -374,13 +374,13 @@ function action_EVENT_ANY_GADGET_DIE_208038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为208001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 208001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -389,7 +389,7 @@ function condition_EVENT_ANY_GADGET_DIE_208039(context, evt)
 	if 208005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -400,13 +400,13 @@ function action_EVENT_ANY_GADGET_DIE_208039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为208002的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 208002 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -415,7 +415,7 @@ function condition_EVENT_ANY_GADGET_DIE_208040(context, evt)
 	if 208009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -426,13 +426,13 @@ function action_EVENT_ANY_GADGET_DIE_208040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为208003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 208003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -441,7 +441,7 @@ function condition_EVENT_ANY_GADGET_DIE_208041(context, evt)
 	if 208010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -452,13 +452,13 @@ function action_EVENT_ANY_GADGET_DIE_208041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q7326003_fail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -467,7 +467,7 @@ function condition_EVENT_ANY_GADGET_DIE_208042(context, evt)
 	if 208011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -478,13 +478,13 @@ function action_EVENT_ANY_GADGET_DIE_208042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q7326003_fail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -493,7 +493,7 @@ function condition_EVENT_ANY_GADGET_DIE_208043(context, evt)
 	if 208018 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -504,25 +504,25 @@ function action_EVENT_ANY_GADGET_DIE_208043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q7326003_fail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_208044(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为3
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -533,7 +533,7 @@ function action_EVENT_VARIABLE_CHANGE_208044(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -542,7 +542,7 @@ function condition_EVENT_TIME_AXIS_PASS_208045(context, evt)
 	if "duration2" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -553,7 +553,7 @@ function action_EVENT_TIME_AXIS_PASS_208045(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -562,7 +562,7 @@ function condition_EVENT_TIME_AXIS_PASS_208046(context, evt)
 	if "duration" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -573,13 +573,13 @@ function action_EVENT_TIME_AXIS_PASS_208046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133304208, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -588,7 +588,7 @@ function condition_EVENT_GADGET_CREATE_208047(context, evt)
 	if 208001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -596,17 +596,17 @@ end
 function action_EVENT_GADGET_CREATE_208047(context, evt)
 	-- 创建标识为"duration"，时间节点为{16}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "duration", {16}, false)
-
-
+	
+	
 	-- 触发镜头注目，注目位置为坐标{x=-1498.591, y=200.4466, z=2735.619}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1498.591, y=200.4466, z=2735.619}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1498.591, y=200.4466, z=2735.619}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 4,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end

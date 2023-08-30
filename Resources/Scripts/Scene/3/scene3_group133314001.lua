@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133314001
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	alert_max_value = 1000,
 	normal_sandworm_id = 1030,
 	direct_sandworm_id = 1035
@@ -12,12 +12,12 @@ defs = {
 
 -- DEFS_MISCS
 --沙虫区域的参数配置
-special_sandworm_region_defs =
+local special_sandworm_region_defs = 
 {
     [1005] = {alert_by_tick_normal = {20,50},alert_by_tick_sandstorm = {200,300}, sandworm_params_config_id = 11}
 }
 
-default_sandworm_region_defs =
+local default_sandworm_region_defs = 
 {
     alert_by_tick_normal = {20,50},
 	alert_by_tick_sandstorm = {200,300},
@@ -26,7 +26,7 @@ default_sandworm_region_defs =
 
 
 
-MetaRegions =
+local MetaRegions = 
 {
     ["SandStorm_InnerRegion"] = {1003},
     ["SandStorm_MiddleRegion"] = {1002},
@@ -38,45 +38,45 @@ MetaRegions =
 
 
 
-weather_region_config =
+local weather_region_config = 
 {
     ["SandStorm_InnerRegion"] = {weather = 4205},
     ["SandStorm_MiddleRegion"] = {weather = 4204},
     ["SandStorm_OuterRegion"] = {weather = 4203}
 }
 
-time_configs =
+local time_configs = 
 {
     --玩家生涯第一次的沙尘暴启动cd
-    ["SANDSTORM_START_CD_AXIS"] =
+    ["SANDSTORM_START_CD_AXIS"] = 
     {
         ["SandStorm_InnerRegion"] = {min = 60,  max = 120},
         ["SandStorm_MiddleRegion"] ={min = 120, max = 180},
         ["SandStorm_OuterRegion"] = {min = 180, max = 240},
     },
     --沙尘暴时间配置
-    ["SANDSTORM_TIME_AXIS"] =
+    ["SANDSTORM_TIME_AXIS"] = 
     {
         ["SandStorm_InnerRegion"] = {min = 240, max = 420},
         ["SandStorm_MiddleRegion"] ={min = 240, max = 360},
         ["SandStorm_OuterRegion"] = {min = 180, max = 300},
     },
     --沙尘暴CD配置
-    ["SANDSTORM_CD_AXIS"] =
+    ["SANDSTORM_CD_AXIS"] = 
     {
         ["SandStorm_InnerRegion"] = {min = 160, max = 300},
         ["SandStorm_MiddleRegion"] ={min = 160, max = 300},
         ["SandStorm_OuterRegion"] = {min = 180, max = 240},
     },
     --每次沙尘暴开启后的第一次沙虫启动cd
-    ["SANDWORM_START_CD_AXIS"] =
+    ["SANDWORM_START_CD_AXIS"] = 
     {
         ["SandStorm_InnerRegion"] = {min = 1, max = 5},
         ["SandStorm_MiddleRegion"] ={min = 1, max = 10},
         ["SandStorm_OuterRegion"] = {min = 1, max = 15},
     },
     --沙虫的常规cd
-    ["SANDWORM_CD_AXIS"] =
+    ["SANDWORM_CD_AXIS"] = 
     {
         ["SandStorm_InnerRegion"] = {min = 5, max = 10},
         ["SandStorm_MiddleRegion"] ={min = 10, max = 15},
@@ -85,9 +85,9 @@ time_configs =
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -143,9 +143,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -156,9 +156,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -174,9 +174,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 require "V3_4/SandstormControl"

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133223207
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -142,9 +142,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -152,7 +152,7 @@ function condition_EVENT_GADGET_CREATE_207002(context, evt)
 	if 207006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -163,7 +163,7 @@ function action_EVENT_GADGET_CREATE_207002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -171,14 +171,14 @@ end
 function condition_EVENT_SELECT_OPTION_207007(context, evt)
 	-- 判断是gadgetid 207006 option_id 65
 	if 207006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 65 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -186,14 +186,14 @@ end
 function action_EVENT_SELECT_OPTION_207007(context, evt)
 	-- 创建标识为"Mark_Start"，时间节点为{3,5,7,9,11,13}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Mark_Start", {3,5,7,9,11,13}, false)
-
-
+	
+	
 	-- 删除指定group： 133223207 ；指定config：207006；物件身上指定option：65；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133223207, 207006, 65) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -202,7 +202,7 @@ function condition_EVENT_TIME_AXIS_PASS_207008(context, evt)
 	if "Mark_Start" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -210,7 +210,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_207008(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133223207, 3)
-
+	
 	return 0
 end
 
@@ -219,7 +219,7 @@ function condition_EVENT_TIME_AXIS_PASS_207009(context, evt)
 	if "Mark_Start" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -227,10 +227,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_207009(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133223207, 3)
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133223207, 4)
-
+	
 	return 0
 end
 
@@ -239,7 +239,7 @@ function condition_EVENT_TIME_AXIS_PASS_207010(context, evt)
 	if "Mark_Start" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -247,10 +247,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_207010(context, evt)
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133223207, 4)
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133223207, 5)
-
+	
 	return 0
 end
 
@@ -259,7 +259,7 @@ function condition_EVENT_TIME_AXIS_PASS_207012(context, evt)
 	if "Mark_Start" ~= evt.source_name or 4 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -267,10 +267,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_207012(context, evt)
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133223207, 5)
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133223207, 6)
-
+	
 	return 0
 end
 
@@ -279,7 +279,7 @@ function condition_EVENT_TIME_AXIS_PASS_207013(context, evt)
 	if "Mark_Start" ~= evt.source_name or 5 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -287,10 +287,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_207013(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133223207, 6)
-
+	
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133223207, 7)
-
+	
 	return 0
 end
 
@@ -299,7 +299,7 @@ function condition_EVENT_TIME_AXIS_PASS_207014(context, evt)
 	if "Mark_Start" ~= evt.source_name or 6 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -307,12 +307,12 @@ end
 function action_EVENT_TIME_AXIS_PASS_207014(context, evt)
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133223207, 7)
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133223207, 207006, {65}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end

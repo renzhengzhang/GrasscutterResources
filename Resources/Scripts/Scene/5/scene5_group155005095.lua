@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155005095
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	wall_1 = 95018,
 	wall_2 = 95019,
 	wall_3 = 95020,
@@ -17,9 +17,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -90,9 +90,9 @@ sight_groups = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -103,9 +103,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -148,9 +148,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -159,7 +159,7 @@ function condition_EVENT_GROUP_LOAD_95001(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "questFinish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -170,7 +170,7 @@ function action_EVENT_GROUP_LOAD_95001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -181,13 +181,13 @@ function action_EVENT_QUEST_FINISH_95002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 155005095, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_ANY_MONSTER_DIE_95004(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -208,25 +208,25 @@ function action_EVENT_ANY_MONSTER_DIE_95004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_95025(context, evt)
 	if evt.param1 ~= 95025 then return false end
-
+	
 	-- 判断是区域95025
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 95025 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_95025(context, evt)
-
+	
 	    ScriptLib.PrintContextLog(context,"DeepseaDrakeBoss: 玩家踩到水底trigger，走重置流程")
 	--SLC_Reset_Battle(context)
 	return 0

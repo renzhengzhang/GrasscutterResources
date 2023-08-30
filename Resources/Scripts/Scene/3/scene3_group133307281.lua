@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133307281
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	active_step = 201,
 	inactive_step = 0,
 	gadget_array = {281001,281003,281008,281009,281007,281002,281005},
@@ -15,7 +15,7 @@ defs = {
 }
 
 -- DEFS_MISCS
-JamshidRocks =
+local JamshidRocks = 
 {
     281001,
     281002,
@@ -26,19 +26,19 @@ JamshidRocks =
     281005
 }
 
-CorrectAnswer =
+local CorrectAnswer = 
 {
     2,2,2,2,2,2,2
 }
-v = 0
-v_error = 0
-max_bit = #defs.gadget_array
+local v = 0
+local v_error = 0
+local max_bit = #defs.gadget_array
 defs.final_point = defs.point_sum - 1
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -112,9 +112,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -125,9 +125,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -143,9 +143,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -154,7 +154,7 @@ function condition_EVENT_GROUP_LOAD_281006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "is_success") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -165,55 +165,55 @@ function action_EVENT_GROUP_LOAD_281006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将configid为 281001 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281002 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281002, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281003 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281003, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281005 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281005, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281007 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281007, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281008 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281008, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281009 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281009, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133307281, EntityType.GADGET, 281014 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -239,7 +239,7 @@ function action_EVENT_GADGET_STATE_CHANGE_281018(context, evt)
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break
+	                        break 
 	                end
 	                if i == max_bit and defs.gadget_array[i] ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
@@ -264,7 +264,7 @@ function action_EVENT_GADGET_STATE_CHANGE_281018(context, evt)
 	        if v_error ~= 1 then
 	                v_error = -1
 	        end
-	        ScriptLib.SetGroupVariableValue(context, "sort", v)
+	        ScriptLib.SetGroupVariableValue(context, "sort", v) 
 	        ScriptLib.SetGroupVariableValue(context, "gear_reset", v_error)
 	        ScriptLib.SetGroupVariableValue(context, "v_error", 0)
 	end
@@ -274,7 +274,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_281019(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == 1 then
 		if #defs.reset_gear_list == 0 then
 	                        defs.reset_gear_list = suites[1].gadgets
@@ -295,8 +295,8 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_281020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
-
+	
+	
 	if evt.param1 == -1 then
 		return true
 	end
@@ -306,11 +306,11 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_281021(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 > 0 and ScriptLib.GetGroupVariableValue(context, "is_success") == 1 then
 		return true
 	end
-
+	
 	-- 判断变量"is_success"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_success") ~= 1 or evt.param1 <= 0  then
 	        return false
@@ -324,74 +324,74 @@ function action_EVENT_VARIABLE_CHANGE_281021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将configid为 281001 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281002 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281002, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281003 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281003, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281007 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281007, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281008 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281008, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281009 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281009, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 281005 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 281005, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133307281, EntityType.GADGET, 281014 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_281026(context, evt)
 	if evt.param1 ~= 281026 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_281026(context, evt)
 	ScriptLib.StartPlatform(context, 281014)
-
+	
 	return 0
 end
 

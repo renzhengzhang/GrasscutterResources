@@ -3,7 +3,7 @@
 ||	owner: 		luyao.huang
 ||	description:	3.3MetaRegion逻辑。由多个region拼成的大型region
 ||	LogName:	MetaRegion
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 
@@ -11,7 +11,7 @@
 --是否属于特定大区域
 function LF_Is_In_Meta_Region(context,uid,metaRegionName)
 
-    metaRegion = MetaRegions[metaRegionName]
+    local metaRegion = MetaRegions[metaRegionName]
     if metaRegion == nil then
         ScriptLib.PrintGroupWarning(context,"## [Warning] [SandstormControl] LF_Is_In_Meta_Region：传入非法MetaRegion名"..metaRegionName)
         return nil
@@ -62,9 +62,9 @@ end
 
 --获取第一个合法的在沙尘暴区域内的玩家uid（支持联机，从主机开始往后排）
 function LF_Get_Legal_Player_Uid_In_SandStorm_Region(context)
-    uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)
     for i = 1, #uid_list do
-        uid = uid_list[i]
+        local uid = uid_list[i]
         if LF_Is_In_SandStorm_Region(context,uid) then
             return uid
         end
@@ -76,7 +76,7 @@ end
 --获取第一个合法的在沙尘暴区域内的玩家所在的圈（支持联机，从主机开始往后排）
 function LF_Get_Legal_Player_Region_In_SandStorm_Region(context)
 
-    uid = LF_Get_Legal_Player_Uid_In_SandStorm_Region(context)
+    local uid = LF_Get_Legal_Player_Uid_In_SandStorm_Region(context)
 
     if uid ~= -1 then
         return LF_Get_SandStorm_Region(context,uid)
@@ -87,16 +87,16 @@ end
 
 --是否至少有一个人在沙尘暴区域内
 function LF_Is_Any_Player_In_SandStorm_Region(context)
-    return LF_Get_Legal_Player_Uid_In_SandStorm_Region(context) ~= -1
+    return LF_Get_Legal_Player_Uid_In_SandStorm_Region(context) ~= -1 
 end
 
 
 --找到所有在沙尘暴区域内的玩家，支持联机
 function LF_Get_All_Player_Uid_In_SandStorm_Region(context)
-    uid_list = ScriptLib.GetSceneUidList(context)
-    ret_uid_list = {}
+    local uid_list = ScriptLib.GetSceneUidList(context)
+    local ret_uid_list = {}
     for i = 1, #uid_list do
-        uid = uid_list[i]
+        local uid = uid_list[i]
         if LF_Is_In_SandStorm_Region(context,uid) then
             table.insert(ret_uid_list,uid)
         end
@@ -105,10 +105,10 @@ function LF_Get_All_Player_Uid_In_SandStorm_Region(context)
 end
 
 function LF_Get_All_Legal_Player_Uid_In_Legal_Sandworm_Region(context)
-    player_in_sandstorm_list = LF_Get_All_Player_Uid_In_SandStorm_Region(context)
-    ret_uid_list = {}
+    local player_in_sandstorm_list = LF_Get_All_Player_Uid_In_SandStorm_Region(context)
+    local ret_uid_list = {}
     for i = 1, #player_in_sandstorm_list do
-        uid = player_in_sandstorm_list[i]
+        local uid = player_in_sandstorm_list[i]
         if LF_Is_In_Legal_Sandworm_Region(context,uid) then
             table.insert(ret_uid_list,uid)
         end
@@ -119,10 +119,10 @@ end
 
 --获取第一个合法的在沙虫区域内的玩家uid（支持联机，随机抽取一个）
 function LF_Get_Legal_Player_Uid_In_Legal_Sandworm_Region(context)
-    player_in_sandstorm_list = LF_Get_All_Player_Uid_In_SandStorm_Region(context)
-    ret_uid_list = {}
+    local player_in_sandstorm_list = LF_Get_All_Player_Uid_In_SandStorm_Region(context)
+    local ret_uid_list = {}
     for i = 1, #player_in_sandstorm_list do
-        uid = player_in_sandstorm_list[i]
+        local uid = player_in_sandstorm_list[i]
         if LF_Is_In_Legal_Sandworm_Region(context,uid) then
             table.insert(ret_uid_list,uid)
         end
@@ -143,7 +143,7 @@ end
 
 --判断一个config_id的region是否是特定的区域region
 function LF_Is_Region_Specific_Region(context,region_name,region_id)
-
+    
     return LF_Is_In_Table(MetaRegions[region_name], region_id)
 end
 
@@ -168,6 +168,6 @@ end
 
 --从table中随机抽取一个元素，均匀分布
 function LF_Get_Random_Value_In_Table(t)
-    r = math.random(#t)
+    local r = math.random(#t)
     return t[r]
 end

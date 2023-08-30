@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250034017
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -123,9 +123,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -133,7 +133,7 @@ function condition_EVENT_GADGET_CREATE_17007(context, evt)
 	if 17001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -144,7 +144,7 @@ function action_EVENT_GADGET_CREATE_17007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -152,14 +152,14 @@ end
 function condition_EVENT_SELECT_OPTION_17008(context, evt)
 	-- 判断是gadgetid 17001 option_id 41
 	if 17001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 41 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -170,10 +170,10 @@ function action_EVENT_SELECT_OPTION_17008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250034017, 2)
-
+	
 	return 0
 end
 
@@ -181,14 +181,14 @@ end
 function condition_EVENT_SELECT_OPTION_17009(context, evt)
 	-- 判断是gadgetid 17001 option_id 42
 	if 17001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 42 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -199,10 +199,10 @@ function action_EVENT_SELECT_OPTION_17009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250034017, 3)
-
+	
 	return 0
 end
 
@@ -210,14 +210,14 @@ end
 function condition_EVENT_SELECT_OPTION_17010(context, evt)
 	-- 判断是gadgetid 17001 option_id 43
 	if 17001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 43 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -228,10 +228,10 @@ function action_EVENT_SELECT_OPTION_17010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250034017, 4)
-
+	
 	return 0
 end
 
@@ -239,14 +239,14 @@ end
 function condition_EVENT_SELECT_OPTION_17011(context, evt)
 	-- 判断是gadgetid 17001 option_id 44
 	if 17001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 44 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -257,10 +257,10 @@ function action_EVENT_SELECT_OPTION_17011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250034017, 5)
-
+	
 	return 0
 end
 
@@ -268,14 +268,14 @@ end
 function condition_EVENT_SELECT_OPTION_17012(context, evt)
 	-- 判断是gadgetid 17001 option_id 45
 	if 17001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 45 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -286,10 +286,10 @@ function action_EVENT_SELECT_OPTION_17012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250034017, 6)
-
+	
 	return 0
 end
 
@@ -297,14 +297,14 @@ end
 function condition_EVENT_SELECT_OPTION_17013(context, evt)
 	-- 判断是gadgetid 17001 option_id 46
 	if 17001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 46 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -315,6 +315,6 @@ function action_EVENT_SELECT_OPTION_17013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

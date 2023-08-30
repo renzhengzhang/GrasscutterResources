@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155005044
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -71,9 +71,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -82,7 +82,7 @@ function condition_EVENT_GROUP_LOAD_44001(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Jiguan", 155005044) ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -90,7 +90,7 @@ end
 function action_EVENT_GROUP_LOAD_44001(context, evt)
 	-- 延迟0秒刷怪
 		math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1, 6))
-		randomTemp = math.random(1, 3)
+		local randomTemp = math.random(1, 3)
 		if randomTemp == 1 then
 			ScriptLib.CreateMonster(context, { config_id = 44002, delay_time = 0 })
 			return 0

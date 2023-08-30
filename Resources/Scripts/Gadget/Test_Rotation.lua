@@ -1,13 +1,13 @@
 -- 默认10秒进行状态转换
-default_time = 10
-start_time = 10
+local default_time = 10
+local start_time = 10
 
 function OnTimer(context, now)
 	-- 获取机关当前状态
-	arguments = ScriptLib.GetGadgetArguments(context)
-	length = #arguments
-	state_time = ScriptLib.GetGadgetStateBeginTime(context)
-	state = ScriptLib.GetGadgetState(context)
+	local arguments = ScriptLib.GetGadgetArguments(context)
+	local length = #arguments
+	local state_time = ScriptLib.GetGadgetStateBeginTime(context)
+	local state = ScriptLib.GetGadgetState(context)
 
 	if arguments[1] ~= nil or arguments[1] > 0 then
 		default_time = arguments[1]
@@ -27,3 +27,5 @@ function OnTimer(context, now)
 		end
 	end
 end
+
+

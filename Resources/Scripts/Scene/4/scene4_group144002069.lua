@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144002069
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -108,9 +108,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -118,7 +118,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_69032(context, evt)
 	if 69001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -128,32 +128,32 @@ function action_EVENT_GADGET_STATE_CHANGE_69032(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 69005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 1, turn_mode = false}
+	local tempParam = {route_type = 1, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 69005, 400200001, {3,4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将configid为 69006 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 69006, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 1, turn_mode = false}
+	local tempParam = {route_type = 1, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 69004, 400200001, {}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -162,7 +162,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_69033(context, evt)
 	if 69001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -172,32 +172,32 @@ function action_EVENT_GADGET_STATE_CHANGE_69033(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 69005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 69005, 400200001, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 69004, 400200001, {}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将configid为 69006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 69006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -206,7 +206,7 @@ function condition_EVENT_ANY_GADGET_DIE_69062(context, evt)
 	if 69026 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -216,17 +216,17 @@ function action_EVENT_ANY_GADGET_DIE_69062(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 69002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "complete" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "complete", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 144002069, 2)
-
+	
 	return 0
 end
 
@@ -235,7 +235,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_69063(context, evt)
 	if 69002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -246,7 +246,7 @@ function action_EVENT_GADGET_STATE_CHANGE_69063(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -255,12 +255,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_69064(context, evt)
 	if 69001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"complete"为0
 	if ScriptLib.GetGroupVariableValue(context, "complete") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -268,7 +268,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_69064(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144002069, 2)
-
+	
 	return 0
 end
 
@@ -277,7 +277,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_69065(context, evt)
 	if 69001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -285,6 +285,6 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_69065(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 144002069, 2)
-
+	
 	return 0
 end

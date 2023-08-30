@@ -31,11 +31,11 @@ tempvalue值枚举：
     3   西
     -1  南
     -2  底
-    -3  东
+    -3  东 
 当玩家尝试使房间向[东、南、西、北]滚动时，调用不同的LF_Turn
 ]]
 
-rogue_rotate_whitebox = {
+local rogue_rotate_whitebox = {
     core_config_id = {4009,4012},
 
     Other_Axis_List={    --该列表用于查询沿某面旋转时，转动的另外四个面分别是什么
@@ -44,13 +44,13 @@ rogue_rotate_whitebox = {
         {1,2,-1,-2,},    --正向转动3面(西面)时，周边四个面顺序
     },
 }
-temp_Variables_Turn = {
+local temp_Variables_Turn = {
 	{  config_id=50000001,name = "Turn", value = 0, no_refresh = false },
 	{  config_id=50000002,name = "Clear", value = 0, no_refresh = false },
 	{  config_id=50000003,name = "Current_Room", value = 0, no_refresh = false },
 }
 
-temp_Tirgger_Turn = {
+local temp_Tirgger_Turn = {
 	{event = EventType.EVENT_VARIABLE_CHANGE, source = "Turn", condition = "", action = "action_EVENT_VARIABLE_CHANGE_Turn",trigger_count = 0},
 	{event = EventType.EVENT_VARIABLE_CHANGE, source = "Clear", condition = "", action = "action_EVENT_VARIABLE_CHANGE_Clear",trigger_count = 0},
 	{event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_EVENT_VARIABLE_CHANGE_Debug",trigger_count = 0},
@@ -60,13 +60,13 @@ temp_Tirgger_Turn = {
 --清除localgadget
 function action_EVENT_VARIABLE_CHANGE_Clear(context,evt)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox action_EVENT_VARIABLE_CHANGE_Clear:".."func")
-    _uid = ScriptLib.GetSceneUidList(context)[1]
+    local _uid = ScriptLib.GetSceneUidList(context)[1]
     ScriptLib.SetTeamEntityGlobalFloatValue(context,{_uid}, "GV_Clear_Gadget", 1)
     return 0
 end
 function LF_Clear(context)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Clear:".."func")
-    _uid = ScriptLib.GetSceneUidList(context)[1]
+    local _uid = ScriptLib.GetSceneUidList(context)[1]
     ScriptLib.SetTeamEntityGlobalFloatValue(context, {_uid}, "GV_Clear_Gadget", 1)
     return 0
 end
@@ -110,23 +110,23 @@ end
     Axis:绕着哪个面转动，详见上文关键字[tempvalue值枚举]
     direction:1为顺时针，-1为逆时针(其实就是使rotaion+90还是-90)
     core_id:转哪个物件
-
+    
     比如尝试向东滚动，即绕着北面逆时针转动，调用方式:LF_Turn(context, 1, -1)
 ]]
 function LF_Turn(context, Axis, direction,core_id)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."Axis="..Axis..", direction"..direction..", core_id"..core_id)
     --物件当前state：
-    _cur_state = ScriptLib.GetGroupTempValue(context,"SGV_Turn_"..core_id,{})
+    local _cur_state = ScriptLib.GetGroupTempValue(context,"SGV_Turn_"..core_id,{})
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."coreid="..core_id.." | ".."_cur_state=".._cur_state)
     --查找123号轴哪个在这个面上（或反面，所以判断绝对值）：
-    _axis = 0
-    _axis_value = 0
-    for i = 3 , 1 , -1 do
+    local _axis = 0
+    local _axis_value = 0
+    for i = 3 , 1 , -1 do 
         --此处为3、2、1的查找优先级，13号轴都能转的情况下，优先转3号轴。
         --因为：13轴在同一面的时候，转3轴可能导致Y轴走到上面，导致南北向无轴可用。由于prefab的层级关系，3号轴转动不影响12号轴，优先转3
-        __v = ScriptLib.GetGroupTempValue(context,"Axis_"..core_id.."_" ..i,{})
+        local __v = ScriptLib.GetGroupTempValue(context,"Axis_"..core_id.."_" ..i,{})
         ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."Axis_"..core_id.."_" ..i..".".."__v="..__v)
-        if Axis == math.abs(__v) then
+        if Axis == math.abs(__v) then 
             _axis = i           --确定转动该轴
             _axis_value = __v   --该轴所在面
             break
@@ -134,22 +134,22 @@ function LF_Turn(context, Axis, direction,core_id)
     end
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."coreid="..core_id.." | ".."_axis=".._axis)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."coreid="..core_id.." | ".."_axis_value=".._axis_value)
-    _axis_value_abs = math.abs(_axis_value)
+    local _axis_value_abs = math.abs(_axis_value)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."coreid="..core_id.." | ".."_axis_value_abs=".._axis_value_abs)
     --转动方向（需要获取一遍轴的正负值，因为轴有可能在反面，此时转动方向就取反）
-    _dir = direction * _axis_value / _axis_value_abs
+    local _dir = direction * _axis_value / _axis_value_abs
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."coreid="..core_id.." | ".."_dir=".._dir)
     --state原值补零(强行3位数,用于后续拼接)
-    _str = string.format("%03d",_cur_state)
+    local _str = string.format("%03d",_cur_state)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."coreid="..core_id.." | ".."_str=".._str)
     --截取目标位（代表要被修改rotation的轴）
-    _num = string.sub(_str,_axis,_axis)
+    local _num = string.sub(_str,_axis,_axis)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."coreid="..core_id.." | ".."_num=".._num)
     --转换,算出新数字（根据转动方向要么+1要么-1,0123循环）
     _num = LF_Find_Next_Value_In_List(context,{"0","1","2","3"},_num,_dir)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."coreid="..core_id.." | ".."_num=".._num)
     --替换旧数字
-    _result = ""
+    local _result = ""
     for i = 1 ,3 do
         if _axis == i then
             _result = _result .. _num--如果是目标位，拼接上新数字
@@ -163,12 +163,12 @@ function LF_Turn(context, Axis, direction,core_id)
     LF_Change_The_Other_Axis(context,_axis,_axis_value,direction,core_id)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."ChangeToTargetLevelTag param="..core_id .. "00" .. _result)
     ScriptLib.ChangeToTargetLevelTag(context, tonumber(core_id .. "00" .. _result))
-    if core_id == 1 then
+    if core_id == 1 then 
         --转动外层
-        _other_core_dir = direction * -1
+        local _other_core_dir = direction * -1
         LF_Turn(context, Axis, _other_core_dir,2)
         --拉镜头
-        _uid = ScriptLib.GetSceneUidList(context)[1]
+        local _uid = ScriptLib.GetSceneUidList(context)[1]
         ScriptLib.SetTeamEntityGlobalFloatValue(context, {_uid}, "GV_Camera_Distance", 1)
         --切leveltag
         ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Turn:".."切leveltag ".."_result=".._result)
@@ -187,24 +187,24 @@ end
 function LF_Get_Next_Room(context,Axis,direction)
     --只要知道共点的三个面是什么房间，就能确定六面，所以要存取当前房间、北边房间、西边房间
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Get_Next_Room:".."func")
-    _cur = ScriptLib.GetGroupVariableValue(context,"Current_Room")
-    _w = ScriptLib.GetGroupTempValue(context,"Room_W",{})
-    _n = ScriptLib.GetGroupTempValue(context,"Room_N",{})
+    local _cur = ScriptLib.GetGroupVariableValue(context,"Current_Room")
+    local _w = ScriptLib.GetGroupTempValue(context,"Room_W",{})
+    local _n = ScriptLib.GetGroupTempValue(context,"Room_N",{})
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Get_Next_Room:".."_cur=".._cur .."|_w=".._w.."|_n=".._n)
-    if Axis == 1 then
+    if Axis == 1 then 
         --N不动，W和cur根据direction动
         _result = LF_Find_Next_Value_In_List(context,rogue_rotate_whitebox.Other_Axis_List[math.abs(_n)],_cur,direction*math.abs(_n)/_n*(-1))
         ScriptLib.SetGroupTempValue(context,"nextroom", _result,{})
-        if direction == 1 then
+        if direction == 1 then 
         ScriptLib.SetGroupTempValue(context,"Room_W", _cur * (-1) ,{})
         else
             ScriptLib.SetGroupTempValue(context,"Room_W", _cur,{})
         end
-    elseif Axis == 3 then
+    elseif Axis == 3 then 
         --W不动，N和cur根据direction动
         _result = LF_Find_Next_Value_In_List(context,rogue_rotate_whitebox.Other_Axis_List[math.abs(_w)],_cur,direction*math.abs(_w)/_w*-1)
         ScriptLib.SetGroupTempValue(context,"nextroom", _result,{})
-        if direction == 1 then
+        if direction == 1 then 
             ScriptLib.SetGroupTempValue(context,"Room_N", _cur ,{})
         else
             ScriptLib.SetGroupTempValue(context,"Room_N", _cur * (-1) ,{})
@@ -217,25 +217,25 @@ function LF_Change_The_Other_Axis(context,Rotated_Axis,Rotated_Axis_Value,direct
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Change_The_Other_Axis:".."Rotated_Axis="..Rotated_Axis..", Rotated_Axis_Value="..Rotated_Axis_Value..", coreid="..core_id)
     for i = Rotated_Axis + 1,3 do
         --遍历低层级的轴
-        list = rogue_rotate_whitebox.Other_Axis_List[math.abs(Rotated_Axis_Value)]
-        _other_axis_value = ScriptLib.GetGroupTempValue(context,"Axis_"..core_id.."_" ..i,{})
-        _next_value = LF_Find_Next_Value_In_List(context,list,_other_axis_value,direction)
+        local list = rogue_rotate_whitebox.Other_Axis_List[math.abs(Rotated_Axis_Value)]
+        local _other_axis_value = ScriptLib.GetGroupTempValue(context,"Axis_"..core_id.."_" ..i,{})
+        local _next_value = LF_Find_Next_Value_In_List(context,list,_other_axis_value,direction)
         ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Change_The_Other_Axis:settemp - ".."Axis_"..core_id.."_" ..i.."=".._next_value)
         if _next_value ~= nil then
             --nil的情况，代表3号轴不在1号轴的周边四面，此时3号轴也不会变化。正常不会出现nil，因为13轴共线的时候优先转3
-            ScriptLib.SetGroupTempValue(context,"Axis_"..core_id.."_" .. i, _next_value , {})
+            ScriptLib.SetGroupTempValue(context,"Axis_"..core_id.."_" .. i, _next_value , {}) 
         else
             ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Change_The_Other_Axis:[Warning]_next_value=nil!!!")
         end
     end
     --log
-    _v1 = ScriptLib.GetGroupTempValue(context,"Axis_"..core_id.."_1",{})
-    _v2 = ScriptLib.GetGroupTempValue(context,"Axis_"..core_id.."_2",{})
-    _v3 = ScriptLib.GetGroupTempValue(context,"Axis_"..core_id.."_3",{})
+    local _v1 = ScriptLib.GetGroupTempValue(context,"Axis_"..core_id.."_1",{})
+    local _v2 = ScriptLib.GetGroupTempValue(context,"Axis_"..core_id.."_2",{})
+    local _v3 = ScriptLib.GetGroupTempValue(context,"Axis_"..core_id.."_3",{})
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Change_The_Other_Axis:result core_id="..core_id.."|v1=".._v1.."|v2=".._v2.."|v3=".._v3)
---[[     _axis_value = ScriptLib.GetGroupTempValue(context,Rotated_Axis,{})
+--[[     local _axis_value = ScriptLib.GetGroupTempValue(context,Rotated_Axis,{})
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Change_The_Other_Axis:".."_axis_value=".._axis_value)
-    _other_axis_value = ScriptLib.GetGroupTempValue(context,_other_axis,{})
+    local _other_axis_value = ScriptLib.GetGroupTempValue(context,_other_axis,{})
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Change_The_Other_Axis:".."_other_axis_value=".._other_axis_value)
     --按照x、y、z的顺序，沿前面轴旋转时会影响后面，但后面轴不影响前面。
     if math.abs(_axis_value) > math.abs(_other_axis_value) then
@@ -247,10 +247,10 @@ end
 function LF_Change_Axis(context,Rotated_Axis_Value,Other_Axis,direction)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Change_Axis:Rotated_Axis_Value="..Rotated_Axis_Value..", Other_Axis="..Other_Axis..", direction"..direction)
     --查[Other_Axis_List]得出新轴
-    _Other_Axis_Old_Value = ScriptLib.GetGroupTempValue(context,Other_Axis,{})
+    local _Other_Axis_Old_Value = ScriptLib.GetGroupTempValue(context,Other_Axis,{})
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Change_Axis:_Other_Axis_Old_Value=".._Other_Axis_Old_Value)
-    _TargetList =rogue_rotate_whitebox.Other_Axis_List[math.abs(Rotated_Axis_Value)]
-    _TargetAxis_New_Value
+    local _TargetList =rogue_rotate_whitebox.Other_Axis_List[math.abs(Rotated_Axis_Value)]
+    local _TargetAxis_New_Value
     for i = 1 , #_TargetList do
         ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Change_Axis:_TargetList[i]=".._TargetList[i])
         if _TargetList[i] == _Other_Axis_Old_Value then
@@ -266,14 +266,14 @@ end ]]
 --沿着list找上一个或下一个(首尾循环)
 function LF_Find_Next_Value_In_List(context,list,v,direction)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox LF_Find_Next_Value_In_List:"..", v="..v..", direction"..direction)
-    origin_key = 0
+    local origin_key = 0
     for i = 1 ,#list do
         if list[i] == v then
             origin_key = i
             break
         end
     end
-    if origin_key == 0 then
+    if origin_key == 0 then 
         return nil
     else
         if origin_key + direction == 0 then
@@ -301,9 +301,9 @@ function SLC_Reset_SGV(context)
     3   西
     -1  南
     -2  底
-    -3  东
+    -3  东  
 ]]
-    _cur_bottom_room = ScriptLib.GetGroupTempValue(context,"nextroom",{})
+    local _cur_bottom_room = ScriptLib.GetGroupTempValue(context,"nextroom",{})
 	ScriptLib.SetGroupVariableValue(context, "Current_Room", _cur_bottom_room)
 	ScriptLib.SetGroupVariableValue(context, "Turn", 0)
     ScriptLib.SetEntityServerGlobalValueByConfigId(context, rogue_rotate_whitebox.core_config_id[1], "SGV_Avatar_Transfer", 0)
@@ -311,10 +311,10 @@ function SLC_Reset_SGV(context)
 end
 function action_EVENT_TIME_AXIS_PASS_TurnEnd(context,evt)
     ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox action_EVENT_TIME_AXIS_PASS_TurnEnd:")
-    if ScriptLib.GetGroupVariableValue(context,"Turn") ~=0 then
+    if ScriptLib.GetGroupVariableValue(context,"Turn") ~=0 then 
         ScriptLib.PrintContextLog(context,"## rogue_rotate_whitebox action_EVENT_TIME_AXIS_PASS_TurnEnd: 触发保底 Turn变量在7秒后还未归0!!!请检查SLC是否调用成功")
 
-        _cur_bottom_room = ScriptLib.GetGroupTempValue(context,"nextroom",{})
+        local _cur_bottom_room = ScriptLib.GetGroupTempValue(context,"nextroom",{})
         ScriptLib.SetGroupVariableValue(context, "Current_Room", _cur_bottom_room)
         ScriptLib.SetGroupVariableValue(context, "Turn", 0)
         ScriptLib.SetEntityServerGlobalValueByConfigId(context, rogue_rotate_whitebox.core_config_id[1], "SGV_Avatar_Transfer", 0)

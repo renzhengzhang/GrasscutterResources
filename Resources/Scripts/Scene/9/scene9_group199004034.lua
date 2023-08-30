@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199004034
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -68,9 +68,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -78,26 +78,26 @@ function action_EVENT_ENTER_REGION_34001(context, evt)
 	if ScriptLib.CheckSceneTag(context, 9,1021 ) and ScriptLib.CheckSceneTag(context, 9,1026 ) and ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 and ScriptLib.GetPlayerVehicleType(context, context.uid) == 2 then
 		ScriptLib.ShowReminderRadius(context, 1111176, { x = -360, y = 120, z = -641}, 270)
 	end
-
+	
 	if ScriptLib.CheckSceneTag(context, 9,1021 ) and ScriptLib.CheckSceneTag(context, 9,1024 ) and ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 and ScriptLib.GetPlayerVehicleType(context, context.uid) == 2 then
 		ScriptLib.ShowReminderRadius(context, 1111176, { x = -360, y = 120, z = -641}, 270)
 	end
-
+	
 	if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1026 ) and ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 and ScriptLib.GetPlayerVehicleType(context, context.uid) == 2 then
 		ScriptLib.ShowReminderRadius(context, 1111176, { x = -360, y = 120, z = -641}, 270)
 	end
-
+	
 	if ScriptLib.CheckSceneTag(context, 9,1023 ) and ScriptLib.CheckSceneTag(context, 9,1022 ) and ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 and ScriptLib.GetPlayerVehicleType(context, context.uid) == 2 then
 		ScriptLib.ShowReminderRadius(context, 1111176, { x = -360, y = 120, z = -641}, 270)
 	end
-
+	
 	if ScriptLib.CheckSceneTag(context, 9,1025 ) and ScriptLib.CheckSceneTag(context, 9,1022 ) and ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 and ScriptLib.GetPlayerVehicleType(context, context.uid) == 2 then
 		ScriptLib.ShowReminderRadius(context, 1111176, { x = -360, y = 120, z = -641}, 270)
 	end
-
+	
 	if ScriptLib.CheckSceneTag(context, 9,1025 ) and ScriptLib.CheckSceneTag(context, 9,1024 ) and ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 and ScriptLib.GetPlayerVehicleType(context, context.uid) == 2 then
 		ScriptLib.ShowReminderRadius(context, 1111176, { x = -360, y = 120, z = -641}, 270)
 	end
-
+	
 	return 0
 end

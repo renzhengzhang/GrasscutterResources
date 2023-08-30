@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303047
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -99,20 +99,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"chestNum"为1
 	if ScriptLib.GetGroupVariableValue(context, "chestNum") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -123,7 +123,7 @@ function action_EVENT_VARIABLE_CHANGE_47004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -131,14 +131,14 @@ end
 function condition_EVENT_SELECT_OPTION_47005(context, evt)
 	-- 判断是gadgetid 47002 option_id 99
 	if 47002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 99 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -149,40 +149,40 @@ function action_EVENT_SELECT_OPTION_47005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7306404_fin") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303047, 3)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133303047, EntityType.GADGET, 47002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133303047, EntityType.GADGET, 47001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"chestNum"为2
 	if ScriptLib.GetGroupVariableValue(context, "chestNum") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -193,19 +193,19 @@ function action_EVENT_VARIABLE_CHANGE_47006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"chestNum"为3
 	if ScriptLib.GetGroupVariableValue(context, "chestNum") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -216,19 +216,19 @@ function action_EVENT_VARIABLE_CHANGE_47007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"chestNum"为4
 	if ScriptLib.GetGroupVariableValue(context, "chestNum") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -239,19 +239,19 @@ function action_EVENT_VARIABLE_CHANGE_47008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"chestNum"为5
 	if ScriptLib.GetGroupVariableValue(context, "chestNum") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -262,19 +262,19 @@ function action_EVENT_VARIABLE_CHANGE_47009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"chestNum"为6
 	if ScriptLib.GetGroupVariableValue(context, "chestNum") ~= 6 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -285,19 +285,19 @@ function action_EVENT_VARIABLE_CHANGE_47010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"chestNum"为7
 	if ScriptLib.GetGroupVariableValue(context, "chestNum") ~= 7 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -308,19 +308,19 @@ function action_EVENT_VARIABLE_CHANGE_47011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"chestNum"为8
 	if ScriptLib.GetGroupVariableValue(context, "chestNum") ~= 8 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -331,19 +331,19 @@ function action_EVENT_VARIABLE_CHANGE_47012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"chestNum"为9
 	if ScriptLib.GetGroupVariableValue(context, "chestNum") ~= 9 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -354,7 +354,7 @@ function action_EVENT_VARIABLE_CHANGE_47013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -364,7 +364,7 @@ function condition_EVENT_GROUP_LOAD_47014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -375,21 +375,21 @@ function action_EVENT_GROUP_LOAD_47014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303047, 3)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133303047, EntityType.GADGET, 47002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133303047, EntityType.GADGET, 47001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end

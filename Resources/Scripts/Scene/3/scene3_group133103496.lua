@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103496
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -106,20 +106,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_496011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Unlocked"为1
 	if ScriptLib.GetGroupVariableValue(context, "Unlocked") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -130,16 +130,16 @@ function action_EVENT_VARIABLE_CHANGE_496011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103496, 3)
-
+	
 	-- 将本组内变量名为 "Unlocked" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Unlocked", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -149,7 +149,7 @@ function condition_EVENT_ANY_MONSTER_DIE_496012(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -157,13 +157,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_496012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103496, 2)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7101103_progress") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -172,7 +172,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_496014(context, evt)
 	if 496002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -183,7 +183,7 @@ function action_EVENT_GADGET_STATE_CHANGE_496014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -192,7 +192,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_496015(context, evt)
 	if 496003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -203,7 +203,7 @@ function action_EVENT_GADGET_STATE_CHANGE_496015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -212,7 +212,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_496016(context, evt)
 	if 496004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -223,19 +223,19 @@ function action_EVENT_GADGET_STATE_CHANGE_496016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_496017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"TreasureBox"为3
 	if ScriptLib.GetGroupVariableValue(context, "TreasureBox") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -246,6 +246,6 @@ function action_EVENT_VARIABLE_CHANGE_496017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

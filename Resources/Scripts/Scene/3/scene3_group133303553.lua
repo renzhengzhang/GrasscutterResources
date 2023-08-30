@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303553
 }
 
 -- DEFS_MISCS
-optionPlay ={
+local optionPlay ={
     gadgetCid = 553001, --只确认该物件的GadgetState
     optionCid = 553002, --只修改此物件的操作台
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -96,16 +96,16 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_553003(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303553, 3)
-
+	
 	return 0
 end
 
@@ -116,7 +116,7 @@ function action_EVENT_GROUP_LOAD_553007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -127,7 +127,7 @@ function action_EVENT_GADGET_STATE_CHANGE_553011(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 

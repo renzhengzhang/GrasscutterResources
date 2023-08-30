@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210268
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 133210268,
 	gadget_thunderThelfID = 268001,
 	pointarray_ID = 321000048,
@@ -16,11 +16,11 @@ defs = {
 
 -- DEFS_MISCS
 function GetNextPath(context)
-	path = {}
-	index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
-	stoppoint = defs.pointInfo[index]
+	local path = {}
+	local index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
+	local stoppoint = defs.pointInfo[index]
 	ScriptLib.PrintLog(context, "stop point : "..stoppoint)
-	currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
+	local currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
 	for i=currentNodeIndex + 1,stoppoint do
 		table.insert(path,i)
 	end
@@ -42,9 +42,9 @@ function MovePlatform(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -93,9 +93,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -174,9 +174,9 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -184,29 +184,29 @@ function condition_EVENT_PLATFORM_REACH_POINT_268002(context, evt)
 	if 268001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_268002(context, evt)
-	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)
+	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)		
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isMoving", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
-	end
+	end	
 	ScriptLib.StopPlatform(context, defs.gadget_thunderThelfID)
 	if evt.param3 == defs.maxPointCount then
 		ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
 	ScriptLib.SetGroupVariableValueByGroup(context, "next_baton_start", 1, defs.next_baton)
 	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_thunderThelfID })
 	ScriptLib.SetGroupVariableValue(context, "ReachPoint", 1)
-	ScriptLib.SetGroupVariableValue(context, "next_baton_start", 2)
-
+	ScriptLib.SetGroupVariableValue(context, "next_baton_start", 2)	
+		
 		return 0
 	end
-
-	next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
+			
+	local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
 	next = next + 1
 	ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
 	ScriptLib.SetGroupVariableValue(context,"currentPathNodeIndex",evt.param3)
@@ -219,15 +219,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_268003(context, evt)
 			if defs.gadget_thunderThelfID ~= evt.param1 then
 				return false
 			end
-			state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
-			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
-			if state == 201 then
+			local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
+			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state) 
+			if state == 201 then 
 				return false
 			end
-			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then
+			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then 
 				return false
 			end
-
+			
 			return true
 end
 
@@ -240,12 +240,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_268004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"next_baton_start"为1
 	if ScriptLib.GetGroupVariableValue(context, "next_baton_start") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -256,16 +256,16 @@ function action_EVENT_VARIABLE_CHANGE_268004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "Release" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Release", 1, 133210393) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210268, 2)
-
+	
 	return 0
 end
 
@@ -275,7 +275,7 @@ function condition_EVENT_GROUP_LOAD_268005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "next_baton_start") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -286,10 +286,10 @@ function action_EVENT_GROUP_LOAD_268005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210268, 2)
-
+	
 	return 0
 end
 
@@ -299,7 +299,7 @@ function condition_EVENT_GROUP_LOAD_268006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "ReachPoint") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -307,19 +307,19 @@ end
 function action_EVENT_GROUP_LOAD_268006(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210268, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_268007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ReachPoint"为1
 	if ScriptLib.GetGroupVariableValue(context, "ReachPoint") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -327,6 +327,6 @@ end
 function action_EVENT_VARIABLE_CHANGE_268007(context, evt)
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210268, 3)
-
+	
 	return 0
 end

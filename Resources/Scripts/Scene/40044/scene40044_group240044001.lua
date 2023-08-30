@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240044001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -108,7 +108,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1003(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 50 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -119,17 +119,17 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_1005(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240044001) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -140,19 +140,19 @@ function action_EVENT_ANY_MONSTER_DIE_1005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1007(context, evt)
 	if evt.param1 ~= 1007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -160,24 +160,24 @@ end
 function action_EVENT_ENTER_REGION_1007(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 240044004, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1008(context, evt)
 	if evt.param1 ~= 1008 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"battle"为1
 	if ScriptLib.GetGroupVariableValue(context, "battle") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -187,8 +187,8 @@ function action_EVENT_ENTER_REGION_1008(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240044001, 1006, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -196,7 +196,7 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_1009(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240044001, 2)
-
+	
 	return 0
 end
 
@@ -207,7 +207,7 @@ function action_EVENT_CHALLENGE_FAIL_1010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -216,7 +216,7 @@ function condition_EVENT_MONSTER_BATTLE_1011(context, evt)
 	if 1001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -227,30 +227,30 @@ function action_EVENT_MONSTER_BATTLE_1011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "battle" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "battle", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1012(context, evt)
 	if evt.param1 ~= 1012 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"battle"为0
 	if ScriptLib.GetGroupVariableValue(context, "battle") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -260,25 +260,25 @@ function action_EVENT_ENTER_REGION_1012(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240044001, 1006, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1016(context, evt)
 	if evt.param1 ~= 1016 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"battle"为1
 	if ScriptLib.GetGroupVariableValue(context, "battle") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -288,20 +288,20 @@ function action_EVENT_ENTER_REGION_1016(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240044001, 1006, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1017(context, evt)
 	if evt.param1 ~= 1017 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -311,7 +311,7 @@ function action_EVENT_ENTER_REGION_1017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

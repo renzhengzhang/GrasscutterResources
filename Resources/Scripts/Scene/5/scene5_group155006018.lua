@@ -1,33 +1,33 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155006018
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155006018
 }
 
 -- DEFS_MISCS
-touchlist = {18009,18010,18011,18012,18013,18014,18015,18016}
+local touchlist = {18009,18010,18011,18012,18013,18014,18015,18016}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 		ScriptLib.RemoveExtraGroupSuite(context, 155006018, 2)
 	end,
-	["1"] = function(context)
+	["1"] = function(context)	
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 
-		current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+		local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 1) then
 			ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, 18002 )
-
-		elseif (current_env_state_id == 2) then
+		
+		elseif (current_env_state_id == 2) then 
 			ScriptLib.CreateGadget(context, { config_id = 18002 })
-	    end
+	    end 
 
 	end,
 	["2"] = function(context)
@@ -35,8 +35,8 @@ gameplayStateFuncitons =
 		ScriptLib.RemoveExtraGroupSuite(context, 155006018, 2)
 		ScriptLib.RemoveExtraGroupSuite(context, 155006018, 5)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
-		ScriptLib.AddQuestProgress(context, "72283_Success")
-
+		ScriptLib.AddQuestProgress(context, "72283_Success")	
+		
 	end,
 	["3"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -44,14 +44,14 @@ gameplayStateFuncitons =
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 4)
 		ScriptLib.RemoveExtraGroupSuite(context, 155006018, 5)
 		ScriptLib.RemoveEntityByConfigId(context, 155006018, EntityType.GADGET, 18002 )
-		ScriptLib.MarkPlayerAction(context, 6073, 3, 1)
+		ScriptLib.MarkPlayerAction(context, 6073, 3, 1) 
 	end
 
 }
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -64,9 +64,9 @@ function SetGadgetStateFromList(context,list,targetstate)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -124,9 +124,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -137,9 +137,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -191,9 +191,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -201,12 +201,12 @@ function condition_EVENT_ANY_GADGET_DIE_18003(context, evt)
 	if 18001 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"gameplayState"为1
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -217,7 +217,7 @@ function action_EVENT_ANY_GADGET_DIE_18003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -230,7 +230,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_18006(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -238,57 +238,57 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_18007(context, evt)
 	if evt.param1 ~= 18007 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 返回渊下宫当前是否为黑夜
-	    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 2) then
 	        return true
 	    else
 	        return false
-	    end
-
+	    end 
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_18007(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=234.974, y=203.4382, z=-242.7391}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=234.974, y=203.4382, z=-242.7391}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=234.974, y=203.4382, z=-242.7391}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 155006018, 5)
-
+	
 	-- 将configid为 18002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_LEAVE_REGION_18008(context, evt)
 	-- 返回渊下宫当前是否为黑夜
-	    current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
+	    local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	    if (current_env_state_id == 2) then
 	        return true
 	    else
 	        return false
-	    end
-
+	    end 
+	
 	return true
 end
 
@@ -298,11 +298,11 @@ function action_EVENT_LEAVE_REGION_18008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 155006018, 5)
-
+	
 	return 0
 end
 
@@ -313,7 +313,7 @@ function action_EVENT_QUEST_START_18017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -324,16 +324,16 @@ function action_EVENT_QUEST_FINISH_18018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_LEVEL_TAG_CHANGE_18019(context, evt)
 		--todo
-		if evt.param2 == 1 then
+		if evt.param2 == 1 then 
 			ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, 18002 )
-		elseif evt.param2 == 2 then
+		elseif evt.param2 == 2 then 	
 			ScriptLib.CreateGadget(context, { config_id = 18002 })
 		end
 	return 0

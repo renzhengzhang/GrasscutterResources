@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201015003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -72,18 +72,18 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_3007(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 201015003) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -94,14 +94,14 @@ function action_EVENT_ANY_MONSTER_DIE_3007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 201015001, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -111,7 +111,7 @@ function action_EVENT_TIMER_EVENT_3008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

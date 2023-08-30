@@ -1,37 +1,37 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144003031
 }
 
 -- DEFS_MISCS
-ProgressTable = {0,100,200,300,500}
-GalleryID = 8005
-SubScoreTimeAxis = {1}
-GadgetTargetScore = 110
-PerSecondSubScore = {-1,-2,-3,-5}
-MonsterTargetScore = {
+local ProgressTable = {0,100,200,300,500}
+local GalleryID = 8005
+local SubScoreTimeAxis = {1}
+local GadgetTargetScore = 110
+local PerSecondSubScore = {-1,-2,-3,-5}
+local MonsterTargetScore = {
         {monsterID = 26010101, score = 50},
         {monsterID = 22010201, score = 50},
         {monsterID = 21020601, score = 50},
 }
-RandomTimeAxis = {
+local RandomTimeAxis = {
         {20,40,60,80,100,120,140,160,180,200,220,240,260},
         {18,38,58,78,98,118,138,158,178,198,218,238,258},
         {22,42,62,82,102,122,142,162,182,202,222,242,262},
 }
-RandomTargetConfigID = {31026,31028,31029,31036}
-configIDList = {31027,31035,31037,31038}
-randomNum = 2
+local RandomTargetConfigID = {31026,31028,31029,31036}
+local configIDList = {31027,31035,31037,31038}
+local randomNum = 2
 
-smallRegion = 31065
-bigRegion = 31066
+local smallRegion = 31065
+local bigRegion = 31066
 
-GroupID = 144003031
+local GroupID = 144003031
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -130,9 +130,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -143,9 +143,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -233,20 +233,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_31015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"wave_2"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave_2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -261,17 +261,17 @@ function action_EVENT_VARIABLE_CHANGE_31015(context, evt)
 		-- 将本组内变量名为 "time_out" 的变量设置为 0
 		if 0 ~= ScriptLib.SetGroupVariableValue(context, "time_out", 0) then
 			ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
-
+	
 			return -1
 		end
 	end
-
+	
 	-- 将本组内变量名为 "wave_2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wave_2", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -281,13 +281,13 @@ function action_EVENT_TIMER_EVENT_31016(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 2, 144003031, {31039,31040,31041,31042,31043,31044,31045,31046,31047,31048,31049,31050,31051}, 13, 5, 5) then
 		return -1
 	end
-
+	
 	-- 延迟70秒后,向groupId为：144003031的对象,请求一次调用,并将string参数："target_timer2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144003031, "target_timer2", 70) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -298,9 +298,9 @@ function action_EVENT_TIMER_EVENT_31017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	DeduplicationRandom( context, configIDList, randomNum )
-
+	
 	return 0
 end
 
@@ -309,7 +309,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_31018(context, evt)
 	if 13 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -320,16 +320,16 @@ function action_EVENT_MONSTER_TIDE_DIE_31018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144003031, 4)
-
+	
 	-- 针对当前group内变量名为 "wave_3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "wave_3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -338,7 +338,7 @@ function condition_EVENT_GADGET_CREATE_31020(context, evt)
 	if 31014 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -349,19 +349,19 @@ function action_EVENT_GADGET_CREATE_31020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_31021(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"wave_1"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave_1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -376,17 +376,17 @@ function action_EVENT_VARIABLE_CHANGE_31021(context, evt)
 		-- 将本组内变量名为 "time_out" 的变量设置为 0
 		if 0 ~= ScriptLib.SetGroupVariableValue(context, "time_out", 0) then
 			ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
-
+	
 			return -1
 		end
 	end
-
+	
 	-- 将本组内变量名为 "wave_1" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wave_1", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -396,13 +396,13 @@ function action_EVENT_TIMER_EVENT_31022(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 144003031, {31001,31002,31003,31004,31005,31006,31007,31008,31009,31010,31011,31012,31013}, 13, 5, 5) then
 		return -1
 	end
-
+	
 	-- 延迟70秒后,向groupId为：144003031的对象,请求一次调用,并将string参数："target_timer1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144003031, "target_timer1", 70) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -413,9 +413,9 @@ function action_EVENT_TIMER_EVENT_31023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	DeduplicationRandom( context, configIDList, randomNum )
-
+	
 	return 0
 end
 
@@ -425,11 +425,11 @@ function action_EVENT_GALLERY_START_31024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 31019, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144003031, 2)
-
+	
 	return 0
 end
 
@@ -439,7 +439,7 @@ function action_EVENT_ENTER_REGION_31025(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,142,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -448,7 +448,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_31030(context, evt)
 	if 13 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -459,28 +459,28 @@ function action_EVENT_MONSTER_TIDE_DIE_31030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144003031, 3)
-
+	
 	-- 针对当前group内变量名为 "wave_2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "wave_2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_31031(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"wave_3"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave_3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -495,17 +495,17 @@ function action_EVENT_VARIABLE_CHANGE_31031(context, evt)
 		-- 将本组内变量名为 "time_out" 的变量设置为 0
 		if 0 ~= ScriptLib.SetGroupVariableValue(context, "time_out", 0) then
 			ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
-
+	
 			return -1
 		end
 	end
-
+	
 	-- 将本组内变量名为 "wave_3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wave_3", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -515,13 +515,13 @@ function action_EVENT_TIMER_EVENT_31032(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 3, 144003031, {31052,31053,31054,31055,31056,31057,31058,31059,31060,31061,31062,31063,31064}, 13, 5, 5) then
 		return -1
 	end
-
+	
 	-- 延迟70秒后,向groupId为：144003031的对象,请求一次调用,并将string参数："target_timer3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144003031, "target_timer3", 70) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -532,9 +532,9 @@ function action_EVENT_TIMER_EVENT_31033(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	DeduplicationRandom( context, configIDList, randomNum )
-
+	
 	return 0
 end
 
@@ -543,7 +543,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_31034(context, evt)
 	if 13 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -554,13 +554,13 @@ function action_EVENT_MONSTER_TIDE_DIE_31034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "wave_3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "wave_3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

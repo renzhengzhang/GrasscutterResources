@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235852007
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -69,20 +69,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7001(context, evt)
 	if evt.param1 ~= 7001 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -90,7 +90,7 @@ end
 function action_EVENT_ENTER_REGION_7001(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=307.8, y=625.1, z=-1671}
+	    local t_pos = {x=307.8, y=625.1, z=-1671}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=-120, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -99,19 +99,19 @@ function action_EVENT_ENTER_REGION_7001(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7003(context, evt)
 	if evt.param1 ~= 7003 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -119,7 +119,7 @@ end
 function action_EVENT_ENTER_REGION_7003(context, evt)
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=197, y=645, z=-1810}
+	    local t_pos = {x=197, y=645, z=-1810}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=-120, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -128,6 +128,6 @@ function action_EVENT_ENTER_REGION_7003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end

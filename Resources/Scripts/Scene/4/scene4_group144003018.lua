@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144003018
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -39,9 +39,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -70,9 +70,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -80,7 +80,7 @@ function condition_EVENT_GADGET_CREATE_18003(context, evt)
 	if 18002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -91,7 +91,7 @@ function action_EVENT_GADGET_CREATE_18003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -99,14 +99,14 @@ end
 function condition_EVENT_SELECT_OPTION_18004(context, evt)
 	-- 判断是gadgetid 18002 option_id 66
 	if 18002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 66 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -114,25 +114,25 @@ end
 function action_EVENT_SELECT_OPTION_18004(context, evt)
 	-- 停止标识为"createOption"的时间轴
 	ScriptLib.EndTimeAxis(context, "createOption")
-
-
+	
+	
 	-- 删除指定group： 144003018 ；指定config：18002；物件身上指定option：66；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 144003018, 18002, 66) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-646,y=203,z=-3}
+	local pos = {x=-646,y=203,z=-3}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400054, pos, 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 创建标识为"createOption"，时间节点为{4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "createOption", {4}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -143,6 +143,6 @@ function action_EVENT_TIME_AXIS_PASS_18005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end

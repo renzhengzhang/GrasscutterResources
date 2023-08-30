@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133213462
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	maxPathNode = 6,
 	pointarray_route = 321300036,
 	gadget_bubble = 462002,
@@ -15,9 +15,9 @@ defs = {
 -- DEFS_MISCS
 function MovePlatform(context)
 	ScriptLib.PrintLog(context, "platform to move")
-	pathnodeindex = ScriptLib.GetGroupVariableValue(context, "currentPathNode") + 1
+	local pathnodeindex = ScriptLib.GetGroupVariableValue(context, "currentPathNode") + 1
 
-	if pathnodeindex > defs.maxPathNode then
+	if pathnodeindex > defs.maxPathNode then 
 		pathnodeindex = defs.maxPathNode
 	end
 
@@ -27,9 +27,9 @@ function MovePlatform(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -82,9 +82,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -95,9 +95,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -122,20 +122,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_462011(context, evt)
 	if evt.param1 ~= 462011 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -146,6 +146,6 @@ function action_EVENT_ENTER_REGION_462011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end

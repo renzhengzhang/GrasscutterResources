@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303040
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	duration = 30,
 	group_id = 133303040,
 	gadget_sum = 9
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -79,9 +79,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -92,9 +92,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -128,9 +128,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -138,7 +138,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_40005(context, evt)
 	if GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -146,7 +146,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_40005(context, evt)
 	-- 终止识别id为56的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 56, 0)
-
+	
 	return 0
 end
 
@@ -157,25 +157,25 @@ function action_EVENT_CHALLENGE_SUCCESS_40006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 40002 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 40002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133303040, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3003, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -186,22 +186,22 @@ function action_EVENT_CHALLENGE_FAIL_40007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133303040, 2)
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3003, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 将本组内变量名为 "gadget_start" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gadget_start", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -210,7 +210,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_40008(context, evt)
 	if 40002 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -220,17 +220,17 @@ function action_EVENT_GADGET_STATE_CHANGE_40008(context, evt)
 	if 0 ~= ScriptLib.ActiveChallenge(context, 56, 273, defs.duration, 7, 201, defs.gadget_sum) then
 	return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= ScriptLib.MarkPlayerAction(context, 3003, 1, 1) then
 	return -1
 	end
-
+	
 	return 0
-
+	
 end
 
 -- 触发条件
@@ -238,11 +238,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_40009(context, evt)
 	if gadgets[evt.param2].gadget_id ~= 70290437 then
 		return false
 	end
-
+	
 	if GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -252,7 +252,7 @@ function condition_EVENT_GROUP_REFRESH_40023(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "SGV_WeatherState", 133303126) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -262,8 +262,8 @@ function action_EVENT_GROUP_REFRESH_40023(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 40002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -273,7 +273,7 @@ function condition_EVENT_GROUP_REFRESH_40024(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "SGV_WeatherState", 133303126) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -283,8 +283,8 @@ function action_EVENT_GROUP_REFRESH_40024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 40002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -294,7 +294,7 @@ function condition_EVENT_GROUP_LOAD_40025(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "gadget_start") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -304,14 +304,14 @@ function action_EVENT_GROUP_LOAD_40025(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 40002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133303040, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 

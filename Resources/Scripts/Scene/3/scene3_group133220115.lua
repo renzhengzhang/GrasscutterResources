@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220115
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -99,9 +99,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -109,7 +109,7 @@ function condition_EVENT_GATHER_115006(context, evt)
 	if 115011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -120,7 +120,7 @@ function action_EVENT_GATHER_115006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -131,19 +131,19 @@ function action_EVENT_QUEST_FINISH_115007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_115010(context, evt)
 	if evt.param1 ~= 115010 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -154,13 +154,13 @@ function action_EVENT_ENTER_REGION_115010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 创建id为115011的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 115011 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -171,7 +171,7 @@ function action_EVENT_QUEST_FINISH_115019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -180,7 +180,7 @@ function condition_EVENT_GADGET_CREATE_115020(context, evt)
 	if 115019 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -191,7 +191,7 @@ function action_EVENT_GADGET_CREATE_115020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -199,14 +199,14 @@ end
 function condition_EVENT_SELECT_OPTION_115021(context, evt)
 	-- 判断是gadgetid 115019 option_id 1
 	if 115019 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -216,26 +216,26 @@ function action_EVENT_SELECT_OPTION_115021(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 115010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133220115 ；指定config：115019；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133220115, 115019, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_115022(context, evt)
 	if evt.param1 ~= 115022 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -246,19 +246,19 @@ function action_EVENT_ENTER_REGION_115022(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_115025(context, evt)
 	if evt.param1 ~= 115025 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -269,6 +269,6 @@ function action_EVENT_ENTER_REGION_115025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

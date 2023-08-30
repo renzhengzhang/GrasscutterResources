@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235827003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -124,9 +124,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -136,7 +136,7 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE_3001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -146,7 +146,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_3006(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 75 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -154,7 +154,7 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_3006(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235827003, 3)
-
+	
 	return 0
 end
 
@@ -164,7 +164,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_3007(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 50 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -174,7 +174,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_3008(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 20 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -182,7 +182,7 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_3008(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235827003, 5)
-
+	
 	return 0
 end
 
@@ -191,7 +191,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_3016(context, evt)
 	if 3002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -202,7 +202,7 @@ function action_EVENT_ANY_MONSTER_LIVE_3016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -213,7 +213,7 @@ function action_EVENT_CHALLENGE_SUCCESS_3017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -224,20 +224,20 @@ function action_EVENT_CHALLENGE_FAIL_3018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 235827003, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 235827003, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	return 0
 end
 

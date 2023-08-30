@@ -1,11 +1,11 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308548
 }
 
 -- DEFS_MISCS
 --第一次交互的option，之后切为2
-optionID = {433}
+local optionID = {433}
 
 --常用ID：
 --{431,432} 开/关门
@@ -14,9 +14,9 @@ optionID = {433}
 --{440} 权限操作台解除物件锁定
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -82,23 +82,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_548003(context, evt)
 	-- 判断是gadgetid 548002 option_id 433
 	if 548002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 433 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -108,8 +108,8 @@ function action_EVENT_SELECT_OPTION_548003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 548002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -118,7 +118,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_548004(context, evt)
 	if 548002 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -129,7 +129,7 @@ function action_EVENT_GADGET_STATE_CHANGE_548004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_GROUP_LOAD_548005(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133308548, 548002) then
 		return false
 	end
-
+	
 	return true
 end
 

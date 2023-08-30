@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133002283
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -87,9 +87,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -97,7 +97,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_377(context, evt)
 	if 1026 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -108,7 +108,7 @@ function action_EVENT_ANY_MONSTER_LIVE_377(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -118,7 +118,7 @@ function condition_EVENT_ANY_MONSTER_DIE_378(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -129,25 +129,25 @@ function action_EVENT_ANY_MONSTER_DIE_378(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 1031, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 1032, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 1033, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_CHALLENGE_SUCCESS_379(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -169,12 +169,12 @@ function action_EVENT_CHALLENGE_FAIL_380(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "13300228305") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

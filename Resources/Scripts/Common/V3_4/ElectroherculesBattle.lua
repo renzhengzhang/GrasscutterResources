@@ -3,15 +3,15 @@
 ||	owner: 		luyao.huang
 ||	description:	3.4鬼兜虫斗虫活动
 ||	LogName:	ElectroherculesBattle
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 ------
-local_defs =
+local local_defs = 
 {
     gallery_id = 32001
 }
-Tri = {
+local Tri = {
     --后续换成select_difficulty
     --[1] = { name = "select_difficulty", config_id = 8000001, event = EventType.EVENT_SELECT_DIFFICULTY, source = "", condition = "", action = "action_select_difficulty", trigger_count = 0},
     [1] = { name = "variable_change_GM", config_id = 8000001, event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change_GM", trigger_count = 0},
@@ -34,7 +34,7 @@ end
 ------------------------------------------------------------------
 --测试时间轴:每1秒打印一次血量
 function action_time_axis_pass(context,evt)
-    difficulty = ScriptLib.GetGroupVariableValue(context,"difficulty")
+    local difficulty = ScriptLib.GetGroupVariableValue(context,"difficulty")
 
     EnemyHP = ScriptLib.GetMonsterHpPercent(context, base_info.group_id, EnemyElectrohercules[difficulty])
     ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] action_time_axis_pass: 敌方生命:"..EnemyHP.."%")
@@ -45,11 +45,11 @@ end
 function action_select_difficulty(context,evt)
     ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] action_select_difficulty： 玩家选择挑战难度，加载对应suite")
     --设置difficulty
-    difficulty = evt.param2
+    local difficulty = evt.param2
     ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] action_select_difficulty： 玩家选择挑战难度，难度为："..difficulty)
     ScriptLib.SetGroupVariableValue(context,"difficulty",difficulty)
     --拉起Gallery
-    gallery_id = evt.param1
+    local gallery_id = evt.param1
     local_defs.gallery_id = gallery_id
     LF_Start_Play(context,difficulty,gallery_id)
     ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] action_select_difficulty： 拉起Gallery，ID="..gallery_id)
@@ -63,12 +63,12 @@ end
 function action_variable_change_GM(context,evt)
     ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] action_variable_change_GM： 玩家选择挑战难度，加载对应suite")
     if evt.source_name == "GM_Select_Difficulty" and evt.param1 ~= 0 then
-        difficulty = evt.param1
-        --difficulty = evt.param3
+        local difficulty = evt.param1
+        --local difficulty = evt.param3
         ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] action_variable_change_GM： 玩家选择挑战难度，难度为："..difficulty)
         ScriptLib.SetGroupVariableValue(context,"difficulty",difficulty)
 
-        gallery_id = 32001
+        local gallery_id = 32001
         local_defs.gallery_id = gallery_id
         LF_Start_Play(context,difficulty,gallery_id)
         ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] action_variable_change_GM： 拉起默认Gallery，ID="..gallery_id)
@@ -88,19 +88,19 @@ end
 function action_monster_die(context,evt)
 
     ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] action_monster_die: 怪物死亡")
-    difficulty = ScriptLib.GetGroupVariableValue(context,"difficulty")
+    local difficulty = ScriptLib.GetGroupVariableValue(context,"difficulty")
     if evt.param1 == PlayerElectrohercules then
         ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] action_monster_die: 角色死亡，失败")
         ScriptLib.StopGallery(context,local_defs.gallery_id,true)
     end
-
+    
     if evt.param1 == EnemyElectrohercules[difficulty] then
         ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] action_monster_die: 敌人死亡，成功")
         ScriptLib.StopGallery(context,local_defs.gallery_id,false)
     end
     --运营埋点，获得结束时敌我双方的生命值百分比
-    PlayerHP = ScriptLib.GetMonsterHpPercent(context, base_info.group_id, PlayerElectrohercules)
-    EnemyHP = ScriptLib.GetMonsterHpPercent(context, base_info.group_id, EnemyElectrohercules[difficulty])
+    local PlayerHP = ScriptLib.GetMonsterHpPercent(context, base_info.group_id, PlayerElectrohercules)
+    local EnemyHP = ScriptLib.GetMonsterHpPercent(context, base_info.group_id, EnemyElectrohercules[difficulty])
     ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] action_monster_die: 对局结束，玩家生命:"..PlayerHP.."% 敌方生命:"..EnemyHP.."%")
     ScriptLib.MarkGroupLuaAction(context, "ElectroherculesBattleEnd", "", {["self_hp"] = PlayerHP,["enemy_hp"] = EnemyHP})
 
@@ -116,7 +116,7 @@ function LF_Start_Play(context, difficulty, gallery_id)
 	ScriptLib.SetWeatherAreaState(context, weather_id, 1)
     --创建敌我Monster
     ScriptLib.CreateMonster(context, { config_id = PlayerElectrohercules, delay_time = 0 })
-    ret = ScriptLib.CreateMonster(context, { config_id = EnemyElectrohercules[difficulty], delay_time = 0 })
+    local ret = ScriptLib.CreateMonster(context, { config_id = EnemyElectrohercules[difficulty], delay_time = 0 })
     ScriptLib.PrintContextLog(context,"## [ElectroherculesBattle] LF_Start_Play: 创建敌人结果为"..ret)
     --拉起Gallery
     ScriptLib.StartGallery(context,gallery_id)

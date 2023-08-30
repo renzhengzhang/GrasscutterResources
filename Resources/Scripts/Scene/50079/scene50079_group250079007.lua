@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250079007
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -101,16 +101,16 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_7006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250079007, 2)
-
+	
 	return 0
 end
 
@@ -119,7 +119,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7007(context, evt)
 	if 7003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -127,7 +127,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_7007(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250079007, 3)
-
+	
 	return 0
 end
 
@@ -136,7 +136,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7008(context, evt)
 	if 7004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -144,7 +144,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_7008(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250079007, 4)
-
+	
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7009(context, evt)
 	if 7005 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -161,6 +161,6 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_7009(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250079007, 2)
-
+	
 	return 0
 end

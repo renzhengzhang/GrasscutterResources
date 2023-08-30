@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144001109
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -94,20 +94,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_109002(context, evt)
 	if evt.param1 ~= 109002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -118,13 +118,13 @@ function action_EVENT_ENTER_REGION_109002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "4001002" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "4001002", 1, 144001002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -134,8 +134,8 @@ function condition_EVENT_ANY_MONSTER_DIE_109003(context, evt)
 	if evt.param1 ~= 109001 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -146,7 +146,7 @@ function action_EVENT_ANY_MONSTER_DIE_109003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -154,7 +154,7 @@ end
 function action_EVENT_QUEST_START_109004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144001109, 2)
-
+	
 	return 0
 end
 
@@ -164,8 +164,8 @@ function condition_EVENT_ANY_MONSTER_DIE_109011(context, evt)
 	if evt.param1 ~= 109001 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -176,7 +176,7 @@ function action_EVENT_ANY_MONSTER_DIE_109011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -184,6 +184,6 @@ end
 function action_EVENT_TIMER_EVENT_109012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144001115, 2)
-
+	
 	return 0
 end

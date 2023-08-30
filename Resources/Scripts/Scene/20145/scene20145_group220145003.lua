@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220145003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -101,27 +101,27 @@ function condition_EVENT_GADGET_STATE_CHANGE_3005(context, evt)
 	if 3001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"first"为0
 	if ScriptLib.GetGroupVariableValue(context, "first") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_3005(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=433.1534, y=115.5686, z=528.8632}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=433.1534, y=115.5686, z=528.8632}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=433.1534, y=115.5686, z=528.8632}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -130,7 +130,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3006(context, evt)
 	if 3001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -141,19 +141,19 @@ function action_EVENT_GADGET_STATE_CHANGE_3006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	-- 将configid为 3002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "first" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "first", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -162,7 +162,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3007(context, evt)
 	if 3002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -173,19 +173,19 @@ function action_EVENT_GADGET_STATE_CHANGE_3007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	-- 将configid为 3001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "first" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "first", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -194,26 +194,26 @@ function condition_EVENT_GADGET_STATE_CHANGE_3008(context, evt)
 	if 3002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"first"为0
 	if ScriptLib.GetGroupVariableValue(context, "first") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_3008(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=574.626, y=93.13, z=512.2806}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=574.626, y=93.13, z=512.2806}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=574.626, y=93.13, z=512.2806}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end

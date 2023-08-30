@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220134041
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	groupid = 220134041
 }
 
 -- DEFS_MISCS
-       defs = {
+local        defs = {
 
-        gear_info =
+        gear_info = 
                {        --connect: 每个物件各个旋转档位可连接的对象 0表示无可连接
                 [1] = { config_id=41001 , connect = {41008, 41005, 41006}, point_array_id = 34 },
                 [2] = { config_id=41002 , connect = {41004, 41006}, point_array_id = 35 },
@@ -19,29 +19,26 @@ defs = {
                 [4] = { config_id=41004 , connect = {41008, 41009, 41005}, point_array_id = 37},
                 [5] = { config_id= 41005 , connect = {41007,  41009}, point_array_id = 38 },
                 [6] = { config_id=41006 , connect = {41005, 41007, 41008}, point_array_id = 39 },
-
- [7] = { config_id=41007 , connect = {41008,41008}, point_array_id = 103 },
-
-[8] = { config_id=41008 , connect = {41009,41007}, point_array_id = 104 },
-
-[9] = { config_id=41009 , connect = {41008,41008}, point_array_id = 105},
-
-        },
+                [7] = { config_id=41007 , connect = {41008,41008}, point_array_id = 103 },
+              [8] = { config_id=41008 , connect = {41009,41007}, point_array_id = 104 },
+  [9] = { config_id=41009 , connect = {41008,41008}, point_array_id = 105},
+              
+        }, 
 
         --几种解
-        solutions =
+        solutions = 
         {
                 --[解法x] = {gear_info[1]切到它的第x档, gear_info[2]切到它的第y档...}
                 [1] = { connection = {1,4,4,4,4,4}, ends = { }},
-
+              
         },
 turn_option = 31,
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -195,9 +192,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -208,9 +205,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -235,28 +232,28 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41010(context, evt)
 	-- 判断是gadgetid 为 41001的移动平台，是否到达了34 的点集中的 2 点
-
+	
 	if 41001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 34 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -264,9 +261,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41010(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "botleft", 2)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41001)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41013 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41014 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41013 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41014 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41015 })
 	  end
 	  return 0
@@ -278,48 +275,48 @@ function condition_EVENT_GADGET_STATE_CHANGE_41012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "camera") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41012(context, evt)
 	-- 触发镜头注目，注目位置为坐标（316，642，-1487），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=316, y=642, z=-1487}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=316, y=642, z=-1487}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 将本组内变量名为 "camera" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "camera", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41016(context, evt)
 	-- 判断是gadgetid 为 41001的移动平台，是否到达了34 的点集中的 1 点
-
+	
 	if 41001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 34 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -327,9 +324,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41016(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "botleft", 1)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 41001)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41014 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41013 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41014 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41013 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41015 })
 	  end
 	  return 0
@@ -338,20 +335,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41017(context, evt)
 	-- 判断是gadgetid 为 41001的移动平台，是否到达了34 的点集中的 3 点
-
+	
 	if 41001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 34 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -359,9 +356,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41017(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "botleft", 3)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 41001)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41015 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41014 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41015 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41014 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41013 })
 	  end
 	  return 0
@@ -372,7 +369,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_41018(context, evt)
 	if 41001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -383,22 +380,22 @@ function action_EVENT_GADGET_STATE_CHANGE_41018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 41014 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 41015 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -407,30 +404,30 @@ function condition_EVENT_GADGET_STATE_CHANGE_41019(context, evt)
 	if 41001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41019(context, evt)
 		if ScriptLib.GetGroupVariableValue(context,"botleft") == 1 then
-	 ScriptLib.CreateGadget(context, { config_id = 41014 })
+	 ScriptLib.CreateGadget(context, { config_id = 41014 }) 
 		  ScriptLib.KillEntityByConfigId(context, { config_id = 41013 })
 		  ScriptLib.KillEntityByConfigId(context, { config_id = 41015 })
-
+	
 		elseif ScriptLib.GetGroupVariableValue(context,"botleft") == 2 then
-
-			ScriptLib.CreateGadget(context, { config_id = 41013 })
-		   ScriptLib.KillEntityByConfigId(context, { config_id = 41014 })
+		  
+			ScriptLib.CreateGadget(context, { config_id = 41013 }) 
+		   ScriptLib.KillEntityByConfigId(context, { config_id = 41014 })  
 		  ScriptLib.KillEntityByConfigId(context, { config_id = 41015 })
-
+	
 		elseif ScriptLib.GetGroupVariableValue(context,"botleft") == 3 then
-
-			ScriptLib.CreateGadget(context, { config_id = 41015 })
-		   ScriptLib.KillEntityByConfigId(context, { config_id = 41014 })
+		  
+			ScriptLib.CreateGadget(context, { config_id = 41015 }) 
+		   ScriptLib.KillEntityByConfigId(context, { config_id = 41014 })  
 		  ScriptLib.KillEntityByConfigId(context, { config_id = 41013 })
-
-
+		  
+	  
 	end
 	  return 0
 end
@@ -438,20 +435,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41023(context, evt)
 	-- 判断是gadgetid 为 41002的移动平台，是否到达了35 的点集中的 1 点
-
+	
 	if 41002 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 35 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -459,10 +456,10 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41023(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "botmid", 1)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41002)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41021 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41022 })
-
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41021 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41022 })  
+	   
 	  end
 	  return 0
 end
@@ -470,20 +467,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41024(context, evt)
 	-- 判断是gadgetid 为 41002的移动平台，是否到达了35 的点集中的 2 点
-
+	
 	if 41002 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 35 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -491,10 +488,10 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41024(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "botmid", 2)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41002)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41022 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41021 })
-
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41022 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41021 })  
+	   
 	  end
 	  return 0
 end
@@ -504,7 +501,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_41025(context, evt)
 	if 41002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -515,15 +512,15 @@ function action_EVENT_GADGET_STATE_CHANGE_41025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 41022 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -532,22 +529,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_41026(context, evt)
 	if 41002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41026(context, evt)
 		if ScriptLib.GetGroupVariableValue(context,"botmid") == 1 then
-	 ScriptLib.CreateGadget(context, { config_id = 41021 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41022 })
-
+	 ScriptLib.CreateGadget(context, { config_id = 41021 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41022 }) 
+	
 		elseif ScriptLib.GetGroupVariableValue(context,"botmid") == 2 then
-
-			ScriptLib.CreateGadget(context, { config_id = 41022 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41021 })
-
-
+		  
+			ScriptLib.CreateGadget(context, { config_id = 41022 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41021 }) 
+		  
+	  
 	end
 	  return 0
 end
@@ -555,20 +552,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41030(context, evt)
 	-- 判断是gadgetid 为 41003的移动平台，是否到达了36 的点集中的 1 点
-
+	
 	if 41003 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 36 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -576,9 +573,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41030(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "botright", 1)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41003)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41027 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41028 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41027 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41028 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41029 })
 	  end
 	  return 0
@@ -587,20 +584,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41031(context, evt)
 	-- 判断是gadgetid 为 41003的移动平台，是否到达了36 的点集中的 3 点
-
+	
 	if 41003 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 36 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -608,9 +605,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41031(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "botright", 3)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41003)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41029 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41027 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41029 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41027 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41028 })
 	  end
 	  return 0
@@ -619,20 +616,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41032(context, evt)
 	-- 判断是gadgetid 为 41003的移动平台，是否到达了36 的点集中的 2 点
-
+	
 	if 41003 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 36 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -640,9 +637,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41032(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "botright", 2)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41003)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41028 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41027 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41028 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41027 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41029 })
 	  end
 	  return 0
@@ -653,7 +650,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_41033(context, evt)
 	if 41003 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -664,22 +661,22 @@ function action_EVENT_GADGET_STATE_CHANGE_41033(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 41028 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 41029 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -688,27 +685,27 @@ function condition_EVENT_GADGET_STATE_CHANGE_41034(context, evt)
 	if 41003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41034(context, evt)
 		if ScriptLib.GetGroupVariableValue(context,"botright") == 1 then
-	ScriptLib.CreateGadget(context, { config_id = 41027 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41028 })
+	ScriptLib.CreateGadget(context, { config_id = 41027 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41028 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41029 })
 		elseif ScriptLib.GetGroupVariableValue(context,"botright") == 2 then
-
-			ScriptLib.CreateGadget(context, { config_id = 41028 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41027 })
+		  
+			ScriptLib.CreateGadget(context, { config_id = 41028 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41027 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41029 })
 		elseif ScriptLib.GetGroupVariableValue(context,"botright") == 3 then
-
-			ScriptLib.CreateGadget(context, { config_id = 41029 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41027 })
+		  
+			ScriptLib.CreateGadget(context, { config_id = 41029 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41027 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41028 })
-
+	  
 	end
 	  return 0
 end
@@ -716,20 +713,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41038(context, evt)
 	-- 判断是gadgetid 为 41004的移动平台，是否到达了37 的点集中的 1 点
-
+	
 	if 41004 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 37 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -737,9 +734,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41038(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "midleft", 1)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41004)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41035 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41036 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41035 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41036 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41037 })
 	  end
 	  return 0
@@ -748,20 +745,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41039(context, evt)
 	-- 判断是gadgetid 为 41004的移动平台，是否到达了37 的点集中的 2 点
-
+	
 	if 41004 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 37 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -769,9 +766,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41039(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "midleft", 2)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41004)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41036 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41037 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41036 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41037 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41035 })
 	  end
 	  return 0
@@ -780,20 +777,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41040(context, evt)
 	-- 判断是gadgetid 为 41004的移动平台，是否到达了37 的点集中的 3 点
-
+	
 	if 41004 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 37 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -801,9 +798,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41040(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "midleft", 3)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41004)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41035 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41036 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41035 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41036 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41037 })
 	  end
 	  return 0
@@ -814,7 +811,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_41041(context, evt)
 	if 41004 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -825,22 +822,22 @@ function action_EVENT_GADGET_STATE_CHANGE_41041(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 41036 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 41037 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -849,28 +846,28 @@ function condition_EVENT_GADGET_STATE_CHANGE_41042(context, evt)
 	if 41004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41042(context, evt)
 		if ScriptLib.GetGroupVariableValue(context,"midleft") == 1 then
-	ScriptLib.CreateGadget(context, { config_id = 41035 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41036 })
+	ScriptLib.CreateGadget(context, { config_id = 41035 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41036 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41037 })
-
+	
 		elseif ScriptLib.GetGroupVariableValue(context,"midleft") == 2 then
-
-	ScriptLib.CreateGadget(context, { config_id = 41036 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41035 })
+		  
+	ScriptLib.CreateGadget(context, { config_id = 41036 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41035 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41037 })
 		elseif ScriptLib.GetGroupVariableValue(context,"midleft") == 3 then
-
-	ScriptLib.CreateGadget(context, { config_id = 41037 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41036 })
+		  
+	ScriptLib.CreateGadget(context, { config_id = 41037 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41036 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41035 })
-
+	  
 	end
 	  return 0
 end
@@ -878,20 +875,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41045(context, evt)
 	-- 判断是gadgetid 为 41005的移动平台，是否到达了38 的点集中的 1 点
-
+	
 	if 41005 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 38 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -899,10 +896,10 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41045(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "midmid", 1)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41005)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41044 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41043 })
-
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41044 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41043 })  
+	   
 	  end
 	  return 0
 end
@@ -910,20 +907,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41046(context, evt)
 	-- 判断是gadgetid 为 41005的移动平台，是否到达了38 的点集中的 2 点
-
+	
 	if 41005 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 38 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -931,10 +928,10 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41046(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "midmid", 2)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41005)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41043 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41044 })
-
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41043 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41044 })  
+	   
 	  end
 	  return 0
 end
@@ -944,7 +941,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_41047(context, evt)
 	if 41005 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -955,15 +952,15 @@ function action_EVENT_GADGET_STATE_CHANGE_41047(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 41044 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -972,22 +969,22 @@ function condition_EVENT_GADGET_STATE_CHANGE_41048(context, evt)
 	if 41005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41048(context, evt)
 		if ScriptLib.GetGroupVariableValue(context,"midmid") == 1 then
-	 ScriptLib.CreateGadget(context, { config_id = 41044 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41043 })
-
+	 ScriptLib.CreateGadget(context, { config_id = 41044 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41043 }) 
+	
 		elseif ScriptLib.GetGroupVariableValue(context,"midmid") == 2 then
-
-			ScriptLib.CreateGadget(context, { config_id = 41043 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41044 })
-
-
+		  
+			ScriptLib.CreateGadget(context, { config_id = 41043 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41044 }) 
+		  
+	  
 	end
 	  return 0
 end
@@ -995,20 +992,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41052(context, evt)
 	-- 判断是gadgetid 为 41006的移动平台，是否到达了39 的点集中的 1 点
-
+	
 	if 41006 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 39 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1016,9 +1013,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41052(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "midright", 1)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41006)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41049 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41050 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41049 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41050 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41051 })
 	  end
 	  return 0
@@ -1027,20 +1024,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41053(context, evt)
 	-- 判断是gadgetid 为 41006的移动平台，是否到达了39 的点集中的 2 点
-
+	
 	if 41006 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 39 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1048,9 +1045,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41053(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "midright", 2)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41006)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41050 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41049 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41050 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41049 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41051 })
 	  end
 	  return 0
@@ -1059,20 +1056,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41054(context, evt)
 	-- 判断是gadgetid 为 41006的移动平台，是否到达了39 的点集中的 3 点
-
+	
 	if 41006 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 39 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1080,9 +1077,9 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_41054(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "midright", 3)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41006)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41051 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41049 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41051 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41049 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41050 })
 	  end
 	  return 0
@@ -1093,7 +1090,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_41055(context, evt)
 	if 41006 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1104,22 +1101,22 @@ function action_EVENT_GADGET_STATE_CHANGE_41055(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 41050 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 41051 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -1128,29 +1125,29 @@ function condition_EVENT_GADGET_STATE_CHANGE_41056(context, evt)
 	if 41006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41056(context, evt)
 		if ScriptLib.GetGroupVariableValue(context,"midright") == 1 then
-	ScriptLib.CreateGadget(context, { config_id = 41049 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41050 })
+	ScriptLib.CreateGadget(context, { config_id = 41049 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41050 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41051 })
-
+	
 		elseif ScriptLib.GetGroupVariableValue(context,"midright") == 2 then
-
-
-		ScriptLib.CreateGadget(context, { config_id = 41050 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41049 })
+		  
+				
+		ScriptLib.CreateGadget(context, { config_id = 41050 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41049 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41051 })
 	elseif ScriptLib.GetGroupVariableValue(context,"midright") == 3 then
-	ScriptLib.CreateGadget(context, { config_id = 41051 })
-		ScriptLib.KillEntityByConfigId(context, { config_id = 41049 })
+	ScriptLib.CreateGadget(context, { config_id = 41051 }) 
+		ScriptLib.KillEntityByConfigId(context, { config_id = 41049 })  
 	   ScriptLib.KillEntityByConfigId(context, { config_id = 41050 })
-
-
+		  
+	  
 	end
 	  return 0
 end
@@ -1160,23 +1157,23 @@ function condition_EVENT_GADGET_STATE_CHANGE_41058(context, evt)
 	if 41008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41058(context, evt)
 		if ScriptLib.GetGroupVariableValue(context,"topright") == 1 then
-	ScriptLib.CreateGadget(context, { config_id = 41057 })
-
-
+	ScriptLib.CreateGadget(context, { config_id = 41057 }) 
+	 
+	
 		elseif ScriptLib.GetGroupVariableValue(context,"topleft") == 1 then
-
-
-		ScriptLib.CreateGadget(context, { config_id = 41020 })
-
-
-
+		  
+				
+		ScriptLib.CreateGadget(context, { config_id = 41020 }) 
+		
+		  
+	  
 	end
 	  return 0
 end
@@ -1186,25 +1183,25 @@ function condition_EVENT_GADGET_STATE_CHANGE_41059(context, evt)
 	if 41008 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41059(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 41007)== 0
-	  then
-	ScriptLib.KillEntityByConfigId(context, { config_id = 41020 })
-
+	  then 		
+	ScriptLib.KillEntityByConfigId(context, { config_id = 41020 })  
+	
 	end
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 41009)== 0
-	  then
-
-
-	ScriptLib.KillEntityByConfigId(context, { config_id = 41057 })
-
-
-
+	  then 		
+		  
+			
+	ScriptLib.KillEntityByConfigId(context, { config_id = 41057 })  
+		
+		  
+	  
 	end
 	  return 0
 end
@@ -1212,20 +1209,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41060(context, evt)
 	-- 判断是gadgetid 为 41008的移动平台，是否到达了104 的点集中的 2 点
-
+	
 	if 41008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 104 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1234,17 +1231,17 @@ function action_EVENT_PLATFORM_REACH_POINT_41060(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "topleft", 1)
 	  ScriptLib.SetGroupVariableValue(context, "topright", 0)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41008)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41020 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41020 }) 
 	  end
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 41009)== 0
-	  then
-
-
-	ScriptLib.KillEntityByConfigId(context, { config_id = 41057 })
-
-
-
+	  then 		
+		  
+			
+	ScriptLib.KillEntityByConfigId(context, { config_id = 41057 })  
+		
+		  
+	  
 	end
 	  return 0
 end
@@ -1252,20 +1249,20 @@ end
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_41061(context, evt)
 	-- 判断是gadgetid 为 41008的移动平台，是否到达了104 的点集中的 1 点
-
+	
 	if 41008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 104 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1274,17 +1271,17 @@ function action_EVENT_PLATFORM_REACH_POINT_41061(context, evt)
 	  ScriptLib.SetGroupVariableValue(context, "topleft", 0)
 	  ScriptLib.SetGroupVariableValue(context, "topright", 1)
 	  if ScriptLib.GetGadgetStateByConfigId(context, 0, 41008)== 201
-	  then
-		ScriptLib.CreateGadget(context, { config_id = 41057 })
+	  then 		
+		ScriptLib.CreateGadget(context, { config_id = 41057 }) 
 	  end
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 41007)== 0
-	  then
-
-
-	ScriptLib.KillEntityByConfigId(context, { config_id = 41020 })
-
-
-
+	  then 		
+		  
+			
+	ScriptLib.KillEntityByConfigId(context, { config_id = 41020 })  
+		
+		  
+	  
 	end
 	  return 0
 end
@@ -1294,17 +1291,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_41062(context, evt)
 	if 41007 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41062(context, evt)
-
-	ScriptLib.CreateGadget(context, { config_id = 41020 })
-
-
-
+	
+	ScriptLib.CreateGadget(context, { config_id = 41020 }) 
+	 
+	
+	
 	  return 0
 end
 
@@ -1313,18 +1310,18 @@ function condition_EVENT_GADGET_STATE_CHANGE_41063(context, evt)
 	if 41007 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41063(context, evt)
-	if ScriptLib.GetGroupVariableValue(context,"topleft") == 0
+	if ScriptLib.GetGroupVariableValue(context,"topleft") == 0 
 	or ScriptLib.GetGadgetStateByConfigId(context, 0, 41008)== 0
 	then
-	ScriptLib.KillEntityByConfigId(context, { config_id = 41020 })
+	ScriptLib.KillEntityByConfigId(context, { config_id = 41020 }) 
 	end
-
+	
 	  return 0
 end
 
@@ -1333,15 +1330,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_41064(context, evt)
 	if 41009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41064(context, evt)
-
-	ScriptLib.CreateGadget(context, { config_id = 41057 })
-
+	
+	ScriptLib.CreateGadget(context, { config_id = 41057 }) 
+	
 	  return 0
 end
 
@@ -1350,18 +1347,18 @@ function condition_EVENT_GADGET_STATE_CHANGE_41065(context, evt)
 	if 41009 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_41065(context, evt)
-	if ScriptLib.GetGroupVariableValue(context,"topright") == 0 or
+	if ScriptLib.GetGroupVariableValue(context,"topright") == 0 or 
 	ScriptLib.GetGadgetStateByConfigId(context, 0, 41008)== 0
 	then
-	ScriptLib.KillEntityByConfigId(context, { config_id = 41057 })
+	ScriptLib.KillEntityByConfigId(context, { config_id = 41057 }) 
 	end
-
+	
 	  return 0
 end
 

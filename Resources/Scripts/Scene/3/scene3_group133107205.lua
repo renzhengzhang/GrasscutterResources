@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133107205
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -94,9 +94,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -104,7 +104,7 @@ function condition_EVENT_GATHER_205001(context, evt)
 	if 205002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -115,7 +115,7 @@ function action_EVENT_GATHER_205001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -124,7 +124,7 @@ function condition_EVENT_GATHER_205003(context, evt)
 	if 205004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -135,7 +135,7 @@ function action_EVENT_GATHER_205003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -145,7 +145,7 @@ function condition_EVENT_GROUP_REFRESH_205005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mine1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -156,19 +156,19 @@ function action_EVENT_GROUP_REFRESH_205005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_205006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"mine1"为1
 	if ScriptLib.GetGroupVariableValue(context, "mine1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -179,19 +179,19 @@ function action_EVENT_VARIABLE_CHANGE_205006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_205007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"mine2"为1
 	if ScriptLib.GetGroupVariableValue(context, "mine2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -202,7 +202,7 @@ function action_EVENT_VARIABLE_CHANGE_205007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -212,7 +212,7 @@ function condition_EVENT_GROUP_REFRESH_205008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mine2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -223,7 +223,7 @@ function action_EVENT_GROUP_REFRESH_205008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -232,7 +232,7 @@ function condition_EVENT_GATHER_205011(context, evt)
 	if 205009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -243,7 +243,7 @@ function action_EVENT_GATHER_205011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -252,7 +252,7 @@ function condition_EVENT_GATHER_205012(context, evt)
 	if 205010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -263,19 +263,19 @@ function action_EVENT_GATHER_205012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_205013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"mine3"为1
 	if ScriptLib.GetGroupVariableValue(context, "mine3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -286,19 +286,19 @@ function action_EVENT_VARIABLE_CHANGE_205013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_205014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"mine4"为1
 	if ScriptLib.GetGroupVariableValue(context, "mine4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -309,7 +309,7 @@ function action_EVENT_VARIABLE_CHANGE_205014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -319,7 +319,7 @@ function condition_EVENT_GROUP_REFRESH_205015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mine3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -330,7 +330,7 @@ function action_EVENT_GROUP_REFRESH_205015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -340,7 +340,7 @@ function condition_EVENT_GROUP_REFRESH_205016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mine4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -351,6 +351,6 @@ function action_EVENT_GROUP_REFRESH_205016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

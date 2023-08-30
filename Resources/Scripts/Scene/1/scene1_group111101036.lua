@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101036
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	elevatorOptionID = 24,
 	gadget_elevatorID = 36001,
 	finalMovePoints = {1,2,3,4,5}
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -82,24 +82,24 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.source_name ~= "moveState"then return false end
-
+	
 	-- 判断变量"moveState"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "moveState", 111101036) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -112,16 +112,16 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.source_name ~= "moveState"then return false end
-
+	
 	-- 判断变量"moveState"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "moveState", 111101036) ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 

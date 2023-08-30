@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220200
 }
 
@@ -16,9 +16,9 @@ function SLC_PlayCutScene_UnlockSakura(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -91,15 +91,15 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_OFFERING_LEVELUP_200002(context, evt)
 	-- 将在groupid为 133220200 中的 configid为 200001 的供奉物件根据stateList对应等级设置其状态
-
+	
 	if 2 ~= evt.param1 then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_OfferingLevel")
 	  return -1
@@ -107,8 +107,8 @@ function action_EVENT_OFFERING_LEVELUP_200002(context, evt)
 	if 0 ~=	ScriptLib.SetGroupGadgetStateByConfigId(context, 133220200, 200004, 201) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_OfferingLevel")
 	 	return -1
-	end
-
+	end	
+	
 	return 0
 end
 
@@ -119,6 +119,6 @@ function action_EVENT_QUEST_FINISH_200005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end

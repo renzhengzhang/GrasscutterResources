@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133302233
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_CoreID = 233005,
 	monster_BossID = 233002,
 	gadget_Point_1 = 233006,
@@ -16,9 +16,9 @@ defs = {
 }
 
 -- DEFS_MISCS
-RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-DeathField ={
+local DeathField ={
 	CoreID = defs.gadget_CoreID,
 	BossID = defs.monster_BossID,
 	BossSuite = 2,
@@ -26,7 +26,7 @@ DeathField ={
 	PointList = {defs.gadget_Point_1,defs.gadget_Point_2,defs.gadget_Point_3},
 }
 
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 1,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -35,9 +35,9 @@ CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -115,9 +115,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -128,9 +128,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -182,9 +182,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -193,7 +193,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_233003(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 70 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -204,13 +204,13 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_233003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 233017, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -221,7 +221,7 @@ function action_EVENT_QUEST_START_233013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -230,7 +230,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_233015(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133302233, 233014) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -238,7 +238,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_233015(context, evt)
 	 ScriptLib.SetWeatherAreaState(context, 4076, 1)
 	 ScriptLib.SetWeatherAreaState(context, 4046, 0)
-
+	
 	return 0
 end
 
@@ -247,7 +247,7 @@ function condition_EVENT_ANY_MONSTER_DIE_233019(context, evt)
 	if 233002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -257,8 +257,8 @@ function action_EVENT_ANY_MONSTER_DIE_233019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 233012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -267,7 +267,7 @@ function condition_EVENT_ANY_GADGET_DIE_233027(context, evt)
 	if 233005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -275,13 +275,13 @@ end
 function action_EVENT_ANY_GADGET_DIE_233027(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302233, 4)
-
+	
 	-- 将configid为 233014 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 233014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -290,7 +290,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_233028(context, evt)
 	if 233006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -301,8 +301,8 @@ function action_EVENT_GADGET_STATE_CHANGE_233028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -311,7 +311,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_233029(context, evt)
 	if 233007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -322,8 +322,8 @@ function action_EVENT_GADGET_STATE_CHANGE_233029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -332,7 +332,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_233030(context, evt)
 	if 233008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -343,8 +343,8 @@ function action_EVENT_GADGET_STATE_CHANGE_233030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 

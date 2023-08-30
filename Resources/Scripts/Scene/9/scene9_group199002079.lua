@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002079
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
         --开启操作台configID
         starter_gadget = 79002,
         --终点Region的ConfigID
@@ -33,14 +33,14 @@ defs = {
 
         father_challenge = 2018,
 
-        child_time_challenge =
+        child_time_challenge = 
         {
-		{challenge_id = 2019, aim = 140},
+		{challenge_id = 2019, aim = 140},                
 		{challenge_id = 2029, aim = 100},
-
+                        
 	},
 
-        child_count_challenge =
+        child_count_challenge = 
         {
  	      {challenge_id = 2025, aim = 6},
         },
@@ -48,9 +48,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -344,9 +344,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -357,9 +357,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -456,9 +456,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -466,7 +466,7 @@ function condition_EVENT_ANY_GADGET_DIE_79007(context, evt)
 	if 79241 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -474,20 +474,20 @@ end
 function action_EVENT_ANY_GADGET_DIE_79007(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002079, 4)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 79037 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 改变指定group组199002079中， configid为79001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 199002079, 79001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -496,7 +496,7 @@ function condition_EVENT_ANY_GADGET_DIE_79031(context, evt)
 	if 79001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -504,23 +504,23 @@ end
 function action_EVENT_ANY_GADGET_DIE_79031(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002079, 5)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 79053 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 改变指定group组199002079中， configid为79032的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 199002079, 79032, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199002079, 3)
-
+	
 	return 0
 end
 
@@ -529,7 +529,7 @@ function condition_EVENT_ANY_GADGET_DIE_79035(context, evt)
 	if 79032 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -537,23 +537,23 @@ end
 function action_EVENT_ANY_GADGET_DIE_79035(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002079, 6)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 79072 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 改变指定group组199002079中， configid为79033的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 199002079, 79033, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199002079, 4)
-
+	
 	return 0
 end
 
@@ -562,7 +562,7 @@ function condition_EVENT_ANY_GADGET_DIE_79042(context, evt)
 	if 79033 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -570,23 +570,23 @@ end
 function action_EVENT_ANY_GADGET_DIE_79042(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002079, 7)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 79086 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 改变指定group组199002079中， configid为79036的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 199002079, 79036, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199002079, 5)
-
+	
 	return 0
 end
 
@@ -595,7 +595,7 @@ function condition_EVENT_ANY_GADGET_DIE_79043(context, evt)
 	if 79036 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -603,20 +603,20 @@ end
 function action_EVENT_ANY_GADGET_DIE_79043(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002079, 8)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 79092 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 改变指定group组199002079中， configid为79044的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 199002079, 79044, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -625,7 +625,7 @@ function condition_EVENT_ANY_GADGET_DIE_79051(context, evt)
 	if 79044 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -636,17 +636,17 @@ function action_EVENT_ANY_GADGET_DIE_79051(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002079, 9)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199002079, 7)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199002079, 6)
-
+	
 	return 0
 end
 
@@ -656,7 +656,7 @@ function condition_EVENT_CHALLENGE_SUCCESS_79094(context, evt)
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -667,21 +667,21 @@ function action_EVENT_CHALLENGE_SUCCESS_79094(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 79093 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199002079, 8)
-
+	
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199002079, 9)
-
+	
 	return 0
 end
 
@@ -690,7 +690,7 @@ function condition_EVENT_ANY_GADGET_DIE_79157(context, evt)
 	if 79271 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -698,20 +698,20 @@ end
 function action_EVENT_ANY_GADGET_DIE_79157(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002079, 3)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 79003 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 改变指定group组199002079中， configid为79241的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 199002079, 79241, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

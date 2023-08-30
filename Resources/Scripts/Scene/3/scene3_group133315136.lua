@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133315136
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -89,23 +89,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_136001(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=462.9963, y=156.2501, z=2339.657}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=462.9963, y=156.2501, z=2339.657}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=462.9963, y=156.2501, z=2339.657}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = true, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -114,7 +114,7 @@ function condition_EVENT_ANY_GADGET_DIE_136002(context, evt)
 	if 136006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -125,7 +125,7 @@ function action_EVENT_ANY_GADGET_DIE_136002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -134,7 +134,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_136016(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315136, 136008) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -144,26 +144,26 @@ function action_EVENT_GADGET_STATE_CHANGE_136016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 136010, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 136009 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 136009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 136014 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 136014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 136011 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 136011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -172,11 +172,11 @@ function condition_EVENT_GROUP_LOAD_136017(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315136, 136007) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315136, 136008) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -186,8 +186,8 @@ function action_EVENT_GROUP_LOAD_136017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 136003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -196,7 +196,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_136018(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315136, 136007) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -206,26 +206,26 @@ function action_EVENT_GADGET_STATE_CHANGE_136018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 136004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 136005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 136005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 136012 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 136012, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 136015 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 136015, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -234,11 +234,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_136020(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315136, 136007) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315136, 136008) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -248,8 +248,8 @@ function action_EVENT_GADGET_STATE_CHANGE_136020(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 136003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

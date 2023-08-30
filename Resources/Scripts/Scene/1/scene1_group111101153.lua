@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101153
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_Teleport_1 = 153001,
 	gadget_Teleport_2 = 153002,
 	gadget_Teleport_3 = 0,
@@ -22,13 +22,13 @@ defs = {
 }
 
 -- DEFS_MISCS
-connectInfo =
+connectInfo = 
 {
 	{defs.gadget_Teleport_1,defs.gadget_Teleport_2,defs.pointarray_1},
 
 }
 
-TeleportOwnerShip =
+TeleportOwnerShip = 
 {
 	{defs.gadget_TeleportOperator_1, defs.gadget_Teleport_1},
 	{defs.gadget_TeleportOperator_2, defs.gadget_Teleport_2},
@@ -43,7 +43,7 @@ staticBackwardSet = {10,9,8,7,6,5,4,3,2,1}
 
 function GetTeleportNameByConfigID(context, config_id)
 	for k,v  in pairs(defs)  do
-		if v == config_id then
+		if v == config_id then 
 			return k
 		end
 	end
@@ -53,46 +53,46 @@ function CheckIsConnected(context,teleport_aID,teleport_bID)
 
 	--获取角度
 	ScriptLib.PrintLog(context, "CheckConnected from "..teleport_aID .. " to "..teleport_bID)
-	yrotation_a = ScriptLib.GetRotationByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_aID)).y
-	yrotation_b = ScriptLib.GetRotationByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_bID)).y
+	local yrotation_a = ScriptLib.GetRotationByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_aID)).y
+	local yrotation_b = ScriptLib.GetRotationByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_bID)).y
 	ScriptLib.PrintLog(context, "yrotation_a = "..yrotation_a .. "| yrotation_a =  "..yrotation_b)
 	--转换为弧度
-	yrad_a = math.rad(yrotation_a)
-	yrad_b = math.rad(yrotation_b)
+	local yrad_a = math.rad(yrotation_a) 
+	local yrad_b = math.rad(yrotation_b)
 	ScriptLib.PrintLog(context, "yrad_a = "..yrad_a .. "| yrad_b =  "..yrad_b)
 
 	--编辑器中的XZ和运行下的对应关系是反的,所以这里XZ左边调换了一下
-	dir_a = {x = math.sin(yrad_a), y = 0, z = math.cos(yrad_a)}
-	dir_b = {x = math.sin(yrad_b), y = 0, z = math.cos(yrad_b)}
+	local dir_a = {x = math.sin(yrad_a), y = 0, z = math.cos(yrad_a)}
+	local dir_b = {x = math.sin(yrad_b), y = 0, z = math.cos(yrad_b)}
 	ScriptLib.PrintLog(context, "dir_a : x = "..dir_a.x.." , y = "..dir_a.y.." , z = "..dir_a.z)
 	ScriptLib.PrintLog(context, "dir_b : x = "..dir_b.x.." , y = "..dir_b.y.." , z = "..dir_b.z)
-
+	
 	--获取两个点位置
-	pos_a = ScriptLib.GetPosByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_aID))
+	local pos_a = ScriptLib.GetPosByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_aID))
 	ScriptLib.PrintLog(context, "pos_a : x = "..pos_a.x.." , y = "..pos_a.y.." , z = "..pos_a.z)
-	pos_b = ScriptLib.GetPosByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_bID))
+	local pos_b = ScriptLib.GetPosByEntityId(context, ScriptLib.GetEntityIdByConfigId(context,teleport_bID))
 	ScriptLib.PrintLog(context, "pos_b : x = "..pos_b.x.." , y = "..pos_b.y.." , z = "..pos_b.z)
 
 	--计算两个点之间的方向,并且Normalize
-	diratob = {x = pos_b.x - pos_a.x,y = 0,z = pos_b.z - pos_a.z}
-	norDirAtoB = Normalize({x = pos_b.x - pos_a.x,y = 0,z = pos_b.z - pos_a.z})
+	local diratob = {x = pos_b.x - pos_a.x,y = 0,z = pos_b.z - pos_a.z}
+	local norDirAtoB = Normalize({x = pos_b.x - pos_a.x,y = 0,z = pos_b.z - pos_a.z})
 	ScriptLib.PrintLog(context, "norDirAtoB : x = "..norDirAtoB.x.." , y = "..norDirAtoB.y.." , z = "..norDirAtoB.z)
-	dirbtoa = {x = pos_a.x - pos_b.x,y = 0,z = pos_a.z - pos_b.z}
-	norDirBtoA = Normalize({x = pos_a.x - pos_b.x,y = 0,z = pos_a.z - pos_b.z})
+	local dirbtoa = {x = pos_a.x - pos_b.x,y = 0,z = pos_a.z - pos_b.z}
+	local norDirBtoA = Normalize({x = pos_a.x - pos_b.x,y = 0,z = pos_a.z - pos_b.z})
 	ScriptLib.PrintLog(context, "norDirBtoA : x = "..norDirBtoA.x.." , y = "..norDirBtoA.y.." , z = "..norDirBtoA.z)
 
 	--计算两个点的点乘结果
-	dotvalue_a = dir_a.x * norDirAtoB.x + dir_a.y * norDirAtoB.y + dir_a.z * norDirAtoB.z
-	dotvalue_b = dir_b.x * norDirBtoA.x + dir_b.y * norDirBtoA.y + dir_b.z * norDirBtoA.z
+	local dotvalue_a = dir_a.x * norDirAtoB.x + dir_a.y * norDirAtoB.y + dir_a.z * norDirAtoB.z
+	local dotvalue_b = dir_b.x * norDirBtoA.x + dir_b.y * norDirBtoA.y + dir_b.z * norDirBtoA.z
 
 	ScriptLib.PrintLog(context, "dotvalue_a "..dotvalue_a)
 	ScriptLib.PrintLog(context, "dotvalue_b "..dotvalue_b)
 
 	--判断点乘结果是否大于0.5,也就是正负 45度范围
 	if dotvalue_a >= 0.5  and dotvalue_b >= 0.5 then
-		return true
+		return true 
 	end
-
+	
 	ScriptLib.PrintLog(context, "invalid cos = ".. dotvalue_a)
 
 	return false
@@ -101,7 +101,7 @@ end
 
 --获取所有关联的传送点
 function FindRelatedTargets(context,teleport_ID)
-	relatedtarget ={}
+	local relatedtarget ={}
 	for i=1,#connectInfo do
 		if connectInfo[i][1] == teleport_ID or connectInfo[i][2] == teleport_ID then
 			if connectInfo[i][1] == teleport_ID then
@@ -116,11 +116,11 @@ end
 
 --在所有关联传送点中找到激活链接的,如果没有则返回nil
 function GetConnectedTeleport(context,teleport_id)
-	related
+	local related 
 	related = FindRelatedTargets(context,teleport_id)
 
 	for i=1,#related do
-		if CheckIsConnected(context,teleport_id,related[i][1]) == true then
+		if CheckIsConnected(context,teleport_id,related[i][1]) == true then 
 			return related[i]
 		end
 	end
@@ -129,20 +129,20 @@ end
 
 --数学计算归一化
 function Normalize(vet)
-	magnitude = math.sqrt(vet.x * vet.x + vet.y * vet.y + vet.z * vet.z)
-	newvect = {x = vet.x/magnitude, y = vet.y / magnitude, z = vet.z / magnitude}
+	local magnitude = math.sqrt(vet.x * vet.x + vet.y * vet.y + vet.z * vet.z)
+	local newvect = {x = vet.x/magnitude, y = vet.y / magnitude, z = vet.z / magnitude}
 	return newvect
 end
 
 --更新所有传送门的状态表现
 function UpdateTeleportState(context)
-
-	teleportname
+	
+	local teleportname
 	for i=1,4 do
-			connect = GetConnectedTeleport(context,TeleportOwnerShip[i][2])
-
-		if connect == nil then
-
+			local connect = GetConnectedTeleport(context,TeleportOwnerShip[i][2])
+			
+		if connect == nil then 
+			
 			ScriptLib.SetGadgetStateByConfigId(context, TeleportOwnerShip[i][2], GadgetState.Default)
 			teleportname = GetTeleportNameByConfigID(context, TeleportOwnerShip[i][2])
 			teleportname = teleportname.."_isActive"
@@ -164,9 +164,9 @@ end
 
 --传送玩家, 只要给到对应的Teleportid就可以
 function TeleportAction(context,teleport_id)
-	related = FindRelatedTargets(context, teleport_id)
+	local related = FindRelatedTargets(context, teleport_id)
 	for i=1,#related do
-		if CheckIsConnected(context,teleport_id,related[i][1]) == true then
+		if CheckIsConnected(context,teleport_id,related[i][1]) == true then 
 			ScriptLib.MoveAvatarByPointArray(context, context.uid, related[i][2], related[i][3], {speed=10}, "{\"MarkType\":1}")
 			return 0
 		end
@@ -174,9 +174,9 @@ function TeleportAction(context,teleport_id)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -228,9 +228,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -241,9 +241,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -259,27 +259,27 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_153009(context, evt)
 	if evt.param1 ~= 153009 then return false end
-
+	
 	-- 判断变量"gadget_Teleport_1_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_1_isActive") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_153009(context, evt)
 			--gadget_Teleport_1 trigger
-			teleportid = defs["gadget_Teleport_1"]
+			local teleportid = defs["gadget_Teleport_1"]
 			TeleportAction(context, teleportid)
 			return 0
 end
@@ -287,19 +287,19 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_153010(context, evt)
 	if evt.param1 ~= 153010 then return false end
-
+	
 	-- 判断变量"gadget_Teleport_2_isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "gadget_Teleport_2_isActive") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_153010(context, evt)
 			--gadget_Teleport_2 trigger
-			teleportid = defs["gadget_Teleport_2"]
+			local teleportid = defs["gadget_Teleport_2"]
 			TeleportAction(context, teleportid)
 			return 0
 end
@@ -309,20 +309,20 @@ function action_EVENT_GROUP_LOAD_153013(context, evt)
 				ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_ID, defs.gadget_TeleportOperator_1, {31})
 				ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_ID, defs.gadget_TeleportOperator_2, {31})
 				ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_ID, defs.gadget_TeleportOperator_3, {31})
-				ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_ID, defs.gadget_TeleportOperator_4, {31})
+				ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_ID, defs.gadget_TeleportOperator_4, {31}) 
 			return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_153014(context, evt)
 			-- 判断是gadgetid 124006 option_id 31
-			if defs.gadget_TeleportOperator_1 ~= evt.param1 and
+			if defs.gadget_TeleportOperator_1 ~= evt.param1 and 
 				defs.gadget_TeleportOperator_2 ~= evt.param1 and
 				defs.gadget_TeleportOperator_3 ~= evt.param1 and
 				defs.gadget_TeleportOperator_4 ~= evt.param1 then
-				return false
+				return false	
 			end
-
+			
 			if 31 ~= evt.param2 then
 				return false
 			end
@@ -331,8 +331,8 @@ end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_153014(context, evt)
-		localtarget
-
+		local localtarget
+	
 			for i=1,4 do
 				if TeleportOwnerShip[i][1] == evt.param1 then
 					localtarget = TeleportOwnerShip[i][2]
@@ -348,13 +348,13 @@ end
 function condition_EVENT_PLATFORM_REACH_POINT_153015(context, evt)
 			-- 判断是gadgetid 124006 option_id 31
 		ScriptLib.PrintLog(context, "Reachpoint_condition : "..evt.param1)
-			if 	defs.gadget_Teleport_1 ~= evt.param1 and
+			if 	defs.gadget_Teleport_1 ~= evt.param1 and 
 				defs.gadget_Teleport_2 ~= evt.param1 and
 				defs.gadget_Teleport_3 ~= evt.param1 and
 				defs.gadget_Teleport_4 ~= evt.param1 then
-				return false
+				return false	
 			end
-
+		
 		return true
 end
 

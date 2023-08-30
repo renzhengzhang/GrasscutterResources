@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201011046
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 4,
 	gadget_id_2 = 145,
 	gadget_id_3 = 146,
@@ -15,9 +15,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -94,9 +94,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -170,9 +170,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -180,7 +180,7 @@ function condition_EVENT_GADGET_CREATE_130(context, evt)
 	if 4 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -191,7 +191,7 @@ function action_EVENT_GADGET_CREATE_130(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -201,27 +201,27 @@ function condition_EVENT_SELECT_OPTION_131(context, evt)
 	if 4 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_131(context, evt)
-
+	
 	-- 根据不同的选项做不同的操作
 	if defs.gadget_id_2 == evt.param2 then
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201011004, suite = 1 }) then
 			return -1
 		end
-
+	
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 		return 0
 	end
-
+	
 	return 0
 end
 
@@ -231,27 +231,27 @@ function condition_EVENT_SELECT_OPTION_132(context, evt)
 	if 4 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_132(context, evt)
-
+	
 	-- 根据不同的选项做不同的操作
 	if defs.gadget_id_3 == evt.param2 then
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201011004, suite = 2 }) then
 			return -1
 		end
-
+	
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 		return 0
 	end
-
+	
 	return 0
 end
 
@@ -261,27 +261,27 @@ function condition_EVENT_SELECT_OPTION_133(context, evt)
 	if 4 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_133(context, evt)
-
+	
 	-- 根据不同的选项做不同的操作
 	if defs.gadget_id_4 == evt.param2 then
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201011004, suite = 3 }) then
 			return -1
 		end
-
+	
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 		return 0
 	end
-
+	
 	return 0
 end
 
@@ -291,27 +291,27 @@ function condition_EVENT_SELECT_OPTION_134(context, evt)
 	if 4 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_134(context, evt)
-
+	
 	-- 根据不同的选项做不同的操作
 	if defs.gadget_id_5 == evt.param2 then
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201011004, suite = 4 }) then
 			return -1
 		end
-
+	
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 		return 0
 	end
-
+	
 	return 0
 end
 
@@ -321,27 +321,27 @@ function condition_EVENT_SELECT_OPTION_135(context, evt)
 	if 4 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_135(context, evt)
-
+	
 	-- 根据不同的选项做不同的操作
 	if defs.gadget_id_6 == evt.param2 then
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201011004, suite = 5 }) then
 			return -1
 		end
-
+	
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 		return 0
 	end
-
+	
 	return 0
 end
 
@@ -351,26 +351,26 @@ function condition_EVENT_SELECT_OPTION_136(context, evt)
 	if 4 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_136(context, evt)
-
+	
 	-- 根据不同的选项做不同的操作
 	if defs.gadget_id_7 == evt.param2 then
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201011004, suite = 6 }) then
 			return -1
 		end
-
+	
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 		return 0
 	end
-
+	
 	return 0
 end

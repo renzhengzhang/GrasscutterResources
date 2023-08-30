@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 245010033
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_id = 245010033,
 	gear_group_id = 245010037
 }
@@ -19,33 +19,33 @@ route_map={
   [4]={route_points={1,2,3,4,5,6,7,8,9,10},tags=16},
 }
 
-entrance_point_map={
+local entrance_point_map={
   [1]=1,
   [2]=2,
 }
 
 
-entrance_map={
+local entrance_map={
   [2]=1,
   [4]=2,
 }
-exit_point_list={3}  --退出点
+local exit_point_list={3}  --退出点
 
 
 --对应的刷怪策略
-monster_programme={
+local monster_programme={
   [1]=stage_thug_twoway,
   [2]=stage_rockking_twoway,
   --[3]=stage_hunter_twoway,
   --[4]=stage_iceking_twoway,
   --[5]=stage_rockking_twoway,
-  --[6]=stage_electricking_twoway,
+  --[6]=stage_electricking_twoway, 
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -96,9 +96,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -109,9 +109,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -208,9 +208,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 require "V2_0/TowerDefense_Monster_V2.0"

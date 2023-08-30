@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309073
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	interactOptionID = 430,
 	gadget_fireTorch = 73002,
 	gadget_fireBase1 = 73001,
@@ -18,9 +18,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -81,9 +81,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -94,9 +94,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -112,9 +112,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -122,7 +122,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_73007(context, evt)
 	if 73002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -132,20 +132,20 @@ function action_EVENT_GADGET_STATE_CHANGE_73007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 73006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 31004, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5027, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_GROUP_LOAD_73008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133309073, 73002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -164,14 +164,14 @@ function action_EVENT_GROUP_LOAD_73008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 73006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5027, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -180,7 +180,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_73010(context, evt)
 	if 73001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -191,13 +191,13 @@ function action_EVENT_GADGET_STATE_CHANGE_73010(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 7022, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -206,7 +206,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_73011(context, evt)
 	if 73004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -217,7 +217,7 @@ function action_EVENT_GADGET_STATE_CHANGE_73011(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 

@@ -1,8 +1,8 @@
 
 
-Debris_ID = 70800060
-Debris_Option_ID = 68
-temp_Variables = {
+local Debris_ID = 70800060
+local Debris_Option_ID = 68
+local temp_Variables = {
 	{ config_id=50000001,name = "GalleryStart", value = 0, no_refresh = false },
 	{ config_id=50000002,name = "GalleryFinish", value = 0, no_refresh = false },
 	{ config_id=50000003,name = "Try_Add_Box", value = 0, no_refresh = false },
@@ -13,7 +13,7 @@ temp_Variables = {
 	{ config_id=50000008,name = "GalleryEnd", value = 0, no_refresh = false },
 }
 
-temp_Tirgger = {
+local temp_Tirgger = {
 	{event = EventType.EVENT_VARIABLE_CHANGE, source = "Try_Start_Challenge", condition = "", action = "action_Try_Start_Challenge",trigger_count = 0},
 	{event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_EVENT_SELECT_OPTION",trigger_count = 0},
 	{event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_EVENT_GADGET_CREATE",trigger_count = 0},
@@ -38,27 +38,27 @@ function action_EVENT_GROUP_LOAD(context,evt)
 end
 function action_EVENT_GALLERY_STOP(context,evt)
     ScriptLib.PrintContextLog(context,"action_EVENT_GALLERY_STOP[is_fail]="..evt.param2.."[reason]="..evt.param3)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
     ScriptLib.PrintContextLog(context,"action_EVENT_GALLERY_STOP[uid_list[1]]="..uid_list[1])
-    group_id = ScriptLib.GetContextGroupId(context)
+    local group_id = ScriptLib.GetContextGroupId(context)
     ScriptLib.RefreshGroup(context, {group_id = group_id, suite = 1})
 	ScriptLib.SetTeamEntityGlobalFloatValue(context, {uid_list[1]}, "Try_Reset_Box", 1)
 
-	return 0
+	return 0 
 end
 function action_EVENT_VARIABLE_CHANGE(context,evt)
 	if evt.source_name == "GalleryStart" and evt.param1 == 1 then
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		ScriptLib.SetTeamEntityGlobalFloatValue(context, {uid_list[1]}, "Try_Mark_Skiff", 1)	--向team发消息，等SLC
 	end
 	if evt.source_name == "GalleryFinish" then
         ScriptLib.StopGallery(context, defs.gallery_id, false)
 	end
-	if evt.source_name == "Try_Add_Box" then
-		uid_list = ScriptLib.GetSceneUidList(context)
+	if evt.source_name == "Try_Add_Box" then 
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		ScriptLib.SetTeamEntityGlobalFloatValue(context, {uid_list[1]}, "Try_Add_Box", 1)
 	end
-	if evt.source_name == "ADD_Gallery_box_count" then
+	if evt.source_name == "ADD_Gallery_box_count" then 
 		LF_AddBox_UpdateParamTable(context)
 	end
 	if evt.source_name == "ADD_Gallery_monster_count" then
@@ -83,7 +83,7 @@ function action_EVENT_SELECT_OPTION(context,evt)
     if ScriptLib.GetGadgetIdByEntityId(context, evt.source_eid) ~= Debris_ID then return 0 end	--判断是否箱子
 	ScriptLib.PrintContextLog(context,"fuc[action_EVENT_SELECT_OPTION]suc")
 	--移除箱子
-	group_id = ScriptLib.GetContextGroupId(context)
+	local group_id = ScriptLib.GetContextGroupId(context)
 	ScriptLib.DelWorktopOptionByGroupId(context, group_id, evt.param1, Debris_Option_ID)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, group_id, evt.param1, 202)
     return 0
@@ -91,7 +91,7 @@ end
 
 function action_Try_Start_Challenge(context,evt)
     ScriptLib.PrintContextLog(context,"fuc[action_Try_Start_Challenge]")
-	uid = ScriptLib.GetSceneUidList(context)
+	local uid = ScriptLib.GetSceneUidList(context)
     ScriptLib.SetTeamEntityGlobalFloatValue(context, {uid[1]}, "Try_Start_Challenge", 1)
 	return 0
 end
@@ -128,11 +128,11 @@ end
 --https://www.tapd.cn/22963631/bugtrace/bugs/view/1122963631001308277
 --通过竹筏在客户端成功创建后进行ServerLuaCall来通知lua侧创建怪物
 function SLC_Raft_Created(context)
-	cfgid = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local cfgid = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
     ScriptLib.PrintContextLog(context,"fuc[SLC_Raft_Created] | cfgid = " .. cfgid)
 	if Raft_Monster_List ~= nil then
 		for k , v in pairs(Raft_Monster_List) do
-			if k == cfgid then
+			if k == cfgid then 
 				for i = 1 , #v do
 					ScriptLib.CreateMonster(context, {config_id = v[i], delay_time = 0})
 				end
@@ -146,7 +146,7 @@ function Set_Raft_SGV()
 	if Raft_Monster_List ~= nil then
 		for k,v in pairs(Raft_Monster_List) do
 			for k2,v2 in pairs(gadgets) do
-				if v2.config_id == k then
+				if v2.config_id == k then 
 					v2.server_global_value_config = {["SGV_Need_SLC"]= 1}
 				end
 			end
@@ -164,14 +164,14 @@ function LF_SetReason_UpdateParamTable_StopGallery(context,v)
 	return 0
 end
 function LF_AddBox_UpdateParamTable(context)
-	v = ScriptLib.GetGroupTempValue(context,"ParamTable_box_count",{})
+	local v = ScriptLib.GetGroupTempValue(context,"ParamTable_box_count",{})
 	v = v + 1
 	ScriptLib.SetGroupTempValue(context,"ParamTable_box_count",v,{})
 	LF_UpdateParamTable(context)
 	return 0
 end
 function LF_AddMonster_UpdateParamTable(context)
-	v = ScriptLib.GetGroupTempValue(context,"ParamTable_monster_count",{})
+	local v = ScriptLib.GetGroupTempValue(context,"ParamTable_monster_count",{})
 	v = v + 1
 	ScriptLib.SetGroupTempValue(context,"ParamTable_monster_count",v,{})
 	LF_UpdateParamTable(context)
@@ -179,11 +179,11 @@ function LF_AddMonster_UpdateParamTable(context)
 end
 
 function LF_UpdateParamTable(context)
-	uid_list = ScriptLib.GetSceneUidList(context)
-	monster_count = ScriptLib.GetGroupTempValue(context,"ParamTable_monster_count",{})
-	box_count = ScriptLib.GetGroupTempValue(context,"ParamTable_box_count",{})
-	fail_reason = ScriptLib.GetGroupTempValue(context,"ParamTable_fail_reason",{})
-	paramTable = {
+	local uid_list = ScriptLib.GetSceneUidList(context)
+	local monster_count = ScriptLib.GetGroupTempValue(context,"ParamTable_monster_count",{})
+	local box_count = ScriptLib.GetGroupTempValue(context,"ParamTable_box_count",{})
+	local fail_reason = ScriptLib.GetGroupTempValue(context,"ParamTable_fail_reason",{})
+	local paramTable = {
 		["uid"]=uid_list[1],
 		["monster_count"]=monster_count,
 		["box_count"]=box_count,

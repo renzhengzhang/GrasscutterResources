@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250081002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -183,9 +183,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -196,9 +196,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -223,20 +223,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2044(context, evt)
 	if evt.param1 ~= 2044 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -247,31 +247,31 @@ function action_EVENT_ENTER_REGION_2044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110538 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110538) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2045(context, evt)
 	if evt.param1 ~= 2045 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -282,31 +282,31 @@ function action_EVENT_ENTER_REGION_2045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110539 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110539) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2046(context, evt)
 	if evt.param1 ~= 2046 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -317,79 +317,79 @@ function action_EVENT_ENTER_REGION_2046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2007, 95) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2007) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2008, 28) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2005, 29) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2009, 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2009) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110540 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110540) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2047(context, evt)
 	if evt.param1 ~= 2047 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -400,39 +400,39 @@ function action_EVENT_ENTER_REGION_2047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2010) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110541 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110541) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_2048(context, evt)
 	-- 判断是gadgetid 为 2010的移动平台，是否到达了31 的路线中的 0 点
-
+	
 	if 2010 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 31 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 0 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -443,43 +443,43 @@ function action_EVENT_PLATFORM_REACH_POINT_2048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2011, 33) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110542 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110542) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2049(context, evt)
 	if evt.param1 ~= 2049 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -490,43 +490,43 @@ function action_EVENT_ENTER_REGION_2049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2012) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2013, 35) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110543 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110543) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2050(context, evt)
 	if evt.param1 ~= 2050 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -537,31 +537,31 @@ function action_EVENT_ENTER_REGION_2050(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2015) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110544 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110544) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2051(context, evt)
 	if evt.param1 ~= 2051 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -572,31 +572,31 @@ function action_EVENT_ENTER_REGION_2051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2017) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110545 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110545) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2052(context, evt)
 	if evt.param1 ~= 2052 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -607,31 +607,31 @@ function action_EVENT_ENTER_REGION_2052(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2018) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110546 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110546) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2053(context, evt)
 	if evt.param1 ~= 2053 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -642,31 +642,31 @@ function action_EVENT_ENTER_REGION_2053(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2019) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110547 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110547) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2054(context, evt)
 	if evt.param1 ~= 2054 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -677,31 +677,31 @@ function action_EVENT_ENTER_REGION_2054(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2020) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110548 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110548) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2055(context, evt)
 	if evt.param1 ~= 2055 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -712,31 +712,31 @@ function action_EVENT_ENTER_REGION_2055(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2021) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110549 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110549) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2056(context, evt)
 	if evt.param1 ~= 2056 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -747,25 +747,25 @@ function action_EVENT_ENTER_REGION_2056(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2022) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2057(context, evt)
 	if evt.param1 ~= 2057 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -776,25 +776,25 @@ function action_EVENT_ENTER_REGION_2057(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2023) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2058(context, evt)
 	if evt.param1 ~= 2058 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -805,25 +805,25 @@ function action_EVENT_ENTER_REGION_2058(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2024) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2059(context, evt)
 	if evt.param1 ~= 2059 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -834,67 +834,67 @@ function action_EVENT_ENTER_REGION_2059(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2025) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2026, 46) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2026) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2033, 54) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2033) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2034, 55) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2034) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110550 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110550) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2060(context, evt)
 	if evt.param1 ~= 2060 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -905,67 +905,67 @@ function action_EVENT_ENTER_REGION_2060(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2028, 48) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2028) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2035, 56) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2035) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2036, 57) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2036) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110551 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110551) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2061(context, evt)
 	if evt.param1 ~= 2061 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -976,55 +976,55 @@ function action_EVENT_ENTER_REGION_2061(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2029) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2030, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2030) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2037, 58) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2037) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110552 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110552) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2062(context, evt)
 	if evt.param1 ~= 2062 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1035,55 +1035,55 @@ function action_EVENT_ENTER_REGION_2062(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2031) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2032, 52) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2032) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2038, 59) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2038) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110553 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110553) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2063(context, evt)
 	if evt.param1 ~= 2063 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1094,31 +1094,31 @@ function action_EVENT_ENTER_REGION_2063(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2039) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110554 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110554) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2064(context, evt)
 	if evt.param1 ~= 2064 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1129,67 +1129,67 @@ function action_EVENT_ENTER_REGION_2064(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2040) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2041, 61) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2041) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2042, 62) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2042) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2043, 63) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2043) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110555 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110555) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2069(context, evt)
 	if evt.param1 ~= 2069 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1200,37 +1200,37 @@ function action_EVENT_ENTER_REGION_2069(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2068, 94) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2067) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2068) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2070(context, evt)
 	if evt.param1 ~= 2070 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1241,25 +1241,25 @@ function action_EVENT_ENTER_REGION_2070(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2066) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2074(context, evt)
 	if evt.param1 ~= 2074 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1270,36 +1270,36 @@ function action_EVENT_ENTER_REGION_2074(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2072, 97) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 2073, 98) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2071) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2072) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 2703) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end

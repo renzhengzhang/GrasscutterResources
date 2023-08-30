@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240408017
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -69,9 +69,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -80,7 +80,7 @@ function condition_EVENT_DUNGEON_SETTLE_17008(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -90,74 +90,74 @@ function action_EVENT_DUNGEON_SETTLE_17008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17001, GadgetState.StatueActive) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 240408016, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 改变指定group组240408011中， configid为11003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240408011, 11003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组240408011中， configid为11004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240408011, 11004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组240408011中， configid为11005的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240408011, 11005, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组240408011中， configid为11006的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240408011, 11006, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组240408011中， configid为11007的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240408011, 11007, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组240408011中， configid为11008的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240408011, 11008, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组240408011中， configid为11009的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240408011, 11009, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组240408011中， configid为11010的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240408011, 11010, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组240408011中， configid为11011的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240408011, 11011, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 240408011, "Snow_Timer") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -167,7 +167,7 @@ function action_EVENT_DUNGEON_REWARD_GET_17009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

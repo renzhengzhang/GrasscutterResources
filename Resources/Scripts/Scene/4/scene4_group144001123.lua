@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144001123
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -100,9 +100,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -112,22 +112,22 @@ function action_EVENT_TIMER_EVENT_123002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 123001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "finishyishi" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "finishyishi", 1, 144001122) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144001123, 3)
-
+	
 	return 0
 end
 
@@ -138,28 +138,28 @@ function action_EVENT_QUEST_START_123003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟2秒后,向groupId为：144001123的对象,请求一次调用,并将string参数："7900602" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001123, "7900602", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 144001129, 1)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_123004(context, evt)
 	if evt.param1 ~= 123004 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -170,13 +170,13 @@ function action_EVENT_ENTER_REGION_123004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7900603") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -186,7 +186,7 @@ function condition_EVENT_GROUP_LOAD_123006(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finishyishi", 144001122) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -197,12 +197,12 @@ function action_EVENT_GROUP_LOAD_123006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 123001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end

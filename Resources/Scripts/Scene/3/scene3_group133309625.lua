@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309625
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	pointarray_ID = 330900059,
 	pointArrayNum = 3,
 	gadget_shooter = 625002,
@@ -40,9 +40,9 @@ defs.optionID=435
 defs.shooterGadgetID=defs.gadget_shooter
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -80,9 +80,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -93,9 +93,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -111,9 +111,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -122,7 +122,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_625005(context, evt)
 	if 625003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -132,14 +132,14 @@ function action_EVENT_GADGET_STATE_CHANGE_625005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 625004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "finished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -149,7 +149,7 @@ function condition_EVENT_GROUP_LOAD_625006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -159,8 +159,8 @@ function action_EVENT_GROUP_LOAD_625006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 625004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -168,14 +168,14 @@ end
 function condition_EVENT_SELECT_OPTION_625007(context, evt)
 	-- 判断是gadgetid 0 option_id 0
 	if defs.gadget_shooterBase_1 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if defs.optionID ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -186,7 +186,7 @@ function action_EVENT_SELECT_OPTION_625007(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 

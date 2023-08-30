@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133212152
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -69,9 +69,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -82,9 +82,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -109,9 +109,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -119,7 +119,7 @@ function condition_EVENT_ANY_GADGET_DIE_152024(context, evt)
 	if 152008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -130,13 +130,13 @@ function action_EVENT_ANY_GADGET_DIE_152024(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "quest_finish" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "quest_finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -145,7 +145,7 @@ function condition_EVENT_ANY_GADGET_DIE_152025(context, evt)
 	if 152019 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -156,13 +156,13 @@ function action_EVENT_ANY_GADGET_DIE_152025(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "quest_finish" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "quest_finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -171,7 +171,7 @@ function condition_EVENT_ANY_GADGET_DIE_152026(context, evt)
 	if 152015 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -182,12 +182,12 @@ function action_EVENT_ANY_GADGET_DIE_152026(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "quest_finish" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "quest_finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

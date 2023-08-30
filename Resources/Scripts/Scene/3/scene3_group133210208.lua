@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210208
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	duration = 120,
 	group_id = 133210208
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -138,16 +138,16 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_START_208001(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210208, 2)
-
+	
 	return 0
 end
 
@@ -156,7 +156,7 @@ function condition_EVENT_GADGET_CREATE_208002(context, evt)
 	if 208004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -167,7 +167,7 @@ function action_EVENT_GADGET_CREATE_208002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -175,14 +175,14 @@ end
 function condition_EVENT_SELECT_OPTION_208003(context, evt)
 	-- 判断是gadgetid 208004 option_id 87
 	if 208004 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 87 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -193,32 +193,32 @@ function action_EVENT_SELECT_OPTION_208003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
-
+	
+	
 	-- 删除指定group： 133210208 ；指定config：208004；物件身上指定option：87；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133210208, 208004, 87) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 202号挑战,duration内开启宝箱
 	if 0 ~= ScriptLib.ActiveChallenge(context, 666, 250, defs.duration, 4, 250, 1) then
 	return -1
 	end
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "GadgetCreate", 1, 133210106)
-
+	
 	-- 调用提示id为 32100119 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 32100119) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	--添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133210208, 4, FlowSuiteOperatePolicy.COMPLETE)
-
-
-
+	
+	
+	
 	return 0
 end
 
@@ -229,22 +229,22 @@ function action_EVENT_CHALLENGE_SUCCESS_208005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 32100128 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 32100128) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "GadgetCreate" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "GadgetCreate", 0, 133210106) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210208, 5)
-
+	
 	return 0
 end
 
@@ -255,40 +255,40 @@ function action_EVENT_CHALLENGE_FAIL_208006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "GadgetCreate" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "GadgetCreate", 0, 133210106) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 将flowGroup的某个flowSuite移除，不会触发物件和怪物死亡
 	  ScriptLib.RemoveExtraFlowSuite(context, 133210208, 4, FlowSuiteOperatePolicy.DEFAULT)
-
+	
 	-- 调用提示id为 32100127 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 32100127) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133210208, 208004, {87}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_208008(context, evt)
 	if evt.param1 ~= 208008 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -296,7 +296,7 @@ end
 function action_EVENT_QUEST_START_208010(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210208, 3)
-
+	
 	return 0
 end
 
@@ -304,19 +304,19 @@ end
 function action_EVENT_QUEST_START_208020(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210208, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_208021(context, evt)
 	if evt.param1 ~= 208021 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -327,12 +327,12 @@ function action_EVENT_ENTER_REGION_208021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7215002") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,4 +1,4 @@
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["TimeAxis_Event"] = { config_id = 8000002, name = "TimeAxis_Event", event= EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_trigger_timeaxis", trigger_count = 0 },
 		["Monster_Die"] = { config_id = 8000003, name = "Monster_Die", event= EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_monster_die", trigger_count = 0 },
@@ -7,8 +7,8 @@ extrTriggers = {
 	}
 }
 
-TimeAxis = {wind_force_interval}
-TimeAxisStart = {1}
+local TimeAxis = {wind_force_interval}
+local TimeAxisStart = {1}
 
 function RefreshRandomElem( context, prev_context, ActivityStage )
 	-- 刷新随机场地要素
@@ -45,7 +45,7 @@ end
 
 function action_all_avatar_die( context,evt )
 	-- 所有角色死亡
-	UidList = ScriptLib.GetSceneUidList(context)
+	local UidList = ScriptLib.GetSceneUidList(context)
 
 	for i,v in ipairs(UidList) do
 		if ScriptLib.IsPlayerAllAvatarDie(context, v) == false then
@@ -116,18 +116,18 @@ function RandomFloor( context )
 end
 
 function action_trigger_timeaxis( context,evt)
-
+	
 	if evt.source_name == "WindFlowAxis" or evt.source_name == "WindFlowAxisStart" then
 
 		ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : Trigger WindTimeAxis")
 
-		Index1 = ScriptLib.GetGroupTempValue(context, "Index1", {})
-		Index2 = ScriptLib.GetGroupTempValue(context, "Index2", {})
-		LastWindFlowIndex = ScriptLib.GetGroupTempValue(context, "LastWindFlowIndex", {})
+		local Index1 = ScriptLib.GetGroupTempValue(context, "Index1", {})
+		local Index2 = ScriptLib.GetGroupTempValue(context, "Index2", {})
+		local LastWindFlowIndex = ScriptLib.GetGroupTempValue(context, "LastWindFlowIndex", {})
 
 		ScriptLib.PrintContextLog(context, "## WINDFLORA_LOG : LastWindFlowIndex Is ->"..LastWindFlowIndex)
 
-		CurSuiteList = {}
+		local CurSuiteList = {}
 
 		for i,v in ipairs(BossRandomList[Index1][Index2].suite_id) do
 			table.insert(CurSuiteList,v)
@@ -153,7 +153,7 @@ function action_trigger_timeaxis( context,evt)
 		end
 
 		ScriptLib.SetGroupTempValue(context, "LastWindFlowIndex", randomSuiteIndex, {})
-
+		
 	end
 
 	return 0
@@ -162,8 +162,8 @@ end
 
 function MoveBubble( context )
 	-- 移动水泡
-	Index1 = ScriptLib.GetGroupTempValue(context, "Index1", {})
-	Index2 = ScriptLib.GetGroupTempValue(context, "Index2", {})
+	local Index1 = ScriptLib.GetGroupTempValue(context, "Index1", {})
+	local Index2 = ScriptLib.GetGroupTempValue(context, "Index2", {})
 
 	math.randomseed(ScriptLib.GetServerTime(context))
 	randomSuiteIndex = math.random(#BossRandomList[Index1][Index2].suite_id)

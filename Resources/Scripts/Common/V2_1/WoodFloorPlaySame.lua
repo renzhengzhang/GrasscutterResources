@@ -1,14 +1,14 @@
 --- def参数
 --- 描述长宽
 --[[
-defs = {
+local defs = {
 	-- 该参数用来确认合法对子地板
 	FloorGadgetID = {70310062,70310063,70310064,70310065,70310087,70310088},
 	FloorNum = 8,
 }
 --]]
 ---------------------
-tempTrigger = {
+local tempTrigger = {
 	{ config_id = 2330001, name = "floorStateChange", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "",
 	  condition = "", action = "action_floorStateChange", trigger_count = 0},
 	{ config_id = 2330002, name = "EVENT_FloorPlayStart", event = EventType.EVENT_VARIABLE_CHANGE, source = "FloorPlayStart",
@@ -30,7 +30,7 @@ function LF_Initialize_Level()
 		v.isFloor = LF_IsFloor(v.gadget_id)
 	end
 
-	var = { config_id=50000001,name = "lastConfigID", value = 0, no_refresh = false }   --上一次踩亮的地板configID
+	local var = { config_id=50000001,name = "lastConfigID", value = 0, no_refresh = false }   --上一次踩亮的地板configID
 	variables[var.name] = var
 	var = { config_id=50000002,name = "totalFloorNum", value = defs.FloorNum, no_refresh = false } --地板计数器，侦测玩法结束变量
 	variables[var.name] = var
@@ -54,8 +54,8 @@ end
 --------公用函数----------
 ------------Group加载时保底--------
 function action_EVENT_GROUP_LOAD(context,evt)
-    floorPlayEnd = ScriptLib.GetGroupVariableValue(context, "FloorPlayEnd")
-	floorPlayStart = ScriptLib.GetGroupVariableValue(context, "FloorPlayStart")
+    local floorPlayEnd = ScriptLib.GetGroupVariableValue(context, "FloorPlayEnd")
+	local floorPlayStart = ScriptLib.GetGroupVariableValue(context, "FloorPlayStart")
 
     if 0 == floorPlayEnd and 1 == floorPlayStart then
        -- 玩法已开启未完成，请求回档,重新开启
@@ -64,7 +64,7 @@ function action_EVENT_GROUP_LOAD(context,evt)
 
     if 1== floorPlayEnd then
         for k, v in pairs(gadgets) do
-            curState = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, v.config_id)
+            local curState = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, v.config_id)
             if v.isFloor and curState ~= 202 then
                 ScriptLib.SetGadgetStateByConfigId(context, v.config_id, 202)
                 ScriptLib.PrintContextLog(context, "TD WoodFloorPlay : 将不为202的地板设置为202，其ConfigID为" .. v.config_id)
@@ -76,8 +76,8 @@ function action_EVENT_GROUP_LOAD(context,evt)
 end
 ------------对应地板被踩时触发--------
 	function action_floorStateChange(context,evt)
-		toGadgetState = evt.param1
-		configID = evt.param2
+		local toGadgetState = evt.param1
+		local configID = evt.param2
 		ScriptLib.PrintContextLog(context, "TD WoodFloorPlay : 侦测到物件状态切位"..toGadgetState.."ConfigID为" .. configID)
 		if 201 == toGadgetState and  gadgets[configID].isFloor then
 			AnalyzeFloorBySameFloor(context,configID)
@@ -117,12 +117,12 @@ end
 ------------踩踏木制地板判定(对对子)--------
 ---地板只有进入201时，才启动以下分析逻辑
 	function AnalyzeFloorBySameFloor(context,currentConfigID)
-		lastConfigID = ScriptLib.GetGroupVariableValue(context, "lastConfigID")
+		local lastConfigID = ScriptLib.GetGroupVariableValue(context, "lastConfigID")
 		if lastConfigID ~= 0 then
 			ScriptLib.PrintContextLog(context, "TD WoodFloorPlay : 第二次踩中地板,ConfigID为" .. lastConfigID)
 			-- 这是第二次踩入的地板
-			lastGadgetID = gadgets[lastConfigID].gadget_id
-			currentGadgetID = gadgets[currentConfigID].gadget_id
+			local lastGadgetID = gadgets[lastConfigID].gadget_id
+			local currentGadgetID = gadgets[currentConfigID].gadget_id
 			if lastGadgetID == currentGadgetID then
 				-- 两个地板同时切入202
 				ScriptLib.SetGadgetStateByConfigId(context, lastConfigID, 202)

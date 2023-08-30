@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133212196
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -113,9 +113,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -123,7 +123,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_196004(context, evt)
 	if 196003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -134,40 +134,40 @@ function action_EVENT_GADGET_STATE_CHANGE_196004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_196005(context, evt)
 	if evt.param1 ~= 196005 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_196005(context, evt)
 	-- 触发镜头注目，注目位置为坐标（-4038，203，-2133），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-4038, y=203, z=-2133}
-	  pos_follow = {x=-1, y=1, z=1}
+		local pos = {x=-4038, y=203, z=-2133}
+	  local pos_follow = {x=-1, y=1, z=1}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = true, is_change_play_mode = true,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 321240025 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 321240025) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_GROUP_LOAD_196007(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,13 +188,13 @@ function action_EVENT_GROUP_LOAD_196007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133212196, suite = 4 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -204,7 +204,7 @@ function condition_EVENT_GROUP_LOAD_196010(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -215,7 +215,7 @@ function action_EVENT_GROUP_LOAD_196010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -224,7 +224,7 @@ function condition_EVENT_MONSTER_BATTLE_196011(context, evt)
 	if 196002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -232,7 +232,7 @@ end
 function action_EVENT_MONSTER_BATTLE_196011(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212196, 2)
-
+	
 	return 0
 end
 
@@ -242,7 +242,7 @@ function condition_EVENT_ANY_MONSTER_DIE_196012(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -253,18 +253,18 @@ function action_EVENT_ANY_MONSTER_DIE_196012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 321372109 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 321372109) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133212196, suite = 4 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

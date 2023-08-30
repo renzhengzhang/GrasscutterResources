@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220078
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -136,9 +136,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -148,147 +148,147 @@ function action_EVENT_QUEST_FINISH_78004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-3366,y=227,z=-4591}
+	local pos = {x=-3366,y=227,z=-4591}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31021174, pos, 80) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220078, 3)
-
+	
 	-- 将本组内变量名为 "RockDoor1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "RockDoor1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_78008(context, evt)
 	if evt.param1 ~= 78008 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"regionCount"为0
 	if ScriptLib.GetGroupVariableValue(context, "regionCount") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_78008(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-3308,y=200,z=-4535}
+	local pos = {x=-3308,y=200,z=-4535}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31021176, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "regionCount" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "regionCount", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1332200783") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_78011(context, evt)
 	if evt.param1 ~= 78011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"regionCount"为0
 	if ScriptLib.GetGroupVariableValue(context, "regionCount") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_78011(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-3308,y=200,z=-4535}
+	local pos = {x=-3308,y=200,z=-4535}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31021176, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "regionCount" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "regionCount", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1332200783") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_78012(context, evt)
 	if evt.param1 ~= 78012 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"regionCount"为0
 	if ScriptLib.GetGroupVariableValue(context, "regionCount") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_78012(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-3308,y=200,z=-4535}
+	local pos = {x=-3308,y=200,z=-4535}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31021176, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "regionCount" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "regionCount", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1332200783") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -299,21 +299,21 @@ function action_EVENT_QUEST_FINISH_78014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-3263,y=210,z=-4554}
+	local pos = {x=-3263,y=210,z=-4554}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31021175, pos, 80) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "RockDoor2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "RockDoor2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -324,21 +324,21 @@ function action_EVENT_QUEST_FINISH_78015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-3374,y=229,z=-4540}
+	local pos = {x=-3374,y=229,z=-4540}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31021175, pos, 80) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "RockDoor3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "RockDoor3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -347,7 +347,7 @@ function condition_EVENT_GADGET_CREATE_78016(context, evt)
 	if 78007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -358,7 +358,7 @@ function action_EVENT_GADGET_CREATE_78016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -366,14 +366,14 @@ end
 function condition_EVENT_SELECT_OPTION_78017(context, evt)
 	-- 判断是gadgetid 78007 option_id 171
 	if 78007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 171 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -384,13 +384,13 @@ function action_EVENT_SELECT_OPTION_78017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133220078 ；指定config：78007；物件身上指定option：171；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133220078, 78007, 171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -401,13 +401,13 @@ function action_EVENT_QUEST_FINISH_78018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 创建id为78010的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 78010 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -418,25 +418,25 @@ function action_EVENT_QUEST_FINISH_78019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220078, EntityType.GADGET, 78010 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220078, EntityType.GADGET, 78007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133220078, EntityType.GADGET, 78009 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -445,12 +445,12 @@ function condition_EVENT_GADGET_CREATE_78022(context, evt)
 	if 78001 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"RockDoor1"为1
 	if ScriptLib.GetGroupVariableValue(context, "RockDoor1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -461,8 +461,8 @@ function action_EVENT_GADGET_CREATE_78022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -471,12 +471,12 @@ function condition_EVENT_GADGET_CREATE_78024(context, evt)
 	if 78002 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"RockDoor2"为1
 	if ScriptLib.GetGroupVariableValue(context, "RockDoor2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -487,8 +487,8 @@ function action_EVENT_GADGET_CREATE_78024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -497,12 +497,12 @@ function condition_EVENT_GADGET_CREATE_78025(context, evt)
 	if 78003 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"RockDoor3"为1
 	if ScriptLib.GetGroupVariableValue(context, "RockDoor3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -513,7 +513,7 @@ function action_EVENT_GADGET_CREATE_78025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end

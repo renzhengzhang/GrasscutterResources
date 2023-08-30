@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199001001
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	starter_worktop_id = 1032,
 	pointarray_route = 900100002,
 	final_stage = 9,
@@ -16,15 +16,15 @@ defs = {
 
 -- DEFS_MISCS
 --物件池物件gadgetid
-pool_object_gadget_id =
+local pool_object_gadget_id =
 {
     70380225,70380226
 }
 
-monster_drop_num =
+monster_drop_num = 
 {1,1}
 
-monster_suite_chain =
+local monster_suite_chain =
 {
     [3] = {8},
     [5] = {6},
@@ -32,7 +32,7 @@ monster_suite_chain =
     [12] = {13}
 }
 
-elite_drop =
+local elite_drop = 
 {
     [1098] = {2,2},
     [1101] = {2,2},
@@ -53,14 +53,14 @@ elite_drop =
 }
 
 
-point_id_array =
+local point_id_array = 
 {
        from = 1,
        to = 40,
        except = {37}
 }
 
-fuel = {
+local fuel = {
         --初始燃料数量
         init_fuel = 100,
         --给发动机补充能量时，每秒消耗的燃料数量
@@ -69,7 +69,7 @@ fuel = {
         fuel_ball = 20,
 }
 
-energy = {
+local energy = {
         --初始发动机能量
         init_energy = 100,
         --发动机最大能量
@@ -84,7 +84,7 @@ energy = {
 }
 
 
-part = {
+local part = {
         --初始零件数
         init_part = 100,
         --修补分块时，每秒消耗的零件数
@@ -96,12 +96,12 @@ part = {
 }
 
 
-score = {
+local score = {
     checkpoint = 20,
     monster = 5,
 }
 
-raft =
+local raft = 
 {
     engine = 1001,
     part_1 = 1024,
@@ -110,10 +110,10 @@ raft =
     part_4 = 1031
 }
 
-checkpoint =
+local checkpoint = 
 {12,20,30,39,40}
 
-stage =
+local stage = 
 {
     [1] = {monster_suites = {2},start_suites = {2}, tag = "Sailing",obstacle = {1099},revive_point = 1233},
     [2] = {monster_suites = {3},start_suites = {3}, tag = "KillMonster", obstacle = {1099},revive_point = 1234},
@@ -136,9 +136,9 @@ CloudNets = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -341,9 +341,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -354,9 +354,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -489,9 +489,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -499,7 +499,7 @@ function condition_EVENT_GADGET_CREATE_1194(context, evt)
 	if 1196 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -509,14 +509,14 @@ function action_EVENT_GADGET_CREATE_1194(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1193, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 1190 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1190, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

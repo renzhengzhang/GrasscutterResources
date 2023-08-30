@@ -1,40 +1,40 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 247003003
 }
 
 -- DEFS_MISCS
-BossOperatorConfigID = 3001
-QuitPointConfigID = 3006
-BossPoolID = 27001
-GroupId = 247003003
-MainGroupID = 247003001
-RegionID = 3007
-questID = 4002206
-questRegionID = 3008
-doorConfigID = 3016
-doorBossFrontID = 3002
-doorBossBackID = 3003
-finishQuestID = 4002204
-lastDoorConfigID = 3004
-ThunderFloorTimeAxis = { 5,9 }
-ThunderFloorList = {3014,3015,3018,3019,3020,3021,3022,3023,3030,3031,3032,3033,3034,3035,3036,3037,3043,3044,3045,3046,3047,3048,3049,3050}
-isLastRoom = 1
-AirWallConfigID = 3017
-DestinationConfigID = 3005
-EnterRoomTrigger = 3007
-PlotRoom = {regionID = 3051, groupID = 247003032}
-BossDoorPos = {x=319.907,y=3.629,z=409.988}
-BossDoorRot = {180}
-nextQuestID = 4002208
-DestinationPos = {x=319.907,y=1.652,z=411.77}
-DestinationRot = {0}
-preQuestID = 4002206
+local BossOperatorConfigID = 3001
+local QuitPointConfigID = 3006
+local BossPoolID = 27001
+local GroupId = 247003003
+local MainGroupID = 247003001
+local RegionID = 3007
+local questID = 4002206
+local questRegionID = 3008
+local doorConfigID = 3016
+local doorBossFrontID = 3002
+local doorBossBackID = 3003
+local finishQuestID = 4002204
+local lastDoorConfigID = 3004
+local ThunderFloorTimeAxis = { 5,9 }
+local ThunderFloorList = {3014,3015,3018,3019,3020,3021,3022,3023,3030,3031,3032,3033,3034,3035,3036,3037,3043,3044,3045,3046,3047,3048,3049,3050}
+local isLastRoom = 1
+local AirWallConfigID = 3017
+local DestinationConfigID = 3005
+local EnterRoomTrigger = 3007
+local PlotRoom = {regionID = 3051, groupID = 247003032}
+local BossDoorPos = {x=319.907,y=3.629,z=409.988}
+local BossDoorRot = {180}
+local nextQuestID = 4002208
+local DestinationPos = {x=319.907,y=1.652,z=411.77}
+local DestinationRot = {0}
+local preQuestID = 4002206
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -120,9 +120,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -133,9 +133,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -160,9 +160,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -172,7 +172,7 @@ function action_EVENT_QUEST_START_3040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -183,36 +183,36 @@ function action_EVENT_TIMER_EVENT_3041(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 创建id为3039的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 3039 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3042(context, evt)
 	if evt.param1 ~= 3042 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_3042(context, evt)
 	ScriptLib.SetWeatherAreaState(context, 10064, 1)
-
+	
 	if 0 ~= ScriptLib.EnterWeatherArea(context, 10064) then
 	return -1
 	end
-
+	
 	return 0
 end
 

@@ -5,10 +5,10 @@ setmetatable(_ENV,{__index=function() return {} end })
 defs.group_id
 defs.timer
 --光桥机关
-light_bridge={
+local light_bridge={
 	{operator_id=8001,effect_id=8002,gadget_id={8003}}
 }
-wind_field={
+local wind_field={
 	{operator_id=8001,effect_id=8002,gadget_id={8003}}
 }
 --]]
@@ -33,18 +33,18 @@ function LF_Initialize_Trap()
 	--ScriptLib.PrintLog("## suite.gadgets.size() -> "..#suites[1].gadgets)
 	--[[
 	for i=1,#light_bridge do
-		trigger={ config_id = 8000000+light_bridge[i].operator_id,name = tostring(light_bridge[i].operator_id), event = EventType.EVENT_TIMER_EVENT, source = tostring(light_bridge[i].operator_id), condition = "", action = "action_Light_Bridge_Revert", trigger_count = 0 }
+		local trigger={ config_id = 8000000+light_bridge[i].operator_id,name = tostring(light_bridge[i].operator_id), event = EventType.EVENT_TIMER_EVENT, source = tostring(light_bridge[i].operator_id), condition = "", action = "action_Light_Bridge_Revert", trigger_count = 0 }
 	end
 	]]--
 	for i=1,#wind_field do
 		table.insert(variables,{ config_id=51000000+i,name = tostring(wind_field[i].operator_id).."wind", value = 0 })
-		wind_field_trigger={ config_id = 8000000+wind_field[i].operator_id,name = tostring(wind_field[i].operator_id), event = EventType.EVENT_TIMER_EVENT, source = tostring(wind_field[i].operator_id), condition = "", action = "action_Trap_Revert", trigger_count = 0 }
+		local wind_field_trigger={ config_id = 8000000+wind_field[i].operator_id,name = tostring(wind_field[i].operator_id), event = EventType.EVENT_TIMER_EVENT, source = tostring(wind_field[i].operator_id), condition = "", action = "action_Trap_Revert", trigger_count = 0 }
 		table.insert(triggers, wind_field_trigger)
 		table.insert(suites[1].triggers, wind_field_trigger.name)
 	end
 	for i=1,#light_bridge do
 		table.insert(variables,{ config_id=52000000+i,name = tostring(light_bridge[i].operator_id).."bridge", value = 0 })
-		light_bridge_trigger={ config_id = 8000000+light_bridge[i].operator_id,name = tostring(light_bridge[i].operator_id), event = EventType.EVENT_TIMER_EVENT, source = tostring(light_bridge[i].operator_id), condition = "", action = "action_Trap_Revert", trigger_count = 0 }
+		local light_bridge_trigger={ config_id = 8000000+light_bridge[i].operator_id,name = tostring(light_bridge[i].operator_id), event = EventType.EVENT_TIMER_EVENT, source = tostring(light_bridge[i].operator_id), condition = "", action = "action_Trap_Revert", trigger_count = 0 }
 		table.insert(triggers, light_bridge_trigger)
 		table.insert(suites[1].triggers, light_bridge_trigger.name)
 	end
@@ -86,7 +86,7 @@ function action_GADGET_STATE_CHANGE(context,evt)
 		return 0
 	end
 	]]--
-	if evt.param1 == GadgetState.Default then
+	if evt.param1 == GadgetState.Default then 
 		for i=1,#light_bridge do
 			if evt.param2 == light_bridge[i].operator_id then
 				ScriptLib.ShowReminder(context, 400024)
@@ -137,15 +137,15 @@ function action_VARIABLE_CHANGE(context, evt)
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, light_bridge[i].operator_id, 4002)
 				ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, light_bridge[i].operator_id, {4001})
 			end
-		end
+		end	
 		for i=1,#wind_field do
 			if ScriptLib.GetGroupVariableValue(context, tostring(wind_field[i].operator_id).."wind") == 0 then
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, wind_field[i].operator_id, 4003)
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, wind_field[i].operator_id, 4004)
 				ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, wind_field[i].operator_id, {4003})
 			end
-		end
-		return 0
+		end	
+		return 0	
 	end
 	if evt.param1 ==1 then
 		for i=1,#light_bridge do
@@ -154,15 +154,15 @@ function action_VARIABLE_CHANGE(context, evt)
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, light_bridge[i].operator_id, 4002)
 				ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, light_bridge[i].operator_id, {4002})
 			end
-		end
+		end	
 		for i=1,#wind_field do
 			if ScriptLib.GetGroupVariableValue(context, tostring(wind_field[i].operator_id).."wind") == 0 then
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, wind_field[i].operator_id, 4003)
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, wind_field[i].operator_id, 4004)
 				ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, wind_field[i].operator_id, {4004})
 			end
-		end
-		return 0
+		end	
+		return 0	
 	end
 	return 0
 end
@@ -217,7 +217,7 @@ function action_EVENT_SELECT_OPTION(context, evt)
 				end
 				if evt.param2 == 4001 then
 					ScriptLib.DelWorktopOption(context, 4001)
-				else
+				else 
 					ScriptLib.DelWorktopOption(context, 4002)
 				end
 				--去除指引特效
@@ -259,7 +259,7 @@ function action_EVENT_SELECT_OPTION(context, evt)
 				end
 				if evt.param2 ==4003 then
 					ScriptLib.DelWorktopOption(context, 4003)
-				else
+				else 
 					ScriptLib.DelWorktopOption(context, 4004)
 				end
 				ScriptLib.KillEntityByConfigId(context, { config_id = wind_field[i].effect_id })

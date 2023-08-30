@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133314122
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id = 122004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -79,9 +79,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -89,7 +89,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_122005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") == #suites[1].gadgets then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -100,11 +100,11 @@ function action_EVENT_GADGET_STATE_CHANGE_122005(context, evt)
 	elseif evt.param1 == GadgetState.Default then
 		ScriptLib.ChangeGroupVariableValue(context,"start",-1)
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "start") == #suites[1].gadgets then
 		ScriptLib.CreateGadget(context, { config_id = defs.gadget_id })
 	end
-
+	
 	return 0
 end
 
@@ -115,7 +115,7 @@ function action_EVENT_GADGET_STATE_CHANGE_122006(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -124,7 +124,7 @@ function condition_EVENT_GADGET_CREATE_122007(context, evt)
 	if defs.gadget_id ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -135,12 +135,12 @@ function action_EVENT_GADGET_CREATE_122007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 1008, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end

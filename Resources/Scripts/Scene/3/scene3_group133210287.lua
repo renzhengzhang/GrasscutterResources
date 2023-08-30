@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210287
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -81,9 +81,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -92,21 +92,21 @@ function condition_EVENT_ANY_MONSTER_DIE_287007(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_287007(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=-3976.696,y=214.883,z=-692.8798}
+	local pos = {x=-3976.696,y=214.883,z=-692.8798}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400004, pos, 60) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133210287, 2)
-
+	
 	return 0
 end

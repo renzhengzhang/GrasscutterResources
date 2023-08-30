@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201016003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -97,23 +97,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_6(context, evt)
 	-- 判断是gadgetid 3002 option_id 1
 	if 3002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -123,36 +123,36 @@ function action_EVENT_SELECT_OPTION_6(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 3002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 201016003 ；指定config：3002；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 201016003, 3002, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（177，10，-48），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=177, y=10, z=-48}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=177, y=10, z=-48}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 201016003, monsters = {}, gadgets = {3020} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -161,7 +161,7 @@ function condition_EVENT_GADGET_CREATE_25(context, evt)
 	if 3002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -172,7 +172,7 @@ function action_EVENT_GADGET_CREATE_25(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -181,7 +181,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_37(context, evt)
 	if 3008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -192,25 +192,25 @@ function action_EVENT_GADGET_STATE_CHANGE_37(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Key" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Key", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 3017) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 201016003, monsters = {}, gadgets = {3019} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -219,7 +219,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_38(context, evt)
 	if 3003 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -230,50 +230,50 @@ function action_EVENT_GADGET_STATE_CHANGE_38(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Key" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Key", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 3016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 201016003, monsters = {}, gadgets = {3018} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_39(context, evt)
 	-- 判断是gadgetid 为 3013的移动平台，是否到达了1016011 的路线中的 1 点
-
+	
 	if 3013 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1016011 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	-- 判断变量"Key"为1
 	if ScriptLib.GetGroupVariableValue(context, "Key") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -284,27 +284,27 @@ function action_EVENT_PLATFORM_REACH_POINT_39(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_70(context, evt)
 	-- 判断是gadgetid 为 3013的移动平台，是否到达了1016011 的路线中的 2 点
-
+	
 	if 3013 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1016011 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -315,19 +315,19 @@ function action_EVENT_PLATFORM_REACH_POINT_70(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_76(context, evt)
 	if evt.param1 ~= 76 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -338,13 +338,13 @@ function action_EVENT_ENTER_REGION_76(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 延迟4秒后,向groupId为：201016003的对象,请求一次调用,并将string参数："Hints" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201016003, "Hints", 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -355,25 +355,25 @@ function action_EVENT_TIMER_EVENT_77(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为3019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 3019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3021(context, evt)
 	if evt.param1 ~= 3021 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -384,6 +384,6 @@ function action_EVENT_ENTER_REGION_3021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

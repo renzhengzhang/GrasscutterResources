@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133107134
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -149,9 +149,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -162,9 +162,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -261,9 +261,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -273,7 +273,7 @@ function action_EVENT_CHALLENGE_SUCCESS_134002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -284,7 +284,7 @@ function action_EVENT_CHALLENGE_FAIL_134003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -293,7 +293,7 @@ function condition_EVENT_GADGET_CREATE_134005(context, evt)
 	if 134001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -304,7 +304,7 @@ function action_EVENT_GADGET_CREATE_134005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -312,14 +312,14 @@ end
 function condition_EVENT_SELECT_OPTION_134006(context, evt)
 	-- 判断是gadgetid 134001 option_id 2
 	if 134001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -332,38 +332,38 @@ function action_EVENT_SELECT_OPTION_134006(context, evt)
 	ScriptLib.StartFatherChallenge(context, 2008)
 	ScriptLib.SetChallengeEventMark(context, 2008, ChallengeEventMarkType.FLIGHT_TIME)
 	ScriptLib.SetChallengeEventMark(context, 2010, ChallengeEventMarkType.FLIGHT_GATHER_POINT)
-
-
-
+	
+	
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133107134, 2)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133107134, 3)
-
+	
 	-- 触发镜头注目，注目位置为坐标（-427，422，594），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-427, y=422, z=588}
+		local pos = {x=-427, y=422, z=588}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0 }) then
 					return -1
-				end
-
+				end 
+	
 	-- 删除指定group： 133107134 ；指定config：134004；物件身上指定option：2；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133107134, 134001, 2) then
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134053(context, evt)
 	if evt.param1 ~= 134053 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -374,55 +374,55 @@ function action_EVENT_ENTER_REGION_134053(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134040) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134044) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134051) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134056(context, evt)
 	if evt.param1 ~= 134056 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134103(context, evt)
 	if evt.param1 ~= 134103 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -430,22 +430,22 @@ end
 function action_EVENT_ENTER_REGION_134103(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133107134, 7)
-
+	
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133107134, 9)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134104(context, evt)
 	if evt.param1 ~= 134104 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -453,19 +453,19 @@ end
 function action_EVENT_ENTER_REGION_134104(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133107134, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134105(context, evt)
 	if evt.param1 ~= 134105 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -473,76 +473,76 @@ end
 function action_EVENT_ENTER_REGION_134105(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133107134, 9)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133107134, 7)
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134072) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134078) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134079) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134084) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134086) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134091) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134093) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134098) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 134099) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134106(context, evt)
 	if evt.param1 ~= 134106 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -550,10 +550,10 @@ end
 function action_EVENT_ENTER_REGION_134106(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133107134, 10)
-
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133107134, 8)
-
+	
 	return 0
 end
 
@@ -562,7 +562,7 @@ function condition_EVENT_ANY_GADGET_DIE_134109(context, evt)
 	if (134065 == evt.param1)  or (134066 == evt.param1) or (134073 == evt.param1) or (134100 == evt.param1) or (134102 == evt.param1) then
 	    return true
 	end
-
+	
 	return false
 end
 

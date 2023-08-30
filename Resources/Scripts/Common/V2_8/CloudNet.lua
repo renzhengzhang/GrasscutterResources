@@ -3,12 +3,12 @@
 ||	owner: 		luyao.huang
 ||	description:	2.8云网物件用
 ||	LogName:	CloudNet
-||	Protection:
+||	Protection:	
 =======================================]]--
 
-Tri = {
+local Tri = {
     [1] = { name = "any_gadget_die_cloud_net", config_id = 8000001, event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_any_gadget_die_cloud_net", trigger_count = 0},
-
+   
 }
 
 function Initialize()

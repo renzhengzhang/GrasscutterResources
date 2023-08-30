@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144002078
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -78,9 +78,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -91,9 +91,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -163,9 +163,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -173,7 +173,7 @@ function condition_EVENT_GADGET_CREATE_78004(context, evt)
 	if 78003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -184,7 +184,7 @@ function action_EVENT_GADGET_CREATE_78004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -192,19 +192,19 @@ end
 function condition_EVENT_SELECT_OPTION_78005(context, evt)
 	-- 判断是gadgetid 78003 option_id 211
 	if 78003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 211 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"turncount"为0
 	if ScriptLib.GetGroupVariableValue(context, "turncount") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -213,38 +213,38 @@ function action_EVENT_SELECT_OPTION_78005(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 78007, 400200002, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "turncount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "turncount", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_78006(context, evt)
 	-- 判断是gadgetid 为 78007的移动平台，是否到达了400200002 的点集中的 2 点
-
+	
 	if 78007 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 400200002 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -255,7 +255,7 @@ function action_EVENT_PLATFORM_REACH_POINT_78006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -263,19 +263,19 @@ end
 function condition_EVENT_SELECT_OPTION_78012(context, evt)
 	-- 判断是gadgetid 78003 option_id 211
 	if 78003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 211 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"turncount"为1
 	if ScriptLib.GetGroupVariableValue(context, "turncount") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -284,18 +284,18 @@ function action_EVENT_SELECT_OPTION_78012(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 78007, 400200002, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "turncount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "turncount", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -303,19 +303,19 @@ end
 function condition_EVENT_SELECT_OPTION_78013(context, evt)
 	-- 判断是gadgetid 78003 option_id 211
 	if 78003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 211 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"turncount"为2
 	if ScriptLib.GetGroupVariableValue(context, "turncount") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -324,18 +324,18 @@ function action_EVENT_SELECT_OPTION_78013(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 78007, 400200002, {3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "turncount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "turncount", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -343,19 +343,19 @@ end
 function condition_EVENT_SELECT_OPTION_78014(context, evt)
 	-- 判断是gadgetid 78003 option_id 211
 	if 78003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 211 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"turncount"为3
 	if ScriptLib.GetGroupVariableValue(context, "turncount") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -364,32 +364,32 @@ function action_EVENT_SELECT_OPTION_78014(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 78007, 400200002, {4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "turncount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "turncount", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_78017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"turncount"为4
 	if ScriptLib.GetGroupVariableValue(context, "turncount") < 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -397,7 +397,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_78017(context, evt)
 	-- 变量"turncount"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "turncount", 0)
-
+	
 	return 0
 end
 
@@ -405,19 +405,19 @@ end
 function condition_EVENT_SELECT_OPTION_78018(context, evt)
 	-- 判断是gadgetid 78011 option_id 211
 	if 78011 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 211 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"turncount1"为0
 	if ScriptLib.GetGroupVariableValue(context, "turncount1") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -426,18 +426,18 @@ function action_EVENT_SELECT_OPTION_78018(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 78009, 400200003, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "turncount1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "turncount1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -445,19 +445,19 @@ end
 function condition_EVENT_SELECT_OPTION_78019(context, evt)
 	-- 判断是gadgetid 78011 option_id 211
 	if 78011 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 211 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"turncount1"为1
 	if ScriptLib.GetGroupVariableValue(context, "turncount1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -466,18 +466,18 @@ function action_EVENT_SELECT_OPTION_78019(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 78009, 400200003, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "turncount1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "turncount1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -485,19 +485,19 @@ end
 function condition_EVENT_SELECT_OPTION_78020(context, evt)
 	-- 判断是gadgetid 78011 option_id 211
 	if 78011 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 211 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"turncount1"为2
 	if ScriptLib.GetGroupVariableValue(context, "turncount1") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -506,18 +506,18 @@ function action_EVENT_SELECT_OPTION_78020(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 78009, 400200003, {3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "turncount1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "turncount1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -525,19 +525,19 @@ end
 function condition_EVENT_SELECT_OPTION_78021(context, evt)
 	-- 判断是gadgetid 78011 option_id 211
 	if 78011 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 211 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"turncount1"为3
 	if ScriptLib.GetGroupVariableValue(context, "turncount1") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -546,32 +546,32 @@ function action_EVENT_SELECT_OPTION_78021(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = true}
+	local tempParam = {route_type = 0, turn_mode = true}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 78009, 400200003, {4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "turncount1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "turncount1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_78022(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"turncount"为4
 	if ScriptLib.GetGroupVariableValue(context, "turncount1") < 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -579,7 +579,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_78022(context, evt)
 	-- 变量"turncount1"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "turncount1", 0)
-
+	
 	return 0
 end
 
@@ -587,13 +587,13 @@ end
 function action_EVENT_GROUP_LOAD_78029(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144002078, 5)
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144002078, 6)
-
+	
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144002078, 7)
-
+	
 	return 0
 end
 
@@ -602,7 +602,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_78034(context, evt)
 	if 78001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -612,8 +612,8 @@ function action_EVENT_GADGET_STATE_CHANGE_78034(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 78007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -622,7 +622,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_78035(context, evt)
 	if 78001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -632,8 +632,8 @@ function action_EVENT_GADGET_STATE_CHANGE_78035(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 78007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -642,7 +642,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_78036(context, evt)
 	if 78001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -652,8 +652,8 @@ function action_EVENT_GADGET_STATE_CHANGE_78036(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 78009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -662,7 +662,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_78037(context, evt)
 	if 78001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -672,8 +672,8 @@ function action_EVENT_GADGET_STATE_CHANGE_78037(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 78009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -682,7 +682,7 @@ function condition_EVENT_GADGET_CREATE_78038(context, evt)
 	if 78011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -693,7 +693,7 @@ function action_EVENT_GADGET_CREATE_78038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -702,7 +702,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_78045(context, evt)
 	if 78001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -712,14 +712,14 @@ function action_EVENT_GADGET_STATE_CHANGE_78045(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 78015, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 78016 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 78016, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -728,7 +728,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_78046(context, evt)
 	if 78001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -738,14 +738,14 @@ function action_EVENT_GADGET_STATE_CHANGE_78046(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 78015, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 78016 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 78016, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -754,7 +754,7 @@ function condition_EVENT_ANY_GADGET_DIE_78060(context, evt)
 	if 78028 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -764,17 +764,17 @@ function action_EVENT_ANY_GADGET_DIE_78060(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 78002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "complete" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "complete", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 144002078, 2)
-
+	
 	return 0
 end
 
@@ -783,7 +783,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_78061(context, evt)
 	if 78002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -794,7 +794,7 @@ function action_EVENT_GADGET_STATE_CHANGE_78061(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -803,12 +803,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_78062(context, evt)
 	if 78001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"complete"为0
 	if ScriptLib.GetGroupVariableValue(context, "complete") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -816,7 +816,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_78062(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144002078, 2)
-
+	
 	return 0
 end
 
@@ -825,7 +825,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_78063(context, evt)
 	if 78001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -833,6 +833,6 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_78063(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 144002078, 2)
-
+	
 	return 0
 end

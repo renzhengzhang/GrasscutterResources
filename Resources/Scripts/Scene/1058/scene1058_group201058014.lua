@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201058014
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -96,9 +96,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -106,7 +106,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_14011(context, evt)
 	if 14001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -117,13 +117,13 @@ function action_EVENT_ANY_MONSTER_LIVE_14011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 201058002, monsters = {}, gadgets = {2004} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -133,18 +133,18 @@ function action_EVENT_CHALLENGE_SUCCESS_14012(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058002, 2001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 触发镜头注目，注目位置为坐标（14，92，52），持续时间为1.5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=14, y=92, z=52}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=14, y=92, z=52}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 1.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -154,16 +154,16 @@ function action_EVENT_CHALLENGE_FAIL_14013(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201058002, 2017, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201058014, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201058002, 2)
-
+	
 	return 0
 end

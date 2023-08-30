@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133223218
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 133223218,
 	gadget_thunderThelfID = 218001,
 	pointarray_ID = 322300043,
@@ -15,11 +15,11 @@ defs = {
 
 -- DEFS_MISCS
 function GetNextPath(context)
-	path = {}
-	index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
-	stoppoint = defs.pointInfo[index]
+	local path = {}
+	local index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
+	local stoppoint = defs.pointInfo[index]
 	ScriptLib.PrintLog(context, "stop point : "..stoppoint)
-	currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
+	local currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
 	for i=currentNodeIndex + 1,stoppoint do
 		table.insert(path,i)
 	end
@@ -41,9 +41,9 @@ function MovePlatform(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -84,9 +84,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -98,9 +98,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -144,20 +144,20 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_218002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"markFinish"为1
 	if ScriptLib.GetGroupVariableValue(context, "markFinish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -165,7 +165,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_218002(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133223218, 2)
-
+	
 	return 0
 end
 
@@ -174,30 +174,30 @@ function condition_EVENT_PLATFORM_REACH_POINT_218003(context, evt)
 	if 218001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_218003(context, evt)
-
-			ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)
+	
+			ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)		
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isMoving", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
-	end
+	end	
 	ScriptLib.StopPlatform(context, defs.gadget_thunderThelfID)
-
-	next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
-
+	
+	local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
+	
 	if evt.param3 == defs.maxPointCount then
 		ScriptLib.ChangeGroupVariableValue(context, "loopCount", 1)
 		next = defs.loopStartPointIndex
 		ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
 		ScriptLib.SetGroupVariableValue(context,"currentPathNodeIndex",0)
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -207,15 +207,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_218004(context, evt)
 			if defs.gadget_thunderThelfID ~= evt.param1 then
 				return false
 			end
-			state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
-			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
-			if state == 201 then
+			local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
+			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state) 
+			if state == 201 then 
 				return false
 			end
-			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then
+			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then 
 				return false
 			end
-
+			
 			return true
 end
 

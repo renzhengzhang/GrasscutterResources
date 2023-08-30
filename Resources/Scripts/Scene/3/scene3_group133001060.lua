@@ -1,16 +1,16 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133001060
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	--按想要的解谜顺序, 填子装置的config_id
-	branch_gadgets = {60002, 60003, 60004},
+	branch_gadgets = {60002, 60003, 60004}, 
 	--主装置的config_id,可填一个或多个
-	main_gadget = {60001},
+	main_gadget = {60001}, 
 	--重置倒计时秒数
-	limit_time = {40},
+	limit_time = {40}, 
 	--这组解谜在哪个suit里
 	puzzle_suit = 1,
 	--当前group
@@ -24,8 +24,7 @@ defs = {
 	--目标点
 	target_point = 60035,
 	--挑战时间
-	time = 210
-,
+	time = 210,
 	--教学Region
 	guide_regionID = 60018,
 	--Reminder提示用region
@@ -40,9 +39,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -127,9 +126,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -140,9 +139,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -167,23 +166,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_LEAVE_REGION_60008(context, evt)
 	if evt.param1 ~=60008 then return false end
 	return true
-
+	
 end
 
 -- 触发操作
 function action_EVENT_LEAVE_REGION_60008(context, evt)
 	-- 终止识别id为1的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 1, 0)
-
+	
 	return 0
 end
 
@@ -192,7 +191,7 @@ function condition_EVENT_GADGET_CREATE_60010(context, evt)
 	if defs.challenge_gadget ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -203,7 +202,7 @@ function action_EVENT_GADGET_CREATE_60010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -213,8 +212,8 @@ function action_EVENT_CHALLENGE_SUCCESS_60024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60035, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -222,14 +221,14 @@ end
 function condition_EVENT_SELECT_OPTION_60031(context, evt)
 	-- 判断是gadgetid 60009 option_id 7
 	if defs.challenge_gadget ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -246,33 +245,33 @@ function action_EVENT_SELECT_OPTION_60031(context, evt)
 			ScriptLib.ActiveChallenge(context, 1, 2003014,defs.time, defs.group, defs.monster_count, 0)
 			ScriptLib.ShowReminder(context, 400097)
 		end
-
+		
 		-- 删除指定group： 133001060 ；指定config：60009；物件身上指定option：7；
 		if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, defs.group, defs.challenge_gadget, 7) then
 		  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		  return -1
 		end
-
+		
 		--启动怪物潮
-
+		
 		if 0 ~= ScriptLib.AutoMonsterTide(context, 1, defs.group, defs.monster_array, defs.monster_count, defs.monster_min, defs.monster_max) then
 		 return -1
 		end
-
-
+		
+		
 		return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_60034(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if 1 ~= evt.param2 or 2 ~= evt.param1 or "puzzle_state" ~= evt.source_name then
 	  return false
 	end
-
+	
 	ScriptLib.PrintContextLog(context, "玩法成功 创建隐形操作台")
-
+	
 	return true
 end
 
@@ -282,8 +281,8 @@ function action_EVENT_VARIABLE_CHANGE_60034(context, evt)
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60035, GadgetState.GearStop) then
 		  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 				return -1
-			end
-
+			end 
+		
 		return 0
 end
 

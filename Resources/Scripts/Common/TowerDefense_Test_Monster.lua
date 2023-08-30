@@ -6,7 +6,7 @@ function LF_Init_Monster_Group()
 	table.insert(triggers, temp_trigger)
 end
 
-gear_group_id = defs.gear_group_id or 250030001
+local gear_group_id = defs.gear_group_id or 250030001
 
 function action_monster_die(context, evt)
 	ScriptLib.PrintContextLog(context, "--------------- award_points ------------")

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210107
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -93,20 +93,20 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_107004(context, evt)
 	if evt.param1 ~= 107004 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -117,7 +117,7 @@ function action_EVENT_ENTER_REGION_107004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -125,14 +125,14 @@ end
 function condition_EVENT_SELECT_OPTION_107005(context, evt)
 	-- 判断是gadgetid 107003 option_id 7
 	if 107003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -143,10 +143,10 @@ function action_EVENT_SELECT_OPTION_107005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210107, 2)
-
+	
 	return 0
 end
 
@@ -156,7 +156,7 @@ function condition_EVENT_LEAVE_REGION_107006(context, evt)
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -167,6 +167,6 @@ function action_EVENT_LEAVE_REGION_107006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end

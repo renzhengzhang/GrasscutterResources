@@ -1,10 +1,10 @@
 --[[
-defs = {
+local defs = {
 	RegionID =  575001
 }
 --]]
 -----------------------------------------
-extraTriggers = {
+local extraTriggers = {
     {config_id = 9000001, name = "ENTER_REGION", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_EVENT_ENTER_REGION", forbid_guest = false,trigger_count = 0 },
     {config_id = 9000002,name = "LEAVE_REGION", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_EVENT_LEAVE_REGION", forbid_guest = false, trigger_count = 0 },
 }

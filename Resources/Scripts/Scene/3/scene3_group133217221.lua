@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133217221
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -84,9 +84,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -94,19 +94,19 @@ function condition_EVENT_GADGET_STATE_CHANGE_221010(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133217221, 221001) then
 		return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133217221, 221002) then
 		return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133217221, 221003) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133217221, 221004) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -117,60 +117,60 @@ function action_EVENT_GADGET_STATE_CHANGE_221010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133217221, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	-- 将configid为 221001 的物件更改为状态 GadgetState.Action02
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 221001, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 221002 的物件更改为状态 GadgetState.Action02
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 221002, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 221003 的物件更改为状态 GadgetState.Action02
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 221003, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 221004 的物件更改为状态 GadgetState.Action02
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 221004, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 221005 的物件更改为状态 GadgetState.Action02
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 221005, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 221006 的物件更改为状态 GadgetState.Action02
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 221006, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 221007 的物件更改为状态 GadgetState.Action02
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 221007, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 221008 的物件更改为状态 GadgetState.Action02
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 221008, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

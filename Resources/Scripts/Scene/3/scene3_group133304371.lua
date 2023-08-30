@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304371
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	active_step = 201,
 	inactive_step = 0,
 	gadget_array = {371001,371002,371003},
@@ -12,14 +12,14 @@ defs = {
 }
 
 -- DEFS_MISCS
-v = 0
-v_error = 0
-max_bit = #defs.gadget_array
+local v = 0
+local v_error = 0
+local max_bit = #defs.gadget_array
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -117,9 +117,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -128,7 +128,7 @@ function condition_EVENT_GROUP_LOAD_371004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -139,43 +139,43 @@ function action_EVENT_GROUP_LOAD_371004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "gear_reset" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gear_reset", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "v_error" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "v_error", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "trigger_output" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "trigger_output", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 371001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 371001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 371002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 371002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 371003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 371003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -184,21 +184,21 @@ function condition_EVENT_QUEST_START_371005(context, evt)
 	-- 判断变量"first"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "first", 133304371) == 0 then
 			return true
-
+	
 	end
-
+	
 	-- 判断变量"second"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "second", 133304371) == 0 then
 			return true
-
+	
 	end
-
+	
 	-- 判断变量"third"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "third", 133304371) == 0 then
 			return true
-
+	
 	end
-
+	
 	return false
 end
 
@@ -209,7 +209,7 @@ function action_EVENT_QUEST_START_371005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -230,7 +230,7 @@ function action_EVENT_GADGET_STATE_CHANGE_371007(context, evt)
 	end
 	if evt.param1 == defs.active_step then
 	        --操作顺序入栈
-
+	
 	        -- 原版
 	        --[[
 	        for i = 1,max_bit do
@@ -238,7 +238,7 @@ function action_EVENT_GADGET_STATE_CHANGE_371007(context, evt)
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break
+	                        break 
 	                end
 	                if i == max_bit and defs.gadget_array[i] ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
@@ -246,7 +246,7 @@ function action_EVENT_GADGET_STATE_CHANGE_371007(context, evt)
 	                end
 	        end
 	        --]]
-
+	        
 	        --魔改
 	        for i = 1,max_bit do
 	            if i == 1 then
@@ -254,46 +254,46 @@ function action_EVENT_GADGET_STATE_CHANGE_371007(context, evt)
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break
+	                        break 
 	                end
 	                if i == max_bit and ScriptLib.GetGroupVariableValue(context, "first") ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
 	                        v = 10*v
 	                end
 	            end
-
+	            
 	            if i == 2 then
 	                if ScriptLib.GetGroupVariableValue(context, "second") == evt.param2 then
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break
+	                        break 
 	                end
 	                if i == max_bit and ScriptLib.GetGroupVariableValue(context, "second") ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
 	                        v = 10*v
 	                end
 	            end
-
-
+	
+	
 	            if i == 3 then
 	                if ScriptLib.GetGroupVariableValue(context, "third") == evt.param2 then
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break
+	                        break 
 	                end
 	                if i == max_bit and ScriptLib.GetGroupVariableValue(context, "third") ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
 	                        v = 10*v
 	                end
 	            end
-
+	            
 	        end
-
+	
 	end
-
-
+	
+	
 	--v的位数足够时进行出栈检测
 	if v > 10^(max_bit-1) then
 	        v_error = ScriptLib.GetGroupVariableValue(context, "v_error")
@@ -311,19 +311,19 @@ function action_EVENT_GADGET_STATE_CHANGE_371007(context, evt)
 	        if v_error ~= 1 then
 	                v_error = -1
 	        end
-	        ScriptLib.SetGroupVariableValue(context, "sort", v)
+	        ScriptLib.SetGroupVariableValue(context, "sort", v) 
 	        ScriptLib.SetGroupVariableValue(context, "gear_reset", v_error)
 	        ScriptLib.SetGroupVariableValue(context, "v_error", 0)
 	end
-
-
+	
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_371008(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == 1 then
 		if #defs.reset_gear_list == 0 then
 	                        defs.reset_gear_list = suites[1].gadgets
@@ -344,8 +344,8 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_371009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
-
+	
+	
 	if evt.param1 == -1 then
 		return true
 	end
@@ -359,14 +359,14 @@ function action_EVENT_VARIABLE_CHANGE_371009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_371010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 > 0 then
 		return true
 	end
@@ -380,32 +380,32 @@ function action_EVENT_VARIABLE_CHANGE_371010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为371006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 371006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "wq7306220_fin") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_371012(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7306219)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7306219)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
 	if curQuestState ~= 3 then
 	   return false
 	end
-
+	
 	return true
 end
 
@@ -416,7 +416,7 @@ function action_EVENT_GROUP_LOAD_371012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -426,7 +426,7 @@ function condition_EVENT_GROUP_LOAD_371013(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 133304371) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -437,12 +437,12 @@ function action_EVENT_GROUP_LOAD_371013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 创建id为371006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 371006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

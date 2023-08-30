@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133302243
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_smoke1 = 243002,
 	gadget_smoke2 = 243003,
 	fquestid = 73115,
@@ -12,10 +12,10 @@ defs = {
 }
 
 -- DEFS_MISCS
-defs_miscs =
+local defs_miscs = 
 {
     -- 死域观测站透镜的config id
-    lensConfigId = 243001,
+    lensConfigId = 243001,    
 
     lnlConfigId = 243004,
 
@@ -24,7 +24,7 @@ defs_miscs =
     hiddenlnlParam = "hiddenlnl_"..tostring(defs.fquestid),
 
     -- 一个smoke对应一个quest
-    smokeTable =
+    smokeTable = 
     {
         -- 每项格式如下，通常应该只有两项，即一个透镜对应两个黑烟
         --[smoke_id] = {smoke = smoke_config_id, region = region_id, group = group_id, observeQuest = quest_id, finishQuest = quest_id, questParam = "任务定义的进度名"}
@@ -34,9 +34,9 @@ defs_miscs =
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -114,22 +114,22 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_243007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"smoke_103002"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_"..tostring(defs.gadget_smoke1)) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -140,31 +140,31 @@ function action_EVENT_VARIABLE_CHANGE_243007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=-765.4644, y=226.2593, z=2117.909}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-765.4644, y=226.2593, z=2117.909}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-765.4644, y=226.2593, z=2117.909}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 2,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_243008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"smoke_103003"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_"..tostring(defs.gadget_smoke2)) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -175,17 +175,17 @@ function action_EVENT_VARIABLE_CHANGE_243008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=-784, y=188, z=2631}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-784, y=188, z=2631}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-784, y=188, z=2631}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 2,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -207,11 +207,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_243009(context, evt)
 	if 2 == 3 and 300 ~= evt.param1 and 301 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if ScriptLib.GetHostQuestState(context, defs.fquestid*100+1) ~= 2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -222,26 +222,26 @@ function action_EVENT_GADGET_STATE_CHANGE_243009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_243010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"smoke_104002"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_"..tostring(defs.gadget_smoke1)) == 1 then
 			return true
 	end
-
+	
 	-- 判断变量"smoke_104003"为1
 	if ScriptLib.GetGroupVariableValue(context, "smoke_"..tostring(defs.gadget_smoke2)) == 1 then
 			return true
 	end
-
+	
 	return false
 end
 
@@ -252,19 +252,19 @@ function action_EVENT_VARIABLE_CHANGE_243010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_243012(context, evt)
 	if evt.param1 ~= 243012 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -275,7 +275,7 @@ function action_EVENT_ENTER_REGION_243012(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240663001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -69,9 +69,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 删除指定操作台的option
@@ -100,19 +100,19 @@ function TLA_set_gadget_state_by_configid(context, evt, config_id, state)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, config_id, state) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
+		end 
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1002(context, evt)
 	if evt.param1 ~= 1002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -123,13 +123,13 @@ function action_EVENT_ENTER_REGION_1002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将configid为 1001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -137,26 +137,26 @@ end
 function condition_EVENT_SELECT_OPTION_1003(context, evt)
 	-- 判断是gadgetid 1001 option_id 7
 	if 1001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_1003(context, evt)
 	ScriptLib.AutoMonsterTide(context, 1, 240663002, {2004,2005,2006,2007,2008,2010,2011,2012,2013,2014,2016,2017,2018,2019,2020}, 15, 5, 5)
-
+	
 	TLA_del_work_options_by_group_configid(context, evt, 240663001, 1001, 7)
-
+	
 	TLA_set_gadget_state_by_configid(context, evt, 1001, GadgetState.GearStop)
-
+	
 	TLA_refresh_group_tosuite(context, evt, 240663003, 2)
-
+	
 	return 0
 end

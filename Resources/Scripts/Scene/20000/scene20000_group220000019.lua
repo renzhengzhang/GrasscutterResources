@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220000019
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 118,
 	gadget_id_2 = 119,
 	gadget_id_3 = 120,
@@ -13,9 +13,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -107,7 +107,7 @@ function condition_EVENT_CLIENT_EXECUTE_70(context, evt)
 	if defs.gadget_id_1 ~= ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid }) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -118,7 +118,7 @@ function action_EVENT_CLIENT_EXECUTE_70(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -127,7 +127,7 @@ function condition_EVENT_CLIENT_EXECUTE_71(context, evt)
 	if defs.gadget_id_2 ~= ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid }) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -138,7 +138,7 @@ function action_EVENT_CLIENT_EXECUTE_71(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_CLIENT_EXECUTE_72(context, evt)
 	if defs.gadget_id_3 ~= ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid }) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_CLIENT_EXECUTE_72(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -167,7 +167,7 @@ function condition_EVENT_CLIENT_EXECUTE_73(context, evt)
 	if defs.gadget_id_4 ~= ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid }) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -178,7 +178,7 @@ function action_EVENT_CLIENT_EXECUTE_73(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_CLIENT_EXECUTE_74(context, evt)
 	if defs.gadget_id_5 ~= ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid }) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -198,6 +198,6 @@ function action_EVENT_CLIENT_EXECUTE_74(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end

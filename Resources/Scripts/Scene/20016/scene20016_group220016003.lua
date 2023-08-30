@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220016003
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 46306,
 	gadget_id_2 = 1,
 	gadget_id_3 = 3003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,26 +85,26 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_QUEST_FINISH_8(context, evt)
 	--检查ID为46306的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if defs.gadget_id_1 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if defs.gadget_id_2 ~= evt.param2 then
 		return false
 	end
-
+	
 	ScriptLib.PrintLog(context, "quest 46306 finish")
 	return true
 end
@@ -114,17 +114,17 @@ function action_EVENT_QUEST_FINISH_8(context, evt)
 	-- 将configid为 12 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_3, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 	-- 延迟3秒后,向groupId为：220016003的对象,请求一次调用,并将string参数："Power" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220016003, "Power", 0) then
 	  return -1
 	end
-
+	
 	-- 调用提示id为 0 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1001001) then
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -133,7 +133,7 @@ function condition_EVENT_TIMER_EVENT_9(context, evt)
 	if  "Power" ~= evt.source_name then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -144,25 +144,25 @@ function action_EVENT_TIMER_EVENT_9(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 3007 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10(context, evt)
 	if evt.param1 ~= 10 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -172,7 +172,7 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

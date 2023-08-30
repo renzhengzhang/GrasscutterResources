@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133302051
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -102,21 +102,21 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_51001(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7306907)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7306907)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
 	if curQuestState ~= 2 then
 	   return false
 	end
-
+	
 	return true
 end
 
@@ -127,20 +127,20 @@ function action_EVENT_GROUP_LOAD_51001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_51002(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7306907)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7306907)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
 	if curQuestState ~= 3 then
 	   return false
 	end
-
+	
 	return true
 end
 
@@ -148,13 +148,13 @@ end
 function action_EVENT_GROUP_LOAD_51002(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302051, 2)
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133302051, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -165,6 +165,6 @@ function action_EVENT_QUEST_START_51019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end

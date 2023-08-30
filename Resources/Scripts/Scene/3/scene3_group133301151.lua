@@ -1,13 +1,13 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301151
 }
 
 -- DEFS_MISCS
-gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
-
+		
 	end,
 	["1"] = function(context)
 
@@ -31,16 +31,16 @@ gameplayStateFuncitons =
 	end
 }
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -77,9 +77,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -90,9 +90,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -135,9 +135,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -149,7 +149,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_151002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -161,20 +161,20 @@ function action_EVENT_QUEST_START_151003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_151004(context, evt)
-		leveltag = ScriptLib.GetCurrentLevelTagVec(context, 12)[1]
-
-		if leveltag == 39 then
+		local leveltag = ScriptLib.GetCurrentLevelTagVec(context, 12)[1]
+	
+		if leveltag == 39 then 
 			ScriptLib.SetGroupVariableValue(context, "gameplayState", 3)
 		end
-
+		
 		return 0
-
+	
 end
 
 -- 触发操作
@@ -184,6 +184,6 @@ function action_EVENT_QUEST_START_151005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

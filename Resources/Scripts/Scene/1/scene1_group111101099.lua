@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101099
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -119,9 +119,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -132,9 +132,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -195,9 +195,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -205,7 +205,7 @@ function condition_EVENT_GADGET_CREATE_99002(context, evt)
 	if 99001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -216,7 +216,7 @@ function action_EVENT_GADGET_CREATE_99002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -224,16 +224,16 @@ end
 function condition_EVENT_SELECT_OPTION_99003(context, evt)
 	-- 判断是gadgetid 99001 option_id 7
 	if 99001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_99003(context, evt)
 	if evt.param2 == 7 then
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		ScriptLib.SetPlayerGroupVisionType(context, uid_list, {0})
 		ScriptLib.DelWorktopOptionByGroupId(context, 111101099, 99001, 7)
 		ScriptLib.SetWorktopOptionsByGroupId(context, 111101099, 99001, {2905})
@@ -242,11 +242,11 @@ function action_EVENT_SELECT_OPTION_99003(context, evt)
 		ScriptLib.CreateGroupTimerEvent(context, 111101099, "destroy_ballon", 7)
 		ScriptLib.ChangeGroupVariableValue(context, "stage", 1)
 	elseif evt.param2 == 2905 then
-		uid_list = ScriptLib.GetSceneUidList(context)
+		local uid_list = ScriptLib.GetSceneUidList(context)
 		ScriptLib.SetPlayerGroupVisionType(context, uid_list, {1})
 		ScriptLib.SetWorktopOptionsByGroupId(context, 111101099, 99001, {7})
 	end
-
+	
 	return 0
 end
 
@@ -273,7 +273,7 @@ function action_EVENT_TIMER_EVENT_99028(context, evt)
 	        ScriptLib.CreateGroupTimerEvent(context, 111101099, "refresh_ballon", 10)
 	        ScriptLib.SetGroupVariableValue(context, "stage", 1)
 	end
-
+	
 	return 0
 end
 
@@ -282,7 +282,7 @@ function condition_EVENT_GADGET_CREATE_99030(context, evt)
 	if 99029 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -292,7 +292,7 @@ function action_EVENT_GADGET_CREATE_99030(context, evt)
 	ScriptLib.SetPlatformPointArray(context, 99039, 110100004, { 2,3,4,1 }, { route_type = 2 })
 	ScriptLib.SetPlatformPointArray(context, 99040, 110100004, { 3,4,1,2 }, { route_type = 2 })
 	ScriptLib.SetPlatformPointArray(context, 99029, 110100004, { 4,1,2,3 }, { route_type = 2 })
-
+	
 	return 0
 end
 
@@ -301,14 +301,14 @@ function condition_EVENT_GADGET_CREATE_99049(context, evt)
 	if 99032 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_99049(context, evt)
 	ScriptLib.SetPlatformPointArray(context, 99032, 110100001, { 1,2,3 }, { route_type = 2 })
-
+	
 	return 0
 end
 
@@ -335,7 +335,7 @@ function action_EVENT_TIMER_EVENT_99062(context, evt)
 	                ScriptLib.SetGroupGadgetStateByConfigId(context, 111101099, v, 201)
 	        end
 	end
-
+	
 	return 0
 end
 
@@ -344,14 +344,14 @@ function condition_EVENT_GADGET_CREATE_99063(context, evt)
 	if 99054 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_99063(context, evt)
 	ScriptLib.SetPlatformPointArray(context, 99054, 110100002, { 1,3,2 }, { route_type = 2 })
-
+	
 	return 0
 end
 
@@ -360,7 +360,7 @@ function condition_EVENT_GADGET_CREATE_99065(context, evt)
 	if 99018 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -369,7 +369,7 @@ function action_EVENT_GADGET_CREATE_99065(context, evt)
 	ScriptLib.SetPlatformPointArray(context, 99018, 110100003, { 1,2,3 }, { route_type = 2 })
 	ScriptLib.SetPlatformPointArray(context, 99019, 110100003, { 2,3,1 }, { route_type = 2 })
 	ScriptLib.SetPlatformPointArray(context, 99037, 110100003, { 3,1,2 }, { route_type = 2 })
-
+	
 	return 0
 end
 
@@ -378,14 +378,14 @@ function condition_EVENT_GADGET_CREATE_99080(context, evt)
 	if 99004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_99080(context, evt)
 	ScriptLib.CreateGroupTimerEvent(context, 111101099, "destroy_ballon", 7)
-
+	
 	return 0
 end
 
@@ -394,14 +394,14 @@ function condition_EVENT_GADGET_CREATE_99081(context, evt)
 	if 99012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_99081(context, evt)
 	ScriptLib.CreateGroupTimerEvent(context, 111101099, "destroy_ballon", 7)
-
+	
 	return 0
 end
 
@@ -410,14 +410,14 @@ function condition_EVENT_GADGET_CREATE_99082(context, evt)
 	if 99017 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_99082(context, evt)
 	ScriptLib.CreateGroupTimerEvent(context, 111101099, "destroy_ballon", 7)
-
+	
 	return 0
 end
 
@@ -426,14 +426,14 @@ function condition_EVENT_GADGET_CREATE_99083(context, evt)
 	if 99018 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_99083(context, evt)
 	ScriptLib.CreateGroupTimerEvent(context, 111101099, "destroy_ballon", 7)
-
+	
 	return 0
 end
 
@@ -442,13 +442,13 @@ function condition_EVENT_GADGET_CREATE_99084(context, evt)
 	if 99029 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_99084(context, evt)
 	ScriptLib.CreateGroupTimerEvent(context, 111101099, "destroy_ballon", 7)
-
+	
 	return 0
 end

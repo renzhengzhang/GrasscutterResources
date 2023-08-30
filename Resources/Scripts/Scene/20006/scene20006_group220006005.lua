@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220006005
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 42
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -86,9 +86,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -97,7 +97,7 @@ function condition_EVENT_DUNGEON_SETTLE_9(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -108,7 +108,7 @@ function action_EVENT_DUNGEON_SETTLE_9(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -118,7 +118,7 @@ function condition_EVENT_ANY_MONSTER_DIE_12(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -129,31 +129,31 @@ function action_EVENT_ANY_MONSTER_DIE_12(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 92, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 93, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 94, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1019001 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1019001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -163,7 +163,7 @@ function condition_EVENT_ANY_MONSTER_DIE_53(context, evt)
 	if evt.type == EventType.EVENT_ANY_MONSTER_DIE and evt.param1 == defs.gadget_id_1 then
 		return true
 	end
-
+	
 	return false
 end
 
@@ -174,7 +174,7 @@ function action_EVENT_ANY_MONSTER_DIE_53(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	return 0
 end

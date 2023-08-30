@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 166001362
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -127,9 +127,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -137,7 +137,7 @@ function condition_EVENT_ANY_GADGET_DIE_362014(context, evt)
 	if 362005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -148,7 +148,7 @@ function action_EVENT_ANY_GADGET_DIE_362014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_ANY_GADGET_DIE_362015(context, evt)
 	if 362006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -168,7 +168,7 @@ function action_EVENT_ANY_GADGET_DIE_362015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_ANY_GADGET_DIE_362016(context, evt)
 	if 362002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,7 +188,7 @@ function action_EVENT_ANY_GADGET_DIE_362016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_ANY_GADGET_DIE_362017(context, evt)
 	if 362008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -208,7 +208,7 @@ function action_EVENT_ANY_GADGET_DIE_362017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_ANY_GADGET_DIE_362018(context, evt)
 	if 362004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -228,6 +228,6 @@ function action_EVENT_ANY_GADGET_DIE_362018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

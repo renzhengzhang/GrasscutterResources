@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133314250
 }
 
 -- DEFS_MISCS
-JamshidRocks =
+local JamshidRocks = 
 {
     250001,
     250002,
@@ -15,15 +15,15 @@ JamshidRocks =
     250010
 }
 
-CorrectAnswer =
+local CorrectAnswer = 
 {
     3,2,3,1,4,4,1
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -87,9 +87,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -100,9 +100,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -127,20 +127,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_250005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_success"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_success") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -151,49 +151,49 @@ function action_EVENT_VARIABLE_CHANGE_250005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将configid为 250001 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250002 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250002, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250003 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250003, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250007 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250007, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250008 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250008, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250009 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250009, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250010 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250010, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -203,7 +203,7 @@ function condition_EVENT_GROUP_LOAD_250006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "is_success") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -214,61 +214,61 @@ function action_EVENT_GROUP_LOAD_250006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将configid为 250001 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250002 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250002, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250003 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250003, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250007 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250007, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250008 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250008, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250009 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250009, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 250010 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250010, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_250025(context, evt)
 	if evt.param1 ~= 250025 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -276,7 +276,7 @@ end
 function action_EVENT_ENTER_REGION_250025(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133314250, 2)
-
+	
 	return 0
 end
 

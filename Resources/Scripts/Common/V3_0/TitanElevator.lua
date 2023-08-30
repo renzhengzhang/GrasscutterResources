@@ -21,7 +21,7 @@ GROUP SETVAR 133304011 3F 0
 --]]
 
 --[[
-LevelInfo = {
+local LevelInfo = {
     ELCid = defs.gadget_ELCid,
     GearCidList = { defs.gadget_GearCid01,defs.gadget_GearCid02,defs.gadget_GearCid03 }, -- defs.GearCid//务必按照电梯最底层排序到电梯最上层
     GearIDList = { 780, 781, 782}, -- defs.GearId//对应去操作台第几层,ID不准重复
@@ -46,25 +46,25 @@ LevelInfo = {
 }
 --]]
 
-VarInfo = {
+local VarInfo = {
     -- 值String
     CurStep = "CurPlayStep",
     CurELPos = "CurELPos",
     TargetPos = "TargetPos",
 }
 
-PlayStep = {
+local PlayStep = {
     Init = 0, -- 电梯无目标。操作台可用。
     Come = 1, -- 操作台不可用。（End状态下可能会进入）
     Wait = 2, -- 电梯有目标，玩家进入后Start。操作台可用。
     Start = 3, -- 电梯有目标。操作台不可用。抵达楼层后进入End。
 }
-ObjState = {
+local ObjState = {
     Elevator = { Deactivate = 0, Active = 201, Check = 202 },
     Switch = {Deactivate = 0, Active = 201, Runing = 202}
 }
 
-Tri_TitanElevator = {
+local Tri_TitanElevator = {
     -- 检查Event
     { keyWord = "GadgetCheck",event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", trigger_count = 0},
     -- GroupLoad
@@ -80,7 +80,7 @@ Tri_TitanElevator = {
 }
 
 function LF_Initialize_TitanElevator()
-    startConfigID = 50020001
+    local startConfigID = 50020001
     for _,v in pairs(Tri_TitanElevator) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -95,11 +95,11 @@ function LF_Initialize_TitanElevator()
     end
     LF_InsertTriggers(Tri_TitanElevator,{1})
 
-    var = { config_id= 50020101, name = VarInfo.CurStep, value = 0, no_refresh = false }  -- 步骤计数器
+    local var = { config_id= 50020101, name = VarInfo.CurStep, value = 0, no_refresh = false }  -- 步骤计数器
     variables[var.name] = var
-    var = { config_id= 50020102, name = VarInfo.CurELPos, value = 1, no_refresh = false }  -- 电梯层数
+    local var = { config_id= 50020102, name = VarInfo.CurELPos, value = 1, no_refresh = false }  -- 电梯层数
     variables[var.name] = var
-    var = { config_id= 50020103, name = VarInfo.TargetPos, value = 0, no_refresh = false }  -- 电梯层数
+    local var = { config_id= 50020103, name = VarInfo.TargetPos, value = 0, no_refresh = false }  -- 电梯层数
     variables[var.name] = var
 
     return 0
@@ -157,9 +157,9 @@ function action_ELMove(context,evt)
         return 0
     end
 
-    curELPos = ScriptLib.GetGroupVariableValue(context, VarInfo.CurELPos)
-    curELTarget = ScriptLib.GetGroupVariableValue(context, VarInfo.TargetPos)
-    routeID = LF_GetRouteID(curELPos,curELTarget)
+    local curELPos = ScriptLib.GetGroupVariableValue(context, VarInfo.CurELPos)
+    local curELTarget = ScriptLib.GetGroupVariableValue(context, VarInfo.TargetPos)
+    local routeID = LF_GetRouteID(curELPos,curELTarget)
 
     if  -1 == ScriptLib.SetPlatformRouteId(context, LevelInfo.ELCid, routeID) then
         ScriptLib.PrintContextLog(context, "## TD_Elevator : action_ELMove 电梯设置没成功，拿到的routeID为" .. routeID)
@@ -177,21 +177,21 @@ end
 -- EVENT_SELECT_OPTION
 function action_PressButton(context,evt)
 
-    gearCid = evt.param1
+    local gearCid = evt.param1
     -- 确认是第几层操作台
-    curGearPos = LF_GetIndexInTable(gearCid,LevelInfo.GearCidList)
+    local curGearPos = LF_GetIndexInTable(gearCid,LevelInfo.GearCidList)
     if curGearPos <= 0 then
         return 0
     end
 
     ScriptLib.SetGadgetStateByConfigId(context, gearCid, ObjState.Switch.Runing)
 
-    targetPos =  LF_GetIndexInTable(evt.param2,LevelInfo.GearIDList)
+    local targetPos =  LF_GetIndexInTable(evt.param2,LevelInfo.GearIDList)
     ScriptLib.PrintContextLog(context, "## TD_Elevator action_PressButton: Cid：" .. gearCid .. "|Gear:" .. evt.param2 .. "|targetPos:" .. targetPos)
     -- 确认现在状态
     if LF_CheckPlayStep(context,{PlayStep.Init, PlayStep.Wait},"action_PressButton") then
         -- 确认是否要Come
-        curELPos = ScriptLib.GetGroupVariableValue(context, VarInfo.CurELPos)
+        local curELPos = ScriptLib.GetGroupVariableValue(context, VarInfo.CurELPos)
         if curELPos == curGearPos then
             ScriptLib.PrintContextLog(context, "## TD_Elevator action_PressButton: 当前电梯在同楼层")
             if LF_CheckPlayStep(context,{PlayStep.Init},"action_PressButton") then
@@ -211,7 +211,7 @@ function action_PressButton(context,evt)
             -- 操作台无了
             LF_DelAllELOption(context)
             -- 电梯开始移动
-            routeID = LF_GetRouteID(curELPos,curGearPos)
+            local routeID = LF_GetRouteID(curELPos,curGearPos)
             if  -1 == ScriptLib.SetPlatformRouteId(context, LevelInfo.ELCid, routeID) then
                 ScriptLib.PrintContextLog(context, "## TD_Elevator action_PressButton: 电梯设置没成功，拿到的routeID为" .. routeID)
             end
@@ -233,7 +233,7 @@ function action_PressButton(context,evt)
 end
 
 function action_PassChange(context,evt)
-    varName = evt.source_name
+    local varName = evt.source_name
     if not LF_IsInTable(varName,LevelInfo.PassVarList) then
         return 0
     end
@@ -254,18 +254,18 @@ end
 ||	LocalFunction
 --======================================]]
 function LF_GetRouteID(curPos,targetPos)
-    tempCurPos = Fix(curPos,LevelInfo.RouteList,"LF_GetRouteID")
-    curRouteList = LevelInfo.RouteList[tempCurPos]
-    tempTarget = Fix(targetPos,curRouteList,"LF_GetRouteID")
-    routeID = curRouteList[tempTarget]
+    local tempCurPos = Fix(curPos,LevelInfo.RouteList,"LF_GetRouteID")
+    local curRouteList = LevelInfo.RouteList[tempCurPos]
+    local tempTarget = Fix(targetPos,curRouteList,"LF_GetRouteID")
+    local routeID = curRouteList[tempTarget]
     return routeID
 end
 
 -- 获取所有钥匙数据
 function LF_GetKeyList(context)
-    curKeyList = {}
+    local curKeyList = {}
     for i = 1,#LevelInfo.PassVarList do
-        curkey = ScriptLib.GetGroupVariableValue(context, LevelInfo.PassVarList[i])
+        local curkey = ScriptLib.GetGroupVariableValue(context, LevelInfo.PassVarList[i])
         curKeyList[i] = curkey
     end
     ScriptLib.PrintContextLog(context, "## TD_Elevator 当前KeyList为" .. LF_ArrayToString(curKeyList))
@@ -273,7 +273,7 @@ function LF_GetKeyList(context)
 end
 
 function LF_CheckUnLock(context,curKeyList,index)
-    tempIndex = Fix(index,curKeyList,"检查前往的电梯是否已解锁")
+    local tempIndex = Fix(index,curKeyList,"检查前往的电梯是否已解锁")
     if curKeyList[tempIndex] > 0 then
         return true
     end
@@ -281,8 +281,8 @@ function LF_CheckUnLock(context,curKeyList,index)
 end
 
 function LF_CheckGearEnable(context,fromPos,targetPos)
-    curPos = ScriptLib.GetGroupVariableValue(context, VarInfo.CurELPos)
-    curTargetPos = ScriptLib.GetGroupVariableValue(context, VarInfo.TargetPos)
+    local curPos = ScriptLib.GetGroupVariableValue(context, VarInfo.CurELPos)
+    local curTargetPos = ScriptLib.GetGroupVariableValue(context, VarInfo.TargetPos)
     if fromPos ~= targetPos and (curPos ~= fromPos or curTargetPos ~= targetPos) then
         return true
     end
@@ -290,28 +290,28 @@ function LF_CheckGearEnable(context,fromPos,targetPos)
 end
 
 function LF_GetGearID(index)
-    idIndex  = Fix(index,LevelInfo.GearIDList,"LF_SetAllELOption 根据Index拿对应的gearid")
-    gearID = LevelInfo.GearIDList[idIndex]
+    local idIndex  = Fix(index,LevelInfo.GearIDList,"LF_SetAllELOption 根据Index拿对应的gearid")
+    local gearID = LevelInfo.GearIDList[idIndex]
     return gearID
 end
 
 -- 所有机关上操作台
 function LF_SetAllELOption(context)
-    curKeyList = LF_GetKeyList(context)
-    unlockShiled= false
+    local curKeyList = LF_GetKeyList(context)
+    local unlockShiled= false
     -- 借助这个取一下当前已经操作的操作台，不用重复创建
     for i = 1,#LevelInfo.GearCidList do
-        curGear = LevelInfo.GearCidList[i]
-        isUnlock_i  = LF_CheckUnLock(context,curKeyList,i)
-        gearList = {}
+        local curGear = LevelInfo.GearCidList[i]
+        local isUnlock_i  = LF_CheckUnLock(context,curKeyList,i)
+        local gearList = {}
         if isUnlock_i then
             for j = 1,#LevelInfo.GearCidList do
-                isUnlock_j  = LF_CheckUnLock(context,curKeyList,j)
-                gearEnable = LF_CheckGearEnable(context,i,j)
+                local isUnlock_j  = LF_CheckUnLock(context,curKeyList,j)
+                local gearEnable = LF_CheckGearEnable(context,i,j)
                 -- 检查前往的电梯是否已解锁
                 -- 判断是否已经设置了电梯前往目标楼层
                 if isUnlock_j and gearEnable then
-                    gearID = LF_GetGearID(j)
+                    local gearID = LF_GetGearID(j)
                     table.insert(gearList, gearID)
                 end
             end
@@ -341,12 +341,12 @@ end
 
 -- 目标机关上操作台
 function LF_SetELOption(context,cid)
-    curKeyList = LF_GetKeyList(context)
+    local curKeyList = LF_GetKeyList(context)
 
-    curGear = cid
+    local curGear = cid
     -- 确认是第几层操作台
-    curGearPos = LF_GetIndexInTable(curGear,LevelInfo.GearCidList)
-    isUnlock_From  = LF_CheckUnLock(context,curKeyList,curGearPos)
+    local curGearPos = LF_GetIndexInTable(curGear,LevelInfo.GearCidList)
+    local isUnlock_From  = LF_CheckUnLock(context,curKeyList,curGearPos)
 
     if curGearPos <= 0 then
         ScriptLib.PrintContextLog(context, "## TD_Elevator LF_SetELOption: 操作不是电梯的操作台")
@@ -356,14 +356,14 @@ function LF_SetELOption(context,cid)
         ScriptLib.PrintContextLog(context, "## TD_Elevator LF_SetAllELOption: 当前操作台" .. curGear .. "未解锁")
     end
 
-    gearList = {}
+    local gearList = {}
     for j = 1,#LevelInfo.GearIDList do
-        isUnlock_To  = LF_CheckUnLock(context,curKeyList,j)
-        gearEnable = LF_CheckGearEnable(context,curGearPos,j)
+        local isUnlock_To  = LF_CheckUnLock(context,curKeyList,j)
+        local gearEnable = LF_CheckGearEnable(context,curGearPos,j)
         -- 检查前往的电梯是否已解锁
         -- 判断是否已经设置了电梯前往目标楼层
         if isUnlock_To and gearEnable then
-            gearID = LF_GetGearID(j)
+            local gearID = LF_GetGearID(j)
             table.insert(gearList, gearID)
         end
     end
@@ -380,9 +380,9 @@ end
 -- 删除机关全部操作台
 function LF_DelAllELOption(context)
     for i = 1,#LevelInfo.GearCidList do
-        curGear = LevelInfo.GearCidList[i]
+        local curGear = LevelInfo.GearCidList[i]
         for j = 1,#LevelInfo.GearIDList do
-            gear = LevelInfo.GearIDList[j]
+            local gear = LevelInfo.GearIDList[j]
             ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, curGear, gear)
         end
     end
@@ -391,9 +391,9 @@ end
 
 -- 删除目标机关全部操作台
 function LF_DelELOption(context,cid)
-    curGear = cid
+    local curGear = cid
     for j = 1,#LevelInfo.GearIDList do
-        gear = LevelInfo.GearIDList[j]
+        local gear = LevelInfo.GearIDList[j]
         ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, curGear, gear)
     end
     return 0
@@ -403,7 +403,7 @@ end
 
 -- 步骤检查
 function LF_CheckPlayStep(context,phase,functionName)
-    curPlayStep = ScriptLib.GetGroupVariableValue(context, VarInfo.CurStep)
+    local curPlayStep = ScriptLib.GetGroupVariableValue(context, VarInfo.CurStep)
     for _,v in pairs(phase) do
         if v == curPlayStep then
             ScriptLib.PrintContextLog(context, "## TD_Elevator From:" .. functionName .." ||  当前[Phase:".. curPlayStep .."]符合目标进度" ..LF_ArrayToString(phase)  )
@@ -427,7 +427,7 @@ end
 --======================================]]
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -467,7 +467,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    s = "{"
+    local s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","

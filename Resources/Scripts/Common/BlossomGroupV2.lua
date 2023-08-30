@@ -1,6 +1,6 @@
 --地脉花循环营地模板
 
---defs = {
+--local defs = {
 --	group_id = xxx ,
 --    monster_waves = 4,
 --    chest_id = xxx,
@@ -11,7 +11,7 @@
 
 
 
-Tri = {
+local Tri = {
 	[1] = { name = "any_monster_die", config_id = 8000001, event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_any_monster_die", trigger_count = 0 },
 	[2] = { name = "blossom_progress_finish", config_id = 8000002, event = EventType.EVENT_BLOSSOM_PROGRESS_FINISH, source = "", condition= "", action = "action_blossom_progress_finish", trigger_count = 0 },
 	[4] = { name = "group_load", config_id = 8000004, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
@@ -19,7 +19,7 @@ Tri = {
     --[6] = { name = "chest_die", config_id = 8000006, event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_any_gadget_die", trigger_count = 0 },
     [7] = { name = "select_option", config_id = 8000007, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
     [8] = { name = "blossom_chest_die", config_id = 8000008, event = EventType.EVENT_BLOSSOM_CHEST_DIE, source = "", condition = "", action = "action_blossom_chest_die", trigger_count = 0 },
-
+    
 }
 
 function Initialize()
@@ -33,7 +33,7 @@ function Initialize()
     table.insert(variables,{ config_id=50000002,name = "wave", value = 0, no_refresh = true})
 
 
-
+    
 end
 
 ----------------------------------
@@ -56,7 +56,7 @@ function action_group_load(context, evt)
     ScriptLib.SetGroupVariableValue(context,"GroupCompletion",0)
 
     --group load时判定一下这个group是否已经开启，如果已经开启则无事发生
-    has_started = ScriptLib.GetGroupVariableValue(context,"HasStarted")
+    local has_started = ScriptLib.GetGroupVariableValue(context,"HasStarted")
     if (has_started == 1) then
         ScriptLib.PrintContextLog(context,"BG: Group has been started, refresh failed!")
         return 0
@@ -72,7 +72,7 @@ function action_group_refresh(context, evt)
     ScriptLib.PrintContextLog(context,"BG: Group has been refreshed!")
 
     --group load时判定一下这个group是否已经开启，如果已经开启则无事发生
-    has_started = ScriptLib.GetGroupVariableValue(context,"HasStarted")
+    local has_started = ScriptLib.GetGroupVariableValue(context,"HasStarted")
     if (has_started == 1) then
         ScriptLib.PrintContextLog(context,"BG: Group has been started, refresh failed!")
         return 0
@@ -92,7 +92,7 @@ function action_blossom_chest_die(context,evt)
         ScriptLib.SetGroupVariableValue(context,"HasStarted",0)
         ScriptLib.SetGroupVariableValue(context,"wave",0)
         ScriptLib.RefreshBlossomGroup(context, { group_id = 0, suite = 1, exclude_prev = true })
-
+        
     end
     return 0
 end
@@ -102,8 +102,8 @@ function action_select_option(context,evt)
     ScriptLib.PrintContextLog(context,"BG: Option has been selected! Monster waves start!")
     ScriptLib.SetGadgetStateByConfigId(context, LF_Get_Blossom_Operator(context), 201)
     ScriptLib.DelWorktopOptionByGroupId(context,0,LF_Get_Blossom_Operator(context),187)
-
-
+    
+    
     --所有东西成功刷出来了，将group设置为已开始状态
     ScriptLib.SetGroupVariableValue(context,"HasStarted",1)
     LF_Start_Monster_Wave(context)
@@ -132,15 +132,15 @@ end
 
 function LF_Create_Next_Monster_Wave(context)
     --更新下一波怪物潮的方法，如果已经到了最后一波，则不刷新（此时理论上来说打完应该直接触发blossom group finish）
-    wave = ScriptLib.GetGroupVariableValue(context,"wave")
-	--wave = ScriptLib.GetGroupTempValue(context, "wave", {})
-    nextWave = wave + 1
+    local wave = ScriptLib.GetGroupVariableValue(context,"wave")
+	--local wave = ScriptLib.GetGroupTempValue(context, "wave", {})
+    local nextWave = wave + 1
     if nextWave+1 > #suites then
         ScriptLib.PrintContextLog(context, "BG: This is final wave ")
     else
         ScriptLib.PrintContextLog(context,"BG: Creating monster wave: "..nextWave)
 		ScriptLib.AddExtraGroupSuite(context, 0, nextWave+1)
-
+        
         ScriptLib.PrintContextLog(context,"BG: We are trying to load suite : "..nextWave+1)
         ScriptLib.SetGroupVariableValue(context,"wave",nextWave)
 		--ScriptLib.SetGroupTempValue(context, "wave", nextWave, {})
@@ -170,11 +170,11 @@ function LF_Init_Blossom_Group(context)
     if (LF_Get_Blossom_Operator(context) == -1) then
         return -1
     end
-
+    
     ScriptLib.PrintContextLog(context,"BG: Current operator config id is: "..LF_Get_Blossom_Operator(context))
 
     --加载地脉淤积的gadget
-	ret = ScriptLib.CreateGadget(context, {config_id = LF_Get_Blossom_Operator(context)})
+	local ret = ScriptLib.CreateGadget(context, {config_id = LF_Get_Blossom_Operator(context)})
 
     ScriptLib.PrintContextLog(context,"BG: Create worktop result: "..ret)
 
@@ -190,8 +190,8 @@ end
 function LF_Get_Blossom_Operator(context)
     --获取当前BlossomGroup的地脉淤积操作台的方法，根据当前的刷新类型，返回不同的操作台
 
-    operator = {[1]=defs.gadget_id_operator_1,[2]=nil,[3]=defs.gadget_id_operator_2}
-    refreshType = ScriptLib.GetBlossomRefreshTypeByGroupId(context, 0)
+    local operator = {[1]=defs.gadget_id_operator_1,[2]=nil,[3]=defs.gadget_id_operator_2}
+    local refreshType = ScriptLib.GetBlossomRefreshTypeByGroupId(context, 0)
     if not (refreshType == 1 or refreshType == 3) then
         return -1
     end

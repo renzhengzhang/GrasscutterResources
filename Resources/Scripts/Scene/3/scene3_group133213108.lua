@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133213108
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -98,9 +98,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -108,7 +108,7 @@ function condition_EVENT_GADGET_CREATE_108009(context, evt)
 	if 108004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -119,7 +119,7 @@ function action_EVENT_GADGET_CREATE_108009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -127,14 +127,14 @@ end
 function condition_EVENT_SELECT_OPTION_108010(context, evt)
 	-- 判断是gadgetid 108004 option_id 35
 	if 108004 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 35 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -145,26 +145,26 @@ function action_EVENT_SELECT_OPTION_108010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 创建id为108001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 108001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 108004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133213108, EntityType.GADGET, 108006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -173,7 +173,7 @@ function condition_EVENT_GADGET_CREATE_108011(context, evt)
 	if 108005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -184,7 +184,7 @@ function action_EVENT_GADGET_CREATE_108011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -192,14 +192,14 @@ end
 function condition_EVENT_SELECT_OPTION_108012(context, evt)
 	-- 判断是gadgetid 108005 option_id 35
 	if 108005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 35 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -210,26 +210,26 @@ function action_EVENT_SELECT_OPTION_108012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 创建id为108002的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 108002 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 108005 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133213108, EntityType.GADGET, 108007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -238,7 +238,7 @@ function condition_EVENT_GADGET_CREATE_108013(context, evt)
 	if 108015 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -249,7 +249,7 @@ function action_EVENT_GADGET_CREATE_108013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -257,14 +257,14 @@ end
 function condition_EVENT_SELECT_OPTION_108014(context, evt)
 	-- 判断是gadgetid 108015 option_id 35
 	if 108015 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 35 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -275,25 +275,25 @@ function action_EVENT_SELECT_OPTION_108014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 创建id为108003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 108003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 108015 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133213108, EntityType.GADGET, 108008 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end

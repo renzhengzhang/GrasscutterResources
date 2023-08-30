@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199004222
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -111,9 +111,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -121,7 +121,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_222002(context, evt)
 	if 222001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -129,11 +129,11 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_222002(context, evt)
 	-- 创建标识为"temp"，时间节点为{20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "temp", {20}, false)
-
-
+	
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199004222, 2)
-
+	
 	return 0
 end
 
@@ -142,7 +142,7 @@ function condition_EVENT_TIME_AXIS_PASS_222003(context, evt)
 	if "temp" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -152,11 +152,11 @@ function action_EVENT_TIME_AXIS_PASS_222003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 222001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199004222, 2)
-
+	
 	return 0
 end
 
@@ -165,7 +165,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_222006(context, evt)
 	if 222005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -173,11 +173,11 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_222006(context, evt)
 	-- 创建标识为"temp1"，时间节点为{20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "temp1", {20}, false)
-
-
+	
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199004222, 3)
-
+	
 	return 0
 end
 
@@ -186,7 +186,7 @@ function condition_EVENT_TIME_AXIS_PASS_222014(context, evt)
 	if "temp1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -196,10 +196,10 @@ function action_EVENT_TIME_AXIS_PASS_222014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 222005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199004222, 3)
-
+	
 	return 0
 end

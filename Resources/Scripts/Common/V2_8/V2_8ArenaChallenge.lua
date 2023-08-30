@@ -3,11 +3,11 @@
 ||	owner: 		luyao.huang
 ||	description:	2.8幻影心流复刻活动
 ||	LogName:	V2_8ArenaChallenge
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 --计数型挑战
-counting_challenge =
+local counting_challenge = 
 {
     [1] = {challenge_id = defs.kill_monster_challenge_id, tag = tostring(defs.kill_monster_challenge_id), var_name = "challenge_kill_monster"},
     [2] = {challenge_id = defs.state_change_challenge_id, tag = tostring(defs.state_change_challenge_id), var_name = "challenge_state_change_condition"}
@@ -15,7 +15,7 @@ counting_challenge =
 
 ------
 
-local_defs =
+local local_defs = 
 {
     father_challenge_index = 101,
     time_challenge_index = 11,
@@ -27,21 +27,21 @@ local_defs =
 
 }
 
-time_axis = {
+local time_axis = {
     ELITE_INTERVAL_AXIS = {defs.elite_interval},
-
+    
     CHANGE_STAGE_INTERVAL_AXIS = {defs.change_stage_interval},
 
     SECOND_STAGE_ELITE_DELAY_AXIS = {2}
 }
 
-Tri = {
+local Tri = {
     [1] = { name = "group_load", config_id = 10000001, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     [2] = { name = "variable_change", config_id = 10000002, event = EventType.EVENT_VARIABLE_CHANGE, source = "state_change_condition_num", condition = "", action = "action_variable_change", trigger_count = 0},
     [3] = { name = "time_axis_pass", config_id = 10000003, event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_time_axis_pass", trigger_count = 0},
     [4] = { name = "monstert_die_before_leave_scene", config_id = 10000004, event = EventType.EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE, source = "", condition = "", action = "action_monster_die_before_leave_scene", trigger_count = 0},
     [5] = { name = "challenge_fail", config_id = 10000005, event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail", trigger_count = 0},
-    [6] = { name = "pool_monster_tide_over", config_id = 10000006, event = EventType.EVENT_POOL_MONSTER_TIDE_OVER, source = "", condition = "", action = "action_pool_monster_tide_over", trigger_count = 0},
+    [6] = { name = "pool_monster_tide_over", config_id = 10000006, event = EventType.EVENT_POOL_MONSTER_TIDE_OVER, source = "", condition = "", action = "action_pool_monster_tide_over", trigger_count = 0},  
 }
 
 function Initialize()
@@ -52,8 +52,8 @@ function Initialize()
 
     for k,v in pairs(counting_challenge) do
         if v.challenge_id ~= nil then
-            t = {name = "variable_change_"..v.challenge_id, config_id = 1000000+k, event = EventType.EVENT_VARIABLE_CHANGE,source = v.var_name, condition = "", action = "", trigger_count = 0, tag = v.tag}
-
+            local t = {name = "variable_change_"..v.challenge_id, config_id = 1000000+k, event = EventType.EVENT_VARIABLE_CHANGE,source = v.var_name, condition = "", action = "", trigger_count = 0, tag = v.tag}
+            
 		    table.insert(triggers, t)
 		    table.insert(suites[1].triggers, t.name)
 
@@ -71,7 +71,7 @@ function Initialize()
     --转阶段条件完成计数
     table.insert(variables,{config_id = 30000104, name = "state_change_condition_num", value = 0})
 
-
+    
     --是否是第一组精英怪
     table.insert(variables,{config_id = 30000105, name = "is_first_elite", value = 1})
 
@@ -100,7 +100,7 @@ function action_variable_change(context,evt)
         if evt.param1 >= defs.state_change_condition_num and LF_Get_Current_Stage(context) == 0 then
             ScriptLib.PrintContextLog(context,"## [V2_8ArenaChallenge]action_variable_change: 完成转阶段条件")
             LF_Change_To_Second_Stage(context)
-        end
+        end   
     end
 
 
@@ -163,10 +163,10 @@ function action_monster_die_before_leave_scene(context,evt)
                     ScriptLib.StopChallenge(context,local_defs.time_challenge_index,1)
                     ScriptLib.StopChallenge(context,local_defs.kill_monster_challenge_index,1)
 
-                    state_change_condition_num = ScriptLib.GetGroupVariableValue(context,"state_change_condition_num")
+                    local state_change_condition_num = ScriptLib.GetGroupVariableValue(context,"state_change_condition_num")
 
                     --结束时如果完成了转阶段的条件挑战，才算成功，否则算失败
-                    if state_change_condition_num >= defs.state_change_condition_num or LF_Is_Easy_Mode() then
+                    if state_change_condition_num >= defs.state_change_condition_num or LF_Is_Easy_Mode() then 
                         ScriptLib.PrintContextLog(context,"## [V2_8ArenaChallenge]action_monster_die_before_leave_scene: 完成了条件转换逻辑，成功")
                         --挑战成功，补一个性能优化恢复的逻辑
                         LF_Stop_Optimization(context)
@@ -208,7 +208,7 @@ function action_pool_monster_tide_over(context,evt)
     end
     if LF_Get_Current_Stage(context) == 1 and LF_Get_Current_Tide(context) == 2  then
         ScriptLib.PrintContextLog(context,"## [V2_8ArenaChallenge]action_pool_monster_tide_over: 二阶段小怪潮刷完了，挑战失败，几乎不可能出现这种情况")
-
+        
         --ScriptLib.StopChallenge(context,local_defs.father_challenge_index,0)
     end
     return 0
@@ -234,22 +234,22 @@ end
 --玩法启动
 function LF_Start_Play(context)
     ScriptLib.PrintContextLog(context,"## [V2_8ArenaChallenge]LF_Start_Play: 玩法启动")
-
+    
     LF_Set_Worktop_State(context,false)
 
     ScriptLib.CreateGadget(context,{config_id = defs.airwall})
 
     ScriptLib.CreateFatherChallenge(context, local_defs.father_challenge_index, defs.father_challenge_id, defs.challenge_time, {success = 5, fail = 10,fail_on_wipe = true})
-    uid = ScriptLib.GetSceneOwnerUid(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
 	--先开，再attach，给子挑战保序
 	ScriptLib.StartFatherChallenge(context,local_defs.father_challenge_index)
-	ScriptLib.AttachChildChallenge(context,local_defs.father_challenge_index, local_defs.time_challenge_index, defs.time_challenge_id,{3,666,999999},{uid},{success = 0,fail = 0}) --挑战计时
+	ScriptLib.AttachChildChallenge(context,local_defs.father_challenge_index, local_defs.time_challenge_index, defs.time_challenge_id,{3,666,999999},{uid},{success = 0,fail = 0}) --挑战计时	
     if not LF_Is_Easy_Mode() then
-	    ScriptLib.AttachChildChallenge(context,local_defs.father_challenge_index, local_defs.state_change_challenge_index, defs.state_change_challenge_id,{3,defs.state_change_challenge_id,defs.state_change_condition_num},{uid},{success = 0,fail = 0}) --普通挑战
+	    ScriptLib.AttachChildChallenge(context,local_defs.father_challenge_index, local_defs.state_change_challenge_index, defs.state_change_challenge_id,{3,defs.state_change_challenge_id,defs.state_change_condition_num},{uid},{success = 0,fail = 0}) --普通挑战	
 	end
-    ScriptLib.AttachChildChallenge(context,local_defs.father_challenge_index, local_defs.kill_monster_challenge_index, defs.kill_monster_challenge_id,{3,defs.kill_monster_challenge_id,LF_Get_Elite_Num(context)},{uid},{success = 0,fail = 0}) --触发精英怪死亡计数
-
-
+    ScriptLib.AttachChildChallenge(context,local_defs.father_challenge_index, local_defs.kill_monster_challenge_index, defs.kill_monster_challenge_id,{3,defs.kill_monster_challenge_id,LF_Get_Elite_Num(context)},{uid},{success = 0,fail = 0}) --触发精英怪死亡计数	
+   
+    
     LF_Try_Start_Monster_Tide(context,monster_tide_config[1])
 
     if LF_Is_Easy_Mode() then
@@ -264,8 +264,8 @@ function LF_Start_Play(context)
     --一阶段屏蔽天气，固定为晴天
     LF_Set_Weather(context,local_defs.stage_1_weather_id,true)
 
-
-    stage1_start_time = ScriptLib.GetSceneTimeSeconds(context)
+    
+    local stage1_start_time = ScriptLib.GetSceneTimeSeconds(context)
     ScriptLib.SetGroupVariableValue(context,"stage1_start_time", stage1_start_time)
 end
 
@@ -275,11 +275,11 @@ end
 function LF_Change_To_Second_Stage(context)
     ScriptLib.PrintContextLog(context,"## [V2_8ArenaChallenge]LF_Change_To_Second_Stage: 转到二阶段")
 
+    
 
-
-    stage1_end_time = ScriptLib.GetSceneTimeSeconds(context)
-    stage1_start_time = ScriptLib.GetGroupVariableValue(context,"stage1_start_time")
-    stage1_time = stage1_end_time - stage1_start_time
+    local stage1_end_time = ScriptLib.GetSceneTimeSeconds(context)
+    local stage1_start_time = ScriptLib.GetGroupVariableValue(context,"stage1_start_time")
+    local stage1_time = stage1_end_time - stage1_start_time
     ScriptLib.PrintContextLog(context,"## [V2_8ArenaChallenge]LF_Change_To_Second_Stage: 运营打点：consume_time 参数为"..stage1_time)
     ScriptLib.MarkGroupLuaAction(context, "ArenaChallenge","",{["consume_time"]=stage1_time})
 
@@ -361,7 +361,7 @@ end
 
 --向team上设置SGV
 function LF_Set_Team_SGV(context,SGV_name,value)
-    uid = ScriptLib.GetSceneOwnerUid(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
     ScriptLib.SetTeamServerGlobalValue(context, uid, SGV_name, value)
 end
 
@@ -381,7 +381,7 @@ end
 
 --是否是简单模式
 function LF_Is_Easy_Mode()
-    return defs.is_easy_mode == 1
+    return defs.is_easy_mode == 1 
 end
 
 
@@ -399,7 +399,7 @@ end
 --玩法结束的时候，要帮性能优化大礼包补一个恢复优化的逻辑，不然优化去不掉了
 function LF_Stop_Optimization(context)
     ScriptLib.PrintContextLog(context,"## [V2_8ArenaChallenge]LF_Stop_Optimization: 补一个恢复优化的逻辑")
-    uid = ScriptLib.GetSceneOwnerUid(context)
+    local uid = ScriptLib.GetSceneOwnerUid(context)
     --关闭视野锚点
 	--ScriptLib.ClearPlayerEyePoint(context, defs.inner_region)
 	ScriptLib.SetLimitOptimization(context, uid, false)
@@ -435,7 +435,7 @@ function LF_Start_Elite_Tide(context)
 end
 
 function LF_Create_Elite(context)
-    elite_index = LF_Get_Current_Elite_Index(context)
+    local elite_index = LF_Get_Current_Elite_Index(context)
     ScriptLib.PrintContextLog(context,"## [V2_8ArenaChallenge]LF_Create_Elite: 生成精英怪"..elite_index)
     if elite_list[elite_index] ~= nil then
         for i = 1, #elite_list[elite_index] do
@@ -463,7 +463,7 @@ end
 function LF_Try_Continue_Monster_Tide(context)
     ScriptLib.PrintContextLog(context,"## [V2_8ArenaChallenge]LF_Try_Continue_Monster_Tide: 尝试继续怪物潮")
     LF_Change_Tide_Op_Num(context,-1)
-    op_num = LF_Get_Tide_Op_Num(context)
+    local op_num = LF_Get_Tide_Op_Num(context)
     if op_num <= 0 then
         ScriptLib.ResumeAutoPoolMonsterTide(context, base_info.group_id, LF_Get_Current_Tide(context))
     end
@@ -495,7 +495,7 @@ function LF_Clear_Current_Monster_Tide(context)
     ScriptLib.PrintContextLog(context,"## [V2_8ArenaChallenge]LF_Clear_Current_Monster_Tide: 清理当前怪物潮")
 
     --清干净场上残存的怪物
-    alive_monster_list = ScriptLib.GetGroupAliveMonsterList(context,base_info.group_id)
+    local alive_monster_list = ScriptLib.GetGroupAliveMonsterList(context,base_info.group_id)
     for i = 1,#alive_monster_list do
         ScriptLib.RemoveEntityByConfigId(context,base_info.group_id,EntityType.MONSTER,alive_monster_list[i])
     end
@@ -526,7 +526,7 @@ end
 --返回当前场上精英怪是否全死了
 function LF_Is_Current_Elite_All_Dead(context)
 
-    alive_monster_list = ScriptLib.GetGroupAliveMonsterList(context,base_info.group_id)
+    local alive_monster_list = ScriptLib.GetGroupAliveMonsterList(context,base_info.group_id)
     for i = 1, #alive_monster_list do
         if (LF_Is_Elite(alive_monster_list[i])) then
             return false
@@ -537,7 +537,7 @@ end
 
 --获取精英怪的总数
 function LF_Get_Elite_Num(context)
-    num = 0
+    local num = 0
     for i = 1, #elite_list do
         num = num + #elite_list[i]
     end
@@ -554,7 +554,7 @@ function LF_Set_Current_Stage(context,stage)
 end
 
 function LF_Goto_Next_Stage(context)
-    stage = LF_Get_Current_Stage(context)
+    local stage = LF_Get_Current_Stage(context)
     LF_Set_Current_Stage(context,stage+1)
 end
 
@@ -568,7 +568,7 @@ function LF_Set_Current_Elite_Index(context,elite)
 end
 
 function LF_Goto_Next_Elite_Index(context)
-    elite = LF_Get_Current_Elite_Index(context)
+    local elite = LF_Get_Current_Elite_Index(context)
     LF_Set_Current_Elite_Index(context,elite+1)
 end
 
@@ -582,7 +582,7 @@ function LF_Set_Current_Tide(context,tide)
 end
 
 function LF_Goto_Next_Tide(context)
-    tide = LF_Get_Current_Tide(context)
+    local tide = LF_Get_Current_Tide(context)
     LF_Set_Current_Tide(context,tide+1)
 end
 
@@ -593,7 +593,7 @@ function LF_Get_Tide_Op_Num(context)
 end
 
 function LF_Change_Tide_Op_Num(context,delta)
-    tide_op_num = LF_Get_Tide_Op_Num(context)
+    local tide_op_num = LF_Get_Tide_Op_Num(context)
     if tide_op_num + delta < 0 then
         ScriptLib.SetGroupVariableValue(context,"tide_op_num",0)
     else

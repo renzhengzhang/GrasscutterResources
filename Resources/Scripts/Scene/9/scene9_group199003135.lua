@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003135
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	point_sum = 4,
 	route_2 = 900300035,
 	gadget_seelie = 135001,
@@ -15,9 +15,9 @@ defs = {
 defs.final_point = defs.point_sum - 1
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -96,20 +96,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_135002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"reverse"为1
 	if ScriptLib.GetGroupVariableValue(context, "reverse") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -120,33 +120,33 @@ function action_EVENT_VARIABLE_CHANGE_135002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 135001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_135003(context, evt)
 	-- 判断是gadgetid 为 135001的移动平台，是否到达了900300035 的路线中的 4 点
-
+	
 	if 135001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 900300035 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -157,27 +157,27 @@ function action_EVENT_PLATFORM_REACH_POINT_135003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_135004(context, evt)
 	-- 判断是gadgetid 为 135001的移动平台，是否到达了900300036 的路线中的 4 点
-
+	
 	if 135001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 900300036 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -188,13 +188,13 @@ function action_EVENT_PLATFORM_REACH_POINT_135004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003135, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -203,15 +203,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_135005(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-
+	
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-
+	
 	if defs.final_point == evt.param3 then
 	return false
 	end
-
+	
 	return true
 end
 
@@ -220,24 +220,24 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_135005(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, 135001) then
 	return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= evt.param3 then
 	ScriptLib.MarkPlayerAction(context, 2005, 2, evt.param3 + 1)
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_135006(context, evt)
 	if evt.param1 ~= 135006 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -248,24 +248,24 @@ function action_EVENT_ENTER_REGION_135006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 135001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2005, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 将本组内变量名为 "revert" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "revert", 1, 199003133) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end

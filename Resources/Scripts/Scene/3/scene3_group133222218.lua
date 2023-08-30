@@ -1,17 +1,16 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133222218
 }
 
 -- DEFS_MISCS
-wakuraConfig =
-{
-    -- 布设时请务必保持上下Rotation相同，需要初始值不同的场合请通过GadgetState控制
+local wakuraConfig =
+{    -- 布设时请务必保持上下Rotation相同，需要初始值不同的场合请通过GadgetState控制
     -- Index与Rotation无严格要求，务必锚定红色数字1为第一面，按照逆时钟推算Index即可
     -- 举例 上下为两个六边形，红色数字1为第一面，同时下六边形GadgetState为 203。
     -- 那么upNum从1开始依次计数。downNum也是从1开始依次计数。(在编辑器界面你无法看到下六边形转到4）
     -- 然后根据纸垂特征往右依次填数即可。
-
+    
     groupId = 133222218,
     upConfig = 218003,
     downConfig = 218002,
@@ -22,7 +21,7 @@ wakuraConfig =
     targetFaceNum = {3,4,3}, -- 设计者关注的最终面的数量
     SGVList = {"SGV_Light_01","SGV_Light_02","SGV_Light_03","SGV_Light_04","SGV_Light_05","SGV_Light_06"}
 }
-stateIndex ={
+local stateIndex ={
     [0] = {index = 1,next = 201},
     [201] ={index = 2,next = 202},
     [202] ={index = 3,next = 203},
@@ -32,9 +31,9 @@ stateIndex ={
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -72,9 +71,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +84,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -103,9 +102,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -113,7 +112,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_218007(context, evt)
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133222218, 218004) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -124,7 +123,7 @@ function action_EVENT_GADGET_STATE_CHANGE_218007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -134,8 +133,8 @@ function action_EVENT_QUEST_START_218009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 218004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

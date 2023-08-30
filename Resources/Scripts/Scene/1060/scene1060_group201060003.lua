@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201060003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -96,23 +96,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_3004(context, evt)
 	-- 判断是gadgetid 3014 option_id 82
 	if 3014 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 82 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -123,13 +123,13 @@ function action_EVENT_SELECT_OPTION_3004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Progress", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3005(context, evt)
 	if 3002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -149,13 +149,13 @@ function action_EVENT_GADGET_STATE_CHANGE_3005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Progress", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -164,7 +164,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3006(context, evt)
 	if 3003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -175,13 +175,13 @@ function action_EVENT_GADGET_STATE_CHANGE_3006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Progress" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Progress", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -189,18 +189,18 @@ end
 function condition_EVENT_SELECT_OPTION_3007(context, evt)
 	-- 判断是gadgetid 3014 option_id 82
 	if 3014 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 82 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量""不为0
 	if ScriptLib.GetGroupVariableValue(context, "Progress") == 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -211,10 +211,10 @@ function action_EVENT_SELECT_OPTION_3007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 变量"Progress"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "Progress", 0)
-
+	
 	return 0
 end
 
@@ -222,18 +222,18 @@ end
 function condition_EVENT_SELECT_OPTION_3008(context, evt)
 	-- 判断是gadgetid 3015 option_id 823
 	if 3015 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 83 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量""不为1
 	if ScriptLib.GetGroupVariableValue(context, "Progress") == 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -244,10 +244,10 @@ function action_EVENT_SELECT_OPTION_3008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 变量"Progress"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "Progress", 0)
-
+	
 	return 0
 end
 
@@ -255,18 +255,18 @@ end
 function condition_EVENT_SELECT_OPTION_3009(context, evt)
 	-- 判断是gadgetid 3016 option_id 84
 	if 3016 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 84 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量""不为2
 	if ScriptLib.GetGroupVariableValue(context, "Progress") == 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -277,10 +277,10 @@ function action_EVENT_SELECT_OPTION_3009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 变量"Progress"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "Progress", 0)
-
+	
 	return 0
 end
 
@@ -288,19 +288,19 @@ end
 function condition_EVENT_SELECT_OPTION_3010(context, evt)
 	-- 判断是gadgetid 3014 option_id 82
 	if 3014 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 82 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"Progress"为0
 	if ScriptLib.GetGroupVariableValue(context, "Progress") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -311,26 +311,26 @@ function action_EVENT_SELECT_OPTION_3010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Progress", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 201060003, EntityType.GADGET, 3003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 3014 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -338,19 +338,19 @@ end
 function condition_EVENT_SELECT_OPTION_3011(context, evt)
 	-- 判断是gadgetid 3015 option_id 83
 	if 3015 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 83 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"Progress"为1
 	if ScriptLib.GetGroupVariableValue(context, "Progress") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -361,26 +361,26 @@ function action_EVENT_SELECT_OPTION_3011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "Progress" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Progress", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 201060003, EntityType.GADGET, 3002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 3015 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -388,19 +388,19 @@ end
 function condition_EVENT_SELECT_OPTION_3012(context, evt)
 	-- 判断是gadgetid 3016 option_id 84
 	if 3016 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 84 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"Progress"为2
 	if ScriptLib.GetGroupVariableValue(context, "Progress") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -411,26 +411,26 @@ function action_EVENT_SELECT_OPTION_3012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Progress" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Progress", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 201060003, EntityType.GADGET, 3001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 3016 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -438,31 +438,31 @@ end
 function action_EVENT_QUEST_START_3013(context, evt)
 	-- 变量"Progress"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "Progress", 0)
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201060003, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 201060003, 3014, {82}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 201060003, 3015, {83}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 201060003, 3016, {84}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -471,7 +471,7 @@ function condition_EVENT_GADGET_CREATE_3017(context, evt)
 	if 3014 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -482,7 +482,7 @@ function action_EVENT_GADGET_CREATE_3017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -491,7 +491,7 @@ function condition_EVENT_GADGET_CREATE_3018(context, evt)
 	if 3015 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -502,7 +502,7 @@ function action_EVENT_GADGET_CREATE_3018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -511,7 +511,7 @@ function condition_EVENT_GADGET_CREATE_3019(context, evt)
 	if 3016 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -522,6 +522,6 @@ function action_EVENT_GADGET_CREATE_3019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end

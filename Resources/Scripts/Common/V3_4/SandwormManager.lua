@@ -1,9 +1,9 @@
 --[[======================================
 ||	filename:	SandwormManager
 ||	owner: 		luyao.huang
-||	description:
+||	description:	
 ||	LogName:	SandwormManager
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 
@@ -11,9 +11,9 @@
 
 
 
-manager_Tri = {
+local manager_Tri = {
     [1] = { name = "group_will_unload_sandworm_manager", config_id = 100000001, event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload_sandworm_manager", trigger_count = 0},
-
+  
 }
 
 function manager_Initialize()
@@ -51,8 +51,8 @@ end
 
 function LF_Request_Create_Sandworm(context,prev_context,origin_group,priority)
     ScriptLib.PrintContextLog(context,"## [SandwormManager] LF_Request_Create_Sandworm: 请求创建沙虫，来源group为"..origin_group.."，优先级为"..priority)
-    current_sandworm_priority = ScriptLib.GetGroupVariableValue(context,"current_sandworm_priority")
-    current_sandworm_origin_group = ScriptLib.GetGroupVariableValue(context,"current_sandworm_origin_group")
+    local current_sandworm_priority = ScriptLib.GetGroupVariableValue(context,"current_sandworm_priority")
+    local current_sandworm_origin_group = ScriptLib.GetGroupVariableValue(context,"current_sandworm_origin_group")
     if current_sandworm_origin_group == -1 and current_sandworm_priority == -1 then
         ScriptLib.PrintContextLog(context,"## [SandwormManager] LF_Request_Create_Sandworm: 当前占用列表为空，允许创建")
         ScriptLib.SetGroupVariableValue(context,"current_sandworm_origin_group",origin_group)
@@ -76,7 +76,7 @@ end
 
 function LF_Request_Clear_Occupation(context,prev_context,origin_group)
     ScriptLib.PrintContextLog(context,"## [SandwormManager] LF_Request_Clear_Occupation: 请求清除沙虫占用，来源group为"..origin_group)
-    current_sandworm_origin_group = ScriptLib.GetGroupVariableValue(context,"current_sandworm_origin_group")
+    local current_sandworm_origin_group = ScriptLib.GetGroupVariableValue(context,"current_sandworm_origin_group")
     if current_sandworm_origin_group == origin_group then
         ScriptLib.PrintContextLog(context,"## [SandwormManager] LF_Request_Clear_Occupation: 与当前的占用group匹配")
         ScriptLib.SetGroupVariableValue(context,"current_sandworm_origin_group",-1)

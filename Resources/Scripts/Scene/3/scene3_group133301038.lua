@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301038
 }
 
 -- DEFS_MISCS
-BattleCfg = {
+local BattleCfg = {
     -- RegionConfigID
     NearMaranaRegion = 38016,   --靠近无留坨播放CS的区域
     RanaroStartMoveRegion = 38017,  --玩家进入后，兰那罗引导玩家前往各个岛的区域
@@ -56,7 +56,7 @@ BattleCfg = {
     }
 }
 
-QuestCfg = {
+local QuestCfg = {
     MissionStart01 = "7303704",
     MissionStart02 = "7303705",
     BossAppear = "7303704",
@@ -68,9 +68,9 @@ QuestCfg = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -170,9 +170,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -183,9 +183,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -273,9 +273,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -285,9 +285,9 @@ function action_EVENT_GROUP_LOAD_38004(context, evt)
 		ScriptLib.RefreshGroup(context, { group_id = base_info.group_id, suite = 1 })
 		return 0
 	end
-
+	
 	-- 如果09任务已完成，Protect是否处理过
-	protectValue = ScriptLib.GetGroupVariableValue(context, "Protect")
+	local protectValue = ScriptLib.GetGroupVariableValue(context, "Protect")
 	ScriptLib.PrintContextLog(context, "## TD_BossMarana SceneTag处理 protectValue = " .. protectValue)
 	if protectValue == 0 then
 		if ScriptLib.CheckSceneTag(context, 3,1101 ) then
@@ -316,7 +316,7 @@ function action_EVENT_GROUP_LOAD_38004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -325,22 +325,22 @@ function condition_EVENT_GADGET_CREATE_38041(context, evt)
 	if 38024 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_38041(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-766.4076, y=-143.7692, z=3982.114}，持续时间为1.5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-766.4076, y=-143.7692, z=3982.114}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-766.4076, y=-143.7692, z=3982.114}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 1.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -349,22 +349,22 @@ function condition_EVENT_GADGET_CREATE_38042(context, evt)
 	if 38028 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_38042(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-727.7316, y=-143.2718, z=4065.241}，持续时间为1.5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-727.7316, y=-143.2718, z=4065.241}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-727.7316, y=-143.2718, z=4065.241}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 1.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -373,22 +373,22 @@ function condition_EVENT_GADGET_CREATE_38043(context, evt)
 	if 38030 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_38043(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-616.0141, y=-143.8488, z=4046.944}，持续时间为1.5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-616.0141, y=-143.8488, z=4046.944}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-616.0141, y=-143.8488, z=4046.944}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 1.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 

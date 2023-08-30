@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144002079
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -119,16 +119,16 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_79029(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144002079, 5)
-
+	
 	return 0
 end
 
@@ -137,12 +137,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_79030(context, evt)
 	if 79001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"complete"为0
 	if ScriptLib.GetGroupVariableValue(context, "complete") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -152,8 +152,8 @@ function action_EVENT_GADGET_STATE_CHANGE_79030(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 79003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -162,7 +162,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_79031(context, evt)
 	if 79001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -172,8 +172,8 @@ function action_EVENT_GADGET_STATE_CHANGE_79031(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 79003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -182,7 +182,7 @@ function condition_EVENT_ANY_GADGET_DIE_79060(context, evt)
 	if 79026 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -192,17 +192,17 @@ function action_EVENT_ANY_GADGET_DIE_79060(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 79002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "complete" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "complete", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 144002079, 2)
-
+	
 	return 0
 end
 
@@ -211,7 +211,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_79061(context, evt)
 	if 79002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -222,7 +222,7 @@ function action_EVENT_GADGET_STATE_CHANGE_79061(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -231,12 +231,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_79062(context, evt)
 	if 79001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"complete"为0
 	if ScriptLib.GetGroupVariableValue(context, "complete") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -244,7 +244,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_79062(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144002079, 2)
-
+	
 	return 0
 end
 
@@ -253,7 +253,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_79063(context, evt)
 	if 79001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -261,6 +261,6 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_79063(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 144002079, 2)
-
+	
 	return 0
 end

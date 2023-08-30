@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133223426
 }
 
@@ -12,16 +12,16 @@ defs = {
         hasChild = false, --表示是否切当前Group的suite，true表示切自己的
         selfSuiteId = 2, --需要切的自己的suite
         hasMultiStatues = false, --是否有多个雷鸟雕像
-        statuesMap =
+        statuesMap = 
         {
                 [10001] = 2, --雷鸟雕像和需要切出来的Suite的对应表
         },
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -102,20 +102,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_426003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Bird_Start"为1
 	if ScriptLib.GetGroupVariableValue(context, "Bird_Start") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -125,8 +125,8 @@ function action_EVENT_VARIABLE_CHANGE_426003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 426001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -135,12 +135,12 @@ function condition_EVENT_GADGET_CREATE_426005(context, evt)
 	if 426002 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-
+	
 	-- 判断变量"Finish"为0
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -151,7 +151,7 @@ function action_EVENT_GADGET_CREATE_426005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -159,14 +159,14 @@ end
 function condition_EVENT_SELECT_OPTION_426006(context, evt)
 	-- 判断是gadgetid 426002 option_id 7
 	if 426002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -177,31 +177,31 @@ function action_EVENT_SELECT_OPTION_426006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 426004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133223426 ；指定config：426002；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133223426, 426002, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 426002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 426002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -211,7 +211,7 @@ function condition_EVENT_GROUP_LOAD_426007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "water_finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -222,20 +222,20 @@ function action_EVENT_GROUP_LOAD_426007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_426008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -245,8 +245,8 @@ function action_EVENT_VARIABLE_CHANGE_426008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 426001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

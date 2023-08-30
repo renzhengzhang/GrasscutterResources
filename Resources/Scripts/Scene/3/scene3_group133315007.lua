@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133315007
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -117,9 +117,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -127,7 +127,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7006(context, evt)
 	if 7001 ~= evt.param2 or GadgetState.GatherDrop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -137,14 +137,14 @@ function action_EVENT_GADGET_STATE_CHANGE_7006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133315007, EntityType.GADGET, 7013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -155,17 +155,17 @@ function action_EVENT_ENTER_REGION_7007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（95，270，2995），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=95, y=270, z=2995}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=95, y=270, z=2995}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -174,7 +174,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7011(context, evt)
 	if 7004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -184,8 +184,8 @@ function action_EVENT_GADGET_STATE_CHANGE_7011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -194,7 +194,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7012(context, evt)
 	if 7005 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_GADGET_STATE_CHANGE_7012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

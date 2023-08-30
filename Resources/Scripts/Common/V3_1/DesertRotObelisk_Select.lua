@@ -32,19 +32,19 @@ defs.gadget_connect2={}
 defs.gadget_connect3={}
 --]]
 ---
-obeliskList={
+local obeliskList={
 	{config_id=defs.gadget_1,rotation=defs.rotation_1},
 	{config_id=defs.gadget_2,rotation=defs.rotation_2},
 	{config_id=defs.gadget_3,rotation=defs.rotation_3},
 }
 
-connectRelation={
+local connectRelation={
 	[defs.gadget_1]=defs.gadget_connect1,
 	[defs.gadget_2]=defs.gadget_connect2,
 	[defs.gadget_3]=defs.gadget_connect3,
 }
 
-extraTriggers={
+local extraTriggers={
 	{ config_id = 8000001, name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_GroupLoad", trigger_count = 0 },
 	{ config_id = 8000002, name = "Platform_Arrive", event = EventType.EVENT_PLATFORM_ARRIVAL, source = "", condition = "", action = "action_PlatformArrive", trigger_count = 0 },
 	{ config_id = 8000003, name = "On_Option_Select", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_OptionSelect", trigger_count = 0 },
@@ -96,7 +96,7 @@ function action_OptionSelect(context, evt)
 	if evt.param2 ~= defs.option_id then
 		return 0
 	end
-	config_id = evt.param1
+	local config_id = evt.param1
 	for _,v in pairs(obeliskList)do
 		ScriptLib.SetWorktopOptionsByGroupId(context,base_info.group_id , v.config_id, {})
 	end
@@ -112,15 +112,15 @@ end
 function RotateGadget(context,config_id)
 	ScriptLib.SetGadgetStateByConfigId(context, config_id, 202)
 	ScriptLib.SetPlatformPointArray(context, config_id, defs.pointarray_ID, { 1 }, { route_type = 0,turn_mode=true })
-	curRot = ScriptLib.GetGroupVariableValue(context, config_id.."rotation")
+	local curRot = ScriptLib.GetGroupVariableValue(context, config_id.."rotation")
 	ScriptLib.SetGroupVariableValue(context, config_id.."rotation", (curRot+120)%360)
 end
 
 function action_PlatformArrive(context, evt)
 	ScriptLib.PrintContextLog(context, "@@ LUA_Log : RotObelisk action_PlatformArrive start ")
 
-	config_id = evt.param1
-	curRot = ScriptLib.GetGroupVariableValue(context, config_id.."rotation")
+	local config_id = evt.param1
+	local curRot = ScriptLib.GetGroupVariableValue(context, config_id.."rotation")
 	if(curRot==0)then
 		ScriptLib.SetGadgetStateByConfigId(context, config_id, 201)
 	else

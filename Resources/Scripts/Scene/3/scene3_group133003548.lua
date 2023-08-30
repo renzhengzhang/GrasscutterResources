@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133003548
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	crucible_timer = {45,165,285,405,525,650,775},
 	crucible_timer_prepare = 2,
 	gadget_crucible = 548001,
@@ -19,11 +19,11 @@ defs = {
 -- DEFS_MISCS
 points = {
 	{config_id = 1, pos = {x= 2349.235, y= 283.8984, z= -1716.95}, rot = {x=0,y=189.4293,z=0} },
-	{config_id = 2, pos = {x= 2342.74854, y= 283.898438, z= -1730.98035}, rot = {x=0,y=0,z=0} },
+	{config_id = 2, pos = {x= 2342.74854, y= 283.898438, z= -1730.98035}, rot = {x=0,y=0,z=0} }, 
 	{config_id = 3, pos = { x = 2346.308, y = 283.784, z = -1735.868 }, rot = { x = 0.000, y = 0.000, z = 0.000 } }
 }
 
-stage_table = {
+local stage_table = {
 	[1] = { name = "Water",   suite = {[1]={2}, [2]={3}} },
 	[2] = { name = "Fire",    suite = {[1]={4,5}, [2]={4,5}, [3]={4,5}} },
 	[3] = { name = "Electric",suite = {[1]={6,7}, [2]={6,7}, [3]={6,7}} },
@@ -31,10 +31,10 @@ stage_table = {
 	[5] = { name = "Wind", 	  suite = {} },
 	[6] = { name = "Rock", 	  suite = {} },
 	[7] = { name = "Grass",   suite = {} }
-}
+} 
 
 
-timer_table = {
+local timer_table = {
 	[1] = {2},
 	[2] = {2},
 	[3] = {2}
@@ -47,13 +47,13 @@ timer_table = {
 }
 
 
-timer_notify_str = "timer_notify"
-timer_suite_str = "timer_suite"
-timer_counter = "timer_counter"
+local timer_notify_str = "timer_notify"
+local timer_suite_str = "timer_suite"
+local timer_counter = "timer_counter"
 
 
 function LF_random_stage_suite(table, elem, stage)
-	array = table[elem].suite[stage]
+	local array = table[elem].suite[stage]
 	if #array == 0 or array == nil then
 		return -1
 	end
@@ -63,7 +63,7 @@ end
 
 
 function LF_random_timer_suite(table, stage)
-	array = table[stage]
+	local array = table[stage]
 	if #array == 0 or array == nil then
 		return -1
 	end
@@ -72,7 +72,7 @@ function LF_random_timer_suite(table, stage)
 end
 
 function LF_set_timer(context)
-	i = ScriptLib.GetGroupVariableValue(context, timer_counter)
+	local i = ScriptLib.GetGroupVariableValue(context, timer_counter)
 	if i > #defs.crucible_timer then
 		ScriptLib.PrintLog(context, "## undefined_crucible_timer !")
 		return -1
@@ -80,15 +80,15 @@ function LF_set_timer(context)
 		return -1
 	end
 
-	duration = 0
+	local duration = 0
 	if i <= 1 then
 		duration = defs.crucible_timer[i]
 	else
 		duration = defs.crucible_timer[i+1] - defs.crucible_timer[i]
 	end
 
-	dur = duration - defs.crucible_timer_prepare
-	if dur <= 0 then
+	local dur = duration - defs.crucible_timer_prepare
+	if dur <= 0 then 
 		ScriptLib.PrintLog(context, "## crucible_timer_duration_illegal !")
 		return -1
 	end
@@ -100,9 +100,9 @@ function LF_set_timer(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -140,9 +140,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -153,9 +153,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -189,7 +189,7 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================

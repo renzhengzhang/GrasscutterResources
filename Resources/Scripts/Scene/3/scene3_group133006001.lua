@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133006001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -75,9 +75,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -88,9 +88,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -124,9 +124,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -134,7 +134,7 @@ function condition_EVENT_ANY_GADGET_DIE_1001(context, evt)
 	if 1003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -145,73 +145,73 @@ function action_EVENT_ANY_GADGET_DIE_1001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1007 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1034 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1035 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1024 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1023 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1022 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 将本组内变量名为 "reminder" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "reminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为4
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -222,19 +222,19 @@ function action_EVENT_VARIABLE_CHANGE_1002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "count1" 的变量设置为 4
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "count1", 4, 133006003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟3秒后,向groupId为：133006001的对象,请求一次调用,并将string参数："BLACKWIND" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133006001, "BLACKWIND", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_ANY_GADGET_DIE_1008(context, evt)
 	if 1004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -254,61 +254,61 @@ function action_EVENT_ANY_GADGET_DIE_1008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1016 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1037 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1027 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1029 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1013 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1025 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 将本组内变量名为 "reminder" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "reminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -317,7 +317,7 @@ function condition_EVENT_ANY_GADGET_DIE_1009(context, evt)
 	if 1005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -328,61 +328,61 @@ function action_EVENT_ANY_GADGET_DIE_1009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1018 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1026 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1028 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1024 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1023 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 将本组内变量名为 "reminder" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "reminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1025 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -391,7 +391,7 @@ function condition_EVENT_ANY_GADGET_DIE_1010(context, evt)
 	if 1006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -402,66 +402,66 @@ function action_EVENT_ANY_GADGET_DIE_1010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1019 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1030 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1014 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1031 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1022 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 将本组内变量名为 "reminder" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "reminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"big"为1
 	if ScriptLib.GetGroupVariableValue(context, "big") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -472,7 +472,7 @@ function action_EVENT_VARIABLE_CHANGE_1011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -483,29 +483,29 @@ function action_EVENT_TIMER_EVENT_1012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（2630，214，-2356），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=2630, y=214, z=-2356}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=2630, y=214, z=-2356}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"reminder"为1
 	if ScriptLib.GetGroupVariableValue(context, "reminder") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -516,19 +516,19 @@ function action_EVENT_VARIABLE_CHANGE_1015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"dead"为1
 	if ScriptLib.GetGroupVariableValue(context, "dead") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -539,7 +539,7 @@ function action_EVENT_VARIABLE_CHANGE_1017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -548,24 +548,24 @@ function condition_EVENT_GADGET_CREATE_1020(context, evt)
 	if 1032 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"count"为1
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_1020(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=2630,y=200,z=-2356}
+	local pos = {x=2630,y=200,z=-2356}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31020861, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -573,17 +573,17 @@ end
 function condition_EVENT_QUEST_FINISH_1021(context, evt)
 	--检查ID为7101215的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 7101215 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -594,7 +594,7 @@ function action_EVENT_QUEST_FINISH_1021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -603,24 +603,24 @@ function condition_EVENT_GADGET_CREATE_1033(context, evt)
 	if 1032 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"count"为2
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_1033(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=2630,y=200,z=-2356}
+	local pos = {x=2630,y=200,z=-2356}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31020861, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -629,23 +629,23 @@ function condition_EVENT_GADGET_CREATE_1036(context, evt)
 	if 1032 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"count"为3
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_1036(context, evt)
 	-- 在指定位置对应半径范围播放reminder
-	pos = {x=2630,y=200,z=-2356}
+	local pos = {x=2630,y=200,z=-2356}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31020861, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end

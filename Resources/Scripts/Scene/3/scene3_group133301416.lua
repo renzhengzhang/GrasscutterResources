@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301416
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -36,9 +36,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -49,9 +49,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -76,21 +76,21 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_416002(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7302515)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7302515)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
 	if curQuestState ~= 3 then
 	   return false
 	end
-
+	
 	return true
 end
 
@@ -101,6 +101,6 @@ function action_EVENT_GROUP_LOAD_416002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end

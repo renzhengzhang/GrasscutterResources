@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133216010
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -110,9 +110,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -120,7 +120,7 @@ function condition_EVENT_ANY_GADGET_DIE_10011(context, evt)
 	if 10004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -131,8 +131,8 @@ function action_EVENT_ANY_GADGET_DIE_10011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -141,7 +141,7 @@ function condition_EVENT_ANY_GADGET_DIE_10012(context, evt)
 	if 10005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -152,18 +152,18 @@ function action_EVENT_ANY_GADGET_DIE_10012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_10013(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133216010) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -173,7 +173,7 @@ function action_EVENT_ANY_MONSTER_DIE_10013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10017, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

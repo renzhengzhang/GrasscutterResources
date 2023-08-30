@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133302674
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -146,9 +146,9 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -156,7 +156,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_674007(context, evt)
 	if 674003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -164,7 +164,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_674007(context, evt)
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133302674, 4, FlowSuiteOperatePolicy.COMPLETE)
-
+	
 	return 0
 end
 
@@ -173,7 +173,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_674008(context, evt)
 	if 674002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -181,13 +181,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_674008(context, evt)
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133302674, 2, FlowSuiteOperatePolicy.COMPLETE)
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 30006, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -196,7 +196,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_674009(context, evt)
 	if 674005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -204,7 +204,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_674009(context, evt)
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133302674, 5, FlowSuiteOperatePolicy.COMPLETE)
-
+	
 	return 0
 end
 
@@ -213,7 +213,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_674010(context, evt)
 	if 674006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -221,12 +221,12 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_674010(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133302674, 3)
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 30006, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end

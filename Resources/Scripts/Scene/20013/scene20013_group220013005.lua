@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220013005
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -141,9 +141,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -154,9 +154,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -244,20 +244,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11(context, evt)
 	if evt.param1 ~= 11 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -268,19 +268,19 @@ function action_EVENT_ENTER_REGION_11(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12(context, evt)
 	if evt.param1 ~= 12 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -291,19 +291,19 @@ function action_EVENT_ENTER_REGION_12(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13(context, evt)
 	if evt.param1 ~= 13 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -314,19 +314,19 @@ function action_EVENT_ENTER_REGION_13(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14(context, evt)
 	if evt.param1 ~= 14 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -337,19 +337,19 @@ function action_EVENT_ENTER_REGION_14(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_15(context, evt)
 	if evt.param1 ~= 15 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -360,19 +360,19 @@ function action_EVENT_ENTER_REGION_15(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16(context, evt)
 	if evt.param1 ~= 16 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -383,19 +383,19 @@ function action_EVENT_ENTER_REGION_16(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_17(context, evt)
 	if evt.param1 ~= 17 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -406,19 +406,19 @@ function action_EVENT_ENTER_REGION_17(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_18(context, evt)
 	if evt.param1 ~= 18 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -429,19 +429,19 @@ function action_EVENT_ENTER_REGION_18(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_19(context, evt)
 	if evt.param1 ~= 19 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -452,7 +452,7 @@ function action_EVENT_ENTER_REGION_19(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -462,7 +462,7 @@ function condition_EVENT_DUNGEON_SETTLE_29(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -473,7 +473,7 @@ function action_EVENT_DUNGEON_SETTLE_29(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -483,7 +483,7 @@ function condition_EVENT_DUNGEON_SETTLE_30(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -494,7 +494,7 @@ function action_EVENT_DUNGEON_SETTLE_30(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -504,7 +504,7 @@ function condition_EVENT_DUNGEON_SETTLE_31(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -515,7 +515,7 @@ function action_EVENT_DUNGEON_SETTLE_31(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -525,7 +525,7 @@ function condition_EVENT_DUNGEON_SETTLE_32(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -536,7 +536,7 @@ function action_EVENT_DUNGEON_SETTLE_32(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -546,7 +546,7 @@ function condition_EVENT_DUNGEON_SETTLE_33(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -557,7 +557,7 @@ function action_EVENT_DUNGEON_SETTLE_33(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -567,7 +567,7 @@ function condition_EVENT_DUNGEON_SETTLE_34(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -578,7 +578,7 @@ function action_EVENT_DUNGEON_SETTLE_34(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -588,7 +588,7 @@ function condition_EVENT_DUNGEON_SETTLE_35(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -599,7 +599,7 @@ function action_EVENT_DUNGEON_SETTLE_35(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -609,7 +609,7 @@ function condition_EVENT_DUNGEON_SETTLE_36(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -620,7 +620,7 @@ function action_EVENT_DUNGEON_SETTLE_36(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -630,7 +630,7 @@ function condition_EVENT_DUNGEON_SETTLE_37(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -641,7 +641,7 @@ function action_EVENT_DUNGEON_SETTLE_37(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -651,8 +651,8 @@ function condition_EVENT_ANY_MONSTER_DIE_42(context, evt)
 	if evt.param1 ~= 5005 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -663,7 +663,7 @@ function action_EVENT_ANY_MONSTER_DIE_42(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -673,8 +673,8 @@ function condition_EVENT_ANY_MONSTER_DIE_43(context, evt)
 	if evt.param1 ~= 5002 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -685,7 +685,7 @@ function action_EVENT_ANY_MONSTER_DIE_43(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -695,8 +695,8 @@ function condition_EVENT_ANY_MONSTER_DIE_44(context, evt)
 	if evt.param1 ~= 5003 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -707,7 +707,7 @@ function action_EVENT_ANY_MONSTER_DIE_44(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -717,8 +717,8 @@ function condition_EVENT_ANY_MONSTER_DIE_45(context, evt)
 	if evt.param1 ~= 5004 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -729,7 +729,7 @@ function action_EVENT_ANY_MONSTER_DIE_45(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -739,8 +739,8 @@ function condition_EVENT_ANY_MONSTER_DIE_46(context, evt)
 	if evt.param1 ~= 5006 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -751,7 +751,7 @@ function action_EVENT_ANY_MONSTER_DIE_46(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -761,8 +761,8 @@ function condition_EVENT_ANY_MONSTER_DIE_47(context, evt)
 	if evt.param1 ~= 5007 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -773,7 +773,7 @@ function action_EVENT_ANY_MONSTER_DIE_47(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -783,8 +783,8 @@ function condition_EVENT_ANY_MONSTER_DIE_48(context, evt)
 	if evt.param1 ~= 5008 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -795,7 +795,7 @@ function action_EVENT_ANY_MONSTER_DIE_48(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -805,8 +805,8 @@ function condition_EVENT_ANY_MONSTER_DIE_49(context, evt)
 	if evt.param1 ~= 5009 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -817,7 +817,7 @@ function action_EVENT_ANY_MONSTER_DIE_49(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -827,8 +827,8 @@ function condition_EVENT_ANY_MONSTER_DIE_50(context, evt)
 	if evt.param1 ~= 5010 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -839,7 +839,7 @@ function action_EVENT_ANY_MONSTER_DIE_50(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -849,7 +849,7 @@ function condition_EVENT_ANY_MONSTER_DIE_51(context, evt)
 	if evt.param1 ~= 5001 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end

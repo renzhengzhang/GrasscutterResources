@@ -6,7 +6,7 @@
 ||	Owner         ||	chao.jin
 ||	Description   ||	2.7 家具扭蛋活动进入Region时修改玩家SGV
 ||	LogName       ||    ##[GachaSync]
-||	Protection    ||
+||	Protection    ||	
 =====================================================================================================================
 --[[misc
 defs = {
@@ -15,7 +15,7 @@ defs = {
 }
 =====================================================================================================================]]
 
-GachaSync_Triggers = {
+local GachaSync_Triggers = {
     [1] = { name = "enter_region", config_id = 8002001, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0, forbid_guest = false},
     [2] = { name = "leave_region", config_id = 8002002, event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_region", trigger_count = 0, forbid_guest = false },
     [3] = { name = "group_load", config_id = 8002003, event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
@@ -28,7 +28,7 @@ function action_enter_region(context,evt)
 		ScriptLib.PrintContextLog(context,"##[GachaSync]:玩家进入活动Group范围")
 		ScriptLib.SetTeamServerGlobalValue(context, context.uid, "SGV_ActivityGacha_ElemSyncRegion", defs.sync_element)
 	end
-	return 0
+	return 0 
 end
 
 function action_leave_region(context,evt)
@@ -36,7 +36,7 @@ function action_leave_region(context,evt)
 		ScriptLib.PrintContextLog(context,"##[GachaSync]:玩家离开活动Group范围")
 		ScriptLib.SetTeamServerGlobalValue(context, context.uid, "SGV_ActivityGacha_ElemSyncRegion", 0)
 	end
-	return 0
+	return 0 
 end
 
 
@@ -45,7 +45,7 @@ function action_group_load(context,evt)
 		ScriptLib.PrintContextLog(context,"##[GachaSync]:修改Group天气")
 		ScriptLib.SetWeatherAreaState(context, 1009, 1)
 	end
-	return 0
+	return 0 
 end
 
 function GachaSync_Initialize()

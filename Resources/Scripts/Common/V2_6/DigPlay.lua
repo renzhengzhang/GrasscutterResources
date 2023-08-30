@@ -22,7 +22,7 @@
 	},
 }]]--
 
-extraTriggers={
+local extraTriggers={
   { config_id = 8000001, name = "EVENT_GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
   { config_id = 8000002, name = "VARIABLE_CHANGE", event = EventType.EVENT_VARIABLE_CHANGE, source = "PlayStartTrigger", condition = "", action = "action_VARIABLE_CHANGE", trigger_count = 0},
   { config_id = 8000003, name = "SELECT_OPTION", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_SELECT_OPTION", trigger_count = 0},
@@ -68,15 +68,15 @@ function action_LUA_NOTIFY(context, evt)
 end
 --如果宝箱未被领取，则group创建时恢复宝箱和位置
 function action_EVENT_GROUP_LOAD(context, evt)
-	playStep=	ScriptLib.GetGroupVariableValue(context, "PlayStep")
+	local playStep=	ScriptLib.GetGroupVariableValue(context, "PlayStep")
 	--如果宝箱还未领，创建宝箱
 	if playStep==1 or playStep==3 or playStep==5 then
-		treasureBoxPos=ScriptLib.GetGroupVariableValue(context, "TreasureBoxPos")
+		local treasureBoxPos=ScriptLib.GetGroupVariableValue(context, "TreasureBoxPos")
 		--找到宝箱创建位置
-		configID=defs["gadget_"..treasureBoxPos]
+		local configID=defs["gadget_"..treasureBoxPos]
 		for i=1,#gadgets do
 			if gadgets[i].config_id==configID then
-				treasureBoxID=(playStep+1)/2
+				local treasureBoxID=(playStep+1)/2
 				treasureBoxID=math.floor(treasureBoxID)
 				if defs["treasurebox_"..treasureBoxID]~=nil then
 					ScriptLib.PrintContextLog(context,"DigPlayLog:load treasurebox pos:"..gadgets[i].pos.x.."|"..gadgets[i].pos.y.."|"..gadgets[i].pos.z)
@@ -91,7 +91,7 @@ function action_EVENT_GROUP_LOAD(context, evt)
 		return 0
 	end
 	--如果玩法还在继续，则恢复之前的状态
-  isPlaying =	ScriptLib.GetGroupVariableValue(context, "Playing")
+  local isPlaying =	ScriptLib.GetGroupVariableValue(context, "Playing")
   if isPlaying==1 then
   	AddOptions(context)
   end
@@ -101,7 +101,7 @@ end
 --宝箱开启后推进流程
 function action_GADGET_STATE_CHANGE(context, evt)
 	if evt.param1==102 then
-		playStep=	ScriptLib.GetGroupVariableValue(context, "PlayStep")
+		local playStep=	ScriptLib.GetGroupVariableValue(context, "PlayStep")
 		playStep=playStep+1
 		ScriptLib.SetGroupVariableValue(context, "PlayStep", playStep)
 	end
@@ -128,7 +128,7 @@ function action_VARIABLE_CHANGE_RESET(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "Playing", 0)
 	ScriptLib.SetGroupVariableValue(context, "Strategy", 0)
 	--把宝箱干掉并回退playstep
-	playStep =	ScriptLib.GetGroupVariableValue(context, "PlayStep")
+	local playStep =	ScriptLib.GetGroupVariableValue(context, "PlayStep")
 	if playStep==1 then
 			ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, defs["treasurebox_"..1])
 	elseif playStep==3 then
@@ -149,7 +149,7 @@ function action_SELECT_OPTION(context, evt)
 	if evt.param2~=99 then
 		return 0
 	end
-	strategy=ScriptLib.GetGroupVariableValue(context, "Strategy")
+	local strategy=ScriptLib.GetGroupVariableValue(context, "Strategy")
 
   --strategy为0则说明是第一次挖，此时尽可能随机一个挖掘处不是炸弹的strategy
 	if strategy<=0 or strategy==nil then
@@ -160,9 +160,9 @@ function action_SELECT_OPTION(context, evt)
 	--查询如果是地雷或宝箱，结束玩法
 	for k,v in pairs(defs) do
 		if v==evt.param1 then
-			tempIdx=string.sub(k,#k-1)
+			local tempIdx=string.sub(k,#k-1)
 			tempIdx=tonumber(tempIdx)
-			digNum=digMaps[strategy][math.floor(tempIdx/10)][tempIdx%10]
+			local digNum=digMaps[strategy][math.floor(tempIdx/10)][tempIdx%10]
 			--挖到炸弹
 			if digNum==1 then
 				--提示
@@ -186,17 +186,17 @@ function action_SELECT_OPTION(context, evt)
 				--保存宝箱位置
 				ScriptLib.SetGroupVariableValue(context, "TreasureBoxPos", tempIdx)
 				--增加关卡进度
-				playStep =	ScriptLib.GetGroupVariableValue(context, "PlayStep")
+				local playStep =	ScriptLib.GetGroupVariableValue(context, "PlayStep")
 				playStep=playStep+1
 				ScriptLib.SetGroupVariableValue(context, "PlayStep", playStep)
 				--创建宝箱
 				for i=1,#gadgets do
 					if gadgets[i].config_id==evt.param1 then
-						treasureBoxID=(playStep+1)/2
+						local treasureBoxID=(playStep+1)/2
 						treasureBoxID=math.floor(treasureBoxID)
 						--挖到宝箱后说一句话，纯表现
 						if not(defs.is_quest_group==1) then
-						  reminderId=310645001+treasureBoxID
+						  local reminderId=310645001+treasureBoxID
 						  ScriptLib.ShowReminder(context, reminderId)
 						end
 
@@ -217,10 +217,10 @@ function action_SELECT_OPTION(context, evt)
 				EndGame(context)
       --挖到物品
 			else
-				bombNum=0
+				local bombNum=0
 				--计算目标位置周围有几个雷
-				ti=math.floor(tempIdx/10)
-				tj=tempIdx%10
+				local ti=math.floor(tempIdx/10)
+				local tj=tempIdx%10
 				for i=(ti>1 and ti-1 or ti),(ti<5 and ti+1 or ti) do
 					for j=(tj>1 and tj-1 or tj),(tj<5 and tj+1 or tj) do
 						if digMaps[strategy][i][j]==1 then
@@ -257,7 +257,7 @@ function EndGame(context)
 end
 
 function AddOptions(context)
-  tempIdx=0
+  local tempIdx=0
 	for i=1,5 do
 		for j=1,5 do
 			tempIdx=i*10+j
@@ -270,7 +270,7 @@ function AddOptions(context)
 end
 
 function ResetHoles(context)
-  tempIdx=0
+  local tempIdx=0
 	for i=1,5 do
 		for j=1,5 do
 			tempIdx=i*10+j
@@ -284,15 +284,15 @@ end
 
 function LF_InitialStrategy(context,evt)
 	--标志在前半遍历是否找到合适的strategy
-	firstHalf=0
+	local firstHalf=0
 	math.randomseed(ScriptLib.GetServerTime(context))
 	--先随一次
-	tempStrategy=math.random(#digMaps)
+	local tempStrategy=math.random(#digMaps)
   for k,v in pairs(defs) do
 		if v==evt.param1 then
-			tempIdx=string.sub(k,#k-1)
+			local tempIdx=string.sub(k,#k-1)
 			tempIdx=tonumber(tempIdx)
-			digNum=digMaps[tempStrategy][math.floor(tempIdx/10)][tempIdx%10]
+			local digNum=digMaps[tempStrategy][math.floor(tempIdx/10)][tempIdx%10]
 			--如果首次挖到的位置是炸弹
 			if digNum==1 then
 				ScriptLib.PrintContextLog(context,"## [DigPlay] Log : 第一次随机策略随到了雷:"..tempStrategy)
@@ -305,7 +305,7 @@ function LF_InitialStrategy(context,evt)
 					end
 				end
 				if firstHalf==0 then
-						for i=1,tempStrategy do
+						for i=1,tempStrategy do 
 							if digMaps[i][math.floor(tempIdx/10)][tempIdx%10]~=1 then
 								tempStrategy=i
 								break

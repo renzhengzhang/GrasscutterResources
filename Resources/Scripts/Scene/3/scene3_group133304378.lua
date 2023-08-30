@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304378
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	point_camera = 378040,
 	gadget_lookEntity = 378004,
 	look_duration = 4
 }
 
 -- DEFS_MISCS
-CameraLookSetting = {
+local CameraLookSetting = {
     blend_type = 0,
     blend_duration = 1.5,
     is_force_walk = false,
@@ -20,9 +20,9 @@ CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -137,9 +137,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -150,9 +150,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -186,20 +186,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_378018(context, evt)
 	if evt.param1 ~= 378018 then return false end
-
+	
 	-- 判断是区域378018
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 378018 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -210,7 +210,7 @@ function action_EVENT_ENTER_REGION_378018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -220,7 +220,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_378019(context, evt)
 	if 378007 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -231,75 +231,75 @@ function action_EVENT_GADGET_STATE_CHANGE_378019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将configid为 378002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 378003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 378004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 378005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 378013 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 378014 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 378015 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378015, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 378017 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 378037 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378037, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 378038 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378038, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 378039 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378039, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	LF_PointLook(context)
-
+	
 	return 0
 end
 
@@ -307,19 +307,19 @@ end
 function action_EVENT_QUEST_START_378020(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304378, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_378021(context, evt)
 	if evt.param1 ~= 378021 then return false end
-
+	
 	-- 判断是区域378021
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 378021 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -330,19 +330,19 @@ function action_EVENT_ENTER_REGION_378021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_378022(context, evt)
 	if evt.param1 ~= 378022 then return false end
-
+	
 	-- 判断是区域378022
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 378022 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -353,19 +353,19 @@ function action_EVENT_ENTER_REGION_378022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_378023(context, evt)
 	if evt.param1 ~= 378023 then return false end
-
+	
 	-- 判断是区域378023
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 378023 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -373,7 +373,7 @@ end
 function action_EVENT_ENTER_REGION_378023(context, evt)
 	-- 创建标识为"shining"，时间节点为{1,2,3,4,5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "shining", {0.1,0.2,0.4,0.6,0.8}, false)
-
+	
 	return 0
 end
 
@@ -384,7 +384,7 @@ function action_EVENT_QUEST_START_378024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -395,24 +395,24 @@ function action_EVENT_QUEST_FINISH_378025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_378026(context, evt)
 	if evt.param1 ~= 378026 then return false end
-
+	
 	-- 判断变量"focus"为1
 	if ScriptLib.GetGroupVariableValue(context, "focus") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断是区域378026
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 378026 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -423,17 +423,17 @@ function action_EVENT_ENTER_REGION_378026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=-1320.06, y=310.0979, z=2140.031}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1320.06, y=310.0979, z=2140.031}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1320.06, y=310.0979, z=2140.031}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -442,7 +442,7 @@ function condition_EVENT_TIME_AXIS_PASS_378028(context, evt)
 	if "shining" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -452,8 +452,8 @@ function action_EVENT_TIME_AXIS_PASS_378028(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -462,7 +462,7 @@ function condition_EVENT_TIME_AXIS_PASS_378029(context, evt)
 	if "shining" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -472,8 +472,8 @@ function action_EVENT_TIME_AXIS_PASS_378029(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -482,7 +482,7 @@ function condition_EVENT_TIME_AXIS_PASS_378030(context, evt)
 	if "shining" ~= evt.source_name or 4 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -492,8 +492,8 @@ function action_EVENT_TIME_AXIS_PASS_378030(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -502,7 +502,7 @@ function condition_EVENT_TIME_AXIS_PASS_378031(context, evt)
 	if "shining" ~= evt.source_name or 5 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -512,26 +512,26 @@ function action_EVENT_TIME_AXIS_PASS_378031(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 378012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304378, 3)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133304378, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_378032(context, evt)
 	if evt.param1 ~= 378032 then return false end
-
+	
 	-- 判断是区域378032
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 378032 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -542,20 +542,20 @@ function action_EVENT_ENTER_REGION_378032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_378041(context, evt)
-	curQuestState = ScriptLib.GetHostQuestState(context,7307402)
+	local curQuestState = ScriptLib.GetHostQuestState(context,7307402)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
 	end
 	if curQuestState ~= 2 then
 	   return false
 	end
-
+	
 	return true
 end
 
@@ -563,19 +563,19 @@ end
 function action_EVENT_GROUP_LOAD_378041(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304378, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_378043(context, evt)
 	if evt.param1 ~= 378043 then return false end
-
+	
 	-- 判断是区域378023
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 378023 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -583,12 +583,12 @@ end
 function action_EVENT_ENTER_REGION_378043(context, evt)
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
-		pos = {x=-1322, y=309, z=2128}
+		local pos = {x=-1322, y=309, z=2128}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "Audio_Lua_kanun_melody_2", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end
-
+		end 
+	
 	return 0
 end
 

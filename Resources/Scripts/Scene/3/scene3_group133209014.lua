@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133209014
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
         inner_region = 14023,
         outer_region = 14023,
         related_region = 14023,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -104,9 +104,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -117,9 +117,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -135,23 +135,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14001(context, evt)
-
-
+	
+	
 	if 4 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -161,26 +161,26 @@ function action_EVENT_SELECT_DIFFICULTY_14001(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209010, 5)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14002(context, evt)
-
-
+	
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 5 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -190,26 +190,26 @@ function action_EVENT_SELECT_DIFFICULTY_14002(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209013, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14003(context, evt)
-
-
+	
+	
 	if 2 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 5 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -219,26 +219,26 @@ function action_EVENT_SELECT_DIFFICULTY_14003(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209013, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14004(context, evt)
-
-
+	
+	
 	if 3 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 5 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -248,26 +248,26 @@ function action_EVENT_SELECT_DIFFICULTY_14004(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209013, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14005(context, evt)
-
-
+	
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 7 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -277,26 +277,26 @@ function action_EVENT_SELECT_DIFFICULTY_14005(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209012, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14006(context, evt)
-
-
+	
+	
 	if 2 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 7 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -306,26 +306,26 @@ function action_EVENT_SELECT_DIFFICULTY_14006(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209012, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14007(context, evt)
-
-
+	
+	
 	if 3 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 7 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -335,26 +335,26 @@ function action_EVENT_SELECT_DIFFICULTY_14007(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209012, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14008(context, evt)
-
-
+	
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -364,26 +364,26 @@ function action_EVENT_SELECT_DIFFICULTY_14008(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209011, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14009(context, evt)
-
-
+	
+	
 	if 2 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -393,26 +393,26 @@ function action_EVENT_SELECT_DIFFICULTY_14009(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209011, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14010(context, evt)
-
-
+	
+	
 	if 3 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -422,26 +422,26 @@ function action_EVENT_SELECT_DIFFICULTY_14010(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209011, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14011(context, evt)
-
-
+	
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -451,26 +451,26 @@ function action_EVENT_SELECT_DIFFICULTY_14011(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209010, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14012(context, evt)
-
-
+	
+	
 	if 2 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -480,26 +480,26 @@ function action_EVENT_SELECT_DIFFICULTY_14012(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209010, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14013(context, evt)
-
-
+	
+	
 	if 3 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -509,26 +509,26 @@ function action_EVENT_SELECT_DIFFICULTY_14013(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209010, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14014(context, evt)
-
-
+	
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 6 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -538,26 +538,26 @@ function action_EVENT_SELECT_DIFFICULTY_14014(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209009, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14015(context, evt)
-
-
+	
+	
 	if 2 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 6 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -567,26 +567,26 @@ function action_EVENT_SELECT_DIFFICULTY_14015(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209009, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14016(context, evt)
-
-
+	
+	
 	if 3 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 6 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -596,26 +596,26 @@ function action_EVENT_SELECT_DIFFICULTY_14016(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209009, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14017(context, evt)
-
-
+	
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -625,26 +625,26 @@ function action_EVENT_SELECT_DIFFICULTY_14017(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209008, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14018(context, evt)
-
-
+	
+	
 	if 2 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -654,26 +654,26 @@ function action_EVENT_SELECT_DIFFICULTY_14018(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209008, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14019(context, evt)
-
-
+	
+	
 	if 3 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -683,26 +683,26 @@ function action_EVENT_SELECT_DIFFICULTY_14019(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209008, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14020(context, evt)
-
-
+	
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -712,26 +712,26 @@ function action_EVENT_SELECT_DIFFICULTY_14020(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14021(context, evt)
-
-
+	
+	
 	if 2 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -741,26 +741,26 @@ function action_EVENT_SELECT_DIFFICULTY_14021(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14022(context, evt)
-
-
+	
+	
 	if 3 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -770,27 +770,27 @@ function action_EVENT_SELECT_DIFFICULTY_14022(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
-
+		end 
+	 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14025(context, evt)
-
-
+	
+	
 	if 4 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 6 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -800,25 +800,25 @@ function action_EVENT_SELECT_DIFFICULTY_14025(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209009, 5)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14026(context, evt)
-
+	
 	if 4 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -828,11 +828,11 @@ function action_EVENT_SELECT_DIFFICULTY_14026(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209008, 5)
-
+	
 	return 0
 end
 
@@ -840,14 +840,14 @@ end
 function condition_EVENT_SELECT_OPTION_14027(context, evt)
 	-- 判断是gadgetid 14025 option_id 4100
 	if 14025 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 4100 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -858,28 +858,28 @@ function action_EVENT_SELECT_OPTION_14027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4101；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4101) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4102；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4102) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4103；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4103) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 2)
-
+	
 	return 0
 end
 
@@ -887,14 +887,14 @@ end
 function condition_EVENT_SELECT_OPTION_14028(context, evt)
 	-- 判断是gadgetid 14025 option_id 4101
 	if 14025 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 4101 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -905,28 +905,28 @@ function action_EVENT_SELECT_OPTION_14028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4101；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4101) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4102；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4102) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4103；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4103) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 3)
-
+	
 	return 0
 end
 
@@ -934,14 +934,14 @@ end
 function condition_EVENT_SELECT_OPTION_14029(context, evt)
 	-- 判断是gadgetid 14025 option_id 4102
 	if 14025 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 4102 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -952,28 +952,28 @@ function action_EVENT_SELECT_OPTION_14029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4101；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4101) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4102；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4102) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4103；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4103) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 4)
-
+	
 	return 0
 end
 
@@ -981,14 +981,14 @@ end
 function condition_EVENT_SELECT_OPTION_14030(context, evt)
 	-- 判断是gadgetid 14025 option_id 4103
 	if 14025 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 4103 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -999,43 +999,43 @@ function action_EVENT_SELECT_OPTION_14030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4101；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4101) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4102；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4102) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133209014 ；指定config：14025；物件身上指定option：4103；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133209014, 14025, 4103) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 9)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14031(context, evt)
-
-
+	
+	
 	if 4 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1045,26 +1045,26 @@ function action_EVENT_SELECT_DIFFICULTY_14031(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 9)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14032(context, evt)
-
-
+	
+	
 	if 4 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 7 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1074,26 +1074,26 @@ function action_EVENT_SELECT_DIFFICULTY_14032(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209012, 5)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14033(context, evt)
-
-
+	
+	
 	if 4 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 5 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1103,26 +1103,26 @@ function action_EVENT_SELECT_DIFFICULTY_14033(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209013, 5)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_SELECT_DIFFICULTY_14034(context, evt)
-
-
+	
+	
 	if 4 ~= evt.param2 then
 		return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1132,11 +1132,11 @@ function action_EVENT_SELECT_DIFFICULTY_14034(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133209029, 29001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209011, 5)
-
+	
 	return 0
 end
 

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 247101001
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	awardball_configid = 1011,
 	fungus_group = 247101002,
 	call_entity = 1010,
@@ -30,15 +30,15 @@ awardBallGeneratePosition={
 {x=226.620392,y=91,z=211.032684},
 }
 
-custom_level={
+local custom_level={
 [81033]={max_count=9},
 [81012]={max_count=4},
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -202,9 +202,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -215,9 +215,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -332,68 +332,68 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_1014(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247101001, 2)
-
+	
 	-- 将本组内变量名为 "level2_room3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "level2_room3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_1029(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247101001, 5)
-
+	
 	-- 将本组内变量名为 "level3_room3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "level3_room3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_1037(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247101001, 7)
-
+	
 	-- 将本组内变量名为 "level1_room2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "level1_room2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1038(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"level1_room2"为1
 	if ScriptLib.GetGroupVariableValue(context, "level1_room2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -404,13 +404,13 @@ function action_EVENT_VARIABLE_CHANGE_1038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 延迟20秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 1034, delay_time = 20 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -420,7 +420,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1054(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 60 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -428,7 +428,7 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1054(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247101001, 6)
-
+	
 	return 0
 end
 
@@ -438,7 +438,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1055(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 30 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -446,7 +446,7 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1055(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247101001, 9)
-
+	
 	return 0
 end
 

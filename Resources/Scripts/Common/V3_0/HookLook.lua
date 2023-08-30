@@ -9,20 +9,20 @@
 =======================================]]
 
 --[[
-RequireSuite = {1}
+local RequireSuite = {1}
 
-HookLookPlay = {
+local HookLookPlay = {
     HookPoint = defs.gadget_LookHookCid,
     Duration = 3,
 }
 --]]
 
-HookLook_Trigger = {
+local HookLook_Trigger = {
     { keyWord = "HookLook", event = EventType.EVENT_LUA_NOTIFY, source = "RaioFlowerBeHit", trigger_count = 0},
 }
 
 function LF_Initialize_HookLook()
-    startConfigID = 40040001
+    local startConfigID = 40040001
     for _,v in pairs(HookLook_Trigger) do
         v.config_id = startConfigID
         if v.keyWordType == nil then
@@ -62,8 +62,8 @@ function action_HookLook(context, evt)
 
     -- 取所有玩家最近的位置
 
-    gadgetInfo = gadgets[HookLookPlay.HookPoint]
-    pos = gadgetInfo.pos
+    local gadgetInfo = gadgets[HookLookPlay.HookPoint]
+    local pos = gadgetInfo.pos
     ScriptLib.BeginCameraSceneLook(context,
             {
                 look_pos = pos,
@@ -86,7 +86,7 @@ end
 
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -126,7 +126,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    s = "{"
+    local s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","
@@ -140,27 +140,27 @@ end
 
 -- 检查Owner是否在附近
 function LF_Owner_is_Nearby(context)
-    ownerUid = ScriptLib.GetSceneOwnerUid(context)
-    ownerEid = ScriptLib.GetAvatarEntityIdByUid(context, ownerUid)
-    ownerPos = ScriptLib.GetPosByEntityId(context,ownerEid)
+    local ownerUid = ScriptLib.GetSceneOwnerUid(context)
+    local ownerEid = ScriptLib.GetAvatarEntityIdByUid(context, ownerUid)
+    local ownerPos = ScriptLib.GetPosByEntityId(context,ownerEid)
 
     -- 配合LUANOTIFY专用
-    configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
+    local configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
     if gadgets[configId] == nil then
         return false
     end
-    targetPos = gadgets[configId].pos
+    local targetPos = gadgets[configId].pos
 
-    X = ownerPos.x - targetPos.x
-    Y = ownerPos.y - targetPos.y
-    Z = ownerPos.z - targetPos.z
+    local X = ownerPos.x - targetPos.x
+    local Y = ownerPos.y - targetPos.y
+    local Z = ownerPos.z - targetPos.z
 
-    radius = 20
+    local radius = 20
     if HookLookPlay.radius ~= nil then
         radius = HookLookPlay.radius
     end
 
-    msg = "## TD_HookLook : LF_Owner_is_Nearby 距离为 = "
+    local msg = "## TD_HookLook : LF_Owner_is_Nearby 距离为 = "
     msg = msg .. math.sqrt(X*X+Y*Y+Z*Z)
     msg = msg .. "Radius为 = ".. radius
     ScriptLib.PrintContextLog(context, msg)

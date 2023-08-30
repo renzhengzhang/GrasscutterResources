@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 247024001
 }
 
 -- DEFS_MISCS
-defs ={
+local defs ={
         gallery_id = 27007,
         finish_region = 1104,
         operator_time_1 = 20,
@@ -15,18 +15,18 @@ defs ={
         ability_region = 1169,
     }
 
-windball_list = {
+local windball_list = {
  [1014] = 2,
  [1080] = 4,
  [1054] = 12,
 }
 
 
-operator_list = {
+local operator_list = {
 
 }
 
-revivepoint_list = {
+local revivepoint_list = {
         [1109] =1110,
         [1111] =1112,
         [1113] =1114,
@@ -35,7 +35,7 @@ revivepoint_list = {
         [1119] =1120,
 }
 
-transfer_list = {
+local transfer_list = {
         --[region_configid] = point_id,
         [1134] =1112,
         [1135] =1114,
@@ -48,9 +48,9 @@ transfer_list = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -334,9 +334,9 @@ sight_groups = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -347,9 +347,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -491,39 +491,39 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1013(context, evt)
 	if evt.param1 ~= 1013 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1013(context, evt)
-	list = {ScriptLib.GetSceneUidList(context),}
-	count = 0
+	local list = {ScriptLib.GetSceneUidList(context),}
+	local count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
-
+	
 	if count == 1 then
 		ScriptLib.AssignPlayerShowTemplateReminder(context, 209, {param_vec = {}, param_uid_vec = {}, uid_vec = {context.uid}})
-
+	
 		return 0
 	else return -1
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -532,7 +532,7 @@ function condition_EVENT_GADGET_CREATE_1043(context, evt)
 	if 1037 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -543,7 +543,7 @@ function action_EVENT_GADGET_CREATE_1043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -552,7 +552,7 @@ function condition_EVENT_GADGET_CREATE_1046(context, evt)
 	if 1041 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -563,7 +563,7 @@ function action_EVENT_GADGET_CREATE_1046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -571,14 +571,14 @@ end
 function condition_EVENT_SELECT_OPTION_1047(context, evt)
 	-- 判断是gadgetid 1037 option_id 788
 	if 1037 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 788 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -589,13 +589,13 @@ function action_EVENT_SELECT_OPTION_1047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 247024001 ；指定config：1037；物件身上指定option：788；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 247024001, 1037, 788) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -603,14 +603,14 @@ end
 function condition_EVENT_SELECT_OPTION_1049(context, evt)
 	-- 判断是gadgetid 1041 option_id 788
 	if 1041 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 788 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -621,25 +621,25 @@ function action_EVENT_SELECT_OPTION_1049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 247024001 ；指定config：1041；物件身上指定option：788；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 247024001, 1041, 788) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1066(context, evt)
 	if evt.param1 ~= 1066 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -649,21 +649,21 @@ function action_EVENT_ENTER_REGION_1066(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1065, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247024001, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_1067(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 247024001) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -673,27 +673,27 @@ function action_EVENT_ANY_MONSTER_DIE_1067(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1055, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247024001, 5)
-
+	
 	-- 调用提示id为 470210105 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 470210105) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=-471.5702, y=9.746119, z=-387.4375}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-471.5702, y=9.746119, z=-387.4375}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-471.5702, y=9.746119, z=-387.4375}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -702,7 +702,7 @@ function condition_EVENT_GADGET_CREATE_1093(context, evt)
 	if 1092 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -713,7 +713,7 @@ function action_EVENT_GADGET_CREATE_1093(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -721,14 +721,14 @@ end
 function condition_EVENT_SELECT_OPTION_1094(context, evt)
 	-- 判断是gadgetid 1092 option_id 788
 	if 1092 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 788 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -739,64 +739,64 @@ function action_EVENT_SELECT_OPTION_1094(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 247024001 ；指定config：1092；物件身上指定option：788；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 247024001, 1092, 788) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1131(context, evt)
 	if evt.param1 ~= 1131 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1131(context, evt)
-	list = {ScriptLib.GetSceneUidList(context),}
-	count = 0
+	local list = {ScriptLib.GetSceneUidList(context),}
+	local count = 0
 	for k,v in pairs(list) do
 	    count = count + 1
 	end
-
+	
 	if count == 1 then
 		ScriptLib.AssignPlayerShowTemplateReminder(context, 208, {param_vec = {}, param_uid_vec = {}, uid_vec = {context.uid}})
-
+	
 		return 0
 	else return -1
 	end
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_1138(context, evt)
 	-- 判断是gadgetid 为 1039的移动平台，是否到达了5 的路线中的 1 点
-
+	
 	if 1039 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 5 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -804,26 +804,26 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_1138(context, evt)
 	-- 创建标识为"timer1"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer1", {2}, false)
-
-
+	
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 1039, 8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1142(context, evt)
 	if evt.param1 ~= 1142 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -831,19 +831,19 @@ end
 function action_EVENT_ENTER_REGION_1142(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247024001, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1143(context, evt)
 	if evt.param1 ~= 1143 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -851,22 +851,22 @@ end
 function action_EVENT_ENTER_REGION_1143(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 6)
-
+	
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247024001, 7)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1144(context, evt)
 	if evt.param1 ~= 1144 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -874,28 +874,28 @@ end
 function action_EVENT_ENTER_REGION_1144(context, evt)
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 8)
-
+	
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247024001, 9)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 7)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1145(context, evt)
 	if evt.param1 ~= 1145 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -903,31 +903,31 @@ end
 function action_EVENT_ENTER_REGION_1145(context, evt)
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 9)
-
+	
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247024001, 10)
-
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 8)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 7)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1146(context, evt)
 	if evt.param1 ~= 1146 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -935,34 +935,34 @@ end
 function action_EVENT_ENTER_REGION_1146(context, evt)
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 10)
-
+	
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247024001, 11)
-
+	
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 9)
-
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 8)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 7)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1148(context, evt)
 	if evt.param1 ~= 1148 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -970,34 +970,34 @@ end
 function action_EVENT_ENTER_REGION_1148(context, evt)
 	-- 删除suite11的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 11)
-
+	
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 10)
-
+	
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 9)
-
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 8)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 7)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1149(context, evt)
 	if evt.param1 ~= 1149 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1005,33 +1005,33 @@ end
 function action_EVENT_ENTER_REGION_1149(context, evt)
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 7)
-
+	
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247024001, 8)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 247024001, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_1155(context, evt)
 	-- 判断是gadgetid 为 1042的移动平台，是否到达了6 的路线中的 1 点
-
+	
 	if 1042 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 6 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1039,34 +1039,34 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_1155(context, evt)
 	-- 创建标识为"timer2"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer2", {2}, false)
-
-
+	
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 1042, 9) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_1161(context, evt)
 	-- 判断是gadgetid 为 1061的移动平台，是否到达了7 的路线中的 1 点
-
+	
 	if 1061 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 7 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1074,14 +1074,14 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_1161(context, evt)
 	-- 创建标识为"timer3"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer3", {2}, false)
-
-
+	
+	
 	-- 设置移动平台路径
 	if 0 ~= ScriptLib.SetPlatformRouteId(context, 1061, 10) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1090,7 +1090,7 @@ function condition_EVENT_TIME_AXIS_PASS_1163(context, evt)
 	if "timer1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1101,27 +1101,27 @@ function action_EVENT_TIME_AXIS_PASS_1163(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_1164(context, evt)
 	-- 判断是gadgetid 为 1039的移动平台，是否到达了8 的路线中的 1 点
-
+	
 	if 1039 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 8 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1132,13 +1132,13 @@ function action_EVENT_PLATFORM_ARRIVAL_1164(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 247024001, 1037, {788}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1147,7 +1147,7 @@ function condition_EVENT_TIME_AXIS_PASS_1165(context, evt)
 	if "timer2" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1158,27 +1158,27 @@ function action_EVENT_TIME_AXIS_PASS_1165(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_1166(context, evt)
 	-- 判断是gadgetid 为 1042的移动平台，是否到达了9 的路线中的 1 点
-
+	
 	if 1042 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 9 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1189,13 +1189,13 @@ function action_EVENT_PLATFORM_ARRIVAL_1166(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 247024001, 1041, {788}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1204,7 +1204,7 @@ function condition_EVENT_TIME_AXIS_PASS_1167(context, evt)
 	if "timer3" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1215,27 +1215,27 @@ function action_EVENT_TIME_AXIS_PASS_1167(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_1168(context, evt)
 	-- 判断是gadgetid 为 1061的移动平台，是否到达了10 的路线中的 1 点
-
+	
 	if 1061 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 10 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1246,40 +1246,40 @@ function action_EVENT_PLATFORM_ARRIVAL_1168(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 247024001, 1092, {788}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1170(context, evt)
 	if evt.param1 ~= 1170 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_1170(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-392.6119, y=-1.743446, z=-387.7961}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-392.6119, y=-1.743446, z=-387.7961}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-392.6119, y=-1.743446, z=-387.7961}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250067002
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 
 	option_turn = 613,
 	option_startstop = 7,
@@ -12,17 +12,17 @@ defs = {
 	point_array = 1,
 	--运输装置config_id
 	carrier_list = {2001},
-	switcher_control =
+	switcher_control = 
 	{--[操作台configID] = {被控岔路装置1, 被控岔路装置2},
 		[2015] = {2002,2013},
 		[2016] = {2004,2010},
 	},
 
 	--几条路 注意是point_list有向的 倒数第二个点为岔路判定点
-	way_info =
+	way_info = 
 	{
 		--key为路径几 顺序无所谓
-		[1] =
+		[1] = 
 		{
 			point_list = {18,1},
 
@@ -36,9 +36,9 @@ defs = {
 				[201] = 0,
 				[202] = 0,
 				[203] = 4,
-			},
+			}, 
 		},
-		[3] =
+		[3] = 
 		{
 			point_list = {12,16,17},
 
@@ -52,9 +52,9 @@ defs = {
 				[201] = 0,
 				[202] = 0,
 				[203] = 0,
-			},
+			}, 
 		},
-		[4] =
+		[4] = 
 		{
 			point_list = {2,15,14,13},
 
@@ -68,9 +68,9 @@ defs = {
 				[201] = 3,
 				[202] = 0,
 				[203] = 0,
-			},
+			}, 
 		},
-		[5] =
+		[5] = 
 		{
 			point_list = {12,11,10},
 
@@ -84,9 +84,9 @@ defs = {
 				[201] = 0,
 				[202] = 0,
 				[203] = 0,
-			},
+			}, 
 		},
-		[6] =
+		[6] = 
 		{
 			point_list = {9,8,7,6},
 
@@ -100,9 +100,9 @@ defs = {
 				[201] = 0,
 				[202] = 0,
 				[203] = 0,
-			},
+			}, 
 		},
-         [7] =
+         [7] = 
 		{
 			point_list = {5,4,3},
 
@@ -116,22 +116,22 @@ defs = {
 				[201] = 0,
 				[202] = 0,
 				[203] = 0,
-			},
+			}, 
 		},
 
 	},
 
 	--停车点 到此点时会判断是否需要停车
-	stop_points =
+	stop_points = 
 	{
 		7, 14
 	},
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -184,9 +184,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -197,9 +197,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -215,28 +215,28 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_2017(context, evt)
 	-- 判断是gadgetid 为 2001的移动平台，是否到达了1 的点集中的 17 点
-
+	
 	if 2001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 17 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -247,14 +247,14 @@ function action_EVENT_PLATFORM_ARRIVAL_2017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建id为2001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 2001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -263,7 +263,7 @@ function condition_EVENT_GADGET_CREATE_2018(context, evt)
 	if 2001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -274,7 +274,7 @@ function action_EVENT_GADGET_CREATE_2018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 

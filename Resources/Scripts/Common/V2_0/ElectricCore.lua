@@ -1,9 +1,9 @@
 function LF_Initialize_Group(triggers, suites)
-	id=8100001
+	local id=8100001
 	for i=1,#gadgets do
 		if gadgets[i].gadget_id == 70900380 then
-			configId=gadgets[i].config_id
-			insertRegion={ config_id = id, shape = RegionShape.SPHERE, radius = 14.5, pos=gadgets[i].pos, area_id = gadgets[i].area_id,ability_group_list = { "Fly_Electric_Core_Play" } }
+			local configId=gadgets[i].config_id
+			local insertRegion={ config_id = id, shape = RegionShape.SPHERE, radius = 14.5, pos=gadgets[i].pos, area_id = gadgets[i].area_id,ability_group_list = { "Fly_Electric_Core_Play" } }
 			table.insert(regions,insertRegion)
 			for j=1,#suites do
 				for k=1,#suites[j].gadgets do

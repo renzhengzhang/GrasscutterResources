@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240102003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -80,9 +80,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -90,7 +90,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_3(context, evt)
 	if 3001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -101,19 +101,19 @@ function action_EVENT_ANY_MONSTER_LIVE_3(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 删除指定group： 240102001 ；指定config：1002；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240102001, 1002, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 改变指定group组240102001中， configid为1002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240102001, 1002, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -124,31 +124,31 @@ function action_EVENT_CHALLENGE_FAIL_4(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 改变指定group组240102001中， configid为1002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240102001, 1002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 240102009, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 改变指定group组240102010中， configid为12的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240102010, 12, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 240102003, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_9(context, evt)
 	if 6 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -168,12 +168,12 @@ function action_EVENT_MONSTER_TIDE_DIE_9(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 3008, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end

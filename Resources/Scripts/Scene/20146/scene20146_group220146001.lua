@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220146001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -113,9 +113,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -123,7 +123,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1008(context, evt)
 	if 1003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -134,11 +134,11 @@ function action_EVENT_GADGET_STATE_CHANGE_1008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220146001, 2)
-
+	
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1009(context, evt)
 	if 1004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -158,11 +158,11 @@ function action_EVENT_GADGET_STATE_CHANGE_1009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220146001, 3)
-
+	
 	return 0
 end
 
@@ -171,7 +171,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1010(context, evt)
 	if 1012 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -179,38 +179,38 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_1010(context, evt)
 	-- 停止标识为"1"的时间轴
 	ScriptLib.EndTimeAxis(context, "1")
-
-
+	
+	
 	-- 停止标识为"2"的时间轴
 	ScriptLib.EndTimeAxis(context, "2")
-
-
+	
+	
 	-- 针对当前group内变量名为 "sum" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "sum", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1007 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220146001, EntityType.GADGET, 1020 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -219,7 +219,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1013(context, evt)
 	if 1002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -230,11 +230,11 @@ function action_EVENT_GADGET_STATE_CHANGE_1013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220146001, 4)
-
+	
 	return 0
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1014(context, evt)
 	if 1006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -254,24 +254,24 @@ function action_EVENT_GADGET_STATE_CHANGE_1014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建标识为"1"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "1", {1}, false)
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"sum"为1
 	if ScriptLib.GetGroupVariableValue(context, "sum") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -282,27 +282,27 @@ function action_EVENT_VARIABLE_CHANGE_1015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220146005, 2)
-
+	
 	-- 将configid为 1011 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 触发镜头注目，注目位置为坐标{x=315.853, y=77.28713, z=685.3493}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=315.853, y=77.28713, z=685.3493}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=315.853, y=77.28713, z=685.3493}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -311,7 +311,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1016(context, evt)
 	if 1007 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -322,12 +322,12 @@ function action_EVENT_GADGET_STATE_CHANGE_1016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建标识为"2"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "2", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -336,7 +336,7 @@ function condition_EVENT_TIME_AXIS_PASS_1017(context, evt)
 	if "1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -347,7 +347,7 @@ function action_EVENT_TIME_AXIS_PASS_1017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -356,7 +356,7 @@ function condition_EVENT_TIME_AXIS_PASS_1018(context, evt)
 	if "2" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -367,7 +367,7 @@ function action_EVENT_TIME_AXIS_PASS_1018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -376,7 +376,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1019(context, evt)
 	if 1005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -387,6 +387,6 @@ function action_EVENT_GADGET_STATE_CHANGE_1019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

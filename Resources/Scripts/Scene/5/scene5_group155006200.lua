@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155006200
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155006200,
 	gadget_pattern = 200001,
 	gadget_mark_01 = 200002,
@@ -20,11 +20,11 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {}
-Worktops = {}
-DayAppearGadgets = {defs.gadget_mask}
-NightAppearGadgets = {defs.gadget_worktop,defs.gadget_pattern,defs.gadget_mark_01,defs.gadget_mark_02,defs.gadget_mark_03,defs.gadget_mark_04,defs.gadget_mark_05}
+local Controllers = {}
+local EnvControlGadgets = {}
+local Worktops = {}
+local DayAppearGadgets = {defs.gadget_mask}
+local NightAppearGadgets = {defs.gadget_worktop,defs.gadget_pattern,defs.gadget_mark_01,defs.gadget_mark_02,defs.gadget_mark_03,defs.gadget_mark_04,defs.gadget_mark_05}
 
 
 --[[
@@ -58,48 +58,48 @@ NightAppearGadgets = {defs.gadget_worktop,defs.gadget_pattern,defs.gadget_mark_0
 marklist = {defs.gadget_mark_01,defs.gadget_mark_02,defs.gadget_mark_03,defs.gadget_mark_04,defs.gadget_mark_05}
 
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
-
+		
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-
+		
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
-
-
+		
+		
 	end,
 	["2"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
-
-		solutionvarname = "solution_state_"..defs.solutionListIndex
-		if ScriptLib.GetGroupVariableValueByGroup(context, solutionvarname, defs.altarGroupID) == 0 then
+		
+		local solutionvarname = "solution_state_"..defs.solutionListIndex
+		if ScriptLib.GetGroupVariableValueByGroup(context, solutionvarname, defs.altarGroupID) == 0 then 
 			ScriptLib.SetGroupVariableValueByGroup(context, solutionvarname, 1, defs.altarGroupID)
 		end
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, defs.gadget_pattern, 201)
-		for i=1, #marklist do
+		for i=1, #marklist do 
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, marklist[i], 201)
 		end
-
+		
 	end
 
 }
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -146,9 +146,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -159,9 +159,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -204,9 +204,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -218,7 +218,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_200010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 		-- 判断变量"gameplayState"为0
 		if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 				return false
@@ -238,21 +238,21 @@ function condition_EVENT_SELECT_OPTION_200011(context, evt)
 			ScriptLib.PrintContextLog(context,"evt.param1 = "..evt.param1.. " | evt.param2 = "..evt.param2.." | evt.param3 = "..evt.param3)
 			if 200007 ~= evt.param1 then
 				ScriptLib.PrintContextLog(context,"option gadget id ~= 109011")
-				return false
+				return false	
 			end
-
+			
 			if 65 ~= evt.param2 then
 				ScriptLib.PrintContextLog(context,"option index ~= 65")
 				return false
 			end
-
-
+			
+			
 			-- 判断变量"gameplayState"为1
 			if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 				ScriptLib.PrintContextLog(context,"gameplayState ~= 1")
 					return false
 			end
-
+			
 			return true
 end
 
@@ -262,14 +262,14 @@ function action_EVENT_SELECT_OPTION_200011(context, evt)
 			ScriptLib.PrintContextLog(context, "---Initial Time Axis---")
 			-- 创建标识为"activeSolution"，时间节点为{1,2,3,4,5,6}的时间轴，false用于控制该时间轴是否循环
 			ScriptLib.InitTimeAxis(context, "activeSolution", {1,2,3,4,5,6}, false)
-
+			
 			return 0
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_200012(context, evt)
 		ScriptLib.PrintContextLog(context, "---Start Time Axis---")
-		if evt.param1 == 6 then
+		if evt.param1 == 6 then 
 			ScriptLib.PrintContextLog(context,"Show pattern["..evt.param1.."] : "..defs.gadget_pattern)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, defs.gadget_pattern, 201)
 			ScriptLib.SetGroupVariableValue(context, "gameplayState", 2)
@@ -277,7 +277,7 @@ function action_EVENT_TIME_AXIS_PASS_200012(context, evt)
 			ScriptLib.PrintContextLog(context,"Show mark["..evt.param1.."] : "..marklist[evt.param1])
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, marklist[evt.param1], 201)
 		end
-
+		
 		return 0
 end
 
@@ -286,7 +286,7 @@ function condition_EVENT_GADGET_CREATE_200013(context, evt)
 	if 200007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -297,7 +297,7 @@ function action_EVENT_GADGET_CREATE_200013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 

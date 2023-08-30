@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133223270
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -99,7 +99,7 @@ function condition_EVENT_FISHING_STOP_270002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fishing_count") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -110,7 +110,7 @@ function action_EVENT_FISHING_STOP_270002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -121,7 +121,7 @@ function condition_EVENT_FISHING_QTE_FINISH_270003(context, evt)
 	elseif 0 ~= evt.param1 and 0 ~= 0 then
 	  return false
 	end
-
+	
 	return true
 end
 
@@ -132,6 +132,6 @@ function action_EVENT_FISHING_QTE_FINISH_270003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220413
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	inner_region = 413010,
 	outer_region = 413010,
 	related_region = 413010,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -152,9 +152,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -164,7 +164,7 @@ function action_EVENT_GROUP_LOAD_413004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_blossom_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -175,7 +175,7 @@ function action_EVENT_GROUP_LOAD_413011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -185,7 +185,7 @@ function condition_EVENT_ANY_MONSTER_DIE_413046(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -193,7 +193,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_413046(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220413, 3)
-
+	
 	return 0
 end
 
@@ -202,7 +202,7 @@ function condition_EVENT_GADGET_CREATE_413048(context, evt)
 	if 413044 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -213,7 +213,7 @@ function action_EVENT_GADGET_CREATE_413048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -221,14 +221,14 @@ end
 function condition_EVENT_SELECT_OPTION_413049(context, evt)
 	-- 判断是gadgetid 413044 option_id 175
 	if 413044 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -239,51 +239,51 @@ function action_EVENT_SELECT_OPTION_413049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 413044 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 413044, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建编号为101（该挑战的识别id),挑战内容为111169的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 101, 111169, 180, 133220413, 15, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220413, 2)
-
+	
 	-- 将configid为 413044 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 413044, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220413, 5)
-
+	
 	-- 指定group的循环玩法进度加1
 	if 0 ~= ScriptLib.SetBlossomScheduleStateByGroupId(context, 133220413, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_blossomscehedule_byGroupId")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_413050(context, evt)
 	ScriptLib.RemoveEntityByConfigId(context, 133220413, EntityType.REGION, 413010)
-
-
+	
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133220413, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -293,20 +293,20 @@ function action_EVENT_CHALLENGE_SUCCESS_413051(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 413044, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 指定group的循环玩法进度加1
 	if 0 ~= ScriptLib.SetBlossomScheduleStateByGroupId(context, 133220413, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_blossomscehedule_byGroupId")
 		return -1
 	end
-
+	
 		-- 刷新本group,指定suite与等级修正,自动通知对应循环玩法的进度
 		if 0 ~= ScriptLib.RefreshBlossomGroup(context, { group_id = 0, suite = 1, exclude_prev = true }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_blossom_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -316,7 +316,7 @@ function condition_EVENT_ANY_MONSTER_DIE_413052(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -324,7 +324,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_413052(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220413, 4)
-
+	
 	return 0
 end
 

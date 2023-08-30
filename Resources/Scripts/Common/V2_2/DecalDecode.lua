@@ -8,7 +8,7 @@ defs = {
 	suite_opts = ,
 }
 ]]
-Trigger_DecalDecode  = {
+local Trigger_DecalDecode  = {
 	[1] = { name = "gadget_create", config_id = 9001001, event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0 },
 	[2] = { name = "select_option", config_id = 9001002, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0 },
 	[3] = { name = "variable_change",config_id = 9001003, event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_variable_change", trigger_count = 0 },
@@ -16,8 +16,8 @@ Trigger_DecalDecode  = {
 
 
 function action_variable_change( context,evt )
-	var_name = evt.source_name
-	value_new = evt.param1
+	local var_name = evt.source_name
+	local value_new = evt.param1
 	if var_name == "isNeedNotify" then
 		ScriptLib.AddExtraGroupSuite(context, defs.group_id, defs.suite_decals)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_id, defs.suite_opts)
@@ -28,8 +28,8 @@ end
 
 --物件创建时初始化事件
 function action_gadget_create(context, evt)
-	config_id = evt.param1
-	--校验传进来的gadget是不是Group里的操作台，不是则返回
+	local config_id = evt.param1
+	--校验传进来的gadget是不是Group里的操作台，不是则返回 
 	if defs.decal_opt_map[config_id] == nil then
 		return -1
 	end
@@ -39,9 +39,9 @@ function action_gadget_create(context, evt)
 end
 
 function action_select_option(context,evt)
-	config_id = evt.param1	--	操作台的configid
-	option_id = evt.param2	--	操作id
-	--校验传进来的gadget是不是Group里的操作台，不是则返回
+	local config_id = evt.param1	--	操作台的configid
+	local option_id = evt.param2	--	操作id
+	--校验传进来的gadget是不是Group里的操作台，不是则返回 
 	if defs.decal_opt_map[config_id] == nil then
 		return -1
 	end
@@ -50,14 +50,14 @@ function action_select_option(context,evt)
 	end
 	--点亮对应的符文
 	ScriptLib.PrintContextLog(context, "@@ LUA_DD : Receive_OPT")
-	decal_id = defs.decal_opt_map[config_id].decal_id
-	decal_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, decal_id)
+	local decal_id = defs.decal_opt_map[config_id].decal_id
+	local decal_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, decal_id)
 	if decal_state == 202 then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, decal_id, 201)
 	elseif decal_state == 201 then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, decal_id, 202)
 	end
-	wrongNums = 0
+	local wrongNums = 0
 	for wt_id,infos in pairs(defs.decal_opt_map) do
 		if infos.index ~=  ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, infos.decal_id) then
 			wrongNums = wrongNums + 1

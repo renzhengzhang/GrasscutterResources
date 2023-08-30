@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220149004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -87,9 +87,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -99,35 +99,35 @@ function action_EVENT_ENTER_REGION_4002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 延迟4秒后,向groupId为：220149004的对象,请求一次调用,并将string参数："1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220149004, "1", 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（462.0944，151.66，339.17），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=462.0944, y=151.66, z=339.17}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=462.0944, y=151.66, z=339.17}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 将configid为 4019 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4019, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4021 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4021, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -138,19 +138,19 @@ function action_EVENT_TIMER_EVENT_4003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4004(context, evt)
 	if evt.param1 ~= 4004 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -158,83 +158,83 @@ end
 function action_EVENT_ENTER_REGION_4004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220149004, 2)
-
+	
 	-- 将configid为 4019 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4019, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4021 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4021, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟4秒后,向groupId为：220149004的对象,请求一次调用,并将string参数："2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220149004, "2", 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220149004, "1") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220149014, "1") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220149014, "2") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220149014, "3") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220149015, "1") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220149015, "2") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220149015, "3") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_4006(context, evt)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 220149014, 14001, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 220149014, 14004, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 220149014, 14008, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 220149015, 15001, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 220149015, 15002, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 220149015, 15008, GadgetState.GearStart)
-
+	
 	return 0
 end

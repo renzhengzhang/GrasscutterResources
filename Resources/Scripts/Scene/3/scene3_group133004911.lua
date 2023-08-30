@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133004911
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_1 = 911001,
 	gadget_2 = 911002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -106,13 +106,13 @@ function action_EVENT_ENTER_REGION_911001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "AnyTrigger" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "AnyTrigger", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -132,12 +132,12 @@ function action_EVENT_ENTER_REGION_911002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "AnyTrigger" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "AnyTrigger", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

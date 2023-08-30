@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 233741003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -69,9 +69,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -82,9 +82,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -154,9 +154,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -164,7 +164,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_3007(context, evt)
 	if 3001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -175,13 +175,13 @@ function action_EVENT_ANY_MONSTER_LIVE_3007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "monster_wave2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "monster_wave2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -192,43 +192,43 @@ function action_EVENT_CHALLENGE_SUCCESS_3008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_allow_use_skill")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "stage" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage", 1, 233741001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 爬塔更换队伍2
 	if 0 ~= ScriptLib.TowerMirrorTeamSetUp(context, 2) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_team_setup")
 		return -1
 	end
-
+	
 	-- 改变指定group组233741002中， configid为2001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741002, 2001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 233741002, 2001, {176}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 改变指定group组233741009中， configid为9001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741009, 9001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组233741009中， configid为9002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741009, 9002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -239,31 +239,31 @@ function action_EVENT_CHALLENGE_FAIL_3009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	-- 改变指定group组233741002中， configid为2001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741002, 2001, GadgetState.GearAction2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组233741009中， configid为9001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741009, 9001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组233741009中， configid为9002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741009, 9002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -273,12 +273,12 @@ function condition_EVENT_ANY_MONSTER_DIE_3014(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"monster_wave2"为2
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave2") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -289,7 +289,7 @@ function action_EVENT_ANY_MONSTER_DIE_3014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -298,7 +298,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_3015(context, evt)
 	if 3018 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -309,13 +309,13 @@ function action_EVENT_ANY_MONSTER_LIVE_3015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "monster_wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "monster_wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -325,26 +325,26 @@ function action_EVENT_CHALLENGE_SUCCESS_3016(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741002, 2001, GadgetState.GearAction1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "stage" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage", 2, 233741001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 改变指定group组233741009中， configid为9001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741009, 9001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组233741009中， configid为9002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741009, 9002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -355,31 +355,31 @@ function action_EVENT_CHALLENGE_FAIL_3017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 改变指定group组233741002中， configid为2001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741002, 2001, GadgetState.GearAction2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	-- 改变指定group组233741009中， configid为9001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741009, 9001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组233741009中， configid为9002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233741009, 9002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -390,8 +390,8 @@ function action_EVENT_DUNGEON_SETTLE_3025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -401,12 +401,12 @@ function condition_EVENT_ANY_MONSTER_DIE_3026(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 2 then
 			return false
 	end
-
+	
 	-- 判断剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -414,13 +414,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3026(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 233741003, 4)
-
+	
 	-- 将本组内变量名为 "monster_wave" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_wave", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -430,12 +430,12 @@ function condition_EVENT_ANY_MONSTER_DIE_3032(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -443,13 +443,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3032(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 233741003, 3)
-
+	
 	-- 将本组内变量名为 "monster_wave" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_wave", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -459,12 +459,12 @@ function condition_EVENT_ANY_MONSTER_DIE_3035(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"monster_wave2"为1
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -475,6 +475,6 @@ function action_EVENT_ANY_MONSTER_DIE_3035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

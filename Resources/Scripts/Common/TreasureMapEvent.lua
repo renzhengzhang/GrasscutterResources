@@ -1,4 +1,4 @@
-extraTriggers={
+local extraTriggers={
 	{ config_id = 8000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
 	{ config_id = 8000002, name = "GENERAL_REWARD_TAKEN", event = EventType.EVENT_GENERAL_REWARD_TAKEN, source = "", condition = "", action = "action_EVENT_GENERAL_REWARD_TAKEN", trigger_count = 0 }
 }
@@ -13,7 +13,7 @@ function LF_Initialize_Group(triggers, suites)
 end
 
 
-function action_EVENT_GROUP_LOAD(context, evt)
+function action_EVENT_GROUP_LOAD(context, evt)	
 	if ScriptLib.GetGroupVariableValue(context, "Created") == 0 then
 		for i=1,#gadgets do
 			if gadgets[i].gadget_id == 70220042 then
@@ -24,8 +24,8 @@ function action_EVENT_GROUP_LOAD(context, evt)
 	return 0
 end
 
-function action_EVENT_GENERAL_REWARD_TAKEN(context, evt)
-	ScriptLib.SetGroupVariableValue(context, "Created", 1)
+function action_EVENT_GENERAL_REWARD_TAKEN(context, evt)  
+	ScriptLib.SetGroupVariableValue(context, "Created", 1)       
     return ScriptLib.CreateMonstersFromMonsterPool(context,"盗宝团")
 end
 

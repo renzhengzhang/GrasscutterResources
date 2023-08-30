@@ -3,11 +3,11 @@
 ||  owner:      shuyi.chang
 ||  description:    回流之柱被控制组
 ||  LogName:    ## [VarunaStandard]
-||  Protection:
+||  Protection: 
 =======================================]]
 
 --[[
-defs =
+local defs = 
 {
     -- 钓鱼点
     fishingPoint = {
@@ -16,37 +16,37 @@ defs =
     },
 
     -- 升降水面，应该只有一项
-	rootWaterTable =
+	rootWaterTable = 
 	{
         [188001] = 330300001,
 	},
 }
 --]]
 
-extraTriggers =
+local extraTriggers = 
 {
 	{ config_id = 50000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
 	{ config_id = 50000002, name = "PLATFORM_ARRIVAL", event = EventType.EVENT_PLATFORM_ARRIVAL, source = "", condition = "", action = "action_EVENT_PLATFORM_ARRIVAL", trigger_count = 0 },
 }
 
-extraVariables =
+local extraVariables = 
 {
 
 }
 
-rootGadgetId = 70290436
-bubbleGadgetId = 70290437
-waterGadgetId = 70310225
-fishingGadgetId = 70950099
+local rootGadgetId = 70290436
+local bubbleGadgetId = 70290437
+local waterGadgetId = 70310225
+local fishingGadgetId = 70950099
 
-bubbles = {}
-roots = {}
-waterConfigId = 0
-fishPoints = {}
+local bubbles = {}
+local roots = {}
+local waterConfigId = 0
+local fishPoints = {}
 
-fishGroupId = 133303151
+local fishGroupId = 133303151
 --================================================================
--- Functions
+-- Local Functions
 --================================================================
 function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
 
@@ -93,7 +93,7 @@ function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
         if v.gadget_id == fishingGadgetId then
             table.insert(fishPoints, v.config_id)
         end
-
+        
     end
 end
 
@@ -117,7 +117,7 @@ function LF_CreateFishingPoint(context, weatherState)
 	ScriptLib.PrintContextLog(context, "## [VarunaStandard] LF_CreateFishingPoint is called")
 
     -- 0雨天用低处的，1晴天用高处的
-    suite = 0
+    local suite = 0
 
     if weatherState == 0 then
         -- 雨天，创建低的
@@ -143,7 +143,7 @@ end
 function LF_DelFishingPoint(context, weatherState)
     ScriptLib.PrintContextLog(context, "## [VarunaStandard] LF_DelFishingPoint is called")
 
-    suite = 0
+    local suite = 0
 
     if weatherState == 0 then
         -- 雨天，删除高的
@@ -159,10 +159,10 @@ function LF_DelFishingPoint(context, weatherState)
     end
 
     -- 移动水面只有一个，这里就写死了，简单一点
-    exist = ScriptLib.CheckIsInGroup(context, 133303188, 188001)
+    local exist = ScriptLib.CheckIsInGroup(context, 133303188, 188001)
     if exist == true then
 
-        waterStatus = ScriptLib.GetGroupVariableValueByGroup(context, "waterStatus", 133303188)
+        local waterStatus = ScriptLib.GetGroupVariableValueByGroup(context, "waterStatus", 133303188)
         if waterStatus == 2 then
             -- 水片已存在，且在移动中，需要把钓鱼点干掉，创建等移动平台到位通知
             ScriptLib.RemoveExtraGroupSuite(context, fishGroupId, defs.fishingPoint.top)
@@ -173,7 +173,7 @@ function LF_DelFishingPoint(context, weatherState)
         -- 存在但没在移动，只干掉不需要的那个钓鱼点（这个不需要的钓鱼点其实也应该已经不在了）
         ScriptLib.RemoveExtraGroupSuite(context, fishGroupId, suite)
         ScriptLib.PrintContextLog(context, "## [VarunaStandard] del fish point "..suite)
-    else
+    else 
         ScriptLib.RemoveExtraGroupSuite(context, fishGroupId, defs.fishingPoint.top)
         ScriptLib.RemoveExtraGroupSuite(context, fishGroupId, defs.fishingPoint.bottom)
         ScriptLib.PrintContextLog(context, "## [VarunaStandard] del all fish points cuz water doesn't exist")
@@ -186,7 +186,7 @@ function LF_DelFishingPoint_FromOther(context, prev_context, weatherState)
 end
 
 function LF_SetRootAndBubbleState_Local(context, weatherState)
-	ScriptLib.PrintContextLog(context, "## [VarunaStandard] LF_SetRootAndBubbleState_is called")
+	ScriptLib.PrintContextLog(context, "## [VarunaStandard] LF_SetRootAndBubbleState_Local is called")
 
     -- 0雨天，1晴天
     LF_SetBubbleState(context, weatherState)
@@ -197,13 +197,13 @@ function LF_SetRootAndBubbleState_Local(context, weatherState)
 
     if #fishPoints ~= 0 then
         LF_DelFishingPoint(context, weatherState)
-    end
+    end    
     return 0
 end
 
 function LF_SetBubbleState(context, weatherState)
     -- 下雨的时候有泡泡
-    gadgetState
+    local gadgetState
     if weatherState == 0 then
         gadgetState = 0
     elseif weatherState == 1 then
@@ -220,7 +220,7 @@ end
 
 function LF_SetRootState(context, weatherState)
     -- 下雨的时候不能和树桩交互
-    gadgetState
+    local gadgetState
     if weatherState == 0 then
         gadgetState = 0
     elseif weatherState == 1 then
@@ -236,7 +236,7 @@ function LF_SetWaterState(context, weatherState)
     ScriptLib.PrintContextLog(context, "## [VarunaStandard] LF_SetWaterState is called, waterConfigId = "..waterConfigId)
 
     -- 下雨的时候水面下降（把水吸走了）
-    pointId
+    local pointId
     if weatherState == 0 then
         pointId = 2
     elseif weatherState == 1 then
@@ -248,7 +248,7 @@ function LF_SetWaterState(context, weatherState)
             -- 水面上升和下降
             ScriptLib.SetPlatformPointArray(context, k, v, {pointId}, { route_type = 0 })
             ScriptLib.PrintContextLog(context, "## [VarunaStandard] water "..k.." is moving, pointId = "..pointId)
-
+    
             ScriptLib.SetGroupVariableValueByGroup(context, "waterStatus", 2, 133303188)
         end
     end
@@ -261,7 +261,7 @@ function action_EVENT_GROUP_LOAD(context, evt)
 	ScriptLib.PrintContextLog(context, "## [VarunaStandard] group is loaded")
 
     -- group 加载时查询当前天气
-    weather = ScriptLib.GetGroupVariableValueByGroup(context, "SGV_WeatherState", 133303126)
+    local weather = ScriptLib.GetGroupVariableValueByGroup(context, "SGV_WeatherState", 133303126)
 	LF_SetRootAndBubbleState_Local(context, weather)
 
     ScriptLib.PrintContextLog(context, "## [VarunaStandard] there are "..#fishPoints.." items in table fishPoints")

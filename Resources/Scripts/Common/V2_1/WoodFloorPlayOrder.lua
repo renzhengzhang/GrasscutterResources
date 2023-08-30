@@ -1,7 +1,7 @@
 --- def参数
 --- 描述长宽
 --[[
-defs = {
+local defs = {
 	-- 该参数 填入ConfigID 用来确认临接关系
 	InitFloorArrays = {
 		{6001,6004,6007,6010},
@@ -14,7 +14,7 @@ defs = {
 }
 --]]
 ---------------------
-tempTrigger = {
+local tempTrigger = {
 	{ config_id = 2330001, name = "floorStateChange", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "",
 	  condition = "", action = "action_floorStateChange", trigger_count = 0},
 	{ config_id = 2330002, name = "EVENT_FloorPlayStart", event = EventType.EVENT_VARIABLE_CHANGE, source = "FloorPlayStart",
@@ -34,7 +34,7 @@ function LF_Initialize_Level()
 
 	LF_InitCheckFloorStyle()
 
-	var = { config_id=50000001,name = "lastFloorIndex", value = 0, no_refresh = false } --上一次踩亮的地板顺位Index ，每次开始游戏重置
+	local var = { config_id=50000001,name = "lastFloorIndex", value = 0, no_refresh = false } --上一次踩亮的地板顺位Index ，每次开始游戏重置
 	variables[var.name] = var
 	var = { config_id=50000002,name = "lastConfigID", value = 0, no_refresh = false } --上一次踩亮的地板configID ，每次开始游戏重置
 	variables[var.name] = var
@@ -51,10 +51,10 @@ end
 function LF_InitCheckFloorStyle()
 	-- 处理地板边界 xNotEnd为False是下边界，yNotEnd为False是右边界。
 	for i=1,#defs.InitFloorArrays do
-		tempXNotEnd = i ~= #defs.InitFloorArrays
+		local tempXNotEnd = i ~= #defs.InitFloorArrays
 		for j=1,#defs.InitFloorArrays[i] do
-			tempYNotEnd = j ~= #defs.InitFloorArrays[i]
-			tempConfigId = defs.InitFloorArrays[i][j]
+			local tempYNotEnd = j ~= #defs.InitFloorArrays[i]
+			local tempConfigId = defs.InitFloorArrays[i][j]
 			if tempConfigId > 0 then
 				gadgets[tempConfigId].FloorParam = {x=i,y=j,xNotEnd=tempXNotEnd,yNotEnd=tempYNotEnd}
 				gadgets[tempConfigId].isFloor = true
@@ -67,11 +67,11 @@ end
 --------公用函数----------
 ------------Group加载时保底--------
 function action_EVENT_GROUP_LOAD(context,evt)
-    floorPlayEnd = ScriptLib.GetGroupVariableValue(context, "FloorPlayEnd")
+    local floorPlayEnd = ScriptLib.GetGroupVariableValue(context, "FloorPlayEnd")
 
     if 0 == floorPlayEnd then
         -- Group强制刷新
-        groupID = ScriptLib.GetContextGroupId(context)
+        local groupID = ScriptLib.GetContextGroupId(context)
         ScriptLib.RefreshGroup(context, { group_id = groupID, suite = 1 })
     end
     return 0
@@ -83,7 +83,7 @@ end
 		-- 所有地板设为0
 		for i=1,#defs.InitFloorArrays do
 			for j=1,#defs.InitFloorArrays[i] do
-				tempConfigId = defs.InitFloorArrays[i][j]
+				local tempConfigId = defs.InitFloorArrays[i][j]
 				if tempConfigId > 0 then
 					ScriptLib.SetGadgetStateByConfigId(context, tempConfigId, 0)
 					ScriptLib.PrintContextLog(context, "TD WoodFloorPlay : 将对应地板设置为0，ConfigID为" .. tempConfigId)
@@ -99,8 +99,8 @@ end
 	end
 ---------------对应地板被踩时触发--------
 	function action_floorStateChange(context,evt)
-		toGadgetState = evt.param1
-		configID = evt.param2
+		local toGadgetState = evt.param1
+		local configID = evt.param2
 		ScriptLib.PrintContextLog(context, "TD WoodFloorPlay : 侦测到物件状态切入"..toGadgetState.."ConfigID为" .. configID)
 		if 201 == toGadgetState and  gadgets[configID].isFloor then
 			AnalyzeFloorByFixedOrder(context,configID)
@@ -120,9 +120,9 @@ end
 ------------踩踏木制地板判定(日月星)--------
 ---地板只有进入201时，才启动以下分析逻辑
 	function AnalyzeFloorByFixedOrder(context,currentConfigID)
-		lastIndex = ScriptLib.GetGroupVariableValue(context, "lastFloorIndex")  --上一个踩中地板的顺位
-		lastConfigID = ScriptLib.GetGroupVariableValue(context, "lastConfigID") --上一个踩中地板的ConfigID
-		currentIndex = 0
+		local lastIndex = ScriptLib.GetGroupVariableValue(context, "lastFloorIndex")  --上一个踩中地板的顺位
+		local lastConfigID = ScriptLib.GetGroupVariableValue(context, "lastConfigID") --上一个踩中地板的ConfigID
+		local currentIndex = 0
 		if lastConfigID == 0 then
 			--获取其在日月星中的顺位
 			currentIndex = GetFirstDataInArray(gadgets[currentConfigID].gadget_id)
@@ -145,7 +145,7 @@ end
 				-- 所有地板设为0
 				for i=1,#defs.InitFloorArrays do
 					for j=1,#defs.InitFloorArrays[i] do
-						tempConfigId = defs.InitFloorArrays[i][j]
+						local tempConfigId = defs.InitFloorArrays[i][j]
 						if tempConfigId > 0 then
 							ScriptLib.SetGadgetStateByConfigId(context, tempConfigId, 202)
 							ScriptLib.PrintContextLog(context, "TD WoodFloorPlay : 将对应地板设置为202，ConfigID为" .. tempConfigId)
@@ -168,7 +168,7 @@ end
 
 ------------是否为附近地板---------
 	function IsNearbyFloor(lastConfigID,currentConfigID)
-		currentFloorConfigList = GetNearbyFloorConfigList(lastConfigID)
+		local currentFloorConfigList = GetNearbyFloorConfigList(lastConfigID)
 		for i = 1,#currentFloorConfigList do
 			if currentConfigID == currentFloorConfigList[i] then
 				return true
@@ -179,18 +179,18 @@ end
 
 ------------是否为正确顺序地板---------
 	function IsRightFloor(currentIndex,currentConfigID)
-		targetGadgetID = defs.FloorGadgetID[currentIndex]
-		currentGadgetID = gadgets[currentConfigID].gadget_id
+		local targetGadgetID = defs.FloorGadgetID[currentIndex]
+		local currentGadgetID = gadgets[currentConfigID].gadget_id
 		return currentGadgetID == targetGadgetID
 	end
 
 ------------Private：获取附近地板ConfigList---------
 	function GetNearbyFloorConfigList(configID)
-		currentFloorConfigList = {}
-		tempPos = gadgets[configID].FloorParam
+		local currentFloorConfigList = {}
+		local tempPos = gadgets[configID].FloorParam
 		if tempPos ~= nil then
-			tempX = tempPos.x
-			tempY = tempPos.y
+			local tempX = tempPos.x
+			local tempY = tempPos.y
 			if(tempX > 1)  then table.insert(currentFloorConfigList,defs.InitFloorArrays[tempX-1][tempY]) end
 			if(tempY > 1)  then table.insert(currentFloorConfigList,defs.InitFloorArrays[tempX][tempY-1]) end
 			if(tempPos.xNotEnd)  then table.insert(currentFloorConfigList,defs.InitFloorArrays[tempX+1][tempY]) end

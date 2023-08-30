@@ -5,25 +5,25 @@
 ||	owner: 		weiwei.sun
 ||	description: 	3.2奇趣秘园 局内逻辑 战斗
 ||	LogName:	## [CharAmuse_Retrans]
-||	Protection:
+||	Protection:	
 =======================================]]
 --[[
 
-defs = {
+local defs = {
 	--玩法范围region，玩法进行期间，不在此Region内的玩家会被拉回
 	play_region = ,
 }
 
 ]]
 
-retrans_cfg = {
+local retrans_cfg = {
 	--主控GroupID
 	main_group = 251008007,
 	--检查频率
 	check_interval = 5,
 }
 
-Retrans_Triggers = {
+local Retrans_Triggers = {
 	{ config_id = 8800001, name = "Time_Axis_ReTrans", event = EventType.EVENT_TIME_AXIS_PASS, source = "retranstimer", condition = "", action = "action_Time_Axis_ReTrans", trigger_count = 0}
 }
 
@@ -53,7 +53,7 @@ function EX_StopReTransCheck(context, prev_context)
 end
 
 function action_Time_Axis_ReTrans(context, evt)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		LF_DoReTransCheck(context, v)
 	end
@@ -61,7 +61,7 @@ function action_Time_Axis_ReTrans(context, evt)
 end
 
 function EX_DoReTransCheck(context, prev_context)
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 	for i,v in ipairs(uid_list) do
 		LF_DoReTransCheck(context, v)
 	end
@@ -74,7 +74,7 @@ function EX_DoReTransCheck_Single(context, prev_context, uid)
 end
 
 function LF_DoReTransCheck(context, uid)
-	if nil == regions[defs.play_region] then
+	if nil == regions[defs.play_region] then 
 		return 0
 	end
 	if false == ScriptLib.IsPlayerTransmittable(context, uid) then

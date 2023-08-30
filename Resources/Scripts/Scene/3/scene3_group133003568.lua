@@ -1,24 +1,24 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133003568
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	sum = 30
 }
 
 -- DEFS_MISCS
 function LF_random_gadgetId()
-	a = 70330024
+	local a = 70330024
 	a = a + math.random(1,14)
 	return a
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -155,9 +155,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -168,9 +168,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -195,9 +195,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -206,19 +206,19 @@ function action_EVENT_GROUP_REFRESH_568001(context, evt)
 		return -1
 	end
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1,5))
-	temp_arr1 = {}
-	temp_arr2 = {}
+	local temp_arr1 = {}
+	local temp_arr2 = {}
 	--configId序列
-	fin_arr1 = {}
+	local fin_arr1 = {}
 	--pos序列
-	fin_arr2 = {}
+	local fin_arr2 = {}
 	for i = 1,#gadgets do
 		temp_arr1[i] = i
 		temp_arr2[i] = i
 	end
 	for i = 1,defs.sum do
-		j = math.random(1,#temp_arr1)
-		k = math.random(1,#temp_arr2)
+		local j = math.random(1,#temp_arr1)
+		local k = math.random(1,#temp_arr2)
 		fin_arr1[i] = temp_arr1[j]
 		fin_arr2[i] = temp_arr2[k]
 		table.remove(temp_arr1, j)

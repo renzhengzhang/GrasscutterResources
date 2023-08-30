@@ -1,24 +1,24 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133302021
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 133302021,
 	gadget_thunderThelfID = 21002,
 	pointarray_ID = 330200003,
 	maxPointCount = 14,
-	pointInfo = {6,10,14}
+	pointInfo = {6,10,14} 
 }
 
 -- DEFS_MISCS
 function GetNextPath(context)
-	path = {}
-	index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
-	stoppoint = defs.pointInfo[index]
+	local path = {}
+	local index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
+	local stoppoint = defs.pointInfo[index]
 	ScriptLib.PrintLog(context, "stop point : "..stoppoint)
-	currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
+	local currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
 	for i=currentNodeIndex + 1,stoppoint do
 		table.insert(path,i)
 	end
@@ -40,9 +40,9 @@ function MovePlatform(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -160,9 +160,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -173,9 +173,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -227,9 +227,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -237,7 +237,7 @@ function condition_EVENT_GADGET_CREATE_21024(context, evt)
 	if 21001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -248,7 +248,7 @@ function action_EVENT_GADGET_CREATE_21024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -256,14 +256,14 @@ end
 function condition_EVENT_SELECT_OPTION_21025(context, evt)
 	-- 判断是gadgetid 21001 option_id 175
 	if 21001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -271,38 +271,38 @@ end
 function action_EVENT_SELECT_OPTION_21025(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302021, 2)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302021, 3)
-
+	
 	-- 删除指定group： 133302021 ；指定config：21001；物件身上指定option：175；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133302021, 21001, 175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 21001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 21001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建编号为101（该挑战的识别id),挑战内容为82的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 101, 82, 300, 2, 201031, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（-895，400，3181），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-895, y=400, z=3181}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-895, y=400, z=3181}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -313,7 +313,7 @@ function action_EVENT_CHALLENGE_FAIL_21026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -323,21 +323,21 @@ function action_EVENT_CHALLENGE_SUCCESS_21027(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 21001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302021, 3)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302021, 4)
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302021, 5)
-
+	
 	-- 创建标识为"T"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -348,7 +348,7 @@ function action_EVENT_GROUP_LOAD_21028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -357,27 +357,27 @@ function condition_EVENT_PLATFORM_REACH_POINT_21029(context, evt)
 	if 21002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_21029(context, evt)
-	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)
+	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)       
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isMoving", 0) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	    return -1
-	end
+	end 
 	ScriptLib.StopPlatform(context, defs.gadget_thunderThelfID)
 	if evt.param3 == defs.maxPointCount then
 	    ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
 	    --ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_thunderThelfID, GadgetState.GearStart)
-	    --ScriptLib.SetFlowSuite(context, defs.group_ID, 2)
-	    --ScriptLib.MarkPlayerAction(context, 2014, 3, 1)
+	    --ScriptLib.SetFlowSuite(context, defs.group_ID, 2)       
+	    --ScriptLib.MarkPlayerAction(context, 2014, 3, 1) 
 	    return 0
 	end
-
-	next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
+	        
+	local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
 	next = next + 1
 	ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
 	ScriptLib.SetGroupVariableValue(context,"currentPathNodeIndex",evt.param3)
@@ -390,19 +390,19 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_21030(context, evt)
 	        if defs.gadget_thunderThelfID ~= evt.param1 then
 	            return false
 	        end
-	        state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
-	        ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
-	        if state == 202 then
+	        local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
+	        ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state) 
+	        if state == 202 then 
 	            return false
 	        end
-	        if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then
+	        if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then 
 	            return false
 	        end
-
+	        
 	        if ScriptLib.GetGroupVariableValue(context, "isFinished") == 1 then
 	            return false
 	        end
-
+	
 	        return true
 end
 
@@ -417,7 +417,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_21031(context, evt)
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133302021, 21002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -425,19 +425,19 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_21031(context, evt)
 	-- 终止识别id为101的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 101, 1)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21032(context, evt)
 	if evt.param1 ~= 21032 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -445,22 +445,22 @@ end
 function action_EVENT_ENTER_REGION_21032(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302021, 4)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302021, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21033(context, evt)
 	if evt.param1 ~= 21033 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -468,10 +468,10 @@ end
 function action_EVENT_ENTER_REGION_21033(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302021, 5)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302021, 4)
-
+	
 	return 0
 end
 
@@ -480,7 +480,7 @@ function condition_EVENT_GADGET_CREATE_21038(context, evt)
 	if 21002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -490,8 +490,8 @@ function action_EVENT_GADGET_CREATE_21038(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 21002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -499,6 +499,6 @@ end
 function action_EVENT_TIME_AXIS_PASS_21073(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302021, 2)
-
+	
 	return 0
 end

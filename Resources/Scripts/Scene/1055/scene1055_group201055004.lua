@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201055004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -74,9 +74,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -87,9 +87,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -105,9 +105,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -115,7 +115,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4005(context, evt)
 	if 4011 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -125,105 +125,105 @@ function action_EVENT_GADGET_STATE_CHANGE_4005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4012 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "20105500401") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201055006, 7)
-
+	
 	-- 将configid为 4014 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4014, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4015 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4015, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4016 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4016, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4022 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4022, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4032 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4032, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4033 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4033, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 触发镜头注目，注目位置为坐标（36，58，-52），持续时间为5秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=36, y=58, z=-52}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=36, y=58, z=-52}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4015) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4032) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 4033) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4013(context, evt)
 	if evt.param1 ~= 4013 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -231,61 +231,61 @@ end
 function action_EVENT_ENTER_REGION_4013(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201055006, 7)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201055006, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4021(context, evt)
 	if evt.param1 ~= 4021 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_4021(context, evt)
 	-- 触发镜头注目，注目位置为坐标（16，57，-96），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=16, y=57, z=-96}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=16, y=57, z=-96}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 创建id为4020的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4020 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 延迟15秒后,向groupId为：201055004的对象,请求一次调用,并将string参数："timeTrans2start" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055004, "timeTrans2start", 15) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟30秒后,向groupId为：201055004的对象,请求一次调用,并将string参数："timeTrans3start" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055004, "timeTrans3start", 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟45秒后,向groupId为：201055004的对象,请求一次调用,并将string参数："timeTrans4start" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055004, "timeTrans4start", 45) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -296,13 +296,13 @@ function action_EVENT_TIMER_EVENT_4023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 延迟45秒后,向groupId为：201055004的对象,请求一次调用,并将string参数："timeTrans2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055004, "timeTrans2", 45) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -313,20 +313,20 @@ function action_EVENT_TIMER_EVENT_4025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建id为4024的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4024 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 延迟45秒后,向groupId为：201055004的对象,请求一次调用,并将string参数："timeTrans2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055004, "timeTrans2", 45) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -337,13 +337,13 @@ function action_EVENT_TIMER_EVENT_4027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 延迟45秒后,向groupId为：201055004的对象,请求一次调用,并将string参数："timeTrans3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055004, "timeTrans3", 45) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -354,20 +354,20 @@ function action_EVENT_TIMER_EVENT_4028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建id为4026的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4026 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 延迟45秒后,向groupId为：201055004的对象,请求一次调用,并将string参数："timeTrans3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055004, "timeTrans3", 45) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -378,13 +378,13 @@ function action_EVENT_TIMER_EVENT_4029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 延迟45秒后,向groupId为：201055004的对象,请求一次调用,并将string参数："timeTrans4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055004, "timeTrans4", 45) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -395,46 +395,46 @@ function action_EVENT_TIMER_EVENT_4030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建id为4031的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4031 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 延迟45秒后,向groupId为：201055004的对象,请求一次调用,并将string参数："timeTrans4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055004, "timeTrans4", 45) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4037(context, evt)
 	if evt.param1 ~= 4037 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_4037(context, evt)
 	-- 触发镜头注目，注目位置为坐标（43，57，-52），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=43, y=57, z=-52}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=43, y=57, z=-52}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 1,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end

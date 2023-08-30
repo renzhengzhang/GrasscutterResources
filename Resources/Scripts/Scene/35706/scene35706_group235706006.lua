@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235706006
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -107,7 +107,7 @@ function condition_EVENT_GADGET_CREATE_6003(context, evt)
 	if 6001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -118,10 +118,10 @@ function action_EVENT_GADGET_CREATE_6003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235706006, 3)
-
+	
 	return 0
 end
 
@@ -129,19 +129,19 @@ end
 function condition_EVENT_SELECT_OPTION_6004(context, evt)
 	-- 判断是gadgetid 6001 option_id 175
 	if 6001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"stage"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage", 235706005) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -152,70 +152,70 @@ function action_EVENT_SELECT_OPTION_6004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_allow_use_skill")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235706007, 2)
-
+	
 	-- 删除指定group： 235706006 ；指定config：6001；物件身上指定option：175；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 235706006, 6001, 175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 改变指定group组235706006中， configid为6001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706006, 6001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706005中， configid为5002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706005, 5002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706005中， configid为5001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706005, 5001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706009中， configid为9001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706009, 9001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706009中， configid为9002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706009, 9002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706006中， configid为6002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706006, 6002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706006中， configid为6006的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706006, 6006, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706006中， configid为6007的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706006, 6007, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235706006, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 235706006, 3)
-
+	
 	return 0
 end
 
@@ -223,19 +223,19 @@ end
 function condition_EVENT_SELECT_OPTION_6005(context, evt)
 	-- 判断是gadgetid 6001 option_id 176
 	if 6001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 176 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"stage"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage", 235706005) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -246,73 +246,73 @@ function action_EVENT_SELECT_OPTION_6005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_allow_use_skill")
 		return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 235706008, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 删除指定group： 235706006 ；指定config：6001；物件身上指定option：176；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 235706006, 6001, 176) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 改变指定group组235706006中， configid为6001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706006, 6001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706005中， configid为5002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706005, 5002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706005中， configid为5001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706005, 5001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706009中， configid为9001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706009, 9001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706009中， configid为9002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706009, 9002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706006中， configid为6002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706006, 6002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706006中， configid为6006的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706006, 6006, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235706006中， configid为6007的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235706006, 6007, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235706006, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 235706006, 3)
-
+	
 	return 0
 end
 
@@ -321,7 +321,7 @@ function condition_EVENT_ANY_GADGET_DIE_6013(context, evt)
 	if 6010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -331,14 +331,14 @@ function action_EVENT_ANY_GADGET_DIE_6013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟60秒后,向groupId为：235706006的对象,请求一次调用,并将string参数："heat2_timer" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 235706006, "heat2_timer", 60) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -347,7 +347,7 @@ function condition_EVENT_ANY_GADGET_DIE_6014(context, evt)
 	if 6009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -357,14 +357,14 @@ function action_EVENT_ANY_GADGET_DIE_6014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟60秒后,向groupId为：235706006的对象,请求一次调用,并将string参数："heat1_timer" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 235706006, "heat1_timer", 60) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -374,14 +374,14 @@ function action_EVENT_TIMER_EVENT_6015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为6009的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 6009 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -391,13 +391,13 @@ function action_EVENT_TIMER_EVENT_6016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为6010的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 6010 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

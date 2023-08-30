@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133316060
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -68,9 +68,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 设置指定gadget的state
@@ -79,7 +79,7 @@ function TLA_set_gadget_state_by_configid(context, evt, config_id, state)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, config_id, state) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
+		end 
 	return 0
 end
 
@@ -88,15 +88,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_60003(context, evt)
 	if 60002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_60003(context, evt)
 	TLA_set_gadget_state_by_configid(context, evt, 60001, GadgetState.GearStart)
-
+	
 	ScriptLib.AddQuestProgress(context, "Q7325605")
-
+	
 	return 0
 end

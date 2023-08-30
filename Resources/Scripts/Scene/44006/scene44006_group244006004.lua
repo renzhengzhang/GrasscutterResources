@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 244006004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -80,20 +80,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ROUND"为2
 	if ScriptLib.GetGroupVariableValue(context, "ROUND") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -103,26 +103,26 @@ function action_EVENT_VARIABLE_CHANGE_4002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 调用提示id为 400028 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400028) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ROUND"为4
 	if ScriptLib.GetGroupVariableValue(context, "ROUND") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -132,26 +132,26 @@ function action_EVENT_VARIABLE_CHANGE_4003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4001, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 调用提示id为 400028 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400028) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ROUND"为6
 	if ScriptLib.GetGroupVariableValue(context, "ROUND") ~= 6 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -161,15 +161,15 @@ function action_EVENT_VARIABLE_CHANGE_4004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4001 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -178,7 +178,7 @@ function condition_EVENT_GADGET_CREATE_4005(context, evt)
 	if 4001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,7 +188,7 @@ function action_EVENT_GADGET_CREATE_4005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

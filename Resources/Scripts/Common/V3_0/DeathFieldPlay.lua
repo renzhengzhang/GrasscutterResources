@@ -11,9 +11,9 @@
 GROUP GETVAR 133301250 PlayPhase
 --]]
 --[[
-RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
+local RequireSuite = {} --死域玩法的初始suit。若不填或不注入，默认走init_config.suite
 
-DeathField ={
+local DeathField ={
     CoreID = 33001,
     BossID = 33006,
     BossSuite = 2,
@@ -31,12 +31,12 @@ DeathField ={
 -- PlayPhase = 3 => 死域核心破坏后,死域被切换
 -- goto 1296 271 -1590
 
-DeathFieldGadget ={
+local DeathFieldGadget ={
     --Core = 70310193,
     Point = 70310195,
 }
 
-DeathFieldPlay_Trigger = {
+local DeathFieldPlay_Trigger = {
     { config_id = 40000001, name = "tri_DeathField_PointDie", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "",
       condition = "", action = "action_DeathField_PointDie", trigger_count = 0},
     { config_id = 40000002, name = "tri_DeathField_BossDie", event = EventType.EVENT_ANY_MONSTER_DIE, source = "",
@@ -56,16 +56,16 @@ function LF_Initialize_DeathFieldPlay()
     LF_BossDataCheck()
     LF_PointDataCheck()
 
-    var = { config_id= 40000101, name = "DeathPointNum", value = 0, no_refresh = false }  --死亡节点计数
+    local var = { config_id= 40000101, name = "DeathPointNum", value = 0, no_refresh = false }  --死亡节点计数
     variables[var.name] = var
 
 
     if DeathField.NoProtect == true then
         -- 不做保底处理，Group刷新时会刷到初始状态
-        var = { config_id= 40000102, name = "PlayPhase", value = 0, no_refresh = false } -- 玩法阶段
+        local var = { config_id= 40000102, name = "PlayPhase", value = 0, no_refresh = false } -- 玩法阶段
         variables[var.name] = var
     else
-        var = { config_id= 40000102, name = "PlayPhase", value = 0, no_refresh = true } -- 玩法阶段
+        local var = { config_id= 40000102, name = "PlayPhase", value = 0, no_refresh = true } -- 玩法阶段
         variables[var.name] = var
     end
 
@@ -83,7 +83,7 @@ function LF_BossDataCheck()
         return 0
     end
 
-    boss = monsters[DeathField.BossID]
+    local boss = monsters[DeathField.BossID]
 
     if nil == boss.logic_state then
         boss.logic_state = {"SGV_DeathZoneState"}
@@ -100,7 +100,7 @@ function LF_PointDataCheck()
         return 0
     end
     for _,v in ipairs(DeathField.PointList) do
-        gadgetData = gadgets[v]
+        local gadgetData = gadgets[v]
         if gadgetData ~= nil then
             if nil == gadgetData.persistent then
                 -- 如果无logic_state，则直接写入
@@ -120,7 +120,7 @@ function action_DeathField_PointDie(context,evt)
     end
 
     -- 死域节点击杀数+1
-    curDeathPointNum = ScriptLib.GetGroupVariableValue(context, "DeathPointNum")
+    local curDeathPointNum = ScriptLib.GetGroupVariableValue(context, "DeathPointNum")
     ScriptLib.SetGroupVariableValue(context,"DeathPointNum",curDeathPointNum + 1)
     ScriptLib.PrintContextLog(context,"TD_DeathFieldPlay 节点死亡流程：DeathPointNum + 1 = " .. curDeathPointNum + 1)
 
@@ -135,13 +135,13 @@ end
 
 -- 死域之主死亡时，Core切201
 function action_DeathField_BossDie(context,evt)
-    playPhase = ScriptLib.GetGroupVariableValue(context, "PlayPhase")
+    local playPhase = ScriptLib.GetGroupVariableValue(context, "PlayPhase")
     if playPhase ~= 1 then
         ScriptLib.PrintContextLog(context,"TD_DeathFieldPlay BossDie未进入，当前阶段为 " .. playPhase)
         return 0
     end
 
-    tempList = ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id)
+    local tempList = ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id)
     -- 如果当前Group没有存活怪物就会转阶段
     if next(tempList)==nil then
         -- 切阶段2
@@ -154,7 +154,7 @@ end
 
 -- 死域核心死亡时，Core切202，进入死域转换流程
 function action_DeathField_CoreDie(context,evt)
-    playPhase = ScriptLib.GetGroupVariableValue(context, "PlayPhase")
+    local playPhase = ScriptLib.GetGroupVariableValue(context, "PlayPhase")
     if playPhase ~= 2 then
         ScriptLib.PrintContextLog(context,"TD_DeathFieldPlay CoreDie未进入，当前阶段为 " .. playPhase)
         return 0
@@ -172,8 +172,8 @@ function action_DeathField_GroupLoad(context,evt)
         return 0
     end
 
-    playPhase = ScriptLib.GetGroupVariableValue(context, "PlayPhase")
-    curDeathZoneID =
+    local playPhase = ScriptLib.GetGroupVariableValue(context, "PlayPhase")
+    local curDeathZoneID =
     ScriptLib.PrintContextLog(context,"TD_DeathFieldPlay GroupLoad时，当前阶段为" .. playPhase)
     -- playPhase = 0 时，刷新Group为状态1
     if playPhase == 0 then
@@ -242,7 +242,7 @@ end
 
 -- 标准的InsertTriggers方法
 function LF_InsertTriggers(TempTrigger,TempRequireSuite)
-    hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
+    local hasRequireSuitList = not (TempRequireSuite == nil or #TempRequireSuite <=0)
     if hasRequireSuitList then
         if (init_config.io_type ~= 1) then
             --常规group注入。trigger注入白名单定义的suite list
@@ -282,7 +282,7 @@ function LF_InsertTriggers(TempTrigger,TempRequireSuite)
 end
 -- 简单拆分一个数组
 function LF_ArrayToString(array)
-    s = "{"
+    local s = "{"
     for k,v in pairs(array) do
         if k < #array then
             s = s .. v ..","
@@ -305,13 +305,13 @@ end
 
 -- 根据数组的长度修饰num
 function Fix(value,array,error)
-    arrayType= type(array)
+    local arrayType= type(array)
     if arrayType ~= "table" then
         ScriptLib.PrintLog(error .. "array 非法")
         return 1
     end
 
-    valueType= type(value)
+    local valueType= type(value)
     if valueType ~= "number" then
         ScriptLib.PrintLog(error .. "value 非法")
         return 1

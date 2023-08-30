@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133003543
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -79,9 +79,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -89,7 +89,7 @@ function condition_EVENT_ANY_MONSTER_DIE_543002(context, evt)
 	if 543001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -100,22 +100,22 @@ function action_EVENT_ANY_MONSTER_DIE_543002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_543005(context, evt)
 	if evt.param1 ~= 543005 then return false end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_543005(context, evt)
 	     	if context.uid~=0 then
-			small_region={}
-			big_region={}
+			local small_region={}
+			local big_region={}
 			for i=1,#regions do
 				if regions[i].config_id==543005 then
 					small_region=regions[i]
@@ -126,7 +126,7 @@ function action_EVENT_ENTER_REGION_543005(context, evt)
 			end
 			ScriptLib.TrySetPlayerEyePoint(context, small_region, big_region, 0, {0})
 		end
-
+	
 	return 0
 end
 
@@ -141,7 +141,7 @@ function action_EVENT_LEAVE_REGION_543006(context, evt)
 	     	if context.uid~=0 then
 			ScriptLib.ClearPlayerEyePoint(context, 543005)
 		end
-
+	
 	return 0
 end
 

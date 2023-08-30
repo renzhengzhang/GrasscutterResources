@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133008670
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 
 	gallery_id = 13004 ,
 	group_id = 133008670,
@@ -16,9 +16,8 @@ defs = {
 	end_region = 670047,
 
 	--玩法RegionID，进入此圈开启性能优化
-	optimiz_region = {670141,670142,670143,670144}
-,
-
+	optimiz_region = {670141,670142,670143,670144},
+	
 	--全程终点在哪个suit,如果这个group非终点，则配0
 	ending_suit = 6,
 	--挑战限时秒
@@ -26,12 +25,8 @@ defs = {
 
 	--金币和冰柱的对应关系
 	--[冰柱config_id]={金币config_id1,金币config_id2...}
-	coin_ice = {
-[670005]={670012},
-[670115]={670011},
-[670119]={670025},
-[670126]={670023}
-
+	coin_ice = { [670005]={670012},[670115]={670011},[670119]={670025},[670126]={670023}
+	
 	},
                 end_gadget = 670022,
  look_pos = {x=802, y=199, z=-1302},
@@ -43,9 +38,9 @@ coin_target_2 = 10,
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -268,9 +263,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -281,9 +276,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -353,20 +348,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_670008(context, evt)
 	if evt.param1 ~= 670008 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -374,22 +369,22 @@ end
 function action_EVENT_ENTER_REGION_670008(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133008670, 5)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133008670, 3)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133008670, EntityType.GADGET, 670035 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133008670, EntityType.GADGET, 670007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -398,7 +393,7 @@ function condition_EVENT_GADGET_CREATE_670046(context, evt)
 	if 670013 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -409,19 +404,19 @@ function action_EVENT_GADGET_CREATE_670046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_670050(context, evt)
 	if evt.param1 ~= 670050 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -429,22 +424,22 @@ end
 function action_EVENT_ENTER_REGION_670050(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133008670, 4)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133008670, 2)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133008670, EntityType.GADGET, 670032 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133008670, EntityType.GADGET, 670034 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -455,7 +450,7 @@ function action_EVENT_CHALLENGE_SUCCESS_670051(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -466,19 +461,19 @@ function action_EVENT_CHALLENGE_FAIL_670052(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_670067(context, evt)
 	if evt.param1 ~= 670067 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -486,31 +481,31 @@ end
 function action_EVENT_ENTER_REGION_670067(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133008670, 3)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133008670, EntityType.GADGET, 670031 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133008670, EntityType.GADGET, 670033 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_670086(context, evt)
 	if evt.param1 ~= 670086 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -518,22 +513,22 @@ end
 function action_EVENT_ENTER_REGION_670086(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133008670, 6)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133008670, 4)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133008670, EntityType.GADGET, 670084 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133008670, EntityType.GADGET, 670085 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 

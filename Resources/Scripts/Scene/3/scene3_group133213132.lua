@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133213132
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -102,18 +102,18 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_132007(context, evt)
-	-- 判断指定group组剩余gadget数量是否是2
+	-- 判断指定group组剩余gadget数量是否是2 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133213132}) ~= 2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -121,35 +121,35 @@ end
 function action_EVENT_ANY_GADGET_DIE_132007(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213132, 3)
-
+	
 	-- 将configid为 132001 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 132001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "finished2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "finished2", 1, 133213180) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "globalfinish1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "globalfinish1", 1, 133213180) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（-3447.558，209.9198，-3407.884），持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-3447.558, y=209.9198, z=-3407.884}
-	  pos_follow = {x=-1, y=1, z=-3}
+		local pos = {x=-3447.558, y=209.9198, z=-3407.884}
+	  local pos_follow = {x=-1, y=1, z=-3}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = true, follow_pos = pos_follow, is_force_walk = true, is_change_play_mode = true,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -158,7 +158,7 @@ function condition_EVENT_GADGET_CREATE_132008(context, evt)
 	if 132011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -169,17 +169,17 @@ function action_EVENT_GADGET_CREATE_132008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_132009(context, evt)
-	-- 判断指定group组剩余gadget数量是否是4
+	-- 判断指定group组剩余gadget数量是否是4 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133213132}) ~= 4 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -189,18 +189,18 @@ function action_EVENT_ANY_GADGET_DIE_132009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 132001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_132010(context, evt)
-	-- 判断指定group组剩余gadget数量是否是3
+	-- 判断指定group组剩余gadget数量是否是3 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133213132}) ~= 3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -210,8 +210,8 @@ function action_EVENT_ANY_GADGET_DIE_132010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 132001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -219,14 +219,14 @@ end
 function condition_EVENT_SELECT_OPTION_132012(context, evt)
 	-- 判断是gadgetid 132011 option_id 71
 	if 132011 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 71 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -237,36 +237,36 @@ function action_EVENT_SELECT_OPTION_132012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 132011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133213132, EntityType.GADGET, 132006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133213132, EntityType.GADGET, 132016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_132013(context, evt)
-	-- 判断指定group组剩余gadget数量是否是2
+	-- 判断指定group组剩余gadget数量是否是2 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133213132}) ~= 2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -277,16 +277,16 @@ function action_EVENT_GROUP_LOAD_132013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 132001 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 132001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213132, 3)
-
+	
 	return 0
 end
 
@@ -295,12 +295,12 @@ function condition_EVENT_ANY_GADGET_DIE_132014(context, evt)
 	if 132011 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish2"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "globalfinish2", 133213180) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -311,13 +311,13 @@ function action_EVENT_ANY_GADGET_DIE_132014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110294 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110294) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -326,12 +326,12 @@ function condition_EVENT_ANY_GADGET_DIE_132015(context, evt)
 	if 132011 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish2"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "globalfinish2", 133213180) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -342,7 +342,7 @@ function action_EVENT_ANY_GADGET_DIE_132015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -351,7 +351,7 @@ function condition_EVENT_GROUP_LOAD_132017(context, evt)
 	if -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133213132, 132011) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -362,6 +362,6 @@ function action_EVENT_GROUP_LOAD_132017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end

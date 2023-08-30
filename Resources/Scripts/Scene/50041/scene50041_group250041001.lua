@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250041001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -99,9 +99,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -109,7 +109,7 @@ function condition_EVENT_GADGET_CREATE_1003(context, evt)
 	if 1001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -120,7 +120,7 @@ function action_EVENT_GADGET_CREATE_1003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -128,14 +128,14 @@ end
 function condition_EVENT_SELECT_OPTION_1004(context, evt)
 	-- 判断是gadgetid 1001 option_id 2
 	if 1001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -146,13 +146,13 @@ function action_EVENT_SELECT_OPTION_1004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 延迟3秒后,向groupId为：250041001的对象,请求一次调用,并将string参数："SS1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250041001, "SS1", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -163,19 +163,19 @@ function action_EVENT_CHALLENGE_FAIL_1005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 250041001, "SS2") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 250041001, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -184,9 +184,9 @@ function action_EVENT_TIMER_EVENT_1006(context, evt)
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250041001, "SS2", 8) then
 	  return -1
 	end
-
-
-
+	
+	
+	
 	return 0
 end
 
@@ -195,9 +195,9 @@ function action_EVENT_TIMER_EVENT_1007(context, evt)
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250041001, "SS1", 8) then
 	  return -1
 	end
-
+	
 	--ChangeBulletType(context)
-
+	
 	return 0
 end
 
@@ -205,14 +205,14 @@ end
 function condition_EVENT_SELECT_OPTION_1008(context, evt)
 	-- 判断是gadgetid 1009 option_id 4
 	if 1009 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 4 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -223,19 +223,19 @@ function action_EVENT_SELECT_OPTION_1008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 250041001, "SS2") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 250041001, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -244,7 +244,7 @@ function condition_EVENT_GADGET_CREATE_1010(context, evt)
 	if 1009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -255,6 +255,6 @@ function action_EVENT_GADGET_CREATE_1010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end

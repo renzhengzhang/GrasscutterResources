@@ -1,43 +1,43 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111102054
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	starter_worktop_id = 54004,
 	final_stage = 3,
 	gallery_id = 21200
 }
 
 -- DEFS_MISCS
-score = {
+local score = {
     checkpoint = 20,
     monster = 5,
 }
 
-stage_berth_windzone = {
+local stage_berth_windzone = {
     [1] = {berth_num = 4, berth = {54085,54086,54087,54088}, windzone = {54089,54090,54091,54092}},
     [2] = {berth_num = 3, berth = {54093,54094,54095}, windzone = {54096,54097,54098}},
     [3] = {berth_num = 2, berth = {54099,54100}, windzone = {54101}},
 }
 
-stage =
+local stage = 
 {
     [1] = {monster_suites = {2},start_suites = {2}, tag = "Battle"},
     [2] = {monster_suites = {3},start_suites = {3}, tag = "Battle"},
     [3] = {monster_suites = {4,5},start_suites = {4}, tag = "Battle"},
 }
 
-monster_suite_chain =
+local monster_suite_chain = 
 {
 	[4] = {5}
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -167,9 +167,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -180,9 +180,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -234,9 +234,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 require "V2_8/SocialActivity_Common"

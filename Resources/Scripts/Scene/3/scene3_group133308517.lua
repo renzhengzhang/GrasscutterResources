@@ -1,11 +1,11 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308517
 }
 
 -- DEFS_MISCS
 --第一次交互的option，之后切为2
-optionID = {431}
+local optionID = {431}
 
 --常用ID：
 --{431,432} 开/关门
@@ -13,12 +13,12 @@ optionID = {431}
 --{438,439} 开/关风扇（权限等级3）
 --{440} 权限操作台解除物件锁定
 
-isQuest = 1
+local isQuest = 1
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -95,23 +95,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_517003(context, evt)
 	-- 判断是gadgetid 517002 option_id 431
 	if 517002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 431 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -121,14 +121,14 @@ function action_EVENT_SELECT_OPTION_517003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 517002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 通知场景上的所有玩家播放名字为111 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 111, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -137,7 +137,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_517004(context, evt)
 	if 517002 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -147,8 +147,8 @@ function action_EVENT_GADGET_STATE_CHANGE_517004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 517001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_GROUP_LOAD_517005(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133308517, 517002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -167,8 +167,8 @@ function action_EVENT_GROUP_LOAD_517005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 517001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -177,14 +177,14 @@ function condition_EVENT_GADGET_CREATE_517006(context, evt)
 	if 517002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_517006(context, evt)
 	LF_StOperatorState( context )
-
+	
 	return 0
 end
 

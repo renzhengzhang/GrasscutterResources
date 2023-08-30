@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309353
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_receiver_1 = 353002,
 	gadget_receiver_2 = 353003
 }
@@ -17,9 +17,9 @@ defs.receiverList = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -61,9 +61,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -92,9 +92,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -102,12 +102,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_353001(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133309353, 353002) then
 		return false
 	end
-
+	
 	-- 判断变量"finished"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finished", 133309353) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -117,8 +117,8 @@ function action_EVENT_GADGET_STATE_CHANGE_353001(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133309354, 354003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -127,12 +127,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_353004(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133309353, 353002) then
 		return false
 	end
-
+	
 	-- 判断变量"finished"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finished", 133309353) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -142,8 +142,8 @@ function action_EVENT_GADGET_STATE_CHANGE_353004(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133309354, 354003, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -152,12 +152,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_353006(context, evt)
 	if 353003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"finished"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finished", 133309353) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -167,8 +167,8 @@ function action_EVENT_GADGET_STATE_CHANGE_353006(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133309354, 354002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -177,12 +177,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_353007(context, evt)
 	if 353003 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"finished"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finished", 133309353) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -192,7 +192,7 @@ function action_EVENT_GADGET_STATE_CHANGE_353007(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133309354, 354002, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

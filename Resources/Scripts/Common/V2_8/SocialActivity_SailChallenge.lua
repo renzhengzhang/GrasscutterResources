@@ -3,12 +3,12 @@
 ||	owner: 		luyao.huang
 ||	description:	2.8社交活动-开船停车
 ||	LogName:	SocialActivity_SailChallenge
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 ------
 
-local_defs =
+local local_defs = 
 {
     --激流纹章
     coin_id = 70380235,
@@ -19,20 +19,20 @@ local_defs =
     clear_berth_reminder = 400164
 }
 
-stage_target_reminder =
+local stage_target_reminder =
 {
     400159,400160,400161
 }
 
-gadget_config_id_map = {}
+local gadget_config_id_map = {}
 
-Tri = {
+local Tri = {
     [1] = { name = "monster_die_before_leave_scene", config_id = 9000001, event = EventType.EVENT_MONSTER_DIE_BEFORE_LEAVE_SCENE, source = "", condition = "", action = "action_monster_die_before_leave_scene", trigger_count = 0},
     [2] = { name = "gadget_state_change", config_id = 9000002, event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "", action = "action_gadget_state_change", trigger_count = 0},
     [3] = { name = "any_gadget_die", config_id = 9000003, event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_any_gadget_die", trigger_count = 0},
     [4] = { name = "enter_region", config_id = 9000004, event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0, forbid_guest = false},
     [5] = { name = "player_back_gallery_revive_point", config_id = 9000005, event = EventType.EVENT_PLAYER_BACK_GALLERY_REVIVE_POINT, source = "", condition = "", action = "action_player_back_gallery_revive_point", trigger_count = 0},
-
+    
 }
 
 function Initialize()
@@ -40,13 +40,13 @@ function Initialize()
 		table.insert(triggers, v)
 		table.insert(suites[1].triggers, v.name)
 	end
-
+    
     for i = 1, #gadgets do
         gadget_config_id_map[gadgets[i].config_id] = gadgets[i].gadget_id
     end
 
     for k,v in pairs(stage_berth_windzone) do
-
+        
         table.insert(variables,{config_id = 60000000+k, name = "stage_berth_"..tostring(k).."_active_num", value = 0})
     end
 
@@ -70,7 +70,7 @@ function action_monster_die_before_leave_scene(context,evt)
     LF_Gallery_Update(context,"MONSTER_DIE")
 
     --先看看chain上有没有需要加载的下一位的suite。如果有，直接加载，不考虑进入下一个stage
-    monster_suite_id = LF_Get_Suite_By_Config_Id(evt.param1,false)
+    local monster_suite_id = LF_Get_Suite_By_Config_Id(evt.param1,false)
     if LF_Try_Create_Next_Chain_Suite(context,monster_suite_id) then
         return 0
     end
@@ -88,13 +88,13 @@ end
 --停船圈状态改变时，如果当前阶段所有停船圈都已经激活，则创生风场
 function action_gadget_state_change(context,evt)
 
-    config_id = evt.param2
+    local config_id = evt.param2
     if (evt.param1 == 201) then
-        berth_stage = LF_Get_Stage_By_Config_Id(config_id, true)
+        local berth_stage = LF_Get_Stage_By_Config_Id(config_id, true)
         if berth_stage ~= 0 then
             ScriptLib.PrintContextLog(context,"## [SocialActivity_SailChallenge] action_gadget_state_change: 物件状态改变，阶段为"..berth_stage)
             ScriptLib.ChangeGroupVariableValue(context,"stage_berth_"..tostring(berth_stage).."_active_num",1)
-            active_num = ScriptLib.GetGroupVariableValue(context,"stage_berth_"..tostring(berth_stage).."_active_num")
+            local active_num = ScriptLib.GetGroupVariableValue(context,"stage_berth_"..tostring(berth_stage).."_active_num")
             if stage_berth_windzone[berth_stage]~= nil then
                 if (active_num >= stage_berth_windzone[berth_stage].berth_num) then
                     ScriptLib.PrintContextLog(context,"## [SocialActivity_SailChallenge] action_gadget_state_change: 阶段"..berth_stage.."停车圈全部触发，创生风场")
@@ -116,8 +116,8 @@ end
 --吃掉金币触发
 function action_any_gadget_die(context,evt)
 
-    cid = evt.param1
-    gid = gadget_config_id_map[cid]
+    local cid = evt.param1
+    local gid = gadget_config_id_map[cid]
     if (gid == local_defs.coin_id) then
         ScriptLib.ChangeGroupVariableValue(context,"coin_num",1)
         LF_Gallery_Update(context,"COIN")
@@ -167,13 +167,13 @@ end
 --特殊玩法启动逻辑
 function LF_Special_Play_Start(context)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_SailChallenge] LF_Special_Play_Start: 特殊玩法启动逻辑")
-
+    
     --初始化时，清一下怪物死亡计数
     ScriptLib.SetGroupVariableValue(context,"current_stage_die_monster_num",0)
     ScriptLib.SetGroupVariableValue(context,"coin_num",0)
 
     --玩法开始时，给各个玩家造船
-    uid_list = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
+    local uid_list = ScriptLib.GetGalleryUidList(context,defs.gallery_id)
     if start_boat_points ~= nil then
         for i = 1, #uid_list do
             if start_boat_points[i] ~= nil then
@@ -190,7 +190,7 @@ end
 --特殊阶段转换事件
 function LF_Special_State_Change(context)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_SailChallenge] LF_Special_State_Change: 特殊阶段转换逻辑")
-
+    
 
     if LF_Stage_Has_Tag(context,LF_Get_Current_Stage(context),"Sail") then
         --转阶段时，清一下上阶段的怪物死亡计数
@@ -199,7 +199,7 @@ function LF_Special_State_Change(context)
 
         --显示每个航行阶段的目标提示文字
         ScriptLib.ChangeGroupVariableValue(context,"reminder_index",1)
-        reminder_index = ScriptLib.GetGroupVariableValue(context,"reminder_index")
+        local reminder_index = ScriptLib.GetGroupVariableValue(context,"reminder_index")
         if stage_target_reminder[reminder_index]~=nil then
             ScriptLib.ShowReminder(context,stage_target_reminder[reminder_index])
         end
@@ -209,7 +209,7 @@ function LF_Special_State_Change(context)
         LF_Gallery_Update(context,"CHANGE_TO_BATTLE")
     end
 
-
+    
     --根据LD的需求，隔X个stage，清理前面所有stage的内容
     for i = 1, LF_Get_Current_Stage(context)-local_defs.clear_stage_interval do
         LF_Clear_Specific_Stage(context,i)
@@ -267,7 +267,7 @@ function LF_Create_Boat(context,uid,point_id)
         ScriptLib.PrintGroupWarning(context,"## [SocialActivity_SailChallenge]LF_Create_Boat：取到的造船点为空！")
         return
     end
-    boat_point = {}
+    local boat_point = {}
     for i = 1, #points do
         if points[i].config_id == point_id then
             boat_point = points[i]
@@ -275,7 +275,7 @@ function LF_Create_Boat(context,uid,point_id)
         end
     end
     ScriptLib.PrintContextLog(context,"## [SocialActivity_SailChallenge] LF_Create_Boat: 在点位"..point_id.."建船")
-    ret = ScriptLib.CreateVehicle(context, uid, local_defs.boat_id, {x=boat_point.pos.x,y=boat_point.pos.y,z=boat_point.pos.z},{x=boat_point.rot.x,y=boat_point.rot.y,z=boat_point.rot.z})
+    local ret = ScriptLib.CreateVehicle(context, uid, local_defs.boat_id, {x=boat_point.pos.x,y=boat_point.pos.y,z=boat_point.pos.z},{x=boat_point.rot.x,y=boat_point.rot.y,z=boat_point.rot.z})
     ScriptLib.PrintContextLog(context,"## [SocialActivity_SailChallenge] LF_Create_Boat:建船的结果为 "..ret)
 end
 
@@ -292,52 +292,52 @@ function LF_Gallery_Update(context,command)
     ScriptLib.PrintContextLog(context,"## [SocialActivity_SailChallenge] LF_Gallery_Update: 向gallery同步")
     if command == "START_PLAY" then
 
-        camp_num = 0
+        local camp_num = 0
         for i = 1, #stage do
             if stage[i].tag == "Battle" then
                 camp_num = camp_num + 1
             end
         end
 
-        param_table = {["sail_stage"] = 1, ["progress"] = 0, ["max_progress"] = camp_num}
+        local param_table = {["sail_stage"] = 1, ["progress"] = 0, ["max_progress"] = camp_num}
         LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end
 
     if command == "CHANGE_TO_SAIL" then
 
-        camp_num = 0
+        local camp_num = 0
         for i = 1, LF_Get_Current_Stage(context) do
             if stage[i].tag == "Battle" then
                 camp_num = camp_num + 1
             end
         end
 
-        param_table = {["sail_stage"] = 1, ["progress"] = camp_num }
+        local param_table = {["sail_stage"] = 1, ["progress"] = camp_num }
         LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end
 
     if command == "CHANGE_TO_BATTLE" then
-        monster_num = 0
+        local monster_num = 0
         for i = 1, #LF_Get_Stage_Monster_Suites(context,LF_Get_Current_Stage(context)) do
             monster_num = monster_num + #suites[LF_Get_Stage_Monster_Suites(context,LF_Get_Current_Stage(context))[i]].monsters
         end
-        param_table =  {["sail_stage"] = 2, ["kill_monster_count"] = 0, ["max_monster_count"] = monster_num}
+        local param_table =  {["sail_stage"] = 2, ["kill_monster_count"] = 0, ["max_monster_count"] = monster_num}
         LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id,param_table)
     end
 
     if command == "MONSTER_DIE" then
-        current_stage_die_monster_num = ScriptLib.GetGroupVariableValue(context,"current_stage_die_monster_num")
-        param_table = {["kill_monster_count"] = current_stage_die_monster_num}
+        local current_stage_die_monster_num = ScriptLib.GetGroupVariableValue(context,"current_stage_die_monster_num")
+        local param_table = {["kill_monster_count"] = current_stage_die_monster_num}
         LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end
 
     if command == "COIN" then
-        coin = ScriptLib.GetGroupVariableValue(context,"coin_num")
-        param_table = {["coin"] = coin}
+        local coin = ScriptLib.GetGroupVariableValue(context,"coin_num")
+        local param_table = {["coin"] = coin}
         LF_Print_Table(context,param_table)
         ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, param_table)
     end

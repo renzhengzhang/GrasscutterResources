@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155006012
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	groupID = 155006012,
 	gadget_1 = 12003,
 	gadget_2 = 12004,
@@ -17,40 +17,40 @@ defs = {
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets =  {12001,12006,12007}
-Worktops = {}
-DayAppearGadgets = {}
-NightAppearGadgets = {12013}
+local Controllers = {}
+local EnvControlGadgets =  {12001,12006,12007}
+local Worktops = {}
+local DayAppearGadgets = {}
+local NightAppearGadgets = {12013}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
-
+	
 		DayNight_Gadget_Unlock(context,12006)
 		DayNight_Gadget_Unlock(context,12007)
 
 	end,
 	["2"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
-
+		
 		DayNight_Gadget_Unlock(context,12006)
 		DayNight_Gadget_Unlock(context,12007)
 	end
 
 }
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
-mazzinfo =
+local mazzinfo = 
 {
 	mid = {wall = defs.gadget_1, operator = defs.gadget_operator_1, sotrevarname = "RotWall_1", rotstate = "isStartRot_Wall_1", pointarray = defs.pointarray_Rotate_1 },
 	inside = {wall = defs.gadget_2, operator = defs.gadget_operator_2, sotrevarname = "RotWall_2", rotstate = "isStartRot_Wall_2", pointarray = defs.pointarray_Rotate_2}
@@ -58,10 +58,10 @@ mazzinfo =
 
 
 function GetMazzInfoByConfigID(context,config_id)
-
-	if config_id == defs.gadget_1 or config_id == defs.gadget_operator_1 then
+	
+	if config_id == defs.gadget_1 or config_id == defs.gadget_operator_1 then 
 		return mazzinfo.mid
-	elseif config_id == defs.gadget_2 or config_id == defs.gadget_operator_2 then
+	elseif config_id == defs.gadget_2 or config_id == defs.gadget_operator_2 then 
 		return mazzinfo.inside
 	end
 
@@ -76,19 +76,19 @@ function RotateWall(context, gadgetID)
 end
 
 function InitialRotY(context)
-	gadgetname
-	varname
-	gadgetid
-	rot
+	local gadgetname 
+	local varname
+	local gadgetid
+	local rot
 
 	for k,v in pairs(mazzinfo) do
 		ScriptLib.SetGroupVariableValue(context,v.rotstate,0)
 		rot = math.floor(ScriptLib.GetGroupVariableValue(context,v.sotrevarname)/90)
 		if rot ~= 0 then
 			ScriptLib.SetPlatformPointArray(context, v.wall, defs.pointarray_Rotate_2, {rot}, { route_type = 0,turn_mode=true })
-		end
+		end 
 	end
-	--[[for i = 1, 2 do
+	--[[for i = 1, 2 do 
 		gadgetname = "gadget_"..i
 		varname = "RotWall_"..i
 		rot = ScriptLib.GetGroupVariableValue(context,varname)
@@ -100,9 +100,9 @@ function InitialRotY(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -153,9 +153,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -166,9 +166,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -184,25 +184,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_12005(context, evt)
 		ScriptLib.PrintContextLog(context,"Active Time Axis : evtname = "..evt.source_name..", axisindex = "..evt.param1)
-		if evt.param1 == 1 then
+		if evt.param1 == 1 then 
 			ScriptLib.PrintContextLog(context,"Rotation : "..defs.gadget_1)
 			RotateWall(context, defs.gadget_1)
-		elseif evt.param1 == 2 then
-			temprot
-			tempmazzinfo = {}
-
+		elseif evt.param1 == 2 then 
+			local temprot
+			local tempmazzinfo = {}
+		
 			tempmazzinfo = GetMazzInfoByConfigID(context,defs.gadget_1)
 			temprot = ScriptLib.GetGroupVariableValue(context,tempmazzinfo.sotrevarname)
 			temprot = temprot + 90
-			if temprot == 360 then
+			if temprot == 360 then 
 				temprot = 0
 			end
 			ScriptLib.SetGroupVariableValue(context,tempmazzinfo.sotrevarname,temprot)
@@ -214,24 +214,24 @@ end
 -- 触发操作
 function action_EVENT_GROUP_LOAD_12008(context, evt)
 		UpdateGamePlayState(context)
-
+		
 		InitialRotY(context)
-
+		
 		return 0
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_12009(context, evt)
 		--[[ScriptLib.PrintContextLog(context,"ReachPoint : PlatformConfigID = "..evt.param1..", PointArrayID = "..evt.param2..", PointIndex = "..evt.param3)
-		temprot
-		tempmazzinfo = {}
-
+		local temprot
+		local tempmazzinfo = {}
+	
 		tempmazzinfo = GetMazzInfoByConfigID(context,evt.param1)
 		ScriptLib.PrintContextLog(context,"ReachPoint : {wall = "..tempmazzinfo.wall..", operator = "..tempmazzinfo.operator..", initialRot = "..tempmazzinfo.initialRot..", targetRot = "..tempmazzinfo.targetRot..", sotrevarname = "..tempmazzinfo.sotrevarname..", rotstate = "..tempmazzinfo.rotstate.. "}")
-
+		
 		temprot = ScriptLib.GetGroupVariableValue(context,tempmazzinfo.sotrevarname)
 		temprot = temprot + 90
-		if temprot == 360 then
+		if temprot == 360 then 
 			temprot = 0
 		end
 		ScriptLib.SetGroupVariableValue(context,tempmazzinfo.sotrevarname,temprot)
@@ -244,10 +244,10 @@ end
 function condition_EVENT_GADGET_STATE_CHANGE_12010(context, evt)
 		ScriptLib.PrintContextLog(context,"Active Controller is "..evt.param2.." with state = "..evt.param1)
 		if 12006 ~= evt.param2 and 12007 ~= evt.param2 then
-			return false
+			return false	
 		end
-
-		if evt.param1 ~= 222 then
+		
+		if evt.param1 ~= 222 then 
 			return false
 		end
 		return true
@@ -255,9 +255,9 @@ end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_12010(context, evt)
-				tempmazzinfo = {}
+				local tempmazzinfo = {}
 				tempmazzinfo = GetMazzInfoByConfigID(context,evt.param2)
-				--ScriptLib.PrintContextLog(context,"StateChange : {wall = "..tempmazzinfo.wall..", operator = "..tempmazzinfo.operator..", sotrevarname = "..tempmazzinfo.sotrevarname..", rotstate = "..tempmazzinfo.rotstate.. "}")
+				--ScriptLib.PrintContextLog(context,"StateChange : {wall = "..tempmazzinfo.wall..", operator = "..tempmazzinfo.operator..", sotrevarname = "..tempmazzinfo.sotrevarname..", rotstate = "..tempmazzinfo.rotstate.. "}")	
 				if ScriptLib.GetGroupVariableValue(context,tempmazzinfo.rotstate) == 0 then
 					ScriptLib.SetGroupVariableValue(context,tempmazzinfo.rotstate,1)
 					ScriptLib.InitTimeAxis(context, "Rotating_"..tempmazzinfo.wall, {1,4}, false)
@@ -269,17 +269,17 @@ end
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_12014(context, evt)
 		ScriptLib.PrintContextLog(context,"Active Time Axis : evtname = "..evt.source_name..", axisindex = "..evt.param1)
-		if evt.param1 == 1 then
+		if evt.param1 == 1 then 
 			ScriptLib.PrintContextLog(context,"Rotation : "..defs.gadget_2)
 			RotateWall(context, defs.gadget_2)
-		elseif evt.param1 == 2 then
-			temprot
-			tempmazzinfo = {}
-
+		elseif evt.param1 == 2 then 
+			local temprot
+			local tempmazzinfo = {}
+		
 			tempmazzinfo = GetMazzInfoByConfigID(context,defs.gadget_2)
 			temprot = ScriptLib.GetGroupVariableValue(context,tempmazzinfo.sotrevarname)
 			temprot = temprot + 90
-			if temprot == 360 then
+			if temprot == 360 then 
 				temprot = 0
 			end
 			ScriptLib.SetGroupVariableValue(context,tempmazzinfo.sotrevarname,temprot)

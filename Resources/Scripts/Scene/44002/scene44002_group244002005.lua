@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 244002005
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -87,7 +87,7 @@ function condition_EVENT_GADGET_CREATE_5001(context, evt)
 	if 5008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -98,7 +98,7 @@ function action_EVENT_GADGET_CREATE_5001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -106,14 +106,14 @@ end
 function condition_EVENT_SELECT_OPTION_5004(context, evt)
 	-- 判断是gadgetid 5008 option_id 214
 	if 5008 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 214 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -121,33 +121,33 @@ end
 function action_EVENT_SELECT_OPTION_5004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 244002006, 2)
-
+	
 	-- 删除指定group： 244002005 ；指定config：5008；物件身上指定option：214；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 244002005, 5008, 214) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 改变指定group组244002001中， configid为1022的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1022, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组244002001中， configid为1023的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 244002001, 1023, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 5008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 244002009, 3)
-
+	
 	return 0
 end

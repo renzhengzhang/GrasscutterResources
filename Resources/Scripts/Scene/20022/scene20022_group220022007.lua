@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220022007
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -79,20 +79,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7(context, evt)
 	if evt.param1 ~= 7 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -102,38 +102,38 @@ function action_EVENT_ENTER_REGION_7(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 11, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220022005中， configid为7的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220022005, 7, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 7001, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 7002, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 7003, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 7004, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -142,7 +142,7 @@ function condition_EVENT_ANY_MONSTER_DIE_10(context, evt)
 	if 23 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -153,25 +153,25 @@ function action_EVENT_ANY_MONSTER_DIE_10(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟1秒后,向groupId为：220022007的对象,请求一次调用,并将string参数："delaykill" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220022007, "delaykill", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "220022007") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 解锁目标12
 	if 0 ~= ScriptLib.ChangeGroupGadget(context, { config_id = 12, state = GadgetState.Default }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : unlock_gadget")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -181,7 +181,7 @@ function condition_EVENT_ANY_MONSTER_DIE_7005(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -192,19 +192,19 @@ function action_EVENT_ANY_MONSTER_DIE_7005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 23, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220022010, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -215,20 +215,20 @@ function action_EVENT_TIMER_EVENT_7006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7007(context, evt)
 	if evt.param1 ~= 7007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -238,7 +238,7 @@ function action_EVENT_ENTER_REGION_7007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 12, GadgetState.ChestLocked) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

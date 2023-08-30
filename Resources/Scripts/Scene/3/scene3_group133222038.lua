@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133222038
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -87,9 +87,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -100,9 +100,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -118,9 +118,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -128,7 +128,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_38006(context, evt)
 	if 38004 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -139,13 +139,13 @@ function action_EVENT_GADGET_STATE_CHANGE_38006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "WaterFirst" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "WaterFirst", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_38007(context, evt)
 	if 38013 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -165,13 +165,13 @@ function action_EVENT_GADGET_STATE_CHANGE_38007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "WaterSecond" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "WaterSecond", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -179,14 +179,14 @@ end
 function condition_EVENT_SELECT_OPTION_38008(context, evt)
 	-- 判断是gadgetid 38001 option_id 7
 	if 38001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -194,42 +194,42 @@ end
 function action_EVENT_SELECT_OPTION_38008(context, evt)
 	-- 创建标识为"First"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "First", {2}, false)
-
-
+	
+	
 	-- 创建标识为"FlashWater"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "FlashWater", {1}, false)
-
-
+	
+	
 	-- 通知场景上的所有玩家播放名字为322203801 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 322203801, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133222038 ；指定config：38001；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133222038, 38001, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 38004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "WaterFirst" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "WaterFirst", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133222314, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -238,7 +238,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_38009(context, evt)
 	if 38003 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -249,13 +249,13 @@ function action_EVENT_GADGET_STATE_CHANGE_38009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "WaterThird" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "WaterThird", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -263,14 +263,14 @@ end
 function condition_EVENT_SELECT_OPTION_38012(context, evt)
 	-- 判断是gadgetid 38010 option_id 7
 	if 38010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -278,50 +278,50 @@ end
 function action_EVENT_SELECT_OPTION_38012(context, evt)
 	-- 创建标识为"Third"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Third", {2}, false)
-
-
+	
+	
 	-- 将configid为 38011 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 通知场景上的所有玩家播放名字为322203803 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 322203803, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133222038 ；指定config：38010；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133222038, 38010, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 38003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "WaterThird" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "WaterThird", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Last" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Last", 1, 133222157) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Finish", 1, 133222244) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -329,14 +329,14 @@ end
 function condition_EVENT_SELECT_OPTION_38014(context, evt)
 	-- 判断是gadgetid 38002 option_id 7
 	if 38002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -344,38 +344,38 @@ end
 function action_EVENT_SELECT_OPTION_38014(context, evt)
 	-- 创建标识为"Second"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Second", {2}, false)
-
-
+	
+	
 	-- 通知场景上的所有玩家播放名字为322203802 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 322203802, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133222038 ；指定config：38002；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133222038, 38002, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 38013 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "WaterSecond" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "WaterSecond", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Finish", 1, 133222349) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -384,7 +384,7 @@ function condition_EVENT_TIME_AXIS_PASS_38018(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -395,13 +395,13 @@ function action_EVENT_TIME_AXIS_PASS_38018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 创建id为38015的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 38015 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -410,7 +410,7 @@ function condition_EVENT_TIME_AXIS_PASS_38019(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -421,13 +421,13 @@ function action_EVENT_TIME_AXIS_PASS_38019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 创建id为38016的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 38016 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -436,7 +436,7 @@ function condition_EVENT_TIME_AXIS_PASS_38020(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -447,13 +447,13 @@ function action_EVENT_TIME_AXIS_PASS_38020(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 创建id为38017的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 38017 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -463,7 +463,7 @@ function condition_EVENT_GROUP_LOAD_38021(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "WaterFirst") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -474,7 +474,7 @@ function action_EVENT_GROUP_LOAD_38021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -484,7 +484,7 @@ function condition_EVENT_GROUP_LOAD_38022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "WaterSecond") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -495,7 +495,7 @@ function action_EVENT_GROUP_LOAD_38022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -505,7 +505,7 @@ function condition_EVENT_GROUP_LOAD_38023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "WaterThird") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -516,7 +516,7 @@ function action_EVENT_GROUP_LOAD_38023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -526,7 +526,7 @@ function condition_EVENT_GROUP_LOAD_38024(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "WaterFirst") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -537,13 +537,13 @@ function action_EVENT_GROUP_LOAD_38024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133222038, EntityType.GADGET, 38005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -552,7 +552,7 @@ function condition_EVENT_TIME_AXIS_PASS_38025(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -563,7 +563,7 @@ function action_EVENT_TIME_AXIS_PASS_38025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -573,7 +573,7 @@ function condition_EVENT_GROUP_LOAD_38026(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "WaterSecond") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -584,7 +584,7 @@ function action_EVENT_GROUP_LOAD_38026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -594,7 +594,7 @@ function condition_EVENT_GROUP_LOAD_38027(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "WaterThird") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -605,12 +605,12 @@ function action_EVENT_GROUP_LOAD_38027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Finish", 1, 133222244) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end

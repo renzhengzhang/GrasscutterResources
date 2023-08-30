@@ -1,8 +1,8 @@
-play={
+local play={
 }
 
 
-extraTriggers={
+local extraTriggers={
 	{config_id = 8000001,name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0 },
 	{config_id = 8000002,name = "Boss_Die", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "", action = "action_boss_die", trigger_count = 0 },
 	{config_id = 8000003,name = "Gadget_Create", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0 },
@@ -28,8 +28,8 @@ end
 
 function action_EVENT_ENTER_REGION(context, evt)
 	if context.uid~=0 then
-		small_region={}
-		big_region={}
+		local small_region={}
+		local big_region={}
 		for i=1,#regions do
 			if regions[i].config_id==640012 then
 				small_region=regions[i]
@@ -52,8 +52,8 @@ end
 
 function action_EVENT_LEAVE_REGION(context, evt)
 	if context.uid~=0 then
-		--small_region={}
-		--big_region={}
+		--local small_region={}
+		--local big_region={}
 		--for i=1,#regions do
 			--if regions[i].config_id==640012 then
 				--small_region=regions[i]
@@ -73,9 +73,9 @@ end
 function action_group_load(context, evt)
 	ScriptLib.PrintContextLog(context, "DrakePrimoRockBossGroupLoad")
 	math.randomseed(ScriptLib.GetServerTime(context))
-	newIdx=math.random(#monsters)
+	local newIdx=math.random(#monsters)
 	if ScriptLib.GetGroupVariableValue(context, "current_idx") == 0 then
-		ScriptLib.SetGroupVariableValue(context, "current_idx", newIdx)
+		ScriptLib.SetGroupVariableValue(context, "current_idx", newIdx) 
 		--ScriptLib.CreateMonster(context, { config_id = monster[newIdx].config_id, delay_time = 0 })
 		ScriptLib.CreateMonsterByConfigIdByPos(context, monsters[newIdx].config_id, monsters[newIdx].pos, monsters[newIdx].rot)
 		return 0
@@ -85,8 +85,8 @@ function action_group_load(context, evt)
 	end
 	if ScriptLib.GetGroupVariableValue(context, "killed") ~= 0 and evt.param1 ==1 then
 		ScriptLib.CreateMonster(context, { config_id = monsters[newIdx].config_id, delay_time = 0 })
-		ScriptLib.SetGroupVariableValue(context, "current_idx", newIdx)
-		ScriptLib.SetGroupVariableValue(context, "killed", 0)
+		ScriptLib.SetGroupVariableValue(context, "current_idx", newIdx) 
+		ScriptLib.SetGroupVariableValue(context, "killed", 0) 
 		return 0
 	end
 	if ScriptLib.GetGroupVariableValue(context, "killed") == 0 then
@@ -99,7 +99,7 @@ end
 
 --boss死亡创建领奖点
 function action_boss_die(context, evt)
-	ScriptLib.SetGroupVariableValue(context, "killed", 1)
+	ScriptLib.SetGroupVariableValue(context, "killed", 1) 
 	ScriptLib.SetGroupVariableValue(context, "boss_exist", 0)
 	ScriptLib.CreateGadget(context, { config_id = 640007 })
 	return 0

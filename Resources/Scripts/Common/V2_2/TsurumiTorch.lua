@@ -9,7 +9,7 @@ defs = {
 
 ]]
 
-Triggers_Start = {
+local Triggers_Start = {
 	[1] = { name = "gadget_state_change", config_id = 9000001, event = EventType.EVENT_GADGET_STATE_CHANGE, source = "",condition = "",action = "action_gadget_state_change",trigger_count= 0},
 	[2] = { name = "group_load", config_id = 9000002, event = EventType.EVENT_GROUP_LOAD, source = "",condition = "",action = "action_group_load",trigger_count= 0},
 }
@@ -18,8 +18,8 @@ Triggers_Start = {
 
 --火把点亮状态改变
 function action_gadget_state_change( context, evt )
-	config_id = evt.param2
-	cur_state = evt.param1
+	local config_id = evt.param2
+	local cur_state = evt.param1
 	--检查是不是在重置整个火把组，是则不处理
 	if 0 ~= ScriptLib.GetGroupTempValue(context, "Reseting",{}) then
 		return -1
@@ -33,17 +33,17 @@ function action_gadget_state_change( context, evt )
 		return 0
 	end
 	--检查所有火把的状态，如果已经是无解状态，则重置
-	lightedTorch = {}
+	local lightedTorch = {}
 	--检查所有火把的状态，并放到一个表里
 	for key,cfg_id in pairs(defs.torch_list) do
-		torch_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, cfg_id)
+		local torch_state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, cfg_id)
 		if torch_state == 201 then
 			table.insert(lightedTorch, cfg_id)
 		end
 	end
 	--点燃的火把数量等于正确解数量时进行一次校验
 	if #lightedTorch == #defs.torch_solution then
-		right_count = 0
+		local right_count = 0
 		for k_l = 1,#defs.torch_solution do
 			for k_s= 1,#lightedTorch do
 				if defs.torch_solution[k_l] == lightedTorch[k_s] then

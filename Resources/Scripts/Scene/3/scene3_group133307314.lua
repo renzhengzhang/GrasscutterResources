@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133307314
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -98,9 +98,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 玩家行为埋点
@@ -119,16 +119,16 @@ function condition_EVENT_ANY_MONSTER_DIE_314003(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_314003(context, evt)
 	ScriptLib.CreateGadget(context, {config_id=314002})
-
+	
 	TLA_mark_playeraction(context, evt, 4000, 3, 1)
-
+	
 	return 0
 end
 
@@ -137,24 +137,24 @@ function condition_EVENT_MONSTER_BATTLE_314010(context, evt)
 	if 314017 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_MONSTER_BATTLE_314010(context, evt)
 	ScriptLib.SetGadgetStateByConfigId(context,314001, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context,314004, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context,314005, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context,314006, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context,314007, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context,314008, GadgetState.GearStart)
-
+	
 	return 0
 end
 
@@ -163,24 +163,24 @@ function condition_EVENT_MONSTER_BATTLE_314018(context, evt)
 	if 314009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_MONSTER_BATTLE_314018(context, evt)
 	ScriptLib.SetGadgetStateByConfigId(context,314011, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context,314012, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context,314013, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context,314014, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context,314015, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context,314016, GadgetState.GearStart)
-
+	
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_ANY_MONSTER_DIE_314020(context, evt)
 	if 314009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -197,6 +197,6 @@ end
 function action_EVENT_ANY_MONSTER_DIE_314020(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133307314, 2)
-
+	
 	return 0
 end

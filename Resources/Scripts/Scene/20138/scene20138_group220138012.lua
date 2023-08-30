@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220138012
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -108,7 +108,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_12003(context, evt)
 	if 12002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -116,7 +116,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_12003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220138012, 2)
-
+	
 	return 0
 end
 
@@ -124,16 +124,16 @@ end
 function action_EVENT_OBSERVATION_POINT_NOTIFY_12022(context, evt)
 	if 12001 == evt.param1 and 605 == evt.param2 then
 		ScriptLib.SetGadgetStateByConfigId(context,12002, GadgetState.GearStart)
-
+		
 		ScriptLib.SetGroupVariableValueByGroup(context, "eyefinish1", 1, 220138022)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,12001, GadgetState.ChestOpened)
-
+		
 		ScriptLib.KillEntityByConfigId(context, {group_id=220138012, config_id=12015, entity_type=EntityType.GADGET})
-
+		
 		ScriptLib.KillEntityByConfigId(context, {group_id=220138012, config_id=12016, entity_type=EntityType.GADGET})
 	end
-
+	
 	return 0
 end
 
@@ -142,7 +142,7 @@ function condition_EVENT_GROUP_LOAD_12023(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220138012, 12002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -150,6 +150,6 @@ end
 function action_EVENT_GROUP_LOAD_12023(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220138012, 2)
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 234701002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -105,9 +105,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -115,7 +115,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_2011(context, evt)
 	if 2001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -126,12 +126,12 @@ function action_EVENT_ANY_MONSTER_LIVE_2011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 创建编号为1（该怪物潮的识别id)的怪物潮，创建怪物总数为12，场上怪物最少4只，最多4只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 234701002, {2003,2004,2006,2007}, 12, 4, 4) then
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -140,7 +140,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_2034(context, evt)
 	if 12 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -151,19 +151,19 @@ function action_EVENT_MONSTER_TIDE_DIE_2034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 2005, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 2009, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -174,49 +174,49 @@ function action_EVENT_CHALLENGE_SUCCESS_2038(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : save_challenge_remainTime")
 	      return -1
 	    end
-
+	
 	-- 爬塔是否允许使用技能（ is_allow_use_skill=0或1,表示不允许或允许使用主动技能）
 	if 0 ~= ScriptLib.SetIsAllowUseSkill(context, 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_allow_use_skill")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "stage" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage", 1, 234701001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 爬塔更换队伍2
 	if 0 ~= ScriptLib.TowerMirrorTeamSetUp(context, 2) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_team_setup")
 		return -1
 	end
-
+	
 	-- 改变指定group组234701003中， configid为3001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234701003, 3001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 234701003, 3001, {176}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 改变指定group组234701004中， configid为4001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234701004, 4001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组234701004中， configid为4002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234701004, 4002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -226,20 +226,20 @@ function action_EVENT_CHALLENGE_FAIL_2039(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234701003, 3001, GadgetState.GearAction2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 234701002, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -248,7 +248,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_2041(context, evt)
 	if 2021 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -256,7 +256,7 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_2041(context, evt)
 	-- 创建编号为2（该挑战的识别id),挑战内容为197的区域挑战，param1必须为时间
 	-- 从234701001的变量TPL_TIME中取出对应值并开启挑战
-	  tpl_time = ScriptLib.GetGroupVariableValueByGroup(context, "TPL_TIME", 234701001)
+	  local tpl_time = ScriptLib.GetGroupVariableValueByGroup(context, "TPL_TIME", 234701001)
 	  if tpl_time == nil or tpl_time < 0 then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge_by_remainTime")
 	    return -1
@@ -267,7 +267,7 @@ function action_EVENT_ANY_MONSTER_LIVE_2041(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge_by_remainTime")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
@@ -278,7 +278,7 @@ function action_EVENT_CHALLENGE_SUCCESS_2042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -288,19 +288,19 @@ function action_EVENT_CHALLENGE_FAIL_2043(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 234701003, 3001, GadgetState.GearAction2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 234701002, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	return 0
 end

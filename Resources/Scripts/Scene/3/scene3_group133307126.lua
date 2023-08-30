@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133307126
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	wait = {0,3},
 	duration = 5,
 	interval = 8,
@@ -19,9 +19,9 @@ defs.fans = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -82,9 +82,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -135,9 +135,9 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -145,23 +145,23 @@ function condition_EVENT_TIME_AXIS_PASS_126004(context, evt)
 	if nil == string.find(evt.source_name, "wait") then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_126004(context, evt)
 	--获取时间轴对应物件的ID
-	_sGadget = 0
+	local _sGadget = 0
 	_sGadget = tonumber(string.sub(evt.source_name, -1))
-
+	
 	--创建正式时间轴
-	_timeAxisKey = ""
-	_timeAxisKey = string.format("switch_%d",_sGadget)
-	_switchTime = 0
+	local _timeAxisKey = ""
+	_timeAxisKey = string.format("switch_%d",_sGadget) 
+	local _switchTime = 0
 	_switchTime = defs.duration + defs.interval
 	ScriptLib.InitTimeAxis(context, _timeAxisKey, {defs.duration,_switchTime}, true)
-
+	
 	return 0
 end
 
@@ -170,72 +170,72 @@ function condition_EVENT_TIME_AXIS_PASS_126005(context, evt)
 	if nil ~= string.find(evt.source_name, "switch") then
 		return true
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_126005(context, evt)
 	--获取时间轴对应物件的ID
-	_sGadget = 0
+	local _sGadget = 0
 	_sGadget = tonumber(string.sub(evt.source_name, -1))
-
+	
 	-- 将在groupid为 133307126 中的 configid为 defs.fans[_sGadget] 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	--
-	_gadgetStateList = {0,201,0}
-	_key = 0
-
+	-- 
+	local _gadgetStateList = {0,201,0}
+	local _key = 0
+	
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 133307126, defs.fans[_sGadget]) then
 	    _key = k
 	    break
 	  end
 	end
-
+	
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133307126, defs.fans[_sGadget], _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. defs.fans[_sGadget] .."State没有成功")
 	  return -1
 	end
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_126007(context, evt)
 	if evt.param1 ~= 126007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"isRefresh"为0
 	if ScriptLib.GetGroupVariableValue(context, "isRefresh") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_126007(context, evt)
-	_timeAxisKey = ""
-	_waitTime = 0
-	_gadgetID = 0
-
+	local _timeAxisKey = ""
+	local _waitTime = 0
+	local _gadgetID = 0
+	
 	--判断wait是否为空
 	if 0 == #defs.wait then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : wait为空")
 	  return -1
 	end
-
+	
 	for i , v in pairs(defs.fans) do
 	  if defs.wait[i] ~= nil then
 	    _waitTime = defs.wait[i]
@@ -247,46 +247,46 @@ function action_EVENT_ENTER_REGION_126007(context, evt)
 	  else
 	    _gadgetID = v
 	    --执行一次转换
-	    _gadgetStateList = {0,201,0}
-	    _key = 0
-
+	    local _gadgetStateList = {0,201,0}
+	    local _key = 0
+	
 	    for k,v in pairs(_gadgetStateList) do
 	      if v == ScriptLib.GetGadgetStateByConfigId(context, 133307126, _gadgetID) then
 	        _key = k
 	        break
 	      end
 	    end
-
+	
 	    _key = _key + 1
 	    _key = _key%#_gadgetStateList
 	    if 0 == _key then
 	      _key = #_gadgetStateList
 	    end
-
+	
 	    if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133307126, _gadgetID, _gadgetStateList[_key]) then
 	          ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. _gadgetID .."State没有成功")
 	    return -1
 	    end
 	    --创建正式时间轴
-	    _timeAxisKey = string.format("switch_%d",i)
-	    _switchTime = 0
+	    _timeAxisKey = string.format("switch_%d",i) 
+	    local _switchTime = 0
 	    _switchTime = defs.duration + defs.interval
 	    ScriptLib.InitTimeAxis(context, _timeAxisKey, {defs.duration,_switchTime}, true)
 	  end
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_126008(context, evt)
 	if evt.param1 ~= 126008 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -297,19 +297,19 @@ function action_EVENT_ENTER_REGION_126008(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_126009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"isOff"为1
 	if ScriptLib.GetGroupVariableValue(context, "isOff") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -317,19 +317,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_126009(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133307126, 2)
-
+	
 	-- 将configid为 126001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 126001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 126002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 126002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -339,7 +339,7 @@ function condition_EVENT_GROUP_LOAD_126010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isOff") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -347,19 +347,19 @@ end
 function action_EVENT_GROUP_LOAD_126010(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133307126, 2)
-
+	
 	-- 将configid为 126001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 126001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 126002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 126002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -369,7 +369,7 @@ function condition_EVENT_GROUP_LOAD_126011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isOff") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -379,13 +379,13 @@ function action_EVENT_GROUP_LOAD_126011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 126001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 126002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 126002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

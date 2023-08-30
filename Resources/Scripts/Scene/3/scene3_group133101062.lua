@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133101062
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	challenge_1_duration = 40,
 	challenge_2_duration = 55,
 	challenge_3_duration = 45,
@@ -44,9 +44,9 @@ defs.quest_4_success = defs.group_id.."0401"
 defs.quest_4_fail = defs.group_id.."0402"
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -129,9 +129,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -142,9 +142,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -188,9 +188,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -215,7 +215,7 @@ function action_EVENT_QUEST_START_62009(context, evt)
 	ScriptLib.ActiveChallenge(context, 10, defs.challenge_id_no_record, defs.challenge_2_duration, 4, 555, 1)
 	-- 添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 2, 3)
-
+	
 	-- 设定挑战标志符为2
 	ScriptLib.SetGroupVariableValue(context, "Challenge_Flag", 2)
 	return 0
@@ -229,7 +229,7 @@ function action_EVENT_QUEST_START_62010(context, evt)
 	ScriptLib.ActiveChallenge(context, 10, defs.challenge_id_have_record, defs.challenge_3_duration, 4, 555, 1)
 	-- 添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 2, 4)
-
+	
 	-- 设定挑战标志符为3
 	ScriptLib.SetGroupVariableValue(context, "Challenge_Flag", 3)
 	return 0
@@ -238,7 +238,7 @@ end
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_62011(context, evt)
 	-- 根据触发的挑战类型决定奖励物品
-	reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
+	local reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
 	if reward == 1 then
 	ScriptLib.CreateGadget(context, {config_id = defs.gadget_chest_1} )
 	-- 向任务返回结果
@@ -276,7 +276,7 @@ end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_62012(context, evt)
-	reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
+	local reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
 	if reward == 1 then
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context, defs.quest_1_fail)
@@ -307,7 +307,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_62013(context, evt)
-	if evt.param1 ~= defs.region then
+	if evt.param1 ~= defs.region then 
 	return false
 	end
 	return true
@@ -320,8 +320,8 @@ function action_EVENT_ENTER_REGION_62013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -333,7 +333,7 @@ function action_EVENT_QUEST_START_62014(context, evt)
 	ScriptLib.ActiveChallenge(context, 10, defs.challenge_id_have_record, defs.challenge_3_duration, 4, 555, 1)
 	-- 添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 2, 5)
-
+	
 	-- 设定挑战标志符为3
 	ScriptLib.SetGroupVariableValue(context, "Challenge_Flag", 4)
 	return 0

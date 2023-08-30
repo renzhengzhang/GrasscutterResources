@@ -1,22 +1,20 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133002066
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	--战斗开始加载suit（空气墙等）
 	add_onStart = {2},
 	--开启流程的操作台configID
-	gadget_starter = 66007
-,
+	gadget_starter = 66007,
 	--领奖台configID
 	gadget_reward = 66003,
 	--Boss的ConfigID
 	boss_id = 66005,
                 --暖源的IDlist
-                heat_id =
-{66009,66010,66011},
+                heat_id = {66009,66010,66011},
 
 	--点位configID
 	point_list = {66012,66013,66014},
@@ -29,9 +27,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -112,9 +110,9 @@ sight_groups = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -125,9 +123,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -170,9 +168,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -180,7 +178,7 @@ function condition_EVENT_GADGET_CREATE_66017(context, evt)
 	if 66016 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -191,7 +189,7 @@ function action_EVENT_GADGET_CREATE_66017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -199,21 +197,21 @@ end
 function condition_EVENT_SELECT_OPTION_66018(context, evt)
 	-- 判断是gadgetid 66016 option_id 2905
 	if 66016 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2905 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_66018(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=1097.705, y= 285.8612, z=-438.728}, radius = 2, rot = {x=0, y=269.461, z=0}})
-
+	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=1097.705, y= 285.8612, z=-438.728}, radius = 2, rot = {x=0, y=269.461, z=0}}) 
+	
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133105038
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -130,9 +130,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -177,9 +177,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -337,9 +337,9 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -347,7 +347,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_38011(context, evt)
 	if 38053 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -358,37 +358,37 @@ function action_EVENT_GADGET_STATE_CHANGE_38011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "correct" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "correct", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 38060 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38060, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 38061 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38061, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 38062 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38062, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 38059 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38059, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -396,7 +396,7 @@ end
 function action_EVENT_QUEST_FINISH_38012(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133105038, 2)
-
+	
 	return 0
 end
 
@@ -404,7 +404,7 @@ end
 function action_EVENT_QUEST_FINISH_38013(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133105038, 4)
-
+	
 	return 0
 end
 
@@ -413,7 +413,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_38015(context, evt)
 	if 38008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -424,13 +424,13 @@ function action_EVENT_GADGET_STATE_CHANGE_38015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 38060 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38060, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -439,7 +439,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_38016(context, evt)
 	if 38049 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -450,25 +450,25 @@ function action_EVENT_GADGET_STATE_CHANGE_38016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 38061 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38061, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_38029(context, evt)
 	if evt.param1 ~= 38029 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -479,7 +479,7 @@ function action_EVENT_ENTER_REGION_38029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -488,7 +488,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_38031(context, evt)
 	if 38051 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -499,13 +499,13 @@ function action_EVENT_GADGET_STATE_CHANGE_38031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 38062 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38062, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -516,13 +516,13 @@ function action_EVENT_QUEST_START_38034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "correct" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "correct", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -531,7 +531,7 @@ function condition_EVENT_ANY_GADGET_DIE_38035(context, evt)
 	if 38002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -542,7 +542,7 @@ function action_EVENT_ANY_GADGET_DIE_38035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -551,12 +551,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_38036(context, evt)
 	if 38008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"times"为1
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -567,7 +567,7 @@ function action_EVENT_GADGET_STATE_CHANGE_38036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -576,12 +576,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_38037(context, evt)
 	if 38049 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"times"为2
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -592,7 +592,7 @@ function action_EVENT_GADGET_STATE_CHANGE_38037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -601,12 +601,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_38038(context, evt)
 	if 38051 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"times"为3
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -617,7 +617,7 @@ function action_EVENT_GADGET_STATE_CHANGE_38038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -626,7 +626,7 @@ function condition_EVENT_ANY_GADGET_DIE_38039(context, evt)
 	if 38050 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -637,7 +637,7 @@ function action_EVENT_ANY_GADGET_DIE_38039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -646,7 +646,7 @@ function condition_EVENT_ANY_GADGET_DIE_38040(context, evt)
 	if 38052 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -657,7 +657,7 @@ function action_EVENT_ANY_GADGET_DIE_38040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -666,7 +666,7 @@ function condition_EVENT_ANY_GADGET_DIE_38041(context, evt)
 	if 38054 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -677,24 +677,24 @@ function action_EVENT_ANY_GADGET_DIE_38041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_38042(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"times"为4
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 4 then
 			return false
 	end
-
+	
 	-- 判断变量"correct"为4
 	if ScriptLib.GetGroupVariableValue(context, "correct") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -705,60 +705,60 @@ function action_EVENT_VARIABLE_CHANGE_38042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（888，348，-786），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=888, y=348, z=-786}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=888, y=348, z=-786}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 将configid为 38005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 38007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 调用提示id为 70500031 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 70500031) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133105038, EntityType.GADGET, 38068 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_38043(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"times"为4
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 4 then
 			return false
 	end
-
+	
 	-- 判断变量"correct"不为4
 	if ScriptLib.GetGroupVariableValue(context, "correct") >= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -769,55 +769,55 @@ function action_EVENT_VARIABLE_CHANGE_38043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "times" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "times", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "correct" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "correct", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 38059 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38059, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 38060 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38060, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 38061 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38061, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 38062 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 38062, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_38047(context, evt)
 	if evt.param1 ~= 38047 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -828,7 +828,7 @@ function action_EVENT_ENTER_REGION_38047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -837,7 +837,7 @@ function condition_EVENT_ANY_MONSTER_DIE_38058(context, evt)
 	if 38006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -848,10 +848,10 @@ function action_EVENT_ANY_MONSTER_DIE_38058(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133105038, 3)
-
+	
 	return 0
 end
 
@@ -860,12 +860,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_38063(context, evt)
 	if 38053 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"camera"为0
 	if ScriptLib.GetGroupVariableValue(context, "camera") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -876,23 +876,23 @@ function action_EVENT_GADGET_STATE_CHANGE_38063(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（901.7714，350.5666，-798.9892），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=901.7714, y=350.5666, z=-798.9892}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=901.7714, y=350.5666, z=-798.9892}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 将本组内变量名为 "camera" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "camera", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -901,12 +901,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_38065(context, evt)
 	if 38008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"camera"为0
 	if ScriptLib.GetGroupVariableValue(context, "camera") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -917,23 +917,23 @@ function action_EVENT_GADGET_STATE_CHANGE_38065(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（901.126，350.6323，-798.5636），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=901.126, y=350.6323, z=-798.5636}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=901.126, y=350.6323, z=-798.5636}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 将本组内变量名为 "camera" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "camera", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -942,12 +942,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_38066(context, evt)
 	if 38049 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"camera"为0
 	if ScriptLib.GetGroupVariableValue(context, "camera") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -958,23 +958,23 @@ function action_EVENT_GADGET_STATE_CHANGE_38066(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（900.4602，350.7121，-797.658），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=900.4602, y=350.7121, z=-797.658}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=900.4602, y=350.7121, z=-797.658}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 将本组内变量名为 "camera" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "camera", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -983,12 +983,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_38067(context, evt)
 	if 38051 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"camera"为0
 	if ScriptLib.GetGroupVariableValue(context, "camera") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -999,22 +999,22 @@ function action_EVENT_GADGET_STATE_CHANGE_38067(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（899.8642，350.7925，-797.217），持续时间为2秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=899.8642, y=350.7925, z=-797.217}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=899.8642, y=350.7925, z=-797.217}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 将本组内变量名为 "camera" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "camera", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

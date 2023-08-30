@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133225033
 }
 
 -- DEFS_MISCS
-defs =
+defs = 
 {
 	group_id = 133225033,
 	Lightup_Seq = {33003,33016,33010,33001,33002}
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -73,9 +73,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +86,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -113,20 +113,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_33009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"StoneCanPlace_A"为1
 	if ScriptLib.GetGroupVariableValue(context, "StoneCanPlace_A") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -136,20 +136,20 @@ function action_EVENT_VARIABLE_CHANGE_33009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_33011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"StoneCanPlace_B"为1
 	if ScriptLib.GetGroupVariableValue(context, "StoneCanPlace_B") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -159,8 +159,8 @@ function action_EVENT_VARIABLE_CHANGE_33011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -169,7 +169,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_33012(context, evt)
 	if 33004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -180,13 +180,13 @@ function action_EVENT_GADGET_STATE_CHANGE_33012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "stone_progress" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stone_progress", 2, 133225093) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_33013(context, evt)
 	if 33005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -206,13 +206,13 @@ function action_EVENT_GADGET_STATE_CHANGE_33013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "stone_progress" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stone_progress", 2, 133225129) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -221,7 +221,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_33014(context, evt)
 	if 33006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -232,25 +232,25 @@ function action_EVENT_GADGET_STATE_CHANGE_33014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "stone_progress" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stone_progress", 2, 133225128) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_33015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"stone_progress"为3
 	if ScriptLib.GetGroupVariableValue(context, "stone_progress") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -261,31 +261,31 @@ function action_EVENT_VARIABLE_CHANGE_33015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133225033, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "isQuestNotify" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isQuestNotify", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_33017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Finished"为1
 	if ScriptLib.GetGroupVariableValue(context, "Finished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -296,19 +296,19 @@ function action_EVENT_VARIABLE_CHANGE_33017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_33018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"StoneCanPlace_C"为1
 	if ScriptLib.GetGroupVariableValue(context, "StoneCanPlace_C") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -318,8 +318,8 @@ function action_EVENT_VARIABLE_CHANGE_33018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 33006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

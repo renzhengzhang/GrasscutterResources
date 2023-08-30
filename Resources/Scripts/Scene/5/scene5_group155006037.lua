@@ -1,27 +1,27 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155006037
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155006037
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {37003,37004,37005}
-Worktops = {}
-DayAppearGadgets = {37001,37011}
-NightAppearGadgets = {37002}
+local Controllers = {}
+local EnvControlGadgets = {37003,37004,37005}
+local Worktops = {}
+local DayAppearGadgets = {37001,37011}
+local NightAppearGadgets = {37002}
 
 
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-
+		
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
@@ -33,7 +33,7 @@ gameplayStateFuncitons =
 
 	end,
 	["2"] = function(context)
-
+		
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
 
@@ -44,7 +44,7 @@ gameplayStateFuncitons =
 		ScriptLib.SetGadgetStateByConfigId(context, 37001, 202)
 		ScriptLib.SetGadgetStateByConfigId(context, 37011, 202)
 		ScriptLib.SetGadgetStateByConfigId(context, 37002, 202)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context, 37012, 201)
 		ScriptLib.SetGadgetStateByConfigId(context, 37013, 201)
 		ScriptLib.SetGadgetStateByConfigId(context, 37014, 201)
@@ -54,7 +54,7 @@ gameplayStateFuncitons =
 
 	end,
 	["3"] = function(context)
-
+		
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
 		DayNight_Gadget_Finish(context,37003)
@@ -64,7 +64,7 @@ gameplayStateFuncitons =
 		ScriptLib.SetGadgetStateByConfigId(context, 37001, 202)
 		ScriptLib.SetGadgetStateByConfigId(context, 37011, 202)
 		ScriptLib.SetGadgetStateByConfigId(context, 37002, 202)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context, 37012, 201)
 		ScriptLib.SetGadgetStateByConfigId(context, 37013, 201)
 		ScriptLib.SetGadgetStateByConfigId(context, 37014, 201)
@@ -74,7 +74,7 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -82,18 +82,18 @@ end
 
 function GadgetStateSwitcher(context,gadget_id,state)
 
-	if ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[1] then
+	if ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[1] then 
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupid, gadget_id, state[2])
-	elseif ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[2] then
+	elseif ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[2] then 
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupid, gadget_id, state[1])
-	end
+	end 
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -143,9 +143,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -156,9 +156,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -192,9 +192,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -202,24 +202,24 @@ function condition_EVENT_GADGET_STATE_CHANGE_37006(context, evt)
 		if 37003 ~= evt.param2 or 322 ~= evt.param1 then
 			return false
 		end
-
+	
 		if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 	end
-
-
+	
+		
 		ScriptLib.PrintContextLog(context,"EnvState: 震动机关被激活！")
 		return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_37006(context, evt)
-
+	
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 155006037, 37001, 202)
-
-
+	
+	
 	return 0
-
+	
 end
 
 -- 触发条件
@@ -230,8 +230,8 @@ function condition_EVENT_GADGET_STATE_CHANGE_37007(context, evt)
 		if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 		end
-
-
+	
+		
 		return true
 end
 
@@ -242,7 +242,7 @@ function action_EVENT_GADGET_STATE_CHANGE_37007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -251,12 +251,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_37008(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 155006037, 37015) then
 		return false
 	end
-
+	
 	-- 判断变量"gameplayState"为2
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -267,14 +267,14 @@ function action_EVENT_GADGET_STATE_CHANGE_37008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_37009(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end

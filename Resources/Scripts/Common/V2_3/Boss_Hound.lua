@@ -6,7 +6,7 @@
 	--怪物脱战时，会在一系列表演之后发一个SLC_BossBattleReset，group重置
 ]]
 --[[
-defs = {
+local defs = {
 
 	--开启怪物用的特效gadget
 	gadget_starter = 275001,
@@ -36,7 +36,7 @@ defs = {
 }
 ]]
 
-extraTriggers={
+local extraTriggers={
 
   --{ config_id = 8000001,name = "Enter_StartRegion", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_Enter_StartRegion", trigger_count = 0 , forbid_guest = false },
   { config_id = 8000002,name = "Leave_BattleRegion", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_Leave_BattleRegion", trigger_count = 0, forbid_guest = false },
@@ -58,7 +58,7 @@ function LF_Initialize_Group(triggers, suites)
 end
 
 function condition_Boss_Die(context, evt)
-	if evt.param1 ~= defs.monster_configID then
+	if evt.param1 ~= defs.monster_configID then 
 		return false
 	end
 	return true
@@ -91,16 +91,16 @@ function action_Leave_BattleRegion(context, evt)
 	ScriptLib.PrintContextLog(context, "[Boss_Hound] Player leave region. uid@"..context.uid)
 
 	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then
-
-		--count = ScriptLib.GetRegionEntityCount(context, { region_eid = eid, entity_type = EntityType.AVATAR })
+		
+		--local count = ScriptLib.GetRegionEntityCount(context, { region_eid = eid, entity_type = EntityType.AVATAR })
 			--尝试转移config_id的authority, 当uid和config_id的authority不一致时尝试转移到region_config_id里的玩家。
-	    new_auth = ScriptLib.TryReallocateEntityAuthority(context, context.uid, defs.monster_configID, evt.param1)
-	    --[[if count <= 0 then
+	    local new_auth = ScriptLib.TryReallocateEntityAuthority(context, context.uid, defs.monster_configID, evt.param1)
+	    --[[if count <= 0 then 
 	    	ScriptLib.PrintContextLog(context, "[Boss_Hound] No Player in Region. Reset Battle.")
 	    	LF_ResetBattle(context)
 	    end]]
 	end
-
+	
 
 	return 0
 end
@@ -116,7 +116,7 @@ end
 
 --[[function action_Enter_StartRegion(context, evt)
 
-	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 0 or
+	if ScriptLib.GetGroupVariableValue(context, "challenge_state") ~= 0 or 
 		evt.param1 ~= defs.start_region then
 		return 0
 	end
@@ -127,7 +127,7 @@ end]]
 --触发战斗
 function action_Boss_In_Battle(context, evt)
 
-	if evt.param1 ~= defs.monster_configID then
+	if evt.param1 ~= defs.monster_configID then 
 		return 0
 	end
 
@@ -162,10 +162,10 @@ end
 --返回场内(battle_radius) 的一个活的玩家uid，没找到的话返回0
 function LF_Get_BattleField_AlivePlayer(context)
 
-	uid_list = ScriptLib.GetSceneUidList(context)
+	local uid_list = ScriptLib.GetSceneUidList(context)
 
 	for i,v in ipairs(uid_list) do
-		if LF_Get_Distance(context, v, defs.battle_regionID) < defs.battle_radius then
+		if LF_Get_Distance(context, v, defs.battle_regionID) < defs.battle_radius then 
 			if ScriptLib.IsPlayerAllAvatarDie(context, v) == false then
 				ScriptLib.PrintContextLog(context, "[Boss_Hound] Get_BattleField_AlivePlayer. UID@"..v)
 				return v
@@ -177,12 +177,12 @@ function LF_Get_BattleField_AlivePlayer(context)
 end
 
 function LF_Get_Distance(context, uid, config_id)
-	eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
-	pos1 = ScriptLib.GetPosByEntityId(context, eid)
-	pos2 = regions[config_id].pos
-	X = pos1.x - pos2.x
-	Y = pos1.y - pos2.y
-	Z = pos1.z - pos2.z
+	local eid = ScriptLib.GetAvatarEntityIdByUid(context, uid)
+	local pos1 = ScriptLib.GetPosByEntityId(context, eid)
+	local pos2 = regions[config_id].pos
+	local X = pos1.x - pos2.x
+	local Y = pos1.y - pos2.y
+	local Z = pos1.z - pos2.z
 	return math.sqrt(X*X+Y*Y+Z*Z)
 end
 
@@ -193,14 +193,14 @@ function SLC_BossBattleReset(context)
 		ScriptLib.PrintContextLog(context, "[Boss_Hound] #WARN# Got SLC_BossBattleReset, while challenge_state is 0 (Not in Battle). Tell TD.")
 		return 0
 	end]]
-
+	
 	--planA: 接到直接重置
 	LF_ResetBattle(context)
-
+	
 	--planB: 尝试找场内玩家转移auth。 找不到，就ResetBattle
-	--[[target_uid = LF_Get_BattleField_AlivePlayer(context)
+	--[[local target_uid = LF_Get_BattleField_AlivePlayer(context)
 
-	if target_uid ~= 0 then
+	if target_uid ~= 0 then 
 
 		ScriptLib.PrintContextLog(context, "[Boss_Hound] Got SLC_BossBattleReset, then found alive player@"..target_uid.." in field, trying Refresh Authority.")
 

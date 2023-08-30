@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309275
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	point_camera = 275020,
 	gadget_lookEntity = 275022,
 	look_duration = 3.5
 }
 
 -- DEFS_MISCS
-markList = {275001,275002,275003,275006,275007,275008,275009,275010,275011,275012}
+local markList = {275001,275002,275003,275006,275007,275008,275009,275010,275011,275012}
 
-CameraLookSetting = {
+local CameraLookSetting = {
 
     blend_type = 1,
 
@@ -28,9 +28,9 @@ CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -99,9 +99,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -112,9 +112,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -139,9 +139,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -149,7 +149,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_275013(context, evt)
 	if 275004 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -160,29 +160,29 @@ function action_EVENT_GADGET_STATE_CHANGE_275013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "isOn" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "isOn", 0, 133309279) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_275017(context, evt)
 	if evt.param1 ~= 275017 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133309275, 275002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -193,7 +193,7 @@ function action_EVENT_ENTER_REGION_275017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -203,39 +203,39 @@ function condition_EVENT_GADGET_STATE_CHANGE_275018(context, evt)
 	if 275002 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_275018(context, evt)
 	LF_PointLook(context)
-
+	
 	-- 将configid为 275005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 275005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-		end
-
+		end 
+	
 	-- 将configid为 275009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 275009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-		end
-
+		end 
+	
 	-- 卸载指定gadget
 	if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133309493, EntityType.GADGET, 493006 ) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 		end
-
+	
 	-- 将configid为 275001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 275001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-		end
-
+		end 
+	
 	-- 将configid为 275003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 275003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -245,7 +245,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_275019(context, evt)
 	if 275004 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -256,7 +256,7 @@ function action_EVENT_GADGET_STATE_CHANGE_275019(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 

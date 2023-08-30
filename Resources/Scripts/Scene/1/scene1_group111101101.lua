@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101101
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -87,9 +87,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -97,7 +97,7 @@ function condition_EVENT_GADGET_CREATE_101003(context, evt)
 	if 101002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -108,7 +108,7 @@ function action_EVENT_GADGET_CREATE_101003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -116,14 +116,14 @@ end
 function condition_EVENT_SELECT_OPTION_101004(context, evt)
 	-- 判断是gadgetid 101002 option_id 7
 	if 101002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -134,22 +134,22 @@ function action_EVENT_SELECT_OPTION_101004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 将configid为 101001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 101001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 111101101, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将使用操作台的玩家传送至目标点
 		if evt.uid ~= nil then
-	    t_pos = {x=2517.592, y=236, z=-1177.988}
+	    local t_pos = {x=2517.592, y=236, z=-1177.988}
 	    if 0 ~= ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = t_pos, rot = {x=0, y=0, z=0}}) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	      return -1
@@ -158,7 +158,7 @@ function action_EVENT_SELECT_OPTION_101004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
@@ -167,7 +167,7 @@ function condition_EVENT_ANY_GADGET_DIE_101008(context, evt)
 	if 101007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -178,6 +178,6 @@ function action_EVENT_ANY_GADGET_DIE_101008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

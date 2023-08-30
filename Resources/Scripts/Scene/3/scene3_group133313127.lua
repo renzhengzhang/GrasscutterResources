@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133313127
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	pointarray_route = 331300003,
 	chest_id = 127010,
 	wordle_id = 127011
@@ -12,12 +12,12 @@ defs = {
 
 -- DEFS_MISCS
 --向前移动的符文
-timeback_rune = 127007
+local timeback_rune = 127007
 
-timeback_controller = 127008
+local timeback_controller = 127008
 
 --倒流操作台。
-timeback_worktops =
+local timeback_worktops = 
 {
     127005,
     127006,
@@ -25,7 +25,7 @@ timeback_worktops =
 }
 
 --倒流物件id。
-timeback_gadgets =
+local timeback_gadgets = 
 {
     127001,  --石柱1
     127002,  --石柱2
@@ -35,14 +35,14 @@ timeback_gadgets =
 }
 
 --符文的移动路径点阵
-rune_point_array =
+local rune_point_array = 
 {
     1,2,3,4,5,6,7,8,9,10,11,12,13,14
 }
 
 --检查点到点阵路点的映射关系
 --默认最后一个checkpoint就是终点，不能再往下移动了
-checkpoints_to_route_points =
+local checkpoints_to_route_points = 
 {
     [1] = 3,
     [2] = 8,
@@ -51,7 +51,7 @@ checkpoints_to_route_points =
 
 
 --检查点到倒流操作台的映射关系，两者应该放在同一个位置上
-checkpoint_to_worktops =
+local checkpoint_to_worktops = 
 {
     [1] = timeback_worktops[1],
     [2] = timeback_worktops[2],
@@ -59,9 +59,9 @@ checkpoint_to_worktops =
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -100,9 +100,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -113,9 +113,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -131,9 +131,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 require "V3_4/OasisTimebackControl"

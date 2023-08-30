@@ -31,12 +31,12 @@ end
 function OnBeHurt(context, element_type, strike_type, is_host)
 	if is_host == true then
 		-- 获取机关当前状态
-		state = ScriptLib.GetGadgetState(context)
+		local state = ScriptLib.GetGadgetState(context)
 		if state == GadgetState.GearStart then
 			if element_type == ElementType.Wind then
-				groupId = ScriptLib.GetContextGroupId(context)
-				configId = ScriptLib.GetContextGadgetConfigId(context)
-				ScriptLib.KillEntityByConfigId(context, { group_id = groupId, config_id = configId, entity_type=EntityType.GADGET })
+				local groupId = ScriptLib.GetContextGroupId(context)
+				local configId = ScriptLib.GetContextGadgetConfigId(context)
+				ScriptLib.KillEntityByConfigId(context, { group_id = groupId, config_id = configId, entity_type=EntityType.GADGET }) 
 			end
 		end
 	end

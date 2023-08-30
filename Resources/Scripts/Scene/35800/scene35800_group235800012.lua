@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235800012
 }
 
 -- DEFS_MISCS
 --Boss主题玩法3
-BossGroupID = 235800012
+local BossGroupID = 235800012
 
-BossConfigID = 0
+local BossConfigID = 0
 
-ElementFallConfigID = 12075
+local ElementFallConfigID = 12075
 
 --四阶段Boss战随机要素列表
-BossRandomList = {
+local BossRandomList = {
         [1] = {
                 [1] = {type = 2, suite_id = {4,5,6,7}},
         },
@@ -36,11 +36,11 @@ BossRandomList = {
         }
 }
 
-regionIndex =  12076
+local regionIndex =  12076
 
-wind_force_interval = 30
+local wind_force_interval = 30
 
-bubble_point_array = {
+local bubble_point_array = {
     [7059] = {point_array_id = 1, point_id_list = {1,2,3,4,5,6}, route_type = 1},
     [7060] = {point_array_id = 2, point_id_list = {1,2,3,4,5,6}, route_type = 1},
     [7061] = {point_array_id = 3, point_id_list = {1,2,3,4,5,6}, route_type = 1},
@@ -56,9 +56,9 @@ bubble_point_array = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -162,9 +162,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -175,9 +175,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -292,9 +292,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 require "WindFlora_Boss_RandomList"

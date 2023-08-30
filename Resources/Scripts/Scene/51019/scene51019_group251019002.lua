@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 251019002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -88,85 +88,85 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2006(context, evt)
 	if evt.param1 ~= 2006 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_2006(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=-30.81, y= 25.65, z=38.848}, radius = 0.1, rot = {x=0, y=270, z=0}})
-
+	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=-30.81, y= 25.65, z=38.848}, radius = 0.1, rot = {x=0, y=270, z=0}}) 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2007(context, evt)
 	if evt.param1 ~= 2007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_2007(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=-58.18, y= 25.63, z=39.37}, radius = 0.1, rot = {x=0, y=0, z=0}})
-
+	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=-58.18, y= 25.63, z=39.37}, radius = 0.1, rot = {x=0, y=0, z=0}}) 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2009(context, evt)
 	if evt.param1 ~= 2009 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_2009(context, evt)
 	ScriptLib.SetGadgetStateByConfigId(context,2011, GadgetState.GearStart)
-
+	
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 251019003, 3005, GadgetState.GearStart)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2016(context, evt)
 	if evt.param1 ~= 2016 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_2016(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=46.19, y= 31.61, z=4.29}, radius = 0.1, rot = {x=0, y=0, z=0}})
-
+	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=46.19, y= 31.61, z=4.29}, radius = 0.1, rot = {x=0, y=0, z=0}}) 
+	
 	return 0
 end

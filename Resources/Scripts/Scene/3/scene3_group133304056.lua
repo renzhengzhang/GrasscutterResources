@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304056
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -86,20 +86,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_56005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"vine1"为1
 	if ScriptLib.GetGroupVariableValue(context, "vine1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -110,19 +110,19 @@ function action_EVENT_VARIABLE_CHANGE_56005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_56006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"vine2"为1
 	if ScriptLib.GetGroupVariableValue(context, "vine2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -133,19 +133,19 @@ function action_EVENT_VARIABLE_CHANGE_56006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_56007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"vine3"为1
 	if ScriptLib.GetGroupVariableValue(context, "vine3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -156,7 +156,7 @@ function action_EVENT_VARIABLE_CHANGE_56007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -166,7 +166,7 @@ function condition_EVENT_GROUP_LOAD_56008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "vine1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -177,7 +177,7 @@ function action_EVENT_GROUP_LOAD_56008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_GROUP_LOAD_56009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "vine2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -198,7 +198,7 @@ function action_EVENT_GROUP_LOAD_56009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_GROUP_LOAD_56010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "vine3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -219,6 +219,6 @@ function action_EVENT_GROUP_LOAD_56010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_entity_SGV_by_cid")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133001263
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -84,25 +84,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_263001(context, evt)
 	if evt.param1 ~= 263001 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"allow_spawn"为1
 	if ScriptLib.GetGroupVariableValue(context, "allow_spawn") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -110,7 +110,7 @@ end
 function action_EVENT_ENTER_REGION_263001(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001263, 2)
-
+	
 	return 0
 end
 
@@ -118,17 +118,17 @@ end
 function condition_EVENT_QUEST_FINISH_263008(context, evt)
 	--检查ID为30803的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 30803 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -139,6 +139,6 @@ function action_EVENT_QUEST_FINISH_263008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

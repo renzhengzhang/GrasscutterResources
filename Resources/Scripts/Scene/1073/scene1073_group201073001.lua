@@ -1,37 +1,33 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201073001
 }
 
 -- DEFS_MISCS
-questLockInfo=
+local questLockInfo=
 {
     [1]={------默认全关
         [2]={uplock=true,downlock=true }
     },
     [2]={---单独开启一楼
-        [1]={uplock=false,downlock=true }
-,
+        [1]={uplock=false,downlock=true },
         [2]={uplock=true,downlock=false }
     },
     [3]={---单独开启三楼
-        [2]={uplock=false,downlock=true }
-,
+        [2]={uplock=false,downlock=true },
         [3]={uplock=true,downlock=false }
     },
     [4]={---一楼三楼全开
-        [1]={uplock=false,downlock=true }
-,
-        [2]={uplock=false,downlock=false }
-,
+        [1]={uplock=false,downlock=true },
+        [2]={uplock=false,downlock=false },
         [3]={uplock=true,downlock=false }
     },
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +63,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +76,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -98,9 +94,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -110,7 +106,7 @@ function action_EVENT_QUEST_FINISH_1008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

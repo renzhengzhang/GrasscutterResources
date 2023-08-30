@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210461
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -19,7 +19,7 @@ npcs = {
 
 -- 装置
 gadgets = {
-	-- option飞贼
+	-- option飞贼 
 	{ config_id = 461002, gadget_id = 70350292, pos = { x = -3867.932, y = 250.000, z = -548.502 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 30, route_id = 321000094, area_id = 17 }
 }
 
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -87,20 +87,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_461003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Success"为1
 	if ScriptLib.GetGroupVariableValue(context, "Success") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -111,6 +111,6 @@ function action_EVENT_VARIABLE_CHANGE_461003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

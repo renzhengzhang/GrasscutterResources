@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111102053
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	starter_worktop_id = 53005,
 	final_stage = 7,
 	TEMP_father_challenge_id = 2010001,
@@ -15,14 +15,14 @@ defs = {
 }
 
 -- DEFS_MISCS
-score = {
+local score = {
     checkpoint = 20,
     monster = 5,
 }
 
 
 
-stage =
+local stage = 
 {
     [1] = {monster_suites = {2}, start_suites = {2}, tag = "Battle"},
     [2] = {monster_suites = {3,4},start_suites = {3,4}, tag = "Battle"},
@@ -30,7 +30,7 @@ stage =
     [4] = {monster_suites = {7},  start_suites = {7},   tag = "Dive"},
 }
 
-mechanism_ball_level_variable =
+local mechanism_ball_level_variable = 
 {
 	[53128] = "Ball_1",
 	[53129] = "Ball_2",
@@ -39,9 +39,9 @@ mechanism_ball_level_variable =
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -216,9 +216,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -229,9 +229,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -301,20 +301,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_53144(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Ball_1"为1
 	if ScriptLib.GetGroupVariableValue(context, "Ball_1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -325,37 +325,37 @@ function action_EVENT_VARIABLE_CHANGE_53144(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为53141的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 53141 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为53142的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 53142 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为53143的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 53143 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_53145(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Ball_2"为1
 	if ScriptLib.GetGroupVariableValue(context, "Ball_2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -366,37 +366,37 @@ function action_EVENT_VARIABLE_CHANGE_53145(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为53147的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 53147 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为53148的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 53148 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为53149的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 53149 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_53154(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Ball_3"为1
 	if ScriptLib.GetGroupVariableValue(context, "Ball_3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -407,37 +407,37 @@ function action_EVENT_VARIABLE_CHANGE_53154(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为53151的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 53151 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为53152的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 53152 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为53153的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 53153 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_53155(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Ball_4"为1
 	if ScriptLib.GetGroupVariableValue(context, "Ball_4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -447,26 +447,26 @@ function action_EVENT_VARIABLE_CHANGE_53155(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 53062, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 53063 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 53063, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 53064 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 53064, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 53065 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 53065, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

@@ -3,12 +3,12 @@
 
 ]]
 --[[
-defs = {
+local defs = {
 	guide_regionID = [configID],
 }
 ]]
 
-extraTriggers={
+local extraTriggers={
 
   { config_id = 8000001, name = "Enter_Tutorial_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_TutorialRegion", trigger_count = 0}
 }
@@ -24,9 +24,9 @@ end
 
 function action_enter_TutorialRegion(context, evt)
 
-	if defs.guide_regionID == nil then
+	if defs.guide_regionID == nil then 
 		return 0
-	elseif evt.param1 == defs.guide_regionID then
+	elseif evt.param1 == defs.guide_regionID then 
 		LF_Try_StartTutorial(context)
 	end
 	return 0
@@ -34,9 +34,9 @@ end
 
 function LF_Try_StartTutorial(context)
 
-    UidList = ScriptLib.GetSceneUidList(context)
-    ownerUid = UidList[1]
-    havePlayed  = ScriptLib.GetExhibitionAccumulableData(context, ownerUid, 10901101)
+    local UidList = ScriptLib.GetSceneUidList(context)
+    local ownerUid = UidList[1]
+    local havePlayed  = ScriptLib.GetExhibitionAccumulableData(context, ownerUid, 10901101)
 
     if 0 == havePlayed then
         ScriptLib.ShowClientTutorial(context, 833, {ownerUid})

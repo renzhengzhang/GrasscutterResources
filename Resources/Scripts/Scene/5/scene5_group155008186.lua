@@ -1,23 +1,23 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155008186
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155008186,
 	gadget_RuneSeal = 186001,
 	gadget_mask = 186002
 }
 
 -- DEFS_MISCS
-Controllers = {}
-EnvControlGadgets = {}
-Worktops = {}
-DayAppearGadgets = {defs.gadget_mask}
-NightAppearGadgets = {defs.gadget_RuneSeal}
+local Controllers = {}
+local EnvControlGadgets = {}
+local Worktops = {}
+local DayAppearGadgets = {defs.gadget_mask}
+local NightAppearGadgets = {defs.gadget_RuneSeal}
 
-gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -37,16 +37,16 @@ gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -132,9 +132,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -146,7 +146,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_186004(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -156,7 +156,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_186005(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155008186, 186001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -167,13 +167,13 @@ function action_EVENT_GADGET_STATE_CHANGE_186005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "activecount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "activecount", 1, 155008183) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 

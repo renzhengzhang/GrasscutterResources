@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220198
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -87,9 +87,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -97,7 +97,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_198002(context, evt)
 	if 198004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -108,13 +108,13 @@ function action_EVENT_GADGET_STATE_CHANGE_198002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "dog" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "dog", 1, 133220656) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -123,7 +123,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_198005(context, evt)
 	if 198003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -131,33 +131,33 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_198005(context, evt)
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133220198, EntityType.MONSTER, 198001)
-
-
-
+	
+		
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 198006, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 创建id为198004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 198004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 6028, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -167,7 +167,7 @@ function condition_EVENT_GROUP_LOAD_198008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -177,8 +177,8 @@ function action_EVENT_GROUP_LOAD_198008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 198003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -188,7 +188,7 @@ function condition_EVENT_GROUP_LOAD_198009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -198,8 +198,8 @@ function action_EVENT_GROUP_LOAD_198009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 198003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_GADGET_CREATE_198010(context, evt)
 	if 198003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -216,14 +216,14 @@ end
 function action_EVENT_GADGET_CREATE_198010(context, evt)
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133220198, EntityType.MONSTER, 198006)
-
-
-
+	
+		
+	
 	-- 将configid为 198003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 198003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

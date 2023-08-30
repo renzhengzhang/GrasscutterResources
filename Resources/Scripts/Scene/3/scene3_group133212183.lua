@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133212183
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -116,9 +116,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -129,9 +129,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -183,9 +183,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -193,7 +193,7 @@ function condition_EVENT_GADGET_CREATE_183011(context, evt)
 	if 183001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -204,19 +204,19 @@ function action_EVENT_GADGET_CREATE_183011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_183012(context, evt)
 	if evt.param1 ~= 183012 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -224,7 +224,7 @@ end
 function action_EVENT_ENTER_REGION_183012(context, evt)
 	-- 终止识别id为101的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 101, 1)
-
+	
 	return 0
 end
 
@@ -232,14 +232,14 @@ end
 function condition_EVENT_SELECT_OPTION_183013(context, evt)
 	-- 判断是gadgetid 183001 option_id 175
 	if 183001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -250,8 +250,8 @@ function action_EVENT_SELECT_OPTION_183013(context, evt)
 	    ScriptLib.ShowReminder(context, 400046)
 	    return 0
 	end
-
-
+	
+	
 	if true == ScriptLib.CheckIsInMpMode(context) then
 	    ScriptLib.ShowReminder(context, 400053)
 	        return -1
@@ -261,57 +261,57 @@ function action_EVENT_SELECT_OPTION_183013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 	  return -1
 	end
-
+	
 	-- 将configid为 183001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 183001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 	    return -1
-	  end
-
+	  end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212183, 2)
-
+	
 	----------------------------------------------------------------------------------------------------------------------------
 	-- 创建编号为111167父挑战，indexID为101
 	if 0 ~= ScriptLib.CreateFatherChallenge(context, 101, 111167, 60, {success = 1, fail = 1, fail_on_wipe=true}) then
 	        return -1
 	end
-
-
+	
+	
 	-- 创建编号为111172的子挑战：无用子挑战
 	if 0 ~= ScriptLib.AttachChildChallenge(context, 101, 201, 111172, {999,1,1,1},{},{success=0,fail=0}) then
 	        return -1
 	end
-
+	
 	-- 开始父挑战
 	if 0 ~= ScriptLib.StartFatherChallenge(context, 101) then
 	        return -1
 	end
-
+	
 	-- 挑战开启将'ElectricCorePlayHasStarted'改为1
-	challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
+	local challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 1, {group_id = grp_id})
 	    end
-
-
-	        uid_list = ScriptLib.GetSceneUidList(context)
+	
+	
+	        local uid_list = ScriptLib.GetSceneUidList(context)
 	        ScriptLib.SetGroupTempValue(context, "optimize_"..uid_list[1], 1, { group_id = 133212183})
 	        ScriptLib.SetPlayerGroupVisionType(context, {uid_list[1]}, {0})
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_183036(context, evt)
 	if evt.param1 ~= 183036 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -319,22 +319,22 @@ end
 function action_EVENT_ENTER_REGION_183036(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212183, 3)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212183, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_183038(context, evt)
 	if evt.param1 ~= 183038 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -342,54 +342,54 @@ end
 function action_EVENT_ENTER_REGION_183038(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212183, 4)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212183, 3)
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_183070(context, evt)
 	-- 挑战结束将'ElectricCorePlayHasStarted'改为0
-	challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
+	local challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 0, {group_id = grp_id})
 	    end
-
-
-	        uid_list = ScriptLib.GetSceneUidList(context)
+	
+	
+	        local uid_list = ScriptLib.GetSceneUidList(context)
 	        ScriptLib.SetGroupTempValue(context, "optimize_"..uid_list[1], 0, { group_id = 133212183})
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133212183, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
-
+	
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_183071(context, evt)
 	-- 挑战结束将'ElectricCorePlayHasStarted'改为0
-	challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
+	local challenge_groups = {133220053,133220172,133212361,133212185,133212183,133212033}
 	    for k,grp_id in pairs(challenge_groups) do
 	                ScriptLib.SetGroupTempValue(context, "ElectricCorePlayHasStarted", 0, {group_id = grp_id})
 	    end
-
-
-	        uid_list = ScriptLib.GetSceneUidList(context)
+	
+	
+	        local uid_list = ScriptLib.GetSceneUidList(context)
 	        ScriptLib.SetGroupTempValue(context, "optimize_"..uid_list[1], 0, { group_id = 133212183})
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133212183, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
-
+	
+	
 	return 0
 end
 
@@ -398,7 +398,7 @@ function condition_EVENT_ANY_GADGET_DIE_183074(context, evt)
 	if (183053~= evt.param1) and (183054~= evt.param1) and (183055~= evt.param1) and (183064~= evt.param1) and (183065~= evt.param1) and (183066~= evt.param1) and (183067~= evt.param1) and (183068~= evt.param1) and (183069~= evt.param1) and (183072~= evt.param1) and (183073~= evt.param1) then
 	  return false
 	end
-
+	
 	return true
 end
 
@@ -406,7 +406,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_183074(context, evt)
 	-- 增加时间
 	  ScriptLib.ModifyFatherChallengeProperty(context, 101, FatherChallengeProperty.DURATION, 5)
-
+	
 	return 0
 end
 
@@ -414,7 +414,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_183075(context, evt)
 	-- 增加时间
 	  ScriptLib.ModifyFatherChallengeProperty(context, 101, FatherChallengeProperty.DURATION, 5)
-
+	
 	return 0
 end
 

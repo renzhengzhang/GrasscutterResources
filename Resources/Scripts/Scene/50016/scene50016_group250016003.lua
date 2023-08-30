@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250016003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -101,7 +101,7 @@ function condition_EVENT_GADGET_CREATE_1(context, evt)
 	if 3001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -112,7 +112,7 @@ function action_EVENT_GADGET_CREATE_1(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -121,7 +121,7 @@ function condition_EVENT_SELECT_OPTION_2(context, evt)
 	if 3001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -129,16 +129,16 @@ end
 function action_EVENT_SELECT_OPTION_2(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250016001, 2)
-
+	
 	-- 删除指定group： 250016003 ；指定config：3001；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250016003, 3001, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 250016003, 1)
-
+	
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_GADGET_CREATE_4(context, evt)
 	if 3002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_GADGET_CREATE_4(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -167,7 +167,7 @@ function condition_EVENT_SELECT_OPTION_5(context, evt)
 	if 3002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -175,15 +175,15 @@ end
 function action_EVENT_SELECT_OPTION_5(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250016002, 2)
-
+	
 	-- 删除指定group： 250016003 ；指定config：3002；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250016003, 3002, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 250016003, 1)
-
+	
 	return 0
 end

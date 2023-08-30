@@ -1,13 +1,13 @@
 --- ServerUploadTool Save to [/root/env/data/lua/common/V2_3]  ---
 --[[
 	2.3雪山活动 铁人三项跑酷
-
+	
 	单Group版
 ]]
 
 --[[
 
-defs = {
+local defs = {
 
 	gallery_id = ,
 
@@ -30,7 +30,7 @@ defs = {
 
 	--金币和冰柱的对应关系
 	--[冰柱config_id]={金币config_id1,金币config_id2...}
-	coin_ice = {
+	coin_ice = { 
 		[108010] = {108015,108023},
 		[108011] = {108017,108024},
 		[108012] = {108019,108025},
@@ -41,7 +41,7 @@ defs = {
 }
 
 ]]
-triggers_start={
+local triggers_start={
 	--测试用
 	--[[{ config_id = 8000000, name = "Test_GM",  event = EventType.EVENT_VARIABLE_CHANGE, source = "testGM", condition = "", action = "", trigger_count = 0, tag = "100"},
 	{ config_id = 80000010, name = "Challenge_SuccessTest", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "",condition = "",action = "action_challenge_success",trigger_count= 0},]]
@@ -56,15 +56,15 @@ triggers_start={
   { config_id = 8000007, name = "Group_Will_Unload", event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_group_will_unload", trigger_count = 0},
   { config_id = 8000008, name = "Enter_Tutorial_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_TutorialRegion", trigger_count = 0},
 }
---[[triggers_optimiz = {
+--[[local triggers_optimiz = {
 
 }]]
-triggers_end={
+local triggers_end={
  	--终点的trigger单独拿出来，以备同一赛道需要多个Group
   { config_id = 8100001, name = "Enter_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_enter_final", action = "", trigger_count = 0, tag = "666" },
   { config_id = 8100002, name = "Challenge_Success", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "",condition = "",action = "action_challenge_success",trigger_count= 0}
 }
-
+	
 
 function LF_Initialize_Group(triggers, suites)
 	--起点用触发器
@@ -93,9 +93,9 @@ end
 
 function action_enter_TutorialRegion(context, evt)
 
-	if defs.guide_regionID == nil then
+	if defs.guide_regionID == nil then 
 		return 0
-	elseif evt.param1 == defs.guide_regionID then
+	elseif evt.param1 == defs.guide_regionID then 
 		LF_Try_StartTutorial(context)
 	end
 	return 0
@@ -103,9 +103,9 @@ end
 
 function LF_Try_StartTutorial(context)
 
-    UidList = ScriptLib.GetSceneUidList(context)
-    ownerUid = UidList[1]
-    havePlayed  = ScriptLib.GetExhibitionAccumulableData(context, ownerUid, 10901102)
+    local UidList = ScriptLib.GetSceneUidList(context)
+    local ownerUid = UidList[1]
+    local havePlayed  = ScriptLib.GetExhibitionAccumulableData(context, ownerUid, 10901102)
 
     if 0 == havePlayed then
         ScriptLib.ShowClientTutorial(context, 834, {ownerUid})
@@ -120,10 +120,10 @@ function SLC_WinterCampCoinGet(context,param1)
 
 	ScriptLib.PrintContextLog(context, "[WinterCamp] Got SLC_WinterCampCoinGet. param@"..param1 )
 
-	if param1 == 0 then
+	if param1 == 0 then 
 		--触发挑战Trigger
 		ScriptLib.ChangeGroupVariableValue(context, "coin_counter", 1)
-	elseif param1 == 1 then
+	elseif param1 == 1 then 
 		--触发挑战Trigger
 		ScriptLib.ChangeGroupVariableValue(context, "spec_coin_counter", 1)
 	end
@@ -137,28 +137,28 @@ end
 function action_select_option(context, evt)
 	--检查SelectOption
 	if defs.starter_gadget ~= evt.param1 or 175 ~= evt.param2 then
-		return -1
+		return -1	
 	end
 	--检查是否单机
 	if true == ScriptLib.CheckIsInMpMode(context) then
-		--starter_entity = ScriptLib.GetEntityIdByConfigId(context, defs.starter_gadget)
-		--center = ScriptLib.GetPosByEntityId(context, starter_entity)--这个接口取到的小数位数太多 没法直接用
+		--local starter_entity = ScriptLib.GetEntityIdByConfigId(context, defs.starter_gadget)
+		--local center = ScriptLib.GetPosByEntityId(context, starter_entity)--这个接口取到的小数位数太多 没法直接用
 		for k,v in pairs(gadgets) do
 			if k == defs.starter_gadget then
 				center = v.pos
 				break
 			end
 		end
-		ScriptLib.ShowReminderRadius(context, 400053, center, 2)
+		ScriptLib.ShowReminderRadius(context, 400053, center, 2) 
 		return -1
 	end
 	--LD用多个Region覆盖赛道范围，这个变量用于判断是否出圈
 	ScriptLib.SetGroupTempValue(context, "is_in_region", 0, {})
 
 	--切操作台状态
-	ScriptLib.SetGadgetStateByConfigId(context, defs.starter_gadget, GadgetState.GearStart)
+	ScriptLib.SetGadgetStateByConfigId(context, defs.starter_gadget, GadgetState.GearStart) 
 	--去掉操作台SelectOption
-	ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, defs.starter_gadget, 175)
+	ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, defs.starter_gadget, 175) 
 
 	--加载第一波suit
 	for k,v in pairs(defs.load_on_start) do
@@ -170,9 +170,9 @@ function action_select_option(context, evt)
 	ScriptLib.SwitchSceneEnvAnimal(context, 0)
 
 	--VisionType 龙血古树赛道不屏蔽3 神像赛道不屏蔽5
-	if defs.group_id == 133008671 then
+	if defs.group_id == 133008671 then 
 		ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {0,3})
-	elseif defs.group_id == 133008673 then
+	elseif defs.group_id == 133008673 then 
 		ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {0,5})
 	else
 		ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {0})
@@ -198,11 +198,11 @@ function InitChallenge(context)
 	ScriptLib.SetGroupTempValue(context, "challenge_state", 1, {})
 
 	--ScriptLib.PrintContextLog(context, "[WinterCamp] Gallery Started. gallery_id@"..evt.param1)
-	--起挑战
+	--起挑战 
 	ScriptLib.CreateFatherChallenge(context, 1, defs.father_challenge, defs.challenge_time, {success = 10, fail = 5})
 	--先开，再attach，给子挑战保序
 	ScriptLib.StartFatherChallenge(context,1)
-	ScriptLib.AttachChildChallenge(context,1, 2003003, 2003003,{4, 666,1,1},{},{success = 10,fail = 5}) --限时到达
+	ScriptLib.AttachChildChallenge(context,1, 2003003, 2003003,{4, 666,1,1},{},{success = 10,fail = 5}) --限时到达	
 	ScriptLib.AttachChildChallenge(context, 1, 2003004, 2003004,{3, 888,999},{},{success = 0,fail = 0}) --收集普通纹章
 	ScriptLib.AttachChildChallenge(context, 1, 2003005, 2003005,{3, 999,999},{},{success = 0,fail = 0}) --收集限时纹章
 
@@ -251,14 +251,14 @@ function action_challenge_success(context,evt)
 end
 
 function action_challenge_fail(context, evt)
-
+	
 	--evt.param2剩余时间
-	if evt.param2 <= 0 then
+	if evt.param2 <= 0 then 
 		LF_FailChallenge(context,1)
 	else
 		LF_FailChallenge(context,2)
 	end
-
+	
 	return 0
 end
 
@@ -267,7 +267,7 @@ function LF_FailChallenge(context,reason)
 
 	-- 设置操作台选项
 	ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_id, defs.starter_gadget, {175})
-
+	
 	for i = 2, #suites do
 	    ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, i)
 	end
@@ -299,14 +299,14 @@ end
 --group bundle没在不会报错，返回0 ，活动没开有warnin
 function LF_Close_OtherHintCircle(context)
 
-    explore_id = ScriptLib.WinterCampGetExploreGroupBundleId(context)
+    local explore_id = ScriptLib.WinterCampGetExploreGroupBundleId(context)
     if explore_id ~= 0 then
     	ScriptLib.DeactivateGroupLinkBundleByBundleId(context, explore_id)
 	end
 
-  	battle_id = ScriptLib.WinterCampGetBattleGroupBundleId(context)
+  	local battle_id = ScriptLib.WinterCampGetBattleGroupBundleId(context)
   	if battle_id ~= 0 then
-  	  	ScriptLib.DeactivateGroupLinkBundleByBundleId(context, battle_id)
+  	  	ScriptLib.DeactivateGroupLinkBundleByBundleId(context, battle_id) 
   	end
   	ScriptLib.PrintContextLog(context, "[WinterCampParkour] Close Other HintCircle. explore_id@"..explore_id.." battle_id@"..battle_id)
     return 0
@@ -314,12 +314,12 @@ end
 --跑酷结束，恢复其他两种活动营地的黄圈
 function LF_Open_OtherHintCircle(context)
 
-    explore_id = ScriptLib.WinterCampGetExploreGroupBundleId(context)
+    local explore_id = ScriptLib.WinterCampGetExploreGroupBundleId(context)
     if explore_id ~= 0 then
    		ScriptLib.ActivateGroupLinkBundleByBundleId(context, explore_id)
     end
 
-  	battle_id = ScriptLib.WinterCampGetBattleGroupBundleId(context)
+  	local battle_id = ScriptLib.WinterCampGetBattleGroupBundleId(context)
   	if battle_id ~= 0 then
   		ScriptLib.ActivateGroupLinkBundleByBundleId(context, battle_id)
   	end
@@ -329,12 +329,12 @@ end
 --含金币冰柱破碎，通知对应的金币gadget切状态
 function SLC_SpecialIcePillarBreak(context)
 
-	cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
+	local cfg_id = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 
 	ScriptLib.PrintContextLog(context, "[WinterCampParkour] Break Special IcePillar. cfg_id@"..cfg_id)
 
-	for k,v in pairs(defs.coin_ice) do
-		if k == cfg_id then
+	for k,v in pairs(defs.coin_ice) do 
+		if k == cfg_id then 
 			ChangeCoinState(context,v)
 			return 0
 		end
@@ -386,20 +386,20 @@ function action_leave_OptimizRegion(context,evt)
 			return 0
 		end
 
-		--ScriptLib.ClearPlayerEyePoint(context, evt.param1)
+		--ScriptLib.ClearPlayerEyePoint(context, evt.param1)	
 
 		--如果完全出圈了，触发挑战失败
-		is_in_region = ScriptLib.GetGroupTempValue(context, "is_in_region", {})
+		local is_in_region = ScriptLib.GetGroupTempValue(context, "is_in_region", {})
 		ScriptLib.PrintContextLog(context, "[WinterCamp] Leave optimiz_region. Region_config_id@"..evt.param1.." is_in_region@"..is_in_region)
-		if is_in_region <= 0 then
+		if is_in_region <= 0 then 
 			LF_FailChallenge(context,2)
-		end
+		end				
 	end
 	return 0
 end
 --终点检查
 function condition_enter_final(context, evt)
-	if evt.param1 ~= defs.end_region then
+	if evt.param1 ~= defs.end_region then 
 		return false
 	end
 	return true
@@ -426,7 +426,7 @@ function action_group_will_unload(context,evt)
 end
 
 function LF_RevertVisionType(context)
-	uidList = ScriptLib.GetSceneUidList(context)
+	local uidList = ScriptLib.GetSceneUidList(context)
 	for k,v in pairs(uidList) do
 		ScriptLib.RevertPlayerRegionVision(context, v)
 	end
@@ -435,10 +435,10 @@ end
 
 function CameraAction(context)
 
-	if defs.look_pos and defs.duration then
+	if defs.look_pos and defs.duration then 
 
 		--触发镜头注目，强制注目形式，不广播其他玩家
-		pos_follow = {x=0, y=0, z=0}
+		local pos_follow = {x=0, y=0, z=0}
 		ScriptLib.BeginCameraSceneLook(context, { look_pos = defs.look_pos, is_allow_input = false, duration = defs.duration, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                            is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                            is_set_screen_XY = false, screen_x = 0, screen_y = 0 })

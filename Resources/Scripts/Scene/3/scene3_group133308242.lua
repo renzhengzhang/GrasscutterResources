@@ -1,16 +1,16 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308242
 }
 
 -- DEFS_MISCS
 --第一次交互的option，之后切为2
-optionID = {440}
+local optionID = {440}
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -71,9 +71,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -129,23 +129,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_242009(context, evt)
 	-- 判断是gadgetid 242008 option_id 440
 	if 242008 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 440 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -155,8 +155,8 @@ function action_EVENT_SELECT_OPTION_242009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 242008, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -165,7 +165,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_242010(context, evt)
 	if 242008 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -176,16 +176,16 @@ function action_EVENT_GADGET_STATE_CHANGE_242010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "finish", 1, 133308122) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308242, 4)
-
+	
 	return 0
 end
 
@@ -194,7 +194,7 @@ function condition_EVENT_GROUP_LOAD_242011(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133308242, 242008) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -205,16 +205,16 @@ function action_EVENT_GROUP_LOAD_242011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "finish", 1, 133308122) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308242, 4)
-
+	
 	return 0
 end
 
@@ -224,7 +224,7 @@ function condition_EVENT_ANY_MONSTER_DIE_242012(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -235,10 +235,10 @@ function action_EVENT_ANY_MONSTER_DIE_242012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308242, 2)
-
+	
 	return 0
 end
 
@@ -248,7 +248,7 @@ function condition_EVENT_ANY_MONSTER_DIE_242013(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -259,10 +259,10 @@ function action_EVENT_ANY_MONSTER_DIE_242013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308242, 3)
-
+	
 	return 0
 end
 
@@ -272,7 +272,7 @@ function condition_EVENT_ANY_MONSTER_DIE_242014(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -283,40 +283,40 @@ function action_EVENT_ANY_MONSTER_DIE_242014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 242008 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 242008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_242015(context, evt)
 	if evt.param1 ~= 242015 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_242015(context, evt)
 	-- 触发镜头注目，注目位置为坐标{x=-1298.888, y=47.24238, z=4547.299}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
-		pos = {x=-1298.888, y=47.24238, z=4547.299}
-	  pos_follow = {x=0, y=0, z=0}
+		local pos = {x=-1298.888, y=47.24238, z=4547.299}
+	  local pos_follow = {x=0, y=0, z=0}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = true, duration = 3, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
 	                                                      is_set_follow_pos = false, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false,
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -326,7 +326,7 @@ function condition_EVENT_GROUP_LOAD_242017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monsterdie") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -334,7 +334,7 @@ end
 function action_EVENT_GROUP_LOAD_242017(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308242, 2)
-
+	
 	return 0
 end
 
@@ -344,7 +344,7 @@ function condition_EVENT_GROUP_LOAD_242018(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monsterdie") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -352,7 +352,7 @@ end
 function action_EVENT_GROUP_LOAD_242018(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308242, 3)
-
+	
 	return 0
 end
 
@@ -362,11 +362,11 @@ function condition_EVENT_GROUP_LOAD_242019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monsterdie") ~= 3 then
 			return false
 	end
-
+	
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133308242, 242008) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -376,8 +376,8 @@ function action_EVENT_GROUP_LOAD_242019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 242008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

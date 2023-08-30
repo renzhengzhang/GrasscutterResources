@@ -12,11 +12,11 @@
 
 =======================================================================================]]
 
---DarkLevel = 0
+--local DarkLevel = 0 
 
 
 
-extrTriggers = {
+local extrTriggers = {
 	initialtrigger = {
 		["In_Region"] = { config_id = 80000001, name = "In_Region", event= EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_PlayerInRegion", trigger_count = 0, forbid_guest = false },
 	}
@@ -28,7 +28,7 @@ function action_PlayerInRegion( context,evt )
 	if evt.param1 ~= regionID then
 		return 0
 	end
-
+	
 	--根据LD在group中填写的数值设置当前区域等级
 	ScriptLib.PrintContextLog(context, "## DK_LOG : Set SetDarkPressureLevel To "..DarkLevel)
 	ScriptLib.SetDarkPressureLevel(context, DarkLevel)

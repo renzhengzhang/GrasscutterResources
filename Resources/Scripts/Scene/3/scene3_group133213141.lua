@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133213141
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -82,9 +82,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -92,7 +92,7 @@ function condition_EVENT_ANY_MONSTER_DIE_141002(context, evt)
 	if 141001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -103,7 +103,7 @@ function action_EVENT_ANY_MONSTER_DIE_141002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -112,7 +112,7 @@ function condition_EVENT_MONSTER_BATTLE_141003(context, evt)
 	if 141001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -123,7 +123,7 @@ function action_EVENT_MONSTER_BATTLE_141003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : challenge_KilMonster_InTime")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -134,7 +134,7 @@ function action_EVENT_CHALLENGE_SUCCESS_141004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -145,7 +145,7 @@ function action_EVENT_CHALLENGE_FAIL_141005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -155,7 +155,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_141006(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 10 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -163,7 +163,7 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_141006(context, evt)
 	-- 终止识别id为180的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 180, 1)
-
+	
 	return 0
 end
 
@@ -174,6 +174,6 @@ function action_EVENT_GROUP_LOAD_141008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

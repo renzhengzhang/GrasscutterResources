@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133003553
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -94,9 +94,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -106,10 +106,10 @@ function action_EVENT_GROUP_REFRESH_553006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_blossomscehedule_byGroupId")
 		return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133003553, 3)
-
+	
 	return 0
 end
 
@@ -117,7 +117,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_553007(context, evt)
 	-- 指定group的循环玩法进度加1
 	ScriptLib.AddBlossomScheduleProgressByGroupId(context, 133003553)
-
+	
 	return 0
 end
 
@@ -128,13 +128,13 @@ function action_EVENT_BLOSSOM_PROGRESS_FINISH_553008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_blossomscehedule_byGroupId")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "GroupCompletion" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "GroupCompletion", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -145,6 +145,6 @@ function action_EVENT_GROUP_LOAD_553009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_blossom_group")
 			return -1
 		end
-
+	
 	return 0
 end

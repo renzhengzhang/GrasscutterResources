@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220112002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -68,9 +68,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -79,7 +79,7 @@ function condition_EVENT_QUEST_START_2001(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "point") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -90,7 +90,7 @@ function action_EVENT_QUEST_START_2001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -98,8 +98,8 @@ end
 function action_EVENT_TIMER_EVENT_2002(context, evt)
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 220112001, EntityType.MONSTER, 1001)
-
-
-
+	
+		
+	
 	return 0
 end

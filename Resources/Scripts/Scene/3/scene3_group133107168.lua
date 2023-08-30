@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133107168
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -76,9 +76,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -86,7 +86,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_168004(context, evt)
 	if 168002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -97,7 +97,7 @@ function action_EVENT_GADGET_STATE_CHANGE_168004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -106,7 +106,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_168005(context, evt)
 	if 168001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -117,7 +117,7 @@ function action_EVENT_GADGET_STATE_CHANGE_168005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -126,7 +126,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_168007(context, evt)
 	if 168003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -137,19 +137,19 @@ function action_EVENT_GADGET_STATE_CHANGE_168007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_168008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"fin_count"为3
 	if ScriptLib.GetGroupVariableValue(context, "fin_count") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -160,7 +160,7 @@ function action_EVENT_VARIABLE_CHANGE_168008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -168,17 +168,17 @@ end
 function condition_EVENT_QUEST_FINISH_168009(context, evt)
 	--检查ID为4135907的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 4135907 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,8 +188,8 @@ function action_EVENT_QUEST_FINISH_168009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 168002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -197,17 +197,17 @@ end
 function condition_EVENT_QUEST_FINISH_168010(context, evt)
 	--检查ID为4135907的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 4135907 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -217,8 +217,8 @@ function action_EVENT_QUEST_FINISH_168010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 168001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -226,17 +226,17 @@ end
 function condition_EVENT_QUEST_FINISH_168011(context, evt)
 	--检查ID为4135907的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 4135907 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -246,7 +246,7 @@ function action_EVENT_QUEST_FINISH_168011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 168003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

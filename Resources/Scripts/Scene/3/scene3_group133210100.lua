@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210100
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -160,20 +160,20 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_100002(context, evt)
 	if evt.param1 ~= 100002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -184,10 +184,10 @@ function action_EVENT_ENTER_REGION_100002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210100, 3)
-
+	
 	return 0
 end
 
@@ -196,7 +196,7 @@ function condition_EVENT_GADGET_CREATE_100003(context, evt)
 	if 100005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -207,7 +207,7 @@ function action_EVENT_GADGET_CREATE_100003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -215,7 +215,7 @@ end
 function action_EVENT_QUEST_START_100004(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210100, 4)
-
+	
 	return 0
 end
 
@@ -223,14 +223,14 @@ end
 function condition_EVENT_SELECT_OPTION_100006(context, evt)
 	-- 判断是gadgetid 100005 option_id 64
 	if 100005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 64 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -240,8 +240,8 @@ function action_EVENT_SELECT_OPTION_100006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 100001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -260,58 +260,58 @@ function action_EVENT_TIME_AXIS_PASS_100007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "Success" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Success", 2, 133210388) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Success" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Success", 2, 133210389) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Success" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Success", 2, 133210390) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Success" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Success", 2, 133210391) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_100008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Gadget_Count1"为1
 	if ScriptLib.GetGroupVariableValue(context, "Gadget_Count1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"Gadget_Count2"为1
 	if ScriptLib.GetGroupVariableValue(context, "Gadget_Count2") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"Gadget_Count3"为1
 	if ScriptLib.GetGroupVariableValue(context, "Gadget_Count3") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"Gadget_Count4"为1
 	if ScriptLib.GetGroupVariableValue(context, "Gadget_Count4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -322,7 +322,7 @@ function action_EVENT_VARIABLE_CHANGE_100008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -330,19 +330,19 @@ end
 function action_EVENT_QUEST_START_100026(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210100, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_100027(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Success"为1
 	if ScriptLib.GetGroupVariableValue(context, "Success") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -353,41 +353,41 @@ function action_EVENT_VARIABLE_CHANGE_100027(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Success" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Success", 1, 133210388) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Success" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Success", 1, 133210389) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Success" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Success", 1, 133210390) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Success" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Success", 1, 133210391) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 创建标识为"playreminder"，时间节点为{28}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "playreminder", {28}, false)
-
-
+	
+	
 	-- 将本组内变量名为 "reminder" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "reminder", 1, 133210469) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -397,7 +397,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_100032(context, evt)
 	if 100001 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -408,21 +408,21 @@ function action_EVENT_GADGET_STATE_CHANGE_100032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 调用提示id为 32100117 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 32100117) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7214905") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210100, 5)
-
+	
 	return 0
 end

@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220014004
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 2035,
 	gadget_id_2 = 220014002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -77,20 +77,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_32(context, evt)
 	if evt.param1 ~= 32 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -101,13 +101,13 @@ function action_EVENT_ENTER_REGION_32(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 35, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -117,7 +117,7 @@ function condition_EVENT_ANY_MONSTER_DIE_39(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -126,18 +126,18 @@ function action_EVENT_ANY_MONSTER_DIE_39(context, evt)
 	-- 改变指定group组220014002中， configid为36的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220014002, defs.gadget_id_1, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220014002, 2035, {8}) then
 		return -1
 	end
-
+	
 	-- 改变指定group组27中， configid为220014002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 27, defs.gadget_id_2, GadgetState.GearStart) then
 			return -1
-		end
-
-
+		end 
+	
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304124
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -113,9 +113,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -123,7 +123,7 @@ function condition_EVENT_GADGET_CREATE_124012(context, evt)
 	if 124005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -134,7 +134,7 @@ function action_EVENT_GADGET_CREATE_124012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -143,7 +143,7 @@ function condition_EVENT_GADGET_CREATE_124013(context, evt)
 	if 124006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -154,7 +154,7 @@ function action_EVENT_GADGET_CREATE_124013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -163,7 +163,7 @@ function condition_EVENT_GADGET_CREATE_124014(context, evt)
 	if 124007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -174,7 +174,7 @@ function action_EVENT_GADGET_CREATE_124014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -183,7 +183,7 @@ function condition_EVENT_GADGET_CREATE_124015(context, evt)
 	if 124008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -194,7 +194,7 @@ function action_EVENT_GADGET_CREATE_124015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -202,14 +202,14 @@ end
 function condition_EVENT_SELECT_OPTION_124016(context, evt)
 	-- 判断是gadgetid 124006 option_id 91
 	if 124006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -220,13 +220,13 @@ function action_EVENT_SELECT_OPTION_124016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304124, EntityType.GADGET, 124006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -234,14 +234,14 @@ end
 function condition_EVENT_SELECT_OPTION_124017(context, evt)
 	-- 判断是gadgetid 124005 option_id 91
 	if 124005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -252,13 +252,13 @@ function action_EVENT_SELECT_OPTION_124017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304124, EntityType.GADGET, 124005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -267,7 +267,7 @@ function condition_EVENT_GADGET_CREATE_124018(context, evt)
 	if 124011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -278,7 +278,7 @@ function action_EVENT_GADGET_CREATE_124018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -286,14 +286,14 @@ end
 function condition_EVENT_SELECT_OPTION_124020(context, evt)
 	-- 判断是gadgetid 124007 option_id 91
 	if 124007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -304,13 +304,13 @@ function action_EVENT_SELECT_OPTION_124020(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304124, EntityType.GADGET, 124007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -318,14 +318,14 @@ end
 function condition_EVENT_SELECT_OPTION_124021(context, evt)
 	-- 判断是gadgetid 124008 option_id 91
 	if 124008 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -336,13 +336,13 @@ function action_EVENT_SELECT_OPTION_124021(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304124, EntityType.GADGET, 124008 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -350,14 +350,14 @@ end
 function condition_EVENT_SELECT_OPTION_124022(context, evt)
 	-- 判断是gadgetid 124011 option_id 91
 	if 124011 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -368,13 +368,13 @@ function action_EVENT_SELECT_OPTION_124022(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133304124, EntityType.GADGET, 124011 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -385,11 +385,11 @@ function action_EVENT_ANY_GADGET_DIE_124023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 创建标识为"rmd_trigger"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "rmd_trigger", {2}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -398,7 +398,7 @@ function condition_EVENT_TIME_AXIS_PASS_124024(context, evt)
 	if "rmd_trigger" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -409,10 +409,10 @@ function action_EVENT_TIME_AXIS_PASS_124024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 停止标识为"rmd_trigger"的时间轴
 	ScriptLib.EndTimeAxis(context, "rmd_trigger")
-
-
+	
+	
 	return 0
 end

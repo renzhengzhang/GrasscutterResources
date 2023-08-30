@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240044002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -112,9 +112,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -125,9 +125,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -152,9 +152,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -163,17 +163,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2010(context, evt)
 	if 2001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall1"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall1") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall5"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall5") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -182,18 +182,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2010(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2001, 1, {10}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -203,12 +203,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_2011(context, evt)
 	if 2001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall1"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -217,18 +217,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2011(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2001, 1, {1}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall1" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall1", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -238,17 +238,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2012(context, evt)
 	if 2002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall2"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall4"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall4") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -257,18 +257,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2012(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2002, 1, {11}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -278,12 +278,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_2013(context, evt)
 	if 2002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall2"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -292,18 +292,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2013(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2002, 1, {2}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -313,12 +313,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_2014(context, evt)
 	if 2003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall3"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall3") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -327,18 +327,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2014(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2003, 1, {12}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -348,12 +348,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_2015(context, evt)
 	if 2003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall3"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -362,18 +362,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2015(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2003, 1, {3}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall3", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -383,17 +383,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2016(context, evt)
 	if 2004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall2"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall4"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall4") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -402,18 +402,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2016(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2004, 1, {11}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -423,12 +423,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_2017(context, evt)
 	if 2004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall4"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -437,18 +437,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2017(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2004, 1, {4}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall4" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall4", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -458,17 +458,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2018(context, evt)
 	if 2005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall1"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall1") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall5"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall5") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -477,18 +477,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2018(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2005, 1, {10}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall5" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall5", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -498,12 +498,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_2019(context, evt)
 	if 2005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall5"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall5") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -512,18 +512,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2019(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2005, 1, {5}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall5" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall5", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -533,12 +533,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_2020(context, evt)
 	if 2006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall6"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall6") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -547,18 +547,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2020(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2006, 1, {14}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall6" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall6", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -568,12 +568,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_2021(context, evt)
 	if 2006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall6"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall6") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -582,18 +582,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2021(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2006, 1, {6}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall6" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall6", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -603,17 +603,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2022(context, evt)
 	if 2007 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall7"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall7") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall9"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall9") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -622,18 +622,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2022(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2007, 1, {13}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall7" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall7", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -643,17 +643,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2023(context, evt)
 	if 2007 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall7"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall7") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"wall8"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall8") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -662,18 +662,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2023(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2007, 1, {7}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall7" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall7", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -683,17 +683,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2024(context, evt)
 	if 2008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall8"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall8") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall7"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall7") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -702,18 +702,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2024(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2008, 1, {7}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall8" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall8", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -723,12 +723,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_2025(context, evt)
 	if 2008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall8"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall8") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -737,18 +737,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2025(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2008, 1, {8}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall8" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall8", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -758,17 +758,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2026(context, evt)
 	if 2009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall9"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall9") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall7"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall7") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -777,18 +777,18 @@ function action_EVENT_GADGET_STATE_CHANGE_2026(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2009, 1, {13}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall9" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall9", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -798,12 +798,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_2027(context, evt)
 	if 2009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall9"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall9") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -812,30 +812,30 @@ function action_EVENT_GADGET_STATE_CHANGE_2027(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2009, 1, {9}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall9" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall9", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2028(context, evt)
 	if evt.param1 ~= 2028 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -846,7 +846,7 @@ function action_EVENT_ENTER_REGION_2028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -856,17 +856,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2029(context, evt)
 	if 2002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall2"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall4"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall4") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -874,22 +874,22 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_2029(context, evt)
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 240044004, 1)
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240044004, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2030(context, evt)
 	if evt.param1 ~= 2030 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -900,19 +900,19 @@ function action_EVENT_ENTER_REGION_2030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2032(context, evt)
 	if evt.param1 ~= 2032 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -923,19 +923,19 @@ function action_EVENT_ENTER_REGION_2032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 0, 2037, {73}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 240044002, 2038, {73}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -943,14 +943,14 @@ end
 function condition_EVENT_SELECT_OPTION_2039(context, evt)
 	-- 判断是gadgetid 2036 option_id 73
 	if 2036 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 73 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -960,14 +960,14 @@ function action_EVENT_SELECT_OPTION_2039(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240044002, 2033, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 240044002 ；指定config：2036；物件身上指定option：73；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240044002, 2036, 73) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -975,14 +975,14 @@ end
 function condition_EVENT_SELECT_OPTION_2040(context, evt)
 	-- 判断是gadgetid 2037 option_id 73
 	if 2037 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 73 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -992,14 +992,14 @@ function action_EVENT_SELECT_OPTION_2040(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240044002, 2034, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 240044002 ；指定config：2037；物件身上指定option：73；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240044002, 2037, 73) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1007,14 +1007,14 @@ end
 function condition_EVENT_SELECT_OPTION_2041(context, evt)
 	-- 判断是gadgetid 2038 option_id 73
 	if 2038 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 73 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1024,14 +1024,14 @@ function action_EVENT_SELECT_OPTION_2041(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240044002, 2035, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 240044002 ；指定config：2038；物件身上指定option：73；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240044002, 2038, 73) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1041,17 +1041,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2042(context, evt)
 	if 2001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall1"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall1") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall5"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall5") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1062,7 +1062,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1072,17 +1072,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2043(context, evt)
 	if 2005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall1"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"wall5"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall5") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1093,7 +1093,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1103,17 +1103,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2044(context, evt)
 	if 2002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall2"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall4"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1124,7 +1124,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1134,17 +1134,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2045(context, evt)
 	if 2004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall2"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"wall4"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall4") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1155,7 +1155,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1165,17 +1165,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2046(context, evt)
 	if 2007 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall7"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall7") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall9"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall9") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1186,7 +1186,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1196,17 +1196,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2047(context, evt)
 	if 2007 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall7"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall7") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"wall8"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall8") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1217,7 +1217,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1227,17 +1227,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2048(context, evt)
 	if 2008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall7"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall7") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall8"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall8") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1248,7 +1248,7 @@ function action_EVENT_GADGET_STATE_CHANGE_2048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1258,17 +1258,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_2049(context, evt)
 	if 2009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall7"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall7") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"wall9"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall9") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1279,29 +1279,29 @@ function action_EVENT_GADGET_STATE_CHANGE_2049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2050(context, evt)
 	if evt.param1 ~= 2050 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"wall7"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall7") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall8"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall8") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1310,55 +1310,55 @@ function action_EVENT_ENTER_REGION_2050(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2007, 1, {13}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2009, 1, {9}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall7" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "wall7", 1, 240044002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall9" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "wall9", 0, 240044002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2051(context, evt)
 	if evt.param1 ~= 2051 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"wall7"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall7") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"wall9"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall9") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1367,32 +1367,32 @@ function action_EVENT_ENTER_REGION_2051(context, evt)
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2007, 1, {7}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
-	tempParam = {route_type = 0, turn_mode = false}
+	local tempParam = {route_type = 0, turn_mode = false}
 	if 0 ~= ScriptLib.SetPlatformPointArray(context, 2008, 1, {8}, tempParam) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall7" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "wall7", 0, 240044002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall8" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "wall8", 0, 240044002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
