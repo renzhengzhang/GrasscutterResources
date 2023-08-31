@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220000001
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	monster_id_1 = 1001,
 	monster_id_2 = 1002,
 	monster_id_3 = 1003,
@@ -19,9 +19,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -101,9 +101,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -111,7 +111,7 @@ function condition_EVENT_GADGET_CREATE_1(context, evt)
 	if 1010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -122,7 +122,7 @@ function action_EVENT_GADGET_CREATE_1(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -132,7 +132,7 @@ function condition_EVENT_SELECT_OPTION_3(context, evt)
 	if 1010 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
@@ -144,23 +144,23 @@ function action_EVENT_SELECT_OPTION_3(context, evt)
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_1, delay_time = 0 }) then
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_2, delay_time = 0 }) then
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_3, delay_time = 0 }) then
 	  return -1
 	end
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.monster_id_1, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 		return 0
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -170,7 +170,7 @@ function condition_EVENT_SELECT_OPTION_4(context, evt)
 	if 1010 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
@@ -182,23 +182,23 @@ function action_EVENT_SELECT_OPTION_4(context, evt)
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_4, delay_time = 0 }) then
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_5, delay_time = 0 }) then
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_6, delay_time = 0 }) then
 	  return -1
 	end
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.monster_id_1, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 		return 0
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_SELECT_OPTION_5(context, evt)
 	if 1010 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
@@ -220,30 +220,30 @@ function action_EVENT_SELECT_OPTION_5(context, evt)
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_7, delay_time = 0 }) then
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_8, delay_time = 0 }) then
 	  return -1
 	end
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.monster_id_1, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 		return 0
 	end
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10(context, evt)
 	if evt.param1 ~= 10 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -254,20 +254,20 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 		pos = {x=53, y=2, z=-53}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 					return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11(context, evt)
 	if evt.param1 ~= 11 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -278,7 +278,7 @@ function action_EVENT_ENTER_REGION_11(context, evt)
 		pos = {x=53, y=2, z=-53}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 2, is_broadcast = false }) then
 					return -1
-		end
-
+		end 
+	
 	return 0
 end

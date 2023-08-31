@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220011004
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 97,
 	gadget_id_2 = 70,
 	gadget_id_3 = 137,
@@ -17,9 +17,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -80,9 +80,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -93,9 +93,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -111,20 +111,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_38(context, evt)
 	if evt.param1 ~= 38 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -134,44 +134,44 @@ function action_EVENT_ENTER_REGION_38(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 56, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 57 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 57, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 58 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 58, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 59 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 59, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 60 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 60, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 81 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 81, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 调用提示id为 1041112 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1041112) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -181,7 +181,7 @@ function condition_EVENT_DUNGEON_SETTLE_43(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -192,7 +192,7 @@ function action_EVENT_DUNGEON_SETTLE_43(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -201,7 +201,7 @@ function condition_EVENT_GADGET_CREATE_47(context, evt)
 	if 83 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -212,7 +212,7 @@ function action_EVENT_GADGET_CREATE_47(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -222,7 +222,7 @@ function condition_EVENT_SELECT_OPTION_48(context, evt)
 	if 83 ~= evt.param1 then
 			return false
 		end
-
+	
 	return true
 end
 
@@ -234,68 +234,68 @@ function action_EVENT_SELECT_OPTION_48(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, defs.gadget_id_2) then
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, defs.gadget_id_3) then
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, defs.gadget_id_4) then
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, defs.gadget_id_5) then
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, defs.gadget_id_6) then
 	  return -1
 	end
-
+	
 	-- 删除指定group： 220011004 ；指定config：83；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220011004, defs.gadget_id_8, 7) then
 		return -1
 	end
-
+	
 	-- 解锁目标4
 	if 0 ~= ScriptLib.UnlockForce(context, defs.gadget_id_7) then
 		return -1
 	end
-
+	
 	-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220011003, monsters = {}, gadgets = {3020} }) then
 			return -1
 		end
-
+	
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_1 }) then
 		return -1
 	end
-
+	
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_8, GadgetState.GearStart) then
 			return -1
-		end
+		end 
 		return 0
 	end
-
+	
 	if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id =  3020}) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_53(context, evt)
 	if evt.param1 ~= 53 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -306,31 +306,31 @@ function action_EVENT_ENTER_REGION_53(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	-- 创建id为98的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 98 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1041026 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1041026) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_54(context, evt)
 	if evt.param1 ~= 54 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -341,19 +341,19 @@ function action_EVENT_ENTER_REGION_54(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_63(context, evt)
 	if evt.param1 ~= 63 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -364,7 +364,7 @@ function action_EVENT_ENTER_REGION_63(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -373,7 +373,7 @@ function condition_EVENT_ANY_GADGET_DIE_4001(context, evt)
 	if 29 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -384,9 +384,9 @@ function action_EVENT_ANY_GADGET_DIE_4001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : show_client_guide")
 		return -1
 	end
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220011007, 7)
-
+	
 	return 0
 end

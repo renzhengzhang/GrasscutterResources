@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220205
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	inner_region = 205047,
 	outer_region = 205047,
 	related_region = 205047,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -167,9 +167,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -179,7 +179,7 @@ function action_EVENT_GROUP_LOAD_205046(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_blossom_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -190,7 +190,7 @@ function action_EVENT_GROUP_LOAD_205048(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_GADGET_CREATE_205051(context, evt)
 	if 205044 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -210,7 +210,7 @@ function action_EVENT_GADGET_CREATE_205051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -218,14 +218,14 @@ end
 function condition_EVENT_SELECT_OPTION_205052(context, evt)
 	-- 判断是gadgetid 205044 option_id 175
 	if 205044 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -236,62 +236,62 @@ function action_EVENT_SELECT_OPTION_205052(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 205044 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 205044, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220205, 2)
-
+	
 	-- 创建编号为101（该挑战的识别id),挑战内容为111170的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 101, 111170, 120, 133220205, 1, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 将configid为 205041 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 205041, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 205042 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 205042, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 205043 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 205043, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220205, 8)
-
+	
 	-- 指定group的循环玩法进度加1
 	if 0 ~= ScriptLib.SetBlossomScheduleStateByGroupId(context, 133220205, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_blossomscehedule_byGroupId")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_205053(context, evt)
 	ScriptLib.RemoveEntityByConfigId(context, 133220205, EntityType.REGION, 205047)
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133220205, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -301,38 +301,38 @@ function action_EVENT_CHALLENGE_SUCCESS_205054(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 205044, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 205041 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 205041, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 205042 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 205042, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 205043 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 205043, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 指定group的循环玩法进度加1
 	if 0 ~= ScriptLib.SetBlossomScheduleStateByGroupId(context, 133220205, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_blossomscehedule_byGroupId")
 		return -1
 	end
-
+	
 		-- 刷新本group,指定suite与等级修正,自动通知对应循环玩法的进度
 		if 0 ~= ScriptLib.RefreshBlossomGroup(context, { group_id = 0, suite = 1, exclude_prev = true }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_blossom_group")
 			return -1
 		end
-
+	
 	return 0
 end
 

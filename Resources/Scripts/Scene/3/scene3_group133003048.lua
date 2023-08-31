@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133003048
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     GroupID = 133003048,
     AGRegionConfigID = 48041,
     AGName = "ActivityAbility_ToMoon_FoodChallenge_Part1",
@@ -25,9 +25,9 @@ local Phase ={
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -96,9 +96,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -109,9 +109,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -217,16 +217,16 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_48019(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133003048, 2)
-
+	
 	return 0
 end
 
@@ -236,8 +236,8 @@ function condition_EVENT_ANY_MONSTER_DIE_48020(context, evt)
 	if evt.param1 ~= 48001 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -248,13 +248,13 @@ function action_EVENT_ANY_MONSTER_DIE_48020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "IS_BOSS1_DEAD" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "IS_BOSS1_DEAD", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -262,20 +262,20 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_48021(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133003048, 11)
-
+	
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133003048, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133003048, EntityType.GADGET, 48033 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -284,7 +284,7 @@ function condition_EVENT_MONSTER_BATTLE_48022(context, evt)
 	if 48001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -292,20 +292,20 @@ end
 function action_EVENT_MONSTER_BATTLE_48022(context, evt)
 	-- 创建标识为"T1"，时间节点为{75}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T1", {75}, false)
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_48023(context, evt)
 	if evt.param1 ~= 48023 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -313,8 +313,8 @@ end
 function action_EVENT_ENTER_REGION_48023(context, evt)
 	-- 创建标识为"T2"，时间节点为{75}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T2", {75}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -324,12 +324,12 @@ function condition_EVENT_TIME_AXIS_PASS_48024(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS1_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"stage"为1
 	if ScriptLib.GetGroupVariableValue(context, "stage") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -340,22 +340,22 @@ function action_EVENT_TIME_AXIS_PASS_48024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 400069 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400069) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133003048, 5)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133003048, 4)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133003048, 4)
-
+	
 	return 0
 end
 
@@ -365,12 +365,12 @@ function condition_EVENT_TIME_AXIS_PASS_48025(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS1_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"stage"为2
 	if ScriptLib.GetGroupVariableValue(context, "stage") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -381,22 +381,22 @@ function action_EVENT_TIME_AXIS_PASS_48025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 400069 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400069) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133003048, 6)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133003048, 5)
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133003048, 5)
-
+	
 	return 0
 end
 
@@ -405,7 +405,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_48028(context, evt)
 	if 48059 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -416,13 +416,13 @@ function action_EVENT_GADGET_STATE_CHANGE_48028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133003048, EntityType.GADGET, 48033 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 

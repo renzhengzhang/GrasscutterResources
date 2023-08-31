@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133307090
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	active_step = 201,
 	inactive_step = 0,
 	gadget_array = {90001,90002,90003,90004,90005},
@@ -17,9 +17,9 @@ local v_error = 0
 local max_bit = #defs.gadget_array
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -96,9 +96,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -109,9 +109,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -136,9 +136,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -163,7 +163,7 @@ function action_EVENT_GADGET_STATE_CHANGE_90007(context, evt)
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break
+	                        break 
 	                end
 	                if i == max_bit and defs.gadget_array[i] ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
@@ -188,7 +188,7 @@ function action_EVENT_GADGET_STATE_CHANGE_90007(context, evt)
 	        if v_error ~= 1 then
 	                v_error = -1
 	        end
-	        ScriptLib.SetGroupVariableValue(context, "sort", v)
+	        ScriptLib.SetGroupVariableValue(context, "sort", v) 
 	        ScriptLib.SetGroupVariableValue(context, "gear_reset", v_error)
 	        ScriptLib.SetGroupVariableValue(context, "v_error", 0)
 	end
@@ -198,7 +198,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_90008(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == 1 then
 		if #defs.reset_gear_list == 0 then
 	                        defs.reset_gear_list = suites[1].gadgets
@@ -219,7 +219,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_90010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 > 0 then
 		return true
 	end
@@ -233,31 +233,31 @@ function action_EVENT_VARIABLE_CHANGE_90010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为90006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 90006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 解除当前场景中pointid 为%force_id%的地城入口的groupLimit状态
 		ScriptLib.UnfreezeGroupLimit(context, 675)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133307090, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_90011(context, evt)
 	if evt.param1 ~= 90011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -268,7 +268,7 @@ function action_EVENT_ENTER_REGION_90011(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -278,7 +278,7 @@ function condition_EVENT_GROUP_LOAD_90012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "guard") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -286,16 +286,16 @@ end
 function action_EVENT_GROUP_LOAD_90012(context, evt)
 	-- 解除当前场景中pointid 为%force_id%的地城入口的groupLimit状态
 		ScriptLib.UnfreezeGroupLimit(context, 675)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133307090, 2)
-
+	
 	-- 创建id为90006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 90006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -305,7 +305,7 @@ function condition_EVENT_GROUP_LOAD_90013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "guard") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -316,9 +316,9 @@ function action_EVENT_GROUP_LOAD_90013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133307090, 2)
-
+	
 	return 0
 end

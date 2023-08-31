@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133001304
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -83,9 +83,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -94,7 +94,7 @@ function condition_EVENT_ANY_MONSTER_DIE_460(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -105,33 +105,33 @@ function action_EVENT_ANY_MONSTER_DIE_460(context, evt)
 		local pos = {x=1738, y=214, z=-1372}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 					return -1
-		end
-
+		end 
+	
 	-- 延迟3秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 1303, delay_time = 0 }) then
 	  return -1
 	end
-
+	
 	-- 延迟3秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 1304, delay_time = 0 }) then
 	  return -1
 	end
-
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=1738,y=214,z=-1372}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400004, pos, 50) then
 		return -1
 	end
-
+	
 	-- 延迟3秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 1305, delay_time = 0 }) then
 	  return -1
 	end
-
+	
 	-- 延迟3秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 1306, delay_time = 0 }) then
 	  return -1
 	end
-
+	
 	return 0
 end

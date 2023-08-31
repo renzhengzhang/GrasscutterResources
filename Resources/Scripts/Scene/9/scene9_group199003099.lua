@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003099
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	groupid = 199003099
 }
 
@@ -12,18 +12,18 @@ defs = {
 function GadgetStateSwitcher(context,gadget_id,state)
 
 				if
- ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[1] then
+ ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[1] then 
 					ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupid, gadget_id, state[2])
-				elseif ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[2] then
+				elseif ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[2] then 
 					ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupid, gadget_id, state[1])
-				end
-
+				end 
+			
 			end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -71,9 +71,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -111,23 +111,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_99011(context, evt)
 	-- 判断是gadgetid 99006 option_id 411
 	if 99006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 411 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -141,14 +141,14 @@ end
 function condition_EVENT_SELECT_OPTION_99012(context, evt)
 	-- 判断是gadgetid 99007 option_id 411
 	if 99007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 411 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -162,14 +162,14 @@ end
 function condition_EVENT_SELECT_OPTION_99013(context, evt)
 	-- 判断是gadgetid 99008 option_id 411
 	if 99008 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 411 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -183,14 +183,14 @@ end
 function condition_EVENT_SELECT_OPTION_99014(context, evt)
 	-- 判断是gadgetid 99009 option_id 411
 	if 99009 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 411 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -204,14 +204,14 @@ end
 function condition_EVENT_SELECT_OPTION_99015(context, evt)
 	-- 判断是gadgetid 99010 option_id 411
 	if 99010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 411 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -226,23 +226,23 @@ function condition_EVENT_GADGET_STATE_CHANGE_99016(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 199003099, 99001) then
 		return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 199003099, 99002) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003099, 99003) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003099, 99004) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003099, 99005) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -252,8 +252,8 @@ function action_EVENT_GADGET_STATE_CHANGE_99016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 99017, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -262,7 +262,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_99018(context, evt)
 	if 99017 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -273,7 +273,7 @@ function action_EVENT_GADGET_STATE_CHANGE_99018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -283,31 +283,31 @@ function action_EVENT_GROUP_LOAD_99019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 99001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 99002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 99002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 99003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 99003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 99004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 99004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 99005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 99005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

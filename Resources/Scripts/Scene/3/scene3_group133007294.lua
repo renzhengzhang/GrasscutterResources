@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133007294
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	active_step = 201,
 	inactive_step = 0,
 	gadget_array = {294001,294002,294003},
@@ -17,9 +17,9 @@ local v_error = 0
 local max_bit = #defs.gadget_array
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -99,9 +99,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -109,12 +109,12 @@ function condition_EVENT_GADGET_CREATE_294004(context, evt)
 	if 294001 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"gear_load"为0
 	if ScriptLib.GetGroupVariableValue(context, "gear_load") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -124,8 +124,8 @@ function action_EVENT_GADGET_CREATE_294004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 294001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -151,7 +151,7 @@ function action_EVENT_GADGET_STATE_CHANGE_294005(context, evt)
 	                        v = ScriptLib.GetGroupVariableValue(context, "sort")
 	                        v = 10*v + i
 	                        ScriptLib.SetGroupVariableValue(context, "sort", v)
-	                        break
+	                        break 
 	                end
 	                if i == max_bit and defs.gadget_array[i] ~= evt.param2 then
 	                        ScriptLib.SetGroupVariableValue(context, "v_error", 1)
@@ -176,7 +176,7 @@ function action_EVENT_GADGET_STATE_CHANGE_294005(context, evt)
 	        if v_error ~= 1 then
 	                v_error = -1
 	        end
-	        ScriptLib.SetGroupVariableValue(context, "sort", v)
+	        ScriptLib.SetGroupVariableValue(context, "sort", v) 
 	        ScriptLib.SetGroupVariableValue(context, "gear_reset", v_error)
 	        ScriptLib.SetGroupVariableValue(context, "v_error", 0)
 	end
@@ -186,7 +186,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_294006(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == 1 then
 		if #defs.reset_gear_list == 0 then
 	                        defs.reset_gear_list = suites[1].gadgets
@@ -207,8 +207,8 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_294007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
-
+	
+	
 	if evt.param1 == -1 then
 		return true
 	end
@@ -222,20 +222,20 @@ function action_EVENT_VARIABLE_CHANGE_294007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "trigger_output" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "trigger_output", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_294008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 > 0 then
 		return true
 	end
@@ -246,42 +246,42 @@ end
 function action_EVENT_VARIABLE_CHANGE_294008(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133007293, 3)
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133007293, 5)
-
+	
 	-- 调用提示id为 30070105 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 30070105) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "4141306") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "gear_load" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "gear_load", 2, 133007293) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "gear_load" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gear_load", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_294009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
-
+	
+	
 	if evt.param1 == 1 then
 		return true
 	end
@@ -295,15 +295,15 @@ function action_EVENT_VARIABLE_CHANGE_294009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_294010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
-
+	
+	
 	if evt.param1 == 3 then
 		return true
 	end
@@ -317,15 +317,15 @@ function action_EVENT_VARIABLE_CHANGE_294010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_294011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
-
+	
+	
 	if evt.param1 > 5 then
 		return true
 	end
@@ -339,15 +339,15 @@ function action_EVENT_VARIABLE_CHANGE_294011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_294012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
-
+	
+	
 	if evt.param1 == 5 then
 		return true
 	end
@@ -361,7 +361,7 @@ function action_EVENT_VARIABLE_CHANGE_294012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -370,12 +370,12 @@ function condition_EVENT_GADGET_CREATE_294013(context, evt)
 	if 294002 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"gear_load"为0
 	if ScriptLib.GetGroupVariableValue(context, "gear_load") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -385,8 +385,8 @@ function action_EVENT_GADGET_CREATE_294013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 294002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -395,12 +395,12 @@ function condition_EVENT_GADGET_CREATE_294014(context, evt)
 	if 294003 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"gear_load"为0
 	if ScriptLib.GetGroupVariableValue(context, "gear_load") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -410,7 +410,7 @@ function action_EVENT_GADGET_CREATE_294014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 294003, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

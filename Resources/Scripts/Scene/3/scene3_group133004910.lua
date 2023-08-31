@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133004910
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -78,9 +78,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -91,9 +91,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -163,9 +163,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -174,8 +174,8 @@ function condition_EVENT_ANY_MONSTER_DIE_910026(context, evt)
 	if evt.param1 ~= 910021 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -186,7 +186,7 @@ function action_EVENT_ANY_MONSTER_DIE_910026(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -196,8 +196,8 @@ function condition_EVENT_ANY_MONSTER_DIE_910027(context, evt)
 	if evt.param1 ~= 910022 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -208,7 +208,7 @@ function action_EVENT_ANY_MONSTER_DIE_910027(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -218,8 +218,8 @@ function condition_EVENT_ANY_MONSTER_DIE_910028(context, evt)
 	if evt.param1 ~= 910023 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -230,7 +230,7 @@ function action_EVENT_ANY_MONSTER_DIE_910028(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -240,8 +240,8 @@ function condition_EVENT_ANY_MONSTER_DIE_910029(context, evt)
 	if evt.param1 ~= 910024 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -252,7 +252,7 @@ function action_EVENT_ANY_MONSTER_DIE_910029(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -260,14 +260,14 @@ end
 function condition_EVENT_SELECT_OPTION_910031(context, evt)
 	-- 判断是gadgetid 910030 option_id 2903
 	if 910030 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2903 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -278,7 +278,7 @@ function action_EVENT_SELECT_OPTION_910031(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -287,7 +287,7 @@ function condition_EVENT_GADGET_CREATE_910032(context, evt)
 	if 910030 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -298,7 +298,7 @@ function action_EVENT_GADGET_CREATE_910032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -306,14 +306,14 @@ end
 function condition_EVENT_SELECT_OPTION_910036(context, evt)
 	-- 判断是gadgetid 910033 option_id 2903
 	if 910033 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2903 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -324,7 +324,7 @@ function action_EVENT_SELECT_OPTION_910036(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -332,14 +332,14 @@ end
 function condition_EVENT_SELECT_OPTION_910037(context, evt)
 	-- 判断是gadgetid 910034 option_id 2903
 	if 910034 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2903 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -350,7 +350,7 @@ function action_EVENT_SELECT_OPTION_910037(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -358,14 +358,14 @@ end
 function condition_EVENT_SELECT_OPTION_910038(context, evt)
 	-- 判断是gadgetid 910035 option_id 2903
 	if 910035 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2903 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -376,7 +376,7 @@ function action_EVENT_SELECT_OPTION_910038(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -385,7 +385,7 @@ function condition_EVENT_GADGET_CREATE_910039(context, evt)
 	if 910033 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -396,7 +396,7 @@ function action_EVENT_GADGET_CREATE_910039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -405,7 +405,7 @@ function condition_EVENT_GADGET_CREATE_910040(context, evt)
 	if 910034 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -416,7 +416,7 @@ function action_EVENT_GADGET_CREATE_910040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -425,7 +425,7 @@ function condition_EVENT_GADGET_CREATE_910041(context, evt)
 	if 910035 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -436,7 +436,7 @@ function action_EVENT_GADGET_CREATE_910041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 

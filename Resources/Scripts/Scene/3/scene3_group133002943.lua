@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133002943
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -69,9 +69,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -79,7 +79,7 @@ function condition_EVENT_GADGET_CREATE_943002(context, evt)
 	if 943001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -90,7 +90,7 @@ function action_EVENT_GADGET_CREATE_943002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -98,14 +98,14 @@ end
 function condition_EVENT_SELECT_OPTION_943003(context, evt)
 	-- 判断是gadgetid 943001 option_id 169
 	if 943001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 169 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -116,12 +116,12 @@ function action_EVENT_SELECT_OPTION_943003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133002943 ；指定config：943001；物件身上指定option：169；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133002943, 943001, 169) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end

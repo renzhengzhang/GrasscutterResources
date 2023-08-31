@@ -1,40 +1,40 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002045
 }
 
 -- DEFS_MISCS
-local        defs =
+local        defs = 
 {
 	--幕布Group
 	curtain_group = 199002075,
         --每个阶段的所有演员物件config_id。用于统一设置可拾取/可对话状态
-        actor_list =
+        actor_list = 
         {
-                [1] =
-                {
+                [1] = 
+                { 
                         [45001] = 1110788,
                         [45002] = 1110820,
                         [45003] = 1110821,
                         [45004] = 1110822,
                         [45031] = 1111307,
                 },
-                [2] =
-                {
+                [2] = 
+                { 
                         [45001] = 1110796,
                         [45003] = 1110821,
                         [45004] = 1110822,
                         [45031] = 1111307,
                 },
-                [3] =
-                {
+                [3] = 
+                { 
                         [45001] = 1110807,
                         [45004] = 1110822,
                         [45031] = 1111307,
                 },
         },
         --可拾取的gadget列表，即not in any suite的夜鸦雕像
-        pickable_gadget =
+        pickable_gadget = 
         {
                         [45002] = {0, 45033,  45033,  45033},
                         [45003] = {0, 0, 45034, -1},
@@ -42,12 +42,12 @@ local        defs =
 	        [45031] = {0, 0, 0, 0},
         },
         --行动序列
-        actions =
+        actions = 
         {
                 {
                           [1] = { config_id = 45001, reminder_id = 1110786, point_array = 0, point_id_list = 0, duration = 22},
-
-
+                         
+                        
                 },
                 {
                           [1] = { config_id = 45002, reminder_id = 1110789, point_array = 0, point_id_list = 0, duration = 29},
@@ -79,32 +79,30 @@ local        defs =
 
                 },
         },
-
-        spec_actions =
+        spec_actions = 
         {
-
+                
                  [1] = { config_id = 45031, reminder_id = 1111308, point_array = {900200138}, point_id_list = {1,2,3,4,5,6}, duration = 4},
                  [2] = { config_id = 45031, reminder_id = 1111308, point_array = {900200138}, point_id_list = {1,2,3,4,5,6}, duration = 4},
                  [3] = { config_id = 45031, reminder_id = 1111308, point_array = {900200138}, point_id_list = {1,2,3,4,5,6}, duration = 4},
-
+                
         },
         --每段剧情结束时加载的对应suite(放聚光灯和操作台用),和正确的放置槽位config_id
         --key是阶段id
-        question_suits =
+        question_suits =  
         {
                    [1] = { add_suite = 3, correct_slot = 45009, correct_gadget = 45002, spec = 45031},
                    [2] = { add_suite = 4, correct_slot = 45010, correct_gadget = 45003, spec = 45031},
                    [3] = { add_suite = 5, correct_slot = 45010, correct_gadget = 45004, spec = 45031},
         },
-
-no_actor = 45001
+no_actor = 45001
 
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -183,9 +181,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -196,9 +194,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -250,20 +248,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_45014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_done"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -274,49 +272,49 @@ function action_EVENT_VARIABLE_CHANGE_45014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "jianmu2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "jianmu2", 0, 199002019) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "jianmu3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "jianmu3", 0, 199002019) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "jianmu1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "jianmu1", 1, 199002019) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "appear" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "appear", 1, 199002191) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "start" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "start", 1, 199002187) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_45015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_done"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -327,19 +325,19 @@ function action_EVENT_VARIABLE_CHANGE_45015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_45029(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_done"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -350,7 +348,7 @@ function action_EVENT_VARIABLE_CHANGE_45029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -360,7 +358,7 @@ function condition_EVENT_GROUP_LOAD_45030(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -371,7 +369,7 @@ function action_EVENT_GROUP_LOAD_45030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 

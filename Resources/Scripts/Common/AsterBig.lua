@@ -84,11 +84,11 @@ local progress_def = {
 	["nightmare"] = {0,1500,3000,4500,6500}
 }
 
-defs = {
+local defs = {
 	--group_main
 	gadget_aster = 413001,
 	gadget_reward = 123456,
-	score_ratio = {normal=1,hard=0.75,nightmare=0.5},
+	score_ratio = {normal=1,hard=0.75,nightmare=0.5}, 
 	difficulty_weight = {normal=75,hard=20,nightmare=5},
 	--group_stage
 	--group_clear
@@ -108,7 +108,7 @@ local play = {
 	group_gadget = 133001498,
 	energy_str = "AVATAR_ASTER_SCORE", 		--uid_value
 	difficulty = "difficulty",
-	ratio_energy = {"ASTER_ENERGY_RATIO",2},
+	ratio_energy = {"ASTER_ENERGY_RATIO",2},	
 	ratio_progress = {"ASTER_PROGRESS_RATIO",2},
 	op_radius = 10
 }
@@ -271,7 +271,7 @@ function condition_battle_state(context, evt)
 	if defs.group_id == play.group_main then
 		ScriptLib.PrintContextLog(context, "## ASTER_LOG: battle_state : param1->"..evt.param1.." | param2->"..evt.param2.." | param3->"..evt.param3)
 	end
-	if evt.param1 == play.PlayType and evt.param2 == play.PlayId then
+	if evt.param1 == play.PlayType and evt.param2 == play.PlayId then 
 		return true
 	end
 	return false
@@ -720,7 +720,7 @@ function LF_Get_Uid_Op_Target(context, buff_type)
 	local list = {}
 	math.randomseed(ScriptLib.GetServerTime(context) + buff_type)
 	--if buff_type == 1 or buff_type == 2 then
-	list[1] = user[math.random(1,#user)]
+	list[1] = user[math.random(1,#user)] 
 	ScriptLib.PrintContextLog(context, "## ASTER_LOG : uid_op_target -> "..list[1])
 	--end
 	return list
@@ -744,10 +744,10 @@ function LF_Modify_Gadget_Group(context, stage)
 	elseif circle_type_defs[D] == 2 then
 		--交分台换位置
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_aster, 201)
-	end
+	end	
 	if stage == 0 then
 		ScriptLib.SetScenePlayBattleUidValue(context, 0, host, "circle_ptr", tide_defs[D][stage].circle)
-		ScriptLib.AddExtraGroupSuite(context, play.group_gadget, tide_defs[D][stage].circle)
+		ScriptLib.AddExtraGroupSuite(context, play.group_gadget, tide_defs[D][stage].circle)	
 	elseif circle_type_defs[D] == 1 then
 		ScriptLib.SetScenePlayBattleUidValue(context, 0, host, "circle_ptr", tide_defs[D][stage].circle)
 		local prev_stage = ScriptLib.GetScenePlayBattleUidValue(context, 0, host, "prev_stage")

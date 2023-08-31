@@ -1,5 +1,5 @@
 --[[
-defs = {
+local defs = {
     --  进入指定Region获得对应AbilityGroup
     -- AG:AbilityGroup
     GroupID = 133003041,
@@ -222,3 +222,4 @@ end
 
 LF_Initialize_Level()
 --- ServerUploadTool Save to [/root/env/data/lua/common/V2_1]  ---
+

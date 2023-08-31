@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235884002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -101,9 +101,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -112,12 +112,12 @@ function condition_EVENT_ANY_MONSTER_DIE_2006(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"monster_wave"为0
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -128,10 +128,10 @@ function action_EVENT_ANY_MONSTER_DIE_2006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235884002, 4)
-
+	
 	return 0
 end
 
@@ -141,12 +141,12 @@ function condition_EVENT_ANY_MONSTER_DIE_2008(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"monster_wave"为1
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -157,12 +157,12 @@ function action_EVENT_ANY_MONSTER_DIE_2008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "GALLERY_STATE" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "GALLERY_STATE", 2, 235884001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end

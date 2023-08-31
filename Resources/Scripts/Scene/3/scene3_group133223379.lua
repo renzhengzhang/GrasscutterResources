@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133223379
 }
 
@@ -12,16 +12,16 @@ defs = {
         hasChild = true, --表示是否切当前Group的suite，true表示切自己的
         selfSuiteId = 2, --需要切的自己的suite
         hasMultiStatues = false, --是否有多个雷鸟雕像
-        statuesMap =
+        statuesMap = 
         {
                 [10001] = 2, --雷鸟雕像和需要切出来的Suite的对应表
         },
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -87,25 +87,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_379002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Notified"为1
 	if ScriptLib.GetGroupVariableValue(context, "Notified") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"Quest_Finish"为0
 	if ScriptLib.GetGroupVariableValue(context, "Quest_Finish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -116,7 +116,7 @@ function action_EVENT_VARIABLE_CHANGE_379002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（-6130，201，-2591），持续时间为4秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-6130, y=201, z=-2591}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -125,8 +125,8 @@ function action_EVENT_VARIABLE_CHANGE_379002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -135,7 +135,7 @@ function condition_EVENT_QUEST_START_379003(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133223379, 379001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -145,11 +145,11 @@ function action_EVENT_QUEST_START_379003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 379001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 变量"Notified"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "Notified", 0)
-
+	
 	return 0
 end
 
@@ -159,7 +159,7 @@ function condition_EVENT_QUEST_FINISH_379004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Quest_Finish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -170,7 +170,7 @@ function action_EVENT_QUEST_FINISH_379004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

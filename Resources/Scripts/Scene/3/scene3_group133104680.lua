@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133104680
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -122,9 +122,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -133,8 +133,8 @@ function condition_EVENT_ANY_MONSTER_DIE_680001(context, evt)
 	if evt.param1 ~= 680012 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -145,13 +145,13 @@ function action_EVENT_ANY_MONSTER_DIE_680001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "finished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（336，154，997），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=336, y=154, z=997}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -160,14 +160,14 @@ function action_EVENT_ANY_MONSTER_DIE_680001(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133104680, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_680002(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 60 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -185,13 +185,13 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_680002(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104680, 3)
-
+	
 	-- 调用提示id为 400005 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -201,7 +201,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_680003(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 20 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -209,13 +209,13 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_680003(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104680, 4)
-
+	
 	-- 调用提示id为 400005 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -224,7 +224,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_680004(context, evt)
 	if 680009 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -232,7 +232,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_680004(context, evt)
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104680, 5)
-
+	
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_680005(context, evt)
 	if 680017 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -249,7 +249,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_680005(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104680, 3)
-
+	
 	return 0
 end
 
@@ -258,7 +258,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_680006(context, evt)
 	if 680018 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -269,11 +269,11 @@ function action_EVENT_GADGET_STATE_CHANGE_680006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104680, 4)
-
+	
 	return 0
 end
 
@@ -283,7 +283,7 @@ function condition_EVENT_GROUP_LOAD_680007(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "wave3", 133104622) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -291,25 +291,25 @@ end
 function action_EVENT_GROUP_LOAD_680007(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104680, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104680, 3)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104680, 4)
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104680, 5)
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104680, 2)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104678, 2)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104679, 2)
-
+	
 	return 0
 end
 
@@ -318,7 +318,7 @@ function condition_EVENT_GADGET_CREATE_680008(context, evt)
 	if 680009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -329,7 +329,7 @@ function action_EVENT_GADGET_CREATE_680008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -338,7 +338,7 @@ function condition_EVENT_MONSTER_BATTLE_680019(context, evt)
 	if 680012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -346,6 +346,6 @@ end
 function action_EVENT_MONSTER_BATTLE_680019(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104680, 5)
-
+	
 	return 0
 end

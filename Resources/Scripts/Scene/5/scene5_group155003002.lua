@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155003002
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155003002
 }
 
 -- DEFS_MISCS
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
-
-
+		
+		
 	end,
 	["1"] = function(context)
 
@@ -21,7 +21,7 @@ local gameplayStateFuncitons =
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 
 
-
+	
 	end,
 	["2"] = function(context)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
@@ -30,16 +30,16 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -73,9 +73,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +86,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -122,22 +122,22 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_2001(context, evt)
 			local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155003001)
-
-			if isactive == 1 then
-				if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then
+		
+			if isactive == 1 then 
+				if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then 
 					ScriptLib.SetGroupVariableValue(context,"gameplayState", 1)
 				end
-
+				
 			end
-
+		
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -145,7 +145,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_2002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -156,7 +156,7 @@ function condition_EVENT_QUEST_START_2004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -167,19 +167,19 @@ function action_EVENT_QUEST_START_2004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 2003 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 155003002, EntityType.GADGET, 2005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end

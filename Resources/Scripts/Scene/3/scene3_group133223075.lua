@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133223075
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -83,20 +83,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_75001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"thief_progress"为3
 	if ScriptLib.GetGroupVariableValue(context, "thief_progress") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -107,19 +107,19 @@ function action_EVENT_VARIABLE_CHANGE_75001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_75003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"thief_A_finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "thief_A_finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -129,20 +129,20 @@ function action_EVENT_VARIABLE_CHANGE_75003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 75005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_75004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"thief_B_finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "thief_B_finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -152,20 +152,20 @@ function action_EVENT_VARIABLE_CHANGE_75004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 75007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_75008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"thief_C_finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "thief_C_finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -175,8 +175,8 @@ function action_EVENT_VARIABLE_CHANGE_75008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 75006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -186,7 +186,7 @@ function condition_EVENT_GROUP_LOAD_75009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "thief_progress") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -197,6 +197,6 @@ function action_EVENT_GROUP_LOAD_75009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

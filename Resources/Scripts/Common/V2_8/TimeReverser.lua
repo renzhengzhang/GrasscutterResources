@@ -4,10 +4,10 @@
 ||  owner:      weiwei.sun
 ||  description:    2.8莫娜梦境 时间回溯
 ||  LogName:    TimeReverser
-||  Protection:
+||  Protection: 
 =======================================]]--
 --[[
-defs = {
+local defs = {
     reverse_time = 10,--回溯倒计时，整数秒
 }
 ]]
@@ -30,13 +30,13 @@ function LF_Initialize_Group(triggers, suites)
 end
 
 function action_Group_Load(context, evt)
-    if 1 == ScriptLib.GetGroupVariableValue(context, "is_reverting") then
+    if 1 == ScriptLib.GetGroupVariableValue(context, "is_reverting") then        
         for k, v in pairs(gadgets) do
-            if nil ~= v.mark_flag then
+            if nil ~= v.mark_flag then 
                 ScriptLib.SetGadgetStateByConfigId(context, v.config_id, 0)
             end
         end
-    end
+    end 
     ScriptLib.SetGroupVariableValue(context, "revert", 0)
     ScriptLib.SetGroupVariableValue(context, "is_reverting", 0)
     return 0
@@ -47,7 +47,7 @@ function action_Device_Gadget_State_Change(context, evt)
     if 70310390 ~= gadget_id then
         return  0
     end
-    if 0 ~= evt.param1 then
+    if 0 ~= evt.param1 then 
         return 0
     end
     ScriptLib.SetGroupVariableValue(context, "is_reverting", 0)
@@ -55,26 +55,26 @@ function action_Device_Gadget_State_Change(context, evt)
 end
 
 function action_Gadget_State_Change(context, evt)
-    if nil == gadgets[evt.param2] then
+    if nil == gadgets[evt.param2] then 
         ScriptLib.PrintContextLog(context, "## [TimeReverser] Gadget_State_Change get unknown param2.")
         return 0
     end
-    if nil == gadgets[evt.param2].mark_flag then
+    if nil == gadgets[evt.param2].mark_flag then 
         return 0
     end
-    if 201 ~= evt.param1 then
+    if 201 ~= evt.param1 then 
         return 0
     end
     --检查是否处于待回溯状态，若不处于，则尝试init回溯时间轴
-    if 1 ~= ScriptLib.GetGroupVariableValue(context, "is_reverting") then
+    if 1 ~= ScriptLib.GetGroupVariableValue(context, "is_reverting") then        
         LF_TryInitReverseTimeAxis(context)
     end
     return 0
 end
 
-function action_TimeAxis_Pass(context, evt)
+function action_TimeAxis_Pass(context, evt) 
     for k, v in pairs(gadgets) do
-        if nil ~= v.mark_flag then
+        if nil ~= v.mark_flag then 
             ScriptLib.SetGadgetStateByConfigId(context, v.config_id, 0)
         end
         --其中回溯机关 做回溯表现
@@ -93,7 +93,7 @@ function action_Revert_VariableChange(context, evt)
         --检查是否处于待回溯状态，若不处于，则尝试init回溯时间轴
         if 1 ~= ScriptLib.GetGroupVariableValue(context, "is_reverting") then
            LF_TryInitReverseTimeAxis(context)
-        end
+        end       
     end
     return 0
 end
@@ -116,7 +116,7 @@ function LF_TryInitReverseTimeAxis(context)
         ScriptLib.SetGroupVariableValue(context, "is_reverting", 1)
         ScriptLib.PrintContextLog(context, "## [TimeReverser] LF_TryInitReverseTimeAxis. InitTimeAxis.")
         return 0
-    end
-    return 0
+    end 
+    return 0 
 end
 LF_Initialize_Group(triggers, suites)

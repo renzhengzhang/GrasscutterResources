@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235800011
 }
 
@@ -20,7 +20,7 @@ local BubbleWeightList = {
 	[9] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[10] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[11] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
-	[12] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 0 }, { Num= 4, weight= 0 }, { Num= 5, weight= 100 }},
+	[12] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 0 }, { Num= 4, weight= 0 }, { Num= 5, weight= 100 }},								
 }
 
 
@@ -37,7 +37,7 @@ local BubbleWeightList2 = {
 	[10] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[11] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[12] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
-
+										
 }
 
 
@@ -53,7 +53,7 @@ local BubbleWeightList3 = {
 	[9] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 20 }, { Num= 4, weight= 80 }, { Num= 5, weight= 0 }},
 	[10] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 50 }, { Num= 4, weight= 50 }, { Num= 5, weight= 0 }},
 	[11] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 50 }, { Num= 4, weight= 50 }, { Num= 5, weight= 0 }},
-	[12] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 0 }, { Num= 4, weight= 50 }, { Num= 5, weight= 50 }},
+	[12] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 0 }, { Num= 4, weight= 50 }, { Num= 5, weight= 50 }},								
 }
 
 local BubbleWeightList4 = {
@@ -68,7 +68,7 @@ local BubbleWeightList4 = {
 	[9] = {{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[10] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
 	[11] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 30 }, { Num= 4, weight= 70 }, { Num= 5, weight= 0 }},
-	[12] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 50 }, { Num= 4, weight= 0 }, { Num= 5, weight= 50 }},
+	[12] ={{ Num= 1, weight= 0 }, { Num= 2, weight= 0 }, { Num= 3, weight= 50 }, { Num= 4, weight= 0 }, { Num= 5, weight= 50 }},							
 }
 
 --BubbleStep = {{list= BubbleWeightList ,BubbleSpSuite=0},{list= BubbleWeightList2 , BubbleSpSuite=21},{list= BubbleWeightList3 , BubbleSpSuite=22} ,{list= BubbleWeightList4 ,BubbleSpSuite=22}}
@@ -96,7 +96,7 @@ local RegionID = 11073
 
 local flower_region_id = {11075,11076,11077,11078}
 
-local bubble_delay_sec = 10
+local bubble_delay_sec = 10  
 
 local Bubble_PerfectScore = 20
 
@@ -113,9 +113,9 @@ local perfect_complete_timelimit_challenge = "perfect_complete_timelimit_challen
 local defeated_timelimit_challenge = "defeated_timelimit_challenge_6007"
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -252,9 +252,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -265,9 +265,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -472,20 +472,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11075(context, evt)
 	if evt.param1 ~= 11075 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -496,19 +496,19 @@ function action_EVENT_ENTER_REGION_11075(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11076(context, evt)
 	if evt.param1 ~= 11076 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -519,19 +519,19 @@ function action_EVENT_ENTER_REGION_11076(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11077(context, evt)
 	if evt.param1 ~= 11077 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -542,19 +542,19 @@ function action_EVENT_ENTER_REGION_11077(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11078(context, evt)
 	if evt.param1 ~= 11078 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -565,7 +565,7 @@ function action_EVENT_ENTER_REGION_11078(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

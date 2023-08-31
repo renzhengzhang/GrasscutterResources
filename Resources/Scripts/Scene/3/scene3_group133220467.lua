@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220467
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -81,20 +81,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_467001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"open"为1
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -105,7 +105,7 @@ function action_EVENT_VARIABLE_CHANGE_467001(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -115,7 +115,7 @@ function condition_EVENT_GROUP_LOAD_467002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "open") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -126,6 +126,6 @@ function action_EVENT_GROUP_LOAD_467002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end

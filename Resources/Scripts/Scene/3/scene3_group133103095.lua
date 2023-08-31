@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103095
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     ButtonLeftConfig = 95001,
     ButtonRightConfig = 95002,
     StoveConfig = 95003,
@@ -34,9 +34,9 @@ local challengeParam = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -197,9 +197,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -210,9 +210,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -309,9 +309,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -321,7 +321,7 @@ function action_EVENT_QUEST_START_95047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -332,19 +332,19 @@ function action_EVENT_CHALLENGE_FAIL_95049(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1110380 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110380) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "startOrNot" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "startOrNot", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -355,19 +355,19 @@ function action_EVENT_CHALLENGE_SUCCESS_95054(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "startOrNot" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "startOrNot", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "challengefinishforquest") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -377,8 +377,8 @@ function action_EVENT_QUEST_FINISH_95067(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 95005, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -388,8 +388,8 @@ function action_EVENT_QUEST_START_95070(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 95005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -398,7 +398,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_95084(context, evt)
 	if 95001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -409,7 +409,7 @@ function action_EVENT_GADGET_STATE_CHANGE_95084(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -418,7 +418,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_95085(context, evt)
 	if 95002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -429,7 +429,7 @@ function action_EVENT_GADGET_STATE_CHANGE_95085(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -438,7 +438,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_95086(context, evt)
 	if 95001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -449,7 +449,7 @@ function action_EVENT_GADGET_STATE_CHANGE_95086(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -458,7 +458,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_95087(context, evt)
 	if 95002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -469,32 +469,32 @@ function action_EVENT_GADGET_STATE_CHANGE_95087(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_95088(context, evt)
 	-- 判断是gadgetid 为 95003的移动平台，是否到达了310300238 的路线中的 1 点
-
+	
 	if 95003 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300238 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	-- 判断变量"isRightBtnPressed"为1
 	if ScriptLib.GetGroupVariableValue(context, "isRightBtnPressed") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -505,7 +505,7 @@ function action_EVENT_PLATFORM_REACH_POINT_95088(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -514,12 +514,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_95089(context, evt)
 	if 95002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"curPos"为1
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -530,32 +530,32 @@ function action_EVENT_GADGET_STATE_CHANGE_95089(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_95090(context, evt)
 	-- 判断是gadgetid 为 95003的移动平台，是否到达了310300240 的路线中的 1 点
-
+	
 	if 95003 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300240 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	-- 判断变量"isRightBtnPressed"为1
 	if ScriptLib.GetGroupVariableValue(context, "isRightBtnPressed") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -566,7 +566,7 @@ function action_EVENT_PLATFORM_REACH_POINT_95090(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -575,12 +575,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_95091(context, evt)
 	if 95002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"curPos"为2
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -591,7 +591,7 @@ function action_EVENT_GADGET_STATE_CHANGE_95091(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -600,12 +600,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_95092(context, evt)
 	if 95001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"curPos"为2
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -616,7 +616,7 @@ function action_EVENT_GADGET_STATE_CHANGE_95092(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -625,12 +625,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_95093(context, evt)
 	if 95001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"curPos"为3
 	if ScriptLib.GetGroupVariableValue(context, "curPos") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -641,7 +641,7 @@ function action_EVENT_GADGET_STATE_CHANGE_95093(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -651,20 +651,20 @@ function action_EVENT_QUEST_START_95094(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 95004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 95005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 95005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 95006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 95006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

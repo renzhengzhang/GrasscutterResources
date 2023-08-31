@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003100
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,73 +85,73 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_100002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "weather") == 2 then
-
+	
 	ScriptLib.RefreshGroup(context, { group_id = 199003045, suite = 1 })
-
-	ScriptLib.RefreshGroup(context, { group_id = 199003047, suite = 1 })
-
-
+		
+	ScriptLib.RefreshGroup(context, { group_id = 199003047, suite = 1 }) 
+	
+	
 	else
-
+	
 	ScriptLib.RefreshGroup(context, { group_id = 199003045, suite = 2 })
-	ScriptLib.RefreshGroup(context, { group_id = 199003047, suite = 2 })
-
+	ScriptLib.RefreshGroup(context, { group_id = 199003047, suite = 2 }) 
+	
 	end
-
-
+	
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_100003(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "weather") == 1 then
-
+	
 	if ScriptLib.GetGroupVariableValueByGroup(context, "create", 199003093) == 1 then
 	ScriptLib.RefreshGroup(context, { group_id = 199003093, suite = 2 })
 	end
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003108) == 0 then
-	ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 2 })
+	ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 2 }) 
 	end
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "isFinished", 199003060) == 0 then
 	  ScriptLib.GoToFlowSuite(context, 199003060, 1)
 	end
-
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "create", 199003093) == 0 then
 	 ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 2 })
 	end
-
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003131) == 0 then
 	  ScriptLib.GoToFlowSuite(context, 199003131, 2)
 	end
-
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003108) == 0 then
 	  ScriptLib.GoToFlowSuite(context, 199003116, 2)
 	   ScriptLib.GoToFlowSuite(context, 199003118, 2)
 	  ScriptLib.GoToFlowSuite(context, 199003121, 2)
 	end
-
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003149) == 0 then
 	  ScriptLib.GoToFlowSuite(context, 199003149, 2)
 	end
-
+	
 	else
-
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003108) == 0 then
-	ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 1 })
+	ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 1 }) 
 	end
-
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "create", 199003093) == 0 then
 	 ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 1 })
 	end
@@ -159,7 +159,7 @@ function action_EVENT_VARIABLE_CHANGE_100003(context, evt)
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003131) == 0 then
 	ScriptLib.GoToFlowSuite(context, 199003131, 1)
 	end
-
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "isFinished", 199003060) == 0 then
 	  ScriptLib.GoToFlowSuite(context, 199003060, 2)
 	end
@@ -167,14 +167,14 @@ function action_EVENT_VARIABLE_CHANGE_100003(context, evt)
 	  ScriptLib.GoToFlowSuite(context, 199003116, 1)
 	  ScriptLib.GoToFlowSuite(context, 199003118, 1)
 	  ScriptLib.GoToFlowSuite(context, 199003121, 1)
-
-
+	
+	
 	end
-
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003149) == 0 then
 	   ScriptLib.GoToFlowSuite(context, 199003149, 1)
 	end
-
+	
 	end
 	return 0
 end
@@ -185,7 +185,7 @@ function condition_EVENT_GROUP_LOAD_100006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "weather") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -194,17 +194,17 @@ function action_EVENT_GROUP_LOAD_100006(context, evt)
 	ScriptLib.SetWeatherAreaState(context, 9007, 1)
 	ScriptLib.SetWeatherAreaState(context, 9005, 0)
 	ScriptLib.SetWeatherAreaState(context, 9006, 0)
-
-
-
+	
+	
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003108) == 0 then
-	ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 2 })
+	ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 2 }) 
 	end
-
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "create", 199003093) == 0 then
 	 ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 2 })
 	end
-
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003131) == 0 then
 	  ScriptLib.GoToFlowSuite(context, 199003131, 2)
 	end
@@ -213,7 +213,7 @@ function action_EVENT_GROUP_LOAD_100006(context, evt)
 	   ScriptLib.GoToFlowSuite(context, 199003118, 2)
 	  ScriptLib.GoToFlowSuite(context, 199003121, 2)
 	end
-
+	
 	 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003149) == 0 then
 	  ScriptLib.GoToFlowSuite(context, 199003149, 2)
 	end
@@ -226,7 +226,7 @@ function condition_EVENT_GROUP_LOAD_100007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "weather") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -235,18 +235,18 @@ function action_EVENT_GROUP_LOAD_100007(context, evt)
 	ScriptLib.SetWeatherAreaState(context, 9005, 1)
 	ScriptLib.SetWeatherAreaState(context, 9006, 0)
 	ScriptLib.SetWeatherAreaState(context, 9007, 0)
-
-
-
+	
+	
+	
 	ScriptLib.RefreshGroup(context, { group_id = 199003045, suite = 1 })
-
-	ScriptLib.RefreshGroup(context, { group_id = 199003047, suite = 1 })
-
-
+		
+	ScriptLib.RefreshGroup(context, { group_id = 199003047, suite = 1 }) 
+	
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003108) == 0 then
-		ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 1 })
+		ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 1 }) 
 		end
-
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "create", 199003093) == 0 then
 		 ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 1 })
 		end
@@ -254,19 +254,19 @@ function action_EVENT_GROUP_LOAD_100007(context, evt)
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003131) == 0 then
 		ScriptLib.GoToFlowSuite(context, 199003131, 1)
 		end
-
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003108) == 0 then
 		  ScriptLib.GoToFlowSuite(context, 199003116, 1)
 		  ScriptLib.GoToFlowSuite(context, 199003118, 1)
 		  ScriptLib.GoToFlowSuite(context, 199003121, 1)
-
-
+		
+		
 		end
-
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003149) == 0 then
 		   ScriptLib.GoToFlowSuite(context, 199003149, 1)
 		end
-
+	
 	return 0
 end
 
@@ -276,7 +276,7 @@ function condition_EVENT_GROUP_LOAD_100008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "weather") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -285,15 +285,15 @@ function action_EVENT_GROUP_LOAD_100008(context, evt)
 	ScriptLib.SetWeatherAreaState(context, 9005, 1)
 	ScriptLib.SetWeatherAreaState(context, 9006, 0)
 	ScriptLib.SetWeatherAreaState(context, 9007, 0)
-
-
-
+	
+	
+	
 	--雾
-
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003108) == 0 then
-		ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 1 })
+		ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 1 }) 
 		end
-
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "create", 199003093) == 0 then
 		 ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 1 })
 		end
@@ -301,22 +301,22 @@ function action_EVENT_GROUP_LOAD_100008(context, evt)
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003131) == 0 then
 		ScriptLib.GoToFlowSuite(context, 199003131, 1)
 		end
-
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003108) == 0 then
 		  ScriptLib.GoToFlowSuite(context, 199003116, 1)
 		  ScriptLib.GoToFlowSuite(context, 199003118, 1)
 		  ScriptLib.GoToFlowSuite(context, 199003121, 1)
-
-
+		
+		
 		end
-
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003149) == 0 then
 		   ScriptLib.GoToFlowSuite(context, 199003149, 1)
 		end
 	--风
 	ScriptLib.RefreshGroup(context, { group_id = 199003045, suite = 2 })
-	ScriptLib.RefreshGroup(context, { group_id = 199003047, suite = 2 })
-
+	ScriptLib.RefreshGroup(context, { group_id = 199003047, suite = 2 }) 
+	
 	return 0
 end
 
@@ -326,7 +326,7 @@ function condition_EVENT_GROUP_LOAD_100009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "weather") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -335,15 +335,15 @@ function action_EVENT_GROUP_LOAD_100009(context, evt)
 	ScriptLib.SetWeatherAreaState(context, 9006, 1)
 	ScriptLib.SetWeatherAreaState(context, 9007, 0)
 	ScriptLib.SetWeatherAreaState(context, 9005, 0)
-
-
-
+	
+	
+	
 	--雾
-
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003108) == 0 then
-		ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 1 })
+		ScriptLib.RefreshGroup(context, { group_id = 199003108, suite = 1 }) 
 		end
-
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "create", 199003093) == 0 then
 		 ScriptLib.RefreshGroup(context, { group_id = 199003113, suite = 1 })
 		end
@@ -351,43 +351,43 @@ function action_EVENT_GROUP_LOAD_100009(context, evt)
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003131) == 0 then
 		ScriptLib.GoToFlowSuite(context, 199003131, 1)
 		end
-
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003108) == 0 then
 		  ScriptLib.GoToFlowSuite(context, 199003116, 1)
 		  ScriptLib.GoToFlowSuite(context, 199003118, 1)
 		  ScriptLib.GoToFlowSuite(context, 199003121, 1)
-
-
+		
+		
 		end
-
+		
 		 if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003149) == 0 then
 		   ScriptLib.GoToFlowSuite(context, 199003149, 1)
 		end
 	--风
 	ScriptLib.RefreshGroup(context, { group_id = 199003045, suite = 2 })
-	ScriptLib.RefreshGroup(context, { group_id = 199003047, suite = 2 })
-
+	ScriptLib.RefreshGroup(context, { group_id = 199003047, suite = 2 }) 
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_100010(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "weather") == 4 then
-
+	
 	ScriptLib.RefreshGroup(context, { group_id = 199003151, suite = 1 })
 	ScriptLib.SetGroupVariableValueByGroup(context, "weather", 4, 199003164)
-
-
-
+	
+	
+	
 	else
-
+	
 	ScriptLib.RefreshGroup(context, { group_id = 199003151, suite = 2 })
 	ScriptLib.SetGroupVariableValueByGroup(context, "weather", 0, 199003164)
 	end
-
-
-
+	
+	
+	
 	return 0
 end

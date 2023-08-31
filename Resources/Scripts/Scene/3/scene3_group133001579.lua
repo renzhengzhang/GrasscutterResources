@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133001579
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	RegionID =  579013
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -113,9 +113,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -123,22 +123,22 @@ function condition_EVENT_ANY_MONSTER_LIVE_579002(context, evt)
 	if 579001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_LIVE_579002(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 502, 110167, 240, {success = 1, fail = 1, fail_on_wipe=true})
-
+	
 	ScriptLib.AttachChildChallenge(context, 502, 110268, 110168, {240,133001579,1,0},{},{success=1,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 502, 110269, 110169, {240,5,579,1,0},{},{success=0,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 502, 110270, 110170, {240,1,0,0},{},{success=0,fail=1})
-
+	
 	ScriptLib.StartFatherChallenge(context, 502)
-
+	
 	return 0
 end
 
@@ -147,22 +147,22 @@ function condition_EVENT_ANY_MONSTER_LIVE_579003(context, evt)
 	if 579001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_LIVE_579003(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 501, 110167, 300, {success = 1, fail = 1, fail_on_wipe=true})
-
+	
 	ScriptLib.AttachChildChallenge(context, 501, 110168, 110168, {300,133001579,1,0},{},{success=1,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 501, 110169, 110169, {300,5,579,1,0},{},{success=0,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 501, 110170, 110170, {300,2,0,0},{},{success=0,fail=1})
-
+	
 	ScriptLib.StartFatherChallenge(context, 501)
-
+	
 	return 0
 end
 
@@ -173,7 +173,7 @@ function action_EVENT_CHALLENGE_SUCCESS_579004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -184,7 +184,7 @@ function action_EVENT_CHALLENGE_FAIL_579005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -195,7 +195,7 @@ function action_EVENT_CHALLENGE_SUCCESS_579006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_CHALLENGE_FAIL_579007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -215,22 +215,22 @@ function condition_EVENT_ANY_MONSTER_LIVE_579008(context, evt)
 	if 579014 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_LIVE_579008(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 503, 110167, 110, {success = 1, fail = 1, fail_on_wipe=true})
-
+	
 	ScriptLib.AttachChildChallenge(context, 503, 110368, 110168, {110,133001579,1,0},{},{success=1,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 503, 110369, 110169, {110,5,579,1,0},{},{success=0,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 503, 110370, 110179, {110,0,0,0},{},{success=0,fail=1})
-
+	
 	ScriptLib.StartFatherChallenge(context, 503)
-
+	
 	return 0
 end
 
@@ -241,7 +241,7 @@ function action_EVENT_CHALLENGE_SUCCESS_579009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -252,7 +252,7 @@ function action_EVENT_CHALLENGE_FAIL_579010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 

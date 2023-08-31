@@ -1,16 +1,16 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210219
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 133210219,
 	gadget_thunderThelfID = 219001,
 	pointarray_ID = 321000067,
 	maxPointCount = 14,
 	gadget_Reward_1 = 219004,
-	pointInfo = {5,8,10,12,14}
+	pointInfo = {5,8,10,12,14} 
 }
 
 -- DEFS_MISCS
@@ -41,9 +41,9 @@ function MovePlatform(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -90,9 +90,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -104,9 +104,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -184,9 +184,9 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -194,28 +194,28 @@ function condition_EVENT_PLATFORM_REACH_POINT_219003(context, evt)
 	if 219001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_219003(context, evt)
-	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)
+	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)		
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isMoving", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
-	end
+	end	
 	ScriptLib.StopPlatform(context, defs.gadget_thunderThelfID)
 	if evt.param3 == defs.maxPointCount then
 		ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
-		ScriptLib.CreateGadget(context, { config_id = defs.gadget_Reward_1 })
+		ScriptLib.CreateGadget(context, { config_id = defs.gadget_Reward_1 }) 
 		ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_thunderThelfID, GadgetState.GearStart)
 		ScriptLib.MarkPlayerAction(context, 2014, 3, 1)
-		ScriptLib.SetFlowSuite(context, defs.group_ID, 3)
-
+		ScriptLib.SetFlowSuite(context, defs.group_ID, 3)		
+		
 		return 0
 	end
-
+			
 	local next = ScriptLib.GetGroupVariableValue(context, "nextRouteIndex")
 	next = next + 1
 	ScriptLib.SetGroupVariableValue(context,"nextRouteIndex", next)
@@ -230,14 +230,14 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_219005(context, evt)
 				return false
 			end
 			local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
-			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state)
-			if state == 201 then
+			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state) 
+			if state == 201 then 
 				return false
 			end
-			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then
+			if ScriptLib.GetGroupVariableValue(context, "isMoving") ~= 0 then 
 				return false
 			end
-
+			
 			return true
 end
 
@@ -250,12 +250,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_219006(context, evt)
 	if evt.param1 ~= 219006 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -266,7 +266,7 @@ function action_EVENT_ENTER_REGION_219006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -274,7 +274,7 @@ end
 function action_EVENT_QUEST_START_219007(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210219, 2)
-
+	
 	return 0
 end
 
@@ -283,7 +283,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_219008(context, evt)
 	if 219004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -294,16 +294,16 @@ function action_EVENT_GADGET_STATE_CHANGE_219008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7216506") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210219, 4)
-
+	
 	return 0
 end
 
@@ -314,6 +314,6 @@ function action_EVENT_QUEST_START_219009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220013002
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 10,
 	gadget_id_2 = 1018,
 	gadget_id_3 = 1017,
@@ -58,9 +58,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -185,9 +185,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -198,9 +198,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -216,164 +216,164 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3(context, evt)
 	if evt.param1 ~= 3 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_3(context, evt)
 	-- 根据不同的选项做不同的操作
-
+	
 	ScriptLib.ChangeGroupVariableValue(context, "Enter_FireChoice", 1)
 	if 0 ~= ScriptLib.ShowReminder(context, 10050401) then
 		return -1
 	end
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220013003, suite = 1 }) then
 			return -1
 		end
-
+	
 	-- 改变指定group组220013001中， configid为3的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013001, defs.gadget_id_2, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220013001中， configid为2的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013001, defs.gadget_id_3, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220013001中， configid为1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013001, defs.gadget_id_4, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4(context, evt)
 	if evt.param1 ~= 4 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_4(context, evt)
 	-- 根据不同的选项做不同的操作
-
+	
 	ScriptLib.ChangeGroupVariableValue(context, "Enter_IceChoice", 1)
 	if 0 ~= ScriptLib.ShowReminder(context, 10050501) then
 		return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_5, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220013003, suite = 2 }) then
 			return -1
 		end
-
+	
 	-- 改变指定group组220013001中， configid为1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013001, defs.gadget_id_4, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220013001中， configid为2的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013001, defs.gadget_id_3, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220013001中， configid为3的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013001, defs.gadget_id_2, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5(context, evt)
 	if evt.param1 ~= 5 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_5(context, evt)
 	-- 根据不同的选项做不同的操作
-
+	
 	ScriptLib.ChangeGroupVariableValue(context, "Enter_ElecChoice", 1)
-
+	
 	if 0 ~= ScriptLib.ShowReminder(context, 10050601) then
 		return -1
 	end
-
+	
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_6, GadgetState.GearStart) then
 				return -1
-			end
-
+			end 
+		
 			-- 重新生成指定group，指定suite
 			if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220013003, suite = 3 }) then
 				return -1
 			end
-
+		
 		-- 改变指定group组220013001中， configid为1的gadget的state
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013001, defs.gadget_id_4, GadgetState.Default) then
 				return -1
-			end
-
+			end 
+		
 		-- 改变指定group组220013001中， configid为2的gadget的state
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013001, defs.gadget_id_3, GadgetState.Default) then
 				return -1
-			end
-
+			end 
+		
 		-- 改变指定group组220013001中， configid为3的gadget的state
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013001, defs.gadget_id_2, GadgetState.Default) then
 				return -1
-			end
-
+			end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25(context, evt)
 	if evt.param1 ~= 25 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -382,7 +382,7 @@ function action_EVENT_ENTER_REGION_25(context, evt)
 	cur_fireChoice = ScriptLib.GetGroupVariableValue(context, "Enter_FireChoice")
 	cur_iceChoice = ScriptLib.GetGroupVariableValue(context, "Enter_IceChoice")
 	cur_elecChoice = ScriptLib.GetGroupVariableValue(context, "Enter_ElecChoice")
-
+	
 	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【1】
 	    if cur_fireChoice == 1 then
 	-- 重新生成指定group，指定suite
@@ -392,10 +392,10 @@ function action_EVENT_ENTER_REGION_25(context, evt)
 	if 0 ~= ScriptLib.ShowReminder(context, 10050801) then
 		return -1
 	end
-
+	
 	    end
-
-	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【2】
+	
+	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【2】 
 	    if cur_iceChoice == 1 then
 	-- 重新生成指定group，指定suite
 			   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220013005, suite = 2 }) then
@@ -404,10 +404,10 @@ function action_EVENT_ENTER_REGION_25(context, evt)
 	if 0 ~= ScriptLib.ShowReminder(context, 10051101) then
 		return -1
 	end
-
+	
 	    end
-
-	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【3】
+	
+	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【3】 
 	    if cur_elecChoice == 1 then
 	-- 重新生成指定group，指定suite
 			   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220013005, suite = 3 }) then
@@ -416,41 +416,41 @@ function action_EVENT_ENTER_REGION_25(context, evt)
 	if 0 ~= ScriptLib.ShowReminder(context, 10051401) then
 		return -1
 	end
-
+	
 	    end
-
-
+	
+	
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013003, defs.gadget_id_8, GadgetState.Default) then
 				return -1
-			end
-
+			end 
+		
 		-- 改变指定group组220013003中， configid为15的gadget的state
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013003, defs.gadget_id_9, GadgetState.Default) then
 				return -1
-			end
-
+			end 
+		
 		-- 改变指定group组220013003中， configid为16的gadget的state
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013003, defs.gadget_id_10, GadgetState.Default) then
 				return -1
-			end
-
+			end 
+		
 		-- 根据不同的选项做不同的操作
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_7, GadgetState.GearStart) then
 				return -1
-			end
-
+			end 
+		
 		return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_26(context, evt)
 	if evt.param1 ~= 26 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -459,7 +459,7 @@ function action_EVENT_ENTER_REGION_26(context, evt)
 	cur_fireChoice = ScriptLib.GetGroupVariableValue(context, "Enter_FireChoice")
 	cur_iceChoice = ScriptLib.GetGroupVariableValue(context, "Enter_IceChoice")
 	cur_elecChoice = ScriptLib.GetGroupVariableValue(context, "Enter_ElecChoice")
-
+	
 	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【1】
 	    if cur_fireChoice == 1 then
 	-- 重新生成指定group，指定suite
@@ -470,8 +470,8 @@ function action_EVENT_ENTER_REGION_26(context, evt)
 		return -1
 	end
 	    end
-
-	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【2】
+	
+	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【2】 
 	    if cur_iceChoice == 1 then
 	-- 重新生成指定group，指定suite
 			   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220013005, suite = 5 }) then
@@ -480,10 +480,10 @@ function action_EVENT_ENTER_REGION_26(context, evt)
 	if 0 ~= ScriptLib.ShowReminder(context, 10051201) then
 		return -1
 	end
-
+	
 	    end
-
-	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【3】
+	
+	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【3】 
 	    if cur_elecChoice == 1 then
 	-- 重新生成指定group，指定suite
 			   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220013005, suite = 6 }) then
@@ -492,41 +492,41 @@ function action_EVENT_ENTER_REGION_26(context, evt)
 	if 0 ~= ScriptLib.ShowReminder(context, 10051501) then
 		return -1
 	end
-
+	
 	    end
-
+	
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_11, GadgetState.GearStart) then
 				return -1
-			end
-
+			end 
+		
 		-- 改变指定group组220013003中， configid为14的gadget的state
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013003, defs.gadget_id_8, GadgetState.Default) then
 				return -1
-			end
-
+			end 
+		
 		-- 改变指定group组220013003中， configid为15的gadget的state
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013003, defs.gadget_id_9, GadgetState.Default) then
 				return -1
-			end
-
+			end 
+		
 		-- 改变指定group组220013003中， configid为16的gadget的state
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013003, defs.gadget_id_10, GadgetState.Default) then
 				return -1
-			end
-
-
+			end 
+		
+		
 		return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_27(context, evt)
 	if evt.param1 ~= 27 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -535,78 +535,78 @@ function action_EVENT_ENTER_REGION_27(context, evt)
 	cur_fireChoice = ScriptLib.GetGroupVariableValue(context, "Enter_FireChoice")
 	cur_iceChoice = ScriptLib.GetGroupVariableValue(context, "Enter_IceChoice")
 	cur_elecChoice = ScriptLib.GetGroupVariableValue(context, "Enter_ElecChoice")
-
+	
 	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【1】
 	    if cur_fireChoice == 1 then
 	-- 重新生成指定group，指定suite
 			   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220013005, suite = 7 }) then
 				  return -1
 			   end
-
+	
 	if 0 ~= ScriptLib.ShowReminder(context, 10051001) then
 		return -1
 	end
-
+	
 	    end
-
-	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【2】
+	
+	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【2】 
 	    if cur_iceChoice == 1 then
 	-- 重新生成指定group，指定suite
 			   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220013005, suite = 8 }) then
 				  return -1
 			   end
-
+	
 	if 0 ~= ScriptLib.ShowReminder(context, 10051301)  then
 		return -1
 	end
-
+	
 	    end
-
-	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【3】
+	
+	--如果火+攻则在BOSS区域生成 火+攻 型阵容 【3】 
 	    if cur_elecChoice == 1 then
 	-- 重新生成指定group，指定suite
 			   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220013005, suite = 9 }) then
 				  return -1
 			   end
-
+	
 	if 0 ~= ScriptLib.ShowReminder(context, 10051601) then
 		return -1
 	end
-
+	
 	    end
-
+	
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013003, defs.gadget_id_8, GadgetState.Default) then
 				return -1
-			end
-
+			end 
+		
 		-- 改变指定group组220013003中， configid为15的gadget的state
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013003, defs.gadget_id_9, GadgetState.Default) then
 				return -1
-			end
-
+			end 
+		
 		-- 改变指定group组220013003中， configid为16的gadget的state
 		if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220013003, defs.gadget_id_10, GadgetState.Default) then
 				return -1
-			end
-
+			end 
+		
 		-- 根据不同的选项做不同的操作
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_12, GadgetState.GearStart) then
 				return -1
-			end
-
-
+			end 
+		
+		
 		return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_28(context, evt)
 	if evt.param1 ~= 28 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -616,32 +616,32 @@ function action_EVENT_ENTER_REGION_28(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 115, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 116 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 116, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 117 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 117, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_38(context, evt)
 	if evt.param1 ~= 38 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -651,32 +651,32 @@ function action_EVENT_ENTER_REGION_38(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 9 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 9, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 10 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_52(context, evt)
 	if evt.param1 ~= 52 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -686,90 +686,90 @@ function action_EVENT_ENTER_REGION_52(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 221, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 222 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 222, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟0.4秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_Left_row2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_Left_row2", 0.4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟0.8秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_Left_row3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_Left_row3", 0.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟1.2秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_Left_row4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_Left_row4", 1.2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_57(context, evt)
 	if evt.param1 ~= 57 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_57(context, evt)
 	-- 根据不同的选项做不同的操作
-
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_13, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	-- 根据不同的选项做不同的操作
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_14, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	-- 延迟1秒后,向groupId为：220013002的对象,请求一次调用,并将string参数：Fire_Middle_row2 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_Middle_row2", 1) then
-
+	
 	  return -1
 	end
-
+	
 	-- 延迟2秒后,向groupId为：220013002的对象,请求一次调用,并将string参数：Fire_Middle_row3 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_Middle_row3", 2) then
-
+	
 	  return -1
 	end
-
+	
 	-- 延迟3秒后,向groupId为：220013002的对象,请求一次调用,并将string参数：Fire_Middle_row4 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_Middle_row4", 3) then
-
+	
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_61(context, evt)
 	if evt.param1 ~= 61 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -779,44 +779,44 @@ function action_EVENT_ENTER_REGION_61(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 239, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 240 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 240, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟0.4秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_Right_row2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_Right_row2", 0.4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟0.8秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_Right_row3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_Right_row3", 0.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟1.2秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_Right_row4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_Right_row4", 1.2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_67(context, evt)
 	if evt.param1 ~= 67 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -826,44 +826,44 @@ function action_EVENT_ENTER_REGION_67(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 252, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 253 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 253, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟0.4秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_2Left_row2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_2Left_row2", 0.4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟0.8秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_2Left_row3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_2Left_row3", 0.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟1.2秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_2Left_row4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_2Left_row4", 1.2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_68(context, evt)
 	if evt.param1 ~= 68 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -873,44 +873,44 @@ function action_EVENT_ENTER_REGION_68(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 260, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 261 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 261, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟0.4秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_2Middle_row2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_2Middle_row2", 0.4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟0.8秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_2Middle_row3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_2Middle_row3", 0.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟1.2秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_2Middle_row4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_2Middle_row4", 1.2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_69(context, evt)
 	if evt.param1 ~= 69 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -920,332 +920,332 @@ function action_EVENT_ENTER_REGION_69(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 268, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 269 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 269, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟0.4秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_2Right_row2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_2Right_row2", 0.4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟0.8秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_2Right_row3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_2Right_row3", 0.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟1.2秒后,向groupId为：220013002的对象,请求一次调用,并将string参数："Fire_2Right_row4" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220013002, "Fire_2Right_row4", 1.2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_TIMER_EVENT_70(context, evt)
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_70(context, evt)
 	-- 根据不同的选项做不同的操作
-
+	
 	if evt.source_name == "Fire_Middle_row2" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_15, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_16, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_Middle_row3" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_17, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_18, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_Middle_row4" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_19, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_20, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_71(context, evt)
 	-- 根据不同的选项做不同的操作
-
+	
 	if evt.source_name == "Fire_Left_row2" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_21, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_22, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_Left_row3" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_23, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_24, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_Left_row4" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_25, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_26, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_72(context, evt)
 	-- 根据不同的选项做不同的操作
-
+	
 	if evt.source_name == "Fire_Right_row2" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_27, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_28, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_Right_row3" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_29, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_30, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_Right_row4" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_31, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_32, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_73(context, evt)
 	-- 根据不同的选项做不同的操作
-
+	
 	if evt.source_name == "Fire_2Left_row2" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_33, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_34, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_2Left_row3" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_35, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_36, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_2Left_row4" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_37, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_38, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_74(context, evt)
 	-- 根据不同的选项做不同的操作
-
+	
 	if evt.source_name == "Fire_2Middle_row2" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_39, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_40, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_2Middle_row3" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_41, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_42, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_2Middle_row4" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_43, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_44, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_75(context, evt)
 	-- 根据不同的选项做不同的操作
-
+	
 	if evt.source_name == "Fire_2Right_row2" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_45, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_46, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_2Right_row3" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_47, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_48, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	if evt.source_name == "Fire_2Right_row4" then
-
-
+	
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_49, GadgetState.GearStart) then
-
+	
 			return -1
-		end
-
+		end 
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_50, GadgetState.GearStart) then
-
+	
 			return -1
-		end
+		end 
 	end
-
+	
 	return 0
 end

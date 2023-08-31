@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 244007002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -94,37 +94,37 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2008(context, evt)
 	if evt.param1 ~= 2008 then return false end
-
+	
 	-- 判断变量"IS_BOSS_DEAD"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 244007001) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_2008(context, evt)
-
+	
 	--  在Group244007002从怪物潮池{13032}中随机创建一个TideIndex为2的怪物潮，创建怪物总数为4，场上怪物最少4只，最多4只, pointTag 为 4  每0尝试填充一次，填充数量为0
 	if 0 ~= ScriptLib.AutoPoolMonsterTide(context, 2, 244007002, {13032},0,{},{}, {total_count = 4, min_count = 4, max_count = 4, tag = 4, fill_time= 0, fill_count = 0}) then
 		return -1
 	end
-
+	
 	-- 延迟30秒后,向groupId为：244007002的对象,请求一次调用,并将string参数："T2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 244007002, "T2", 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -135,38 +135,38 @@ function action_EVENT_TIMER_EVENT_2009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 244007003, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2012(context, evt)
 	if evt.param1 ~= 2012 then return false end
-
+	
 	-- 判断变量"EXTRA_MONSTER"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "EXTRA_MONSTER", 244007001) ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"IS_BOSS_DEAD"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 244007001) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_2012(context, evt)
-
+	
 	--  在Group244007002从怪物潮池{13040}中随机创建一个TideIndex为21的怪物潮，创建怪物总数为1，场上怪物最少1只，最多1只, pointTag 为 8  每0尝试填充一次，填充数量为0
 	if 0 ~= ScriptLib.AutoPoolMonsterTide(context, 21, 244007002, {13040},0,{},{}, {total_count = 1, min_count = 1, max_count = 1, tag = 8, fill_time= 0, fill_count = 0}) then
 		return -1
 	end
-
+	
 	return 0
 end

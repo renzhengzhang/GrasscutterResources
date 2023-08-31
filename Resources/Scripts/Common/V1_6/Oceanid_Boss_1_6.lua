@@ -1,5 +1,5 @@
 --[[
-defs = {
+local defs = {
 	monster_boss = xxx,
 	summon_region_list = {1,2,3}, --region出怪的list
 	summon_interval = 15,			--自动出怪时间
@@ -113,7 +113,7 @@ function action_any_monster_die(context, evt)
 					LF_Random_Attack_Platform(context)
 					ScriptLib.InitTimeAxis(context, "shuffle_loop", {25}, true)
 				end
-				break
+				break 
 			end
 		end
 	end
@@ -200,7 +200,7 @@ function LF_Summon_Action(context, idx)
 		ScriptLib.RemoveExtraGroupSuite(context, 0, idx+5)
 	end
 	local value = ScriptLib.GetGroupTempValue(context, "SummonStep", {})
-	value = value - value%math.pow(10,idx) + value%math.pow(10,idx-1) + math.pow(10,idx-1)
+	value = value - value%math.pow(10,idx) + value%math.pow(10,idx-1) + math.pow(10,idx-1) 
 	ScriptLib.SetGroupTempValue(context, "SummonStep", value, {})
 	if value ~= 1111 then
 		ScriptLib.InitTimeAxis(context, "summon", {defs.summon_interval}, true)
@@ -224,7 +224,7 @@ end
 function SLC_Summon_Start(context)
 	if 1 ~= ScriptLib.GetGroupTempValue(context, "summon_lock", {}) then
 		ScriptLib.SetGroupTempValue(context, "summon_lock", 1, {})
-	else
+	else 
 		return -1
 	end
 	ScriptLib.EndTimeAxis(context, "summon_delay")

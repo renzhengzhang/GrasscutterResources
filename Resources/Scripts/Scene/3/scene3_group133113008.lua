@@ -1,15 +1,15 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133113008
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	group_id = 133113008, --对应的GroupID
 	need_kill_hint = true,
 	gadget_init = {8006, 8007},	--defs.gadget_init里按顺序填入 开启挑战机关ConfigID、 限时终点ConfigID
 	challenge_time = 181, --挑战持续的时间
-	gadget_suites = {
+	gadget_suites = { 
 		[4] = {8008,8016},	--suites每波需要销毁的指示路点和光柱,结构为[suite_id] = {gadget1,gadget2},id从4开始
 		[5] = {8010,8017},
 		[6] = {8012,8018},
@@ -18,8 +18,8 @@ defs = {
 		[8002] = 7,
 		[8003] = 8,
 		[8004] = 9,
-
-
+	
+		
 	},
 	gadget_heraldry_count = 13, --收集的激流纹章数量
 	gadget_heraldry_id = 70350256, --激流纹章ID
@@ -27,9 +27,9 @@ defs = {
   }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -192,9 +192,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -205,9 +205,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -304,26 +304,26 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_QUEST_FINISH_8013(context, evt)
 	--检查ID为1905216的任务的完成状态是否为0（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 1905216 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 0 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -331,7 +331,7 @@ end
 function action_EVENT_QUEST_FINISH_8013(context, evt)
 	-- 终止识别id为888的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 888, 0)
-
+	
 	return 0
 end
 
@@ -341,8 +341,8 @@ function condition_EVENT_ANY_MONSTER_DIE_8105(context, evt)
 	if evt.param1 ~= 8002 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -350,7 +350,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_8105(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133113008, 8)
-
+	
 	return 0
 end
 
@@ -360,8 +360,8 @@ function condition_EVENT_ANY_MONSTER_DIE_8106(context, evt)
 	if evt.param1 ~= 8003 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -369,7 +369,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_8106(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133113008, 9)
-
+	
 	return 0
 end
 
@@ -378,58 +378,58 @@ function action_EVENT_CHALLENGE_SUCCESS_8108(context, evt)
 	  -- key>= 4，lua通知190520201；key< 4，lua通知190520202
 	  if ScriptLib.GetGroupVariableValue(context, "key") < 10 then ScriptLib.AddQuestProgress(context, "190520202")
 	  elseif ScriptLib.GetGroupVariableValue(context, "key") >= 10 then ScriptLib.AddQuestProgress(context, "190520201")
-	  end
-
+	  end 
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 8006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 8007 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133113008, 4)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133113008, 5)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133113008, 6)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133113008, 7)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133113008, 8)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133113008, 9)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
-	    ScriptLib.KillExtraGroupSuite(context, 133113008, 10)
-
+	    ScriptLib.KillExtraGroupSuite(context, 133113008, 10)    
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133113008, 2)
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133113008, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "hasStarted" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasStarted", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -440,79 +440,79 @@ function action_EVENT_CHALLENGE_FAIL_8109(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasStarted" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasStarted", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133113008, 8006, {175}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将configid为 8006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133113008, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133113008, 2)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133113008, 4)
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133113008, 5)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133113008, 6)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133113008, 7)
-
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133113008, 8)
-
+	
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133113008, 9)
-
+	
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133113008, 10)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_8110(context, evt)
 	if evt.param1 ~= 8110 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_8111(context, evt)
 	if evt.param1 ~= 8111 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -523,32 +523,32 @@ function action_EVENT_ENTER_REGION_8111(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133113008, EntityType.GADGET, 8016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133113008, 5)
-
+	
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133113008, 10)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_8113(context, evt)
 	if evt.param1 ~= 8113 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -559,21 +559,21 @@ function action_EVENT_ENTER_REGION_8113(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 8017 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133113008, 6)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133113008, 4)
-
+	
 	return 0
 end
 
@@ -583,8 +583,8 @@ function condition_EVENT_ANY_MONSTER_DIE_8114(context, evt)
 	if evt.param1 ~= 8001 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -592,19 +592,19 @@ end
 function action_EVENT_ANY_MONSTER_DIE_8114(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133113008, 7)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_8115(context, evt)
 	if evt.param1 ~= 8115 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -615,24 +615,24 @@ function action_EVENT_ENTER_REGION_8115(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 8018 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133113008, 2)
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133113008, 5)
-
+	
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133113008, 10)
-
+	
 	return 0
 end
 
@@ -641,7 +641,7 @@ function condition_EVENT_GADGET_CREATE_8117(context, evt)
 	if 8006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -652,7 +652,7 @@ function action_EVENT_GADGET_CREATE_8117(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -661,7 +661,7 @@ function condition_EVENT_ANY_GADGET_DIE_8118(context, evt)
 	if (8022 == evt.param1)  or (8023 == evt.param1) or (8029 == evt.param1) or (8030 == evt.param1) or (8033 == evt.param1) or (8034 == evt.param1) or (8046 == evt.param1) or (8059 == evt.param1) or (8060 == evt.param1) or (8077 == evt.param1) or (8095 == evt.param1) or (8096 == evt.param1) or (8097 == evt.param1) then
 	  return true
 	end
-
+	
 	return false
 end
 
@@ -672,7 +672,7 @@ function action_EVENT_ANY_GADGET_DIE_8118(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -680,19 +680,19 @@ end
 function condition_EVENT_SELECT_OPTION_8119(context, evt)
 	-- 判断是gadgetid 8006 option_id 175
 	if 8006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"hasStarted"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasStarted") ~= 0 then
 			return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 400041 ~= 0 then
@@ -704,44 +704,44 @@ function condition_EVENT_SELECT_OPTION_8119(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_8119(context, evt)
 	--创建编号为888（该挑战的识别id),挑战内容为127的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
-
+	
 	ScriptLib.CreateFatherChallenge(context, 2003007, 2003007, 121, {success = 1, fail = 1})
 	ScriptLib.AttachChildChallenge(context, 2003007, 2003008, 2003008,{0,4, 666,1},{},{success=1,fail=1})
 	ScriptLib.AttachChildChallenge(context, 2003007, 2003009, 2003009,{0,2, 888,13},{},{success=0,fail=0})
 	ScriptLib.StartFatherChallenge(context, 2003007)
 	ScriptLib.SetChallengeEventMark(context, 2003007, ChallengeEventMarkType.SUMMER_TIME_SPRINT_BOAT_TIME)
 	ScriptLib.SetChallengeEventMark(context, 2003009, ChallengeEventMarkType.SUMMER_TIME_SPRINT_BOAT_GATHER_POINT)
-
+	
 	-- 添加suite4的新内容
 	ScriptLib.AddExtraGroupSuite(context, 133113008, 4)
-
+	
 	-- 添加suite10的新内容
 	ScriptLib.AddExtraGroupSuite(context, 133113008, 10)
-
+	
 	-- 将本组内变量名为 "hasStarted" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasStarted", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 8006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133113008 ；指定config：8006；物件身上指定option：175；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133113008, 8006, 175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end

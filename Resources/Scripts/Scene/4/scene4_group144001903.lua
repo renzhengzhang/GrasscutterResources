@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144001903
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -104,20 +104,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_903001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Gear"为2
 	if ScriptLib.GetGroupVariableValue(context, "Gear") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -128,19 +128,19 @@ function action_EVENT_VARIABLE_CHANGE_903001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_903002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Gear"为3
 	if ScriptLib.GetGroupVariableValue(context, "Gear") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -151,30 +151,30 @@ function action_EVENT_VARIABLE_CHANGE_903002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 延迟6秒后,向groupId为：144001903的对象,请求一次调用,并将string参数："AddQuestProgress3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001903, "AddQuestProgress3", 6) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_903003(context, evt)
 	if evt.param1 ~= 903003 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"FirstReminder"为0
 	if ScriptLib.GetGroupVariableValue(context, "FirstReminder") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -185,13 +185,13 @@ function action_EVENT_ENTER_REGION_903003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "FirstReminder" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "FirstReminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -200,7 +200,7 @@ function condition_EVENT_ANY_GADGET_DIE_903004(context, evt)
 	if 903006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -211,7 +211,7 @@ function action_EVENT_ANY_GADGET_DIE_903004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -222,19 +222,19 @@ function action_EVENT_ANY_GADGET_DIE_903008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_903009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Gear"为1
 	if ScriptLib.GetGroupVariableValue(context, "Gear") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -245,24 +245,24 @@ function action_EVENT_VARIABLE_CHANGE_903009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_903010(context, evt)
 	if evt.param1 ~= 903010 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"FirstReminder"为0
 	if ScriptLib.GetGroupVariableValue(context, "FirstReminder") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -273,30 +273,30 @@ function action_EVENT_ENTER_REGION_903010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "FirstReminder" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "FirstReminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_903011(context, evt)
 	if evt.param1 ~= 903011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"FirstReminder"为0
 	if ScriptLib.GetGroupVariableValue(context, "FirstReminder") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -307,13 +307,13 @@ function action_EVENT_ENTER_REGION_903011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "FirstReminder" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "FirstReminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -322,7 +322,7 @@ function condition_EVENT_ANY_GADGET_DIE_903012(context, evt)
 	if 903005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -333,7 +333,7 @@ function action_EVENT_ANY_GADGET_DIE_903012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -344,13 +344,13 @@ function action_EVENT_TIMER_EVENT_903013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 144001903, "AddQuestProgress3") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -359,7 +359,7 @@ function condition_EVENT_ANY_GADGET_DIE_903014(context, evt)
 	if 903007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -370,19 +370,19 @@ function action_EVENT_ANY_GADGET_DIE_903014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_903015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Gear1"为1
 	if ScriptLib.GetGroupVariableValue(context, "Gear1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -393,19 +393,19 @@ function action_EVENT_VARIABLE_CHANGE_903015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_903016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Gear2"为1
 	if ScriptLib.GetGroupVariableValue(context, "Gear2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -416,7 +416,7 @@ function action_EVENT_VARIABLE_CHANGE_903016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -424,19 +424,19 @@ end
 function action_EVENT_QUEST_START_903017(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144001903, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_903018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Gear3"为1
 	if ScriptLib.GetGroupVariableValue(context, "Gear3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -447,6 +447,6 @@ function action_EVENT_VARIABLE_CHANGE_903018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

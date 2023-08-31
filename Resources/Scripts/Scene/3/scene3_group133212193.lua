@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133212193
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_id = 133212193,
 	inner_region = 193020,
 	outer_region = 193020,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -72,9 +72,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +85,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -121,23 +121,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_193015(context, evt)
 	-- 判断是gadgetid 193013 option_id 175
 	if 193013 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -148,51 +148,51 @@ function action_EVENT_SELECT_OPTION_193015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 创建编号为101（该挑战的识别id),挑战内容为111170的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 101, 111170, 120, 133212193, 1, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 创建编号为1（该怪物潮的识别id)的怪物潮，创建怪物总数为1，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 133212193, {193001}, 1, 1, 1) then
 		return -1
 	end
-
+	
 	-- 将configid为 193010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 193010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 193011 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 193011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 193021 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 193021, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 193013 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 193013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212193, 2)
-
+	
 	-- 指定group的循环玩法进度加1
 	if 0 ~= ScriptLib.SetBlossomScheduleStateByGroupId(context, 133212193, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_blossomscehedule_byGroupId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -201,7 +201,7 @@ function condition_EVENT_GADGET_CREATE_193016(context, evt)
 	if 193013 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -212,20 +212,20 @@ function action_EVENT_GADGET_CREATE_193016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_193017(context, evt)
 	ScriptLib.RemoveEntityByConfigId(context, 133212193, EntityType.REGION, 193020)
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133212193, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -235,41 +235,41 @@ function action_EVENT_CHALLENGE_SUCCESS_193018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 193013, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 193010 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 193010, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 193011 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 193011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 193021 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 193021, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 指定group的循环玩法进度加1
 	ScriptLib.AddBlossomScheduleProgressByGroupId(context, 133212193)
-
+	
 	-- 指定group的循环玩法进度加1
 	if 0 ~= ScriptLib.SetBlossomScheduleStateByGroupId(context, 133212193, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_blossomscehedule_byGroupId")
 		return -1
 	end
-
+	
 		-- 刷新本group,指定suite与等级修正,自动通知对应循环玩法的进度
 		if 0 ~= ScriptLib.RefreshBlossomGroup(context, { group_id = 0, suite = 1, exclude_prev = true }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_blossom_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -280,7 +280,7 @@ function action_EVENT_GROUP_LOAD_193019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_blossom_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -291,7 +291,7 @@ function action_EVENT_GROUP_LOAD_193022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 

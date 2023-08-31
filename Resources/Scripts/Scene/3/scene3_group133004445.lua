@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133004445
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -107,20 +107,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_445018(context, evt)
 	if evt.param1 ~= 445018 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -131,7 +131,7 @@ function action_EVENT_ENTER_REGION_445018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -141,7 +141,7 @@ function condition_EVENT_ANY_GADGET_DIE_445019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isfail") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -152,17 +152,17 @@ function action_EVENT_ANY_GADGET_DIE_445019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_TIMER_EVENT_445020(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0
+	-- 判断指定group组剩余gadget数量是否是0 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133004445}) == 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -173,20 +173,20 @@ function action_EVENT_TIMER_EVENT_445020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=2264,y=236,z=-733}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 31021146, pos, 80) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 延迟2秒后,向groupId为：133004445的对象,请求一次调用,并将string参数："delaymessage" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133004445, "delaymessage", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_GADGET_CREATE_445021(context, evt)
 	if 445001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_TIMER_EVENT_445022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -216,12 +216,12 @@ function condition_EVENT_ANY_GADGET_DIE_445023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isfail") ~= 0 then
 			return false
 	end
-
-	-- 判断指定group组剩余gadget数量是否是0
+	
+	-- 判断指定group组剩余gadget数量是否是0 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133004445}) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -233,12 +233,12 @@ function action_EVENT_ANY_GADGET_DIE_445023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1330044452") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

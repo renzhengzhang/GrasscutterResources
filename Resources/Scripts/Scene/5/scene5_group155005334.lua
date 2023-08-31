@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155005334
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155005334,
 	gadget_airforce = 334001,
 	gadget_windforce = 334003,
@@ -21,9 +21,9 @@ local DayAppearGadgets = {}
 local NightAppearGadgets = {}
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -72,9 +72,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +85,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -112,9 +112,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -125,20 +125,20 @@ function condition_EVENT_LEVEL_TAG_CHANGE_334002(context, evt)
 	        return false
 	    else
 	        return true
-	    end
-
+	    end 
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_LEVEL_TAG_CHANGE_334002(context, evt)
 	ScriptLib.PrintContextLog(context,"进入白天")
-
+	
 	ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_airforce )
 	ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_windforce )
-
+	
 	return 0
-
+		
 end
 
 -- 触发条件
@@ -146,7 +146,7 @@ function condition_EVENT_GADGET_CREATE_334005(context, evt)
 	if 334004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -159,10 +159,10 @@ function action_EVENT_GADGET_CREATE_334005(context, evt)
 	    is_daynight_gadget = true
 	  end
 	end
-
-	if (not is_daynight_gadget) then
+	
+	if (not is_daynight_gadget) then 
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1
+	    return -1 
 	end
 	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
@@ -172,8 +172,8 @@ function action_EVENT_GADGET_CREATE_334005(context, evt)
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,334004,302)
 	end
-
-
+	
+	
 	--lua层调用，重置gadget状态
 	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
@@ -181,10 +181,10 @@ function action_EVENT_GADGET_CREATE_334005(context, evt)
 	    is_daynight_gadget = true
 	  end
 	end
-
-	if (not is_daynight_gadget) then
+	
+	if (not is_daynight_gadget) then 
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1
+	    return -1 
 	end
 	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
@@ -196,8 +196,8 @@ function action_EVENT_GADGET_CREATE_334005(context, evt)
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,334004,300+current_phase)
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -208,30 +208,30 @@ function action_EVENT_GROUP_LOAD_334006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_334007(context, evt)
-
+	
 	ScriptLib.PrintContextLog(context,"开始reachpoint")
-
-
+	
+	
 	-- 判断是gadgetid 为 25003的移动平台，是否到达了500600028 的路线中的 2 点
-
+	
 	if defs.gadget_airforce ~= evt.param1 then
 	    return false
 	end
-
+	
 	if defs.route_01 ~= evt.param2 then
 	    return false
 	end
-
+	
 	if defs.reachpoint ~= evt.param3 then
 	    return false
 	end
-
+	
 	-- 返回渊下宫当前是否为黑夜
 	local uid_List = ScriptLib.GetSceneUidList(context)
 	local host_id = uid_List[1]
@@ -240,22 +240,22 @@ function condition_EVENT_PLATFORM_REACH_POINT_334007(context, evt)
 	    return true
 	else
 	    return false
-	end
-
+	end 
+	
 	ScriptLib.PrintContextLog(context,"155006188-结束判断reachpoint")
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_334007(context, evt)
 	ScriptLib.PrintContextLog(context,"开始stop platform")
-
-	ScriptLib.StopPlatform(context, defs.gadget_airforce)
-	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_airforce })
+	
+	ScriptLib.StopPlatform(context, defs.gadget_airforce) 
+	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_airforce }) 
 	--ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_airforce)
 	ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_windforce)
-
+			
 	return 0
 end
 
@@ -264,30 +264,30 @@ function condition_EVENT_GADGET_STATE_CHANGE_334008(context, evt)
 	if evt.param2 ~= defs.gadget_Switch then
 	    return false
 	end
-
+	
 	local currentState = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_Switch)
-
+	
 	ScriptLib.PrintContextLog(context,"开始判断322 ?="..currentState)
-
+	
 	if 322 ~= currentState then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_334008(context, evt)
 	ScriptLib.PrintContextLog(context,"执行状态转换后action")
-
+	
 	ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_airforce )
 	ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_windforce )
-
+		
 	ScriptLib.CreateGadget(context, { config_id = defs.gadget_airforce })
 	ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_airforce, 202)
-
+	
 	return 0
-
+		
 end
 
 -- 触发条件
@@ -296,19 +296,19 @@ function condition_EVENT_ENTER_REGION_334009(context, evt)
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 	    return false
 	end
-
+	
 	if 203 ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_airforce) then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_334009(context, evt)
-
-		ScriptLib.StartPlatform(context, defs.gadget_airforce)
-
+	
+		ScriptLib.StartPlatform(context, defs.gadget_airforce) 
+	
 		ScriptLib.PrintContextLog(context,"启动移动平台--完成")
 	return 0
 end
@@ -318,7 +318,7 @@ function condition_EVENT_ANY_GADGET_DIE_334010(context, evt)
 	if 334001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -331,10 +331,10 @@ function action_EVENT_ANY_GADGET_DIE_334010(context, evt)
 	    is_daynight_gadget = true
 	  end
 	end
-
-	if (not is_daynight_gadget) then
+	
+	if (not is_daynight_gadget) then 
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1
+	    return -1 
 	end
 	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
@@ -346,8 +346,8 @@ function action_EVENT_ANY_GADGET_DIE_334010(context, evt)
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,334004,300+current_phase)
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -356,7 +356,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_334011(context, evt)
 	if 334001 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -367,7 +367,7 @@ function action_EVENT_GADGET_STATE_CHANGE_334011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 

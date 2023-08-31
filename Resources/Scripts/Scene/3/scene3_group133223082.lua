@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133223082
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -78,23 +78,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_82003(context, evt)
 	-- 判断是gadgetid 82001 option_id 24
 	if 82001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 24 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -105,35 +105,35 @@ function action_EVENT_SELECT_OPTION_82003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133223082 ；指定config：82001；物件身上指定option：24；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133223082, 82001, 24) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 创建id为82007的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 82007 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将configid为 82001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 82001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"Water_Start"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Water_Start", {1}, false)
-
-
+	
+	
 	-- 通知场景上的所有玩家播放名字为322310003 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 322310003, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -143,7 +143,7 @@ function condition_EVENT_GROUP_LOAD_82004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "water_level") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -154,8 +154,8 @@ function action_EVENT_GROUP_LOAD_82004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -165,11 +165,11 @@ function condition_EVENT_GADGET_CREATE_82005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 3 then
 			return false
 	end
-
+	
 	if 82001 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -180,19 +180,19 @@ function action_EVENT_GADGET_CREATE_82005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_82006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"finish"为3
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -202,14 +202,14 @@ function action_EVENT_VARIABLE_CHANGE_82006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 82001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133223082, 82001, {24}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -218,7 +218,7 @@ function condition_EVENT_TIME_AXIS_PASS_82008(context, evt)
 	if "Water_Start" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -229,6 +229,6 @@ function action_EVENT_TIME_AXIS_PASS_82008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end

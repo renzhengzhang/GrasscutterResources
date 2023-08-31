@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155005033
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -103,9 +103,9 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -113,7 +113,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_33002(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 155005033, 33001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -124,16 +124,16 @@ function action_EVENT_GADGET_STATE_CHANGE_33002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_LEVEL_TAG_CHANGE_33004(context, evt)
 		-- 改变指定group组155005033中， configid为33003的gadget的state
-		if evt.param2 == 1 then
+		if evt.param2 == 1 then 
 			ScriptLib.SetGroupGadgetStateByConfigId(context, 155005033, 33003,201)
-		elseif evt.param2 == 2 then
+		elseif evt.param2 == 2 then  
 			ScriptLib.SetGroupGadgetStateByConfigId(context, 155005033, 33003,301)
 		end
 		return 0
@@ -146,7 +146,7 @@ function action_EVENT_GROUP_LOAD_33005(context, evt)
 			ScriptLib.SetGroupGadgetStateByConfigId(context, 155005033, 33003, 201)
 		elseif (current_env_state_id == 2) then
 			ScriptLib.SetGroupGadgetStateByConfigId(context, 155005033, 33003, 301)
-		end
+		end 
 	return 0
 end
 
@@ -154,7 +154,7 @@ end
 function action_EVENT_QUEST_START_33006(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 155005033, 2)
-
+	
 	return 0
 end
 
@@ -162,6 +162,6 @@ end
 function action_EVENT_QUEST_FINISH_33007(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 155005033, 3)
-
+	
 	return 0
 end

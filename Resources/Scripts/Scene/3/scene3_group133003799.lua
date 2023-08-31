@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133003799
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -72,9 +72,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -82,7 +82,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_799005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") == #suites[1].gadgets then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -93,12 +93,12 @@ function action_EVENT_GADGET_STATE_CHANGE_799005(context, evt)
 	elseif evt.param1 == GadgetState.Default then
 		ScriptLib.ChangeGroupVariableValue(context,"start",-1)
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "start") == #suites[1].gadgets then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 133003098, 2575, GadgetState.GearStart)
 	                ScriptLib.SetGroupGadgetStateByConfigId(context, 133003923, 923007, GadgetState.GearStart)
 	                ScriptLib.AddQuestProgress(context, "4141210")
 	end
-
+	
 	return 0
 end

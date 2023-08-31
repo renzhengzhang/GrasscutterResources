@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250004070
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -68,9 +68,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -78,7 +78,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_129(context, evt)
 	if 644 ~= evt.param2 or GadgetState.GearAction2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -89,7 +89,7 @@ function action_EVENT_GADGET_STATE_CHANGE_129(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -105,6 +105,6 @@ function action_EVENT_PLATFORM_REACH_POINT_130(context, evt)
 			end
 		end
 	end
-
+	
 	return 0
 end

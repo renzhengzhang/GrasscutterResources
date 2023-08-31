@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133315064
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_id = 133315064
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -123,22 +123,22 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_64001(context, evt)
 	-- 初始化table
 	    local suite_table = {}
-
+	
 	-- 需要在group创建时调用，该函数会通过context的groupid读取HuntingData表，来创建entity填充points
 	    if 0~= ScriptLib.RefreshHuntingClueGroup(context) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_hunting_clue_group")
 	        return -1
 	    end
-
+	
 	-- 根据HuntingData表的配置来激活对应的suite
 	    if 0~= ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context) then
 	        suite_table = ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context)
@@ -146,7 +146,7 @@ function action_EVENT_GROUP_LOAD_64001(context, evt)
 	            ScriptLib.AddExtraGroupSuite(context, 133315064, suite_id)
 	        end
 	    end
-
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_HUNTING_FINISH_FINAL_64002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	return 0
 end

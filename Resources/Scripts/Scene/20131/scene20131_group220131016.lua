@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220131016
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -147,9 +147,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -160,9 +160,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -322,20 +322,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_16008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Stage"为2
 	if ScriptLib.GetGroupVariableValue(context, "Stage") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -346,22 +346,22 @@ function action_EVENT_VARIABLE_CHANGE_16008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16009(context, evt)
 	if evt.param1 ~= 16009 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -369,19 +369,19 @@ end
 function action_EVENT_ENTER_REGION_16009(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16010(context, evt)
 	if evt.param1 ~= 16010 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -389,19 +389,19 @@ end
 function action_EVENT_ENTER_REGION_16010(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_16011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Stage"为4
 	if ScriptLib.GetGroupVariableValue(context, "Stage") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -409,19 +409,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_16011(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_16012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Stage"为5
 	if ScriptLib.GetGroupVariableValue(context, "Stage") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -429,19 +429,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_16012(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 5)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_16013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Stage"为7
 	if ScriptLib.GetGroupVariableValue(context, "Stage") ~= 7 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -449,19 +449,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_16013(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 7)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16015(context, evt)
 	if evt.param1 ~= 16015 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -469,22 +469,22 @@ end
 function action_EVENT_ENTER_REGION_16015(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 10)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16016(context, evt)
 	if evt.param1 ~= 16016 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -495,25 +495,25 @@ function action_EVENT_ENTER_REGION_16016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 6)
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 5)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16017(context, evt)
 	if evt.param1 ~= 16017 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -521,19 +521,19 @@ end
 function action_EVENT_ENTER_REGION_16017(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16018(context, evt)
 	if evt.param1 ~= 16018 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -541,22 +541,22 @@ end
 function action_EVENT_ENTER_REGION_16018(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 8)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 7)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16020(context, evt)
 	if evt.param1 ~= 16020 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -564,22 +564,22 @@ end
 function action_EVENT_ENTER_REGION_16020(context, evt)
 	-- 添加suite16的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 16)
-
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 8)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16022(context, evt)
 	if evt.param1 ~= 16022 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -587,19 +587,19 @@ end
 function action_EVENT_ENTER_REGION_16022(context, evt)
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 9)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16025(context, evt)
 	if evt.param1 ~= 16025 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -607,22 +607,22 @@ end
 function action_EVENT_ENTER_REGION_16025(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 11)
-
+	
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 10)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16026(context, evt)
 	if evt.param1 ~= 16026 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -630,22 +630,22 @@ end
 function action_EVENT_ENTER_REGION_16026(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 11)
-
+	
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 10)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16027(context, evt)
 	if evt.param1 ~= 16027 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -653,22 +653,22 @@ end
 function action_EVENT_ENTER_REGION_16027(context, evt)
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 12)
-
+	
 	-- 删除suite11的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 11)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16028(context, evt)
 	if evt.param1 ~= 16028 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -676,22 +676,22 @@ end
 function action_EVENT_ENTER_REGION_16028(context, evt)
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 13)
-
+	
 	-- 删除suite12的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 12)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16029(context, evt)
 	if evt.param1 ~= 16029 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -699,22 +699,22 @@ end
 function action_EVENT_ENTER_REGION_16029(context, evt)
 	-- 添加suite14的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 14)
-
+	
 	-- 删除suite13的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 13)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16031(context, evt)
 	if evt.param1 ~= 16031 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -722,22 +722,22 @@ end
 function action_EVENT_ENTER_REGION_16031(context, evt)
 	-- 添加suite17的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 17)
-
+	
 	-- 删除suite14的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 14)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16034(context, evt)
 	if evt.param1 ~= 16034 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -745,19 +745,19 @@ end
 function action_EVENT_ENTER_REGION_16034(context, evt)
 	-- 删除suite15的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 15)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16036(context, evt)
 	if evt.param1 ~= 16036 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -765,19 +765,19 @@ end
 function action_EVENT_ENTER_REGION_16036(context, evt)
 	-- 删除suite16的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 16)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16037(context, evt)
 	if evt.param1 ~= 16037 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -785,22 +785,22 @@ end
 function action_EVENT_ENTER_REGION_16037(context, evt)
 	-- 添加suite17的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 17)
-
+	
 	-- 删除suite14的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 14)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16039(context, evt)
 	if evt.param1 ~= 16039 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -808,22 +808,22 @@ end
 function action_EVENT_ENTER_REGION_16039(context, evt)
 	-- 添加suite15的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 15)
-
+	
 	-- 删除suite17的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220131016, 17)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16040(context, evt)
 	if evt.param1 ~= 16040 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -831,6 +831,6 @@ end
 function action_EVENT_ENTER_REGION_16040(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220131016, 3)
-
+	
 	return 0
 end

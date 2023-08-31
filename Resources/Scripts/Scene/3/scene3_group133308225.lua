@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308225
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -76,9 +76,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 使用reminderUI
@@ -98,7 +98,7 @@ function TLA_kill_monster_by_group(context, evt, group_id)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
+		
 	return 0
 end
 
@@ -118,7 +118,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_225002(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 10 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -129,16 +129,16 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_225002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_MONSTER_BATTLE_225003(context, evt)
 	TLA_active_reminder_ui(context, evt, 1000140035)
-
+	
 	ScriptLib.AutoMonsterTide(context, 1, 133308225, {225004,225005}, 6, 1, 2)
-
+	
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_TIME_AXIS_PASS_225006(context, evt)
 	if "die" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_TIME_AXIS_PASS_225006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -167,22 +167,22 @@ function condition_EVENT_ANY_MONSTER_DIE_225007(context, evt)
 	if 225001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_225007(context, evt)
 	ScriptLib.KillMonsterTide(context, 133308225, 1)
-
+	
 	TLA_kill_monster_by_group(context, evt, 133308225)
-
+	
 	ScriptLib.InitTimeAxis(context, "die", {6}, false)
-
+	
 	TLA_set_groupvariable(context, evt, "finish", 1)
-
+	
 	TLA_active_reminder_ui(context, evt, 1000140043)
-
+	
 	return 0
 end
 
@@ -192,7 +192,7 @@ function condition_EVENT_GROUP_LOAD_225008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -203,6 +203,6 @@ function action_EVENT_GROUP_LOAD_225008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

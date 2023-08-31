@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201059004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -115,9 +115,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -128,9 +128,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -164,20 +164,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4002(context, evt)
 	if evt.param1 ~= 4002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -187,37 +187,37 @@ function action_EVENT_ENTER_REGION_4002(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 201059004, 4003, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 201059003, EntityType.GADGET, 3020 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "Enterloop" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "Enterloop", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4005(context, evt)
 	if evt.param1 ~= 4005 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop1"为5
 	if ScriptLib.GetGroupVariableValue(context, "loop1") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -228,7 +228,7 @@ function action_EVENT_ENTER_REGION_4005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -238,7 +238,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4007(context, evt)
 	if 4006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -249,31 +249,31 @@ function action_EVENT_GADGET_STATE_CHANGE_4007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4035 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4008(context, evt)
 	if evt.param1 ~= 4008 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop0"为3
 	if ScriptLib.GetGroupVariableValue(context, "loop0") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -283,50 +283,50 @@ function action_EVENT_ENTER_REGION_4008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4011 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "guihuo_2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "guihuo_2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201059008, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将configid为 4004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201059004, 3)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201059004, 3)
-
+	
 	-- 将本组内变量名为 "loop0" 的变量设置为 99
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "loop0", 99) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "loop1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -336,12 +336,12 @@ function condition_EVENT_DUNGEON_AVATAR_SLIP_DIE_4009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Enterloop") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"loop0"为3
 	if ScriptLib.GetGroupVariableValue(context, "loop0") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -352,13 +352,13 @@ function action_EVENT_DUNGEON_AVATAR_SLIP_DIE_4009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop0" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop0", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -368,7 +368,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4010(context, evt)
 	if 4011 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -379,14 +379,14 @@ function action_EVENT_GADGET_STATE_CHANGE_4010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4036 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -395,7 +395,7 @@ function condition_EVENT_GADGET_CREATE_4012(context, evt)
 	if 4006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -405,25 +405,25 @@ function action_EVENT_GADGET_CREATE_4012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4013(context, evt)
 	if evt.param1 ~= 4013 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop0"为2
 	if ScriptLib.GetGroupVariableValue(context, "loop0") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -434,16 +434,16 @@ function action_EVENT_ENTER_REGION_4013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201059009, 3)
-
+	
 	-- 针对当前group内变量名为 "loop0" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop0", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -452,7 +452,7 @@ function condition_EVENT_GADGET_CREATE_4014(context, evt)
 	if 4011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -462,20 +462,20 @@ function action_EVENT_GADGET_CREATE_4014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_4015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"guihuo_2"为2
 	if ScriptLib.GetGroupVariableValue(context, "guihuo_2") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -485,78 +485,78 @@ function action_EVENT_VARIABLE_CHANGE_4015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为4024的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4024 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4035 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4036 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 将本组内变量名为 "loop0" 的变量设置为 50
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "loop0", 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "loop1" 的变量设置为 50
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "loop1", 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "loop2" 的变量设置为 50
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "loop2", 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "loop3" 的变量设置为 50
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "loop3", 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4019 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 4018 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4016(context, evt)
 	if evt.param1 ~= 4016 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -567,22 +567,22 @@ function action_EVENT_ENTER_REGION_4016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "loop0" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop0", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为4019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201059004, 3)
-
+	
 	return 0
 end
 
@@ -592,12 +592,12 @@ function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_4017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Enterloop") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"loop1"为5
 	if ScriptLib.GetGroupVariableValue(context, "loop1") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -608,30 +608,30 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE_4017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop1" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop1", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4020(context, evt)
 	if evt.param1 ~= 4020 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop0"为1
 	if ScriptLib.GetGroupVariableValue(context, "loop0") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -642,30 +642,30 @@ function action_EVENT_ENTER_REGION_4020(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop0" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop0", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4021(context, evt)
 	if evt.param1 ~= 4021 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop1"为3
 	if ScriptLib.GetGroupVariableValue(context, "loop1") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -676,13 +676,13 @@ function action_EVENT_ENTER_REGION_4021(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -692,12 +692,12 @@ function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_4022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Enterloop") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"loop2"为5
 	if ScriptLib.GetGroupVariableValue(context, "loop2") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -708,25 +708,25 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE_4022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop2" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop2", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4023(context, evt)
 	if evt.param1 ~= 4023 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -737,25 +737,25 @@ function action_EVENT_ENTER_REGION_4023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4025(context, evt)
 	if evt.param1 ~= 4025 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop2"为3
 	if ScriptLib.GetGroupVariableValue(context, "loop2") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -766,30 +766,30 @@ function action_EVENT_ENTER_REGION_4025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4026(context, evt)
 	if evt.param1 ~= 4026 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop1"为5
 	if ScriptLib.GetGroupVariableValue(context, "loop1") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -799,50 +799,50 @@ function action_EVENT_ENTER_REGION_4026(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4011 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "guihuo_2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "guihuo_2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201059008, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将configid为 4004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201059004, 3)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201059004, 3)
-
+	
 	-- 针对当前group内变量名为 "loop2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "loop1" 的变量设置为 99
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "loop1", 99) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -852,12 +852,12 @@ function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_4027(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Enterloop") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"loop3"为5
 	if ScriptLib.GetGroupVariableValue(context, "loop3") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -868,13 +868,13 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE_4027(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop3" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop3", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -884,12 +884,12 @@ function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_4028(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Enterloop") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"loop0"为3
 	if ScriptLib.GetGroupVariableValue(context, "loop0") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -900,30 +900,30 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE_4028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop0" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop0", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4030(context, evt)
 	if evt.param1 ~= 4030 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop2"为5
 	if ScriptLib.GetGroupVariableValue(context, "loop2") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -933,67 +933,67 @@ function action_EVENT_ENTER_REGION_4030(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4011 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "guihuo_2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "guihuo_2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201059008, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将configid为 4004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201059004, 3)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201059004, 3)
-
+	
 	-- 针对当前group内变量名为 "loop3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "loop" 的变量设置为 99
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "loop", 99) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4032(context, evt)
 	if evt.param1 ~= 4032 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop3"为3
 	if ScriptLib.GetGroupVariableValue(context, "loop3") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1004,30 +1004,30 @@ function action_EVENT_ENTER_REGION_4032(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4034(context, evt)
 	if evt.param1 ~= 4034 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop3"为5
 	if ScriptLib.GetGroupVariableValue(context, "loop3") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1037,61 +1037,61 @@ function action_EVENT_ENTER_REGION_4034(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 4011 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "guihuo_2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "guihuo_2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201059008, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将configid为 4004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201059004, 3)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201059004, 3)
-
+	
 	-- 针对当前group内变量名为 "loop3" 的变量，进行修改，变化值为 -4
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop3", -4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4037(context, evt)
 	if evt.param1 ~= 4037 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop1"为2
 	if ScriptLib.GetGroupVariableValue(context, "loop1") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1102,54 +1102,54 @@ function action_EVENT_ENTER_REGION_4037(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201059010, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201059011, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 创建id为4019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 10590115 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 10590115) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "loop1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4038(context, evt)
 	if evt.param1 ~= 4038 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop2"为2
 	if ScriptLib.GetGroupVariableValue(context, "loop2") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1160,54 +1160,54 @@ function action_EVENT_ENTER_REGION_4038(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201059010, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201059011, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 创建id为4019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 10590118 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 10590118) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "loop2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4039(context, evt)
 	if evt.param1 ~= 4039 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop3"为2
 	if ScriptLib.GetGroupVariableValue(context, "loop3") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1218,54 +1218,54 @@ function action_EVENT_ENTER_REGION_4039(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201059010, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201059011, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 创建id为4019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 10590118 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 10590118) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "loop3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4040(context, evt)
 	if evt.param1 ~= 4040 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop1"为4
 	if ScriptLib.GetGroupVariableValue(context, "loop1") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1276,33 +1276,33 @@ function action_EVENT_ENTER_REGION_4040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201059009, 3)
-
+	
 	-- 针对当前group内变量名为 "loop1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4041(context, evt)
 	if evt.param1 ~= 4041 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop2"为4
 	if ScriptLib.GetGroupVariableValue(context, "loop2") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1313,33 +1313,33 @@ function action_EVENT_ENTER_REGION_4041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201059009, 3)
-
+	
 	-- 针对当前group内变量名为 "loop2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4042(context, evt)
 	if evt.param1 ~= 4042 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop3"为4
 	if ScriptLib.GetGroupVariableValue(context, "loop3") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1350,33 +1350,33 @@ function action_EVENT_ENTER_REGION_4042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 201059009, 3)
-
+	
 	-- 针对当前group内变量名为 "loop3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4044(context, evt)
 	if evt.param1 ~= 4044 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop1"为1
 	if ScriptLib.GetGroupVariableValue(context, "loop1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1386,31 +1386,31 @@ function action_EVENT_ENTER_REGION_4044(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 针对当前group内变量名为 "loop1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4045(context, evt)
 	if evt.param1 ~= 4045 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop2"为1
 	if ScriptLib.GetGroupVariableValue(context, "loop2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1420,31 +1420,31 @@ function action_EVENT_ENTER_REGION_4045(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 针对当前group内变量名为 "loop2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4046(context, evt)
 	if evt.param1 ~= 4046 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"loop3"为1
 	if ScriptLib.GetGroupVariableValue(context, "loop3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1454,14 +1454,14 @@ function action_EVENT_ENTER_REGION_4046(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 针对当前group内变量名为 "loop3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1471,12 +1471,12 @@ function condition_EVENT_DUNGEON_AVATAR_SLIP_DIE_4047(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Enterloop") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"loop1"为5
 	if ScriptLib.GetGroupVariableValue(context, "loop1") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1487,13 +1487,13 @@ function action_EVENT_DUNGEON_AVATAR_SLIP_DIE_4047(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop1" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop1", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1503,12 +1503,12 @@ function condition_EVENT_DUNGEON_AVATAR_SLIP_DIE_4048(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Enterloop") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"loop2"为5
 	if ScriptLib.GetGroupVariableValue(context, "loop2") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1519,13 +1519,13 @@ function action_EVENT_DUNGEON_AVATAR_SLIP_DIE_4048(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop2" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop2", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1535,12 +1535,12 @@ function condition_EVENT_DUNGEON_AVATAR_SLIP_DIE_4049(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Enterloop") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"loop3"为5
 	if ScriptLib.GetGroupVariableValue(context, "loop3") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1551,13 +1551,13 @@ function action_EVENT_DUNGEON_AVATAR_SLIP_DIE_4049(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "loop3" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "loop3", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1568,7 +1568,7 @@ function action_EVENT_DUNGEON_REVIVE_4050(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1578,17 +1578,17 @@ function condition_EVENT_DUNGEON_AVATAR_SLIP_DIE_4051(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Enterloop") ~= 99 then
 			return false
 	end
-
+	
 	-- 判断变量"loop3"为5
 	if ScriptLib.GetGroupVariableValue(context, "loop3") ~= 5 then
 			return false
 	end
-
+	
 	-- 判断变量"loop3_bool"为1
 	if ScriptLib.GetGroupVariableValue(context, "loop3_bool") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1599,36 +1599,36 @@ function action_EVENT_DUNGEON_AVATAR_SLIP_DIE_4051(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201059010, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 创建id为4019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将configid为 4004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "loop3" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "loop3", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "loop3_bool" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "loop3_bool", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

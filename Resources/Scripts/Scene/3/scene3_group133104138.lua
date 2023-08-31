@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133104138
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	challenge_1_duration = 130,
 	challenge_2_duration = 110,
 	challenge_3_duration = 100,
@@ -45,9 +45,9 @@ defs.quest_4_success = defs.group_id.."0401"
 defs.quest_4_fail = defs.group_id.."0402"
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -91,9 +91,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -104,9 +104,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -159,9 +159,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -174,7 +174,7 @@ function action_EVENT_QUEST_START_225(context, evt)
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 0, defs.group_id_lift)
 	-- 设定挑战标志符为1
 	ScriptLib.SetGroupVariableValue(context, "Challenge_Flag", 1)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 1, 1)
 	ScriptLib.MarkPlayerAction(context, 3000, 2, 2)
@@ -191,7 +191,7 @@ function action_EVENT_QUEST_START_226(context, evt)
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 0, defs.group_id_lift)
 	-- 设定挑战标志符为2
 	ScriptLib.SetGroupVariableValue(context, "Challenge_Flag", 2)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 2, 3)
 	return 0
@@ -204,12 +204,12 @@ function action_EVENT_QUEST_START_227(context, evt)
 	-- 开启限时到达挑战
 	ScriptLib.ActiveChallenge(context, 10, defs.recordChallengeID, defs.challenge_3_duration, 4, 555, 1)
 	--关闭电梯
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 0, defs.group_id_lift)
-
+	
 	-- 设定挑战标志符为3
 	ScriptLib.SetGroupVariableValue(context, "Challenge_Flag", 3)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 2, 4)
 	return 0
@@ -224,9 +224,9 @@ function action_EVENT_CHALLENGE_SUCCESS_228(context, evt)
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context,defs.quest_1_success)
 	--开启电梯
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 1, defs.group_id_lift)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 3, 2)
 	--刷新电梯的GroupSuit1
@@ -239,9 +239,9 @@ function action_EVENT_CHALLENGE_SUCCESS_228(context, evt)
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context, defs.quest_2_success)
 	--开启电梯
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 1, defs.group_id_lift)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 3, 3)
 	--刷新电梯的GroupSuit1
@@ -254,9 +254,9 @@ function action_EVENT_CHALLENGE_SUCCESS_228(context, evt)
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context, defs.quest_3_success)
 	--开启电梯
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 1, defs.group_id_lift)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 3, 4)
 	--刷新电梯的GroupSuit1
@@ -268,9 +268,9 @@ function action_EVENT_CHALLENGE_SUCCESS_228(context, evt)
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context, defs.quest_4_success)
 	--开启电梯
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 1, defs.group_id_lift)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 3, 5)
 	--刷新电梯的GroupSuit1
@@ -289,9 +289,9 @@ function action_EVENT_CHALLENGE_FAIL_229(context, evt)
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context, defs.quest_1_fail)
 	--开启电梯
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 1, defs.group_id_lift)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 4, 2)
 	--刷新电梯的GroupSuit1
@@ -302,9 +302,9 @@ function action_EVENT_CHALLENGE_FAIL_229(context, evt)
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context, defs.quest_2_fail)
 	--开启电梯
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 1, defs.group_id_lift)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 4, 3)
 	--刷新电梯的GroupSuit1
@@ -315,9 +315,9 @@ function action_EVENT_CHALLENGE_FAIL_229(context, evt)
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context, defs.quest_3_fail)
 	--开启电梯
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 1, defs.group_id_lift)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 4, 4)
 	--刷新电梯的GroupSuit1
@@ -328,9 +328,9 @@ function action_EVENT_CHALLENGE_FAIL_229(context, evt)
 	-- 向任务返回结果
 	ScriptLib.AddQuestProgress(context, defs.quest_4_fail)
 	--开启电梯
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 1, defs.group_id_lift)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 4, 5)
 	--刷新电梯的GroupSuit1
@@ -343,7 +343,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_230(context, evt)
-	if evt.param1 ~= defs.region then
+	if evt.param1 ~= defs.region then 
 	return false
 	end
 	return true
@@ -356,8 +356,8 @@ function action_EVENT_ENTER_REGION_230(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -368,12 +368,12 @@ function action_EVENT_QUEST_START_231(context, evt)
 	-- 开启限时到达挑战
 	ScriptLib.ActiveChallenge(context, 10, defs.recordChallengeID, defs.challenge_3_duration, 4, 555, 1)
 	--关闭电梯
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "switch", 0, defs.group_id_lift)
-
+	
 	-- 设定挑战标志符为3
 	ScriptLib.SetGroupVariableValue(context, "Challenge_Flag", 4)
-
+	
 	--添加玩法埋点
 	ScriptLib.MarkPlayerAction(context, 3000, 2, 5)
 	return 0

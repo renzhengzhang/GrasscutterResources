@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101095
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	group_id = 111101095,
 	thunder1_id = 95019,
 	thunder2_id = 95020,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -131,38 +131,38 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_95004(context, evt)
 	if evt.param1 ~= 95004 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasStarted"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasStarted") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_95004(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "hasStarted", 1)
-
+	
 	ScriptLib.CreateFatherChallenge(context, 100, 67, 99999, {success=400, fail=100, fail_on_wipe=true})
-
+	
 	ScriptLib.AttachChildChallenge(context, 100, 1001, 68, {2,998,3}, {},{success=100,fail=100})
-
+	
 	ScriptLib.StartFatherChallenge(context, 100)
-
+	
 	return 0
 end
 
@@ -171,7 +171,7 @@ function condition_EVENT_ANY_GADGET_DIE_95005(context, evt)
 	if 95001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,7 +188,7 @@ function action_EVENT_ANY_GADGET_DIE_95005(context, evt)
 	        ScriptLib.ModifyFatherChallengeProperty(context, 100, FatherChallengeProperty.CUR_SUCC, 100)
 	        ScriptLib.PrintContextLog(context, "## ModifyFatherChallengeProperty!!!" )
 	end
-
+	
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_ANY_GADGET_DIE_95006(context, evt)
 	if 95002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -214,7 +214,7 @@ function action_EVENT_ANY_GADGET_DIE_95006(context, evt)
 	        ScriptLib.ModifyFatherChallengeProperty(context, 100, FatherChallengeProperty.CUR_SUCC, 100)
 	        ScriptLib.PrintContextLog(context, "## ModifyFatherChallengeProperty!!!" )
 	end
-
+	
 	return 0
 end
 
@@ -223,7 +223,7 @@ function condition_EVENT_ANY_GADGET_DIE_95007(context, evt)
 	if 95003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -240,22 +240,22 @@ function action_EVENT_ANY_GADGET_DIE_95007(context, evt)
 	        ScriptLib.ModifyFatherChallengeProperty(context, 100, FatherChallengeProperty.CUR_SUCC, 100)
 	        ScriptLib.PrintContextLog(context, "## ModifyFatherChallengeProperty!!!" )
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_95015(context, evt)
 	ScriptLib.RefreshGroup(context, {group_id = defs.group_id, suite = 1})
-
+	
 	ScriptLib.SetGroupVariableValue(context, "hasStarted", 0)
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_95017(context, evt)
 	ScriptLib.PrintContextLog(context, "## ChallengeSuccess 1001!!!")
-
+	
 	return 0
 end

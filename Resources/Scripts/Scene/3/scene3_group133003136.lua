@@ -1,12 +1,12 @@
 -- this is a group where there are 3 monsters during quest `Going Upon The Breeze: Clear Out the Nearby Hilichurl Camp: Lumine and Amber`
-base_info = {
+local base_info = {
 	group_id = 133003136
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- Created at initialization
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- group configuration
---
+-- 
 --================================================================
 
 suites = {
@@ -92,9 +92,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- trigger
---
+-- 
 --================================================================
 
 -- Triggering conditions (It will take action if 3 monsters are killed)
@@ -105,7 +105,7 @@ function condition_EVENT_ANY_MONSTER_DIE_511(context, evt)
         ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : Not all monsters killed. Remaining count: " .. count_kill)
         return false
     end
-
+	
 	return true
 end
 
@@ -116,16 +116,16 @@ function action_EVENT_ANY_MONSTER_DIE_511(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : skip bacuse treasure here should be here but because we are on a private server and have finished then resetting the quest from the beginning again makes the treasure not appear because we have taken it before.")
 		--return -1
 	end
-
+	
 	-- The notification task system completes the condition type "LUA notification", and the complex parameter is the progress of quest_param +1
 	-- maybe need hack QUEST_CONTENT_ADD_QUEST_PROGRESS?
 	if 0 ~= ScriptLib.AddQuestProgress(context, "133003136") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- Set the specified Group to be contestable
 	    ScriptLib.SetGroupReplaceable(context, 133003136, true)
-
+	
 	return 0
 end

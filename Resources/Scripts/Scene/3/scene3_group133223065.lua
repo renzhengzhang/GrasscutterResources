@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133223065
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -122,23 +122,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_65003(context, evt)
 	-- 判断是gadgetid 65002 option_id 24
 	if 65002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 24 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -149,28 +149,28 @@ function action_EVENT_SELECT_OPTION_65003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133223065 ；指定config：65002；物件身上指定option：24；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133223065, 65002, 24) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 65002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 65002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 65001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 65001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133223065, 4)
-
+	
 	-- 触发镜头注目，注目位置为坐标（-5930.495，175.3，-2672.809），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-5930.495, y=175.3, z=-2672.809}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -179,8 +179,8 @@ function action_EVENT_SELECT_OPTION_65003(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -190,11 +190,11 @@ function condition_EVENT_GADGET_CREATE_65004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133223065, 65001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -204,20 +204,20 @@ function action_EVENT_GADGET_CREATE_65004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 65001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_65006(context, evt)
 	if evt.param1 ~= 65006 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -228,13 +228,13 @@ function action_EVENT_ENTER_REGION_65006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 通知groupid为133223065中,configid为：65005的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 65005, 133223065) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -244,11 +244,11 @@ function condition_EVENT_GADGET_CREATE_65010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-
+	
 	if 65002 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -259,19 +259,19 @@ function action_EVENT_GADGET_CREATE_65010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_65011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"start"为1
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -281,17 +281,17 @@ function action_EVENT_VARIABLE_CHANGE_65011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 65002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133223065, 65002, {24}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133223065, 2)
-
+	
 	return 0
 end
 
@@ -301,7 +301,7 @@ function condition_EVENT_GROUP_LOAD_65015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -309,6 +309,6 @@ end
 function action_EVENT_GROUP_LOAD_65015(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133223065, 4)
-
+	
 	return 0
 end

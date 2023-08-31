@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235822005
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -75,9 +75,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -85,7 +85,7 @@ function condition_EVENT_GADGET_CREATE_5002(context, evt)
 	if 5001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -96,7 +96,7 @@ function action_EVENT_GADGET_CREATE_5002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -104,19 +104,19 @@ end
 function condition_EVENT_SELECT_OPTION_5003(context, evt)
 	-- 判断是gadgetid 5001 option_id 177
 	if 5001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 177 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"stage"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage", 235822004) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -126,18 +126,18 @@ function action_EVENT_SELECT_OPTION_5003(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 235822006, {6001,6002,6003,6004,6005,6006,6007,6008,6009,6010,6011,6012,6013,6014,6024,6025,6026,6027}, 18, 3, 3) then
 		return -1
 	end
-
+	
 	-- 删除指定group： 235822005 ；指定config：5001；物件身上指定option：177；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 235822005, 5001, 177) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 改变指定group组235822005中， configid为5001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235822005, 5001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

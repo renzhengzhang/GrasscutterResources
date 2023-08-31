@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250029001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -78,9 +78,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -91,9 +91,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -136,9 +136,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -146,7 +146,7 @@ function condition_EVENT_GADGET_CREATE_1039(context, evt)
 	if 1037 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -157,7 +157,7 @@ function action_EVENT_GADGET_CREATE_1039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -165,14 +165,14 @@ end
 function condition_EVENT_SELECT_OPTION_1040(context, evt)
 	-- 判断是gadgetid 1037 option_id 7
 	if 1037 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -180,13 +180,13 @@ end
 function action_EVENT_SELECT_OPTION_1040(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250029001, 2)
-
+	
 	-- 删除指定group： 250029001 ；指定config：1037；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250029001, 1037, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -196,12 +196,12 @@ function condition_EVENT_ANY_MONSTER_DIE_1041(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"wave"为0
 	if ScriptLib.GetGroupVariableValue(context, "wave") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -209,13 +209,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_1041(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250029001, 3)
-
+	
 	-- 将本组内变量名为 "wave" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "wave", 1, 250029001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -225,12 +225,12 @@ function condition_EVENT_ANY_MONSTER_DIE_1042(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"wave"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -238,13 +238,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_1042(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250029001, 4)
-
+	
 	-- 将本组内变量名为 "wave" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "wave", 2, 250029001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -254,12 +254,12 @@ function condition_EVENT_ANY_MONSTER_DIE_1043(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"wave"为2
 	if ScriptLib.GetGroupVariableValue(context, "wave") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -267,12 +267,12 @@ end
 function action_EVENT_ANY_MONSTER_DIE_1043(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250029001, 2)
-
+	
 	-- 将本组内变量名为 "wave" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "wave", 0, 250029001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133008227
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -89,9 +89,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -102,9 +102,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -138,9 +138,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -148,7 +148,7 @@ function condition_EVENT_ANY_GADGET_DIE_227004(context, evt)
 	if 227001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -156,25 +156,25 @@ end
 function action_EVENT_ANY_GADGET_DIE_227004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133008227, 2)
-
+	
 	-- 将本组内变量名为 "iceBreak" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "iceBreak", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_227014(context, evt)
 	if evt.param1 ~= 227014 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -185,19 +185,19 @@ function action_EVENT_ENTER_REGION_227014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_227015(context, evt)
 	if evt.param1 ~= 227015 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -208,19 +208,19 @@ function action_EVENT_ENTER_REGION_227015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_227016(context, evt)
 	if evt.param1 ~= 227016 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -231,27 +231,27 @@ function action_EVENT_ENTER_REGION_227016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227017(context, evt)
 	-- 判断是gadgetid 为 227011的移动平台，是否到达了300800058 的路线中的 2 点
-
+	
 	if 227011 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800058 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -262,39 +262,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget5" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget5", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227018(context, evt)
 	-- 判断是gadgetid 为 227011的移动平台，是否到达了300800058 的路线中的 4 点
-
+	
 	if 227011 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800058 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -305,39 +305,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget6" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget6", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227019(context, evt)
 	-- 判断是gadgetid 为 227011的移动平台，是否到达了300800058 的路线中的 6 点
-
+	
 	if 227011 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800058 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 6 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -348,39 +348,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget7" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget7", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227020(context, evt)
 	-- 判断是gadgetid 为 227011的移动平台，是否到达了300800058 的路线中的 8 点
-
+	
 	if 227011 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800058 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 8 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -391,39 +391,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget8" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget8", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227021(context, evt)
 	-- 判断是gadgetid 为 227011的移动平台，是否到达了300800058 的路线中的 10 点
-
+	
 	if 227011 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800058 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 10 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -434,39 +434,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget9" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget9", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227022(context, evt)
 	-- 判断是gadgetid 为 227011的移动平台，是否到达了300800058 的路线中的 12 点
-
+	
 	if 227011 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800058 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 12 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -477,39 +477,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget10" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget10", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227023(context, evt)
 	-- 判断是gadgetid 为 227012的移动平台，是否到达了300800059 的路线中的 12 点
-
+	
 	if 227012 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800059 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 12 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -520,39 +520,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget5" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget5", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227024(context, evt)
 	-- 判断是gadgetid 为 227012的移动平台，是否到达了300800059 的路线中的 2 点
-
+	
 	if 227012 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800059 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -563,39 +563,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget6" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget6", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227025(context, evt)
 	-- 判断是gadgetid 为 227012的移动平台，是否到达了300800059 的路线中的 4 点
-
+	
 	if 227012 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800059 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -606,39 +606,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget7" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget7", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227026(context, evt)
 	-- 判断是gadgetid 为 227012的移动平台，是否到达了300800059 的路线中的 6 点
-
+	
 	if 227012 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800059 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 6 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -649,39 +649,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget8" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget8", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227027(context, evt)
 	-- 判断是gadgetid 为 227012的移动平台，是否到达了300800059 的路线中的 8 点
-
+	
 	if 227012 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800059 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 8 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -692,39 +692,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget9" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget9", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227028(context, evt)
 	-- 判断是gadgetid 为 227012的移动平台，是否到达了300800059 的路线中的 10 点
-
+	
 	if 227012 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800059 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 10 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -735,39 +735,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget10" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget10", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227029(context, evt)
 	-- 判断是gadgetid 为 227013的移动平台，是否到达了300800060 的路线中的 10 点
-
+	
 	if 227013 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800060 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 10 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -778,39 +778,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget5" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget5", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227030(context, evt)
 	-- 判断是gadgetid 为 227013的移动平台，是否到达了300800060 的路线中的 12 点
-
+	
 	if 227013 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800060 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 12 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -821,39 +821,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget6" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget6", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227031(context, evt)
 	-- 判断是gadgetid 为 227013的移动平台，是否到达了300800060 的路线中的 2 点
-
+	
 	if 227013 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800060 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -864,39 +864,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget7" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget7", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227032(context, evt)
 	-- 判断是gadgetid 为 227013的移动平台，是否到达了300800060 的路线中的 4 点
-
+	
 	if 227013 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800060 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -907,39 +907,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget8" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget8", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227033(context, evt)
 	-- 判断是gadgetid 为 227013的移动平台，是否到达了300800060 的路线中的 6 点
-
+	
 	if 227013 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800060 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 6 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -950,39 +950,39 @@ function action_EVENT_PLATFORM_REACH_POINT_227033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget9" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget9", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_227034(context, evt)
 	-- 判断是gadgetid 为 227013的移动平台，是否到达了300800060 的路线中的 8 点
-
+	
 	if 227013 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800060 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 8 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -993,19 +993,19 @@ function action_EVENT_PLATFORM_REACH_POINT_227034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 227010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2.8秒后,向groupId为：133008227的对象,请求一次调用,并将string参数："gadget10" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008227, "gadget10", 2.8) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1015,8 +1015,8 @@ function action_EVENT_TIMER_EVENT_227035(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227005, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -1026,8 +1026,8 @@ function action_EVENT_TIMER_EVENT_227036(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227006, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -1037,8 +1037,8 @@ function action_EVENT_TIMER_EVENT_227037(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227007, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -1048,8 +1048,8 @@ function action_EVENT_TIMER_EVENT_227038(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227008, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -1059,8 +1059,8 @@ function action_EVENT_TIMER_EVENT_227039(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227009, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -1070,14 +1070,14 @@ function action_EVENT_TIMER_EVENT_227040(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227010, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 针对当前group内变量名为 "tryTimes" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "tryTimes", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1085,28 +1085,28 @@ end
 function condition_EVENT_GADGET_STATE_CHANGE_227041(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 133008227, 227005) ~= GadgetState.GearStart then
 	        return false
-	end
-
+	end 
+	
 	if ScriptLib.GetGadgetStateByConfigId(context, 133008227, 227006) ~= GadgetState.GearStart then
 	        return false
-	end
-
+	end 
+	
 	if ScriptLib.GetGadgetStateByConfigId(context, 133008227, 227007) ~= GadgetState.GearStart then
 	        return false
-	end
-
+	end 
+	
 	if ScriptLib.GetGadgetStateByConfigId(context, 133008227, 227008) ~= GadgetState.GearStart then
 	        return false
-	end
-
+	end 
+	
 	if ScriptLib.GetGadgetStateByConfigId(context, 133008227, 227009) ~= GadgetState.GearStart then
 	        return false
-	end
-
+	end 
+	
 	if ScriptLib.GetGadgetStateByConfigId(context, 133008227, 227010) ~= GadgetState.GearStart then
 	        return false
-	end
-
+	end 
+	
 	return true
 end
 
@@ -1117,61 +1117,61 @@ function action_EVENT_GADGET_STATE_CHANGE_227041(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133008227, "gadget5") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133008227, "gadget6") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133008227, "gadget7") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133008227, "gadget8") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133008227, "gadget9") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133008227, "gadget10") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133008324, monsters = {}, gadgets = {324003} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	-- 调用提示id为 300822630 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 300822630) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133008227, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1180,7 +1180,7 @@ function condition_EVENT_GADGET_CREATE_227042(context, evt)
 	if 227005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1190,50 +1190,50 @@ function action_EVENT_GADGET_CREATE_227042(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 227006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 227007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 227008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 227009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 227010 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 227010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_227043(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"tryTimes"为3
 	if ScriptLib.GetGroupVariableValue(context, "tryTimes") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1244,19 +1244,19 @@ function action_EVENT_VARIABLE_CHANGE_227043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_227044(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"tryTimes"为6
 	if ScriptLib.GetGroupVariableValue(context, "tryTimes") ~= 6 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1267,19 +1267,19 @@ function action_EVENT_VARIABLE_CHANGE_227044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_227045(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"tryTimes"为12
 	if ScriptLib.GetGroupVariableValue(context, "tryTimes") ~= 12 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1290,7 +1290,7 @@ function action_EVENT_VARIABLE_CHANGE_227045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -1300,7 +1300,7 @@ function condition_EVENT_GROUP_LOAD_227046(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "iceBreak") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1311,19 +1311,19 @@ function action_EVENT_GROUP_LOAD_227046(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_227047(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"tryTimes"为18
 	if ScriptLib.GetGroupVariableValue(context, "tryTimes") ~= 18 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1334,19 +1334,19 @@ function action_EVENT_VARIABLE_CHANGE_227047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_227048(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"tryTimes"为24
 	if ScriptLib.GetGroupVariableValue(context, "tryTimes") ~= 24 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1357,19 +1357,19 @@ function action_EVENT_VARIABLE_CHANGE_227048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_227049(context, evt)
 	if evt.param1 ~= 227049 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1380,6 +1380,6 @@ function action_EVENT_ENTER_REGION_227049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

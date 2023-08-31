@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133314085
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -83,9 +83,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -93,7 +93,7 @@ function condition_EVENT_GADGET_CREATE_85003(context, evt)
 	if 85002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -104,7 +104,7 @@ function action_EVENT_GADGET_CREATE_85003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -112,14 +112,14 @@ end
 function condition_EVENT_SELECT_OPTION_85004(context, evt)
 	-- 判断是gadgetid 85002 option_id 68
 	if 85002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 68 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -130,13 +130,13 @@ function action_EVENT_SELECT_OPTION_85004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133314085 ；指定config：85002；物件身上指定option：64；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133314085, 85002, 64) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -145,7 +145,7 @@ function condition_EVENT_GADGET_CREATE_85007(context, evt)
 	if 85006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -156,7 +156,7 @@ function action_EVENT_GADGET_CREATE_85007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -164,14 +164,14 @@ end
 function condition_EVENT_SELECT_OPTION_85008(context, evt)
 	-- 判断是gadgetid 85006 option_id 68
 	if 85006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 68 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -182,13 +182,13 @@ function action_EVENT_SELECT_OPTION_85008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133314085 ；指定config：85006；物件身上指定option：64；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133314085, 85006, 64) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -196,14 +196,14 @@ end
 function condition_EVENT_SELECT_OPTION_85011(context, evt)
 	-- 判断是gadgetid 85010 option_id 68
 	if 85010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 68 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -214,13 +214,13 @@ function action_EVENT_SELECT_OPTION_85011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133314085 ；指定config：85010；物件身上指定option：64；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133314085, 85010, 64) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -229,7 +229,7 @@ function condition_EVENT_GADGET_CREATE_85012(context, evt)
 	if 85010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -240,7 +240,7 @@ function action_EVENT_GADGET_CREATE_85012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -249,7 +249,7 @@ function condition_EVENT_GADGET_CREATE_85014(context, evt)
 	if 85015 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -260,7 +260,7 @@ function action_EVENT_GADGET_CREATE_85014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -268,14 +268,14 @@ end
 function condition_EVENT_SELECT_OPTION_85016(context, evt)
 	-- 判断是gadgetid 85015 option_id 68
 	if 85015 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 68 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -286,25 +286,25 @@ function action_EVENT_SELECT_OPTION_85016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133314085 ；指定config：85015；物件身上指定option：64；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133314085, 85015, 64) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_85017(context, evt)
 	if evt.param1 ~= 85017 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -315,6 +315,6 @@ function action_EVENT_ENTER_REGION_85017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

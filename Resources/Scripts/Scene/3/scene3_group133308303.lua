@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308303
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -173,9 +173,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -186,9 +186,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -249,9 +249,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -261,55 +261,55 @@ function action_EVENT_QUEST_START_303001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 调用提示id为 730551101 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 730551101) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308303, 2)
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308303, 6)
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308606, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308597, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308120, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308243, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_303002(context, evt)
 	if evt.param1 ~= 303002 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -317,7 +317,7 @@ end
 function action_EVENT_ENTER_REGION_303002(context, evt)
 	-- 终止识别id为133308303的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 133308303, 1)
-
+	
 	return 0
 end
 
@@ -328,19 +328,19 @@ function action_EVENT_CHALLENGE_SUCCESS_303003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308606, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308303, suite = 5 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -351,28 +351,28 @@ function action_EVENT_CHALLENGE_FAIL_303004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308303, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133308606, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133308303, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133308303, 3)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133308303, 4)
-
+	
 	return 0
 end
 
@@ -381,7 +381,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_303006(context, evt)
 	if 303005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -389,7 +389,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_303006(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
@@ -398,7 +398,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_303007(context, evt)
 	if 303009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -406,7 +406,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_303007(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
@@ -415,7 +415,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_303008(context, evt)
 	if 303011 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -423,19 +423,19 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_303008(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_303010(context, evt)
 	if evt.param1 ~= 303010 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -446,13 +446,13 @@ function action_EVENT_ENTER_REGION_303010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308303, 3)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133308303, 2)
-
+	
 	return 0
 end
 
@@ -461,7 +461,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_303015(context, evt)
 	if 303012 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -469,7 +469,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_303015(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
@@ -478,7 +478,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_303016(context, evt)
 	if 303013 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -486,7 +486,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_303016(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
@@ -495,7 +495,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_303017(context, evt)
 	if 303014 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -503,19 +503,19 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_303017(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_303018(context, evt)
 	if evt.param1 ~= 303018 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -526,16 +526,16 @@ function action_EVENT_ENTER_REGION_303018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308303, 4)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133308303, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133308303, 3)
-
+	
 	return 0
 end
 
@@ -544,7 +544,7 @@ function condition_EVENT_GADGET_CREATE_303019(context, evt)
 	if 303005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -558,7 +558,7 @@ function action_EVENT_GADGET_CREATE_303019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -567,7 +567,7 @@ function condition_EVENT_GADGET_CREATE_303020(context, evt)
 	if 303009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -581,7 +581,7 @@ function action_EVENT_GADGET_CREATE_303020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -590,7 +590,7 @@ function condition_EVENT_GADGET_CREATE_303021(context, evt)
 	if 303011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -604,7 +604,7 @@ function action_EVENT_GADGET_CREATE_303021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -613,7 +613,7 @@ function condition_EVENT_GADGET_CREATE_303022(context, evt)
 	if 303012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -627,7 +627,7 @@ function action_EVENT_GADGET_CREATE_303022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -636,7 +636,7 @@ function condition_EVENT_GADGET_CREATE_303023(context, evt)
 	if 303013 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -650,7 +650,7 @@ function action_EVENT_GADGET_CREATE_303023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -659,7 +659,7 @@ function condition_EVENT_GADGET_CREATE_303024(context, evt)
 	if 303014 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -673,27 +673,27 @@ function action_EVENT_GADGET_CREATE_303024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_303041(context, evt)
 	-- 判断是gadgetid 为 303005的移动平台，是否到达了330800044 的点集中的 2 点
-
+	
 	if 303005 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800044 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -701,27 +701,27 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_303041(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_303042(context, evt)
 	-- 判断是gadgetid 为 303009的移动平台，是否到达了330800045 的点集中的 2 点
-
+	
 	if 303009 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800045 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -729,27 +729,27 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_303042(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_303043(context, evt)
 	-- 判断是gadgetid 为 303011的移动平台，是否到达了330800046 的点集中的 2 点
-
+	
 	if 303011 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800046 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -757,27 +757,27 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_303043(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_303044(context, evt)
 	-- 判断是gadgetid 为 303012的移动平台，是否到达了330800047 的点集中的 2 点
-
+	
 	if 303012 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800047 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -785,27 +785,27 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_303044(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_303045(context, evt)
 	-- 判断是gadgetid 为 303013的移动平台，是否到达了330800048 的点集中的 2 点
-
+	
 	if 303013 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800048 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -813,27 +813,27 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_303045(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_303046(context, evt)
 	-- 判断是gadgetid 为 303014的移动平台，是否到达了330800049 的点集中的 2 点
-
+	
 	if 303014 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800049 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -841,7 +841,7 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_303046(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
@@ -850,7 +850,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_303078(context, evt)
 	if 303073 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -858,7 +858,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_303078(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
@@ -867,7 +867,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_303079(context, evt)
 	if 303074 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -875,7 +875,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_303079(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
@@ -884,7 +884,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_303080(context, evt)
 	if 303075 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -892,7 +892,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_303080(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
@@ -901,7 +901,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_303081(context, evt)
 	if 303076 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -909,7 +909,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_303081(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
@@ -918,7 +918,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_303082(context, evt)
 	if 303077 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -926,7 +926,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_303082(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
@@ -935,7 +935,7 @@ function condition_EVENT_GADGET_CREATE_303083(context, evt)
 	if 303073 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -949,7 +949,7 @@ function action_EVENT_GADGET_CREATE_303083(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -958,7 +958,7 @@ function condition_EVENT_GADGET_CREATE_303084(context, evt)
 	if 303074 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -972,7 +972,7 @@ function action_EVENT_GADGET_CREATE_303084(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -981,7 +981,7 @@ function condition_EVENT_GADGET_CREATE_303085(context, evt)
 	if 303075 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -995,7 +995,7 @@ function action_EVENT_GADGET_CREATE_303085(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1004,7 +1004,7 @@ function condition_EVENT_GADGET_CREATE_303086(context, evt)
 	if 303076 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1018,7 +1018,7 @@ function action_EVENT_GADGET_CREATE_303086(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1027,7 +1027,7 @@ function condition_EVENT_GADGET_CREATE_303087(context, evt)
 	if 303077 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1041,27 +1041,27 @@ function action_EVENT_GADGET_CREATE_303087(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_303088(context, evt)
 	-- 判断是gadgetid 为 303073的移动平台，是否到达了330800059 的点集中的 2 点
-
+	
 	if 303073 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800059 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1069,27 +1069,27 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_303088(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_303089(context, evt)
 	-- 判断是gadgetid 为 303074的移动平台，是否到达了330800060 的点集中的 2 点
-
+	
 	if 303074 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800060 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1097,27 +1097,27 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_303089(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_303090(context, evt)
 	-- 判断是gadgetid 为 303075的移动平台，是否到达了330800061 的点集中的 2 点
-
+	
 	if 303075 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800061 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1125,27 +1125,27 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_303090(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_303091(context, evt)
 	-- 判断是gadgetid 为 303076的移动平台，是否到达了330800062 的点集中的 2 点
-
+	
 	if 303076 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800062 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1153,27 +1153,27 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_303091(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_303092(context, evt)
 	-- 判断是gadgetid 为 303077的移动平台，是否到达了330800063 的点集中的 2 点
-
+	
 	if 303077 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800063 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1181,6 +1181,6 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_303092(context, evt)
 	-- 终止识别id为133308303的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 133308303, 0)
-
+	
 	return 0
 end

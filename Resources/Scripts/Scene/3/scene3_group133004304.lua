@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133004304
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -38,9 +38,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -51,9 +51,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -69,9 +69,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -79,7 +79,7 @@ function condition_EVENT_GADGET_CREATE_304002(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 133004304, 304004) == -1 then
 		return true
 	end
-
+	
 	return false
 end
 
@@ -89,8 +89,8 @@ function action_EVENT_GADGET_CREATE_304002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 304001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -99,7 +99,7 @@ function condition_EVENT_ANY_GADGET_DIE_304003(context, evt)
 	if 304004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -109,13 +109,13 @@ function action_EVENT_ANY_GADGET_DIE_304003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 304001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2012, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133223271
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	order = {271006,271007,271008},
 	region = 271013,
 	region_Enter = 271013,
@@ -13,9 +13,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -78,9 +78,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -91,9 +91,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -154,23 +154,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_271014(context, evt)
 	-- 判断是gadgetid 271006 option_id 92
 	if 271006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 92 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -181,19 +181,19 @@ function action_EVENT_SELECT_OPTION_271014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "LD_Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "LD_Finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为271022的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 271022 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -201,14 +201,14 @@ end
 function condition_EVENT_SELECT_OPTION_271015(context, evt)
 	-- 判断是gadgetid 271007 option_id 92
 	if 271007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 92 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -219,13 +219,13 @@ function action_EVENT_SELECT_OPTION_271015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为271023的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 271023 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -233,14 +233,14 @@ end
 function condition_EVENT_SELECT_OPTION_271016(context, evt)
 	-- 判断是gadgetid 271008 option_id 92
 	if 271008 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 92 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -251,37 +251,37 @@ function action_EVENT_SELECT_OPTION_271016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 31070408 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 31070408) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "LD_Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "LD_Finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为271024的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 271024 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_271021(context, evt)
 	if evt.param1 ~= 271021 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -293,7 +293,7 @@ function action_EVENT_ENTER_REGION_271021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 

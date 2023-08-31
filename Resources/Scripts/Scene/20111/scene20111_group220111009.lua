@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220111009
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -76,20 +76,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9002(context, evt)
 	if evt.param1 ~= 9002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -100,25 +100,25 @@ function action_EVENT_ENTER_REGION_9002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220111010, 9)
-
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220111010, 8)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9003(context, evt)
 	if evt.param1 ~= 9003 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -129,7 +129,7 @@ function action_EVENT_ENTER_REGION_9003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -137,14 +137,14 @@ end
 function condition_EVENT_SELECT_OPTION_9005(context, evt)
 	-- 判断是gadgetid 9006 option_id 73
 	if 9006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 73 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -154,26 +154,26 @@ function action_EVENT_SELECT_OPTION_9005(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220111009, 9004, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 220111009 ；指定config：9006；物件身上指定option：73；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220111009, 9006, 73) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "collect" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "collect", 1, 220111013) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "point" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "point", 1, 220111006) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -181,19 +181,19 @@ end
 function condition_EVENT_SELECT_OPTION_9007(context, evt)
 	-- 判断是gadgetid 9006 option_id 73
 	if 9006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 73 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"point1"为0
 	if ScriptLib.GetGroupVariableValue(context, "point1") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -201,16 +201,16 @@ end
 function action_EVENT_SELECT_OPTION_9007(context, evt)
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220111010, 9)
-
+	
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220111010, 10)
-
+	
 	-- 将本组内变量名为 "point1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "point1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -218,19 +218,19 @@ end
 function condition_EVENT_SELECT_OPTION_9008(context, evt)
 	-- 判断是gadgetid 9006 option_id 73
 	if 9006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 73 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"point1"为1
 	if ScriptLib.GetGroupVariableValue(context, "point1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -238,6 +238,6 @@ end
 function action_EVENT_SELECT_OPTION_9008(context, evt)
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220111010, 9)
-
+	
 	return 0
 end

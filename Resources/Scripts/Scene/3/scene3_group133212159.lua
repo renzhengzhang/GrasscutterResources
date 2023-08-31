@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133212159
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -167,9 +167,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -177,7 +177,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_159003(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133212159, 159001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,7 +188,7 @@ function action_EVENT_GADGET_STATE_CHANGE_159003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_159006(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133212159, 159004) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -205,13 +205,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_159006(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212159, 4)
-
+	
 	-- 针对当前group内变量名为 "133212159_var" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "133212159_var", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -220,7 +220,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_159008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133212159, 159007) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -228,13 +228,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_159008(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212159, 6)
-
+	
 	-- 针对当前group内变量名为 "133212159_var" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "133212159_var", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_159011(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133212159, 159010) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -251,30 +251,30 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_159011(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212159, 8)
-
+	
 	-- 针对当前group内变量名为 "133212159_var" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "133212159_var", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_159014(context, evt)
 	if evt.param1 ~= 159014 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"133212159_var"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "133212159_var", 133212159) ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -282,7 +282,7 @@ end
 function action_EVENT_ENTER_REGION_159014(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212159, 10)
-
+	
 	return 0
 end
 
@@ -293,7 +293,7 @@ function action_EVENT_GADGETTALK_DONE_159016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -304,7 +304,7 @@ function action_EVENT_GADGETTALK_DONE_159017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -315,7 +315,7 @@ function action_EVENT_GADGETTALK_DONE_159018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -326,6 +326,6 @@ function action_EVENT_GADGETTALK_DONE_159019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

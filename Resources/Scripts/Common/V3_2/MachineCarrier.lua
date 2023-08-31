@@ -5,11 +5,11 @@
 ||	owner: 		weiwei.sun
 ||	description: 	3.2散兵工厂 轨道运输装置 提供移动平台随时暂停、启动，以及根据轨道状态改变移动方向的支持
 ||	LogName:	## [MachineCarrier]
-||	Protection:
+||	Protection:	
 =======================================]]
 --[[
 
-defs = {
+local defs = {
 
 	option_turn = 613,
 
@@ -25,7 +25,7 @@ defs = {
 	--运输装置config_id
 	carrier_list = {},
 
-	switcher_control =
+	switcher_control = 
 	{--[操作台configID] = {被控岔路装置1, 被控岔路装置2},
 		[9017] = {9003},
 	},
@@ -33,10 +33,10 @@ defs = {
 	--终点
 	end_point = ,
 	--几条路 注意是point_list有向的 倒数第二个点为岔路判定点
-	way_info =
+	way_info = 
 	{
 		--key为路径几 顺序无所谓
-		[1] =
+		[1] = 
 		{
 			point_list = {1},
 
@@ -50,9 +50,9 @@ defs = {
 				[201] = 0,
 				[202] = 0,
 				[204] = 0,
-			},
+			}, 
 		},
-		[2] =
+		[2] = 
 		{
 			point_list = {12,11,10,9,8,7,6,5,4,3},
 
@@ -66,7 +66,7 @@ defs = {
 				[201] = 5,
 				[202] = 0,
 				[203] = 0,
-			},
+			}, 
 		},
 		},
 	},
@@ -74,13 +74,13 @@ defs = {
 	--每次任意车到达上车点时，检查region内是否有玩家，有则停车
 	station_region = ,
 
-	turn_point =
+	turn_point = 
 	{
 		3
 	},
 
 	--停车点 到此点时会判断是否需要停车
-	stop_points =
+	stop_points = 
 	{
 		7, 14
 	},
@@ -88,7 +88,7 @@ defs = {
 
 ]]
 
-local cfg =
+local cfg = 
 {
 	--岔路旋转State列表
 	turn_queue = {0,201,202,203},
@@ -152,7 +152,7 @@ function action_Select_Turn_Option(context, evt)
 		end
 	end
 	if 1 ~= move_state then
-		LF_ResumeMove(context)
+		LF_ResumeMove(context)	
 	end
 	return 0
 end
@@ -168,7 +168,7 @@ function action_Select_StartStop_Option(context, evt)
 		ScriptLib.SetGroupTempValue(context, "is_toStop", 1, {})--按下停止按钮后当有任意一个车到上车点的时候 停下
 		return 0
 	end
-
+	
 	return 0
 end
 
@@ -177,7 +177,7 @@ function action_Enter_Play_Region(context, evt)
 		ScriptLib.PrintContextLog(context,"## [MachineCarrier] action_Enter_Play_Region. play_region is empty!")
 		return 0
 	end
-	if defs.play_region ~= evt.param1 then
+	if defs.play_region ~= evt.param1 then	
 		return 0
 	end
 	if nil == defs.carrier_list[1] then
@@ -185,7 +185,7 @@ function action_Enter_Play_Region(context, evt)
 		return 0
 	end
 
-	LF_StartMove(context, defs.carrier_list[1])
+	LF_StartMove(context, defs.carrier_list[1])	
 
 	return 0
 end
@@ -195,7 +195,7 @@ function action_Leave_Play_Region(context, evt)
 		ScriptLib.PrintContextLog(context,"## [MachineCarrier] action_Leave_Play_Region. play_region is empty!")
 		return 0
 	end
-	if defs.play_region ~= evt.param1 then
+	if defs.play_region ~= evt.param1 then	
 		return 0
 	end
 	--重置电车
@@ -268,7 +268,7 @@ function action_Point_Arrival(context, evt)
 			if 1 == LF_TryStopMoveAtStation(context, evt.param1) then
 				LF_TryTurnGadget(context, evt.param1, evt.param3)
 				return 0
-			end
+			end		
 		end
 	end
 
@@ -280,7 +280,7 @@ function action_Point_Arrival(context, evt)
 				if 0 == ScriptLib.GetGroupVariableValue(context, "first_station") then
 					ScriptLib.SetGroupVariableValue(context, "first_station", 1)
 				end
-				LF_PauseMove(context)
+				LF_PauseMove(context)	
 				LF_TryTurnGadget(context, evt.param1, evt.param3)
 			end
 		end
@@ -334,7 +334,7 @@ function LF_IsMoveable(context)
 		--取得之前停在哪里
 		local cur_way = ScriptLib.GetGroupTempValue(context, "way_"..v, {})
 
-		if 0 < cur_way and nil ~= defs.way_info[cur_way] then
+		if 0 < cur_way and nil ~= defs.way_info[cur_way] then	
 			local switcher_state = ScriptLib.GetGadgetStateByConfigId(context, base_info.group_id, defs.way_info[cur_way].gear_id)
 			if nil ~= defs.way_info[cur_way].dir[switcher_state] then
 				local new_way = defs.way_info[cur_way].dir[switcher_state]
@@ -343,7 +343,7 @@ function LF_IsMoveable(context)
 					return 0
 				end
 			end
-		end
+		end	
 	end
 	return 1
 end
@@ -365,10 +365,10 @@ function LF_TrySpawnCarrier(context)
 		for i,v in ipairs(defs.carrier_list) do
 			local ret = ScriptLib.CreateGadget(context, { config_id = v })
 			if 0 == ret then
-				LF_StartMove(context, v)
+				LF_StartMove(context, v)	
 				return 0
 			end
-		end
+		end	 
 	end
 	return 0
 end
@@ -380,10 +380,10 @@ function LF_StartMove(context, config_id)
 	end
 	ScriptLib.PrintContextLog(context,"## [MachineCarrier] LF_StartMove. Try start config_id@"..config_id.." point_list@".. table.concat(defs.way_info[1].point_list, ", "))
 	local ret = ScriptLib.SetPlatformPointArray(context, config_id, defs.point_array, defs.way_info[1].point_list, { route_type = 0, record_mode = 0 })
-	if 0 == ret then
+	if 0 == ret then 
 		ScriptLib.SetGroupTempValue(context, "move_state", 1, {})
-		ScriptLib.SetGroupTempValue(context, "way_"..config_id, 1, {})
-		ScriptLib.SetGroupTempValue(context, "point_"..config_id, 0, {})
+		ScriptLib.SetGroupTempValue(context, "way_"..config_id, 1, {})	
+		ScriptLib.SetGroupTempValue(context, "point_"..config_id, 0, {})	
 		return 0
 	end
 	if nil ~= defs.option_gadget then
@@ -395,7 +395,7 @@ end
 
 function LF_ResumeMove(context)
 
-	if 0 == LF_IsMoveable(context) then
+	if 0 == LF_IsMoveable(context) then	
 		return 0
 	end
 	--启动
@@ -405,7 +405,7 @@ function LF_ResumeMove(context)
 
 		--取得之前停在哪里
 		local cur_way = ScriptLib.GetGroupTempValue(context, "way_"..v, {})
-		if 0 < cur_way then
+		if 0 < cur_way then		
 
 			local cur_point_index = ScriptLib.GetGroupTempValue(context, "point_"..v, {})
 
@@ -440,7 +440,7 @@ end
 function LF_PauseMove(context)
 	for i, v in ipairs(defs.carrier_list) do
 		ScriptLib.StopPlatform(context, v)
-	end
+	end	
 	ScriptLib.SetGroupTempValue(context, "move_state", 0, {})
 	if nil ~= defs.option_gadget then
 		ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, defs.option_gadget, { defs.option_start })
@@ -480,7 +480,7 @@ function SLC_MachineCarrier_Player_In(context)
 		return 0
 	end
 
-	local way_info = defs.way_info[cur_way]
+	local way_info = defs.way_info[cur_way] 
 
 	if nil == way_info.point_list[cur_point_index] then
 		return 0
@@ -490,14 +490,14 @@ function SLC_MachineCarrier_Player_In(context)
 		return 0
 	end
 	if 1 ~= move_state then
-		LF_ResumeMove(context)
+		LF_ResumeMove(context)	
 	end
 	return 0
 end
 
 function LF_DelAllTurningOption(context)
 	for k,v in pairs(defs.switcher_control) do
-
+		
 		ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, k, defs.option_turn )
 	end
 	ScriptLib.SetGroupTempValue(context, "option_deleted", 1, {})

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 251019003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -76,27 +76,27 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3003(context, evt)
 	if evt.param1 ~= 3003 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_3003(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=-43.67, y= 20.71, z=68.10}, radius = 0.1, rot = {x=0, y=180, z=0}})
-
+	ScriptLib.TransPlayerToPos(context, {uid_list = {evt.uid}, pos = {x=-43.67, y= 20.71, z=68.10}, radius = 0.1, rot = {x=0, y=180, z=0}}) 
+	
 	return 0
 end
 
@@ -105,14 +105,14 @@ function condition_EVENT_GADGET_CREATE_3009(context, evt)
 	if 3008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_3009(context, evt)
 	ScriptLib.SetWorktopOptionsByGroupId(context, 251019003, 3008, {1})
-
+	
 	return 0
 end
 
@@ -120,24 +120,24 @@ end
 function condition_EVENT_SELECT_OPTION_3010(context, evt)
 	-- 判断是gadgetid 3008 option_id 1
 	if 3008 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_3010(context, evt)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 251019003, 3004, GadgetState.GearStart)
-
+	
 	ScriptLib.DelWorktopOptionByGroupId(context, 251019003, 3008, 1)
-
+	
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 251019002, 2010, GadgetState.GearStart)
-
+	
 	return 0
 end

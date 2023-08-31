@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220163010
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 
 	option_turn = 613,
 	option_start = 7,
@@ -22,7 +22,7 @@ recover_points = {5,6},
 
 	--运输装置config_id
 	carrier_list = {10001,10004,10005,10006,10010,10011,10012,10013,10014,10016,10017,10018},
-	switcher_control =
+	switcher_control = 
 	{--[操作台configID] = {被控岔路装置1, 被控岔路装置2},
 		[10003] = {10002},
 	},
@@ -34,10 +34,10 @@ recover_points = {5,6},
     turn_point = {4,11},
 
 	--几条路 注意是point_list有向的 倒数第二个点为岔路判定点
-	way_info =
+	way_info = 
 	{
 		--key为路径几 顺序无所谓
-		[1] =
+		[1] = 
 		{
 			point_list = {1,2,3},
 
@@ -51,9 +51,9 @@ recover_points = {5,6},
 				[201] = 0,
 				[202] = 3,
 				[203] = 2,
-			},
+			}, 
 		},
-		[2] =
+		[2] = 
 		{
 			point_list = {14,4,6,11,7,12},
 
@@ -67,9 +67,9 @@ recover_points = {5,6},
 				[201] = 0,
 				[202] = 0,
 				[203] = 0,
-			},
+			}, 
 		},
-		[3] =
+		[3] = 
 		{
 			point_list = {14,4,5,8,9,10,13},
 
@@ -83,12 +83,12 @@ recover_points = {5,6},
 				[201] = 0,
 				[202] = 0,
 				[203] = 0,
-			},
+			}, 
 	},
 },
 
 	--停车点 到此点时会判断是否需要停车
-	stop_points =
+	stop_points = 
 	{
 		4
 	},
@@ -101,9 +101,9 @@ recover_points = {5,6},
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -165,9 +165,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -178,9 +178,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -196,23 +196,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_10009(context, evt)
 	-- 判断是gadgetid 10003 option_id 613
 	if 10003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 613 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -226,20 +226,20 @@ function action_EVENT_SELECT_OPTION_10009(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10020(context, evt)
 	if evt.param1 ~= 10020 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -249,8 +249,8 @@ function action_EVENT_ENTER_REGION_10020(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

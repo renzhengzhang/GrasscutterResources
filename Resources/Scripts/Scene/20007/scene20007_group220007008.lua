@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220007008
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -90,9 +90,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -122,7 +122,7 @@ function action_EVENT_SELECT_OPTION_8007(context, evt)
 	if evt.param2 == 1 then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 220007008, evt.param1, GadgetState.GearStart)
 	elseif evt.param2 == 4 then
-		ScriptLib.SetGroupGadgetStateByConfigId(context, 220007008, evt.param1, GadgetState.GearStop)
+		ScriptLib.SetGroupGadgetStateByConfigId(context, 220007008, evt.param1, GadgetState.GearStop) 
 	elseif evt.param2 == 5 then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 220007008, evt.param1, GadgetState.GearAction1)
 	elseif evt.param2 == 6 then

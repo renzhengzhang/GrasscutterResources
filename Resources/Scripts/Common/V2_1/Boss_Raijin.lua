@@ -7,7 +7,7 @@
 =======================================]]--
 -- Trigger变量
 --[[
-defs = {
+local defs = {
     BossConfigID = 181001,
     regionID = 181005,
 }
@@ -119,3 +119,4 @@ end
 
 LF_Initialize_Level()
 --- ServerUploadTool Save to [/root/env/data/lua/common/V2_1]  ---
+

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303013
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -81,9 +81,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -92,7 +92,7 @@ function condition_EVENT_ANY_MONSTER_DIE_13002(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -103,13 +103,13 @@ function action_EVENT_ANY_MONSTER_DIE_13002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 13004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -118,7 +118,7 @@ function condition_EVENT_TIME_AXIS_PASS_13003(context, evt)
 	if "battle" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -128,8 +128,8 @@ function action_EVENT_TIME_AXIS_PASS_13003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_MONSTER_BATTLE_13005(context, evt)
 	if 13001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -146,8 +146,8 @@ end
 function action_EVENT_MONSTER_BATTLE_13005(context, evt)
 	-- 创建标识为"battle"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "battle", {3}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_13006(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 95 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -168,6 +168,6 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_13006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

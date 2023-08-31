@@ -5,12 +5,12 @@
 ||	owner: 		weiwei.sun
 ||	description: 	3.2奇趣秘园 局内逻辑 踢足球
 ||	LogName:	## [CharAmuse_FootBall]
-||	Protection:
+||	Protection:	
 =======================================]]
 --[[
 
 --踢球玩法配置
-defs = {
+local defs = {
 
 	-----全玩法通用配置-----
 
@@ -34,7 +34,7 @@ defs = {
     -- 如果是琴的关卡，用这套
     Jean = {
         -- 球门和空气墙所在的suite
-        goal_suite =10,
+        goal_suite =10, 
         -- 刷球和空气墙的规则
         setting = {
             -- 单人玩家
@@ -60,14 +60,14 @@ defs = {
                 {ball_suite = {1,2}, wall_suite = {}},
                 {ball_suite = {3,4}, wall_suite = {2}},
                 {ball_suite = {3,4}, wall_suite = {4}},
-            },
-
-        },
+            },   
+       
+        }, 
     },
 
     -- 如果是可莉&烟绯的关卡，用这套
     Klee = {
-        goal_suite =2,
+        goal_suite =2, 
         setting = {
             [1] = {
                 {ball_suite = {1,2}, wall_suite = {}},
@@ -91,9 +91,9 @@ defs = {
                 {ball_suite = {1,2}, wall_suite = {}},
                 {ball_suite = {3,4}, wall_suite = {2}},
                 {ball_suite = {3,4}, wall_suite = {4}},
-            },
-
-        },
+            },   
+       
+        }, 
     },
 }
 
@@ -101,13 +101,13 @@ defs = {
 local cfg = {
 	main_group = 251008007,
 	--
-	gallery_match =
+	gallery_match = 
 	{
 		--[1000] = defs.Jean,
 		[28009] = defs.Klee,
 		[28010] = defs.Jean
 	},
-	monter_score =
+	monter_score = 
 	{
 		[20011204] = 1,
 		[20011305] = 5,
@@ -144,7 +144,7 @@ function EX_StartGallery(context, prev_context, gallery_id, is_last_level)
 	if nil ~= defs.play_suites then
 		for k,v in pairs(defs.play_suites) do
 			ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v)
-		end
+		end	
 	end
 
 	local uid_list = ScriptLib.GetSceneUidList(context)
@@ -186,7 +186,7 @@ function action_AirWallVariable_Change(context, evt)
 	elseif 0 == evt.param1 and 1 == evt.param2 then
 		for i,v in ipairs(defs.air_wall) do
 			ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, v)
-		end
+		end	
 	end
 	return 0
 end
@@ -197,13 +197,13 @@ function action_Gallery_Stop(context, evt)
 	if nil ~= defs.play_suites then
 		for k,v in pairs(defs.play_suites) do
 			ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, v)
-		end
+		end	
 	end
 
 	LF_ClearRound(context)
 	ScriptLib.EndAllTimeAxis(context)
 
-	if 3 ~= evt.param3 then
+	if 3 ~= evt.param3 then		
 		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		--ScriptLib.InitTimeAxis(context, "StopGallery_Fail", { 3 } , false) 9.21修改 失败不要延时结束
 		ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {1, base_info.group_id})
@@ -213,7 +213,7 @@ function action_Gallery_Stop(context, evt)
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
 			ScriptLib.InitTimeAxis(context, "StopGallery", { 3 } , false)
-		end
+		end	
 	end
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] Gallery stoped. reason@".. evt.param3.." --------------")
 	return 0
@@ -227,7 +227,7 @@ end
 
 ---------------------------------------------------------------------------------------------------------------
 function LF_Start_Play(context)
-
+	
 	ScriptLib.SetGroupTempValue(context, "round", 0, {})
 
 	player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
@@ -313,7 +313,7 @@ function LF_StartRound(context)
 	--如果已经到了LD配置尽头，则循环最后一波
 	if round > #char_type.setting[player_count] then
 		round = #char_type.setting[player_count]
-		ScriptLib.SetGroupTempValue(context, "round", round, {})
+		ScriptLib.SetGroupTempValue(context, "round", round, {}) 
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] LF_StartRound. All round finished. Set to final.")
 	end
 
@@ -350,7 +350,7 @@ function LF_StartRound(context)
 end
 
 function LF_ClearRound(context)
-
+	
 	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
 	local char_type = LF_GetFootBallCharType(context)
 	local setting = char_type.setting[player_count]
@@ -365,7 +365,7 @@ function LF_ClearRound(context)
 		end
 	end
 	--移除其他
-	for i = 2, #suites do
+	for i = 2, #suites do 
 
 		if defs.Jean.goal_suite ~= i and defs.Klee.goal_suite ~= i and wall_suite ~= i then
 			ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, i)
@@ -373,7 +373,7 @@ function LF_ClearRound(context)
 	end
 	--埋点
 	local score_gain = ScriptLib.GetGroupTempValue(context, "score_gain", {})
-    ScriptLib.MarkGroupLuaAction(context, "CharAmuse_Football", ScriptLib.GetDungeonTransaction(context), {["wave_num"] = round, ["score_gain"] = score_gain})
+    ScriptLib.MarkGroupLuaAction(context, "CharAmuse_Football", ScriptLib.GetDungeonTransaction(context), {["wave_num"] = round, ["score_gain"] = score_gain}) 
 	return 0
 end
 
@@ -417,7 +417,7 @@ function action_MovingWall_ReachPoint(context, evt)
 end
 
 --[[function SLC_CharAmuse_KillSlime(context)
-	local config_id = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id})
+	local config_id = ScriptLib.GetMonsterConfigId(context, { monster_eid = context.source_entity_id})	
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] SLC_CharAmuse_KillSlime. source_entity_id@".. context.source_entity_id.. " target_entity_id@".. context.target_entity_id.." GetMonsterConfigId@"..config_id)
 	if nil == cfg.monter_score[monsters[config_id].monster_id] then
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_FootBall] SLC_CharAmuse_KillSlime. Got unexpected config_id@")
@@ -446,7 +446,7 @@ function LF_HandleMonsterDie(context, config_id)
 	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 	ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["add_score"] = score} )
 	ScriptLib.CharAmusementUpdateScore(context, cfg.main_group, 1, score)--给MultStage更新分数 服务器侧埋点用
-
+	
 	--挑战完成
 	if 0 >= ScriptLib.GetGroupTempValue(context, "cur_score", {}) then
 		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)

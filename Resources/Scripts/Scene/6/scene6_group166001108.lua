@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 166001108
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -39,9 +39,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -79,9 +79,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -89,7 +89,7 @@ function condition_EVENT_MONSTER_BATTLE_108005(context, evt)
 	if 108001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -100,19 +100,19 @@ function action_EVENT_MONSTER_BATTLE_108005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_hp_by_group")
 			return -1
 		end
-
+	
 	-- 将group 166001108 中config id为 108002 的怪物血量设为 80 %（血量百分比不能填0，如果掉血，则走通用的掉血流程，如果加血，直接设置新的血量）。
 	if 0 ~= ScriptLib.SetMonsterHp(context, 166001108, 108002, 80) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_hp_by_group")
 			return -1
 		end
-
+	
 	-- 将group 166001108 中config id为 108003 的怪物血量设为 70 %（血量百分比不能填0，如果掉血，则走通用的掉血流程，如果加血，直接设置新的血量）。
 	if 0 ~= ScriptLib.SetMonsterHp(context, 166001108, 108003, 70) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_hp_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -122,8 +122,8 @@ function condition_EVENT_ANY_MONSTER_DIE_108007(context, evt)
 	if evt.param1 ~= 108001 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -134,12 +134,12 @@ function action_EVENT_ANY_MONSTER_DIE_108007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 166001108, monsters = {108003,108002}, gadgets = {} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end

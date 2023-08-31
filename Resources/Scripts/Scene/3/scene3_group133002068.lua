@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133002068
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	target_group = 133002145,
 	Active_Trap_Time = 30
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -105,9 +105,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -118,9 +118,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -145,20 +145,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_68004(context, evt)
 	if evt.param1 ~= 68004 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -166,23 +166,23 @@ end
 function action_EVENT_ENTER_REGION_68004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133002068, 2)
-
+	
 	-- 调用提示id为 400172 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400172) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 创建标识为"trap_1"，时间节点为{1,60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "trap_1", {1,60}, false)
-
-
+	
+	
 	-- 将本组内变量名为 "create_random_shield_orb" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_random_shield_orb", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -191,7 +191,7 @@ function condition_EVENT_TIME_AXIS_PASS_68009(context, evt)
 	if "buff_2" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -202,13 +202,13 @@ function action_EVENT_TIME_AXIS_PASS_68009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "create_random_shield_orb" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_random_shield_orb", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_ANY_GADGET_DIE_68028(context, evt)
 	if 68002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -225,8 +225,8 @@ end
 function action_EVENT_ANY_GADGET_DIE_68028(context, evt)
 	-- 创建标识为"buff_1"，时间节点为{1,15,20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "buff_1", {1,15,20}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -235,7 +235,7 @@ function condition_EVENT_ANY_GADGET_DIE_68029(context, evt)
 	if 68003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -243,8 +243,8 @@ end
 function action_EVENT_ANY_GADGET_DIE_68029(context, evt)
 	-- 创建标识为"buff_2"，时间节点为{1,15,20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "buff_2", {1,15,20}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -253,7 +253,7 @@ function condition_EVENT_ANY_GADGET_DIE_68030(context, evt)
 	if 68006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -261,8 +261,8 @@ end
 function action_EVENT_ANY_GADGET_DIE_68030(context, evt)
 	-- 创建标识为"buff_3"，时间节点为{1,15,20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "buff_3", {1,15,20}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -271,7 +271,7 @@ function condition_EVENT_ANY_GADGET_DIE_68031(context, evt)
 	if 68007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -279,8 +279,8 @@ end
 function action_EVENT_ANY_GADGET_DIE_68031(context, evt)
 	-- 创建标识为"buff_4"，时间节点为{1,15,20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "buff_4", {1,15,20}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -289,7 +289,7 @@ function condition_EVENT_ANY_GADGET_DIE_68032(context, evt)
 	if 68008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -297,8 +297,8 @@ end
 function action_EVENT_ANY_GADGET_DIE_68032(context, evt)
 	-- 创建标识为"buff_5"，时间节点为{1,15,20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "buff_5", {1,15,20}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -307,7 +307,7 @@ function condition_EVENT_TIME_AXIS_PASS_68033(context, evt)
 	if "buff_1" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -318,13 +318,13 @@ function action_EVENT_TIME_AXIS_PASS_68033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "create_random_shield_orb" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_random_shield_orb", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -333,7 +333,7 @@ function condition_EVENT_TIME_AXIS_PASS_68034(context, evt)
 	if "buff_2" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -344,7 +344,7 @@ function action_EVENT_TIME_AXIS_PASS_68034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -353,7 +353,7 @@ function condition_EVENT_TIME_AXIS_PASS_68035(context, evt)
 	if "buff_3" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -364,13 +364,13 @@ function action_EVENT_TIME_AXIS_PASS_68035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "create_random_shield_orb" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_random_shield_orb", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -379,7 +379,7 @@ function condition_EVENT_TIME_AXIS_PASS_68036(context, evt)
 	if "buff_4" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -390,13 +390,13 @@ function action_EVENT_TIME_AXIS_PASS_68036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "create_random_shield_orb" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_random_shield_orb", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -405,7 +405,7 @@ function condition_EVENT_TIME_AXIS_PASS_68037(context, evt)
 	if "buff_5" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -416,13 +416,13 @@ function action_EVENT_TIME_AXIS_PASS_68037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "create_random_shield_orb" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "create_random_shield_orb", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

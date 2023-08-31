@@ -1,7 +1,7 @@
 --- def参数
 --- 描述长宽
 --[[
-defs = {
+local defs = {
 	-- 该参数 填入ConfigID 用来确认临接关系
 	InitFloorArrays = {
 		{6001,6004,6007,6010},

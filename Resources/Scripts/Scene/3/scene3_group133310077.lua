@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133310077
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_door = 77002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -81,31 +81,31 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_77003(context, evt)
 	if evt.param1 ~= 77003 then return false end
-
+	
 	-- 判断变量"open_the_door"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "open_the_door", 133310023) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_77003(context, evt)
-
+	
 	if 0 ~= ScriptLib.SetGadgetTalkByConfigId(context, 133310077, 77007, 6801602) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_talk_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -113,11 +113,11 @@ end
 function action_EVENT_GADGETTALK_DONE_77004(context, evt)
 	-- 创建标识为"open"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "open", {1}, false)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 77001, GadgetState.GearStart)
-
+	
 	ScriptLib.RemoveEntityByConfigId(context, 133310077, EntityType.GADGET, 77007 )
-
+	
 	return 0
 end
 
@@ -126,7 +126,7 @@ function condition_EVENT_TIME_AXIS_PASS_77005(context, evt)
 	if "open" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -136,14 +136,14 @@ function action_EVENT_TIME_AXIS_PASS_77005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 77002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 调用提示id为 7319009 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if ScriptLib.GetGroupVariableValue(context, "quest_accept") == 1 then
 		ScriptLib.ShowReminder(context, 7319009)
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -152,7 +152,7 @@ function condition_EVENT_GROUP_LOAD_77006(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133310077, 77001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -162,14 +162,14 @@ function action_EVENT_GROUP_LOAD_77006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 77002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133310077, EntityType.GADGET, 77007 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -180,7 +180,7 @@ function action_EVENT_QUEST_START_77008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_77011(context, evt)
 	if 77002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -200,6 +200,6 @@ function action_EVENT_GADGET_STATE_CHANGE_77011(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end

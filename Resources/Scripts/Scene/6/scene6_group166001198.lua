@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 166001198
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -107,9 +107,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -120,9 +120,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -147,9 +147,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -159,7 +159,7 @@ function action_EVENT_QUEST_FINISH_198011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -170,7 +170,7 @@ function action_EVENT_QUEST_FINISH_198012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -181,7 +181,7 @@ function action_EVENT_QUEST_FINISH_198013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -192,7 +192,7 @@ function action_EVENT_QUEST_FINISH_198014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -200,19 +200,19 @@ end
 function action_EVENT_QUEST_START_198015(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001198, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_198018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Destroy_Var"为1
 	if ScriptLib.GetGroupVariableValue(context, "Destroy_Var") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -223,19 +223,19 @@ function action_EVENT_VARIABLE_CHANGE_198018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_198019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Destroy_Var"为2
 	if ScriptLib.GetGroupVariableValue(context, "Destroy_Var") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -246,7 +246,7 @@ function action_EVENT_VARIABLE_CHANGE_198019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -255,7 +255,7 @@ function condition_EVENT_GADGET_CREATE_198021(context, evt)
 	if 198020 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -266,7 +266,7 @@ function action_EVENT_GADGET_CREATE_198021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -274,14 +274,14 @@ end
 function condition_EVENT_SELECT_OPTION_198022(context, evt)
 	-- 判断是gadgetid 198020 option_id 91
 	if 198020 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -298,7 +298,7 @@ function action_EVENT_SELECT_OPTION_198022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
@@ -307,7 +307,7 @@ function condition_EVENT_GADGET_CREATE_198030(context, evt)
 	if 198027 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -318,7 +318,7 @@ function action_EVENT_GADGET_CREATE_198030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -326,14 +326,14 @@ end
 function condition_EVENT_SELECT_OPTION_198031(context, evt)
 	-- 判断是gadgetid 198027 option_id 91
 	if 198027 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -350,7 +350,7 @@ function action_EVENT_SELECT_OPTION_198031(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
@@ -359,7 +359,7 @@ function condition_EVENT_GADGET_CREATE_198032(context, evt)
 	if 198028 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -370,7 +370,7 @@ function action_EVENT_GADGET_CREATE_198032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -378,14 +378,14 @@ end
 function condition_EVENT_SELECT_OPTION_198033(context, evt)
 	-- 判断是gadgetid 198028 option_id 91
 	if 198028 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -402,7 +402,7 @@ function action_EVENT_SELECT_OPTION_198033(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
@@ -411,7 +411,7 @@ function condition_EVENT_GADGET_CREATE_198034(context, evt)
 	if 198029 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -422,7 +422,7 @@ function action_EVENT_GADGET_CREATE_198034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -430,14 +430,14 @@ end
 function condition_EVENT_SELECT_OPTION_198035(context, evt)
 	-- 判断是gadgetid 198029 option_id 91
 	if 198029 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -454,7 +454,7 @@ function action_EVENT_SELECT_OPTION_198035(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
@@ -463,7 +463,7 @@ function condition_EVENT_GADGET_CREATE_198036(context, evt)
 	if 198023 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -474,7 +474,7 @@ function action_EVENT_GADGET_CREATE_198036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -482,14 +482,14 @@ end
 function condition_EVENT_SELECT_OPTION_198037(context, evt)
 	-- 判断是gadgetid 198023 option_id 91
 	if 198023 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -506,7 +506,7 @@ function action_EVENT_SELECT_OPTION_198037(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
@@ -515,7 +515,7 @@ function condition_EVENT_GADGET_CREATE_198038(context, evt)
 	if 198024 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -526,7 +526,7 @@ function action_EVENT_GADGET_CREATE_198038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -534,14 +534,14 @@ end
 function condition_EVENT_SELECT_OPTION_198039(context, evt)
 	-- 判断是gadgetid 198024 option_id 91
 	if 198024 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -558,7 +558,7 @@ function action_EVENT_SELECT_OPTION_198039(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
@@ -567,7 +567,7 @@ function condition_EVENT_GADGET_CREATE_198040(context, evt)
 	if 198025 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -578,7 +578,7 @@ function action_EVENT_GADGET_CREATE_198040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -586,14 +586,14 @@ end
 function condition_EVENT_SELECT_OPTION_198041(context, evt)
 	-- 判断是gadgetid 198025 option_id 91
 	if 198025 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -610,7 +610,7 @@ function action_EVENT_SELECT_OPTION_198041(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
@@ -619,7 +619,7 @@ function condition_EVENT_GADGET_CREATE_198042(context, evt)
 	if 198026 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -630,7 +630,7 @@ function action_EVENT_GADGET_CREATE_198042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -638,14 +638,14 @@ end
 function condition_EVENT_SELECT_OPTION_198043(context, evt)
 	-- 判断是gadgetid 198026 option_id 91
 	if 198026 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 91 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -662,6 +662,6 @@ function action_EVENT_SELECT_OPTION_198043(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end

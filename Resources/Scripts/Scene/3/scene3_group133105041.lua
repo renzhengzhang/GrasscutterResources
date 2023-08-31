@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133105041
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     ButtonLeftConfig = 41001,
     ButtonRightConfig = 41002,
     StoveConfig = 41003,
@@ -34,9 +34,9 @@ local challengeParam = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -224,9 +224,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -237,9 +237,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -336,9 +336,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -348,35 +348,35 @@ function action_EVENT_TIME_AXIS_PASS_41007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
 	local functionKey = "StartPotTaunt"
 	local functionParam1 = "StartPotTaunt" .. "Param1"
 	local functionParam2 = "StartPotTaunt" .. "Param2"
 	local functionParam3 = "StartPotTaunt" .. "Param3"
 	local functionParam4 = "StartPotTaunt" .. "Param4"
-
+	
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41006, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 1, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
 	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-
+	
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
 	local functionKey = "StartPotTaunt"
 	local functionParam1 = "StartPotTaunt" .. "Param1"
 	local functionParam2 = "StartPotTaunt" .. "Param2"
 	local functionParam3 = "StartPotTaunt" .. "Param3"
 	local functionParam4 = "StartPotTaunt" .. "Param4"
-
+	
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41004, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
 	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-
+	
 	return 0
 end
 
@@ -386,7 +386,7 @@ function condition_EVENT_QUEST_START_41012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fail") >= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -394,16 +394,16 @@ end
 function action_EVENT_QUEST_START_41012(context, evt)
 	-- 创建标识为"monstercreate1"，时间节点为{40}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "monstercreate1", {40}, false)
-
-
+	
+	
 	-- 创建标识为"monstercreate2"，时间节点为{20,60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "monstercreate2", {20,60}, false)
-
-
+	
+	
 	-- 创建标识为"monstercreate3"，时间节点为{75}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "monstercreate3", {75}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -414,35 +414,35 @@ function action_EVENT_TIME_AXIS_PASS_41014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randRest")
 			return -1
 		end
-
+	
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
 	local functionKey = "StartPotTaunt"
 	local functionParam1 = "StartPotTaunt" .. "Param1"
 	local functionParam2 = "StartPotTaunt" .. "Param2"
 	local functionParam3 = "StartPotTaunt" .. "Param3"
 	local functionParam4 = "StartPotTaunt" .. "Param4"
-
+	
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41004, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 1, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
 	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-
+	
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
 	local functionKey = "StartPotTaunt"
 	local functionParam1 = "StartPotTaunt" .. "Param1"
 	local functionParam2 = "StartPotTaunt" .. "Param2"
 	local functionParam3 = "StartPotTaunt" .. "Param3"
 	local functionParam4 = "StartPotTaunt" .. "Param4"
-
+	
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41006, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
 	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-
+	
 	return 0
 end
 
@@ -453,7 +453,7 @@ function action_EVENT_QUEST_START_41051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -464,7 +464,7 @@ function action_EVENT_TIME_AXIS_PASS_41052(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -475,37 +475,37 @@ function action_EVENT_CHALLENGE_FAIL_41053(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 70500051 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 70500051) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 停止标识为"monstercreate1"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate1")
-
-
+	
+	
 	-- 停止标识为"monstercreate2"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate2")
-
-
+	
+	
 	-- 停止标识为"monstercreate3"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate3")
-
-
+	
+	
 	-- 针对当前group内变量名为 "fail" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "fail", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133105043, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -516,31 +516,31 @@ function action_EVENT_CHALLENGE_SUCCESS_41067(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 70500041 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 70500041) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133105043, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 停止标识为"monstercreate1"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate1")
-
-
+	
+	
 	-- 停止标识为"monstercreate2"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate2")
-
-
+	
+	
 	-- 停止标识为"monstercreate3"的时间轴
 	ScriptLib.EndTimeAxis(context, "monstercreate3")
-
-
+	
+	
 	return 0
 end
 
@@ -551,7 +551,7 @@ function action_EVENT_TIME_AXIS_PASS_41068(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -562,19 +562,19 @@ function action_EVENT_TIME_AXIS_PASS_41069(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_41070(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ovenATempDirection"为1
 	if ScriptLib.GetGroupVariableValue(context, "ovenATempDirection") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -582,8 +582,8 @@ end
 function action_EVENT_VARIABLE_CHANGE_41070(context, evt)
 	-- 创建标识为"ovenAUP"，时间节点为{1}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "ovenAUP", {1}, true)
-
-
+	
+	
 	return 0
 end
 
@@ -594,19 +594,19 @@ function action_EVENT_TIME_AXIS_PASS_41071(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_41072(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ovenATempDirection"为2
 	if ScriptLib.GetGroupVariableValue(context, "ovenATempDirection") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -614,24 +614,24 @@ end
 function action_EVENT_VARIABLE_CHANGE_41072(context, evt)
 	-- 重启标识为"ovenADOWN"的时间轴
 	ScriptLib.ContinueTimeAxis(context, "ovenADOWN")
-
-
+	
+	
 	-- 暂停标识为"ovenAUP"的时间轴
 	ScriptLib.PauseTimeAxis(context, "ovenAUP")
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_41073(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ovenBTempDirection"为1
 	if ScriptLib.GetGroupVariableValue(context, "ovenBTempDirection") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -639,12 +639,12 @@ end
 function action_EVENT_VARIABLE_CHANGE_41073(context, evt)
 	-- 暂停标识为"ovenBDOWN"的时间轴
 	ScriptLib.PauseTimeAxis(context, "ovenBDOWN")
-
-
+	
+	
 	-- 创建标识为"ovenBUP"，时间节点为{1}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "ovenBUP", {1}, true)
-
-
+	
+	
 	return 0
 end
 
@@ -655,19 +655,19 @@ function action_EVENT_TIME_AXIS_PASS_41074(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_41075(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ovenBTempDirection"为2
 	if ScriptLib.GetGroupVariableValue(context, "ovenBTempDirection") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -675,24 +675,24 @@ end
 function action_EVENT_VARIABLE_CHANGE_41075(context, evt)
 	-- 重启标识为"ovenBDOWN"的时间轴
 	ScriptLib.ContinueTimeAxis(context, "ovenBDOWN")
-
-
+	
+	
 	-- 暂停标识为"ovenBUP"的时间轴
 	ScriptLib.PauseTimeAxis(context, "ovenBUP")
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_41076(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ovenCTempDirection"为1
 	if ScriptLib.GetGroupVariableValue(context, "ovenCTempDirection") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -700,12 +700,12 @@ end
 function action_EVENT_VARIABLE_CHANGE_41076(context, evt)
 	-- 创建标识为"ovenCDOWN"，时间节点为{1}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "ovenCDOWN", {1}, true)
-
-
+	
+	
 	-- 暂停标识为"ovenCTemp"的时间轴
 	ScriptLib.PauseTimeAxis(context, "ovenCTemp")
-
-
+	
+	
 	return 0
 end
 
@@ -716,19 +716,19 @@ function action_EVENT_TIME_AXIS_PASS_41077(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_41078(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ovenCTempDirection"为2
 	if ScriptLib.GetGroupVariableValue(context, "ovenCTempDirection") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -736,12 +736,12 @@ end
 function action_EVENT_VARIABLE_CHANGE_41078(context, evt)
 	-- 重启标识为"ovenCDOWN"的时间轴
 	ScriptLib.ContinueTimeAxis(context, "ovenCDOWN")
-
-
+	
+	
 	-- 暂停标识为"ovenCUP"的时间轴
 	ScriptLib.PauseTimeAxis(context, "ovenCUP")
-
-
+	
+	
 	return 0
 end
 
@@ -752,35 +752,35 @@ function action_EVENT_TIME_AXIS_PASS_41079(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randRest")
 			return -1
 		end
-
+	
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
 	local functionKey = "StartPotTaunt"
 	local functionParam1 = "StartPotTaunt" .. "Param1"
 	local functionParam2 = "StartPotTaunt" .. "Param2"
 	local functionParam3 = "StartPotTaunt" .. "Param3"
 	local functionParam4 = "StartPotTaunt" .. "Param4"
-
+	
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41006, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 1, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
 	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-
+	
 	-- 发起一个针对Td的LuaFunction "StartPotTaunt" 的请求
 	local functionKey = "StartPotTaunt"
 	local functionParam1 = "StartPotTaunt" .. "Param1"
 	local functionParam2 = "StartPotTaunt" .. "Param2"
 	local functionParam3 = "StartPotTaunt" .. "Param3"
 	local functionParam4 = "StartPotTaunt" .. "Param4"
-
+	
 	ScriptLib.SetGroupTempValue(context, functionParam1, 41004, {})
 	ScriptLib.SetGroupTempValue(context, functionParam2, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam3, 0, {})
 	ScriptLib.SetGroupTempValue(context, functionParam4, 0, {})
 	local currentValue = ScriptLib.GetGroupTempValue(context,functionKey,{})
 	ScriptLib.SetGroupTempValue(context, functionKey, currentValue+1, {})
-
+	
 	return 0
 end
 
@@ -791,7 +791,7 @@ function action_EVENT_GROUP_LOAD_41080(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -801,8 +801,8 @@ function action_EVENT_QUEST_START_41094(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 41005, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -812,8 +812,8 @@ function action_EVENT_QUEST_FINISH_41095(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 41005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -824,7 +824,7 @@ function action_EVENT_QUEST_FINISH_41096(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 

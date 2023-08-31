@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 230201004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -61,9 +61,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -128,9 +128,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -139,7 +139,7 @@ function condition_EVENT_ANY_MONSTER_DIE_4020(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -147,7 +147,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_4020(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 230201004, 3)
-
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_ANY_MONSTER_DIE_4021(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -165,7 +165,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_4021(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 230201004, 5)
-
+	
 	return 0
 end
 
@@ -175,7 +175,7 @@ function condition_EVENT_ANY_MONSTER_DIE_4022(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -183,7 +183,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_4022(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 230201004, 4)
-
+	
 	return 0
 end
 
@@ -192,7 +192,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_4023(context, evt)
 	if 4001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -203,7 +203,7 @@ function action_EVENT_ANY_MONSTER_LIVE_4023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -213,20 +213,20 @@ function action_EVENT_CHALLENGE_FAIL_4024(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 230201005, 5001, GadgetState.GearAction2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230201004, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -236,8 +236,8 @@ function action_EVENT_CHALLENGE_SUCCESS_4025(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 230201005, 3001, GadgetState.GearAction1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -248,7 +248,7 @@ function action_EVENT_DUNGEON_SETTLE_4026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end

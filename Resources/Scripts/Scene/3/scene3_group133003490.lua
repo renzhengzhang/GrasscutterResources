@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133003490
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -93,9 +93,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -103,7 +103,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_490006(context, evt)
 	if 490007 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -113,12 +113,12 @@ function action_EVENT_GADGET_STATE_CHANGE_490006(context, evt)
 		if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "A", 1) then
 		  return -1
 		end
-
+		
 		-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 		if 0 ~= ScriptLib.AddQuestProgress(context, "13300349001") then
 		  return -1
 		end
-
+		
 		-- 判断调查点是否已经全部完成
 		if 4 > ScriptLib.GetGroupVariableValue(context, "A")+ScriptLib.GetGroupVariableValue(context, "B")+ScriptLib.GetGroupVariableValue(context, "C")+ScriptLib.GetGroupVariableValue(context, "D") then
 			-- 调用提示id为 1110035 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
@@ -131,7 +131,7 @@ function action_EVENT_GADGET_STATE_CHANGE_490006(context, evt)
 				return -1
 			end
 		end
-
+		
 		return 0
 end
 
@@ -140,7 +140,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_490011(context, evt)
 	if 490008 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -150,12 +150,12 @@ function action_EVENT_GADGET_STATE_CHANGE_490011(context, evt)
 		if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "B", 1) then
 		  return -1
 		end
-
+		
 		-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 		if 0 ~= ScriptLib.AddQuestProgress(context, "13300349002") then
 		  return -1
 		end
-
+		
 		-- 判断调查点是否已经全部完成
 		if 4 > ScriptLib.GetGroupVariableValue(context, "A")+ScriptLib.GetGroupVariableValue(context, "B")+ScriptLib.GetGroupVariableValue(context, "C")+ScriptLib.GetGroupVariableValue(context, "D") then
 			-- 调用提示id为 1110038 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
@@ -168,7 +168,7 @@ function action_EVENT_GADGET_STATE_CHANGE_490011(context, evt)
 				return -1
 			end
 		end
-
+		
 		return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_490012(context, evt)
 	if 490009 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -187,12 +187,12 @@ function action_EVENT_GADGET_STATE_CHANGE_490012(context, evt)
 		if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "C", 1) then
 		  return -1
 		end
-
+		
 		-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 		if 0 ~= ScriptLib.AddQuestProgress(context, "13300349003") then
 		  return -1
 		end
-
+		
 		-- 判断调查点是否已经全部完成
 		if 4 > ScriptLib.GetGroupVariableValue(context, "A")+ScriptLib.GetGroupVariableValue(context, "B")+ScriptLib.GetGroupVariableValue(context, "C")+ScriptLib.GetGroupVariableValue(context, "D") then
 			-- 调用提示id为 1110039 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
@@ -205,7 +205,7 @@ function action_EVENT_GADGET_STATE_CHANGE_490012(context, evt)
 				return -1
 			end
 		end
-
+		
 		return 0
 end
 
@@ -214,7 +214,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_490013(context, evt)
 	if 490010 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -224,12 +224,12 @@ function action_EVENT_GADGET_STATE_CHANGE_490013(context, evt)
 		if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "D", 1) then
 		  return -1
 		end
-
+		
 		-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 		if 0 ~= ScriptLib.AddQuestProgress(context, "13300349004") then
 		  return -1
 		end
-
+		
 		-- 判断调查点是否已经全部完成
 		if 4 > ScriptLib.GetGroupVariableValue(context, "A")+ScriptLib.GetGroupVariableValue(context, "B")+ScriptLib.GetGroupVariableValue(context, "C")+ScriptLib.GetGroupVariableValue(context, "D") then
 			-- 调用提示id为 1110042 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
@@ -242,6 +242,6 @@ function action_EVENT_GADGET_STATE_CHANGE_490013(context, evt)
 				return -1
 			end
 		end
-
+		
 		return 0
 end

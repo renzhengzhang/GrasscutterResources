@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103462
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	seal_id = 462005,
 	light_1 = 462006,
 	light_2 = 462007,
@@ -14,9 +14,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -98,9 +98,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -108,12 +108,12 @@ function condition_EVENT_GADGET_CREATE_462010(context, evt)
 	if 462009 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"isFinished"为0
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -123,26 +123,26 @@ function action_EVENT_GADGET_CREATE_462010(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "TriggerCount", 0) then
 	    return -1
 	  end
-
+	  
 	  -- 将configid为 462009 的物件更改为状态 GadgetState.Default
 	  if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 462009, GadgetState.Default) then
 	          return -1
-	      end
-
+	      end 
+	  
 	  -- 设置操作台选项
 	  if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133103462, 462009, {7}) then
 	      return -1
 	  end
-
+	  
 	  if ScriptLib.GetGroupVariableValue(context, "CreateTag") ~= 0 then
 	  -- 改变指定group组133103540中， configid为540003的gadget的state
 	  if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133103540, 540003, GadgetState.GearStop) then
 	          return -1
-	      end
+	      end 
 	    end
-
+	  
 	    ScriptLib.SetGroupVariableValue(context, "CreateTag", 1)
-
+	
 	  return 0
 end
 
@@ -150,14 +150,14 @@ end
 function condition_EVENT_SELECT_OPTION_462011(context, evt)
 	-- 判断是gadgetid 462009 option_id 7
 	if 462009 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -167,42 +167,42 @@ function action_EVENT_SELECT_OPTION_462011(context, evt)
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "TriggerCount", 1) then
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133103462 ；指定config：462009；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133103462, 462009, 7) then
 		return -1
 	end
-
+	
 	-- 将configid为 462009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 462009, GadgetState.GearStart) then
 			return -1
-		end
-
-
-
+		end 
+	
+	
+	
 	-- 204号挑战,duration内开启宝箱
 	if 0 ~= ScriptLib.ActiveChallenge(context, 666, 204, 60, 4, 204, 1) then
 	return -1
 	end
-
-
+	
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= ScriptLib.MarkPlayerAction(context, 5007, 1, 1) then
 	return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_462012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"TriggerCount"为1
 	if ScriptLib.GetGroupVariableValue(context, "TriggerCount") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -212,8 +212,8 @@ function action_EVENT_VARIABLE_CHANGE_462012(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133103540, 540003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -222,12 +222,12 @@ function condition_EVENT_GADGET_CREATE_462013(context, evt)
 	if 462009 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"isFinished"为1
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -237,20 +237,20 @@ function action_EVENT_GADGET_CREATE_462013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 462009, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_462014(context, evt)
 	if evt.param1 ~= 462014 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -260,32 +260,32 @@ function action_EVENT_CHALLENGE_FAIL_462017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 462009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133103462, 462009, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5007, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 改变指定group组133103540中， configid为540003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133103540, 540003, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "TriggerCount" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "TriggerCount", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -296,30 +296,30 @@ function action_EVENT_CHALLENGE_SUCCESS_462018(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 将本组内变量名为 "isFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isFinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Puzzle_Flag_2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Puzzle_Flag_2", 1, 133103540) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 462009 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 462009, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210114
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -145,20 +145,20 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_114001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Gadget_Count"为3
 	if ScriptLib.GetGroupVariableValue(context, "Gadget_Count") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -177,7 +177,7 @@ function action_EVENT_TIME_AXIS_PASS_114002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -186,7 +186,7 @@ function condition_EVENT_GADGET_CREATE_114003(context, evt)
 	if 114007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -197,7 +197,7 @@ function action_EVENT_GADGET_CREATE_114003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -205,23 +205,23 @@ end
 function action_EVENT_QUEST_START_114005(context, evt)
 	-- 创建标识为"active"，时间节点为{4}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "active", {4}, false)
-
-
+	
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210005, 4)
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210006, 5)
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210010, 5)
-
+	
 		-- 添加某个flowSuite里的要素，如果当前与目标suite属性不一样，会纠正为目标属性，同时触发相应Trigger
 	  ScriptLib.AddExtraFlowSuite(context, 133210114, 4, FlowSuiteOperatePolicy.COMPLETE)
-
+	
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210114, 4)
-
+	
 	return 0
 end
 
@@ -229,14 +229,14 @@ end
 function condition_EVENT_SELECT_OPTION_114006(context, evt)
 	-- 判断是gadgetid 114007 option_id 63
 	if 114007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 63 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -246,8 +246,8 @@ function action_EVENT_SELECT_OPTION_114006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 114004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -258,34 +258,34 @@ function action_EVENT_QUEST_START_114008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "QuestStart" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "QuestStart", 1, 133210006) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "QuestStart" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "QuestStart", 1, 133210010) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210114, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_114009(context, evt)
 	if evt.param1 ~= 114009 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -296,7 +296,7 @@ function action_EVENT_ENTER_REGION_114009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -304,7 +304,7 @@ end
 function action_EVENT_QUEST_FINISH_114011(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210114, 5)
-
+	
 	return 0
 end
 
@@ -315,7 +315,7 @@ function action_EVENT_QUEST_FINISH_114024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -325,7 +325,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_114034(context, evt)
 	if 114004 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -336,22 +336,22 @@ function action_EVENT_GADGET_STATE_CHANGE_114034(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133210114 ；指定config：114007；物件身上指定option：63；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133210114, 114007, 63) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "SucCount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "SucCount", 1, 133210416) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210114, 5)
-
+	
 	return 0
 end
 
@@ -359,6 +359,6 @@ end
 function action_EVENT_QUEST_START_114035(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210114, 2)
-
+	
 	return 0
 end

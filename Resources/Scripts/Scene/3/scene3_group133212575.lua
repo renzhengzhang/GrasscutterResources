@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133212575
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -98,9 +98,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -111,9 +111,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -170,9 +170,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -180,7 +180,7 @@ function condition_EVENT_ANY_GADGET_DIE_575007(context, evt)
 	if 575002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_ANY_GADGET_DIE_575009(context, evt)
 	if 575002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -198,7 +198,7 @@ function condition_EVENT_ANY_GADGET_DIE_575020(context, evt)
 	if 575003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_ANY_GADGET_DIE_575027(context, evt)
 	if 575012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -216,7 +216,7 @@ function condition_EVENT_ANY_GADGET_DIE_575028(context, evt)
 	if 575013 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -225,7 +225,7 @@ function condition_EVENT_ANY_GADGET_DIE_575029(context, evt)
 	if 575017 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -234,7 +234,7 @@ function condition_EVENT_ANY_GADGET_DIE_575030(context, evt)
 	if 575018 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_ANY_GADGET_DIE_575031(context, evt)
 	if 575006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -252,7 +252,7 @@ function condition_EVENT_ANY_GADGET_DIE_575032(context, evt)
 	if 575021 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -261,7 +261,7 @@ function condition_EVENT_ANY_GADGET_DIE_575033(context, evt)
 	if 575022 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -270,7 +270,7 @@ function condition_EVENT_ANY_GADGET_DIE_575034(context, evt)
 	if 575023 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -279,7 +279,7 @@ function condition_EVENT_ANY_GADGET_DIE_575035(context, evt)
 	if 575024 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -288,7 +288,7 @@ function condition_EVENT_ANY_GADGET_DIE_575036(context, evt)
 	if 575025 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -297,7 +297,7 @@ function condition_EVENT_ANY_GADGET_DIE_575037(context, evt)
 	if 575026 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -306,7 +306,7 @@ function condition_EVENT_ANY_GADGET_DIE_575038(context, evt)
 	if 575039 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -314,7 +314,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_575038(context, evt)
 	-- 终止识别id为666的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 666, 1)
-
+	
 	return 0
 end
 
@@ -325,13 +325,13 @@ function action_EVENT_ENTER_REGION_575048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 调用提示id为 400079 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400079) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -342,10 +342,10 @@ function action_EVENT_CHALLENGE_SUCCESS_575049(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212575, 5)
-
+	
 	return 0
 end
 
@@ -354,7 +354,7 @@ function condition_EVENT_ANY_GADGET_DIE_575050(context, evt)
 	if 575001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -362,7 +362,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_575050(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
@@ -373,32 +373,32 @@ function action_EVENT_CHALLENGE_FAIL_575051(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212575, 1)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212575, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212575, 3)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212575, 4)
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133212575, 5)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_575053(context, evt)
-	-- 判断指定group组剩余gadget数量是否是1
+	-- 判断指定group组剩余gadget数量是否是1 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133212575}) ~= 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -406,29 +406,29 @@ end
 function action_EVENT_ANY_GADGET_DIE_575053(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212575, 2)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575001 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 调用提示id为 400080 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400080) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_575055(context, evt)
-	-- 判断指定group组剩余gadget数量是否是1
+	-- 判断指定group组剩余gadget数量是否是1 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133212575}) ~= 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -436,29 +436,29 @@ end
 function action_EVENT_ANY_GADGET_DIE_575055(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212575, 3)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 调用提示id为 400081 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400081) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_575057(context, evt)
-	-- 判断指定group组剩余gadget数量是否是3
+	-- 判断指定group组剩余gadget数量是否是3 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133212575}) ~= 3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -466,41 +466,41 @@ end
 function action_EVENT_ANY_GADGET_DIE_575057(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212575, 4)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575008 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575010 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575011 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 调用提示id为 400082 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400082) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_575060(context, evt)
-	-- 判断指定group组剩余gadget数量是否是4
+	-- 判断指定group组剩余gadget数量是否是4 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133212575}) ~= 4 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -508,37 +508,37 @@ end
 function action_EVENT_ANY_GADGET_DIE_575060(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212575, 5)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575014 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575015 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575019 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 调用提示id为 400083 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400083) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -547,7 +547,7 @@ function condition_EVENT_ANY_GADGET_DIE_575063(context, evt)
 	if 575005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -555,7 +555,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_575063(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
@@ -564,7 +564,7 @@ function condition_EVENT_ANY_GADGET_DIE_575065(context, evt)
 	if 575014 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -572,7 +572,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_575065(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
@@ -581,7 +581,7 @@ function condition_EVENT_ANY_GADGET_DIE_575066(context, evt)
 	if 575008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -589,17 +589,17 @@ end
 function action_EVENT_ANY_GADGET_DIE_575066(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_575067(context, evt)
-	-- 判断指定group组剩余gadget数量是否是4
+	-- 判断指定group组剩余gadget数量是否是4 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133212575}) ~= 4 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -610,25 +610,25 @@ function action_EVENT_ANY_GADGET_DIE_575067(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575040 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575041 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133212575, EntityType.GADGET, 575042 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -637,7 +637,7 @@ function condition_EVENT_ANY_GADGET_DIE_575082(context, evt)
 	if 575004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -646,7 +646,7 @@ function condition_EVENT_ANY_GADGET_DIE_575083(context, evt)
 	if 575010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -654,7 +654,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_575083(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
@@ -663,7 +663,7 @@ function condition_EVENT_ANY_GADGET_DIE_575084(context, evt)
 	if 575011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -671,7 +671,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_575084(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
@@ -680,7 +680,7 @@ function condition_EVENT_ANY_GADGET_DIE_575085(context, evt)
 	if 575015 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -688,7 +688,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_575085(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
@@ -697,7 +697,7 @@ function condition_EVENT_ANY_GADGET_DIE_575086(context, evt)
 	if 575016 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -705,7 +705,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_575086(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
@@ -714,7 +714,7 @@ function condition_EVENT_ANY_GADGET_DIE_575087(context, evt)
 	if 575019 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -722,7 +722,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_575087(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
@@ -731,7 +731,7 @@ function condition_EVENT_ANY_GADGET_DIE_575089(context, evt)
 	if 575040 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -739,7 +739,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_575089(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
@@ -748,7 +748,7 @@ function condition_EVENT_ANY_GADGET_DIE_575090(context, evt)
 	if 575041 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -756,7 +756,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_575090(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
@@ -765,7 +765,7 @@ function condition_EVENT_ANY_GADGET_DIE_575091(context, evt)
 	if 575042 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -773,6 +773,6 @@ end
 function action_EVENT_ANY_GADGET_DIE_575091(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end

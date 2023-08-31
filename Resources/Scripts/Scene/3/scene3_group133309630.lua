@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309630
 }
 
@@ -9,9 +9,9 @@ local turnOption = 435
 local correctState = 0
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -88,7 +88,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_630002(context, evt)
 	if 630001 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -99,7 +99,7 @@ function action_EVENT_GADGET_STATE_CHANGE_630002(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -109,7 +109,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_630004(context, evt)
 	if 630001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -120,7 +120,7 @@ function action_EVENT_GADGET_STATE_CHANGE_630004(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 

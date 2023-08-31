@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220140003
 }
 
@@ -33,7 +33,7 @@ local        defs = {
                         [3024] = {0, 102, 103, 104},
                         [3025] = {0, 102, 103, 104},
                         [3004] = {0, 102, 103, 104},
-
+ 	        
 
                 },
 
@@ -49,9 +49,9 @@ local        defs = {
         }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -148,9 +148,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -161,9 +161,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -197,9 +197,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -207,7 +207,7 @@ function condition_EVENT_TIME_AXIS_PASS_3002(context, evt)
 	if "test" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -215,13 +215,13 @@ end
 function action_EVENT_TIME_AXIS_PASS_3002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140003, 2)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "4006705") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -229,10 +229,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_3005(context, evt)
 	if evt.source_name == "test" and evt.param1 == 1 then
 		ScriptLib.SetGadgetStateByConfigId(context,3001, GadgetState.Default)
-
+		
 		ScriptLib.SetPlatformPointArray(context, 3001, 1, {2}, {route_type=RouteType.OneWay, turn_mode=false, record_mode=RouteRecordMode.Reach, speed_level=0, arrive_range=0})
 	end
-
+	
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3006(context, evt)
 	if 3028 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -252,16 +252,16 @@ function action_EVENT_GADGET_STATE_CHANGE_3006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140003, 3)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "4006706") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -270,7 +270,7 @@ function condition_EVENT_TIME_AXIS_PASS_3008(context, evt)
 	if "test" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -284,8 +284,8 @@ function action_EVENT_TIME_AXIS_PASS_3008(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -293,14 +293,14 @@ end
 function condition_EVENT_SELECT_OPTION_3013(context, evt)
 	-- 判断是gadgetid 3003 option_id 7
 	if 3003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -311,23 +311,23 @@ function action_EVENT_SELECT_OPTION_3013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建标识为"test"，时间节点为{4,9}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "test", {4,9}, false)
-
-
+	
+	
 	-- 改变指定group组220140003中， configid为3007的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220140003, 3007, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220140017, 1)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220140017, 2)
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -336,7 +336,7 @@ function action_EVENT_SELECT_OPTION_3013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=0, y=0, z=0}，持续时间为2.5秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=0, y=0, z=0}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -345,38 +345,38 @@ function action_EVENT_SELECT_OPTION_3013(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220140003, EntityType.GADGET, 3038 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 删除指定group： 220140003 ；指定config：3003；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220140003, 3003, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220140016, 2)
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_3023(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "load") == 0 and ScriptLib.GetGroupVariableValue(context, "option1") == 1 and ScriptLib.GetGroupVariableValue(context, "option2") == 1 then
 		ScriptLib.SetGroupVariableValue(context, "option1", 2)
-
+		
 		ScriptLib.SetWorktopOptionsByGroupId(context, 0, 3003, {7})
-
+		
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140003, config_id=3022, entity_type=EntityType.GADGET})
 	end
-
+	
 	return 0
 end
 
@@ -385,7 +385,7 @@ function condition_EVENT_QUEST_START_3034(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220140003, 3028) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -396,7 +396,7 @@ function action_EVENT_QUEST_START_3034(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -405,7 +405,7 @@ function condition_EVENT_GROUP_LOAD_3035(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220140003, 3028) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -416,7 +416,7 @@ function action_EVENT_GROUP_LOAD_3035(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -424,18 +424,18 @@ end
 function action_EVENT_GROUP_LOAD_3036(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "load") == 1 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
-
+		
 		ScriptLib.SetPlatformPointArray(context, 3001, 3, {1}, {route_type=RouteType.OneWay, turn_mode=false, record_mode=RouteRecordMode.Reach, speed_level=0, arrive_range=0})
-
+		
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140003, config_id=3038, entity_type=EntityType.GADGET})
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "load") == 0 and ScriptLib.GetGroupVariableValue(context, "option1") == 2 then
 		ScriptLib.SetWorktopOptionsByGroupId(context, 0, 3003, {7})
-
+		
 		ScriptLib.KillEntityByConfigId(context, {group_id=220140003, config_id=3022, entity_type=EntityType.GADGET})
 	end
-
+	
 	return 0
 end
 
@@ -445,7 +445,7 @@ function condition_EVENT_QUEST_START_3046(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "load") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -456,7 +456,7 @@ function action_EVENT_QUEST_START_3046(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -466,7 +466,7 @@ function condition_EVENT_GROUP_LOAD_3047(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "load") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -477,7 +477,7 @@ function action_EVENT_GROUP_LOAD_3047(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -487,7 +487,7 @@ function condition_EVENT_GROUP_LOAD_3048(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "wind") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -495,19 +495,19 @@ end
 function action_EVENT_GROUP_LOAD_3048(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220140003, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3050(context, evt)
 	if evt.param1 ~= 3050 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -521,14 +521,14 @@ end
 function condition_EVENT_SELECT_OPTION_3051(context, evt)
 	-- 判断是gadgetid 3003 option_id 7
 	if 3003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -538,8 +538,8 @@ function action_EVENT_SELECT_OPTION_3051(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

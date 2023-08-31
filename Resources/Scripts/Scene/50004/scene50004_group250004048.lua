@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250004048
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -139,9 +139,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -152,9 +152,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -197,9 +197,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -207,7 +207,7 @@ function condition_EVENT_GADGET_CREATE_84(context, evt)
 	if 401 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -218,17 +218,17 @@ function action_EVENT_GADGET_CREATE_84(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_CHALLENGE_SUCCESS_85(context, evt)
-	-- 判断指定group组剩余gadget数量是否是96
+	-- 判断指定group组剩余gadget数量是否是96 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 250004048}) ~= 96 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -239,7 +239,7 @@ function action_EVENT_CHALLENGE_SUCCESS_85(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -248,7 +248,7 @@ function condition_EVENT_SELECT_OPTION_86(context, evt)
 	if 401 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -259,13 +259,13 @@ function action_EVENT_SELECT_OPTION_86(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 创建编号为888（该挑战的识别id),挑战内容为169的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 888, 169, 60, 7, 666, 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -276,6 +276,6 @@ function action_EVENT_CHALLENGE_FAIL_88(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

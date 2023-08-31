@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220134036
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     --控制星空灯
     control = { group_id = 220134042, config_id = 42001, light_index = 5, giving_gadget = 36001,}
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -86,27 +86,27 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_36002(context, evt)
 			ScriptLib.ActiveGadgetItemGiving(context, 10000105, 220134036, 36001)
-
+		
 		return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"given_item"为101801
 	if ScriptLib.GetGroupVariableValue(context, "given_item") ~= 101801 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -117,19 +117,19 @@ function action_EVENT_VARIABLE_CHANGE_36003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"given_item"为101802
 	if ScriptLib.GetGroupVariableValue(context, "given_item") ~= 101802 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -140,19 +140,19 @@ function action_EVENT_VARIABLE_CHANGE_36004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"given_item"为101803
 	if ScriptLib.GetGroupVariableValue(context, "given_item") ~= 101803 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -163,19 +163,19 @@ function action_EVENT_VARIABLE_CHANGE_36005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"given_item"为101804
 	if ScriptLib.GetGroupVariableValue(context, "given_item") ~= 101804 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -186,47 +186,47 @@ function action_EVENT_VARIABLE_CHANGE_36006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"given_item"为101805
 	if ScriptLib.GetGroupVariableValue(context, "given_item") ~= 101805 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_36007(context, evt)
-	ScriptLib.RefreshGroup(context, { group_id = 220134024, suite = 5 })
+	ScriptLib.RefreshGroup(context, { group_id = 220134024, suite = 5 }) 
 	if  ScriptLib.GetGroupVariableValueByGroup(context, "given_item", 220134037) == 101806 then
-
-	ScriptLib.RefreshGroup(context, { group_id = 220134020, suite = 2 })
-	ScriptLib.AddQuestProgress(context, "door3complete")
+	
+	ScriptLib.RefreshGroup(context, { group_id = 220134020, suite = 2 }) 
+	ScriptLib.AddQuestProgress(context, "door3complete") 
 	ScriptLib.SetGroupVariableValueByGroup(context, "door3", 1, 220134033)
-
-
+	
+	
 	    else
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"given_item"为101806
 	if ScriptLib.GetGroupVariableValue(context, "given_item") ~= 101806 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -237,19 +237,19 @@ function action_EVENT_VARIABLE_CHANGE_36008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"given_item"为101807
 	if ScriptLib.GetGroupVariableValue(context, "given_item") ~= 101807 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -260,19 +260,19 @@ function action_EVENT_VARIABLE_CHANGE_36009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"given_item"为101808
 	if ScriptLib.GetGroupVariableValue(context, "given_item") ~= 101808 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -283,19 +283,19 @@ function action_EVENT_VARIABLE_CHANGE_36010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"given_item"为0
 	if ScriptLib.GetGroupVariableValue(context, "given_item") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -306,31 +306,31 @@ function action_EVENT_VARIABLE_CHANGE_36011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220134020, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "door3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "door3", 0, 220134033) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"given_item"为101834
 	if ScriptLib.GetGroupVariableValue(context, "given_item") ~= 101834 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -341,19 +341,19 @@ function action_EVENT_VARIABLE_CHANGE_36012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_36013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"camera"为0
 	if ScriptLib.GetGroupVariableValue(context, "camera") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -367,14 +367,14 @@ function action_EVENT_VARIABLE_CHANGE_36013(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 将本组内变量名为 "camera" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "camera", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

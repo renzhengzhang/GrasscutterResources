@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103655
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -89,47 +89,47 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_655002(context, evt)
 	if evt.param1 ~= 655002 then return false end
-
+	
 	-- 判断变量"Gate_Change"为1
 	if ScriptLib.GetGroupVariableValue(context, "Gate_Change") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_655002(context, evt)
 	local t_p_value = ScriptLib.GetOpeningDungeonListByRosterId(context, 1)
-
+	
 	if t_p_value[1] == 110 then
 	    if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 655001, GadgetState.GearAction1) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 	            return -1
-	    end
+	    end       
 	elseif t_p_value[1] == 114 then
 	    if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 655001, GadgetState.GearAction2) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 	            return -1
-	    end
+	    end  
 	elseif t_p_value[1] == 118 then
 	    if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 655001, GadgetState.GearStart) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 	            return -1
-	    end
+	    end  
 	elseif t_p_value[1] == 122 then
 	    if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 655001, GadgetState.GearStop) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 	            return -1
-	    end
+	    end  
 	end
 	return 0
 end
@@ -138,17 +138,17 @@ end
 function condition_EVENT_QUEST_FINISH_655003(context, evt)
 	--检查ID为1112310的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 1112310 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -159,7 +159,7 @@ function action_EVENT_QUEST_FINISH_655003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -167,17 +167,17 @@ end
 function condition_EVENT_QUEST_FINISH_655007(context, evt)
 	--检查ID为1112311的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 1112311 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,19 +188,19 @@ function action_EVENT_QUEST_FINISH_655007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_655008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Quest_Finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "Quest_Finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -208,7 +208,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_655008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103655, 2)
-
+	
 	return 0
 end
 
@@ -218,7 +218,7 @@ function condition_EVENT_GROUP_LOAD_655009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Quest_Finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -226,6 +226,6 @@ end
 function action_EVENT_GROUP_LOAD_655009(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103655, 2)
-
+	
 	return 0
 end

@@ -4,10 +4,10 @@
 ||  owner:      weiwei.sun
 ||  description:    DreamLand大活动角色地城通用Buff控制器 挂在挑战Group上
 ||  LogName:    ## [DLDungeon]
-||  Protection:
+||  Protection: 
 =======================================]]
 --[[
-defs = {
+local defs = {
     --是否教学关
     is_tutorial = 1,
     --起始操作台
@@ -32,7 +32,7 @@ defs = {
     --随机固定顺序怪物潮组合 每次进地城随机取key。
     --key对应value代表依序出现的MonsterTide，小花括号内配置复数个表示同时刷出。
     rand_table = {
-        [1] =
+        [1] = 
         {
             {1,2},
             {3},
@@ -69,7 +69,7 @@ local cfg = {
     --持续刷buff时，间隔时间
     buff_interval = 30,
 
-    exhiKey_succ =
+    exhiKey_succ = 
     {
         [1] = {"Activity_SummerTimeV2_Kazuha_Succ", "Activity_SummerTimeV2_Kazuha_SuccOnce"},
         [2] = {"Activity_SummerTimeV2_Xinyan_Succ", "Activity_SummerTimeV2_Xinyan_SuccOnce"},
@@ -91,23 +91,23 @@ local cfg = {
     exhiKey_all_replace = {
         --万叶
         [1] = {
-            "Activity_SummerTimeV2_Kazuha_TotalBuff", --2.8大活动地城-万叶-单局拾取Buff总数
-            "Activity_SummerTimeV2_Kazuha_TSkillOnce", --2.8大活动地城-万叶-单局使用T键技能数
+            "Activity_SummerTimeV2_Kazuha_TotalBuff", --2.8大活动地城-万叶-单局拾取Buff总数  
+            "Activity_SummerTimeV2_Kazuha_TSkillOnce", --2.8大活动地城-万叶-单局使用T键技能数   
         },
         --辛焱
         [2] = {
-            "Activity_SummerTimeV2_Xinyan_GadgetUsage",--2.8大活动地城-辛焱-单局交互传音花次数
-            "Activity_SummerTimeV2_Xinyan_EnbreakOnce",--2.8大活动地城-辛焱-单局传音花碎盾次数
+            "Activity_SummerTimeV2_Xinyan_GadgetUsage",--2.8大活动地城-辛焱-单局交互传音花次数 
+            "Activity_SummerTimeV2_Xinyan_EnbreakOnce",--2.8大活动地城-辛焱-单局传音花碎盾次数 
             "Activity_SummerTimeV2_Xinyan_FallAttackOnce",--2.8大活动地城-辛焱-单局下落冲击波击中次数
         },
         --菲谢尔
         [3] = {
             "Activity_SummerTimeV2_Fischl_BuffOnce",--2.8大活动地城-菲谢尔-单局获得奥兹buff次数
-            "Activity_SummerTimeV2_Fischl_ElecShockOnce",--2.8大活动地城-菲谢尔-单局雷冲击波击中次数
+            "Activity_SummerTimeV2_Fischl_ElecShockOnce",--2.8大活动地城-菲谢尔-单局雷冲击波击中次数 
         },
         --莫娜
         [4] = {
-            "Activity_SummerTimeV2_Mona_PushOnce",--2.8大活动地城-莫娜-单局撞怪数
+            "Activity_SummerTimeV2_Mona_PushOnce",--2.8大活动地城-莫娜-单局撞怪数 
             "Activity_SummerTimeV2_Mona_BuffOnce",--2.8大活动地城-莫娜-单局获得星座buff次数
         }
     },
@@ -128,7 +128,7 @@ local extra_Triggers = {
     { config_id = 8000006, name = "MonaBuff2_TimeAxis_Pass", event = EventType.EVENT_TIME_AXIS_PASS, source = "mona_buff2", condition = "", action = "action_MonaBuff2_TimeAxis_Pass", trigger_count = 0},
     { config_id = 8000007, name = "WindField_GadgetCreate", event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_WindField_GadgetCreate", trigger_count = 0},
     { config_id = 8000008, name = "WindField_GadgetDie", event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_WindField_GadgetDie", trigger_count = 0},
-
+    
     { config_id = 8000009, name = "Group_Load", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_Group_Load", trigger_count = 0},
     { config_id = 8000010, name = "Select_Option", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_Select_Option", trigger_count = 0},
 
@@ -151,7 +151,7 @@ end
 
 function action_Group_Load(context, evt)
     --莫娜、辛焱地城add随机suite
-    if 2 == defs.type or 4 == defs.type then
+    if 2 == defs.type or 4 == defs.type then 
         LF_AddRandomSuite(context)
     end
     return 0
@@ -162,7 +162,7 @@ function action_Select_Option(context, evt)
     if evt.param1 ~= defs.starter then
         return 0
     end
-    if nil ~= defs.option_id then
+    if nil ~= defs.option_id then 
         ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, defs.starter, defs.option_id)
     end
 
@@ -174,19 +174,19 @@ function action_Select_Option(context, evt)
 
     if nil == defs.is_tutorial then
         LF_ClearReplacableExhibition(context)
-        if 2 == defs.type then
+        if 2 == defs.type then 
             LF_Init_XinyanWatcherCounter(context)
         end
     end
-
+    
     ScriptLib.SetGroupTempValue(context, "wave", 1, {})
     LF_StartMonsterTide(context, 1)
 
     --辛焱 风场计数
     if 2 == defs.type then
-         ScriptLib.SetGroupTempValue(context, "xinyan_wind", 0,{})
+         ScriptLib.SetGroupTempValue(context, "xinyan_wind", 0,{}) 
     end
-    --ability SGVchange触发器
+    --ability SGVchange触发器   
     ScriptLib.SetGroupTempValue(context, "sgv_changer", 1, {})
     return 0
 end
@@ -227,7 +227,7 @@ function LF_InitChallenge(context)
     --计算怪物数量
     local tide_queue = defs.rand_table[rand_index]
     local sum = 0
-    for k,v in pairs(tide_queue) do
+    for k,v in pairs(tide_queue) do 
         for ik, iv in pairs(v) do
             sum = sum + #defs.tide_cfg[iv].monsters
         end
@@ -239,13 +239,13 @@ end
 
 function action_Dungeon_All_Avatar_Die(context, evt)
 
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)   
     for k,v in pairs(uid_list) do
         local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
         if false == is_all_dead then
             return 0
         end
-    end
+    end 
     ScriptLib.SetGroupTempValue(context, "is_all_dead", 1, {})
     ScriptLib.CauseDungeonFail(context)
     ScriptLib.StopChallenge(context, defs.challenge_id, 0)
@@ -265,13 +265,13 @@ function LF_ClearAllMonsterTide(context)
     end
 
     --正常值 clear指定的怪物潮
-    for k,v in pairs(defs.rand_table[rand_index][wave]) do
+    for k,v in pairs(defs.rand_table[rand_index][wave]) do 
         --怪物潮索引
-        local tide_index = wave*1000 + v
+        local tide_index = wave*1000 + v  
         ScriptLib.PrintContextLog(context, "## [DLDungeon] Clear monster tide. tide_cfg@"..v.." tide_index@"..tide_index)
         ScriptLib.KillMonsterTide(context, base_info.group_id, tide_index)
     end
-    return 0
+    return 0 
 end
 
 --开启一个波次的怪物潮
@@ -279,9 +279,9 @@ end
 function LF_StartMonsterTide(context, wave)
 
     --万叶、菲谢尔刷buff
-    if 1 == defs.type or 3 == defs.type then
+    if 1 == defs.type or 3 == defs.type then 
 
-        ScriptLib.EndTimeAxis(context, "routine_buff")
+        ScriptLib.EndTimeAxis(context, "routine_buff") 
 
         LF_ClearBuffGadget(context)
         LF_CreateRandomBuff(context, defs.buff_count)
@@ -290,19 +290,19 @@ function LF_StartMonsterTide(context, wave)
         ScriptLib.PrintContextLog(context, "## [DLDungeon] Buff_TimeAxis_Pass. Start routine buff time axis.")
     end
     --莫娜亮石板
-    if 4 == defs.type then
+    if 4 == defs.type then 
         LF_ActiveMonaStar(context)
     end
 
     local rand_index = ScriptLib.GetGroupVariableValue(context, "rand_index")
     --越界修正
     --rand_index异常直接取1
-    if rand_index > #defs.rand_table then
+    if rand_index > #defs.rand_table then 
         rand_index = 1
         ScriptLib.SetGroupVariableValue(context, "rand_index", rand_index)
     end
     --波次异常直接停止 以免无限循环
-    if wave > #defs.rand_table[rand_index] then
+    if wave > #defs.rand_table[rand_index] then 
         return 0
     end
     --本轮有几个并行怪物潮
@@ -314,12 +314,12 @@ function LF_StartMonsterTide(context, wave)
     ScriptLib.SetGroupTempValue(context, "tide_num", tide_num, {})
 
     --启动并行怪物潮
-    for k,v in pairs(defs.rand_table[rand_index][wave]) do
+    for k,v in pairs(defs.rand_table[rand_index][wave]) do 
         --设置怪物潮索引
-        local tide_index = wave*1000 + v
+        local tide_index = wave*1000 + v  
         ScriptLib.PrintContextLog(context, "## [DLDungeon] Start monster tide. tide_cfg@"..v.." tide_index@"..tide_index)
         --创建怪物潮
-        ScriptLib.AutoMonsterTide(context, tide_index, base_info.group_id, defs.tide_cfg[v].monsters, #defs.tide_cfg[v].monsters, defs.tide_cfg[v].min, defs.tide_cfg[v].max)
+        ScriptLib.AutoMonsterTide(context, tide_index, base_info.group_id, defs.tide_cfg[v].monsters, #defs.tide_cfg[v].monsters, defs.tide_cfg[v].min, defs.tide_cfg[v].max)      
     end
 
     --波次++
@@ -327,13 +327,13 @@ function LF_StartMonsterTide(context, wave)
 
     --辛焱reminder 如果本次中有 tide_cfg 3、4、5、6 则ShowHintReminder
     if 2 == defs.type and 1 ~= defs.is_tutorial then
-        for k,v in pairs(defs.rand_table[rand_index][wave]) do
+        for k,v in pairs(defs.rand_table[rand_index][wave]) do 
             if 3 == v or 4 == v or 5 == v or 6 == v then
                 LF_ShowHintReminder(context)
                 return 0
             end
         end
-    end
+    end 
     return 0
 end
 
@@ -349,7 +349,7 @@ function action_Monster_Tide_Die(context, evt)
         ScriptLib.StopChallenge(context, defs.challenge_id, 0)
         return 0
     end
-    if evt.param1 < #defs.tide_cfg[tide_cfg_index].monsters then
+    if evt.param1 < #defs.tide_cfg[tide_cfg_index].monsters then 
         return 0
     end
 
@@ -358,7 +358,7 @@ function action_Monster_Tide_Die(context, evt)
     --检查本轮怪物潮都已经结束
     local tide_num = ScriptLib.GetGroupTempValue(context, "tide_num", {})
     ScriptLib.PrintContextLog(context, "## [DLDungeon]: Tide index ".. tide_index.." all monster die. remain_tide_num@".. tide_num)
-    if 0 >= tide_num then
+    if 0 >= tide_num then   
         local rand_index = ScriptLib.GetGroupVariableValue(context, "rand_index")
         if wave > #defs.rand_table[rand_index] then
             --全部完成
@@ -374,9 +374,9 @@ function action_Monster_Tide_Die(context, evt)
 end
 
 function action_Challenge_Success(context, evt)
-    if defs.challenge_id ~= evt.param1 then
+    if defs.challenge_id ~= evt.param1 then 
         return 0
-    end
+    end   
     ------清理-------
     --莫娜石板清除
     if 4 == defs.type then
@@ -386,10 +386,10 @@ function action_Challenge_Success(context, evt)
     --万叶、菲谢尔清理场上Buff
     if 1 == defs.type or 3 == defs.type then
         --停止所有时间轴
-        ScriptLib.EndTimeAxis(context, "routine_buff")
+        ScriptLib.EndTimeAxis(context, "routine_buff")      
         LF_ClearBuffGadget(context)
     end
-    if nil ~= defs.is_tutorial then
+    if nil ~= defs.is_tutorial then 
         return 0
     end
     ------陈列室-------
@@ -404,7 +404,7 @@ function action_Challenge_Success(context, evt)
 end
 
 function action_Challenge_Fail(context, evt)
-     if defs.challenge_id ~= evt.param1 then
+     if defs.challenge_id ~= evt.param1 then 
         return 0
     end
     ------清理-------
@@ -419,21 +419,21 @@ function action_Challenge_Fail(context, evt)
     --万叶、菲谢尔清理场上Buff
     if 1 == defs.type or 3 == defs.type then
         --停止所有时间轴
-        ScriptLib.EndTimeAxis(context, "routine_buff")
+        ScriptLib.EndTimeAxis(context, "routine_buff")       
         LF_ClearBuffGadget(context)
     end
 
     ScriptLib.RefreshGroup(context, { group_id = base_info.group_id, suite = init_config.suite })
 
     --莫娜、辛焱地城add随机suite
-    if 2 == defs.type or 4 == defs.type then
+    if 2 == defs.type or 4 == defs.type then 
         LF_AddRandomSuite(context)
     end
     -- 设置操作台选项
     ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, defs.starter, { defs.option_id })
 
     --教学关不DungeonFail
-    if nil ~= defs.is_tutorial then
+    if nil ~= defs.is_tutorial then 
         return 0
     end
 
@@ -443,7 +443,7 @@ function action_Challenge_Fail(context, evt)
     end
 
     return 0
-end
+end 
 
 function LF_AddRandomSuite(context)
 
@@ -473,14 +473,14 @@ function LF_CreateRandomBuff(context, count)
     local spawn_queue = {table.unpack(defs.buff_pool)}
 
     --需求：先刷0~2个限定buff(无、A、B、A+B)，其余部分刷普通buff。不需要再对buff种类做随机了
-    if nil ~= defs.buff_pool_spec and 2 <= #defs.buff_pool_spec then
+    if nil ~= defs.buff_pool_spec and 2 <= #defs.buff_pool_spec then 
         math.randomseed(ScriptLib.GetServerTime(context))
         local spec_num = math.random(0, 3)
         --数量确定，只枚举情况不洗牌了
         if 3 == spec_num then
             table.insert(spawn_queue, 1, defs.buff_pool_spec[1])
             table.insert(spawn_queue, 2, defs.buff_pool_spec[2])
-        elseif 1 == spec_num or 2 == spec_num then
+        elseif 1 == spec_num or 2 == spec_num then 
             table.insert(spawn_queue, 1, defs.buff_pool_spec[spec_num])
         end
     end
@@ -490,7 +490,7 @@ function LF_CreateRandomBuff(context, count)
     local point_list = LF_Get_RandomPointList(context)
     for i = 1, count do
         --获取生成点位
-        local point_configID = point_list[i]
+        local point_configID = point_list[i] 
         ScriptLib.PrintContextLog(context, "## [DLDungeon] To Create gadget. gadget@"..spawn_queue[i].." at Point@"..point_configID)
         ScriptLib.CreateGadgetByConfigIdByPos(context, spawn_queue[i], gadgets[point_configID].pos, gadgets[point_configID].rot)
     end
@@ -521,20 +521,20 @@ function action_WindField_GadgetCreate(context, evt)
         return 0
     end
     ScriptLib.PrintContextLog(context, "## [DLDungeon] WindField_GadgetCreate. evt.param1@"..evt.param1)
-    if 70220118 ~= gadgets[evt.param1].gadget_id then
+    if 70220118 ~= gadgets[evt.param1].gadget_id then 
         return 0
-    end
+    end  
     ScriptLib.ChangeGroupTempValue(context, "xinyan_wind", 1, {})
     LF_SetGV_AllTeam(context, "GV_XINYAN_BUFF", 1)
     return 0
 end
 --辛焱 风场创建
 function action_WindField_GadgetDie(context, evt)
-    if 70220118 ~= gadgets[evt.param1].gadget_id then
+    if 70220118 ~= gadgets[evt.param1].gadget_id then 
         return 0
-    end
+    end  
     ScriptLib.ChangeGroupTempValue(context, "xinyan_wind", -1, {})
-    if 0 >= ScriptLib.GetGroupTempValue(context, "xinyan_wind", {}) then
+    if 0 >= ScriptLib.GetGroupTempValue(context, "xinyan_wind", {}) then 
         LF_SetGV_AllTeam(context, "GV_XINYAN_BUFF", 0)
     end
     return 0
@@ -565,7 +565,7 @@ function LF_ActiveMonaStar(context)
     for k,v in pairs(gadgets) do
         if v.gadget_id == 70310323 and k ~= star_list[star_idx][2] then
             ScriptLib.SetGadgetStateByConfigId(context, k, 202)
-        end
+        end 
     end
     LF_ShowHintReminder(context)
     return 0
@@ -584,7 +584,7 @@ function LF_CloseMonaStar(context)
 end
 --莫娜 石板被踩
 function SLC_DLActivityDungeon_StarBtn(context)
-    if 1 ~= ScriptLib.GetGroupTempValue(context, "mona_btn", {}) then
+    if 1 ~= ScriptLib.GetGroupTempValue(context, "mona_btn", {}) then 
         return 0
     end
     --施加buff
@@ -602,7 +602,7 @@ function LF_ActiveMonaBuff(context)
 
     local monster_tide_idx = ScriptLib.GetGroupTempValue(context, "mona_buff_idx", {})
     local buff_list = defs.tide_cfg[monster_tide_idx].mona_buffs
-    if nil == buff_list then
+    if nil == buff_list then 
         return 0
     end
     math.randomseed(ScriptLib.GetServerTime(context))
@@ -610,10 +610,10 @@ function LF_ActiveMonaBuff(context)
     local buff_idx = math.random(#buff_list)
     ScriptLib.PrintContextLog(context, "## [DLDungeon] LF_ActiveMonaBuff. buff@"..buff_list[buff_idx])
     --开启弹飞buff
-    if 1 == buff_list[buff_idx] then
+    if 1 == buff_list[buff_idx] then 
         LF_SetGV_AllTeam(context, "GV_MONA_BUFF1", 1)
     --下雨、增伤buff
-    elseif 2 == buff_list[buff_idx] then
+    elseif 2 == buff_list[buff_idx] then 
         LF_SetGV_AllTeam(context, "GV_MONA_BUFF2", 1)
         LF_HandleMonaWater(context, 1)
     --全场控怪
@@ -622,7 +622,7 @@ function LF_ActiveMonaBuff(context)
         LF_SetGV_AllTeam(context, "GV_MONA_BUFF3", 1)
     end
     --埋点
-    ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon4_1", "", {["bufftype"] = buff_list[buff_idx]})
+    ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon4_1", "", {["bufftype"] = buff_list[buff_idx]}) 
     return 0
 end
 
@@ -651,7 +651,7 @@ end
 --param1: 1-球A大跳 2-球B减T键CD 3-球C增伤至最多三层
 function SLC_DLActivityDungeon_Kazuha(context, param1)
     ScriptLib.PrintContextLog(context, "## [DLDungeon] SLC_DLActivityDungeon_Kazuha. param1@"..param1.." uid@"..context.uid)
-    if 1 == param1 then
+    if 1 == param1 then   
         LF_SetGV_AllTeam(context, "GV_KAZUHA_BUFF1", 1)
     elseif 2 == param1 then
         LF_SetGV_AllTeam(context,"GV_KAZUHA_BUFF2", 1)
@@ -663,14 +663,14 @@ function SLC_DLActivityDungeon_Kazuha(context, param1)
     end
     ScriptLib.AddExhibitionReplaceableData(context, context.uid, "Activity_SummerTimeV2_Kazuha_TotalBuff", 1)
     --埋点
-    ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon1_2", "", {["bufftype"] = param1})
+    ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon1_2", "", {["bufftype"] = param1}) 
     return 0
 end
 --万叶地城减CD触发
 --param1: 0-元素战技 1-元素爆发 2-下落攻击
 function SLC_DLActivityDungeon_TCoolDown(context, param1)
     ScriptLib.PrintContextLog(context, "## [DLDungeon] SLC_DLActivityDungeon_TCoolDown. param1@"..param1)
-    if 1 == param1 then
+    if 1 == param1 then   
         LF_TriggerSGVChangeAllTeam(context, "GV_SKILL_CD")
     elseif 2 == param1 then
         LF_TriggerSGVChangeAllTeam(context, "GV_ULTIMATESKILL_CD")
@@ -685,7 +685,7 @@ end
 --param1: 1-雷震荡波 2-奥兹 3-刷大招
 function SLC_DLActivityDungeon_Fischl(context, param1)
     ScriptLib.PrintContextLog(context, "## [DLDungeon] SLC_DLActivityDungeon_Fischl. param1@"..param1.." uid@"..context.uid)
-    if 1 == param1 then
+    if 1 == param1 then   
         LF_SetGV_OnePlayer(context, "GV_CREATE_ELECTRICZONE", 1)
         LF_Exhibition_FischlBuff(context)
     elseif 2 == param1 then
@@ -695,7 +695,7 @@ function SLC_DLActivityDungeon_Fischl(context, param1)
         LF_Exhibition_FischlBuff(context)
     end
     --埋点
-    ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon3_1", "", {["bufftype"] = param1})
+    ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon3_1", "", {["bufftype"] = param1}) 
     return 0
 end
 --招奥兹需要冲物件SLC，所以陈列室另起一个SLC
@@ -704,14 +704,14 @@ function SLC_DLActivityDungeon_FischlOzSummon(context)
     local pos_raw = ScriptLib.GetPosByEntityId(context, context.source_entity_id)
     position.x = pos_raw.x - pos_raw.x % 0.01
     position.y = pos_raw.y - pos_raw.y % 0.01
-    position.z = pos_raw.z - pos_raw.z % 0.01
-    if nil ~= defs.crow_id then
+    position.z = pos_raw.z - pos_raw.z % 0.01  
+    if nil ~= defs.crow_id then 
         for k , v in pairs(defs.crow_id) do
             local ret = ScriptLib.CreateGadgetByConfigIdByPos(context, v, position, gadgets[v].rot)
             if 0 == ret then
                 break
             end
-        end
+        end          
     end
     return 0
 end
@@ -723,27 +723,27 @@ function LF_HandleMonaWater(context, dir)
     return 0
 end
 
-function LF_TriggerSGVChangeAllTeam(context, key)
+function LF_TriggerSGVChangeAllTeam(context, key)  
     local value = ScriptLib.GetGroupTempValue(context, "sgv_changer", {})
 
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)    
     ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, key, value)
     ScriptLib.PrintContextLog(context, "## [DLDungeon] LF_TriggerSGVChangeAllTeam. key@"..key.." value@"..value)
     if value > 1000 then
         ScriptLib.SetGroupTempValue(context, "sgv_changer", 0, {})
     else
         ScriptLib.ChangeGroupTempValue(context, "sgv_changer", 1, {})
-    end
+    end  
     return 0
 end
 function LF_SetGV_AllMonster(context, key, value)
-    local mon_list = ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id)
-    ScriptLib.AddEntityGlobalFloatValueByConfigId(context, mon_list, key, value)
+    local mon_list = ScriptLib.GetGroupAliveMonsterList(context, base_info.group_id) 
+    ScriptLib.AddEntityGlobalFloatValueByConfigId(context, mon_list, key, value)  
     ScriptLib.PrintContextLog(context, "## [DLDungeon] LF_SetGV_AllMonster. key@"..key.." value@"..value)
     return 0
 end
 function LF_SetGV_AllTeam(context, key, value)
-    local uid_list = ScriptLib.GetSceneUidList(context)
+    local uid_list = ScriptLib.GetSceneUidList(context)    
     ScriptLib.SetTeamEntityGlobalFloatValue(context, uid_list, key, value)
     ScriptLib.PrintContextLog(context, "## [DLDungeon] LF_SetGV_AllTeam. key@"..key.." value@"..value)
     return 0
@@ -755,10 +755,10 @@ function LF_SetGV_OnePlayer(context, key, value)
     return 0
 end
 function LF_SetSGV_AllTeam(context, key, value)
-    local uid_list = ScriptLib.GetSceneUidList(context)
-    for k,v in pairs(uid_list) do
+    local uid_list = ScriptLib.GetSceneUidList(context)  
+    for k,v in pairs(uid_list) do 
         ScriptLib.SetTeamServerGlobalValue(context, v, key, value)
-    end
+    end  
     ScriptLib.PrintContextLog(context, "## [DLDungeon] LF_SetSGV_AllTeam. key@"..key.." value@"..value)
     return 0
 end
@@ -768,7 +768,7 @@ function LF_ReportSkillExhibition(context)
      local uid_list = ScriptLib.GetSceneUidList(context)
     for k, v in pairs(cfg.exhiKey_all) do
         local record = ScriptLib.GetGroupTempValue(context, v, {})
-        if 0 < record then
+        if 0 < record then 
             for ik,iv in pairs(uid_list) do
                 ScriptLib.AddExhibitionAccumulableData(context, iv, v, record)
             end
@@ -778,7 +778,7 @@ function LF_ReportSkillExhibition(context)
 end
 --陈列室 通用 全体 通关次数
 function LF_Exhibition_Succ(context)
-    if nil ~= defs.is_tutorial then
+    if nil ~= defs.is_tutorial then 
         return 0
     end
     local uid_list = ScriptLib.GetSceneUidList(context)
@@ -790,17 +790,17 @@ function LF_Exhibition_Succ(context)
 end
 --重置陈列室缓存值
 function LF_InitExhibitionTemp(context)
-    if nil ~= defs.is_tutorial then
+    if nil ~= defs.is_tutorial then 
         return 0
     end
-    for k, v in pairs(cfg.exhiKey_all) do
+    for k, v in pairs(cfg.exhiKey_all) do 
         ScriptLib.SetGroupTempValue(context, v, 0, {})
     end
     return 0
 end
 --陈列室 万叶 单人 单局减CD触发次数
 function LF_Exhibition_CoolDown(context, uid)
-    if nil ~= defs.is_tutorial or 1 ~= defs.type then
+    if nil ~= defs.is_tutorial or 1 ~= defs.type then 
         return 0
     end
 
@@ -809,7 +809,7 @@ function LF_Exhibition_CoolDown(context, uid)
 end
 --缓存陈列室 万叶 T键次数
 function SLC_DLActivityDungeon_Exhi_TSkill(context)
-    if nil ~= defs.is_tutorial or 1 ~= defs.type then
+    if nil ~= defs.is_tutorial or 1 ~= defs.type then 
         return 0
     end
     --全体
@@ -817,12 +817,12 @@ function SLC_DLActivityDungeon_Exhi_TSkill(context)
     --单人
     ScriptLib.AddExhibitionReplaceableData(context, context.uid, "Activity_SummerTimeV2_Kazuha_TSkillOnce", 1)
     --埋点
-    ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon1_1", "", {})
+    ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon1_1", "", {}) 
     return 0
 end
 --缓存陈列室 莫娜 撞怪击中次数
 function SLC_DLActivityDungeon_Exhi_MonaPush(context)
-    if nil ~= defs.is_tutorial or 4 ~= defs.type then
+    if nil ~= defs.is_tutorial or 4 ~= defs.type then 
         return 0
     end
     --全体
@@ -834,7 +834,7 @@ end
 
 --缓存陈列室 菲谢尔 全体 冲击波击中次数
 function SLC_DLActivityDungeon_Exhi_FischlElecShock(context)
-    if nil ~= defs.is_tutorial or 3 ~= defs.type then
+    if nil ~= defs.is_tutorial or 3 ~= defs.type then 
         return 0
     end
     --全体
@@ -845,7 +845,7 @@ function SLC_DLActivityDungeon_Exhi_FischlElecShock(context)
 end
 --缓存陈列室 菲谢尔 获得奥兹buff次数
 function LF_Exhibition_FischlBuff(context)
-    if nil ~= defs.is_tutorial or 3 ~= defs.type then
+    if nil ~= defs.is_tutorial or 3 ~= defs.type then 
         return 0
     end
     --全体
@@ -858,7 +858,7 @@ end
 
 --缓存陈列室 莫娜 全体 获得星星buff次数
 function LF_DLActivityDungeon_Exhi_MonaBuff(context)
-    if nil ~= defs.is_tutorial or 4 ~= defs.type then
+    if nil ~= defs.is_tutorial or 4 ~= defs.type then 
         return 0
     end
     --全体
@@ -870,24 +870,24 @@ end
 --缓存陈列室 辛焱 全体 交互传音花次数
 --param1: 1-风场 2-声波
 function SLC_DLActivityDungeon_Exhi_GadgetUsage(context, param1)
-    if nil ~= defs.is_tutorial or 2 ~= defs.type then
+    if nil ~= defs.is_tutorial or 2 ~= defs.type then 
         return 0
     end
      --单人
     ScriptLib.AddExhibitionReplaceableData(context, context.uid, "Activity_SummerTimeV2_Xinyan_GadgetUsage", 1)
     --埋点
     if 1 == param1 then
-        ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon2_1", "", {})
+        ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon2_1", "", {}) 
     elseif 2 == param1 then
-        ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon2_2", "", {})
+        ScriptLib.MarkGroupLuaAction(context, "SummerTimeV2_Dungeon2_2", "", {}) 
     end
     return 0
 end
 --缓存陈列室 辛焱 全体 花冲击波击中盾怪次数
 function SLC_DLActivityDungeon_Exhi_XinyanEnbreak(context)
-    if nil ~= defs.is_tutorial or 2 ~= defs.type then
+    if nil ~= defs.is_tutorial or 2 ~= defs.type then 
         return 0
-    end
+    end 
     --全体
     ScriptLib.ChangeGroupTempValue(context, "Activity_SummerTimeV2_Xinyan_Enbreak", 1, {})
     --单人
@@ -896,13 +896,13 @@ function SLC_DLActivityDungeon_Exhi_XinyanEnbreak(context)
 end
 --缓存陈列室 辛焱 全体 下落攻击击中次数
 function SLC_DLActivityDungeon_Exhi_XinyanFallAttack(context)
-    if nil ~= defs.is_tutorial or 2 ~= defs.type then
+    if nil ~= defs.is_tutorial or 2 ~= defs.type then 
         return 0
     end
     --单人跨局累计wathcer
     ScriptLib.ChangeGroupTempValue(context, tostring(context.uid), 1, {})
 
-    --单人单局
+    --单人单局   
     ScriptLib.AddExhibitionReplaceableData(context, context.uid, "Activity_SummerTimeV2_Xinyan_FallAttackOnce", 1)
     return 0
 end

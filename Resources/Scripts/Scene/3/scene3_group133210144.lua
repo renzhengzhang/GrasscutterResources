@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210144
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	max_gear = 6,
 	timer = 20,
 	group_id = 133210144,
@@ -17,9 +17,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -84,9 +84,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -150,16 +150,16 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_START_144001(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210144, 2)
-
+	
 	return 0
 end
 
@@ -175,19 +175,19 @@ end
 function action_EVENT_TIME_AXIS_PASS_144002(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210144, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_144003(context, evt)
 	if evt.param1 ~= 144003 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -198,7 +198,7 @@ function action_EVENT_ENTER_REGION_144003(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_TIME_AXIS_PASS_144004(context, evt)
 	if "1111" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_144005(context, evt)
 	if 144009 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -225,8 +225,8 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_144005(context, evt)
 	-- 创建标识为"defs.gadget1"，时间节点为{20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "defs.gadget1", {20}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -266,8 +266,8 @@ end
 function action_EVENT_TIME_AXIS_PASS_144007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, tonumber(evt.source_name), GadgetState.Default) then
 	return -1
-	end
-
+	end 
+	
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Reminder", 133210144) == 0 then
 	-- 调用提示id为 32100109 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 32100109) then
@@ -276,14 +276,14 @@ function action_EVENT_TIME_AXIS_PASS_144007(context, evt)
 	end
 	    ScriptLib.ChangeGroupVariableValue(context, "Reminder", 1)
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_144008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 ~= defs.max_gear then
 	return false
 	end
@@ -298,7 +298,7 @@ function action_EVENT_VARIABLE_CHANGE_144008(context, evt)
 	ScriptLib.CancelGroupTimerEvent(context, defs.group_id, tostring(defs.gadget_4))
 	ScriptLib.CancelGroupTimerEvent(context, defs.group_id, tostring(defs.gadget_5))
 	ScriptLib.CancelGroupTimerEvent(context, defs.group_id, tostring(defs.gadget_6))
-
+	
 	-- 触发镜头注目，注目位置为坐标（-4101.45，215.87，-1164），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-4101.45, y=215.87, z=-1164}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -307,13 +307,13 @@ function action_EVENT_VARIABLE_CHANGE_144008(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
-
-
+				end 
+	
+	
+	
 	ScriptLib.AddQuestProgress(context, "7214803")
 	ScriptLib.GoToFlowSuite(context, 133210144, 3)
-
-
+	
+	
 	return 0
 end

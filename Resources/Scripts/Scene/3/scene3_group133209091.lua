@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133209091
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -84,9 +84,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -94,7 +94,7 @@ function condition_EVENT_ANY_GADGET_DIE_91005(context, evt)
 	if 91002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -105,19 +105,19 @@ function action_EVENT_ANY_GADGET_DIE_91005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "check1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "check1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133209091, EntityType.GADGET, 91004 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -126,7 +126,7 @@ function condition_EVENT_ANY_GADGET_DIE_91006(context, evt)
 	if 91001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -137,19 +137,19 @@ function action_EVENT_ANY_GADGET_DIE_91006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "check2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "check2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133209091, EntityType.GADGET, 91003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -159,7 +159,7 @@ function condition_EVENT_GROUP_LOAD_91007(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "check1", 133209091) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -170,7 +170,7 @@ function action_EVENT_GROUP_LOAD_91007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -180,7 +180,7 @@ function condition_EVENT_GROUP_LOAD_91008(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "check2", 133209091) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -191,6 +191,6 @@ function action_EVENT_GROUP_LOAD_91008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

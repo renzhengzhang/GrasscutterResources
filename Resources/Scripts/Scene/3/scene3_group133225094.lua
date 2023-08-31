@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133225094
 }
 
 -- DEFS_MISCS
-defs =
+defs = 
 {
 	group_id = 133225094,
 	Lightup_Seq = {94001,94003,94009,94010,94002}
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -116,20 +116,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_94012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"StoneCanPlace_A"为1
 	if ScriptLib.GetGroupVariableValue(context, "StoneCanPlace_A") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -139,20 +139,20 @@ function action_EVENT_VARIABLE_CHANGE_94012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 94004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_94013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"StoneCanPlace_B"为1
 	if ScriptLib.GetGroupVariableValue(context, "StoneCanPlace_B") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -162,8 +162,8 @@ function action_EVENT_VARIABLE_CHANGE_94013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 94005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -172,7 +172,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_94014(context, evt)
 	if 94004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -183,13 +183,13 @@ function action_EVENT_GADGET_STATE_CHANGE_94014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "stone_progress" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stone_progress", 2, 133225160) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -198,7 +198,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_94015(context, evt)
 	if 94005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -209,13 +209,13 @@ function action_EVENT_GADGET_STATE_CHANGE_94015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "stone_progress" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stone_progress", 2, 133225161) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -224,7 +224,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_94016(context, evt)
 	if 94006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -235,25 +235,25 @@ function action_EVENT_GADGET_STATE_CHANGE_94016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "stone_progress" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stone_progress", 2, 133225162) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_94017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"stone_progress"为3
 	if ScriptLib.GetGroupVariableValue(context, "stone_progress") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -264,25 +264,25 @@ function action_EVENT_VARIABLE_CHANGE_94017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "isQuestNotify" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "isQuestNotify", 1, 133225094) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_94018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Finished"为1
 	if ScriptLib.GetGroupVariableValue(context, "Finished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -293,19 +293,19 @@ function action_EVENT_VARIABLE_CHANGE_94018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_94019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"StoneCanPlace_C"为1
 	if ScriptLib.GetGroupVariableValue(context, "StoneCanPlace_C") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -315,8 +315,8 @@ function action_EVENT_VARIABLE_CHANGE_94019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 94006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -326,7 +326,7 @@ function condition_EVENT_GROUP_LOAD_94020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Finished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -337,7 +337,7 @@ function action_EVENT_GROUP_LOAD_94020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 

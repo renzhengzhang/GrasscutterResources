@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133225081
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	BossConfigID = 81001,
 	regionID = 81006,
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -99,9 +99,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -111,7 +111,7 @@ function action_EVENT_ANY_MONSTER_LIVE_81002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -120,7 +120,7 @@ function condition_EVENT_MONSTER_BATTLE_81004(context, evt)
 	if 81001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -128,7 +128,7 @@ end
 function action_EVENT_MONSTER_BATTLE_81004(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133225081, 3)
-
+	
 	return 0
 end
 
@@ -137,7 +137,7 @@ function condition_EVENT_ANY_MONSTER_DIE_81005(context, evt)
 	if 81001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -148,17 +148,17 @@ function action_EVENT_ANY_MONSTER_DIE_81005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133225081, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_81006(context, evt)
 	if evt.param1 ~= 181005 then return false end
-
+	
 	return true
 end
 
@@ -177,7 +177,7 @@ function action_EVENT_ENTER_REGION_81006(context, evt)
 			end
 			ScriptLib.TrySetPlayerEyePoint(context, small_region, big_region, 0, {0})
 		end
-
+	
 	return 0
 end
 
@@ -192,7 +192,7 @@ function action_EVENT_LEAVE_REGION_81007(context, evt)
 	     	if context.uid~=0 then
 			ScriptLib.ClearPlayerEyePoint(context, 81006)
 		end
-
+	
 	return 0
 end
 

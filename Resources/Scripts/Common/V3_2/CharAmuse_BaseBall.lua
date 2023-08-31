@@ -6,13 +6,13 @@
 ||	description: 	3.2奇趣秘园 棒球 局内逻辑
 ||					球作为ServerGadget，优化remote体验
 ||	LogName:	## [CharAmuse_BaseBall]
-||	Protection:
+||	Protection:	
 =======================================]]
 --[[
 
-defs = {
+local defs = {
 
-defs = {
+local defs = {
 	--玩法范围region cube
 	play_region = 6010,
 	--进入时加载内容，例如棒球发球机。依次为单人、2人…
@@ -25,18 +25,18 @@ defs = {
 	target = 15,
 
 	--射击波次 默认
-	order =
+	order = 
 	{
-		easy,
+		easy, 
 		normal,
 		hard,
 		normal,
 		hard,
 	},
 	--射击波次 云锦
-	order_yunjin =
+	order_yunjin = 
 	{
-		easy,
+		easy, 
 		normal,
 		hard,
 		normal,
@@ -46,16 +46,16 @@ defs = {
 	--从哪一波开始，使每个发球机节奏不同，0为不处理
 	diff_from = 0,
 
-	multi_shoot =
+	multi_shoot = 
 	{	--有几个坐标就发几个球，坐标是相对于默认发射点的偏移
 		[21] = { {x = 0, z = 0}, {x = 0, z = 0}, {x = 0, z = 0} }
 	},
 
 	--波次随机池配置 {{射击模式}, {间隔}}
 	-- 1-单个普通 2-单个快速 3-双普 4-双快 5-三普 6-三快 7-左右旋 8-单快速左旋 9-（空） 10-单快速右旋 20以上-multi_shoot
-	seq =
+	seq = 
 	{
-
+		
 	},
 	easy=
 	{
@@ -70,7 +70,7 @@ defs = {
 	    { {2,1,2,1,2}, {3,3,3,3,5} },
 	},
 	--球物件池
-	ball_pool =
+	ball_pool = 
 	{	--普通
 		[2] = {6006,6007,6008,6009,6031,6032,6033,6035},
 		--快速
@@ -81,7 +81,7 @@ defs = {
 		[3] = {},
 	},
 	--射击基准点位
-	shoot_points =
+	shoot_points = 
 	{
 		--1人
 		[1] ={6016},
@@ -102,7 +102,7 @@ local cfg = {
 	--主控GroupID
 	main_group = 251008007,
 	-- 1-单个普通 2-单个快速 3-双普 4-双快 5-三普 6-三快 7-左右旋 8-单快速左旋 9-（空） 10-单快速右旋
-	shoot_info =
+	shoot_info = 
 	{
 		[1] = { ball_type = 2, shoot_count = 1, rot = { x = 0.000, y = 180.000, z = 0.000 }},
 		[2] = { ball_type = 1, shoot_count = 1, rot = { x = 0.000, y = 180.000, z = 0.000 }},
@@ -144,8 +144,8 @@ function EX_StartGallery(context, prev_context, gallery_id, is_last_level)
 	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})
 
-	if nil ~= defs.play_suites and nil ~= defs.play_suites[#uid_list] then
-		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, defs.play_suites[#uid_list])
+	if nil ~= defs.play_suites and nil ~= defs.play_suites[#uid_list] then		
+		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, defs.play_suites[#uid_list])		
 	end
 	ScriptLib.SetGroupTempValue(context, "is_last_level", is_last_level, {})
 	--开启gallery
@@ -182,7 +182,7 @@ function action_AirWallVariable_Change(context, evt)
 	elseif 0 == evt.param1 and 1 == evt.param2 then
 		for i,v in ipairs(defs.air_wall) do
 			ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, v)
-		end
+		end	
 	end
 	return 0
 end
@@ -193,7 +193,7 @@ function action_Gallery_Stop(context, evt)
 	if nil ~= defs.play_suites then
 		for k,v in pairs(defs.play_suites) do
 			ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, v)
-		end
+		end	
 	end
 
 	--清除全部球
@@ -211,7 +211,7 @@ function action_Gallery_Stop(context, evt)
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
 			ScriptLib.InitTimeAxis(context, "StopGallery", { 3 } , false)
-		end
+		end	
 	end
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_BaseBall] Gallery stoped. reason@".. evt.param3.." --------------")
 	return 0
@@ -222,8 +222,8 @@ function action_Enter_Play_Region(context, evt)
 	local uid_list = ScriptLib.GetSceneUidList(context)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_BaseBall] Enter_Play_Region. player_count@"..#uid_list)
 	--地城Group没有卸载 TriggerCount 1 直接上就完了
-	if nil ~= defs.enter_suites and nil ~= defs.enter_suites[#uid_list] then
-		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, defs.enter_suites[#uid_list])
+	if nil ~= defs.enter_suites and nil ~= defs.enter_suites[#uid_list] then		
+		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, defs.enter_suites[#uid_list])		
 	end
 	return 0
 end
@@ -242,7 +242,7 @@ function LF_Start_Play(context)
 	end
 	ScriptLib.SetGroupTempValue(context, "cur_score", target, {})
 	ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["max_score"]= target} )
-
+	
 	--order_index: 当前执行到defs.order列表中的哪一位
 	ScriptLib.SetGroupTempValue(context, "order_index", 1, {})
 	--rand_index： 本次在当前难度的池中，随机到哪一条发射序列
@@ -252,7 +252,7 @@ function LF_Start_Play(context)
 	--埋点计数
 	ScriptLib.SetGroupTempValue(context, "hit", 0, {})
 	ScriptLib.SetGroupTempValue(context, "wave_num", 0, {})
-
+	
 	local order = defs.order
 	if 28008 == ScriptLib.GetGroupTempValue(context, "gallery_id", {}) then
 		order = defs.order_yunjin
@@ -261,7 +261,7 @@ function LF_Start_Play(context)
 		return 0
 	end
 	LF_StartSequenceShoot_Normal(context, defs.seq[order[1]])
-
+	
 	return 0
 end
 
@@ -279,11 +279,11 @@ function LF_HandleOrderFinish(context, is_normal)
 
 	--order_index ++
 	local ret = ScriptLib.ChangeGroupTempValue(context, "order_index", 1, {})
-	if -1 == ret then
+	if -1 == ret then 
 		ScriptLib.SetGroupTempValue(context, "order_index", 1, {})
 	end
 	local order_index = ScriptLib.GetGroupTempValue(context, "order_index", {})
-	if defs.high_reminder ~= nil and defs.high_from ~= nil and defs.high_from == order_index then
+	if defs.high_reminder ~= nil and defs.high_from ~= nil and defs.high_from == order_index then 
 		ScriptLib.ShowReminder(context, defs.high_reminder)
 	end
 
@@ -300,10 +300,10 @@ function LF_HandleOrderFinish(context, is_normal)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_BaseBall] LF_HandleOrderFinish. is_normal@"..is_normal.." next order_index@".. order_index)
 	ScriptLib.ChangeGroupTempValue(context, "time_axis_index", 1, {})
 	--当前是齐射阶段
-	if 1 == is_normal then
+	if 1 == is_normal then 
 
 		--下一个是齐射还是不齐射
-		if 0 < defs.diff_from and order_index >= defs.diff_from then
+		if 0 < defs.diff_from and order_index >= defs.diff_from then 
 			LF_StartSequenceShoot_Diff(context, defs.seq[order[order_index]])
 		else
 			LF_StartSequenceShoot_Normal(context, defs.seq[order[order_index]])
@@ -342,7 +342,7 @@ function LF_StartSequenceShoot_Normal(context, difficulty)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_BaseBall] LF_StartSequenceShoot_Normal. rand_index@"..rand_index)
 
 	--打出第一球
-	LF_CreateBall_All(context, sequence[1][1])
+	LF_CreateBall_All(context, sequence[1][1])	
 
 	return 0
 end
@@ -371,7 +371,7 @@ end
 function action_Interval_TimeAxis_Pass(context, evt)
 	local name = string.sub(evt.source_name, 1, 8)
 
-	if "interval" ~= name then
+	if "interval" ~= name then 
 		return 0
 	end
 
@@ -387,7 +387,7 @@ function action_Interval_TimeAxis_Pass(context, evt)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_BaseBall] Interval_TimeAxis_Pass. order_index@"..order_index.." difficulty@".. difficulty .." rand_index@"..rand_index.." evt.param1@"..evt.param1)
 	--时间轴中间点
 	if evt.param1 < #sequence[1] then
-		LF_CreateBall_All(context, sequence[1][evt.param1 + 1])
+		LF_CreateBall_All(context, sequence[1][evt.param1 + 1])	
 	--时间轴结束
 	else
 		LF_HandleOrderFinish(context, 1)
@@ -398,7 +398,7 @@ end
 
 function action_Separate_TimeAxis_Pass(context, evt)
 	local name = string.sub(evt.source_name, 1, 8)
-	if "interval" == name then
+	if "interval" == name then 
 		return 0
 	end
 
@@ -407,13 +407,13 @@ function action_Separate_TimeAxis_Pass(context, evt)
 	if 28008 == ScriptLib.GetGroupTempValue(context, "gallery_id", {}) then
 		order = defs.order_yunjin
 	end
-	if nil == order[order_index] then
+	if nil == order[order_index] then 
 		return 0
 	end
 
 	--还原 发射点的config_id 和 射击序列的index
 	local div = string.find(evt.source_name, "_")
-	if nil == div then
+	if nil == div then 
 		return 0
 	end
 	local config_id = tonumber(string.sub(evt.source_name, 1, div - 1))
@@ -421,7 +421,7 @@ function action_Separate_TimeAxis_Pass(context, evt)
 	--校验
 	local difficulty = defs.seq[order[order_index]]
 	local sequence = difficulty[rand_index]
-	if nil == gadgets[config_id] or nil == sequence then
+	if nil == gadgets[config_id] or nil == sequence then 
 		return 0
 	end
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_BaseBall] Separate_TimeAxis_Pass. source_name@"..evt.source_name.. " config_id@"..config_id.." rand_index@"..rand_index)
@@ -447,13 +447,13 @@ function LF_CreateBall_All(context, shoot_type)
 	if 20 < shoot_type then
 
 		for k, shoot_point in pairs(defs.shoot_points[player_count]) do
-			local pos = {
-				x = gadgets[shoot_point].pos.x,
-				y = gadgets[shoot_point].pos.y,
+			local pos = { 
+				x = gadgets[shoot_point].pos.x, 
+				y = gadgets[shoot_point].pos.y, 
 				z = gadgets[shoot_point].pos.z
 			}
-			LF_Create_MultiShootBall(context, pos, shoot_type)
-		end
+			LF_Create_MultiShootBall(context, pos, shoot_type)	    
+		end	
 
 	else
 		if nil == cfg.shoot_info[shoot_type] then
@@ -468,21 +468,21 @@ function LF_CreateBall_All(context, shoot_type)
 
 		if 7 == shoot_type then
 			for k, shoot_point in pairs(defs.shoot_points[player_count]) do
-				local pos = {
-					x = gadgets[shoot_point].pos.x,
-					y = gadgets[shoot_point].pos.y,
+				local pos = { 
+					x = gadgets[shoot_point].pos.x, 
+					y = gadgets[shoot_point].pos.y, 
 					z = gadgets[shoot_point].pos.z
 				}
-				LF_Create_DualCurveBall(context, pos)
+				LF_Create_DualCurveBall(context, pos)		    
 			end
 
-		else
+		else	
 			for k, shoot_point in pairs(defs.shoot_points[player_count]) do
 
 				for i = 1, shoot_count do
-					local pos = {
-						x = gadgets[shoot_point].pos.x,
-						y = gadgets[shoot_point].pos.y,
+					local pos = { 
+						x = gadgets[shoot_point].pos.x, 
+						y = gadgets[shoot_point].pos.y, 
 						z = gadgets[shoot_point].pos.z + (i-1)*defs.multishoot_distance
 					}
 					LF_CreateBallFromPool(context, pos, rot, ball_type)
@@ -501,12 +501,12 @@ function LF_CreateBall_Single(context, shoot_point, shoot_type)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_BaseBall] LF_CreateBall_Single. shoot_type@"..shoot_type)
 
 	if 20 < shoot_type then
-		local pos = {
-			x = gadgets[shoot_point].pos.x,
-			y = gadgets[shoot_point].pos.y,
+		local pos = { 
+			x = gadgets[shoot_point].pos.x, 
+			y = gadgets[shoot_point].pos.y, 
 			z = gadgets[shoot_point].pos.z
 		}
-		LF_Create_MultiShootBall(context, pos)
+		LF_Create_MultiShootBall(context, pos)	    
 
 	else
 		if nil == cfg.shoot_info[shoot_type] then
@@ -519,18 +519,18 @@ function LF_CreateBall_Single(context, shoot_point, shoot_type)
 		--出生朝向
 		local rot = cfg.shoot_info[shoot_type].rot
 
-		if 7 == shoot_type then
-			local pos = {
-				x = gadgets[shoot_point].pos.x,
-				y = gadgets[shoot_point].pos.y,
+		if 7 == shoot_type then		
+			local pos = { 
+				x = gadgets[shoot_point].pos.x, 
+				y = gadgets[shoot_point].pos.y, 
 				z = gadgets[shoot_point].pos.z
 			}
-			LF_Create_DualCurveBall(context, pos)
-		else
+			LF_Create_DualCurveBall(context, pos)		    		
+		else	
 			for i = 1, shoot_count do
-				local pos = {
-					x = gadgets[shoot_point].pos.x,
-					y = gadgets[shoot_point].pos.y,
+				local pos = { 
+					x = gadgets[shoot_point].pos.x, 
+					y = gadgets[shoot_point].pos.y, 
 					z = gadgets[shoot_point].pos.z + (i-1)*defs.multishoot_distance
 				}
 				LF_CreateBallFromPool(context, pos, rot, ball_type)
@@ -552,10 +552,10 @@ function LF_CreateBallFromPool(context, pos_table, rot_table, ball_type)
 
 	for ik , iv in pairs(defs.ball_pool[ball_type]) do
 	    local ret = ScriptLib.CreateGadgetByParamTable(context, {config_id = iv, pos = pos_table, rot = rot_table, sgv_key = {"SGV_BaseBall_State"}, sgv_value = {ball_state} })
-	    if 0 == ret then
+	    if 0 == ret then	    	
 	       	return 0
 	    end
-	end
+	end 
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_BaseBall] LF_CreateBallFromPool. Create gadget failed. ")
 	return 0
 end
@@ -566,20 +566,20 @@ function LF_Create_DualCurveBall(context, pos_table)
 	if defs.high_from ~= nil and defs.high_from <= ScriptLib.GetGroupTempValue(context, "order_index", {}) then
 		ball_state = 1
 	end
-	--左旋
+	--左旋 
 	for ik , iv in pairs(defs.ball_pool[4]) do
 	    local ret = ScriptLib.CreateGadgetByParamTable(context, {config_id = iv, pos = pos_table, rot = { x = 0.000, y = 140.000, z = 0.000 }, sgv_key = {"SGV_BaseBall_State"}, sgv_value = {ball_state} })
-	    if 0 == ret then
+	    if 0 == ret then	    	
 	       	break
 	    end
-	end
+	end 
 	--右旋
 	for ik , iv in pairs(defs.ball_pool[3]) do
 	    local ret = ScriptLib.CreateGadgetByParamTable(context, {config_id = iv, pos = pos_table, rot = { x = 0.000, y = 220.000, z = 0.000 }, sgv_key = {"SGV_BaseBall_State"}, sgv_value = {ball_state} })
-	    if 0 == ret then
+	    if 0 == ret then	    	
 	       	break
 	    end
-	end
+	end 
 
 	return 0
 end
@@ -600,10 +600,10 @@ function LF_Create_MultiShootBall(context, pos_table, shoot_type)
 		local pos = { x = pos_table.x + defs.multi_shoot[shoot_type][i].x, y = pos_table.y, z = pos_table.z + defs.multi_shoot[shoot_type][i].z }
 		for ik , iv in pairs(defs.ball_pool[2]) do
 		    local ret = ScriptLib.CreateGadgetByParamTable(context, {config_id = iv, pos = pos, rot = { x = 0.000, y = 180.000, z = 0.000 }, sgv_key = {"SGV_BaseBall_State"}, sgv_value = {ball_state} })
-		    if 0 == ret then
+		    if 0 == ret then	    	
 		       	break
 	    	end
-		end
+		end 
 	end
 
 	return 0
@@ -666,7 +666,7 @@ end
 
 function LF_MakeTimeAxis(context, time_table)
 	local t = {}
-	for i = 1, #time_table do
+	for i = 1, #time_table do 
 		local num = 0
 		for j = i, 1, -1 do
 			num = num + time_table[j]

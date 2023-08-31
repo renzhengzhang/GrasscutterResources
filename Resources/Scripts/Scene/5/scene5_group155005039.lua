@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155005039
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	groupid = 155005039,
 	pointarray_Rot = 500500004
 }
@@ -14,11 +14,11 @@ local EnvControlGadgets = {39005}
 local DayAppearGadgets = {}
 local NightAppearGadgets = {}
 
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
 		DayNight_Gadget_Lock(context,39005)
-
+		
 	end,
 	["1"] = function(context)
 		DayNight_Gadget_Unlock(context,39005)
@@ -28,15 +28,15 @@ local gameplayStateFuncitons =
 		InitialRotY(context)
 	end,
 	["2"] = function(context)
-
+		
 		ScriptLib.AddQuestProgress(context, "72190_SolvePuzzle")
-
+		
 	end
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -44,22 +44,22 @@ end
 
 function GadgetStateSwitcher(context,gadget_id,state)
 
-	if ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[1] then
+	if ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[1] then 
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupid, gadget_id, state[2])
-	elseif ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[2] then
+	elseif ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, gadget_id)  == state[2] then 
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.groupid, gadget_id, state[1])
-	end
+	end 
 
 end
 function RotateGate(context,gadget_id,pointarray_id,rotvar,rotstep)
-	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {1}, {route_type = 0, turn_mode = true})
-	if rotvar ~= '' and rotvar ~= nil then
+	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {1}, {route_type = 0, turn_mode = true}) 
+	if rotvar ~= '' and rotvar ~= nil then 
 		local temprot = ScriptLib.GetGroupVariableValue(context, rotvar)
 
-		temprot = rotstep + temprot
+		temprot = rotstep + temprot 
 
-		if temprot >=360 then
-			temprot = 0
+		if temprot >=360 then 
+			temprot = 0 
 		end
 		ScriptLib.SetGroupVariableValue(context,rotvar, temprot)
 	end
@@ -72,13 +72,13 @@ function InitialRotY(context)
 
 	if rot ~= 0 then
 		ScriptLib.SetPlatformPointArray(context,39004, defs.pointarray_Rot, {rot}, { route_type = 0,turn_mode=true })
-	end
+	end 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -131,9 +131,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -144,9 +144,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -162,9 +162,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -174,7 +174,7 @@ function action_EVENT_TIME_AXIS_PASS_39009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -188,9 +188,9 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_39011(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
-
+	
 	return 0
 end
 
@@ -199,8 +199,8 @@ function condition_EVENT_GADGET_STATE_CHANGE_39012(context, evt)
 			if 222 ~= ScriptLib.GetGadgetStateByConfigId(context, 155005039, 39005) then
 				return false
 			end
-
-			if 0 ~=ScriptLib.GetGroupVariableValue(context, "isActing") then
+			
+			if 0 ~=ScriptLib.GetGroupVariableValue(context, "isActing") then 
 				return false
 			end
 			return true
@@ -209,7 +209,7 @@ end
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_39012(context, evt)
 			if ScriptLib.GetGadgetStateByConfigId(context, defs.groupid, 39002) == 0
-				and ScriptLib.GetGroupVariableValue(context,"Rot") == 180 then
+				and ScriptLib.GetGroupVariableValue(context,"Rot") == 180 then 
 					ScriptLib.PrintContextLog(context, defs.groupid.." : Somthing block")
 					ScriptLib.ShowReminder(context, 50050101)
 				return -1
@@ -217,9 +217,9 @@ function action_EVENT_GADGET_STATE_CHANGE_39012(context, evt)
 			ScriptLib.InitTimeAxis(context, "resetisActing", {1}, false)
 			RotateGate(context,39004,defs.pointarray_Rot,"Rot",90)
 			ScriptLib.SetGroupVariableValue(context, "isActing", 1)
-
-			ScriptLib.PlayCutScene(context, 53, 0)
-
+		
+			ScriptLib.PlayCutScene(context, 53, 0) 
+		
 			--[[local pos = {x=200, y= 173, z=-442}
 			local pos_follow = {x=0, y=0, z=0}
 				if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
@@ -235,18 +235,18 @@ end
 function condition_EVENT_SELECT_OPTION_39013(context, evt)
 			-- 判断是gadgetid 39006 option_id 7
 			if 39006 ~= evt.param1 and 39008 ~= evt.param1 then
-				return false
+				return false	
 			end
-
+			
 			if 7 ~= evt.param2 then
 				return false
 			end
-
-			if 0 ~=ScriptLib.GetGroupVariableValue(context, "isActing") then
+	
+			if 0 ~=ScriptLib.GetGroupVariableValue(context, "isActing") then 
 				return false
 			end
-
-
+			
+			
 			return true
 end
 
@@ -258,10 +258,10 @@ function action_EVENT_SELECT_OPTION_39013(context, evt)
 				ScriptLib.DelWorktopOptionByGroupId(context, defs.groupid, evt.param1, 7)
 				ScriptLib.SetGroupVariableValue(context, "isActing", 1)
 				GadgetStateSwitcher(context,evt.param1,{0,201})
-				if evt.param1 == 39006 then
-					ScriptLib.PlayCutScene(context, 54, 0)
-				elseif evt.param1 == 39008 then
-					ScriptLib.PlayCutScene(context, 55, 0)
+				if evt.param1 == 39006 then 
+					ScriptLib.PlayCutScene(context, 54, 0) 
+				elseif evt.param1 == 39008 then 
+					ScriptLib.PlayCutScene(context, 55, 0) 
 				end
 			return 0
 end
@@ -273,7 +273,7 @@ function action_EVENT_TIME_AXIS_PASS_39014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -284,16 +284,16 @@ function action_EVENT_TIME_AXIS_PASS_39015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_39016(context, evt)
-		if evt.param2 ~= 39006 and evt.param2 ~= 39008 then
+		if evt.param2 ~= 39006 and evt.param2 ~= 39008 then 
 			return false
 		end
-
+	
 		return true
 end
 
@@ -306,11 +306,11 @@ function action_EVENT_GADGET_STATE_CHANGE_39016(context, evt)
 			end
 			GadgetStateSwitcher(context,39007,{0,201})
 		end
-		if evt.param2 == 39008 then
+		if evt.param2 == 39008 then 
 			GadgetStateSwitcher(context,39001,{0,201})
 			GadgetStateSwitcher(context,39003,{0,201})
 		end
-
+		
 		return 0
 end
 

@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250009009
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_id = 250009009,
 	gadget_target_1 = 9002,
 	monster_mole_1 = 9001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -92,9 +92,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -104,19 +104,19 @@ function action_EVENT_ANY_MONSTER_DIE_9004(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 250009009, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "isFinish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isFinish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -124,14 +124,14 @@ end
 function condition_EVENT_SELECT_OPTION_9005(context, evt)
 	-- 判断是gadgetid 9003 option_id 171
 	if 9003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 171 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -141,20 +141,20 @@ function action_EVENT_SELECT_OPTION_9005(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 250009009, 9003, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 250009009 ；指定config：9003；物件身上指定option：171；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250009009, 9003, 171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2006, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -163,7 +163,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9006(context, evt)
 	if 9003 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -174,13 +174,13 @@ function action_EVENT_GADGET_STATE_CHANGE_9006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "isActive" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isActive", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9008(context, evt)
 	if 9002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -200,7 +200,7 @@ function action_EVENT_GADGET_STATE_CHANGE_9008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -210,12 +210,12 @@ function condition_EVENT_GADGET_CREATE_9009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"isFinish"为0
 	if ScriptLib.GetGroupVariableValue(context, "isFinish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -225,7 +225,7 @@ function action_EVENT_GADGET_CREATE_9009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 9003, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

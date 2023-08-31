@@ -3,7 +3,7 @@
 
 ]]
 --[[
-defs = {
+local defs = {
 	guide_regionID = [configID],
 }
 ]]
@@ -24,9 +24,9 @@ end
 
 function action_enter_TutorialRegion(context, evt)
 
-	if defs.guide_regionID == nil then
+	if defs.guide_regionID == nil then 
 		return 0
-	elseif evt.param1 == defs.guide_regionID then
+	elseif evt.param1 == defs.guide_regionID then 
 		LF_Try_StartTutorial(context)
 	end
 	return 0

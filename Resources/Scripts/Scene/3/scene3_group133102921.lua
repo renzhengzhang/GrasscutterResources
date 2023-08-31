@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133102921
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -83,9 +83,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -94,7 +94,7 @@ function condition_EVENT_QUEST_START_921006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "quest") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -105,7 +105,7 @@ function action_EVENT_QUEST_START_921006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -115,7 +115,7 @@ function condition_EVENT_QUEST_START_921007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "quest") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -126,7 +126,7 @@ function action_EVENT_QUEST_START_921007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -137,6 +137,6 @@ function action_EVENT_QUEST_FINISH_921008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

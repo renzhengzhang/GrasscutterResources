@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111102103
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -75,23 +75,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_103002(context, evt)
 	-- 判断是gadgetid 103001 option_id 437
 	if 103001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 437 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -102,8 +102,8 @@ function action_EVENT_SELECT_OPTION_103002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -111,14 +111,14 @@ end
 function condition_EVENT_SELECT_OPTION_103007(context, evt)
 	-- 判断是gadgetid 103003 option_id 437
 	if 103003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 437 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -129,8 +129,8 @@ function action_EVENT_SELECT_OPTION_103007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -138,14 +138,14 @@ end
 function condition_EVENT_SELECT_OPTION_103008(context, evt)
 	-- 判断是gadgetid 103004 option_id 437
 	if 103004 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 437 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -156,8 +156,8 @@ function action_EVENT_SELECT_OPTION_103008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -165,14 +165,14 @@ end
 function condition_EVENT_SELECT_OPTION_103009(context, evt)
 	-- 判断是gadgetid 103005 option_id 437
 	if 103005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 437 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -183,8 +183,8 @@ function action_EVENT_SELECT_OPTION_103009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -192,14 +192,14 @@ end
 function condition_EVENT_SELECT_OPTION_103010(context, evt)
 	-- 判断是gadgetid 103006 option_id 437
 	if 103006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 437 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -210,7 +210,7 @@ function action_EVENT_SELECT_OPTION_103010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end

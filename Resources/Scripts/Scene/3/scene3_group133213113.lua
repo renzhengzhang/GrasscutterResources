@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133213113
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -109,23 +109,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_113004(context, evt)
 	-- 判断是gadgetid 113017 option_id 68
 	if 113017 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 68 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -136,20 +136,20 @@ function action_EVENT_SELECT_OPTION_113004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 113017 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133213113, EntityType.GADGET, 113005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -158,7 +158,7 @@ function condition_EVENT_GADGET_CREATE_113009(context, evt)
 	if 113006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -169,7 +169,7 @@ function action_EVENT_GADGET_CREATE_113009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -177,14 +177,14 @@ end
 function condition_EVENT_SELECT_OPTION_113013(context, evt)
 	-- 判断是gadgetid 113006 option_id 86
 	if 113006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 86 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -195,34 +195,34 @@ function action_EVENT_SELECT_OPTION_113013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 创建id为113001的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 113001 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 113006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133213113, EntityType.GADGET, 113010 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
 		local pos = {x=-3726, y=238, z=-3056}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "Sfx_Quest_underConstruction", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -230,14 +230,14 @@ end
 function condition_EVENT_SELECT_OPTION_113014(context, evt)
 	-- 判断是gadgetid 113007 option_id 86
 	if 113007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 86 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -248,34 +248,34 @@ function action_EVENT_SELECT_OPTION_113014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 创建id为113002的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 113002 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 113007 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133213113, EntityType.GADGET, 113011 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
 		local pos = {x=-3719, y=236, z=-3079}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "Sfx_Quest_underConstruction", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -283,14 +283,14 @@ end
 function condition_EVENT_SELECT_OPTION_113015(context, evt)
 	-- 判断是gadgetid 113008 option_id 86
 	if 113008 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 86 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -301,34 +301,34 @@ function action_EVENT_SELECT_OPTION_113015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 创建id为113003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 113003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 113008 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133213113, EntityType.GADGET, 113012 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
 		local pos = {x=-3620, y=214, z=-3150}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "Sfx_Quest_underConstruction", play_type= 1, is_broadcast = false }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -337,7 +337,7 @@ function condition_EVENT_GADGET_CREATE_113018(context, evt)
 	if 113007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -348,7 +348,7 @@ function action_EVENT_GADGET_CREATE_113018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -357,7 +357,7 @@ function condition_EVENT_GADGET_CREATE_113019(context, evt)
 	if 113017 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -368,7 +368,7 @@ function action_EVENT_GADGET_CREATE_113019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -377,7 +377,7 @@ function condition_EVENT_GADGET_CREATE_113020(context, evt)
 	if 113008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -388,6 +388,6 @@ function action_EVENT_GADGET_CREATE_113020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end

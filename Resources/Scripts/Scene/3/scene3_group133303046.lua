@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303046
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -94,23 +94,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_46003(context, evt)
 	-- 判断是gadgetid 46002 option_id 99
 	if 46002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 99 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -121,19 +121,19 @@ function action_EVENT_SELECT_OPTION_46003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133303046, EntityType.GADGET, 46002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "dug" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "dug", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -142,7 +142,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_46006(context, evt)
 	if 46004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -153,19 +153,19 @@ function action_EVENT_GADGET_STATE_CHANGE_46006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为46005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 46005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1111394 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1111394) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -175,7 +175,7 @@ function condition_EVENT_GROUP_LOAD_46007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "chestOpened") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -186,13 +186,13 @@ function action_EVENT_GROUP_LOAD_46007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133303046, EntityType.GADGET, 46002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -202,7 +202,7 @@ function condition_EVENT_GROUP_REFRESH_46008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "chestOpened") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -213,12 +213,12 @@ function action_EVENT_GROUP_REFRESH_46008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133303046, EntityType.GADGET, 46002 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end

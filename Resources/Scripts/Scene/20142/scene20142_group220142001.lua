@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220142001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -84,20 +84,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_1002(context, evt)
 	if evt.param2 == 603 then
 		ScriptLib.SetGadgetStateByConfigId(context,1003, GadgetState.Default)
-
+		
 		ScriptLib.DelWorktopOptionByGroupId(context, 0, 1001, 603)
-
+		
 		ScriptLib.InitTimeAxis(context, "temp", {2,7}, false)
-
+		
 		if ScriptLib.GetGroupVariableValue(context, "room2") == 1 then
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 1001, 604)
 		else
@@ -106,27 +106,27 @@ function action_EVENT_SELECT_OPTION_1002(context, evt)
 	else
 		if evt.param2 == 604 then
 			ScriptLib.SetGadgetStateByConfigId(context,1003, GadgetState.Default)
-
+			
 			ScriptLib.InitTimeAxis(context, "temp2", {2,7}, false)
-
+			
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 1001, 603)
-
+			
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 1001, 604)
 		end
-
+		
 		if evt.param2 == 614 then
 			ScriptLib.SetGroupVariableValue(context, "room2", 1)
-
+			
 			ScriptLib.SetGadgetStateByConfigId(context,1003, GadgetState.Default)
-
+			
 			ScriptLib.InitTimeAxis(context, "temp3", {2,7}, false)
-
+			
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 1001, 603)
-
+			
 			ScriptLib.DelWorktopOptionByGroupId(context, 0, 1001, 614)
 		end
 	end
-
+	
 	return 0
 end
 
@@ -134,10 +134,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_1004(context, evt)
 	if evt.source_name == "temp" and evt.param1 == 1 then
 		ScriptLib.ChangeToTargetLevelTag(context, 23)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,1003, GadgetState.GearStart)
 	end
-
+	
 	if evt.source_name == "temp" and evt.param1 == 2 then
 		if ScriptLib.GetGroupVariableValue(context, "room2") == 0 then
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 1001, {603,614})
@@ -145,7 +145,7 @@ function action_EVENT_TIME_AXIS_PASS_1004(context, evt)
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 1001, {603,604})
 		end
 	end
-
+	
 	return 0
 end
 
@@ -153,14 +153,14 @@ end
 function action_EVENT_TIME_AXIS_PASS_1005(context, evt)
 	if evt.source_name == "temp2" and evt.param1 == 1 then
 		ScriptLib.ChangeToTargetLevelTag(context, 25)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,1003, GadgetState.GearStart)
 	end
-
+	
 	if evt.source_name == "temp2" and evt.param1 == 2 then
 		ScriptLib.SetWorktopOptionsByGroupId(context, 0, 1001, {603,604})
 	end
-
+	
 	return 0
 end
 
@@ -168,14 +168,14 @@ end
 function action_EVENT_TIME_AXIS_PASS_1006(context, evt)
 	if evt.source_name == "temp3" and evt.param1 == 1 then
 		ScriptLib.ChangeToTargetLevelTag(context, 25)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,1003, GadgetState.GearStart)
 	end
-
+	
 	if evt.source_name == "temp3" and evt.param1 == 2 then
 		ScriptLib.SetWorktopOptionsByGroupId(context, 0, 1001, {603,604})
 	end
-
+	
 	return 0
 end
 
@@ -183,20 +183,20 @@ end
 function action_EVENT_SELECT_OPTION_1007(context, evt)
 	if evt.param2 == 621 and ScriptLib.GetGroupVariableValue(context, "message") == 0 then
 		ScriptLib.ShowReminder(context, 201420101)
-
+		
 		ScriptLib.InitTimeAxis(context, "message1", {3}, false)
-
+		
 		ScriptLib.SetGroupVariableValue(context, "message", 1)
 	end
-
+	
 	if evt.param2 == 622 and ScriptLib.GetGroupVariableValue(context, "message") == 0 then
 		ScriptLib.ShowReminder(context, 201420101)
-
+		
 		ScriptLib.InitTimeAxis(context, "message1", {3}, false)
-
+		
 		ScriptLib.SetGroupVariableValue(context, "message", 1)
 	end
-
+	
 	return 0
 end
 
@@ -205,7 +205,7 @@ function action_EVENT_TIME_AXIS_PASS_1008(context, evt)
 	if evt.source_name == "message1" and evt.param1 == 1 and ScriptLib.GetGroupVariableValue(context, "message") == 1 then
 		ScriptLib.SetGroupVariableValue(context, "message", 0)
 	end
-
+	
 	return 0
 end
 
@@ -216,13 +216,13 @@ function action_EVENT_QUEST_FINISH_1009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220142001, 1001, {603,614}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -230,14 +230,14 @@ end
 function condition_EVENT_SELECT_OPTION_1010(context, evt)
 	-- 判断是gadgetid 1001 option_id 603
 	if 1001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 603 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -251,8 +251,8 @@ function action_EVENT_SELECT_OPTION_1010(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -260,14 +260,14 @@ end
 function condition_EVENT_SELECT_OPTION_1011(context, evt)
 	-- 判断是gadgetid 1001 option_id 604
 	if 1001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 604 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -281,8 +281,8 @@ function action_EVENT_SELECT_OPTION_1011(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -290,14 +290,14 @@ end
 function condition_EVENT_SELECT_OPTION_1012(context, evt)
 	-- 判断是gadgetid 1001 option_id 614
 	if 1001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 614 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -311,15 +311,15 @@ function action_EVENT_SELECT_OPTION_1012(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_1013(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "message", 0)
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "open") == 1 and ScriptLib.GetGroupVariableValue(context, "room2") == 1 then
 		ScriptLib.SetWorktopOptionsByGroupId(context, 0, 1001, {603,604})
 	else
@@ -329,19 +329,19 @@ function action_EVENT_GROUP_LOAD_1013(context, evt)
 			ScriptLib.SetWorktopOptionsByGroupId(context, 0, 1001, {621,622})
 		end
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1014(context, evt)
 	if evt.param1 ~= 1014 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -363,6 +363,6 @@ function action_EVENT_SELECT_OPTION_1015(context, evt)
 			end
 		end
 	end
-
+	
 	return 0
 end

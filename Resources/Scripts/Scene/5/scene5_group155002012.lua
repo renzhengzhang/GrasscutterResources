@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155002012
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155002012,
 	pointarray_Rot = 500200004
 }
@@ -13,22 +13,21 @@ defs = {
 local Controllers = {}
 local EnvControlGadgets = {}
 local Worktops = {}
-local DayAppearGadgets = {12001
-,12002,12003}
+local DayAppearGadgets = {12001,12002,12003}
 local NightAppearGadgets = {}
 
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-
+		
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
+	
 
-
-
+	
 	end,
 	["2"] = function(context)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
@@ -38,29 +37,29 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 function RotateGate(context,gadget_id,pointarray_id,rotvar,rotstep)
-	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {1}, {route_type = 0, turn_mode = true})
-	if rotvar ~= '' and rotvar ~= nil then
+	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {1}, {route_type = 0, turn_mode = true}) 
+	if rotvar ~= '' and rotvar ~= nil then 
 		local temprot = ScriptLib.GetGroupVariableValue(context, rotvar)
 
-		temprot = rotstep + temprot
+		temprot = rotstep + temprot 
 
-		if temprot >=360 then
-			temprot = 0
+		if temprot >=360 then 
+			temprot = 0 
 		end
 		ScriptLib.SetGroupVariableValue(context,rotvar, temprot)
 	end
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -96,9 +95,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -109,9 +108,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -136,20 +135,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_12005(context, evt)
 					local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155002001)
-
-					if isactive == 1 then
-						if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then
+				
+					if isactive == 1 then 
+						if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then 
 							ScriptLib.SetGroupVariableValue(context,"gameplayState", 1)
 						end
-
+						
 					end
 			UpdateGamePlayState(context)
 	return 0
@@ -158,13 +157,13 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_12006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 		if evt.param1 == evt.param2 then return false end
-
+		
 			if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 					return false
 			end
-
+			
 	return true
 end
 

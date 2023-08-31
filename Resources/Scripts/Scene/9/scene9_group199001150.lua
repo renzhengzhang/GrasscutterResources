@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199001150
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -120,9 +120,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -133,9 +133,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -187,9 +187,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -198,7 +198,7 @@ function condition_EVENT_GROUP_LOAD_150024(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mark") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -206,14 +206,14 @@ end
 function action_EVENT_GROUP_LOAD_150024(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199001150, 4)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 150041 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -222,7 +222,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_150028(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199001150, 150027) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -234,8 +234,8 @@ function action_EVENT_GADGET_STATE_CHANGE_150028(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_05_True", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -244,7 +244,7 @@ function condition_EVENT_LEAVE_REGION_150029(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199001150, 150027) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -254,8 +254,8 @@ function action_EVENT_LEAVE_REGION_150029(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 150027, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -264,7 +264,7 @@ function condition_EVENT_LEAVE_REGION_150030(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199001150, 150026) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -274,8 +274,8 @@ function action_EVENT_LEAVE_REGION_150030(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 150026, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -285,7 +285,7 @@ function condition_EVENT_GROUP_LOAD_150037(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mark2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -296,20 +296,20 @@ function action_EVENT_GROUP_LOAD_150037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 150018) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 150043 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -319,7 +319,7 @@ function condition_EVENT_GROUP_LOAD_150038(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mark2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -329,8 +329,8 @@ function action_EVENT_GROUP_LOAD_150038(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 150025, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -340,7 +340,7 @@ function condition_EVENT_QUEST_START_150039(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mark2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -351,7 +351,7 @@ function action_EVENT_QUEST_START_150039(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -361,7 +361,7 @@ function condition_EVENT_GROUP_LOAD_150040(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "mark2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -372,7 +372,7 @@ function action_EVENT_GROUP_LOAD_150040(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -381,7 +381,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_150048(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199001150, 150045) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -393,8 +393,8 @@ function action_EVENT_GADGET_STATE_CHANGE_150048(context, evt)
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_05_True", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -403,7 +403,7 @@ function condition_EVENT_LEAVE_REGION_150049(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199001150, 150045) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -413,8 +413,8 @@ function action_EVENT_LEAVE_REGION_150049(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 150045, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -423,7 +423,7 @@ function condition_EVENT_ANY_GADGET_DIE_150052(context, evt)
 	if 150050 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -434,20 +434,20 @@ function action_EVENT_ANY_GADGET_DIE_150052(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 150018) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 150043 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -456,7 +456,7 @@ function condition_EVENT_ANY_GADGET_DIE_150055(context, evt)
 	if 150014 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -467,37 +467,37 @@ function action_EVENT_ANY_GADGET_DIE_150055(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199001150, 4)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 150041 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_150056(context, evt)
 	-- 判断是gadgetid 为 150018的移动平台，是否到达了900100021 的路线中的 0 点
-
+	
 	if 150018 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 900100021 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 0 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -508,21 +508,21 @@ function action_EVENT_PLATFORM_REACH_POINT_150056(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 150025 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 150025, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
 		local pos = {x=215, y=196, z=158}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "YinLvDao_Tone_05_True", play_type= 1, is_broadcast = true }) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_soundplay")
 					return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -535,7 +535,7 @@ function action_EVENT_LEVEL_TAG_CHANGE_150057(context, evt)
 			ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=2})
 		end
 	end
-
+	
 	return 0
 end
 
@@ -548,6 +548,6 @@ function action_EVENT_GROUP_LOAD_150058(context, evt)
 			ScriptLib.RefreshGroup(context, {group_id=0, refresh_level_revise=0, exclude_prev=false, is_force_random_suite=false, suite=2})
 		end
 	end
-
+	
 	return 0
 end

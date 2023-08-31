@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304042
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -96,14 +96,14 @@ function action_EVENT_QUEST_FINISH_42001(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 42005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -114,17 +114,17 @@ function action_EVENT_LUA_NOTIFY_42002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 33040102 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 33040102) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 创建标识为"close"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "close", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -134,12 +134,12 @@ function condition_EVENT_GROUP_LOAD_42003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"notify"为1
 	if ScriptLib.GetGroupVariableValue(context, "notify") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -150,7 +150,7 @@ function action_EVENT_GROUP_LOAD_42003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -159,7 +159,7 @@ function condition_EVENT_TIME_AXIS_PASS_42006(context, evt)
 	if "close" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -170,7 +170,7 @@ function action_EVENT_TIME_AXIS_PASS_42006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -180,8 +180,8 @@ function action_EVENT_QUEST_START_42007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 42005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -194,6 +194,6 @@ end
 -- 触发操作
 function action_EVENT_LUA_NOTIFY_42010(context, evt)
 	    ScriptLib.ClearPlayerEyePoint(context, 42008)
-
+	
 	return 0
 end

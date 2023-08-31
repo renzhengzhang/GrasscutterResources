@@ -5,11 +5,11 @@
 ||	owner: 		weiwei.sun
 ||	description: 	3.2奇趣秘园 局内逻辑 水上漂
 ||	LogName:	## [CharAmuse_RunOnWater]
-||	Protection:
+||	Protection:	
 =======================================]]
 --[[
 
-defs = {
+local defs = {
 
 	-----全玩法通用配置-----
 
@@ -20,19 +20,19 @@ defs = {
 	limit_time = 120,
 	target = 15,
 
-
+	
 	-----水上漂配置-----
 
 	reminder = 400171,
-
+	
 	--波次轮替时，不被移除的suite
 	ignore_on_clear = {},
 
     -- 如果是早柚的关卡，用这套
-    Sayu =
+    Sayu = 
     {
         -- 史莱姆 buff 所在的suite
-        add_suite ={10,11},
+        add_suite ={10,11}, 
         -- 每波金币刷出来之后，多少秒后会rmd
         rmd_time = 25,
         -- 每波金币刷出来之后，多少秒后会刷掉
@@ -65,7 +65,7 @@ defs = {
                 {
                 },
             },
-        },
+        }, 
     },
 
     -- 如果是神里的关卡，用这套
@@ -79,7 +79,7 @@ local cfg = {
 
 	--主控GroupID
 	main_group = 251008007,
-	gallery_match =
+	gallery_match = 
 	{
 		--[1000] = defs.Jean,
 		[28005] = defs.Sayu,
@@ -152,7 +152,7 @@ function action_AirWallVariable_Change(context, evt)
 	elseif 0 == evt.param1 and 1 == evt.param2 then
 		for i,v in ipairs(defs.air_wall) do
 			ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, v)
-		end
+		end	
 	end
 	return 0
 end
@@ -166,11 +166,11 @@ function action_Gallery_Stop(context, evt)
 	for k,v in pairs(char_type.add_suite) do
 		ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, v)
 	end
-
+	
 	ScriptLib.EndAllTimeAxis(context)
 
 	if 3 ~= evt.param3 then
-		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
+		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)	
 		--ScriptLib.InitTimeAxis(context, "StopGallery_Fail", { 3 } , false) 9.21修改 失败不要延时结束
 		ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {1, base_info.group_id})
 	else
@@ -179,7 +179,7 @@ function action_Gallery_Stop(context, evt)
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
 			ScriptLib.InitTimeAxis(context, "StopGallery", { 3 } , false)
-		end
+		end	
 	end
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_RunOnWater] Gallery stoped. reason@".. evt.param3.." --------------")
 
@@ -188,7 +188,7 @@ end
 
 ---------------------------------------------------------------------------------------------------------------
 function LF_Start_Play(context)
-
+	
 	ScriptLib.SetGroupTempValue(context, "coin_num", 0, {})
 	ScriptLib.SetGroupTempValue(context, "round", 0, {})
 	ScriptLib.SetGroupTempValue(context, "index", 0, {})--这个用于使最后一波循环时，timeaxis名称不同
@@ -204,7 +204,7 @@ function LF_Start_Play(context)
 	end
 	ScriptLib.SetGroupTempValue(context, "cur_score", target, {})
 	ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["max_score"]= target} )
-
+	
 	local rand_length = 1
 	local char_type = LF_GetRunOnWaterCharType(context)
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_RunOnWater] LF_Start_Play. player_count@"..player_count)
@@ -241,11 +241,11 @@ function SLC_CharAmusement_CoinGet(context, param1)
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, config_id)
 		ScriptLib.ChangeGroupTempValue(context, "cur_score", -1, {})
 		ScriptLib.ChangeGroupTempValue(context, "coin_num", -1, {})
-
+		
 		ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["add_score"]= 1} )
 		ScriptLib.CharAmusementUpdateScore(context, cfg.main_group, 1, 1)--给MultStage更新分数 服务器侧埋点用
 
-	elseif 2 == param1 then
+	elseif 2 == param1 then 
 		local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, config_id)
 		if nil ~= defs.super_coin and 1 <= defs.super_coin then
@@ -269,7 +269,7 @@ function SLC_CharAmusement_CoinGet(context, param1)
 
 	local coin_num = ScriptLib.GetGroupTempValue(context, "coin_num", {})
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_RunOnWater] SLC_CharAmusement_CoinGet. param1@"..param1.." coin_num@"..coin_num)
-	if 0 >= coin_num then
+	if 0 >= coin_num then 
 		--ScriptLib.EndAllTimeAxis(context)
 		--局内不能用EndAll 因为会停掉超界检测
 		local round = ScriptLib.GetGroupTempValue(context, "round", {})
@@ -304,7 +304,7 @@ function LF_ClearRound(context)
 	end
 
 
-	for i = 3, #suites do
+	for i = 3, #suites do 
 		--史莱姆、体力球suite不移除
 		if nil ~= defs.ignore_on_clear then
 			if false == LF_CheckIsInTable(context, i, defs.ignore_on_clear) then
@@ -316,7 +316,7 @@ function LF_ClearRound(context)
 	return 0
 end
 
-
+ 
 function LF_StartRound(context, rand_index)
 
 	local char_type = LF_GetRunOnWaterCharType(context)
@@ -327,7 +327,7 @@ function LF_StartRound(context, rand_index)
 	else
 		coin_list = char_type.coin_list["SP"]
 	end
-
+	
 	ScriptLib.SetGroupTempValue(context, "coin_num", 0, {})--个数 记录金币吃完用
 	ScriptLib.SetGroupTempValue(context, "score_total", 0, {})--分数 埋点用
 	if nil == coin_list then
@@ -345,7 +345,7 @@ function LF_StartRound(context, rand_index)
 	--如果已经到了LD配置尽头，则循环最后一波
 	if round > #coin_list[rand_index] then
 		round = #coin_list[rand_index]
-		ScriptLib.SetGroupTempValue(context, "round", round, {})
+		ScriptLib.SetGroupTempValue(context, "round", round, {}) 
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_RunOnWater] LF_StartRound. All round finished. Set to final.")
 	end
 
@@ -372,7 +372,7 @@ function LF_StartRound(context, rand_index)
 	if 1 < round then
 		ScriptLib.ShowReminder(context, 470310104)
 	end
-
+	
 	--创建其他物件
 	for k,v in pairs(coin_list[rand_index][round].other) do
 		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v)

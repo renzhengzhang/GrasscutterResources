@@ -1,5 +1,5 @@
 --[[
-defs = {
+local defs = {
 	gallery_id = 1,
 	gadget_entry = 1,
 	balloon_clear_state = 202,
@@ -68,7 +68,7 @@ function action_time_axis_pass(context, evt)
 		LF_CLEAR_CUR_RANDOM_BALLOON(context, evt.param1)
 	elseif evt.source_name == "static_clear" then
 		LF_CLEAR_CUR_STATIC_BALLOON(context, evt.param1)
-	end
+	end	
 	return 0
 end
 
@@ -136,14 +136,14 @@ function LF_CREATE_NEXT_STATIC_BALLOON(context, wave)
 	if wave == 0 then
 		balloons = suites[defs.static_start_suite].gadgets
 		ScriptLib.AddExtraGroupSuite(context, 0, defs.static_start_suite)
-	else
+	else 
 		balloons = suites[defs.static_suite_list[wave]].gadgets
 		--防止策划配错，强制移除
 		ScriptLib.RemoveExtraGroupSuite(context, 0, defs.static_suite_list[wave])
 		ScriptLib.AddExtraGroupSuite(context, 0, defs.static_suite_list[wave])
 	end
 	ScriptLib.PrintContextLog(context, "## balloon_log : #balloons="..#balloons)
-
+	
 	--调整蛋道
 	for i,v in ipairs(balloons) do
 		if  point_array_defs[v] ~= nil then

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133213110
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -128,9 +128,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -138,7 +138,7 @@ function condition_EVENT_GADGET_CREATE_110010(context, evt)
 	if 110007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -149,7 +149,7 @@ function action_EVENT_GADGET_CREATE_110010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -157,14 +157,14 @@ end
 function condition_EVENT_SELECT_OPTION_110011(context, evt)
 	-- 判断是gadgetid 110007 option_id 85
 	if 110007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 85 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -175,27 +175,27 @@ function action_EVENT_SELECT_OPTION_110011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133213110 ；指定config：110007；物件身上指定option：171；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133213110, 110007, 171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 110007 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 110001 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -204,7 +204,7 @@ function condition_EVENT_GADGET_CREATE_110012(context, evt)
 	if 110008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -215,7 +215,7 @@ function action_EVENT_GADGET_CREATE_110012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -223,14 +223,14 @@ end
 function condition_EVENT_SELECT_OPTION_110013(context, evt)
 	-- 判断是gadgetid 110008 option_id 85
 	if 110008 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 85 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -241,27 +241,27 @@ function action_EVENT_SELECT_OPTION_110013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133213110 ；指定config：110008；物件身上指定option：171；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133213110, 110008, 171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 110008 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 110002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -270,7 +270,7 @@ function condition_EVENT_GADGET_CREATE_110014(context, evt)
 	if 110009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -281,7 +281,7 @@ function action_EVENT_GADGET_CREATE_110014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -289,14 +289,14 @@ end
 function condition_EVENT_SELECT_OPTION_110015(context, evt)
 	-- 判断是gadgetid 110009 option_id 85
 	if 110009 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 85 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -307,39 +307,39 @@ function action_EVENT_SELECT_OPTION_110015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133213110 ；指定config：110009；物件身上指定option：171；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133213110, 110009, 171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 110009 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 110003 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_110026(context, evt)
 	if evt.param1 ~= 110026 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -347,6 +347,6 @@ end
 function action_EVENT_ENTER_REGION_110026(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213110, 4)
-
+	
 	return 0
 end

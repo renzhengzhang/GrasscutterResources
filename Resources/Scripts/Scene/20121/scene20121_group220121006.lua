@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220121006
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -75,9 +75,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -88,9 +88,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -151,20 +151,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_6004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"_stage1_monster"为5
 	if ScriptLib.GetGroupVariableValue(context, "_stage1_monster") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -172,7 +172,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_6004(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220121006, 3)
-
+	
 	return 0
 end
 
@@ -183,31 +183,31 @@ function action_EVENT_QUEST_FINISH_6012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220121002, suite = 6 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220121007, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220121011, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220121012, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -215,25 +215,25 @@ end
 function action_EVENT_ENTER_REGION_6013(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220121006, 2)
-
+	
 	-- 创建标识为"_wave_tick"，时间节点为{4}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "_wave_tick", {4}, true)
-
-
+	
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=-35,y=-258,z=-30}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 500660110, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=-35,y=-258,z=-30}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400121, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -244,19 +244,19 @@ function action_EVENT_ANY_MONSTER_DIE_6014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_6015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"_stage1_monster"为11
 	if ScriptLib.GetGroupVariableValue(context, "_stage1_monster") ~= 11 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -266,8 +266,8 @@ function action_EVENT_VARIABLE_CHANGE_6015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6010, GadgetState.ChestOpened) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -276,7 +276,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_6016(context, evt)
 	if 6010 ~= evt.param2 or GadgetState.ChestLocked ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -284,7 +284,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_6016(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220121006, 6)
-
+	
 	return 0
 end
 
@@ -293,7 +293,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_6017(context, evt)
 	if 6010 ~= evt.param2 or GadgetState.ChestTrap ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -301,11 +301,11 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_6017(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220121006, 3)
-
+	
 	-- 创建标识为"_thunder_tick"，时间节点为{5}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "_thunder_tick", {5}, true)
-
-
+	
+	
 	return 0
 end
 
@@ -314,7 +314,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_6018(context, evt)
 	if 6010 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -322,11 +322,11 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_6018(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220121006, 4)
-
+	
 	-- 创建标识为"_wave_tick"，时间节点为{8}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "_wave_tick", {8}, true)
-
-
+	
+	
 	return 0
 end
 
@@ -335,7 +335,7 @@ function condition_EVENT_GADGET_CREATE_6019(context, evt)
 	if 6010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -351,8 +351,8 @@ function action_EVENT_TIME_AXIS_PASS_6021(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -361,7 +361,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_6022(context, evt)
 	if 6010 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -373,25 +373,25 @@ function action_EVENT_GADGET_STATE_CHANGE_6022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=-35.61409,y=-259.57,z=-29.9867}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400122, pos, 100) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6023(context, evt)
 	if evt.param1 ~= 6023 then return false end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 220121006, 6010) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -403,7 +403,7 @@ function action_EVENT_ENTER_REGION_6023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -412,7 +412,7 @@ function condition_EVENT_ANY_GADGET_DIE_6026(context, evt)
 	if 6010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -423,12 +423,12 @@ function action_EVENT_ANY_GADGET_DIE_6026(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220121006, EntityType.GADGET, 6020 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end

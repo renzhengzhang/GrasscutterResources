@@ -1,6 +1,6 @@
 --2.0奥博伦派对玩法
 
---defs = {
+--local defs = {
 --	group_id = 111101122 ,
 --    tamari_gadget_id = defs.temari_gadget_id,
 --    host_option_id = 184,
@@ -33,7 +33,7 @@ local Tri2 = {
 	[4] = { name = "select_option", config_id = 8000006, event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_select_option", trigger_count = 0, forbid_guest = false  },
 	[5] = { name = "group_refresh", config_id = 8000007, event = EventType.EVENT_GROUP_REFRESH, source = "", condition = "", action = "action_group_refresh", trigger_count = 0},
     [6] = { name = "gadget_create", config_id = 8000008, event = EventType.EVENT_GADGET_CREATE, source = "", condition = "", action = "action_gadget_create", trigger_count = 0},
-
+    
 }
 
 function Initialize()
@@ -45,13 +45,13 @@ function Initialize()
 		table.insert(triggers, v)
 		table.insert(suites[2].triggers, v.name)
 	end
-
+    
     table.insert(chests,defs.chest_1)
     table.insert(chests,defs.chest_2)
     table.insert(chests,defs.chest_3)
     --table.insert(chests,defs.chest_online)
     table.insert(temari_gadgets,defs.temari_1)
-    table.insert(temari_gadgets,defs.temari_2)
+    table.insert(temari_gadgets,defs.temari_2) 
     table.insert(temari_gadgets,defs.temari_3)
     table.insert(temari_gadgets,defs.temari_online)
 
@@ -72,7 +72,7 @@ end
 function action_group_load(context,evt)
     ScriptLib.PrintContextLog(context,"TMR: Group Load!")
     LF_Initiate_Play(context)
-
+    
     return 0
 end
 
@@ -102,7 +102,7 @@ function action_gadget_create(context,evt)
     if (evt.param1 == defs.temari_gadget_id) then
         LF_Set_Gadget_Option(context)
     end
-    return 0
+    return 0 
 end
 
 function action_quest_finish(context,evt)
@@ -116,10 +116,10 @@ end
 --选择了选项，根据当前主客机，触发不同的挑战（联机挑战）
 function action_select_option(context,evt)
     --试图开启主机藏球挑战
-    if evt.param2 == tempDefs.host_option then
+    if evt.param2 == tempDefs.host_option then 
         --藏球挑战
         if LF_Is_Host(context) then
-            if LF_Get_Challenge_State(context) == 10 or LF_Get_Challenge_State(context) == 12 then
+            if LF_Get_Challenge_State(context) == 10 or LF_Get_Challenge_State(context) == 12 then 
                 --仅在联机玩法初始化以及主机已完成藏球的情况下，可以开启藏球挑战
                 ScriptLib.PrintContextLog(context,"TMR: !!!!!!!!!!!!Hide ball challenge starts!!!!!!!")
                 LF_Load_Online_Level(context,1)
@@ -167,7 +167,7 @@ function action_select_option(context,evt)
             ScriptLib.PrintContextLog(context,"TMR: CHALLENGE FAILS!!!! Cannot start duplicated challenges!!!")
         end
     end
-
+    
     return 0
 end
 
@@ -176,7 +176,7 @@ end
 function action_challenge_fail(context,evt)
 
     if LF_Get_Play_Phase(context) == 1 then
-        if evt.param1 == tempDefs.find_ball_challenge_offline then
+        if evt.param1 == tempDefs.find_ball_challenge_offline then 
             ScriptLib.PrintContextLog(context,"TMR: Offline Challenge fails!")
             LF_Stop_Temari_Gallery(context)
             LF_Update_Quest_State(context,false)
@@ -206,7 +206,7 @@ function action_challenge_fail(context,evt)
             --移除掉联机用的关卡布设
             LF_Online_Hide_Level(context)
             LF_Set_Gadget_Option(context)
-            LF_Stop_Temari_Gallery(context)
+            LF_Stop_Temari_Gallery(context) 
         end
     end
 
@@ -216,13 +216,13 @@ end
 
 --分别处理单机玩法和联机玩法挑战成功的情况
 function action_challenge_success(context,evt)
-
+    
     ScriptLib.PrintContextLog(context,"TMR: Some challenge has been finished!!!")
     if LF_Get_Play_Phase(context) == 1 then
-        if evt.param1 == tempDefs.find_ball_challenge_offline then
+        if evt.param1 == tempDefs.find_ball_challenge_offline then  
             ScriptLib.PrintContextLog(context,"TMR: Offline Challenge success!")
             LF_Stop_Temari_Gallery(context)
-            LF_Update_Quest_State(context,true)
+            LF_Update_Quest_State(context,true)  
             --创建一个单机找球挑战宝箱，仅单机挑战的最后一关给一个宝箱
             if (LF_Get_OfflineChallenge_Level(context)-2 == 3) then
                 ScriptLib.CreateGadget(context,{config_id=chests[LF_Get_OfflineChallenge_Level(context)-2]})
@@ -247,10 +247,10 @@ function action_challenge_success(context,evt)
             --移除掉联机用的关卡布设
             LF_Online_Hide_Level(context)
             LF_Set_Gadget_Option(context)
-            LF_Stop_Temari_Gallery(context)
+            LF_Stop_Temari_Gallery(context) 
         end
     end
-
+    
     return 0
 end
 
@@ -291,7 +291,7 @@ function LF_Load_Next_Level(context)
 end
 
 --初始化联机玩法
-function LF_Initiate_Online_Challenge(context)
+function LF_Initiate_Online_Challenge(context)  
     --把交互用的奥博伦球创建出来
     ScriptLib.CreateGadget(context,{config_id = defs.temari_gadget_id})
     --给奥博伦交互球设置选项
@@ -318,7 +318,7 @@ end
 
 --重置整个group的方法，将group还原至最初的状态
 function LF_Reset_Group(context)
-    if LF_Get_Play_Phase(context) == 1 then
+    if LF_Get_Play_Phase(context) == 1 then 
         LF_Set_OfflineChallenge_Level(context,2)
         LF_Set_Challenge_State(context,0)
     else
@@ -337,10 +337,10 @@ end
 --target:0：单机找球；1：联机藏球；2：联机找球
 function LF_Start_Challenge(context,target)
     if LF_Get_Play_Phase(context) == 1 then
-        --要求开启挑战，因为是单机的，直接开就可以了
+        --要求开启挑战，因为是单机的，直接开就可以了   
         ScriptLib.ActiveChallenge(context,tempDefs.find_ball_challenge_offline,tempDefs.find_ball_challenge_offline,tempDefs.challenge_time, 0, tempDefs.find_ball_challenge_offline, 1)
         LF_Start_Temari_Gallery(context)
-
+        
     else
         if (target == 2) then
             local ret = LF_Start_Temari_Gallery(context)
@@ -365,7 +365,7 @@ function LF_Start_Challenge(context,target)
         ScriptLib.CreateFatherChallenge(context, father_challenge, father_challenge, tempDefs.challenge_time, {success=2, fail=1})
         ScriptLib.AttachChildChallenge(context, father_challenge, challenge, challenge, child_challenge_param_table, {context.uid},{success=1, fail=1})
         ScriptLib.StartFatherChallenge(context,father_challenge)
-
+        
     end
     return 0
 end
@@ -377,15 +377,15 @@ function LF_Stop_Challenge(context,target,result)
 
     if LF_Get_Play_Phase(context) == 1 then
         --单机的直接关掉即可
-
+        
         ScriptLib.PrintContextLog(context,"TMR: Stop offline challenge here!!!")
         ScriptLib.StopChallenge(context,tempDefs.find_ball_challenge_offline,result)
     else
-        if (target == 1) then
+        if (target == 1) then 
             --结束联机藏球挑战
             ScriptLib.PrintContextLog(context,"TMR: Stop hide ball challenge with result: "..result)
             ScriptLib.StopChallenge(context,tempDefs.father_hide_ball_challenge,result)
-        elseif (target == 2) then
+        elseif (target == 2) then 
             --结束联机找球挑战
             ScriptLib.PrintContextLog(context,"TMR: Stop find ball challenge with result: "..result)
             ScriptLib.StopChallenge(context,tempDefs.father_find_ball_challenge,result)
@@ -418,14 +418,14 @@ function LF_Update_Quest_State(context, questState)
     local quest_suffix = "01"
     if (questState) then
         quest_suffix = "01"
-    else
+    else 
         quest_suffix = "02"
     end
     local quest_param = defs.group_id.."0"..quest_level..quest_suffix
     local ret = ScriptLib.AddQuestProgress(context,quest_param)
 
     ScriptLib.PrintContextLog(context,"TMR: quest param is "..quest_param)
-
+    
     ScriptLib.PrintContextLog(context,"TMR: The result of Adding quest progress is "..ret)
 
     --不论挑战是否胜利，都要移除掉当前加载的关卡
@@ -458,9 +458,9 @@ function LF_Teleport_Player(context)
     ScriptLib.PrintContextLog(context,"TMR: Current host player is :"..uidlist[1])
     ScriptLib.PrintContextLog(context,"TMR: The context uid is: "..context.uid)
     if (LF_Is_Host(context)) then
-         ScriptLib.TransPlayerToPos(context, {uid_list = {uidlist[1]}, pos = {x=temari_pos.x,y=temari_pos.y,z=temari_pos.z}, radius = 1, rot = {x=0, y=0, z=1},is_skip_ui=false} )
+         ScriptLib.TransPlayerToPos(context, {uid_list = {uidlist[1]}, pos = {x=temari_pos.x,y=temari_pos.y,z=temari_pos.z}, radius = 1, rot = {x=0, y=0, z=1},is_skip_ui=false} )    
     else
-        ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=temari_pos.x,y=temari_pos.y,z=temari_pos.z}, radius = 1, rot = {x=0, y=0, z=1},is_skip_ui=false} )
+        ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=temari_pos.x,y=temari_pos.y,z=temari_pos.z}, radius = 1, rot = {x=0, y=0, z=1},is_skip_ui=false} )    
     end
 end
 
@@ -553,7 +553,7 @@ end
 
 --返回当前关卡的手鞠球位置
 function LF_Get_Temari_Pos(context)
-    if (LF_Get_Play_Phase(context) == 1) then
+    if (LF_Get_Play_Phase(context) == 1) then 
         --一阶段获取手鞠球的位置
         local curLevel = LF_Get_OfflineChallenge_Level(context)
         local temari_entity_id = ScriptLib.GetEntityIdByConfigId(context,temari_gadgets[curLevel-2])
@@ -572,7 +572,7 @@ end
 --存储联机玩法中当前球的位置
 function LF_Save_Online_Temari_Pos(context)
     local pos = LF_Get_Temari_Pos(context)
-
+    
     ScriptLib.PrintContextLog(context,"TMR: Save Temari pos: "..pos.x..","..pos.y..","..pos.z)
     local ret = ScriptLib.SetGroupVariableValue(context,"pos_x",math.floor(pos.x))
     ScriptLib.SetGroupVariableValue(context,"pos_y",math.ceil(pos.y))

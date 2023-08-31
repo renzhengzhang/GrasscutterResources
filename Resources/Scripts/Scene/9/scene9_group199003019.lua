@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003019
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -39,9 +39,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -70,9 +70,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -80,7 +80,7 @@ function condition_EVENT_ANY_GADGET_DIE_19002(context, evt)
 	if 19003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -88,18 +88,18 @@ end
 function action_EVENT_ANY_GADGET_DIE_19002(context, evt)
 	 ScriptLib.CreateGadget(context, { config_id = 19001 })
 	ScriptLib.SetGroupVariableValue(context, "destroy", 1)
-
+	
 	if ScriptLib.GetHostQuestState(context,7902001)==3 then
-
-	ScriptLib.ShowReminder(context, 1111232)
-
+	
+	ScriptLib.ShowReminder(context, 1111232) 
+	
 	end
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "weather", 3, 199003100)
 	ScriptLib.SetWeatherAreaState(context, 9005, 1)
 	ScriptLib.SetWeatherAreaState(context, 9006, 0)
 	ScriptLib.SetWeatherAreaState(context, 9007, 0)
-
+	
 	return 0
 end
 
@@ -109,7 +109,7 @@ function condition_EVENT_GROUP_LOAD_19004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "destroy") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -120,6 +120,6 @@ function action_EVENT_GROUP_LOAD_19004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

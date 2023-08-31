@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210469
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -87,31 +87,31 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_469001(context, evt)
 	if evt.param1 ~= 469001 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"StatueCount"不为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "StatueCount", 133210391) == 3 then
 			return false
 	end
-
-
+	
+	
 	-- 判断变量"reminder"为0
 	if ScriptLib.GetGroupVariableValue(context, "reminder") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -122,36 +122,36 @@ function action_EVENT_ENTER_REGION_469001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "reminder" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "reminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_469002(context, evt)
 	if evt.param1 ~= 469002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"StatueCount"不为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "StatueCount", 133210391) == 3 then
 			return false
 	end
-
-
+	
+	
 	-- 判断变量"reminder"为0
 	if ScriptLib.GetGroupVariableValue(context, "reminder") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -162,36 +162,36 @@ function action_EVENT_ENTER_REGION_469002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "reminder" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "reminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_469003(context, evt)
 	if evt.param1 ~= 469003 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"StatueCount"不为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "StatueCount", 133210391) == 3 then
 			return false
 	end
-
-
+	
+	
 	-- 判断变量"reminder"为0
 	if ScriptLib.GetGroupVariableValue(context, "reminder") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -202,36 +202,36 @@ function action_EVENT_ENTER_REGION_469003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "reminder" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "reminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_469004(context, evt)
 	if evt.param1 ~= 469004 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"StatueCount"不为3
 	if ScriptLib.GetGroupVariableValueByGroup(context, "StatueCount", 133210391) == 3 then
 			return false
 	end
-
+	
 	-- 判断变量"reminder"为0
 	if ScriptLib.GetGroupVariableValue(context, "reminder") ~= 0 then
 			return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -242,25 +242,25 @@ function action_EVENT_ENTER_REGION_469004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "reminder" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "reminder", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_469005(context, evt)
 	if evt.param1 ~= 469005 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -271,7 +271,7 @@ function action_EVENT_ENTER_REGION_469005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -290,6 +290,6 @@ function action_EVENT_TIME_AXIS_PASS_469006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

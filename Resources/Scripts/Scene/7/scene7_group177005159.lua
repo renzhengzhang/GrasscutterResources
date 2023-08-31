@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 177005159
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	duration = 240,
 	kill_sum = 4,
 	group_id = 177005159,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -112,9 +112,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -122,7 +122,7 @@ function condition_EVENT_GADGET_CREATE_159008(context, evt)
 	if 159006 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -133,13 +133,13 @@ function action_EVENT_GADGET_CREATE_159008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasFinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -147,14 +147,14 @@ end
 function condition_EVENT_SELECT_OPTION_159009(context, evt)
 	-- 判断是gadgetid 159006 option_id 177
 	if 159006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 177 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -164,22 +164,22 @@ function action_EVENT_SELECT_OPTION_159009(context, evt)
 	if 0 ~= ScriptLib.ActiveChallenge(context, 180, 180, defs.duration, defs.group_id, defs.kill_sum, 0) then
 	return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
-
+	
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, defs.group_id, defs.gadget_controller_id, 177) then
 	return -1
 	end
-
-
+		
+	
 	-- 将configid为 2002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 159006, GadgetState.GearStart) then
 	return -1
-	end
-
+	end 
+	
 	return 0
-
+	
 end
 
 -- 触发操作
@@ -189,19 +189,19 @@ function action_EVENT_CHALLENGE_SUCCESS_159010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 159006 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 159006, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为159005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 159005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -211,14 +211,14 @@ function action_EVENT_CHALLENGE_FAIL_159011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 159006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177005159, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177005159, 3)
-
+	
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_ANY_MONSTER_DIE_159013(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -236,7 +236,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_159013(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 177005159, 3)
-
+	
 	return 0
 end
 
@@ -246,7 +246,7 @@ function condition_EVENT_GROUP_LOAD_159014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "hasFinished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -256,14 +256,14 @@ function action_EVENT_GROUP_LOAD_159014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 159006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177005159, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 177005159, 3)
-
+	
 	return 0
 end
 
@@ -272,7 +272,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_159015(context, evt)
 	if 159006 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -283,12 +283,12 @@ function action_EVENT_GADGET_STATE_CHANGE_159015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasFinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

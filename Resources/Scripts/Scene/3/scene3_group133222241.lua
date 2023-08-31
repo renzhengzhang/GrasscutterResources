@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133222241
 }
 
@@ -8,9 +8,9 @@ local connection = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -86,9 +86,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -96,24 +96,24 @@ function condition_EVENT_GADGET_STATE_CHANGE_241006(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133222241, 241001) then
 		return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133222241, 241002) then
 		return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133222241, 241003) then
 		return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133222241, 241004) then
 		return false
 	end
-
+	
 	-- 判断变量"Finish"为0
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -124,7 +124,7 @@ function action_EVENT_GADGET_STATE_CHANGE_241006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -133,24 +133,24 @@ function condition_EVENT_GADGET_STATE_CHANGE_241007(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133222241, 241001) then
 		return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133222241, 241002) then
 		return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133222241, 241003) then
 		return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133222241, 241004) then
 		return false
 	end
-
+	
 	-- 判断变量"Finish"为0
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -160,30 +160,30 @@ function action_EVENT_GADGET_STATE_CHANGE_241007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 241005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "IsFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "IsFinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为33 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 33, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"CutScene"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "CutScene", {2}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_GROUP_LOAD_241008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_GROUP_LOAD_241008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -213,7 +213,7 @@ function condition_EVENT_TIME_AXIS_PASS_241009(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -233,7 +233,7 @@ function condition_EVENT_GROUP_LOAD_241011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 

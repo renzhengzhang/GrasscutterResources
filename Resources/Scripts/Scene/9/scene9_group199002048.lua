@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002048
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -86,9 +86,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -97,7 +97,7 @@ function condition_EVENT_GROUP_LOAD_48001(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "CrowAnorld1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -105,29 +105,29 @@ end
 function action_EVENT_GROUP_LOAD_48001(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002048, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_48002(context, evt)
 	if evt.param1 ~= 48002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"CrowAnorld"为1
 	if ScriptLib.GetGroupVariableValue(context, "CrowAnorld") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"camera"为0
 	if ScriptLib.GetGroupVariableValue(context, "camera") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -138,13 +138,13 @@ function action_EVENT_ENTER_REGION_48002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 1111287 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1111287) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（388.4551，122.1666，-437.0644），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=388.4551, y=122.1666, z=-437.0644}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -153,8 +153,8 @@ function action_EVENT_ENTER_REGION_48002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -164,12 +164,12 @@ function condition_EVENT_GADGETTALK_DONE_48003(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "play_state", 199002043) ~= 2 then
 			return false
 	end
-
+	
 	-- 判断变量"cur_stage"为4
 	if ScriptLib.GetGroupVariableValueByGroup(context, "cur_stage", 199002043) ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -180,13 +180,13 @@ function action_EVENT_GADGETTALK_DONE_48003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199002048, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -197,12 +197,12 @@ function action_EVENT_QUEST_START_48005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "create43005" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "create43005", 1, 199002043) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end

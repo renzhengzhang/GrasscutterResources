@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303490
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	enter_region = 490012,
 	leave_region = 490013,
 	FindClue = 1,
@@ -15,9 +15,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -125,9 +125,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -218,12 +218,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_490011(context, evt)
 	if evt.param1 ~= 490011 then return false end
-
+	
 	-- 判断是区域490011
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 490011 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -231,37 +231,37 @@ end
 function action_EVENT_ENTER_REGION_490011(context, evt)
 	-- 变量"PuzzleProgress"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "PuzzleProgress", 0)
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303490, 2)
-
+	
 	-- 针对当前group内变量名为 "FindClue" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "FindClue", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 600155 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 600155) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303490, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_490015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"PuzzleProgress"为4
 	if ScriptLib.GetGroupVariableValue(context, "PuzzleProgress") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -269,19 +269,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_490015(context, evt)
 	-- 变量"FindRock"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "FindRock", 0)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133303490, 2)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303490, 3)
-
+	
 	-- 调用提示id为 600156 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 600156) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -290,7 +290,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_490016(context, evt)
 	if 490005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -301,7 +301,7 @@ function action_EVENT_GADGET_STATE_CHANGE_490016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

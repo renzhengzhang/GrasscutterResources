@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101291
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -107,9 +107,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -117,7 +117,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_291004(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 111101245, 245012) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -127,8 +127,8 @@ function action_EVENT_GADGET_STATE_CHANGE_291004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 291001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -137,7 +137,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_291005(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 111101287, 287023) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -147,8 +147,8 @@ function action_EVENT_GADGET_STATE_CHANGE_291005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 291002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_291006(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 111101290, 290006) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -167,8 +167,8 @@ function action_EVENT_GADGET_STATE_CHANGE_291006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 291003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_291007(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 111101291, 291001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,7 +188,7 @@ function action_EVENT_GADGET_STATE_CHANGE_291007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_291008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 111101291, 291002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -208,7 +208,7 @@ function action_EVENT_GADGET_STATE_CHANGE_291008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_291009(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 111101291, 291003) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -228,19 +228,19 @@ function action_EVENT_GADGET_STATE_CHANGE_291009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_291010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"gears_count"为3
 	if ScriptLib.GetGroupVariableValue(context, "gears_count") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -248,7 +248,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_291010(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101291, 2)
-
+	
 	return 0
 end
 
@@ -258,8 +258,8 @@ function condition_EVENT_ANY_MONSTER_DIE_291022(context, evt)
 	if evt.param1 ~= 291020 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -270,17 +270,17 @@ function action_EVENT_ANY_MONSTER_DIE_291022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_291023(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 111101291) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -288,6 +288,6 @@ end
 function action_EVENT_ANY_MONSTER_DIE_291023(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101291, 3)
-
+	
 	return 0
 end

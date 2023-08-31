@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220139022
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -116,9 +116,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -129,9 +129,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -192,9 +192,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -203,7 +203,7 @@ function condition_EVENT_GROUP_LOAD_22002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "QuestFinish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -213,58 +213,58 @@ function action_EVENT_GROUP_LOAD_22002(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220139016, 16001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为22017的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 22017 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "eyefinish1" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eyefinish1", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "eyefinish2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eyefinish2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "eyefinish3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eyefinish3", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "duankou" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "duankou", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22021(context, evt)
 	-- 判断是gadgetid 为 22018的移动平台，是否到达了12 的点集中的 4 点
-
+	
 	if 22018 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 12 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -275,27 +275,27 @@ function action_EVENT_PLATFORM_ARRIVAL_22021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22022(context, evt)
 	-- 判断是gadgetid 为 22019的移动平台，是否到达了13 的点集中的 4 点
-
+	
 	if 22019 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 13 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -306,27 +306,27 @@ function action_EVENT_PLATFORM_ARRIVAL_22022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22023(context, evt)
 	-- 判断是gadgetid 为 22020的移动平台，是否到达了14 的点集中的 2 点
-
+	
 	if 22020 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 14 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -337,42 +337,42 @@ function action_EVENT_PLATFORM_ARRIVAL_22023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 22020 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22020, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "QuestFinish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "QuestFinish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220139022, suite = 5 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_22024(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"eyefinish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "eyefinish1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"duankou"为0
 	if ScriptLib.GetGroupVariableValue(context, "duankou") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -383,11 +383,11 @@ function action_EVENT_VARIABLE_CHANGE_22024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220139022, 2)
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -396,30 +396,30 @@ function action_EVENT_VARIABLE_CHANGE_22024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将configid为 22018 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22018, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_22025(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"eyefinish2"为1
 	if ScriptLib.GetGroupVariableValue(context, "eyefinish2") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"duankou"为1
 	if ScriptLib.GetGroupVariableValue(context, "duankou") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -430,11 +430,11 @@ function action_EVENT_VARIABLE_CHANGE_22025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220139022, 3)
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -443,35 +443,35 @@ function action_EVENT_VARIABLE_CHANGE_22025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将configid为 22019 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22019, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_22026(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"eyefinish3"为1
 	if ScriptLib.GetGroupVariableValue(context, "eyefinish3") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"duankou"为2
 	if ScriptLib.GetGroupVariableValue(context, "duankou") ~= 2 then
 			return false
 	end
-
+	
 	-- 判断变量"QuestFinish"为0
 	if ScriptLib.GetGroupVariableValue(context, "QuestFinish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -482,11 +482,11 @@ function action_EVENT_VARIABLE_CHANGE_22026(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220139022, 4)
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -495,33 +495,33 @@ function action_EVENT_VARIABLE_CHANGE_22026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将configid为 22020 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22027(context, evt)
 	-- 判断是gadgetid 为 22018的移动平台，是否到达了5 的点集中的 2 点
-
+	
 	if 22018 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 5 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -535,7 +535,7 @@ function action_EVENT_PLATFORM_ARRIVAL_22027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -544,27 +544,27 @@ function action_EVENT_PLATFORM_ARRIVAL_22027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22028(context, evt)
 	-- 判断是gadgetid 为 22019的移动平台，是否到达了6 的点集中的 3 点
-
+	
 	if 22019 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 6 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -578,7 +578,7 @@ function action_EVENT_PLATFORM_ARRIVAL_22028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -587,27 +587,27 @@ function action_EVENT_PLATFORM_ARRIVAL_22028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22029(context, evt)
 	-- 判断是gadgetid 为 22020的移动平台，是否到达了7 的点集中的 2 点
-
+	
 	if 22020 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 7 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -621,7 +621,7 @@ function action_EVENT_PLATFORM_ARRIVAL_22029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -630,7 +630,7 @@ function action_EVENT_PLATFORM_ARRIVAL_22029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -639,12 +639,12 @@ function condition_EVENT_GADGET_CREATE_22030(context, evt)
 	if 22017 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"FirstLeonMet"为1
 	if ScriptLib.GetGroupVariableValue(context, "FirstLeonMet") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -654,28 +654,28 @@ function action_EVENT_GADGET_CREATE_22030(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22031(context, evt)
 	-- 判断是gadgetid 为 22018的移动平台，是否到达了12 的点集中的 4 点
-
+	
 	if 22018 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 12 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -685,28 +685,28 @@ function action_EVENT_PLATFORM_ARRIVAL_22031(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220139017, 17001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_22032(context, evt)
 	-- 判断是gadgetid 为 22019的移动平台，是否到达了13 的点集中的 4 点
-
+	
 	if 22019 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 13 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -716,8 +716,8 @@ function action_EVENT_PLATFORM_ARRIVAL_22032(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220139018, 18001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -728,16 +728,16 @@ function action_EVENT_QUEST_FINISH_22033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 22017 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 22017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220139022, 4)
-
+	
 	return 0
 end
 
@@ -745,10 +745,10 @@ end
 function action_EVENT_GROUP_REFRESH_22041(context, evt)
 	if ScriptLib.GetHostQuestState(context,4007320) == 2 then
 		ScriptLib.RemoveExtraGroupSuite(context, 220139022, 4)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, 220139022, 6)
 	end
-
+	
 	return 0
 end
 
@@ -756,7 +756,7 @@ end
 function action_EVENT_QUEST_START_22042(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220139022, 6)
-
+	
 	return 0
 end
 
@@ -765,7 +765,7 @@ function action_EVENT_GROUP_LOAD_22043(context, evt)
 	if ScriptLib.GetHostQuestState(context,4007320) == 2 then
 		ScriptLib.AddExtraGroupSuite(context, 220139022, 6)
 	end
-
+	
 	return 0
 end
 
@@ -776,7 +776,7 @@ function action_EVENT_QUEST_FINISH_22044(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end

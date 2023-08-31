@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210511
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -73,20 +73,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_511001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Statue1"为1
 	if ScriptLib.GetGroupVariableValue(context, "Statue1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -100,20 +100,20 @@ function action_EVENT_VARIABLE_CHANGE_511001(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_511002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Statue2"为1
 	if ScriptLib.GetGroupVariableValue(context, "Statue2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -127,20 +127,20 @@ function action_EVENT_VARIABLE_CHANGE_511002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_511003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Statue3"为1
 	if ScriptLib.GetGroupVariableValue(context, "Statue3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -154,20 +154,20 @@ function action_EVENT_VARIABLE_CHANGE_511003(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_511004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Statue4"为1
 	if ScriptLib.GetGroupVariableValue(context, "Statue4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -181,7 +181,7 @@ function action_EVENT_VARIABLE_CHANGE_511004(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end

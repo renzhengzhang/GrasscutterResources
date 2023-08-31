@@ -5,10 +5,10 @@
 --||   Owner         ||    chao-jin
 --||   Description   ||    对应Gadget 70900431
 --||   LogName       ||    ##[DrumSingle]
---||   Protection    ||
+--||   Protection    ||    
 --======================================================================================================================
 --[[Defs & Miscs
-defs = {
+local defs = {
 	drum = 77001, --鼓的ConfigID
 	interval = 2, --敲鼓的节奏间隔
 	reminder_success = 400112,
@@ -44,10 +44,10 @@ end
  DrumSingle_Initialize()
 
 --加载Group时的操作
-function action_single_group_load(context, evt)
+function action_single_group_load(context, evt) 
 	ScriptLib.PrintContextLog(context, "##[DrumSingle]:加载敲鼓玩法Group")
 	LF_ResetBeatMark(context)
-	ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, defs.drum, {OPTION.SINGLE})
+	ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, defs.drum, {OPTION.SINGLE}) 
 	return 0
 end
 
@@ -63,7 +63,7 @@ end
 function action_single_select_option(context, evt)
 	--单曲模式
 	if evt.param2 == OPTION.SINGLE then
-		ScriptLib.PrintContextLog(context, "##[DrumSingle]:敲鼓玩法,单曲演奏模式")
+		ScriptLib.PrintContextLog(context, "##[DrumSingle]:敲鼓玩法,单曲演奏模式") 
 		ScriptLib.SetTeamServerGlobalValue(context, context.uid, "SGV_Drum_Play_Start", 1)
 		ScriptLib.SetGroupTempValue(context, "PlayMode", OPTION.SINGLE, {})
 		if music_staff[1] ~= nil then
@@ -79,18 +79,18 @@ end
 
 --检测敲击的时间轴
 function action_single_time_axis_pass(context, evt)
-	if evt.source_name == "MusicPlay" then
+	if evt.source_name == "MusicPlay" then 
 		--处理单曲模式
---		if OPTION.SINGLE == ScriptLib.GetGroupTempValue(context, "PlayMode", {}) then
+--		if OPTION.SINGLE == ScriptLib.GetGroupTempValue(context, "PlayMode", {}) then		
 			local pre_beat_index = ScriptLib.GetGroupTempValue(context, "BeatIndex", {})
 			ScriptLib.PrintContextLog(context, "##[DrumSingle]:上一个节拍"..pre_beat_index)
 			--处理上一个节拍是否错过,如果错过了就直接处理失败
-			if music_staff[pre_beat_index] ~= nil then
+			if music_staff[pre_beat_index] ~= nil then 
 				if music_staff[pre_beat_index] ~= ScriptLib.GetGroupTempValue(context, "LastBeatType", {}) then
 					ScriptLib.PrintContextLog(context, "##[DrumSingle]: 上一个节拍 MISS")
 					LF_SinglePlayFail(context)
 					return 0
-				end
+				end 
 			end
 
 			--初始化下一个时间段内的记录变量，更新鼓的状态
@@ -118,14 +118,14 @@ end
 function SLC_DrumPercussSingle(context, beat_timing, beat_type)
 	local play_mode = ScriptLib.GetGroupTempValue(context, "PlayMode", {})
 	if play_mode == 0 then
-		ScriptLib.PrintContextLog(context, "##[DrumSingle]:演奏未开始，不处理敲击事件")
+		ScriptLib.PrintContextLog(context, "##[DrumSingle]:演奏未开始，不处理敲击事件") 
 		return 0
 	end
 	ScriptLib.PrintContextLog(context, "##[DrumSingle]:[SLC]敲鼓")
 
 	--获取是否进行过敲击
 	local has_percussed = ScriptLib.GetGroupTempValue(context, "BeatPercussed", {})
-	if 0 ~= ScriptLib.GetGroupTempValue(context, "BeatPercussed", {}) then
+	if 0 ~= ScriptLib.GetGroupTempValue(context, "BeatPercussed", {}) then 
 		ScriptLib.PrintContextLog(context, "##[DrumSingle]:当前节拍重复敲击，失败")
 		LF_SinglePlayFail(context)
 		return 0
@@ -134,20 +134,20 @@ function SLC_DrumPercussSingle(context, beat_timing, beat_type)
 	--获取当前的敲击序列
 	local staff_index = ScriptLib.GetGroupTempValue(context, "BeatIndex", {})
 	--单曲模式校验
-	if play_mode == OPTION.SINGLE then
-		if music_staff[staff_index] ~= 0 then
-			if beat_timing == 0 then
+	if play_mode == OPTION.SINGLE then 
+		if music_staff[staff_index] ~= 0 then 
+			if beat_timing == 0 then 
 				ScriptLib.PrintContextLog(context, "##[DrumSingle]:未在敲击区间内敲击，失败")
 				LF_SinglePlayFail(context)
 				return 0
 			else
-				if music_staff[staff_index] ~= beat_type then
+				if music_staff[staff_index] ~= beat_type then 
 					ScriptLib.PrintContextLog(context, "##[DrumSingle]:敲击方式错误，失败"..beat_type)
 					LF_SinglePlayFail(context)
 					return 0
 				end
 				--最后一个节拍敲完
-				if staff_index >= #music_staff then
+				if staff_index >= #music_staff then 
 					ScriptLib.PrintContextLog(context, "##[DrumSingle]:全部节拍完成")
 					LF_SinglePlaySuccess(context)
 					return 0
@@ -180,7 +180,7 @@ function LF_SinglePlaySuccess(context)
 	ScriptLib.PrintContextLog(context, "##[DrumSingle]:演奏成功")
 	ScriptLib.EndTimeAxis(context, "MusicPlay")
 	LF_ResetBeatMark(context)
-	ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, defs.drum, {OPTION.SINGLE})
+	ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, defs.drum, {OPTION.SINGLE}) 
 	ScriptLib.ShowReminder(context, defs.reminder_success)
 	ScriptLib.SetGroupVariableValue(context, "Finished", 1)
 end
@@ -192,6 +192,6 @@ function LF_SinglePlayFail(context)
 	ScriptLib.SetTeamServerGlobalValue(context, context.uid, "SGV_Drum_Play_Start", 0)
 	LF_ResetBeatMark(context)
 	--失败则初始化操作台
-	ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, defs.drum, {OPTION.SINGLE})
+	ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, defs.drum, {OPTION.SINGLE}) 
 	ScriptLib.ShowReminder(context, defs.reminder_fail)
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 166001243
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -76,9 +76,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -86,7 +86,7 @@ function condition_EVENT_GADGET_CREATE_243005(context, evt)
 	if 243004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -97,7 +97,7 @@ function action_EVENT_GADGET_CREATE_243005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -107,7 +107,7 @@ function condition_EVENT_GROUP_LOAD_243006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "drop") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -118,38 +118,38 @@ function action_EVENT_GROUP_LOAD_243006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为243004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 243004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_243007(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	-- 创建id为243003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 243003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为243004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 243004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 243001, delay_time = 1 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -158,7 +158,7 @@ function condition_EVENT_ANY_GADGET_DIE_243008(context, evt)
 	if 243003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -169,20 +169,20 @@ function action_EVENT_ANY_GADGET_DIE_243008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_243010(context, evt)
 	if evt.param1 ~= 243010 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -192,14 +192,14 @@ function action_EVENT_ENTER_REGION_243010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 243002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "drop" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "drop", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

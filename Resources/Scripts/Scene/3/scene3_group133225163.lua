@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133225163
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -99,9 +99,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -109,7 +109,7 @@ function condition_EVENT_TIME_AXIS_PASS_163006(context, evt)
 	if "Decal_Start" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -120,29 +120,29 @@ function action_EVENT_TIME_AXIS_PASS_163006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "decal_create_1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "decal_create_1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 停止标识为"Decal_Start"的时间轴
 	ScriptLib.EndTimeAxis(context, "Decal_Start")
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_163007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"decal_finish_1"为1
 	if ScriptLib.GetGroupVariableValue(context, "decal_finish_1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -153,23 +153,23 @@ function action_EVENT_VARIABLE_CHANGE_163007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 创建标识为"Decal_Start"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Decal_Start", {3}, false)
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_163008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"decal_finish_2"为1
 	if ScriptLib.GetGroupVariableValue(context, "decal_finish_2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -180,11 +180,11 @@ function action_EVENT_VARIABLE_CHANGE_163008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 创建标识为"Decal_Start_2"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Decal_Start_2", {3}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_TIME_AXIS_PASS_163009(context, evt)
 	if "Decal_Start_2" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -204,29 +204,29 @@ function action_EVENT_TIME_AXIS_PASS_163009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "decal_create_2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "decal_create_2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 停止标识为"Decal_Start_2"的时间轴
 	ScriptLib.EndTimeAxis(context, "Decal_Start_2")
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_163010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"decal_finish_3"为1
 	if ScriptLib.GetGroupVariableValue(context, "decal_finish_3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -237,11 +237,11 @@ function action_EVENT_VARIABLE_CHANGE_163010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 创建标识为"Decal_Start_3"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Decal_Start_3", {3}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -250,7 +250,7 @@ function condition_EVENT_TIME_AXIS_PASS_163011(context, evt)
 	if "Decal_Start_3" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -261,29 +261,29 @@ function action_EVENT_TIME_AXIS_PASS_163011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "decal_create_3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "decal_create_3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 停止标识为"Decal_Start_3"的时间轴
 	ScriptLib.EndTimeAxis(context, "Decal_Start_3")
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_163012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"total_progress"为3
 	if ScriptLib.GetGroupVariableValue(context, "total_progress") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -291,8 +291,8 @@ end
 function action_EVENT_VARIABLE_CHANGE_163012(context, evt)
 	-- 创建标识为"Decal_Show_All"，时间节点为{4,5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Decal_Show_All", {4,5}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -301,7 +301,7 @@ function condition_EVENT_TIME_AXIS_PASS_163013(context, evt)
 	if "Decal_Show_All" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -312,7 +312,7 @@ function action_EVENT_TIME_AXIS_PASS_163013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -322,12 +322,12 @@ function condition_EVENT_GROUP_LOAD_163014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "decal_finish_1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"decal_create_1"为0
 	if ScriptLib.GetGroupVariableValue(context, "decal_create_1") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -338,13 +338,13 @@ function action_EVENT_GROUP_LOAD_163014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "decal_create_1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "decal_create_1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -354,12 +354,12 @@ function condition_EVENT_GROUP_LOAD_163015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "decal_finish_2") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"decal_create_2"为0
 	if ScriptLib.GetGroupVariableValue(context, "decal_create_2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -370,13 +370,13 @@ function action_EVENT_GROUP_LOAD_163015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "decal_create_2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "decal_create_2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -386,12 +386,12 @@ function condition_EVENT_GROUP_LOAD_163016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "decal_finish_3") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"decal_create_3"为0
 	if ScriptLib.GetGroupVariableValue(context, "decal_create_3") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -402,13 +402,13 @@ function action_EVENT_GROUP_LOAD_163016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "decal_create_3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "decal_create_3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -418,12 +418,12 @@ function condition_EVENT_GROUP_LOAD_163017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "decal_create_all") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"total_progress"为3
 	if ScriptLib.GetGroupVariableValue(context, "total_progress") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -434,19 +434,19 @@ function action_EVENT_GROUP_LOAD_163017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为163005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 163005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "decal_create_all" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "decal_create_all", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -455,7 +455,7 @@ function condition_EVENT_TIME_AXIS_PASS_163018(context, evt)
 	if "Decal_Show_All" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -466,12 +466,12 @@ function action_EVENT_TIME_AXIS_PASS_163018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为163005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 163005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

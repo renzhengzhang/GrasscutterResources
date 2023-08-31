@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101185
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -39,9 +39,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -70,20 +70,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_185004(context, evt)
 	if evt.param1 ~= 185004 then return false end
-
+	
 	-- 判断是区域1185004
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 1185004 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -91,7 +91,7 @@ end
 function action_EVENT_ENTER_REGION_185004(context, evt)
 	ScriptLib.PrintContextLog(context, "[Threat Test] SGV_CAN_CLEAR_THREAT Set: 1. @EntityID: "..evt.target_eid.." @UID: "..evt.uid)
 	ScriptLib.SetTeamServerGlobalValue(context, evt.uid, "SGV_CAN_CLEAR_THREAT", 1)
-
+		
 	return 0
 end
 
@@ -101,7 +101,7 @@ function condition_EVENT_LEAVE_REGION_185005(context, evt)
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 1185005 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -109,6 +109,6 @@ end
 function action_EVENT_LEAVE_REGION_185005(context, evt)
 	ScriptLib.PrintContextLog(context, "[Threat Test] SGV_CAN_CLEAR_THREAT Set: 0. @EntityID: "..evt.target_eid.." @UID: "..evt.uid)
 	ScriptLib.SetTeamServerGlobalValue(context, evt.uid, "SGV_CAN_CLEAR_THREAT", 0)
-
+		
 	return 0
 end

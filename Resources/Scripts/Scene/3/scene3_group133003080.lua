@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133003080
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -135,20 +135,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_80014(context, evt)
 	if evt.param1 ~= 80014 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -159,26 +159,26 @@ function action_EVENT_ENTER_REGION_80014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=2284.393,y=242.2473,z=-1331.739}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110453, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_80015(context, evt)
 	if evt.param1 ~= 80015 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -190,19 +190,19 @@ function action_EVENT_ENTER_REGION_80015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_80019(context, evt)
 	if evt.param1 ~= 80019 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -214,7 +214,7 @@ function action_EVENT_ENTER_REGION_80019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -223,7 +223,7 @@ function condition_EVENT_GADGET_CREATE_80034(context, evt)
 	if 80017 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -234,7 +234,7 @@ function action_EVENT_GADGET_CREATE_80034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -242,14 +242,14 @@ end
 function condition_EVENT_SELECT_OPTION_80035(context, evt)
 	-- 判断是gadgetid 80017 option_id 7
 	if 80017 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -261,29 +261,29 @@ function action_EVENT_SELECT_OPTION_80035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 创建编号为666（该挑战的识别id),挑战内容为15的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 666, 15, 300, 26, 888, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 80016) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 80017 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133003080, 2)
-
+	
 	return 0
 end
 
@@ -291,36 +291,36 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_80036(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133003080, 2)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133003080, 4)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1330030802") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_80037(context, evt)
 	-- 判断是gadgetid 为 80016的移动平台，是否到达了300300335 的路线中的 12 点
-
+	
 	if 80016 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300300335 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 12 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -328,7 +328,7 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_80037(context, evt)
 	-- 终止识别id为666的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 666, 1)
-
+	
 	return 0
 end
 
@@ -339,19 +339,19 @@ function action_EVENT_CHALLENGE_FAIL_80038(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133003080, 2)
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133003080, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133003080, 4)
-
+	
 	return 0
 end
 
@@ -360,7 +360,7 @@ function condition_EVENT_ANY_GADGET_DIE_80039(context, evt)
 	if 80016 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -368,32 +368,32 @@ end
 function action_EVENT_ANY_GADGET_DIE_80039(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_80040(context, evt)
 	-- 判断是gadgetid 为 80016的移动平台，是否到达了300300335 的路线中的 10 点
-
+	
 	if 80016 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300300335 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 10 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	-- 判断变量"isObstacle1Available"为1
 	if ScriptLib.GetGroupVariableValue(context, "isObstacle1Available") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -404,10 +404,10 @@ function action_EVENT_PLATFORM_REACH_POINT_80040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133003080, 4)
-
+	
 	return 0
 end
 
@@ -416,7 +416,7 @@ function condition_EVENT_ANY_GADGET_DIE_80041(context, evt)
 	if 80018 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -427,19 +427,19 @@ function action_EVENT_ANY_GADGET_DIE_80041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_80043(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"isObstacle1Available"为0
 	if ScriptLib.GetGroupVariableValue(context, "isObstacle1Available") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -450,6 +450,6 @@ function action_EVENT_VARIABLE_CHANGE_80043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end

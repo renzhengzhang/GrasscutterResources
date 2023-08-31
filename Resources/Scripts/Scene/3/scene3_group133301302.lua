@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301302
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_CoreID = 302005,
 	monster_BossID = 302002,
 	gadget_Point_1 = 302006,
@@ -35,9 +35,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -107,9 +107,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -120,9 +120,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -165,9 +165,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -181,7 +181,7 @@ function condition_EVENT_ANY_GADGET_DIE_302023(context, evt)
 	if 302005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -189,7 +189,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_302023(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301302, 4)
-
+	
 	return 0
 end
 
@@ -198,7 +198,7 @@ function condition_EVENT_ANY_GADGET_DIE_302024(context, evt)
 	if 302008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -209,8 +209,8 @@ function action_EVENT_ANY_GADGET_DIE_302024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -219,7 +219,7 @@ function condition_EVENT_ANY_GADGET_DIE_302025(context, evt)
 	if 302007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -230,14 +230,14 @@ function action_EVENT_ANY_GADGET_DIE_302025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 302016, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -246,7 +246,7 @@ function condition_EVENT_ANY_GADGET_DIE_302026(context, evt)
 	if 302006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -257,14 +257,14 @@ function action_EVENT_ANY_GADGET_DIE_302026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 302022 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 

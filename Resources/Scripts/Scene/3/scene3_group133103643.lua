@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103643
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -89,9 +89,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -100,7 +100,7 @@ function condition_EVENT_GROUP_LOAD_643005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -111,7 +111,7 @@ function action_EVENT_GROUP_LOAD_643005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -121,7 +121,7 @@ function condition_EVENT_GROUP_LOAD_643008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "dig") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -132,19 +132,19 @@ function action_EVENT_GROUP_LOAD_643008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_643009(context, evt)
 	if evt.param1 ~= 643009 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -155,7 +155,7 @@ function action_EVENT_ENTER_REGION_643009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -164,12 +164,12 @@ function condition_EVENT_GADGET_CREATE_643021(context, evt)
 	if 643022 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"dig"为0
 	if ScriptLib.GetGroupVariableValue(context, "dig") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -180,7 +180,7 @@ function action_EVENT_GADGET_CREATE_643021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -188,14 +188,14 @@ end
 function condition_EVENT_SELECT_OPTION_643023(context, evt)
 	-- 判断是gadgetid 643022 option_id 169
 	if 643022 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 169 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -206,26 +206,26 @@ function action_EVENT_SELECT_OPTION_643023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133103643 ；指定config：643022；物件身上指定option：169；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133103643, 643022, 169) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 643004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 将本组内变量名为 "dig" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "dig", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -234,7 +234,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_643024(context, evt)
 	if 643020 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -245,25 +245,25 @@ function action_EVENT_GADGET_STATE_CHANGE_643024(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "fin" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "fin", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_643025(context, evt)
 	if evt.param1 ~= 643025 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -274,6 +274,6 @@ function action_EVENT_ENTER_REGION_643025(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220134092
 }
 
@@ -8,43 +8,43 @@ local        defs = {
 
     is_movable = 1,
 
-    patterns =
+    patterns = 
     {
             --形态1
-            [1] =
+            [1] = 
             {
                     [92001] = {connect =0 , point_array = 0, point_id = {0}} ,
                     [92004] = {connect =0 , point_array = 0, point_id = {0}} ,
-
+                    
             },
 
-
+ 
 
                         --形态3 star2
-                        [2] =
+                        [2] = 
                         {
-
+                        
                             [92001] = {connect =0, point_array = 69, point_id = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}} ,
-
-
+                 
+                            
                     },
 
                                                 --形态4 star3
-                        [3] =
+                        [3] = 
                         { [92001] = {connect =92004, point_array = 69, point_id = {25}} ,
                         [92004] = {connect =92001, point_array = 87, point_id = {2}},
 
                     },
-
-
+                    
+            
     },
 
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -91,9 +91,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -104,9 +104,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -122,23 +122,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_92003(context, evt)
 	-- 判断是gadgetid 92002 option_id 411
 	if 92002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 411 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -149,44 +149,44 @@ function action_EVENT_SELECT_OPTION_92003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "star3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "star3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 220134092 ；指定config：92002；物件身上指定option：411；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220134092, 92002, 411) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_92005(context, evt)
 	-- 判断是gadgetid 为 92001的移动平台，是否到达了69 的点集中的 25 点
-
+	
 	if 92001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 69 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 25 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	-- 判断变量"star4"为1
 	if ScriptLib.GetGroupVariableValue(context, "star4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -197,7 +197,7 @@ function action_EVENT_PLATFORM_REACH_POINT_92005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_GROUP_LOAD_92006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "star3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -218,19 +218,19 @@ function action_EVENT_GROUP_LOAD_92006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_92008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"star4"为1
 	if ScriptLib.GetGroupVariableValue(context, "star4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -241,7 +241,7 @@ function action_EVENT_VARIABLE_CHANGE_92008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	end
 	return 0
 end

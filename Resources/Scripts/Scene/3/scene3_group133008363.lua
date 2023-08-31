@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133008363
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -143,9 +143,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -154,8 +154,8 @@ function condition_EVENT_ANY_MONSTER_DIE_363009(context, evt)
 	if evt.param1 ~= 363006 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -166,44 +166,44 @@ function action_EVENT_ANY_MONSTER_DIE_363009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133008363, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133008363, 3)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133008363, 6)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 363010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 363011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 363031 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133008363, 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -212,7 +212,7 @@ function condition_EVENT_ANY_GADGET_DIE_363012(context, evt)
 	if 363007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -223,7 +223,7 @@ function action_EVENT_ANY_GADGET_DIE_363012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -232,7 +232,7 @@ function condition_EVENT_ANY_GADGET_DIE_363016(context, evt)
 	if 363007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -243,7 +243,7 @@ function action_EVENT_ANY_GADGET_DIE_363016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -254,7 +254,7 @@ function action_EVENT_GROUP_LOAD_363017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -264,7 +264,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_363020(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 70 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -272,7 +272,7 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_363020(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133008363, 2)
-
+	
 	return 0
 end
 
@@ -282,7 +282,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_363021(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 30 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -290,7 +290,7 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_363021(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133008363, 3)
-
+	
 	return 0
 end
 
@@ -299,7 +299,7 @@ function condition_EVENT_MONSTER_BATTLE_363029(context, evt)
 	if 363006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -310,25 +310,25 @@ function action_EVENT_MONSTER_BATTLE_363029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 363044 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 363005 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133008363, 5)
-
+	
 	return 0
 end
 
@@ -337,7 +337,7 @@ function condition_EVENT_ANY_GADGET_DIE_363033(context, evt)
 	if 363013 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -348,7 +348,7 @@ function action_EVENT_ANY_GADGET_DIE_363033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -357,7 +357,7 @@ function condition_EVENT_ANY_GADGET_DIE_363034(context, evt)
 	if 363008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -368,7 +368,7 @@ function action_EVENT_ANY_GADGET_DIE_363034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -378,7 +378,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_363036(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 50 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -386,31 +386,31 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_363036(context, evt)
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133008363, 5)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 363010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 363011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 363031 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133008363, 6)
-
+	
 	return 0
 end
 
@@ -419,7 +419,7 @@ function condition_EVENT_ANY_GADGET_DIE_363041(context, evt)
 	if 363008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -430,7 +430,7 @@ function action_EVENT_ANY_GADGET_DIE_363041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -439,7 +439,7 @@ function condition_EVENT_ANY_GADGET_DIE_363042(context, evt)
 	if 363013 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -450,6 +450,6 @@ function action_EVENT_ANY_GADGET_DIE_363042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

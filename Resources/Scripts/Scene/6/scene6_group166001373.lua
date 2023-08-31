@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 166001373
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -147,16 +147,16 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_START_373007(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001373, 5)
-
+	
 	return 0
 end
 
@@ -164,7 +164,7 @@ end
 function action_EVENT_QUEST_START_373008(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001373, 6)
-
+	
 	return 0
 end
 
@@ -172,7 +172,7 @@ end
 function action_EVENT_QUEST_START_373009(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001373, 7)
-
+	
 	return 0
 end
 
@@ -183,29 +183,29 @@ function action_EVENT_ANY_MONSTER_DIE_373010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 改变指定group组166001040中， configid为40002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 166001040, 40002, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组166001041中， configid为41001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 166001041, 41001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组166001042中， configid为42001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 166001042, 42001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"fight"，时间节点为{2,4,6}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fight", {2,4,6}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -214,7 +214,7 @@ function condition_EVENT_TIME_AXIS_PASS_373011(context, evt)
 	if "fight" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -228,14 +228,14 @@ function action_EVENT_TIME_AXIS_PASS_373011(context, evt)
 	                                                      is_set_screen_XY = true, screen_x = 0, screen_y = 2 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 60010356 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 60010356) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -244,7 +244,7 @@ function condition_EVENT_TIME_AXIS_PASS_373012(context, evt)
 	if "fight" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -255,7 +255,7 @@ function action_EVENT_TIME_AXIS_PASS_373012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -266,29 +266,29 @@ function action_EVENT_ANY_MONSTER_DIE_373013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 改变指定group组166001040中， configid为40002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 166001040, 40002, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组166001041中， configid为41001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 166001041, 41001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组166001042中， configid为42001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 166001042, 42001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"fight"，时间节点为{2,4,6}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fight", {2,4,6}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -299,29 +299,29 @@ function action_EVENT_ANY_MONSTER_DIE_373014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 改变指定group组166001040中， configid为40002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 166001040, 40002, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组166001041中， configid为41001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 166001041, 41001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组166001042中， configid为42001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 166001042, 42001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"fight"，时间节点为{2,4,6}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fight", {2,4,6}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -330,7 +330,7 @@ function condition_EVENT_TIME_AXIS_PASS_373015(context, evt)
 	if "fight" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -344,14 +344,14 @@ function action_EVENT_TIME_AXIS_PASS_373015(context, evt)
 	                                                      is_set_screen_XY = true, screen_x = 0, screen_y = 2 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 60010356 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 60010356) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -360,7 +360,7 @@ function condition_EVENT_TIME_AXIS_PASS_373016(context, evt)
 	if "fight" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -374,14 +374,14 @@ function action_EVENT_TIME_AXIS_PASS_373016(context, evt)
 	                                                      is_set_screen_XY = true, screen_x = 0, screen_y = 2 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 60010356 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 60010356) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -390,7 +390,7 @@ function condition_EVENT_TIME_AXIS_PASS_373017(context, evt)
 	if "fight" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -401,7 +401,7 @@ function action_EVENT_TIME_AXIS_PASS_373017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -410,7 +410,7 @@ function condition_EVENT_TIME_AXIS_PASS_373018(context, evt)
 	if "fight" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -421,7 +421,7 @@ function action_EVENT_TIME_AXIS_PASS_373018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -431,7 +431,7 @@ function condition_EVENT_GROUP_LOAD_373019(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "quest") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -442,7 +442,7 @@ function action_EVENT_GROUP_LOAD_373019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -451,7 +451,7 @@ function condition_EVENT_TIME_AXIS_PASS_373020(context, evt)
 	if "fight" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -462,7 +462,7 @@ function action_EVENT_TIME_AXIS_PASS_373020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -471,7 +471,7 @@ function condition_EVENT_TIME_AXIS_PASS_373021(context, evt)
 	if "fight" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -482,7 +482,7 @@ function action_EVENT_TIME_AXIS_PASS_373021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -491,7 +491,7 @@ function condition_EVENT_TIME_AXIS_PASS_373022(context, evt)
 	if "fight" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -502,6 +502,6 @@ function action_EVENT_TIME_AXIS_PASS_373022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250015038
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -95,7 +95,7 @@ function condition_EVENT_GADGET_CREATE_38006(context, evt)
 	if 38002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -106,7 +106,7 @@ function action_EVENT_GADGET_CREATE_38006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -114,14 +114,14 @@ end
 function condition_EVENT_SELECT_OPTION_38007(context, evt)
 	-- 判断是gadgetid 38002 option_id 7
 	if 38002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -132,23 +132,23 @@ function action_EVENT_SELECT_OPTION_38007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 38002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015038, 2)
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 38001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -156,7 +156,7 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_38008(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 250015038, 2)
-
+	
 	return 0
 end
 
@@ -164,33 +164,33 @@ end
 function action_EVENT_CHALLENGE_FAIL_38009(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 250015038, 2)
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 250015038, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_38010(context, evt)
 	-- 判断是gadgetid 为 38001的移动平台，是否到达了4 的路线中的 4 点
-
+	
 	if 38001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_ANY_GADGET_DIE_38011(context, evt)
 	if 38001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -207,6 +207,6 @@ end
 function action_EVENT_ANY_GADGET_DIE_38011(context, evt)
 	-- 终止识别id为666的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 666, 0)
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210292
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -97,20 +97,20 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_292002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"GadgetState"为0
 	if ScriptLib.GetGroupVariableValue(context, "GadgetState") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -120,20 +120,20 @@ function action_EVENT_VARIABLE_CHANGE_292002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 292001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_292003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"GadgetState"为1
 	if ScriptLib.GetGroupVariableValue(context, "GadgetState") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -143,8 +143,8 @@ function action_EVENT_VARIABLE_CHANGE_292003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 292001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_292004(context, evt)
 	if 292001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -164,22 +164,22 @@ function action_EVENT_GADGET_STATE_CHANGE_292004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "QuestFinish2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "QuestFinish2", 1, 133210027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133210292, EntityType.GADGET, 292005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210292, 2)
-
+	
 	return 0
 end
 
@@ -188,7 +188,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_292007(context, evt)
 	if 292008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -198,22 +198,22 @@ function action_EVENT_GADGET_STATE_CHANGE_292007(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 321029201, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 针对当前group内变量名为 "ActiveCount" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "ActiveCount", 1, 133210027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "QuestFinish2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "QuestFinish2", 1, 133210027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210292, 2)
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133104438
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -87,9 +87,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -98,12 +98,12 @@ function condition_EVENT_ANY_MONSTER_DIE_438003(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"flag"为0
 	if ScriptLib.GetGroupVariableValue(context, "flag") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -114,26 +114,26 @@ function action_EVENT_ANY_MONSTER_DIE_438003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 438002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 438002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 4000, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 438004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -142,7 +142,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_438005(context, evt)
 	if 438004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -152,14 +152,14 @@ function action_EVENT_GADGET_STATE_CHANGE_438005(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 133104440, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组133104440中， configid为440004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133104440, 440004, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -169,7 +169,7 @@ function condition_EVENT_GROUP_LOAD_438006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "flag") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -179,20 +179,20 @@ function action_EVENT_GROUP_LOAD_438006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 438002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_438011(context, evt)
 	if evt.param1 ~= 438011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -200,12 +200,12 @@ end
 function action_EVENT_ENTER_REGION_438011(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104438, 2)
-
+	
 	-- 创建id为438004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 438004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

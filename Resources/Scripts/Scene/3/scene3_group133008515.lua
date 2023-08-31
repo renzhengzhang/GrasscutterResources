@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133008515
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -88,22 +88,22 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_515005(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133008515, 2)
-
+	
 	-- 将configid为 515001 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 515001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -113,7 +113,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_515011(context, evt)
 	if 515001 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 or GadgetState.Action01 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -121,24 +121,24 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_515011(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133008515, 2)
-
+	
 	-- 延迟60秒后,向groupId为：133008515的对象,请求一次调用,并将string参数："delay" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133008515, "delay", 60) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_515031(context, evt)
 	if -1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133008515, 515002) then
-
+	
 	return false
-
+	
 	end
-
+	
 	return true
 end
 
@@ -148,13 +148,13 @@ function action_EVENT_GROUP_LOAD_515031(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 515001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133008515, "delay") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end

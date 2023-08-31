@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133315061
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -107,20 +107,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GROUP_LOAD_61004(context, evt)
 	if ScriptLib.GetDeathZoneStatus(context,0) == 0 then
-
+	
 	return true
-
+	
 	end
-
-
+	
+	
 	return false
 end
 
@@ -131,19 +131,19 @@ function action_EVENT_GROUP_LOAD_61004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_61008(context, evt)
 	if evt.param1 ~= 61008 then return false end
-
+	
 	-- 判断是区域61008
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 61008 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -154,19 +154,19 @@ function action_EVENT_ENTER_REGION_61008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_61009(context, evt)
 	if evt.param1 ~= 61009 then return false end
-
+	
 	-- 判断是区域61009
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 61009 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -177,7 +177,7 @@ function action_EVENT_ENTER_REGION_61009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -186,7 +186,7 @@ function condition_EVENT_MONSTER_BATTLE_61010(context, evt)
 	if 61005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -197,7 +197,7 @@ function action_EVENT_MONSTER_BATTLE_61010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 

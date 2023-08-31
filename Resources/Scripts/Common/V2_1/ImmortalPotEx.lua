@@ -1,6 +1,6 @@
 -- Trigger变量
 --[[
-defs = {
+local defs = {
     ButtonLeftConfig = 51001,
     ButtonRightConfig = 51002,
     StoveConfig = 51003,

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201053021
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -73,9 +73,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +86,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -104,20 +104,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon1Appear"为1
 	if ScriptLib.GetGroupVariableValue(context, "icon1Appear") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -128,19 +128,19 @@ function action_EVENT_VARIABLE_CHANGE_21002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon2Appear"为1
 	if ScriptLib.GetGroupVariableValue(context, "icon2Appear") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -151,19 +151,19 @@ function action_EVENT_VARIABLE_CHANGE_21004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon3Appear"为1
 	if ScriptLib.GetGroupVariableValue(context, "icon3Appear") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -174,19 +174,19 @@ function action_EVENT_VARIABLE_CHANGE_21006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon4Appear"为1
 	if ScriptLib.GetGroupVariableValue(context, "icon4Appear") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -197,19 +197,19 @@ function action_EVENT_VARIABLE_CHANGE_21008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon4Appear"为2
 	if ScriptLib.GetGroupVariableValue(context, "icon4Appear") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -220,20 +220,20 @@ function action_EVENT_VARIABLE_CHANGE_21009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon5Appear"为1
 	if ScriptLib.GetGroupVariableValue(context, "icon5Appear") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -244,19 +244,19 @@ function action_EVENT_VARIABLE_CHANGE_21010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon5Appear"为2
 	if ScriptLib.GetGroupVariableValue(context, "icon5Appear") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -267,20 +267,20 @@ function action_EVENT_VARIABLE_CHANGE_21012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon1Appear"为2
 	if ScriptLib.GetGroupVariableValue(context, "icon1Appear") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -291,20 +291,20 @@ function action_EVENT_VARIABLE_CHANGE_21013(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon2Appear"为2
 	if ScriptLib.GetGroupVariableValue(context, "icon2Appear") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -315,20 +315,20 @@ function action_EVENT_VARIABLE_CHANGE_21014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon3Appear"为2
 	if ScriptLib.GetGroupVariableValue(context, "icon3Appear") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -339,20 +339,20 @@ function action_EVENT_VARIABLE_CHANGE_21015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21016(context, evt)
 	if evt.param1 ~= 21016 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -363,19 +363,19 @@ function action_EVENT_ENTER_REGION_21016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon6Appear"为1
 	if ScriptLib.GetGroupVariableValue(context, "icon6Appear") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -386,19 +386,19 @@ function action_EVENT_VARIABLE_CHANGE_21018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_21019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"icon6Appear"为2
 	if ScriptLib.GetGroupVariableValue(context, "icon6Appear") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -409,20 +409,20 @@ function action_EVENT_VARIABLE_CHANGE_21019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21020(context, evt)
 	if evt.param1 ~= 21020 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -433,19 +433,19 @@ function action_EVENT_ENTER_REGION_21020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21021(context, evt)
 	if evt.param1 ~= 21021 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -456,6 +456,6 @@ function action_EVENT_ENTER_REGION_21021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end

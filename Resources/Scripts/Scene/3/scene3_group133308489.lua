@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308489
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -104,9 +104,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -114,12 +114,12 @@ function condition_EVENT_ANY_GADGET_DIE_489005(context, evt)
 	if 489007 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"kills"为3
 	if ScriptLib.GetGroupVariableValue(context, "kills") == 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -127,30 +127,30 @@ end
 function action_EVENT_ANY_GADGET_DIE_489005(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133308489, 2)
-
+	
 	-- 将configid为 489004 的物件更改为状态 GadgetState.ChestLocked
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 489004, GadgetState.ChestLocked) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
-		end
-
+		end 
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 489009 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 489010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 489011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -161,7 +161,7 @@ function action_EVENT_ANY_MONSTER_DIE_489006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -170,12 +170,12 @@ function condition_EVENT_ANY_GADGET_DIE_489012(context, evt)
 	if 489007 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"kills"为3
 	if ScriptLib.GetGroupVariableValue(context, "kills") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -185,8 +185,8 @@ function action_EVENT_ANY_GADGET_DIE_489012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 489004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_ANY_GADGET_DIE_489013(context, evt)
 	if 489009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_ANY_GADGET_DIE_489013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -215,7 +215,7 @@ function condition_EVENT_ANY_GADGET_DIE_489014(context, evt)
 	if 489010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -226,7 +226,7 @@ function action_EVENT_ANY_GADGET_DIE_489014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -235,7 +235,7 @@ function condition_EVENT_ANY_GADGET_DIE_489015(context, evt)
 	if 489011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -246,19 +246,19 @@ function action_EVENT_ANY_GADGET_DIE_489015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_489016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"kills"为3
 	if ScriptLib.GetGroupVariableValue(context, "kills") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -268,20 +268,20 @@ function action_EVENT_VARIABLE_CHANGE_489016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 489004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_489017(context, evt)
 	if evt.param1 ~= 489017 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -292,7 +292,7 @@ function action_EVENT_ENTER_REGION_489017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end

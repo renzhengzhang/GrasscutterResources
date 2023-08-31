@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133310484
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -79,18 +79,18 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_484003(context, evt)
-	-- 判断指定group组剩余gadget数量是否是1
+	-- 判断指定group组剩余gadget数量是否是1 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133310484}) ~= 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -100,8 +100,8 @@ function action_EVENT_ANY_GADGET_DIE_484003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 484001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -110,7 +110,7 @@ function condition_EVENT_ANY_GADGET_DIE_484006(context, evt)
 	if 484002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -121,14 +121,14 @@ function action_EVENT_ANY_GADGET_DIE_484006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 484005 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -137,7 +137,7 @@ function condition_EVENT_ANY_GADGET_DIE_484007(context, evt)
 	if 484005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -148,14 +148,14 @@ function action_EVENT_ANY_GADGET_DIE_484007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 484002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -165,13 +165,13 @@ function action_EVENT_QUEST_FINISH_484008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 484002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 484005 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 484005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

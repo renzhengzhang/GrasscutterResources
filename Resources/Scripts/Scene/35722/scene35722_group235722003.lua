@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235722003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -95,7 +95,7 @@ function condition_EVENT_GADGET_CREATE_3002(context, evt)
 	if 3001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -106,7 +106,7 @@ function action_EVENT_GADGET_CREATE_3002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -114,19 +114,19 @@ end
 function condition_EVENT_SELECT_OPTION_3003(context, evt)
 	-- 判断是gadgetid 3001 option_id 175
 	if 3001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"stage"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage", 235722002) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -137,34 +137,34 @@ function action_EVENT_SELECT_OPTION_3003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_allow_use_skill")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235722004, 2)
-
+	
 	-- 删除指定group： 235722003 ；指定config：3001；物件身上指定option：175；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 235722003, 3001, 175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 改变指定group组235722003中， configid为3001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235722003, 3001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235722001中， configid为1001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235722001, 1001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235722001中， configid为1002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235722001, 1002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -172,19 +172,19 @@ end
 function condition_EVENT_SELECT_OPTION_3004(context, evt)
 	-- 判断是gadgetid 3001 option_id 176
 	if 3001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 176 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"stage"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage", 235722002) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -195,33 +195,33 @@ function action_EVENT_SELECT_OPTION_3004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_allow_use_skill")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235722005, 2)
-
+	
 	-- 删除指定group： 235722003 ；指定config：3001；物件身上指定option：176；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 235722003, 3001, 176) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 改变指定group组235722003中， configid为3001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235722003, 3001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235722001中， configid为1001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235722001, 1001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235722001中， configid为1002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235722001, 1002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

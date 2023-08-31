@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133211023
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -89,9 +89,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -100,8 +100,8 @@ function action_EVENT_QUEST_START_23002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 23001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -111,8 +111,8 @@ function action_EVENT_QUEST_START_23003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 23001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -123,13 +123,13 @@ function action_EVENT_QUEST_START_23010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为23016的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 23016 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -140,13 +140,13 @@ function action_EVENT_QUEST_START_23011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为23017的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 23017 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -154,14 +154,14 @@ end
 function condition_EVENT_SELECT_OPTION_23012(context, evt)
 	-- 判断是gadgetid 23008 option_id 64
 	if 23008 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 64 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -172,19 +172,19 @@ function action_EVENT_SELECT_OPTION_23012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133211023, EntityType.GADGET, 23008 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133211023, EntityType.GADGET, 23016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_GADGET_CREATE_23013(context, evt)
 	if 23008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_GADGET_CREATE_23013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -212,14 +212,14 @@ end
 function condition_EVENT_SELECT_OPTION_23014(context, evt)
 	-- 判断是gadgetid 23009 option_id 64
 	if 23009 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 64 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -230,19 +230,19 @@ function action_EVENT_SELECT_OPTION_23014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133211023, EntityType.GADGET, 23009 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133211023, EntityType.GADGET, 23017 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -251,7 +251,7 @@ function condition_EVENT_GADGET_CREATE_23015(context, evt)
 	if 23009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -262,6 +262,6 @@ function action_EVENT_GADGET_CREATE_23015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end

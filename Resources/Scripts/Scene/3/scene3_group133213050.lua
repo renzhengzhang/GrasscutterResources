@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133213050
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -136,9 +136,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -149,9 +149,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -320,9 +320,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -332,7 +332,7 @@ function action_EVENT_ENTER_REGION_50076(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -342,7 +342,7 @@ function condition_EVENT_TIMER_EVENT_50077(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -350,13 +350,13 @@ end
 function action_EVENT_TIMER_EVENT_50077(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213050, 4)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133213050, 3)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133213050, 3)
-
+	
 	return 0
 end
 
@@ -367,7 +367,7 @@ function action_EVENT_ENTER_REGION_50078(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -377,7 +377,7 @@ function condition_EVENT_TIMER_EVENT_50079(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -385,13 +385,13 @@ end
 function action_EVENT_TIMER_EVENT_50079(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213050, 5)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133213050, 4)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133213050, 4)
-
+	
 	return 0
 end
 
@@ -399,13 +399,13 @@ end
 function action_EVENT_GROUP_LOAD_50080(context, evt)
 	-- 初始化table
 	    local suite_table = {}
-
+	
 	-- 需要在group创建时调用，该函数会通过context的groupid读取HuntingData表，来创建entity填充points
 	    if 0~= ScriptLib.RefreshHuntingClueGroup(context) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_hunting_clue_group")
 	        return -1
 	    end
-
+	
 	-- 根据HuntingData表的配置来激活对应的suite
 	    if 0~= ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context) then
 	        suite_table = ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context)
@@ -413,9 +413,9 @@ function action_EVENT_GROUP_LOAD_50080(context, evt)
 	            ScriptLib.AddExtraGroupSuite(context, 133213050, suite_id)
 	        end
 	    end
-
+	
 	return 0
-
+	
 end
 
 -- 触发操作
@@ -425,7 +425,7 @@ function action_EVENT_ENTER_REGION_50081(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -435,7 +435,7 @@ function condition_EVENT_TIMER_EVENT_50082(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -443,13 +443,13 @@ end
 function action_EVENT_TIMER_EVENT_50082(context, evt)
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213050, 13)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133213050, 12)
-
+	
 	-- 删除suite12的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133213050, 12)
-
+	
 	return 0
 end
 
@@ -460,7 +460,7 @@ function action_EVENT_ENTER_REGION_50083(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -470,7 +470,7 @@ function condition_EVENT_TIMER_EVENT_50084(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -478,13 +478,13 @@ end
 function action_EVENT_TIMER_EVENT_50084(context, evt)
 	-- 添加suite14的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213050, 14)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133213050, 13)
-
+	
 	-- 删除suite13的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133213050, 13)
-
+	
 	return 0
 end
 
@@ -495,14 +495,14 @@ function action_EVENT_HUNTING_FINISH_FINAL_50085(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133213050, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -513,7 +513,7 @@ function action_EVENT_ENTER_REGION_50086(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -523,7 +523,7 @@ function condition_EVENT_TIMER_EVENT_50087(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -531,13 +531,13 @@ end
 function action_EVENT_TIMER_EVENT_50087(context, evt)
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213050, 13)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133213050, 14)
-
+	
 	-- 删除suite14的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133213050, 14)
-
+	
 	return 0
 end
 
@@ -548,7 +548,7 @@ function action_EVENT_ENTER_REGION_50088(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -558,7 +558,7 @@ function condition_EVENT_TIMER_EVENT_50089(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -566,13 +566,13 @@ end
 function action_EVENT_TIMER_EVENT_50089(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133213050, 4)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133213050, 5)
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133213050, 5)
-
+	
 	return 0
 end
 

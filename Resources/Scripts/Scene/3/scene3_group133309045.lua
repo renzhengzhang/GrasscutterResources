@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309045
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -73,9 +73,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -85,13 +85,13 @@ function action_EVENT_QUEST_FINISH_45001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 7308303 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7308303) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -101,7 +101,7 @@ function condition_EVENT_QUEST_FINISH_45002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "queststate") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -112,22 +112,22 @@ function action_EVENT_QUEST_FINISH_45002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "complete") == 1 then
-
+	
 	-- 创建标识为"playcs1"，时间节点为{20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "playcs", {16}, false)
-
+	
 	end
-
-
+	
+	
 	if ScriptLib.GetGroupVariableValue(context, "complete") == 2 then
-
+	
 	-- 创建标识为"playcs2"，时间节点为{20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "playcutscene", {16}, false)
-
+	
 	end
-
+	
 	return 0
 end
 
@@ -137,7 +137,7 @@ function condition_EVENT_QUEST_FINISH_45003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "queststate") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -148,22 +148,22 @@ function action_EVENT_QUEST_FINISH_45003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "complete") == 1 then
-
+	
 	-- 创建标识为"playcs1"，时间节点为{20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "playcs", {16}, false)
-
+	
 	end
-
-
+	
+	
 	if ScriptLib.GetGroupVariableValue(context, "complete") == 2 then
-
+	
 	-- 创建标识为"playcs2"，时间节点为{20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "playcutscene", {16}, false)
-
+	
 	end
-
+	
 	return 0
 end
 
@@ -173,7 +173,7 @@ function condition_EVENT_QUEST_FINISH_45004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "queststate") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -184,22 +184,22 @@ function action_EVENT_QUEST_FINISH_45004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "complete") == 1 then
-
+	
 	-- 创建标识为"playcs1"，时间节点为{20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "playcs", {16}, false)
-
+	
 	end
-
-
+	
+	
 	if ScriptLib.GetGroupVariableValue(context, "complete") == 2 then
-
+	
 	-- 创建标识为"playcs2"，时间节点为{20}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "playcutscene", {16}, false)
-
+	
 	end
-
+	
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_TIME_AXIS_PASS_45005(context, evt)
 	if "playcs" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -219,7 +219,7 @@ function action_EVENT_TIME_AXIS_PASS_45005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_TIME_AXIS_PASS_45006(context, evt)
 	if "playcutscene" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -239,6 +239,6 @@ function action_EVENT_TIME_AXIS_PASS_45006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

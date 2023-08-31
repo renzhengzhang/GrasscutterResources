@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250007002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -68,9 +68,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -78,7 +78,7 @@ function condition_EVENT_GADGET_CREATE_1(context, evt)
 	if 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -89,7 +89,7 @@ function action_EVENT_GADGET_CREATE_1(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -98,7 +98,7 @@ function condition_EVENT_SELECT_OPTION_2(context, evt)
 	if 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -108,19 +108,19 @@ function action_EVENT_SELECT_OPTION_2(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 250007003, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 删除指定group： 250007002 ；指定config：3；物件身上指定option：105；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250007002, 3, 105) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end

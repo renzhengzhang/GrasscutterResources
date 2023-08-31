@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 233720005
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -98,9 +98,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -108,7 +108,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_5003(context, evt)
 	if 5001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -127,17 +127,17 @@ function action_EVENT_ANY_MONSTER_LIVE_5003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge_by_remainTime")
 	    return -1
 	  end
-
+	
 	-- 创建标识为"timer_init"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_init", {1}, false)
-
-
+	
+	
 	-- 将本组内变量名为 "monster_wave" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -146,20 +146,20 @@ function condition_EVENT_TIME_AXIS_PASS_5008(context, evt)
 	if "timer1_gv" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_5008(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer1_gv")
-
+	
 	local uid = ScriptLib.GetSceneUidList(context)
-
+	
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "LevelEntityTowerBuff_EnergyChangeMode", 1)
-
+	
 	ScriptLib.InitTimeAxis(context, "timer2_reminder", {8.8}, false)
-
+	
 	return 0
 end
 
@@ -168,18 +168,18 @@ function condition_EVENT_TIME_AXIS_PASS_5009(context, evt)
 	if "timer1_reminder" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_5009(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer1_reminder")
-
+	
 	ScriptLib.ShowReminder(context, 337200102)
-
+	
 	ScriptLib.InitTimeAxis(context, "timer1_gv", {0.8}, false)
-
+	
 	return 0
 end
 
@@ -188,18 +188,18 @@ function condition_EVENT_TIME_AXIS_PASS_5010(context, evt)
 	if "timer2_reminder" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_5010(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer2_reminder")
-
+	
 	ScriptLib.ShowReminder(context, 337200101)
-
+	
 	ScriptLib.InitTimeAxis(context, "timer2_gv", {0.8}, false)
-
+	
 	return 0
 end
 
@@ -209,12 +209,12 @@ function condition_EVENT_ANY_MONSTER_DIE_5012(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"monster_wave"为1
 	if ScriptLib.GetGroupVariableValue(context, "monster_wave") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -222,13 +222,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_5012(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 233720005, 3)
-
+	
 	-- 将本组内变量名为 "monster_wave" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -237,20 +237,20 @@ function condition_EVENT_TIME_AXIS_PASS_5013(context, evt)
 	if "timer_init" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_5013(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer_init")
-
+	
 	local uid = ScriptLib.GetSceneUidList(context)
-
+	
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "LevelEntityTowerBuff_EnergyChangeMode", 1)
-
+	
 	ScriptLib.InitTimeAxis(context, "timer2_reminder", {8.8}, false)
-
+	
 	return 0
 end
 
@@ -259,20 +259,20 @@ function condition_EVENT_TIME_AXIS_PASS_5014(context, evt)
 	if "timer2_gv" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_5014(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer2_gv")
-
+	
 	local uid = ScriptLib.GetSceneUidList(context)
-
+	
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "LevelEntityTowerBuff_EnergyChangeMode", -1)
-
+	
 	ScriptLib.InitTimeAxis(context, "timer1_reminder", {8.8}, false)
-
+	
 	return 0
 end
 
@@ -283,32 +283,32 @@ function action_EVENT_CHALLENGE_SUCCESS_5015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 233720003, 2)
-
+	
 	-- 改变指定group组233720003中， configid为3005的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233720003, 3005, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 停止标识为"timer1_reminder"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer1_reminder")
-
-
+	
+	
 	-- 停止标识为"timer2_reminder"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer2_reminder")
-
-
+	
+	
 	-- 停止标识为"timer1_gv"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer1_gv")
-
-
+	
+	
 	-- 停止标识为"timer2_gv"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer2_gv")
-
-
+	
+	
 	return 0
 end
 
@@ -319,31 +319,31 @@ function action_EVENT_CHALLENGE_FAIL_5016(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 233720003, 2)
-
+	
 	-- 停止标识为"timer1_reminder"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer1_reminder")
-
-
+	
+	
 	-- 停止标识为"timer2_reminder"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer2_reminder")
-
-
+	
+	
 	-- 停止标识为"timer1_gv"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer1_gv")
-
-
+	
+	
 	-- 停止标识为"timer2_gv"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer2_gv")
-
-
+	
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	return 0
 end

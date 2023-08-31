@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155005118
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	pointarryRot = 500500007,
 	pointarryRott = 500500008
 }
@@ -15,9 +15,9 @@ local DayAppearGadgets = {}
 local NightAppearGadgets = {}
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -101,14 +101,14 @@ function condition_EVENT_GADGET_STATE_CHANGE_118007(context, evt)
 	if 118003 ~= evt.param2 or 222 ~= ScriptLib.GetGadgetStateByConfigId(context, 155005118, 118003) then
 			return false
 		end
-
+		
 		return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_118007(context, evt)
 		ScriptLib.SetPlatformPointArray(context, 118001, defs.pointarryRot, { 1 }, { route_type = 0,turn_mode=true })
-
+	
 			local pos = {x=644.9871, y=195, z=492}
 		  local pos_follow = {x=0, y=0, z=0}
 		    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
@@ -116,8 +116,8 @@ function action_EVENT_GADGET_STATE_CHANGE_118007(context, evt)
 		                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 						ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 		        return -1
-					end
-
+					end 
+	
 		-- 将本组内变量名为 "Door01" 的变量设置为 1
 		if 0 ~= ScriptLib.SetGroupVariableValue(context, "Door01", 1) then
 		  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
@@ -131,7 +131,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_118008(context, evt)
 	if 118004 ~= evt.param2 or 322 ~= ScriptLib.GetGadgetStateByConfigId(context, 155005118, 118004) then
 			return false
 		end
-
+		
 		return true
 end
 
@@ -160,7 +160,7 @@ function condition_EVENT_GROUP_LOAD_118010(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Door02", 155005118) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -176,7 +176,7 @@ function condition_EVENT_GROUP_LOAD_118011(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Door01", 155005118) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 

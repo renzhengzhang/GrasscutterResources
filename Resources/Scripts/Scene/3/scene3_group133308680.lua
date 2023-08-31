@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308680
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_elevator_id = 680001,
 	gadget_floor_id = 120008,
 	pointarray_id = 330800057
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -102,9 +102,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -115,9 +115,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -142,20 +142,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_680008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"isLocked"为0
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -165,20 +165,20 @@ function action_EVENT_VARIABLE_CHANGE_680008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为680004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 680004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为680006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 680006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=-1491.528, y=127.1324, z=4438.673}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-1491.528, y=127.1324, z=4438.673}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -187,8 +187,8 @@ function action_EVENT_VARIABLE_CHANGE_680008(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_GADGET_CREATE_680009(context, evt)
 	if 680003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -208,7 +208,7 @@ function action_EVENT_GADGET_CREATE_680009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_GADGET_CREATE_680010(context, evt)
 	if 680004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -228,7 +228,7 @@ function action_EVENT_GADGET_CREATE_680010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -237,7 +237,7 @@ function condition_EVENT_GADGET_CREATE_680011(context, evt)
 	if 680006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -248,7 +248,7 @@ function action_EVENT_GADGET_CREATE_680011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -257,7 +257,7 @@ function condition_EVENT_GADGET_CREATE_680012(context, evt)
 	if 680005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -268,7 +268,7 @@ function action_EVENT_GADGET_CREATE_680012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -276,19 +276,19 @@ end
 function condition_EVENT_SELECT_OPTION_680013(context, evt)
 	-- 判断是gadgetid 680004 option_id 433
 	if 680004 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 433 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"isLocked"为0
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -296,32 +296,32 @@ end
 function action_EVENT_SELECT_OPTION_680013(context, evt)
 	-- 创建标识为"goingDown"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "goingDown", {3}, false)
-
-
+	
+	
 	-- 将configid为 680001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 680002 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308680, EntityType.GADGET, 680004 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308680, EntityType.GADGET, 680006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -329,19 +329,19 @@ end
 function condition_EVENT_SELECT_OPTION_680014(context, evt)
 	-- 判断是gadgetid 680006 option_id 453
 	if 680006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 453 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"isLocked"为0
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -352,7 +352,7 @@ function action_EVENT_SELECT_OPTION_680014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -361,31 +361,31 @@ function action_EVENT_SELECT_OPTION_680014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将configid为 680001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 680002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308680, EntityType.GADGET, 680004 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308680, EntityType.GADGET, 680006 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -393,19 +393,19 @@ end
 function condition_EVENT_SELECT_OPTION_680015(context, evt)
 	-- 判断是gadgetid 680003 option_id 453
 	if 680003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 453 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"isLocked"为0
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -416,7 +416,7 @@ function action_EVENT_SELECT_OPTION_680015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 设置移动平台点阵,点阵id为point_array_id
 	-- route_type = 0,1,2 [OneWay 单向/Reciprocate 往复/Loop 循环]
 	-- turn_mode = true/false 开启/关闭
@@ -425,31 +425,31 @@ function action_EVENT_SELECT_OPTION_680015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将configid为 680001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 680007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308680, EntityType.GADGET, 680003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308680, EntityType.GADGET, 680005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -457,19 +457,19 @@ end
 function condition_EVENT_SELECT_OPTION_680016(context, evt)
 	-- 判断是gadgetid 680005 option_id 433
 	if 680005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 433 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"isLocked"为0
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -477,32 +477,32 @@ end
 function action_EVENT_SELECT_OPTION_680016(context, evt)
 	-- 创建标识为"goingUp"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "goingUp", {3}, false)
-
-
+	
+	
 	-- 将configid为 680001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 680007 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680007, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308680, EntityType.GADGET, 680003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133308680, EntityType.GADGET, 680005 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -511,7 +511,7 @@ function condition_EVENT_TIME_AXIS_PASS_680017(context, evt)
 	if "goingDown" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -525,7 +525,7 @@ function action_EVENT_TIME_AXIS_PASS_680017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -534,7 +534,7 @@ function condition_EVENT_TIME_AXIS_PASS_680018(context, evt)
 	if "goingUp" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -548,27 +548,27 @@ function action_EVENT_TIME_AXIS_PASS_680018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_680019(context, evt)
 	-- 判断是gadgetid 为 680001的移动平台，是否到达了330800057 的点集中的 2 点
-
+	
 	if 680001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800057 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -576,28 +576,28 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_680019(context, evt)
 	-- 创建标识为"wentDown"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "wentDown", {1}, false)
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_680020(context, evt)
 	-- 判断是gadgetid 为 680001的移动平台，是否到达了330800057 的点集中的 1 点
-
+	
 	if 680001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 330800057 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -605,8 +605,8 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_680020(context, evt)
 	-- 创建标识为"wentUp"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "wentUp", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -615,7 +615,7 @@ function condition_EVENT_TIME_AXIS_PASS_680021(context, evt)
 	if "wentUp" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -625,32 +625,32 @@ function action_EVENT_TIME_AXIS_PASS_680021(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 680002 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 680007 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680007, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为680004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 680004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为680006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 680006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -659,7 +659,7 @@ function condition_EVENT_TIME_AXIS_PASS_680022(context, evt)
 	if "wentDown" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -669,32 +669,32 @@ function action_EVENT_TIME_AXIS_PASS_680022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 680007 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680007, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 680002 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为680003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 680003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为680005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 680005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -704,7 +704,7 @@ function condition_EVENT_GROUP_LOAD_680023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isLocked") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -714,19 +714,19 @@ function action_EVENT_GROUP_LOAD_680023(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 680002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为680004的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 680004 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为680006的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 680006 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

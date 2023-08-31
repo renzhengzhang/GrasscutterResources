@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301250
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_CoreID = 250005,
 	monster_BossID = 250002,
 	gadget_Point_1 = 250006,
@@ -42,9 +42,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -117,9 +117,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -130,9 +130,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -175,9 +175,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -190,9 +190,9 @@ function action_EVENT_LUA_NOTIFY_250014(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
-
+				end 
+	
+	
 	return 0
 end
 
@@ -201,7 +201,7 @@ function condition_EVENT_MONSTER_BATTLE_250016(context, evt)
 	if 250002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -211,38 +211,38 @@ function action_EVENT_MONSTER_BATTLE_250016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250012, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为250015的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 250015 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为250025的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 250025 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为250032的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 250032 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为250033的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 250033 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为250034的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 250034 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -252,8 +252,8 @@ function condition_EVENT_ANY_MONSTER_DIE_250018(context, evt)
 	if evt.param1 ~= 250002 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -263,8 +263,8 @@ function action_EVENT_ANY_MONSTER_DIE_250018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 250012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -273,7 +273,7 @@ function condition_EVENT_ANY_GADGET_DIE_250027(context, evt)
 	if 250005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -281,7 +281,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_250027(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301250, 4)
-
+	
 	return 0
 end
 
@@ -290,7 +290,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_250028(context, evt)
 	if 250006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -301,8 +301,8 @@ function action_EVENT_GADGET_STATE_CHANGE_250028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -311,7 +311,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_250029(context, evt)
 	if 250007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -322,8 +322,8 @@ function action_EVENT_GADGET_STATE_CHANGE_250029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -332,7 +332,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_250030(context, evt)
 	if 250008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -343,8 +343,8 @@ function action_EVENT_GADGET_STATE_CHANGE_250030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133003074
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -104,9 +104,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -114,7 +114,7 @@ function condition_EVENT_ANY_GADGET_DIE_74006(context, evt)
 	if 74027 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -125,20 +125,20 @@ function action_EVENT_ANY_GADGET_DIE_74006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=2180.845,y=226.26,z=-1211.189}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110434, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "alive" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "alive", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_ANY_GADGET_DIE_74007(context, evt)
 	if 74023 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -158,19 +158,19 @@ function action_EVENT_ANY_GADGET_DIE_74007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "boom" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "boom", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "alive" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "alive", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -179,7 +179,7 @@ function condition_EVENT_ANY_GADGET_DIE_74008(context, evt)
 	if 74024 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -190,19 +190,19 @@ function action_EVENT_ANY_GADGET_DIE_74008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "boom" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "boom", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "alive" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "alive", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -212,7 +212,7 @@ function condition_EVENT_ANY_MONSTER_DIE_74017(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -223,7 +223,7 @@ function action_EVENT_ANY_MONSTER_DIE_74017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -232,7 +232,7 @@ function condition_EVENT_ANY_GADGET_DIE_74018(context, evt)
 	if 74025 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -243,19 +243,19 @@ function action_EVENT_ANY_GADGET_DIE_74018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "boom" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "boom", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "alive" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "alive", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -264,7 +264,7 @@ function condition_EVENT_ANY_GADGET_DIE_74028(context, evt)
 	if 74022 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -275,19 +275,19 @@ function action_EVENT_ANY_GADGET_DIE_74028(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "boom" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "boom", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "alive" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "alive", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -296,7 +296,7 @@ function condition_EVENT_ANY_GADGET_DIE_74029(context, evt)
 	if 74026 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -307,31 +307,31 @@ function action_EVENT_ANY_GADGET_DIE_74029(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "boom" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "boom", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "alive" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "alive", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_74030(context, evt)
 	if evt.param1 ~= 74030 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -343,19 +343,19 @@ function action_EVENT_ENTER_REGION_74030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_74031(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"boom"为1
 	if ScriptLib.GetGroupVariableValue(context, "boom") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -367,7 +367,7 @@ function action_EVENT_VARIABLE_CHANGE_74031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -377,12 +377,12 @@ function condition_EVENT_ANY_MONSTER_DIE_74032(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "alive") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断剩余怪物数量是否是0
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -394,6 +394,6 @@ function action_EVENT_ANY_MONSTER_DIE_74032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end

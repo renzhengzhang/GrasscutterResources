@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003037
 }
 
 -- DEFS_MISCS
-defs =
+local defs = 
 {
         rmd_list = {1111160,1111161,1111162},
 }
@@ -13,7 +13,7 @@ function LF_GetRandomResult(context, source_table)
 
         math.randomseed(ScriptLib.GetServerTime(context))
         rand_index = math.random(#source_table)
-
+        
         if nil ~= source_table[rand_index] then
                 ScriptLib.PrintContextLog(context, "## [GetRandom] Get Random Result: value@"..source_table[rand_index])
                 return source_table[rand_index]
@@ -23,9 +23,9 @@ function LF_GetRandomResult(context, source_table)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -87,20 +87,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_37001(context, evt)
 	if evt.param1 ~= 37001 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -112,7 +112,7 @@ function condition_EVENT_ENTER_REGION_37001(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -125,6 +125,6 @@ function action_EVENT_ENTER_REGION_37001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 	        return -1
 	end
-
+	
 	return 0
 end

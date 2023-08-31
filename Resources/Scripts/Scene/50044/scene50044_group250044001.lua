@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250044001
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	laser_interval1 = 10,
 	laser_interval2 = 8,
 	laser_interval3 = 6
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -228,9 +228,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -241,9 +241,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -376,9 +376,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -386,7 +386,7 @@ function condition_EVENT_GADGET_CREATE_1109(context, evt)
 	if 1005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -397,7 +397,7 @@ function action_EVENT_GADGET_CREATE_1109(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -405,14 +405,14 @@ end
 function condition_EVENT_SELECT_OPTION_1110(context, evt)
 	-- 判断是gadgetid 1005 option_id 13
 	if 1005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 13 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -420,88 +420,88 @@ end
 function action_EVENT_SELECT_OPTION_1110(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250044001, 2)
-
+	
 	-- 延迟3秒后,向groupId为：250044001的对象,请求一次调用,并将string参数："active_laser" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250044001, "active_laser", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟3秒后,向groupId为：250044001的对象,请求一次调用,并将string参数："active_ground" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250044001, "active_ground", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_1111(context, evt)
 	--创建射线墙
-	local count = ScriptLib.GetGroupVariableValue(context, "laser_count")
-
+	local count = ScriptLib.GetGroupVariableValue(context, "laser_count") 
+	
 	if count <= 3 then
-
-	        local suite_id = ScriptLib.GetGroupVariableValue(context, "current_id")
-
+	
+	        local suite_id = ScriptLib.GetGroupVariableValue(context, "current_id") 
+	
 	        ScriptLib.AddExtraGroupSuite(context, 250044001, suite_id)
-
+	
 	        for k,v in ipairs(suites[suite_id].gadgets) do
 	                ScriptLib.SetGroupGadgetStateByConfigId(context, 250044001, v, 201)
 	                ScriptLib.StartPlatform(context, v)
 	        end
-
+	
 	        ScriptLib.ChangeGroupVariableValueByGroup(context, "current_id", 1, 250044001)
-
+	
 	        ScriptLib.ChangeGroupVariableValue(context, "laser_count", 1)
-
+	
 	        ScriptLib.CreateGroupTimerEvent(context, 250044001, "active_laser", defs.laser_interval1)
-
+	
 	elseif count > 3 and count <= 6 then
-
-	        local suite_id = ScriptLib.GetGroupVariableValue(context, "current_id")
-
+	
+	        local suite_id = ScriptLib.GetGroupVariableValue(context, "current_id") 
+	
 	        ScriptLib.AddExtraGroupSuite(context, 250044001, suite_id)
-
+	
 	        for k,v in ipairs(suites[suite_id].gadgets) do
 	                ScriptLib.SetGroupGadgetStateByConfigId(context, 250044001, v, 201)
 	                ScriptLib.StartPlatform(context, v)
 	        end
-
+	
 	        ScriptLib.ChangeGroupVariableValueByGroup(context, "current_id", 1, 250044001)
-
+	
 	        ScriptLib.ChangeGroupVariableValue(context, "laser_count", 1)
-
+	
 	        ScriptLib.CreateGroupTimerEvent(context, 250044001, "active_laser", defs.laser_interval2)
 	elseif count <= 10 then
-
-	        local suite_id = ScriptLib.GetGroupVariableValue(context, "current_id")
-
+	
+	        local suite_id = ScriptLib.GetGroupVariableValue(context, "current_id") 
+	
 	        ScriptLib.AddExtraGroupSuite(context, 250044001, suite_id)
-
+	
 	        for k,v in ipairs(suites[suite_id].gadgets) do
 	                ScriptLib.SetGroupGadgetStateByConfigId(context, 250044001, v, 201)
 	                ScriptLib.StartPlatform(context, v)
 	        end
-
+	
 	        ScriptLib.ChangeGroupVariableValueByGroup(context, "current_id", 1, 250044001)
-
+	
 	        ScriptLib.ChangeGroupVariableValue(context, "laser_count", 1)
-
-	        ScriptLib.CreateGroupTimerEvent(context, 250044001, "active_laser", defs.laser_interval3)
-
+	
+	        ScriptLib.CreateGroupTimerEvent(context, 250044001, "active_laser", defs.laser_interval3)       
+	
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_1112(context, evt)
 	local laser_config_id = evt.param1
-
-	ScriptLib.KillEntityByConfigId(context, { group_id = 250044001, config_id = laser_config_id})
-
+	
+	ScriptLib.KillEntityByConfigId(context, { group_id = 250044001, config_id = laser_config_id}) 
+	
 	return 0
 end
 
@@ -509,7 +509,7 @@ end
 function action_EVENT_TIMER_EVENT_1124(context, evt)
 	-- 添加suite14的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250044001, 14)
-
+	
 	return 0
 end
 
@@ -518,17 +518,17 @@ function condition_EVENT_GADGET_CREATE_1185(context, evt)
 	if 1126 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_1185(context, evt)
 	local gadget_list = suites[14].gadgets
-
+	
 	for i, v in ipairs(gadget_list) do
 	        ScriptLib.SetGroupGadgetStateByConfigId(context, 250044001, v, 201)
 	end
-
+	
 	return 0
 end

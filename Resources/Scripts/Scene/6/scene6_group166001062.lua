@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 166001062
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	bossConfigId = 62001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ sight_groups = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -120,9 +120,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -130,7 +130,7 @@ function condition_EVENT_TIME_AXIS_PASS_62002(context, evt)
 	if "BOSSDIE" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -141,7 +141,7 @@ function action_EVENT_TIME_AXIS_PASS_62002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -150,7 +150,7 @@ function condition_EVENT_MONSTER_BATTLE_62004(context, evt)
 	if 62001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -161,7 +161,7 @@ function action_EVENT_MONSTER_BATTLE_62004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -169,8 +169,8 @@ end
 function action_EVENT_LUA_NOTIFY_62005(context, evt)
 	-- 创建标识为"BOSSDIE"，时间节点为{3,8}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "BOSSDIE", {3,8}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -179,7 +179,7 @@ function condition_EVENT_TIME_AXIS_PASS_62006(context, evt)
 	if "BOSSDIE" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -190,7 +190,7 @@ function action_EVENT_TIME_AXIS_PASS_62006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -198,7 +198,7 @@ end
 function action_EVENT_LUA_NOTIFY_62013(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001062, 2)
-
+	
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_ANY_GADGET_DIE_62014(context, evt)
 	if 62009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -218,8 +218,8 @@ function action_EVENT_ANY_GADGET_DIE_62014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_ANY_GADGET_DIE_62015(context, evt)
 	if 62010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -239,8 +239,8 @@ function action_EVENT_ANY_GADGET_DIE_62015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -248,7 +248,7 @@ end
 function action_EVENT_LUA_NOTIFY_62016(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001062, 3)
-
+	
 	return 0
 end
 
@@ -256,7 +256,7 @@ end
 function action_EVENT_LUA_NOTIFY_62017(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001062, 4)
-
+	
 	return 0
 end
 
@@ -264,13 +264,13 @@ end
 function action_EVENT_LUA_NOTIFY_62018(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001062, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001062, 3)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001062, 4)
-
+	
 	return 0
 end
 

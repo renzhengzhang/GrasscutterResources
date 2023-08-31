@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133106214
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -101,7 +101,7 @@ function condition_EVENT_ANY_GADGET_DIE_214012(context, evt)
 	if 214004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -112,7 +112,7 @@ function action_EVENT_ANY_GADGET_DIE_214012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -121,7 +121,7 @@ function condition_EVENT_ANY_GADGET_DIE_214013(context, evt)
 	if 214005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -132,7 +132,7 @@ function action_EVENT_ANY_GADGET_DIE_214013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -141,7 +141,7 @@ function condition_EVENT_ANY_GADGET_DIE_214014(context, evt)
 	if 214002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -152,7 +152,7 @@ function action_EVENT_ANY_GADGET_DIE_214014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -161,7 +161,7 @@ function condition_EVENT_ANY_GADGET_DIE_214015(context, evt)
 	if 214001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -172,7 +172,7 @@ function action_EVENT_ANY_GADGET_DIE_214015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -181,7 +181,7 @@ function condition_EVENT_ANY_GADGET_DIE_214016(context, evt)
 	if 214006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -192,17 +192,17 @@ function action_EVENT_ANY_GADGET_DIE_214016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_214017(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0
+	-- 判断指定group组剩余gadget数量是否是0 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133106214}) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -213,6 +213,6 @@ function action_EVENT_ANY_GADGET_DIE_214017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

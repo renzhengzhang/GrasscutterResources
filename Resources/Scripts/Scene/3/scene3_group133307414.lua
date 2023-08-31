@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133307414
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	point_sum = 6,
 	route_2 = 330700124,
 	gadget_seelie = 414002
@@ -14,9 +14,9 @@ defs = {
 defs.final_point = defs.point_sum - 1
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -109,9 +109,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 设置此group的variable
@@ -139,16 +139,16 @@ function condition_EVENT_GADGET_STATE_CHANGE_414004(context, evt)
 	if 414003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_414004(context, evt)
 	TLA_set_groupvariable(context, evt, "isfinish", 1)
-
+	
 	ScriptLib.KillEntityByConfigId(context, {group_id=133307414, config_id=408002, entity_type=EntityType.NONE})
-
+	
 	return 0
 end
 
@@ -157,24 +157,24 @@ function condition_EVENT_PLATFORM_ARRIVAL_414005(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-
+	
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-
+	
 	if  defs.final_point ~= evt.param3 then
 	return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_ARRIVAL_414005(context, evt)
 	TLA_stop_platform(context, evt, 414002)
-
+	
 	ScriptLib.GoToGroupSuite(context, 133307414, 3)
-
+	
 	return 0
 end
 
@@ -183,15 +183,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_414006(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-
+	
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-
+	
 	if defs.final_point == evt.param3 then
 	return false
 	end
-
+	
 	return true
 end
 
@@ -200,7 +200,7 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_414006(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, 414002) then
 	return -1
 	end
-
+	
 	return 0
 end
 
@@ -211,7 +211,7 @@ function action_EVENT_ENTER_REGION_414007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -221,14 +221,14 @@ function condition_EVENT_GROUP_LOAD_414008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isfinish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_414008(context, evt)
 	ScriptLib.KillEntityByConfigId(context, {group_id=133307414, config_id=408002, entity_type=EntityType.NONE})
-
+	
 	return 0
 end
 
@@ -237,7 +237,7 @@ function condition_EVENT_GROUP_LOAD_414009(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133307395, 395005) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -245,19 +245,19 @@ end
 function action_EVENT_GROUP_LOAD_414009(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133307414, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_414010(context, evt)
 	if evt.param1 ~= 414010 then return false end
-
+	
 	-- 判断是区域414010
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 414010 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -268,7 +268,7 @@ function action_EVENT_ENTER_REGION_414010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=-2145.35, y=27.29208, z=5568.525}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-2145.35, y=27.29208, z=5568.525}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -277,7 +277,7 @@ function action_EVENT_ENTER_REGION_414010(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end

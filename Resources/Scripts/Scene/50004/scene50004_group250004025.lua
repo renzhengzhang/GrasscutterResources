@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250004025
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 252,
 	gadget_id_2 = 251,
 	gadget_id_3 = 1,
@@ -14,9 +14,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,18 +85,18 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_CLIENT_EXECUTE_49(context, evt)
 	-- 判断是gadgetid 57 option_id 0
 	if defs.gadget_id_1 == ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid }) then
-
+	
 	return true
-
+	
 	end
 end
 
@@ -104,23 +104,23 @@ end
 function action_EVENT_CLIENT_EXECUTE_49(context, evt)
 	-- 将configid为 40 的物件更改为状态 GadgetState.Default
 	if evt.param1 == defs.gadget_id_3 then
-
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_2, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
-
+	
 	end
-
+	
 	if evt.param1 == defs.gadget_id_4 then
-
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_2, GadgetState.GearAction1) then
 			return -1
-		end
-
+		end 
+	
 	return 0
-
+	
 	end
 end
 
@@ -128,9 +128,9 @@ end
 function condition_EVENT_CLIENT_EXECUTE_50(context, evt)
 	-- 判断是gadgetid 57 option_id 0
 	if defs.gadget_id_5 == ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid }) then
-
+	
 	return true
-
+	
 	end
 end
 
@@ -138,35 +138,35 @@ end
 function action_EVENT_CLIENT_EXECUTE_50(context, evt)
 	-- 将configid为 40 的物件更改为状态 GadgetState.Default
 	if evt.param1 == defs.gadget_id_3 then
-
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_6, GadgetState.GearStop) then
 			return -1
-		end
-
+		end 
+	
 	return 0
-
+	
 	end
-
+	
 	if evt.param1 == defs.gadget_id_4 then
-
+	
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_6, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	return 0
-
+	
 	end
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_51(context, evt)
 	if evt.param1 ~= 51 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -176,7 +176,7 @@ function action_EVENT_ENTER_REGION_51(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 251, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

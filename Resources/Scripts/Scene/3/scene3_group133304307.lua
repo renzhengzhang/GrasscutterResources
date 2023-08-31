@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304307
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -107,9 +107,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -118,7 +118,7 @@ function condition_EVENT_GROUP_LOAD_307002(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "door", 133304307) ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -129,8 +129,8 @@ function action_EVENT_GROUP_LOAD_307002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -139,7 +139,7 @@ function condition_EVENT_ANY_GADGET_DIE_307030(context, evt)
 	if 307025 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -150,19 +150,19 @@ function action_EVENT_ANY_GADGET_DIE_307030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_307031(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"door"为2
 	if ScriptLib.GetGroupVariableValueByGroup(context, "door", 133304307) ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -172,12 +172,12 @@ function action_EVENT_VARIABLE_CHANGE_307031(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 307014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"delay"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "delay", {3}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -186,7 +186,7 @@ function condition_EVENT_TIME_AXIS_PASS_307032(context, evt)
 	if "delay" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -197,7 +197,7 @@ function action_EVENT_TIME_AXIS_PASS_307032(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end

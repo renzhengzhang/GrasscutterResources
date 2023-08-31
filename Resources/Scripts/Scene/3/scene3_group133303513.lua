@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303513
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -73,9 +73,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +86,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -104,9 +104,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -114,7 +114,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513027(context, evt)
 	if 513001 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -125,7 +125,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -134,7 +134,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513028(context, evt)
 	if 513002 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -145,7 +145,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513029(context, evt)
 	if 513003 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -165,7 +165,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -174,7 +174,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513030(context, evt)
 	if 513004 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -185,7 +185,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -194,7 +194,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513031(context, evt)
 	if 513005 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -205,7 +205,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -214,7 +214,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513032(context, evt)
 	if 513006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -225,7 +225,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -234,7 +234,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513033(context, evt)
 	if 513007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -245,7 +245,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -254,7 +254,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513034(context, evt)
 	if 513008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -265,7 +265,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -274,7 +274,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513035(context, evt)
 	if 513009 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -285,7 +285,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -294,7 +294,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513036(context, evt)
 	if 513010 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -305,7 +305,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -314,7 +314,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513037(context, evt)
 	if 513011 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -325,7 +325,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -334,7 +334,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513038(context, evt)
 	if 513012 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -345,7 +345,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -354,7 +354,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_513039(context, evt)
 	if 513013 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -365,7 +365,7 @@ function action_EVENT_GADGET_STATE_CHANGE_513039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 

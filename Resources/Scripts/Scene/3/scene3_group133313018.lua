@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133313018
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	point_camera = 18019,
 	gadget_lookEntity = 18008,
 	look_duration = 4
@@ -12,34 +12,29 @@ defs = {
 
 -- DEFS_MISCS
 local CameraLookSetting = {
-    blend_type = 1,
-  --镜头的移动路径，球面0，直线1
-    blend_duration = 1,
- --镜头的移动时间
-    is_force_walk = false,
- --强制玩家行走
-    is_allow_input = false,
- --允许输入
-    delay = 0,
- --触发延迟
+    blend_type = 1,  --镜头的移动路径，球面0，直线1
+    blend_duration = 1, --镜头的移动时间
+    is_force_walk = false, --强制玩家行走
+    is_allow_input = false, --允许输入
+    delay = 0, --触发延迟
 }
 
-local I_connectors =
+local I_connectors = 
 {
     [1] = 18003
 }
 
-local L_connectors =
+local L_connectors = 
 {
 
 }
 
-local containers =
+local containers = 
 {
     [1] = 18017
 }
 
-local lights =
+local lights = 
 {
     [1] = 18007,
     [2] = 18012,
@@ -48,36 +43,36 @@ local lights =
     [5] = 18016
 }
 
-local streams =
+local streams = 
 {
    [containers[1]] = {I_connectors[1],lights[1],lights[2],lights[3],lights[4],lights[5]}
 }
 
-local L_connections =
+local L_connections = 
 {
-
+    
 }
 
 local base_interval = 2
 
-local special_interval =
+local special_interval = 
 {
 }
 
-local worktops =
+local worktops = 
 {
 
 }
 
-local connector_to_worktop =
+local connector_to_worktop = 
 {
 
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -139,9 +134,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -152,9 +147,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -170,9 +165,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 删除指定操作台的option
@@ -191,7 +186,7 @@ function TLA_set_gadget_state_by_configid(context, evt, config_id, state)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, config_id, state) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
+		end 
 	return 0
 end
 
@@ -211,7 +206,7 @@ function condition_EVENT_GROUP_LOAD_18005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "door_open") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -221,8 +216,8 @@ function action_EVENT_GROUP_LOAD_18005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -230,14 +225,14 @@ end
 function condition_EVENT_SELECT_OPTION_18006(context, evt)
 	-- 判断是gadgetid 18002 option_id 7
 	if 18002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -248,41 +243,41 @@ function action_EVENT_SELECT_OPTION_18006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 18002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 18004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133313018 ；指定config：18002；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133313018, 18002, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 创建标识为"Rmd_Time"，时间节点为{3}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Rmd_Time", {3}, false)
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_18009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"phase"为1
 	if ScriptLib.GetGroupVariableValue(context, "phase") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -292,14 +287,14 @@ function action_EVENT_VARIABLE_CHANGE_18009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18001, GadgetState.ExcitedState) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133313018, 18001, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -309,7 +304,7 @@ function condition_EVENT_GADGET_CREATE_18010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "phase") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -319,14 +314,14 @@ function action_EVENT_GADGET_CREATE_18010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133313018, 18001, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -334,29 +329,29 @@ end
 function condition_EVENT_SELECT_OPTION_18011(context, evt)
 	-- 判断是gadgetid 18001 option_id 7
 	if 18001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_18011(context, evt)
 	TLA_set_gadget_state_by_configid(context, evt, 18001, GadgetState.GearStart)
-
+	
 	TLA_set_groupvariable(context, evt, "phase", 2)
-
+	
 	TLA_set_gadget_state_by_configid(context, evt, 18003, GadgetState.GearStart)
-
+	
 	TLA_del_work_options_by_group_configid(context, evt, 133313018, 18001, 7)
-
+	
 	LF_PointLook(context)
-
+	
 	return 0
 end
 
@@ -365,7 +360,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_18013(context, evt)
 	if 18017 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -375,14 +370,14 @@ function action_EVENT_GADGET_STATE_CHANGE_18013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 18002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133313018, 18002, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -391,7 +386,7 @@ function condition_EVENT_GADGET_CREATE_18018(context, evt)
 	if 18002 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -402,7 +397,7 @@ function action_EVENT_GADGET_CREATE_18018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 

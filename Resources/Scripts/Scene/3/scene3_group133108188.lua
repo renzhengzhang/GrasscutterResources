@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133108188
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     GroupID = 133108188,
     AGRegionConfigID = 188011,
     AGName = "ActivityAbility_ToMoon_FoodChallenge_Part3",
@@ -24,9 +24,9 @@ local Phase ={
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -92,9 +92,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -105,9 +105,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -177,20 +177,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_188011(context, evt)
 	if evt.param1 ~= 188011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -201,7 +201,7 @@ function action_EVENT_ANY_MONSTER_DIE_188012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -209,7 +209,7 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_188013(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108188, 7)
-
+	
 	return 0
 end
 
@@ -218,7 +218,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_188014(context, evt)
 	if 188010 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -229,19 +229,19 @@ function action_EVENT_GADGET_STATE_CHANGE_188014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_188021(context, evt)
 	if evt.param1 ~= 188021 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -249,7 +249,7 @@ end
 function action_EVENT_ENTER_REGION_188021(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108188, 2)
-
+	
 	return 0
 end
 
@@ -259,12 +259,12 @@ function condition_EVENT_ANY_MONSTER_DIE_188036(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 3 then
 		return false
 	end
-
+	
 	-- 判断变量"stage"为1
 	if ScriptLib.GetGroupVariableValue(context, "stage") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -275,16 +275,16 @@ function action_EVENT_ANY_MONSTER_DIE_188036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133108188, 5)
-
+	
 	-- 调用提示id为 400070 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400070) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133008324
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -82,9 +82,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -93,8 +93,8 @@ function condition_EVENT_ANY_MONSTER_DIE_324002(context, evt)
 	if evt.param1 ~= 324001 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -104,20 +104,20 @@ function action_EVENT_ANY_MONSTER_DIE_324002(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008228, 228001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组133008228中， configid为228006的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008228, 228006, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组133008165中， configid为165001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008165, 165001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 触发镜头注目，注目位置为坐标（814，326，-657），持续时间为4秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=814, y=326, z=-657}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -126,14 +126,14 @@ function action_EVENT_ANY_MONSTER_DIE_324002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 将本组内变量名为 "isActivate" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isActivate", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -142,7 +142,7 @@ function condition_EVENT_ANY_GADGET_DIE_324004(context, evt)
 	if 324003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -153,16 +153,16 @@ function action_EVENT_ANY_GADGET_DIE_324004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 改变指定monster的globalvalue
 	  ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {324001}, "_MONSTERAFFIX_AIHITFEELING_LEVELTRIGGER", 1)
-
+	
 	-- 通知groupid为133008324中,configid为：324001的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 324001, 133008324) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -172,7 +172,7 @@ function condition_EVENT_GROUP_LOAD_324005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isActivate") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -183,7 +183,7 @@ function action_EVENT_GROUP_LOAD_324005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -193,8 +193,8 @@ function condition_EVENT_ANY_MONSTER_DIE_324006(context, evt)
 	if evt.param1 ~= 324007 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -204,20 +204,20 @@ function action_EVENT_ANY_MONSTER_DIE_324006(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008228, 228001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组133008228中， configid为228006的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008228, 228006, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组133008165中， configid为165001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133008165, 165001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 触发镜头注目，注目位置为坐标（814，326，-657），持续时间为4秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=814, y=326, z=-657}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -226,7 +226,7 @@ function action_EVENT_ANY_MONSTER_DIE_324006(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end

@@ -1,16 +1,15 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 247203001
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 
 --【三期新增】电梯所在房间的region id，用于保底玩家离开之后又飞速冲回来
     elevatorRegion = 1016,
 
-
---【三期新增】离开区域关电梯厅的门
+--【三期新增】离开区域关电梯厅的门
     elevatorCloseRegion = 1030,
 
     keyDoor = {
@@ -56,15 +55,15 @@ defs = {
 
     --父挑战识别ID
     challenge_father = 999,
-
+    
     --随机球GroupID
     buff_group = 247203008,
             }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -159,9 +158,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -172,9 +171,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -208,9 +207,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -220,13 +219,13 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE_1021(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 结束挑战失败！！！！")
 		return -1
 	end
-
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -235,20 +234,20 @@ function condition_EVENT_GADGET_CREATE_1022(context, evt)
 	if 1001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_1022(context, evt)
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 247203008 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
-
+	
+	
 	return 0
 end
 
@@ -256,19 +255,19 @@ end
 function action_EVENT_DUNGEON_SETTLE_1023(context, evt)
 	--判断胜利or失败
 	if 1 ~= evt.param1 then
-
+	
 		ScriptLib.StopGallery(context, defs.gallery_id, true)
 		ScriptLib.PrintContextLog(context, "gallery失败结算!!!!!!!!")
-
-
-
+	
+		
+	
 	else
-
+	
 		ScriptLib.StopGallery(context, defs.gallery_id, false)
 		ScriptLib.PrintContextLog(context, "galllery胜利结算!!!!!!!!")
-
-
-
+	
+	
+	
 	end
 	return 0
 end
@@ -276,12 +275,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1024(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"runes"为1
 	if ScriptLib.GetGroupVariableValue(context, "runes") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -292,19 +291,19 @@ function action_EVENT_VARIABLE_CHANGE_1024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1025(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"runes"为2
 	if ScriptLib.GetGroupVariableValue(context, "runes") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -315,19 +314,19 @@ function action_EVENT_VARIABLE_CHANGE_1025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1026(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"runes"为3
 	if ScriptLib.GetGroupVariableValue(context, "runes") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -338,22 +337,22 @@ function action_EVENT_VARIABLE_CHANGE_1026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247203001, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1027(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"runes"为3
 	if ScriptLib.GetGroupVariableValue(context, "runes") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -364,18 +363,18 @@ function action_EVENT_VARIABLE_CHANGE_1027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, defs.group_1, defs.gadget_switch, {59}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	--子挑战 启动父机关 打开电梯门
 	ScriptLib.AttachChildChallenge(context, 999, 902, 230, {7,902,1,1},{},{success=1,fail=1})
-
+	
 	ScriptLib.PrintContextLog(context, "操作台子挑战挂载!!!!!!!!")
-
+	
 	return 0
 end
 
@@ -383,14 +382,14 @@ end
 function condition_EVENT_SELECT_OPTION_1028(context, evt)
 	-- 判断是gadgetid 1003 option_id 59
 	if 1003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 59 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -401,53 +400,53 @@ function action_EVENT_SELECT_OPTION_1028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
 		end
-
-
+	
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 247203001, 2)
-
-
+	
+	
 	-- 删除指引点
 	    ScriptLib.RemoveExtraGroupSuite(context, 247203001, 3)
-
+	
 	-- 删除中控台group的地上操作台物件；物件身上指定option：59；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 247203001, 1003, 59) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	--子挑战 完成最终试练
 	ScriptLib.AttachChildChallenge(context, 999, 903, 231, {3,903,1,1},{},{success=99999,fail=1})
-
+	
 	ScriptLib.PrintContextLog(context, "操作台子挑战挂载!!!!!!!!")
-
+	
 	-- 调用提示id为 43001011 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 47201004) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	--电梯开门镜头
 	local pos = { x=225.815, y=165.119, z=364.989}
 	local pos_follow = { x=244.54, y=166.77, z=364.989}
-
+	
 	if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2.5, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0, is_set_follow_pos = true, is_abs_follow_pos = true, follow_pos = pos_follow, is_force_walk = false, is_change_play_mode = false, screen_x = 0, screen_y = 0, is_set_screenXY = false }) then
 	    ScriptLib.PrintContextLog(context, "@@Lua_warning : active_cameralook_begin")
 	    return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1029(context, evt)
 	if evt.param1 ~= 1029 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -458,34 +457,34 @@ function action_EVENT_ENTER_REGION_1029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 1002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_1031(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	ScriptLib.PrintContextLog(context, "符文计数+1")
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1032(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"success"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "success", 247203001) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -494,7 +493,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1033(context, evt)
 	if 1001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 

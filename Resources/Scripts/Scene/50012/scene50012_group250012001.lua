@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250012001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -105,9 +105,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -115,7 +115,7 @@ function condition_EVENT_GADGET_CREATE_1(context, evt)
 	if 1012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -126,7 +126,7 @@ function action_EVENT_GADGET_CREATE_1(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -135,7 +135,7 @@ function condition_EVENT_SELECT_OPTION_2(context, evt)
 	if 1012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -145,24 +145,24 @@ function action_EVENT_SELECT_OPTION_2(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250012001, 2)
-
+	
 	-- 创建编号为3008（该挑战的识别id),挑战内容为177的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 3008, 177, 90, 250012001, 11, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 1012 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -172,7 +172,7 @@ function condition_EVENT_ANY_MONSTER_DIE_3(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -180,7 +180,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250012001, 3)
-
+	
 	return 0
 end
 
@@ -191,20 +191,20 @@ function action_EVENT_CHALLENGE_FAIL_4(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 250012001, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 创建id为1012的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1012 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -215,18 +215,18 @@ function action_EVENT_CHALLENGE_SUCCESS_5(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 创建id为1013的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1013 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为1012的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 1012 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

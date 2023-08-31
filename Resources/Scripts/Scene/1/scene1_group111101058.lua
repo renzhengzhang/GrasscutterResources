@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101058
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -87,9 +87,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -97,7 +97,7 @@ function condition_EVENT_GADGET_CREATE_58002(context, evt)
 	if 58001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -108,7 +108,7 @@ function action_EVENT_GADGET_CREATE_58002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -116,14 +116,14 @@ end
 function condition_EVENT_SELECT_OPTION_58003(context, evt)
 	-- 判断是gadgetid 58001 option_id 7
 	if 58001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -152,17 +152,17 @@ function action_EVENT_CHALLENGE_SUCCESS_58005(context, evt)
 			ScriptLib.SetWorktopOptionsByGroupId(context, 111101058, 58001, {7})
 			return 0
 		end
-
+		
 		if evt.source_name == "9003" then
 			ScriptLib.AttachChildChallenge(context, 9001, 9004, 9004, {111101058,1,5},{},{success=3,fail=3})
 		end
-
+		
 		return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_58010(context, evt)
-
+	
 	return true
 end
 

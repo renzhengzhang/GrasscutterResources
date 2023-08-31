@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201055005
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -117,9 +117,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -129,71 +129,71 @@ function action_EVENT_CHALLENGE_SUCCESS_5003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 5005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 5006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 201055005, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201055005, 4)
-
+	
 	-- 创建id为5011的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 5011 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为5012的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 5012 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为5013的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 5013 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为5014的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 5014 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为5018的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 5018 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为5019的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 5019 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 201055005, EntityType.GADGET, 5010 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -202,7 +202,7 @@ function condition_EVENT_MONSTER_BATTLE_5004(context, evt)
 	if 5001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -213,49 +213,49 @@ function action_EVENT_MONSTER_BATTLE_5004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 创建编号为100（该挑战的识别id),挑战内容为56的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 100, 56, 60, 0, 0, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 延迟30秒后,向groupId为：201055005的对象,请求一次调用,并将string参数："createTime" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055005, "createTime", 30) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟12秒后,向groupId为：201055005的对象,请求一次调用,并将string参数："time1" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055005, "time1", 12) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟33秒后,向groupId为：201055005的对象,请求一次调用,并将string参数："time3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055005, "time3", 33) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 延迟50秒后,向groupId为：201055005的对象,请求一次调用,并将string参数："timeEnd" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 201055005, "timeEnd", 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为201055005中,configid为：5001的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 5001, 201055005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为201055005中,configid为：5002的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 5002, 201055005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -266,13 +266,13 @@ function action_EVENT_TIMER_EVENT_5009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 5008, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -280,7 +280,7 @@ end
 function action_EVENT_TIMER_EVENT_5015(context, evt)
 	-- 终止识别id为100的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 100, 1)
-
+	
 	return 0
 end
 
@@ -291,7 +291,7 @@ function action_EVENT_TIMER_EVENT_5016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -302,7 +302,7 @@ function action_EVENT_TIMER_EVENT_5017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -313,31 +313,31 @@ function action_EVENT_CHALLENGE_FAIL_5020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 201055005, "timeEnd") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 201055005, "time1") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 201055005, "time3") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 201055005, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -345,17 +345,17 @@ end
 function condition_EVENT_QUEST_FINISH_5022(context, evt)
 	--检查ID为1101208的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 1101208 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -363,19 +363,19 @@ end
 function action_EVENT_QUEST_FINISH_5022(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 201055005, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5024(context, evt)
 	if evt.param1 ~= 5024 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -386,7 +386,7 @@ function action_EVENT_ENTER_REGION_5024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end

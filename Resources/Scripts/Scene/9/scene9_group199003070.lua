@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003070
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     reverse_time = 10,--回溯倒计时，整数秒
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -90,9 +90,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -100,15 +100,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_70013(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003070, 70003) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003070, 70004) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003070, 70005) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -118,18 +118,18 @@ function action_EVENT_GADGET_STATE_CHANGE_70013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 70002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 70001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 70001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 停止标识为"reverse"的时间轴
 	ScriptLib.EndTimeAxis(context, "reverse")
-
-
+	
+	
 	return 0
 end
 
@@ -138,11 +138,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_70014(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003070, 70003) then
 		return false
 	end
-
+	
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 199003070, 70001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -153,7 +153,7 @@ function action_EVENT_GADGET_STATE_CHANGE_70014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -162,11 +162,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_70015(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003070, 70004) then
 		return false
 	end
-
+	
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 199003070, 70001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -177,7 +177,7 @@ function action_EVENT_GADGET_STATE_CHANGE_70015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -186,11 +186,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_70016(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199003070, 70005) then
 		return false
 	end
-
+	
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 199003070, 70001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -201,19 +201,19 @@ function action_EVENT_GADGET_STATE_CHANGE_70016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_70017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_reverting"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_reverting") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -225,23 +225,23 @@ function action_EVENT_VARIABLE_CHANGE_70017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_70018(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_reverting"为0
 	if ScriptLib.GetGroupVariableValue(context, "is_reverting") ~= 0 then
 			return false
 	end
-
+	
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 199003070, 70001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -253,13 +253,13 @@ function action_EVENT_VARIABLE_CHANGE_70018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	ScriptLib.RemoveEntityByConfigId(context, 199003070, EntityType.GADGET, 70008 )
-
+	
 	 ScriptLib.RemoveEntityByConfigId(context, 199003070, EntityType.GADGET, 70009 )
-
+	
 	 ScriptLib.RemoveEntityByConfigId(context, 199003070, EntityType.GADGET, 70011 )
-
+	
 	return 0
 end
 

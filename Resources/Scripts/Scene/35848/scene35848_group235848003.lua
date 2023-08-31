@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235848003
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     --起始操作台
     starter =3003,
     --起始操作台选项
@@ -13,7 +13,7 @@ defs = {
     delay = 3,
     --挑战总时限 秒
     time_limit = 60,
-    --挑战ID
+    --挑战ID 
     challenge_id =2010053,
 
 
@@ -29,7 +29,7 @@ defs = {
     --随机固定顺序怪物潮组合 每次进地城随机取key。
     --key对应value代表依序出现的MonsterTide，小花括号内配置复数个表示同时刷出。
     rand_table = {
-        [1] =
+        [1] = 
         {
             {1},
         },
@@ -53,9 +53,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -94,9 +94,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -143,9 +143,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -153,7 +153,7 @@ function condition_EVENT_GADGET_CREATE_3006(context, evt)
 	if 3002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -164,7 +164,7 @@ function action_EVENT_GADGET_CREATE_3006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -173,12 +173,12 @@ function condition_EVENT_GADGET_CREATE_3007(context, evt)
 	if 3005 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"suite"为1
 	if ScriptLib.GetGroupVariableValue(context, "suite") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -186,7 +186,7 @@ end
 function action_EVENT_GADGET_CREATE_3007(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235848003, 3)
-
+	
 	return 0
 end
 
@@ -194,14 +194,14 @@ end
 function condition_EVENT_SELECT_OPTION_3011(context, evt)
 	-- 判断是gadgetid 3003 option_id 94
 	if 3003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 94 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -212,26 +212,26 @@ function action_EVENT_SELECT_OPTION_3011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 3002 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 235848003, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_3012(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 235848003) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -239,19 +239,19 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3012(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235848006, 3)
-
+	
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 235848005, monsters = {}, gadgets = {5005} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235848005, 5)
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235848006, 4)
-
+	
 	return 0
 end
 

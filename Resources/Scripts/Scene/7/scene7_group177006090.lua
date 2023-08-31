@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 177006090
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -86,9 +86,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -96,7 +96,7 @@ function condition_EVENT_GATHER_90001(context, evt)
 	if 90005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -107,7 +107,7 @@ function action_EVENT_GATHER_90001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -116,7 +116,7 @@ function condition_EVENT_GATHER_90002(context, evt)
 	if 90007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -127,7 +127,7 @@ function action_EVENT_GATHER_90002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -137,7 +137,7 @@ function condition_EVENT_QUEST_START_90003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -148,19 +148,19 @@ function action_EVENT_QUEST_START_90003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_90006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为2
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -171,7 +171,7 @@ function action_EVENT_VARIABLE_CHANGE_90006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -182,7 +182,7 @@ function action_EVENT_QUEST_START_90008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -191,12 +191,12 @@ function condition_EVENT_GATHER_90009(context, evt)
 	if 90005 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"start"为1
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -207,7 +207,7 @@ function action_EVENT_GATHER_90009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -216,12 +216,12 @@ function condition_EVENT_GATHER_90010(context, evt)
 	if 90007 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"start"为1
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -232,6 +232,6 @@ function action_EVENT_GATHER_90010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

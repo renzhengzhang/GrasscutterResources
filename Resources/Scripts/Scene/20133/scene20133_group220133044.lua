@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220133044
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -125,9 +125,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -136,7 +136,7 @@ function condition_EVENT_QUEST_START_44004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "talkShadowDoor") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -147,7 +147,7 @@ function action_EVENT_QUEST_START_44004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -157,20 +157,20 @@ function action_EVENT_QUEST_FINISH_44005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为44002的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 44002 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "talkShadowDoor" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "talkShadowDoor", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -180,20 +180,20 @@ function action_EVENT_QUEST_FINISH_44006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为44003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 44003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "talkShadowDoor" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "talkShadowDoor", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -203,20 +203,20 @@ function action_EVENT_QUEST_FINISH_44007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为44008的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 44008 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "talkShadowDoor" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "talkShadowDoor", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -227,7 +227,7 @@ function action_EVENT_QUEST_START_44009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -237,32 +237,32 @@ function action_EVENT_QUEST_FINISH_44010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220133044, 4)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "4006916") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "talkShadowDoor" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "talkShadowDoor", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_44013(context, evt)
 			    if ScriptLib.GetHostQuestState(context,4006916)==2 or ScriptLib.GetHostQuestState(context,4006903)==2 then
-				ScriptLib.RefreshGroup(context, { group_id = 220133044, suite = 2 })
+				ScriptLib.RefreshGroup(context, { group_id = 220133044, suite = 2 }) 
 				end
-
+			
 			return 0
 end
 
@@ -272,16 +272,16 @@ function action_EVENT_GROUP_LOAD_44015(context, evt)
 		ScriptLib.RemoveExtraGroupSuite(context, 220133044, 3)
 		ScriptLib.AddExtraGroupSuite(context, 220133044, 4)
 				end
-
+			
 			return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_44016(context, evt)
 			    if ScriptLib.GetHostQuestState(context,4006904)==3 then
-				ScriptLib.RefreshGroup(context, { group_id = 220133044, suite = 1 })
+				ScriptLib.RefreshGroup(context, { group_id = 220133044, suite = 1 }) 
 				end
-
+			
 			return 0
 end
 
@@ -290,7 +290,7 @@ function action_EVENT_GROUP_LOAD_44017(context, evt)
 	if ScriptLib.GetHostQuestState(context,4006903) == 2 then
 		ScriptLib.RemoveExtraGroupSuite(context, 220133044, 3)
 	end
-
+	
 	return 0
 end
 
@@ -299,6 +299,6 @@ function action_EVENT_GROUP_REFRESH_44018(context, evt)
 	if ScriptLib.GetHostQuestState(context,4006918) == 2 then
 		ScriptLib.AddExtraGroupSuite(context, 220133044, 4)
 	end
-
+	
 	return 0
 end

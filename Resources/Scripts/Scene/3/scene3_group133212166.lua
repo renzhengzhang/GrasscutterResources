@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133212166
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	duration = 240,
 	kill_sum = 14,
 	group_id = 133212166,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -65,9 +65,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -78,9 +78,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -114,23 +114,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_166006(context, evt)
 	-- 判断是gadgetid 166005 option_id 177
 	if 166005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 177 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -144,19 +144,19 @@ function action_EVENT_SELECT_OPTION_166006(context, evt)
 	if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_controller_id }) then
 	return -1
 	end
-
+	
 	-- 将configid为 2002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 166004, GadgetState.GearStart) then
 	return -1
-	end
-
+	end 
+	
 	-- 将configid为 2002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 166022, GadgetState.GearStart) then
 	return -1
-	end
-
+	end 
+	
 	return 0
-
+	
 end
 
 -- 触发操作
@@ -165,20 +165,20 @@ function action_EVENT_CHALLENGE_SUCCESS_166007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 166004, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 166022 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 166022, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 针对当前group内变量名为 "hasFinished" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "hasFinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -186,16 +186,16 @@ end
 function action_EVENT_CHALLENGE_FAIL_166008(context, evt)
 	--销毁编号为1（该怪物潮的识别id)的怪物潮
 	ScriptLib.KillMonsterTide(context, 133212166, 1)
-
+	
 	--销毁编号为2（该怪物潮的识别id)的怪物潮
-	ScriptLib.KillMonsterTide(context, 133212166, 2)
-
+	ScriptLib.KillMonsterTide(context, 133212166, 2) 
+	
 	--销毁编号为3（该怪物潮的识别id)的怪物潮
 	ScriptLib.KillMonsterTide(context, 133212166, 3)
-
+	
 	-- 重新生成指定group，指定suite
-	ScriptLib.RefreshGroup(context, { group_id = 133212166, suite = 1 })
-
+	ScriptLib.RefreshGroup(context, { group_id = 133212166, suite = 1 }) 
+	
 	return 0
 end
 
@@ -204,12 +204,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_166009(context, evt)
 	if 166004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasFinished"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasFinished") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -219,23 +219,23 @@ function action_EVENT_GADGET_STATE_CHANGE_166009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 166022, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建编号为1（该怪物潮的识别id)的怪物潮，创建怪物总数为4，场上怪物最少2只，最多2只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 133212166, {166001,166003,166002,166011}, 4, 2, 2) then
 		return -1
 	end
-
+	
 	-- 创建编号为2（该怪物潮的识别id)的怪物潮，创建怪物总数为2，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 2, 133212166, {166012,166013}, 2, 1, 1) then
 		return -1
 	end
-
+	
 	-- 创建编号为3（该怪物潮的识别id)的怪物潮，创建怪物总数为6，场上怪物最少3只，最多3只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 3, 133212166, {166014,166015,166016,166017,166020}, 6, 3, 3) then
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -244,7 +244,7 @@ function condition_EVENT_GADGET_CREATE_166010(context, evt)
 	if 166005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -255,7 +255,7 @@ function action_EVENT_GADGET_CREATE_166010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -264,7 +264,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_166021(context, evt)
 	if 6 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -272,6 +272,6 @@ end
 function action_EVENT_MONSTER_TIDE_DIE_166021(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212166, 3)
-
+	
 	return 0
 end

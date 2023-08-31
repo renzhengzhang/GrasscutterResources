@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133104029
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -131,9 +131,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -144,9 +144,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -243,9 +243,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -253,7 +253,7 @@ function condition_EVENT_GADGET_CREATE_29002(context, evt)
 	if 29001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -264,7 +264,7 @@ function action_EVENT_GADGET_CREATE_29002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -272,14 +272,14 @@ end
 function condition_EVENT_SELECT_OPTION_29003(context, evt)
 	-- 判断是gadgetid 29001 option_id 2
 	if 29001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -287,21 +287,21 @@ end
 function action_EVENT_SELECT_OPTION_29003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104029, 2)
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104029, 5)
-
+	
 	-- 删除指定group： 133104029 ；指定config：29001；物件身上指定option：2；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133104029, 29001, 2) then
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（558，248，935），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=558, y=248, z=935}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0 }) then
 					return -1
-				end
-
+				end 
+	
 	-- 创建编号为666（该挑战的识别id),挑战内容为127的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	ScriptLib.CreateFatherChallenge(context, 2008, 2008, 181, {success = 1, fail = 1})
 	ScriptLib.AttachChildChallenge(context, 2008, 2009, 2009,{0,4, 666,1},{},{success=1,fail=1})
@@ -309,7 +309,7 @@ function action_EVENT_SELECT_OPTION_29003(context, evt)
 	ScriptLib.StartFatherChallenge(context, 2008)
 	ScriptLib.SetChallengeEventMark(context, 2008, ChallengeEventMarkType.FLIGHT_TIME)
 	ScriptLib.SetChallengeEventMark(context, 2010, ChallengeEventMarkType.FLIGHT_GATHER_POINT)
-
+	
 	return 0
 end
 
@@ -320,7 +320,7 @@ function action_EVENT_CHALLENGE_SUCCESS_29004(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -331,19 +331,19 @@ function action_EVENT_CHALLENGE_FAIL_29005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_29049(context, evt)
 	if evt.param1 ~= 29049 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -351,19 +351,19 @@ end
 function action_EVENT_ENTER_REGION_29049(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104029, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_29076(context, evt)
 	if evt.param1 ~= 29076 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -371,19 +371,19 @@ end
 function action_EVENT_ENTER_REGION_29076(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104029, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_29112(context, evt)
 	if evt.param1 ~= 29112 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -391,22 +391,22 @@ end
 function action_EVENT_ENTER_REGION_29112(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104029, 4)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104029, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_29114(context, evt)
 	if evt.param1 ~= 29114 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -415,7 +415,7 @@ function condition_EVENT_ANY_GADGET_DIE_29121(context, evt)
 	if (29058 == evt.param1)  or (29084 == evt.param1) or (29091 == evt.param1) or (29113 == evt.param1) or (29100 == evt.param1) then
 	    return true
 	end
-
+	
 	return false
 end
 

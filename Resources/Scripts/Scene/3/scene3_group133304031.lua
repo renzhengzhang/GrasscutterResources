@@ -1,13 +1,13 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304031
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	maxPlayerEnergyLev = 3,
 	titanRegion = 31011,
-
+    
     -- todo: 保底判断一下各个位置的config id对应的是否是正确的gadget id
     cells = {
         -- 每一项均需严格遵循下述格式，没有line或者node则留空，不能不创建！
@@ -15,8 +15,7 @@ defs = {
         [31001] = {cell = 31001, lines = {31006, 31010, 31019}, nodes = {31007}},
         [31002] = {cell = 31002, lines = {31005, 31008, 31017}, nodes = {31007}},
         [31003] = {cell = 31003, lines = {31008, 31009, 31018}, nodes = {}}
-    }
-,
+    },
 
     -- 指定初始激活的电池id，未指定则默认初始未激活
     activeCells = {},
@@ -26,9 +25,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -86,9 +85,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -99,9 +98,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -117,20 +116,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_31004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"groupStatus"为3
 	if ScriptLib.GetGroupVariableValue(context, "groupStatus") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -140,20 +139,20 @@ function action_EVENT_VARIABLE_CHANGE_31004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 31015, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "1F" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "1F", 1, 133304011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "2F" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "2F", 1, 133304011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -163,7 +162,7 @@ function condition_EVENT_QUEST_START_31013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "groupStatus") == 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -174,21 +173,21 @@ function action_EVENT_QUEST_START_31013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_31022(context, evt)
-
+	
 	if GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	if 31012 == evt.param2 or 31014 == evt.param2 or 31021 == evt.param2 then
 		return true
 	end
-
+	
 	return false
 end
 
@@ -199,7 +198,7 @@ function action_EVENT_GADGET_STATE_CHANGE_31022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=-1546.866, y=230.7271, z=2326.842}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-1546.866, y=230.7271, z=2326.842}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -208,8 +207,8 @@ function action_EVENT_GADGET_STATE_CHANGE_31022(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 

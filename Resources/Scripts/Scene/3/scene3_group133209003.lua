@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133209003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -82,9 +82,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -93,8 +93,8 @@ function condition_EVENT_ANY_MONSTER_DIE_3001(context, evt)
 	if evt.param1 ~= 3008 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -105,28 +105,28 @@ function action_EVENT_ANY_MONSTER_DIE_3001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "133209003") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_3005(context, evt)
-	-- 判断指定group组剩余怪物数量是否是1
+	-- 判断指定group组剩余怪物数量是否是1 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133209003) ~= 1 then
 		return false
 	end
-
+	
 	-- 判断变量"Boss_Die"为0
 	if ScriptLib.GetGroupVariableValue(context, "Boss_Die") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -134,7 +134,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_3005(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209003, 2)
-
+	
 	return 0
 end
 
@@ -145,9 +145,9 @@ function action_EVENT_QUEST_START_3007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209003, 2)
-
+	
 	return 0
 end

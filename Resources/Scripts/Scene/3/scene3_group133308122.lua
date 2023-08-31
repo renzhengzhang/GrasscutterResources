@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308122
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -71,20 +71,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_122002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -92,14 +92,14 @@ end
 function action_EVENT_VARIABLE_CHANGE_122002(context, evt)
 	-- 创建标识为"finish"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "finish", {1}, false)
-
-
+	
+	
 	-- 通知场景上的所有玩家播放名字为106 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 106, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -108,7 +108,7 @@ function condition_EVENT_TIME_AXIS_PASS_122003(context, evt)
 	if "finish" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -118,12 +118,12 @@ function action_EVENT_TIME_AXIS_PASS_122003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 122001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 停止标识为"finish"的时间轴
 	ScriptLib.EndTimeAxis(context, "finish")
-
-
+	
+	
 	return 0
 end
 
@@ -133,7 +133,7 @@ function condition_EVENT_GROUP_LOAD_122004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -143,7 +143,7 @@ function action_EVENT_GROUP_LOAD_122004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 122001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

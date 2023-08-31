@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250004060
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -74,17 +74,17 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_CLIENT_EXECUTE_106(context, evt)
 	if 598 == ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid }) then
-
+	
 	return true
-
+	
 	end
 end
 
@@ -94,7 +94,7 @@ function action_EVENT_CLIENT_EXECUTE_106(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 591, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

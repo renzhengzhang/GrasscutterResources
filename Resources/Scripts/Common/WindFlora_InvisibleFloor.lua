@@ -1,5 +1,5 @@
 
--- defs_floor_groups = {
+-- local defs_floor_groups = {
 -- 	[1] = {invisible_suites = 2, visible_suites = 3},
 -- 	[2] = {invisible_suites = 4, visible_suites = 5},
 -- 	[3] = {invisible_suites = 6, visible_suites = 7},
@@ -46,8 +46,8 @@ function action_timer_event(context, evt)
 		        ScriptLib.SetGroupGadgetStateByConfigId(context, 235800006, v, 902)
 		end
 		ScriptLib.CreateGroupTimerEvent(context, 235800006, "SwitchToInvisible", 3)
-		ScriptLib.PrintContextLog(context, "@@ Require_WARNING : action_timer_event >>> SwitchToInvisible"..suites_index)
-	end
+		ScriptLib.PrintContextLog(context, "@@ Require_WARNING : action_timer_event >>> SwitchToInvisible"..suites_index)		
+	end	
 	return 0
 end
 

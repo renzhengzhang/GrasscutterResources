@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220023003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -77,53 +77,53 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3(context, evt)
 	if evt.param1 ~= 3 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_3(context, evt)
-
+	
 	-- 将configid为 33 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3005, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 34 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3006, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 5 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 3004, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	-- 启动移动平台
-	ScriptLib.StartPlatform(context, 3007)
-
-
+	ScriptLib.StartPlatform(context, 3007) 
+	
+	
 	-- 启动移动平台
 	ScriptLib.StartPlatform(context, 3008)
-
-
+	
+	
 	-- 启动移动平台
-	ScriptLib.StartPlatform(context, 3009)
-
-
-
+	ScriptLib.StartPlatform(context, 3009) 
+	
+	
+	
 	return 0
 end

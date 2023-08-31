@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210300
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -134,28 +134,28 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_300002(context, evt)
 	-- 判断是gadgetid 为 300005的移动平台，是否到达了321000067 的路线中的 8 点
-
+	
 	if 300005 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 321000067 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 8 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -166,41 +166,41 @@ function action_EVENT_PLATFORM_REACH_POINT_300002(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 改变指定group组133210485中， configid为485001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133210485, 485001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210300, 3)
-
+	
 	-- 将本组内变量名为 "GadgetArrive1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "GadgetArrive1", 1, 133210302) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "GadgetCreate" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "GadgetCreate", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_300003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"GadgetCreate"为1
 	if ScriptLib.GetGroupVariableValue(context, "GadgetCreate") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -208,19 +208,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_300003(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133210300, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_300007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"AllSuccess"为1
 	if ScriptLib.GetGroupVariableValue(context, "AllSuccess") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -228,6 +228,6 @@ end
 function action_EVENT_VARIABLE_CHANGE_300007(context, evt)
 		-- 将指定group的suiteIndex设为指定suite
 	  ScriptLib.SetFlowSuite(context, 133210300, 4)
-
+	
 	return 0
 end

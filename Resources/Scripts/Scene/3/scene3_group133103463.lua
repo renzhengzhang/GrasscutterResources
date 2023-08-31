@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103463
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	duration = 45,
 	kill_sum = 3,
 	group_id = 133103463,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -104,9 +104,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -114,12 +114,12 @@ function condition_EVENT_GADGET_CREATE_463003(context, evt)
 	if 463002 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"g1"为0
 	if ScriptLib.GetGroupVariableValue(context, "g1") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -129,8 +129,8 @@ function action_EVENT_GADGET_CREATE_463003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 463002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -139,12 +139,12 @@ function condition_EVENT_GADGET_CREATE_463012(context, evt)
 	if 463005 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"g2"为0
 	if ScriptLib.GetGroupVariableValue(context, "g2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -154,8 +154,8 @@ function action_EVENT_GADGET_CREATE_463012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 463005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -164,12 +164,12 @@ function condition_EVENT_GADGET_CREATE_463013(context, evt)
 	if 463006 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"g3"为0
 	if ScriptLib.GetGroupVariableValue(context, "g3") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -179,8 +179,8 @@ function action_EVENT_GADGET_CREATE_463013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 463006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -190,7 +190,7 @@ function condition_EVENT_GROUP_LOAD_463014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "gears") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -201,37 +201,37 @@ function action_EVENT_GROUP_LOAD_463014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "g2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "g2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "g3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "g3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 463002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 463002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 463005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 463005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 463006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 463006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -240,7 +240,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_463017(context, evt)
 	if 463006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -251,13 +251,13 @@ function action_EVENT_GADGET_STATE_CHANGE_463017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "g3" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "g3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -266,7 +266,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_463018(context, evt)
 	if 463002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -277,13 +277,13 @@ function action_EVENT_GADGET_STATE_CHANGE_463018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "g1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "g1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -292,7 +292,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_463019(context, evt)
 	if 463005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -303,25 +303,25 @@ function action_EVENT_GADGET_STATE_CHANGE_463019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "g2" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "g2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_463020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"gears"为3
 	if ScriptLib.GetGroupVariableValue(context, "gears") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -329,12 +329,12 @@ end
 function action_EVENT_VARIABLE_CHANGE_463020(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103463, 2)
-
+	
 	-- 将configid为 463008 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 463008, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

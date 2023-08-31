@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250006004
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 15,
 	gadget_id_2 = 11,
 	gadget_id_3 = 104
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -75,9 +75,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -85,7 +85,7 @@ function condition_EVENT_GADGET_CREATE_10(context, evt)
 	if 15 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -96,7 +96,7 @@ function action_EVENT_GADGET_CREATE_10(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -105,7 +105,7 @@ function condition_EVENT_SELECT_OPTION_11(context, evt)
 	if 15 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -115,28 +115,28 @@ function action_EVENT_SELECT_OPTION_11(context, evt)
 	if defs.gadget_id_3 == evt.param2 then
 		if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_1, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组250006001中， configid为13的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 250006001, defs.gadget_id_2, GadgetState.Default) then
 			return -1
-		end
-
-
+		end 
+	
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 250006005, suite = 2 }) then
 			return -1
 		end
-
+	
 	-- 删除指定group： 250006002 ；指定config：14；物件身上指定option：104；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250006004, defs.gadget_id_1, 104) then
 		return -1
 	end
-
+	
 		return 0
 	end
-
-
-
+	
+	
+	
 	return 0
 end

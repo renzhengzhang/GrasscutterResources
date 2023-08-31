@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133316075
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -42,9 +42,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -55,9 +55,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -82,23 +82,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_75010(context, evt)
 	-- 判断是gadgetid 75006 option_id 442
 	if 75006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 442 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -109,7 +109,7 @@ function action_EVENT_SELECT_OPTION_75010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -117,14 +117,14 @@ end
 function condition_EVENT_SELECT_OPTION_75011(context, evt)
 	-- 判断是gadgetid 75007 option_id 442
 	if 75007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 442 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -135,7 +135,7 @@ function action_EVENT_SELECT_OPTION_75011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -143,14 +143,14 @@ end
 function condition_EVENT_SELECT_OPTION_75012(context, evt)
 	-- 判断是gadgetid 75008 option_id 442
 	if 75008 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 442 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -161,7 +161,7 @@ function action_EVENT_SELECT_OPTION_75012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -169,14 +169,14 @@ end
 function condition_EVENT_SELECT_OPTION_75013(context, evt)
 	-- 判断是gadgetid 75009 option_id 442
 	if 75009 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 442 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -187,6 +187,6 @@ function action_EVENT_SELECT_OPTION_75013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133223477
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -89,9 +89,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -99,7 +99,7 @@ function condition_EVENT_GATHER_477003(context, evt)
 	if 477001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -110,13 +110,13 @@ function action_EVENT_GATHER_477003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133223477, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -126,7 +126,7 @@ function condition_EVENT_QUEST_FINISH_477004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Start") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -137,13 +137,13 @@ function action_EVENT_QUEST_FINISH_477004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133223477, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_GROUP_LOAD_477005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Start") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -164,6 +164,6 @@ function action_EVENT_GROUP_LOAD_477005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

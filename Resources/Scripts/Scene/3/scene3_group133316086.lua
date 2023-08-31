@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133316086
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -75,9 +75,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 创建指定group的指定suite内所有内容
@@ -92,7 +92,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_86002(context, evt)
 	if 86001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -103,13 +103,13 @@ function action_EVENT_GADGET_STATE_CHANGE_86002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为7323213 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 7323213, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -118,7 +118,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_86004(context, evt)
 	if 86003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -129,34 +129,34 @@ function action_EVENT_GADGET_STATE_CHANGE_86004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为7323213 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 7323213, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_86005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为2
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_86005(context, evt)
 	TLA_add_groupsuite(context, evt, 133316092, 1)
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "Launch", 1, 133316092)
-
+	
 	return 0
 end
 
@@ -165,7 +165,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_86008(context, evt)
 	if 86006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -175,8 +175,8 @@ function action_EVENT_GADGET_STATE_CHANGE_86008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 86001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -185,7 +185,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_86009(context, evt)
 	if 86007 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -195,7 +195,7 @@ function action_EVENT_GADGET_STATE_CHANGE_86009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 86003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

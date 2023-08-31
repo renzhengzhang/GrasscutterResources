@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133104621
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -95,9 +95,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -108,9 +108,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -127,9 +127,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -137,7 +137,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_621010(context, evt)
 	if 621001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -148,13 +148,13 @@ function action_EVENT_GADGET_STATE_CHANGE_621010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为310462101 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310462101, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -163,7 +163,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_621011(context, evt)
 	if 621002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -174,13 +174,13 @@ function action_EVENT_GADGET_STATE_CHANGE_621011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为310462102 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310462102, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_621012(context, evt)
 	if 621003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -200,13 +200,13 @@ function action_EVENT_GADGET_STATE_CHANGE_621012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为310462103 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310462103, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -215,7 +215,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_621013(context, evt)
 	if 621004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -226,13 +226,13 @@ function action_EVENT_GADGET_STATE_CHANGE_621013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为310462104 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310462104, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_621014(context, evt)
 	if 621005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -252,13 +252,13 @@ function action_EVENT_GADGET_STATE_CHANGE_621014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为310462105 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310462105, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -267,7 +267,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_621015(context, evt)
 	if 621006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -278,13 +278,13 @@ function action_EVENT_GADGET_STATE_CHANGE_621015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为310462106 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310462106, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -293,7 +293,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_621016(context, evt)
 	if 621007 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -304,13 +304,13 @@ function action_EVENT_GADGET_STATE_CHANGE_621016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为310462107 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310462107, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -319,7 +319,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_621017(context, evt)
 	if 621008 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -330,13 +330,13 @@ function action_EVENT_GADGET_STATE_CHANGE_621017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为310462108 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310462108, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -345,7 +345,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_621018(context, evt)
 	if 621009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -356,13 +356,13 @@ function action_EVENT_GADGET_STATE_CHANGE_621018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 通知场景上的所有玩家播放名字为310462109 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310462109, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -370,17 +370,17 @@ end
 function condition_EVENT_QUEST_FINISH_621023(context, evt)
 	--检查ID为7100521的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 7100521 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -391,13 +391,13 @@ function action_EVENT_QUEST_FINISH_621023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 延迟9秒后,向groupId为：133104621的对象,请求一次调用,并将string参数："gateopen" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133104621, "gateopen", 9) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -406,7 +406,7 @@ function condition_EVENT_ANY_GADGET_DIE_621025(context, evt)
 	if 621001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -417,19 +417,19 @@ function action_EVENT_ANY_GADGET_DIE_621025(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 621024 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621024, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为621044的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621044 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -438,7 +438,7 @@ function condition_EVENT_ANY_GADGET_DIE_621034(context, evt)
 	if 621002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -449,19 +449,19 @@ function action_EVENT_ANY_GADGET_DIE_621034(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 621026 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621026, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为621045的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621045 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -470,7 +470,7 @@ function condition_EVENT_ANY_GADGET_DIE_621035(context, evt)
 	if 621003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -481,19 +481,19 @@ function action_EVENT_ANY_GADGET_DIE_621035(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 621027 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621027, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为621046的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621046 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -502,7 +502,7 @@ function condition_EVENT_ANY_GADGET_DIE_621036(context, evt)
 	if 621004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -513,19 +513,19 @@ function action_EVENT_ANY_GADGET_DIE_621036(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 621028 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621028, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为621047的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621047 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -534,7 +534,7 @@ function condition_EVENT_ANY_GADGET_DIE_621037(context, evt)
 	if 621005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -545,19 +545,19 @@ function action_EVENT_ANY_GADGET_DIE_621037(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 621029 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621029, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为621048的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621048 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -566,7 +566,7 @@ function condition_EVENT_ANY_GADGET_DIE_621038(context, evt)
 	if 621006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -577,19 +577,19 @@ function action_EVENT_ANY_GADGET_DIE_621038(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 621030 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621030, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为621049的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621049 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -598,7 +598,7 @@ function condition_EVENT_ANY_GADGET_DIE_621039(context, evt)
 	if 621007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -609,19 +609,19 @@ function action_EVENT_ANY_GADGET_DIE_621039(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 621031 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621031, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为621050的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621050 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -630,7 +630,7 @@ function condition_EVENT_ANY_GADGET_DIE_621040(context, evt)
 	if 621008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -641,19 +641,19 @@ function action_EVENT_ANY_GADGET_DIE_621040(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 621032 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621032, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为621051的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621051 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -662,7 +662,7 @@ function condition_EVENT_ANY_GADGET_DIE_621041(context, evt)
 	if 621009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -673,19 +673,19 @@ function action_EVENT_ANY_GADGET_DIE_621041(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 621033 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621033, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为621052的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621052 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -695,8 +695,8 @@ function action_EVENT_TIMER_EVENT_621042(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621022, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -709,7 +709,7 @@ function action_EVENT_GROUP_LOAD_621053(context, evt)
 	                end
 	        end
 	ScriptLib.AddQuestProgress(context, "7100521_end")
-
+	
 	ScriptLib.KillEntityByConfigId(context, { config_id = 621024 })
 	ScriptLib.KillEntityByConfigId(context, { config_id = 621026 })
 	ScriptLib.KillEntityByConfigId(context, { config_id = 621027 })
@@ -720,7 +720,7 @@ function action_EVENT_GROUP_LOAD_621053(context, evt)
 	ScriptLib.KillEntityByConfigId(context, { config_id = 621032 })
 	ScriptLib.KillEntityByConfigId(context, { config_id = 621033 })
 	ScriptLib.SetGroupVariableValue(context, "pillarsover", 1)
-
+	
 	return 0
 end
 
@@ -730,7 +730,7 @@ function condition_EVENT_GROUP_LOAD_621054(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "pillarsover") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -740,61 +740,61 @@ function action_EVENT_GROUP_LOAD_621054(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 621022, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为621044的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621044 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为621045的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621045 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为621046的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621046 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为621047的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621047 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为621048的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621048 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为621049的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621049 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为621050的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621050 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为621051的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621051 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为621052的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 621052 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 166001277
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -62,9 +62,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +75,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -111,9 +111,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -121,7 +121,7 @@ function condition_EVENT_GADGET_CREATE_277009(context, evt)
 	if 277020 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -131,15 +131,15 @@ function action_EVENT_GADGET_CREATE_277009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 277002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"wind"，时间节点为{15}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "wind", {15}, false)
-
-
+	
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001277, 3)
-
+	
 	return 0
 end
 
@@ -148,7 +148,7 @@ function condition_EVENT_TIME_AXIS_PASS_277017(context, evt)
 	if "wind" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -156,7 +156,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_277017(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001277, 3)
-
+	
 	return 0
 end
 
@@ -165,11 +165,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_277018(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 166001277, 277010) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 166001277, 277012) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -177,11 +177,11 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_277018(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 166001277, 3)
-
+	
 	-- 创建标识为"niubi"，时间节点为{11}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "niubi", {11}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -190,7 +190,7 @@ function condition_EVENT_TIME_AXIS_PASS_277019(context, evt)
 	if "niubi" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -198,7 +198,7 @@ end
 function action_EVENT_TIME_AXIS_PASS_277019(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 166001277, 3)
-
+	
 	return 0
 end
 
@@ -207,19 +207,19 @@ function condition_EVENT_GADGET_STATE_CHANGE_277021(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 166001277, 277001) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 166001277, 277010) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 166001277, 277011) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 166001277, 277012) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -230,6 +230,6 @@ function action_EVENT_GADGET_STATE_CHANGE_277021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end

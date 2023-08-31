@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220342
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 133220342,
 	gadget_1 = 342001,
 	rotation_1 = 180,
@@ -24,9 +24,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -106,20 +106,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_342007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"successed"为1
 	if ScriptLib.GetGroupVariableValue(context, "successed") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -130,7 +130,7 @@ function action_EVENT_VARIABLE_CHANGE_342007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（-2334.36，200.86，-4213.62），持续时间为4秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-2334.36, y=200.86, z=-4213.62}
 	  local pos_follow = {x=0, y=3, z=0}
@@ -139,8 +139,8 @@ function action_EVENT_VARIABLE_CHANGE_342007(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = -1, screen_y = 2 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 

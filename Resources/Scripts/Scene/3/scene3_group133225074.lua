@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133225074
 }
 
@@ -9,7 +9,7 @@ group_id = 133225074,--使用的移动点阵ID
 pointarray_id = 322500003,
 pillar_num = 5,--定义的给操作台的操作数
 suite_opts = 2,
-
+        
 --定义符文石和移动点之间的位置关系
 Graph = {
 [1] = {preNode = 0, nextNode = 0, outNode = 0, inNode = 2, selfSigil= 0},
@@ -44,9 +44,9 @@ PillarInfo = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -105,9 +105,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -118,9 +118,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -154,20 +154,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_74014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Finished"为1
 	if ScriptLib.GetGroupVariableValue(context, "Finished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -178,7 +178,7 @@ function action_EVENT_VARIABLE_CHANGE_74014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_74022(context, evt)
 	if 74015 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -198,13 +198,13 @@ function action_EVENT_GADGET_STATE_CHANGE_74022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Finish", 1, 133225177) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 

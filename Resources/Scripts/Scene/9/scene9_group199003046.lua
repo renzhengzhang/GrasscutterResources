@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003046
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -85,9 +85,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -98,9 +98,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -143,19 +143,19 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_46005(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199003046, 3)
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199003046, 4)
-
+	
 	return 0
 end
 
@@ -164,26 +164,26 @@ function condition_EVENT_GADGET_STATE_CHANGE_46007(context, evt)
 	if 46001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_46007(context, evt)
-	ScriptLib.SetGroupVariableValueByGroup(context, "weather", 1, 199003100)
+	ScriptLib.SetGroupVariableValueByGroup(context, "weather", 1, 199003100)	
 	ScriptLib.SetWeatherAreaState(context, 9007, 1)
-
+			
 	ScriptLib.SetWeatherAreaState(context, 9005, 0)
-	ScriptLib.SetWeatherAreaState(context, 9006, 0)
-
+	ScriptLib.SetWeatherAreaState(context, 9006, 0)	
+	
 	--改重置其他方碑
 	ScriptLib.SetGadgetStateByConfigId(context, 46002, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 46003, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 46004, GadgetState.Default)
 	--出星星计数
 	ScriptLib.CreateGadget(context, { config_id = 46020 })
-
-
+	
+	
 	return 0
 end
 
@@ -192,7 +192,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_46008(context, evt)
 	if 46003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -201,16 +201,16 @@ function action_EVENT_GADGET_STATE_CHANGE_46008(context, evt)
 	ScriptLib.SetGroupVariableValueByGroup(context, "weather", 3, 199003100)
 	ScriptLib.SetWeatherAreaState(context, 9005, 1)
 	ScriptLib.SetWeatherAreaState(context, 9006, 0)
-	ScriptLib.SetWeatherAreaState(context, 9007, 0)
-
+	ScriptLib.SetWeatherAreaState(context, 9007, 0)		
+	
 	--改重置其他方碑
 	ScriptLib.SetGadgetStateByConfigId(context, 46002, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 46001, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 46004, GadgetState.Default)
 	--出星星计数
 	ScriptLib.CreateGadget(context, { config_id = 46022 })
-
-
+			
+	
 	return 0
 end
 
@@ -219,25 +219,25 @@ function condition_EVENT_GADGET_STATE_CHANGE_46009(context, evt)
 	if 46004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_46009(context, evt)
-	ScriptLib.SetGroupVariableValueByGroup(context, "weather", 4, 199003100)
+	ScriptLib.SetGroupVariableValueByGroup(context, "weather", 4, 199003100)		
 	ScriptLib.SetWeatherAreaState(context, 9006, 1)
 	ScriptLib.SetWeatherAreaState(context, 9007, 0)
 	ScriptLib.SetWeatherAreaState(context, 9005, 0)
-
+	
 	--改重置其他方碑
 	ScriptLib.SetGadgetStateByConfigId(context, 46002, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 46003, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 46001, GadgetState.Default)
 	--出星星计数
 	ScriptLib.CreateGadget(context, { config_id = 46023 })
-
-
+			
+	
 	return 0
 end
 
@@ -246,7 +246,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_46010(context, evt)
 	if 46002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -255,41 +255,41 @@ function action_EVENT_GADGET_STATE_CHANGE_46010(context, evt)
 	ScriptLib.SetGroupVariableValueByGroup(context, "weather", 2, 199003100)
 	ScriptLib.SetWeatherAreaState(context, 9005, 1)
 	ScriptLib.SetWeatherAreaState(context, 9006, 0)
-	ScriptLib.SetWeatherAreaState(context, 9007, 0)
-
+	ScriptLib.SetWeatherAreaState(context, 9007, 0)		
+	
 	--改重置其他方碑
 	ScriptLib.SetGadgetStateByConfigId(context, 46001, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 46003, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 46004, GadgetState.Default)
 	--出星星计数
 	ScriptLib.CreateGadget(context, { config_id = 46021 })
-
-
+			
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_46011(context, evt)
 	if evt.param1 ~= 46011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_46011(context, evt)
-
-
-	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=-660, y=334, z=-43}, radius = 2, rot = {x=0, y=0, z=1}, is_skip_ui=true, scene_id =9} )
+	
+	
+	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=-660, y=334, z=-43}, radius = 2, rot = {x=0, y=0, z=1}, is_skip_ui=true, scene_id =9} ) 
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans9")
 	return 0
-
-
-
+	 
+	
+	
 end
 
 -- 触发条件
@@ -297,7 +297,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_46012(context, evt)
 	if 46001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -305,18 +305,18 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_46012(context, evt)
 	    local k=0
 	    local t=0
-
+	
 	        k=ScriptLib.GetGroupVariableValue(context, "key")
 	        t=ScriptLib.GetGroupVariableValue(context, "times")
-
+	
 	        k=k+1*10^t
 	        t=t+1
-
+	
 	        if 0 ~= ScriptLib.SetGroupVariableValue(context, "key", k) then
 	            ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 	            return -1
 	          end
-
+	
 	        if 0 ~= ScriptLib.SetGroupVariableValue(context, "times", t) then
 	            ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 	            return -1
@@ -329,7 +329,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_46013(context, evt)
 	if 46002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -337,18 +337,18 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_46013(context, evt)
 	    local k=0
 	    local t=0
-
+	
 	        k=ScriptLib.GetGroupVariableValue(context, "key")
 	        t=ScriptLib.GetGroupVariableValue(context, "times")
-
+	
 	        k=k+2*10^t
 	        t=t+1
-
+	
 	        if 0 ~= ScriptLib.SetGroupVariableValue(context, "key", k) then
 	            ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 	            return -1
 	          end
-
+	
 	        if 0 ~= ScriptLib.SetGroupVariableValue(context, "times", t) then
 	            ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 	            return -1
@@ -361,7 +361,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_46014(context, evt)
 	if 46003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -369,18 +369,18 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_46014(context, evt)
 	    local k=0
 	    local t=0
-
+	
 	        k=ScriptLib.GetGroupVariableValue(context, "key")
 	        t=ScriptLib.GetGroupVariableValue(context, "times")
-
+	
 	        k=k+3*10^t
 	        t=t+1
-
+	
 	        if 0 ~= ScriptLib.SetGroupVariableValue(context, "key", k) then
 	            ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 	            return -1
 	          end
-
+	
 	        if 0 ~= ScriptLib.SetGroupVariableValue(context, "times", t) then
 	            ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 	            return -1
@@ -393,7 +393,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_46015(context, evt)
 	if 46004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -401,18 +401,18 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_46015(context, evt)
 	    local k=0
 	    local t=0
-
+	
 	        k=ScriptLib.GetGroupVariableValue(context, "key")
 	        t=ScriptLib.GetGroupVariableValue(context, "times")
-
+	
 	        k=k+4*10^t
 	        t=t+1
-
+	
 	        if 0 ~= ScriptLib.SetGroupVariableValue(context, "key", k) then
 	            ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 	            return -1
 	          end
-
+	
 	        if 0 ~= ScriptLib.SetGroupVariableValue(context, "times", t) then
 	            ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_is_k")
 	            return -1
@@ -423,14 +423,14 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_46016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"key"为1243
 	if ScriptLib.GetGroupVariableValueByGroup(context, "times", 199003046) <4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -440,16 +440,16 @@ function action_EVENT_VARIABLE_CHANGE_46016(context, evt)
 	ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46020 )
 	ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46021 )
 	ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46022 )
-	ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46023 )
-
+	ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46023 ) 
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 46001, GadgetState.Default)
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 46002, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 46003, GadgetState.Default)
 	ScriptLib.SetGadgetStateByConfigId(context, 46004, GadgetState.Default)
-
+		
 		if ScriptLib.GetGroupVariableValueByGroup(context, "key", 199003046) == 4321 then
-			ScriptLib.SetGroupVariableValue(context, "key", 0)
+			ScriptLib.SetGroupVariableValue(context, "key", 0) 
 		    ScriptLib.RemoveExtraGroupSuite(context, 199003046, 3)
 			    ScriptLib.AddExtraGroupSuite(context, 199003046, 4)
 		ScriptLib.AddQuestProgress(context, "quest7902305finish")
@@ -460,12 +460,12 @@ function action_EVENT_VARIABLE_CHANGE_46016(context, evt)
 		                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 						ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 		        return -1
-					end
-
+					end 
+				
 				end
-
+		
 				if ScriptLib.GetGroupVariableValueByGroup(context, "key", 199003046) == 4123 then
-					ScriptLib.SetGroupVariableValue(context, "key", 0)
+					ScriptLib.SetGroupVariableValue(context, "key", 0) 
 		   ScriptLib.RemoveExtraGroupSuite(context, 199003046, 4)
 					ScriptLib.AddExtraGroupSuite(context, 199003046, 3)
 		local pos = {x=-716, y=149, z=-7}
@@ -475,37 +475,37 @@ function action_EVENT_VARIABLE_CHANGE_46016(context, evt)
 		                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 						ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 		        return -1
-					end
+					end 
 				end
-
+		
 	ScriptLib.SetGroupVariableValue(context, "key", 0)
-
-
-
-
-
-
+	
+		
+		
+		
+	
+				
 				return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_46017(context, evt)
 	if evt.param1 ~= 46017 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_46017(context, evt)
-
-
-	 ScriptLib.AddQuestProgress(context, "quest7902306finish")
-
+	
+	
+	 ScriptLib.AddQuestProgress(context, "quest7902306finish") 
+	
 	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = { x=-276, y=120, z=495.5}, radius = 2, rot = {x=0, y=0, z=1}, is_skip_ui=false, scene_id =9} )
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans3")
 	return 0
@@ -517,44 +517,44 @@ function condition_EVENT_GROUP_LOAD_46018(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "times") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_46018(context, evt)
-	 ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46020 )
-
+	 ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46020 ) 
+	
 	ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46021 )
-
+	
 	 ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46022 )
-
-	 ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46023 )
-
+	
+	 ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46023 ) 
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_QUEST_START_46019(context, evt)
-	 ScriptLib.RefreshGroup(context, { group_id = 199003046, suite = 1 })
-
+	 ScriptLib.RefreshGroup(context, { group_id = 199003046, suite = 1 }) 
+	
 	ScriptLib.SetGroupVariableValue(context, "key", 0)
-
+	
 	ScriptLib.SetGroupVariableValue(context, "times", 0)
-
-	 ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46020 )
+	
+	 ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46020 ) 
 	ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46021 )
-
-	ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46022 )
-
-	 ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46023 )
-
-	ScriptLib.SetGadgetStateByConfigId(context, 46001, GadgetState.Default)
-
-	ScriptLib.SetGadgetStateByConfigId(context, 46004, GadgetState.Default)
-
-	ScriptLib.SetGadgetStateByConfigId(context, 46003, GadgetState.Default)
-	ScriptLib.SetGadgetStateByConfigId(context, 46002, GadgetState.Default)
-
+	
+	ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46022 ) 
+	
+	 ScriptLib.RemoveEntityByConfigId(context, 199003046, EntityType.GADGET, 46023 ) 
+	
+	ScriptLib.SetGadgetStateByConfigId(context, 46001, GadgetState.Default) 
+	
+	ScriptLib.SetGadgetStateByConfigId(context, 46004, GadgetState.Default) 
+	
+	ScriptLib.SetGadgetStateByConfigId(context, 46003, GadgetState.Default) 
+	ScriptLib.SetGadgetStateByConfigId(context, 46002, GadgetState.Default) 
+	
 	return 0
 end

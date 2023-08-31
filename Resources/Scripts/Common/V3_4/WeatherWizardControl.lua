@@ -3,10 +3,10 @@
 ||	owner: 		luyao.huang
 ||	description:	天气精灵控制，后续会放到ability层处理
 ||	LogName:	WeatherWizardControl
-||	Protection:
+||	Protection:	
 =======================================]]--
 
---defs =
+--local defs = 
 --{
 --    energy_worktop_id = 100001,
 --}

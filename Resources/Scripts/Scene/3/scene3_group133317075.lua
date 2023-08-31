@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133317075
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	duration = 40,
 	group_id = 133317075,
 	collectable_sum = 8
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -109,9 +109,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 创建指定gadget
@@ -147,22 +147,22 @@ function TLA_set_gadget_state_by_configid(context, evt, config_id, state)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, config_id, state) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
+		end 
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_75012(context, evt)
 	TLA_set_gadget_state_by_configid(context, evt, 75002, GadgetState.GearStop)
-
+	
 	TLA_kill_groupsuite(context, evt, 133317075, 2)
-
+	
 	TLA_goto_groupsuite(context, evt, 133317075, 3)
-
+	
 	TLA_create_gadget(context, evt, 75001)
-
+	
 	ScriptLib.AddQuestProgress(context, "7332202")
-
+	
 	return 0
 end
 
@@ -172,23 +172,23 @@ function action_EVENT_CHALLENGE_FAIL_75013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 75002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为75003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 75003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133317075, 2)
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_75014(context, evt)
 	if 75002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -207,17 +207,17 @@ function action_EVENT_GADGET_STATE_CHANGE_75014(context, evt)
 	if 0 ~= ScriptLib.ActiveChallenge(context, 666, 271, defs.duration, 2, 218, defs.collectable_sum) then
 	return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 1, 1) then
 	return -1
 	end
-
+	
 	return 0
-
+	
 end
 
 -- 触发条件
@@ -225,7 +225,7 @@ function condition_EVENT_GADGET_CREATE_75016(context, evt)
 	if 75003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -236,7 +236,7 @@ function action_EVENT_GADGET_CREATE_75016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -244,14 +244,14 @@ end
 function condition_EVENT_SELECT_OPTION_75017(context, evt)
 	-- 判断是gadgetid 75003 option_id 177
 	if 75003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 177 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -262,14 +262,14 @@ function action_EVENT_SELECT_OPTION_75017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 将configid为 75002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 75002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 触发镜头注目，注目位置为坐标（1320，345，-744），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=1320, y=345, z=-744}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -278,8 +278,8 @@ function action_EVENT_SELECT_OPTION_75017(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -289,22 +289,22 @@ function action_EVENT_GROUP_LOAD_75018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 75002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为75003的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 75003 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133317075, 2)
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 3002, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133316103
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -72,9 +72,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 使用注目镜头
@@ -87,7 +87,7 @@ function TLA_active_cameralook_begin(context, evt, x, y, z, is_allow_input, dura
 	                                                      is_set_screen_XY = is_set_screen_XY, screen_x = screen_x, screen_y = screen_y }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
+				end 
 	return 0
 end
 
@@ -96,7 +96,7 @@ function condition_EVENT_GADGET_CREATE_103003(context, evt)
 	if 103002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -107,7 +107,7 @@ function action_EVENT_GADGET_CREATE_103003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -115,23 +115,23 @@ end
 function condition_EVENT_SELECT_OPTION_103004(context, evt)
 	-- 判断是gadgetid 103002 option_id 418
 	if 103002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 418 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_103004(context, evt)
 	ScriptLib.AddQuestProgress(context, "Q7325619")
-
+	
 	TLA_active_cameralook_begin(context, evt, 1188.643, 105.6155, 6500.839, false, 3, 0, false, 0, 0, 0, false, false, false, 0, 0)
-
+	
 	return 0
 end
 
@@ -140,17 +140,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_103007(context, evt)
 	if 103005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	if 103006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_103007(context, evt)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 133316082, 82001, GadgetState.Default)
-
+	
 	return 0
 end

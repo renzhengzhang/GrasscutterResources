@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309546
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	enter_region = 546017,
 	leave_region = 546018,
 	FindClue = 1,
@@ -15,9 +15,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -128,20 +128,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_546004(context, evt)
 	if evt.param1 ~= 546004 then return false end
-
+	
 	-- 判断是区域546004
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 546004 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -149,28 +149,28 @@ end
 function action_EVENT_ENTER_REGION_546004(context, evt)
 	-- 变量"BeatMonster"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "BeatMonster", 0)
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309546, 2)
-
+	
 	-- 针对当前group内变量名为 "FindClue" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "FindClue", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 600153 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 600153) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将configid为 546013 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 546013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -181,7 +181,7 @@ function action_EVENT_ANY_MONSTER_DIE_546008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -191,7 +191,7 @@ function condition_EVENT_ANY_MONSTER_DIE_546009(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -199,16 +199,16 @@ end
 function action_EVENT_ANY_MONSTER_DIE_546009(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309546, 3)
-
+	
 	-- 调用提示id为 400004 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133309546, 2)
-
+	
 	return 0
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_546010(context, evt)
 	if 546001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -228,19 +228,19 @@ function action_EVENT_GADGET_STATE_CHANGE_546010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_546016(context, evt)
 	if evt.param1 ~= 546016 then return false end
-
+	
 	-- 判断是区域546016
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 546016 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -251,7 +251,7 @@ function action_EVENT_ENTER_REGION_546016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -261,7 +261,7 @@ function condition_EVENT_ANY_MONSTER_DIE_546019(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -269,26 +269,26 @@ end
 function action_EVENT_ANY_MONSTER_DIE_546019(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309546, 4)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133309546, 3)
-
+	
 	-- 变量"FindRock"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "FindRock", 0)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 546012 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 调用提示id为 600154 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 600154) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=-2527.912, y=209.2846, z=6045.838}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-2527.912, y=209.2846, z=6045.838}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -297,8 +297,8 @@ function action_EVENT_ANY_MONSTER_DIE_546019(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 

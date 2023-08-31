@@ -1,28 +1,28 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155008070
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155008070
 }
 
 -- DEFS_MISCS
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
-
-
+		
+		
 	end,
 	["1"] = function(context)
-
+	
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
-
-
+	
+		
 	end,
 	["2"] = function(context)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, 70001, 0)
 		ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 2, 155008071)
@@ -36,7 +36,7 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -46,7 +46,7 @@ function CheckSuccess(context)
 	local wallmatch = ScriptLib.GetGroupVariableValue(context, "iswallmatch")
 
 
-	if wallmatch == 1 then
+	if wallmatch == 1 then 
 		return true
 	end
 
@@ -58,9 +58,9 @@ function FinishProcess(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -98,9 +98,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -111,9 +111,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -147,18 +147,18 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_LEVEL_TAG_CHANGE_70002(context, evt)
-	if evt.param2 == 1 then
+	if evt.param2 == 1 then 
 			ScriptLib.SetGroupVariableValue(context, "isNight", 0)
-		elseif evt.param2 == 2 then
+		elseif evt.param2 == 2 then 
 			ScriptLib.SetGroupVariableValue(context, "isNight", 1)
-			if CheckSuccess(context) == true then
+			if CheckSuccess(context) == true then 
 				FinishProcess(context)
 				if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 3 then
 					ScriptLib.SetGroupVariableValue(context, "gameplayState", 2)
@@ -171,19 +171,19 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_70003(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 		local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 			if (current_env_state_id == 1) then
 				ScriptLib.SetGroupVariableValue(context, "isNight", 0)
 			elseif  (current_env_state_id == 2) then
 				ScriptLib.SetGroupVariableValue(context, "isNight", 1)
-				if CheckSuccess(context) == true then
+				if CheckSuccess(context) == true then 
 					FinishProcess(context)
 					if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 3 then
 						ScriptLib.SetGroupVariableValue(context, "gameplayState", 2)
 					end
 				end
-			end
+			end 
 		return 0
 end
 
@@ -196,7 +196,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_70005(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -206,7 +206,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_70006(context, evt)
 	if GadgetState.ChestOpened ~= ScriptLib.GetGadgetStateByConfigId(context, 155008070, 70001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -217,6 +217,6 @@ function action_EVENT_GADGET_STATE_CHANGE_70006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

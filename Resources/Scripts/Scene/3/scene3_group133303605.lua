@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303605
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_iris = 605001,
 	gadget_block = 605002
 }
@@ -12,7 +12,7 @@ defs = {
 -- DEFS_MISCS
 function LF_ChangeIrisStateByBlock (context, block_state)
 	--石块在地面关闭神瞳交互
-	if 300 == block_state or 301 == block_state or 202 == block_state then
+	if 300 == block_state or 301 == block_state or 202 == block_state then 
 		ScriptLib.SetGroupVariableValue(context, "isActive", 0)
 		ScriptLib.InitTimeAxis(context, "blockfalling", {1}, false)
 	else -- 否则激活神瞳交互
@@ -22,9 +22,9 @@ function LF_ChangeIrisStateByBlock (context, block_state)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -103,9 +103,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -125,7 +125,7 @@ end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_605005(context, evt)
-	if  ScriptLib.CheckIsInGroup(context, base_info.group_id, defs.gadget_iris) ~= true then
+	if  ScriptLib.CheckIsInGroup(context, base_info.group_id, defs.gadget_iris) ~= true then 
 		return -1
 	end
 	ScriptLib.SetGadgetEnableInteract(context, base_info.group_id, defs.gadget_iris, false)

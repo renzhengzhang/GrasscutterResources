@@ -1,5 +1,5 @@
 --[[
-defs = {
+local defs = {
 	RegionID =  575001
 }
 --]]

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235800006
 }
 
 -- DEFS_MISCS
-defs ={
+local defs ={
         GalleryID = 6001,
         MainGroupID = 235800001,
         GroupID = 235800006,
@@ -45,9 +45,9 @@ local InvisibleFloor_Failed_Deduction = -10
 local InvisibleFloor_Falling_Deduction = -2
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -387,9 +387,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -400,9 +400,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -535,9 +535,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -545,7 +545,7 @@ function condition_EVENT_GADGET_CREATE_6304(context, evt)
 	if 6001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -556,7 +556,7 @@ function action_EVENT_GADGET_CREATE_6304(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -565,7 +565,7 @@ function condition_EVENT_GADGET_CREATE_6305(context, evt)
 	if 6036 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -576,7 +576,7 @@ function action_EVENT_GADGET_CREATE_6305(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -585,7 +585,7 @@ function condition_EVENT_GADGET_CREATE_6306(context, evt)
 	if 6112 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -596,7 +596,7 @@ function action_EVENT_GADGET_CREATE_6306(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -605,7 +605,7 @@ function condition_EVENT_GADGET_CREATE_6307(context, evt)
 	if 6143 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -616,7 +616,7 @@ function action_EVENT_GADGET_CREATE_6307(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -625,7 +625,7 @@ function condition_EVENT_GADGET_CREATE_6308(context, evt)
 	if 6177 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -636,7 +636,7 @@ function action_EVENT_GADGET_CREATE_6308(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -645,7 +645,7 @@ function condition_EVENT_GADGET_CREATE_6309(context, evt)
 	if 6076 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -656,7 +656,7 @@ function action_EVENT_GADGET_CREATE_6309(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 

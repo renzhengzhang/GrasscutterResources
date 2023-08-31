@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155008101
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155008101,
 	gadget_airforce = 101001,
 	gadget_mask = 101002,
@@ -19,7 +19,7 @@ local Worktops = {}
 local DayAppearGadgets = {defs.gadget_mask}
 local NightAppearGadgets = {defs.gadget_airforce,defs.gadget_windforce}
 
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -39,16 +39,16 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -97,9 +97,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -110,9 +110,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -146,15 +146,15 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_101004(context, evt)
 	UpdateGamePlayState(context)
-	if ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155009001) == 1 then
+	if ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155009001) == 1 then 
 	  ScriptLib.SetGroupVariableValue(context, "gameplayState", 1)
 	end
 	return 0
@@ -163,7 +163,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_101005(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -181,7 +181,7 @@ function condition_EVENT_ENTER_REGION_101006(context, evt)
 			else
 				ScriptLib.PrintContextLog(context,"不是夜晚")
 		        return false
-		    end
+		    end 
 			ScriptLib.PrintContextLog(context,"默认判断")
 		return true
 end
@@ -189,18 +189,18 @@ end
 -- 触发操作
 function action_EVENT_ENTER_REGION_101006(context, evt)
 		--如果没有冥鱼则直接创建
-			if -1 == ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_airforce) then
-
+			if -1 == ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_airforce) then			
+				
 				ScriptLib.CreateGadget(context, { config_id = defs.gadget_airforce })
 				ScriptLib.SetGroupVariableValue(context, "ismoving", 0)
-
-			else
+			
+			else 
 				--如果有冥鱼,并且在移动中, 则销毁创建
-				if 1 ==	ScriptLib.GetGroupVariableValue(context, "ismoving") then
+				if 1 ==	ScriptLib.GetGroupVariableValue(context, "ismoving") then 
 					ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_airforce )
 					ScriptLib.CreateGadget(context, { config_id = defs.gadget_airforce })
 					ScriptLib.SetGroupVariableValue(context, "ismoving", 0)
-
+					
 				end
 			end
 			--ScriptLib.StartPlatform(context, 25003)
@@ -217,33 +217,33 @@ function condition_EVENT_PLATFORM_REACH_POINT_101007(context, evt)
 	        return true
 	    else
 	        return false
-	    end
-
+	    end 
+	
 	-- 判断是gadgetid 为 25003的移动平台，是否到达了500600003 的路线中的 1 点
-
+	
 	if defs.gadget_airforce ~= evt.param1 then
 	  return false
 	end
-
+	
 	if defs.route_01 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_101007(context, evt)
-		ScriptLib.StopPlatform(context, defs.gadget_airforce)
+		ScriptLib.StopPlatform(context, defs.gadget_airforce) 
 		ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_airforce)
 		ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_windforce)
 		ScriptLib.SetGroupVariableValue(context, "ismoving", 0)
-
+		
 		return 0
 end
 
@@ -254,25 +254,25 @@ function action_EVENT_QUEST_START_101008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_101009(context, evt)
 		if evt.param1 ~= 101009 then return false end
-		if 203 ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_airforce) and
+		if 203 ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_airforce) and 
 		202 ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_airforce) then
 			return false
 		end
-
+	
 		local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 		if (current_env_state_id == 2) then
 			return true
 		else
 			return false
-		end
-
+		end 
+	
 		return true
 end
 
@@ -280,7 +280,7 @@ end
 function action_EVENT_ENTER_REGION_101009(context, evt)
 			ScriptLib.SetGroupVariableValue(context, "ismoving", 1)
 			ScriptLib.CreateGadget(context, { config_id = defs.gadget_windforce })
-			ScriptLib.StartPlatform(context, defs.gadget_airforce)
+			ScriptLib.StartPlatform(context, defs.gadget_airforce) 
 			ScriptLib.PrintContextLog(context,"启动移动平台--完成")
 			return 0
 end
@@ -290,7 +290,7 @@ function condition_EVENT_GADGET_CREATE_101010(context, evt)
 	if 101001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -299,7 +299,7 @@ function action_EVENT_GADGET_CREATE_101010(context, evt)
 			ScriptLib.SetGroupVariableValue(context, "ismoving", 0)
 			ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_airforce, 202)
 			ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, defs.gadget_windforce )
-			ScriptLib.CreateGadget(context, { config_id = defs.gadget_windforce })
+			ScriptLib.CreateGadget(context, { config_id = defs.gadget_windforce }) 
 		return 0
 end
 

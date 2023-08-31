@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155005305
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155005305,
 	pointarray_move = 500500011
 }
@@ -44,41 +44,41 @@ local NightAppearGadgets = {}
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
-
+		
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-
+		
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 		DayNight_Gadget_Unlock(context,305004)
-
+		
 	end,
 	["2"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
-		ScriptLib.SetPlatformPointArray(context, 305003, defs.pointarray_move, {1,2}, {route_type = 0, turn_mode = false})
+		ScriptLib.SetPlatformPointArray(context, 305003, defs.pointarray_move, {1,2}, {route_type = 0, turn_mode = false}) 
 		DayNight_Gadget_Finish (context,305004)
-
+		
 	end
 
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -114,9 +114,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -127,9 +127,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -163,9 +163,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -177,7 +177,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_305002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 		-- 判断变量"gameplayState"为0
 		if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 				return false
@@ -196,7 +196,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_305005(context, evt)
 	if 312 ~= ScriptLib.GetGadgetStateByConfigId(context, 155005305, 305004) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -207,7 +207,7 @@ function action_EVENT_GADGET_STATE_CHANGE_305005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

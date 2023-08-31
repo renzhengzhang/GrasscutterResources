@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155006187
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155006187
 }
 
@@ -43,43 +43,43 @@ local NightAppearGadgets = {187003}
 
 	ScriptLib.SetPlatformPointArray(context, gadget_id, pointarray_id, {pointarrayindexlist}, { route_type = 0 })
 ]]
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
-
-
+		
+		
 	end,
 	["1"] = function(context)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
-
-
+		
+		
 	end,
 	["2"] = function(context)
-
+	
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
 
-
+		
 	end,
 	["3"] = function(context)
-
+	
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 4)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, 187003, 201)
 		ScriptLib.AddQuestProgress(context, "72244_PutOrbIntoWater")
 
-
+		
 	end,
 	["4"] = function(context)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 4)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, 187003, 201)
-
+		
 	end,
 	["5"] = function(context)
-
+		
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 4)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, 187003, 201)
-
+		
 	end
 
 
@@ -88,16 +88,16 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -139,9 +139,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -152,9 +152,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -206,9 +206,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -220,7 +220,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_187002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -231,7 +231,7 @@ function condition_EVENT_QUEST_START_187006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -242,7 +242,7 @@ function action_EVENT_QUEST_START_187006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -252,7 +252,7 @@ function condition_EVENT_QUEST_START_187007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -263,7 +263,7 @@ function action_EVENT_QUEST_START_187007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -272,12 +272,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_187008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155006187, 187005) then
 		return false
 	end
-
+	
 	-- 判断变量"gameplayState"为2
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -288,7 +288,7 @@ function action_EVENT_GADGET_STATE_CHANGE_187008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -298,7 +298,7 @@ function condition_EVENT_QUEST_START_187009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "gameplayState") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -309,6 +309,6 @@ function action_EVENT_QUEST_START_187009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

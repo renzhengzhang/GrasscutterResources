@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155006055
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	pointarryRot = 500600005
 }
 
@@ -15,9 +15,9 @@ local DayAppearGadgets = {55004}
 local NightAppearGadgets = {55002}
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -54,9 +54,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -95,7 +95,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_55008(context, evt)
 	if 212 ~= ScriptLib.GetGadgetStateByConfigId(context, 155006055, 55005) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -106,7 +106,7 @@ function action_EVENT_GADGET_STATE_CHANGE_55008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 55003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
+		end 
 	 -- 卸载指定gadget
 	                if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 155006055, EntityType.GADGET, 55002 ) then
 	            ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")

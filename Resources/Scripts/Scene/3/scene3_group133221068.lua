@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133221068
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 
         group_id = 133221068,
 
@@ -15,7 +15,7 @@ defs = {
         ChallengeIndex = 2001,
 
         --开始挑战后，哪些suit要Add
-        challenge_suits =
+        challenge_suits = 
         { 2,3,4,5 },
 
         --玩法限定region，出圈触发暂离，此region在suite1
@@ -41,9 +41,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -194,9 +194,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -207,9 +207,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -270,20 +270,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_68046(context, evt)
 	if evt.param1 ~= 68046 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -294,7 +294,7 @@ function action_EVENT_ENTER_REGION_68046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -302,34 +302,34 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_68073(context, evt)
 	--潜行营地对话处理
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Endflag_slip",133221068) ~= 0 then
-
-
-
+	
+	
+	
 		-- 调用提示id为 400021 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 		if 0 ~= ScriptLib.ShowReminder(context, 32210107) then
 		  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 			return -1
 		end
-
-
+	
+	
 		ScriptLib.PrintContextLog(context, "先完成了战斗营地 播放两段对话")
-
+	
 	else
-
+	
 		-- 调用提示id为 400021 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 		if 0 ~= ScriptLib.ShowReminder(context, 32210103) then
 		  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 			return -1
 		end
-
+	
 		ScriptLib.PrintContextLog(context, "尚未完成战斗营地 只播第一段对话")
-
+	
 		if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Endflag_battle", 1, 133220703) then
 	    	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	    	return -1
 		end
 	end
-
+	
 	return 0
 end
 
@@ -338,7 +338,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68083(context, evt)
 	if 68074 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -346,7 +346,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_68083(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133221068, 6)
-
+	
 	return 0
 end
 
@@ -355,7 +355,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68084(context, evt)
 	if 68074 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -363,7 +363,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_68084(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133221068, 6)
-
+	
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304040
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -117,16 +117,16 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_QUEST_START_40005(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133304040, 2)
-
+	
 	return 0
 end
 
@@ -136,7 +136,7 @@ function condition_EVENT_LEAVE_REGION_40006(context, evt)
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 40006 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -146,8 +146,8 @@ function action_EVENT_LEAVE_REGION_40006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 40011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -156,7 +156,7 @@ function condition_EVENT_GADGET_CREATE_40007(context, evt)
 	if 40004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -167,7 +167,7 @@ function action_EVENT_GADGET_CREATE_40007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -177,17 +177,17 @@ function condition_EVENT_SELECT_OPTION_40008(context, evt)
 	if isMP == true then
 		return false
 	end
-
+	
 	-- 判断是gadgetid 40004 option_id 783
 	if 40004 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 783 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -195,20 +195,20 @@ end
 function action_EVENT_SELECT_OPTION_40008(context, evt)
 	-- 创建标识为"wait"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "wait", {2}, false)
-
-
+	
+	
 	-- 将configid为 40004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 40004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133304040 ；指定config：40004；物件身上指定option：783；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133304040, 40004, 783) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_TIME_AXIS_PASS_40009(context, evt)
 	if "wait" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -225,19 +225,19 @@ end
 function action_EVENT_TIME_AXIS_PASS_40009(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133304040, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_40012(context, evt)
 	if evt.param1 ~= 40012 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -247,7 +247,7 @@ function action_EVENT_ENTER_REGION_40012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 40011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235719007
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -40,9 +40,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -53,9 +53,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -80,9 +80,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -90,7 +90,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_7010(context, evt)
 	if 7003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -101,13 +101,13 @@ function action_EVENT_ANY_MONSTER_LIVE_7010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "monster_wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "monster_wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -118,43 +118,43 @@ function action_EVENT_CHALLENGE_SUCCESS_7011(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : save_challenge_remainTime")
 	      return -1
 	    end
-
+	
 	-- 将本组内变量名为 "stage" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage", 1, 235719005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 爬塔更换队伍2
 	if 0 ~= ScriptLib.TowerMirrorTeamSetUp(context, 2) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_team_setup")
 		return -1
 	end
-
+	
 	-- 改变指定group组235719006中， configid为6001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235719006, 6001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 235719006, 6001, {176}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 改变指定group组235719009中， configid为9001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235719009, 9001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235719009中， configid为9002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235719009, 9002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -165,24 +165,24 @@ function action_EVENT_CHALLENGE_FAIL_7012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	-- 改变指定group组235719009中， configid为9001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235719009, 9001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组235719009中， configid为9002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 235719009, 9002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

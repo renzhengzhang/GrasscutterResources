@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220005010
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	max_gear = 4,
 	timer = 10,
 	group_id = 220005010,
@@ -16,9 +16,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -107,7 +107,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10004(context, evt)
 	if 10009 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -118,13 +118,13 @@ function action_EVENT_GADGET_STATE_CHANGE_10004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 220005006, monsters = {}, gadgets = {6002} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -133,7 +133,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10006(context, evt)
 	if 10001 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -144,13 +144,13 @@ function action_EVENT_GADGET_STATE_CHANGE_10006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -160,26 +160,26 @@ function action_EVENT_TIMER_EVENT_10007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_10008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"active_count"为4
 	if ScriptLib.GetGroupVariableValue(context, "active_count") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -189,56 +189,56 @@ function action_EVENT_VARIABLE_CHANGE_10008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 10002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 10003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 10005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 10009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220005010, "time1") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220005010, "time2") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220005010, "time3") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220005010, "time4") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -247,7 +247,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10014(context, evt)
 	if 10002 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -258,13 +258,13 @@ function action_EVENT_GADGET_STATE_CHANGE_10014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -273,7 +273,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10015(context, evt)
 	if 10003 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -284,13 +284,13 @@ function action_EVENT_GADGET_STATE_CHANGE_10015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -299,7 +299,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_10016(context, evt)
 	if 10005 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -310,13 +310,13 @@ function action_EVENT_GADGET_STATE_CHANGE_10016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -326,14 +326,14 @@ function action_EVENT_TIMER_EVENT_10017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10002, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -343,14 +343,14 @@ function action_EVENT_TIMER_EVENT_10018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10003, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -360,13 +360,13 @@ function action_EVENT_TIMER_EVENT_10019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 10005, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 针对当前group内变量名为 "active_count" 的变量，进行修改，变化值为 -1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "active_count", -1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

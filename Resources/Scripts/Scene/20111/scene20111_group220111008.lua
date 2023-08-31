@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220111008
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -95,9 +95,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -106,17 +106,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_8002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "wall1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"wall2"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 1 then
 			return false
 	end
-
+	
 	-- 检测config_id为8003的gadget是否从GadgetState.Default变为GadgetState.GearStart
 	if 8003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -127,7 +127,7 @@ function action_EVENT_GADGET_STATE_CHANGE_8002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -137,17 +137,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_8007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "wall1") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall2"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 0 then
 			return false
 	end
-
+	
 	-- 检测config_id为8004的gadget是否从GadgetState.Default变为GadgetState.GearStart
 	if 8004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_GADGET_STATE_CHANGE_8007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -168,12 +168,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_8008(context, evt)
 	if 8003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall1"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall1") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -187,13 +187,13 @@ function action_EVENT_GADGET_STATE_CHANGE_8008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -203,17 +203,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_8009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "wall1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"wall2"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 0 then
 			return false
 	end
-
+	
 	-- 检测config_id为8003的gadget是否从GadgetState.Default变为GadgetState.GearStart
 	if 8003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -227,13 +227,13 @@ function action_EVENT_GADGET_STATE_CHANGE_8009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall1" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall1", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -243,12 +243,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_8010(context, evt)
 	if 8004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall2"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -262,13 +262,13 @@ function action_EVENT_GADGET_STATE_CHANGE_8010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -278,17 +278,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_8011(context, evt)
 	if 8004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall2"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall1"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -302,13 +302,13 @@ function action_EVENT_GADGET_STATE_CHANGE_8011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -318,12 +318,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_8012(context, evt)
 	if 8005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall3"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall3") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -337,35 +337,35 @@ function action_EVENT_GADGET_STATE_CHANGE_8012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_8013(context, evt)
 	if evt.param1 ~= 8013 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"wall1"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall1") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"wall2"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -379,13 +379,13 @@ function action_EVENT_ENTER_REGION_8013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -395,12 +395,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_8014(context, evt)
 	if 8006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall4"为0
 	if ScriptLib.GetGroupVariableValue(context, "wall4") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -414,13 +414,13 @@ function action_EVENT_GADGET_STATE_CHANGE_8014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -430,12 +430,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_8015(context, evt)
 	if 8006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall4"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -443,10 +443,10 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_8015(context, evt)
 	-- 删除suite15的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220111010, 15)
-
+	
 	-- 添加suite16的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220111010, 16)
-
+	
 	return 0
 end
 
@@ -456,12 +456,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_8018(context, evt)
 	if 8005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall3"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -475,13 +475,13 @@ function action_EVENT_GADGET_STATE_CHANGE_8018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall3", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -491,12 +491,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_8019(context, evt)
 	if 8006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"wall4"为1
 	if ScriptLib.GetGroupVariableValue(context, "wall4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -510,12 +510,12 @@ function action_EVENT_GADGET_STATE_CHANGE_8019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "wall4" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "wall4", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

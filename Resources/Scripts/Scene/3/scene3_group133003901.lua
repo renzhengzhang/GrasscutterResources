@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133003901
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 24,
 	gadget_id_2 = 27,
 	gadget_id_3 = 35,
@@ -38,9 +38,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -128,9 +128,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -141,9 +141,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -159,9 +159,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -180,7 +180,7 @@ function condition_EVENT_ENTER_REGION_27(context, evt)
 		return true
 	end
 	return false
-
+	
 end
 
 -- 触发条件
@@ -194,7 +194,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_36(context, evt)
 	-- 判断角色数量不少于1
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 35103) == QuestState.UNFINISHED or ScriptLib.GetQuestState(context, evt.target_eid, 35105) == QuestState.UNFINISHED)
+	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 35103) == QuestState.UNFINISHED or ScriptLib.GetQuestState(context, evt.target_eid, 35105) == QuestState.UNFINISHED) 
 	and evt.param1 == defs.gadget_id_4 then
 		return true
 	end
@@ -235,8 +235,8 @@ function action_EVENT_ENTER_REGION_40(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 

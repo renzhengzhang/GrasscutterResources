@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 201006007
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -91,9 +91,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -102,8 +102,8 @@ function condition_EVENT_ANY_MONSTER_DIE_33(context, evt)
 	if evt.param1 ~= 22 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -113,50 +113,50 @@ function action_EVENT_ANY_MONSTER_DIE_33(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 48, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为78的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 78 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 解锁目标3
 	if 0 ~= ScriptLib.UnlockForce(context, 3) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : unlock_force")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "DragonTear") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 44 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 44, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 74 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 74, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_37(context, evt)
 	if evt.param1 ~= 37 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -170,8 +170,8 @@ function action_EVENT_ENTER_REGION_37(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -181,8 +181,8 @@ function condition_EVENT_ANY_MONSTER_DIE_38(context, evt)
 	if evt.param1 ~= 23 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -193,7 +193,7 @@ function action_EVENT_ANY_MONSTER_DIE_38(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -203,8 +203,8 @@ function condition_EVENT_ANY_MONSTER_DIE_39(context, evt)
 	if evt.param1 ~= 24 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -215,7 +215,7 @@ function action_EVENT_ANY_MONSTER_DIE_39(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -225,8 +225,8 @@ function condition_EVENT_ANY_MONSTER_DIE_40(context, evt)
 	if evt.param1 ~= 25 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -237,19 +237,19 @@ function action_EVENT_ANY_MONSTER_DIE_40(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_41(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"key"为3
 	if ScriptLib.GetGroupVariableValue(context, "key") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -260,7 +260,7 @@ function action_EVENT_VARIABLE_CHANGE_41(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -269,7 +269,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_42(context, evt)
 	if 22 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -279,7 +279,7 @@ function action_EVENT_ANY_MONSTER_LIVE_42(context, evt)
 		local pos = {x=180, y=60, z=-21}
 	    if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0, is_allow_input = true }) then
 					return -1
-				end
-
+				end 
+	
 	return 0
 end

@@ -1,19 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 247006005
 }
 
 -- DEFS_MISCS
 local GroupId = 247006005
-local ChestConfigID =
- 5001
+local ChestConfigID = 5001
 local RegionID = 5002
 local ChestConfigIDList = {5001}
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -80,9 +79,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -93,9 +92,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -111,25 +110,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5004(context, evt)
 	if evt.param1 ~= 5004 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"gear"为0
 	if ScriptLib.GetGroupVariableValue(context, "gear") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -140,7 +139,7 @@ function action_EVENT_ENTER_REGION_5004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -148,14 +147,14 @@ end
 function condition_EVENT_SELECT_OPTION_5006(context, evt)
 	-- 判断是gadgetid 5005 option_id 24
 	if 5005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 24 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -165,26 +164,26 @@ function action_EVENT_SELECT_OPTION_5006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 5003 的物件更改为状态 GadgetState.GearAction1
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 5003, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 247006005 ；指定config：5005；物件身上指定option：24；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 247006005, 5005, 24) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "gear" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "gear", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

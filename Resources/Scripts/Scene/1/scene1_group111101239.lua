@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101239
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	pointarray_route = 110100045,
 	gadget_controller_1 = 239014,
 	gadget_controller_2 = 239017,
@@ -25,60 +25,59 @@ local NightAppearGadgets = {}
 
 MaxSize = 12
 
-ControllerWallMap =
+ControllerWallMap = 
 {
 	{defs.gadget_controller_1,
 		{
-			{defs.gadget_wall_1,{2,7,12}},
+			{defs.gadget_wall_1,{2,7,12}}, 
 			{defs.gadget_wall_2,{1,6,11}}
 		}
 	},
 	{defs.gadget_controller_2,
 		{
-			{defs.gadget_wall_1,{12,7,2}},
+			{defs.gadget_wall_1,{12,7,2}}, 
 			{defs.gadget_wall_2,{11,6,1}}
 		}
 	},
 	{defs.gadget_controller_3,
 		{
-			{defs.gadget_wall_3,{8,9,10}},
+			{defs.gadget_wall_3,{8,9,10}}, 
 			{defs.gadget_wall_4,{3,4,5}}
 		}
 	},
 	{defs.gadget_controller_4,
 		{
-			{defs.gadget_wall_3,{10,9,8}},
+			{defs.gadget_wall_3,{10,9,8}}, 
 			{defs.gadget_wall_4,{5,4,3}}
 		}
 	}
 }
 
 --初始wall表，把所有的wall都填入
-StartWallMap =
+StartWallMap = 
 {
     {defs.gadget_wall_1, 7},
     {defs.gadget_wall_2, 6},
     {defs.gadget_wall_3, 9},
-    {defs.gadget_wall_4, 4},
+    {defs.gadget_wall_4, 4}, 
 }
-
---初始blocker表，把所有的block都填入
-StartBlockerMap =
+--初始blocker表，把所有的block都填入
+StartBlockerMap = 
 {
     {defs.blocker_1,1,0},
     {defs.blocker_2,12,0}
 }
 
 --目标解法，如果填了就会有完成事件
-TargetSolution =
+TargetSolution = 
 {
      12,11,10,5
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -132,9 +131,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -145,9 +144,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -163,9 +162,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -177,10 +176,10 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    is_daynight_gadget = true
 	  end
 	end
-
-	if (not is_daynight_gadget) then
+	
+	if (not is_daynight_gadget) then 
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1
+	    return -1 
 	end
 	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
@@ -190,8 +189,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239014,302)
 	end
-
-
+	
+	
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
 	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
@@ -199,10 +198,10 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    is_daynight_gadget = true
 	  end
 	end
-
-	if (not is_daynight_gadget) then
+	
+	if (not is_daynight_gadget) then 
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1
+	    return -1 
 	end
 	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
@@ -212,8 +211,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239015,302)
 	end
-
-
+	
+	
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
 	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
@@ -221,10 +220,10 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    is_daynight_gadget = true
 	  end
 	end
-
-	if (not is_daynight_gadget) then
+	
+	if (not is_daynight_gadget) then 
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1
+	    return -1 
 	end
 	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
@@ -234,8 +233,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239016,302)
 	end
-
-
+	
+	
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
 	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
@@ -243,10 +242,10 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    is_daynight_gadget = true
 	  end
 	end
-
-	if (not is_daynight_gadget) then
+	
+	if (not is_daynight_gadget) then 
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1
+	    return -1 
 	end
 	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
@@ -256,8 +255,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239017,302)
 	end
-
-
+	
+	
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
 	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
@@ -265,10 +264,10 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    is_daynight_gadget = true
 	  end
 	end
-
-	if (not is_daynight_gadget) then
+	
+	if (not is_daynight_gadget) then 
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1
+	    return -1 
 	end
 	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
@@ -278,8 +277,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239021,302)
 	end
-
-
+	
+	
 	--lua层调用，将指定gadget转到一个合适的昼夜激活状态
 	local is_daynight_gadget = false
 	for i = 1 ,#EnvControlGadgets do
@@ -287,10 +286,10 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	    is_daynight_gadget = true
 	  end
 	end
-
-	if (not is_daynight_gadget) then
+	
+	if (not is_daynight_gadget) then 
 	    ScriptLib.PrintContextLog(context,"EnvState: 错误的传入了一个不在昼夜列表中的物件！！！")
-	    return -1
+	    return -1 
 	end
 	local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
 	local current_env_state = ScriptLib.GetLevelTagNameById(context,current_env_state_id)
@@ -300,8 +299,8 @@ function action_EVENT_GROUP_LOAD_239018(context, evt)
 	if (current_env_state == "2_4_Night") then
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 0,239022,302)
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -310,7 +309,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_239023(context, evt)
 	if 239021 ~= evt.param2 or 222 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -321,8 +320,8 @@ function action_EVENT_GADGET_STATE_CHANGE_239023(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 239019, 201-state) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -331,7 +330,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_239024(context, evt)
 	if 239022 ~= evt.param2 or 222 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -342,20 +341,20 @@ function action_EVENT_GADGET_STATE_CHANGE_239024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 239020, 201-state) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_239026(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"has_succeeded"为1
 	if ScriptLib.GetGroupVariableValue(context, "has_succeeded") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -365,8 +364,8 @@ function action_EVENT_VARIABLE_CHANGE_239026(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 239025, GadgetState.ChestOpened) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

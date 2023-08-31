@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220136004
 }
 
 -- DEFS_MISCS
-defs = {
- queue = {
-
+local defs = {
+ queue = {      
+         
         [1] = { config_id = 4010, bullet_type = 3, duration = 5, shoot_time = 6, shoot_interval = 0.6, point_array = 2, point_id = {1,2},route_type = 1},
  [2] = { config_id = 4040, bullet_type = 2, duration = 5, shoot_time = 6, shoot_interval = 0.6, point_array = 9, point_id = {1,2},route_type = 1},
         [3] = { config_id = 4003, bullet_type = 1, duration = 5, shoot_time = 8, shoot_interval = 0.3, point_array = 7, point_id = {1,2},turn_mode = true,route_type = 1},
@@ -28,9 +28,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -134,9 +134,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -147,9 +147,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -210,20 +210,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4002(context, evt)
 	if evt.param1 ~= 4002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -234,7 +234,7 @@ function action_EVENT_ENTER_REGION_4002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -242,22 +242,22 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_4008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220136004, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220136004, 3)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "ballchallengecomplete") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "star_shooter" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "star_shooter", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -268,16 +268,16 @@ function action_EVENT_CHALLENGE_FAIL_4009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220136004, 3)
-
+	
 	-- 创建id为4045的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4045 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -287,37 +287,37 @@ function condition_EVENT_QUEST_START_4014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "once") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_QUEST_START_4014(context, evt)
-	      -- 创建父挑战
+	      -- 创建父挑战 
 		  ScriptLib.CreateFatherChallenge(context, 260, 262, 61, {success = 1, fail = 1, fail_on_wipe = true})
 		  ScriptLib.StartFatherChallenge(context, 260)
 		  ScriptLib.AttachChildChallenge(context, 260, 262, 260,{3, 777, 30, 0, 0},{},{success=1, fail=1})
 	  ScriptLib.AttachChildChallenge(context, 260, 261, 261,{60, 0},{},{success=1, fail=1})
-
+	
 	 ScriptLib.SetGroupVariableValue(context, "star_shooter", 1)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220136004, 3)
-
+	
 	 ScriptLib.SetGroupVariableValue(context, "once", 1)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4043(context, evt)
 	if evt.param1 ~= 4043 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -331,11 +331,11 @@ end
 -- 触发操作
 function action_EVENT_GROUP_LOAD_4044(context, evt)
 	 ScriptLib.SetGroupVariableValue(context, "once", 0)
-
+	
 	 if ScriptLib.GetHostQuestState(context,4007408)==2 then
-	ScriptLib.CreateGadget(context, { config_id = 4045 })
+	ScriptLib.CreateGadget(context, { config_id = 4045 }) 
 	end
-
+	
 	return 0
 end
 

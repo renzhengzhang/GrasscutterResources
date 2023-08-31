@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133313047
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -107,9 +107,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 创建指定group的指定suite内所有内容
@@ -122,12 +122,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_47002(context, evt)
 	if evt.param1 ~= 47002 then return false end
-
+	
 	-- 判断是区域47002
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 47002 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -138,7 +138,7 @@ function action_EVENT_ENTER_REGION_47002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -148,28 +148,28 @@ function condition_EVENT_ANY_MONSTER_DIE_47003(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_47003(context, evt)
 	TLA_add_groupsuite(context, evt, 133313047, 2)
-
+	
 	ScriptLib.AddQuestProgress(context, "7330513")
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_47028(context, evt)
 	if evt.param1 ~= 47028 then return false end
-
+	
 	-- 判断是区域47028
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 47028 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -180,7 +180,7 @@ function action_EVENT_ENTER_REGION_47028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -190,15 +190,15 @@ function condition_EVENT_GROUP_LOAD_47030(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_47030(context, evt)
 	TLA_add_groupsuite(context, evt, 133313047, 2)
-
+	
 	ScriptLib.AddQuestProgress(context, "7330513")
-
+	
 	return 0
 end

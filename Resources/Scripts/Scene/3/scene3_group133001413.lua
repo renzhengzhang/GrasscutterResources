@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133001413
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_aster = 413001,
 	gadget_reward = 413124,
 	group_id = 133001413,
@@ -60,22 +60,22 @@ local buff_def = {
         --difficulty
         [1] = {
                 --stage
-                [1] = {buff={3},weight={100}},
-                [2] = {buff={1},weight={100}}
+                [1] = {buff={3},weight={100}},                
+                [2] = {buff={1},weight={100}}                                           
         },
         [2] = {
-                [1] = {buff={3},weight={100}},
-                [2] = {buff={1},weight={100}}
+                [1] = {buff={3},weight={100}},                
+                [2] = {buff={1},weight={100}}     
         },
         [3] = {
-                [1] = {buff={3},weight={100}},
-                [2] = {buff={1},weight={100}}
+                [1] = {buff={3},weight={100}},                
+                [2] = {buff={1},weight={100}}     
         },
         [4] = {
-                [1] = {buff={1},weight={100}},
+                [1] = {buff={1},weight={100}},                
                 [2] = {buff={3},weight={100}},
                 [3] = {buff={3},weight={100}},
-                [4] = {buff={1},weight={100}}
+                [4] = {buff={1},weight={100}}     
         }
 }
 
@@ -155,9 +155,9 @@ local tide_suite_config = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -462,9 +462,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -475,9 +475,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -1123,17 +1123,17 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_SCENE_MP_PLAY_OPEN_413004(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "interact_flag", 1)
-
+	
 	ScriptLib.SetGadgetEnableInteract(context, defs.group_id, defs.gadget_aster, true)
-
+	
 	return 0
 end
 
@@ -1142,20 +1142,20 @@ function condition_EVENT_GADGET_CREATE_413005(context, evt)
 	if 413001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_413005(context, evt)
 	local flag = ScriptLib.GetGroupVariableValue(context, "interact_flag")
-
+	
 	if flag == 1 then
 	        ScriptLib.SetGadgetEnableInteract(context, defs.group_id, defs.gadget_aster, true)
 	else
 	        ScriptLib.SetGadgetEnableInteract(context, defs.group_id, defs.gadget_aster, false)
 	end
-
+	
 	return 0
 end
 

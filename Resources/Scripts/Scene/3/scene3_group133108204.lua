@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133108204
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_id = 133108204,
 	num_monster = 5,
 	id_boss = 204004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -77,9 +77,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -90,9 +90,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -117,30 +117,30 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_204010(context, evt)
 	if evt.param1 ~= 204010 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"challengeStart"为0
 	if ScriptLib.GetGroupVariableValue(context, "challengeStart") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"challengeSuccess"为0
 	if ScriptLib.GetGroupVariableValue(context, "challengeSuccess") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -151,19 +151,19 @@ function action_EVENT_ENTER_REGION_204010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 开始父挑战2004001，识别号2040，全灭时失败
 	ScriptLib.CreateFatherChallenge(context,2040,2004001,99999999, {success=2, fail=100,fail_on_wipe=true})
-
+	
 	-- 开始识别号2040的挑战
 	ScriptLib.StartFatherChallenge(context, 2040)
-
+	
 	-- #1 boss，子挑战2004002，识别号2041，触发1次，tag20491
 	ScriptLib.AttachChildChallenge(context,2040,2041,2004002,{1,20491,1},{context.uid},{success=1, fail=100})
-
+	
 	-- #2 小怪，子挑战2004003，识别号2042，小怪，触发defs次，tag20492
 	ScriptLib.AttachChildChallenge(context,2040,2042,2004003,{1,20492,defs.num_monster},{context.uid},{success=1, fail=100})
-
+	
 	return 0
 end
 
@@ -173,12 +173,12 @@ function condition_EVENT_LEAVE_REGION_204011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "challengeStart") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"challengeSuccess"为0
 	if ScriptLib.GetGroupVariableValue(context, "challengeSuccess") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -186,7 +186,7 @@ end
 function action_EVENT_LEAVE_REGION_204011(context, evt)
 	-- 终止识别id为2040的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 2040, 0)
-
+	
 	return 0
 end
 
@@ -194,14 +194,14 @@ end
 function condition_EVENT_SELECT_OPTION_204014(context, evt)
 	-- 判断是gadgetid 204009 option_id 189
 	if 204009 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 189 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -212,36 +212,36 @@ function action_EVENT_SELECT_OPTION_204014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 改变指定group组133108204中， configid为204009的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133108204, 204009, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "giveReward" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "giveReward", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_204015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"giveReward"为1
 	if ScriptLib.GetGroupVariableValue(context, "giveReward") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"hasReward"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasReward") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -252,15 +252,15 @@ function action_EVENT_VARIABLE_CHANGE_204015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	ScriptLib.FinishGroupLinkBundle(context, defs.group_id)
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133108204, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -271,13 +271,13 @@ function action_EVENT_CHALLENGE_SUCCESS_204017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "challengeSuccess" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "challengeSuccess", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -288,13 +288,13 @@ function action_EVENT_CHALLENGE_FAIL_204018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133108204, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -304,8 +304,8 @@ function condition_EVENT_ANY_MONSTER_DIE_204019(context, evt)
 	if evt.param1 == defs.id_boss then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -315,8 +315,8 @@ function condition_EVENT_ANY_MONSTER_DIE_204020(context, evt)
 	if evt.param1 ~= defs.id_boss then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 

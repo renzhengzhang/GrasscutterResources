@@ -3,16 +3,16 @@
 ||  owner:      shuyi.chang
 ||  description:    连续弹跳蘑菇
 ||  LogName:    ## [ContinuousTrampoline]
-||  Protection:
+||  Protection: 
 =======================================]]
 
--- defs =
+-- local defs = 
 -- {
 --     maxRegion = 34004,
 --     maxJumpTimes = 5,
 --     mushroomList = {
---         [1] = {34001, 34002,},
---         [2] = {34003},
+--         [1] = {34001, 34002,}, 
+--         [2] = {34003}, 
 --         [3] = {34004, 34005, 34006,},
 --         [4] = {34007,},
 --         [5] = {34008,},
@@ -24,8 +24,8 @@
 local challengeId = 84
 
 
-local extraTriggers =
-{
+local extraTriggers = 
+{	
 	{ config_id = 5000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_GROUP_LOAD", trigger_count = 0},
 	{ config_id = 5000002, name = "ENTER_REGION", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_ENTER_REGION", forbid_guest = true, trigger_count = 0},
     { config_id = 5000003, name = "AVATAR_JUMP", event = EventType.EVENT_VARIABLE_CHANGE, source = "jumpTimes", condition = "", action = "action_AVATAR_JUMP", trigger_count = 0, tag = "99"},
@@ -36,7 +36,7 @@ local extraTriggers =
 
 }
 
-local extraVariables =
+local extraVariables = 
 {
     -- 记录玩家连续跳跃次数
     { config_id = 5000101, name = "jumpTimes", value = 0, no_refresh = false },
@@ -80,7 +80,7 @@ function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
     --     for j = 1, #defs.mushroomList[i] do
     --         local idTemp = regionBaseId + i * 10 + j
     --         local posTemp = {x = gadgets[defs.mushroomList[i][j]].pos.x, y = gadgets[defs.mushroomList[i][j]].pos.y + 2.5, z = gadgets[defs.mushroomList[i][j]].pos.z}
-    --         local regionTemp = { config_id = idTemp,
+    --         local regionTemp = { config_id = idTemp, 
     --             shape = RegionShape.CYLINDER, radius = 1.5, pos = { x = posTemp.x, y = posTemp.y, z = posTemp.z }, height = 3.000 }
     --         regions[idTemp] = regionTemp
     --         mushroomRegion[i] = idTemp
@@ -88,7 +88,7 @@ function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
     --         -- add region to suites
     --         table.insert(suites[1].regions, idTemp)
     --     end
-
+       
     -- end
 end
 
@@ -127,7 +127,7 @@ function action_GROUP_LOAD(context, evt)
         local currentMushroomIdx = ScriptLib.GetGroupVariableValue(context, "mushroomIdx")
         LF_CreateMushrooms(context, currentMushroomIdx)
     end
-
+    
     return 0
 
 end
@@ -137,7 +137,7 @@ function action_GROUP_WILL_UNLOAD(context, evt)
 
     -- 挑战底层问题？group unload时强制挑战失败
     ScriptLib.StopChallenge(context, challengeId, 0)
-
+    
     return 0
 
 end
@@ -219,7 +219,7 @@ end
 --================================================================
 -- SLC functions
 --================================================================
-function SLC_Jump_Succeed_Once(context, evt)
+function SLC_Jump_Succeed_Once(context, evt)    
     ScriptLib.PrintContextLog(context, "## [ContinuousTrampoline] SLC_Jump_Succeed_Once is called")
 
     -- 为了处理断网情况，需要给ability层一个callback，把gv值设回0，ability层只有在对应gv值为0的情况下才允许发slc
@@ -269,7 +269,7 @@ function SLC_Fall_Onto_Ground(context, evt)
     if jumpTimes <  defs.maxJumpTimes and jumpTimes > 0 then
         LF_RestartChallenge(context)
     end
-
+    
     return 0
 end
 

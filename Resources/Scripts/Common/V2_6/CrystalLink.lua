@@ -3,7 +3,7 @@
 ||	owner: 		luyao.huang
 ||	description:	2.6连线buff地城玩法
 ||	LogName:	CrystalLink
-||	Protection:
+||	Protection:	
 =======================================]]--
 --miscs
 
@@ -33,7 +33,7 @@
 --    {2047,2048}
 --}
 --
---defs = {
+--local defs = {
 --    play_round = 1,             --战斗轮次，上半场 = 1，下半场 = 2
 --    next_play_group = 100000,   --下一个轮次的groupid
 --
@@ -50,7 +50,7 @@
 
 --内部表数据定义
 local local_defs = {
-    worktop_option = 30110,                             --操作台选项id
+    worktop_option = 30110,                             --操作台选项id                               
     team_global_value = "SGV_FEVER_LEVEL",                  --team上的SGV名称
     --monster_create_min_interval = 5                     --性能优化：刷怪最小间隔
 }
@@ -75,7 +75,7 @@ local time_axis = {
 
     --增加fever触发不超过n次的检测时间窗口
     add_fever_check_window_axis = {defs.add_fever_check_window},
-
+    
     --性能优化：刷怪最小间隔
     monster_create_min_interval_axis = {defs.monster_create_min_interval},
 
@@ -96,7 +96,7 @@ local Tri = {
     { config_id = 40000007, name = "gallery_stop", event = EventType.EVENT_GALLERY_STOP, source = "", condition = "", action = "action_gallery_stop", trigger_count = 0},
     { config_id = 40000008, name = "dungeon_all_avatar_die", event = EventType.EVENT_DUNGEON_ALL_AVATAR_DIE, source = "", condition = "", action = "action_dungeon_all_avatar_die", trigger_count = 0},
     { config_id = 40000009, name = "dungeon_settle", event = EventType.EVENT_DUNGEON_SETTLE, source = "", condition = "", action = "action_dungeon_settle", trigger_count = 0},
-
+    
 }
 
 function Initialize()
@@ -149,7 +149,7 @@ end
 
 --下半场玩法启动，开始玩法初始化
 function action_variable_change(context,evt)
-    if (evt.source_name == "can_start" and evt.param1 == 1) then
+    if (evt.source_name == "can_start" and evt.param1 == 1) then  
         ScriptLib.PrintContextLog(context,"## [CrystalLink] variable change： 下半场group启动，玩法初始化")
         LF_Init_Play(context)
     end
@@ -209,7 +209,7 @@ function action_time_axis_pass(context,evt)
     if (evt.source_name == "ATTENUATION_INTERVAL_AXIS") then
         ScriptLib.SetGroupTempValue(context,"can_attenuate",1,{})
     end
-
+    
     --增加fever检测时间窗口，这个窗口内，玩家增加fever的次数应该少于指定次数
     if (evt.source_name == "ADD_FEVER_CHECK_WINDOW_AXIS") then
         ScriptLib.SetGroupTempValue(context,"add_fever_times",0,{})
@@ -279,7 +279,7 @@ function action_monster_tide_die(context,evt)
 
         ScriptLib.PrintContextLog(context,"## [CrystalLink] monster die：怪物死亡，重启时间轴")
         local has_paused_by_minion_die = ScriptLib.GetGroupVariableValue(context,"has_paused_by_minion_die")
-        if (has_paused_by_minion_die == 0) then
+        if (has_paused_by_minion_die == 0) then 
             if (defs.monster_create_min_interval ~= 0) then
                 ScriptLib.PrintContextLog(context,"## [CrystalLink] monster die：之前没有怪物死亡了，pause一次怪物潮")
                 ScriptLib.InitTimeAxis(context,"MONSTER_CREATE_MIN_INTERVAL_AXIS",time_axis.monster_create_min_interval_axis,false)
@@ -298,7 +298,7 @@ function action_monster_die_before_leave_scene(context,evt)
     local is_elite = LF_Is_Elite(context,monster_cid)
 
     if (is_elite) then
-
+        
         if (LF_Is_Current_Elite_All_Dead(context)) then
             ScriptLib.PrintContextLog(context,"## [CrystalLink] monster die：本轮次的精英怪死完了，精英怪重新开始计时")
             --精英死亡时，重新开始计时
@@ -307,7 +307,7 @@ function action_monster_die_before_leave_scene(context,evt)
             --精英死亡时，重新开始精英怪预警计时
             ScriptLib.EndTimeAxis(context,"ELITE_PREVIEW_REMINDER_AXIS")
             ScriptLib.InitTimeAxis(context,"ELITE_PREVIEW_REMINDER_AXIS",time_axis.elite_preview_reminder_axis,false)
-
+            
             --精英怪死亡时，可能波次已经推进且场上小怪死完，但小怪是在波次推进之前死完的，无法触发这个事件
             if (LF_Is_Current_Minion_All_Dead(context) and LF_Monster_Tide_Index_Has_Move_Forward(context)) then
                 ScriptLib.SetGroupVariableValue(context,"current_tide_all_killed", 1)
@@ -350,7 +350,7 @@ function action_dungeon_settle(context,evt)
     --触发事件时做一次校验，只在当前激活的group做清理
     local is_active = ScriptLib.GetGroupVariableValue(context,"is_active")
     if (is_active == 1) then
-
+        
         LF_Immediate_Stop_Play(context)
         ScriptLib.CauseDungeonSuccess(context)
     end
@@ -367,7 +367,7 @@ end
 
 --初始化玩法，加载操作台等物件
 function LF_Init_Play(context)
-
+    
     ScriptLib.PrintContextLog(context,"## [CrystalLink] LF Init Play： ----------玩法初始化开始----------")
 
     --先将当前group置为激活状态
@@ -377,11 +377,11 @@ function LF_Init_Play(context)
     --加载环境氛围物件
     ScriptLib.AddExtraGroupSuite(context,base_info.group_id,defs.environment_suite)
     --上半场开场，将team上的半场SGV记录为0
-    if (defs.play_round == 1) then
+    if (defs.play_round == 1) then  
         LF_Set_Team_Global_Value(context,"SGV_CLEAR_LEVEL",0)
     end
     --如果是下半场，需要直接将振晶石切换到上半场的状态
-    if (defs.play_round == 2) then
+    if (defs.play_round == 2) then  
         local current_fever = ScriptLib.GetGroupVariableValue(context,"current_fever")
         local fever_level = LF_Get_Fever_Level(context,current_fever)
         LF_Activate_Environment_Gadget(context,fever_level)
@@ -400,7 +400,7 @@ function LF_Start_Play(context)
     ScriptLib.InitGalleryProgressScore(context, "fever", defs.gallery_id, fever_progress_table, GalleryProgressScoreUIType.GALLERY_PROGRESS_SCORE_UI_TYPE_CRYSTAL_LINK, GalleryProgressScoreType.GALLERY_PROGRESS_SCORE_NO_DEGRADE)
 
     --如果是下半场，在开场的时候用current_fever刷新一次fever值，把上半场的fever带过来
-    if (defs.play_round == 2) then
+    if (defs.play_round == 2) then  
         local current_fever = ScriptLib.GetGroupVariableValue(context,"current_fever")
         LF_Update_Fever(context,current_fever)
     end
@@ -446,7 +446,7 @@ function LF_Stop_Play(context)
         local current_fever = ScriptLib.GetGalleryProgressScore(context, "fever", defs.gallery_id)
         ScriptLib.SetGroupVariableValueByGroup(context,"current_fever",current_fever,defs.next_play_group)
         ScriptLib.SetGroupVariableValueByGroup(context,"can_start",1,defs.next_play_group)
-
+        
         LF_Set_Team_Global_Value(context,"SGV_CLEAR_LEVEL",1)
         if ScriptLib.CrystalLinkDungeonTeamSetUp(context,2,{init_gallery_progress=current_fever})~=0 then
             ScriptLib.PrintContextLog(context,"## [CrystalLink] LF Stop Play： 切换队伍失败，直接结束地城")
@@ -507,7 +507,7 @@ function LF_Create_Monster_Tide(context,monster_tide_index)
     local monster_config_id_list = monster_tide[monster_tide_index]
 
     --增加怪物潮的计数，下一次开启时index会+1，防止索引到同一波怪物潮
-    local tide_num = LF_Get_Current_Tide_Num(context)
+    local tide_num = LF_Get_Current_Tide_Num(context)    
     LF_Set_Current_Tide_Num(context,tide_num+1)
 
     local min = monster_tide_count[monster_tide_index].min
@@ -518,16 +518,16 @@ function LF_Create_Monster_Tide(context,monster_tide_index)
     ScriptLib.SetGroupVariableValue(context,"last_created_tide_index",monster_tide_index)
     --重置记录monstertide的变量
     ScriptLib.SetGroupVariableValue(context,"current_tide_all_killed",0)
-
+    
     ScriptLib.PrintContextLog(context,"## [CrystalLink] Create Monster Tide： ----------怪物潮生成结束----------")
-
+    
 
 end
 
 --召唤指定ID的精英怪组
 function LF_Create_Elite_Monster(context,elite_index)
     ScriptLib.PrintContextLog(context,"## [CrystalLink] Create Elite Monster： ----------开始生成精英怪，精英怪索引为 = "..elite_index.."----------")
-
+    
     local elite_list = elite[elite_index]
 
     math.randomseed(ScriptLib.GetServerTime(context))
@@ -599,7 +599,7 @@ function LF_Activate_Environment_Gadget(context,fever_level)
     end
 
     if (fever_level < #fever_progress_table-2) then
-        for i = 1, fever_level do
+        for i = 1, fever_level do 
             ScriptLib.SetGroupGadgetStateByConfigId(context,base_info.group_id,ReactionGems[i][1],201)
             ScriptLib.SetGroupGadgetStateByConfigId(context,base_info.group_id,ReactionGems[i][2],201)
         end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002148
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -186,9 +186,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -199,9 +199,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -235,19 +235,19 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_148003(context, evt)
 	if evt.param2 == 148002 and ScriptLib.GetGadgetStateByConfigId(context, 0, 148002) == 201 then
 		ScriptLib.SetGroupVariableValue(context, "put", 1)
-
+		
 		ScriptLib.SetGadgetTalkByConfigId(context, 199002148, 148001, 6800349)
 	end
-
+	
 	return 0
 end
 
@@ -255,10 +255,10 @@ end
 function action_EVENT_ENTER_REGION_148004(context, evt)
 	if ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 then
 		ScriptLib.SetGroupVariableValue(context, "reward", 1)
-
+		
 		ScriptLib.SetGadgetTalkByConfigId(context, 199002148, 148001, 6800351)
 	end
-
+	
 	return 0
 end
 
@@ -269,7 +269,7 @@ function action_EVENT_GADGETTALK_DONE_148005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -279,7 +279,7 @@ function condition_EVENT_GADGETTALK_DONE_148006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -290,50 +290,50 @@ function action_EVENT_GADGETTALK_DONE_148006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 199002106) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 199002140) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 199002143) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "start" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "start", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002148, 2)
-
+	
 	-- 创建标识为"fly"，时间节点为{120}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "fly", {120}, false)
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_148137(context, evt)
 	if evt.param1 ~= 148137 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -341,19 +341,19 @@ end
 function action_EVENT_ENTER_REGION_148137(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002148, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_148138(context, evt)
 	if evt.param1 ~= 148138 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -361,7 +361,7 @@ end
 function action_EVENT_ENTER_REGION_148138(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199002148, 2)
-
+	
 	return 0
 end
 
@@ -372,13 +372,13 @@ function action_EVENT_GADGETTALK_DONE_148139(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为148140的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 148140 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -387,7 +387,7 @@ function condition_EVENT_TIME_AXIS_PASS_148141(context, evt)
 	if "fly" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -398,7 +398,7 @@ function action_EVENT_TIME_AXIS_PASS_148141(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -409,7 +409,7 @@ function action_EVENT_GROUP_LOAD_148142(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -422,23 +422,23 @@ function action_EVENT_GROUP_REFRESH_148143(context, evt)
 			ScriptLib.SetGadgetTalkByConfigId(context, 199002148, 148001, 6800349)
 		end
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "reward2") == 1 then
 		ScriptLib.CreateGadget(context, {config_id=148140})
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_148144(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"remove"为1
 	if ScriptLib.GetGroupVariableValue(context, "remove") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -449,6 +449,6 @@ function action_EVENT_VARIABLE_CHANGE_148144(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

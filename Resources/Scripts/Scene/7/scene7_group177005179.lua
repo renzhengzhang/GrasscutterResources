@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 177005179
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -68,9 +68,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -78,18 +78,18 @@ function condition_EVENT_SELECT_OPTION_179002(context, evt)
 	--联机下不可使用
 	if ScriptLib.CheckIsInMpMode(context) then
 	    ScriptLib.AssignPlayerShowTemplateReminder(context, 165, {param_vec={},param_uid_vec={},uid_vec={context.uid}})
-	    return false
+	    return false 
 	end
-
+	
 	-- 判断是gadgetid 179001 option_id 324
 	if 179001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 324 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -100,24 +100,24 @@ function action_EVENT_SELECT_OPTION_179002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 179001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 179001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 177005179 ；指定config：179001；物件身上指定option：324；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 177005179, 179001, 324) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 177005076, monsters = {}, gadgets = {76015} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end

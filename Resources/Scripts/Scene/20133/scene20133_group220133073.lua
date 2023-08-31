@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220133073
 }
 
@@ -26,9 +26,9 @@ local	defs = {
 	}
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -92,9 +92,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -105,9 +105,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -141,9 +141,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -151,12 +151,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_73023(context, evt)
 	if 73004 ~= evt.param2 or GadgetState.ChestTrap ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"big_flower"为1
 	if ScriptLib.GetGroupVariableValue(context, "big_flower") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -164,10 +164,10 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_73023(context, evt)
 	-- 变量"big_flower"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "big_flower", 0)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220133073, 2)
-
+	
 	return 0
 end
 
@@ -176,12 +176,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_73024(context, evt)
 	if 73004 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"big_flower"为1
 	if ScriptLib.GetGroupVariableValue(context, "big_flower") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -189,26 +189,26 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_73024(context, evt)
 	-- 变量"big_flower"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "big_flower", 0)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220133073, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_73025(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"big_flower"为1
 	if ScriptLib.GetGroupVariableValue(context, "big_flower") ~= 1 then
 			return false
 	end
-
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 220133073, 73004) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -216,11 +216,11 @@ end
 function action_EVENT_VARIABLE_CHANGE_73025(context, evt)
 	-- 创建标识为"WindTimeA"，时间节点为{15}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "WindTimeA", {15}, false)
-
-
+	
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220133073, 2)
-
+	
 	return 0
 end
 
@@ -229,7 +229,7 @@ function condition_EVENT_TIME_AXIS_PASS_73027(context, evt)
 	if "WindTimeA" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -237,10 +237,10 @@ end
 function action_EVENT_TIME_AXIS_PASS_73027(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220133073, 2)
-
+	
 	-- 变量"big_flower"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "big_flower", 0)
-
+	
 	return 0
 end
 

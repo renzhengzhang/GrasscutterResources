@@ -1,64 +1,64 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155003019
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155003019,
 	managerGroup = 155003001,
 	pointarray_move = 500300005
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	group_ID = 155003019,
 	managerGroup = 155003001,
 	pointarray_move = 500300005
 }
 
 -- DEFS_MISCS
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
-
-
+		
+		
 	end,
 	["1"] = function(context)
 
-
+	
 		ScriptLib.AddExtraGroupSuite(context,defs.group_ID, 2)
 		ScriptLib.PrintContextLog(context, " add suit 2")
 
-
+	
 	end,
 	["2"] = function(context)
-
-
+		
+		
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 
-
+	
 	end
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 	ScriptLib.PrintContextLog(context, "update gameplay state")
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 function TeleportAction(context,pointarray_id,routelist)
-
+	
 	--context, uid, pointarrayid, pointindex, speed, SFX
-	ScriptLib.MoveAvatarByPointArray(context, context.uid, pointarray_id, routelist, {speed=10}, "{\"MarkType\":2,\"IgnoreCollisionWhenEnter\":true}")
+	ScriptLib.MoveAvatarByPointArray(context, context.uid, pointarray_id, routelist, {speed=10}, "{\"MarkType\":2,\"IgnoreCollisionWhenEnter\":true}") 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -92,9 +92,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -105,9 +105,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -132,20 +132,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_19001(context, evt)
 			local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", defs.managerGroup)
-
-			if isactive == 1 then
-				if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then
+			
+			if isactive == 1 then 
+				if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then 
 					ScriptLib.SetGroupVariableValue(context,"gameplayState", 1)
 				end
-
+				
 			end
 		UpdateGamePlayState(context)
 			return 0
@@ -154,12 +154,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_19002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 		-- 判断变量"gameplayState"为0
 		if ScriptLib.GetGroupVariableValue(context, "gameplayState") == 0 then
 				return false
 		end
-
+		
 		return true
 end
 
@@ -172,12 +172,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_19004(context, evt)
 	if evt.param1 ~= 19004 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133315017
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -81,7 +81,7 @@ triggers = {
 	{ config_id = 1017024, name = "ENTER_REGION_17024", event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_EVENT_ENTER_REGION_17024", action = "action_EVENT_ENTER_REGION_17024" },
 	-- 右侧 石块2 炸开石头
 	{ config_id = 1017025, name = "ANY_GADGET_DIE_17025", event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "condition_EVENT_ANY_GADGET_DIE_17025", action = "action_EVENT_ANY_GADGET_DIE_17025", trigger_count = 0 },
-	-- 水冲下来   干掉钵参花和底座
+	-- 水冲下来   干掉钵参花和底座  
 	{ config_id = 1017027, name = "QUEST_START_17027", event = EventType.EVENT_QUEST_START, source = "7306334", condition = "", action = "action_EVENT_QUEST_START_17027", trigger_count = 0 },
 	-- 右侧 石块4 藤蔓机关
 	{ config_id = 1017028, name = "ENTER_REGION_17028", event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_EVENT_ENTER_REGION_17028", action = "action_EVENT_ENTER_REGION_17028" },
@@ -110,9 +110,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -123,9 +123,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -159,9 +159,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -169,7 +169,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_17004(context, evt)
 	if 17001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -180,7 +180,7 @@ function action_EVENT_GADGET_STATE_CHANGE_17004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -189,7 +189,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_17005(context, evt)
 	if 17002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -200,14 +200,14 @@ function action_EVENT_GADGET_STATE_CHANGE_17005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_17008(context, evt)
 	if evt.param1 ~= 17008 then return false end
-
+	
 	local curQuestState = ScriptLib.GetHostQuestState(context,7306328)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -215,12 +215,12 @@ function condition_EVENT_ENTER_REGION_17008(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-
+	
 	-- 判断是区域17008
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 17008 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -231,7 +231,7 @@ function action_EVENT_ENTER_REGION_17008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -240,7 +240,7 @@ function condition_EVENT_ANY_GADGET_DIE_17009(context, evt)
 	if 17030 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -251,19 +251,19 @@ function action_EVENT_ANY_GADGET_DIE_17009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_17011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"unlock"为1
 	if ScriptLib.GetGroupVariableValue(context, "unlock") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -273,12 +273,12 @@ function action_EVENT_VARIABLE_CHANGE_17011(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 69, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"unlock"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "unlock", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -287,7 +287,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_17012(context, evt)
 	if 17003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -298,19 +298,19 @@ function action_EVENT_GADGET_STATE_CHANGE_17012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_17013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"unlock"为2
 	if ScriptLib.GetGroupVariableValue(context, "unlock") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -320,26 +320,26 @@ function action_EVENT_VARIABLE_CHANGE_17013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17007, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 通知场景上的所有玩家播放名字为69 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 69, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_17014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"unlock"为3
 	if ScriptLib.GetGroupVariableValue(context, "unlock") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -349,29 +349,29 @@ function action_EVENT_VARIABLE_CHANGE_17014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17007, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 通知场景上的所有玩家播放名字为69 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 69, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315017, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_17018(context, evt)
 	if evt.param1 ~= 17018 then return false end
-
+	
 	-- 判断是区域17018
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 17018 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -382,7 +382,7 @@ function action_EVENT_ENTER_REGION_17018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=220.3932, y=90.54044, z=2929.329}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=220.3932, y=90.54044, z=2929.329}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -391,8 +391,8 @@ function action_EVENT_ENTER_REGION_17018(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -402,7 +402,7 @@ function condition_EVENT_GROUP_LOAD_17020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "unlock") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -413,20 +413,20 @@ function action_EVENT_GROUP_LOAD_17020(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_17022(context, evt)
 	if evt.param1 ~= 17022 then return false end
-
+	
 	-- 判断是区域17022
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 17022 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -437,7 +437,7 @@ function action_EVENT_ENTER_REGION_17022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -446,7 +446,7 @@ function condition_EVENT_ANY_GADGET_DIE_17023(context, evt)
 	if 17021 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -457,19 +457,19 @@ function action_EVENT_ANY_GADGET_DIE_17023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_17024(context, evt)
 	if evt.param1 ~= 17024 then return false end
-
+	
 	-- 判断是区域17024
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 17024 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -480,7 +480,7 @@ function action_EVENT_ENTER_REGION_17024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=96.40336, y=95.78428, z=2977.272}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=96.40336, y=95.78428, z=2977.272}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -489,8 +489,8 @@ function action_EVENT_ENTER_REGION_17024(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -499,7 +499,7 @@ function condition_EVENT_ANY_GADGET_DIE_17025(context, evt)
 	if 17019 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -510,13 +510,13 @@ function action_EVENT_ANY_GADGET_DIE_17025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 7306310 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7306310) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -524,25 +524,25 @@ end
 function action_EVENT_QUEST_START_17027(context, evt)
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133315017, 3)
-
+	
 		-- 杀死Group内指定的monster和gadget
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133315310, monsters = {}, gadgets = {310001} }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_17028(context, evt)
 	if evt.param1 ~= 17028 then return false end
-
+	
 	-- 判断是区域17028
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 17028 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -553,7 +553,7 @@ function action_EVENT_ENTER_REGION_17028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -562,7 +562,7 @@ function condition_EVENT_ANY_GADGET_DIE_17029(context, evt)
 	if 17017 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -573,13 +573,13 @@ function action_EVENT_ANY_GADGET_DIE_17029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 7306312 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 7306312) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -588,7 +588,7 @@ function condition_EVENT_TIME_AXIS_PASS_17031(context, evt)
 	if "unlock" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -598,7 +598,7 @@ function action_EVENT_TIME_AXIS_PASS_17031(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 17007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
