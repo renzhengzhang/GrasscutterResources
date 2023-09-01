@@ -37,7 +37,7 @@
   },
   {
     "homeBgmId": 105,
-    "GBEONILEOBA": true,
+    "isDefaultUnlock": true,
     "PIBHIOHLBPD": true,
     "FHIHLFCGDNH": true,
     "cityId": 1,
@@ -83,7 +83,7 @@
   },
   {
     "homeBgmId": 110,
-    "GBEONILEOBA": true,
+    "isDefaultUnlock": true,
     "PIBHIOHLBPD": true,
     "FHIHLFCGDNH": true,
     "cityId": 1,
@@ -183,7 +183,7 @@
   },
   {
     "homeBgmId": 121,
-    "GBEONILEOBA": true,
+    "isDefaultUnlock": true,
     "PIBHIOHLBPD": true,
     "FHIHLFCGDNH": true,
     "cityId": 1,
@@ -238,7 +238,7 @@
   },
   {
     "homeBgmId": 201,
-    "GBEONILEOBA": true,
+    "isDefaultUnlock": true,
     "PIBHIOHLBPD": true,
     "FHIHLFCGDNH": true,
     "cityId": 2,
@@ -248,7 +248,7 @@
   },
   {
     "homeBgmId": 202,
-    "GBEONILEOBA": true,
+    "isDefaultUnlock": true,
     "PIBHIOHLBPD": true,
     "FHIHLFCGDNH": true,
     "cityId": 2,
@@ -456,7 +456,7 @@
   },
   {
     "homeBgmId": 225,
-    "GBEONILEOBA": true,
+    "isDefaultUnlock": true,
     "PIBHIOHLBPD": true,
     "FHIHLFCGDNH": true,
     "cityId": 2,
