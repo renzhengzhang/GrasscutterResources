@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155006180
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155006180,
 	gadget_sealday = 0,
 	gadget_sealnight = 180002
@@ -20,11 +20,11 @@ local NightAppearGadgets = {defs.gadget_sealnight}
 
 
 
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-
+		
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
@@ -32,7 +32,7 @@ local gameplayStateFuncitons =
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 
 
-
+	
 	end,
 	["2"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
@@ -40,8 +40,8 @@ local gameplayStateFuncitons =
 		if defs.gadget_sealday ~= 0 then
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, defs.gadget_sealday, 202)
 		end
-
-		if defs.gadget_sealnight ~= 0 then
+		
+		if defs.gadget_sealnight ~= 0 then 
 			ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_ID, defs.gadget_sealnight, 202)
 		end
 	end
@@ -49,16 +49,16 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -90,9 +90,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -103,9 +103,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -139,14 +139,14 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_180003(context, evt)
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -154,7 +154,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_180004(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end

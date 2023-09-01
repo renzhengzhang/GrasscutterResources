@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133107932
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -79,9 +79,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -90,19 +90,19 @@ function action_EVENT_QUEST_START_932002(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133107932, 932001, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133107932, 2)
-
+	
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133107801, EntityType.MONSTER, 801007)
-
-
-
+	
+		
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133107801, 2)
-
+	
 	return 0
 end
 
@@ -111,7 +111,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_932003(context, evt)
 	if 932001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -122,9 +122,9 @@ function action_EVENT_GADGET_STATE_CHANGE_932003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133107932, 2)
-
+	
 	return 0
 end

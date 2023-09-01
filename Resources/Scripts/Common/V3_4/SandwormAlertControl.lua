@@ -1,13 +1,13 @@
 --[[======================================
-||	filename:
+||	filename:	
 ||	owner: 		luyao.huang
-||	description:
-||	LogName:
-||	Protection:
+||	description:	
+||	LogName:	
+||	Protection:	
 =======================================]]--
 
 
-defs =
+local defs = 
 {
     sandworm_id = 1030,
     direct_sandworm_id = 1031,
@@ -23,13 +23,13 @@ local local_defs = {
     array_base_offset = 90010000,
 }
 
-local sandworm_state =
+local sandworm_state = 
 {
     waiting = 0,
     attacking = 1
 }
 
-local business_type_defs =
+local business_type_defs = 
 {
     --大世界
     --目标玩家为沙虫区域内的一个随机合法玩家
@@ -42,7 +42,7 @@ local business_type_defs =
     direct = 2,
 }
 
-local sandworm_default_params =
+local sandworm_default_params = 
 {
     business_type = business_type_defs.bigworld,
     sandworm_params_config_id = 0,
@@ -97,7 +97,7 @@ function action_variable_change_alert(context,evt)
 end
 
 function action_group_will_unload_alert(context,evt)
-
+    
     ScriptLib.PrintContextLog(context,"## [SandwormAlertControl] group即将卸载，重置警戒值以及其他参数")
     ScriptLib.SetGroupVariableValue(context,"sandworm_state",sandworm_state.waiting)
     ScriptLib.SetGroupVariableValue(context,"alert_value",0)
@@ -145,7 +145,7 @@ function LF_Create_Sandworm(context,origin_group_id)
             local owner_eid = ScriptLib.GetAvatarEntityIdByUid(context,target_uid)
             local pos = ScriptLib.GetPosByEntityId(context,owner_eid)
             local rpos =  LF_Get_Random_Neighbour(context,pos,range[1],range[2])
-            ScriptLib.CreateGadgetByParamTable(context,{config_id = defs.sandworm_id,pos = {x=rpos.x,y=rpos.y+1.5,z=rpos.z}, rot = {x=0,y=0,z=0},
+            ScriptLib.CreateGadgetByParamTable(context,{config_id = defs.sandworm_id,pos = {x=rpos.x,y=rpos.y+1.5,z=rpos.z}, rot = {x=0,y=0,z=0}, 
                 sgv_key = {"SGV_Ambush_Times","SGV_Attack_Times"}, sgv_value = {ambush_times,attack_times}})
         end
     --end

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155005050
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155005050,
 	gadget_controller = 50001
 }
@@ -15,18 +15,18 @@ local EnvControlGadgets = {defs.gadget_controller}
 local DayAppearGadgets = {}
 local NightAppearGadgets = {}
 
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
-
+		
 	end,
 	["1"] = function(context)
-		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
+		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)					
 		DayNight_Gadget_Lock(context,defs.gadget_controller)
-
+	
 	end,
 	["2"] = function(context)
-		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
+		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)					
 		DayNight_Gadget_Unlock(context,defs.gadget_controller)
 
 		local current_env_state_id = ScriptLib.GetCurrentLevelTagVec(context, 1)[1]
@@ -34,26 +34,26 @@ local gameplayStateFuncitons =
 			ScriptLib.SetWorktopOptionsByGroupId(context, 155005050, 50001, {500})
 		elseif (current_env_state_id == 2) then
 			ScriptLib.SetWorktopOptionsByGroupId(context, 155005050, 50001, {501})
-		end
+		end 
 
 		ScriptLib.SetGroupVariableValue(context, "gameplayState", 3)
 	end,
 	["3"] = function(context)
-		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
+		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)					
 		DayNight_Gadget_Unlock(context,defs.gadget_controller)
 	end
 }
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -89,9 +89,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -102,9 +102,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -129,9 +129,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -141,7 +141,7 @@ function action_EVENT_QUEST_START_50002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -154,7 +154,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_50004(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end

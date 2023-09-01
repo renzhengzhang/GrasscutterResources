@@ -1,4 +1,4 @@
-base_info = {
+local base_info = {
 	group_id = 220179002
 }
 
@@ -46,24 +46,24 @@ suites = {
 }
 
 function condition_EVENT_ANY_MONSTER_DIE_1029(context, evt)
-	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set die condition monster 2")
+	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set die condition monster 2")	
 	return true
 end
 
 function action_EVENT_ANY_MONSTER_DIE_1029(context, evt)
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set die action monster 2")
-	ScriptLib.CreateGadget(context, { config_id = 2008 })
-	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add")
+	ScriptLib.CreateGadget(context, { config_id = 2008 }) 
+	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add")	
 	return true
 end
 
 function condition_EVENT_ANY_MONSTER_LIVE_1029(context, evt)
-	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set live condition monster 2")
+	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set live condition monster 2")	
 	return true
 end
 
 function action_EVENT_ANY_MONSTER_LIVE_1029(context, evt)
 	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set live action monster 2")
-	--todo
+	--todo	
 	return true
 end

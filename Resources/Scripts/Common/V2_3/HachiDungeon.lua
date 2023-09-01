@@ -4,7 +4,7 @@
 
 --[[
 
-defs = {
+local defs = {
 	group_id = 246101001,
 	--Boss目标点
 	target_points = {1004,1005,1006,1007,1008,1009,1010,1011,1012}
@@ -38,11 +38,11 @@ function SLC_ActiveRandomPoint(context)
 	local list = {table.unpack(defs.target_points)}
 	ScriptLib.PrintContextLog(context, "[HachiDungeon] Get Random Result: ListCount@"..#list.." Last Index@"..last_index)
 	--如果不是第一次随机
-	if last_index ~= 0 then
+	if last_index ~= 0 then 		
 		table.remove(list, last_index)
 		ScriptLib.PrintContextLog(context, "[HachiDungeon] Remove from Pool @"..list[rand_index])
 	end
-
+	
 	math.randomseed(ScriptLib.GetServerTime(context))
 
 	rand_index = math.random(#list)
@@ -56,7 +56,7 @@ function SLC_ActiveRandomPoint(context)
 	--CD时间轴 时间到了将刚才的物件切回0
 	ScriptLib.SetGroupTempValue(context, "deny_call", 1, {})
 	ScriptLib.InitTimeAxis(context, "cool_down", {10}, false)
-
+	
 	return 0
 end
 
@@ -81,7 +81,7 @@ function SLC_HachiDungeonBuff_Mark(context)
 	ScriptLib.ChangeGroupTempValue(context, "buff_num", 1, {})
 	return 0
 end
---上报运营日志数据 需求单s1286672
+--上报运营日志数据 需求单s1286672 
 function UpLoadActionLog(context)
 
 	local log = {
@@ -98,7 +98,7 @@ end
 
 function LF_GetKeyByValue(context, value, table)
 	for k,v in pairs(table) do
-		if value == v then
+		if value == v then 
 			return k
 		end
 	end

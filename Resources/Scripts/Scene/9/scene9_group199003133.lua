@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003133
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     reverse_time = 30,--回溯倒计时，整数秒
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -69,9 +69,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -82,9 +82,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -100,9 +100,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -112,42 +112,42 @@ function action_EVENT_TIME_AXIS_PASS_133005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "star2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "star2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "reverse" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "reverse", 1, 199003134) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "reverse" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "reverse", 1, 199003135) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_133006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"star1"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "star1", 199003133) ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"star2"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "star2", 199003133) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -158,47 +158,47 @@ function action_EVENT_VARIABLE_CHANGE_133006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 133001 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 停止标识为"reverse"的时间轴
 	ScriptLib.EndTimeAxis(context, "reverse")
-
-
+	
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003134, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003135, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将configid为 133004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_133011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_reverting"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_reverting") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -210,23 +210,23 @@ function action_EVENT_VARIABLE_CHANGE_133011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_133013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_reverting"为0
 	if ScriptLib.GetGroupVariableValue(context, "is_reverting") ~= 0 then
 			return false
 	end
-
+	
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 199003133, 133001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -238,7 +238,7 @@ function action_EVENT_VARIABLE_CHANGE_133013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -248,7 +248,7 @@ function condition_EVENT_GROUP_LOAD_133014(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 199003133) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -258,26 +258,26 @@ function action_EVENT_GROUP_LOAD_133014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003134, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 199003135, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将configid为 133004 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 133004, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -287,11 +287,11 @@ function condition_EVENT_GROUP_LOAD_133016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 0 then
 			return false
 	end
-
+	
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 199003133, 133001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -302,25 +302,25 @@ function action_EVENT_GROUP_LOAD_133016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "star2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "star2", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "reverse" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "reverse", 0, 199003134) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "reverse" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "reverse", 0, 199003135) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 

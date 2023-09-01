@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240050006
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -72,9 +72,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +85,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -130,9 +130,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -142,7 +142,7 @@ function action_EVENT_QUEST_FINISH_6007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -151,7 +151,7 @@ function condition_EVENT_GADGET_CREATE_6024(context, evt)
 	if 6025 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -162,7 +162,7 @@ function action_EVENT_GADGET_CREATE_6024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -170,14 +170,14 @@ end
 function condition_EVENT_SELECT_OPTION_6026(context, evt)
 	-- 判断是gadgetid 6025 option_id 72
 	if 6025 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 72 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -188,13 +188,13 @@ function action_EVENT_SELECT_OPTION_6026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 6023 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6023, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -203,7 +203,7 @@ function condition_EVENT_MONSTER_BATTLE_6031(context, evt)
 	if 6001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -211,13 +211,13 @@ end
 function action_EVENT_MONSTER_BATTLE_6031(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240050006, 2)
-
+	
 	-- 调用提示id为 500660231 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 500660231) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -227,7 +227,7 @@ function condition_EVENT_ANY_MONSTER_DIE_6032(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -238,6 +238,6 @@ function action_EVENT_ANY_MONSTER_DIE_6032(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

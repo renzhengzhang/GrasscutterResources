@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133217006
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	-- 该参数 填入ConfigID 用来确认临接关系
 	InitFloorArrays = {
 		{6001,6004,6007,6010},
@@ -17,9 +17,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -87,9 +87,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -100,9 +100,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -127,20 +127,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_6013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"lastConfigID"为0
 	if ScriptLib.GetGroupVariableValue(context, "lastConfigID") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -150,8 +150,8 @@ function action_EVENT_VARIABLE_CHANGE_6013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 0, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -161,19 +161,19 @@ function condition_EVENT_GADGET_STATE_CHANGE_6015(context, evt)
 	if 0 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_6016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"FloorPlayEnd"为1
 	if ScriptLib.GetGroupVariableValue(context, "FloorPlayEnd") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -183,18 +183,18 @@ function action_EVENT_VARIABLE_CHANGE_6016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7216207") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 创建标识为"Finish"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "Finish", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -205,29 +205,29 @@ function action_EVENT_QUEST_START_6017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6018(context, evt)
 	if evt.param1 ~= 6018 then return false end
-
+	
 	-- 判断变量"FloorPlayStart"为0
 	if ScriptLib.GetGroupVariableValue(context, "FloorPlayStart") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"Option"为0
 	if ScriptLib.GetGroupVariableValue(context, "Option") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"Quest"为1
 	if ScriptLib.GetGroupVariableValue(context, "Quest") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -238,13 +238,13 @@ function action_EVENT_ENTER_REGION_6018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "Option" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Option", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -252,14 +252,14 @@ end
 function condition_EVENT_SELECT_OPTION_6019(context, evt)
 	-- 判断是gadgetid 6014 option_id 7
 	if 6014 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -270,25 +270,25 @@ function action_EVENT_SELECT_OPTION_6019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 6014 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6014, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "FloorPlayStart" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "FloorPlayStart", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133217006 ；指定config：6014；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133217006, 6014, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -299,25 +299,25 @@ function action_EVENT_LEAVE_REGION_6020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "Option" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Option", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_6021(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"FloorPlayStart"为0
 	if ScriptLib.GetGroupVariableValue(context, "FloorPlayStart") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -327,8 +327,8 @@ function action_EVENT_VARIABLE_CHANGE_6021(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -337,7 +337,7 @@ function condition_EVENT_TIME_AXIS_PASS_6022(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -348,13 +348,13 @@ function action_EVENT_TIME_AXIS_PASS_6022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133217228, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -364,11 +364,11 @@ function condition_EVENT_GROUP_LOAD_6024(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "FloorPlayEnd") ~= 1 then
 			return false
 	end
-
+	
 	if ScriptLib.GetGroupVariableValueByGroup(context, "FloorPlayEnd", 133217228) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -379,13 +379,13 @@ function action_EVENT_GROUP_LOAD_6024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133217228, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 

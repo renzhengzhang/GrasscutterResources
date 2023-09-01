@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003147
 }
 
@@ -7,7 +7,7 @@ base_info = {
 local        defs = {
 	is_movable = 1,
 	--连线形态
-	patterns =
+	patterns = 
 	{
 			--形态1
 			[1] = {
@@ -16,33 +16,33 @@ local        defs = {
 			[147003] = {connect =0 , point_array = 900300038, point_id = {3}} ,
 			[147004] = {connect =0, point_array = 900300038, point_id = {4}} ,
 			[147005] = {connect =0, point_array = 900300038, point_id = {5}} ,
-
+		
 			},
 			--形态2
-			[2] =
+			[2] = 
 			{[147001] = {connect =0 , point_array = 900300038, point_id = {1}},
 			[147002] = {connect =0 ,point_array = 900300038, point_id = {2}} ,
 			[147003] = {connect =0 ,point_array = 900300038, point_id = {3}} ,
 			[147004] = {connect =0, point_array = 900300038, point_id = {4}} ,
 			[147005] = {connect =0, point_array = 900300038, point_id = {5}} ,
-
+	
 			},
-            [3] =
+            [3] = 
 			{[147001] = {connect =147003 , point_array = 900300038, point_id = {1}},
 			[147002] = {connect =147001 ,point_array = 900300038, point_id = {2}} ,
 			[147003] = {connect =147004 ,point_array = 900300038, point_id = {3}} ,
 			[147004] = {connect =147005, point_array = 900300038, point_id = {4}} ,
 			[147005] = {connect =147002, point_array = 900300038, point_id = {5}} ,
-
+	
 			},
 	}
 
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -123,28 +123,28 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_147007(context, evt)
 	-- 判断是gadgetid 为 147001的移动平台，是否到达了900300038 的点集中的 1 点
-
+	
 	if 147001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 900300038 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -155,7 +155,7 @@ function action_EVENT_PLATFORM_REACH_POINT_147007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 

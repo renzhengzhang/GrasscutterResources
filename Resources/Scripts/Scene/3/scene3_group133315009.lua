@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133315009
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -154,9 +154,9 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -164,11 +164,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_9005(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315009, 9012) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315009, 9013) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -176,7 +176,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9005(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133315009, 4)
-
+	
 	return 0
 end
 
@@ -185,7 +185,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9006(context, evt)
 	if 9002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -196,10 +196,10 @@ function action_EVENT_GADGET_STATE_CHANGE_9006(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133315009, 2)
-
+	
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_9008(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133315009, 9003) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -216,7 +216,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_9008(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133315009, 3)
-
+	
 	return 0
 end
 
@@ -226,7 +226,7 @@ function condition_EVENT_ANY_MONSTER_DIE_9010(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -237,30 +237,30 @@ function action_EVENT_ANY_MONSTER_DIE_9010(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133315009, 5)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_9014(context, evt)
 	-- 判断是gadgetid 为 9003的移动平台，是否到达了331500085 的路线中的 1 点
-
+	
 	if 9003 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 331500085 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -268,6 +268,6 @@ end
 function action_EVENT_PLATFORM_ARRIVAL_9014(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 133315009, 3)
-
+	
 	return 0
 end

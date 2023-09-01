@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309544
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_receiver_1 = 544002,
 	gadget_receiver_2 = 544003,
 	gadget_receiver_3 = 544004,
@@ -21,9 +21,9 @@ defs.receiverList = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -73,9 +73,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +86,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -122,19 +122,19 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_544005(context, evt)
-
+	
 	for _,v in pairs(defs.receiverList) do
 	  if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133309544, v) then
 	    return false
 	  end
-
+	
 	end
 	return true
 end
@@ -146,19 +146,19 @@ function action_EVENT_GADGET_STATE_CHANGE_544005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_544007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -169,19 +169,19 @@ function action_EVENT_VARIABLE_CHANGE_544007(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_544008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -192,7 +192,7 @@ function action_EVENT_VARIABLE_CHANGE_544008(context, evt)
 	  if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133309544, v, GadgetState.GearAction1)then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-	  end
+	  end 
 	end
 	return 0
 end
@@ -200,12 +200,12 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_544009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -215,8 +215,8 @@ function action_EVENT_VARIABLE_CHANGE_544009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 544001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -226,7 +226,7 @@ function condition_EVENT_GROUP_LOAD_544010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -237,7 +237,7 @@ function action_EVENT_GROUP_LOAD_544010(context, evt)
 	  if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133309544, v, GadgetState.GearAction1)then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-	  end
+	  end 
 	end
 	return 0
 end
@@ -248,7 +248,7 @@ function condition_EVENT_GROUP_LOAD_544012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -258,7 +258,7 @@ function action_EVENT_GROUP_LOAD_544012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 544001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

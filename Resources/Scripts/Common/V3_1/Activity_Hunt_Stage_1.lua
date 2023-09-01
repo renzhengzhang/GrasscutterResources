@@ -8,7 +8,7 @@
 
 --需求defs
 --[[
-    defs = {
+    local defs = {
         gallery_id = 111,
         region = 111
     }
@@ -118,7 +118,7 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
     --二阶段抓到动物后 判断是否完成
     if evt.source_name == "Stage_2_Monster_Count" then
         ScriptLib.PrintContextLog(context,"## Activity_Hunt_Stage_1 action_EVENT_VARIABLE_CHANGE1:defs.stage_2_goal="..defs.stage_2_goal)
-        if evt.param1 >= defs.stage_2_goal then
+        if evt.param1 >= defs.stage_2_goal then 
             ScriptLib.StopGallery(context, 27002, false)
         end
     end
@@ -136,7 +136,7 @@ end
 --初始化
 function Initialize()
 	--加触发器
-    if temp_Tirgger ~= nil then
+    if temp_Tirgger ~= nil then 
         for k,v in pairs(temp_Tirgger) do
             v.name = v.action
             v.config_id = 40000000 + k
@@ -147,7 +147,7 @@ function Initialize()
         end
     end
 	--加变量
-    if temp_Variables ~= nil then
+    if temp_Variables ~= nil then 
         for k,v in pairs(temp_Variables) do
             v.config_id = 50000000 + k
             table.insert(variables,v)

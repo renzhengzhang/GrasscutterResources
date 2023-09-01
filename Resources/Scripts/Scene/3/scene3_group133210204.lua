@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210204
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -105,9 +105,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -116,7 +116,7 @@ function condition_EVENT_ANY_MONSTER_DIE_204003(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -127,7 +127,7 @@ function action_EVENT_ANY_MONSTER_DIE_204003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -137,12 +137,12 @@ function condition_EVENT_ANY_MONSTER_DIE_204017(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 1 then
 		return false
 	end
-
+	
 	-- 判断变量"Boss"为0
 	if ScriptLib.GetGroupVariableValue(context, "Boss") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -150,20 +150,20 @@ end
 function action_EVENT_ANY_MONSTER_DIE_204017(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133210204, 3)
-
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=-4074.294,y=201.0461,z=-652.3647}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110371, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1202115") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -173,8 +173,8 @@ function condition_EVENT_ANY_MONSTER_DIE_204022(context, evt)
 	if evt.param1 ~= 204021 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -185,13 +185,13 @@ function action_EVENT_ANY_MONSTER_DIE_204022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1202190") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -202,7 +202,7 @@ function action_EVENT_GROUP_LOAD_204023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -212,12 +212,12 @@ function condition_EVENT_ANY_MONSTER_DIE_204026(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"Boss"为1
 	if ScriptLib.GetGroupVariableValue(context, "Boss") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -228,6 +228,6 @@ function action_EVENT_ANY_MONSTER_DIE_204026(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

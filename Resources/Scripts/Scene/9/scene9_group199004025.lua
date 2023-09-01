@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199004025
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -189,9 +189,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -202,9 +202,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -256,20 +256,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25007(context, evt)
 	if evt.param1 ~= 25007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -281,7 +281,7 @@ function condition_EVENT_ENTER_REGION_25007(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -291,15 +291,15 @@ function action_EVENT_ENTER_REGION_25007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25008(context, evt)
 	if evt.param1 ~= 25008 then return false end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -311,12 +311,12 @@ function condition_EVENT_ENTER_REGION_25008(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -326,20 +326,20 @@ function action_EVENT_ENTER_REGION_25008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25009(context, evt)
 	if evt.param1 ~= 25009 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -351,7 +351,7 @@ function condition_EVENT_ENTER_REGION_25009(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -361,15 +361,15 @@ function action_EVENT_ENTER_REGION_25009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25010(context, evt)
 	if evt.param1 ~= 25010 then return false end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -381,12 +381,12 @@ function condition_EVENT_ENTER_REGION_25010(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -396,20 +396,20 @@ function action_EVENT_ENTER_REGION_25010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25019, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25011(context, evt)
 	if evt.param1 ~= 25011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -421,7 +421,7 @@ function condition_EVENT_ENTER_REGION_25011(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -431,20 +431,20 @@ function action_EVENT_ENTER_REGION_25011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25012(context, evt)
 	if evt.param1 ~= 25012 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -456,7 +456,7 @@ function condition_EVENT_ENTER_REGION_25012(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -466,32 +466,32 @@ function action_EVENT_ENTER_REGION_25012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25015, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 25016 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25016, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 25017 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25017, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25020(context, evt)
 	if evt.param1 ~= 25020 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -503,7 +503,7 @@ function condition_EVENT_ENTER_REGION_25020(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -513,8 +513,8 @@ function action_EVENT_ENTER_REGION_25020(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -522,7 +522,7 @@ end
 function action_EVENT_QUEST_START_25022(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199004025, 2)
-
+	
 	return 0
 end
 
@@ -530,19 +530,19 @@ end
 function action_EVENT_QUEST_START_25023(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199004025, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25026(context, evt)
 	if evt.param1 ~= 25026 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -554,7 +554,7 @@ function condition_EVENT_ENTER_REGION_25026(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -564,20 +564,20 @@ function action_EVENT_ENTER_REGION_25026(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25032, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25027(context, evt)
 	if evt.param1 ~= 25027 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -589,7 +589,7 @@ function condition_EVENT_ENTER_REGION_25027(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -597,19 +597,19 @@ end
 function action_EVENT_ENTER_REGION_25027(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199004025, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25030(context, evt)
 	if evt.param1 ~= 25030 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -621,7 +621,7 @@ function condition_EVENT_ENTER_REGION_25030(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -631,23 +631,23 @@ function action_EVENT_ENTER_REGION_25030(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25035, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199004025, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25031(context, evt)
 	if evt.param1 ~= 25031 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -659,7 +659,7 @@ function condition_EVENT_ENTER_REGION_25031(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -669,26 +669,26 @@ function action_EVENT_ENTER_REGION_25031(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25038, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 25049 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25049, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25033(context, evt)
 	if evt.param1 ~= 25033 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -700,7 +700,7 @@ function condition_EVENT_ENTER_REGION_25033(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -710,26 +710,26 @@ function action_EVENT_ENTER_REGION_25033(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25051, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 25053 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25053, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25034(context, evt)
 	if evt.param1 ~= 25034 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -741,7 +741,7 @@ function condition_EVENT_ENTER_REGION_25034(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -751,20 +751,20 @@ function action_EVENT_ENTER_REGION_25034(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25048, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25037(context, evt)
 	if evt.param1 ~= 25037 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -776,7 +776,7 @@ function condition_EVENT_ENTER_REGION_25037(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -786,39 +786,39 @@ function action_EVENT_ENTER_REGION_25037(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25045, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 25055 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25055, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 25056 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25056, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 25057 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25057, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 25058 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25058, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25047(context, evt)
 	if evt.param1 ~= 25047 then return false end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -830,12 +830,12 @@ function condition_EVENT_ENTER_REGION_25047(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -845,20 +845,20 @@ function action_EVENT_ENTER_REGION_25047(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25065, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25050(context, evt)
 	if evt.param1 ~= 25050 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -870,7 +870,7 @@ function condition_EVENT_ENTER_REGION_25050(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -880,20 +880,20 @@ function action_EVENT_ENTER_REGION_25050(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25066, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25052(context, evt)
 	if evt.param1 ~= 25052 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -905,7 +905,7 @@ function condition_EVENT_ENTER_REGION_25052(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -915,26 +915,26 @@ function action_EVENT_ENTER_REGION_25052(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25067, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 25068 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25068, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25054(context, evt)
 	if evt.param1 ~= 25054 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -946,7 +946,7 @@ function condition_EVENT_ENTER_REGION_25054(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -956,15 +956,15 @@ function action_EVENT_ENTER_REGION_25054(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25069, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25059(context, evt)
 	if evt.param1 ~= 25059 then return false end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -976,12 +976,12 @@ function condition_EVENT_ENTER_REGION_25059(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -991,26 +991,26 @@ function action_EVENT_ENTER_REGION_25059(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25070, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为25002的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 25002 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25060(context, evt)
 	if evt.param1 ~= 25060 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -1022,7 +1022,7 @@ function condition_EVENT_ENTER_REGION_25060(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	return true
 end
 
@@ -1032,21 +1032,21 @@ function action_EVENT_ENTER_REGION_25060(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25071, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 25072 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 25072, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_25064(context, evt)
 	if evt.param1 ~= 25064 then return false end
-
+	
 	--弹出Reminder提示玩家不处于要求的状态下，状态ID为2代表玩家处于开船状态
 	    if 2 ~= ScriptLib.GetPlayerVehicleType(context,context.uid) then
 	      if 0 ~= 0 then
@@ -1058,12 +1058,12 @@ function condition_EVENT_ENTER_REGION_25064(context, evt)
 	    else
 	      return true
 	    end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1071,7 +1071,7 @@ end
 function action_EVENT_ENTER_REGION_25064(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199004025, 4)
-
+	
 	return 0
 end
 
@@ -1082,6 +1082,6 @@ function action_EVENT_QUEST_START_25088(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end

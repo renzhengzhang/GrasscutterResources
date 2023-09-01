@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133213180
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -104,30 +104,30 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_180001(context, evt)
 	if evt.param1 ~= 180001 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish1"为0
 	if ScriptLib.GetGroupVariableValue(context, "globalfinish1") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"finished1"为0
 	if ScriptLib.GetGroupVariableValue(context, "finished1") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -138,29 +138,29 @@ function action_EVENT_ENTER_REGION_180001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_180002(context, evt)
 	if evt.param1 ~= 180002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish1"为0
 	if ScriptLib.GetGroupVariableValue(context, "globalfinish1") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"finished2"为0
 	if ScriptLib.GetGroupVariableValue(context, "finished2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -171,29 +171,29 @@ function action_EVENT_ENTER_REGION_180002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_180003(context, evt)
 	if evt.param1 ~= 180003 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish1"为0
 	if ScriptLib.GetGroupVariableValue(context, "globalfinish1") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"finished3"为0
 	if ScriptLib.GetGroupVariableValue(context, "finished3") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -204,29 +204,29 @@ function action_EVENT_ENTER_REGION_180003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_180004(context, evt)
 	if evt.param1 ~= 180004 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish1"为0
 	if ScriptLib.GetGroupVariableValue(context, "globalfinish1") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"finished4"为0
 	if ScriptLib.GetGroupVariableValue(context, "finished4") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -237,29 +237,29 @@ function action_EVENT_ENTER_REGION_180004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_180005(context, evt)
 	if evt.param1 ~= 180005 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish1"为0
 	if ScriptLib.GetGroupVariableValue(context, "globalfinish1") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"finished5"为0
 	if ScriptLib.GetGroupVariableValue(context, "finished5") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -270,29 +270,29 @@ function action_EVENT_ENTER_REGION_180005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_180006(context, evt)
 	if evt.param1 ~= 180006 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "globalfinish1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"finished1"为0
 	if ScriptLib.GetGroupVariableValue(context, "finished1") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -303,29 +303,29 @@ function action_EVENT_ENTER_REGION_180006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_180007(context, evt)
 	if evt.param1 ~= 180007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "globalfinish1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"finished2"为0
 	if ScriptLib.GetGroupVariableValue(context, "finished2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -336,29 +336,29 @@ function action_EVENT_ENTER_REGION_180007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_180008(context, evt)
 	if evt.param1 ~= 180008 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "globalfinish1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"finished3"为0
 	if ScriptLib.GetGroupVariableValue(context, "finished3") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -369,29 +369,29 @@ function action_EVENT_ENTER_REGION_180008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_180009(context, evt)
 	if evt.param1 ~= 180009 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "globalfinish1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"finished4"为0
 	if ScriptLib.GetGroupVariableValue(context, "finished4") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -402,29 +402,29 @@ function action_EVENT_ENTER_REGION_180009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_180010(context, evt)
 	if evt.param1 ~= 180010 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"globalfinish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "globalfinish1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"finished5"为0
 	if ScriptLib.GetGroupVariableValue(context, "finished5") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -435,19 +435,19 @@ function action_EVENT_ENTER_REGION_180010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_180011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"globalfinish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "globalfinish1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -458,6 +458,6 @@ function action_EVENT_VARIABLE_CHANGE_180011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

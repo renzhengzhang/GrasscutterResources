@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155003001
 }
 
 -- DEFS_MISCS
-local grouplist =
+local grouplist = 
 {
 	155003021,
 	155003022,
@@ -14,17 +14,17 @@ local grouplist =
 
 function GroupNotify(context)
 	for i=1,#grouplist do
-		if ScriptLib.GetGroupVariableValueByGroup(context, "gameplayState", grouplist[i]) == 0 then
+		if ScriptLib.GetGroupVariableValueByGroup(context, "gameplayState", grouplist[i]) == 0 then 
 			ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 1, grouplist[i])
 		end
-
+		
 	end
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -86,9 +86,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -98,12 +98,12 @@ function action_EVENT_QUEST_START_1001(context, evt)
 		  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		  return -1
 		end
-
+		
 	 --ScriptLib.UnlockScenePoint(context, 34)
 	ScriptLib.UnhideScenePoint(context, 34)
 	ScriptLib.UnhideScenePoint(context, 36)
-
-
+	
+	
 		GroupNotify(context)
 		return 0
 end
@@ -114,7 +114,7 @@ function condition_EVENT_GROUP_LOAD_1002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IslandActive") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -122,6 +122,6 @@ end
 function action_EVENT_GROUP_LOAD_1002(context, evt)
 	ScriptLib.UnhideScenePoint(context, 34)
 	ScriptLib.UnhideScenePoint(context, 36)
-
+	
 	return 0
 end

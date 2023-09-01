@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133217135
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -82,9 +82,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -95,9 +95,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -164,9 +164,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -174,7 +174,7 @@ function condition_EVENT_GADGET_CREATE_135003(context, evt)
 	if 135002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -185,7 +185,7 @@ function action_EVENT_GADGET_CREATE_135003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -193,14 +193,14 @@ end
 function condition_EVENT_SELECT_OPTION_135004(context, evt)
 	-- 判断是gadgetid 135002 option_id 2903
 	if 135002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2903 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -211,8 +211,8 @@ function action_EVENT_GROUP_WILL_UNLOAD_135005(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	return 0
 end
 
@@ -221,7 +221,7 @@ function condition_EVENT_GADGET_CREATE_135008(context, evt)
 	if 135007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -232,7 +232,7 @@ function action_EVENT_GADGET_CREATE_135008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -240,14 +240,14 @@ end
 function condition_EVENT_SELECT_OPTION_135009(context, evt)
 	-- 判断是gadgetid 135007 option_id 2903
 	if 135007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2903 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -258,8 +258,8 @@ function action_EVENT_GROUP_WILL_UNLOAD_135010(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	return 0
 end
 
@@ -268,7 +268,7 @@ function condition_EVENT_GADGET_CREATE_135013(context, evt)
 	if 135012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -279,7 +279,7 @@ function action_EVENT_GADGET_CREATE_135013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -287,14 +287,14 @@ end
 function condition_EVENT_SELECT_OPTION_135014(context, evt)
 	-- 判断是gadgetid 135012 option_id 2903
 	if 135012 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2903 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -305,8 +305,8 @@ function action_EVENT_GROUP_WILL_UNLOAD_135015(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	return 0
 end
 
@@ -317,14 +317,14 @@ function action_EVENT_CHALLENGE_SUCCESS_135016(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOSUC") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -335,14 +335,14 @@ function action_EVENT_CHALLENGE_FAIL_135017(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOFAIL") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -353,14 +353,14 @@ function action_EVENT_CHALLENGE_FAIL_135018(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOFAIL") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -371,14 +371,14 @@ function action_EVENT_CHALLENGE_SUCCESS_135019(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOSUC") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -389,14 +389,14 @@ function action_EVENT_CHALLENGE_FAIL_135020(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOFAIL") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -407,14 +407,14 @@ function action_EVENT_CHALLENGE_SUCCESS_135021(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOSUC") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -431,14 +431,14 @@ function action_EVENT_QUEST_FINISH_135022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-
-
+	
+	
 	-- 创建编号为1001（该挑战的识别id),挑战内容为2001005的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1001, 2001005, 120, 9, 13501, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -455,14 +455,14 @@ function action_EVENT_QUEST_FINISH_135023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-
-
+	
+	
 	-- 创建编号为1002（该挑战的识别id),挑战内容为2001005的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1002, 2001005, 120, 9, 13502, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -479,14 +479,14 @@ function action_EVENT_QUEST_FINISH_135024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-
-
+	
+	
 	-- 创建编号为1003（该挑战的识别id),挑战内容为2001005的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1003, 2001005, 120, 9, 13503, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -495,7 +495,7 @@ function condition_EVENT_GADGET_CREATE_135027(context, evt)
 	if 135026 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -506,7 +506,7 @@ function action_EVENT_GADGET_CREATE_135027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -514,14 +514,14 @@ end
 function condition_EVENT_SELECT_OPTION_135028(context, evt)
 	-- 判断是gadgetid 135026 option_id 2903
 	if 135026 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2903 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -532,8 +532,8 @@ function action_EVENT_GROUP_WILL_UNLOAD_135029(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	return 0
 end
 
@@ -544,14 +544,14 @@ function action_EVENT_CHALLENGE_SUCCESS_135030(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOSUC") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -562,14 +562,14 @@ function action_EVENT_CHALLENGE_FAIL_135031(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOFAIL") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -586,14 +586,14 @@ function action_EVENT_QUEST_FINISH_135032(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-
-
+	
+	
 	-- 创建编号为1004（该挑战的识别id),挑战内容为2001005的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1004, 2001005, 120, 9, 13504, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -602,7 +602,7 @@ function condition_EVENT_GADGET_CREATE_135035(context, evt)
 	if 135034 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -613,7 +613,7 @@ function action_EVENT_GADGET_CREATE_135035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -621,14 +621,14 @@ end
 function condition_EVENT_SELECT_OPTION_135036(context, evt)
 	-- 判断是gadgetid 135034 option_id 2903
 	if 135034 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2903 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -639,8 +639,8 @@ function action_EVENT_GROUP_WILL_UNLOAD_135037(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	return 0
 end
 
@@ -651,14 +651,14 @@ function action_EVENT_CHALLENGE_SUCCESS_135038(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOSUC") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -669,14 +669,14 @@ function action_EVENT_CHALLENGE_FAIL_135039(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOFAIL") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -693,14 +693,14 @@ function action_EVENT_QUEST_FINISH_135040(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-
-
+	
+	
 	-- 创建编号为1005（该挑战的识别id),挑战内容为2001005的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1005, 2001005, 120, 9, 13505, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -709,7 +709,7 @@ function condition_EVENT_GADGET_CREATE_135043(context, evt)
 	if 135042 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -720,7 +720,7 @@ function action_EVENT_GADGET_CREATE_135043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -728,14 +728,14 @@ end
 function condition_EVENT_SELECT_OPTION_135044(context, evt)
 	-- 判断是gadgetid 135042 option_id 2903
 	if 135042 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2903 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -746,8 +746,8 @@ function action_EVENT_GROUP_WILL_UNLOAD_135045(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	return 0
 end
 
@@ -758,14 +758,14 @@ function action_EVENT_CHALLENGE_SUCCESS_135046(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOSUC") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -776,14 +776,14 @@ function action_EVENT_CHALLENGE_FAIL_135047(context, evt)
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_target_distance_gallery: stop gallery fails")
 	        return -1
 	    end
-
-
+	
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "Q22041ZHAOMAOFAIL") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -800,13 +800,13 @@ function action_EVENT_QUEST_FINISH_135048(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_target_distance_gallery: set target fails")
 	    return -1
 	end
-
-
+	
+	
 	-- 创建编号为1006（该挑战的识别id),挑战内容为2001005的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1006, 2001005, 120, 9, 13506, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end

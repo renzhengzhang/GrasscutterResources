@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240042001
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
         monster_boss = 1007,
         summon_region_list = {1037,1038,1039}, --region出怪的list
         summon_interval = 15,                        --自动出怪时间
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -95,9 +95,9 @@ sight_groups = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -108,9 +108,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -216,9 +216,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -226,7 +226,7 @@ function condition_EVENT_GADGET_CREATE_1005(context, evt)
 	if 1003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -237,7 +237,7 @@ function action_EVENT_GADGET_CREATE_1005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -245,14 +245,14 @@ end
 function condition_EVENT_SELECT_OPTION_1006(context, evt)
 	-- 判断是gadgetid 1003 option_id 175
 	if 1003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -260,19 +260,19 @@ end
 function action_EVENT_SELECT_OPTION_1006(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240042001, 2)
-
+	
 	-- 删除指定group： 240042001 ；指定config：1003；物件身上指定option：175；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240042001, 1003, 175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 1003 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1003, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -281,7 +281,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_1009(context, evt)
 	if 1003 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -289,54 +289,54 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_1009(context, evt)
 	-- 初始化时间变量
 	local challenge_time = 0
-
+	
 	if -1 ~= ScriptLib.GetEffigyChallengeLimitTime(context) then
 		challenge_time = ScriptLib.GetEffigyChallengeLimitTime(context)
 	end
-
+	
 	-- 创建编号为110187父挑战，indexID为1
 	if 0 ~= ScriptLib.CreateFatherChallenge(context, 1, 110187, 999999, {success = 1, fail = 1, fail_on_wipe=false}) then
 		return -1
 	end
-
+	
 	-- 创建编号为201的子挑战：杀怪挑战
 	if 0 ~= ScriptLib.AttachChildChallenge(context, 1, 201, 110192, {1,10,1},{},{success=0,fail=0}) then
 		return -1
 	end
-
+	
 	-- 创建编号为202的子挑战：限时积分.如果没有选择不会开启
-
+	
 	if 0 ~= challenge_time then
 		ScriptLib.AttachChildChallenge(context, 1, 202, 110193, {challenge_time,1,10,1},{},{success=0,fail=0})
 	else
 		ScriptLib.AddExtraGroupSuite(context, 240042001, 11)
 	end
-
+	
 	-- 开始父挑战
 	if 0 ~= ScriptLib.StartFatherChallenge(context, 1) then
 		return -1
 	end
-
+	
 	LF_Create_Boss(context)
-
+	
 	--  刷怪
 	ScriptLib.CreateEffigyChallengeMonster(context, 240042001, {15010})
-
+	
 	-- 卸载回血gadget
 	if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240042001, EntityType.GADGET, 1008 ) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_1010(context, evt)
 	local uid_list = ScriptLib.GetSceneUidList(context)
-
+	
 	local ret = 0
-
+	
 	for i,v in ipairs(uid_list) do
 		local is_all_dead = ScriptLib.IsPlayerAllAvatarDie(context, v)
 		if true ~= is_all_dead then
@@ -344,11 +344,11 @@ function condition_EVENT_DUNGEON_ALL_AVATAR_DIE_1010(context, evt)
 			break
 		end
 	end
-
+	
 	if ret ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -356,7 +356,7 @@ end
 function action_EVENT_DUNGEON_ALL_AVATAR_DIE_1010(context, evt)
 	-- 终止识别id为1的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 1, 0)
-
+	
 	return 0
 end
 
@@ -367,13 +367,13 @@ function action_EVENT_CHALLENGE_FAIL_1011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 地城失败结算
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -384,7 +384,7 @@ function action_EVENT_CHALLENGE_SUCCESS_1012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -392,7 +392,7 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_1013(context, evt)
 	-- 终止识别id为1的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 1, 1)
-
+	
 	return 0
 end
 
@@ -400,7 +400,7 @@ end
 function action_EVENT_CHALLENGE_FAIL_1014(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240042001, 11)
-
+	
 	return 0
 end
 
@@ -408,7 +408,7 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_1015(context, evt)
 	-- 终止识别id为1的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 1, 1)
-
+	
 	return 0
 end
 
@@ -418,8 +418,8 @@ function condition_EVENT_ANY_MONSTER_DIE_1040(context, evt)
 	if evt.param1 ~= 1007 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 

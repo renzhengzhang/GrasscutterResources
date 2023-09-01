@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 245007003
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_id = 245007003,
 	gear_group_id = 245007002
 }
@@ -21,8 +21,8 @@ route_map={
 
 local entrance_point_map={
   [1]=18,
-  [2]=19,
-  [3]=20,
+  [2]=19, 
+  [3]=20,  
 }
 
 
@@ -30,7 +30,7 @@ local entrance_map={
   [2]=18,
   [4]=18,
   [8]=19,
-  [16]=20,
+  [16]=20,   
 }
 
 local exit_point_list={21,22}
@@ -43,25 +43,25 @@ local monster_programme={
   [3]=stage_hunter_oneway,
   [4]=stage_iceking_oneway,
   [5]=stage_rockking_oneway,
-  [6]=stage_electricking_oneway,
+  [6]=stage_electricking_oneway, 
   [7]=stage_defender_twoway,
   [8]=stage_dragon_twoway,
   [9]=stage_hunter_twoway,
   [10]=stage_iceking_twoway,
   [11]=stage_rockking_twoway,
-  [12]=stage_electricking_twoway,
+  [12]=stage_electricking_twoway, 
   [13]=stage_defender_threeway,
   [14]=stage_dragon_threeway,
   [15]=stage_hunter_threeway,
   [16]=stage_iceking_threeway,
   [17]=stage_rockking_threeway,
-  [18]=stage_electricking_threeway,
+  [18]=stage_electricking_threeway, 
   [19]=stage_defender_fourway,
   [20]=stage_dragon_fourway,
   [21]=stage_hunter_fourway,
   [22]=stage_iceking_fourway,
   [23]=stage_rockking_fourway,
-  [24]=stage_electricking_fourway,
+  [24]=stage_electricking_fourway, 
   [25]=stage_rockking_hil_twoway,
   [26]=stage_iceking_hil_twoway,
   [27]=stage_thug_twoway,
@@ -73,9 +73,9 @@ local monster_programme={
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -131,9 +131,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -144,9 +144,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -180,9 +180,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 require "V2_0/TowerDefense_Monster_V2.0"

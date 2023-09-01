@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220134093
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -82,9 +82,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -95,9 +95,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -113,9 +113,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -124,7 +124,7 @@ function condition_EVENT_QUEST_START_93001(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "door1", 220134033) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -135,7 +135,7 @@ function action_EVENT_QUEST_START_93001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -145,7 +145,7 @@ function condition_EVENT_GROUP_LOAD_93002(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "door1", 220134033) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -156,7 +156,7 @@ function action_EVENT_GROUP_LOAD_93002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -166,7 +166,7 @@ function condition_EVENT_QUEST_START_93003(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 220134002) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -177,7 +177,7 @@ function action_EVENT_QUEST_START_93003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_GROUP_LOAD_93004(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 220134002) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -198,7 +198,7 @@ function action_EVENT_GROUP_LOAD_93004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_QUEST_START_93005(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "door2", 220134033) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -219,7 +219,7 @@ function action_EVENT_QUEST_START_93005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -229,7 +229,7 @@ function condition_EVENT_GROUP_LOAD_93006(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "door2", 220134033) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -240,7 +240,7 @@ function action_EVENT_GROUP_LOAD_93006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -250,7 +250,7 @@ function condition_EVENT_QUEST_START_93007(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "door3", 220134033) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -261,7 +261,7 @@ function action_EVENT_QUEST_START_93007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -271,7 +271,7 @@ function condition_EVENT_GROUP_LOAD_93008(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "door3", 220134033) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -282,7 +282,7 @@ function action_EVENT_GROUP_LOAD_93008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -292,7 +292,7 @@ function condition_EVENT_QUEST_START_93009(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "door4", 220134033) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -303,7 +303,7 @@ function action_EVENT_QUEST_START_93009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -313,7 +313,7 @@ function condition_EVENT_GROUP_LOAD_93010(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "door4", 220134033) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -324,7 +324,7 @@ function action_EVENT_GROUP_LOAD_93010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -334,7 +334,7 @@ function condition_EVENT_QUEST_START_93011(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 220134010) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -345,7 +345,7 @@ function action_EVENT_QUEST_START_93011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -355,7 +355,7 @@ function condition_EVENT_GROUP_LOAD_93012(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 220134010) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -366,7 +366,7 @@ function action_EVENT_GROUP_LOAD_93012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -376,7 +376,7 @@ function condition_EVENT_QUEST_START_93013(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 220134011) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -387,7 +387,7 @@ function action_EVENT_QUEST_START_93013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -397,7 +397,7 @@ function condition_EVENT_GROUP_LOAD_93014(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 220134011) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -408,7 +408,7 @@ function action_EVENT_GROUP_LOAD_93014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -418,7 +418,7 @@ function condition_EVENT_QUEST_START_93015(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 220134013) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -429,7 +429,7 @@ function action_EVENT_QUEST_START_93015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -439,7 +439,7 @@ function condition_EVENT_GROUP_LOAD_93016(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finish", 220134013) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -450,7 +450,7 @@ function action_EVENT_GROUP_LOAD_93016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -460,7 +460,7 @@ function condition_EVENT_QUEST_START_93017(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "reach", 220134015) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -471,7 +471,7 @@ function action_EVENT_QUEST_START_93017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -481,7 +481,7 @@ function condition_EVENT_GROUP_LOAD_93018(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "reach", 220134015) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -492,7 +492,7 @@ function action_EVENT_GROUP_LOAD_93018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -502,7 +502,7 @@ function condition_EVENT_QUEST_START_93019(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "reach", 220134016) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -513,7 +513,7 @@ function action_EVENT_QUEST_START_93019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -523,7 +523,7 @@ function condition_EVENT_GROUP_LOAD_93020(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "reach", 220134016) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -534,7 +534,7 @@ function action_EVENT_GROUP_LOAD_93020(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -544,7 +544,7 @@ function condition_EVENT_QUEST_START_93021(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "reach", 220134017) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -555,7 +555,7 @@ function action_EVENT_QUEST_START_93021(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -565,7 +565,7 @@ function condition_EVENT_GROUP_LOAD_93022(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "reach", 220134017) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -576,7 +576,7 @@ function action_EVENT_GROUP_LOAD_93022(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -586,7 +586,7 @@ function condition_EVENT_QUEST_START_93023(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "reach", 220134018) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -597,7 +597,7 @@ function action_EVENT_QUEST_START_93023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -607,7 +607,7 @@ function condition_EVENT_GROUP_LOAD_93024(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "reach", 220134018) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -618,6 +618,6 @@ function action_EVENT_GROUP_LOAD_93024(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220010011
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -93,9 +93,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -105,13 +105,13 @@ function action_EVENT_CHALLENGE_SUCCESS_29(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 改变指定group组220010010中， configid为76的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220010010, 76, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 触发镜头注目，注目位置为坐标（446，-30，14），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=446, y=-30, z=14}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -120,8 +120,8 @@ function action_EVENT_CHALLENGE_SUCCESS_29(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -132,19 +132,19 @@ function action_EVENT_CHALLENGE_FAIL_30(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 改变指定group组220010010中， configid为76的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220010010, 76, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220010011, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_ANY_MONSTER_DIE_31(context, evt)
 	if 11 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -164,7 +164,7 @@ function action_EVENT_ANY_MONSTER_DIE_31(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -173,7 +173,7 @@ function condition_EVENT_ANY_MONSTER_DIE_32(context, evt)
 	if 9 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -184,7 +184,7 @@ function action_EVENT_ANY_MONSTER_DIE_32(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -193,7 +193,7 @@ function condition_EVENT_ANY_MONSTER_DIE_33(context, evt)
 	if 17 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -204,7 +204,7 @@ function action_EVENT_ANY_MONSTER_DIE_33(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -213,7 +213,7 @@ function condition_EVENT_ANY_MONSTER_DIE_34(context, evt)
 	if 21 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -224,7 +224,7 @@ function action_EVENT_ANY_MONSTER_DIE_34(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -233,7 +233,7 @@ function condition_EVENT_ANY_MONSTER_DIE_35(context, evt)
 	if 14 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -244,7 +244,7 @@ function action_EVENT_ANY_MONSTER_DIE_35(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -253,7 +253,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_36(context, evt)
 	if 17 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -264,6 +264,6 @@ function action_EVENT_ANY_MONSTER_LIVE_36(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end

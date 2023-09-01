@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308068
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -61,9 +61,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -137,9 +137,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -147,7 +147,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68006(context, evt)
 	if 68004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -158,7 +158,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -167,7 +167,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68007(context, evt)
 	if 68004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -178,7 +178,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68008(context, evt)
 	if 68020 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -198,7 +198,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68009(context, evt)
 	if 68012 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -218,7 +218,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -227,7 +227,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68010(context, evt)
 	if 68019 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -238,7 +238,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -247,7 +247,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68011(context, evt)
 	if 68020 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -258,7 +258,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -267,7 +267,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68013(context, evt)
 	if 68003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -278,7 +278,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -287,7 +287,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68016(context, evt)
 	if 68001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -298,7 +298,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -307,7 +307,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68017(context, evt)
 	if 68002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -318,7 +318,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -327,7 +327,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68018(context, evt)
 	if 68003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -338,7 +338,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -347,7 +347,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68024(context, evt)
 	if 68023 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -358,7 +358,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68024(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -367,7 +367,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68025(context, evt)
 	if 68021 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -378,7 +378,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -387,7 +387,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68026(context, evt)
 	if 68022 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -398,7 +398,7 @@ function action_EVENT_GADGET_STATE_CHANGE_68026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -407,7 +407,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_68027(context, evt)
 	if 68023 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -418,6 +418,6 @@ function action_EVENT_GADGET_STATE_CHANGE_68027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

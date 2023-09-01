@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308672
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -84,9 +84,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -97,9 +97,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -133,9 +133,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -143,7 +143,7 @@ function condition_EVENT_GADGET_CREATE_672016(context, evt)
 	if 672010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -154,7 +154,7 @@ function action_EVENT_GADGET_CREATE_672016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -164,7 +164,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672017(context, evt)
 	if 672005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -175,31 +175,31 @@ function action_EVENT_GADGET_STATE_CHANGE_672017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 672001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 672001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 672003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 672003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 672027 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 672027, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 672006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 672006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -209,7 +209,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_672018(context, evt)
 	if 672005 ~= evt.param2 or GadgetState.Default ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -220,31 +220,31 @@ function action_EVENT_GADGET_STATE_CHANGE_672018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 672001 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 672001, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 672003 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 672003, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 672027 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 672027, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 672006 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 672006, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -252,23 +252,23 @@ end
 function condition_EVENT_SELECT_OPTION_672019(context, evt)
 	-- 判断是gadgetid 672010 option_id 447
 	if 672010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 447 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133308672, 672005) then
 		return false
 	end
-
+	
 	-- 判断变量"change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -279,29 +279,29 @@ function action_EVENT_SELECT_OPTION_672019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 672009) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 创建标识为"button"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "button", {2}, false)
-
-
+	
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：918；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：447；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 447) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -309,23 +309,23 @@ end
 function condition_EVENT_SELECT_OPTION_672020(context, evt)
 	-- 判断是gadgetid 672010 option_id 447
 	if 672010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 447 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133308672, 672005) then
 		return false
 	end
-
+	
 	-- 判断变量"change"为0
 	if ScriptLib.GetGroupVariableValue(context, "change") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -336,47 +336,47 @@ function action_EVENT_SELECT_OPTION_672020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 672003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 672027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 672004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 672009) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 创建标识为"button"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "button", {2}, false)
-
-
+	
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：918；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：447；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 447) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -384,23 +384,23 @@ end
 function condition_EVENT_SELECT_OPTION_672021(context, evt)
 	-- 判断是gadgetid 672010 option_id 447
 	if 672010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 447 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133308672, 672005) then
 		return false
 	end
-
+	
 	-- 判断变量"change"为0
 	if ScriptLib.GetGroupVariableValue(context, "change") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -411,23 +411,23 @@ function action_EVENT_SELECT_OPTION_672021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 创建标识为"button"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "button", {2}, false)
-
-
+	
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：918；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：447；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 447) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -435,23 +435,23 @@ end
 function condition_EVENT_SELECT_OPTION_672022(context, evt)
 	-- 判断是gadgetid 672010 option_id 447
 	if 672010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 447 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133308672, 672005) then
 		return false
 	end
-
+	
 	-- 判断变量"change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -462,41 +462,41 @@ function action_EVENT_SELECT_OPTION_672022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 672003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 672027) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 672002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 创建标识为"button"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "button", {2}, false)
-
-
+	
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：918；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：447；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 447) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -505,22 +505,22 @@ function condition_EVENT_SELECT_OPTION_672023(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133308672, 672005) then
 		return false
 	end
-
+	
 	-- 判断是gadgetid 672010 option_id 918
 	if 672010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 918 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"first"为0
 	if ScriptLib.GetGroupVariableValue(context, "first") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -530,18 +530,18 @@ function action_EVENT_SELECT_OPTION_672023(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 104, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"first"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "first", {1}, false)
-
-
+	
+	
 	-- 将本组内变量名为 "first" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "first", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -550,17 +550,17 @@ function condition_EVENT_SELECT_OPTION_672024(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133308672, 672005) then
 		return false
 	end
-
+	
 	-- 判断是gadgetid 672010 option_id 918
 	if 672010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 918 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -570,24 +570,24 @@ function action_EVENT_SELECT_OPTION_672024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 672005, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"button"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "button", {2}, false)
-
-
+	
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：918；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：447；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 447) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -596,7 +596,7 @@ function condition_EVENT_TIME_AXIS_PASS_672025(context, evt)
 	if "first" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -606,12 +606,12 @@ function action_EVENT_TIME_AXIS_PASS_672025(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 672005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 停止标识为"first"的时间轴
 	ScriptLib.EndTimeAxis(context, "first")
-
-
+	
+	
 	return 0
 end
 
@@ -620,22 +620,22 @@ function condition_EVENT_SELECT_OPTION_672026(context, evt)
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 133308672, 672005) then
 		return false
 	end
-
+	
 	-- 判断是gadgetid 672010 option_id 918
 	if 672010 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 918 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"first"为1
 	if ScriptLib.GetGroupVariableValue(context, "first") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -645,24 +645,24 @@ function action_EVENT_SELECT_OPTION_672026(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 672005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"button"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "button", {2}, false)
-
-
+	
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：918；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 918) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 133308672 ；指定config：672010；物件身上指定option：447；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308672, 672010, 447) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -671,7 +671,7 @@ function condition_EVENT_TIME_AXIS_PASS_672028(context, evt)
 	if "button" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -682,7 +682,7 @@ function action_EVENT_TIME_AXIS_PASS_672028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -695,7 +695,7 @@ function condition_EVENT_GROUP_LOAD_672029(context, evt)
 	if curQuestState ~= 3 then
 	   return false
 	end
-
+	
 	return true
 end
 
@@ -706,7 +706,7 @@ function action_EVENT_GROUP_LOAD_672029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -714,6 +714,6 @@ end
 function action_EVENT_GROUP_LOAD_672030(context, evt)
 	-- 变量"change"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "change", 0)
-
+	
 	return 0
 end

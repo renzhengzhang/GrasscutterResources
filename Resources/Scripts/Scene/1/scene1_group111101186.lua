@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101186
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -102,28 +102,28 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_186007(context, evt)
 	-- 判断是gadgetid 186006 option_id 79
 	if 186006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 79 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"suitState"为1
 	if ScriptLib.GetGroupVariableValue(context, "suitState") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -134,13 +134,13 @@ function action_EVENT_SELECT_OPTION_186007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111101186, 2)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101186, 3)
-
+	
 	return 0
 end
 
@@ -148,7 +148,7 @@ end
 function action_EVENT_GROUP_LOAD_186010(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101186, 2)
-
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_GADGET_CREATE_186011(context, evt)
 	if 186006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -168,7 +168,7 @@ function action_EVENT_GADGET_CREATE_186011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -176,19 +176,19 @@ end
 function condition_EVENT_SELECT_OPTION_186013(context, evt)
 	-- 判断是gadgetid 186006 option_id 79
 	if 186006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 79 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"suitState"为2
 	if ScriptLib.GetGroupVariableValue(context, "suitState") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -199,12 +199,12 @@ function action_EVENT_SELECT_OPTION_186013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 111101186, 3)
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101186, 2)
-
+	
 	return 0
 end

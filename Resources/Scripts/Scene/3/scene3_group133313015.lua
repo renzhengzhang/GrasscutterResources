@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133313015
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -59,9 +59,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -72,9 +72,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -117,9 +117,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 使用reminderUI
@@ -137,7 +137,7 @@ function condition_EVENT_ANY_GADGET_DIE_15002(context, evt)
 	if 15001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -148,7 +148,7 @@ function action_EVENT_ANY_GADGET_DIE_15002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -158,13 +158,13 @@ function condition_EVENT_ANY_MONSTER_DIE_15006(context, evt)
 	if evt.param1 ~= 15005 then
 	    return false
 	 end
-
-
+	  
+	
 	-- 判断变量"phase"为2
 	if ScriptLib.GetGroupVariableValue(context, "phase") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -174,8 +174,8 @@ function action_EVENT_ANY_MONSTER_DIE_15006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15001, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -186,23 +186,23 @@ function action_EVENT_QUEST_START_15007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 15001 的物件更改为状态 GadgetState.ChestLocked
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15001, GadgetState.ChestLocked) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133313015, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133313015, 3)
-
+	
 	-- 创建标识为"rmd_1"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "rmd_1", {2}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -212,7 +212,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_15008(context, evt)
 	if 15001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 or GadgetState.ChestLocked ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -223,16 +223,16 @@ function action_EVENT_GADGET_STATE_CHANGE_15008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133313015, 2)
-
+	
 	-- 调用提示id为 1000080042 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1000080042) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -242,7 +242,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_15009(context, evt)
 	if 15001 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -253,16 +253,16 @@ function action_EVENT_GADGET_STATE_CHANGE_15009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133313015, 3)
-
+	
 	-- 调用提示id为 1000080044 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1000080044) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -271,16 +271,16 @@ function condition_EVENT_GADGET_STATE_CHANGE_15010(context, evt)
 	if 15001 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_15010(context, evt)
 	ScriptLib.InitTimeAxis(context, "battle_fin", {4}, false)
-
+	
 	TLA_active_reminder_ui(context, evt, 1000080045)
-
+	
 	return 0
 end
 
@@ -290,12 +290,12 @@ function condition_EVENT_ANY_MONSTER_DIE_15011(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"phase"为1
 	if ScriptLib.GetGroupVariableValue(context, "phase") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -305,8 +305,8 @@ function action_EVENT_ANY_MONSTER_DIE_15011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -317,11 +317,11 @@ function action_EVENT_QUEST_FINISH_15012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建标识为"change"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "change", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -330,7 +330,7 @@ function condition_EVENT_TIME_AXIS_PASS_15013(context, evt)
 	if "change" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -340,8 +340,8 @@ function action_EVENT_TIME_AXIS_PASS_15013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15001, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -351,7 +351,7 @@ function condition_EVENT_GROUP_LOAD_15014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "phase") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -361,8 +361,8 @@ function action_EVENT_GROUP_LOAD_15014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 15001, GadgetState.Action02) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -371,16 +371,16 @@ function condition_EVENT_TIME_AXIS_PASS_15015(context, evt)
 	if "rmd_1" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_15015(context, evt)
 	TLA_active_reminder_ui(context, evt, 1000080041)
-
+	
 	ScriptLib.EndTimeAxis(context, "rmd_1")
-
+	
 	return 0
 end
 
@@ -389,15 +389,15 @@ function condition_EVENT_TIME_AXIS_PASS_15016(context, evt)
 	if "battle_fin" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_15016(context, evt)
 	ScriptLib.AddQuestProgress(context, "Q7310334")
-
+	
 	ScriptLib.EndTimeAxis(context, "battle_fin")
-
+	
 	return 0
 end

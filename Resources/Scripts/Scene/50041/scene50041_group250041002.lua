@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250041002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -104,9 +104,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -117,9 +117,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -306,9 +306,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -316,7 +316,7 @@ function condition_EVENT_GADGET_CREATE_2029(context, evt)
 	if 2001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -327,13 +327,13 @@ function action_EVENT_GADGET_CREATE_2029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "WindFloraNum" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "WindFloraNum", 1, 250041002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -341,14 +341,14 @@ end
 function condition_EVENT_SELECT_OPTION_2030(context, evt)
 	-- 判断是gadgetid 2001 option_id 2
 	if 2001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 2 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -356,28 +356,28 @@ end
 function action_EVENT_SELECT_OPTION_2030(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250041002, 2)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250041002, 3)
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250041002, 4)
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250041002, 5)
-
+	
 	-- 创建编号为666（该挑战的识别id),挑战内容为127的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 666, 127, 60, 4, 666, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 延迟3秒后,向groupId为：250041002的对象,请求一次调用,并将string参数："aa" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250041002, "aa", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -388,25 +388,25 @@ function action_EVENT_CHALLENGE_FAIL_2031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 250041002, "aa2") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 250041002, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "WindFloraNum" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "WindFloraNum", 1, 250041002) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -415,10 +415,10 @@ function action_EVENT_TIMER_EVENT_2032(context, evt)
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250041002, "aa2", 4) then
 	  return -1
 	end
-
+	
 	--BubblePlatform(context)
 	RandomBubbleNum(context)
-
+	
 	return 0
 end
 
@@ -428,10 +428,10 @@ function action_EVENT_TIMER_EVENT_2034(context, evt)
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250041002, "aa", 4) then
 	  return -1
 	end
-
+	
 	--BubblePlatform(context)
 	RandomBubbleNum(context)
-
+	
 	return 0
 end
 

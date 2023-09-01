@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199001065
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -29,9 +29,9 @@ regions = {
 
 -- 触发器
 triggers = {
-	-- WatorHeight=1
+	-- WatorHeight=1 
 	{ config_id = 1065003, name = "VARIABLE_CHANGE_65003", event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "condition_EVENT_VARIABLE_CHANGE_65003", action = "action_EVENT_VARIABLE_CHANGE_65003", trigger_count = 0 },
-	-- WatorHeight=2
+	-- WatorHeight=2 
 	{ config_id = 1065004, name = "VARIABLE_CHANGE_65004", event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "condition_EVENT_VARIABLE_CHANGE_65004", action = "action_EVENT_VARIABLE_CHANGE_65004", trigger_count = 0 },
 	{ config_id = 1065010, name = "GROUP_LOAD_65010", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "condition_EVENT_GROUP_LOAD_65010", action = "action_EVENT_GROUP_LOAD_65010", trigger_count = 0 },
 	{ config_id = 1065011, name = "GROUP_LOAD_65011", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "condition_EVENT_GROUP_LOAD_65011", action = "action_EVENT_GROUP_LOAD_65011", trigger_count = 0 }
@@ -54,9 +54,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -67,9 +67,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,20 +85,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_65003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"WatorHeight"为1
 	if ScriptLib.GetGroupVariableValue(context, "WatorHeight") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -109,25 +109,25 @@ function action_EVENT_VARIABLE_CHANGE_65003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 65001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_65004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"WatorHeight"为2
 	if ScriptLib.GetGroupVariableValue(context, "WatorHeight") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -138,13 +138,13 @@ function action_EVENT_VARIABLE_CHANGE_65004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 65001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_GROUP_LOAD_65010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "WatorHeight") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -165,7 +165,7 @@ function action_EVENT_GROUP_LOAD_65010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -175,7 +175,7 @@ function condition_EVENT_GROUP_LOAD_65011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "WatorHeight") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -186,6 +186,6 @@ function action_EVENT_GROUP_LOAD_65011(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 177005165
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_id = 177005165,
 	gadget_riddle_1 = 165002,
 	gadget_riddle_2 = 165003,
@@ -14,9 +14,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -84,15 +84,15 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_165007(context, evt)
 	if evt.param2 ~= defs.gadget_riddle_1 and evt.param2 ~= defs.gadget_riddle_2 and evt.param2 ~= defs.gadget_riddle_3 and evt.param2 ~= defs.gadget_riddle_4 then
-	return false
+	return false 
 	end
 	return true
 end
@@ -103,7 +103,7 @@ function action_EVENT_GADGET_STATE_CHANGE_165007(context, evt)
 	ScriptLib.ChangeGroupVariableValue(context, "State_Flag", 1)
 	if 0 == ScriptLib.GetCurTriggerCount(context) then
 	ScriptLib.MarkPlayerAction(context, 1003, 1, 1)
-	end
+	end 
 	elseif evt.param1 == GadgetState.Default then
 	ScriptLib.ChangeGroupVariableValue(context, "State_Flag", -1)
 	end
@@ -113,7 +113,7 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_165008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 < 0 or evt.param1 > 4 then
 	return false
 	end
@@ -123,7 +123,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_165008(context, evt)
 	if evt.param1 == 4 then
-	ScriptLib.CreateGadget(context, { config_id = 165006 })
+	ScriptLib.CreateGadget(context, { config_id = 165006 }) 
 	end
 	return 0
 end

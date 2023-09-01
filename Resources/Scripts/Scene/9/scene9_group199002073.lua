@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002073
 }
 
 -- DEFS_MISCS
-local	defs =
+local	defs = 
 {
 	--操作台
 	start_operator = 73002,
@@ -18,17 +18,16 @@ local	defs =
 	--第二幕GroupID
 	play_group_2 = 199002043,
 
-
-
+  
       --玩法范围，主机出圈则重置
         play_region = 73003,
 
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -62,9 +61,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -75,9 +74,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -93,9 +92,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -105,18 +104,18 @@ function action_EVENT_QUEST_START_73004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_73005(context, evt)
 	ScriptLib.GetHostQuestState(context,7902603)
-
+	
 	if 2 == ScriptLib.GetHostQuestState(context,7902603) or 3 == ScriptLib.GetHostQuestState(context,7902603) then
 		ScriptLib.CreateGadget(context, {config_id=73002})
 	end
-
+	
 	return 0
 end
 

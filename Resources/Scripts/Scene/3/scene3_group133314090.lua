@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133314090
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -108,9 +108,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -119,8 +119,8 @@ function condition_EVENT_ANY_MONSTER_DIE_90002(context, evt)
 	if evt.param1 ~= 90001 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -128,7 +128,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_90002(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133314090, 4)
-
+	
 	return 0
 end
 
@@ -138,8 +138,8 @@ function condition_EVENT_ANY_MONSTER_DIE_90006(context, evt)
 	if evt.param1 ~= 90003 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -147,7 +147,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_90006(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133314090, 4)
-
+	
 	return 0
 end
 
@@ -157,8 +157,8 @@ function condition_EVENT_ANY_MONSTER_DIE_90007(context, evt)
 	if evt.param1 ~= 90004 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -166,7 +166,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_90007(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133314090, 4)
-
+	
 	return 0
 end
 
@@ -176,8 +176,8 @@ function condition_EVENT_ANY_MONSTER_DIE_90008(context, evt)
 	if evt.param1 ~= 90005 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -188,7 +188,7 @@ function action_EVENT_ANY_MONSTER_DIE_90008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -197,7 +197,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_90009(context, evt)
 	if 90001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -208,7 +208,7 @@ function action_EVENT_ANY_MONSTER_LIVE_90009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -217,7 +217,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_90010(context, evt)
 	if 90005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -228,6 +228,6 @@ function action_EVENT_ANY_MONSTER_LIVE_90010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

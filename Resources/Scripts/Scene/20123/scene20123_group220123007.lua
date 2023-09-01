@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220123007
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -123,9 +123,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -136,9 +136,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -163,9 +163,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -174,12 +174,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_7007(context, evt)
 	if 7001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall1"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wall1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -193,13 +193,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall1" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall1", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -209,12 +209,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_7008(context, evt)
 	if 7001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall1"为2
 	if ScriptLib.GetGroupVariableValue(context, "Wall1") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -228,13 +228,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -244,12 +244,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_7009(context, evt)
 	if 7002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall2"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wall2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -263,13 +263,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall2" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall2", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -279,12 +279,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_7010(context, evt)
 	if 7002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall2"为2
 	if ScriptLib.GetGroupVariableValue(context, "Wall2") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -298,13 +298,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -314,12 +314,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_7011(context, evt)
 	if 7003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall3"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wall3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -333,13 +333,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall3" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall3", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -349,12 +349,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_7012(context, evt)
 	if 7003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall3"为2
 	if ScriptLib.GetGroupVariableValue(context, "Wall3") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -368,13 +368,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -384,17 +384,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_7013(context, evt)
 	if 7004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall4"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wall4") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"Block4"为0
 	if ScriptLib.GetGroupVariableValue(context, "Block4") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -408,13 +408,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall4" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall4", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -424,12 +424,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_7014(context, evt)
 	if 7004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall4"为2
 	if ScriptLib.GetGroupVariableValue(context, "Wall4") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -443,13 +443,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -459,17 +459,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_7015(context, evt)
 	if 7005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall5"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wall5") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"Wall6"为2
 	if ScriptLib.GetGroupVariableValue(context, "Wall6") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -483,13 +483,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall5" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall5", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -499,17 +499,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_7016(context, evt)
 	if 7005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall5"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wall5") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"Wall6"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wall6") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -520,7 +520,7 @@ function action_EVENT_GADGET_STATE_CHANGE_7016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -530,12 +530,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_7017(context, evt)
 	if 7005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall5"为2
 	if ScriptLib.GetGroupVariableValue(context, "Wall5") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -549,13 +549,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall5" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall5", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -565,17 +565,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_7018(context, evt)
 	if 7006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall6"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wall6") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"Block6"为0
 	if ScriptLib.GetGroupVariableValue(context, "Block6") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -589,13 +589,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall6" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall6", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -605,17 +605,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_7019(context, evt)
 	if 7006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall6"为2
 	if ScriptLib.GetGroupVariableValue(context, "Wall6") ~= 2 then
 			return false
 	end
-
+	
 	-- 判断变量"Wall5"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wall5") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -629,13 +629,13 @@ function action_EVENT_GADGET_STATE_CHANGE_7019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Wall6" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "Wall6", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -645,17 +645,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_7020(context, evt)
 	if 7006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall6"为2
 	if ScriptLib.GetGroupVariableValue(context, "Wall6") ~= 2 then
 			return false
 	end
-
+	
 	-- 判断变量"Wall5"为2
 	if ScriptLib.GetGroupVariableValue(context, "Wall5") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -666,19 +666,19 @@ function action_EVENT_GADGET_STATE_CHANGE_7020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7024(context, evt)
 	if evt.param1 ~= 7024 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -686,7 +686,7 @@ end
 function action_EVENT_ENTER_REGION_7024(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220123007, 2)
-
+	
 	return 0
 end
 
@@ -695,7 +695,7 @@ function condition_EVENT_ANY_GADGET_DIE_7048(context, evt)
 	if 7021 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -706,7 +706,7 @@ function action_EVENT_ANY_GADGET_DIE_7048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -715,7 +715,7 @@ function condition_EVENT_ANY_GADGET_DIE_7049(context, evt)
 	if 7022 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -726,7 +726,7 @@ function action_EVENT_ANY_GADGET_DIE_7049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -736,17 +736,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_7050(context, evt)
 	if 7004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall4"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wall4") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"Block4"为1
 	if ScriptLib.GetGroupVariableValue(context, "Block4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -757,7 +757,7 @@ function action_EVENT_GADGET_STATE_CHANGE_7050(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -767,17 +767,17 @@ function condition_EVENT_GADGET_STATE_CHANGE_7051(context, evt)
 	if 7006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	-- 判断变量"Wall6"为1
 	if ScriptLib.GetGroupVariableValue(context, "Wall6") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"Block6"为1
 	if ScriptLib.GetGroupVariableValue(context, "Block6") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -788,6 +788,6 @@ function action_EVENT_GADGET_STATE_CHANGE_7051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

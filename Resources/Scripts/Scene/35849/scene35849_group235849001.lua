@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235849001
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     --起始操作台
     starter = 1040,
     --起始操作台选项
@@ -13,7 +13,7 @@ defs = {
     delay = 3,
     --挑战总时限 秒
     time_limit = 300,
-    --挑战ID
+    --挑战ID 
     challenge_id =2010037,
 
     --怪物潮信息
@@ -34,49 +34,49 @@ defs = {
     --随机固定顺序怪物潮组合 每次进地城随机取key。
     --key对应value代表依序出现的MonsterTide，小花括号内配置复数个表示同时刷出。
     rand_table = {
-        [1] =
+        [1] = 
         {
             {1},
             {3},
             {4}
         },
-        [2] =
+        [2] = 
         {
             {2},
             {3},
             {4}
         },
-        [3] =
+        [3] = 
         {
             {1},
             {3},
             {5}
         },
-        [4] =
+        [4] = 
         {
             {2},
             {3},
             {5}
         },
-        [5] =
+        [5] = 
         {
             {1},
             {3},
             {6}
         },
-        [6] =
+        [6] = 
         {
             {2},
             {3},
             {6}
         },
-       [7] =
+       [7] = 
         {
             {1},
             {3},
             {7}
         },
-       [8] =
+       [8] = 
         {
             {2},
             {3},
@@ -100,9 +100,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -176,9 +176,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -189,9 +189,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -225,23 +225,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_1042(context, evt)
 	-- 判断是gadgetid 1040 option_id 94
 	if 1040 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 94 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -251,20 +251,20 @@ function action_EVENT_SELECT_OPTION_1042(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1016, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 235849001 ；指定config：1040；物件身上指定option：94；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 235849001, 1040, 94) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235849001, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 235849001, 3)
-
+	
 	return 0
 end
 

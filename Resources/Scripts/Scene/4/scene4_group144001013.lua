@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144001013
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -79,9 +79,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -92,9 +92,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -128,9 +128,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -138,7 +138,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13003(context, evt)
 	if 13046 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -149,19 +149,19 @@ function action_EVENT_GADGET_STATE_CHANGE_13003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13005(context, evt)
 	if evt.param1 ~= 13005 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -172,7 +172,7 @@ function action_EVENT_ENTER_REGION_13005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -181,7 +181,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_13007(context, evt)
 	if 13006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -192,19 +192,19 @@ function action_EVENT_GADGET_STATE_CHANGE_13007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_13008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"dooropen"为1
 	if ScriptLib.GetGroupVariableValue(context, "dooropen") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -214,20 +214,20 @@ function action_EVENT_VARIABLE_CHANGE_13008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_13009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"dooropen"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "dooropen", 144001013) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -237,20 +237,20 @@ function action_EVENT_VARIABLE_CHANGE_13009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13010(context, evt)
 	if evt.param1 ~= 13010 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -261,19 +261,19 @@ function action_EVENT_ENTER_REGION_13010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13011(context, evt)
 	if evt.param1 ~= 13011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -284,7 +284,7 @@ function action_EVENT_ENTER_REGION_13011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -294,8 +294,8 @@ function action_EVENT_QUEST_START_13013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 13002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 触发镜头注目，注目位置为坐标（-725.5314，119.8572，402.5192），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-725.5314, y=119.8572, z=402.5192}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -304,14 +304,14 @@ function action_EVENT_QUEST_START_13013(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 延迟1秒后,向groupId为：144001013的对象,请求一次调用,并将string参数："openthetopdoor" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001013, "openthetopdoor", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -320,7 +320,7 @@ function condition_EVENT_ANY_GADGET_DIE_13014(context, evt)
 	if 13012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -328,31 +328,31 @@ end
 function action_EVENT_ANY_GADGET_DIE_13014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144001013, 2)
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 144001123, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 延迟4秒后,向groupId为：144001013的对象,请求一次调用,并将string参数："rockborken" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001013, "rockborken", 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13015(context, evt)
 	if evt.param1 ~= 13015 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -363,13 +363,13 @@ function action_EVENT_ENTER_REGION_13015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 延迟2秒后,向groupId为：144001013的对象,请求一次调用,并将string参数："huitou" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144001013, "huitou", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -380,7 +380,7 @@ function action_EVENT_TIMER_EVENT_13020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -391,7 +391,7 @@ function action_EVENT_TIMER_EVENT_13021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -402,24 +402,24 @@ function action_EVENT_TIMER_EVENT_13022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13023(context, evt)
 	if evt.param1 ~= 13023 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 判断变量"finishyishi"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "finishyishi", 144001122) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -430,7 +430,7 @@ function action_EVENT_ENTER_REGION_13023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -444,7 +444,7 @@ function action_EVENT_TIMER_EVENT_13027(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end

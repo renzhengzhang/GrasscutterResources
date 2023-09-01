@@ -1,5 +1,5 @@
 --[[
-defs = {
+local defs = {
 	gallery_id = 1,
 	option_1 = 7,
 	option_2 = 2905,
@@ -59,7 +59,7 @@ function action_enter_region(context, evt)
 	for i,v in ipairs(regions) do
 		if math.abs(v.pos.y - position.y) <= v.size.y/2 then
 			return LF_SET_VISION_TYPE(context, v.config_id)
-		end
+		end 
 	end
 	return -1
 end
@@ -185,7 +185,7 @@ function LF_GALLERY_START(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, defs.gadget_final) then
 		return -1
 	end
-	for i,v in ipairs(defs.group_list) do
+	for i,v in ipairs(defs.group_list) do	
 		ScriptLib.AddExtraGroupSuite(context, v, 2)
 	end
 end
@@ -194,7 +194,7 @@ function LF_GALLERY_STOP(context, evt)
 	ScriptLib.CreateGadget(context, {config_id = defs.gadget_airwall})
 	--ScriptLib.SetGadgetEnableInteract(context, 0, defs.gadget_operator, true)
 	ScriptLib.RemoveExtraGroupSuite(context, 0, 2)
-	for i,v in ipairs(defs.group_list) do
+	for i,v in ipairs(defs.group_list) do	
 		ScriptLib.RemoveExtraGroupSuite(context, v, 2)
 	end
 	local uid_list = ScriptLib.GetSceneUidList(context)
@@ -204,7 +204,7 @@ end
 -------------------------------------------
 function FlyBalloonDestinationScore(context)
 	ScriptLib.PrintContextLog(context, "## FlyBalloonDestinationScore | uid -> "..context.uid.." | source -> "..context.source_entity_id.." | target -> "..context.target_entity_id)
-	--ScriptLib.AddTeamEntityGlobalFloatValue(context, {context.uid}, "has_end_game", 1)
+	--ScriptLib.AddTeamEntityGlobalFloatValue(context, {context.uid}, "has_end_game", 1)		
 	ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["trigger_gadget_id"]=70360139,["has_end_game"]=true})
 	return 0
 end

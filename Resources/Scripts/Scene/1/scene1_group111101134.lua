@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101134
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -90,9 +90,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -103,9 +103,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -139,16 +139,16 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_134031(context, evt)
 	-- 指定group的循环玩法进度加1
 	ScriptLib.AddBlossomScheduleProgressByGroupId(context, 111101134)
-
+	
 	return 0
 end
 
@@ -159,7 +159,7 @@ function action_EVENT_CHALLENGE_FAIL_134032(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -170,19 +170,19 @@ function action_EVENT_GROUP_REFRESH_134034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 指定group的循环玩法进度加1
 	if 0 ~= ScriptLib.SetBlossomScheduleStateByGroupId(context, 111101134, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_blossomscehedule_byGroupId")
 		return -1
 	end
-
+	
 	-- 刷新循环营地的掉落奖励
 	if 0 ~= ScriptLib.RefreshBlossomDropRewardByGroupId(context, 111101134) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 		return -1
-	end
-
+	end 
+	
 	return 0
 end
 
@@ -191,7 +191,7 @@ function condition_EVENT_BLOSSOM_CHEST_DIE_134035(context, evt)
 	if 134013 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -202,7 +202,7 @@ function action_EVENT_BLOSSOM_CHEST_DIE_134035(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_blossom_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -212,20 +212,20 @@ function action_EVENT_BLOSSOM_PROGRESS_FINISH_134037(context, evt)
 	if 0 ~= ScriptLib.CreateBlossomChestByGroupId(context, 111101134,134013) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_blossomChest_bygroupid")
 			return -1
-		end
-
+		end 
+	
 	-- 指定group的循环玩法进度加1
 	if 0 ~= ScriptLib.SetBlossomScheduleStateByGroupId(context, 111101134, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_blossomscehedule_byGroupId")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "GroupCompletion" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "GroupCompletion", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -236,22 +236,22 @@ function action_EVENT_GROUP_LOAD_134038(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_blossom_group")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_134041(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 111101134) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"wave"为0
 	if ScriptLib.GetGroupVariableValue(context, "wave") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -262,17 +262,17 @@ function action_EVENT_ANY_MONSTER_DIE_134041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101134, 3)
-
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=2137.725,y=194.6,z=-1846.356}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 400004, pos, 50) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -281,7 +281,7 @@ function condition_EVENT_ANY_MONSTER_DIE_134043(context, evt)
 	if 134003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -292,15 +292,15 @@ function action_EVENT_ANY_MONSTER_DIE_134043(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 134016 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -309,7 +309,7 @@ function condition_EVENT_ANY_GADGET_DIE_134044(context, evt)
 	if 134023 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -320,7 +320,7 @@ function action_EVENT_ANY_GADGET_DIE_134044(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end

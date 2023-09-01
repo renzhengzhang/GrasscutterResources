@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133310347
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -116,25 +116,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_347011(context, evt)
 	if evt.param1 ~= 347011 then return false end
-
+	
 	-- 判断变量"finished"为0
 	if ScriptLib.GetGroupVariableValue(context, "finished") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -144,17 +144,17 @@ function action_EVENT_ENTER_REGION_347011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 347001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "finished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133310347, 2)
-
+	
 	return 0
 end
 
@@ -164,7 +164,7 @@ function condition_EVENT_GROUP_LOAD_347013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -172,7 +172,7 @@ end
 function action_EVENT_GROUP_LOAD_347013(context, evt)
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133310347, 2)
-
+	
 	return 0
 end
 
@@ -182,7 +182,7 @@ function condition_EVENT_GROUP_LOAD_347014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finished") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -190,6 +190,6 @@ end
 function action_EVENT_GROUP_LOAD_347014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133310347, 2)
-
+	
 	return 0
 end

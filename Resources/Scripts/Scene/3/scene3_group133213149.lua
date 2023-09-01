@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133213149
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -44,9 +44,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -57,9 +57,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -84,33 +84,33 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_QUEST_FINISH_149004(context, evt)
 	--检查ID为7212803的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 7212803 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_QUEST_FINISH_149004(context, evt)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 133213149, 149001, GadgetState.Default)
-
+	
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 133213149, 149002, GadgetState.Default)
 	ScriptLib.SetGroupGadgetStateByConfigId(context, 133213149, 149003, GadgetState.Default)
 	return 0
@@ -121,7 +121,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_149005(context, evt)
 	if 149008 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -132,19 +132,19 @@ function action_EVENT_GADGET_STATE_CHANGE_149005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 149009 的物件更改为状态 GadgetState.ChestTrap
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 149009, GadgetState.ChestTrap) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 149010 的物件更改为状态 GadgetState.ChestTrap
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 149010, GadgetState.ChestTrap) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -153,7 +153,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_149006(context, evt)
 	if 149009 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -164,19 +164,19 @@ function action_EVENT_GADGET_STATE_CHANGE_149006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 149008 的物件更改为状态 GadgetState.ChestTrap
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 149008, GadgetState.ChestTrap) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 149010 的物件更改为状态 GadgetState.ChestTrap
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 149010, GadgetState.ChestTrap) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -185,7 +185,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_149007(context, evt)
 	if 149010 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -196,18 +196,18 @@ function action_EVENT_GADGET_STATE_CHANGE_149007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 149008 的物件更改为状态 GadgetState.ChestTrap
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 149008, GadgetState.ChestTrap) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 149009 的物件更改为状态 GadgetState.ChestTrap
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 149009, GadgetState.ChestTrap) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

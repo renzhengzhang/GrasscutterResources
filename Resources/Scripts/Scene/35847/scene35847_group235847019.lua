@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235847019
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 challenge_id = 2010046,
     --起始操作台
     starter = 19031,
@@ -34,14 +34,14 @@ challenge_id = 2010046,
     --随机固定顺序怪物潮组合 每次进地城随机取key。
     --key对应value代表依序出现的MonsterTide，小花括号内配置复数个表示同时刷出。
     rand_table = {
-        [1] =
+        [1] = 
         {
             {1},
             {3},
             {7},
             {5}
         },
-        [2] =
+        [2] = 
         {
             {2},
             {4},
@@ -58,9 +58,9 @@ challenge_id = 2010046,
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -170,9 +170,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -183,9 +183,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -345,23 +345,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_19062(context, evt)
 	-- 判断是gadgetid 19031 option_id 24
 	if 19031 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 24 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -369,19 +369,19 @@ end
 function action_EVENT_SELECT_OPTION_19062(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235847019, 2)
-
+	
 	-- 将configid为 19031 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 19031, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 235847019 ；指定config：19031；物件身上指定option：24；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 235847019, 19031, 24) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -390,7 +390,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_19063(context, evt)
 	if 19046 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -400,20 +400,20 @@ function action_EVENT_GADGET_STATE_CHANGE_19063(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 19047, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 19048 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 19048, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 19060 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 19060, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -422,7 +422,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_19064(context, evt)
 	if 19053 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -432,14 +432,14 @@ function action_EVENT_GADGET_STATE_CHANGE_19064(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 19054, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 19055 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 19055, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -448,7 +448,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_19065(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 235847019, 19047) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -456,11 +456,11 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_19065(context, evt)
 	-- 创建标识为"WindTimeA"，时间节点为{14}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "WindTimeA", {14}, false)
-
-
+	
+	
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235847019, 11)
-
+	
 	return 0
 end
 
@@ -468,10 +468,10 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_19066(context, evt)
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 235847019, 11)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 235847019, 12)
-
+	
 	return 0
 end
 
@@ -480,7 +480,7 @@ function condition_EVENT_TIME_AXIS_PASS_19067(context, evt)
 	if "WindTimeA" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -488,25 +488,25 @@ end
 function action_EVENT_TIME_AXIS_PASS_19067(context, evt)
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 235847019, 11)
-
+	
 	-- 将configid为 19047 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 19047, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 19048 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 19048, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 19060 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 19060, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -514,10 +514,10 @@ end
 function action_EVENT_CHALLENGE_FAIL_19068(context, evt)
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 235847019, 11)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 235847019, 12)
-
+	
 	return 0
 end
 
@@ -526,7 +526,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_19069(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 235847019, 19054) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -534,11 +534,11 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_19069(context, evt)
 	-- 创建标识为"WindTimeB"，时间节点为{14}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "WindTimeB", {14}, false)
-
-
+	
+	
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235847019, 12)
-
+	
 	return 0
 end
 
@@ -547,7 +547,7 @@ function condition_EVENT_TIME_AXIS_PASS_19070(context, evt)
 	if "WindTimeB" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -557,17 +557,17 @@ function action_EVENT_TIME_AXIS_PASS_19070(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 19054, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 19055 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 19055, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 235847019, 12)
-
+	
 	return 0
 end
 

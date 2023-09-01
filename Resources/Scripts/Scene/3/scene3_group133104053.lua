@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133104053
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	ClueFire = 108,
 	ClueWater = 109,
 	ClueWind = 110,
@@ -16,9 +16,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -111,9 +111,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -124,9 +124,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -178,20 +178,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_79(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"findAllClue"为1
 	if ScriptLib.GetGroupVariableValue(context, "findAllClue") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -202,42 +202,42 @@ function action_EVENT_VARIABLE_CHANGE_79(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为640的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 640 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为641的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 641 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, 116, {171}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_80(context, evt)
 	if evt.param1 ~= 80 then return false end
-
+	
 	-- 判断变量"count"为4
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 4 then
 			return false
 	end
-
+	
 	-- 判断变量"findAllClue"为1
 	if ScriptLib.GetGroupVariableValue(context, "findAllClue") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -255,7 +255,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_81(context, evt)
 	if 116 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -266,49 +266,49 @@ function action_EVENT_GADGET_STATE_CHANGE_81(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 142) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "unlock_dungeon") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 640 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 640, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 639 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 639, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 641 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 641, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 通知场景上的所有玩家播放名字为310405301 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 310405301, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 调用提示id为 31040160 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 31040160) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -317,7 +317,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_302(context, evt)
 	if 639 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -328,25 +328,25 @@ function action_EVENT_GADGET_STATE_CHANGE_302(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "get_reward") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "isAcceptQuest" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isAcceptQuest", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 5001, 3, 2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -357,7 +357,7 @@ function action_EVENT_QUEST_FINISH_303(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -367,7 +367,7 @@ function action_EVENT_QUEST_START_53001(context, evt)
 						if 0 ~= ScriptLib.SetGroupVariableValue(context, "isAcceptQuest", 1) then
 						  return -1
 						end
-
+					
 						ScriptLib.MarkPlayerAction(context, 5001, 1, 1)
 						--刷新到GroupSuite2
 						ScriptLib.RefreshGroup(context,{group_id = 133104053, suite = 2})
@@ -381,7 +381,7 @@ function action_EVENT_QUEST_START_53001(context, evt)
 						ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, defs.ClueWater, {7})
 						ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, defs.ClueThunder, {7})
 						ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, defs.WaterSwitch, {171})
-
+	
 						return 0
 end
 
@@ -391,12 +391,12 @@ function condition_EVENT_GADGET_CREATE_53002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"isAcceptQuest"为1
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -422,12 +422,12 @@ function action_EVENT_GADGET_CREATE_53002(context, evt)
 						ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, evt.param1, {7})
 					end
 					--如果没有击败守卫，
-				elseif 0 == ScriptLib.GetGroupVariableValue(context,"DefeatGurdian") then
+				elseif 0 == ScriptLib.GetGroupVariableValue(context,"DefeatGurdian") then 
 					ScriptLib.SetGadgetStateByConfigId(context, evt.param1,GadgetState.GearStop)
 					ScriptLib.AddExtraGroupSuite(context, 133104053, 3)
-
+		
 				end
-			--如果没有激活守卫
+			--如果没有激活守卫		
 			elseif 0 == ScriptLib.GetGroupVariableValue(context, "ActiveGurdian") then
 				ScriptLib.RemoveExtraGroupSuite(context, 133104053, 3)
 				--查看是否找到了所有线索，给机关添加Option171
@@ -437,11 +437,11 @@ function action_EVENT_GADGET_CREATE_53002(context, evt)
 				end
 			end
 		end
-
+	
 		if 1 == ScriptLib.GetGroupVariableValue(context,"AnyGurdianDie") then
 			ScriptLib.AddQuestProgress(context,"any_gurdian_die")
 		end
-
+		
 		return 0
 end
 
@@ -451,12 +451,12 @@ function condition_EVENT_SELECT_OPTION_53003(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"isAcceptQuest"为1
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -473,7 +473,7 @@ function action_EVENT_SELECT_OPTION_53003(context, evt)
 									ScriptLib.AddQuestProgress(context, "133104053_progress1")
 									ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, evt.param1, {171})
 									ScriptLib.DelWorktopOptionByGroupId(context, 133104053, evt.param1, 7)
-
+									
 									--第一次开启火机关
 								elseif defs.ClueFire == evt.param1 then
 									ScriptLib.ShowReminder(context, 31040103)
@@ -482,7 +482,7 @@ function action_EVENT_SELECT_OPTION_53003(context, evt)
 									ScriptLib.AddQuestProgress(context, "133104053_progress2")
 									ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, evt.param1, {171})
 									ScriptLib.DelWorktopOptionByGroupId(context, 133104053, evt.param1, 7)
-
+					
 									--第一次开启风机关
 								elseif defs.ClueWind == evt.param1 then
 									ScriptLib.ShowReminder(context, 31040101)
@@ -491,7 +491,7 @@ function action_EVENT_SELECT_OPTION_53003(context, evt)
 									ScriptLib.AddQuestProgress(context, "133104053_progress3")
 									ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, evt.param1, {171})
 									ScriptLib.DelWorktopOptionByGroupId(context, 133104053, evt.param1, 7)
-
+					
 									--第一次开启水机关
 								elseif defs.ClueWater == evt.param1 then
 									ScriptLib.ShowReminder(context, 31040102)
@@ -500,7 +500,7 @@ function action_EVENT_SELECT_OPTION_53003(context, evt)
 									ScriptLib.AddQuestProgress(context, "133104053_progress4")
 									ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, evt.param1, {171})
 									ScriptLib.DelWorktopOptionByGroupId(context, 133104053, evt.param1, 7)
-
+					
 								end
 							end
 							--如果选择了调查按钮171，则会反复触发 reminder
@@ -525,7 +525,7 @@ function action_EVENT_SELECT_OPTION_53003(context, evt)
 							if 171 == evt.param2 then
 								if 0 == ScriptLib.GetGroupVariableValue(context, "findAllClue") then
 									ScriptLib.ShowReminder(context, 31040202)
-								else
+								else 
 									if 0 == ScriptLib.GetGroupVariableValue(context,"ActiveGurdian") then
 										ScriptLib.SetGroupVariableValue(context, "ActiveGurdian", 1)
 										ScriptLib.AddQuestProgress(context, "active_gurdian")
@@ -535,7 +535,7 @@ function action_EVENT_SELECT_OPTION_53003(context, evt)
 										-- 开启或者关闭groupid为133104053中,configid为：53012的怪物的ai，set为1是开启，为0是关闭
 										--ScriptLib.SetMonsterAIByGroup(context, 1, defs.GurdianPowerOff, 133104053)
 										-- 通知groupid为133104053中,configid为：53012的怪物入战或者脱战，set为1是入战，为0是脱战
-
+										
 										--解锁configid 为 53012 的怪物的血量
 										ScriptLib.CreateGroupTimerEvent(context, 133104053, "DisableFakeGurdian", 2)
 										ScriptLib.CreateGroupTimerEvent(context, 133104053, "ActiveGurdian", 8)
@@ -545,40 +545,40 @@ function action_EVENT_SELECT_OPTION_53003(context, evt)
 										--ScriptLib.SetMonsterBattleByGroup(context, 1, defs.Gurdian1, 133104053)
 										--ScriptLib.SetMonsterBattleByGroup(context, 1, defs.Gurdian2, 133104053)
 										--ScriptLib.SetMonsterBattleByGroup(context, 1, defs.Gurdian3, 133104053)
-
-
+										
+			
 										ScriptLib.ShowReminder(context, 31040150)
 									end
 								end
-
+	
 							end
-
+	
 							if 7 == evt.param2 then
 								--如果玩家是打败守卫之后开启了机关的话，
 								if 1 == ScriptLib.GetGroupVariableValue(context,"DefeatGurdian") then
 									ScriptLib.SetGadgetStateByConfigId(context, evt.param1,GadgetState.GearStart)
 									ScriptLib.DelWorktopOptionByGroupId(context, 133104053, evt.param1, 7)
 									ScriptLib.MarkPlayerAction(context, 5001, 2, 2)
-
+					
 								end
-
+					
 							end
-
+					
 						end
-
+							
 							return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_53004(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	-- 延迟5秒后,向groupId为：133104053的对象,请求一次调用,并将string参数："playerReminder" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133104053, "playerReminder", 5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -594,7 +594,7 @@ function action_EVENT_TIMER_EVENT_53005(context, evt)
 					elseif loccount == 4 then
 						ScriptLib.ShowReminder(context, 31040131)
 					end
-
+				
 					ScriptLib.CancelGroupTimerEvent(context, 133104053, "playerReminder")
 					return 0
 end
@@ -606,39 +606,39 @@ function action_EVENT_QUEST_FINISH_53006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_53007(context, evt)
 	if evt.param1 ~= 53007 then return false end
-
+	
 	-- 判断变量"count"为4
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 4 then
 			return false
 	end
-
+	
 	-- 判断变量"findAllClue"为1
 	if ScriptLib.GetGroupVariableValue(context, "findAllClue") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_53007(context, evt)
 	--[[ 	if ScriptLib.GetGroupVariableValue(context,"isAcceptQuest") == 0 then
-
+	
 			if ScriptLib.GetGroupVariableValue(context,"Region_Center") == 0 then
 				ScriptLib.SetGroupVariableValue(context, "Region_Center", 1)
-				if ScriptLib.GetGroupVariableValue(context,"noQuestCount") < 5 then
+				if ScriptLib.GetGroupVariableValue(context,"noQuestCount") < 5 then 
 					ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 				end
 			end
 			local loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
-
+	
 			if loccount == 1 then
 				ScriptLib.ShowReminder(context, 31040190)
 			elseif loccount == 2 then
@@ -651,10 +651,10 @@ function action_EVENT_ENTER_REGION_53007(context, evt)
 				ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 				ScriptLib.ShowReminder(context, 31040206)
 			elseif loccount == 6 then
-				ScriptLib.ShowReminder(context, 31040201)
+				ScriptLib.ShowReminder(context, 31040201)				
 			end
-
-
+	
+	
 		elseif ScriptLib.GetGroupVariableValue(context,"isAcceptQuest") == 1 then
 			ScriptLib.ShowReminder(context, 31040202)
 		end
@@ -673,24 +673,24 @@ function action_EVENT_QUEST_START_53008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_53011(context, evt)
 	if evt.param1 ~= 53011 then return false end
-
+	
 	-- 判断变量"isAcceptQuest"为1
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -698,7 +698,7 @@ end
 function action_EVENT_ENTER_REGION_53011(context, evt)
 	--[[ 	if ScriptLib.GetGroupVariableValue(context,"Region_Wind") == 0 then
 							ScriptLib.SetGroupVariableValue(context, "Region_Wind", 1)
-							if ScriptLib.GetGroupVariableValue(context,"noQuestCount") < 5 then
+							if ScriptLib.GetGroupVariableValue(context,"noQuestCount") < 5 then 
 								ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							end
 						end
@@ -715,7 +715,7 @@ function action_EVENT_ENTER_REGION_53011(context, evt)
 							ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							ScriptLib.ShowReminder(context, 31040206)
 						elseif loccount == 6 then
-							ScriptLib.ShowReminder(context, 31040201)
+							ScriptLib.ShowReminder(context, 31040201)				
 						end
 						 ]]
 		ScriptLib.SetGroupVariableValue(context, "Region_Wind", 1)
@@ -728,7 +728,7 @@ function action_EVENT_ENTER_REGION_53011(context, evt)
 		elseif count == 3 then
 			ScriptLib.ShowReminder(context, 31040131)
 		end
-
+		
 		return 0
 end
 
@@ -738,7 +738,7 @@ function condition_EVENT_ANY_MONSTER_DIE_53013(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -748,43 +748,43 @@ function action_EVENT_ANY_MONSTER_DIE_53013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 116, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, 116, {7}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "DefeatGurdian" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "DefeatGurdian", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "defeat_gurdian") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_53014(context, evt)
 	if evt.param1 ~= 53014 then return false end
-
+	
 	-- 判断变量"isAcceptQuest"为1
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -792,12 +792,12 @@ end
 function action_EVENT_ENTER_REGION_53014(context, evt)
 	--[[ 					if ScriptLib.GetGroupVariableValue(context,"Region_Fire") == 0 then
 							ScriptLib.SetGroupVariableValue(context, "Region_Fire", 1)
-							if ScriptLib.GetGroupVariableValue(context,"noQuestCount") < 5 then
+							if ScriptLib.GetGroupVariableValue(context,"noQuestCount") < 5 then 
 								ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							end
 						end
 						local loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
-
+						
 						if loccount == 1 then
 							ScriptLib.ShowReminder(context, 31040190)
 						elseif loccount == 2 then
@@ -810,7 +810,7 @@ function action_EVENT_ENTER_REGION_53014(context, evt)
 							ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							ScriptLib.ShowReminder(context, 31040206)
 						elseif loccount == 6 then
-							ScriptLib.ShowReminder(context, 31040201)
+							ScriptLib.ShowReminder(context, 31040201)				
 						end ]]
 						ScriptLib.SetGroupVariableValue(context, "Region_Fire", 1)
 						if count == 0 then
@@ -822,7 +822,7 @@ function action_EVENT_ENTER_REGION_53014(context, evt)
 						elseif count == 3 then
 							ScriptLib.ShowReminder(context, 31040131)
 						end
-
+			
 						return 0
 end
 
@@ -832,12 +832,12 @@ function condition_EVENT_SELECT_OPTION_53015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"isAcceptQuest"为0
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -881,9 +881,9 @@ function action_EVENT_SELECT_OPTION_53015(context, evt)
 							ScriptLib.SetGroupVariableValue(context,"Temp_GadgetID",evt.param1)
 							ScriptLib.DelWorktopOptionByGroupId(context, 133104053, evt.param1, 171)
 						end
-
+				
 					end
-
+						
 					return 0
 end
 
@@ -893,12 +893,12 @@ function condition_EVENT_GADGET_CREATE_53016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"isFinished"为0
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -909,48 +909,48 @@ function action_EVENT_GADGET_CREATE_53016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, 109, {171}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, 110, {171}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, 111, {171}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, 116, {171}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_53017(context, evt)
 	if evt.param1 ~= 53017 then return false end
-
+	
 	-- 判断变量"isAcceptQuest"为1
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -958,12 +958,12 @@ end
 function action_EVENT_ENTER_REGION_53017(context, evt)
 	--[[ 					if ScriptLib.GetGroupVariableValue(context,"Region_Thunder") == 0 then
 							ScriptLib.SetGroupVariableValue(context, "Region_Thunder", 1)
-							if ScriptLib.GetGroupVariableValue(context,"noQuestCount") < 5 then
+							if ScriptLib.GetGroupVariableValue(context,"noQuestCount") < 5 then 
 								ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							end
 						end
 						local loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
-
+						
 						if loccount == 1 then
 							ScriptLib.ShowReminder(context, 31040190)
 						elseif loccount == 2 then
@@ -976,7 +976,7 @@ function action_EVENT_ENTER_REGION_53017(context, evt)
 							ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							ScriptLib.ShowReminder(context, 31040206)
 						elseif loccount == 6 then
-							ScriptLib.ShowReminder(context, 31040201)
+							ScriptLib.ShowReminder(context, 31040201)				
 						end
 		ScriptLib.AddQuestProgress(context, "thunder_whitout_quest") ]]
 		ScriptLib.SetGroupVariableValue(context, "Region_Thunder", 1)
@@ -989,24 +989,24 @@ function action_EVENT_ENTER_REGION_53017(context, evt)
 		elseif count == 3 then
 			ScriptLib.ShowReminder(context, 31040131)
 		end
-
+			
 						return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_53018(context, evt)
 	if evt.param1 ~= 53018 then return false end
-
+	
 	-- 判断变量"isAcceptQuest"为1
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1014,12 +1014,12 @@ end
 function action_EVENT_ENTER_REGION_53018(context, evt)
 	--[[ 		if ScriptLib.GetGroupVariableValue(context,"Region_Water") == 0 then
 							ScriptLib.SetGroupVariableValue(context, "Region_Water", 1)
-							if ScriptLib.GetGroupVariableValue(context,"noQuestCount") < 5 then
+							if ScriptLib.GetGroupVariableValue(context,"noQuestCount") < 5 then 
 								ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							end
 						end
 						local loccount = ScriptLib.GetGroupVariableValue(context,"noQuestCount")
-
+						
 						if loccount == 1 then
 							ScriptLib.ShowReminder(context, 31040190)
 						elseif loccount == 2 then
@@ -1032,9 +1032,9 @@ function action_EVENT_ENTER_REGION_53018(context, evt)
 							ScriptLib.ChangeGroupVariableValue(context, "noQuestCount", 1)
 							ScriptLib.ShowReminder(context, 31040206)
 						elseif loccount == 6 then
-							ScriptLib.ShowReminder(context, 31040201)
+							ScriptLib.ShowReminder(context, 31040201)				
 						end
-
+			
 						return 0 ]]
 						ScriptLib.SetGroupVariableValue(context, "Region_Water", 1)
 						if count == 0 then
@@ -1046,7 +1046,7 @@ function action_EVENT_ENTER_REGION_53018(context, evt)
 						elseif count == 3 then
 							ScriptLib.ShowReminder(context, 31040131)
 						end
-
+	
 						return 0
 end
 
@@ -1054,19 +1054,19 @@ end
 function action_EVENT_TIMER_EVENT_53022(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104053, 3)
-
+	
 	-- 延迟1秒后,向groupId为：133104053的对象,请求一次调用,并将string参数："SetMonsterBattle" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133104053, "SetMonsterBattle", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133104053, "ActiveGurdian") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1077,25 +1077,25 @@ function action_EVENT_TIMER_EVENT_53023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为133104053中,configid为：53010的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 53010, 133104053) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为133104053中,configid为：53012的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 53012, 133104053) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133104053, "SetMonsterBattle") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1103,13 +1103,13 @@ end
 function action_EVENT_TIMER_EVENT_53024(context, evt)
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133104053, 5)
-
+	
 	-- 取消group中对应名称的TimerEvent
 	if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 133104053, "DisableFakeGurdian") then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1119,12 +1119,12 @@ function condition_EVENT_QUEST_FINISH_53025(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isFinished") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"isAcceptQuest"为0
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1132,7 +1132,7 @@ end
 function action_EVENT_QUEST_FINISH_53025(context, evt)
 	local id = ScriptLib.GetGroupVariableValue(context, "Temp_GadgetID")
 	ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, id, {171})
-
+	
 	return 0
 end
 
@@ -1142,7 +1142,7 @@ function condition_EVENT_GADGET_CREATE_53026(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "Unlock_Water") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1153,7 +1153,7 @@ function action_EVENT_GADGET_CREATE_53026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1173,13 +1173,13 @@ function action_EVENT_ANY_MONSTER_DIE_53027(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "AnyGurdianDie" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "AnyGurdianDie", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1189,7 +1189,7 @@ function action_EVENT_QUEST_START_53028(context, evt)
 						if 0 ~= ScriptLib.SetGroupVariableValue(context, "isAcceptQuest", 1) then
 						  return -1
 						end
-
+					
 						ScriptLib.MarkPlayerAction(context, 5001, 1, 1)
 						--刷新到GroupSuite2
 						ScriptLib.RefreshGroup(context,{group_id = 133104053, suite = 2})
@@ -1203,6 +1203,6 @@ function action_EVENT_QUEST_START_53028(context, evt)
 						ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, defs.ClueWater, {7})
 						ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, defs.ClueThunder, {7})
 						ScriptLib.SetWorktopOptionsByGroupId(context, 133104053, defs.WaterSwitch, {171})
-
+	
 						return 0
 end

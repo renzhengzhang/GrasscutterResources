@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133107915
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -85,9 +85,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -95,15 +95,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_915004(context, evt)
 	if 915001 == evt.param2 and GadgetState.ChestOpened == evt.param1 then
 		return true
 	end
-
+	
 	if 915002 == evt.param2 and GadgetState.ChestOpened == evt.param1 then
 		return true
 	end
-
+	
 	if 915003 ==  evt.param2 and GadgetState.ChestOpened == evt.param1 then
 		return true
 	end
-
+	
 	return false
 end
 
@@ -114,7 +114,7 @@ function action_EVENT_GADGET_STATE_CHANGE_915004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -123,7 +123,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_915005(context, evt)
 	if 915001 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -134,7 +134,7 @@ function action_EVENT_GADGET_STATE_CHANGE_915005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -143,7 +143,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_915006(context, evt)
 	if 915002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -154,7 +154,7 @@ function action_EVENT_GADGET_STATE_CHANGE_915006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -163,7 +163,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_915007(context, evt)
 	if 915003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -174,17 +174,17 @@ function action_EVENT_GADGET_STATE_CHANGE_915007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_915008(context, evt)
-	-- 判断指定group组剩余gadget数量是否是0
+	-- 判断指定group组剩余gadget数量是否是0 
 	if ScriptLib.CheckRemainGadgetCountByGroupId(context, {group_id = 133107915}) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -195,7 +195,7 @@ function action_EVENT_GADGET_STATE_CHANGE_915008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -206,6 +206,6 @@ function action_EVENT_TIMER_EVENT_915009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

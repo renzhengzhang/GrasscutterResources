@@ -1,5 +1,5 @@
 --[[
-defs = {
+local defs = {
 	box_gadget_id = 1,
 	point_array_id = 1,
 	option_id = 1,
@@ -125,7 +125,7 @@ function LF_Get_Push_Direction(context, avatar, target)
 				_direct = "left"
 			else _direct = "right"
 			end
-		end
+		end  
 	end
 	ScriptLib.PrintContextLog(context, "## BoxPusher : LF_Get_Entity_Pos | _direct = ".._direct)
 	return _direct

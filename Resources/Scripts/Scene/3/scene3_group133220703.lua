@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220703
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 
         group_id = 133220703,
 
@@ -35,9 +35,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -95,9 +95,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -108,9 +108,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -153,19 +153,19 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_703019(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220703, 2)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220703, 3)
-
+	
 	return 0
 end
 
@@ -175,7 +175,7 @@ function condition_EVENT_ANY_MONSTER_DIE_703020(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -183,25 +183,25 @@ end
 function action_EVENT_ANY_MONSTER_DIE_703020(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220703, 4)
-
+	
 	-- 调用提示id为 400004 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 400004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_703023(context, evt)
 	if evt.param1 ~= 703023 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -212,7 +212,7 @@ function action_EVENT_ENTER_REGION_703023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -220,34 +220,34 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_703024(context, evt)
 	--战斗营地对话处理
 	if ScriptLib.GetGroupVariableValueByGroup(context, "Endflag_battle",133220703) ~= 0 then
-
-
+	
+	
 		-- 调用提示id为 400021 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 		if 0 ~= ScriptLib.ShowReminder(context, 32210109) then
 		  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 			return -1
 		end
-
-
+	
+	
 		ScriptLib.PrintContextLog(context, "先完成了潜行营地 播放两段对话")
-
+	
 	else
-
+	
 		-- 调用提示id为 400021 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 		if 0 ~= ScriptLib.ShowReminder(context, 32210106) then
 		  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 			return -1
 		end
-
+	
 		ScriptLib.PrintContextLog(context, "尚未完成潜行营地 只播第一段对话")
-
+	
 		if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Endflag_slip", 1, 133221068) then
 	    	ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	    	return -1
 		end
-
+	
 	end
-
+	
 	return 0
 end
 
@@ -257,7 +257,7 @@ function condition_EVENT_ANY_MONSTER_DIE_703025(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -268,7 +268,7 @@ function action_EVENT_ANY_MONSTER_DIE_703025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 

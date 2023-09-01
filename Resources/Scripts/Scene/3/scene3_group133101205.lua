@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133101205
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	duration = 30,
 	kill_sum = 1,
 	group_id = 133101205,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -61,9 +61,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -74,9 +74,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -167,9 +167,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -179,7 +179,7 @@ function action_EVENT_CHALLENGE_SUCCESS_205005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -190,7 +190,7 @@ function action_EVENT_CHALLENGE_FAIL_205006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_GADGET_CREATE_205007(context, evt)
 	if 205003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -210,7 +210,7 @@ function action_EVENT_GADGET_CREATE_205007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -218,14 +218,14 @@ end
 function condition_EVENT_SELECT_OPTION_205008(context, evt)
 	-- 判断是gadgetid 205003 option_id 177
 	if 205003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 177 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -236,16 +236,16 @@ function action_EVENT_SELECT_OPTION_205008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133101205, 2)
-
+	
 	-- 删除指定group： 133101205 ；指定config：205003；物件身上指定option：177；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133101205, 205003, 177) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -254,7 +254,7 @@ function condition_EVENT_GADGET_CREATE_205013(context, evt)
 	if 205003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -265,10 +265,10 @@ function action_EVENT_GADGET_CREATE_205013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133101205, 2)
-
+	
 	return 0
 end
 
@@ -278,8 +278,8 @@ function action_EVENT_ENTER_REGION_205014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 205002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -288,7 +288,7 @@ function condition_EVENT_GADGET_CREATE_205015(context, evt)
 	if 205012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -299,15 +299,15 @@ function action_EVENT_GADGET_CREATE_205015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 205002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -316,7 +316,7 @@ function condition_EVENT_GADGET_CREATE_205016(context, evt)
 	if 205004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -326,8 +326,8 @@ function action_EVENT_GADGET_CREATE_205016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 205004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -338,7 +338,7 @@ function action_EVENT_GROUP_LOAD_205017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -347,7 +347,7 @@ function condition_EVENT_GADGET_CREATE_205018(context, evt)
 	if 205010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -358,14 +358,14 @@ function action_EVENT_GADGET_CREATE_205018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 205002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end

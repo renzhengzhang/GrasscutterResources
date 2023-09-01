@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235881001
 }
 
 -- DEFS_MISCS
-defs =
+local defs =
 {
 --操作台id
     starter_gadget = 1001,
 --gallery id
     gallery_id = 35002,
---传送点 id
+--传送点 id 
     teleportPos_id = 1005,
-    groups_info =
+    groups_info = 
     {
        --主控group 怪物数量不用管
         [1] = {id = 235881001, monster_num = 0,},
@@ -26,9 +26,9 @@ defs =
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -72,9 +72,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -85,9 +85,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -103,25 +103,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"GALLERY_STATE"为1
 	if ScriptLib.GetGroupVariableValue(context, "GALLERY_STATE") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"GROUP_INDEX"为2
 	if ScriptLib.GetGroupVariableValue(context, "GROUP_INDEX") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -129,28 +129,28 @@ end
 function action_EVENT_VARIABLE_CHANGE_1002(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235881002, 3)
-
+	
 	-- 创建标识为"timer_init"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_init", {1}, false)
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"GALLERY_STATE"为1
 	if ScriptLib.GetGroupVariableValue(context, "GALLERY_STATE") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"GROUP_INDEX"为3
 	if ScriptLib.GetGroupVariableValue(context, "GROUP_INDEX") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -158,28 +158,28 @@ end
 function action_EVENT_VARIABLE_CHANGE_1003(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235881003, 3)
-
+	
 	-- 创建标识为"timer_init"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_init", {1}, false)
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"GALLERY_STATE"为1
 	if ScriptLib.GetGroupVariableValue(context, "GALLERY_STATE") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"GROUP_INDEX"为4
 	if ScriptLib.GetGroupVariableValue(context, "GROUP_INDEX") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -187,11 +187,11 @@ end
 function action_EVENT_VARIABLE_CHANGE_1004(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 235881004, 3)
-
+	
 	-- 创建标识为"timer_init"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "timer_init", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -200,20 +200,20 @@ function condition_EVENT_TIME_AXIS_PASS_1006(context, evt)
 	if "timer_init" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_1006(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer_init")
-
+	
 	local uid = ScriptLib.GetSceneUidList(context)
-
+	
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "_IN_HIGH_TIDE_V3.4", 1)
-
+	
 	ScriptLib.InitTimeAxis(context, "timer2_reminder", {8.8}, false)
-
+	
 	return 0
 end
 
@@ -222,18 +222,18 @@ function condition_EVENT_TIME_AXIS_PASS_1007(context, evt)
 	if "timer2_reminder" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_1007(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer2_reminder")
-
+	
 	ScriptLib.ShowReminder(context, 337200101)
-
+	
 	ScriptLib.InitTimeAxis(context, "timer2_gv", {0.8}, false)
-
+	
 	return 0
 end
 
@@ -242,20 +242,20 @@ function condition_EVENT_TIME_AXIS_PASS_1008(context, evt)
 	if "timer2_gv" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_1008(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer2_gv")
-
+	
 	local uid = ScriptLib.GetSceneUidList(context)
-
+	
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "_IN_HIGH_TIDE_V3.4", -1)
-
+	
 	ScriptLib.InitTimeAxis(context, "timer1_reminder", {8.8}, false)
-
+	
 	return 0
 end
 
@@ -264,18 +264,18 @@ function condition_EVENT_TIME_AXIS_PASS_1009(context, evt)
 	if "timer1_reminder" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_1009(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer1_reminder")
-
+	
 	ScriptLib.ShowReminder(context, 337200102)
-
+	
 	ScriptLib.InitTimeAxis(context, "timer1_gv", {0.8}, false)
-
+	
 	return 0
 end
 
@@ -284,32 +284,32 @@ function condition_EVENT_TIME_AXIS_PASS_1010(context, evt)
 	if "timer1_gv" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_1010(context, evt)
 	ScriptLib.EndTimeAxis(context, "timer1_gv")
-
+	
 	local uid = ScriptLib.GetSceneUidList(context)
-
+	
 	ScriptLib.AddTeamEntityGlobalFloatValue(context, uid, "_IN_HIGH_TIDE_V3.4", 1)
-
+	
 	ScriptLib.InitTimeAxis(context, "timer2_reminder", {8.8}, false)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"GALLERY_STATE"为2
 	if ScriptLib.GetGroupVariableValue(context, "GALLERY_STATE") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -317,24 +317,24 @@ end
 function action_EVENT_VARIABLE_CHANGE_1011(context, evt)
 	-- 停止标识为"timer_init"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer_init")
-
-
+	
+	
 	-- 停止标识为"timer2_reminder"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer2_reminder")
-
-
+	
+	
 	-- 停止标识为"timer2_gv"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer2_gv")
-
-
+	
+	
 	-- 停止标识为"timer1_reminder"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer1_reminder")
-
-
+	
+	
 	-- 停止标识为"timer1_gv"的时间轴
 	ScriptLib.EndTimeAxis(context, "timer1_gv")
-
-
+	
+	
 	return 0
 end
 

@@ -9,7 +9,7 @@
 --需求defs
 --[[
 
-defs = {
+local defs = {
 	pointarray = 110100071,
 	pointcount = 13,
 	Start_Operator = 332001,
@@ -64,16 +64,16 @@ function action_EVENT_SELECT_OPTION(context,evt)
         return -1
     end
     --开始
-    if evt.param1 == defs.Start_Operator then
+    if evt.param1 == defs.Start_Operator then 
         ScriptLib.PrintContextLog(context,"## RollerCoaster action_EVENT_SELECT_OPTION：Start_Operator")
-        for i = 1 ,defs.pointcount do
+        for i = 1 ,defs.pointcount do 
             table.insert(_list,i)
         end
         ScriptLib.PrintContextLog(context,"## RollerCoaster action_EVENT_SELECT_OPTION:#_list = "..#_list)
         ScriptLib.MoveAvatarByPointArray(context,evt.uid,defs.pointarray, _list,{speed = defs.speed }, "{\"MarkType\":1,\"IgnoreCollisionWhenEnter\":true}")
     else
         ScriptLib.PrintContextLog(context,"## RollerCoaster action_EVENT_SELECT_OPTION：End_Operator")
-        for i = 1 ,defs.pointcount do
+        for i = 1 ,defs.pointcount do 
             table.insert(_list,defs.pointcount + 1 - i)
         end
         ScriptLib.PrintContextLog(context,"## RollerCoaster action_EVENT_SELECT_OPTION:#_list = "..#_list)
@@ -84,7 +84,7 @@ end
 --初始化
 function Initialize()
 	--加触发器
-    if temp_Tirgger ~= nil then
+    if temp_Tirgger ~= nil then 
         for k,v in pairs(temp_Tirgger) do
             v.name = v.action
             v.config_id = 40000000 + k
@@ -95,7 +95,7 @@ function Initialize()
         end
     end
 	--加变量
-    if temp_Variables ~= nil then
+    if temp_Variables ~= nil then 
         for k,v in pairs(temp_Variables) do
             v.config_id = 50000000 + k
             table.insert(variables,v)

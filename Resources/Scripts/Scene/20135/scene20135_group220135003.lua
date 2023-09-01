@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220135003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -85,9 +85,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -98,9 +98,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -134,23 +134,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_3011(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "room1") == 0 or ScriptLib.GetGroupVariableValue(context, "room3") == 1 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "room1") == 1 or ScriptLib.GetGroupVariableValue(context, "room4") == 0 or ScriptLib.GetGroupVariableValue(context, "room5") == 0 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
 	end
-
+	
 	return 0
 end
 
@@ -159,54 +159,54 @@ function action_EVENT_GROUP_LOAD_3012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "room1") == 0 or ScriptLib.GetGroupVariableValue(context, "room3") == 1 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 2)
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "room1") == 1 or ScriptLib.GetGroupVariableValue(context, "room4") == 0 or ScriptLib.GetGroupVariableValue(context, "room5") == 0 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 3)
 	end
-
+	
 	ScriptLib.SetGroupVariableValue(context, "reminder1", 0)
-
+	
 	ScriptLib.SetGroupVariableValue(context, "reminder2", 0)
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_3013(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "room1") == 1 and ScriptLib.GetGroupVariableValue(context, "room3") == 0 then
 		ScriptLib.RemoveExtraGroupSuite(context, 220135003, 2)
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_3014(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "room1") == 0 and ScriptLib.GetGroupVariableValue(context, "room4") == 1 and ScriptLib.GetGroupVariableValue(context, "room5") == 1 then
 		ScriptLib.RemoveExtraGroupSuite(context, 220135003, 3)
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3018(context, evt)
 	if evt.param1 ~= 3018 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"reminder1"为0
 	if ScriptLib.GetGroupVariableValue(context, "reminder1") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -217,25 +217,25 @@ function action_EVENT_ENTER_REGION_3018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 201350105 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 201350105) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3019(context, evt)
 	if evt.param1 ~= 3019 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -246,24 +246,24 @@ function action_EVENT_ENTER_REGION_3019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3020(context, evt)
 	if evt.param1 ~= 3020 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"reminder2"为0
 	if ScriptLib.GetGroupVariableValue(context, "reminder2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -274,25 +274,25 @@ function action_EVENT_ENTER_REGION_3020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 201350105 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 201350105) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3021(context, evt)
 	if evt.param1 ~= 3021 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -303,28 +303,28 @@ function action_EVENT_ENTER_REGION_3021(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_3022(context, evt)
 	if evt.param1 ~= 3022 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+			
 	-- 判断变量"turn"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "turn", 220135002) ~= 1 then
 		return false
 	end
-
+			
 	if ScriptLib.CheckSceneTag(context, 20135, 1073) ~= true then
 		return false
 	end
-
+	
 	return true
 end
 

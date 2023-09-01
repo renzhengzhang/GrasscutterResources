@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220037004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -110,20 +110,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_4001(context, evt)
 	if evt.param1 ~= 4001 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -131,50 +131,50 @@ end
 function action_EVENT_ENTER_REGION_4001(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220037004, 2)
-
+	
 	-- 改变指定group组220037002中， configid为2002的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2002, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220037002中， configid为2003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220037002中， configid为2004的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2004, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220037002中， configid为2005的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2005, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=295,y=42,z=3}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110176, pos, 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "1012213") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 改变指定group组220037009中， configid为9003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037009, 9003, GadgetState.Default) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -184,7 +184,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_4005(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 70 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -192,33 +192,33 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_4005(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220037004, 3)
-
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=285,y=42,z=1.27}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110176, pos, 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 将configid为 4011 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 改变指定group组220037009中， configid为9003的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037009, 9003, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=284,y=42,z=3}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 200370201, pos, 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_4006(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 30 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -236,20 +236,20 @@ end
 function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_4006(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220037004, 4)
-
+	
 	-- 在指定位置对应半径范围播放reminder
 	local pos = {x=285,y=42,z=1.27}
 	if 0 ~= ScriptLib.ShowReminderRadius(context, 1110176, pos, 20) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui_bypos")
 		return -1
 	end
-
+	
 	-- 将configid为 4009 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -261,45 +261,45 @@ function action_EVENT_TIMER_EVENT_4007(context, evt)
 			ScriptLib.PrintContextLog(context, "@@LUA_WARNING : create_timerevent_by_group")
 			return -1
 		end
-
+	
 	else
-
+		
 			-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 			if 0 ~= ScriptLib.AddQuestProgress(context, "1012202") then
 				ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 				  return -1
 			end
-
+		
 			-- 改变指定group组220037002中， configid为2002的gadget的state
 				if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2002, GadgetState.GearStart) then
 				ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 					return -1
-				end
-
+				end 
+			
 			-- 改变指定group组220037002中， configid为2003的gadget的state
 				if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2003, GadgetState.GearStart) then
 				ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 					return -1
-				end
-
+				end 
+			
 			-- 改变指定group组220037002中， configid为2004的gadget的state
 				if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2004, GadgetState.GearStart) then
 				ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 					return -1
-				end
-
+				end 
+			
 			-- 改变指定group组220037002中， configid为2005的gadget的state
 				if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2005, GadgetState.GearStart) then
 				ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 					return -1
-				end
-
+				end 
+	
 				if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220037004, "CheckAvatarDie1") then
 					ScriptLib.PrintContextLog(context, "@@LUA_WARNING:cancel_timerevent_by_group")
 					return -1
 				end
 	end
-
+	
 	return 0
 end
 
@@ -309,7 +309,7 @@ function condition_EVENT_ANY_MONSTER_DIE_4008(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -320,7 +320,7 @@ function action_EVENT_ANY_MONSTER_DIE_4008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -332,44 +332,44 @@ function action_EVENT_TIMER_EVENT_4013(context, evt)
 			ScriptLib.PrintContextLog(context, "@@LUA_WARNING : create_timerevent_by_group")
 			return -1
 		end
-
+	
 	else
-
+		
 			-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 			if 0 ~= ScriptLib.AddQuestProgress(context, "1012202") then
 				ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 				  return -1
 			end
-
+		
 			-- 改变指定group组220037002中， configid为2002的gadget的state
 				if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2002, GadgetState.GearStart) then
 				ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 					return -1
-				end
-
+				end 
+			
 			-- 改变指定group组220037002中， configid为2003的gadget的state
 				if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2003, GadgetState.GearStart) then
 				ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 					return -1
-				end
-
+				end 
+			
 			-- 改变指定group组220037002中， configid为2004的gadget的state
 				if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2004, GadgetState.GearStart) then
 				ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 					return -1
-				end
-
+				end 
+			
 			-- 改变指定group组220037002中， configid为2005的gadget的state
 				if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220037002, 2005, GadgetState.GearStart) then
 				ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 					return -1
-				end
-
+				end 
+	
 				if 0 ~= ScriptLib.CancelGroupTimerEvent(context, 220037004, "CheckAvatarDie0") then
 					ScriptLib.PrintContextLog(context, "@@LUA_WARNING:cancel_timerevent_by_group")
 					return -1
 				end
 	end
-
+	
 	return 0
 end

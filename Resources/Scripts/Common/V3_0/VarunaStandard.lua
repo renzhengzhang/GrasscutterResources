@@ -3,11 +3,11 @@
 ||  owner:      shuyi.chang
 ||  description:    回流之柱被控制组
 ||  LogName:    ## [VarunaStandard]
-||  Protection:
+||  Protection: 
 =======================================]]
 
 --[[
-defs =
+local defs = 
 {
     -- 钓鱼点
     fishingPoint = {
@@ -16,20 +16,20 @@ defs =
     },
 
     -- 升降水面，应该只有一项
-	rootWaterTable =
+	rootWaterTable = 
 	{
         [188001] = 330300001,
 	},
 }
 --]]
 
-local extraTriggers =
+local extraTriggers = 
 {
 	{ config_id = 50000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
 	{ config_id = 50000002, name = "PLATFORM_ARRIVAL", event = EventType.EVENT_PLATFORM_ARRIVAL, source = "", condition = "", action = "action_EVENT_PLATFORM_ARRIVAL", trigger_count = 0 },
 }
 
-local extraVariables =
+local extraVariables = 
 {
 
 }
@@ -93,7 +93,7 @@ function LF_Initialize_Group(triggers, suites, variables, gadgets, regions)
         if v.gadget_id == fishingGadgetId then
             table.insert(fishPoints, v.config_id)
         end
-
+        
     end
 end
 
@@ -173,7 +173,7 @@ function LF_DelFishingPoint(context, weatherState)
         -- 存在但没在移动，只干掉不需要的那个钓鱼点（这个不需要的钓鱼点其实也应该已经不在了）
         ScriptLib.RemoveExtraGroupSuite(context, fishGroupId, suite)
         ScriptLib.PrintContextLog(context, "## [VarunaStandard] del fish point "..suite)
-    else
+    else 
         ScriptLib.RemoveExtraGroupSuite(context, fishGroupId, defs.fishingPoint.top)
         ScriptLib.RemoveExtraGroupSuite(context, fishGroupId, defs.fishingPoint.bottom)
         ScriptLib.PrintContextLog(context, "## [VarunaStandard] del all fish points cuz water doesn't exist")
@@ -197,7 +197,7 @@ function LF_SetRootAndBubbleState_Local(context, weatherState)
 
     if #fishPoints ~= 0 then
         LF_DelFishingPoint(context, weatherState)
-    end
+    end    
     return 0
 end
 
@@ -248,7 +248,7 @@ function LF_SetWaterState(context, weatherState)
             -- 水面上升和下降
             ScriptLib.SetPlatformPointArray(context, k, v, {pointId}, { route_type = 0 })
             ScriptLib.PrintContextLog(context, "## [VarunaStandard] water "..k.." is moving, pointId = "..pointId)
-
+    
             ScriptLib.SetGroupVariableValueByGroup(context, "waterStatus", 2, 133303188)
         end
     end

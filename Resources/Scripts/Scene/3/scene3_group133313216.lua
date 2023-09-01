@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133313216
 }
 
@@ -10,53 +10,45 @@ local fans =
     216001,
     216002
 }
-
---沙堆
+--沙堆
 local sandpiles =
 {
     216003,
     216004
 }
-
---百叶窗
+--百叶窗
 local shutters =
 {
 
 }
-
-
---百叶窗开关
+--百叶窗开关
 local shutter_switches =
 {
 
 }
 
-
---移动点阵
+--移动点阵
 local FanToPointArray =
 {
 }
 
-
---风扇与沙堆映射
+--风扇与沙堆映射
 local FanToSandpile =
 {
     [sandpiles[1]] = {fan = fans[1], dir_state = 203, pos = 1},
     [sandpiles[2]] = {fan = fans[2], dir_state = 204, pos = 1},
 }
 
-
-
---百叶窗与开关映射
+--百叶窗与开关映射
 local SwitchToShutter =
 {
 
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -93,9 +85,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -106,9 +98,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -124,9 +116,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -134,7 +126,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_216005(context, evt)
 	if 216003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -144,8 +136,8 @@ function action_EVENT_GADGET_STATE_CHANGE_216005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 216002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -154,7 +146,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_216006(context, evt)
 	if 216004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -165,7 +157,7 @@ function action_EVENT_GADGET_STATE_CHANGE_216006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -174,7 +166,7 @@ function condition_EVENT_GROUP_LOAD_216007(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133313216, 216004) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -185,7 +177,7 @@ function action_EVENT_GROUP_LOAD_216007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 

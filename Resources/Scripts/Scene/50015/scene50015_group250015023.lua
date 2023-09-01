@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250015023
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -104,9 +104,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -115,7 +115,7 @@ function condition_EVENT_ANY_MONSTER_DIE_23008(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -123,13 +123,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_23008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015023, 2)
-
+	
 	-- 调用提示id为 200050203 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 200050203) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -138,7 +138,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_23024(context, evt)
 	if 23019 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -149,7 +149,7 @@ function action_EVENT_GADGET_STATE_CHANGE_23024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -158,7 +158,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_23028(context, evt)
 	if 23020 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -169,7 +169,7 @@ function action_EVENT_GADGET_STATE_CHANGE_23028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -178,52 +178,52 @@ function condition_EVENT_GADGET_STATE_CHANGE_23029(context, evt)
 	if 23019 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_23029(context, evt)
 	-- 将本组内变量名为 "t23019" 的变量设置为 1
-	if 0 ~= ScriptLib.SetGroupVariableValue(context, "t23019", 1)
+	if 0 ~= ScriptLib.SetGroupVariableValue(context, "t23019", 1) 
 	then
 	return -1
 	end
-
-
-	if ScriptLib.GetGroupVariableValue(context, "ison") == 0
+	
+	
+	if ScriptLib.GetGroupVariableValue(context, "ison") == 0 
 	then
-		if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250015023, "stop23019", 5)
+		if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250015023, "stop23019", 5) 
 		then
 		return -1
 		end
 	end
-
-
-	if ScriptLib.GetGroupVariableValue(context, "t23019") + ScriptLib.GetGroupVariableValue(context, "t23020") == 2
+	
+	
+	if ScriptLib.GetGroupVariableValue(context, "t23019") + ScriptLib.GetGroupVariableValue(context, "t23020") == 2 
 	then
-
-		if ScriptLib.GetGroupVariableValue(context, "ison") == 0
+		
+		if ScriptLib.GetGroupVariableValue(context, "ison") == 0 
 		then
 			if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 23016,GadgetState.GearStart) then
 			return -1
 			end
-
+	
 			if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 23021,GadgetState.GearStart) then
 			return -1
 			end
-
-
-			if 0 ~= ScriptLib.SetGroupVariableValue(context, "ison", 1)
+	
+		
+			if 0 ~= ScriptLib.SetGroupVariableValue(context, "ison", 1) 
 			then
 		  	return -1
 			end
-
+		
 		end
-
+		
 	end
-
-
+		
+	
 	return 0
 end
 
@@ -232,7 +232,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_23030(context, evt)
 	if 23020 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -242,39 +242,39 @@ function action_EVENT_GADGET_STATE_CHANGE_23030(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "t23020", 1) then
 	  return -1
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "ison") == 0 then
 		if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 250015023, "stop23020", 5) then
 		  return -1
 		end
 	end
-
-
-
-	if ScriptLib.GetGroupVariableValue(context, "t23019") + ScriptLib.GetGroupVariableValue(context, "t23020") == 2
+		
+	
+	
+	if ScriptLib.GetGroupVariableValue(context, "t23019") + ScriptLib.GetGroupVariableValue(context, "t23020") == 2 
 	then
-
-		if ScriptLib.GetGroupVariableValue(context, "ison") == 0
+		
+		if ScriptLib.GetGroupVariableValue(context, "ison") == 0 
 		then
 			if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 23016,GadgetState.GearStart) then
 			return -1
 			end
-
+	
 			if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 23021,GadgetState.GearStart) then
 			return -1
 			end
-
-
-			if 0 ~= ScriptLib.SetGroupVariableValue(context, "ison", 1)
+	
+		
+			if 0 ~= ScriptLib.SetGroupVariableValue(context, "ison", 1) 
 			then
 		  	return -1
 			end
-
+		
 		end
-
+		
 	end
-
-
+		
+	
 	return 0
 end
 
@@ -284,7 +284,7 @@ function condition_EVENT_TIMER_EVENT_23031(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "ison") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -294,14 +294,14 @@ function action_EVENT_TIMER_EVENT_23031(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 23019, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 调用提示id为 1110033 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110033) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -311,7 +311,7 @@ function condition_EVENT_TIMER_EVENT_23032(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "ison") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -321,13 +321,13 @@ function action_EVENT_TIMER_EVENT_23032(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 23020, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 调用提示id为 1110033 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110033) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

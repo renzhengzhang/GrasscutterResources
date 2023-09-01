@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199004026
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -94,9 +94,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -106,7 +106,7 @@ function action_EVENT_ENTER_REGION_26001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -114,8 +114,8 @@ end
 function action_EVENT_QUEST_START_26002(context, evt)
 	-- 创建标识为"temp"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "temp", {2}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -123,19 +123,19 @@ end
 function action_EVENT_QUEST_START_26004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199004026, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_26005(context, evt)
 	if evt.param1 ~= 26005 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -143,8 +143,8 @@ end
 function action_EVENT_ENTER_REGION_26005(context, evt)
 	-- 创建标识为"temp3"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "temp3", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -152,8 +152,8 @@ end
 function action_EVENT_QUEST_FINISH_26006(context, evt)
 	-- 创建标识为"temp2"，时间节点为{2}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "temp2", {2}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -162,7 +162,7 @@ function condition_EVENT_TIME_AXIS_PASS_26007(context, evt)
 	if "temp" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -173,7 +173,7 @@ function action_EVENT_TIME_AXIS_PASS_26007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -182,7 +182,7 @@ function condition_EVENT_TIME_AXIS_PASS_26008(context, evt)
 	if "temp2" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -193,7 +193,7 @@ function action_EVENT_TIME_AXIS_PASS_26008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -202,7 +202,7 @@ function condition_EVENT_TIME_AXIS_PASS_26009(context, evt)
 	if "temp3" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -213,6 +213,6 @@ function action_EVENT_TIME_AXIS_PASS_26009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

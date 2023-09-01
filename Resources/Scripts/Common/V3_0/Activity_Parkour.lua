@@ -7,7 +7,7 @@
 =======================================]]
 
 --[[
-defs = {
+local defs = {
 
 	gallery_id = ,
 
@@ -42,7 +42,7 @@ local global =
     total_coin_count = 0,
 }
 
-local triggers_start =
+local triggers_start = 
 {
 	--测试用
 	--{ config_id = 8000000, name = "Test_GM",  event = EventType.EVENT_VARIABLE_CHANGE, source = "testGM", condition = "", action = "", trigger_count = 0, tag = "100"},
@@ -61,7 +61,7 @@ local triggers_start =
     { config_id = 40000008, name = "Enter_Tutorial_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_TutorialRegion", trigger_count = 0 },
 }
 
-local triggers_end =
+local triggers_end = 
 {
  	--终点的trigger
     { config_id = 40000009, name = "Enter_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_enter_final", action = "", trigger_count = 0, tag = "666" },
@@ -112,7 +112,7 @@ end
 function LF_Calculate_Coin_Num()
     local sum = 0
     for _, gadgetInfo in pairs(gadgets) do
-        if gadgetInfo.gadget_id == 70220121 then
+        if gadgetInfo.gadget_id == 70220121 then 
             sum = sum + 1
         end
     end
@@ -124,20 +124,20 @@ function LF_InitChallenge(context)
 	--挑战状态标记
 	ScriptLib.SetGroupTempValue(context, "challenge_state", 1, {})
 
-	-- 开父挑战再Attach保序
+	-- 开父挑战再Attach保序 
 	ScriptLib.CreateFatherChallenge(context, 1, global.father_challengeID, defs.challenge_time, {success = 10, fail = 5})
-	if 0 == ScriptLib.StartFatherChallenge(context, 1) then
+	if 0 == ScriptLib.StartFatherChallenge(context, 1) then 
         --PrintLog(context, "开启父挑战成功")
-    else
+    else 
         PrintLog(context, "开启父挑战失败")
     end
     -- param table：param1-event类型, param2-Tag, param3:次数, param4:达到次数是否success
-    -- 限时到达
-	if 0 ~= ScriptLib.AttachChildChallenge(context, 1, 101, 2010051, {4, 666, 1, 1}, {}, {success = 10, fail = 5}) then
+    -- 限时到达	
+	if 0 ~= ScriptLib.AttachChildChallenge(context, 1, 101, 2010051, {4, 666, 1, 1}, {}, {success = 10, fail = 5}) then 
         PrintLog(context, "子挑战2010051添加失败")
     end
     -- 收集金币
-	if 0 ~= ScriptLib.AttachChildChallenge(context, 1, 102, 2010052, {3, 888, 999}, {}, {success = 0, fail = 0}) then
+	if 0 ~= ScriptLib.AttachChildChallenge(context, 1, 102, 2010052, {3, 888, 999}, {}, {success = 0, fail = 0}) then 
         PrintLog(context, "子挑战2010052添加失败")
     end
 
@@ -150,7 +150,7 @@ function LF_Try_StartTutorial(context)
 
     if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,192,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
         PrintLog(context, "弹教程失败")
-    else
+    else 
         PrintLog(context, "弹教程成功")
     end
 
@@ -172,7 +172,7 @@ end
 function LF_RevertVisionType(context)
 	local uidList = ScriptLib.GetSceneUidList(context)
 	for k, v in pairs(uidList) do
-        if 0 == ScriptLib.RevertPlayerRegionVision(context, v) then
+        if 0 == ScriptLib.RevertPlayerRegionVision(context, v) then 
             PrintLog(context, "Revert Vision成功"..v)
         end
         if 0 ~= ScriptLib.SetPlayerGroupVisionType(context, {v}, {1}) then
@@ -184,7 +184,7 @@ end
 
 function CameraAction(context)
 
-	if defs.look_pos and defs.duration then
+	if defs.look_pos and defs.duration then 
 
 		--触发镜头注目，强制注目形式，不广播其他玩家
 		local pos_follow = {x=0, y=0, z=0}
@@ -199,7 +199,7 @@ function CameraAction(context)
 end
 
 function LF_Reset_Level(context)
-
+    
     --重置变量
     ScriptLib.SetGroupVariableValue(context, "coin_counter", 0)
     ScriptLib.SetGroupTempValue(context, "challenge_state", 0, {})
@@ -247,9 +247,9 @@ end
 
 function action_enter_TutorialRegion(context, evt)
 
-	if defs.guide_regionID == nil then
+	if defs.guide_regionID == nil then 
 		return 0
-	elseif evt.param1 == defs.guide_regionID then
+	elseif evt.param1 == defs.guide_regionID then 
 		LF_Try_StartTutorial(context)
 	end
 	return 0
@@ -258,14 +258,14 @@ end
 function action_gadget_create(context, evt)
 
     if defs.starter_gadget ~= evt.param1 then
-		return -1
+		return -1	
 	end
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, defs.starter_gadget, {175}) then
         PrintLog(context, "设置操作台选项失败")
         return -1
     end
-
+	
 	return 0
 end
 
@@ -282,7 +282,7 @@ end
 function action_select_option(context, evt)
 	--检查SelectOption
 	if defs.starter_gadget ~= evt.param1 or 175 ~= evt.param2 then
-		return -1
+		return -1	
 	end
 	--检查是否单机
 	if true == ScriptLib.CheckIsInMpMode(context) then
@@ -293,7 +293,7 @@ function action_select_option(context, evt)
 			end
 		end
         -- 400053:多人游戏状态下无法进行挑战
-		ScriptLib.ShowReminderRadius(context, 400053, center, 2)
+		ScriptLib.ShowReminderRadius(context, 400053, center, 2) 
 		return -1
 	end
 
@@ -301,13 +301,13 @@ function action_select_option(context, evt)
 	ScriptLib.SetGroupTempValue(context, "is_in_region", 0, {})
 
 	--切操作台状态
-	ScriptLib.SetGadgetStateByConfigId(context, defs.starter_gadget, GadgetState.GearStart)
+	ScriptLib.SetGadgetStateByConfigId(context, defs.starter_gadget, GadgetState.GearStart) 
 	--去掉操作台SelectOption
-	ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, defs.starter_gadget, 175)
+	ScriptLib.DelWorktopOptionByGroupId(context, base_info.group_id, defs.starter_gadget, 175) 
 
 	--加载第一波suite
 	for k, v in pairs(defs.load_on_start) do
-		if 0 == ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v) then
+		if 0 == ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v) then 
             PrintLog(context, "加载suite"..v)
         end
 	end
@@ -318,16 +318,16 @@ function action_select_option(context, evt)
 
     -- VISION TYPE
     ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {0})
-	-- if base_info.group_id == 133008671 then
+	-- if base_info.group_id == 133008671 then 
 	-- 	ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {0,3})
     -- end
 
 	ScriptLib.ForbidPlayerRegionVision(context, context.uid)
 
 	LF_InitChallenge(context)
-
+	
 	--开启Gallery
-	if 0 ~= ScriptLib.StartGallery(context, defs.gallery_id) then
+	if 0 ~= ScriptLib.StartGallery(context, defs.gallery_id) then 
         PrintLog(context, "开启Gallery失败")
     else
         PrintLog(context, "金币总数-"..global.total_coin_count)
@@ -336,7 +336,7 @@ function action_select_option(context, evt)
         end
     end
 
-    --TODO:镜头注目
+    --TODO:镜头注目 
 	CameraAction(context)
 
 	return 0
@@ -367,13 +367,13 @@ function action_challenge_success(context,evt)
 end
 
 function action_challenge_fail(context, evt)
-
+	
 	--param2 剩余时间
-	if evt.param2 <= 0 then
+	if evt.param2 <= 0 then 
         -- 超时
 		LF_FailChallenge(context, 1)
 	else
-        if ScriptLib.IsPlayerAllAvatarDie(context, context.owner_uid) then
+        if ScriptLib.IsPlayerAllAvatarDie(context, context.owner_uid) then 
             -- 团灭
             PrintLog(context, "挑战失败-灭队")
             LF_FailChallenge(context, 8)
@@ -383,7 +383,7 @@ function action_challenge_fail(context, evt)
             LF_FailChallenge(context, 2)
         end
 	end
-
+	
 	return 0
 end
 
@@ -417,16 +417,16 @@ function action_leave_OptimizRegion(context,evt)
 
 		--如果完全出圈了，触发挑战失败
 		local is_in_region = ScriptLib.GetGroupTempValue(context, "is_in_region", {})
-		if is_in_region <= 0 then
+		if is_in_region <= 0 then 
 			LF_FailChallenge(context, 4)
-		end
+		end				
 	end
 	return 0
 end
 
 --终点检查
 function condition_enter_final(context, evt)
-	if evt.param1 ~= defs.end_regionID then
+	if evt.param1 ~= defs.end_regionID then 
 		return false
 	end
 	return true

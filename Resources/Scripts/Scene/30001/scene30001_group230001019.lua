@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 230001019
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -78,9 +78,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -91,9 +91,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -110,20 +110,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_5(context, evt)
 	if evt.param1 ~= 5 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -132,13 +132,13 @@ function action_EVENT_ENTER_REGION_5(context, evt)
 	-- 重新生成指定group，默认为独立随机
 	-- 判断如果group1中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001001) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel1", 1)
 	   c_grouplevel1 = ScriptLib.GetGroupVariableValue(context, "grouplevel1")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001001, refresh_level_revise = c_grouplevel1}) then
 			return -1
 		end
-
+	
 	end
 	-- 判断如果group1中怪物没有清除完，那么单纯刷新
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001001) > 0 then
@@ -146,41 +146,41 @@ function action_EVENT_ENTER_REGION_5(context, evt)
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001001, refresh_level_revise = c_grouplevel1}) then
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001004 }) then
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001006 }) then
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001008 }) then
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001016 }) then
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_6(context, evt)
 	if evt.param1 ~= 6 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -189,7 +189,7 @@ function action_EVENT_ENTER_REGION_6(context, evt)
 	-- 重新生成指定group，默认为独立随机
 	-- 判断如果group3中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001003) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel3", 1)
 	   c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001003, refresh_level_revise = c_grouplevel3}) then
@@ -202,34 +202,34 @@ function action_EVENT_ENTER_REGION_6(context, evt)
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001003, refresh_level_revise = c_grouplevel3}) then
 			return -1
 		end
-
+	
 	end
-
-
-
-
+	
+	
+	
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001016 }) then
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001004 }) then
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_8(context, evt)
 	if evt.param1 ~= 8 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -237,7 +237,7 @@ end
 function action_EVENT_ENTER_REGION_8(context, evt)
 	-- 判断如果230001005中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001005) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel5", 1)
 	   local c_grouplevel5 = ScriptLib.GetGroupVariableValue(context, "grouplevel5")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001005, refresh_level_revise = c_grouplevel5}) then
@@ -252,39 +252,39 @@ function action_EVENT_ENTER_REGION_8(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001014 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_9(context, evt)
 	if evt.param1 ~= 9 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -292,7 +292,7 @@ end
 function action_EVENT_ENTER_REGION_9(context, evt)
 	-- 判断如果230001003中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001003) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel3", 1)
 	   local c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001003, refresh_level_revise = c_grouplevel3}) then
@@ -307,21 +307,21 @@ function action_EVENT_ENTER_REGION_9(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_10(context, evt)
 	if evt.param1 ~= 10 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -329,7 +329,7 @@ end
 function action_EVENT_ENTER_REGION_10(context, evt)
 	-- 判断如果230001007中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel7", 1)
 	   local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
@@ -344,12 +344,12 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 判断如果230001009中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001009) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel9", 1)
 	   local c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001009, refresh_level_revise = c_grouplevel9}) then
@@ -364,12 +364,12 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 判断如果230001003中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001003) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel3", 1)
 	   local c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001003, refresh_level_revise = c_grouplevel3}) then
@@ -384,39 +384,39 @@ function action_EVENT_ENTER_REGION_10(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11(context, evt)
 	if evt.param1 ~= 11 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -424,7 +424,7 @@ end
 function action_EVENT_ENTER_REGION_11(context, evt)
 	-- 判断如果230001003中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001003) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel3", 1)
 	   local c_grouplevel3 = ScriptLib.GetGroupVariableValue(context, "grouplevel3")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001003, refresh_level_revise = c_grouplevel3}) then
@@ -439,12 +439,12 @@ function action_EVENT_ENTER_REGION_11(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 判断如果230001009中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001009) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel9", 1)
 	   local c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001009, refresh_level_revise = c_grouplevel9}) then
@@ -459,45 +459,45 @@ function action_EVENT_ENTER_REGION_11(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001015 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_12(context, evt)
 	if evt.param1 ~= 12 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -505,7 +505,7 @@ end
 function action_EVENT_ENTER_REGION_12(context, evt)
 	-- 判断如果230001007中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel7", 1)
 	   local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
@@ -520,12 +520,12 @@ function action_EVENT_ENTER_REGION_12(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 判断如果230001009中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001009) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel9", 1)
 	   local c_grouplevel9 = ScriptLib.GetGroupVariableValue(context, "grouplevel9")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001009, refresh_level_revise = c_grouplevel9}) then
@@ -540,39 +540,39 @@ function action_EVENT_ENTER_REGION_12(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001008 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001004 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_13(context, evt)
 	if evt.param1 ~= 13 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -580,7 +580,7 @@ end
 function action_EVENT_ENTER_REGION_13(context, evt)
 	-- 判断如果230001012中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001012) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel12", 1)
 	   local c_grouplevel12 = ScriptLib.GetGroupVariableValue(context, "grouplevel12")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001012, refresh_level_revise = c_grouplevel12}) then
@@ -595,39 +595,39 @@ function action_EVENT_ENTER_REGION_13(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001013 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001015 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001006 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14(context, evt)
 	if evt.param1 ~= 14 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -635,7 +635,7 @@ end
 function action_EVENT_ENTER_REGION_14(context, evt)
 	-- 判断如果230001007中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel7", 1)
 	   local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
@@ -650,12 +650,12 @@ function action_EVENT_ENTER_REGION_14(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 判断如果230001014中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001014) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel14", 1)
 	   local c_grouplevel14 = ScriptLib.GetGroupVariableValue(context, "grouplevel14")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001014, refresh_level_revise = c_grouplevel14}) then
@@ -670,33 +670,33 @@ function action_EVENT_ENTER_REGION_14(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001013 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001015 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_15(context, evt)
 	if evt.param1 ~= 15 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -704,7 +704,7 @@ end
 function action_EVENT_ENTER_REGION_15(context, evt)
 	-- 判断如果230001007中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001007) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel7", 1)
 	   local c_grouplevel7 = ScriptLib.GetGroupVariableValue(context, "grouplevel7")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001007, refresh_level_revise = c_grouplevel7}) then
@@ -719,12 +719,12 @@ function action_EVENT_ENTER_REGION_15(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 判断如果230001012中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001012) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel12", 1)
 	   local c_grouplevel12 = ScriptLib.GetGroupVariableValue(context, "grouplevel12")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001012, refresh_level_revise = c_grouplevel12}) then
@@ -739,39 +739,39 @@ function action_EVENT_ENTER_REGION_15(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001015 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001016 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_16(context, evt)
 	if evt.param1 ~= 16 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -779,7 +779,7 @@ end
 function action_EVENT_ENTER_REGION_16(context, evt)
 	-- 判断如果230001001中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001001) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel1", 1)
 	   local c_grouplevel1 = ScriptLib.GetGroupVariableValue(context, "grouplevel1")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001001, refresh_level_revise = c_grouplevel1}) then
@@ -794,39 +794,39 @@ function action_EVENT_ENTER_REGION_16(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001011 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001010 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_17(context, evt)
 	if evt.param1 ~= 17 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -834,7 +834,7 @@ end
 function action_EVENT_ENTER_REGION_17(context, evt)
 	-- 判断如果230001014中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001014) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel14", 1)
 	   local c_grouplevel14 = ScriptLib.GetGroupVariableValue(context, "grouplevel14")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001014, refresh_level_revise = c_grouplevel14}) then
@@ -849,33 +849,33 @@ function action_EVENT_ENTER_REGION_17(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001015 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	-- 重新生成指定group，默认为独立随机
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001002 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_randall")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_18(context, evt)
 	if evt.param1 ~= 18 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -883,7 +883,7 @@ end
 function action_EVENT_ENTER_REGION_18(context, evt)
 	-- 判断如果230001001中怪物已经被清除完，那么再次刷新会递增其level等级，提高group的数值强度
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 230001001) == 0 then
-
+	
 	   ScriptLib.ChangeGroupVariableValue(context, "grouplevel1", 1)
 	   local c_grouplevel1 = ScriptLib.GetGroupVariableValue(context, "grouplevel1")
 	   if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 230001001, refresh_level_revise = c_grouplevel1}) then
@@ -898,21 +898,21 @@ function action_EVENT_ENTER_REGION_18(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : test_curseMaze_groupLevel")
 			return -1
 		end
-
+	
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_50(context, evt)
 	if evt.param1 ~= 50 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -923,6 +923,6 @@ function action_EVENT_ENTER_REGION_50(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

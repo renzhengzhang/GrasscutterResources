@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133104279
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -68,9 +68,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -81,9 +81,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -162,9 +162,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -172,7 +172,7 @@ function condition_EVENT_ANY_GADGET_DIE_279007(context, evt)
 	if 279001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -183,10 +183,10 @@ function action_EVENT_ANY_GADGET_DIE_279007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104279, 3)
-
+	
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_ANY_GADGET_DIE_279008(context, evt)
 	if 279002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -206,10 +206,10 @@ function action_EVENT_ANY_GADGET_DIE_279008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104279, 4)
-
+	
 	return 0
 end
 
@@ -218,7 +218,7 @@ function condition_EVENT_ANY_GADGET_DIE_279009(context, evt)
 	if 279003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -229,10 +229,10 @@ function action_EVENT_ANY_GADGET_DIE_279009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104279, 5)
-
+	
 	return 0
 end
 
@@ -241,7 +241,7 @@ function condition_EVENT_ANY_GADGET_DIE_279010(context, evt)
 	if 279004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -252,10 +252,10 @@ function action_EVENT_ANY_GADGET_DIE_279010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104279, 6)
-
+	
 	return 0
 end
 
@@ -264,7 +264,7 @@ function condition_EVENT_ANY_GADGET_DIE_279011(context, evt)
 	if 279005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -275,10 +275,10 @@ function action_EVENT_ANY_GADGET_DIE_279011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104279, 6)
-
+	
 	return 0
 end
 
@@ -287,7 +287,7 @@ function condition_EVENT_ANY_GADGET_DIE_279012(context, evt)
 	if 279006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -298,10 +298,10 @@ function action_EVENT_ANY_GADGET_DIE_279012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133104279, 7)
-
+	
 	return 0
 end
 
@@ -312,7 +312,7 @@ function action_EVENT_QUEST_FINISH_279013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -321,7 +321,7 @@ function condition_EVENT_ANY_GADGET_DIE_279015(context, evt)
 	if 279003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -332,25 +332,25 @@ function action_EVENT_ANY_GADGET_DIE_279015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 279017, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 279018, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 279019, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -359,7 +359,7 @@ function condition_EVENT_GADGET_CREATE_279021(context, evt)
 	if 279001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -367,7 +367,7 @@ end
 function action_EVENT_GADGET_CREATE_279021(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104279, 3)
-
+	
 	return 0
 end
 
@@ -376,7 +376,7 @@ function condition_EVENT_GADGET_CREATE_279029(context, evt)
 	if 279002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -384,7 +384,7 @@ end
 function action_EVENT_GADGET_CREATE_279029(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104279, 4)
-
+	
 	return 0
 end
 
@@ -393,7 +393,7 @@ function condition_EVENT_GADGET_CREATE_279030(context, evt)
 	if 279003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -401,7 +401,7 @@ end
 function action_EVENT_GADGET_CREATE_279030(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104279, 5)
-
+	
 	return 0
 end
 
@@ -410,7 +410,7 @@ function condition_EVENT_GADGET_CREATE_279031(context, evt)
 	if 279004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -418,7 +418,7 @@ end
 function action_EVENT_GADGET_CREATE_279031(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104279, 6)
-
+	
 	return 0
 end
 
@@ -427,7 +427,7 @@ function condition_EVENT_GADGET_CREATE_279032(context, evt)
 	if 279005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -435,7 +435,7 @@ end
 function action_EVENT_GADGET_CREATE_279032(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104279, 7)
-
+	
 	return 0
 end
 
@@ -444,7 +444,7 @@ function condition_EVENT_GADGET_CREATE_279033(context, evt)
 	if 279006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -452,6 +452,6 @@ end
 function action_EVENT_GADGET_CREATE_279033(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133104279, 8)
-
+	
 	return 0
 end

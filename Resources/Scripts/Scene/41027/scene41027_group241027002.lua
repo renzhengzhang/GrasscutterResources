@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 241027002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -39,9 +39,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -52,9 +52,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -70,9 +70,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -80,7 +80,7 @@ function condition_EVENT_GADGET_CREATE_2002(context, evt)
 	if 2001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -91,7 +91,7 @@ function action_EVENT_GADGET_CREATE_2002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -99,19 +99,19 @@ end
 function condition_EVENT_SELECT_OPTION_2003(context, evt)
 	-- 判断是gadgetid 2001 option_id 177
 	if 2001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 177 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"stage"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage", 241027001) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -119,25 +119,25 @@ end
 function action_EVENT_SELECT_OPTION_2003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 241027003, 2)
-
+	
 	-- 删除指定group： 241027002 ；指定config：2001；物件身上指定option：177；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 241027002, 2001, 177) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 改变指定group组241027002中， configid为2001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 241027002, 2001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 针对当前group内变量名为 "wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -145,19 +145,19 @@ end
 function condition_EVENT_SELECT_OPTION_2004(context, evt)
 	-- 判断是gadgetid 2001 option_id 177
 	if 2001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 177 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"stage"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "stage", 241027001) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -165,30 +165,30 @@ end
 function action_EVENT_SELECT_OPTION_2004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 241027003, 2)
-
+	
 	-- 删除指定group： 241027002 ；指定config：2001；物件身上指定option：177；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 241027002, 2001, 177) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 改变指定group组241027002中， configid为2001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 241027002, 2001, GadgetState.GearStop) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 关闭当前已显示的通用提示栏
 	if 0 ~= ScriptLib.sendCloseCommonTipsToClient(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : close_common_tips")
 		return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "wave" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "wave", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003155
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	point_sum = 9,
 	route_2 = 900300043,
 	gadget_seelie = 155003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -83,9 +83,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -96,9 +96,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -132,23 +132,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_155004(context, evt)
 	-- 判断是gadgetid 155002 option_id 411
 	if 155002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 411 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -158,32 +158,32 @@ function action_EVENT_SELECT_OPTION_155004(context, evt)
 	ScriptLib.RemoveEntityByConfigId(context, 199003155, EntityType.GADGET, 155014 )
 	ScriptLib.RemoveEntityByConfigId(context, 199003155, EntityType.GADGET, 155002 )
 	 ScriptLib.CreateGadget(context, { config_id = 155003 })
-	 ScriptLib.SetPlatformRouteId(context, 155003, 900300043)
-
-	 ScriptLib.StartPlatform(context, 155003)
-
-	 ScriptLib.CreateGadget(context, { config_id = 155028 })
-
+	 ScriptLib.SetPlatformRouteId(context, 155003, 900300043) 
+	
+	 ScriptLib.StartPlatform(context, 155003) 
+	
+	 ScriptLib.CreateGadget(context, { config_id = 155028 }) 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_155005(context, evt)
 	-- 判断是gadgetid 为 155003的移动平台，是否到达了900300043 的路线中的 5 点
-
+	
 	if 155003 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 900300043 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 5 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -194,14 +194,14 @@ function action_EVENT_PLATFORM_REACH_POINT_155005(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 创建id为155030的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 155030 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -210,15 +210,15 @@ function condition_EVENT_AVATAR_NEAR_PLATFORM_155006(context, evt)
 	if defs.gadget_seelie ~= evt.param1 then
 	return false
 	end
-
+	
 	if defs.route_2 ~= evt.param2 then
 	return false
 	end
-
+	
 	if defs.final_point == evt.param3 then
 	return false
 	end
-
+	
 	return true
 end
 
@@ -227,24 +227,24 @@ function action_EVENT_AVATAR_NEAR_PLATFORM_155006(context, evt)
 	if 0 ~= ScriptLib.StartPlatform(context, 155003) then
 	return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	if 0 ~= evt.param3 then
 	ScriptLib.MarkPlayerAction(context, 2005, 2, evt.param3 + 1)
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_155007(context, evt)
 	if evt.param1 ~= 155007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -255,13 +255,13 @@ function action_EVENT_ENTER_REGION_155007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 155003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -269,14 +269,14 @@ end
 function condition_EVENT_SELECT_OPTION_155029(context, evt)
 	-- 判断是gadgetid 155028 option_id 169
 	if 155028 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 169 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -287,19 +287,19 @@ function action_EVENT_SELECT_OPTION_155029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为155027的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 155027 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 199003155 ；指定config：155028；物件身上指定option：169；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 199003155, 155028, 169) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -309,19 +309,19 @@ function condition_EVENT_GROUP_LOAD_155031(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_155031(context, evt)
-	ScriptLib.RefreshGroup(context, { group_id = 199003155, suite = 1 })
-
+	ScriptLib.RefreshGroup(context, { group_id = 199003155, suite = 1 }) 
+	
 	if ScriptLib.GetGroupVariableValue(context, "touch") == 1 then
-	 ScriptLib.CreateGadget(context, { config_id = 155028 })
-
+	 ScriptLib.CreateGadget(context, { config_id = 155028 }) 
+	
 	end
-
+	
 	return 0
 end
 
@@ -331,7 +331,7 @@ function condition_EVENT_GROUP_LOAD_155032(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -341,7 +341,7 @@ function action_EVENT_GROUP_LOAD_155032(context, evt)
 	ScriptLib.CreateGadget(context, { config_id = 155030 })
 	 ScriptLib.RemoveEntityByConfigId(context, 199003155, EntityType.GADGET, 155028 )
 	ScriptLib.RemoveEntityByConfigId(context, 199003155, EntityType.GADGET, 155002 )
-	 ScriptLib.RemoveEntityByConfigId(context, 199003155, EntityType.GADGET, 155014 )
-
+	 ScriptLib.RemoveEntityByConfigId(context, 199003155, EntityType.GADGET, 155014 ) 
+	
 	return 0
 end

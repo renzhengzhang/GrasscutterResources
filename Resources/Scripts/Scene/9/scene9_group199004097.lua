@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199004097
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -110,9 +110,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -120,7 +120,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_97003(context, evt)
 	if 97002 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -131,25 +131,25 @@ function action_EVENT_GADGET_STATE_CHANGE_97003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 1010, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 将configid为 97001 的物件更改为状态 GadgetState.GearAction2
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 97001, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 97007 的物件更改为状态 GadgetState.GearAction2
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 97007, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -158,11 +158,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_97004(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199004097, 97007) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 199004097, 97001) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -173,10 +173,10 @@ function action_EVENT_GADGET_STATE_CHANGE_97004(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199004097, 2)
-
+	
 	return 0
 end
 
@@ -185,7 +185,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_97005(context, evt)
 	if 97001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -195,17 +195,17 @@ function action_EVENT_GADGET_STATE_CHANGE_97005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 97002, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 1010, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199004097, 2)
-
+	
 	return 0
 end
 
@@ -214,7 +214,7 @@ function condition_EVENT_GADGET_CREATE_97006(context, evt)
 	if 97001 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -222,7 +222,7 @@ end
 function action_EVENT_GADGET_CREATE_97006(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199004097, 2)
-
+	
 	return 0
 end
 
@@ -231,7 +231,7 @@ function condition_EVENT_GADGET_CREATE_97009(context, evt)
 	if 97007 ~= evt.param1 or GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, 0, evt.param1) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -239,7 +239,7 @@ end
 function action_EVENT_GADGET_CREATE_97009(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199004097, 2)
-
+	
 	return 0
 end
 
@@ -248,7 +248,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_97010(context, evt)
 	if 97007 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -258,17 +258,17 @@ function action_EVENT_GADGET_STATE_CHANGE_97010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 97002, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 1010, 4, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199004097, 2)
-
+	
 	return 0
 end
 
@@ -278,7 +278,7 @@ function condition_EVENT_GADGET_CREATE_97011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -288,8 +288,8 @@ function action_EVENT_GADGET_CREATE_97011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 97001, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -299,7 +299,7 @@ function condition_EVENT_GADGET_CREATE_97012(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -309,8 +309,8 @@ function action_EVENT_GADGET_CREATE_97012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 97007, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -324,12 +324,12 @@ function action_EVENT_LEVEL_TAG_CHANGE_97013(context, evt)
 		if ScriptLib.CheckSceneTag(context, 9,1025 ) then
 			ScriptLib.AddExtraGroupSuite(context, 0, 3)
 		end
-
+		
 		if ScriptLib.CheckSceneTag(context, 9,1022 ) then
 			ScriptLib.AddExtraGroupSuite(context, 0, 4)
 		end
 	end
-
+	
 	return 0
 end
 
@@ -343,12 +343,12 @@ function action_EVENT_GROUP_LOAD_97014(context, evt)
 		if ScriptLib.CheckSceneTag(context, 9,1025 ) then
 			ScriptLib.AddExtraGroupSuite(context, 0, 3)
 		end
-
+		
 		if ScriptLib.CheckSceneTag(context, 9,1022 ) then
 			ScriptLib.AddExtraGroupSuite(context, 0, 4)
 		end
 	end
-
+	
 	return 0
 end
 
@@ -358,7 +358,7 @@ function action_EVENT_LEVEL_TAG_CHANGE_97015(context, evt)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 199004097, 3)
 	end
-
+	
 	return 0
 end
 
@@ -368,7 +368,7 @@ function action_EVENT_LEVEL_TAG_CHANGE_97016(context, evt)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 199004097, 4)
 	end
-
+	
 	return 0
 end
 
@@ -378,6 +378,6 @@ function action_EVENT_LEVEL_TAG_CHANGE_97017(context, evt)
 	else
 		ScriptLib.RemoveExtraGroupSuite(context, 199004097, 2)
 	end
-
+	
 	return 0
 end

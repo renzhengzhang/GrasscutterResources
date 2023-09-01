@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220000069
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -75,9 +75,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -88,9 +88,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -106,9 +106,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -116,7 +116,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_139(context, evt)
 	if 484 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -127,7 +127,7 @@ function action_EVENT_GADGET_STATE_CHANGE_139(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -136,11 +136,11 @@ function action_EVENT_GATHER_140(context, evt)
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 508 }) then
 		    return -1
 		end
-
+	
 		if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "num", 1) then
 	  	return -1
 		end
-
+		
 		return 0
 end
 
@@ -149,11 +149,11 @@ function action_EVENT_GATHER_141(context, evt)
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 509 }) then
 		    return -1
 		end
-
+	
 		if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "num", 1) then
 	  	return -1
 		end
-
+		
 		return 0
 end
 
@@ -162,11 +162,11 @@ function action_EVENT_GATHER_142(context, evt)
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 510 }) then
 		    return -1
 		end
-
+	
 		if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "num", 1) then
 	  	return -1
 		end
-
+		
 		return 0
 end
 
@@ -175,11 +175,11 @@ function action_EVENT_GATHER_143(context, evt)
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 511 }) then
 		    return -1
 		end
-
+	
 		if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "num", 1) then
 	  	return -1
 		end
-
+		
 		return 0
 end
 
@@ -188,11 +188,11 @@ function action_EVENT_GATHER_144(context, evt)
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 512 }) then
 		    return -1
 		end
-
+	
 		if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "num", 1) then
 	  	return -1
 		end
-
+		
 		return 0
 end
 
@@ -201,11 +201,11 @@ function action_EVENT_GATHER_145(context, evt)
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 513 }) then
 		    return -1
 		end
-
+	
 		if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "num", 1) then
 	  	return -1
 		end
-
+		
 		return 0
 end
 
@@ -214,23 +214,23 @@ function action_EVENT_GATHER_146(context, evt)
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 514 }) then
 		    return -1
 		end
-
+	
 		if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "num", 1) then
 	  	return -1
 		end
-
+		
 		return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_149(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	-- 将configid为 484 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 484, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

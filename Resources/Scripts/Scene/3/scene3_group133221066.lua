@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133221066
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -95,20 +95,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_66011(context, evt)
 	if evt.param1 ~= 66011 then return false end
-
+	
 	-- 判断是区域66011
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 66011 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -119,19 +119,19 @@ function action_EVENT_ENTER_REGION_66011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_66012(context, evt)
 	if evt.param1 ~= 66012 then return false end
-
+	
 	-- 判断是区域66012
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 66012 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -142,19 +142,19 @@ function action_EVENT_ENTER_REGION_66012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_66013(context, evt)
 	if evt.param1 ~= 66013 then return false end
-
+	
 	-- 判断是区域66013
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 66013 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -165,19 +165,19 @@ function action_EVENT_ENTER_REGION_66013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_66014(context, evt)
 	if evt.param1 ~= 66014 then return false end
-
+	
 	-- 判断是区域66014
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 66014 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,19 +188,19 @@ function action_EVENT_ENTER_REGION_66014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_66015(context, evt)
 	if evt.param1 ~= 66015 then return false end
-
+	
 	-- 判断是区域66015
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 66015 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -211,19 +211,19 @@ function action_EVENT_ENTER_REGION_66015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_66016(context, evt)
 	if evt.param1 ~= 66016 then return false end
-
+	
 	-- 判断是区域66016
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 66016 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -234,19 +234,19 @@ function action_EVENT_ENTER_REGION_66016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_66017(context, evt)
 	if evt.param1 ~= 66017 then return false end
-
+	
 	-- 判断是区域66017
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 66017 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -257,19 +257,19 @@ function action_EVENT_ENTER_REGION_66017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_66018(context, evt)
 	if evt.param1 ~= 66018 then return false end
-
+	
 	-- 判断是区域66018
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 66018 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -280,19 +280,19 @@ function action_EVENT_ENTER_REGION_66018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_66019(context, evt)
 	if evt.param1 ~= 66019 then return false end
-
+	
 	-- 判断是区域66019
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 66019 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -303,19 +303,19 @@ function action_EVENT_ENTER_REGION_66019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_66020(context, evt)
 	if evt.param1 ~= 66020 then return false end
-
+	
 	-- 判断是区域66020
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 66020 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -326,6 +326,6 @@ function action_EVENT_ENTER_REGION_66020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133106455
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -107,7 +107,7 @@ function action_EVENT_ANY_GADGET_DIE_455004(context, evt)
 	if evt.param1 == 455002 or evt.param1 == 455003 or evt.param1 == 455007 then
 		ScriptLib.AddExtraGroupSuite(context, 133106455, 3)
 	end
-
+	
 	return 0
 end
 
@@ -115,36 +115,36 @@ end
 function condition_EVENT_SELECT_OPTION_455005(context, evt)
 	-- 判断是gadgetid 455006 option_id 751
 	if 455006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 751 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_455005(context, evt)
-	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=1056.20728, y= 743.530762, z=236.784058}, radius = 2, rot = {x=0, y=303.887543, z=0},scene_id=6})
+	ScriptLib.TransPlayerToPos(context, {uid_list = {context.uid}, pos = {x=1056.20728, y= 743.530762, z=236.784058}, radius = 2, rot = {x=0, y=303.887543, z=0},scene_id=6}) 
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_455008(context, evt)
 	if evt.param1 ~= 455008 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	if ScriptLib.GetHostQuestState(context,7107701) == 3 then
 		return true
 	end
-
+	
 	return false
 end
 
@@ -155,10 +155,10 @@ function action_EVENT_ENTER_REGION_455008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106455, 2)
-
+	
 	return 0
 end
 
@@ -168,7 +168,7 @@ function condition_EVENT_GROUP_LOAD_455009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "questfinish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -176,6 +176,6 @@ end
 function action_EVENT_GROUP_LOAD_455009(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106455, 2)
-
+	
 	return 0
 end

@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133008557
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id = 557004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -50,9 +50,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -63,9 +63,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -90,9 +90,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -100,7 +100,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_557005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") == 4 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -111,20 +111,20 @@ function action_EVENT_GADGET_STATE_CHANGE_557005(context, evt)
 	elseif evt.param1 == GadgetState.Default then
 		ScriptLib.ChangeGroupVariableValue(context,"start",-1)
 	end
-
-
-
-
-	if ScriptLib.GetGroupVariableValue(context, "start") == 4
+	
+	
+		
+	
+	if ScriptLib.GetGroupVariableValue(context, "start") == 4 
 	then
-		if ScriptLib.GetGroupVariableValue(context, "cutscenePlayed") == 0
+		if ScriptLib.GetGroupVariableValue(context, "cutscenePlayed") == 0 
 		then
 			ScriptLib.PlayCutScene(context, 3008523, 0)
 			ScriptLib.SetGroupVariableValue(context, "cutscenePlayed", 1)
-		end
+		end	
 		ScriptLib.CreateGadget(context, { config_id = defs.gadget_id })
 	end
-
+	
 	return 0
 end
 
@@ -135,7 +135,7 @@ function action_EVENT_GADGET_STATE_CHANGE_557006(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -144,7 +144,7 @@ function condition_EVENT_GADGET_CREATE_557007(context, evt)
 	if defs.gadget_id ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -155,7 +155,7 @@ function action_EVENT_GADGET_CREATE_557007(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -164,7 +164,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_557009(context, evt)
 	if 557004 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -175,6 +175,6 @@ function action_EVENT_GADGET_STATE_CHANGE_557009(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end

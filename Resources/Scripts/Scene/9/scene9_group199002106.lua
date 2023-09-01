@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002106
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -94,9 +94,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -107,9 +107,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -143,21 +143,21 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GADGETTALK_DONE_106002(context, evt)
 	ScriptLib.SetGroupVariableValueByGroup(context, "state", 1, 199002143)
-
+	
 	ScriptLib.SetGroupVariableValueByGroup(context, "state", 1, 199002140)
-
+	
 	ScriptLib.SetGadgetTalkByConfigId(context, 199002140, 140001, 6800315)
-
+	
 	ScriptLib.SetGadgetTalkByConfigId(context, 199002143, 143001, 6800317)
-
+	
 	return 0
 end
 
@@ -165,10 +165,10 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_106005(context, evt)
 	if evt.param2 == 106004 and ScriptLib.GetGadgetStateByConfigId(context, 0, 106004) == 201 then
 		ScriptLib.SetGroupVariableValue(context, "put", 1)
-
+		
 		ScriptLib.SetGadgetTalkByConfigId(context, 199002106, 106001, 6800325)
 	end
-
+	
 	return 0
 end
 
@@ -178,7 +178,7 @@ function condition_EVENT_GADGETTALK_DONE_106006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "startb") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -189,57 +189,57 @@ function action_EVENT_GADGETTALK_DONE_106006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 199002004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 199002140) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 199002143) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 199002148) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "startb" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "startb", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "startc" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "startc", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建标识为"flyb"，时间节点为{60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "flyb", {60}, false)
-
-
+	
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002106, 2)
-
+	
 	-- 停止标识为"flyc"的时间轴
 	ScriptLib.EndTimeAxis(context, "flyc")
-
-
+	
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199002106, 3)
-
+	
 	return 0
 end
 
@@ -249,7 +249,7 @@ function condition_EVENT_GADGETTALK_DONE_106007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "startc") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -260,57 +260,57 @@ function action_EVENT_GADGETTALK_DONE_106007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 199002004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 199002140) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 199002143) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "remove" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "remove", 1, 199002148) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "startc" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "startc", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "startb" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "startb", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建标识为"flyc"，时间节点为{60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "flyc", {60}, false)
-
-
+	
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199002106, 3)
-
+	
 	-- 停止标识为"flyb"的时间轴
 	ScriptLib.EndTimeAxis(context, "flyb")
-
-
+	
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 199002106, 2)
-
+	
 	return 0
 end
 
@@ -319,7 +319,7 @@ function condition_EVENT_TIME_AXIS_PASS_106012(context, evt)
 	if "flyb" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -330,7 +330,7 @@ function action_EVENT_TIME_AXIS_PASS_106012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -341,7 +341,7 @@ function action_EVENT_GADGETTALK_DONE_106013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -350,7 +350,7 @@ function condition_EVENT_TIME_AXIS_PASS_106041(context, evt)
 	if "flyc" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -361,7 +361,7 @@ function action_EVENT_TIME_AXIS_PASS_106041(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -372,7 +372,7 @@ function action_EVENT_GROUP_LOAD_106042(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -385,19 +385,19 @@ function action_EVENT_GROUP_REFRESH_106043(context, evt)
 			ScriptLib.SetGadgetTalkByConfigId(context, 199002106, 106001, 6800313)
 		end
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_106044(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"remove"为1
 	if ScriptLib.GetGroupVariableValue(context, "remove") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -408,6 +408,6 @@ function action_EVENT_VARIABLE_CHANGE_106044(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

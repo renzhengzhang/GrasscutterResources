@@ -1,11 +1,11 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 420050001
 }
 
 -- DEFS_MISCS
 -- 家园Group物件 001 计时器
-defs = {
+local defs = {
     GalleryID = 410001,
     StartConfig = 1001,
     EndConfig = 1002,
@@ -25,9 +25,9 @@ function CheckUidNoExist(context,enterUid)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -101,9 +101,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -111,15 +111,15 @@ function action_EVENT_ENTER_REGION_1005(context, evt)
 	    -- 增加检查玩家uid是否合法的逻辑
 	    local tempStart = ScriptLib.GetGroupTempValue(context, "TempStart",{})
 	    local enterUid = context.uid
-
+	
 	    if evt.param1 ~= defs.EnterRegionConfig or 0 == tempStart or CheckUidNoExist(context,enterUid) then
 	        return 0
 	    end
-
+	
 	    ScriptLib.PrintContextLog(context, "## TD_玩法套装_计时器 : 完成玩法的玩家uid是 "..enterUid)
 	    ScriptLib.UpdatePlayerGalleryScore(context, defs.GalleryID, {["uid"] = enterUid})
 	    ScriptLib.StopGallery(context, defs.GalleryID, false)
-
+	
 	    return 0
 end
 
@@ -128,11 +128,11 @@ function action_EVENT_LEAVE_REGION_1006(context, evt)
 	    if evt.param1 ~= defs.LeaveRegionConfig then
 	        return 0
 	    end
-
+	
 	    ScriptLib.PrintContextLog(context, "## TD_玩法套装_计时器 : 离开玩家的uid是 "..context.uid)
 	    local ret = ScriptLib.TryReallocateEntityAuthority(context, context.uid, defs.EndConfig, evt.param1)
 	    ScriptLib.PrintContextLog(context, "## TD_玩法套装_计时器 : 切换的玩家是 = "..ret)
-
+	
 	    return 0
 end
 

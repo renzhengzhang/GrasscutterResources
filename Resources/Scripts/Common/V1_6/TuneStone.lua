@@ -1,9 +1,9 @@
 --[[
-defs = {
+local defs = {
 	gadget_up = 1,						--向上压板
 	gadget_down = 2,					--向下压板
 	gadget_water = 7001,				--水片
-	point_array  = 400100010,
+	point_array  = 400100010,			
 	point_list = {1,2,3,4,5},
 	gadget_list = {1,2,3,4,5},			--刻痕
 	point_xz = {x=100,z=100},			--point坐标
@@ -62,7 +62,7 @@ end
 function action_platform_reach_point(context, evt)
 	ScriptLib.PrintContextLog(context, "## TuneStone : Reach_Point | "..evt.param1.." | "..evt.param2)
 	local water = ScriptLib.GetGroupVariableValue(context, "Water_Level")
-	ScriptLib.ScenePlaySound(context, {play_pos = defs.audio_xyz, sound_name = defs.audio_list[water], play_type=1, is_broadcast=true})
+	ScriptLib.ScenePlaySound(context, {play_pos = defs.audio_xyz, sound_name = defs.audio_list[water], play_type=1, is_broadcast=true})	
 	ScriptLib.SetGroupTempValue(context, "motion", 0, {})
 	--if evt.param1 == defs.gadget_water then
 	--	LF_Check_Water_To_Motion(context, evt)
@@ -104,7 +104,7 @@ function LF_Init_Water(context, evt)
 		ScriptLib.SetPlatformPointArray(context, defs.gadget_water, defs.point_array, {defs.point_list[defs.start_level]}, {route_type = 0, turn_mode = false})
 		ScriptLib.SetGroupVariableValue(context, "first_play", 0)
 		ScriptLib.SetGroupVariableValue(context, "Water_Level", defs.start_level)
-		return 0
+		return 0	
 	end
 	if water == 0 then
 		water = defs.start_level
@@ -122,7 +122,7 @@ function LF_Modify_Water(context, water, delta)
 	ScriptLib.PrintContextLog(context, "## TuneStone : LF_Modify_Water : level = "..water.." | delta = "..delta)
 	ScriptLib.SetGroupTempValue(context, "motion", 1, {})
 	ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_list[water], 0)
-	--ScriptLib.ScenePlaySound(context, {play_pos = defs.audio_xyz, sound_name = defs.audio_list[water], play_type=2, is_broadcast=true})
+	--ScriptLib.ScenePlaySound(context, {play_pos = defs.audio_xyz, sound_name = defs.audio_list[water], play_type=2, is_broadcast=true})	
 	local _water = water + delta
 	ScriptLib.SetGroupVariableValue(context, "Water_Level", _water)
 	ScriptLib.SetPlatformPointArray(context, defs.gadget_water, defs.point_array, {defs.point_list[_water]}, {route_type = 0, turn_mode = false})

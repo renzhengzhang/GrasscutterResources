@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101100
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -142,23 +142,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_100002(context, evt)
 	-- 判断是gadgetid 100001 option_id 7
 	if 100001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -169,16 +169,16 @@ function action_EVENT_SELECT_OPTION_100002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101100, 2)
-
+	
 	-- 延迟1秒后,向groupId为：111101100的对象,请求一次调用,并将string参数："time5" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 111101100, "time5", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -187,7 +187,7 @@ function condition_EVENT_GADGET_CREATE_100003(context, evt)
 	if 100001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -198,7 +198,7 @@ function action_EVENT_GADGET_CREATE_100003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -207,7 +207,7 @@ function condition_EVENT_GADGET_CREATE_100019(context, evt)
 	if 100004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -217,20 +217,20 @@ function action_EVENT_GADGET_CREATE_100019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 100004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟1秒后,向groupId为：111101100的对象,请求一次调用,并将string参数："time5" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 111101100, "time5", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 100005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 100005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -241,10 +241,10 @@ function action_EVENT_TIMER_EVENT_100020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101100, 3)
-
+	
 	return 0
 end
 
@@ -255,10 +255,10 @@ function action_EVENT_TIMER_EVENT_100021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101100, 4)
-
+	
 	return 0
 end
 
@@ -269,10 +269,10 @@ function action_EVENT_TIMER_EVENT_100022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101100, 5)
-
+	
 	return 0
 end
 
@@ -283,10 +283,10 @@ function action_EVENT_TIMER_EVENT_100023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101100, 6)
-
+	
 	return 0
 end
 
@@ -297,9 +297,9 @@ function action_EVENT_TIMER_EVENT_100024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 111101100, 7)
-
+	
 	return 0
 end

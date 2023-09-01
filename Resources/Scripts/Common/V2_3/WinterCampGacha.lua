@@ -3,7 +3,7 @@
 
 ]]
 --[[
-defs = {
+local defs = {
 	--挑战ID
 	challenge_id = ,
 
@@ -20,7 +20,7 @@ local extraTriggers={
   { config_id = 8000001,name = "Enter_Region", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_enter_region", trigger_count = 0 },
   --挑战计数trigger
   { config_id = 8000002, name = "Variable_Change", event = EventType.EVENT_VARIABLE_CHANGE, source = "saved_progress", condition = "", action = "", trigger_count = 0 ,tag = "1000"},
-
+ 
   { config_id = 8000003,name = "Leave_Region", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_region", trigger_count = 0 },
   { config_id = 8000009, name = "Group_Will_Unload", event = EventType.EVENT_GROUP_WILL_UNLOAD, source = "", condition = "", action = "action_Group_Will_Unload", trigger_count = 0 },
 
@@ -48,9 +48,9 @@ end
 
 function action_enter_TutorialRegion(context, evt)
 
-	if defs.guide_regionID == nil then
+	if defs.guide_regionID == nil then 
 		return 0
-	elseif evt.param1 == defs.guide_regionID then
+	elseif evt.param1 == defs.guide_regionID then 
 		LF_Try_StartTutorial(context)
 	end
 	return 0
@@ -70,14 +70,14 @@ function LF_Try_StartTutorial(context)
     return 0
 end
 function action_Group_Will_Unload(context, evt)
-	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then
+	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then 
 		ScriptLib.SetGroupVariableValue(context, "challenge_state", 0)
 		ScriptLib.SetGroupTempValue(context, "temp_start", 0, {})
 	end
 	return 0
 end
 function action_enter_region(context, evt)
-	if evt.param1 ~= defs.region_id then
+	if evt.param1 ~= defs.region_id then 
 		return 0
 	end
 
@@ -96,7 +96,7 @@ function action_challenge_pause(context, evt)
 end
 
 function action_challenge_fail(context, evt)
-	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then
+	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 1 then 
 		ScriptLib.PrintContextLog(context,"[WinterCampGacha] #WARN# Challenge Failed, not really expected in this activiy.")
 		ScriptLib.SetGroupVariableValue(context, "challenge_state", 0)
 		ScriptLib.SetGroupTempValue(context, "temp_start", 0, {})
@@ -105,7 +105,7 @@ function action_challenge_fail(context, evt)
 end
 
 function action_leave_region (context, evt)
-	if evt.param1 ~= defs.region_id then
+	if evt.param1 ~= defs.region_id then 
 		return 0
 	end
 
@@ -139,21 +139,21 @@ function StartChallengeOutOfRegion(context)
 
 	ScriptLib.PrintContextLog(context,"[WinterCampGacha] Start Challenge OutOfRegion: temp_start@".. temp_start)
 
-	if temp_start == 0 then
+	if temp_start == 0 then 
 
 		local start_process = ScriptLib.GetGroupVariableValue(context, "saved_progress")
 		--参数1： event_type所在枚举序号； 参数2： trigger_tag；参数3： 次数；参数4：Bool，次数达成是否计为成功；参数5：初始次数值
 		ScriptLib.StartChallenge(context, 1, defs.challenge_id, {3, 1000, defs.target_count, 1 , start_process})
 
 		ScriptLib.SetGroupVariableValue(context, "challenge_state", 1)
-		--tempStart的状态标记
+		--tempStart的状态标记 
 		-- 0-圈外，可触发tempStart。 1-触发了tempStart但未进圈 2-在圈里，不触发tempStart 3- 挑战已完成，不触发tempStart
 		ScriptLib.SetGroupTempValue(context, "temp_start", 1, {})
-
+		
 		--起时间轴
 		ScriptLib.InitTimeAxis(context, "temp_start_life", {6}, false)
 
-	elseif temp_start == 1 then
+	elseif temp_start == 1 then 
 		--续命
 		ScriptLib.InitTimeAxis(context, "temp_start_life", {6}, false)
 
@@ -165,13 +165,13 @@ function LF_TryStartChallenge(context)
 
 	ScriptLib.SetGroupTempValue(context, "temp_start", 2, {})
 
-	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 0 then
+	if ScriptLib.GetGroupVariableValue(context, "challenge_state") == 0 then 
 		local start_process = ScriptLib.GetGroupVariableValue(context, "saved_progress")
 		--参数1： event_type所在枚举序号； 参数2： trigger_tag；参数3： 次数；参数4：Bool，次数达成是否计为成功；参数5：初始次数值
 		ScriptLib.StartChallenge(context, 1, defs.challenge_id, {3, 1000, defs.target_count, 1 , start_process})
 
 		ScriptLib.SetGroupVariableValue(context, "challenge_state", 1)
-
+		
 	end
 
 	return 0
@@ -179,7 +179,7 @@ end
 
 --[[function action_time_axis_pass(context, evt)
 
-	if ScriptLib.GetGroupTempValue(context, "temp_start",{}) == 1 then
+	if ScriptLib.GetGroupTempValue(context, "temp_start",{}) == 1 then 
 
 		ScriptLib.PauseChallenge(context, 1)
 
@@ -196,14 +196,14 @@ function GadgetCall_SnowPile_Interact(context)
 
 	--StartChallengeOutOfRegion(context)
 	LF_TryStartChallenge(context)
-
+	
  	local configId = ScriptLib.GetGadgetConfigId(context, {gadget_eid = context.source_entity_id})
 	--向服务器请求本次雪堆结果 1 刷怪，0掉落，-1有错误
 	local result = ScriptLib.WinterCampSnowDriftInteract(context, configId)
 
 	ScriptLib.PrintContextLog(context,"[WinterCampGacha] Get result form server: result@".. result)
 
-	if result == 1 then
+	if result == 1 then 
 
 		local tmp =  GetMonsterSuit(context,configId)
 
@@ -217,7 +217,7 @@ function GadgetCall_SnowPile_Interact(context)
 		return 0
 
 	elseif result == 0 then
-
+		
 		ScriptLib.ChangeGroupVariableValue(context, "saved_progress", 1)
 		--杀死雪堆
 		ScriptLib.KillGroupEntity(context, { group_id = defs.group_id, gadgets = {configId} })
@@ -246,11 +246,11 @@ end
 	--雪堆1 对应suite2 雪堆2 对应suite3 以此类推
 function GetMonsterSuit(context, cfg_id)
 	local tmp = 0
-	for k,v in ipairs(suites[1].gadgets) do
+	for k,v in ipairs(suites[1].gadgets) do 
 		if cfg_id == v then
 			tmp = k+1
-
-			return tmp
+			
+			return tmp 
 		end
 	end
 	return 0

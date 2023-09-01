@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308293
 }
 
@@ -14,9 +14,9 @@ local optionID = {440}
 --{440} 权限操作台解除物件锁定
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -89,29 +89,29 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_293001(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"quest"为1
 	if ScriptLib.GetGroupVariableValue(context, "quest") ~= 1 then
 			return false
 	end
-
+	
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133308293, 293002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -121,8 +121,8 @@ function action_EVENT_VARIABLE_CHANGE_293001(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 293002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -130,14 +130,14 @@ end
 function condition_EVENT_SELECT_OPTION_293003(context, evt)
 	-- 判断是gadgetid 293002 option_id 440
 	if 293002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 440 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -147,8 +147,8 @@ function action_EVENT_SELECT_OPTION_293003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 293002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_293004(context, evt)
 	if 293002 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -168,7 +168,7 @@ function action_EVENT_GADGET_STATE_CHANGE_293004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_GROUP_LOAD_293005(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133308293, 293002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,7 +188,7 @@ function action_EVENT_GROUP_LOAD_293005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -199,7 +199,7 @@ function action_EVENT_QUEST_FINISH_293006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -209,16 +209,16 @@ function condition_EVENT_GROUP_LOAD_293007(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"quest"为1
 	if ScriptLib.GetGroupVariableValue(context, "quest") ~= 1 then
 			return false
 	end
-
+	
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133308293, 293002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -228,8 +228,8 @@ function action_EVENT_GROUP_LOAD_293007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 293002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

@@ -4,11 +4,11 @@
 ||	owner: 		luyao.huang
 ||	description:	整合了各类沙虫控制方法，可以直接调用或通过tpl调用
 ||	LogName:	SandwormToolkit
-||	Protection:
+||	Protection:	
 =======================================]]--
 
 
---defs = {
+--local defs = {
 --	alert_max_value = 1000,
 --	normal_sandworm_id = 1030,
 --	direct_sandworm_id = 1035,
@@ -19,7 +19,7 @@
 
 
 
-local local_defs =
+local local_defs = 
 {
     sandworm_manager_group = 133314001,
 }
@@ -91,7 +91,7 @@ function LF_Command_Move_Sandworm_Attack(context,attack_times)
             local point_info_list = LF_Get_Point_Info_List(context,sandworm_point_array.point_array,point_list)
             local born_point = LF_Get_Random_Point(context,point_info_list,{})
             local born_pos = born_point.pos
-            ScriptLib.CreateGadgetByParamTable(context,{config_id = defs.move_sandworm_id,pos = {x=born_pos.x,y=born_pos.y,z=born_pos.z}, rot = {x=0,y=0,z=0},
+            ScriptLib.CreateGadgetByParamTable(context,{config_id = defs.move_sandworm_id,pos = {x=born_pos.x,y=born_pos.y,z=born_pos.z}, rot = {x=0,y=0,z=0}, 
                 sgv_key = {"SGV_Attack_Times","SGV_Shoot_Sandworm"}, sgv_value = {attack_times,0}})
                 ScriptLib.SetEntityServerGlobalValueByConfigId(context, defs.move_sandworm_id, "SGV_Shoot_Sandworm", 1)
             LF_On_Create_Sandworm_Success(context)
@@ -157,7 +157,7 @@ end
 --召唤沙虫的实现接口
 --创建一只移动沙虫
 function LF_Create_Move_Sandworm(context,attack_times)
-
+    
     ScriptLib.PrintContextLog(context,"## [SandwormToolkit] LF_Create_Move_Sandworm: 创建一只移动表演用沙虫")
 
 
@@ -169,9 +169,9 @@ function LF_Create_Move_Sandworm(context,attack_times)
     local point_info_list = LF_Get_Point_Info_List(context,sandworm_point_array.point_array,point_list)
     local born_point = LF_Get_Random_Point(context,point_info_list,{})
     local born_pos = born_point.pos
-    ScriptLib.CreateGadgetByParamTable(context,{config_id = defs.move_sandworm_id,pos = {x=born_pos.x,y=born_pos.y,z=born_pos.z}, rot = {x=0,y=0,z=0},
+    ScriptLib.CreateGadgetByParamTable(context,{config_id = defs.move_sandworm_id,pos = {x=born_pos.x,y=born_pos.y,z=born_pos.z}, rot = {x=0,y=0,z=0}, 
         sgv_key = {"SGV_Attack_Times"}, sgv_value = {attack_times}})
-    local black_list = {born_point.point_id}
+    local black_list = {born_point.point_id}   
     local target_point = LF_Get_Random_Point(context,point_info_list,black_list)
     ScriptLib.SetPlatformPointArray(context,defs.move_sandworm_id, sandworm_point_array.point_array, {target_point.point_id}, { route_type = 0,turn_mode=false, record_mode = 2 })
 end
@@ -185,7 +185,7 @@ function action_platform_arrival_toolkit(context,evt)
         for i = 1, sandworm_point_array.max_point do
             table.insert(point_list,i)
         end
-
+    
         local point_info_list = LF_Get_Point_Info_List(context,sandworm_point_array.point_array,point_list)
         local target_point = LF_Get_Random_Point(context,point_info_list,{})
 
@@ -205,7 +205,7 @@ function LF_Create_Direct_Sandworm(context,pos,attack_times,target_stragety)
     --ScriptLib.PrintContextLog(context,"## [SandwormToolkit] LF_Create_Direct_Sandworm: pos参数为"..pos.x..","..pos.y..","..pos.z)
     --ScriptLib.PrintContextLog(context,"## [SandwormToolkit] LF_Create_Direct_Sandworm: attack_times参数为"..attack_times)
     --ScriptLib.PrintContextLog(context,"## [SandwormToolkit] LF_Create_Direct_Sandworm: target_stragety参数为"..target_stragety)
-    local ret = ScriptLib.CreateGadgetByParamTable(context,{config_id = defs.direct_sandworm_id,pos = {x=pos.x,y=pos.y,z=pos.z}, rot = {x=0,y=0,z=0},
+    local ret = ScriptLib.CreateGadgetByParamTable(context,{config_id = defs.direct_sandworm_id,pos = {x=pos.x,y=pos.y,z=pos.z}, rot = {x=0,y=0,z=0}, 
         sgv_key = {"SGV_Attack_Times","SGV_Target_Stragety"}, sgv_value = {attack_times,target_stragety}})
     --ScriptLib.PrintContextLog(context,"## [SandwormToolkit] LF_Create_Direct_Sandworm: 创建结果为"..ret)
 end

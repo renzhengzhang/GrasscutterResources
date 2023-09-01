@@ -3,11 +3,11 @@
 ||  owner:      shuyi.chang
 ||  description:    3.3短距寻物
 ||  LogName:    ## TD_CoinCollect：
-||  Protection:
+||  Protection: 
 =======================================]]
 
 --[[
-defs =
+local defs = 
 {
     -- 还剩多少秒的时候出现金币提示光柱
     hintTime = 30,
@@ -25,19 +25,19 @@ defs =
     galleryId = 99,
 }
 
-defs_miscs =
+local defs_miscs = 
 {
     -- 特殊金币和它们关联的普通金币们，有几个特殊金币就应该有几项
     specialCoinTable = {
         -- 每项格式如下
         [specialCoin_configId] = {coin_configId_01, coin_configId_02, coin_configId_03, ...},
     },
-
+    
 }
 --]]
 
 -- 注意这个动态group卸载会先于gallery结束，所以不能用event_gallery_stop，保底在group will unload里
-local extraTriggers =
+local extraTriggers = 
 {
 	{ config_id = 50000001, name = "GROUP_LOAD", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD", trigger_count = 0 },
 	{ config_id = 50000002, name = "TIME_AXIS_PASS", event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_EVENT_TIME_AXIS_PASS", trigger_count = 0 },
@@ -53,7 +53,7 @@ local extraTriggers =
 
 }
 
-local extraVariables =
+local extraVariables = 
 {
     { config_id = 50000101, name = "final", value = 0, no_refresh = false },
     { config_id = 50000102, name = "collectedCoins", value = 0, no_refresh = false },
@@ -75,7 +75,7 @@ local totalCoinCount = 0
 
 local totalTime = 120
 
-local skillTable =
+local skillTable = 
 {
     ["coin"] = {name = "coin", duration = 10},
     ["charge"] = {name = "charge", duration = 10},
@@ -169,7 +169,7 @@ function LF_PrintList(context, name, list)
 end
 
 -- 从所有201金币中随机1个金币（特殊金币+不和特殊金币关联的普通金币）
-function LF_RandomCoin(context)
+function LF_RandomCoin(context) 
     local tempTable = {}
     -- 特殊金币
     for i, v in pairs(defs_miscs.specialCoinTable) do
@@ -201,7 +201,7 @@ function LF_RandomCoin(context)
     return coinId
 end
 
-function LF_ThreeRandomCoins(context)
+function LF_ThreeRandomCoins(context) 
     ScriptLib.PrintContextLog(context, "## TD_CoinCollect： LF_ThreeRandomCoins is called")
 
     local tempTable = {}
@@ -274,7 +274,7 @@ function LF_ResetGroup(context, start)
     for i = 1, #tempCoins do
         ScriptLib.SetGadgetStateByConfigId(context, tempCoins[i], coinState.show)
     end
-
+    
     -- 保底把所有indie coins设置为显示状态
     for i = 1, #indieCoins do
         ScriptLib.SetGadgetStateByConfigId(context, indieCoins[i], coinState.show)
@@ -334,7 +334,7 @@ function LF_LevelStart(context, start)
         ScriptLib.SetPlayerGroupVisionType(context, uid_list, {1})
 
     end
-
+  
 end
 
 function LF_CheckSkill(context, uid)
@@ -352,7 +352,7 @@ function LF_CheckSkill(context, uid)
     ScriptLib.SetGroupTempValue(context, "times_"..uid, 0, {})
 
     ScriptLib.PrintContextLog(context, "## TD_CoinCollect： LF_CheckSkill is called, uid = "..uid..", skill_id = "..list[1]..", charge = "..list[2]..", coin = "..list[3])
-
+   
 end
 
 
@@ -446,7 +446,7 @@ function action_EVENT_TIME_AXIS_PASS(context, evt)
                 ScriptLib.CreateGadgetByParamTable(context, {config_id = bait, pos = pos, rot = rot})
             end
         end
-
+        
     elseif string.sub(evt.source_name, 1, 12) == "specialCoin_" then
         -- 所有201限时金币都消失回到0，特殊金币重新出现
         local configId = tonumber(string.sub(evt.source_name, 13))
@@ -465,12 +465,12 @@ function action_EVENT_TIME_AXIS_PASS(context, evt)
             ScriptLib.PrintContextLog(context, "## TD_CoinCollect: WARNING!!! no valid uid when widget skill is supposed to end")
             return 0
         end
-
+        
         -- 不在乎这个技能有没有金币和充能，都可以归零
         ScriptLib.SetTeamServerGlobalValue(context, uid, "SGV_CoinCollect_Skill_Charge", 0)
         ScriptLib.SetTeamServerGlobalValue(context, uid, "SGV_CoinCollect_Skill_Coin", 0)
         ScriptLib.SetTeamServerGlobalValue(context, uid, "SGV_CoinCollect_Widget_SkillEnabled", 0)
-
+        
         ScriptLib.PrintContextLog(context, "## TD_CoinCollect: uid = "..uid..", skill end")
     -- elseif string.sub(evt.source_name, 1, 4) == "coin" then
     --     -- 金币技能结束
@@ -525,7 +525,7 @@ function action_EVENT_VARIABLE_CHANGE(context, evt)
         ScriptLib.PrintContextLog(context, "## TD_CoinCollect: start gallery = "..defs.galleryId..", ret = "..ret)
 
     end
-
+  
     return 0
 end
 
@@ -553,7 +553,7 @@ function action_EVENT_GALLERY_START(context, evt)
     for i = 1, #uid_list do
         LF_CheckSkill(context, uid_list[i])
     end
-
+    
     return 0
 end
 
@@ -588,7 +588,7 @@ function SLC_Player_Approach_Coin(context, param1, param2)
     end
 
     ScriptLib.PrintContextLog(context, "## TD_CoinCollect： SLC_Player_Approach_Coin is called, configId = "..configId)
-
+    
     -- 1普通金币，2特殊金币
     if param1 == 1 then
 		-- ScriptLib.SetGroupGadgetStateByConfigId(context, base_info.group_id, configId, 202)
@@ -598,7 +598,7 @@ function SLC_Player_Approach_Coin(context, param1, param2)
         -- todo 通知gallery修改计分，暂时先用挑战做了
         ScriptLib.ChangeGroupVariableValue(context, "collectedCoins", 1)
         local collectedCoins = ScriptLib.GetGroupVariableValue(context, "collectedCoins")
-
+        
         -- param2是消耗了多少时间
         -- local timePassed = totalTime - param2/1000
         local timePassed = param2/1000
@@ -610,7 +610,7 @@ function SLC_Player_Approach_Coin(context, param1, param2)
         if specialCoin_configId ~= nil then
         -- if evt.param3 == 902 then
             ScriptLib.ChangeGroupVariableValue(context, tostring(specialCoin_configId), 1)
-
+    
             -- 如果某一个特殊金币周围的限时金币都被拾取了，关联的特殊金币消失，时间轴取消(不能把关联的限时金币重置回来了)
             if ScriptLib.GetGroupVariableValue(context, tostring(specialCoin_configId)) == #defs_miscs.specialCoinTable[specialCoin_configId] then
                 ScriptLib.SetGroupGadgetStateByConfigId(context, base_info.group_id, specialCoin_configId, coinState.dead)
@@ -643,7 +643,7 @@ function SLC_Player_Approach_Coin(context, param1, param2)
 end
 
 function SLC_CoinCollect_WidgetUsed(context)
-
+    
     -- 使用了一次小道具，需要判断是否需要修改小道具tick速度和金币拾取范围（别的技能的开关是SGV_CoinCollect_Widget_SkillEnabled）
     local coin = ScriptLib.GetGroupTempValue(context, "coin_"..context.uid,{})
     local charge = ScriptLib.GetGroupTempValue(context, "charge_"..context.uid,{})

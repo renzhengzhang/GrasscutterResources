@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240017002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -119,9 +119,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -132,9 +132,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -204,9 +204,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -214,7 +214,7 @@ function condition_EVENT_GADGET_CREATE_2001(context, evt)
 	if 2059 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -225,7 +225,7 @@ function action_EVENT_GADGET_CREATE_2001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -233,22 +233,22 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_2002(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240017003, 2)
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 240017002, EntityType.GADGET, 2059 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 改变指定group组240017001中， configid为1001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240017001, 1001, GadgetState.GearAction2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 240017004, 1)
-
+	
 	return 0
 end
 
@@ -259,28 +259,28 @@ function action_EVENT_CHALLENGE_FAIL_2003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 240017002, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 添加suite1的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240017004, 1)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2040(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"wave"为5
 	if ScriptLib.GetGroupVariableValue(context, "wave") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -288,17 +288,17 @@ end
 function action_EVENT_VARIABLE_CHANGE_2040(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240017002, 7)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_2054(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 240017002) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -309,19 +309,19 @@ function action_EVENT_ANY_MONSTER_DIE_2054(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2055(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"wave"为1
 	if ScriptLib.GetGroupVariableValue(context, "wave") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -329,19 +329,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_2055(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240017002, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2056(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"wave"为2
 	if ScriptLib.GetGroupVariableValue(context, "wave") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -349,19 +349,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_2056(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240017002, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2057(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"wave"为3
 	if ScriptLib.GetGroupVariableValue(context, "wave") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -369,19 +369,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_2057(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240017002, 5)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2058(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"wave"为4
 	if ScriptLib.GetGroupVariableValue(context, "wave") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -389,7 +389,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_2058(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240017002, 6)
-
+	
 	return 0
 end
 
@@ -398,7 +398,7 @@ function condition_EVENT_ANY_GADGET_DIE_2061(context, evt)
 	if 2059 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -406,7 +406,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_2061(context, evt)
 	-- 终止识别id为100的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 100, 0)
-
+	
 	return 0
 end
 
@@ -415,7 +415,7 @@ function condition_EVENT_ANY_GADGET_DIE_2062(context, evt)
 	if 2060 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -423,6 +423,6 @@ end
 function action_EVENT_ANY_GADGET_DIE_2062(context, evt)
 	-- 终止识别id为100的挑战，并判定失败
 		ScriptLib.StopChallenge(context, 100, 0)
-
+	
 	return 0
 end

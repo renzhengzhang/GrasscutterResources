@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210421
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -102,9 +102,9 @@ sight_groups = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -115,9 +115,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -169,9 +169,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -179,7 +179,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_421009(context, evt)
 	if 10 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -189,7 +189,7 @@ function action_EVENT_MONSTER_TIDE_DIE_421009(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 222, 133210421, {421006,421010,421011,421013,421017}, 10, 1, 5) then
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -200,7 +200,7 @@ function action_EVENT_ANY_MONSTER_DIE_421012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -208,14 +208,14 @@ end
 function condition_EVENT_SELECT_OPTION_421014(context, evt)
 	-- 判断是gadgetid 421008 option_id 65
 	if 421008 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 65 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -225,28 +225,28 @@ function action_EVENT_SELECT_OPTION_421014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 421008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133210421, 2)
-
+	
 	-- 删除指定group： 133210421 ；指定config：421008；物件身上指定option：65；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133210421, 421008, 65) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 创建编号为111（该怪物潮的识别id)的怪物潮，创建怪物总数为10，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 111, 133210421, {421001,421002,421003,421004,421005}, 10, 5, 5) then
 		return -1
 	end
-
+	
 	-- 调用提示id为 32100105 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 32100105) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -257,25 +257,25 @@ function action_EVENT_CHALLENGE_SUCCESS_421015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7214603") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "QuestStart" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "QuestStart", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133210421, suite = 4 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -285,51 +285,51 @@ function action_EVENT_CHALLENGE_FAIL_421016(context, evt)
 	if 0 ~= ScriptLib.KillMonsterTide(context, 133210421, 111) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 	end
-
+	
 	--销毁编号为222（该怪物潮的识别id)的怪物潮
 	if 0 ~= ScriptLib.KillMonsterTide(context, 133210421, 222) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 	end
-
+	
 	--销毁编号为333（该怪物潮的识别id)的怪物潮
 	if 0 ~= ScriptLib.KillMonsterTide(context, 133210421, 333) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 	end
-
+	
 	--销毁编号为444（该怪物潮的识别id)的怪物潮
 	if 0 ~= ScriptLib.KillMonsterTide(context, 133210421, 444) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 	end
-
-
+	
+	
 	-- 将configid为 421008 的物件更改为状态 GadgetState.GearAction2
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 421008, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "deadMonster" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "deadMonster", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133210421, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133210421, 3)
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133210421, 421008, {65}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -340,7 +340,7 @@ function action_EVENT_QUEST_START_421018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -349,7 +349,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_421028(context, evt)
 	if 421001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -360,19 +360,19 @@ function action_EVENT_ANY_MONSTER_LIVE_421028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_start_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_421033(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"QuestStart"为2
 	if ScriptLib.GetGroupVariableValue(context, "QuestStart") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -383,7 +383,7 @@ function action_EVENT_VARIABLE_CHANGE_421033(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -393,7 +393,7 @@ function condition_EVENT_GROUP_LOAD_421034(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "QuestStart") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -401,13 +401,13 @@ end
 function action_EVENT_GROUP_LOAD_421034(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133210421, 3)
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 133210421, 421008, {65}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -418,7 +418,7 @@ function action_EVENT_QUEST_START_421035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -428,7 +428,7 @@ function condition_EVENT_GROUP_LOAD_421036(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "QuestStart") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -439,7 +439,7 @@ function action_EVENT_GROUP_LOAD_421036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -450,19 +450,19 @@ function action_EVENT_QUEST_START_421039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_421040(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"QuestStart"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestStart") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -473,7 +473,7 @@ function action_EVENT_VARIABLE_CHANGE_421040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -483,7 +483,7 @@ function condition_EVENT_GROUP_LOAD_421041(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "QuestStart") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -494,7 +494,7 @@ function action_EVENT_GROUP_LOAD_421041(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -503,7 +503,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_421042(context, evt)
 	if 10 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -513,13 +513,13 @@ function action_EVENT_MONSTER_TIDE_DIE_421042(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 333, 133210421, {421019,421020,421021,421022,421023}, 10, 1, 5) then
 		return -1
 	end
-
+	
 	-- 调用提示id为 32100178 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 32100178) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -528,7 +528,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_421043(context, evt)
 	if 10 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -538,12 +538,12 @@ function action_EVENT_MONSTER_TIDE_DIE_421043(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 444, 133210421, {421024,421025,421026,421027}, 20, 2, 2) then
 		return -1
 	end
-
+	
 	-- 调用提示id为 32100179 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 32100179) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

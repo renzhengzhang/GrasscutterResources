@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133212022
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -118,20 +118,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_22002(context, evt)
 	if evt.param1 ~= 22002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -142,17 +142,17 @@ function action_EVENT_ENTER_REGION_22002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_22004(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133212022) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -163,28 +163,28 @@ function action_EVENT_ANY_MONSTER_DIE_22004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212022, 4)
-
+	
 	-- 将本组内变量名为 "monster_die" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_die", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_22005(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"RainState"为1
 	if ScriptLib.GetGroupVariableValue(context, "RainState") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -196,19 +196,19 @@ function action_EVENT_VARIABLE_CHANGE_22005(context, evt)
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_22006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"RainState"为2
 	if ScriptLib.GetGroupVariableValue(context, "RainState") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -218,7 +218,7 @@ function action_EVENT_VARIABLE_CHANGE_22006(context, evt)
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 0, "Eff_Weather_HeavyRainTBS_DqTBS", {-3704.848,197.2667,-1744.457}, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	return 0
 end
 
@@ -228,7 +228,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_22007(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 72 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -240,19 +240,19 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_22007(context, evt)
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_22008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"RainState"为3
 	if ScriptLib.GetGroupVariableValue(context, "RainState") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -263,14 +263,14 @@ function action_EVENT_VARIABLE_CHANGE_22008(context, evt)
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 3, "Eff_Weather_HeavyRainTBS_DqTBS", ratioParam, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	-- 设置气候特效偏移
 	local floatParam={0,1,2}
 	local intParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	return 0
 end
 
@@ -280,7 +280,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_22009(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 10 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -290,32 +290,32 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_22009(context, evt)
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 0, "Eff_Weather_HeavyRainTBS_DqTBS", {0,-12,0}, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	-- 设置气候特效偏移
 	local ratioParam={-1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 3, "Eff_Weather_HeavyRainTBS_DqTBS", ratioParam, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	-- 设置气候特效偏移
 	local floatParam={0,1,20}
 	local intParam={2}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_22010(context, evt)
 	if evt.param1 ~= 22010 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -326,7 +326,7 @@ function action_EVENT_ENTER_REGION_22010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -336,7 +336,7 @@ function condition_EVENT_GROUP_LOAD_22011(context, evt)
 	if ScriptLib.GetGroupVariableValueByGroup(context, "monster_die", 133212022) ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -346,20 +346,20 @@ function action_EVENT_GROUP_LOAD_22011(context, evt)
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 4, "Eff_Weather_HeavyRainTBS_DqTBS", {-3698,210,-1756}, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	-- 设置气候特效偏移
 	local ratioParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 3, "Eff_Weather_HeavyRainTBS_DqTBS", ratioParam, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	-- 设置气候特效偏移
 	local floatParam={0,1,0.1}
 	local intParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	return 0
 end
 
@@ -369,19 +369,19 @@ function action_EVENT_LEAVE_REGION_22012(context, evt)
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 4, "Eff_Weather_HeavyRainTBS_DqTBS", {-3698,210,-1756}, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	-- 设置气候特效偏移
 	local floatParam={0,1,0.1}
 	local intParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 2, "Eff_Weather_HeavyRainTBS_DqTBS", floatParam, intParam) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	-- 设置气候特效偏移
 	local ratioParam={1}
 	if 0~=ScriptLib.SetEnvironmentEffectState(context, 3, "Eff_Weather_HeavyRainTBS_DqTBS", ratioParam, {0}) then
 	   ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : SetEnvironmentEffectFailed")
 	end
-
+	
 	return 0
 end

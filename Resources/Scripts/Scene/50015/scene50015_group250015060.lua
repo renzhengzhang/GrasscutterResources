@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250015060
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -49,9 +49,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -62,9 +62,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -107,9 +107,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -117,7 +117,7 @@ function condition_EVENT_GADGET_CREATE_60013(context, evt)
 	if 60012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -128,7 +128,7 @@ function action_EVENT_GADGET_CREATE_60013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -136,14 +136,14 @@ end
 function condition_EVENT_SELECT_OPTION_60014(context, evt)
 	-- 判断是gadgetid 60012 option_id 184
 	if 60012 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 184 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -151,7 +151,7 @@ end
 function action_EVENT_SELECT_OPTION_60014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015060, 2)
-
+	
 	return 0
 end
 
@@ -159,14 +159,14 @@ end
 function condition_EVENT_SELECT_OPTION_60015(context, evt)
 	-- 判断是gadgetid 60012 option_id 185
 	if 60012 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 185 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -174,7 +174,7 @@ end
 function action_EVENT_SELECT_OPTION_60015(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015060, 3)
-
+	
 	return 0
 end
 
@@ -182,14 +182,14 @@ end
 function condition_EVENT_SELECT_OPTION_60016(context, evt)
 	-- 判断是gadgetid 60012 option_id 186
 	if 60012 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 186 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -197,6 +197,6 @@ end
 function action_EVENT_SELECT_OPTION_60016(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250015060, 4)
-
+	
 	return 0
 end

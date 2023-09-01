@@ -4,7 +4,7 @@
 	--挑战倒计时结束：关Gallery，停止钓鱼
 	--另外处理Gallery意外先结束，同步退出钓鱼-停挑战
 
--- defs = {
+-- local defs = {
 
 --	--GroupID
 --	group_id = 100000000,
@@ -99,7 +99,7 @@ function action_fishing_start(context, evt)
 		--添加子挑战-bonus cfg.child_bonus
 		ScriptLib.AttachChildChallenge(context,cfg.father_id,cfg.child_bonus,cfg.child_bonus, {3,1002,99}, {context.uid},{success=1, fail=1})
 
-
+		
 		ScriptLib.SetGroupTempValue(context,"challenge_state", 1, {})
 	end
 	return 0
@@ -115,11 +115,11 @@ function action_gallery_stop(context, evt)
 	end
 
 	if  ScriptLib.GetGroupTempValue(context, "fishing_state", {}) == 1 then
-
+		
 		--设置挑战状态标记
 		ScriptLib.SetGroupTempValue(context, "fishing_state", 0, {})
 
-		if  ScriptLib.GetGroupTempValue(context, "challenge_state", {}) == 1 then
+		if  ScriptLib.GetGroupTempValue(context, "challenge_state", {}) == 1 then 
 			--停挑战
 			ScriptLib.EndFatherChallenge(context, cfg.father_id)
 		end
@@ -136,12 +136,12 @@ end
 function action_challenge_fail(context, evt)
 	ScriptLib.SetGroupTempValue(context, "challenge_state", 0, {})
 	if  ScriptLib.GetGroupTempValue(context, "fishing_state", {}) == 1 then
-
+		
 		--设置挑战状态标记
 		ScriptLib.SetGroupTempValue(context, "fishing_state", 0, {})
 
 		--停止Gallery false失败 true成功。这里需要填false
-		if ScriptLib.GetGroupTempValue(context, "gallery_state", {}) == 1 then
+		if ScriptLib.GetGroupTempValue(context, "gallery_state", {}) == 1 then 
 			ScriptLib.StopGallery(context, defs.gallery_id, false)
 			ScriptLib.PrintContextLog(context, "[fishing] Gallery stopped by challenge end.")
 		end
@@ -158,12 +158,12 @@ end
 function action_challenge_success(context, evt)
 	ScriptLib.SetGroupTempValue(context, "challenge_state", 0, {})
 	if  ScriptLib.GetGroupTempValue(context, "fishing_state", {}) == 1 then
-
+		
 		--设置挑战状态标记
 		ScriptLib.SetGroupTempValue(context, "fishing_state", 0, {})
 
 		--停止Gallery false失败 true成功
-		if ScriptLib.GetGroupTempValue(context, "gallery_state", {}) == 1 then
+		if ScriptLib.GetGroupTempValue(context, "gallery_state", {}) == 1 then 
 			ScriptLib.StopGallery(context, defs.gallery_id, false)
 		end
 
@@ -184,7 +184,7 @@ function action_fishing_timeout_flee(context, evt)
 	--end
 	return 0
 end
---每次退出钓鱼QTE状态时触发
+--每次退出钓鱼QTE状态时触发 
 	--evt.param1 鱼id
 	--evt.param2 0-失败 1-成功
 	--evt.param3 0-未进包（即背包满/到达活动要求的获取上限）1-进包
@@ -208,31 +208,31 @@ function action_fishing_qte_finish(context, evt)
 			---------处理总数
 			--单局计数+1
 			ScriptLib.ChangeGroupTempValue(context, "totalCount", 1, {})
-			ScriptLib.ChangeGroupTempValue(context, "tempScore", 1, {})
+			ScriptLib.ChangeGroupTempValue(context, "tempScore", 1, {})		
 
 			tempScore = ScriptLib.GetGroupTempValue(context, "tempScore", {})
-
+			
 			--触发总数挑战的计数Trigger
 			ScriptLib.SetGroupVariableValue(context, "score_total", tempScore)
 
 			--------处理连续成功
-
-			--检查是不是该刷新最大连续记录
+			
+			--检查是不是该刷新最大连续记录		
 			if tempUnmissScore < tempScore then
 				--若是，则连续挑战计分更新
 				ScriptLib.SetGroupTempValue(context,"tempUnmissScore", tempScore, {})
 				--触发连续成功挑战计数Trigger
 				ScriptLib.SetGroupVariableValue(context, "score_unmiss", tempScore)
-
+				
 			end
 
 			--------处理Bonus时间
-
+			
 			--检查是不是该刷新最大bonus时间记录,evt里发过来是整数，还是取一下floor保险
 			ScriptLib.PrintContextLog(context, "This BonusTime@"..evt.param4)
 			local diff = 0
 			--不大于180秒，正常算差
-			if evt.param4 <= 180 then
+			if evt.param4 <= 180 then	
 				diff = math.floor(evt.param4 - ScriptLib.GetGroupTempValue(context, "bonusTime", {}))
 			--大于180秒，按180秒算差
 			else
@@ -240,11 +240,11 @@ function action_fishing_qte_finish(context, evt)
 			end
 			--差值是几，就触发几次Trigger
 			if diff > 0 then
-				ScriptLib.SetGroupTempValue(context,"bonusTime", evt.param4, {})
+				ScriptLib.SetGroupTempValue(context,"bonusTime", evt.param4, {})				
 				UpdateBonusTimeForChallenge(context,diff)
 			end
 		--如果不是目标鱼，也要更新Gallery
-		else
+		else			
 			--单轮计数重置
 			ScriptLib.SetGroupTempValue(context,"tempScore", 0, {})
 
@@ -258,7 +258,7 @@ function action_fishing_qte_finish(context, evt)
 		local fishing_score = {totalCount, tempUnmissScore, bonusTime}
 
 		local is_free = false
-		if evt.param3 ~= 1 then
+		if evt.param3 ~= 1 then 
 			is_free = true
 		end
 		ScriptLib.UpdatePlayerGalleryScore(context, defs.gallery_id, {["fishing_score"] = fishing_score, ["fish_id"] = evt.param1, ["is_free"] = is_free})
@@ -284,18 +284,18 @@ end
 function action_leave_region(context, evt)
 
 	if  ScriptLib.GetGroupTempValue(context, "fishing_state", {}) == 1 then
-
+		
 		--设置挑战状态标记
 		ScriptLib.SetGroupTempValue(context, "fishing_state", 0, {})
 
 		--停挑战
-		if  ScriptLib.GetGroupTempValue(context, "challenge_state", {}) == 1 then
+		if  ScriptLib.GetGroupTempValue(context, "challenge_state", {}) == 1 then 
 			--停挑战
 			ScriptLib.EndFatherChallenge(context, cfg.father_id)
 		end
 
 		--停Gallery false失败 true成功
-		if ScriptLib.GetGroupTempValue(context, "gallery_state", {}) == 1 then
+		if ScriptLib.GetGroupTempValue(context, "gallery_state", {}) == 1 then 
 			ScriptLib.StopGallery(context, defs.gallery_id, false)
 		end
 

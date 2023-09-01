@@ -5,13 +5,13 @@
 ||	owner: 		weiwei.sun
 ||	description: 	3.2奇趣秘园 局内逻辑 打桩
 ||	LogName:	## [CharAmuse_Battle]
-||	Protection:
+||	Protection:	
 =======================================]]
 --[[
 
-defs = {
+local defs = {
 	--依次刷怪
-	suite_queue =
+	suite_queue = 
 	{	--随机情况1
 		{2,3,4,5},
 		--随机情况2
@@ -49,10 +49,10 @@ function EX_StartGallery(context, prev_context, gallery_id, is_last_level)
 	if nil ~= defs.play_suites then
 		for k,v in pairs(defs.play_suites) do
 			ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v)
-		end
+		end	
 	end
-	local uid_list = ScriptLib.GetSceneUidList(context)
-	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})
+	local uid_list = ScriptLib.GetSceneUidList(context)	
+	ScriptLib.SetGroupTempValue(context, "player_count", #uid_list, {})	
 	ScriptLib.SetGroupTempValue(context, "is_last_level", is_last_level, {})
 
 	--开启gallery
@@ -90,7 +90,7 @@ function action_AirWallVariable_Change(context, evt)
 	elseif 0 == evt.param1 and 1 == evt.param2 then
 		for i,v in ipairs(defs.air_wall) do
 			ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, v)
-		end
+		end	
 	end
 	return 0
 end
@@ -101,12 +101,12 @@ function action_Gallery_Stop(context, evt)
 	if nil ~= defs.play_suites then
 		for k,v in pairs(defs.play_suites) do
 			ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, v)
-		end
+		end	
 	end
 
 	ScriptLib.EndAllTimeAxis(context)
 
-	if 3 ~= evt.param3 then
+	if 3 ~= evt.param3 then		
 		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		--ScriptLib.InitTimeAxis(context, "StopGallery_Fail", { 3 } , false) 9.21修改 失败不要延时结束
 		ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {1, base_info.group_id})
@@ -116,7 +116,7 @@ function action_Gallery_Stop(context, evt)
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
 			ScriptLib.InitTimeAxis(context, "StopGallery", { 3 } , false)
-		end
+		end	
 	end
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_Battle] Gallery stoped. reason@".. evt.param3.." --------------")
 	return 0
@@ -124,7 +124,7 @@ end
 
 ---------------------------------------------------------------------------------------------------------------
 function LF_Start_Play(context)
-
+	
 	ScriptLib.SetGroupTempValue(context, "round", 0, {})
 
 	local player_count = ScriptLib.GetGroupTempValue(context, "player_count", {})
@@ -138,7 +138,7 @@ function LF_Start_Play(context)
 	end
 	ScriptLib.SetGroupTempValue(context, "cur_score", target, {})
 	ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["max_score"]= target} )
-
+	
 	--随机序列
 	math.randomseed(ScriptLib.GetServerTime(context))
 	local rand_index = math.random(#defs.suite_queue)
@@ -154,7 +154,7 @@ function LF_ClearRound(context)
 	local rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
 	ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, defs.suite_queue[rand_index][round])
 	--埋点
-    ScriptLib.MarkGroupLuaAction(context, "CharAmuse_BreakingShield", ScriptLib.GetDungeonTransaction(context), {["wave_num"] = round})
+    ScriptLib.MarkGroupLuaAction(context, "CharAmuse_BreakingShield", ScriptLib.GetDungeonTransaction(context), {["wave_num"] = round}) 
 
 	return 0
 end
@@ -170,7 +170,7 @@ function LF_StartRound(context)
 	local rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
 	if round > #defs.suite_queue[rand_index] then
 		round = #defs.suite_queue[rand_index]
-		ScriptLib.SetGroupTempValue(context, "round", round, {})
+		ScriptLib.SetGroupTempValue(context, "round", round, {}) 
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_Battle] LF_StartRound. All round finished. Set to final.")
 	end
 
@@ -205,7 +205,7 @@ function action_Any_Monster_Die(context)
 		--客户端弹提示
 		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["is_last_level"] = is_last_level, ["is_finish"] = true, ["is_success"] = true } )
-		ScriptLib.KillGroupEntity(context, { group_id = base_info.group_id, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER })
+		ScriptLib.KillGroupEntity(context, { group_id = base_info.group_id, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) 
 		LF_ClearRound(context)
 		ScriptLib.StopGallery(context, gallery_id, false)
 		return 0

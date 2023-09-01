@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220139019
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -122,25 +122,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_OBSERVATION_POINT_NOTIFY_19009(context, evt)
 	if 19002 == evt.param1 and 405 == evt.param2 then
 		ScriptLib.SetGadgetStateByConfigId(context,19006, GadgetState.GearStart)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,19003, GadgetState.Default)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,19011, GadgetState.GearStart)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,19002, GadgetState.ChestOpened)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,19004, GadgetState.GearStart)
 	end
-
+	
 	return 0
 end
 
@@ -148,24 +148,24 @@ end
 function action_EVENT_OBSERVATION_POINT_NOTIFY_19010(context, evt)
 	if 19003 == evt.param1 and 405 == evt.param2 then
 		ScriptLib.SetGadgetStateByConfigId(context,19007, GadgetState.GearStart)
-
+		
 		ScriptLib.SetGroupVariableValue(context, "finish1", 1)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,19003, GadgetState.ChestOpened)
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_19012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"finish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "finish1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -173,35 +173,35 @@ end
 function action_EVENT_VARIABLE_CHANGE_19012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220139019, 2)
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 19024 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 19025 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 19026 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 19027 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -211,7 +211,7 @@ function condition_EVENT_GROUP_LOAD_19014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -219,7 +219,7 @@ end
 function action_EVENT_GROUP_LOAD_19014(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220139019, 2)
-
+	
 	return 0
 end
 
@@ -229,7 +229,7 @@ function condition_EVENT_GROUP_LOAD_19020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -237,6 +237,6 @@ end
 function action_EVENT_GROUP_LOAD_19020(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220139019, 3)
-
+	
 	return 0
 end

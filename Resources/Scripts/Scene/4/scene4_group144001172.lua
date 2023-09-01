@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144001172
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	region_id = 172009
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -73,9 +73,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +86,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -131,9 +131,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -141,7 +141,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_172005(context, evt)
 	if 172003 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -152,7 +152,7 @@ function action_EVENT_GADGET_STATE_CHANGE_172005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -161,7 +161,7 @@ function condition_EVENT_ANY_GADGET_DIE_172007(context, evt)
 	if 172001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -171,26 +171,26 @@ function action_EVENT_ANY_GADGET_DIE_172007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 172003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 144001172, suite = 2 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_172008(context, evt)
 	if evt.param1 ~= 172008 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -200,11 +200,11 @@ function action_EVENT_ENTER_REGION_172008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 172001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144001172, 4)
-
+	
 	return 0
 end
 
@@ -220,11 +220,11 @@ function action_EVENT_LEAVE_REGION_172009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 172001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 144001172, 4)
-
+	
 	return 0
 end
 
@@ -234,8 +234,8 @@ function action_EVENT_GROUP_REFRESH_172010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 172003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -245,7 +245,7 @@ function action_EVENT_GROUP_LOAD_172011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 172003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

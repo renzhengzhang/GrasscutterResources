@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133104187
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_lift = 709,
 	route_down = 310400076,
 	route_up = 310400077,
@@ -13,9 +13,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -51,9 +51,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -64,9 +64,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -91,34 +91,34 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187001(context, evt)
 	if evt.param1 ~= 187001 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"isActive"为0
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_187001(context, evt)
-
-
+	
+	
 	if ScriptLib.GetGroupVariableValue(context, "switch") == 1 then
-			ScriptLib.SetGroupVariableValue(context, "isActive", 1)
+			ScriptLib.SetGroupVariableValue(context, "isActive", 1) 
 		end
 	return 0
 end
@@ -126,7 +126,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_187002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	-- 启动移动平台
 	local y = ScriptLib.GetGroupVariableValue(context, "isActive")
 	if y == 1 then
@@ -136,9 +136,9 @@ function action_EVENT_VARIABLE_CHANGE_187002(context, evt)
 			ScriptLib.StopPlatform(context, 709)
 		end
 	end
-
-
-
+		
+	
+	
 	return 0
 end
 
@@ -147,7 +147,7 @@ function condition_EVENT_GADGET_CREATE_187003(context, evt)
 	if 709 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -155,9 +155,9 @@ end
 function action_EVENT_GADGET_CREATE_187003(context, evt)
 	local x = ScriptLib.GetGroupVariableValue(context, "switch")
 	local y = ScriptLib.GetGroupVariableValue(context, "isActive")
-
+	
 	if y == 1 then
-
+	
 		if x == 1 then
 			ScriptLib.StartPlatform(context, 709)
 		elseif x == 0 then
@@ -170,18 +170,18 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_187004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"isActive"为1
 	if ScriptLib.GetGroupVariableValue(context, "isActive") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_187004(context, evt)
 	ScriptLib.StartPlatform(context, 709)
-
+	
 	return 0
 end

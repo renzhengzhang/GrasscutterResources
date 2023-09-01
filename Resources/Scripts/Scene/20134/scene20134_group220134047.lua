@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220134047
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -91,28 +91,28 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_47002(context, evt)
 	-- 判断是gadgetid 47006 option_id 214
 	if 47006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 214 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"position"为1
 	if ScriptLib.GetGroupVariableValue(context, "position") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -126,13 +126,13 @@ function action_EVENT_SELECT_OPTION_47002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "position" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "position", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -140,19 +140,19 @@ end
 function condition_EVENT_SELECT_OPTION_47003(context, evt)
 	-- 判断是gadgetid 47006 option_id 214
 	if 47006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 214 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"position"为2
 	if ScriptLib.GetGroupVariableValue(context, "position") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -166,13 +166,13 @@ function action_EVENT_SELECT_OPTION_47003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "position" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "position", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -180,19 +180,19 @@ end
 function condition_EVENT_SELECT_OPTION_47004(context, evt)
 	-- 判断是gadgetid 47006 option_id 214
 	if 47006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 214 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"position"为3
 	if ScriptLib.GetGroupVariableValue(context, "position") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -206,25 +206,25 @@ function action_EVENT_SELECT_OPTION_47004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "position" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "position", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_47005(context, evt)
 	if evt.param1 ~= 47005 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -238,13 +238,13 @@ function action_EVENT_ENTER_REGION_47005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "position" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "position", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -252,19 +252,19 @@ end
 function condition_EVENT_SELECT_OPTION_47008(context, evt)
 	-- 判断是gadgetid 47006 option_id 214
 	if 47006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 214 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"position"为4
 	if ScriptLib.GetGroupVariableValue(context, "position") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -278,13 +278,13 @@ function action_EVENT_SELECT_OPTION_47008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "position" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "position", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -292,19 +292,19 @@ end
 function condition_EVENT_SELECT_OPTION_47009(context, evt)
 	-- 判断是gadgetid 47007 option_id 214
 	if 47007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 214 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"position"为1
 	if ScriptLib.GetGroupVariableValue(context, "position") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -318,13 +318,13 @@ function action_EVENT_SELECT_OPTION_47009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "position" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "position", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -332,19 +332,19 @@ end
 function condition_EVENT_SELECT_OPTION_47010(context, evt)
 	-- 判断是gadgetid 47007 option_id 214
 	if 47007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 214 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"position"为2
 	if ScriptLib.GetGroupVariableValue(context, "position") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -358,13 +358,13 @@ function action_EVENT_SELECT_OPTION_47010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "position" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "position", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -372,19 +372,19 @@ end
 function condition_EVENT_SELECT_OPTION_47011(context, evt)
 	-- 判断是gadgetid 47007 option_id 214
 	if 47007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 214 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"position"为3
 	if ScriptLib.GetGroupVariableValue(context, "position") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -398,13 +398,13 @@ function action_EVENT_SELECT_OPTION_47011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "position" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "position", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -412,19 +412,19 @@ end
 function condition_EVENT_SELECT_OPTION_47012(context, evt)
 	-- 判断是gadgetid 47007 option_id 214
 	if 47007 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 214 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	-- 判断变量"position"为4
 	if ScriptLib.GetGroupVariableValue(context, "position") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -438,25 +438,25 @@ function action_EVENT_SELECT_OPTION_47012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "position" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "position", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"position"为5
 	if ScriptLib.GetGroupVariableValue(context, "position") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -467,25 +467,25 @@ function action_EVENT_VARIABLE_CHANGE_47013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220134060, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_47014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"position"为2
 	if ScriptLib.GetGroupVariableValue(context, "position") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -496,6 +496,6 @@ function action_EVENT_VARIABLE_CHANGE_47014(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

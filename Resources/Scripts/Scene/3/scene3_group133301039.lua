@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301039
 }
 
@@ -14,9 +14,9 @@ local BattleCfg = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -70,9 +70,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -83,9 +83,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -119,25 +119,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_39001(context, evt)
 	if evt.param1 ~= 39001 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"BossBattleProgress"为0
 	if ScriptLib.GetGroupVariableValueByGroup(context, "BossBattleProgress", 133301038)  <  3  then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -148,7 +148,7 @@ function action_EVENT_ENTER_REGION_39001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -157,7 +157,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_39008(context, evt)
 	if 39011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -168,7 +168,7 @@ function action_EVENT_ANY_MONSTER_LIVE_39008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -177,7 +177,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_39017(context, evt)
 	if 39007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,8 +188,8 @@ function action_EVENT_GADGET_STATE_CHANGE_39017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -198,7 +198,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_39018(context, evt)
 	if 39009 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -209,8 +209,8 @@ function action_EVENT_GADGET_STATE_CHANGE_39018(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 
@@ -219,7 +219,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_39019(context, evt)
 	if 39010 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -230,8 +230,8 @@ function action_EVENT_GADGET_STATE_CHANGE_39019(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 

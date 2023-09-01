@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103324
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_id = 133103324,
 	gadget_target_1 = 324003,
 	monster_mole_1 = 324001,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -53,9 +53,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -66,9 +66,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -103,9 +103,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -114,14 +114,14 @@ function condition_EVENT_ANY_MONSTER_DIE_324005(context, evt)
 	if evt.param1 ~= 324002 then
 	    return false
 	 end
-
-
+	  
+	
 	--判断死亡怪物的死亡类型是否为0，0为普通死亡（比如被击杀），1为普通地被killself杀死，2为消失（比如小动物逃跑消失，北风狼脱战消失）
 	if evt.param2 ~= 0 then
 	    return false
 	 end
-
-
+	
+	
 	return true
 end
 
@@ -132,13 +132,13 @@ function action_EVENT_ANY_MONSTER_DIE_324005(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 销毁group存档，不影响当前场景，但卸载后group就永别了
 	if 0 ~= ScriptLib.SetGroupDead(context, 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_group_die")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -146,14 +146,14 @@ end
 function condition_EVENT_SELECT_OPTION_324006(context, evt)
 	-- 判断是gadgetid 324004 option_id 171
 	if 324004 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 171 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -163,20 +163,20 @@ function action_EVENT_SELECT_OPTION_324006(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133103324, 324004, GadgetState.GearAction2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133103324 ；指定config：324004；物件身上指定option：171；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133103324, 324004, 171) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 2006, 1, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -185,7 +185,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_324007(context, evt)
 	if 324004 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -196,13 +196,13 @@ function action_EVENT_GADGET_STATE_CHANGE_324007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "HoleHasShowed" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "HoleHasShowed", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -211,7 +211,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_324008(context, evt)
 	if 324003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -219,13 +219,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_324008(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103324, 3)
-
+	
 	-- 将configid为 324004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 324004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -235,7 +235,7 @@ function condition_EVENT_GROUP_LOAD_324009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "HoleHasShowed") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -246,10 +246,10 @@ function action_EVENT_GROUP_LOAD_324009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103324, 3)
-
+	
 	return 0
 end
 
@@ -259,7 +259,7 @@ function condition_EVENT_GROUP_LOAD_324010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "HoleHasShowed") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -269,16 +269,16 @@ function action_EVENT_GROUP_LOAD_324010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 324004, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103324, 3)
-
+	
 	-- 将configid为 324003 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 324003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

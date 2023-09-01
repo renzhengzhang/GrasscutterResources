@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133210027
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -89,19 +89,19 @@ function action_EVENT_QUEST_FINISH_27001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_27002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ActiveCount"为1
 	if ScriptLib.GetGroupVariableValue(context, "ActiveCount") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -109,20 +109,20 @@ end
 function action_EVENT_VARIABLE_CHANGE_27002(context, evt)
 	-- 创建标识为"reminder1"，时间节点为{10}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "reminder1", {10}, false)
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_27003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ActiveCount"为2
 	if ScriptLib.GetGroupVariableValue(context, "ActiveCount") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -130,8 +130,8 @@ end
 function action_EVENT_VARIABLE_CHANGE_27003(context, evt)
 	-- 创建标识为"reminder2"，时间节点为{10}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "reminder2", {10}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -150,7 +150,7 @@ function action_EVENT_TIME_AXIS_PASS_27004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -169,19 +169,19 @@ function action_EVENT_TIME_AXIS_PASS_27005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_27006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"QuestFinish1"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestFinish1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -192,19 +192,19 @@ function action_EVENT_VARIABLE_CHANGE_27006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_27007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"QuestFinish2"为1
 	if ScriptLib.GetGroupVariableValue(context, "QuestFinish2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -215,7 +215,7 @@ function action_EVENT_VARIABLE_CHANGE_27007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -225,7 +225,7 @@ function condition_EVENT_QUEST_START_27008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "QuestFinish1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -236,7 +236,7 @@ function action_EVENT_QUEST_START_27008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -246,7 +246,7 @@ function condition_EVENT_QUEST_START_27009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "QuestFinish2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -257,6 +257,6 @@ function action_EVENT_QUEST_START_27009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

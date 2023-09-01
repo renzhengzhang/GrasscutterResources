@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304054
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -60,9 +60,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -73,9 +73,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -127,9 +127,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -137,7 +137,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_54005(context, evt)
 	if 54001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -145,19 +145,19 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_54005(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304054, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_54008(context, evt)
 	if evt.param1 ~= 54008 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	local curQuestState = ScriptLib.GetHostQuestState(context,7308903)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -165,7 +165,7 @@ function condition_EVENT_ENTER_REGION_54008(context, evt)
 	if curQuestState == 3 then
 	   return true
 	end
-
+	
 	local curQuestState = ScriptLib.GetHostQuestState(context,7308905)
 	if -1 == curQuestState or 0 == curQuestState then
 	  return false
@@ -173,7 +173,7 @@ function condition_EVENT_ENTER_REGION_54008(context, evt)
 	if curQuestState == 3 then
 	   return true
 	end
-
+	
 	return false
 end
 
@@ -181,7 +181,7 @@ end
 function action_EVENT_ENTER_REGION_54008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304054, 2)
-
+	
 	return 0
 end
 
@@ -190,7 +190,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_54009(context, evt)
 	if 54006 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -198,7 +198,7 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_54009(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304054, 2)
-
+	
 	return 0
 end
 
@@ -208,7 +208,7 @@ function condition_EVENT_GROUP_LOAD_54016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "first") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -216,7 +216,7 @@ end
 function action_EVENT_GROUP_LOAD_54016(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304054, 3)
-
+	
 	return 0
 end
 
@@ -226,7 +226,7 @@ function condition_EVENT_GROUP_LOAD_54017(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "second") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -234,7 +234,7 @@ end
 function action_EVENT_GROUP_LOAD_54017(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133304054, 4)
-
+	
 	return 0
 end
 
@@ -243,7 +243,7 @@ function condition_EVENT_GADGET_CREATE_54018(context, evt)
 	if 54003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -253,8 +253,8 @@ function action_EVENT_GADGET_CREATE_54018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 54001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -263,7 +263,7 @@ function condition_EVENT_GADGET_CREATE_54019(context, evt)
 	if 54003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -273,7 +273,7 @@ function action_EVENT_GADGET_CREATE_54019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 54006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

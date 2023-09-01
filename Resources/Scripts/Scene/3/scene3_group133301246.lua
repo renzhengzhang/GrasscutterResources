@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301246
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_CoreID = 246005,
 	monster_BossID = 246002,
 	gadget_Point_1 = 246006,
@@ -42,9 +42,9 @@ local CameraLookSetting = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -113,9 +113,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -126,9 +126,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -171,9 +171,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -181,7 +181,7 @@ function condition_EVENT_ANY_GADGET_DIE_246013(context, evt)
 	if 246011 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -192,7 +192,7 @@ function action_EVENT_ANY_GADGET_DIE_246013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -201,7 +201,7 @@ function condition_EVENT_ANY_GADGET_DIE_246027(context, evt)
 	if 246005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -209,7 +209,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_246027(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301246, 4)
-
+	
 	return 0
 end
 
@@ -218,7 +218,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_246028(context, evt)
 	if 246006 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -229,11 +229,11 @@ function action_EVENT_GADGET_STATE_CHANGE_246028(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301249, 3)
-
+	
 	return 0
 end
 
@@ -242,7 +242,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_246029(context, evt)
 	if 246007 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -253,11 +253,11 @@ function action_EVENT_GADGET_STATE_CHANGE_246029(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301249, 5)
-
+	
 	return 0
 end
 
@@ -266,7 +266,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_246030(context, evt)
 	if 246008 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -277,11 +277,11 @@ function action_EVENT_GADGET_STATE_CHANGE_246030(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133301249, 4)
-
+	
 	return 0
 end
 

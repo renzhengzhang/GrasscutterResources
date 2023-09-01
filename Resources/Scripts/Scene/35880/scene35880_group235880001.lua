@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 235880001
 }
 
 -- DEFS_MISCS
-defs =
+local defs =
 {
 --操作台id
     starter_gadget = 1001,
 --gallery id
     gallery_id = 35001,
---传送点 id
+--传送点 id 
     teleportPos_id = 1005,
-    groups_info =
+    groups_info = 
     {
        --主控group 怪物数量不用管
         [1] = {id = 235880001, monster_num = 0,},
@@ -26,9 +26,9 @@ defs =
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -106,9 +106,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 自动持续刷怪
@@ -123,84 +123,84 @@ end
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1002(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"GALLERY_STATE"为1
 	if ScriptLib.GetGroupVariableValue(context, "GALLERY_STATE") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"GROUP_INDEX"为2
 	if ScriptLib.GetGroupVariableValue(context, "GROUP_INDEX") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_1002(context, evt)
 	TLA_active_monster_tide(context, evt, 1, 235880002, {2001,2002,2003,2004,2005,2006,2008,2009}, 8, 2, 2)
-
+	
 	TLA_active_monster_tide(context, evt, 2, 235880002, {2010,2011,2012,2013,2014,2015,2016,2017}, 8, 2, 2)
-
+	
 	TLA_active_monster_tide(context, evt, 3, 235880002, {2018,2019,2020,2021}, 4, 1, 1)
-
+	
 	TLA_active_monster_tide(context, evt, 4, 235880002, {2026,2027,2028,2029,2030,2031,2032,2033}, 8, 2, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"GALLERY_STATE"为1
 	if ScriptLib.GetGroupVariableValue(context, "GALLERY_STATE") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"GROUP_INDEX"为3
 	if ScriptLib.GetGroupVariableValue(context, "GROUP_INDEX") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_1003(context, evt)
 	TLA_active_monster_tide(context, evt, 1, 235880003, {3002,3003,3004,3005,3006,3007,3008,3009,3010}, 9, 3, 3)
-
+	
 	TLA_active_monster_tide(context, evt, 2, 235880003, {3011,3012,3013,3014,3015,3016}, 6, 2, 2)
-
+	
 	TLA_active_monster_tide(context, evt, 3, 235880003, {3017,3018,3019}, 3, 1, 1)
-
+	
 	TLA_active_monster_tide(context, evt, 4, 235880003, {3020,3021,3022}, 3, 1, 1)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1004(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"GALLERY_STATE"为1
 	if ScriptLib.GetGroupVariableValue(context, "GALLERY_STATE") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"GROUP_INDEX"为4
 	if ScriptLib.GetGroupVariableValue(context, "GROUP_INDEX") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_1004(context, evt)
 	TLA_active_monster_tide(context, evt, 1, 235880004, {4002,4003,4004,4005,4006,4007,4008,4009,4010,4011,4012,4013}, 12, 6, 6)
-
+	
 	return 0
 end
 

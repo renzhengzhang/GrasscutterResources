@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 245055001
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	is_offical = true,
 	startpoint = 1034,
 	connect_region = 1039,
@@ -20,7 +20,7 @@ offical_settings = {
                 coins_max = 100,        --场上金币总数，用在挑战的显示里
                 editors = {1036,1037,1038},
 }
-
+      
 airwall_graph = {
         [1] = {next_room = 2, airwall_suite = 4}, --房间1连接的房间，中间空气墙所在的Suite
         [2] = {next_room = 3, airwall_suite = 5}, --房间2连接的房间，中间空气墙所在的Suite
@@ -29,39 +29,39 @@ airwall_graph = {
 
 
 room_infos = {
-         {
-                room_cur = 1,
-                room_next = 2,
+         {        
+                room_cur = 1, 
+                room_next = 2, 
                 wall_connect = 1052, --到下一个房间的空气墙
                 region_enter = 0, --弱网拦截用的
-                region_wall_enter = 0, --弱网拦截用的空气墙
+                region_wall_enter = 0, --弱网拦截用的空气墙 
                 region_self = 1031,      --记录处于所属房间region
                 point_safe = 1040 --传送安全点的configID
          },
-         {
-                room_cur = 2,
-                room_next = 3,
+         {        
+                room_cur = 2, 
+                room_next = 3, 
                 wall_connect = 1054, --到下一个房间的空气墙
                 region_enter =1041, --弱网拦截用的
-                region_wall_enter = 1053, --弱网拦截用的空气墙
+                region_wall_enter = 1053, --弱网拦截用的空气墙 
                 region_self = 1032,      --记录处于所属房间region
                 point_safe = 1042 --传送安全点的configID
          },
-         {
-                room_cur = 3,
-                room_next = 0,
+         {        
+                room_cur = 3, 
+                room_next = 0, 
                 wall_connect = 0, --到下一个房间的空气墙
                 region_enter = 1043, --弱网拦截用的
-                region_wall_enter = 1055, --弱网拦截用的空气墙
+                region_wall_enter = 1055, --弱网拦截用的空气墙 
                 region_self = 1033,      --记录处于所属房间region
                 point_safe = 1044 --传送安全点的configID
-         },
+         },		 
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -153,9 +153,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -166,9 +166,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -220,20 +220,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1027(context, evt)
 	if evt.param1 ~= 1027 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -241,19 +241,19 @@ end
 function action_EVENT_ENTER_REGION_1027(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 245055001, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1028(context, evt)
 	if evt.param1 ~= 1028 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -261,7 +261,7 @@ end
 function action_EVENT_ENTER_REGION_1028(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 245055001, 2)
-
+	
 	return 0
 end
 

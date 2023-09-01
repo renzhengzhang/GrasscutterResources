@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220019004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -89,9 +89,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -102,9 +102,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -120,18 +120,18 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_16(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 220019004) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -141,14 +141,14 @@ function action_EVENT_ANY_MONSTER_DIE_16(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4021, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220019004, 4021, {1}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -156,14 +156,14 @@ end
 function condition_EVENT_SELECT_OPTION_17(context, evt)
 	-- 判断是gadgetid 4021 option_id 1
 	if 4021 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 1 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -177,26 +177,26 @@ function action_EVENT_SELECT_OPTION_17(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 将configid为 4020 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 220019004 ；指定config：4021；物件身上指定option：1；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220019004, 4021, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 4021 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4021, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -205,7 +205,7 @@ function condition_EVENT_ANY_MONSTER_DIE_36(context, evt)
 	if 4007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -216,7 +216,7 @@ function action_EVENT_ANY_MONSTER_DIE_36(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -225,7 +225,7 @@ function condition_EVENT_ANY_MONSTER_DIE_37(context, evt)
 	if 4008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -236,19 +236,19 @@ function action_EVENT_ANY_MONSTER_DIE_37(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_38(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"2ndWave"为4
 	if ScriptLib.GetGroupVariableValue(context, "2ndWave") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -258,44 +258,44 @@ function action_EVENT_VARIABLE_CHANGE_38(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4022, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 4006, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 4009, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 4003, delay_time = 0 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019004中,configid为：4006的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 4006, 220019004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019004中,configid为：4009的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 4009, 220019004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	-- 通知groupid为220019004中,configid为：4003的怪物入战或者脱战，set为1是入战，为0是脱战
 	if 0 ~= ScriptLib.SetMonsterBattleByGroup(context, 4003, 220019004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_monster_battle_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -304,7 +304,7 @@ function condition_EVENT_ANY_MONSTER_DIE_39(context, evt)
 	if 4004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -315,7 +315,7 @@ function action_EVENT_ANY_MONSTER_DIE_39(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -324,7 +324,7 @@ function condition_EVENT_ANY_MONSTER_DIE_40(context, evt)
 	if 4005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -335,7 +335,7 @@ function action_EVENT_ANY_MONSTER_DIE_40(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -344,7 +344,7 @@ function condition_EVENT_MONSTER_BATTLE_42(context, evt)
 	if 4001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -355,13 +355,13 @@ function action_EVENT_MONSTER_BATTLE_42(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 4013, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -370,7 +370,7 @@ function condition_EVENT_MONSTER_BATTLE_44(context, evt)
 	if 4002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -381,13 +381,13 @@ function action_EVENT_MONSTER_BATTLE_44(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 延迟2秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 4015, delay_time = 2 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -396,7 +396,7 @@ function condition_EVENT_ANY_MONSTER_DIE_45(context, evt)
 	if 4014 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -407,7 +407,7 @@ function action_EVENT_ANY_MONSTER_DIE_45(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -416,7 +416,7 @@ function condition_EVENT_ANY_MONSTER_DIE_46(context, evt)
 	if 4015 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -427,7 +427,7 @@ function action_EVENT_ANY_MONSTER_DIE_46(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -436,7 +436,7 @@ function condition_EVENT_ANY_MONSTER_DIE_47(context, evt)
 	if 4012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -447,7 +447,7 @@ function action_EVENT_ANY_MONSTER_DIE_47(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -456,7 +456,7 @@ function condition_EVENT_ANY_MONSTER_DIE_48(context, evt)
 	if 4013 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -467,19 +467,19 @@ function action_EVENT_ANY_MONSTER_DIE_48(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_73(context, evt)
 	if evt.param1 ~= 73 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -490,25 +490,25 @@ function action_EVENT_ENTER_REGION_73(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	-- 创建id为4029的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4029 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_74(context, evt)
 	if evt.param1 ~= 74 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -519,6 +519,6 @@ function action_EVENT_ENTER_REGION_74(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end

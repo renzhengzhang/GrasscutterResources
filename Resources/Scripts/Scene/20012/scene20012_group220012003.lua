@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220012003
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	monster_id_1 = 3006,
 	monster_id_2 = 3007,
 	monster_id_3 = 3008,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -97,9 +97,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -108,7 +108,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 4 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -118,34 +118,34 @@ function action_EVENT_ANY_MONSTER_DIE_1(context, evt)
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_1, delay_time = 0 }) then
 	  return -1
 	end
-
+	
 	-- 延迟0.5秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_2, delay_time = 0.5 }) then
 	  return -1
 	end
-
+	
 	-- 延迟1秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_3, delay_time = 1 }) then
 	  return -1
 	end
-
+	
 	-- 延迟1.5秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = defs.monster_id_4, delay_time = 1.5 }) then
 	  return -1
 	end
-
+	
 	-- play_type含义：1·代表开始播放； 2·代表停止播放
 	-- 在指定位置播放或停止音效资源
 		local pos = {x=-4, y=42, z=107}
 	    if 0 ~= ScriptLib.ScenePlaySound(context, {play_pos = pos, sound_name = "LevelHornSound001", play_type= 1, is_broadcast = false }) then
 					return -1
-		end
-
+		end 
+	
 	-- 调用提示id为 1005 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1005) then
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -155,7 +155,7 @@ function condition_EVENT_ANY_MONSTER_DIE_10(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -165,14 +165,14 @@ function action_EVENT_ANY_MONSTER_DIE_10(context, evt)
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220012004, 17, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为3020的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 3020 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（48，45，120），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=48, y=45, z=120}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -181,20 +181,20 @@ function action_EVENT_ANY_MONSTER_DIE_10(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11(context, evt)
 	if evt.param1 ~= 11 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -205,6 +205,6 @@ function action_EVENT_ENTER_REGION_11(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monsters_and_gadgets_by_group")
 			return -1
 		end
-
+	
 	return 0
 end

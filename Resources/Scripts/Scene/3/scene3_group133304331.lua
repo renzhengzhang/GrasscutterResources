@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133304331
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id = 331004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -87,9 +87,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -97,15 +97,15 @@ function condition_EVENT_GADGET_STATE_CHANGE_331005(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133304331, 331001) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133304331, 331002) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133304331, 331003) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -116,7 +116,7 @@ function action_EVENT_GADGET_STATE_CHANGE_331005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -127,7 +127,7 @@ function action_EVENT_GADGET_STATE_CHANGE_331006(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -136,7 +136,7 @@ function condition_EVENT_GADGET_CREATE_331007(context, evt)
 	if defs.gadget_id ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -147,19 +147,19 @@ function action_EVENT_GADGET_CREATE_331007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133304329, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 1008, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -169,7 +169,7 @@ function condition_EVENT_GROUP_LOAD_331008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -180,7 +180,7 @@ function action_EVENT_GROUP_LOAD_331008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -190,8 +190,8 @@ function condition_EVENT_ANY_MONSTER_DIE_331013(context, evt)
 	if evt.param1 ~= 331009 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -201,8 +201,8 @@ function action_EVENT_ANY_MONSTER_DIE_331013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 331001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -212,8 +212,8 @@ function condition_EVENT_ANY_MONSTER_DIE_331014(context, evt)
 	if evt.param1 ~= 331010 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -223,8 +223,8 @@ function action_EVENT_ANY_MONSTER_DIE_331014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 331002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -234,8 +234,8 @@ function condition_EVENT_ANY_MONSTER_DIE_331015(context, evt)
 	if evt.param1 ~= 331011 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -245,7 +245,7 @@ function action_EVENT_ANY_MONSTER_DIE_331015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 331003, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

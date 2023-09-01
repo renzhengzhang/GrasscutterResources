@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240200002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -37,9 +37,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -50,9 +50,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -68,23 +68,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_2(context, evt)
 	-- 判断是gadgetid 1 option_id 7
 	if 1 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -95,18 +95,18 @@ function action_EVENT_SELECT_OPTION_2(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 创建编号为1（该怪物潮的识别id)的怪物潮，创建怪物总数为15，场上怪物最少5只，最多5只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 240200001, {1001,1002,1004,1005,1006,1011,1013,1018,1020,1021}, 15, 5, 5) then
 		return -1
 	end
-
+	
 	-- 改变指定group组240200008中， configid为9的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 240200008, 9, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -114,14 +114,14 @@ end
 function condition_EVENT_SELECT_OPTION_15(context, evt)
 	-- 判断是gadgetid 1 option_id 12
 	if 1 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 12 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -132,6 +132,6 @@ function action_EVENT_SELECT_OPTION_15(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

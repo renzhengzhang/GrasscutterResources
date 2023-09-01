@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199004006
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,9 +45,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -58,9 +58,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -76,9 +76,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -88,7 +88,7 @@ function action_EVENT_QUEST_FINISH_6003(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -96,16 +96,16 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_6004(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 0, 6001) == 201 and ScriptLib.GetGadgetStateByConfigId(context, 0, 6007) == 201 and ScriptLib.GetGadgetStateByConfigId(context, 0, 6005) == 201 then
 		ScriptLib.SetGroupVariableValueByGroup(context, "temp", 1, 199004050)
-
+		
 		ScriptLib.SetGroupVariableValue(context, "temp", 2)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,6005, GadgetState.GearAction2)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,6007, GadgetState.GearAction2)
-
+		
 		ScriptLib.AddQuestProgress(context, "Q7902529finish")
 	end
-
+	
 	return 0
 end
 
@@ -116,7 +116,7 @@ function action_EVENT_QUEST_FINISH_6006(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -127,19 +127,19 @@ function action_EVENT_QUEST_FINISH_6008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 6001 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 6001, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为6009的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 6009 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -149,7 +149,7 @@ function condition_EVENT_GROUP_LOAD_6010(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -160,7 +160,7 @@ function action_EVENT_GROUP_LOAD_6010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -170,7 +170,7 @@ function condition_EVENT_QUEST_START_6011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "temp") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -181,6 +181,6 @@ function action_EVENT_QUEST_START_6011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

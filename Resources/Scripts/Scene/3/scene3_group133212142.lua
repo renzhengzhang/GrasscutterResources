@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133212142
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	groupID = 133212142,
 	shooter = 142001,
 	 repeater = {142001,142002,142003,142011},
@@ -59,9 +59,9 @@ return true
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -128,9 +128,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -141,9 +141,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -168,9 +168,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -178,7 +178,7 @@ function condition_EVENT_ANY_GADGET_DIE_142013(context, evt)
 	if 142005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -186,13 +186,13 @@ end
 function action_EVENT_ANY_GADGET_DIE_142013(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133212142, 2)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7212907_finish") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -202,7 +202,7 @@ function condition_EVENT_GATHER_142020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "") ~= 0 then
 			return true
 	end
-
+	
 	return false
 end
 
@@ -213,23 +213,23 @@ function action_EVENT_GATHER_142020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_142021(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if CheckSuccess(context)==true then
 		-- 通知场景上的所有玩家播放名字为321214201 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 321214201, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "playcutscene" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "playcutscene", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
@@ -241,9 +241,9 @@ function action_EVENT_VARIABLE_CHANGE_142021(context, evt)
 	ScriptLib.AddEntityGlobalFloatValueByConfigId(context, {142001}, "_CHECK_FIRE_BULLET", 1)
 	return 0
 	end
-
-
-
+	
+	
+	
 end
 
 -- 触发操作
@@ -252,26 +252,26 @@ function action_EVENT_QUEST_START_142024(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 142002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 142003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 142003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 142011 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 142011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 142001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 142001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -282,13 +282,13 @@ function action_EVENT_QUEST_FINISH_142025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 改变指定group组133212002中， configid为2001的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133212002, 2001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -298,7 +298,7 @@ function condition_EVENT_GATHER_142026(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "reminder_01") ~= 0 then
 			return true
 	end
-
+	
 	return false
 end
 
@@ -309,7 +309,7 @@ function action_EVENT_GATHER_142026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -320,7 +320,7 @@ function action_EVENT_QUEST_START_142027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -331,7 +331,7 @@ function action_EVENT_QUEST_START_142028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -342,7 +342,7 @@ function action_EVENT_QUEST_FINISH_142029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 

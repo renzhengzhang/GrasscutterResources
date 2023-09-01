@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220675
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -69,9 +69,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -82,9 +82,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -120,9 +120,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -130,7 +130,7 @@ function condition_EVENT_ANY_GADGET_DIE_675007(context, evt)
 	if 675001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -141,25 +141,25 @@ function action_EVENT_ANY_GADGET_DIE_675007(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "variable1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "variable1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_675009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"variable1"为6
 	if ScriptLib.GetGroupVariableValueByGroup(context, "variable1", 133220675) ~= 6 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -167,13 +167,13 @@ end
 function action_EVENT_VARIABLE_CHANGE_675009(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220675, 2)
-
+	
 	-- 调用提示id为 191110183 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 191110183) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -182,7 +182,7 @@ function condition_EVENT_ANY_GADGET_DIE_675010(context, evt)
 	if 675004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -193,13 +193,13 @@ function action_EVENT_ANY_GADGET_DIE_675010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "variable1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "variable1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -210,19 +210,19 @@ function action_EVENT_ENTER_REGION_675011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_675013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"variable1"为3
 	if ScriptLib.GetGroupVariableValue(context, "variable1") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -233,7 +233,7 @@ function action_EVENT_VARIABLE_CHANGE_675013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -241,16 +241,16 @@ end
 function action_EVENT_CHALLENGE_FAIL_675014(context, evt)
 	-- 删除suite1的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220675, 1)
-
+	
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220675, 2)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "191150202") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -261,7 +261,7 @@ function action_EVENT_CHALLENGE_SUCCESS_675015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -270,7 +270,7 @@ function condition_EVENT_ANY_GADGET_DIE_675022(context, evt)
 	if 675002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -281,13 +281,13 @@ function action_EVENT_ANY_GADGET_DIE_675022(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "variable1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "variable1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -296,7 +296,7 @@ function condition_EVENT_ANY_GADGET_DIE_675023(context, evt)
 	if 675003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -307,13 +307,13 @@ function action_EVENT_ANY_GADGET_DIE_675023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "variable1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "variable1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -322,7 +322,7 @@ function condition_EVENT_ANY_GADGET_DIE_675024(context, evt)
 	if 675005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -333,13 +333,13 @@ function action_EVENT_ANY_GADGET_DIE_675024(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "variable1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "variable1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -348,7 +348,7 @@ function condition_EVENT_ANY_GADGET_DIE_675025(context, evt)
 	if 675006 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -359,13 +359,13 @@ function action_EVENT_ANY_GADGET_DIE_675025(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 针对当前group内变量名为 "variable1" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "variable1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -373,17 +373,17 @@ end
 function condition_EVENT_QUEST_FINISH_675026(context, evt)
 	--检查ID为1911502的任务的完成状态是否为3（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 1911502 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 3 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -391,7 +391,7 @@ end
 function action_EVENT_QUEST_FINISH_675026(context, evt)
 	-- 终止识别id为666的挑战，并判定成功
 		ScriptLib.StopChallenge(context, 666, 1)
-
+	
 	return 0
 end
 
@@ -402,6 +402,6 @@ function action_EVENT_ENTER_REGION_675029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end

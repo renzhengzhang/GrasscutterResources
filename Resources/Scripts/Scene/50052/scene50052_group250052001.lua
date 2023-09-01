@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250052001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -43,9 +43,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -56,9 +56,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -74,9 +74,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -84,7 +84,7 @@ function condition_EVENT_GADGET_CREATE_1004(context, evt)
 	if 1003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -95,7 +95,7 @@ function action_EVENT_GADGET_CREATE_1004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -103,14 +103,14 @@ end
 function condition_EVENT_SELECT_OPTION_1005(context, evt)
 	-- 判断是gadgetid 1003 option_id 33
 	if 1003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 33 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -120,32 +120,32 @@ function action_EVENT_SELECT_OPTION_1005(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 250052001 ；指定config：1003；物件身上指定option：33；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250052001, 1003, 33) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 250052001 ；指定config：1003；物件身上指定option：34；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250052001, 1003, 34) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 创建编号为1（该挑战的识别id),挑战内容为110183的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1, 110183, 300, 2, 11, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 将configid为 1003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -153,14 +153,14 @@ end
 function condition_EVENT_SELECT_OPTION_1006(context, evt)
 	-- 判断是gadgetid 1003 option_id 34
 	if 1003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 34 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -170,32 +170,32 @@ function action_EVENT_SELECT_OPTION_1006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 250052001 ；指定config：1003；物件身上指定option：33；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250052001, 1003, 33) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 250052001 ；指定config：1003；物件身上指定option：34；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 250052001, 1003, 34) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 创建编号为1（该挑战的识别id),挑战内容为110183的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1, 110183, 300, 2, 11, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 将configid为 1003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_CHALLENGE_SUCCESS_1008(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -217,6 +217,6 @@ function action_EVENT_CHALLENGE_FAIL_1009(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end

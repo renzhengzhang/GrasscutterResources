@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133102769
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	born_radius = 6,
 	gadget_hp_checker = 769010,
 	gadget_boss_operator = 769011,
@@ -200,7 +200,7 @@ function LF_Get_Legal_Platform(context, array)
 				--LF_Log(context, "## illegal_platform = "..a)
 				table.remove(arr, i)
 				break
-			end
+			end 
 		end
 	end
 	return arr
@@ -313,11 +313,11 @@ function LF_Notify_Platform_Sink(context, index)
 		--如果2号平台存在数据,则需要去重三次
 		if pid ~= 0 then
 			p_counter[2] = LF_Get_Array_Pos(defs.gadget_platform_list, pid)
-			pid = LF_Get_Array_Pos(p_arr, pid)
+			pid = LF_Get_Array_Pos(p_arr, pid)	
 			table.remove(p_arr, pid)
 			pid = ScriptLib.GetGroupVariableValue(context, "platform1")
 			p_counter[1] = LF_Get_Array_Pos(defs.gadget_platform_list, pid)
-			pid = LF_Get_Array_Pos(p_arr, pid)
+			pid = LF_Get_Array_Pos(p_arr, pid)	
 			table.remove(p_arr, pid)
 			pid = ScriptLib.GetGroupVariableValue(context, "platform3")
 			p_counter[3] = LF_Get_Array_Pos(defs.gadget_platform_list, pid)
@@ -479,7 +479,7 @@ function LF_Manage_OceanId_Replacement(context, manage_type)
 				ScriptLib.PrintContextLog(context, "## act_time=["..act_time[1]..","..act_time[2].."]")
 				if cur_time >= act_time[1] and cur_time < act_time[2] then
 					ScriptLib.SetGroupVariableValueByGroup(context, "is_in_replacement", 1, v)
-				end
+				end 
 			end
 		end
 	elseif manage_type == 0 then
@@ -491,7 +491,7 @@ function LF_Manage_OceanId_Replacement(context, manage_type)
 				ScriptLib.PrintContextLog(context, "## act_time=["..act_time[1]..","..act_time[2].."]")
 				if cur_time >= act_time[1] and cur_time < act_time[2] then
 					ScriptLib.SetGroupVariableValueByGroup(context, "is_in_replacement", 0, v)
-				end
+				end 
 			end
 		end
 	end
@@ -511,9 +511,9 @@ function SLC_OCEANID_ESCAPE(context)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -643,9 +643,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -656,9 +656,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -809,9 +809,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -825,7 +825,7 @@ function action_EVENT_ANY_MONSTER_DIE_769027(context, evt)
 					--关卡计算阶段年增加,并通知boss
 					ScriptLib.SetGroupVariableValue(context, "stage", i+1)
 					LF_Log(context, "## stage="..i+1)
-					ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_hp_checker, defs.hp_stack[i+1])
+					ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_hp_checker, defs.hp_stack[i+1])		
 					break
 				end
 			end
@@ -850,10 +850,10 @@ function condition_EVENT_GADGET_STATE_CHANGE_769028(context, evt)
 	if evt.param1 == 201 and evt.param2 == defs.gadget_hp_checker then
 		return true
 	end
-	if evt.param1 == 0 and evt.param3 == 901 then
+	if evt.param1 == 0 and evt.param3 == 901 then 
 		return true
 	end
-	if evt.param1 == 0 and evt.param3 == 202 then
+	if evt.param1 == 0 and evt.param3 == 202 then 
 		return true
 	end
 	if evt.param1 == 202 and evt.param3 == 201 then
@@ -913,7 +913,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_769029(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == 0 then
 		return 0
 	end
@@ -960,7 +960,7 @@ function action_EVENT_GROUP_LOAD_769052(context, evt)
 			local cur_time = ScriptLib.GetServerTime(context)
 			if cur_time > act_time[2] then
 				ScriptLib.SetGroupVariableValue(context, "is_in_replacement", 0)
-			end
+			end 
 		end
 	end
 	return 0
@@ -1010,12 +1010,12 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_769057(context, evt)
 	if evt.param1 ~= 769057 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1029,7 +1029,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_769059(context, evt)
 	if evt.param1 ~= 769059 then return false end
-
+	
 	return true
 end
 
@@ -1037,7 +1037,7 @@ end
 function action_EVENT_ENTER_REGION_769059(context, evt)
 	--ScriptLib.SetPlayerEyePoint(context, 769059)
 	--ScriptLib.SetPlayerGroupVisionType(context, {context.uid}, {0})
-
+	
 	local small_region={}
 			local big_region={}
 			for i=1,#regions do
@@ -1084,7 +1084,7 @@ end
 function action_EVENT_GROUP_WILL_UNLOAD_769061(context, evt)
 	-- 删除suite16的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133102769, 16)
-
+	
 	return 0
 end
 
@@ -1102,7 +1102,7 @@ end
 function action_EVENT_GADGET_CREATE_769066(context, evt)
 	-- 设置操作台选项
 	ScriptLib.SetWorktopOptionsByGroupId(context, 0, evt.param1, {2901})
-
+	
 	return 0
 end
 
@@ -1120,7 +1120,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_769068(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == 0 then
 		ScriptLib.AddExtraGroupSuite(context, 0, 6)
 	else
@@ -1134,13 +1134,13 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_769069(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == evt.param2 then return -1 end
 	ScriptLib.PrintContextLog(context, "## Oceanid_Log : var_change : "..evt.source_name.." | "..evt.param2.." -> "..evt.param1)
 	if evt.param1 > 1 and evt.param1 <= #stage_monster then
 		LF_Calculate_Monster(context, evt.param1)
 	end
-
+	
 	return 0
 end
 

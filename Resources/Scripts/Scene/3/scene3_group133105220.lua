@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133105220
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	challenge_1_duration = 31,
 	challenge_2_duration = 26,
 	challenge_3_duration = 23,
@@ -114,9 +114,9 @@ defs.quest_4_success = defs.group_id.."0401"
 defs.quest_4_fail = defs.group_id.."0402"
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -170,9 +170,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -183,9 +183,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -229,9 +229,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -346,7 +346,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_220015(context, evt)
-	if evt.param1 ~= defs.region then
+	if evt.param1 ~= defs.region then 
 	return false
 	end
 	return true
@@ -359,8 +359,8 @@ function action_EVENT_ENTER_REGION_220015(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 

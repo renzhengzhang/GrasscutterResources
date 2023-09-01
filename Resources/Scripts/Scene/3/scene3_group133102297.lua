@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133102297
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -64,9 +64,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -77,9 +77,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -116,9 +116,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -127,12 +127,12 @@ function condition_EVENT_ANY_MONSTER_DIE_297003(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"isAcceptQuest"为1
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -143,36 +143,36 @@ function action_EVENT_ANY_MONSTER_DIE_297003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "isDefeatEnemies" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isDefeatEnemies", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 297011 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 297011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_297006(context, evt)
 	if evt.param1 ~= 297006 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"isAcceptQuest"为1
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -183,13 +183,13 @@ function action_EVENT_ENTER_REGION_297006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "isFindBridge" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isFindBridge", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -200,7 +200,7 @@ function action_EVENT_QUEST_FINISH_297007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -211,7 +211,7 @@ function action_EVENT_QUEST_FINISH_297008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -221,7 +221,7 @@ function condition_EVENT_QUEST_FINISH_297009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "isAcceptQuest") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -232,13 +232,13 @@ function action_EVENT_QUEST_FINISH_297009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 133102297, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -251,12 +251,12 @@ function action_EVENT_GROUP_LOAD_297013(context, evt)
 					-- 将configid为 297011 的物件更改为状态 GadgetState.Default
 					if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 297011, GadgetState.Default) then
 						return -1
-
-					end
+			
+					end 
 					ScriptLib.AddQuestProgress(context, "already_defeat")
-
+			
 				end
-
+			
 				return 0
 end
 
@@ -266,7 +266,7 @@ function condition_EVENT_ANY_MONSTER_DIE_297021(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -277,13 +277,13 @@ function action_EVENT_ANY_MONSTER_DIE_297021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 297011 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 297011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -293,8 +293,8 @@ function action_EVENT_GROUP_LOAD_297022(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 297011, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -305,7 +305,7 @@ function action_EVENT_QUEST_START_297023(context, evt)
 		if ScriptLib.GetGroupVariableValue(context, "isDefeatEnemies") == 1 then
 			ScriptLib.AddQuestProgress(context, "already_defeat")
 		end
-
+		
 		return 0
 end
 
@@ -316,6 +316,6 @@ function action_EVENT_QUEST_START_297025(context, evt)
 		if ScriptLib.GetGroupVariableValue(context, "isDefeatEnemies") == 1 then
 			ScriptLib.AddQuestProgress(context, "already_defeat")
 		end
-
+		
 		return 0
 end

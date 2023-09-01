@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133103108
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	duration = 70,
 	group_id = 133103108,
 	gadget_sum = 1
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -169,9 +169,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -182,9 +182,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -380,9 +380,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -392,85 +392,85 @@ function action_EVENT_CHALLENGE_FAIL_108005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "questfail") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 3)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 3)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103100, 3)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103100, 3)
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 5)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 6)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 7)
-
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 8)
-
+	
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 9)
-
+	
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 10)
-
+	
 	-- 删除suite11的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 11)
-
+	
 	-- 删除suite12的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 12)
-
+	
 	-- 删除suite13的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 13)
-
+	
 	-- 删除suite14的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 14)
-
+	
 	-- 删除suite15的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 15)
-
+	
 	-- 删除suite16的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 16)
-
+	
 	-- 删除suite17的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 17)
-
+	
 	-- 删除suite18的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 18)
-
+	
 	-- 删除suite19的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 19)
-
+	
 	-- 删除suite20的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 20)
-
+	
 	-- 删除suite21的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 21)
-
+	
 	-- 延迟3秒后,向groupId为：133103108的对象,请求一次调用,并将string参数："yanchi3miaogaibianliang" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133103108, "yanchi3miaogaibianliang", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -481,7 +481,7 @@ function action_EVENT_TIMER_EVENT_108006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -489,13 +489,13 @@ end
 function action_EVENT_QUEST_START_108011(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 2)
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 3)
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 4)
-
+	
 	return 0
 end
 
@@ -506,19 +506,19 @@ function action_EVENT_QUEST_START_108012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_108013(context, evt)
 	if evt.param1 ~= 108013 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -529,19 +529,19 @@ function action_EVENT_ENTER_REGION_108013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_108014(context, evt)
 	if evt.param1 ~= 108014 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -552,19 +552,19 @@ function action_EVENT_ENTER_REGION_108014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_108016(context, evt)
 	if evt.param1 ~= 108016 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -575,19 +575,19 @@ function action_EVENT_ENTER_REGION_108016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_108017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"challengeStart"为1
 	if ScriptLib.GetGroupVariableValue(context, "challengeStart") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -598,16 +598,16 @@ function action_EVENT_VARIABLE_CHANGE_108017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_routeId")
 	  return -1
 	end
-
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 108008) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 3)
-
+	
 	return 0
 end
 
@@ -618,29 +618,29 @@ function action_EVENT_TIMER_EVENT_108018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_108019(context, evt)
 	if evt.param1 ~= 108019 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"dieofalive"为0
 	if ScriptLib.GetGroupVariableValue(context, "dieofalive") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"challenging"为0
 	if ScriptLib.GetGroupVariableValue(context, "challenging") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -650,73 +650,73 @@ function action_EVENT_ENTER_REGION_108019(context, evt)
 	if 0 ~= ScriptLib.ActiveChallenge(context, 56, 246, defs.duration, 2, 246, defs.gadget_sum) then
 	return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	ScriptLib.AddExtraGroupSuite(context, defs.group_id, 2)
-
+	
 	-- 将本组内变量名为 "challenging" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "challenging", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "challengeStart" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "challengeStart", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
-
+	
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_108020(context, evt)
 	-- 删除suite2的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 2)
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 3)
-
+	
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133103108, EntityType.MONSTER, 108005)
-
-
-
+	
+		
+	
 	-- 将本组内变量名为 "challengeStart" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "challengeStart", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "challenging" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "challenging", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_108021(context, evt)
 	if evt.param1 ~= 108021 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"dieoralive"为0
 	if ScriptLib.GetGroupVariableValue(context, "dieoralive") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"challenging"为0
 	if ScriptLib.GetGroupVariableValue(context, "challenging") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -727,34 +727,34 @@ function action_EVENT_ENTER_REGION_108021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "challenging" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "challenging", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建编号为56（该挑战的识别id),挑战内容为246的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
 	if 0 ~= ScriptLib.ActiveChallenge(context, 56, 246, 70, 2, 246, 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 删除suite4的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_108022(context, evt)
 	if evt.param1 ~= 108022 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -762,7 +762,7 @@ end
 function action_EVENT_ENTER_REGION_108022(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 4)
-
+	
 	return 0
 end
 
@@ -771,7 +771,7 @@ function condition_EVENT_ANY_GADGET_DIE_108023(context, evt)
 	if 108008 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -782,102 +782,102 @@ function action_EVENT_ANY_GADGET_DIE_108023(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7150003") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 延迟1秒后,向groupId为：133103108的对象,请求一次调用,并将string参数："baodiwanchengrenwu" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 133103108, "baodiwanchengrenwu", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "dieoralive" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "dieoralive", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "challenging" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "challenging", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite5的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 5)
-
+	
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 6)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 7)
-
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 8)
-
+	
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 9)
-
+	
 	-- 删除suite10的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 10)
-
+	
 	-- 删除suite11的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 11)
-
+	
 	-- 删除suite12的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 12)
-
+	
 	-- 删除suite13的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 13)
-
+	
 	-- 删除suite14的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 14)
-
+	
 	-- 删除suite15的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 15)
-
+	
 	-- 删除suite16的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 16)
-
+	
 	-- 删除suite17的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 17)
-
+	
 	-- 删除suite18的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 18)
-
+	
 	-- 删除suite19的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 19)
-
+	
 	-- 删除suite20的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 20)
-
+	
 	-- 删除suite21的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133103108, 21)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108074(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 2 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -885,27 +885,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108074(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 5)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108075(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 4 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -913,27 +913,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108075(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108076(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 6 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 6 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -941,27 +941,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108076(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 7)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108077(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 8 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 8 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -969,27 +969,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108077(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 8)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108078(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 10 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 10 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -997,27 +997,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108078(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 9)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108079(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 11 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 11 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1025,27 +1025,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108079(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 10)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108080(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 13 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 13 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1053,27 +1053,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108080(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 11)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108081(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 15 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 15 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1081,27 +1081,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108081(context, evt)
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 12)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108083(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 17 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 17 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1109,27 +1109,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108083(context, evt)
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 13)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108084(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 19 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 19 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1137,27 +1137,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108084(context, evt)
 	-- 添加suite14的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 14)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108085(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 21 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 21 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1165,27 +1165,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108085(context, evt)
 	-- 添加suite15的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 15)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108086(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 23 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 23 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1193,27 +1193,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108086(context, evt)
 	-- 添加suite16的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 16)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108087(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 25 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 25 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1221,27 +1221,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108087(context, evt)
 	-- 添加suite17的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 17)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108088(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 27 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 27 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1249,27 +1249,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108088(context, evt)
 	-- 添加suite18的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 18)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108089(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 29 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 29 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1277,27 +1277,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108089(context, evt)
 	-- 添加suite19的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 19)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108090(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 31 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 31 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1305,27 +1305,27 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108090(context, evt)
 	-- 添加suite20的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 20)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_108091(context, evt)
 	-- 判断是gadgetid 为 108008的移动平台，是否到达了310300230 的路线中的 33 点
-
+	
 	if 108008 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 310300230 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 33 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1333,6 +1333,6 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_108091(context, evt)
 	-- 添加suite21的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133103108, 21)
-
+	
 	return 0
 end

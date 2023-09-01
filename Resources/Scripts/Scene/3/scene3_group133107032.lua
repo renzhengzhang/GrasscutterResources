@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133107032
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id = 32004
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -77,9 +77,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -87,7 +87,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_32003(context, evt)
 	if 32004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -98,13 +98,13 @@ function action_EVENT_GADGET_STATE_CHANGE_32003(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 销毁group存档，不影响当前场景，但卸载后group就永别了
 	if 0 ~= ScriptLib.SetGroupDead(context, 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_group_die")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -113,7 +113,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_32005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "start") == #suites[1].gadgets then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -124,12 +124,12 @@ function action_EVENT_GADGET_STATE_CHANGE_32005(context, evt)
 	elseif evt.param1 == GadgetState.Default and evt.param3 == GadgetState.GearStart then
 		ScriptLib.ChangeGroupVariableValue(context,"start",-1)
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context, "start") == #suites[1].gadgets-1 then
 		ScriptLib.SetGadgetStateByConfigId(context, 32004, GadgetState.GearStart)
 		ScriptLib.SetGroupGadgetStateByConfigId(context, 133107112, 112001, GadgetState.Default)
 	end
-
+	
 	return 0
 end
 
@@ -140,6 +140,6 @@ function action_EVENT_GADGET_STATE_CHANGE_32006(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end

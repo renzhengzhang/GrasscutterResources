@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133315026
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -132,9 +132,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -147,8 +147,8 @@ function action_EVENT_ENTER_REGION_26001(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -158,8 +158,8 @@ function condition_EVENT_ANY_MONSTER_DIE_26004(context, evt)
 	if evt.param1 ~= 26003 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -169,8 +169,8 @@ function action_EVENT_ANY_MONSTER_DIE_26004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 26020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -180,7 +180,7 @@ function condition_EVENT_ANY_MONSTER_DIE_26009(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -188,7 +188,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_26009(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315026, 5)
-
+	
 	-- 触发镜头注目，注目位置为坐标（252，252，2484），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=252, y=252, z=2484}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -197,14 +197,14 @@ function action_EVENT_ANY_MONSTER_DIE_26009(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 33150028 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 33150028) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -214,8 +214,8 @@ function condition_EVENT_ANY_MONSTER_DIE_26011(context, evt)
 	if evt.param1 ~= 26010 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -226,16 +226,16 @@ function action_EVENT_ANY_MONSTER_DIE_26011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133315026, 3)
-
+	
 	-- 针对当前group内变量名为 "baodi" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "baodi", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -243,7 +243,7 @@ end
 function action_EVENT_MONSTER_BATTLE_26012(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133315026, 3)
-
+	
 	return 0
 end
 
@@ -253,7 +253,7 @@ function condition_EVENT_GROUP_LOAD_26013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "baodi") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -264,7 +264,7 @@ function action_EVENT_GROUP_LOAD_26013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -274,7 +274,7 @@ function condition_EVENT_QUEST_START_26015(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "baodi") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -285,6 +285,6 @@ function action_EVENT_QUEST_START_26015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

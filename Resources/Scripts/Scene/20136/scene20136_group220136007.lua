@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220136007
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     queue = {
            [1] = { config_id = 7006, bullet_type = 3, duration = 5, shoot_time = 8, shoot_interval = 0.75, point_array = 3, point_id = {1,2},turn_mode = true,route_type = 1},
           --右转
@@ -23,15 +23,15 @@ defs = {
            [12] = { config_id = 7017, bullet_type = 1, duration = 10, shoot_time = 10, shoot_interval = 0.5, point_array = 11, point_id = {1,2},turn_mode = true,route_type = 1},
            [13] = { config_id = 7005, bullet_type = 2, duration = 0, shoot_time = 15, shoot_interval = 1, point_array = 14, point_id = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36},route_type = 1},
           [14] = { config_id = 7007, bullet_type = 2, duration = 10, shoot_time = 15, shoot_interval = 1, point_array = 14, point_id = {18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17},route_type = 1},
-
-
+   
+     
        }
    }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -136,9 +136,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -149,9 +149,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -203,33 +203,33 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7008(context, evt)
 	if evt.param1 ~= 7008 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_7008(context, evt)
-	ScriptLib.AddQuestProgress(context, "dreamback1")
+	ScriptLib.AddQuestProgress(context, "dreamback1") 
 	ScriptLib.GoToGroupSuite(context, 220136007, 5)
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
 	return 0
 end
 
@@ -237,43 +237,43 @@ end
 function condition_EVENT_SELECT_OPTION_7009(context, evt)
 	-- 判断是gadgetid 7003 option_id 175
 	if 7003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_SELECT_OPTION_7009(context, evt)
-	        -- 创建父挑战
+	        -- 创建父挑战 
 	        ScriptLib.CreateFatherChallenge(context, 262, 262, 61, {success = 1, fail = 1, fail_on_wipe = true})
-
-
-	        -- 在父挑战上创建编号为260的子挑战。，EVENT_VARIABLE_CHANGE,Tag = 777, 触发次数为
+	
+	        
+	        -- 在父挑战上创建编号为260的子挑战。，EVENT_VARIABLE_CHANGE,Tag = 777, 触发次数为 
 	        ScriptLib.AttachChildChallenge(context, 262, 260, 260,{3, 777, 10, 0, 0},{},{success=1, fail=1})
 		ScriptLib.AttachChildChallenge(context, 262, 261, 261,{60, 0},{},{success=1, fail=1})
 	ScriptLib.StartFatherChallenge(context, 262)
-
+	
 	-- 将本组内变量名为 "star_shooter" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "star_shooter", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220136007, 3)
-
+	
 	-- 删除指定group： 220136004 ；指定config：7003；物件身上指定option：175；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 220136007, 7003, 175) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -281,22 +281,22 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_7010(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220136007, 2)
-
+	
 	-- 将本组内变量名为 "star_shooter" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "star_shooter", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220136007, 3)
-
+	
 	-- 将configid为 7003 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7003, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -307,16 +307,16 @@ function action_EVENT_CHALLENGE_FAIL_7011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 删除suite3的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 220136007, 3)
-
+	
 	-- 设置操作台选项
 	if 0 ~= ScriptLib.SetWorktopOptionsByGroupId(context, 220136007, 7003, {175}) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -327,7 +327,7 @@ function action_EVENT_GROUP_REFRESH_7059(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 

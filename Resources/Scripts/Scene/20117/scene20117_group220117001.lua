@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220117001
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
     BossConfigID = 1002,
     EnvConfigID = 1001,
     GroupID = 220117001,
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -99,18 +99,18 @@ function condition_EVENT_GADGET_STATE_CHANGE_1003(context, evt)
 	if 1001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_1003(context, evt)
 	ScriptLib.SetWeatherAreaState(context,10060,0)
-
+	
 	ScriptLib.SetWeatherAreaState(context,10061,1)
-
+	
 	ScriptLib.PrintContextLog(context,"环境物件1001切到201，进入Weather10061")
-
+	
 	return 0
 end
 
@@ -120,18 +120,18 @@ function condition_EVENT_GADGET_STATE_CHANGE_1004(context, evt)
 	if 1001 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_1004(context, evt)
 	ScriptLib.SetWeatherAreaState(context,10061,0)
-
+	
 	ScriptLib.SetWeatherAreaState(context,10062,1)
-
+	
 	ScriptLib.PrintContextLog(context,"环境物件1001切到202，进入Weather10062")
-
+	
 	return 0
 end
 
@@ -139,7 +139,7 @@ end
 function action_EVENT_QUEST_START_1005(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220117001, 2)
-
+	
 	return 0
 end
 
@@ -147,21 +147,21 @@ end
 function action_EVENT_TIMER_EVENT_1007(context, evt)
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 220117001, EntityType.MONSTER, 1002)
-
-
-
+	
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_1008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"PhaseStep"为3
 	if ScriptLib.GetGroupVariableValue(context, "PhaseStep") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -172,13 +172,13 @@ function action_EVENT_VARIABLE_CHANGE_1008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 延迟0.5秒后,向groupId为：220117001的对象,请求一次调用,并将string参数："timer" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 220117001, "timer", 0.5) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 

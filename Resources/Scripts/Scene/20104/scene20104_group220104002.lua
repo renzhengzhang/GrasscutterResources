@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220104002
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -41,9 +41,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -54,9 +54,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -92,20 +92,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_2001(context, evt)
 	if evt.param1 ~= 2001 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -116,10 +116,10 @@ function action_EVENT_ENTER_REGION_2001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220104003, 3)
-
+	
 	return 0
 end
 
@@ -129,7 +129,7 @@ function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_2003(context, evt)
 	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 30 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -140,12 +140,12 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_2003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 220104002, EntityType.MONSTER, 2005)
-
-
-
+	
+		
+	
 	return 0
 end
 
@@ -154,7 +154,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_2006(context, evt)
 	if 2005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -165,6 +165,6 @@ function action_EVENT_ANY_MONSTER_LIVE_2006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end

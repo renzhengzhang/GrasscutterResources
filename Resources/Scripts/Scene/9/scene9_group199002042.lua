@@ -1,51 +1,51 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002042
 }
 
 -- DEFS_MISCS
-local        defs =
+local        defs = 
 {
 	--幕布Group
 	curtain_group = 199002073,
         --每个阶段的所有演员物件config_id。用于统一设置可拾取/可对话状态
-        actor_list =
+        actor_list = 
         {
-                [1] =
-                {
+                [1] = 
+                { 
                         [42001] = 1110892,
                         [42002] = 1110916,
                         [42003] = 1110917,
                         [42004] = 1110918,
                 },
-                [2] =
-                {
+                [2] = 
+                { 
                         [42001] = 1110900,
                         [42003] = 1110917,
                         [42004] = 1110918,
                 },
-                [3] =
-                {
+                [3] = 
+                { 
                         [42001] = 1110907,
                         [42004] = 1110918,
                 },
         },
         --可拾取的gadget列表，即not in any suite的夜鸦雕像
-        pickable_gadget =
+        pickable_gadget = 
         {
-                [42002] = {0, 42030, 42027, 42027},
-                [42003] = {0, 0, 42029, 42028},
+                [42002] = {0, 42030, 42027, 42027}, 
+                [42003] = {0, 0, 42029, 42028}, 
                 [42004] = {0, 0, 0, 42029},
         },
         --行动序列
-        actions =
+        actions = 
         {
                 {
                           [1] = { config_id = 42001, reminder_id = 1110889, point_array = 900200030, point_id_list = {1,2,3}, duration = 6},
                           [2] = { config_id = 42008, reminder_id = 1110890, point_array = 0, point_id_list = 0, duration = 7},
                           [3] = { config_id = 42001, reminder_id = 1110891, point_array = 0, point_id_list = 0, duration = 18},
-
-
+                         
+                        
                 },
                 {
                           [1] = { config_id = 42002, reminder_id = 1110893, point_array = 900200031, point_id_list = {1,2,3,4}, duration = 37},
@@ -78,7 +78,7 @@ local        defs =
 
         --每段剧情结束时加载的对应suite(放聚光灯和操作台用),和正确的放置槽位config_id
         --key是阶段id
-        question_suits =
+        question_suits =  
         {
                    [1] = { add_suite = 3, correct_slot = 42005, correct_gadget = 42002},
                    [2] = { add_suite = 4, correct_slot = 42006, correct_gadget = 42003},
@@ -89,9 +89,9 @@ no_actor = 42001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -165,9 +165,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -178,9 +178,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -232,20 +232,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_42025(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_done"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -256,7 +256,7 @@ function action_EVENT_VARIABLE_CHANGE_42025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -266,7 +266,7 @@ function condition_EVENT_GROUP_LOAD_42026(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -277,7 +277,7 @@ function action_EVENT_GROUP_LOAD_42026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 

@@ -1,19 +1,19 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133002227
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 1941,
 	gadget_id_2 = 1965,
 	gadget_id_3 = 1966
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -88,9 +88,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -98,15 +98,15 @@ function condition_EVENT_ANY_GADGET_DIE_276(context, evt)
 	if defs.gadget_id_1 == evt.param1 then
 		return true
 	end
-
+	
 	if defs.gadget_id_2== evt.param1 then
 		return true
 	end
-
+	
 	if defs.gadget_id_3 == evt.param1 then
 		return true
 	end
-
+	
 	return false
 end
 
@@ -117,6 +117,6 @@ function action_EVENT_ANY_GADGET_DIE_276(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

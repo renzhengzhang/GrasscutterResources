@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133225108
 }
 
@@ -12,16 +12,16 @@ defs = {
         hasChild = true, --表示是否切当前Group的suite，true表示切自己的
         selfSuiteId = 1, --需要切的自己的suite
         hasMultiStatues = false, --是否有多个雷鸟雕像
-        statuesMap =
+        statuesMap = 
         {
                 [10001] = 2, --雷鸟雕像和需要切出来的Suite的对应表
         },
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -66,9 +66,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -79,9 +79,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -97,20 +97,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_108006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Finish"为1
 	if ScriptLib.GetGroupVariableValue(context, "Finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -120,8 +120,8 @@ function action_EVENT_VARIABLE_CHANGE_108006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 108001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

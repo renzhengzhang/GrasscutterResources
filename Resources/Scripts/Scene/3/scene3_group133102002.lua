@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133102002
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	quest_1_fail = "2500040440102",
 	quest_1_success = "2500040440101",
 	quest_2_fail = "2500040440202",
@@ -29,9 +29,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -111,9 +111,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -124,9 +124,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -170,9 +170,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -215,41 +215,41 @@ function action_EVENT_CHALLENGE_SUCCESS_6(context, evt)
 				if reward == 1 then
 					ScriptLib.CreateGadget(context, {config_id = defs.chest_1} )
 					-- 向任务返回结果
-
+	
 	-- Kill掉终点
-	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_destination_id })
+	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_destination_id }) 
 					ScriptLib.AddQuestProgress(context, defs.quest_1_success)
-
-
+		
+			
 	-- 挑战结束卸载资源包
 	ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 2)
 				elseif reward == 2 then
 					ScriptLib.CreateGadget(context, {config_id = defs.chest_2} )
 					-- 向任务返回结果
-
+	
 	-- Kill掉终点
 	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_destination_id })
 					ScriptLib.AddQuestProgress(context, defs.quest_2_success)
-
+					
 	-- 挑战结束卸载资源包
 					ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 3)
 				elseif reward == 3 then
 					ScriptLib.CreateGadget(context, {config_id = defs.chest_3} )
 					-- 向任务返回结果
-
+	
 	-- Kill掉终点
 	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_destination_id })
 					ScriptLib.AddQuestProgress(context, defs.quest_3_success)
-
+	
 					-- 挑战结束卸载资源包
 					ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 4)
 				elseif reward == 4 then
 					-- 向任务返回结果
-
+	
 	-- Kill掉终点
-	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_destination_id })
+	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_destination_id }) 
 					ScriptLib.AddQuestProgress(context, defs.quest_4_success)
-
+	
 					-- 挑战结束卸载资源包
 					ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 4)
 				end
@@ -261,28 +261,28 @@ function action_EVENT_CHALLENGE_FAIL_10(context, evt)
 				local reward = ScriptLib.GetGroupVariableValue(context, "Challenge_Flag")
 				if reward == 1 then
 					-- 向任务返回结果
-
+	
 	-- Kill掉终点
 	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_destination_id })
 					ScriptLib.AddQuestProgress(context, defs.quest_1_fail)
 					ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 2)
 				elseif reward == 2 then
 					-- 向任务返回结果
-
+	
 	-- Kill掉终点
 	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_destination_id })
 					ScriptLib.AddQuestProgress(context, defs.quest_2_fail)
 					ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 3)
 				elseif reward == 3 then
 					-- 向任务返回结果
-
+	
 	-- Kill掉终点
 	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_destination_id })
 					ScriptLib.AddQuestProgress(context, defs.quest_3_fail)
 					ScriptLib.RemoveExtraGroupSuite(context, defs.group_id, 4)
 				elseif reward == 4 then
 					-- 向任务返回结果
-
+	
 	-- Kill掉终点
 	ScriptLib.KillEntityByConfigId(context, { config_id = defs.gadget_destination_id })
 					ScriptLib.AddQuestProgress(context, defs.quest_4_fail)
@@ -293,7 +293,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11(context, evt)
-			if evt.param1 ~= defs.region_1 then
+			if evt.param1 ~= defs.region_1 then 
 				return false
 			end
 			return true
@@ -306,8 +306,8 @@ function action_EVENT_ENTER_REGION_11(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	return 0
 end
 

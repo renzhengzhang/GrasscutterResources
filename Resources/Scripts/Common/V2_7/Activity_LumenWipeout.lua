@@ -3,12 +3,12 @@
 --||   Filename      ||    Activity_LumenWipeout
 --||   RelVersion    ||    V2_7
 --||   Owner         ||    chao-jin
---||   Description   ||
+--||   Description   ||    
 --||   LogName       ||    ##[Activity_LumenWipeout]
---||   Protection    ||
+--||   Protection    ||    
 --[[======================================================================================================================
 --Defs & Miscs
-defs = {
+local defs = {
 	pursina = 630015,
 	pursina_tip = 630087,
 	fail_region = 630038
@@ -28,8 +28,8 @@ local extra_infos = {
 
 local LumenWipeout_Triggers = {
 	{config_id = 8002001, name = "pursina_state",  event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "", action = "action_pursina_state", trigger_count = 0},
-	{config_id = 8002002, name = "challenge_success", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0 },
-	{config_id = 8002003, name = "challenge_fail", event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail", trigger_count = 0 },
+	{config_id = 8002002, name = "challenge_success", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "", condition = "", action = "action_challenge_success", trigger_count = 0 }, 
+	{config_id = 8002003, name = "challenge_fail", event = EventType.EVENT_CHALLENGE_FAIL, source = "", condition = "", action = "action_challenge_fail", trigger_count = 0 }, 
     {config_id = 8002004, name = "any_gadget_die",  event = EventType.EVENT_ANY_GADGET_DIE, source = "", condition = "", action = "action_any_gadget_die", trigger_count = 0},
     {config_id = 8002005, name = "group_load",  event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_group_load", trigger_count = 0},
     {config_id = 8002006, name = "leave_fail_region",  event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_leave_fail_region", trigger_count = 0},
@@ -42,21 +42,21 @@ local LumenWipeout_Triggers = {
 
 --Events
 
-function action_pursina_state(context, evt)
-	if evt.source_name == "pursina_state" then
-		if evt.param1 == 0 then
+function action_pursina_state(context, evt) 
+	if evt.source_name == "pursina_state" then 
+		if evt.param1 == 0 then 
 			LF_SetPursinaNormal(context)
 			return 0
 		end
-		if evt.param1 == 1 then
+		if evt.param1 == 1 then 
 			LF_SetPursinaBroken(context)
 			return 0
 		end
-		if evt.param1 == 2 then
+		if evt.param1 == 2 then 
 			LF_SetPursinaMidSpeed(context)
 			return 0
 		end
-		if evt.param3 == 3 then
+		if evt.param3 == 3 then 
 			LF_SetPursinaHighSpeed(context)
 			return 0
 		end
@@ -75,17 +75,17 @@ function action_challenge_success(context, evt)
 	ScriptLib.PrintContextLog(context,"##[LumenWipeout]:埋点数据,挑战成功,流水号"..transaction.."耗时"..used_time.."清除黑泥总数"..remove_mud.."流明石等级"..lumen_level)
     ScriptLib.MarkGroupLuaAction(context, "Luminous_challenge_2", transaction, {["challenge_id"] = 2009002,["end_reason"] = 1,["use_time"]= used_time ,["remove_mud"]= remove_mud,["luminous_level"] = lumen_level})
 
-    LF_ClearGroup(context)
+    LF_ClearGroup(context) 
 	ScriptLib.TryFinishLuminanceStoneChallengeStage(context, base_info.group_id)
 	ScriptLib.GoToGroupSuite(context, base_info.group_id, 10)
-
+	
 	ScriptLib.FinishGroupLinkBundle(context, base_info.group_id)
 	return 0
 end
 
 --处理BGM物件
-function action_pause_battle_bgm(context, evt)
-	if evt.param1 == 630078 then
+function action_pause_battle_bgm(context, evt) 
+	if evt.param1 == 630078 then 
 		ScriptLib.PrintContextLog(context,"##[LumenWipeout]:刷最后一波怪，移除BGM入战物件")
 		if 0 ~= ScriptLib.GetEntityIdByConfigId(context, defs.enemy_gadget) then
 			ScriptLib.RemoveEntityByConfigId(context, base_info.group_id, EntityType.GADGET, defs.enemy_gadget)
@@ -95,24 +95,24 @@ function action_pause_battle_bgm(context, evt)
 end
 
 --挑战失败处理
-function action_challenge_fail(context, evt)
+function action_challenge_fail(context, evt) 
 	ScriptLib.PrintContextLog(context,"##[LumenWipeout]:挑战失败")
 	--运营用的埋点数据
 	local used_time = 300 - evt.param2
 	local remove_mud  = ScriptLib.GetGroupTempValue(context, "MUD_REMOVED", {})
 	local lumen_level = ScriptLib.GetTeamServerGlobalValue(context, context.owner_uid, "SGV_Light_Stone_Level")
 	local transaction = evt.param_str1
-	if evt.param2 <= 0 then
+	if evt.param2 <= 0 then 
 		ScriptLib.PrintContextLog(context,"##[LumenWipeout]:埋点数据,时间用尽,流水号"..transaction.."耗时"..used_time.."清除黑泥总数"..remove_mud.."流明石等级"..lumen_level)
     	ScriptLib.MarkGroupLuaAction(context, "Luminous_challenge_2", transaction, {["challenge_id"] = 2009002,["end_reason"] = 2,["use_time"]= used_time ,["remove_mud"]= remove_mud, ["luminous_level"] = lumen_level})
     else
-    	if ScriptLib.IsPlayerAllAvatarDie(context, context.owner_uid) then
+    	if ScriptLib.IsPlayerAllAvatarDie(context, context.owner_uid) then 
     		ScriptLib.PrintContextLog(context,"##[LumenWipeout]:埋点数据,团灭,流水号"..transaction.."耗时"..used_time.."清除黑泥总数"..remove_mud.."流明石等级"..lumen_level)
     		ScriptLib.MarkGroupLuaAction(context, "Luminous_challenge_2", transaction, {["challenge_id"] = 2009002,["end_reason"] = 0,["use_time"]= used_time ,["remove_mud"]= remove_mud, ["luminous_level"] = lumen_level})
     	end
     end
     --清除额外内容并恢复
-	LF_ClearGroup(context)
+	LF_ClearGroup(context) 
     ScriptLib.CreateGadget(context, {config_id = defs.pursina_tip})
     ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, extra_infos.start_operator, {7})
 
@@ -127,8 +127,8 @@ function action_group_load( context, evt )
 end
 
 --玩家脱离战斗区域，挑战失败
-function action_leave_fail_region(context, evt)
-    if evt.param1 == defs.fail_region then
+function action_leave_fail_region(context, evt) 
+    if evt.param1 == defs.fail_region then 
         ScriptLib.PrintContextLog(context,"##[LumenWipeout]:玩家脱离战斗区域，手动结束挑战")
         ScriptLib.StopChallenge(context, 233, 0)
     end
@@ -167,11 +167,11 @@ function action_gadget_create(context,evt)
 --		ScriptLib.CreateGadget(context, {config_id = mud_list[evt.param1]})
 		ScriptLib.ChangeGroupTempValue(context, "MUD_NUMS", 1, {})
 		--创建黑泥，看看光钉的工作状态
-		if 0 ~= ScriptLib.GetGroupTempValue(context, "MUD_NUMS", {}) then
+		if 0 ~= ScriptLib.GetGroupTempValue(context, "MUD_NUMS", {}) then 
 			if 1 == ScriptLib.GetGroupTempValue(context, "PURSINA_WORKING", {}) then
 				if 0 ==  ScriptLib.GetGroupTempValue(context, "MUD_REMIND", {}) then
 					ScriptLib.PrintContextLog(context,"##[LumenWipeout]:弹出第一次Reminder")
-					ScriptLib.ShowReminder(context, 4000146)
+					ScriptLib.ShowReminder(context, 4000146) 
 					ScriptLib.SetGroupTempValue(context, "MUD_REMIND",1, {})
 				end
 				ScriptLib.PrintContextLog(context,"##[LumenWipeout]:创建黑泥，光钉在工作中，光钉损坏")
@@ -180,7 +180,7 @@ function action_gadget_create(context,evt)
 			end
 		end
 	end
-	if evt.param1 == extra_infos.start_operator then
+	if evt.param1 == extra_infos.start_operator then 
 		ScriptLib.SetWorktopOptionsByGroupId(context, base_info.group_id, extra_infos.start_operator, {7})
 	end
 	return 0
@@ -193,12 +193,12 @@ function action_any_gadget_die(context,evt)
     	ScriptLib.ChangeGroupTempValue(context, "MUD_NUMS", -1, {})
     	ScriptLib.KillEntityByConfigId(context, { group_id = base_info.group_id, config_id = mud_list[evt.param1], entity_type = EntityType.GADGET })
 --    	ScriptLib.RemoveEntityByConfigId(context, 166001630, EntityType.GADGET, mud_list[evt.param1])
-		if not ScriptLib.IsChallengeStartedByChallengeId(context, 2009005) then
+		if not ScriptLib.IsChallengeStartedByChallengeId(context, 2009005) then 
 			ScriptLib.PrintContextLog(context,"##[LumenWipeout]:挑战未开始，不增加统计")
 			return 0
 		end
 		--场上没有黑泥了，移除包裹物，恢复光钉
-		if 0 == ScriptLib.GetGroupTempValue(context, "MUD_NUMS", {}) then
+		if 0 == ScriptLib.GetGroupTempValue(context, "MUD_NUMS", {}) then 
 			if 0 ~= ScriptLib.GetEntityIdByConfigId(context, extra_infos.mud_cover) then
 				ScriptLib.KillEntityByConfigId(context, { group_id = base_info.group_id, config_id = extra_infos.mud_cover, entity_type = EntityType.GADGET })
 --				ScriptLib.RemoveEntityByConfigId(context, 166001630, EntityType.GADGET, extra_infos.mud_cover)
@@ -213,10 +213,10 @@ end
 
 --时间轴移动
 function action_time_axis_pass(context,evt)
-	if evt.source_name == "pursinaDelay" then
+	if evt.source_name == "pursinaDelay" then 
 		ScriptLib.PrintContextLog(context,"##[LumenWipeout]:光钉开始正常运转")
 		LF_SetPursinaMidSpeed(context)
-		ScriptLib.ShowReminder(context, 4000145)
+		ScriptLib.ShowReminder(context, 4000145) 
 	end
 	return 0
 end
@@ -260,7 +260,7 @@ function LF_SetPursinaHighSpeed(context)
 	ScriptLib.SetGroupTempValue(context, "PURSINA_WORKING", 1, {})
 end
 --启动光钉
-function LF_StartPursina(context, evt)
+function LF_StartPursina(context, evt) 
 	ScriptLib.PrintContextLog(context,"##[LumenWipeout]:启动光钉")
 	ScriptLib.SetGadgetStateByConfigId(context, defs.pursina, 202)
 	ScriptLib.SetGroupTempValue(context, "PURSINA_WORKING", 1, {})
@@ -269,7 +269,7 @@ function LF_StartPursina(context, evt)
 end
 --停止光钉
 function LF_StopPursina(context, evt)
-	ScriptLib.PrintContextLog(context,"##[LumenWipeout]:关闭光钉")
+	ScriptLib.PrintContextLog(context,"##[LumenWipeout]:关闭光钉") 
 	ScriptLib.SetGadgetStateByConfigId(context, defs.pursina, 203)
 	ScriptLib.SetGroupTempValue(context, "PURSINA_WORKING", 0, {})
 end

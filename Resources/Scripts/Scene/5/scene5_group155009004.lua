@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155009004
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155009004
 }
 
@@ -16,7 +16,7 @@ local DayAppearGadgets = {4008,4009}
 local NightAppearGadgets = {4003,4005}
 local TriggerInsertWhitelist = {1}
 
-local battleinfo =
+local battleinfo = 
 {
 	{4003,"battle_01",3,155009007,155009025},
 	{4004,"battle_02",4,155009008,155009026},
@@ -53,27 +53,27 @@ function ALLBattleCompleted(context)
 
 		for i=1,#battleinfo do
 			ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 2, battleinfo[i][4])
-
+				
 			if ScriptLib.GetGroupVariableValueByGroup(context, "gameplayState", battleinfo[i][5]) ~= 3 then
 				ScriptLib.SetGroupVariableValueByGroup(context, "gameplayState", 2, battleinfo[i][5])
 			end
-
+			
 			ScriptLib.SetGadgetStateByConfigId(context, battleinfo[i][1], 201)
 		end
 		ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, 4008 )
 		ScriptLib.RemoveEntityByConfigId(context, defs.group_ID, EntityType.GADGET, 4009 )
 end
 
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-
+		
 	end,
 	["1"] = function(context)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 2)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
-
+		
 		Initial(context)
 
 
@@ -98,7 +98,7 @@ local gameplayStateFuncitons =
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 7)
 		for i=1,#battleinfo do
-
+			
 			ScriptLib.SetGadgetStateByConfigId(context, battleinfo[i][1], 201)
 		end
 	end
@@ -106,16 +106,16 @@ local gameplayStateFuncitons =
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -178,9 +178,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -191,9 +191,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -263,22 +263,22 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_4001(context, evt)
 				local isactive = ScriptLib.GetGroupVariableValueByGroup(context, "IslandActive", 155009001)
-
-				if isactive == 1 then
-					if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then
+			
+				if isactive == 1 then 
+					if ScriptLib.GetGroupVariableValue(context,"gameplayState") == 0 then 
 						ScriptLib.SetGroupVariableValue(context,"gameplayState", 1)
 					end
-
+					
 				end
-
+			
 	UpdateGamePlayState(context)
 		return 0
 end
@@ -286,7 +286,7 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_4002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end
@@ -296,33 +296,33 @@ function condition_EVENT_GADGET_STATE_CHANGE_4007(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155009004, 4003) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155009004, 4004) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155009004, 4005) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 155009004, 4006) then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_4007(context, evt)
-				local value = ScriptLib.GetGroupVariableValue(context, "battleState")
-				if value ~= 0 then
-					return -1
-				end
-
+				local value = ScriptLib.GetGroupVariableValue(context, "battleState") 
+				if value ~= 0 then 
+					return -1 
+				end 
+		
 				ScriptLib.SetGroupVariableValue(context, "battleState", 0)
 				ScriptLib.SetGroupVariableValue(context, "battleindex", 1)
 				ScriptLib.SetGroupVariableValue(context, "gameplayState", 2)
-
+			
 				--[[local pos = {x=-758, y=139, z=-226}
 				local pos_follow = {x=0, y=0, z=0}
 					if 0 ~= ScriptLib.BeginCameraSceneLook(context, { look_pos = pos, is_allow_input = false, duration = 2, is_force = true, is_broadcast = false, is_recover_keep_current = true, delay = 0,
@@ -330,7 +330,7 @@ function action_EVENT_GADGET_STATE_CHANGE_4007(context, evt)
 																	is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 								ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 						return -1
-							end
+							end 
 				]]
 				BattleStart(context,ScriptLib.GetGroupVariableValue(context, "battleindex") )
 				return 0
@@ -342,7 +342,7 @@ function condition_EVENT_ANY_MONSTER_DIE_4027(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -353,19 +353,19 @@ function action_EVENT_ANY_MONSTER_DIE_4027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "battleindex" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "battleindex", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "battleState" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "battleState", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -375,7 +375,7 @@ function condition_EVENT_ANY_MONSTER_DIE_4028(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -386,19 +386,19 @@ function action_EVENT_ANY_MONSTER_DIE_4028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "battleindex" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "battleindex", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "battleState" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "battleState", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -408,7 +408,7 @@ function condition_EVENT_ANY_MONSTER_DIE_4029(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -419,19 +419,19 @@ function action_EVENT_ANY_MONSTER_DIE_4029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "battleindex" 的变量设置为 4
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "battleindex", 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "battleState" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "battleState", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -441,7 +441,7 @@ function condition_EVENT_ANY_MONSTER_DIE_4030(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -452,30 +452,30 @@ function action_EVENT_ANY_MONSTER_DIE_4030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "battleState" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "battleState", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_4031(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
-			local value = ScriptLib.GetGroupVariableValue(context, "battleState")
-
-			if value == 0 then
+	
+			local value = ScriptLib.GetGroupVariableValue(context, "battleState") 
+		
+			if value == 0 then 
 				BattleStart(context,ScriptLib.GetGroupVariableValue(context, "battleindex") )
-
-			elseif value == 1 then
-
+		
+			elseif value == 1 then 
+		
 			elseif value == 2 then
 				BattleOver(context,ScriptLib.GetGroupVariableValue(context, "battleindex"))
-			elseif value == 3 then
+			elseif value == 3 then 
 				ScriptLib.SetGroupVariableValue(context,"gameplayState", 3)
 			end
 			--TODO
@@ -489,7 +489,7 @@ function action_EVENT_QUEST_START_4032(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

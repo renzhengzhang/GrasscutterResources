@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133307111
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_1 = 111005,
 	gadget_2 = 111006
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -57,9 +57,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -70,9 +70,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -106,23 +106,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_111008(context, evt)
 	-- 判断是gadgetid 111005 option_id 785
 	if 111005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 785 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -132,26 +132,26 @@ function action_EVENT_SELECT_OPTION_111008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_1, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 31005, 1, defs.gadget_1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 针对当前group内变量名为 "finish" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "finish", 1, 133310583) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133307111 ；指定config：111005；物件身上指定option：785；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133307111, 111005, 785) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -159,14 +159,14 @@ end
 function condition_EVENT_SELECT_OPTION_111009(context, evt)
 	-- 判断是gadgetid 111006 option_id 785
 	if 111006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 785 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -176,26 +176,26 @@ function action_EVENT_SELECT_OPTION_111009(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_2, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 31005, 1, defs.gadget_2) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 针对当前group内变量名为 "finish" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValueByGroup(context, "finish", 1, 133310583) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 133307111 ；指定config：111006；物件身上指定option：785；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133307111, 111006, 785) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -204,7 +204,7 @@ function condition_EVENT_ANY_GADGET_DIE_111010(context, evt)
 	if defs.gadget_1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -212,7 +212,7 @@ end
 function action_EVENT_ANY_GADGET_DIE_111010(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133307111, 2)
-
+	
 	return 0
 end
 
@@ -223,7 +223,7 @@ function action_EVENT_ANY_MONSTER_DIE_111011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -232,7 +232,7 @@ function condition_EVENT_ANY_GADGET_DIE_111012(context, evt)
 	if defs.gadget_2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -240,19 +240,19 @@ end
 function action_EVENT_ANY_GADGET_DIE_111012(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133307111, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_111013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"monsterDie"为6
 	if ScriptLib.GetGroupVariableValue(context, "monsterDie") ~= 6 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -263,13 +263,13 @@ function action_EVENT_VARIABLE_CHANGE_111013(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 31005, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -279,7 +279,7 @@ function condition_EVENT_GROUP_LOAD_111014(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "monsterDie") ~= 6 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -290,6 +290,6 @@ function action_EVENT_GROUP_LOAD_111014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

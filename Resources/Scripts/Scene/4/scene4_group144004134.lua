@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144004134
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -79,9 +79,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -92,9 +92,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -128,25 +128,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134001(context, evt)
 	if evt.param1 ~= 134001 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasTriggeredTutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggeredTutorial") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -157,36 +157,36 @@ function action_EVENT_ENTER_REGION_134001(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasTriggeredTutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasTriggeredTutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144004134, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134002(context, evt)
 	if evt.param1 ~= 134002 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasTriggeredTutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggeredTutorial") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -197,36 +197,36 @@ function action_EVENT_ENTER_REGION_134002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasTriggeredTutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasTriggeredTutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144004134, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134003(context, evt)
 	if evt.param1 ~= 134003 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasTriggeredTutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggeredTutorial") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -237,36 +237,36 @@ function action_EVENT_ENTER_REGION_134003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasTriggeredTutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasTriggeredTutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144004134, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134004(context, evt)
 	if evt.param1 ~= 134004 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasTriggeredTutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggeredTutorial") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -277,36 +277,36 @@ function action_EVENT_ENTER_REGION_134004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasTriggeredTutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasTriggeredTutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144004134, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134005(context, evt)
 	if evt.param1 ~= 134005 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasTriggeredTutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggeredTutorial") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -317,36 +317,36 @@ function action_EVENT_ENTER_REGION_134005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasTriggeredTutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasTriggeredTutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144004134, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134006(context, evt)
 	if evt.param1 ~= 134006 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasTriggeredTutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggeredTutorial") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -357,36 +357,36 @@ function action_EVENT_ENTER_REGION_134006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasTriggeredTutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasTriggeredTutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144004134, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134007(context, evt)
 	if evt.param1 ~= 134007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasTriggeredTutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggeredTutorial") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -397,36 +397,36 @@ function action_EVENT_ENTER_REGION_134007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasTriggeredTutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasTriggeredTutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144004134, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134008(context, evt)
 	if evt.param1 ~= 134008 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasTriggeredTutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggeredTutorial") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -437,36 +437,36 @@ function action_EVENT_ENTER_REGION_134008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasTriggeredTutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasTriggeredTutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144004134, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134009(context, evt)
 	if evt.param1 ~= 134009 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasTriggeredTutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggeredTutorial") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -477,36 +477,36 @@ function action_EVENT_ENTER_REGION_134009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasTriggeredTutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasTriggeredTutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144004134, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134010(context, evt)
 	if evt.param1 ~= 134010 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasTriggeredTutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggeredTutorial") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -517,36 +517,36 @@ function action_EVENT_ENTER_REGION_134010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasTriggeredTutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasTriggeredTutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144004134, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_134011(context, evt)
 	if evt.param1 ~= 134011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"hasTriggeredTutorial"为0
 	if ScriptLib.GetGroupVariableValue(context, "hasTriggeredTutorial") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -557,18 +557,18 @@ function action_EVENT_ENTER_REGION_134011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "hasTriggeredTutorial" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "hasTriggeredTutorial", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 144004134, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end

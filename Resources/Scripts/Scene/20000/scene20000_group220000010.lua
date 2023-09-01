@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220000010
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_id_1 = 50,
 	gadget_id_2 = 49,
 	gadget_id_3 = 1,
@@ -12,9 +12,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -55,9 +55,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -68,9 +68,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -86,9 +86,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -118,7 +118,7 @@ function condition_EVENT_GADGET_CREATE_38(context, evt)
 	if 50 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -129,7 +129,7 @@ function action_EVENT_GADGET_CREATE_38(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_work_options")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -152,7 +152,7 @@ function action_EVENT_SELECT_OPTION_39(context, evt)
 					ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_2, GadgetState.GearStop)
 				elseif state == 202 then
 					ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_2, GadgetState.Default)
-				end
+				end 
 			elseif defs.gadget_id_4 == evt.param2 then
 				if state == 0 then
 					ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_2, GadgetState.GearStop)
@@ -160,9 +160,9 @@ function action_EVENT_SELECT_OPTION_39(context, evt)
 					ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_2, GadgetState.Default)
 				elseif state == 202 then
 					ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_2, GadgetState.GearStart)
-				end
+				end 
 			end
-
+			
 			return 0
 end
 
@@ -183,6 +183,6 @@ function action_EVENT_GADGET_STATE_CHANGE_47(context, evt)
 		elseif evt.param1 == GadgetState.GearStop then
 			ScriptLib.SetGroupVariableValue(context, "Sculpture_State", 202)
 		end
-
+	
 		return 0
 end

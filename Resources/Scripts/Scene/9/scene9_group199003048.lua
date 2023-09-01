@@ -1,13 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199003048
 }
 
 -- DEFS_MISCS
 local        defs = {
-
-guide_region =48009 ,
-        gear_info =
+guide_region =48009 ,
+        gear_info = 
         {        --connect: 每个物件各个旋转档位可连接的对象 0表示无可连接
                 [1] = { config_id=48001, connect = {48002,48003,48004}, point_array_id = 900300012 },
                 [2] = { config_id=48002 , connect = {48001,48004,48003}, point_array_id = 900300013 },
@@ -16,11 +15,11 @@ guide_region =48009 ,
                 [5] = { config_id=48005 , connect = {48002,48003,48006}, point_array_id = 900300016 },
                 [6] = { config_id=48006 , connect = {48005,48003,48007}, point_array_id = 900300017 },
                 [7] = { config_id=48007 , connect = {48006,48003,48004}, point_array_id = 900300018 },
-
+                
         },
 
         --几种解
-        solutions =
+        solutions = 
         {
                 --[解法x] = {gear_info[1]切到它的第x档, gear_info[2]切到它的第y档...}
                 [1] = { connection = {1,3,1,3,1,1,1}, ends = { }},
@@ -30,9 +29,9 @@ turn_option = 31,
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -73,9 +72,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -86,9 +85,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -113,9 +112,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -123,7 +122,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_48008(context, evt)
 	if 48011 ~= evt.param2 or GadgetState.ChestOpened ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -134,21 +133,21 @@ function action_EVENT_GADGET_STATE_CHANGE_48008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_48012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"solution"为1
 	if ScriptLib.GetGroupVariableValue(context, "solution") >= 1 then
 			return true
 	end
-
+	
 	return false
 end
 
@@ -156,7 +155,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_48012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 199003048, 2)
-
+	
 	return 0
 end
 

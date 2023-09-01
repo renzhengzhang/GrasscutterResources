@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308173
 }
 
@@ -8,9 +8,9 @@ base_info = {
 local optionID = {431}
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -78,23 +78,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_173003(context, evt)
 	-- 判断是gadgetid 173002 option_id 431
 	if 173002 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 431 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -104,8 +104,8 @@ function action_EVENT_SELECT_OPTION_173003(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 173002, GadgetState.GearAction1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -114,7 +114,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_173004(context, evt)
 	if 173002 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -125,13 +125,13 @@ function action_EVENT_GADGET_STATE_CHANGE_173004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 173001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 173001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -140,7 +140,7 @@ function condition_EVENT_GROUP_LOAD_173005(context, evt)
 	if GadgetState.GearAction1 ~= ScriptLib.GetGadgetStateByConfigId(context, 133308173, 173002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -151,13 +151,13 @@ function action_EVENT_GROUP_LOAD_173005(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 173001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 173001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -166,7 +166,7 @@ function condition_EVENT_QUEST_START_173006(context, evt)
 	if GadgetState.GearStop ~= ScriptLib.GetGadgetStateByConfigId(context, 133308173, 173002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -176,8 +176,8 @@ function action_EVENT_QUEST_START_173006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 173002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

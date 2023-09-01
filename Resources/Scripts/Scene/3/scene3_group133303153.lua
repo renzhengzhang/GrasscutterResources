@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133303153
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -78,9 +78,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -91,9 +91,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -118,20 +118,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_153009(context, evt)
 	if evt.param1 ~= 153009 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -142,13 +142,13 @@ function action_EVENT_ENTER_REGION_153009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为153008的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 153008 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标{x=-1355.83, y=260.9886, z=3313.716}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-1355.83, y=260.9886, z=3313.716}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -157,20 +157,20 @@ function action_EVENT_ENTER_REGION_153009(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_153010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"No_1"为1
 	if ScriptLib.GetGroupVariableValue(context, "No_1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -180,20 +180,20 @@ function action_EVENT_VARIABLE_CHANGE_153010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 153001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_153011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"No_2"为1
 	if ScriptLib.GetGroupVariableValue(context, "No_2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -203,20 +203,20 @@ function action_EVENT_VARIABLE_CHANGE_153011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 153002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_153012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"No_3"为1
 	if ScriptLib.GetGroupVariableValue(context, "No_3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -226,20 +226,20 @@ function action_EVENT_VARIABLE_CHANGE_153012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 153003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_153013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"No_4"为1
 	if ScriptLib.GetGroupVariableValue(context, "No_4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -249,20 +249,20 @@ function action_EVENT_VARIABLE_CHANGE_153013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 153004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_153014(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"No_5"为1
 	if ScriptLib.GetGroupVariableValue(context, "No_5") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -272,20 +272,20 @@ function action_EVENT_VARIABLE_CHANGE_153014(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 153005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_153015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"No_6"为1
 	if ScriptLib.GetGroupVariableValue(context, "No_6") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -295,20 +295,20 @@ function action_EVENT_VARIABLE_CHANGE_153015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 153006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_153016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"No_7"为1
 	if ScriptLib.GetGroupVariableValue(context, "No_7") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -318,8 +318,8 @@ function action_EVENT_VARIABLE_CHANGE_153016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 153007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -328,31 +328,31 @@ function condition_EVENT_GADGET_STATE_CHANGE_153017(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303153, 153001) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303153, 153002) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303153, 153003) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303153, 153004) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303153, 153005) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303153, 153006) then
 		return false
 	end
-
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 133303153, 153007) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -363,10 +363,10 @@ function action_EVENT_GADGET_STATE_CHANGE_153017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303153, 2)
-
+	
 	return 0
 end
 
@@ -376,7 +376,7 @@ function condition_EVENT_GROUP_LOAD_153018(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -384,19 +384,19 @@ end
 function action_EVENT_GROUP_LOAD_153018(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133303153, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_153019(context, evt)
 	if evt.param1 ~= 153019 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -410,8 +410,8 @@ function action_EVENT_ENTER_REGION_153019(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -421,7 +421,7 @@ function condition_EVENT_GROUP_LOAD_153020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -432,6 +432,6 @@ function action_EVENT_GROUP_LOAD_153020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end

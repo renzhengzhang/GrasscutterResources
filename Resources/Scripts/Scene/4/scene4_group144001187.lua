@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144001187
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -84,9 +84,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -97,9 +97,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -124,25 +124,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187001(context, evt)
 	if evt.param1 ~= 187001 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 判断变量"ifreachedhilltop"为0
 	if ScriptLib.GetGroupVariableValue(context, "ifreachedhilltop") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -153,7 +153,7 @@ function action_EVENT_ENTER_REGION_187001(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（188.2132，210.9843，314.1208），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=188.2132, y=210.9843, z=314.1208}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -162,37 +162,37 @@ function action_EVENT_ENTER_REGION_187001(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 1110260 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110260) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7901505") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187002(context, evt)
 	if evt.param1 ~= 187002 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 判断变量"ifreachedhilltop"为0
 	if ScriptLib.GetGroupVariableValue(context, "ifreachedhilltop") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -203,7 +203,7 @@ function action_EVENT_ENTER_REGION_187002(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（188.2132，210.9843，314.1208），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=188.2132, y=210.9843, z=314.1208}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -212,37 +212,37 @@ function action_EVENT_ENTER_REGION_187002(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 1110260 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110260) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7901505") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187003(context, evt)
 	if evt.param1 ~= 187003 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 判断变量"ifreachedhilltop"为0
 	if ScriptLib.GetGroupVariableValue(context, "ifreachedhilltop") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -253,7 +253,7 @@ function action_EVENT_ENTER_REGION_187003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（214.9878，195.25，155.428），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=214.9878, y=195.25, z=155.428}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -262,37 +262,37 @@ function action_EVENT_ENTER_REGION_187003(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 1110260 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110260) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7901505") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187004(context, evt)
 	if evt.param1 ~= 187004 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 判断变量"ifreachedhilltop"为0
 	if ScriptLib.GetGroupVariableValue(context, "ifreachedhilltop") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -303,7 +303,7 @@ function action_EVENT_ENTER_REGION_187004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（214.9878，195.25，155.428），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=214.9878, y=195.25, z=155.428}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -312,37 +312,37 @@ function action_EVENT_ENTER_REGION_187004(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 1110260 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110260) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7901505") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187005(context, evt)
 	if evt.param1 ~= 187005 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 判断变量"ifreachedhilltop"为0
 	if ScriptLib.GetGroupVariableValue(context, "ifreachedhilltop") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -353,7 +353,7 @@ function action_EVENT_ENTER_REGION_187005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（320.4826，200.9229，167.1213），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=320.4826, y=200.9229, z=167.1213}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -362,37 +362,37 @@ function action_EVENT_ENTER_REGION_187005(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 1110260 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110260) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7901505") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187006(context, evt)
 	if evt.param1 ~= 187006 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 判断变量"ifreachedhilltop"为0
 	if ScriptLib.GetGroupVariableValue(context, "ifreachedhilltop") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -403,7 +403,7 @@ function action_EVENT_ENTER_REGION_187006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（320.4826，200.9229，167.1213），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=320.4826, y=200.9229, z=167.1213}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -412,37 +412,37 @@ function action_EVENT_ENTER_REGION_187006(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 1110260 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110260) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7901505") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187007(context, evt)
 	if evt.param1 ~= 187007 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 判断变量"ifreachedhilltop"为0
 	if ScriptLib.GetGroupVariableValue(context, "ifreachedhilltop") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -453,7 +453,7 @@ function action_EVENT_ENTER_REGION_187007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（232.3025，185.7886，435.674），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=232.3025, y=185.7886, z=435.674}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -462,37 +462,37 @@ function action_EVENT_ENTER_REGION_187007(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 1110260 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110260) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7901505") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187008(context, evt)
 	if evt.param1 ~= 187008 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 判断变量"ifreachedhilltop"为0
 	if ScriptLib.GetGroupVariableValue(context, "ifreachedhilltop") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -503,7 +503,7 @@ function action_EVENT_ENTER_REGION_187008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（232.3025，185.7886，435.674），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=232.3025, y=185.7886, z=435.674}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -512,37 +512,37 @@ function action_EVENT_ENTER_REGION_187008(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 1110260 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110260) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7901505") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187009(context, evt)
 	if evt.param1 ~= 187009 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 判断变量"ifreachedhilltop"为0
 	if ScriptLib.GetGroupVariableValue(context, "ifreachedhilltop") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -553,7 +553,7 @@ function action_EVENT_ENTER_REGION_187009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（359.2453，181.1207，421.2856），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=359.2453, y=181.1207, z=421.2856}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -562,37 +562,37 @@ function action_EVENT_ENTER_REGION_187009(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 1110260 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110260) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7901505") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_187010(context, evt)
 	if evt.param1 ~= 187010 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	-- 判断变量"ifreachedhilltop"为0
 	if ScriptLib.GetGroupVariableValue(context, "ifreachedhilltop") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -603,7 +603,7 @@ function action_EVENT_ENTER_REGION_187010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（359.2453，181.1207，421.2856），持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=359.2453, y=181.1207, z=421.2856}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -612,32 +612,32 @@ function action_EVENT_ENTER_REGION_187010(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 调用提示id为 1110260 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 1110260) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "7901505") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_187012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"complete"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "complete", 144001004) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -648,19 +648,19 @@ function action_EVENT_VARIABLE_CHANGE_187012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_187013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"ifreachedhilltop"为1
 	if ScriptLib.GetGroupVariableValue(context, "ifreachedhilltop") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -671,6 +671,6 @@ function action_EVENT_VARIABLE_CHANGE_187013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

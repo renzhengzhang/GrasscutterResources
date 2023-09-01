@@ -1,53 +1,53 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002037
 }
 
 -- DEFS_MISCS
-local        defs =
+local        defs = 
 {
 	--幕布Group
 	curtain_group = 199002071,
         --每个阶段的所有演员物件config_id。用于统一设置可拾取/可对话状态
-        actor_list =
+        actor_list = 
         {
-                [1] =
-                {
+                [1] = 
+                { 
                         [37001] = 1110659,
                         [37003] = 1110735,
                         [37004] = 1110736,
                         [37005] = 1110737,
                         [37028] = 1111305,
                 },
-                [2] =
-                {
+                [2] = 
+                { 
                         [37001] = 1110667,
                         [37004] = 1110736,
                         [37005] = 1110737,
                         [37028] = 1111305,
                 },
-                [3] =
-                {
+                [3] = 
+                { 
                         [37001] = 1110674,
                         [37005] = 1110737,
                         [37028] = 1111305,
                 },
         },
-        static_gadget =
+        static_gadget = 
     {
-                [37002] = {0, 37033, 37032, 37032},
+                [37002] = {0, 37033, 37032, 37032},  
     },
 
         --可拾取的gadget列表，即not in any suite的夜鸦雕像
-        pickable_gadget =
+        pickable_gadget = 
         {
-                [37003] = {0, 37030, 37034, 37034},
-                [37004] = {0, 0, 37030, 37030},
+                [37003] = {0, 37030, 37034, 37034}, 
+                [37004] = {0, 0, 37030, 37030}, 
                 [37005] = {0, 0, 0, 37031},
  	[37028] = {0, 0, 0, 0},
         },
         --行动序列
-        actions =
+        actions = 
         {
                 {
                           [1] = { config_id = 37002, reminder_id = 1110707, point_array = 900200023, point_id_list = {1,2,3,4}, duration = 10},
@@ -74,8 +74,7 @@ local        defs =
                           [1] = { config_id = 37005, reminder_id = 1110724, point_array = 0, point_id_list = 0, duration = 10},
                           [2] = { config_id = 37002, reminder_id = 1110725, point_array = 900200029, point_id_list = {1,2,3,4}, duration = 20},
                           [3] = { config_id = 37003, reminder_id = 0, point_array = 0, point_id_list = 0, arg=1, duration = 0},
-
-                          [4] = { config_id = 37001, reminder_id = 1110727, point_array = 0, point_id_list = 0, duration = 12},
+                          [4] = { config_id = 37001, reminder_id = 1110727, point_array = 0, point_id_list = 0, duration = 12},
                           [5] = { config_id = 37002, reminder_id = 1110728, point_array = 0, point_id_list = 0, duration = 12},
                           [6] = { config_id = 37005, reminder_id = 1110729, point_array = 0, point_id_list = 0, duration = 8},
                           [7] = { config_id = 37004, reminder_id = 1110730, point_array = 0, point_id_list = 0, duration = 8},
@@ -83,17 +82,17 @@ local        defs =
 
                 },
         },
-        spec_actions =
+        spec_actions = 
         {
-
+               
                   [1] = { config_id = 37028, reminder_id = 1111306, point_array = {900200127}, point_id_list = {1,2,3,4}, duration = 4},
                   [2] = { config_id = 37028, reminder_id = 1111306, point_array = {900200127}, point_id_list = {1,2,3,4}, duration = 4},
                   [3] = { config_id = 37028, reminder_id = 1111306, point_array = {900200127}, point_id_list = {1,2,3,4}, duration = 4},
-
+                
         },
         --每段剧情结束时加载的对应suite(放聚光灯和操作台用),和正确的放置槽位config_id
         --key是阶段id
-        question_suits =
+        question_suits =  
         {
                    [1] = { add_suite = 3, correct_slot = 37007, correct_gadget = 37003, spec = 37028},
                    [2] = { add_suite = 4, correct_slot = 37007, correct_gadget = 37004, spec = 37028},
@@ -105,9 +104,9 @@ no_actor = 37001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -187,9 +186,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -200,9 +199,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -254,20 +253,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_37008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_done"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -278,49 +277,49 @@ function action_EVENT_VARIABLE_CHANGE_37008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "jianmu1" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "jianmu1", 0, 199002019) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "jianmu3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "jianmu3", 0, 199002019) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "jianmu2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "jianmu2", 1, 199002019) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "appear" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "appear", 1, 199002189) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "Appear" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "Appear", 1, 199002082) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_37011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_done"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -331,19 +330,19 @@ function action_EVENT_VARIABLE_CHANGE_37011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_37026(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"is_done"为1
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -354,7 +353,7 @@ function action_EVENT_VARIABLE_CHANGE_37026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -364,7 +363,7 @@ function condition_EVENT_GROUP_LOAD_37027(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "is_done") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -375,7 +374,7 @@ function action_EVENT_GROUP_LOAD_37027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 

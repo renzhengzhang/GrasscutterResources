@@ -3,23 +3,23 @@
 ||  owner:      shuyi.chang
 ||  description:    EyePoint固定LOD测试
 ||  LogName:    ## [TestEyepointLOD]
-||  Protection:
+||  Protection: 
 =======================================]]
 --[[
-defs = {
+local defs = {
     target_region_config_id = 1,
     related_big_region_config_id = 2,
 }
 --]]
 
-local extraTriggers =
+local extraTriggers = 
 {
 	{ config_id = 50000001, name = "ENTER_REGION", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_EVENT_ENTER_REGION", trigger_count = 0 },
 	{ config_id = 50000002, name = "LEAVE_REGION", event = EventType.EVENT_LEAVE_REGION, source = "", condition = "", action = "action_EVENT_LEAVE_REGION", trigger_count = 0 },
 
 }
 
-local extraVariables =
+local extraVariables = 
 {
     -- 设置LOD层级
 	{ config_id = 50000101, name = "lodLevel", value = 1, no_refresh = true },
@@ -79,7 +79,7 @@ function action_EVENT_LEAVE_REGION(context, evt)
         ScriptLib.PrintContextLog(context, "## [TestEyepointLOD] player eye point is cleared, succeed = "..temp)
 
 	end
-
+	
 	return 0
 end
 

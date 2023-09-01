@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240053001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -56,9 +56,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -69,9 +69,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -123,9 +123,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -134,7 +134,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1003(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -145,12 +145,12 @@ function action_EVENT_ANY_MONSTER_DIE_1003(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	-- 创建编号为1（该怪物潮的识别id)的怪物潮，创建怪物总数为18，场上怪物最少6只，最多6只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 240053001, {1004,1005,1006,1007,1008,1009}, 18, 6, 6) then
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -158,7 +158,7 @@ end
 function action_EVENT_CHALLENGE_SUCCESS_1010(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240053001, 3)
-
+	
 	return 0
 end
 
@@ -167,7 +167,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_1011(context, evt)
 	if 1012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -178,18 +178,18 @@ function action_EVENT_ANY_MONSTER_LIVE_1011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_1015(context, evt)
 	ScriptLib.KillMonsterTide(context, 240053001, 1)
-
+	
 	ScriptLib.RemoveExtraGroupSuite(context, 240053001, 2)
-
+	
 	ScriptLib.InitTimeAxis(context, "refresh_challenge", {3}, false)
-
+	
 	return 0
 end
 
@@ -199,7 +199,7 @@ function condition_EVENT_DUNGEON_SETTLE_1017(context, evt)
 	if 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -207,7 +207,7 @@ end
 function action_EVENT_DUNGEON_SETTLE_1017(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240053001, 4)
-
+	
 	return 0
 end
 
@@ -216,22 +216,22 @@ function condition_EVENT_TIME_AXIS_PASS_1018(context, evt)
 	if "refresh_challenge" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_TIME_AXIS_PASS_1018(context, evt)
-	ScriptLib.RefreshGroup(context, { group_id = 240053001, suite = 1 })
-
+	ScriptLib.RefreshGroup(context, { group_id = 240053001, suite = 1 }) 
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_1022(context, evt)
 	ScriptLib.RemoveExtraGroupSuite(context, 240053001, 3)
-
+	
 	ScriptLib.InitTimeAxis(context, "refresh_challenge", {3}, false)
-
+	
 	return 0
 end

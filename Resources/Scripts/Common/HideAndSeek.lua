@@ -1,4 +1,4 @@
---[[defs = {
+--[[local defs = {
 	gadget_operator = xxx,
 	group_id = xxx,
 	gadget_prison_list = {1,2,3,4}

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133106411
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	steps = 2,
 	config_id = 411015,
 	routes = { [1]={route=310600005,points={1,2,7}},  [2]={route=310600005,points={7,8,9}},  },
@@ -15,9 +15,9 @@ defs = {
 local shootLightMap={[411009]=411016,[411010]=411019}
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -74,9 +74,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -87,9 +87,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -141,9 +141,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -152,7 +152,7 @@ function condition_EVENT_GROUP_LOAD_411002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "questFinished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -163,13 +163,13 @@ function action_EVENT_GROUP_LOAD_411002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133106492, EntityType.GADGET, 492003 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -179,7 +179,7 @@ function condition_EVENT_QUEST_START_411005(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MoveStep") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -190,19 +190,19 @@ function action_EVENT_QUEST_START_411005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 411009 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 411009, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 411010 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 411010, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -212,7 +212,7 @@ function condition_EVENT_PLATFORM_REACH_POINT_411006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MoveStep") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -223,23 +223,23 @@ function action_EVENT_PLATFORM_REACH_POINT_411006(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "questFinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "questFinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133106411, 4)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133106411, 5)
-
+	
 	-- 创建标识为"killlightriver"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "killlightriver", {1}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -248,7 +248,7 @@ function condition_EVENT_TIME_AXIS_PASS_411023(context, evt)
 	if "killlightriver" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -259,7 +259,7 @@ function action_EVENT_TIME_AXIS_PASS_411023(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -269,7 +269,7 @@ function condition_EVENT_PLATFORM_REACH_POINT_411024(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "MoveStep") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -277,28 +277,28 @@ end
 function action_EVENT_PLATFORM_REACH_POINT_411024(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106411, 4)
-
+	
 	-- 调用提示id为 710442301 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 710442301) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_411026(context, evt)
-	-- 判断指定group组剩余怪物数量是否是0
+	-- 判断指定group组剩余怪物数量是否是0 
 	if ScriptLib.GetGroupMonsterCountByGroupId(context, 133106411) ~= 0 then
 		return false
 	end
-
+	
 	-- 判断变量"MoveStep"为1
 	if ScriptLib.GetGroupVariableValue(context, "MoveStep") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -306,13 +306,13 @@ end
 function action_EVENT_ANY_MONSTER_DIE_411026(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133106411, 5)
-
+	
 	-- 调用提示id为 710442302 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 710442302) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 

@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155005102
 }
 
@@ -10,7 +10,7 @@ local Worktops = {}
 local DayAppearGadgets = {}
 local NightAppearGadgets = {102010}
 
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
 
@@ -24,7 +24,7 @@ local gameplayStateFuncitons =
 	end
 }
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -32,17 +32,17 @@ end
 --state = {}
 function GadgetStateSwitcher(context,groupid,gadget_id,state)
 
-	if ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[1] then
+	if ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[1] then 
 		ScriptLib.SetGroupGadgetStateByConfigId(context, groupid, gadget_id, state[2])
-	elseif ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[2] then
+	elseif ScriptLib.GetGadgetStateByConfigId(context, groupid, gadget_id)  == state[2] then 
 		ScriptLib.SetGroupGadgetStateByConfigId(context, groupid, gadget_id, state[1])
-	end
+	end 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -76,9 +76,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -89,9 +89,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -116,9 +116,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -130,9 +130,9 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_102015(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end

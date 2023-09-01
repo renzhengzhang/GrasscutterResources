@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220663
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -103,9 +103,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -116,9 +116,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -242,20 +242,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_663040(context, evt)
 	if evt.param1 ~= 663040 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -265,22 +265,22 @@ function action_EVENT_ENTER_REGION_663040(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 133220663, {663001}, 50, 1, 1) then
 		return -1
 	end
-
+	
 	-- 创建编号为2（该怪物潮的识别id)的怪物潮，创建怪物总数为50，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 2, 133220663, {663002}, 50, 1, 1) then
 		return -1
 	end
-
+	
 	-- 创建编号为3（该怪物潮的识别id)的怪物潮，创建怪物总数为50，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 3, 133220663, {663003}, 50, 1, 1) then
 		return -1
 	end
-
+	
 	-- 创建编号为4（该怪物潮的识别id)的怪物潮，创建怪物总数为50，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 4, 133220663, {663004}, 50, 1, 1) then
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -289,7 +289,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_663041(context, evt)
 	if 663009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -297,8 +297,8 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_663041(context, evt)
 	-- 创建标识为"T1"，时间节点为{60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T1", {60}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -308,7 +308,7 @@ function condition_EVENT_TIME_AXIS_PASS_663042(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -316,16 +316,16 @@ end
 function action_EVENT_TIME_AXIS_PASS_663042(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220663, 8)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133220663, 7)
-
+	
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220663, 7)
-
+	
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220663, 13)
-
+	
 	return 0
 end
 
@@ -334,7 +334,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_663043(context, evt)
 	if 663012 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -342,8 +342,8 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_663043(context, evt)
 	-- 创建标识为"T2"，时间节点为{60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T2", {60}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -353,7 +353,7 @@ function condition_EVENT_TIME_AXIS_PASS_663044(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -361,28 +361,28 @@ end
 function action_EVENT_TIME_AXIS_PASS_663044(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220663, 9)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133220663, 8)
-
+	
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220663, 8)
-
+	
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220663, 13)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_663045(context, evt)
 	if evt.param1 ~= 663045 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -393,10 +393,10 @@ function action_EVENT_ENTER_REGION_663045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 删除suite13的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220663, 13)
-
+	
 	return 0
 end
 
@@ -404,13 +404,13 @@ end
 function action_EVENT_GROUP_LOAD_663046(context, evt)
 	-- 初始化table
 	    local suite_table = {}
-
+	
 	-- 需要在group创建时调用，该函数会通过context的groupid读取HuntingData表，来创建entity填充points
 	    if 0~= ScriptLib.RefreshHuntingClueGroup(context) then
 	        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_hunting_clue_group")
 	        return -1
 	    end
-
+	
 	-- 根据HuntingData表的配置来激活对应的suite
 	    if 0~= ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context) then
 	        suite_table = ScriptLib.GetHuntingMonsterExtraSuiteIndexVec(context)
@@ -418,7 +418,7 @@ function action_EVENT_GROUP_LOAD_663046(context, evt)
 	            ScriptLib.AddExtraGroupSuite(context, 133220663, suite_id)
 	        end
 	    end
-
+	
 	return 0
 end
 
@@ -429,7 +429,7 @@ function action_EVENT_HUNTING_FINISH_FINAL_663047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -438,7 +438,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_663048(context, evt)
 	if 663015 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -446,8 +446,8 @@ end
 function action_EVENT_ANY_MONSTER_LIVE_663048(context, evt)
 	-- 创建标识为"T3"，时间节点为{60}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "T3", {60}, false)
-
-
+	
+	
 	return 0
 end
 
@@ -457,7 +457,7 @@ function condition_EVENT_TIME_AXIS_PASS_663049(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "IS_BOSS_DEAD") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -465,28 +465,28 @@ end
 function action_EVENT_TIME_AXIS_PASS_663049(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220663, 8)
-
+	
 	    -- 杀死指定group内的gadget和monster,移除其它东西
 	    ScriptLib.KillExtraGroupSuite(context, 133220663, 9)
-
+	
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220663, 9)
-
+	
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133220663, 13)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_663050(context, evt)
 	if evt.param1 ~= 663050 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -497,19 +497,19 @@ function action_EVENT_ENTER_REGION_663050(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_663051(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 133220663) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -520,44 +520,44 @@ function action_EVENT_VARIABLE_CHANGE_663051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 		return -1
 	end
-
+	
 	--销毁编号为2（该怪物潮的识别id)的怪物潮
 	if 0 ~= ScriptLib.KillMonsterTide(context, 133220663, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 		return -1
 	end
-
+	
 	--销毁编号为3（该怪物潮的识别id)的怪物潮
 	if 0 ~= ScriptLib.KillMonsterTide(context, 133220663, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 		return -1
 	end
-
+	
 	--销毁编号为4（该怪物潮的识别id)的怪物潮
 	if 0 ~= ScriptLib.KillMonsterTide(context, 133220663, 4) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_tide")
 		return -1
 	end
-
+	
 	-- 杀死Group内所有monster
 		if 0 ~= ScriptLib.KillGroupEntity(context, { group_id = 133220663, kill_policy = GroupKillPolicy.GROUP_KILL_MONSTER }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_monster_by_group")
 			return -1
 		end
-
-
+		
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_663052(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 133220663) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -565,19 +565,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_663052(context, evt)
 	-- 删除suite6的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220663, 6)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_663053(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 133220663) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -585,19 +585,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_663053(context, evt)
 	-- 删除suite7的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220663, 7)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_663054(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 133220663) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -605,19 +605,19 @@ end
 function action_EVENT_VARIABLE_CHANGE_663054(context, evt)
 	-- 删除suite8的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220663, 8)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_663055(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"IS_BOSS_DEAD"为1
 	if ScriptLib.GetGroupVariableValueByGroup(context, "IS_BOSS_DEAD", 133220663) ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -625,7 +625,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_663055(context, evt)
 	-- 删除suite9的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133220663, 9)
-
+	
 	return 0
 end
 

@@ -3,10 +3,10 @@
 ||  owner:      shuyi.chang
 ||  description:    爆炸魔药活动
 ||  LogName:    ## [UnstableSpray]
-||  Protection:
+||  Protection: 
 =======================================]]
 --[[
-defs =
+local defs = 
 {
     -- 本轮对应的gallery id
     galleryId = 0,
@@ -27,16 +27,16 @@ defs =
     monsterPoolTable = {
         {
             pool_list = {35001},
-            point_array_id = 0,
-            point_id_list = {},
-            affix_list = {},
+            point_array_id = 0, 
+            point_id_list = {}, 
+            affix_list = {}, 
             param = {total_count = 99, min_count = 1, max_count = 3, tag = 0, fill_time = 0, fill_count = 0, is_ordered = false, is_tag_bit_match = false},
         },
         {
             pool_list = {35001},
-            point_array_id = 0,
-            point_id_list = {},
-            affix_list = {},
+            point_array_id = 0, 
+            point_id_list = {}, 
+            affix_list = {}, 
             param = {total_count = 99, min_count = 1, max_count = 3, tag = 0, fill_time = 0, fill_count = 0, is_ordered = false, is_tag_bit_match = false},
         },
     },
@@ -52,8 +52,8 @@ defs =
 }
 --]]
 
-local extraTriggers =
-{
+local extraTriggers = 
+{	
 	{ config_id = 50000001, name = "ENTER_REGION", event = EventType.EVENT_ENTER_REGION, source = "", condition = "", action = "action_ENTER_REGION", trigger_count = 0},
     { config_id = 50000002, name = "START_CHALLENGE", event = EventType.EVENT_SELECT_OPTION, source = "", condition = "", action = "action_START_CHALLENGE", trigger_count = 0 },
     { config_id = 50000003, name = "STAGE_COMPLETE", event = EventType.EVENT_TIME_AXIS_PASS, source = "", condition = "", action = "action_STAGE_COMPLETE", trigger_count = 0 },
@@ -65,7 +65,7 @@ local extraTriggers =
 
 }
 
-local extraVariables =
+local extraVariables = 
 {
     -- 记录目前是第几个三十秒
     { config_id = 5000101, name = "stage", value = 0, no_refresh = false },
@@ -89,7 +89,7 @@ local worktopField =
 	optionId = 429,
 }
 
--- local transParam =
+-- local transParam = 
 -- {
 --     pos = {x = 0, y = 0, z = 0},
 --     rot = {x = 0, y = 0, z = 0},
@@ -180,7 +180,7 @@ function LF_CheckAndRecordBuff(context, buffIdx)
 
             return 0
         end
-        -- 如果这个var记录了别的buff idx，继续for loop
+        -- 如果这个var记录了别的buff idx，继续for loop        
     end
 
 end
@@ -196,7 +196,7 @@ function action_ENTER_REGION(context, evt)
     if defs.isStartLevel == true then
         ScriptLib.SetGroupVariableValue(context, "levelEnabled", 1)
     end
-
+   
     return 0
 
 end
@@ -237,9 +237,9 @@ function action_START_CHALLENGE(context, evt)
 
         -- 刷怪
         -- ScriptLib.AutoMonsterTide(context, 1, base_info.group_id, defs.tides.monsters, defs.tides.sum, defs.tides.max, defs.tides.min)
-        ScriptLib.AutoPoolMonsterTide(context, 1, base_info.group_id, defs.monsterPoolTable[1].pool_list, defs.monsterPoolTable[1].point_array_id,
+        ScriptLib.AutoPoolMonsterTide(context, 1, base_info.group_id, defs.monsterPoolTable[1].pool_list, defs.monsterPoolTable[1].point_array_id, 
             defs.monsterPoolTable[1].point_id_list, defs.monsterPoolTable[1].affix_list, defs.monsterPoolTable[1].param)
-
+    
         end
     return 0
 end
@@ -255,7 +255,7 @@ function action_STAGE_COMPLETE(context, evt)
         ScriptLib.SetGroupVariableValue(context, "stage", temp)
         ScriptLib.PrintContextLog(context, "## [UnstableSpray] group variable stage is set to "..temp)
 
-
+    
         -- 【时间轴总长度会比90s多一点，应该跑不到这里gallery就已经结束并强制卸载group了，目前走event gallery stop】
         if evt.param1 == 3 then
             -- -- 第三轮结束，停止刷怪
@@ -275,11 +275,11 @@ function action_STAGE_COMPLETE(context, evt)
     else
         -- 不是challenge timer也不是怪物潮timer就肯定是sgv timer
         -- SGV设为0，buff效果结束
-        ScriptLib.SetTeamServerGlobalValue(context, uid, evt.source_name, 0)
+        ScriptLib.SetTeamServerGlobalValue(context, uid, evt.source_name, 0)        
         ScriptLib.PrintContextLog(context, "## [UnstableSpray] "..evt.source_name.." is set to 0")
 
     end
-
+   
     return 0
 end
 
@@ -303,7 +303,7 @@ function action_MONSTER_DIE(context, evt)
 
         -- 第一波怪物潮都死了
         -- 开下一个怪物潮
-        ScriptLib.AutoPoolMonsterTide(context, 2, base_info.group_id, defs.monsterPoolTable[2].pool_list, defs.monsterPoolTable[2].point_array_id,
+        ScriptLib.AutoPoolMonsterTide(context, 2, base_info.group_id, defs.monsterPoolTable[2].pool_list, defs.monsterPoolTable[2].point_array_id, 
         defs.monsterPoolTable[2].point_id_list, defs.monsterPoolTable[2].affix_list, defs.monsterPoolTable[2].param)
 
         ScriptLib.SetGroupVariableValue(context, "firstTideClose", 2)
@@ -329,16 +329,16 @@ function action_GALLERY_STOP(context, evt)
             ScriptLib.SetGroupVariableValueByGroup(context, "levelEnabled", 1, defs.nextGroupId)
         end
     end
-
+    
     -- 所有buff sgv保底归零
     for i = 1, 4 do
        local buffIdx = ScriptLib.GetGroupVariableValue(context, "sgv"..i)
-
+       
        local sgv = ScriptLib.InstableSprayGetSGVByBuffId(context, buffIdx)
        if sgv ~= "" then
             ScriptLib.EndTimeAxis(context, sgv)
 
-            ScriptLib.SetTeamServerGlobalValue(context, uid, sgv, 0)
+            ScriptLib.SetTeamServerGlobalValue(context, uid, sgv, 0)            
             local v = ScriptLib.GetTeamServerGlobalValue(context, uid, sgv)
             ScriptLib.PrintContextLog(context, "## [UnstableSpray] level ends and "..sgv.." = "..v)
        end
@@ -352,7 +352,7 @@ function action_DUNGEON_ALL_AVATAR_DIE(context, evt)
     ScriptLib.PrintContextLog(context, "## [UnstableSpray] all avatar dies in dungeon"..evt.source_name.."uid = "..evt.uid)
 
 	ScriptLib.CauseDungeonFail(context)
-
+    
     -- gallery失败
 	ScriptLib.StopGallery(context, defs.galleryId, true)
 	return 0
@@ -421,7 +421,7 @@ function SLC_TriggerAbility(context, evt)
         LF_CheckAndRecordBuff(context, curBuffIdx[i])
 
         -- local var1 = ScriptLib.SetGroupVariableValue(context, "sgv"..i, curBuffIdx[i])
-
+        
         -- local r = ScriptLib.GetGroupVariableValue(context, "sgv"..i)
         -- ScriptLib.PrintContextLog(context, "## [UnstableSpray] group variable sgv"..i.." is set to "..r..", var = "..var1)
 

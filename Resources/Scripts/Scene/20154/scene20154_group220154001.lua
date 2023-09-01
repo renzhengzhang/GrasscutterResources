@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220154001
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	transTarget = 1004,
 	phaseOneBoss = 1001,
 	phaseTwoBoss = 1002,

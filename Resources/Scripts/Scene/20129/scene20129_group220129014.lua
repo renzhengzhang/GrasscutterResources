@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220129014
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -63,9 +63,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -76,9 +76,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -112,20 +112,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14007(context, evt)
 	if evt.param1 ~= 14007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -133,37 +133,37 @@ end
 function action_EVENT_ENTER_REGION_14007(context, evt)
 	ScriptLib.RemoveExtraGroupSuite(context, 220129014, 2)
 	ScriptLib.CreateGadget(context, { config_id = 14005 })
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14013(context, evt)
 	if evt.param1 ~= 14013 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_14013(context, evt)
-
-
+	
+	
 	ScriptLib.RemoveExtraGroupSuite(context, 220129016, 2)
 	ScriptLib.RemoveExtraGroupSuite(context, 220129017, 2)
 	ScriptLib.RemoveExtraGroupSuite(context, 220129018, 2)
 	ScriptLib.RemoveExtraGroupSuite(context, 220129019, 2)
-
+	
 	ScriptLib.RemoveExtraGroupSuite(context, 220129016, 3)
 	ScriptLib.RemoveExtraGroupSuite(context, 220129017, 3)
 	ScriptLib.RemoveExtraGroupSuite(context, 220129018, 3)
 	ScriptLib.RemoveExtraGroupSuite(context, 220129019, 3)
 	ScriptLib.RemoveExtraGroupSuite(context, 220129011, 3)
-
+	
 	ScriptLib.RemoveExtraGroupSuite(context, 220129020, 2)
 	-- 判断变量"time"为5
 	if ScriptLib.GetGroupVariableValue(context, "time") == 1 then
@@ -172,7 +172,7 @@ function action_EVENT_ENTER_REGION_14013(context, evt)
 	  ScriptLib.AddExtraGroupSuite(context, 220129016, 3)
 	  ScriptLib.SetGroupGadgetStateByConfigId(context, 220129020, 20007, GadgetState.ChestLocked)
 	end
-
+	
 	-- 判断变量"time"为5
 	if ScriptLib.GetGroupVariableValue(context, "time") == 2 then
 	  ScriptLib.RemoveExtraGroupSuite(context, 220129014, 3)
@@ -180,7 +180,7 @@ function action_EVENT_ENTER_REGION_14013(context, evt)
 	  ScriptLib.AddExtraGroupSuite(context, 220129017, 3)
 	  ScriptLib.SetGroupGadgetStateByConfigId(context, 220129020, 20007, GadgetState.ChestOpened)
 	end
-
+	
 	-- 判断变量"time"为5
 	if ScriptLib.GetGroupVariableValue(context, "time") == 3 then
 	  ScriptLib.RemoveExtraGroupSuite(context, 220129014, 3)
@@ -188,7 +188,7 @@ function action_EVENT_ENTER_REGION_14013(context, evt)
 	  ScriptLib.AddExtraGroupSuite(context, 220129018, 3)
 	  ScriptLib.SetGroupGadgetStateByConfigId(context, 220129020, 20007, GadgetState.ChestTrap)
 	end
-
+	
 	-- 判断变量"time"为5
 	if ScriptLib.GetGroupVariableValue(context, "time") == 4 then
 	  ScriptLib.RemoveExtraGroupSuite(context, 220129014, 3)
@@ -196,7 +196,7 @@ function action_EVENT_ENTER_REGION_14013(context, evt)
 	  ScriptLib.AddExtraGroupSuite(context, 220129019, 3)
 	  ScriptLib.SetGroupGadgetStateByConfigId(context, 220129020, 20007, GadgetState.ChestBramble)
 	end
-
+	
 	-- 判断变量"time"为5
 	if ScriptLib.GetGroupVariableValue(context, "time") == 5 then
 	  ScriptLib.RemoveExtraGroupSuite(context, 220129014, 3)
@@ -204,25 +204,25 @@ function action_EVENT_ENTER_REGION_14013(context, evt)
 	  ScriptLib.AddExtraGroupSuite(context, 220129016, 3)
 	  ScriptLib.SetGroupGadgetStateByConfigId(context, 220129020, 20007, GadgetState.ChestFrozen)
 	end
-
+	
 	return 0
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_14014(context, evt)
 	if evt.param1 ~= 14014 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -230,6 +230,6 @@ end
 function action_EVENT_ENTER_REGION_14014(context, evt)
 	ScriptLib.RemoveExtraGroupSuite(context, 220129014, 2)
 	ScriptLib.CreateGadget(context, { config_id = 14005 })
-
+	
 	return 0
 end

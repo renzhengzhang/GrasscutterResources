@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133001377
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -52,9 +52,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -65,9 +65,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -83,26 +83,26 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_QUEST_FINISH_377002(context, evt)
 	--检查ID为101104的任务的完成状态是否为1（1=完成，0=失败）
 	--此事件需要配合Quest表使用，在Quest表里的完成执行中配置“通知group脚本”，则该任务完成后服务端会向对应的group发送通知，参数1填写场景ID，参数2填写group ID（如果不填则会通知所有group）
-
+	
 	--检查任务ID
 	if 101104 ~= evt.param1 then
 		return false
 	end
-
+	
 	--检查任务成功状态
 	if 1 ~= evt.param2 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -112,14 +112,14 @@ function action_EVENT_QUEST_FINISH_377002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 377001, GadgetState.GearAction2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "isfinished" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isfinished", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -128,7 +128,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377003(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -136,13 +136,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_377003(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001378, 2)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "13300137701") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -151,7 +151,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377005(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -159,13 +159,13 @@ end
 function action_EVENT_GADGET_STATE_CHANGE_377005(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001378, 3)
-
+	
 	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
 	if 0 ~= ScriptLib.AddQuestProgress(context, "13300137702") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -174,7 +174,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377007(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -185,7 +185,7 @@ function action_EVENT_GADGET_STATE_CHANGE_377007(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -195,7 +195,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377008(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.GearAction2 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -206,7 +206,7 @@ function action_EVENT_GADGET_STATE_CHANGE_377008(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -216,7 +216,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377009(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.Action01 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -227,7 +227,7 @@ function action_EVENT_GADGET_STATE_CHANGE_377009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -237,7 +237,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377010(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.GearStart ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -248,7 +248,7 @@ function action_EVENT_GADGET_STATE_CHANGE_377010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -258,7 +258,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377011(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.Action02 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -269,7 +269,7 @@ function action_EVENT_GADGET_STATE_CHANGE_377011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -279,7 +279,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377012(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.GearStop ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -290,7 +290,7 @@ function action_EVENT_GADGET_STATE_CHANGE_377012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -300,7 +300,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377013(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -311,7 +311,7 @@ function action_EVENT_GADGET_STATE_CHANGE_377013(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -320,7 +320,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377014(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -331,7 +331,7 @@ function action_EVENT_GADGET_STATE_CHANGE_377014(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -340,7 +340,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377015(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -351,7 +351,7 @@ function action_EVENT_GADGET_STATE_CHANGE_377015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -360,7 +360,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377016(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.Action02 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -371,7 +371,7 @@ function action_EVENT_GADGET_STATE_CHANGE_377016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -380,7 +380,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377017(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -391,7 +391,7 @@ function action_EVENT_GADGET_STATE_CHANGE_377017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -400,7 +400,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377018(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.GearAction1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -411,13 +411,13 @@ function action_EVENT_GADGET_STATE_CHANGE_377018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "isfinished" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isfinished", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -426,7 +426,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_377019(context, evt)
 	if 377001 ~= evt.param2 or GadgetState.GearAction2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -437,6 +437,6 @@ function action_EVENT_GADGET_STATE_CHANGE_377019(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220136008
 }
 
@@ -7,7 +7,7 @@ base_info = {
 local        defs = {
 	is_movable = 1,
 	--连线形态
-	patterns =
+	patterns = 
 	{
 			--形态1
 			[1] = {
@@ -17,7 +17,7 @@ local        defs = {
 			[8004] = {connect =8003, point_array = 8, point_id = {4}} ,
 			[8005] = {connect =8006, point_array = 8, point_id = {5}} ,
 			[8006] = {connect =8005, point_array = 8, point_id = {6}} ,
-
+			
 			},
 			--形态2
 			[2] = {
@@ -27,7 +27,7 @@ local        defs = {
 			[8004] = {connect =8003, point_array = 0, point_id = {0}} ,
 			[8005] = {connect =8006, point_array = 0, point_id = {0}} ,
 			[8006] = {connect =8005, point_array = 0, point_id = {0}} ,
-
+			
 			},
 			[3] = {
 				[8001] = {connect =8004 , point_array = 0, point_id = {0}} ,
@@ -36,7 +36,7 @@ local        defs = {
 			[8004] = {connect =8003, point_array = 0, point_id = {0}} ,
 			[8005] = {connect =8006, point_array = 0, point_id = {0}} ,
 			[8006] = {connect =8005, point_array = 0, point_id = {0}} ,
-
+			
 			},
 			[4] = {
 				[8001] = {connect =8004 , point_array = 0, point_id = {0}} ,
@@ -45,7 +45,7 @@ local        defs = {
 			[8004] = {connect =8003, point_array = 0, point_id = {0}} ,
 			[8005] = {connect =8006, point_array = 0, point_id = {0}} ,
 			[8006] = {connect =8005, point_array = 0, point_id = {0}} ,
-
+			
 			},
 			[5] = {
 				[8001] = {connect =8004 , point_array = 0, point_id = {0}} ,
@@ -54,7 +54,7 @@ local        defs = {
 			[8004] = {connect =8003, point_array = 0, point_id = {0}} ,
 			[8005] = {connect =8006, point_array = 0, point_id = {0}} ,
 			[8006] = {connect =8005, point_array = 0, point_id = {0}} ,
-
+			
 			},
 			[6] = {
 				[8001] = {connect =8004 , point_array = 0, point_id = {0}} ,
@@ -63,7 +63,7 @@ local        defs = {
 			[8004] = {connect =8003, point_array = 0, point_id = {0}} ,
 			[8005] = {connect =8006, point_array = 0, point_id = {0}} ,
 			[8006] = {connect =8005, point_array = 0, point_id = {0}} ,
-
+			
 			},
 			[7] = {
 				[8001] = {connect =8004 , point_array = 0, point_id = {0}} ,
@@ -72,7 +72,7 @@ local        defs = {
 			[8004] = {connect =8003, point_array = 0, point_id = {0}} ,
 			[8005] = {connect =8006, point_array = 0, point_id = {0}} ,
 			[8006] = {connect =8005, point_array = 0, point_id = {0}} ,
-
+			
 			},
 			[8] = {
 				[8001] = {connect =8004 , point_array = 0, point_id = {0}} ,
@@ -81,7 +81,7 @@ local        defs = {
 			[8004] = {connect =8003, point_array = 0, point_id = {0}} ,
 			[8005] = {connect =8006, point_array = 0, point_id = {0}} ,
 			[8006] = {connect =8005, point_array = 0, point_id = {0}} ,
-
+			
 			},
 			[9]= {
 				[8001] = {connect =8004 , point_array = 0, point_id = {0}} ,
@@ -90,7 +90,7 @@ local        defs = {
 			[8004] = {connect =8003, point_array = 0, point_id = {0}} ,
 			[8005] = {connect =8006, point_array = 0, point_id = {0}} ,
 			[8006] = {connect =8005, point_array = 0, point_id = {0}} ,
-
+			
 			},
 			[10] = {
 				[8001] = {connect =8004 , point_array = 0, point_id = {0}} ,
@@ -99,17 +99,17 @@ local        defs = {
 			[8004] = {connect =8003, point_array = 0, point_id = {0}} ,
 			[8005] = {connect =8006, point_array = 0, point_id = {0}} ,
 			[8006] = {connect =8005, point_array = 0, point_id = {0}} ,
-
+			
 			},
-
+			
 	}
 
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -180,9 +180,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -193,9 +193,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -229,20 +229,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_8015(context, evt)
 	if evt.param1 ~= 8015 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -253,7 +253,7 @@ function action_EVENT_ENTER_REGION_8015(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -262,7 +262,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_8016(context, evt)
 	if 8009 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -272,8 +272,8 @@ function action_EVENT_GADGET_STATE_CHANGE_8016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8009, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -282,7 +282,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_8017(context, evt)
 	if 8010 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -292,8 +292,8 @@ function action_EVENT_GADGET_STATE_CHANGE_8017(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8010, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -302,7 +302,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_8018(context, evt)
 	if 8011 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -312,8 +312,8 @@ function action_EVENT_GADGET_STATE_CHANGE_8018(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -322,7 +322,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_8019(context, evt)
 	if 8012 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -332,8 +332,8 @@ function action_EVENT_GADGET_STATE_CHANGE_8019(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -342,52 +342,52 @@ function condition_EVENT_GADGET_STATE_CHANGE_8020(context, evt)
 	if 8009 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_8020(context, evt)
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 4 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 2)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 2) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 1)
-
+	
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 5 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 3)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 3) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 2)
-
+	
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 6 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 4)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 4) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 3)
-
+	
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 7 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 5)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 5) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 4)
-
+	
 	end
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 8 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 6)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 6) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 5)
-
+	
 	end
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 9 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 7)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 7) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 6)
-
+	
 	end
-
+	
 	return 0
 end
 
@@ -396,52 +396,52 @@ function condition_EVENT_GADGET_STATE_CHANGE_8021(context, evt)
 	if 8010 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_8021(context, evt)
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 2 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 2)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 2) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 1)
-
+	
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 3 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 3)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 3) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 2)
-
+	
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 5 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 5)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 5) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 4)
-
+	
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 6 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 6)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 6) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 5)
-
+	
 	end
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 8 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 8)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 8) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 7)
-
+	
 	end
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 9then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 9)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 9) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 8)
-
+	
 	end
-
+	
 	return 0
 end
 
@@ -450,51 +450,51 @@ function condition_EVENT_GADGET_STATE_CHANGE_8022(context, evt)
 	if 8011 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_8022(context, evt)
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 1 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 3)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 3) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 2)
-
+	
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 2 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 4)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 4) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 3)
-
+	
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 4 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 6)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 6) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 5)
-
+	
 	end
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 5 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 7)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 7) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 6)
-
+	
 	end
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 7 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 9)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 9) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 8)
-
+	
 	end
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 8 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 10)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 10) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 9)
-
+	
 	end
-
+	
 	return 0
 end
 
@@ -503,71 +503,71 @@ function condition_EVENT_GADGET_STATE_CHANGE_8023(context, evt)
 	if 8012 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_8023(context, evt)
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 1 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 5)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 5) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 4)
-
+	
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 2 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 6)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 6) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 5)
-
+	
 	end
-
+	
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 3 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 7)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 7) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 6)
-
+	
 	end
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 4 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 8)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 8) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 7)
-
+	
 	end
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 5 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 9)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 9) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 8)
-
+	
 	end
 	if ScriptLib.GetGroupVariableValue(context,"curpoint") == 6 then
-	ScriptLib.SetGroupVariableValue(context, "pattern", 10)
-
+	ScriptLib.SetGroupVariableValue(context, "pattern", 10) 
+	
 	ScriptLib.SetGroupVariableValue(context, "curpoint", 9)
-
+	
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_8025(context, evt)
 	-- 判断是gadgetid 为 8003的移动平台，是否到达了8 的点集中的 5 点
-
+	
 	if 8003 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 8 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 5 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -581,17 +581,17 @@ function action_EVENT_PLATFORM_REACH_POINT_8025(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220136008, 2)
-
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 220136008, 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 

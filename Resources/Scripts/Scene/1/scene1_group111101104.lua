@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 111101104
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	change1 = 0,
 	change2 = 0,
 	change3 = 0,
@@ -27,9 +27,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -114,9 +114,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -127,9 +127,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -145,9 +145,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -155,12 +155,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_104010(context, evt)
 	if defs.gadget_1 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"change1"为0
 	if ScriptLib.GetGroupVariableValue(context, "change1") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -170,11 +170,11 @@ function action_EVENT_GADGET_STATE_CHANGE_104010(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change2", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change4", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -183,40 +183,40 @@ function condition_EVENT_GADGET_STATE_CHANGE_104011(context, evt)
 	if defs.gadget_1 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"change1"为1
 	if ScriptLib.GetGroupVariableValue(context, "change1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_104011(context, evt)
 	-- 针对当前group内变量名为 change1 的变量，进行修改，变化值为 0
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change1", 0, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"change1"为1
 	if ScriptLib.GetGroupVariableValue(context,"change1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断6001的状态为DEFAULT
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_1) then
 			return false
-		end
-
+		end 
+	
 	return true
 end
 
@@ -225,27 +225,27 @@ function action_EVENT_VARIABLE_CHANGE_104012(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_1, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	return 0
-
+	
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"change1"为1
 	if ScriptLib.GetGroupVariableValue(context, "change1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断6001的状态为DEFAULT
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_1) then
 			return false
-
-		end
-
+	
+		end 
+	
 	return true
 end
 
@@ -254,8 +254,8 @@ function action_EVENT_VARIABLE_CHANGE_104013(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_1, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -264,12 +264,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_104014(context, evt)
 	if defs.gadget_2 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change2"为0
 	if ScriptLib.GetGroupVariableValue(context, "change2") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -279,15 +279,15 @@ function action_EVENT_GADGET_STATE_CHANGE_104014(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change1", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change3", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change5", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -296,40 +296,40 @@ function condition_EVENT_GADGET_STATE_CHANGE_104015(context, evt)
 	if defs.gadget_2 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_104015(context, evt)
 	-- 针对当前group内变量名为 defs.change 的变量，进行修改，变化值为 0
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change2", 0, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104016(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change2") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_2) then
 			return false
-		end
-
+		end 
+	
 	return true
 end
 
@@ -338,26 +338,26 @@ function action_EVENT_VARIABLE_CHANGE_104016(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_2, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104017(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change2") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_2) then
 			return false
-
-		end
-
+	
+		end 
+	
 	return true
 end
 
@@ -366,8 +366,8 @@ function action_EVENT_VARIABLE_CHANGE_104017(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_2, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -376,12 +376,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_104018(context, evt)
 	if defs.gadget_3 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为0
 	if ScriptLib.GetGroupVariableValue(context, "change3") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -391,11 +391,11 @@ function action_EVENT_GADGET_STATE_CHANGE_104018(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change2", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change6", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -404,40 +404,40 @@ function condition_EVENT_GADGET_STATE_CHANGE_104019(context, evt)
 	if defs.gadget_3 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_104019(context, evt)
 	-- 针对当前group内变量名为 defs.change 的变量，进行修改，变化值为 0
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change3", 0, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change3") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_3) then
 			return false
-		end
-
+		end 
+	
 	return true
 end
 
@@ -446,26 +446,26 @@ function action_EVENT_VARIABLE_CHANGE_104020(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_3的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_3, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104021(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change3") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_3) then
 			return false
-
-		end
-
+	
+		end 
+	
 	return true
 end
 
@@ -474,8 +474,8 @@ function action_EVENT_VARIABLE_CHANGE_104021(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_3的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_3, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -484,12 +484,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_104022(context, evt)
 	if defs.gadget_4 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为0
 	if ScriptLib.GetGroupVariableValue(context, "change4") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -499,15 +499,15 @@ function action_EVENT_GADGET_STATE_CHANGE_104022(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change1", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change5", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change7", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -516,40 +516,40 @@ function condition_EVENT_GADGET_STATE_CHANGE_104023(context, evt)
 	if defs.gadget_4 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_104023(context, evt)
 	-- 针对当前group内变量名为 defs.change 的变量，进行修改，变化值为 0
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change4", 0, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104024(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change4") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_4) then
 			return false
-		end
-
+		end 
+	
 	return true
 end
 
@@ -558,26 +558,26 @@ function action_EVENT_VARIABLE_CHANGE_104024(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_4, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104025(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change4") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_4) then
 			return false
-
-		end
-
+	
+		end 
+	
 	return true
 end
 
@@ -586,8 +586,8 @@ function action_EVENT_VARIABLE_CHANGE_104025(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_4, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -596,12 +596,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_104026(context, evt)
 	if defs.gadget_5 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为0
 	if ScriptLib.GetGroupVariableValue(context, "change5") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -611,19 +611,19 @@ function action_EVENT_GADGET_STATE_CHANGE_104026(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change2", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change4", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change6", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change8", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -632,40 +632,40 @@ function condition_EVENT_GADGET_STATE_CHANGE_104027(context, evt)
 	if defs.gadget_5 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change5") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_104027(context, evt)
 	-- 针对当前group内变量名为 defs.change 的变量，进行修改，变化值为 0
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change5", 0, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104028(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change5") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_5) then
 			return false
-		end
-
+		end 
+	
 	return true
 end
 
@@ -674,26 +674,26 @@ function action_EVENT_VARIABLE_CHANGE_104028(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_5, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104029(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change5") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_5) then
 			return false
-
-		end
-
+	
+		end 
+	
 	return true
 end
 
@@ -702,8 +702,8 @@ function action_EVENT_VARIABLE_CHANGE_104029(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_5, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -711,43 +711,43 @@ end
 function condition_EVENT_TIMER_EVENT_104030(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_5) then
 			return -1
-		end
-
+		end 
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_4) then
 			return -1
-		end
-
+		end 
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_3) then
 			return -1
-		end
-
-
+		end 
+	
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_2) then
 			return -1
-		end
-
-
+		end 
+	
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_1) then
 			return -1
-		end
-
+		end 
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_6) then
 			return -1
-		end
-
+		end 
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_7) then
 			return -1
-		end
-
+		end 
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_8) then
 			return -1
-		end
-
-
+		end 
+	
+	
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_9) then
 			return -1
-		end
-
+		end 
+	
 	return true
 end
 
@@ -758,7 +758,7 @@ function action_EVENT_TIMER_EVENT_104030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -768,7 +768,7 @@ function action_EVENT_GADGET_STATE_CHANGE_104031(context, evt)
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, defs.group_id, "timeFin", 0.5) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -777,12 +777,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_104033(context, evt)
 	if defs.gadget_6 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为0
 	if ScriptLib.GetGroupVariableValue(context, "change6") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -792,15 +792,15 @@ function action_EVENT_GADGET_STATE_CHANGE_104033(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change3", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change5", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change9", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -809,40 +809,40 @@ function condition_EVENT_GADGET_STATE_CHANGE_104034(context, evt)
 	if defs.gadget_6 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change6") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_104034(context, evt)
 	-- 针对当前group内变量名为 defs.change 的变量，进行修改，变化值为 0
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change6", 0, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104035(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change6") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_6) then
 			return false
-		end
-
+		end 
+	
 	return true
 end
 
@@ -851,26 +851,26 @@ function action_EVENT_VARIABLE_CHANGE_104035(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_6的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_6, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104036(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change6") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_6) then
 			return false
-
-		end
-
+	
+		end 
+	
 	return true
 end
 
@@ -879,8 +879,8 @@ function action_EVENT_VARIABLE_CHANGE_104036(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_6, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -889,27 +889,27 @@ function condition_EVENT_GADGET_STATE_CHANGE_104037(context, evt)
 	if defs.gadget_7 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为0
 	if ScriptLib.GetGroupVariableValue(context, "change7") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_104037(context, evt)
 	-- 针对当前group内变量名为 defs.change 的变量，进行修改，变化值为 1
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change4", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change8", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -918,40 +918,40 @@ function condition_EVENT_GADGET_STATE_CHANGE_104038(context, evt)
 	if defs.gadget_7 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change7") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_104038(context, evt)
 	-- 针对当前group内变量名为 defs.change 的变量，进行修改，变化值为 0
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change7", 0, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104039(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change7") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_7) then
 			return false
-		end
-
+		end 
+	
 	return true
 end
 
@@ -960,26 +960,26 @@ function action_EVENT_VARIABLE_CHANGE_104039(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_6的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_7, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104040(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change7") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_7) then
 			return false
-
-		end
-
+	
+		end 
+	
 	return true
 end
 
@@ -988,8 +988,8 @@ function action_EVENT_VARIABLE_CHANGE_104040(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_7, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -998,12 +998,12 @@ function condition_EVENT_GADGET_STATE_CHANGE_104041(context, evt)
 	if defs.gadget_8 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为0
 	if ScriptLib.GetGroupVariableValue(context, "change8") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1013,15 +1013,15 @@ function action_EVENT_GADGET_STATE_CHANGE_104041(context, evt)
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change5", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change7", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change9", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1030,40 +1030,40 @@ function condition_EVENT_GADGET_STATE_CHANGE_104042(context, evt)
 	if defs.gadget_8 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change8") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_104042(context, evt)
 	-- 针对当前group内变量名为 defs.change 的变量，进行修改，变化值为 0
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change8", 0, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104043(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change8") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_8) then
 			return false
-		end
-
+		end 
+	
 	return true
 end
 
@@ -1072,26 +1072,26 @@ function action_EVENT_VARIABLE_CHANGE_104043(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_6的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_8, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104044(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change8") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_8) then
 			return false
-
-		end
-
+	
+		end 
+	
 	return true
 end
 
@@ -1100,8 +1100,8 @@ function action_EVENT_VARIABLE_CHANGE_104044(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_8, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -1110,27 +1110,27 @@ function condition_EVENT_GADGET_STATE_CHANGE_104045(context, evt)
 	if defs.gadget_9 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为0
 	if ScriptLib.GetGroupVariableValue(context, "change9") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_104045(context, evt)
 	-- 针对当前group内变量名为 defs.change 的变量，进行修改，变化值为 1
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change6", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change8", 1, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1139,40 +1139,40 @@ function condition_EVENT_GADGET_STATE_CHANGE_104046(context, evt)
 	if defs.gadget_9 ~= evt.param2 then
 		return false
 	end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change9") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_104046(context, evt)
 	-- 针对当前group内变量名为 defs.change 的变量，进行修改，变化值为 0
-
+	
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "change9", 0, defs.group_id) then
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104047(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change9") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.Default ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_9) then
 			return false
-		end
-
+		end 
+	
 	return true
 end
 
@@ -1181,26 +1181,26 @@ function action_EVENT_VARIABLE_CHANGE_104047(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_6的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_9, GadgetState.GearStart) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_104048(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"defs.change"为1
 	if ScriptLib.GetGroupVariableValue(context, "change9") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断defs.gadget的状态为DEFAULT
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, defs.group_id, defs.gadget_9) then
 			return false
-
-		end
-
+	
+		end 
+	
 	return true
 end
 
@@ -1209,7 +1209,7 @@ function action_EVENT_VARIABLE_CHANGE_104048(context, evt)
 	-- 改变指定group组defs.group_id中， configid为defs.gadget_1的gadget的state
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, defs.group_id, defs.gadget_9, GadgetState.Default) then
 			return -1
-		end
-
+		end 
+	
 	return 0
 end

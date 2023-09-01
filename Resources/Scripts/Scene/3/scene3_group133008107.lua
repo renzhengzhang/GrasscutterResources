@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133008107
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -48,9 +48,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -61,9 +61,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -79,9 +79,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -89,7 +89,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_107004(context, evt)
 	if 107003 ~= evt.param2 or GadgetState.GearStop ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -100,7 +100,7 @@ function action_EVENT_GADGET_STATE_CHANGE_107004(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -109,7 +109,7 @@ function condition_EVENT_GADGET_CREATE_107006(context, evt)
 	if 107005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -120,7 +120,7 @@ function action_EVENT_GADGET_CREATE_107006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -128,14 +128,14 @@ end
 function condition_EVENT_SELECT_OPTION_107007(context, evt)
 	-- 判断是gadgetid 107005 option_id 24
 	if 107005 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 24 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -145,21 +145,21 @@ function action_EVENT_SELECT_OPTION_107007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 107002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 启动移动平台
 	if 0 ~= ScriptLib.StartPlatform(context, 107001) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 		-- 永久关闭CongfigId的Gadget，需要和Groups的RefreshWithBlock标签搭配
 		if 0 ~= ScriptLib.KillEntityByConfigId(context, { config_id = 107005 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : kill_entity_by_configId")
 		    return -1
 		end
-
-
+		
+	
 	-- 触发镜头注目，注目位置为坐标（1184，372，-956），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=1184, y=372, z=-956}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -168,14 +168,14 @@ function action_EVENT_SELECT_OPTION_107007(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 将本组内变量名为 "water" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "water", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -185,7 +185,7 @@ function condition_EVENT_GROUP_LOAD_107008(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "water") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -196,7 +196,7 @@ function action_EVENT_GROUP_LOAD_107008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : start_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -205,7 +205,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_107009(context, evt)
 	if 107003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -216,7 +216,7 @@ function action_EVENT_GADGET_STATE_CHANGE_107009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -225,7 +225,7 @@ function condition_EVENT_ANY_GADGET_DIE_107010(context, evt)
 	if 107003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -235,32 +235,32 @@ function action_EVENT_ANY_GADGET_DIE_107010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 107002, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 创建id为107005的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 107005 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 停止移动平台
 	if 0 ~= ScriptLib.StopPlatform(context, 107003) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_107011(context, evt)
 	if evt.param1 ~= 107011 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -271,7 +271,7 @@ function action_EVENT_ENTER_REGION_107011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（1184，372，-956），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=1184, y=372, z=-956}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -280,28 +280,28 @@ function action_EVENT_ENTER_REGION_107011(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_REACH_POINT_107012(context, evt)
 	-- 判断是gadgetid 为 107001的移动平台，是否到达了300800024 的路线中的 1 点
-
+	
 	if 107001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 300800024 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -312,6 +312,6 @@ function action_EVENT_PLATFORM_REACH_POINT_107012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

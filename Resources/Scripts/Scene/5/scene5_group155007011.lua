@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155007011
 }
 
@@ -9,9 +9,9 @@ function refreshgadgetStateByGroupVar(context, groupid)
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -88,9 +88,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -102,9 +102,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suite_disk = {
@@ -200,20 +200,20 @@ suite_disk = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_11003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Rune_01"为1
 	if ScriptLib.GetGroupVariableValue(context, "Rune_01") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -224,25 +224,25 @@ function action_EVENT_VARIABLE_CHANGE_11003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 11008 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 11008, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_11009(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Rune_02"为1
 	if ScriptLib.GetGroupVariableValue(context, "Rune_02") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -253,25 +253,25 @@ function action_EVENT_VARIABLE_CHANGE_11009(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 11005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 11005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_11010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Rune_03"为1
 	if ScriptLib.GetGroupVariableValue(context, "Rune_03") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -282,25 +282,25 @@ function action_EVENT_VARIABLE_CHANGE_11010(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 11007 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 11007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_11011(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Rune_04"为1
 	if ScriptLib.GetGroupVariableValue(context, "Rune_04") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -311,25 +311,25 @@ function action_EVENT_VARIABLE_CHANGE_11011(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 11006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 11006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_11012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"Rune_05"为1
 	if ScriptLib.GetGroupVariableValue(context, "Rune_05") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -340,70 +340,70 @@ function action_EVENT_VARIABLE_CHANGE_11012(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 将configid为 11004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 11004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_GROUP_LOAD_11014(context, evt)
-		if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_01", 155007092)  == 1 then
-				if ScriptLib.GetGroupVariableValue(context, "Rune_01") ~= 1 then
-					ScriptLib.SetGroupVariableValue(context, "Rune_01", 1)
+		if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_01", 155007092)  == 1 then 
+				if ScriptLib.GetGroupVariableValue(context, "Rune_01") ~= 1 then 
+					ScriptLib.SetGroupVariableValue(context, "Rune_01", 1) 
 				else
 					ScriptLib.SetGadgetStateByConfigId(context, 11008, GadgetState.GearStart)
 					ScriptLib.AddQuestProgress(context, "72242_ActiveRune_01")
 				end
-
+		
 			end
-
-			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_02", 155007092) == 1 then
-				if ScriptLib.GetGroupVariableValue(context, "Rune_02") ~= 1 then
-					ScriptLib.SetGroupVariableValue(context, "Rune_02", 1)
+		
+			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_02", 155007092) == 1 then 
+				if ScriptLib.GetGroupVariableValue(context, "Rune_02") ~= 1 then 
+					ScriptLib.SetGroupVariableValue(context, "Rune_02", 1) 
 				else
 					ScriptLib.SetGadgetStateByConfigId(context, 11005, GadgetState.GearStart)
 					ScriptLib.AddQuestProgress(context, "72242_ActiveRune_02")
 				end
-
+			
 			end
-
-			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_03", 155007092) == 1 then
-				if ScriptLib.GetGroupVariableValue(context, "Rune_03") ~= 1 then
-					ScriptLib.SetGroupVariableValue(context, "Rune_03", 1)
+		
+			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_03", 155007092) == 1 then 
+				if ScriptLib.GetGroupVariableValue(context, "Rune_03") ~= 1 then 
+					ScriptLib.SetGroupVariableValue(context, "Rune_03", 1) 
 				else
 					ScriptLib.SetGadgetStateByConfigId(context, 11007, GadgetState.GearStart)
 					ScriptLib.AddQuestProgress(context, "72242_ActiveRune_03")
 				end
-
+		
 			end
-
-			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_04", 155007092) == 1 then
-
-				if ScriptLib.GetGroupVariableValue(context, "Rune_04") ~= 1 then
-					ScriptLib.SetGroupVariableValue(context, "Rune_04", 1)
+		
+			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_04", 155007092) == 1 then 
+		
+				if ScriptLib.GetGroupVariableValue(context, "Rune_04") ~= 1 then 
+					ScriptLib.SetGroupVariableValue(context, "Rune_04", 1) 
 				else
 					ScriptLib.SetGadgetStateByConfigId(context, 11006, GadgetState.GearStart)
 					ScriptLib.AddQuestProgress(context, "72242_ActiveRune_04")
 				end
-
+		
 			end
-
-			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_05", 155007092) == 1 then
-
-				if ScriptLib.GetGroupVariableValue(context, "Rune_05") ~= 1 then
-					ScriptLib.SetGroupVariableValue(context, "Rune_05", 1)
+		
+			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_05", 155007092) == 1 then 
+		
+				if ScriptLib.GetGroupVariableValue(context, "Rune_05") ~= 1 then 
+					ScriptLib.SetGroupVariableValue(context, "Rune_05", 1) 
 				else
 					ScriptLib.SetGadgetStateByConfigId(context, 11004, GadgetState.GearStart)
 					ScriptLib.AddQuestProgress(context, "72242_ActiveRune_05")
 				end
-
+		
 			end
-
+			
 			return 0
 end
 
@@ -414,10 +414,10 @@ function action_EVENT_QUEST_START_11015(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 155007011, 2)
-
+	
 	return 0
 end
 
@@ -425,14 +425,14 @@ end
 function condition_EVENT_SELECT_OPTION_11016(context, evt)
 	-- 判断是gadgetid 11013 option_id 7
 	if 11013 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -443,19 +443,19 @@ function action_EVENT_SELECT_OPTION_11016(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 删除指定group： 155007011 ；指定config：11013；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 155007011, 11013, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 11013 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 11013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -463,7 +463,7 @@ end
 function action_EVENT_QUEST_START_11017(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 155007011, 3)
-
+	
 	return 0
 end
 
@@ -472,7 +472,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_11018(context, evt)
 	if 202 ~= ScriptLib.GetGadgetStateByConfigId(context, 155007011, 11002) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -483,7 +483,7 @@ function action_EVENT_GADGET_STATE_CHANGE_11018(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -491,64 +491,64 @@ end
 function action_EVENT_QUEST_START_11019(context, evt)
 		-- 将指定flowGroup的进度和要素属性都改为目标suite（缺的创建，多的移除）
 	  ScriptLib.GoToFlowSuite(context, 155007011, 4)
-
+	
 	return 0
 end
 
 -- 触发操作
 function action_EVENT_QUEST_START_11020(context, evt)
-		if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_01", 155007092)  == 1 then
-				if ScriptLib.GetGroupVariableValue(context, "Rune_01") ~= 1 then
-					ScriptLib.SetGroupVariableValue(context, "Rune_01", 1)
+		if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_01", 155007092)  == 1 then 
+				if ScriptLib.GetGroupVariableValue(context, "Rune_01") ~= 1 then 
+					ScriptLib.SetGroupVariableValue(context, "Rune_01", 1) 
 				else
 					ScriptLib.SetGadgetStateByConfigId(context, 11008, GadgetState.GearStart)
 					ScriptLib.AddQuestProgress(context, "72242_ActiveRune_01")
 				end
-
+		
 			end
-
-			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_02", 155007092) == 1 then
-				if ScriptLib.GetGroupVariableValue(context, "Rune_02") ~= 1 then
-					ScriptLib.SetGroupVariableValue(context, "Rune_02", 1)
+		
+			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_02", 155007092) == 1 then 
+				if ScriptLib.GetGroupVariableValue(context, "Rune_02") ~= 1 then 
+					ScriptLib.SetGroupVariableValue(context, "Rune_02", 1) 
 				else
 					ScriptLib.SetGadgetStateByConfigId(context, 11005, GadgetState.GearStart)
 					ScriptLib.AddQuestProgress(context, "72242_ActiveRune_02")
 				end
-
+			
 			end
-
-			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_03", 155007092) == 1 then
-				if ScriptLib.GetGroupVariableValue(context, "Rune_03") ~= 1 then
-					ScriptLib.SetGroupVariableValue(context, "Rune_03", 1)
+		
+			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_03", 155007092) == 1 then 
+				if ScriptLib.GetGroupVariableValue(context, "Rune_03") ~= 1 then 
+					ScriptLib.SetGroupVariableValue(context, "Rune_03", 1) 
 				else
 					ScriptLib.SetGadgetStateByConfigId(context, 11007, GadgetState.GearStart)
 					ScriptLib.AddQuestProgress(context, "72242_ActiveRune_03")
 				end
-
+		
 			end
-
-			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_04", 155007092) == 1 then
-
-				if ScriptLib.GetGroupVariableValue(context, "Rune_04") ~= 1 then
-					ScriptLib.SetGroupVariableValue(context, "Rune_04", 1)
+		
+			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_04", 155007092) == 1 then 
+		
+				if ScriptLib.GetGroupVariableValue(context, "Rune_04") ~= 1 then 
+					ScriptLib.SetGroupVariableValue(context, "Rune_04", 1) 
 				else
 					ScriptLib.SetGadgetStateByConfigId(context, 11006, GadgetState.GearStart)
 					ScriptLib.AddQuestProgress(context, "72242_ActiveRune_04")
 				end
-
+		
 			end
-
-			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_05", 155007092) == 1 then
-
-				if ScriptLib.GetGroupVariableValue(context, "Rune_05") ~= 1 then
-					ScriptLib.SetGroupVariableValue(context, "Rune_05", 1)
+		
+			if ScriptLib.GetGroupVariableValueByGroup(context, "Rune_05", 155007092) == 1 then 
+		
+				if ScriptLib.GetGroupVariableValue(context, "Rune_05") ~= 1 then 
+					ScriptLib.SetGroupVariableValue(context, "Rune_05", 1) 
 				else
 					ScriptLib.SetGadgetStateByConfigId(context, 11004, GadgetState.GearStart)
 					ScriptLib.AddQuestProgress(context, "72242_ActiveRune_05")
 				end
-
+		
 			end
-
+			
 			return 0
 end
 
@@ -559,7 +559,7 @@ function action_EVENT_GROUP_LOAD_11021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -568,7 +568,7 @@ function condition_EVENT_GROUP_LOAD_11022(context, evt)
 	if ScriptLib.GetGadgetStateByConfigId(context, 155007011, 11002) == 101 then
 	return true
 	end
-
+	
 	return false
 end
 
@@ -579,26 +579,26 @@ function action_EVENT_GROUP_LOAD_11022(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_11023(context, evt)
 	if evt.param1 ~= 11023 then return false end
-
+	
 	-- 判断是区域11023
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 11023 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ENTER_REGION_11023(context, evt)
-
-
+	
+	
 		ScriptLib.PrintContextLog(context, "NonEuclid : 非欧门玩家进入区域，去掉普通石头")
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 11002,"SGV_No_Normal_Gate", 1)
 		return 0
@@ -610,14 +610,14 @@ function condition_EVENT_LEAVE_REGION_11024(context, evt)
 	if ScriptLib.GetRegionConfigId(context, { region_eid = evt.source_eid }) ~= 11024 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_LEAVE_REGION_11024(context, evt)
-
-		ScriptLib.PrintContextLog(context, "NonEuclid : 非欧门玩家离开区域，加载普通石头")
+	
+		ScriptLib.PrintContextLog(context, "NonEuclid : 非欧门玩家离开区域，加载普通石头")	
 		ScriptLib.SetEntityServerGlobalValueByConfigId(context, 11002,"SGV_No_Normal_Gate", 0)
 		return 0
 end

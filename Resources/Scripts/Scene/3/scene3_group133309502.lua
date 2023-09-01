@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309502
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	interactOptionID = 430,
 	gadget_fireTorch = 502002,
 	gadget_fireBase1 = 502001,
@@ -22,22 +22,17 @@ defs = {
 
 -- DEFS_MISCS
 local CameraLookSetting = {
-    blend_type = 1,
-  --镜头的移动路径，球面0，直线1
-    blend_duration = 1,
- --镜头的移动时间
-    is_force_walk = false,
- --强制玩家行走
-    is_allow_input = false,
- --允许输入
-    delay = 0,
- --触发延迟
+    blend_type = 1,  --镜头的移动路径，球面0，直线1
+    blend_duration = 1, --镜头的移动时间
+    is_force_walk = false, --强制玩家行走
+    is_allow_input = false, --允许输入
+    delay = 0, --触发延迟
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -98,9 +93,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -111,9 +106,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -129,9 +124,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -139,7 +134,7 @@ function condition_EVENT_TIME_AXIS_PASS_502006(context, evt)
 	if "elevator" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -149,8 +144,8 @@ function action_EVENT_TIME_AXIS_PASS_502006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 502011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -159,7 +154,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_502007(context, evt)
 	if 502002 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -170,11 +165,11 @@ function action_EVENT_GADGET_STATE_CHANGE_502007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建标识为"elevator"，时间节点为{1}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "elevator", {1}, false)
-
-
+	
+	
 	-- 触发镜头注目，注目位置为坐标{x=-2992.898, y=182.0755, z=5436.101}，持续时间为3秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-2992.898, y=182.0755, z=5436.101}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -183,14 +178,14 @@ function action_EVENT_GADGET_STATE_CHANGE_502007(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 31004, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -199,7 +194,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_502009(context, evt)
 	if 502001 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -210,13 +205,13 @@ function action_EVENT_GADGET_STATE_CHANGE_502009(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 7022, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -225,7 +220,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_502010(context, evt)
 	if 502004 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -236,7 +231,7 @@ function action_EVENT_GADGET_STATE_CHANGE_502010(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -246,7 +241,7 @@ function condition_EVENT_GROUP_LOAD_502013(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finished") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -256,14 +251,14 @@ function action_EVENT_GROUP_LOAD_502013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 502011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 502002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 502002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 

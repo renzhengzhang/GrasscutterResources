@@ -1,17 +1,17 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133001583
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	RegionID =  583049
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -89,9 +89,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -102,9 +102,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -210,16 +210,16 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_TIMER_EVENT_583013(context, evt)
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001583, 5)
-
+	
 	return 0
 end
 
@@ -227,7 +227,7 @@ end
 function action_EVENT_TIMER_EVENT_583014(context, evt)
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001583, 4)
-
+	
 	return 0
 end
 
@@ -235,7 +235,7 @@ end
 function action_EVENT_TIMER_EVENT_583015(context, evt)
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001583, 3)
-
+	
 	return 0
 end
 
@@ -244,7 +244,7 @@ function condition_EVENT_GADGET_CREATE_583016(context, evt)
 	if 583007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -255,7 +255,7 @@ function action_EVENT_GADGET_CREATE_583016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -264,7 +264,7 @@ function condition_EVENT_GADGET_CREATE_583017(context, evt)
 	if 583004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -275,7 +275,7 @@ function action_EVENT_GADGET_CREATE_583017(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -284,7 +284,7 @@ function condition_EVENT_GADGET_CREATE_583018(context, evt)
 	if 583001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -295,7 +295,7 @@ function action_EVENT_GADGET_CREATE_583018(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -303,7 +303,7 @@ end
 function action_EVENT_TIMER_EVENT_583019(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001583, 6)
-
+	
 	return 0
 end
 
@@ -312,7 +312,7 @@ function condition_EVENT_GADGET_CREATE_583020(context, evt)
 	if 583010 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -323,7 +323,7 @@ function action_EVENT_GADGET_CREATE_583020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -331,7 +331,7 @@ end
 function action_EVENT_TIMER_EVENT_583033(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001583, 8)
-
+	
 	return 0
 end
 
@@ -339,7 +339,7 @@ end
 function action_EVENT_TIMER_EVENT_583034(context, evt)
 	-- 添加suite9的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001583, 9)
-
+	
 	return 0
 end
 
@@ -347,7 +347,7 @@ end
 function action_EVENT_TIMER_EVENT_583035(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001583, 7)
-
+	
 	return 0
 end
 
@@ -356,7 +356,7 @@ function condition_EVENT_GADGET_CREATE_583036(context, evt)
 	if 583024 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -367,7 +367,7 @@ function action_EVENT_GADGET_CREATE_583036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -376,7 +376,7 @@ function condition_EVENT_GADGET_CREATE_583037(context, evt)
 	if 583027 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -387,7 +387,7 @@ function action_EVENT_GADGET_CREATE_583037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -396,7 +396,7 @@ function condition_EVENT_GADGET_CREATE_583038(context, evt)
 	if 583021 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -407,7 +407,7 @@ function action_EVENT_GADGET_CREATE_583038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -415,7 +415,7 @@ end
 function action_EVENT_TIMER_EVENT_583045(context, evt)
 	-- 添加suite10的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001583, 10)
-
+	
 	return 0
 end
 
@@ -424,7 +424,7 @@ function condition_EVENT_GADGET_CREATE_583046(context, evt)
 	if 583030 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -435,7 +435,7 @@ function action_EVENT_GADGET_CREATE_583046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -443,7 +443,7 @@ end
 function action_EVENT_TIMER_EVENT_583047(context, evt)
 	-- 添加suite11的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133001583, 11)
-
+	
 	return 0
 end
 
@@ -452,7 +452,7 @@ function condition_EVENT_GADGET_CREATE_583048(context, evt)
 	if 583039 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -463,7 +463,7 @@ function action_EVENT_GADGET_CREATE_583048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 

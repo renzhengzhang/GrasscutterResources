@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133309031
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -107,9 +107,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -118,27 +118,27 @@ function condition_EVENT_GROUP_LOAD_31001(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "active1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"active2"为1
 	if ScriptLib.GetGroupVariableValue(context, "active2") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"active3"为1
 	if ScriptLib.GetGroupVariableValue(context, "active3") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"active4"为1
 	if ScriptLib.GetGroupVariableValue(context, "active4") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"changepos"为1
 	if ScriptLib.GetGroupVariableValue(context, "changepos") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -148,44 +148,44 @@ function action_EVENT_GROUP_LOAD_31001(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 31005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 31020 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 31020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309031, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_31010(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"active1"为1
 	if ScriptLib.GetGroupVariableValue(context, "active1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"active2"为1
 	if ScriptLib.GetGroupVariableValue(context, "active2") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"active3"为1
 	if ScriptLib.GetGroupVariableValue(context, "active3") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"active4"为1
 	if ScriptLib.GetGroupVariableValue(context, "active4") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -195,23 +195,23 @@ function action_EVENT_VARIABLE_CHANGE_31010(context, evt)
 	if 0 ~= ScriptLib.PlayCutScene(context, 96, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 31005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 31005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 31020 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 31020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309031, 2)
-
+	
 	return 0
 end
 
@@ -221,27 +221,27 @@ function condition_EVENT_GROUP_LOAD_31011(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "active1") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"active2"为1
 	if ScriptLib.GetGroupVariableValue(context, "active2") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"active3"为1
 	if ScriptLib.GetGroupVariableValue(context, "active3") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"active4"为1
 	if ScriptLib.GetGroupVariableValue(context, "active4") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"changepos"为0
 	if ScriptLib.GetGroupVariableValue(context, "changepos") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -251,29 +251,29 @@ function action_EVENT_GROUP_LOAD_31011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 31005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 31020 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 31020, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133309031, 2)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_31012(context, evt)
 	if evt.param1 ~= 31012 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -290,7 +290,7 @@ function action_EVENT_ENTER_REGION_31012(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end
 
@@ -301,25 +301,25 @@ function action_EVENT_QUEST_START_31016(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133309031, suite = 3 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_31017(context, evt)
 	if evt.param1 ~= 31017 then return false end
-
+	
 	-- 判断角色数量不少于0
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -336,6 +336,6 @@ function action_EVENT_ENTER_REGION_31017(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : trans_player_byOption")
 	    return -1
 	  end
-
+	
 	return 0
 end

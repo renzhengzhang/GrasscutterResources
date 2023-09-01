@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133302232
 }
 
 -- DEFS_MISCS
-defs =
+local defs = 
 {
-
+    
     challenge_id = 2010057,
 
     starter_option_id = 175,
@@ -17,12 +17,12 @@ defs =
 
 local play_stage =
 {
-    [1] =
+    [1] = 
     {
         gallery_id = 26005,
-        challenge_time = 120,
+        challenge_time = 120, 
         optimize_region = 232099,
-
+        
         element_target = 5,
         starter_operator_configID = 232012,
         dig_operator_configID = 232016,
@@ -34,10 +34,10 @@ local play_stage =
         treasure_configID = 232017,
     },
 
-    [2] =
+    [2] = 
     {
         gallery_id = 26005,
-        challenge_time = 120,
+        challenge_time = 120, 
         optimize_region = 232100,
 
         element_target = 10,
@@ -53,10 +53,10 @@ local play_stage =
 
     },
 
-    [3] =
+    [3] = 
     {
         gallery_id = 26005,
-        challenge_time = 120,
+        challenge_time = 120, 
         optimize_region = 232101,
 
         element_target = 11,
@@ -80,9 +80,9 @@ local extra_elements =
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -221,9 +221,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -234,9 +234,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -396,9 +396,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -407,7 +407,7 @@ function condition_EVENT_ANY_MONSTER_DIE_232050(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -415,7 +415,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_232050(context, evt)
 	-- 添加suite16的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302232, 16)
-
+	
 	return 0
 end
 
@@ -425,7 +425,7 @@ function condition_EVENT_ANY_MONSTER_DIE_232053(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -433,7 +433,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_232053(context, evt)
 	-- 添加suite15的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302232, 15)
-
+	
 	return 0
 end
 
@@ -443,7 +443,7 @@ function condition_EVENT_ANY_MONSTER_DIE_232058(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -451,7 +451,7 @@ end
 function action_EVENT_ANY_MONSTER_DIE_232058(context, evt)
 	-- 添加suite17的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133302232, 17)
-
+	
 	return 0
 end
 
@@ -459,7 +459,7 @@ end
 function action_EVENT_CHALLENGE_FAIL_232072(context, evt)
 	-- 删除suite15的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302232, 15)
-
+	
 	return 0
 end
 
@@ -467,10 +467,10 @@ end
 function action_EVENT_CHALLENGE_FAIL_232073(context, evt)
 	-- 删除suite16的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302232, 16)
-
+	
 	-- 删除suite17的所有内容
 	    ScriptLib.RemoveExtraGroupSuite(context, 133302232, 17)
-
+	
 	return 0
 end
 
@@ -479,7 +479,7 @@ function condition_EVENT_ANY_GADGET_DIE_232088(context, evt)
 	if 232049 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -490,7 +490,7 @@ function action_EVENT_ANY_GADGET_DIE_232088(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -499,7 +499,7 @@ function condition_EVENT_GADGET_CREATE_232093(context, evt)
 	if 232038 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -510,7 +510,7 @@ function action_EVENT_GADGET_CREATE_232093(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -519,7 +519,7 @@ function condition_EVENT_GADGET_CREATE_232094(context, evt)
 	if 232034 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -530,7 +530,7 @@ function action_EVENT_GADGET_CREATE_232094(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -539,7 +539,7 @@ function condition_EVENT_ANY_GADGET_DIE_232095(context, evt)
 	if 232083 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -550,7 +550,7 @@ function action_EVENT_ANY_GADGET_DIE_232095(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -561,13 +561,13 @@ function action_EVENT_CHALLENGE_SUCCESS_232096(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133302232, EntityType.GADGET, 232013 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -578,13 +578,13 @@ function action_EVENT_CHALLENGE_FAIL_232097(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 133302232, EntityType.GADGET, 232074 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 

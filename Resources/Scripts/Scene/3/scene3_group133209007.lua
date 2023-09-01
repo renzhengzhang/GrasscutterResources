@@ -1,18 +1,18 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133209007
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
 	RegionID =  7054,
 	group_1 = 133209007
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -175,9 +175,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -188,9 +188,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -332,9 +332,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -343,8 +343,8 @@ function condition_EVENT_ANY_MONSTER_DIE_7036(context, evt)
 	if evt.param1 ~= 7011 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -355,7 +355,7 @@ function action_EVENT_ANY_MONSTER_DIE_7036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -365,8 +365,8 @@ function condition_EVENT_ANY_MONSTER_DIE_7037(context, evt)
 	if evt.param1 ~= 7012 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -377,7 +377,7 @@ function action_EVENT_ANY_MONSTER_DIE_7037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -386,36 +386,36 @@ function condition_EVENT_GADGET_CREATE_7039(context, evt)
 	if 7034 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_7039(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 222, 111101, 240, {success = 2, fail = 1, fail_on_wipe=true})
-
+	
 	ScriptLib.AttachChildChallenge(context, 222, 201, 111102, {240,defs.group_1,20,0},{},{success=1,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 222, 202, 111103, {240,3,582,3},{},{success=1,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 222, 203, 111104, {240,1,0,0},{},{success=0,fail=1})
-
+	
 	ScriptLib.StartFatherChallenge(context, 222)
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 504, defs.group_1, {7011,7012}, 99, 1, 1) then
 		return -1
 	end
-
+	
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 508, defs.group_1, {7001,7002,7003,7004,7005,7006}, 99, 2, 2) then
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    --ScriptLib.AddExtraGroupSuite(context, 133001583, 2)
-
-
-
+	
+	
+	
 	return 0
 end
 
@@ -426,13 +426,13 @@ function action_EVENT_CHALLENGE_SUCCESS_7040(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "tool_trigger" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tool_trigger", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -443,13 +443,13 @@ function action_EVENT_CHALLENGE_FAIL_7041(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "tool_trigger" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tool_trigger", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -458,37 +458,37 @@ function condition_EVENT_GADGET_CREATE_7042(context, evt)
 	if 7034 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_7042(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 233, 111101, 180, {success = 2, fail = 1, fail_on_wipe=true})
-
+	
 	ScriptLib.AttachChildChallenge(context, 233, 201, 111102, {180,defs.group_1,25,0},{},{success=1,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 233, 202, 111103, {180,3,582,3},{},{success=1,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 233, 203, 111165, {180,0,0,0},{},{success=0,fail=1})
-
+	
 	ScriptLib.StartFatherChallenge(context, 233)
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 506, defs.group_1, {7029,7030,7031,7032}, 99, 2, 2) then
 		return -1
 	end
-
+	
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 509, defs.group_1, {7007,7010,7017,7021,7062,7068,7069,7070,7075,7078,7083,7088}, 99, 3, 3) then
 	 ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    --ScriptLib.AddExtraGroupSuite(context, 133001583, 2)
-
-
-
+	
+	
+	
 	return 0
 end
 
@@ -499,13 +499,13 @@ function action_EVENT_CHALLENGE_SUCCESS_7043(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "tool_trigger" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tool_trigger", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -514,37 +514,37 @@ function condition_EVENT_GADGET_CREATE_7044(context, evt)
 	if 7034 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_7044(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 211, 111101, 300, {success = 2, fail = 1, fail_on_wipe=true})
-
+	
 	ScriptLib.AttachChildChallenge(context, 211, 201, 111102, {300,defs.group_1,15,0},{},{success=1,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 211, 202, 111103, {300,3,582,2},{},{success=1,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 211, 203, 111104, {300,2,0,0},{},{success=0,fail=1})
-
+	
 	ScriptLib.StartFatherChallenge(context, 211)
-
+	
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 502, defs.group_1, {7011,7012,7013,7014}, 99, 2, 2) then
 		return -1
 	end
-
+	
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 507, defs.group_1, {7001,7002,7003,7004,7005,7006,7023,7024,7025,7026,7027,7028}, 99, 4, 4) then
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    --ScriptLib.AddExtraGroupSuite(context, 133001583, 2)
-
-
-
+	
+	
+	
 	return 0
 end
 
@@ -555,13 +555,13 @@ function action_EVENT_CHALLENGE_FAIL_7045(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "tool_trigger" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tool_trigger", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -572,13 +572,13 @@ function action_EVENT_CHALLENGE_SUCCESS_7046(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "tool_trigger" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tool_trigger", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -589,13 +589,13 @@ function action_EVENT_CHALLENGE_FAIL_7047(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "tool_trigger" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tool_trigger", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -603,7 +603,7 @@ end
 function action_EVENT_TIMER_EVENT_7048(context, evt)
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 6)
-
+	
 	return 0
 end
 
@@ -611,7 +611,7 @@ end
 function action_EVENT_TIMER_EVENT_7049(context, evt)
 	-- 添加suite7的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 7)
-
+	
 	return 0
 end
 
@@ -619,7 +619,7 @@ end
 function action_EVENT_TIMER_EVENT_7050(context, evt)
 	-- 添加suite8的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 8)
-
+	
 	return 0
 end
 
@@ -628,7 +628,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_7051(context, evt)
 	if 7007 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -639,7 +639,7 @@ function action_EVENT_ANY_MONSTER_LIVE_7051(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -648,7 +648,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_7052(context, evt)
 	if 7018 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -659,7 +659,7 @@ function action_EVENT_ANY_MONSTER_LIVE_7052(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -668,7 +668,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_7053(context, evt)
 	if 7019 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -679,7 +679,7 @@ function action_EVENT_ANY_MONSTER_LIVE_7053(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -689,8 +689,8 @@ function condition_EVENT_ANY_MONSTER_DIE_7055(context, evt)
 	if evt.param1 ~= 7029 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -701,7 +701,7 @@ function action_EVENT_ANY_MONSTER_DIE_7055(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -711,8 +711,8 @@ function condition_EVENT_ANY_MONSTER_DIE_7056(context, evt)
 	if evt.param1 ~= 7030 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -723,7 +723,7 @@ function action_EVENT_ANY_MONSTER_DIE_7056(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -734,13 +734,13 @@ function action_EVENT_CHALLENGE_FAIL_7063(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "tool_trigger" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tool_trigger", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -751,13 +751,13 @@ function action_EVENT_CHALLENGE_SUCCESS_7064(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "tool_trigger" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "tool_trigger", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -766,40 +766,40 @@ function condition_EVENT_GADGET_CREATE_7065(context, evt)
 	if 7034 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_CREATE_7065(context, evt)
 	ScriptLib.CreateFatherChallenge(context, 244, 111101, 180, {success = 2, fail = 1, fail_on_wipe=true})
-
+	
 	ScriptLib.AttachChildChallenge(context, 244, 201, 111102, {180,defs.group_1,20,0},{},{success=1,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 244, 202, 111105, {180,3,582,2},{},{success=1,fail=1})
-
+	
 	ScriptLib.AttachChildChallenge(context, 244, 203, 111165, {180,0,0,0},{},{success=0,fail=1})
-
+	
 	ScriptLib.StartFatherChallenge(context, 244)
-
+	
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 506, defs.group_1, {7089,7090}, 99, 1, 1) then
 		return -1
 	end
-
+	
 	-- 创建编号为502（该怪物潮的识别id)的怪物潮，创建怪物总数为99，场上怪物最少1只，最多1只
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 509, defs.group_1, {7091,7094,7092,7095,7093,7096}, 99, 2, 2) then
 	 ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 添加suite2的新内容
 	    --ScriptLib.AddExtraGroupSuite(context, 133001583, 2)
-
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 11)
-
-
+	
+	
 	return 0
 end
 
@@ -808,7 +808,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_7071(context, evt)
 	if 7073 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -819,7 +819,7 @@ function action_EVENT_ANY_MONSTER_LIVE_7071(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -827,7 +827,7 @@ end
 function action_EVENT_TIMER_EVENT_7072(context, evt)
 	-- 添加suite12的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 12)
-
+	
 	return 0
 end
 
@@ -835,7 +835,7 @@ end
 function action_EVENT_TIMER_EVENT_7079(context, evt)
 	-- 添加suite13的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 13)
-
+	
 	return 0
 end
 
@@ -844,7 +844,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_7080(context, evt)
 	if 7076 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -855,7 +855,7 @@ function action_EVENT_ANY_MONSTER_LIVE_7080(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -863,7 +863,7 @@ end
 function action_EVENT_TIMER_EVENT_7084(context, evt)
 	-- 添加suite14的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 133209007, 14)
-
+	
 	return 0
 end
 
@@ -872,7 +872,7 @@ function condition_EVENT_ANY_MONSTER_LIVE_7085(context, evt)
 	if 7081 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -883,7 +883,7 @@ function action_EVENT_ANY_MONSTER_LIVE_7085(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -893,8 +893,8 @@ function condition_EVENT_ANY_MONSTER_DIE_7098(context, evt)
 	if evt.param1 ~= 7013 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -905,7 +905,7 @@ function action_EVENT_ANY_MONSTER_DIE_7098(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -915,8 +915,8 @@ function condition_EVENT_ANY_MONSTER_DIE_7099(context, evt)
 	if evt.param1 ~= 7014 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -927,7 +927,7 @@ function action_EVENT_ANY_MONSTER_DIE_7099(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -935,8 +935,8 @@ end
 function action_EVENT_ENTER_REGION_7102(context, evt)
 	-- 创建标识为""，时间节点为{0}的时间轴，true用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "", {0}, true)
-
-
+	
+	
 	return 0
 end
 
@@ -946,8 +946,8 @@ function condition_EVENT_ANY_MONSTER_DIE_7103(context, evt)
 	if evt.param1 ~= 7031 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -958,7 +958,7 @@ function action_EVENT_ANY_MONSTER_DIE_7103(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -968,8 +968,8 @@ function condition_EVENT_ANY_MONSTER_DIE_7104(context, evt)
 	if evt.param1 ~= 7032 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -980,7 +980,7 @@ function action_EVENT_ANY_MONSTER_DIE_7104(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -990,8 +990,8 @@ function condition_EVENT_ANY_MONSTER_DIE_7105(context, evt)
 	if evt.param1 ~= 7089 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -1002,7 +1002,7 @@ function action_EVENT_ANY_MONSTER_DIE_7105(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1012,8 +1012,8 @@ function condition_EVENT_ANY_MONSTER_DIE_7106(context, evt)
 	if evt.param1 ~= 7090 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -1024,7 +1024,7 @@ function action_EVENT_ANY_MONSTER_DIE_7106(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1033,7 +1033,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7107(context, evt)
 	if 7057 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1044,7 +1044,7 @@ function action_EVENT_GADGET_STATE_CHANGE_7107(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 

@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 155008079
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	group_ID = 155008079
 }
 
@@ -45,12 +45,12 @@ local NightAppearGadgets = {}
 ]]
 
 
-local gameplayStateFuncitons =
+local gameplayStateFuncitons = 
 {
 	["0"] = function(context)
-
+		
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
-
+		
 	end,
 	["1"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",0)
@@ -58,19 +58,19 @@ local gameplayStateFuncitons =
 		DayNight_Gadget_Unlock(context,79010)
 		DayNight_Gadget_Unlock(context,79012)
 		DayNight_Gadget_Unlock(context,79011)
-
+		
 	end,
 	["2"] = function(context)
 		ScriptLib.SetGroupVariableValue(context,"is_daynight_finish",1)
 		ScriptLib.AddExtraGroupSuite(context, defs.group_ID, 3)
-
+		
 	end
 
 }
 
 
 function UpdateGamePlayState(context)
-	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState")
+	local state = ScriptLib.GetGroupVariableValue(context, "gameplayState") 
 
 	gameplayStateFuncitons[tostring(state)](context)
 
@@ -78,18 +78,18 @@ end
 
 function GadgetStateSwitcher(context,group_id,gadget_id,state)
 
-	if ScriptLib.GetGadgetStateByConfigId(context, group_id, gadget_id)  == state[1] then
+	if ScriptLib.GetGadgetStateByConfigId(context, group_id, gadget_id)  == state[1] then 
 		ScriptLib.SetGroupGadgetStateByConfigId(context, group_id, gadget_id, state[2])
-	elseif ScriptLib.GetGadgetStateByConfigId(context, group_id, gadget_id)  == state[2] then
+	elseif ScriptLib.GetGadgetStateByConfigId(context, group_id, gadget_id)  == state[2] then 
 		ScriptLib.SetGroupGadgetStateByConfigId(context, group_id, gadget_id, state[1])
-	end
+	end 
 
 end
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -143,9 +143,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -156,9 +156,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -192,9 +192,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -206,20 +206,20 @@ end
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_79002(context, evt)
 	if evt.param1 == evt.param2 then return -1 end
-
+	
 	UpdateGamePlayState(context)
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_79013(context, evt)
-	if evt.param2 ~= 79012 then
+	if evt.param2 ~= 79012 then 
 	return false
 	end
 	if 222 ~= ScriptLib.GetGadgetStateByConfigId(context, 155008079, 79012) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -229,27 +229,27 @@ function action_EVENT_GADGET_STATE_CHANGE_79013(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 79007, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_79014(context, evt)
-	if evt.param2 ~= 79010 then
+	if evt.param2 ~= 79010 then 
 	return false
-	end
+	end	
 	if 222 ~= ScriptLib.GetGadgetStateByConfigId(context, 155008079, 79010) then
 			return false
 		end
-
+		
 		return true
 end
 
 -- 触发操作
 function action_EVENT_GADGET_STATE_CHANGE_79014(context, evt)
 			GadgetStateSwitcher(context,defs.group_ID,79008,{0,201})
-
+			
 		return 0
 end
 

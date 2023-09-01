@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133308318
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -47,9 +47,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -60,9 +60,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -78,9 +78,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -89,7 +89,7 @@ function condition_EVENT_GROUP_LOAD_318006(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -99,32 +99,32 @@ function action_EVENT_GROUP_LOAD_318006(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 318001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 318002 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 318002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 318003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 318003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 318004 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 318004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 318005 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 318005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -133,7 +133,7 @@ function condition_EVENT_TIME_AXIS_PASS_318007(context, evt)
 	if "opendoor" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -143,8 +143,8 @@ function action_EVENT_TIME_AXIS_PASS_318007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 318002, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -153,12 +153,12 @@ function condition_EVENT_GADGET_CREATE_318008(context, evt)
 	if 318001 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"finish"为0
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -169,7 +169,7 @@ function action_EVENT_GADGET_CREATE_318008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -177,14 +177,14 @@ end
 function condition_EVENT_SELECT_OPTION_318009(context, evt)
 	-- 判断是gadgetid 318001 option_id 7
 	if 318001 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 7 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -195,23 +195,23 @@ function action_EVENT_SELECT_OPTION_318009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 318001 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 318001, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 删除指定group： 133308318 ；指定config：318001；物件身上指定option：7；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 133308318, 318001, 7) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 创建标识为"opendoor"，时间节点为{1,3,5,7}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "opendoor", {1,3,5,7}, false)
-
-
+	
+	
 	-- 触发镜头注目，注目位置为坐标{x=-2344.31, y=85.28073, z=4410.529}，持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=-2344.31, y=85.28073, z=4410.529}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -220,8 +220,8 @@ function action_EVENT_SELECT_OPTION_318009(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -230,7 +230,7 @@ function condition_EVENT_TIME_AXIS_PASS_318010(context, evt)
 	if "opendoor" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -240,8 +240,8 @@ function action_EVENT_TIME_AXIS_PASS_318010(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 318003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -250,7 +250,7 @@ function condition_EVENT_TIME_AXIS_PASS_318011(context, evt)
 	if "opendoor" ~= evt.source_name or 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -260,8 +260,8 @@ function action_EVENT_TIME_AXIS_PASS_318011(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 318004, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -270,7 +270,7 @@ function condition_EVENT_TIME_AXIS_PASS_318012(context, evt)
 	if "opendoor" ~= evt.source_name or 4 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -280,11 +280,11 @@ function action_EVENT_TIME_AXIS_PASS_318012(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 318005, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 停止标识为"opendoor"的时间轴
 	ScriptLib.EndTimeAxis(context, "opendoor")
-
-
+	
+	
 	return 0
 end

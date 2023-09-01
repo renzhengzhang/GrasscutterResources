@@ -5,13 +5,13 @@
 ||	owner: 		weiwei.sun
 ||	description: 	3.2奇趣秘园 主流程
 ||	LogName:	## [CharAmuse_Main]
-||	Protection:
+||	Protection:	
 =======================================]]
 --[[
 
-defs = {
+local defs = {
 	--每个房间传送点坐标列表,key为GalleryID
-	transpoint_list =
+	transpoint_list = 
 	{
         --玩法1
         [6001] = {
@@ -24,7 +24,7 @@ defs = {
 	}
 
 	--每个小活动关卡Group列表
-	group_list =
+	group_list = 
 	{
         --玩法1
         [6001] = 235800006,
@@ -45,17 +45,17 @@ local cfg = {
 	switchteam_delay = 2,
 
 	--需要提前取到GalleryID以创建布设的Group
-	groups_need_gallery =
+	groups_need_gallery = 
 	{
 		[251008011] = {28009, 28010}
 	},
 	--战斗关
-	battle_gallery =
+	battle_gallery = 
 	{
 		28013,28014,28015,28016,28017,28018
 	},
 		--战斗关
-	pillar_gallery =
+	pillar_gallery = 
 	{
 		28003,28004
 	}
@@ -134,8 +134,8 @@ function action_MPMode_All_PlayerEnter(context, evt)
 	 if 1 == stage_index and 1 ~= has_transed then
 	 	ScriptLib.SetGroupTempValue(context, "has_transed", 1, {})
 		--LF_TranAllPlayerToGalleryPos(context, stage_index) --需要确保客户端Wait界面已经开启，所以首次进场时晚一点传送
-		ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] Trans player on first round. Start timeaxis enterscene_delay。")
-		ScriptLib.InitTimeAxis(context, "enterscene_delay", { 2 }, false)
+		ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] Trans player on first round. Start timeaxis enterscene_delay。")	
+		ScriptLib.InitTimeAxis(context, "enterscene_delay", { 2 }, false)	
 	end
 	ScriptLib.InitTimeAxis(context, "trans_delay", { cfg.trans_delay }, false)
 	ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] All player enter. Init time axis trans_delay.")
@@ -223,7 +223,7 @@ function action_MultiStage_End(context, evt)
 	--End的是哪一种Stage
 	local name = string.sub(evt.source_name, 1, 9)
 
-	ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] MultiStage_End. stage_index@"..stage_index.." source_name@"..evt.source_name.. " evt.param3@".. evt.param3)
+	ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] MultiStage_End. stage_index@"..stage_index.." source_name@"..evt.source_name.. " evt.param3@".. evt.param3)	
 	--失败
 	if 0 == evt.param3 then
 		if "PlayStage" == name then
@@ -234,7 +234,7 @@ function action_MultiStage_End(context, evt)
 	--成功
 	ScriptLib.ChangeGroupTempValue(context, "stage_num", 1, {})
 	--换人与传送 WaitStage_x -> 倒计时 IdleStage_x -> 开始 PlayStage_x
-	if "WaitStage" == name then
+	if "WaitStage" == name then	
 
 		ScriptLib.EndTimeAxis(context, "trans_delay")
 		--如果首轮传送在WaitStage结束后还没有执行，则在此时传送
@@ -247,11 +247,11 @@ function action_MultiStage_End(context, evt)
 		LF_StartIdleStage(context, stage_index)
 
 	elseif "IdleStage" == name then
-
+	
 		LF_StartPlayStage(context, stage_index)
 
 	elseif "PlayStage" == name then
-
+		
 		ScriptLib.ChangeGroupTempValue(context, "stage_index", 1, {})
 		if true == LF_IsAllStageFinish(context) then
 			ScriptLib.EndSceneMultiStagePlay(context, 1, true)
@@ -268,10 +268,10 @@ end
 function LF_StartWaitStage(context, stage_index)
 
 	local gallery_id = ScriptLib.GetGroupTempValue(context, "gallery_"..stage_index, {})
-
+	
 	--开启阶段
 	ScriptLib.StartSceneMultiStagePlayStage(context, 1, 40, Multistage.CharAmusementPreview, "WaitStage_"..stage_index, { preview_stage_index = stage_index, preview_display_duration = 40})
-	if 1 < stage_index then
+	if 1 < stage_index then		
 		ScriptLib.InitTimeAxis(context, "switchteam_delay", {cfg.switchteam_delay}, false)
 	else
 		--特殊处理1：如果接下来是战斗关，则移除打桩关的suite布设
@@ -358,7 +358,7 @@ function EX_EndPlayStage( context, prev_context, is_fail, from_group)
 		ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] EX_EndPlayStage. CauseDungeonSuccess")
 		return 0
 	end
-
+	
 	return 0
 end
 
@@ -371,7 +371,7 @@ function LF_TranAllPlayerToGalleryPos(context, stage_index)
 			local pos = defs.transpoint_list[gallery_id][k].pos
 			local rot = defs.transpoint_list[gallery_id][k].rot
 			ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] LF_TranAllPlayerToGalleryPos. Start trans player@"..v.." X@"..pos.x.. " Y@"..pos.y.. " Z@"..pos.z)
-			ScriptLib.TransPlayerToPos(context, { uid_list = {v}, pos = pos, radius = 0, rot = rot , is_skip_ui = true })
+			ScriptLib.TransPlayerToPos(context, { uid_list = {v}, pos = pos, radius = 0, rot = rot , is_skip_ui = true }) 
 		end
 	else
 		ScriptLib.PrintGroupWarning(context,"## [CharAmuse_Main] LF_TranAllPlayerToGalleryPos: uid_list got nil. ")
@@ -387,10 +387,10 @@ function EX_ReTrans(context, prev_context, uid)
 	for i,v in ipairs(uid_list) do
 		if v == uid then
 			local pos = defs.transpoint_list[gallery_id][i].pos
-			local rot = defs.transpoint_list[gallery_id][i].rot
-			ScriptLib.TransPlayerToPos(context, { uid_list = {uid}, pos = pos, radius = 0, rot = rot , is_skip_ui = false})
+			local rot = defs.transpoint_list[gallery_id][i].rot		
+			ScriptLib.TransPlayerToPos(context, { uid_list = {uid}, pos = pos, radius = 0, rot = rot , is_skip_ui = false}) 
 			ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] Player@"..uid.." ReTransed.")
-		end
+		end	
 	end
 	return 0
 end
@@ -398,7 +398,7 @@ end
 function LF_IsAllStageFinish(context)
 	local stage_index = ScriptLib.GetGroupTempValue(context, "stage_index", {})
 	local gallery_num = ScriptLib.GetGroupTempValue(context, "gallery_num", {})
-	if stage_index > gallery_num then
+	if stage_index > gallery_num then	
 		return true
 	end
 	return false
@@ -407,14 +407,14 @@ end
 --需要提前取到GalleryID以创建布设的Group
 function LF_SendGalleryIDVec_ToPlayGroup(context, gallery_vec)
 
-	for k,v in pairs(cfg.groups_need_gallery) do
+	for k,v in pairs(cfg.groups_need_gallery) do 
 		for ik,iv in ipairs(v) do
-			if LF_CheckIsInTable(context, iv, gallery_vec) then
+			if LF_CheckIsInTable(context, iv, gallery_vec) then 
 				ScriptLib.ExecuteGroupLua(context, k, "EX_SetGalleryID", { iv })
 				ScriptLib.PrintContextLog(context, "## [CharAmuse_Main] LF_SendGalleryIDVec_ToPlayGroup. To@"..k.." gallery_id@"..iv)
 				return 0
 			end
-		end
+		end		
 	end
 
 	return 0

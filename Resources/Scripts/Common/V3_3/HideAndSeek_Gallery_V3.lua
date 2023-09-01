@@ -8,7 +8,7 @@
 
 --[[
 
-defs =
+local defs = 
 {
 	gadget_prison = gadget_id,
 	duration = 240,
@@ -17,8 +17,8 @@ defs =
 	-- 用于固定lod 1的region，千万不能填错，填错了一定会炸服务器
 	eye_point = region_id,
 }
-
-local energy_info =
+ 
+local energy_info = 
 {
 	[1] = { time = 80, step = {-30,30}, points = {1,2,3,4,5,6}},
 	[2] = { time = 160, step = {-30,30}, points = {1,2,3,4,5,6}}
@@ -155,15 +155,15 @@ local extraGadgets = {
 	[30000004] = { config_id = 30000004, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000005] = { config_id = 30000005, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000006] = { config_id = 30000006, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
-
+	
 	[30000007] = { config_id = 30000007, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000008] = { config_id = 30000008, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000009] = { config_id = 30000009, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
-
+	
 	[30000010] = { config_id = 30000010, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000011] = { config_id = 30000011, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 	[30000012] = { config_id = 30000012, gadget_id = 44000107, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
-
+	
 	-- 能量球，config id把不太吉利的数字跳过去
 	[30000015] = { config_id = 30000015, gadget_id = 44000105, pos = regionDefaultValues.pos, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 10, area_id = regionDefaultValues.area_id },
 
@@ -322,7 +322,7 @@ function action_leave_region(context, evt)
 	ScriptLib.ClearPlayerEyePoint(context, evt.param1)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG ClearPlayerEyePoint")
 
-
+	
 	-- -- 【三期新增】
 	-- -- 关闭锁lod1
 	-- local ret = ScriptLib.ClearPlayerEyePoint(context, defs.eye_point)
@@ -365,7 +365,7 @@ function action_time_axis_pass(context, evt)
 	elseif evt.source_name == "hunter_win_by_EX" or evt.source_name == "hunter_win_in_time" or evt.source_name == "hunter_catch_by_guide" then
 		--相关陈列室统计
 		ScriptLib.SetGroupTempValue(context, evt.source_name, 0, {})
-	elseif evt.source_name == "final_time" then
+	elseif evt.source_name == "final_time" then 
 		--抓捕阶段第180秒后为决胜时间，猎手在该时间内抓两人，记录翻牌
 		ScriptLib.SetGroupTempValue(context,"is_in_final_time",1,{})
 	else
@@ -380,7 +380,7 @@ function action_time_axis_pass(context, evt)
 				-- 【三期新增】换了一个UI弹窗，要读表，改成下面了
 				local _gallery = ScriptLib.GetGroupTempValue(context, "gallery_id", {})
 				ScriptLib.UpdatePlayerGalleryScore(context, _gallery, {["update_type"]="updateGhostUid", ["ghost_uid"]= _uid})
-
+				
 				LF_Set_Player_State_Value(context, _uid, HS_State.Dead.name, 1)
 
 				-- 【三期新增】游侠死亡后变成幽灵，上新挑战目标
@@ -417,9 +417,9 @@ function action_avatar_die(context, evt)
 			if prey == context.uid then
 				--prey提前死亡不参与游戏
 				LF_Set_Prey_Die(context, context.uid)
-				return 0
+				return 0	
 			end
-		end
+		end 
 		--hunter提前死亡直接结算prey胜利
 		local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
 		ScriptLib.EndSceneMultiStagePlayStage(context, _index, "null", true)
@@ -488,8 +488,8 @@ function LF_Stop_Hide_And_Seek(context, value)
 		ScriptLib.EndTimeAxis(context, tostring(_uid))
 	end
 	--这个watcher比较特殊，需要在胜利时检测prey的state，所以要写在还原state之前。
-	if value == 2 then
-		for i = 1 , 3 do
+	if value == 2 then 
+		for i = 1 , 3 do 
 			local _prey = ScriptLib.GetGroupTempValue(context, "prey_"..i, {})
 			local _const = ScriptLib.GetGroupTempValue(context, "const_prey_"..i, {})
 			if _const ~= 0 then
@@ -589,7 +589,7 @@ function LF_Assign_Character_Card(context)
 		table.insert(all_player_list, prey_list[i])
 	end
 	table.insert(all_player_list, hunter)
-
+	
 	-- 开启视野优化
 	for i = 1, #all_player_list do
 		ScriptLib.ForbidPlayerRegionVision(context, all_player_list[i])
@@ -645,7 +645,7 @@ function LF_Start_Comp_Challenge(context)
 	-- 【三期新增】新接口取prey，和服务器保持一致
 	local _index = ScriptLib.GetHideAndSeekPlayIndex(context)
 	local prey_list = ScriptLib.GetHideAndSeekPreyUidList(context, _index)
-
+	
 	local hunter = ScriptLib.GetGroupTempValue(context, "hunter", {})
 	LF_Set_Player_State_Value(context, hunter, HS_State.Play.name, 0)
 
@@ -664,7 +664,7 @@ function LF_Start_Comp_Challenge(context)
 				if v == ScriptLib.GetGroupTempValue(context, "prey_"..j, {}) then
 					idx = j
 					break
-				end
+				end	
 			end
 			--只有非死亡状态的游侠才继续游戏
 			if ScriptLib.GetGroupTempValue(context, HS_State.Play.name.."_"..v, {}) == 3 then
@@ -672,7 +672,7 @@ function LF_Start_Comp_Challenge(context)
 				ScriptLib.AttachChildChallenge(context, 9011, idx*math.pow(10,5)+9013,9013,{base_info.group_id,10},{v},{success=1,fail=1})
 				prey_sum = prey_sum + 1
 			end
-
+			
 			-- 【三期新增】开始隐身的时间先设成挑战开始时间
 			ScriptLib.SetGroupTempValue(context, "VisibleStart"..v, challenge_start_time, {})
 
@@ -713,10 +713,10 @@ end
 function LF_Bake_Random_Scene(context)
 	ScriptLib.PrintContextLog(context, "## HideAndSeek_V3_LOG : LF_Bake_Random_Scene")
 	--根据ld需求进行调整
-
+	
 	--开启天气
 	for i = 1 , #weather_id_list do
-		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 1)
+		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 1) 
 	end
 
 	--suite 2按权重随机创建
@@ -751,12 +751,12 @@ function LF_Clear_Random_Scene(context)
 	end
 
 	ScriptLib.KillEntityByConfigId(context, {config_id = defs.gadget_prison, entity_type = EntityType.GADGET})
-
+	
 	--关闭天气
 	for i = 1 , #weather_id_list do
-		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 0)
+		ScriptLib.SetWeatherAreaState(context, weather_id_list[i], 0) 
 	end
-
+	
 end
 
 function LF_Init_Player_State(context, uid)
@@ -769,7 +769,7 @@ function LF_Init_Player_State(context, uid)
 			else
 				LF_Set_Player_State_Value(context, uid, n.name, n.value)
 			end
-		else
+		else 
 			LF_Set_Player_State_Value(context, uid, n.name, n.value)
 		end
 	end

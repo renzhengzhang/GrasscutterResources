@@ -8,7 +8,7 @@
 
 --需求misc
 --[[
-    defs ={
+    local defs ={
         gallery_id = 27004,
         finish_region = 111,
         challenge_id = 2,
@@ -65,7 +65,7 @@ function action_EVENT_DUNGEON_ALL_AVATAR_DIE(context,evt)
         ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal action_EVENT_DUNGEON_ALL_AVATAR_DIE:_uidlist == nil")
         return 0
     end
-    for i = 1 ,#_uidlist do
+    for i = 1 ,#_uidlist do 
         if ScriptLib.IsPlayerAllAvatarDie(context,_uidlist[i]) == false then --任一活着则结束
             return 0
         end
@@ -102,7 +102,7 @@ function action_EVENT_GALLERY_STOP(context,evt)
         GALLERY_STOP_FINISHED = 9;          // 完成gallery
         GALLERY_STOP_FUNGUS_ALL_DIE = 10;   // 3.2新增蕈兽团灭发起gallery stop
     } ]]
-    if evt.param3 == 3 or evt.param3 == 9 then
+    if evt.param3 == 3 or evt.param3 == 9 then 
         ScriptLib.CauseDungeonSuccess(context)
     else
         ScriptLib.CauseDungeonFail(context)
@@ -132,13 +132,13 @@ function action_EVENT_GADGET_STATE_CHANGE(context,evt)--吃大球
     --查询gadget_id
     local _gadgetid = 0
     for k,v in pairs(gadgets) do
-        if v.config_id == evt.param2 then
+        if v.config_id == evt.param2 then 
             _gadgetid = v.gadget_id
             break
         end
     end
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal action_EVENT_GADGET_STATE_CHANGE: _gadgetid=" .. _gadgetid)
-    if _gadgetid == Stage_Normal.BigOrb_Gadget_ID and evt.param1 == 201 then
+    if _gadgetid == Stage_Normal.BigOrb_Gadget_ID and evt.param1 == 201 then 
         --如果大球切了
         if ScriptLib.GetGroupTempValue(context,"Ball_Cfgid",{}) ==0 then
             --且没有正在进行的吃球挑战
@@ -152,7 +152,7 @@ function action_EVENT_ANY_GADGET_DIE(context,evt)--吃金币、吃小球
     --查询gadgetid
     local _gadgetid = 0
     for k,v in pairs(gadgets) do
-        if v.config_id == evt.param1 then
+        if v.config_id == evt.param1 then 
             _gadgetid = v.gadget_id
             break
         end
@@ -167,13 +167,13 @@ function action_EVENT_ANY_GADGET_DIE(context,evt)--吃金币、吃小球
             ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal action_EVENT_ANY_GADGET_DIE:_uidlist == nil")
             return 0
         end
-        if level_list == nil then
+        if level_list == nil then 
             return 0
         end
-        if level_list[base_info.group_id] == nil then
+        if level_list[base_info.group_id] == nil then 
             return 0
         end
-        for i = 1 , #_uidlist do
+        for i = 1 , #_uidlist do 
             ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal action_EVENT_ANY_GADGET_DIE:level_list[base_info.group_id] = "..level_list[base_info.group_id])
             ScriptLib.AddExhibitionReplaceableDataAfterSuccess(context, _uidlist[i], "Activity_WindField_"..level_list[base_info.group_id].."_Coin", 1, {play_type=ExhibitionPlayType.Gallery,gallery_id=defs.gallery_id})
         end
@@ -186,7 +186,7 @@ function action_EVENT_ANY_GADGET_DIE(context,evt)--吃金币、吃小球
         ScriptLib.UpdatePlayerGalleryScore(context,defs.gallery_id,{["ball_current_count"] = ScriptLib.GetGroupTempValue(context,"temp_ball_current_count",{})})
     end
     return 0
-end
+end 
 function action_EVENT_ENTER_REGION(context,evt)
     ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal action_EVENT_ENTER_REGION:p1="..evt.param1.."|defs.finish_region="..defs.finish_region)
     if evt.param1 == defs.finish_region then
@@ -198,15 +198,15 @@ function action_EVENT_ENTER_REGION(context,evt)
             ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal action_EVENT_ENTER_REGION:level_list == nil")
             return 0
         end
-        if level_list[base_info.group_id] == nil then
+        if level_list[base_info.group_id] == nil then 
             return 0
         end
-        if level_list[base_info.group_id] == 4 then
+        if level_list[base_info.group_id] == 4 then 
             --ScriptLib.AttachGalleryTeamAbilityGroup(context, {evt.uid}, defs.gallery_id, 0)
         end
         ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal action_EVENT_ENTER_REGION:清空陈列室替换值=".."Activity_WindField_"..level_list[base_info.group_id].."_Ball")
         --清空陈列室替换值
-        --球
+        --球 
         ScriptLib.ClearExhibitionReplaceableData(context, evt.uid, "Activity_WindField_"..level_list[base_info.group_id].."_Ball")
         --金币
         ScriptLib.ClearExhibitionReplaceableData(context, evt.uid, "Activity_WindField_"..level_list[base_info.group_id].."_Coin")
@@ -214,7 +214,7 @@ function action_EVENT_ENTER_REGION(context,evt)
     return 0
 end
 function LF_Check_Finish(context,is_enter_region)
-    ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Check_Finish:")
+    ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Check_Finish:") 
 --[[     --Step1 检查吃够球了没【砍了】
     local _maxcount = 0
     for k,v in pairs(gadgets) do
@@ -223,9 +223,9 @@ function LF_Check_Finish(context,is_enter_region)
         end
     end
     local _ball = ScriptLib.GetGroupVariableValue(context,"element_ball")
-    if _ball < _maxcount then
+    if _ball < _maxcount then 
         --没吃够球，弹reminder，return
-        ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Check_Finish:没吃够球，弹reminder，return")
+        ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Check_Finish:没吃够球，弹reminder，return") 
         ScriptLib.ShowReminder(context,470210101)
         return 0
     end ]]
@@ -234,7 +234,7 @@ function LF_Check_Finish(context,is_enter_region)
         --2.1 取活着的玩家_alive_uidlist
     local _eid = ScriptLib.GetEntityIdByConfigId(context, defs.finish_region)
     local _count = ScriptLib.GetRegionEntityCount(context, { region_eid =_eid, entity_type = EntityType.AVATAR })
-    ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Check_Finish:_count".._count)
+    ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Check_Finish:_count".._count) 
     local _alive_uidlist = {}
     local _uidlist = ScriptLib.GetSceneUidList(context)
     if _uidlist == nil then
@@ -242,21 +242,21 @@ function LF_Check_Finish(context,is_enter_region)
         return 0
     end
     for i = 1 , #_uidlist do
-        if ScriptLib.IsPlayerAllAvatarDie(context, _uidlist[i]) == false then
+        if ScriptLib.IsPlayerAllAvatarDie(context, _uidlist[i]) == false then 
             table.insert(_alive_uidlist,_uidlist[i])
         end
     end
         --2.2 判断活着的玩家都到达
-	if _count == 0 then
-        ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Check_Finish:终点位置没人")
+	if _count == 0 then 
+        ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Check_Finish:终点位置没人") 
         --终点没人，return
 		return 0
 	end
-    if _count ~= #_alive_uidlist then
+    if _count ~= #_alive_uidlist then 
         --还有人没到达终点，return
         if is_enter_region == true then
             --如果这次检测是由enter_region引起，则提示玩家
-            ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Check_Finish:需要全部人到达终点，弹reminder，return")
+            ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Check_Finish:需要全部人到达终点，弹reminder，return") 
             ScriptLib.ShowReminder(context,470210102)
         end
         return 0
@@ -265,13 +265,13 @@ function LF_Check_Finish(context,is_enter_region)
     --完成watcher[要先于gallerystop执行
     --watcher完成
     --local _uidlist = ScriptLib.GetSceneUidList(context)--上面有了
-    if level_list == nil then
+    if level_list == nil then 
         return 0
     end
-    if level_list[base_info.group_id] == nil then
+    if level_list[base_info.group_id] == nil then 
         return 0
     end
-    for i = 1 , #_uidlist do
+    for i = 1 , #_uidlist do 
         ScriptLib.AddExhibitionReplaceableDataAfterSuccess(context, _uidlist[i], "Activity_WindField_"..level_list[base_info.group_id].."_LevelFinish", 1, {play_type=ExhibitionPlayType.Gallery,gallery_id=defs.gallery_id})
     end
 
@@ -292,17 +292,17 @@ function action_EVENT_VARIABLE_CHANGE(context,evt)
         LF_Try_FinishBall(context)
     --gm结束
     --正式：
-    elseif evt.source_name == "ball_count" then
-        if evt.param1 == 0 then
+    elseif evt.source_name == "ball_count" then 
+        if evt.param1 == 0 then 
             LF_Try_FinishBall(context)
         end
-    elseif evt.source_name == "element_ball" then
+    elseif evt.source_name == "element_ball" then 
         ScriptLib.UpdatePlayerGalleryScore(context,defs.gallery_id,{[evt.source_name] = evt.param1})
 
-    elseif evt.source_name == "killed_monster" then
+    elseif evt.source_name == "killed_monster" then 
         ScriptLib.UpdatePlayerGalleryScore(context,defs.gallery_id,{[evt.source_name] = evt.param1})
 
-    elseif evt.source_name == "coin" then
+    elseif evt.source_name == "coin" then 
         ScriptLib.UpdatePlayerGalleryScore(context,defs.gallery_id,{[evt.source_name] = evt.param1})
     end
     return 0
@@ -315,7 +315,7 @@ function action_EVENT_GROUP_LOAD(context,evt)
     return 0
 end
 function LF_Try_End(context,is_fail)
-    if is_fail then
+    if is_fail then 
         ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Try_End:true")
     else
         ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Try_End:false")
@@ -345,8 +345,8 @@ function LF_Try_StartBall(context,ball_id)
                 return 0
             end
             local _time = defs.ball_challenge_time
-            if _time == nil then
-                _time = Stage_Normal.Ball_Challenge_Time
+            if _time == nil then 
+                _time = Stage_Normal.Ball_Challenge_Time 
                 ScriptLib.PrintGroupWarning(context,"## Activity_WindMaze_Normal LF_Try_StartBall:没配吃球挑战时间，设为20秒")
             else
             end
@@ -433,7 +433,7 @@ function LF_Try_FinishBall(context)
     ScriptLib.SetGroupTempValue(context,"BigOrb_Is_Fisnish_".._cfgid,1,{})
     --重置其他大球
     for k,v in pairs(windball_list) do
-        if ScriptLib.GetGroupTempValue(context,"BigOrb_Is_Fisnish_"..k,{}) ~= 1 then
+        if ScriptLib.GetGroupTempValue(context,"BigOrb_Is_Fisnish_"..k,{}) ~= 1 then 
             ScriptLib.SetGadgetStateByConfigId(context,k,0)
         end
     end
@@ -449,13 +449,13 @@ function LF_Try_FinishBall(context)
         ScriptLib.PrintContextLog(context,"## Activity_WindMaze_Normal LF_Try_StartBall:_uidlist == nil")
         return 0
     end
-    if level_list == nil then
+    if level_list == nil then 
         return 0
     end
-    if level_list[base_info.group_id] == nil then
+    if level_list[base_info.group_id] == nil then 
         return 0
     end
-    for i = 1 , #_uidlist do
+    for i = 1 , #_uidlist do 
         ScriptLib.AddExhibitionReplaceableDataAfterSuccess(context, _uidlist[i], "Activity_WindField_"..level_list[base_info.group_id].."_Ball", 1, {play_type=ExhibitionPlayType.Gallery,gallery_id=defs.gallery_id})
     end
     return 0
@@ -481,7 +481,7 @@ end
 --初始化
 function Initialize()
 	--加触发器
-    if temp_Tirgger ~= nil then
+    if temp_Tirgger ~= nil then 
         for k,v in pairs(temp_Tirgger) do
             v.name = v.action
             v.config_id = 40000000 + k
@@ -492,7 +492,7 @@ function Initialize()
         end
     end
 	--加变量
-    if temp_Variables ~= nil then
+    if temp_Variables ~= nil then 
         for k,v in pairs(temp_Variables) do
             v.config_id = 50000000 + k
             table.insert(variables,v)

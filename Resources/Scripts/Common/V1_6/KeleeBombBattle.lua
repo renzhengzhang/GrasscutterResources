@@ -1,5 +1,5 @@
 --[[
-defs = {
+local defs = {
 	group_id = xxx,
 	tide_sum = 25,
 	tide_max = 8,
@@ -32,7 +32,7 @@ function Initialize()
 	for k,v in pairs(Tri) do
 		table.insert(triggers, v)
 		table.insert(suites[1].triggers, v.name)
-	end
+	end	
 	for k,v in pairs(Var) do
 		table.insert(variables, v)
 	end
@@ -69,7 +69,7 @@ function action_any_monster_die(context, evt)
 	ScriptLib.AddBlossomScheduleProgressByGroupId(context, defs.group_id)
 	if 0 == ScriptLib.GetGroupMonsterCount(context) then
 		local _wave = ScriptLib.GetGroupVariableValue(context, "wave")
-		if _wave+4 <= #suites then
+		if _wave+4 <= #suites then 
 			ScriptLib.ShowReminderRadius(context, 400004, points[1].pos, 40)
 			ScriptLib.AddExtraGroupSuite(context, 0, _wave+4)
 			ScriptLib.ChangeGroupVariableValue(context, "wave", 1)

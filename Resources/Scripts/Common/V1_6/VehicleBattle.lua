@@ -1,6 +1,6 @@
 --[[
-defs = {
-	group_id = xxx ,
+local defs = {
+	group_id = xxx ,	
 	monster_shaman = 1,
 	gadget_barrier = {1,2,3,4,5},
 	TowerBridges = {{3,4},{3,5}}

@@ -1,23 +1,23 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240060001
 }
 
 -- DEFS_MISCS
-defs = {
+local defs = {
         worktop_id = 1003,  --操作台gadget的id
         gallery_id = 29032,  --对应gallery的id
         battle_region_id = 1012, --td region的id
         recovergadget_id = 1009,   --恢复gadget的id
         cleaner_id = 1010,  --local gadget（能量球）清理gadget的id
         monster_num = 1,  --刷怪总数量
-        is_first_group = true   --是否是第一个group
+        is_first_group = true   --是否是第一个group     
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -58,9 +58,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -71,9 +71,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -125,23 +125,23 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_SELECT_OPTION_1005(context, evt)
 	-- 判断是gadgetid 1003 option_id 175
 	if 1003 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 175 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -152,20 +152,20 @@ function action_EVENT_SELECT_OPTION_1005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 将configid为 1003 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1003, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "GALLERY_STATE" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "GALLERY_STATE", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
-	if ScriptLib.GetEffigyChallengeV2DungeonDifficulty(context) == 1 then
+	
+	if ScriptLib.GetEffigyChallengeV2DungeonDifficulty(context) == 1 then         
 	        ScriptLib.AddExtraGroupSuite(context, 240060001, 2)
 	elseif ScriptLib.GetEffigyChallengeV2DungeonDifficulty(context) == 2 then
 	        ScriptLib.AddExtraGroupSuite(context, 240060001, 3)
@@ -176,7 +176,7 @@ function action_EVENT_SELECT_OPTION_1005(context, evt)
 	else
 	        ScriptLib.AddExtraGroupSuite(context, 240060001, 5)
 	end
-
+	
 	return 0
 end
 
@@ -186,7 +186,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1011(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -197,7 +197,7 @@ function action_EVENT_ANY_MONSTER_DIE_1011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

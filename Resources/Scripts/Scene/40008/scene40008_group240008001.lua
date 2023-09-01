@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 240008001
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -116,20 +116,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_1007(context, evt)
 	if evt.param1 ~= 1007 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -139,11 +139,11 @@ function action_EVENT_ENTER_REGION_1007(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1006, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240008001, 3)
-
+	
 	return 0
 end
 
@@ -151,14 +151,14 @@ end
 function condition_EVENT_SELECT_OPTION_1008(context, evt)
 	-- 判断是gadgetid 1006 option_id 178
 	if 1006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 178 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -168,35 +168,35 @@ function action_EVENT_SELECT_OPTION_1008(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 1011 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1011, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240008002, 2)
-
+	
 	-- 删除指定group： 240008001 ；指定config：1006；物件身上指定option：178；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240008001, 1006, 178) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 240008001 ；指定config：1006；物件身上指定option：179；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240008001, 1006, 179) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 240008001 ；指定config：1006；物件身上指定option：180；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240008001, 1006, 180) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（353，-27，404），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=353, y=-27, z=404}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -205,8 +205,8 @@ function action_EVENT_SELECT_OPTION_1008(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -216,7 +216,7 @@ function condition_EVENT_ANY_MONSTER_DIE_1014(context, evt)
 	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -227,16 +227,16 @@ function action_EVENT_ANY_MONSTER_DIE_1014(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_wok_options_by_configid")
 		return -1
 	end
-
+	
 	-- 将configid为 1006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240008001, 2)
-
+	
 	return 0
 end
 
@@ -244,14 +244,14 @@ end
 function condition_EVENT_SELECT_OPTION_1015(context, evt)
 	-- 判断是gadgetid 1006 option_id 179
 	if 1006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 179 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -261,35 +261,35 @@ function action_EVENT_SELECT_OPTION_1015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 1012 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1012, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240008002, 3)
-
+	
 	-- 删除指定group： 240008001 ；指定config：1006；物件身上指定option：178；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240008001, 1006, 178) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 240008001 ；指定config：1006；物件身上指定option：179；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240008001, 1006, 179) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 240008001 ；指定config：1006；物件身上指定option：180；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240008001, 1006, 180) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（343，-28，404），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=343, y=-28, z=404}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -298,8 +298,8 @@ function action_EVENT_SELECT_OPTION_1015(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end
 
@@ -307,14 +307,14 @@ end
 function condition_EVENT_SELECT_OPTION_1016(context, evt)
 	-- 判断是gadgetid 1006 option_id 180
 	if 1006 ~= evt.param1 then
-		return false
+		return false	
 	end
-
+	
 	if 180 ~= evt.param2 then
 		return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -324,35 +324,35 @@ function action_EVENT_SELECT_OPTION_1016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将configid为 1013 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1013, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 240008002, 4)
-
+	
 	-- 删除指定group： 240008001 ；指定config：1006；物件身上指定option：178；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240008001, 1006, 178) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 240008001 ；指定config：1006；物件身上指定option：179；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240008001, 1006, 179) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 删除指定group： 240008001 ；指定config：1006；物件身上指定option：180；
 	if 0 ~= ScriptLib.DelWorktopOptionByGroupId(context, 240008001, 1006, 180) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : del_work_options_by_group_configId")
 		return -1
 	end
-
+	
 	-- 触发镜头注目，注目位置为坐标（333，-28，404），持续时间为2秒，并且为强制注目形式，不广播其他玩家
 		local pos = {x=333, y=-28, z=404}
 	  local pos_follow = {x=0, y=0, z=0}
@@ -361,7 +361,7 @@ function action_EVENT_SELECT_OPTION_1016(context, evt)
 	                                                      is_set_screen_XY = false, screen_x = 0, screen_y = 0 }) then
 					ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_cameraLook_Begin")
 	        return -1
-				end
-
+				end 
+	
 	return 0
 end

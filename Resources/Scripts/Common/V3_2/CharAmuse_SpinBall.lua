@@ -5,11 +5,11 @@
 ||	owner: 		weiwei.sun
 ||	description: 	3.2奇趣秘园 局内逻辑 弹球
 ||	LogName:	## [CharAmuse_SpinBall]
-||	Protection:
+||	Protection:	
 =======================================]]
 --[[
 
-defs = {
+local defs = {
 
 	-----全玩法通用配置-----
 
@@ -30,24 +30,24 @@ defs = {
 	reminder = 400171,
 
 	--点阵长度
-	length =
+	length = 
 	{--[点阵id] =点阵长度
 		[1] = 9,
 		[2] = 4.
 	},
 	--创生配置
-	born =
+	born = 
 	{--[点阵id] ={ pos = { x=,y=,z=}, rot = pos = { x=,y=,z=}}
 		[1]={ pos = { x=,y=,z=}, rot = pos = { x=,y=,z=}}
 	}
 	--点阵组
-	array_combine =
+	array_combine = 
 	{
 		[1] = {5, 6},
 	}
 
     -- 刷金币suite的规则
-    coin_list =
+    coin_list = 
     {
         -- 单人玩家
         ["SP"] = {
@@ -148,7 +148,7 @@ function action_AirWallVariable_Change(context, evt)
 	elseif 0 == evt.param1 and 1 == evt.param2 then
 		for i,v in ipairs(defs.air_wall) do
 			ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, v)
-		end
+		end	
 	end
 	return 0
 end
@@ -159,7 +159,7 @@ function action_Gallery_Stop(context, evt)
 	LF_ClearRound(context)
 	ScriptLib.EndAllTimeAxis(context)
 
-	if 3 ~= evt.param3 then
+	if 3 ~= evt.param3 then		
 		local is_last_level = (ScriptLib.GetGroupTempValue(context, "is_last_level", {}) >= 1)
 		--ScriptLib.InitTimeAxis(context, "StopGallery_Fail", { 3 } , false) 9.21修改 失败不要延时结束
 		ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {1, base_info.group_id})
@@ -169,7 +169,7 @@ function action_Gallery_Stop(context, evt)
 			ScriptLib.ExecuteGroupLua(context, cfg.main_group, "EX_EndPlayStage", {0, base_info.group_id})
 		else
 			ScriptLib.InitTimeAxis(context, "StopGallery", { 3 } , false)
-		end
+		end	
 	end
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] Gallery stoped. reason@".. evt.param3.." --------------")
 
@@ -207,7 +207,7 @@ function LF_Start_Play(context)
 	ScriptLib.SetGroupTempValue(context, "rand_index", rand_index, {})
 
 	LF_StartRound(context)
-
+	
 	return 0
 end
 
@@ -229,7 +229,7 @@ function LF_StartRound(context)
 
 	ScriptLib.SetGroupTempValue(context, "coin_num", 0, {})
 	ScriptLib.SetGroupTempValue(context, "score_total", 0, {})
-
+	
 	local coin_list = {}
 	if 1 < player_num then
 		coin_list = defs.coin_list["MP"]
@@ -250,7 +250,7 @@ function LF_StartRound(context)
 	--如果已经到了LD配置尽头，则循环最后一波
 	if round > #coin_list[rand_index] then
 		round = #coin_list[rand_index]
-		ScriptLib.SetGroupTempValue(context, "round", round, {})
+		ScriptLib.SetGroupTempValue(context, "round", round, {}) 
 		ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] LF_StartRound. All round finished. Set to final.")
 	end
 
@@ -311,7 +311,7 @@ function action_Wait_TimeAxis_Pass(context, evt)
 			    table.insert(path, i)
 			end
 			local tempParam = {route_type = 2, turn_mode = false}
-			ScriptLib.SetPlatformPointArray(context, config_id, v, path, tempParam)
+			ScriptLib.SetPlatformPointArray(context, config_id, v, path, tempParam) 
 			ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] SetPlatformPointArray. config_id@".. config_id.. "point_array_id@"..v)
 		end
 	end
@@ -320,7 +320,7 @@ function action_Wait_TimeAxis_Pass(context, evt)
 	local coin_suites = coin_list[rand_index][round].coin
 	for k,v in pairs(coin_suites) do
 		ScriptLib.AddExtraGroupSuite(context, base_info.group_id, v)
-	end
+	end	
 
 	--埋点统计本波总分
 	local coin_1 = ScriptLib.CheckRemainGadgetCountByGroupId(context, { group_id = base_info.group_id, gadget_id = { 70320015 }})
@@ -363,10 +363,10 @@ function LF_ClearRound(context)
 		coin_list = defs.coin_list["SP"]
 	end
 	local rand_index = ScriptLib.GetGroupTempValue(context, "rand_index", {})
-
+	
 	for i,v in ipairs(coin_list[rand_index][round].coin) do
 		ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, v)
-	end
+	end	
 	if nil ~= coin_list[rand_index][round].buff then
 		for i,v in ipairs(coin_list[rand_index][round].buff) do
 			ScriptLib.RemoveExtraGroupSuite(context, base_info.group_id, v)
@@ -377,14 +377,14 @@ function LF_ClearRound(context)
 end
 
 function LF_CreateBall(context, pos, rot)
-
+	
     for k , v in pairs(defs.ball_pool) do
         local ret = ScriptLib.CreateGadgetByConfigIdByPos(context, v, pos, rot)
         if 0 == ret then
         	ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] LF_CreateBall. Create gadget@"..v)
             return v
         end
-    end
+    end 
 	ScriptLib.PrintGroupWarning(context,"## [CharAmuse_SpinBall] LF_CreateBall. Unable to create ball.")
 	return 0
 end
@@ -394,8 +394,8 @@ function action_Round_TimeAxis(context, evt)
 	ScriptLib.EndTimeAxis(context, "round_time")
 	ScriptLib.EndTimeAxis(context, "reminder_time")
 
-	LF_ClearRound(context)
-	ScriptLib.InitTimeAxis(context, "roundwait_time", { defs.wait_time } , false)
+	LF_ClearRound(context)	
+	ScriptLib.InitTimeAxis(context, "roundwait_time", { defs.wait_time } , false)	
 	return 0
 end
 
@@ -425,11 +425,11 @@ function SLC_CharAmusement_CoinGet(context, param1)
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, config_id)
 		ScriptLib.ChangeGroupTempValue(context, "cur_score", -1, {})
 		ScriptLib.ChangeGroupTempValue(context, "coin_num", -1, {})
-
+		
 		ScriptLib.UpdatePlayerGalleryScore(context, gallery_id, { ["add_score"]= 1} )
 		ScriptLib.CharAmusementUpdateScore(context, cfg.main_group, 1, 1)--给MultStage更新分数 服务器侧埋点用
 
-	elseif 2 == param1 then
+	elseif 2 == param1 then 
 		local config_id = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 		ScriptLib.RemoveEntityByConfigId(context, 0, EntityType.GADGET, config_id)
 		if nil ~= defs.super_coin and 1 <= defs.super_coin then
@@ -453,15 +453,15 @@ function SLC_CharAmusement_CoinGet(context, param1)
 
 	local coin_num = ScriptLib.GetGroupTempValue(context, "coin_num", {})
 	ScriptLib.PrintContextLog(context,"## [CharAmuse_SpinBall] SLC_CharAmusement_CoinGet. param1@"..param1.." coin_num@"..coin_num)
-	if 0 >= coin_num then
+	if 0 >= coin_num then 
 
-		LF_ClearRound(context)
+		LF_ClearRound(context)	
 
 		ScriptLib.EndTimeAxis(context, "ball_wait")
 		ScriptLib.EndTimeAxis(context, "round_time")
 		ScriptLib.EndTimeAxis(context, "reminder_time")
 
-		ScriptLib.InitTimeAxis(context, "roundwait_time", { defs.wait_time } , false)
+		ScriptLib.InitTimeAxis(context, "roundwait_time", { defs.wait_time } , false)	
 
 	end
 

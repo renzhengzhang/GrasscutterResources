@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133220167
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -45,7 +45,7 @@ triggers = {
 	{ config_id = 1167005, name = "MONSTER_BATTLE_167005", event = EventType.EVENT_MONSTER_BATTLE, source = "", condition = "condition_EVENT_MONSTER_BATTLE_167005", action = "action_EVENT_MONSTER_BATTLE_167005", trigger_count = 0 },
 	-- 雷先死reminder
 	{ config_id = 1167006, name = "VARIABLE_CHANGE_167006", event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "condition_EVENT_VARIABLE_CHANGE_167006", action = "action_EVENT_VARIABLE_CHANGE_167006", trigger_count = 0 },
-	-- 火后死reminder
+	-- 火后死reminder 
 	{ config_id = 1167007, name = "VARIABLE_CHANGE_167007", event = EventType.EVENT_VARIABLE_CHANGE, source = "", condition = "condition_EVENT_VARIABLE_CHANGE_167007", action = "action_EVENT_VARIABLE_CHANGE_167007", trigger_count = 0 },
 	-- 火死亡变量+1
 	{ config_id = 1167008, name = "ANY_MONSTER_DIE_167008", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "condition_EVENT_ANY_MONSTER_DIE_167008", action = "action_EVENT_ANY_MONSTER_DIE_167008", trigger_count = 0 },
@@ -80,9 +80,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -93,9 +93,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -129,9 +129,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
@@ -140,7 +140,7 @@ function condition_EVENT_GROUP_LOAD_167002(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -151,35 +151,35 @@ function action_EVENT_GROUP_LOAD_167002(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133220167, EntityType.MONSTER, 167009)
-
-
-
+	
+		
+	
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133220167, EntityType.MONSTER, 167001)
-
-
-
+	
+		
+	
 	-- 将本组内变量名为 "count" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "count", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_167003(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"fin"为2
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -190,19 +190,19 @@ function action_EVENT_VARIABLE_CHANGE_167003(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	-- 创建id为167026的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 167026 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为167027的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 167027 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -212,7 +212,7 @@ function condition_EVENT_GROUP_LOAD_167004(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -223,7 +223,7 @@ function action_EVENT_GROUP_LOAD_167004(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -232,12 +232,12 @@ function condition_EVENT_MONSTER_BATTLE_167005(context, evt)
 	if 167009 ~= evt.param1 then
 		return false
 	end
-
+	
 	-- 判断变量"rua"为0
 	if ScriptLib.GetGroupVariableValue(context, "rua") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -248,35 +248,35 @@ function action_EVENT_MONSTER_BATTLE_167005(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "rua" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "rua", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_167006(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"aka"为0
 	if ScriptLib.GetGroupVariableValue(context, "aka") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"aoi"为1
 	if ScriptLib.GetGroupVariableValue(context, "aoi") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -287,35 +287,35 @@ function action_EVENT_VARIABLE_CHANGE_167006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "aoi" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "aoi", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_167007(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"aka"为1
 	if ScriptLib.GetGroupVariableValue(context, "aka") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"aoi"为2
 	if ScriptLib.GetGroupVariableValue(context, "aoi") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -326,7 +326,7 @@ function action_EVENT_VARIABLE_CHANGE_167007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -335,7 +335,7 @@ function condition_EVENT_ANY_MONSTER_DIE_167008(context, evt)
 	if 167009 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -346,13 +346,13 @@ function action_EVENT_ANY_MONSTER_DIE_167008(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "fin" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "fin", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -361,7 +361,7 @@ function condition_EVENT_ANY_MONSTER_DIE_167010(context, evt)
 	if 167001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -372,13 +372,13 @@ function action_EVENT_ANY_MONSTER_DIE_167010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "fin" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "fin", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -389,19 +389,19 @@ function action_EVENT_QUEST_START_167011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "aoi" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "aoi", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "aka" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "aka", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -412,41 +412,41 @@ function action_EVENT_QUEST_START_167022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "aoi" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "aoi", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "aka" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "aka", 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_167023(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"aka"为1
 	if ScriptLib.GetGroupVariableValue(context, "aka") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"aoi"为0
 	if ScriptLib.GetGroupVariableValue(context, "aoi") ~= 0 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -457,35 +457,35 @@ function action_EVENT_VARIABLE_CHANGE_167023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	-- 将本组内变量名为 "aka" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "aka", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_167024(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为0
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 0 then
 			return false
 	end
-
+	
 	-- 判断变量"aka"为2
 	if ScriptLib.GetGroupVariableValue(context, "aka") ~= 2 then
 			return false
 	end
-
+	
 	-- 判断变量"aoi"为1
 	if ScriptLib.GetGroupVariableValue(context, "aoi") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -496,7 +496,7 @@ function action_EVENT_VARIABLE_CHANGE_167024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -506,7 +506,7 @@ function condition_EVENT_GROUP_LOAD_167025(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "fin") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -517,17 +517,17 @@ function action_EVENT_GROUP_LOAD_167025(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133220167, EntityType.MONSTER, 167009)
-
-
-
+	
+		
+	
 		-- 移除指定monster
 		ScriptLib.RemoveEntityByConfigId(context, 133220167, EntityType.MONSTER, 167001)
-
-
-
+	
+		
+	
 	return 0
 end
 
@@ -536,7 +536,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_167028(context, evt)
 	if 167026 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -547,13 +547,13 @@ function action_EVENT_GADGET_STATE_CHANGE_167028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -562,7 +562,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_167029(context, evt)
 	if 167027 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -573,25 +573,25 @@ function action_EVENT_GADGET_STATE_CHANGE_167029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 针对当前group内变量名为 "count" 的变量，进行修改，变化值为 1
 	if 0 ~= ScriptLib.ChangeGroupVariableValue(context, "count", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_167030(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为2
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -602,7 +602,7 @@ function action_EVENT_VARIABLE_CHANGE_167030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -613,6 +613,6 @@ function action_EVENT_LEAVE_REGION_167033(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
-
+	
 	return 0
 end

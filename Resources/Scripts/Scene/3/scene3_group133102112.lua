@@ -1,10 +1,10 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133102112
 }
 
 -- Trigger变量
-defs = {
+local defs = {
 	gadget_operator_list = {112001,112002,112003,112004,112010,112016,112017,112018,112019},
 	gadget_operator = 112012,
 	summon_interval = 15,
@@ -18,9 +18,9 @@ defs = {
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -86,9 +86,9 @@ sight_groups = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -99,9 +99,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -216,15 +216,15 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_112026(context, evt)
 	if evt.param1 ~= 112026 then return false end
-
+	
 	if 1 ~= ScriptLib.GetGroupVariableValue(context, "first_see") then
 		return false
 	end
@@ -235,7 +235,7 @@ end
 function action_EVENT_ENTER_REGION_112026(context, evt)
 	ScriptLib.SetGroupVariableValue(context, "first_see", 0)
 	ScriptLib.BeginCameraSceneLook(context, {look_pos = defs.look_pos, duration = defs.look_dur, is_force = true, is_broadcast = false})
-	ScriptLib.ShowReminderRadius(context, 600000, { x = 1787.425, y = 202.55, z = 275.0107 }, 50)
+	ScriptLib.ShowReminderRadius(context, 600000, { x = 1787.425, y = 202.55, z = 275.0107 }, 50) 
 	return 0
 end
 

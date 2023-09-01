@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220163007
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -168,9 +168,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -181,9 +181,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -226,28 +226,28 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7007(context, evt)
 	-- 判断是gadgetid 为 7054的移动平台，是否到达了1 的点集中的 3 点
-
+	
 	if 7054 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -258,37 +258,37 @@ function action_EVENT_PLATFORM_ARRIVAL_7007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 添加suite4的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163007, 4)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_7008(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"disc4"为1
 	if ScriptLib.GetGroupVariableValue(context, "disc4") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"disc3"为1
 	if ScriptLib.GetGroupVariableValue(context, "disc3") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"disc2"为1
 	if ScriptLib.GetGroupVariableValue(context, "disc2") ~= 1 then
 			return false
 	end
-
+	
 	-- 判断变量"disc1"为1
 	if ScriptLib.GetGroupVariableValue(context, "disc1") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -296,31 +296,31 @@ end
 function action_EVENT_VARIABLE_CHANGE_7008(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163007, 2)
-
+	
 	-- 创建标识为"A"，时间节点为{4,5}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "A", {4,5}, false)
-
-
+	
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7009(context, evt)
 	-- 判断是gadgetid 为 7078的移动平台，是否到达了1 的点集中的 2 点
-
+	
 	if 7078 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -331,27 +331,27 @@ function action_EVENT_PLATFORM_ARRIVAL_7009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7010(context, evt)
 	-- 判断是gadgetid 为 7078的移动平台，是否到达了1 的点集中的 4 点
-
+	
 	if 7078 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -362,7 +362,7 @@ function action_EVENT_PLATFORM_ARRIVAL_7010(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -370,76 +370,76 @@ end
 function condition_EVENT_LUA_NOTIFY_7015(context, evt)
 	local configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 	if 7011 ~= configId then
-	        return false
+	        return false        
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_LUA_NOTIFY_7015(context, evt)
-
+	
 	-- 将在groupid为 220163007 中的 configid为 7002 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	--
+	-- 
 	local _gadgetStateList = {0,102,104,106,108,110,112,114,116,118,120,122}
 	local _key = 0
-
+	
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-
+	
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 220163007, 7002) then
 	    _key = k
 	    break
 	  end
 	end
-
+	
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 7002 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 220163007, 7002, _gadgetStateList[1])
 	  return 0
 	end
-
+	
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220163007, 7002, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 7002 .."State没有成功")
-
+	
 	  return -1
 	end
-
-
+	
+	
 	-- 将本组内变量名为 "discSuccess1" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "discSuccess1", 0, 220163012) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220163002, EntityType.GADGET, 2010 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "disc1" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "disc1", 0, 220163007) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 7006 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7006, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -447,70 +447,70 @@ end
 function condition_EVENT_LUA_NOTIFY_7016(context, evt)
 	local configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 	if 7012 ~= configId then
-	        return false
+	        return false        
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_LUA_NOTIFY_7016(context, evt)
-
+	
 	-- 将在groupid为 220163007 中的 configid为 7003 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	--
+	-- 
 	local _gadgetStateList = {0,102,104,106,108,110,112,114,116,118,120,122}
 	local _key = 0
-
+	
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-
+	
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 220163007, 7003) then
 	    _key = k
 	    break
 	  end
 	end
-
+	
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 7003 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 220163007, 7003, _gadgetStateList[1])
 	  return 0
 	end
-
+	
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220163007, 7003, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 7003 .."State没有成功")
-
+	
 	  return -1
 	end
-
-
+	
+	
 	-- 将本组内变量名为 "discSuccess2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "discSuccess2", 0, 220163004) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220163002, EntityType.GADGET, 2011 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "disc2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "disc2", 0, 220163007) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -518,70 +518,70 @@ end
 function condition_EVENT_LUA_NOTIFY_7017(context, evt)
 	local configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 	if 7013 ~= configId then
-	        return false
+	        return false        
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_LUA_NOTIFY_7017(context, evt)
-
+	
 	-- 将在groupid为 220163007 中的 configid为 7004 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	--
+	-- 
 	local _gadgetStateList = {0,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124}
 	local _key = 0
-
+	
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-
+	
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 220163007, 7004) then
 	    _key = k
 	    break
 	  end
 	end
-
+	
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 7004 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 220163007, 7004, _gadgetStateList[1])
 	  return 0
 	end
-
+	
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220163007, 7004, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 7004 .."State没有成功")
-
+	
 	  return -1
 	end
-
-
+	
+	
 	-- 将本组内变量名为 "discSuccess3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "discSuccess3", 0, 220163011) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220163002, EntityType.GADGET, 2016 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "disc3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "disc3", 0, 220163007) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -589,70 +589,70 @@ end
 function condition_EVENT_LUA_NOTIFY_7018(context, evt)
 	local configId = ScriptLib.GetGadgetConfigId(context, { gadget_eid = context.target_entity_id })
 	if 7014 ~= configId then
-	        return false
+	        return false        
 	end
-
-
+	
+	
 	return true
 end
 
 -- 触发操作
 function action_EVENT_LUA_NOTIFY_7018(context, evt)
-
+	
 	-- 将在groupid为 220163007 中的 configid为 7005 的物件根据当前GadgetStateList以及index_Step设置GadgetState
-	--
+	-- 
 	local _gadgetStateList = {0,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124}
 	local _key = 0
-
+	
 	if 0 == #_gadgetStateList then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : gadgetStateList为空")
 	  return -1
 	end
-
+	
 	for k,v in pairs(_gadgetStateList) do
 	  if v == ScriptLib.GetGadgetStateByConfigId(context, 220163007, 7005) then
 	    _key = k
 	    break
 	  end
 	end
-
+	
 	if 0 == _key then
 	     ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 物件" .. 7005 .."的当前State不在List中")
 	     ScriptLib.SetGroupGadgetStateByConfigId(context, 220163007, 7005, _gadgetStateList[1])
 	  return 0
 	end
-
+	
 	_key = _key + 1
 	_key = _key%#_gadgetStateList
 	if 0 == _key then
 	  _key = #_gadgetStateList
 	end
-
+	
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 220163007, 7005, _gadgetStateList[_key]) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : 设置物件" .. 7005 .."State没有成功")
-
+	
 	  return -1
 	end
-
-
+	
+	
 	-- 将本组内变量名为 "discSuccess4" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "discSuccess4", 0, 220163007) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220163002, EntityType.GADGET, 2017 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 将本组内变量名为 "disc4" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "disc4", 0, 220163007) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -661,7 +661,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7019(context, evt)
 	if 7002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -672,31 +672,31 @@ function action_EVENT_GADGET_STATE_CHANGE_7019(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 7006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "eleFinish1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish1", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 7011 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7011, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -705,7 +705,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7020(context, evt)
 	if 7002 ~= evt.param2 or 108 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -716,27 +716,27 @@ function action_EVENT_GADGET_STATE_CHANGE_7020(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 7006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
+		end 
 	ScriptLib.SetGadgetStateByConfigId(context, 7011, GadgetState.GearStop)
-
+	
 	-- 将本组内变量名为 "eleFinish1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish1", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
-
+	
+	
 	return 0
 end
 
@@ -745,7 +745,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7021(context, evt)
 	if 7002 ~= evt.param2 or 116 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -756,28 +756,28 @@ function action_EVENT_GADGET_STATE_CHANGE_7021(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc1", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将configid为 7006 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7006, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
 		end
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 7011, GadgetState.GearStop)
-
+	
 	-- 将本组内变量名为 "eleFinish1" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish1", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
-
+	 
+	
 	return 0
 end
 
@@ -786,7 +786,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_7022(context, evt)
 	if 7002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -797,21 +797,21 @@ function action_EVENT_GADGET_STATE_CHANGE_7022(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "eleFinish2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish2", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 7012, GadgetState.GearStop)
-
+	
 	return 0
 end
 
@@ -820,9 +820,9 @@ function condition_EVENT_GADGET_STATE_CHANGE_7023(context, evt)
 	if 7003 ~= evt.param2 or 108 ~= evt.param1 then
 		return false
 	end
-
-
-
+	
+	
+	
 	return true
 end
 
@@ -833,21 +833,21 @@ function action_EVENT_GADGET_STATE_CHANGE_7023(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "eleFinish2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish2", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 7012, GadgetState.GearStop)
-
+	
 	return 0
 end
 
@@ -856,9 +856,9 @@ function condition_EVENT_GADGET_STATE_CHANGE_7024(context, evt)
 	if 7003 ~= evt.param2 or 116 ~= evt.param1 then
 		return false
 	end
-
-
-
+	
+	
+	
 	return true
 end
 
@@ -869,21 +869,21 @@ function action_EVENT_GADGET_STATE_CHANGE_7024(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "eleFinish2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish2", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 7012, GadgetState.GearStop)
-
+	
 	return 0
 end
 
@@ -892,9 +892,9 @@ function condition_EVENT_GADGET_STATE_CHANGE_7025(context, evt)
 	if 7004 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
-
-
+	
+	
+	
 	return true
 end
 
@@ -905,21 +905,21 @@ function action_EVENT_GADGET_STATE_CHANGE_7025(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 7013, GadgetState.GearStop)
-
+	
 	-- 将本组内变量名为 "eleFinish3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish3", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -928,9 +928,9 @@ function condition_EVENT_GADGET_STATE_CHANGE_7026(context, evt)
 	if 7004 ~= evt.param2 or 108 ~= evt.param1 then
 		return false
 	end
-
-
-
+	
+	
+	
 	return true
 end
 
@@ -941,21 +941,21 @@ function action_EVENT_GADGET_STATE_CHANGE_7026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 7013, GadgetState.GearStop)
-
+	
 	-- 将本组内变量名为 "eleFinish3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish3", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -964,9 +964,9 @@ function condition_EVENT_GADGET_STATE_CHANGE_7027(context, evt)
 	if 7004 ~= evt.param2 or 116 ~= evt.param1 then
 		return false
 	end
-
-
-
+	
+	
+	
 	return true
 end
 
@@ -977,21 +977,21 @@ function action_EVENT_GADGET_STATE_CHANGE_7027(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 7013, GadgetState.GearStop)
-
+	
 	-- 将本组内变量名为 "eleFinish3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish3", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1000,11 +1000,11 @@ function condition_EVENT_GADGET_STATE_CHANGE_7028(context, evt)
 	if 7005 ~= evt.param2 or 0 ~= evt.param1 then
 		return false
 	end
-
-
-
-
-
+	
+	
+	
+	
+	
 	return true
 end
 
@@ -1015,25 +1015,25 @@ function action_EVENT_GADGET_STATE_CHANGE_7028(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "eleFinish4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish4", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 7014 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7014, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -1042,9 +1042,9 @@ function condition_EVENT_GADGET_STATE_CHANGE_7029(context, evt)
 	if 7005 ~= evt.param2 or 108 ~= evt.param1 then
 		return false
 	end
-
-
-
+	
+	
+	
 	return true
 end
 
@@ -1055,21 +1055,21 @@ function action_EVENT_GADGET_STATE_CHANGE_7029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 7014, GadgetState.GearStop)
-
+	
 	-- 将本组内变量名为 "eleFinish4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish4", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1078,9 +1078,9 @@ function condition_EVENT_GADGET_STATE_CHANGE_7030(context, evt)
 	if 7005 ~= evt.param2 or 116 ~= evt.param1 then
 		return false
 	end
-
-
-
+	
+	
+	
 	return true
 end
 
@@ -1091,21 +1091,21 @@ function action_EVENT_GADGET_STATE_CHANGE_7030(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "disc4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "disc4", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	ScriptLib.SetGadgetStateByConfigId(context, 7014, GadgetState.GearStop)
-
+	
 	-- 将本组内变量名为 "eleFinish4" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "eleFinish4", 1, 220163014) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1114,7 +1114,7 @@ function condition_EVENT_GADGET_CREATE_7031(context, evt)
 	if 7002 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1124,8 +1124,8 @@ function action_EVENT_GADGET_CREATE_7031(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7002, 104) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -1134,7 +1134,7 @@ function condition_EVENT_GADGET_CREATE_7032(context, evt)
 	if 7003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1144,8 +1144,8 @@ function action_EVENT_GADGET_CREATE_7032(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7003, 102) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -1154,7 +1154,7 @@ function condition_EVENT_GADGET_CREATE_7033(context, evt)
 	if 7004 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1164,8 +1164,8 @@ function action_EVENT_GADGET_CREATE_7033(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7004, 105) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -1174,7 +1174,7 @@ function condition_EVENT_GADGET_CREATE_7034(context, evt)
 	if 7005 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1184,28 +1184,28 @@ function action_EVENT_GADGET_CREATE_7034(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7005, 110) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7035(context, evt)
 	-- 判断是gadgetid 为 7054的移动平台，是否到达了1 的点集中的 2 点
-
+	
 	if 7054 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 2 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1216,27 +1216,27 @@ function action_EVENT_PLATFORM_ARRIVAL_7035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7036(context, evt)
 	-- 判断是gadgetid 为 7054的移动平台，是否到达了1 的点集中的 4 点
-
+	
 	if 7054 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1247,27 +1247,27 @@ function action_EVENT_PLATFORM_ARRIVAL_7036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7038(context, evt)
 	-- 判断是gadgetid 为 7001的移动平台，是否到达了1 的点集中的 4 点
-
+	
 	if 7001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 4 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1278,24 +1278,24 @@ function action_EVENT_PLATFORM_ARRIVAL_7038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : stop_platform")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7055(context, evt)
 	if evt.param1 ~= 7055 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"eleState2"为1
 	if ScriptLib.GetGroupVariableValue(context, "eleState2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1309,39 +1309,39 @@ function action_EVENT_ENTER_REGION_7055(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将configid为 7049 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7049, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "eleState2" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eleState2", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7056(context, evt)
 	-- 判断是gadgetid 为 7054的移动平台，是否到达了1 的点集中的 3 点
-
+	
 	if 7054 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1352,24 +1352,24 @@ function action_EVENT_PLATFORM_ARRIVAL_7056(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7060(context, evt)
 	if evt.param1 ~= 7060 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"eleState2"为2
 	if ScriptLib.GetGroupVariableValue(context, "eleState2") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1383,13 +1383,13 @@ function action_EVENT_ENTER_REGION_7060(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "eleState2" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eleState2", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1398,7 +1398,7 @@ function condition_EVENT_TIME_AXIS_PASS_7062(context, evt)
 	if "A" ~= evt.source_name or 1 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1409,43 +1409,43 @@ function action_EVENT_TIME_AXIS_PASS_7062(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 通知场景上的所有玩家播放名字为201630001 的cutscene
 	if 0 ~= ScriptLib.PlayCutScene(context, 201630001, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : play_cutscene")
 			return -1
-		end
-
+		end 
+	
 	-- 创建标识为"elevator"，时间节点为{1,10}的时间轴，false用于控制该时间轴是否循环
 	ScriptLib.InitTimeAxis(context, "elevator", {1,10}, false)
-
-
+	
+	
 		-- 卸载指定gadget
 		if 0 ~= ScriptLib.RemoveEntityByConfigId(context, 220163007, EntityType.GADGET, 7049 ) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7065(context, evt)
 	-- 判断是gadgetid 为 7054的移动平台，是否到达了1 的点集中的 3 点
-
+	
 	if 7054 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1455,34 +1455,34 @@ function action_EVENT_PLATFORM_ARRIVAL_7065(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7049, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "eleState" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eleState", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7066(context, evt)
 	-- 判断是gadgetid 为 7001的移动平台，是否到达了1 的点集中的 3 点
-
+	
 	if 7001 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1493,45 +1493,45 @@ function action_EVENT_PLATFORM_ARRIVAL_7066(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 创建id为7054的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 7054 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将configid为 7049 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7049, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "eleState2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eleState2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 添加suite3的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 220163007, 3)
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7069(context, evt)
 	if evt.param1 ~= 7069 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"eleState"为2
 	if ScriptLib.GetGroupVariableValue(context, "eleState") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1545,25 +1545,25 @@ function action_EVENT_ENTER_REGION_7069(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "eleState" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eleState", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7070(context, evt)
 	if evt.param1 ~= 7070 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1574,24 +1574,24 @@ function action_EVENT_ENTER_REGION_7070(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7071(context, evt)
 	if evt.param1 ~= 7071 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"eleState"为1
 	if ScriptLib.GetGroupVariableValue(context, "eleState") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1605,39 +1605,39 @@ function action_EVENT_ENTER_REGION_7071(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将configid为 7049 的物件更改为状态 GadgetState.Default
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7049, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "eleState" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eleState", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7072(context, evt)
 	-- 判断是gadgetid 为 7054的移动平台，是否到达了1 的点集中的 3 点
-
+	
 	if 7054 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1648,27 +1648,27 @@ function action_EVENT_PLATFORM_ARRIVAL_7072(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7073(context, evt)
 	-- 判断是gadgetid 为 7078的移动平台，是否到达了1 的点集中的 3 点
-
+	
 	if 7078 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1679,13 +1679,13 @@ function action_EVENT_PLATFORM_ARRIVAL_7073(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 创建id为7054的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 7054 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1694,7 +1694,7 @@ function condition_EVENT_TIME_AXIS_PASS_7075(context, evt)
 	if "elevator" ~= evt.source_name or 2 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1705,7 +1705,7 @@ function action_EVENT_TIME_AXIS_PASS_7075(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -1714,7 +1714,7 @@ function condition_EVENT_GADGET_CREATE_7076(context, evt)
 	if 7001 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -1725,33 +1725,33 @@ function action_EVENT_GADGET_CREATE_7076(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "eleState" 的变量设置为 2
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eleState", 2) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7079(context, evt)
 	-- 判断是gadgetid 为 7054的移动平台，是否到达了1 的点集中的 3 点
-
+	
 	if 7054 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1762,30 +1762,30 @@ function action_EVENT_PLATFORM_ARRIVAL_7079(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : remove_gadget_by_configid")
 			return -1
 		end
-
+	
 	-- 创建id为7078的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 7078 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_7080(context, evt)
 	if evt.param1 ~= 7080 then return false end
-
+	
 	-- 判断角色数量不少于1
 	if ScriptLib.GetRegionEntityCount(context, { region_eid = evt.source_eid, entity_type = EntityType.AVATAR }) < 1 then
 		return false
 	end
-
+	
 	-- 判断变量"eleState"为2
 	if ScriptLib.GetGroupVariableValue(context, "eleState") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -1799,33 +1799,33 @@ function action_EVENT_ENTER_REGION_7080(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "eleState" 的变量设置为 3
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eleState", 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_PLATFORM_ARRIVAL_7081(context, evt)
 	-- 判断是gadgetid 为 7078的移动平台，是否到达了1 的点集中的 3 点
-
+	
 	if 7078 ~= evt.param1 then
 	  return false
 	end
-
+	
 	if 1 ~= evt.param2 then
 	  return false
 	end
-
+	
 	if 3 ~= evt.param3 then
 	  return false
 	end
-
-
+	
+	
 	return true
 end
 
@@ -1835,13 +1835,13 @@ function action_EVENT_PLATFORM_ARRIVAL_7081(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 7049, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- 将本组内变量名为 "eleState2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "eleState2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 220139003
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -46,9 +46,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -59,9 +59,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -77,25 +77,25 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_OBSERVATION_POINT_NOTIFY_3004(context, evt)
 	if 3001 == evt.param1 and 405 == evt.param2 then
 		ScriptLib.SetGadgetStateByConfigId(context,3003, GadgetState.GearStart)
-
+		
 		ScriptLib.AddQuestProgress(context, "4007305")
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,3001, GadgetState.ChestOpened)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,3005, GadgetState.GearStart)
-
+		
 		ScriptLib.SetGadgetStateByConfigId(context,3002, GadgetState.GearStart)
 	end
-
+	
 	return 0
 end
 
@@ -104,7 +104,7 @@ function condition_EVENT_GROUP_LOAD_3006(context, evt)
 	if GadgetState.GearStart ~= ScriptLib.GetGadgetStateByConfigId(context, 220139003, 3005) then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -118,7 +118,7 @@ function action_EVENT_GROUP_LOAD_3006(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -128,7 +128,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3007(context, evt)
 	if 3005 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 or GadgetState.Default ~= evt.param3 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -142,7 +142,7 @@ function action_EVENT_GADGET_STATE_CHANGE_3007(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_platform_pointArray")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -151,7 +151,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_3008(context, evt)
 	if 3003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -162,7 +162,7 @@ function action_EVENT_GADGET_STATE_CHANGE_3008(context, evt)
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end
 
@@ -170,9 +170,9 @@ end
 function action_EVENT_ENTER_REGION_3009(context, evt)
 	if ScriptLib.GetRegionEntityCount(context, {region_eid = evt.source_eid, entity_type = EntityType.AVATAR}) == 1 then
 		ScriptLib.TryRecordActivityPushTips(context, 2014015)
-
+		
 		ScriptLib.ShowClientTutorial(context, 1190, {})
 	end
-
+	
 	return 0
 end

@@ -1,25 +1,25 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133314004
 }
 
 -- DEFS_MISCS
-local I_connectors =
+local I_connectors = 
 {
     [1] = 4008
 }
 
-local L_connectors =
+local L_connectors = 
 {
 
 }
 
-local containers =
+local containers = 
 {
     [1] = 4003
 }
 
-local lights =
+local lights = 
 {
     [1] = 4005,
     [2] = 4006,
@@ -28,37 +28,37 @@ local lights =
     [5] = 4010
 }
 
-local streams =
+local streams = 
 {
    [containers[1]] = {I_connectors[1],lights[1],lights[2],lights[3],lights[4],lights[5]}
 }
 
-local L_connections =
+local L_connections = 
 {
 
 }
 
 local base_interval = 2
 
-local special_interval =
+local special_interval = 
 {
    {upstream = I_connectors[1], downstream = lights[1], interval = 3}
 }
 
-local worktops =
+local worktops = 
 {
    [1] = 4001
 }
 
-local connector_to_worktop =
+local connector_to_worktop = 
 {
     [I_connectors[1]] = worktops[1]
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -103,9 +103,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -116,9 +116,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -134,9 +134,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -145,8 +145,8 @@ function action_EVENT_QUEST_START_4002(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -159,7 +159,7 @@ function condition_EVENT_GROUP_LOAD_4004(context, evt)
 	if curQuestState ~= 2 then
 	   return false
 	end
-
+	
 	return true
 end
 
@@ -169,8 +169,8 @@ function action_EVENT_GROUP_LOAD_4004(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4001, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -180,7 +180,7 @@ function condition_EVENT_GROUP_LOAD_4009(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -191,13 +191,13 @@ function action_EVENT_GROUP_LOAD_4009(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将configid为 4003 的物件更改为状态 GadgetState.GearStart
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4003, GadgetState.GearStart) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -206,7 +206,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_4011(context, evt)
 	if 4003 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -217,13 +217,13 @@ function action_EVENT_GADGET_STATE_CHANGE_4011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "finish" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "finish", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 

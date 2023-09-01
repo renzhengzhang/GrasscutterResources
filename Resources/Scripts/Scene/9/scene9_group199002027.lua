@@ -1,21 +1,21 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 199002027
 }
 
 -- DEFS_MISCS
-local	defs =
+local	defs = 
 {
 	group_id = 199002027,
 	--起始操作台configID
 	start_operator = 27008,
 	--所有演员物件。用于统一设置状态
-	actor_list =
+	actor_list = 
 	{
 		27001, 27002, 27003, 27004, 27005, 27006
 	},
 	--行动序列
-	actions =
+	actions = 
 	{
    		[1] = { config_id = 27001, reminder_id = 1111067, point_array = 0, point_id_list = 0, duration = 15},
    		[2] = { config_id = 27002, reminder_id = 1111069, point_array = 0, point_id_list = 0, duration = 4},
@@ -24,13 +24,13 @@ local	defs =
    		[5] = { config_id = 27002, reminder_id = 1111072, point_array = 900200066, point_id_list = {1,2,3,4}, duration = 5},
    		[6] = { config_id = 27003, reminder_id = 0, point_array = 900200067, point_id_list = {1,2,3,4}, duration = 10},
    		[7] = { config_id = 27004, reminder_id = 0, point_array = 900200068, point_id_list = {1,2,3,5}, duration = 4},
-                                [8] = { config_id = 27005, reminder_id = 0,
+                                [8] = { config_id = 27005, reminder_id = 0, 
 point_array = 900200069, point_id_list = {1,2,3,5,6}, duration = 4},
-                                [9] = { config_id = 27004, reminder_id = 1111073,
+                                [9] = { config_id = 27004, reminder_id = 1111073, 
 point_array = 0, point_id_list = 0, duration = 6},
                                 [10] = { config_id = 27005, reminder_id = 1111074, point_array = 0, point_id_list = 0, duration = 9},
                                 [11] = { config_id = 27004, reminder_id = 0, point_array = 900200070, point_id_list = {1,2,3,4,5,6,7,8}, duration = 11},
-                                [12] = { config_id = 27005, reminder_id = 0, point_array = 900200071, point_id_list = {1,2,3,4},duration=7},
+                                [12] = { config_id = 27005, reminder_id = 0, point_array = 900200071, point_id_list = {1,2,3,4},duration=7},  		
    		[13] = { config_id = 27002, reminder_id = 1111075, point_array = 900200072, point_id_list = {1,2,3,4,5,6}, duration = 16},
    		[14] = { config_id = 27004, reminder_id = 0, point_array = 900200073, point_id_list = {1,2,3,4}, duration = 6},
   		[15] = { config_id = 27004, reminder_id = 0, point_array = 900200074, point_id_list = {1,2,3,4,5}, duration = 6},
@@ -49,9 +49,9 @@ point_array = 0, point_id_list = 0, duration = 6},
 
 	},
 	--断案阶段加载哪些suite。用于放置操作台和聚光灯
-	question_suits =
+	question_suits =  
 	{
-
+   
 		2
 	},
 	--真正的凶手对应哪个操作台config_id
@@ -62,9 +62,9 @@ point_array = 0, point_id_list = 0, duration = 6},
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -123,9 +123,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -136,9 +136,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -172,20 +172,20 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_27015(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"theatre_state"为3
 	if ScriptLib.GetGroupVariableValue(context, "theatre_state") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -195,14 +195,14 @@ function action_EVENT_VARIABLE_CHANGE_27015(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 27014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	-- group调整group进度,只对非randSuite有效
 	if 0 ~= ScriptLib.GoToGroupSuite(context, 199002027, 3) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -212,7 +212,7 @@ function condition_EVENT_GROUP_LOAD_27016(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "theatre_state") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -222,8 +222,8 @@ function action_EVENT_GROUP_LOAD_27016(context, evt)
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 27014, GadgetState.Default) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -233,11 +233,11 @@ function action_EVENT_ENTER_REGION_27017(context, evt)
 	else
 		if 0 == ScriptLib.TryRecordActivityPushTips(context, 2014016) then
 			ScriptLib.TryRecordActivityPushTips(context, 2014016)
-
+			
 			ScriptLib.ShowClientTutorial(context, 1186, {})
 		end
 	end
-
+	
 	return 0
 end
 

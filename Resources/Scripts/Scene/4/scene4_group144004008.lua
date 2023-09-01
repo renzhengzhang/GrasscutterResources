@@ -1,5 +1,5 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 144004008
 }
 
@@ -28,9 +28,9 @@ local bigRegion = 8034
 local GroupID = 144004008
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -98,9 +98,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -111,9 +111,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -201,22 +201,22 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
 function action_EVENT_GALLERY_START_8004(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144004008, 2)
-
+	
 	-- 将configid为 8002 的物件更改为状态 GadgetState.GearStop
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 8002, GadgetState.GearStop) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 			return -1
-		end
-
+		end 
+	
 	return 0
 end
 
@@ -225,7 +225,7 @@ function condition_EVENT_GADGET_CREATE_8012(context, evt)
 	if 8003 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -236,19 +236,19 @@ function action_EVENT_GADGET_CREATE_8012(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8013(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"monster_tide"为1
 	if ScriptLib.GetGroupVariableValue(context, "monster_tide") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -261,13 +261,13 @@ function action_EVENT_VARIABLE_CHANGE_8013(context, evt)
 	else
 		ScriptLib.CreateGroupTimerEvent(context, 144004008, "monster_timer", 1)
 	end
-
+	
 	-- 将本组内变量名为 "monster_tide" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_tide", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -277,13 +277,13 @@ function action_EVENT_TIMER_EVENT_8014(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 1, 144004008, {8005,8006,8011}, 3, 1, 1) then
 		return -1
 	end
-
+	
 	-- 延迟70秒后,向groupId为：144004008的对象,请求一次调用,并将string参数："target_timer" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144004008, "target_timer", 70) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -294,21 +294,21 @@ function action_EVENT_TIMER_EVENT_8017(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	DeduplicationRandom( context, configIDList, randomNum )
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8019(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"monster_tide3"为1
 	if ScriptLib.GetGroupVariableValue(context, "monster_tide3") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -326,25 +326,25 @@ function action_EVENT_VARIABLE_CHANGE_8019(context, evt)
 			return -1
 		end
 	end
-
+	
 	-- 将本组内变量名为 "monster_tide3" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_tide3", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_8020(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"monster_tide2"为1
 	if ScriptLib.GetGroupVariableValue(context, "monster_tide2") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -362,13 +362,13 @@ function action_EVENT_VARIABLE_CHANGE_8020(context, evt)
 			return -1
 		end
 	end
-
+	
 	-- 将本组内变量名为 "monster_tide2" 的变量设置为 0
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_tide2", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -378,13 +378,13 @@ function action_EVENT_TIMER_EVENT_8021(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 2, 144004008, {8007,8008,8009}, 3, 2, 2) then
 		return -1
 	end
-
+	
 	-- 延迟70秒后,向groupId为：144004008的对象,请求一次调用,并将string参数："target_timer2" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144004008, "target_timer2", 70) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -395,9 +395,9 @@ function action_EVENT_TIMER_EVENT_8024(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	DeduplicationRandom( context, configIDList, randomNum )
-
+	
 	return 0
 end
 
@@ -406,7 +406,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_8026(context, evt)
 	if 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -417,16 +417,16 @@ function action_EVENT_MONSTER_TIDE_DIE_8026(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite6的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144004008, 6)
-
+	
 	-- 将本组内变量名为 "monster_tide3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_tide3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -436,13 +436,13 @@ function action_EVENT_TIMER_EVENT_8027(context, evt)
 	if 0 ~= ScriptLib.AutoMonsterTide(context, 3, 144004008, {8010,8030,8032}, 3, 1, 2) then
 		return -1
 	end
-
+	
 	-- 延迟70秒后,向groupId为：144004008的对象,请求一次调用,并将string参数："target_timer3" 传递过去
 	if 0 ~= ScriptLib.CreateGroupTimerEvent(context, 144004008, "target_timer3", 70) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_timerevent_by_group")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -453,9 +453,9 @@ function action_EVENT_TIMER_EVENT_8028(context, evt)
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
 	end
-
+	
 	DeduplicationRandom( context, configIDList, randomNum )
-
+	
 	return 0
 end
 
@@ -464,7 +464,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_8029(context, evt)
 	if 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -475,13 +475,13 @@ function action_EVENT_MONSTER_TIDE_DIE_8029(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 将本组内变量名为 "monster_tide3" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_tide3", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -490,7 +490,7 @@ function condition_EVENT_MONSTER_TIDE_DIE_8031(context, evt)
 	if 3 ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -501,16 +501,16 @@ function action_EVENT_MONSTER_TIDE_DIE_8031(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cancel_timerevent_by_group")
 	  return -1
 	end
-
+	
 	-- 添加suite5的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 144004008, 5)
-
+	
 	-- 将本组内变量名为 "monster_tide2" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "monster_tide2", 1) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -520,7 +520,7 @@ function action_EVENT_ENTER_REGION_8035(context, evt)
 	if 0 ~= ScriptLib.AssignPlayerShowTemplateReminder(context,142,{param_uid_vec={},param_vec={},uid_vec={context.uid}}) then
 		return -1
 	end
-
+	
 	return 0
 end
 

@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 133301581
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -105,9 +105,9 @@ garbages = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -118,9 +118,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -145,9 +145,9 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发操作
@@ -157,7 +157,7 @@ function action_EVENT_QUEST_FINISH_581010(context, evt)
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
-
+	
 	return 0
 end
 
@@ -167,8 +167,8 @@ function condition_EVENT_ANY_MONSTER_DIE_581011(context, evt)
 	if evt.param1 ~= 581012 then
 	    return false
 	 end
-
-
+	  
+	
 	return true
 end
 
@@ -179,37 +179,37 @@ function action_EVENT_ANY_MONSTER_DIE_581011(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 	  return -1
 	end
-
+	
 	-- 创建id为581026的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 581026 }) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 6089, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	-- 调用提示id为 33010214 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 33010214) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_581034(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为1
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -220,19 +220,19 @@ function action_EVENT_VARIABLE_CHANGE_581034(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_581035(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为2
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 2 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -243,19 +243,19 @@ function action_EVENT_VARIABLE_CHANGE_581035(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_581036(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为3
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 3 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -266,19 +266,19 @@ function action_EVENT_VARIABLE_CHANGE_581036(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_581037(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为4
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 4 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -289,19 +289,19 @@ function action_EVENT_VARIABLE_CHANGE_581037(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_581038(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为5
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 5 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -312,19 +312,19 @@ function action_EVENT_VARIABLE_CHANGE_581038(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_581039(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为6
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 6 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -335,19 +335,19 @@ function action_EVENT_VARIABLE_CHANGE_581039(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_581040(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"count"为7
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 7 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -358,13 +358,13 @@ function action_EVENT_VARIABLE_CHANGE_581040(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	-- 调用提示id为 33010211 的提示UI，会显示在屏幕中央偏下位置，id索引自 ReminderData表格
 	if 0 ~= ScriptLib.ShowReminder(context, 33010211) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_reminder_ui")
 		return -1
 	end
-
+	
 	return 0
 end
 
@@ -373,7 +373,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_581041(context, evt)
 	if 581002 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -384,7 +384,7 @@ function action_EVENT_GADGET_STATE_CHANGE_581041(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -393,7 +393,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_581042(context, evt)
 	if 581005 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -404,7 +404,7 @@ function action_EVENT_GADGET_STATE_CHANGE_581042(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -413,7 +413,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_581043(context, evt)
 	if 581008 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -424,7 +424,7 @@ function action_EVENT_GADGET_STATE_CHANGE_581043(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -433,7 +433,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_581044(context, evt)
 	if 581013 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -444,7 +444,7 @@ function action_EVENT_GADGET_STATE_CHANGE_581044(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -453,7 +453,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_581045(context, evt)
 	if 581015 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -464,7 +464,7 @@ function action_EVENT_GADGET_STATE_CHANGE_581045(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -473,7 +473,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_581046(context, evt)
 	if 581019 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -484,7 +484,7 @@ function action_EVENT_GADGET_STATE_CHANGE_581046(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -493,7 +493,7 @@ function condition_EVENT_GADGET_STATE_CHANGE_581047(context, evt)
 	if 581021 ~= evt.param2 or GadgetState.Default ~= evt.param1 then
 		return false
 	end
-
+	
 	return true
 end
 
@@ -504,7 +504,7 @@ function action_EVENT_GADGET_STATE_CHANGE_581047(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : change_GroupVariable")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -514,7 +514,7 @@ function condition_EVENT_GROUP_LOAD_581048(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "count") ~= 7 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -525,7 +525,7 @@ function action_EVENT_GROUP_LOAD_581048(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_monster")
 	  return -1
 	end
-
+	
 	return 0
 end
 
@@ -535,7 +535,7 @@ function condition_EVENT_GROUP_LOAD_581049(context, evt)
 	if ScriptLib.GetGroupVariableValue(context, "finish") ~= 1 then
 			return false
 	end
-
+	
 	return true
 end
 
@@ -546,12 +546,12 @@ function action_EVENT_GROUP_LOAD_581049(context, evt)
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
 	  return -1
 	end
-
+	
 	-- 运营数据埋点，匹配LD定义的规则使用
 	    if 0 ~= ScriptLib.MarkPlayerAction(context, 6089, 3, 1) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : mark_playerAction")
 	      return -1
 	    end
-
+	
 	return 0
 end

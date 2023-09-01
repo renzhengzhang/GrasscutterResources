@@ -1,12 +1,12 @@
 -- 基础信息
-base_info = {
+local base_info = {
 	group_id = 250079002
 }
 
 -- DEFS_MISCS
 local        defs = {
 
-        gear_info =
+        gear_info = 
         {        --connect: 每个物件各个旋转档位可连接的对象 0表示无可连接
                 [1] = { config_id=2001 , connect = {2002,2006,2004}, point_array_id = 1 },
                 [2] = { config_id=2002 , connect = {2001,2004,2006,2003}, point_array_id = 2 },
@@ -14,11 +14,11 @@ local        defs = {
                 [4] = { config_id=2004 , connect = {2001,2005, 2006,2002}, point_array_id = 4},
                 [5] = { config_id= 2005 , connect = {2004,2003,2006}, point_array_id = 5 },
                 [6] = { config_id=2006 , connect = {2003,2002,2004,2005}, point_array_id = 6 }
-
+            
         },
 
         --几种解
-        solutions =
+        solutions = 
         {
                 --[解法x] = {gear_info[1]切到它的第x档, gear_info[2]切到它的第y档...}
                 [1] = { connection = {2,3,1,4,1,3}, ends = {}},
@@ -28,9 +28,9 @@ turn_option = 31,
 }
 
 --================================================================
---
+-- 
 -- 配置
---
+-- 
 --================================================================
 
 -- 怪物
@@ -67,9 +67,9 @@ variables = {
 }
 
 --================================================================
---
+-- 
 -- 初始化配置
---
+-- 
 --================================================================
 
 -- 初始化时创建
@@ -80,9 +80,9 @@ init_config = {
 }
 
 --================================================================
---
+-- 
 -- 小组配置
---
+-- 
 --================================================================
 
 suites = {
@@ -107,22 +107,22 @@ suites = {
 }
 
 --================================================================
---
+-- 
 -- 触发器
---
+-- 
 --================================================================
 
 -- 触发条件
 function condition_EVENT_VARIABLE_CHANGE_2012(context, evt)
 	if evt.param1 == evt.param2 then return false end
-
+	
 	if evt.param1 == evt.param2 then return false end
-
+	
 	-- 判断变量"solution"为1
 	if ScriptLib.GetGroupVariableValue(context, "solution") >= 1 then
 			return true
 	end
-
+	
 	return false
 end
 
@@ -130,7 +130,7 @@ end
 function action_EVENT_VARIABLE_CHANGE_2012(context, evt)
 	-- 添加suite2的新内容
 	    ScriptLib.AddExtraGroupSuite(context, 250079002, 2)
-
+	
 	return 0
 end
 
