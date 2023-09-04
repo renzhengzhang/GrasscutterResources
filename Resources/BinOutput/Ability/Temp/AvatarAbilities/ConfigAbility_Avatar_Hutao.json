@@ -1245,7 +1245,7 @@
         },
         {
           "$type": "LoseHP",
-          "PGPHIJIKLBG": "CrimsonPlum_LifeCostRatio",
+          "amountByTargetMaxHPRatio": "CrimsonPlum_LifeCostRatio",
           "lethal": false,
           "amountByCasterMaxHPRatio": ""
         },

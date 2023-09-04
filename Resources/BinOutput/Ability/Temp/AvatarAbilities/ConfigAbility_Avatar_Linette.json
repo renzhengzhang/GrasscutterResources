@@ -568,7 +568,7 @@
                   "compareType": "LessAndEqual"
                 }
               ],
-              "PGPHIJIKLBG": "LifeCostRatio",
+              "amountByTargetMaxHPRatio": "LifeCostRatio",
               "lethal": false,
               "amountByCasterMaxHPRatio": ""
             }
