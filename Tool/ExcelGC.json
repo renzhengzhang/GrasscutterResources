@@ -453,5 +453,9 @@
   {
     "name": "AvatarExcelConfigData.json",
     "comment": ""
+  },
+  {
+    "name": "*Coop*.json",
+    "comment": "hangout event #0dd9545"
   }
 ]
