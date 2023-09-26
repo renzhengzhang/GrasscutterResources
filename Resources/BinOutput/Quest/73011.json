@@ -16,11 +16,20 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_PLAYER_ENTER_REGION",
+          "param": [133301025, 25001]
+        },
+        {
+          "type": "QUEST_COND_QUEST_GLOBAL_VAR_EQUAL",
+          "param": [73101]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_GAME_TIME_TICK",
+          "paramString": "0,24"
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -37,11 +46,20 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7301101, 3]
+        },
+        {
+          "type": "QUEST_COND_QUEST_GLOBAL_VAR_EQUAL",
+          "param": [73101]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_UNLOCK_TRANS_POINT",
+          "param": [3, 463]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -58,11 +76,32 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7301102, 3]
+        },
+        {
+          "type": "QUEST_COND_QUEST_GLOBAL_VAR_EQUAL",
+          "param": [73101]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7301101]
+        },
+        {
+          "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
+          "param": [7300403, 3]
+        },
+        {
+          "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
+          "param": [7301003, 3]
+        },
+        {
+          "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
+          "param": [7301203, 3]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],

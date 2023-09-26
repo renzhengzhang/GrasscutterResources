@@ -16,16 +16,31 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7311001, 3]
+        },
+        {
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7321601, 2]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_FINISH_PLOT",
+          "param": [7319001]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
       "failExec": [],
-      "guide": {}
+      "guide": {
+        "type": "QUEST_GUIDE_LOCATION",
+        "param": ["Q7319001_guide", "100"],
+        "guideScene": 3,
+        "guideStyle": "QUEST_GUIDE_STYLE_TARGET",
+        "guideLayer": "QUEST_GUIDE_LAYER_SCENE"
+      }
     },
     {
       "subId": 7319002,
@@ -36,16 +51,27 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7319001, 3]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_FINISH_PLOT",
+          "param": [7319002]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
       "failExec": [],
-      "guide": {}
+      "guide": {
+        "type": "QUEST_GUIDE_LOCATION",
+        "param": ["Q7319002_guide"],
+        "guideScene": 3,
+        "guideStyle": "QUEST_GUIDE_STYLE_POINT",
+        "guideLayer": "QUEST_GUIDE_LAYER_SCENE"
+      }
     },
     {
       "subId": 7319003,
@@ -56,16 +82,28 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7319002, 3]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_OBTAIN_ITEM",
+          "param": [101989],
+          "count": 1
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
       "failExec": [],
-      "guide": {}
+      "guide": {
+        "type": "QUEST_GUIDE_LOCATION",
+        "param": ["Q7319003_guide", "20"],
+        "guideScene": 3,
+        "guideStyle": "QUEST_GUIDE_STYLE_TARGET",
+        "guideLayer": "QUEST_GUIDE_LAYER_SCENE"
+      }
     },
     {
       "subId": 7319004,
@@ -76,16 +114,27 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7319003, 3]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
+          "param": [7311004, 3]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
       "failExec": [],
-      "guide": {}
+      "guide": {
+        "type": "QUEST_GUIDE_LOCATION",
+        "param": ["73110target"],
+        "guideScene": 3,
+        "guideStyle": "QUEST_GUIDE_STYLE_TARGET",
+        "guideLayer": "QUEST_GUIDE_LAYER_SCENE"
+      }
     },
     {
       "subId": 7319005,
@@ -96,16 +145,35 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7311001, 3]
+        },
+        {
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7321601, 3]
+        },
+        {
+          "type": "QUEST_COND_STATE_NOT_EQUAL",
+          "param": [7319002, 3]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
+          "param": [7311004, 3]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
       "failExec": [],
-      "guide": {}
+      "guide": {
+        "type": "QUEST_GUIDE_LOCATION",
+        "param": ["73110target"],
+        "guideScene": 3,
+        "guideStyle": "QUEST_GUIDE_STYLE_TARGET",
+        "guideLayer": "QUEST_GUIDE_LAYER_SCENE"
+      }
     }
   ]
 }

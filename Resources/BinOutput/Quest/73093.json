@@ -17,8 +17,8 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7309802, 3]
         }
       ],
       "finishCond": [],
@@ -39,11 +39,22 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_UNKNOWN_80",
+          "param": [1, 4, 2]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_GADGET_STATE_CHANGE",
+          "param": [133301168, 168002],
+          "paramString": "102"
+        },
+        {
+          "type": "QUEST_CONTENT_GADGET_STATE_CHANGE",
+          "param": [133301168, 168001],
+          "paramString": "201"
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],

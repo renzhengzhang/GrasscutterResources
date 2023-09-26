@@ -14,13 +14,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321701]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -35,13 +34,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321702]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -56,13 +54,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321703]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -77,13 +74,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321704]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -98,13 +94,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321705]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -119,13 +114,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321706]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -140,13 +134,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321707]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -161,13 +154,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321708]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -182,13 +174,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321709]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -203,13 +194,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321710]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -224,13 +214,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321711]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -245,13 +234,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321712]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -266,13 +254,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321713]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -287,13 +274,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321714]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -308,13 +294,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321715]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -329,13 +314,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321716]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -350,13 +334,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321717]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -371,13 +354,12 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321718]
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -394,11 +376,16 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_QUEST_GLOBAL_VAR_EQUAL",
+          "param": [10014, 1]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7321719]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -413,13 +400,13 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "finishCondComb": "LOGIC_NONE",
-      "acceptCond": [
+      "finishCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_CONTENT_ADD_QUEST_PROGRESS",
+          "param": [73217],
+          "count": 18
         }
       ],
-      "finishCond": [],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],

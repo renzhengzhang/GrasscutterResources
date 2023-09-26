@@ -16,11 +16,24 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7367501, 3]
+        },
+        {
+          "type": "QUEST_COND_ACTIVITY_COND",
+          "param": [5096002, 1]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
+          "param": [7367601, 2]
+        },
+        {
+          "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
+          "param": [7367601, 3]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],

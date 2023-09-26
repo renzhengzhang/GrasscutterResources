@@ -16,11 +16,21 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_ACTIVITY_COND",
+          "param": [2015014, 1]
+        },
+        {
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7350014, 3]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_LUA_NOTIFY",
+          "paramString": "Q7350501",
+          "count": 1
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -37,11 +47,24 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_ACTIVITY_COND",
+          "param": [2015014, 1]
+        },
+        {
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7350501, 3]
+        },
+        {
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [7350101, 3]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_GAME_TIME_TICK",
+          "paramString": "0,24"
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],

@@ -15,16 +15,32 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_ACTIVITY_COND",
+          "param": [5091001, 1]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7367401]
+        },
+        {
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7367403]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
       "failExec": [],
-      "guide": {}
+      "guide": {
+        "type": "QUEST_GUIDE_NPC",
+        "autoGuide": "QUEST_GUIDE_AUTO_ENABLE",
+        "param": ["30038"],
+        "guideScene": 3,
+        "guideStyle": "QUEST_GUIDE_STYLE_TARGET",
+        "guideLayer": "QUEST_GUIDE_LAYER_SCENE"
+      }
     },
     {
       "subId": 7367402,
@@ -38,11 +54,28 @@
       "failParentShow": "QUEST_HIDDEN",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_ACTIVITY_COND",
+          "param": [5091001, 1]
+        },
+        {
+          "type": "QUEST_COND_HISTORY_GOT_ANY_ITEM",
+          "param": [220013]
+        },
+        {
+          "type": "QUEST_COND_HISTORY_GOT_ANY_ITEM",
+          "param": [220037]
+        },
+        {
+          "type": "QUEST_COND_QUEST_GLOBAL_VAR_EQUAL",
+          "param": [72651, 1]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_FINISH_PLOT",
+          "param": [7367402]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -61,11 +94,16 @@
       "failParentShow": "QUEST_HIDDEN",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_ACTIVITY_COND",
+          "param": [5091001, 1]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_FINISH_PLOT",
+          "param": [7367403]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -84,11 +122,16 @@
       "failParentShow": "QUEST_HIDDEN",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_ACTIVITY_COND",
+          "param": [5091001, 1]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_FINISH_PLOT",
+          "param": [7367404]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],

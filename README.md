@@ -3,9 +3,10 @@
 
 - ExcelBinOutput - 4.0 Dimbreath
 - BinOutput - 4.0 Dimbreath
-- Scripts - 3.6 GIO & (3.7-?) Manual by Community (like hiro) ***for natural spawn and many other things***
+- Scripts - 3.6 GIO & (3.7-?) manual by community (like hiro) ***for natural spawn and many other things***
 - TextMap - 4.0 Dimbreath ***for language translations items,etc are used for gm-books***
 - QuestEncryptionKeys - 4.0 GI-cutscenes ***Used for cutscenes that require a key***
+- [Patch Quest 3.2 GIO?](https://github.com/wander-in-wind/TsvParser/tree/main/src/main/resources/json) (in tool/Quest) (acceptCond,finishCond,guide)
 
 ## What is difference between GIO and GC?
 - GIO is a leaked full file from official server which was released last month (maybe 28/10/2022) which is available from CBT1-4.0 so it's possible that version 3.3+ some animations/characters are still in beta (aka beta old) so data won't be accurate anymore if it's already release because of the many revisions.

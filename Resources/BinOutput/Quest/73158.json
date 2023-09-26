@@ -17,11 +17,16 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_PLAYER_ENTER_REGION",
+          "param": [133302336, 336002]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7315801]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],
@@ -39,11 +44,17 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_STATE_EQUAL",
+          "param": [99902, 3]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_TIME_VAR_PASS_DAY",
+          "param": [73158],
+          "paramString": "1"
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],

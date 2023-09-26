@@ -17,11 +17,24 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "type": "QUEST_COND_COMPLETE_TALK",
+          "param": [7390302]
+        },
+        {
+          "type": "QUEST_COND_COMPLETE_TALK",
+          "param": [7390301]
         }
       ],
-      "finishCond": [],
+      "finishCond": [
+        {
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7390302]
+        },
+        {
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7390301]
+        }
+      ],
       "failCond": [],
       "beginExec": [],
       "finishExec": [],

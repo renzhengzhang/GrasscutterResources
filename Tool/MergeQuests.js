@@ -10,6 +10,8 @@ if (!fs.existsSync(questData3_2)) {
   return;
 }
 
+const questPatches32Bin = "Quest";
+
 const questPatchesDir = "Patches/Quest";
 if (!fs.existsSync(questPatchesDir)) {
   console.log(
@@ -37,9 +39,9 @@ const questBlacklist = [
 /*
  * These are quests patches which should be applied.
  * These are (basically) applied last.
- * Format is: { questId: { (patches) } }
+ * Format is: { questId: { (patches_data) } }
  */
-const patches = {
+const patches_data = {
   35402: {
     gainItems: [
       {
@@ -62,7 +64,7 @@ const patches = {
 /*
  * These are main quest patches which should be applied.
  * These are (basically) applied last.
- * Format is: { mainId: { (patches) } }
+ * Format is: { mainId: { (patches_data) } }
  */
 const mainPatches = {};
 
@@ -76,15 +78,15 @@ for (const questPatch of questPatches) {
 
   // Check if the patch has sub-quests.
   if (patchData.subQuests) {
-    for (const quest of patchData.subQuests) {
-      const { subId } = quest;
+    for (const i of patchData.subQuests) {
+      const { subId } = i;
 
       // Clean the quest data.
-      delete quest.subId;
-      delete quest.mainId;
+      delete i.subId;
+      delete i.mainId;
 
-      // Apply the patch.
-      patches[subId] = quest;
+      // Apply patch.
+      patches_data[subId] = i;
     }
   }
 
@@ -184,33 +186,35 @@ const mainQuest_data = JSON.parse(mainQuest);
 const talks_data = JSON.parse(talks);
 
 // Merge the data.
-const quests = [];
+const quests_config = [];
 const newQuests = [];
 const newQuestsNoFound = [];
+var count_patch32 = 0;
 for (const mainQuestData of mainQuest_data) {
   const mainQuestId = mainQuestData.id;
   const binfile = `${binOutput}/${mainQuestId}.json`;
+  const binfile32 = `${questPatches32Bin}/${mainQuestId}.json`;
 
-  console.log(`Scanning main quest ${mainQuestId}...`);
+  //console.log(`Scanning main quest ${mainQuestId}...`);
 
   // Find all sub-quests for the main quest.
   let isNewQuest = false;
-  let SaveBin = true;
-  let subQuests = rel3_2_data.filter((quest) => quest.mainId === mainQuestId);
+  let subQuests = rel3_2_data.filter((i) => i.mainId === mainQuestId);
   if (subQuests.length === 0) {
     // This will be considered a new quest if no quest configuration is found in version 3.2. based on mainQuestData file data
     isNewQuest = true;
 
     // since not all new quests are in `QuestExcelConfigData` we have to look again in `Quest bin folder` so both should be there. and sometimes the `Quest Bin Folder` doesn't have new quest data so we have to look in `quest main` or `quest config` in `Excel folder`
-    subQuests = latest_data.filter((quest) => quest.mainId === mainQuestId);
+    subQuests = latest_data.filter((i) => i.mainId === mainQuestId);
     if (subQuests.length === 0) {
       console.log(`Looking for alternatives quest sub ${binfile}`);
-      const binsub_r = fs.readFileSync(binfile);
-      const binsub_d = JSON.parse(binsub_r);
-      let subQuestBin = binsub_d.subQuests;
-      if (subQuestBin !== undefined) {
-        subQuests = subQuestBin; // copy `subquest bin` to `subquest config`
-        SaveBin = false; // meanwhile don't save quest data bin because data we use data bin so should be same unless is patched?.
+      if (fs.existsSync(binfile)) {
+        const binsub_r = fs.readFileSync(binfile);
+        const binsub_d = JSON.parse(binsub_r);
+        let subQuestBin = binsub_d.subQuests;
+        if (subQuestBin !== undefined) {
+          subQuests = subQuestBin; // copy `subquest bin` to `subquest config`
+        }
       }
     }
     if (subQuests.length !== 0) {
@@ -220,8 +224,22 @@ for (const mainQuestData of mainQuest_data) {
     }
   }
 
+  // find patch 3.2
+  var bin32;
+  if (fs.existsSync(binfile32)) {
+    bin32 = JSON.parse(fs.readFileSync(binfile32));
+  }
+
   // Find all talks for the main quest.
   const talks = talks_data.filter((talk) => talk.questId === mainQuestId);
+
+  // dev testing
+  /*
+  if (mainQuestId != 3000) {
+    // skip
+    continue;
+  }
+  */
 
   console.log("=====================================");
   console.log(`Performing merge on main quest ${mainQuestId}.`);
@@ -236,7 +254,7 @@ for (const mainQuestData of mainQuest_data) {
     continue;
   }
   // Create the base quest data.
-  const quest = {
+  const quest_bin = {
     /** @type number */ id: mainQuestId,
     /** @type string */ type: mainQuestData.type,
     /** @type number */ series: mainQuestData.series,
@@ -253,10 +271,12 @@ for (const mainQuestData of mainQuest_data) {
   };
 
   // Create sub-quests for the main quest.
-  for (const subQuestData of subQuests) {
-    const subQuest = {
+  for (const subQuestBin of subQuests) {
+
+    // sub config
+    const subQuest_config = {
       json_file: `${mainQuestId}.json`,
-      ...subQuestData,
+      ...subQuestBin,
     };
 
     // Validate conditions.
@@ -264,20 +284,20 @@ for (const mainQuestData of mainQuest_data) {
       /** @type any[] */ acceptCond,
       /** @type any[] */ finishCond,
       /** @type any[] */ failCond,
-    } = subQuestData;
+    } = subQuestBin;
 
     if (acceptCond) {
-      subQuest.acceptCond = acceptCond
+      subQuest_config.acceptCond = acceptCond
         .filter((cond) => cond._type !== null || cond.type !== null)
         .map(clean);
     }
     if (finishCond) {
-      subQuest.finishCond = finishCond
+      subQuest_config.finishCond = finishCond
         .filter((cond) => cond._type !== null || cond.type !== null)
         .map(clean);
     }
     if (failCond) {
-      subQuest.failCond = failCond
+      subQuest_config.failCond = failCond
         .filter((cond) => cond._type !== null || cond.type !== null)
         .map(clean);
     }
@@ -287,119 +307,136 @@ for (const mainQuestData of mainQuest_data) {
       /** @type any[] */ beginExec,
       /** @type any[] */ finishExec,
       /** @type any[] */ failExec,
-    } = subQuestData;
+    } = subQuestBin;
 
     if (beginExec) {
-      subQuest.beginExec = beginExec
+      subQuest_config.beginExec = beginExec
         .filter((cond) => cond._type !== null || cond.type !== null)
         .map(clean);
     }
     if (finishExec) {
-      subQuest.finishExec = finishExec
+      subQuest_config.finishExec = finishExec
         .filter((cond) => cond._type !== null || cond.type !== null)
         .map(clean);
     }
     if (failExec) {
-      subQuest.failExec = failExec
+      subQuest_config.failExec = failExec
         .filter((cond) => cond._type !== null || cond.type !== null)
         .map(clean);
     }
 
     // Check if the quest is new.
     if (isNewQuest) {
-      // Add the unknown accept condition.
-      if (subQuestData.acceptCond == undefined) {
-        subQuestData.acceptCond = [unknownCondition];
-        // Create an unknownCondition if acceptCond is undefined
-      } else {
-        subQuestData.acceptCond.push(unknownCondition);
-      }
-      if (subQuest.acceptCond == undefined) {
-        subQuest.acceptCond = [unknownCondition];
-      } else {
-        subQuest.acceptCond.push(unknownCondition);
+      subQuestBin.acceptCond = [unknownCondition];
+      subQuest_config.acceptCond = [unknownCondition];
+    }
+
+    // patch 3.2
+    if (subQuestBin.acceptCond[0].type == 'QUEST_COND_UNKNOWN' || subQuest_config.acceptCond[0].type == 'QUEST_COND_UNKNOWN') {
+      const bin32config = bin32.subQuests.filter((item) => item.subId === subQuestBin.subId)[0];
+      if (bin32config) {
+        subQuestBin.acceptCond = bin32config.acceptCond;
+        subQuestBin.finishCond = bin32config.finishCond;
+        subQuestBin.guide = bin32config.guide;
+
+        subQuest_config.acceptCond = bin32config.acceptCond;
+        subQuest_config.finishCond = bin32config.finishCond;
+        subQuest_config.guide = bin32config.guide;
+
+        count_patch32++;
+
+        //console.log(bin32config)
+        //process.exit();
       }
     }
+
+   // console.log(subQuest_config)
 
     // fix (Expected a string but was BEGIN_OBJECT)
-    if (typeof subQuestData.acceptCondComb === "object") {
-      subQuestData.acceptCondComb = "LOGIC_NONE"; // ???
+    if (typeof subQuestBin.acceptCondComb === "object") {
+      subQuestBin.acceptCondComb = "LOGIC_NONE"; // ???
     }
-    if (typeof subQuest.acceptCondComb === "object") {
-      subQuest.acceptCondComb = "LOGIC_NONE"; // ???
-    }
-
-    if (typeof subQuestData.finishCondComb === "object") {
-      subQuestData.finishCondComb = "LOGIC_NONE"; // ???
-    }
-    if (typeof subQuest.finishCondComb === "object") {
-      subQuest.finishCondComb = "LOGIC_NONE"; // ???
+    if (typeof subQuest_config.acceptCondComb === "object") {
+      subQuest_config.acceptCondComb = "LOGIC_NONE"; // ???
     }
 
-    if (typeof subQuestData.failCondComb === "object") {
-      subQuestData.failCondComb = "LOGIC_NONE"; // ???
+    if (typeof subQuestBin.finishCondComb === "object") {
+      subQuestBin.finishCondComb = "LOGIC_NONE"; // ???
     }
-    if (typeof subQuest.failCondComb === "object") {
-      subQuest.failCondComb = "LOGIC_NONE"; // ???
+    if (typeof subQuest_config.finishCondComb === "object") {
+      subQuest_config.finishCondComb = "LOGIC_NONE"; // ???
     }
+
+    if (typeof subQuestBin.failCondComb === "object") {
+      subQuestBin.failCondComb = "LOGIC_NONE"; // ???
+    }
+    if (typeof subQuest_config.failCondComb === "object") {
+      subQuest_config.failCondComb = "LOGIC_NONE"; // ???
+    }
+
+    
 
     // fix null
-    if (subQuestData.finishCond == null) {
-      subQuestData.finishCond = []; // ???
+    if (subQuestBin.finishCond == null) {
+      subQuestBin.finishCond = []; // ???
     }
-    if (subQuest.finishCond == null) {
-      subQuest.finishCond = []; // ???
+    if (subQuest_config.finishCond == null) {
+      subQuest_config.finishCond = []; // ???
     }
-    if (subQuestData.failCond == null) {
-      subQuestData.failCond = []; // ???
+    if (subQuestBin.failCond == null) {
+      subQuestBin.failCond = []; // ???
     }
-    if (subQuest.failCond == null) {
-      subQuest.failCond = []; // ???
-    }
-
-    if (subQuestData.beginExec == null) {
-      subQuestData.beginExec = []; // ???
-    }
-    if (subQuest.beginExec == null) {
-      subQuest.beginExec = []; // ???
-    }
-    if (subQuestData.finishExec == null) {
-      subQuestData.finishExec = []; // ???
-    }
-    if (subQuest.finishExec == null) {
-      subQuest.finishExec = []; // ???
-    }
-    if (subQuestData.failExec == null) {
-      subQuestData.failExec = []; // ???
-    }
-    if (subQuest.failExec == null) {
-      subQuest.failExec = []; // ???
+    if (subQuest_config.failCond == null) {
+      subQuest_config.failCond = []; // ???
     }
 
-    // Validate the quest guide.
-    const { guide } = subQuestData;
+    if (subQuestBin.beginExec == null) {
+      subQuestBin.beginExec = []; // ???
+    }
+    if (subQuest_config.beginExec == null) {
+      subQuest_config.beginExec = []; // ???
+    }
+    if (subQuestBin.finishExec == null) {
+      subQuestBin.finishExec = []; // ???
+    }
+    if (subQuest_config.finishExec == null) {
+      subQuest_config.finishExec = []; // ???
+    }
+    if (subQuestBin.failExec == null) {
+      subQuestBin.failExec = []; // ???
+    }
+    if (subQuest_config.failExec == null) {
+      subQuest_config.failExec = []; // ???
+    }
+
+    //console.log(subQuest_config)
+
+    // Validate quest guide (in config quest)
+    const { guide } = subQuestBin;
     //  || guide.type !== null
     if (guide !== undefined && guide.type !== undefined) {
-      subQuest.guide = cleanGuide(guide);
-    } else subQuest.guide = {};
+      subQuest_config.guide = cleanGuide(guide);
+    } else subQuest_config.guide = {};
 
-    // Remove fields which are empty.
-    removeFields(subQuest, questBlacklist);
+    // Remove fields which are empty. (in config quest)
+    removeFields(subQuest_config, questBlacklist);
 
-    // Check if the quest has any patches.
-    if (patches[subQuestData.subId]) {
-      Object.assign(subQuest, patches[subQuestData.subId]);
+    // Check if quest has any patches. (in  config quest)
+    if (patches_data[subQuestBin.subId]) {
+      Object.assign(subQuest_config, patches_data[subQuestBin.subId]);
     }
 
+     //console.log(subQuest_config)
+
     // Add to the main quest's collection.
-    const subQuestForMain = Object.assign({}, subQuest);
+    const subQuestForMain = Object.assign({}, subQuest_config);
     delete subQuestForMain.json_file;
     delete subQuestForMain.stepDescTextMapHash;
     delete subQuestForMain.guideTipsTextMapHash;
-    quest.subQuests.push(subQuestForMain);
+    quest_bin.subQuests.push(subQuestForMain);
 
     // Add to the global collection.
-    quests.push(subQuest);
+    quests_config.push(subQuest_config);
   }
 
   // Create talks for the main quest.
@@ -450,28 +487,31 @@ for (const mainQuestData of mainQuest_data) {
     removeFields(talk);
 
     // Add to the main quest's collection.
-    quest.talks.push(talk);
+    quest_bin.talks.push(talk);
   }
 
   // Remove un-used fields.
-  removeFields(quest);
+  removeFields(quest_bin);
 
   // Check if the main quest has any patches.
-  if (mainPatches[quest.id]) {
-    Object.assign(quest, mainPatches[quest.id]);
+  if (mainPatches[quest_bin.id]) {
+    Object.assign(quest_bin, mainPatches[quest_bin.id]);
   }
 
   // Create the main quest file.
-  fs.writeFileSync(binfile, JSON.stringify(quest, null, 2));
+  fs.writeFileSync(binfile, JSON.stringify(quest_bin, null, 2));
+  //console.log(JSON.stringify(quest_bin, null, 2))
+  //process.exit();
 }
 
 // Write the new quest data.
-fs.writeFileSync(fileOutput, JSON.stringify(quests, null, 2));
+fs.writeFileSync(fileOutput, JSON.stringify(quests_config, null, 2));
 
 console.log("=====================================");
-console.log(`There are ${quests.length} quests.`);
+console.log(`There are ${quests_config.length} quests.`);
 console.log(`There are ${newQuests.length} new quests.`);
 console.log(`There are ${newQuestsNoFound.length} quests not found.`);
+console.log(`There are ${count_patch32} data sub quest without acceptance conditions`);
 
 for (let i = 0; i < newQuests.length; i += 9) {
   const newQuestsSlice = newQuests.slice(i, i + 9);

@@ -6,6 +6,7 @@ Tool/*.json
 Tool/AllExcel/*
 Tool/FoundExcel/*
 Tool/Patches/
+Tool/Quest/
 .idea/
 
 # file
