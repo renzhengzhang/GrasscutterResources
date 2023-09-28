@@ -15,43 +15,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -60,51 +24,11 @@
           "type": "QUEST_CONTENT_COMPLETE_TALK",
           "param": [80001, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -122,41 +46,9 @@
           "type": "QUEST_EXEC_NOTIFY_GROUP_LUA",
           "param": ["3", "133103559"],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -166,22 +58,6 @@
         {
           "type": "QUEST_EXEC_REFRESH_GROUP_SUITE",
           "param": ["3", "133103559,2"],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
           "param_str": ""
         }
       ],
@@ -196,43 +72,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [80001, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [80001, 3],
           "param_str": ""
         }
       ],
@@ -242,26 +82,6 @@
           "param": [2200901, 0],
           "param_str": "8000201",
           "count": 1
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
@@ -270,46 +90,10 @@
           "param": [0, 0],
           "param_str": "8000202",
           "count": 1
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "guide": {},
       "finishExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -318,43 +102,11 @@
       "failExec": [
         {
           "type": "QUEST_EXEC_ROLLBACK_QUEST",
-          "param": ["80001"],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
+          "param": ["80001", "0"],
           "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -371,95 +123,19 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [80002, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [80002, 3],
           "param_str": ""
         }
       ],
       "finishCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -470,63 +146,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -542,43 +170,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -587,51 +179,11 @@
           "type": "QUEST_CONTENT_SCENE_LEVEL_TAG_EQ",
           "param": [1, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -645,63 +197,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -716,43 +220,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -761,51 +229,11 @@
           "type": "QUEST_CONTENT_SCENE_LEVEL_TAG_EQ",
           "param": [2, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -819,63 +247,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -891,44 +271,12 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [80004, 3, 0, 0, 0],
+          "param": [80004, 3],
           "param_str": ""
         },
         {
           "type": "QUEST_COND_SCENE_LEVEL_TAG_EQ",
-          "param": [1, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [1, 0],
           "param_str": ""
         }
       ],
@@ -937,51 +285,11 @@
           "type": "QUEST_CONTENT_FINISH_PLOT",
           "param": [80006, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -994,23 +302,7 @@
       "finishExec": [
         {
           "type": "QUEST_EXEC_CHANGE_SCENE_LEVEL_TAG",
-          "param": ["2"],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
+          "param": ["2", "0"],
           "param_str": ""
         }
       ],
@@ -1018,41 +310,9 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -1068,44 +328,12 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [80005, 3, 0, 0, 0],
+          "param": [80005, 3],
           "param_str": ""
         },
         {
           "type": "QUEST_COND_SCENE_LEVEL_TAG_EQ",
-          "param": [2, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [2, 0],
           "param_str": ""
         }
       ],
@@ -1114,51 +342,11 @@
           "type": "QUEST_CONTENT_FINISH_PLOT",
           "param": [80007, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -1171,23 +359,7 @@
       "finishExec": [
         {
           "type": "QUEST_EXEC_CHANGE_SCENE_LEVEL_TAG",
-          "param": ["1"],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
+          "param": ["1", "0"],
           "param_str": ""
         }
       ],
@@ -1195,41 +367,9 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -1244,43 +384,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -1289,51 +393,11 @@
           "type": "QUEST_CONTENT_LEAVE_SCENE",
           "param": [3, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -1343,63 +407,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -1414,43 +430,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -1459,51 +439,11 @@
           "type": "QUEST_CONTENT_LEAVE_SCENE_RANGE",
           "param": [3, 50],
           "param_str": "Q12001FailTrigger"
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -1517,63 +457,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -1588,43 +480,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -1633,51 +489,11 @@
           "type": "QUEST_CONTENT_FINISH_PLOT",
           "param": [80010, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -1687,41 +503,9 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -1730,23 +514,7 @@
       "beginExec": [
         {
           "type": "QUEST_EXEC_UNLOCK_PLAYER_WORLD_SCENE",
-          "param": ["5"],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
+          "param": ["5", "0"],
           "param_str": ""
         }
       ]
@@ -1759,43 +527,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -1804,51 +536,11 @@
           "type": "QUEST_CONTENT_FINISH_PLOT",
           "param": [80011, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -1858,41 +550,9 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -1901,23 +561,7 @@
       "beginExec": [
         {
           "type": "QUEST_EXEC_LOCK_PLAYER_WORLD_SCENE",
-          "param": ["5"],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
+          "param": ["5", "0"],
           "param_str": ""
         }
       ]
@@ -1930,43 +574,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -1975,51 +583,11 @@
           "type": "QUEST_CONTENT_FINISH_PLOT",
           "param": [80012, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -2033,63 +601,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -2104,43 +624,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -2149,51 +633,11 @@
           "type": "QUEST_CONTENT_CITY_LEVEL_UP",
           "param": [1, 3],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -2207,63 +651,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -2278,43 +674,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -2323,51 +683,11 @@
           "type": "QUEST_CONTENT_FINISH_PLOT",
           "param": [80014, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -2381,63 +701,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -2452,43 +724,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [80014, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [80014, 3],
           "param_str": ""
         }
       ],
@@ -2497,51 +733,11 @@
           "type": "QUEST_CONTENT_FINISH_PLOT",
           "param": [80015, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -2551,63 +747,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -2622,43 +770,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -2667,51 +779,11 @@
           "type": "QUEST_CONTENT_FINISH_PLOT",
           "param": [80016, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -2725,63 +797,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -2796,43 +820,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -2841,51 +829,11 @@
           "type": "QUEST_CONTENT_ENTER_MY_WORLD",
           "param": [5, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -2899,63 +847,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -2970,43 +870,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [80017, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [80017, 3],
           "param_str": ""
         }
       ],
@@ -3015,51 +879,11 @@
           "type": "QUEST_CONTENT_FINISH_PLOT",
           "param": [80018, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -3073,63 +897,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -3146,43 +922,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -3191,51 +931,11 @@
           "type": "QUEST_CONTENT_FINISH_PLOT",
           "param": [80019, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -3249,63 +949,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -3320,43 +972,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -3365,51 +981,11 @@
           "type": "QUEST_CONTENT_ENTER_VEHICLE",
           "param": [0, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -3419,63 +995,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -3490,43 +1018,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -3535,51 +1027,11 @@
           "type": "QUEST_CONTENT_COMPLETE_TALK",
           "param": [80022, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -3593,63 +1045,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -3664,43 +1068,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [80021, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [80021, 3],
           "param_str": ""
         }
       ],
@@ -3709,51 +1077,11 @@
           "type": "QUEST_CONTENT_COMPLETE_TALK",
           "param": [80023, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -3767,63 +1095,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -3838,43 +1118,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [99902, 3],
           "param_str": ""
         }
       ],
@@ -3883,51 +1127,11 @@
           "type": "QUEST_CONTENT_COMPLETE_TALK",
           "param": [80022, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -3941,63 +1145,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -4012,43 +1168,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [80023, 3, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0, 0, 0],
+          "param": [80023, 3],
           "param_str": ""
         }
       ],
@@ -4057,51 +1177,11 @@
           "type": "QUEST_CONTENT_COMPLETE_TALK",
           "param": [80023, 0],
           "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -4115,63 +1195,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -4225,7 +1257,7 @@
       "beginCond": [
         {
           "type": "QUEST_COND_SCENE_LEVEL_TAG_EQ",
-          "param": ["1"],
+          "param": ["1", "0"],
           "param_str": ""
         }
       ],
@@ -4243,7 +1275,7 @@
       "beginCond": [
         {
           "type": "QUEST_COND_SCENE_LEVEL_TAG_EQ",
-          "param": ["2"],
+          "param": ["2", "0"],
           "param_str": ""
         }
       ],
@@ -4580,7 +1612,7 @@
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": ["80023"],
+          "param": ["80023", "0"],
           "param_str": ""
         }
       ],
@@ -4603,7 +1635,7 @@
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": ["80024"],
+          "param": ["80024", "0"],
           "param_str": ""
         }
       ],

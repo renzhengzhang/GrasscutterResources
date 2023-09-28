@@ -10,23 +10,31 @@
       "mainId": 73046,
       "order": 1,
       "descTextMapHash": 4134807276,
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "showGuide": "QUEST_GUIDE_ITEM_DISABLE",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3]
+          "param": [99902, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_FINISH_PLOT",
-          "param": [7304601]
+          "param": [7304601, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
-      "beginExec": [],
+      "beginExec": [
+        {
+          "type": "QUEST_EXEC_REFRESH_GROUP_SUITE",
+          "param": ["3", "133302020,2"],
+          "param_str": ""
+        }
+      ],
       "finishExec": [],
       "failExec": [],
       "guide": {
@@ -47,13 +55,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7304601, 2]
+          "param": [7304601, 2],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_LUA_NOTIFY",
-          "paramString": "7304602",
+          "param": [0, 0],
+          "param_str": "7304602",
           "count": 1
         }
       ],
@@ -73,13 +83,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7304601, 3]
+          "param": [7304601, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_FINISH_PLOT",
-          "param": [7304603]
+          "param": [7304603, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -104,13 +116,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7304603, 3]
+          "param": [7304603, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
-          "param": [7304602, 3]
+          "param": [7304602, 3],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -136,13 +150,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7304604, 3]
+          "param": [7304604, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7304605]
+          "param": [7304605, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],

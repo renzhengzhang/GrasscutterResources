@@ -31,7 +31,7 @@
       "finishExec": [
         {
           "type": "QUEST_EXEC_SET_GAME_TIME",
-          "param": ["9"],
+          "param": ["9", "0"],
           "param_str": ""
         }
       ],
@@ -40,7 +40,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -71,7 +72,7 @@
       "finishExec": [
         {
           "type": "QUEST_EXEC_SET_GAME_TIME",
-          "param": ["11"],
+          "param": ["11", "0"],
           "param_str": ""
         }
       ],
@@ -80,7 +81,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -111,7 +113,7 @@
       "finishExec": [
         {
           "type": "QUEST_EXEC_SET_GAME_TIME",
-          "param": ["13"],
+          "param": ["13", "0"],
           "param_str": ""
         }
       ],
@@ -120,7 +122,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -151,7 +154,7 @@
       "finishExec": [
         {
           "type": "QUEST_EXEC_SET_GAME_TIME",
-          "param": ["15"],
+          "param": ["15", "0"],
           "param_str": ""
         },
         {
@@ -165,7 +168,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -197,7 +201,7 @@
       "finishExec": [
         {
           "type": "QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM",
-          "param": ["120383"],
+          "param": ["120383", "0"],
           "param_str": ""
         },
         {
@@ -207,7 +211,7 @@
         },
         {
           "type": "QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP",
-          "param": ["133002156"],
+          "param": ["133002156", "0"],
           "param_str": ""
         },
         {
@@ -221,7 +225,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -260,7 +265,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -294,7 +300,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -329,7 +336,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -364,7 +372,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -399,7 +408,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -434,7 +444,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -469,7 +480,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -503,7 +515,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -542,7 +555,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -569,7 +583,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],

@@ -14,27 +14,36 @@
       "order": 1,
       "descTextMapHash": 3315626476,
       "failCondComb": "QUEST_HIDDEN",
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_OR",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7303105, 3]
+          "param": [7303105, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7303107, 3]
+          "param": [7303107, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7304203]
+          "param": [7304203, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
       "beginExec": [],
-      "finishExec": [],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_SET_QUEST_VAR",
+          "param": ["1", "1"],
+          "param_str": ""
+        }
+      ],
       "failExec": [],
       "guide": {}
     },
@@ -48,18 +57,31 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7304205, 3]
+          "param": [7304205, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_GADGET_STATE_CHANGE",
           "param": [133301543, 543001],
-          "paramString": "201"
+          "param_str": "201"
         }
       ],
-      "failCond": [],
-      "beginExec": [],
+      "failCond": [
+        {
+          "type": "QUEST_CONTENT_GADGET_STATE_CHANGE",
+          "param": [133301543, 543002],
+          "param_str": "0"
+        }
+      ],
+      "beginExec": [
+        {
+          "type": "QUEST_EXEC_NOTIFY_GROUP_LUA",
+          "param": ["3", "133301543"],
+          "param_str": ""
+        }
+      ],
       "finishExec": [],
       "failExec": [],
       "guide": {
@@ -80,18 +102,26 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7304202, 4]
+          "param": [7304202, 4],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7304205]
+          "param": [7304205, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
       "beginExec": [],
-      "finishExec": [],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_ROLLBACK_QUEST",
+          "param": ["7304205", "0"],
+          "param_str": ""
+        }
+      ],
       "failExec": [],
       "guide": {
         "type": "QUEST_GUIDE_NPC",
@@ -111,13 +141,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7304202, 3]
+          "param": [7304202, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7304206]
+          "param": [7304206, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -138,26 +170,35 @@
       "order": 5,
       "descTextMapHash": 1384689132,
       "acceptCondComb": "LOGIC_NONE",
-      "finishCondComb": "LOGIC_NONE",
+      "finishCondComb": "LOGIC_OR",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7304201, 3]
+          "param": [7304201, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7304203]
+          "param": [7304203, 0],
+          "param_str": ""
         },
         {
           "type": "QUEST_CONTENT_QUEST_VAR_EQUAL",
-          "param": [1, 1]
+          "param": [1, 1],
+          "param_str": ""
         }
       ],
       "failCond": [],
       "beginExec": [],
-      "finishExec": [],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_SET_QUEST_VAR",
+          "param": ["1", "0"],
+          "param_str": ""
+        }
+      ],
       "failExec": [],
       "guide": {
         "type": "QUEST_GUIDE_NPC",

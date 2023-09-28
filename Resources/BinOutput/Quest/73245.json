@@ -12,25 +12,39 @@
       "order": 1,
       "descTextMapHash": 54353468,
       "failCondComb": "QUEST_HIDDEN",
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "showGuide": "QUEST_GUIDE_ITEM_DISABLE",
-      "finishCondComb": "LOGIC_NONE",
+      "finishCondComb": "LOGIC_AND",
       "failParentShow": "QUEST_HIDDEN",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7302515, 3]
+          "param": [7302515, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7324502]
+          "param": [7324502, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
-      "beginExec": [],
-      "finishExec": [],
+      "beginExec": [
+        {
+          "type": "QUEST_EXEC_REFRESH_GROUP_SUITE",
+          "param": ["3", "133302113,1"],
+          "param_str": ""
+        }
+      ],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_NOTIFY_GROUP_LUA",
+          "param": ["3", "133302113"],
+          "param_str": ""
+        }
+      ],
       "failExec": [],
       "guide": {}
     },
@@ -47,13 +61,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7324501, 3]
+          "param": [7324501, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_FINISH_PLOT",
-          "param": [7324502]
+          "param": [7324502, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -70,25 +86,46 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "showGuide": "QUEST_GUIDE_ITEM_DISABLE",
-      "finishCondComb": "LOGIC_NONE",
+      "finishCondComb": "LOGIC_AND",
       "failParentShow": "QUEST_HIDDEN",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7324502, 3]
+          "param": [7324502, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_LUA_NOTIFY",
-          "paramString": "Q7324503_fin",
+          "param": [0, 0],
+          "param_str": "Q7324503_fin",
           "count": 1
         }
       ],
-      "failCond": [],
-      "beginExec": [],
+      "failCond": [
+        {
+          "type": "QUEST_CONTENT_LUA_NOTIFY",
+          "param": [0, 0],
+          "param_str": "Q7324503_fail",
+          "count": 1
+        }
+      ],
+      "beginExec": [
+        {
+          "type": "QUEST_EXEC_REFRESH_GROUP_SUITE",
+          "param": ["3", "133302113,2"],
+          "param_str": ""
+        }
+      ],
       "finishExec": [],
-      "failExec": [],
+      "failExec": [
+        {
+          "type": "QUEST_EXEC_ROLLBACK_QUEST",
+          "param": ["7324501", "0"],
+          "param_str": ""
+        }
+      ],
       "guide": {}
     },
     {
@@ -99,24 +136,55 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "showGuide": "QUEST_GUIDE_ITEM_DISABLE",
-      "finishCondComb": "LOGIC_NONE",
+      "finishCondComb": "LOGIC_AND",
       "failParentShow": "QUEST_HIDDEN",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7324503, 3]
+          "param": [7324503, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7324505]
+          "param": [7324505, 0],
+          "param_str": ""
         }
       ],
-      "failCond": [],
-      "beginExec": [],
-      "finishExec": [],
-      "failExec": [],
+      "failCond": [
+        {
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7324506, 0],
+          "param_str": ""
+        },
+        {
+          "type": "QUEST_CONTENT_COMPLETE_TALK",
+          "param": [7324507, 0],
+          "param_str": ""
+        }
+      ],
+      "beginExec": [
+        {
+          "type": "QUEST_EXEC_REFRESH_GROUP_SUITE",
+          "param": ["3", "133302113,1"],
+          "param_str": ""
+        }
+      ],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_REFRESH_GROUP_SUITE",
+          "param": ["3", "133302113,3"],
+          "param_str": ""
+        }
+      ],
+      "failExec": [
+        {
+          "type": "QUEST_EXEC_ROLLBACK_QUEST",
+          "param": ["7324501", "0"],
+          "param_str": ""
+        }
+      ],
       "guide": {}
     }
   ],

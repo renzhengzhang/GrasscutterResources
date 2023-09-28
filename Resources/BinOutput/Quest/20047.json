@@ -13,19 +13,7 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [21800, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
+          "param": [21800, 0],
           "param_str": ""
         }
       ],
@@ -34,27 +22,11 @@
           "type": "QUEST_CONTENT_COMPLETE_TALK",
           "param": [2004701, 0],
           "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -70,43 +42,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -124,20 +68,12 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [21800, 0, 0],
+          "param": [21800, 0],
           "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [2004701, 3, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
+          "param": [2004701, 3],
           "param_str": ""
         }
       ],
@@ -147,27 +83,11 @@
           "param": [0, 0],
           "param_str": "13300349001",
           "count": 1
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -183,43 +103,15 @@
           "type": "QUEST_EXEC_ADD_QUEST_PROGRESS",
           "param": ["200470601", "1"],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -236,20 +128,12 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [21800, 0, 0],
+          "param": [21800, 0],
           "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [2004701, 3, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
+          "param": [2004701, 3],
           "param_str": ""
         }
       ],
@@ -259,27 +143,11 @@
           "param": [0, 0],
           "param_str": "13300349002",
           "count": 1
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -295,43 +163,15 @@
           "type": "QUEST_EXEC_ADD_QUEST_PROGRESS",
           "param": ["200470601", "1"],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -348,20 +188,12 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [21800, 0, 0],
+          "param": [21800, 0],
           "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [2004701, 3, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
+          "param": [2004701, 3],
           "param_str": ""
         }
       ],
@@ -371,27 +203,11 @@
           "param": [0, 0],
           "param_str": "13300349003",
           "count": 1
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -407,43 +223,15 @@
           "type": "QUEST_EXEC_ADD_QUEST_PROGRESS",
           "param": ["200470601", "1"],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -460,20 +248,12 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [21800, 0, 0],
+          "param": [21800, 0],
           "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [2004701, 3, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
+          "param": [2004701, 3],
           "param_str": ""
         }
       ],
@@ -483,27 +263,11 @@
           "param": [0, 0],
           "param_str": "13300349004",
           "count": 1
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -519,43 +283,15 @@
           "type": "QUEST_EXEC_ADD_QUEST_PROGRESS",
           "param": ["200470601", "1"],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -572,20 +308,12 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [21800, 0, 0],
+          "param": [21800, 0],
           "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [2004701, 3, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
+          "param": [2004701, 3],
           "param_str": ""
         }
       ],
@@ -595,27 +323,11 @@
           "param": [200470601, 0],
           "param_str": "",
           "count": 4
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -625,29 +337,9 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -657,14 +349,6 @@
         {
           "type": "QUEST_EXEC_REFRESH_GROUP_SUITE",
           "param": ["3", "133003490,2"],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
           "param_str": ""
         }
       ],
@@ -680,20 +364,12 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [21800, 0, 0],
+          "param": [21800, 0],
           "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [2004701, 3, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
+          "param": [2004701, 3],
           "param_str": ""
         }
       ],
@@ -702,27 +378,11 @@
           "type": "QUEST_CONTENT_FINISH_PLOT",
           "param": [2004708, 0],
           "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -732,43 +392,15 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "failExec": [
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""
@@ -784,20 +416,12 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [21800, 0, 0],
+          "param": [21800, 0],
           "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [2004706, 3, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0, 0],
+          "param": [2004706, 3],
           "param_str": ""
         }
       ],
@@ -806,27 +430,11 @@
           "type": "QUEST_CONTENT_COMPLETE_TALK",
           "param": [2004703, 0],
           "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
-        },
-        {
-          "param": [0],
-          "param_str": ""
         }
       ],
       "failCond": [
         {
-          "param": [0, 0],
-          "param_str": ""
-        },
-        {
-          "param": [0, 0],
+          "param": [],
           "param_str": ""
         }
       ],
@@ -847,15 +455,7 @@
         },
         {
           "type": "QUEST_EXEC_NOTIFY_DAILY_TASK",
-          "param": ["21800"],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
+          "param": ["21800", "0"],
           "param_str": ""
         }
       ],
@@ -863,25 +463,9 @@
         {
           "param": [],
           "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
         }
       ],
       "beginExec": [
-        {
-          "param": [],
-          "param_str": ""
-        },
-        {
-          "param": [],
-          "param_str": ""
-        },
         {
           "param": [],
           "param_str": ""

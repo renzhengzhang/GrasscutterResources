@@ -18,7 +18,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -38,7 +39,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -58,7 +60,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -78,7 +81,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -98,7 +102,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -118,7 +123,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -138,7 +144,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -158,7 +165,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -179,7 +187,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -199,7 +208,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -243,7 +253,7 @@
       "finishExec": [
         {
           "type": "TALK_EXEC_SAVE_TALK_ID",
-          "param": ["303006"],
+          "param": ["303006", "0"],
           "param_str": ""
         }
       ]
@@ -313,7 +323,7 @@
       "finishExec": [
         {
           "type": "TALK_EXEC_SAVE_TALK_ID",
-          "param": ["303009"],
+          "param": ["303009", "0"],
           "param_str": ""
         }
       ]
@@ -364,7 +374,7 @@
       "finishExec": [
         {
           "type": "TALK_EXEC_SAVE_TALK_ID",
-          "param": ["303012"],
+          "param": ["303012", "0"],
           "param_str": ""
         }
       ]
@@ -395,7 +405,7 @@
       "finishExec": [
         {
           "type": "TALK_EXEC_SAVE_TALK_ID",
-          "param": ["303014"],
+          "param": ["303014", "0"],
           "param_str": ""
         }
       ]

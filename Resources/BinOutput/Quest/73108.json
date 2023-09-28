@@ -17,13 +17,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3]
+          "param": [99902, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7310802]
+          "param": [7310802, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -49,14 +51,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7310801, 3]
+          "param": [7310801, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_GAME_TIME_TICK",
-          "param": [1],
-          "paramString": "0,24"
+          "param": [1, 0],
+          "param_str": "0,24"
         }
       ],
       "failCond": [],
@@ -76,13 +79,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7310802, 3]
+          "param": [7310802, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7310803]
+          "param": [7310803, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -108,14 +113,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7310803, 3]
+          "param": [7310803, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_GAME_TIME_TICK",
-          "param": [1],
-          "paramString": "0,24"
+          "param": [1, 0],
+          "param_str": "0,24"
         }
       ],
       "failCond": [],
@@ -135,13 +141,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7310804, 3]
+          "param": [7310804, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7310805]
+          "param": [7310805, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -167,14 +175,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7310805, 3]
+          "param": [7310805, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_GAME_TIME_TICK",
-          "param": [1],
-          "paramString": "0,24"
+          "param": [1, 0],
+          "param_str": "0,24"
         }
       ],
       "failCond": [],
@@ -194,13 +203,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7310806, 3]
+          "param": [7310806, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_FINISH_PLOT",
-          "param": [7310807]
+          "param": [7310807, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -220,14 +231,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7310807, 3]
+          "param": [7310807, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_GAME_TIME_TICK",
-          "param": [1],
-          "paramString": "0,24"
+          "param": [1, 0],
+          "param_str": "0,24"
         }
       ],
       "failCond": [],

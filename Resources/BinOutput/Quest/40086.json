@@ -17,13 +17,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [4008604, 3]
+          "param": [4008604, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [4008601]
+          "param": [4008601, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -49,13 +51,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [4008601, 3]
+          "param": [4008601, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [4008602]
+          "param": [4008602, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -81,18 +85,26 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [4008602, 3]
+          "param": [4008602, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [4008603]
+          "param": [4008603, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
       "beginExec": [],
-      "finishExec": [],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_SET_QUEST_GLOBAL_VAR",
+          "param": ["4008603", "1"],
+          "param_str": ""
+        }
+      ],
       "failExec": [],
       "guide": {
         "type": "QUEST_GUIDE_LOCATION",
@@ -108,24 +120,26 @@
       "mainId": 40086,
       "order": 1,
       "descTextMapHash": 3890741828,
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "showGuide": "QUEST_GUIDE_ITEM_DISABLE",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_ACTIVITY_COND",
-          "param": [2017006, 1]
+          "param": [2017006, 1],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [4008512, 3]
+          "param": [4008512, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_GAME_TIME_TICK",
-          "param": [2],
-          "paramString": "0,24"
+          "param": [2, 0],
+          "param_str": "0,24"
         }
       ],
       "failCond": [],

@@ -18,13 +18,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7350003, 3]
+          "param": [7350003, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_GAME_TIME_TICK",
-          "paramString": "0,24"
+          "param": [0, 0],
+          "param_str": "0,24"
         }
       ],
       "failCond": [],

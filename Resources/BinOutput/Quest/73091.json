@@ -17,12 +17,19 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7309802, 3]
+          "param": [7309802, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [],
       "failCond": [],
-      "beginExec": [],
+      "beginExec": [
+        {
+          "type": "QUEST_EXEC_MODIFY_ARANARA_COLLECTION_STATE",
+          "param": ["1", "2", "1"],
+          "param_str": ""
+        }
+      ],
       "finishExec": [],
       "failExec": [],
       "guide": {}
@@ -34,28 +41,46 @@
       "descTextMapHash": 229869220,
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
-      "finishCondComb": "LOGIC_NONE",
+      "finishCondComb": "LOGIC_OR",
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN_80",
-          "param": [1, 2, 2]
+          "param": [1, 2, 2],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_GADGET_STATE_CHANGE",
           "param": [133301166, 166002],
-          "paramString": "102"
+          "param_str": "102"
         },
         {
           "type": "QUEST_CONTENT_GADGET_STATE_CHANGE",
           "param": [133301166, 166001],
-          "paramString": "201"
+          "param_str": "201"
         }
       ],
       "failCond": [],
-      "beginExec": [],
-      "finishExec": [],
+      "beginExec": [
+        {
+          "type": "QUEST_EXEC_REGISTER_DYNAMIC_GROUP",
+          "param": ["3", "133301166"],
+          "param_str": ""
+        }
+      ],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP",
+          "param": ["133301166", "1"],
+          "param_str": ""
+        },
+        {
+          "type": "QUEST_EXEC_MODIFY_ARANARA_COLLECTION_STATE",
+          "param": ["1", "2", "3"],
+          "param_str": ""
+        }
+      ],
       "failExec": [],
       "guide": {}
     },
@@ -70,7 +95,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN_80",
-          "param": [1, 2, 2]
+          "param": [1, 2, 2],
+          "param_str": ""
         }
       ],
       "finishCond": [],

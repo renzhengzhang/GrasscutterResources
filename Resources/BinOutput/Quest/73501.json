@@ -12,26 +12,30 @@
       "order": 1,
       "isMpBlock": true,
       "descTextMapHash": 2030471556,
-      "acceptCondComb": "LOGIC_NONE",
-      "finishCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
+      "finishCondComb": "LOGIC_OR",
       "acceptCond": [
         {
           "type": "QUEST_COND_ACTIVITY_COND",
-          "param": [2015007, 1]
+          "param": [2015007, 1],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7350014, 3]
+          "param": [7350014, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7350102]
+          "param": [7350102, 0],
+          "param_str": ""
         },
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7350103]
+          "param": [7350103, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],

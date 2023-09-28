@@ -13,23 +13,26 @@
       "order": 1,
       "descTextMapHash": 715904284,
       "failCondComb": "QUEST_HIDDEN",
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "finishCondComb": "LOGIC_NONE",
       "failParentShow": "QUEST_HIDDEN",
       "acceptCond": [
         {
           "type": "QUEST_COND_PLAYER_ENTER_REGION",
-          "param": [133303318, 318002]
+          "param": [133303318, 318002],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7302515, 3]
+          "param": [7302515, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_GAME_TIME_TICK",
-          "paramString": "0,24"
+          "param": [0, 0],
+          "param_str": "0,24"
         }
       ],
       "failCond": [],
@@ -50,18 +53,25 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7314201, 3]
+          "param": [7314201, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_GADGET_STATE_CHANGE",
           "param": [133303318, 318001],
-          "paramString": "201"
+          "param_str": "201"
         }
       ],
       "failCond": [],
-      "beginExec": [],
+      "beginExec": [
+        {
+          "type": "QUEST_EXEC_REFRESH_GROUP_SUITE",
+          "param": ["3", "133303318,2"],
+          "param_str": ""
+        }
+      ],
       "finishExec": [],
       "failExec": [],
       "guide": {}
@@ -78,18 +88,31 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7314202, 3]
+          "param": [7314202, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7314201]
+          "param": [7314201, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
       "beginExec": [],
-      "finishExec": [],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_INC_QUEST_GLOBAL_VAR",
+          "param": ["73100", "1"],
+          "param_str": ""
+        },
+        {
+          "type": "QUEST_EXEC_REFRESH_GROUP_SUITE",
+          "param": ["3", "133303318,3"],
+          "param_str": ""
+        }
+      ],
       "failExec": [],
       "guide": {}
     }

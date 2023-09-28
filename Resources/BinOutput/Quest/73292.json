@@ -17,13 +17,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_QUEST_GLOBAL_VAR_EQUAL",
-          "param": [10001, 1]
+          "param": [10001, 1],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_LUA_NOTIFY",
-          "paramString": "WQ7329201",
+          "param": [0, 0],
+          "param_str": "WQ7329201",
           "count": 1
         }
       ],

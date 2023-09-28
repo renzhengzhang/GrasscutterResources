@@ -17,19 +17,27 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_QUEST_GLOBAL_VAR_EQUAL",
-          "param": [10001, 1]
+          "param": [10001, 1],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_LUA_NOTIFY",
-          "paramString": "73222",
+          "param": [0, 0],
+          "param_str": "73222",
           "count": 1
         }
       ],
       "failCond": [],
       "beginExec": [],
-      "finishExec": [],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_INC_QUEST_GLOBAL_VAR",
+          "param": ["73083", "1"],
+          "param_str": ""
+        }
+      ],
       "failExec": [],
       "guide": {}
     }

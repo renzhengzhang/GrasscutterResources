@@ -11,22 +11,25 @@
       "mainId": 70520,
       "order": 1,
       "descTextMapHash": 3488558932,
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_ACTIVITY_COND",
-          "param": [2016027, 1]
+          "param": [2016027, 1],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7051903, 3]
+          "param": [7051903, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7052001]
+          "param": [7052001, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],

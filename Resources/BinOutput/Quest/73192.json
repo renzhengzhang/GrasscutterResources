@@ -18,13 +18,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7302519, 3]
+          "param": [7302519, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
-          "param": [7302515, 3]
+          "param": [7302515, 3],
+          "param_str": ""
         }
       ],
       "failCond": [],

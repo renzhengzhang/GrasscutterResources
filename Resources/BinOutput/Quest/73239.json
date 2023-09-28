@@ -13,25 +13,29 @@
       "order": 2,
       "descTextMapHash": 982059900,
       "acceptCondComb": "LOGIC_NONE",
-      "finishCondComb": "LOGIC_NONE",
+      "finishCondComb": "LOGIC_OR",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7323903, 3]
+          "param": [7323903, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_FINISH_PLOT",
-          "param": [7323901]
+          "param": [7323901, 0],
+          "param_str": ""
         },
         {
           "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
-          "param": [7306803, 3]
+          "param": [7306803, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
-          "param": [7306804, 3]
+          "param": [7306804, 3],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -53,21 +57,24 @@
       "order": 3,
       "descTextMapHash": 2513722044,
       "acceptCondComb": "LOGIC_NONE",
-      "finishCondComb": "LOGIC_NONE",
+      "finishCondComb": "LOGIC_OR",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7323901, 3]
+          "param": [7323901, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
-          "param": [7306803, 3]
+          "param": [7306803, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
-          "param": [7306804, 3]
+          "param": [7306804, 3],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -88,30 +95,35 @@
       "mainId": 73239,
       "order": 1,
       "descTextMapHash": 4118232380,
-      "acceptCondComb": "LOGIC_NONE",
-      "finishCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_OR",
+      "finishCondComb": "LOGIC_OR",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7306803, 2]
+          "param": [7306803, 2],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7306804, 2]
+          "param": [7306804, 2],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_FINISH_PLOT",
-          "param": [7323903]
+          "param": [7323903, 0],
+          "param_str": ""
         },
         {
           "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
-          "param": [7306803, 3]
+          "param": [7306803, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
-          "param": [7306804, 3]
+          "param": [7306804, 3],
+          "param_str": ""
         }
       ],
       "failCond": [],

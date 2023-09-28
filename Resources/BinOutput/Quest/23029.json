@@ -15,13 +15,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [42032]
+          "param": [42032, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [2302901]
+          "param": [2302901, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -41,22 +43,25 @@
       "mainId": 23029,
       "order": 2,
       "descTextMapHash": 3482239500,
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [42032]
+          "param": [42032, 0],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [2302901, 3]
+          "param": [2302901, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_FINISH_PLOT",
-          "param": [2302902]
+          "param": [2302902, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -76,22 +81,25 @@
       "mainId": 23029,
       "order": 3,
       "descTextMapHash": 3192965116,
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [42032]
+          "param": [42032, 0],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [2302902, 3]
+          "param": [2302902, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_FINISH_PLOT",
-          "param": [2302903]
+          "param": [2302903, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -111,27 +119,41 @@
       "mainId": 23029,
       "order": 4,
       "descTextMapHash": 1031568724,
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_DAILY_TASK_START",
-          "param": [42032]
+          "param": [42032, 0],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [2302903, 3]
+          "param": [2302903, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [2302904]
+          "param": [2302904, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
       "beginExec": [],
-      "finishExec": [],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_INC_DAILY_TASK_VAR",
+          "param": ["42032", "0"],
+          "param_str": ""
+        },
+        {
+          "type": "QUEST_EXEC_NOTIFY_DAILY_TASK",
+          "param": ["42032", "0"],
+          "param_str": ""
+        }
+      ],
       "failExec": [],
       "guide": {
         "type": "QUEST_GUIDE_NPC",

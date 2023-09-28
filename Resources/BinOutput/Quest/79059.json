@@ -28,7 +28,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -58,7 +59,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -88,7 +90,7 @@
       "finishExec": [
         {
           "type": "QUEST_EXEC_REFRESH_WORLD_QUEST_FLOW_GROUP_SUITE",
-          "param": ["510020175,3"],
+          "param": ["510020175,3", "0"],
           "param_str": ""
         }
       ],
@@ -97,7 +99,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],

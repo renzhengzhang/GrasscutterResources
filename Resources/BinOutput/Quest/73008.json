@@ -11,30 +11,35 @@
       "mainId": 73008,
       "order": 1,
       "descTextMapHash": 4286180020,
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7300521, 3]
+          "param": [7300521, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7300611, 3]
+          "param": [7300611, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7300714, 3]
+          "param": [7300714, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3]
+          "param": [99902, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7300801]
+          "param": [7300801, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -60,17 +65,20 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7300801, 3]
+          "param": [7300801, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3]
+          "param": [99902, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7300802]
+          "param": [7300802, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -96,17 +104,20 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7300808, 3]
+          "param": [7300808, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3]
+          "param": [99902, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_LUA_NOTIFY",
-          "paramString": "7300803",
+          "param": [0, 0],
+          "param_str": "7300803",
           "count": 1
         }
       ],
@@ -133,17 +144,20 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7300803, 3]
+          "param": [7300803, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3]
+          "param": [99902, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_LUA_NOTIFY",
-          "paramString": "7300804",
+          "param": [0, 0],
+          "param_str": "7300804",
           "count": 1
         }
       ],
@@ -170,13 +184,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7300807, 3]
+          "param": [7300807, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7300805]
+          "param": [7300805, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -202,13 +218,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7300804, 3]
+          "param": [7300804, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_LUA_NOTIFY",
-          "paramString": "7300806",
+          "param": [0, 0],
+          "param_str": "7300806",
           "count": 1
         }
       ],
@@ -235,7 +253,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7300806, 3]
+          "param": [7300806, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -255,7 +274,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7300802, 3]
+          "param": [7300802, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [],

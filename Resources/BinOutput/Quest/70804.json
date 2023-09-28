@@ -12,26 +12,35 @@
       "order": 1,
       "descTextMapHash": 2547869700,
       "failCondComb": "QUEST_HIDDEN",
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7012305, 3]
+          "param": [7012305, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_QUEST_GLOBAL_VAR_EQUAL",
-          "param": [40029]
+          "param": [40029, 0],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_ACTIVITY_END",
-          "param": [2009001]
+          "param": [2009001, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
       "failCond": [],
       "beginExec": [],
-      "finishExec": [],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_INIT_TIME_VAR",
+          "param": ["0", "0"],
+          "param_str": ""
+        }
+      ],
       "failExec": [],
       "guide": {}
     }

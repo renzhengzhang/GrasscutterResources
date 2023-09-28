@@ -16,13 +16,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_ACTIVITY_COND",
-          "param": [5090011, 1]
+          "param": [5090011, 1],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7365001]
+          "param": [7365001, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -47,13 +49,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7365001, 3]
+          "param": [7365001, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7365002]
+          "param": [7365002, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],

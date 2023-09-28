@@ -11,27 +11,36 @@
       "mainId": 73802,
       "order": 1,
       "descTextMapHash": 4097754764,
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_QUEST_GLOBAL_VAR_EQUAL",
-          "param": [301409, 1]
+          "param": [301409, 1],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_TIME_VAR_PASS_DAY",
-          "param": [3013, 1]
+          "param": [3013, 1],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7380201]
+          "param": [7380201, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
       "beginExec": [],
-      "finishExec": [],
+      "finishExec": [
+        {
+          "type": "QUEST_EXEC_CLEAR_TIME_VAR",
+          "param": ["3013", "0"],
+          "param_str": ""
+        }
+      ],
       "failExec": [],
       "guide": {
         "type": "QUEST_GUIDE_NPC",

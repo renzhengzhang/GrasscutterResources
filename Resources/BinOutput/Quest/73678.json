@@ -11,22 +11,25 @@
       "mainId": 73678,
       "order": 1,
       "descTextMapHash": 3246938156,
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7367702, 3]
+          "param": [7367702, 3],
+          "param_str": ""
         },
         {
           "type": "QUEST_COND_ACTIVITY_COND",
-          "param": [2016016, 1]
+          "param": [2016016, 1],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7367801]
+          "param": [7367801, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -51,13 +54,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7367801, 3]
+          "param": [7367801, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_ACTIVITY_TRIGGER_UPDATE",
           "param": [2016, 102],
+          "param_str": "",
           "count": 1
         }
       ],

@@ -19,7 +19,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -39,7 +40,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -59,7 +61,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -81,7 +84,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -101,7 +105,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -123,7 +128,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -143,7 +149,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -164,7 +171,8 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_UNKNOWN",
-          "param": [0, 0]
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [],
@@ -281,7 +289,7 @@
       "finishExec": [
         {
           "type": "TALK_EXEC_SET_GADGET_STATE",
-          "param": ["1302407"],
+          "param": ["1302407", "0"],
           "param_str": ""
         }
       ]
@@ -358,7 +366,7 @@
       "finishExec": [
         {
           "type": "TALK_EXEC_SET_GADGET_STATE",
-          "param": ["1302450"],
+          "param": ["1302450", "0"],
           "param_str": ""
         }
       ]
@@ -385,7 +393,7 @@
       "finishExec": [
         {
           "type": "TALK_EXEC_SET_GADGET_STATE",
-          "param": ["1302451"],
+          "param": ["1302451", "0"],
           "param_str": ""
         }
       ]

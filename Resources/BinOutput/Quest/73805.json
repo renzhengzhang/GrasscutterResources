@@ -11,18 +11,20 @@
       "mainId": 73805,
       "order": 1,
       "descTextMapHash": 1751106284,
-      "acceptCondComb": "LOGIC_NONE",
+      "acceptCondComb": "LOGIC_AND",
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7380024, 3]
+          "param": [7380024, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7380501]
+          "param": [7380501, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],

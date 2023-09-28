@@ -15,13 +15,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_QUEST_GLOBAL_VAR_EQUAL",
-          "param": [7300907, 1]
+          "param": [7300907, 1],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
-          "param": [7301301, 3]
+          "param": [7301301, 3],
+          "param_str": ""
         }
       ],
       "failCond": [],

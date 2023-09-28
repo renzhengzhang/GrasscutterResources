@@ -14,17 +14,26 @@
       "finishCondComb": "LOGIC_NONE",
       "acceptCond": [
         {
-          "type": "QUEST_COND_CITY_REPUTATION_REQUEST"
+          "type": "QUEST_COND_CITY_REPUTATION_REQUEST",
+          "param": [0, 0],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_FINISH_ITEM_GIVING",
-          "param": [7366201]
+          "param": [7366201, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
-      "beginExec": [],
+      "beginExec": [
+        {
+          "type": "QUEST_EXEC_ACTIVE_ITEM_GIVING",
+          "param": ["7366201", "0"],
+          "param_str": ""
+        }
+      ],
       "finishExec": [],
       "failExec": [],
       "guide": {
@@ -45,13 +54,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7366201, 3]
+          "param": [7366201, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7366202]
+          "param": [7366202, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -80,7 +91,7 @@
         },
         {
           "type": "QUEST_COND_ITEM_GIVING_ACTIVED",
-          "param": ["7366201"],
+          "param": ["7366201", "0"],
           "param_str": ""
         }
       ],

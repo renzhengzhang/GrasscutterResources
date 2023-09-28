@@ -17,13 +17,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [7305508, 3]
+          "param": [7305508, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_FINISH_PLOT",
-          "param": [7330601]
+          "param": [7330601, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],

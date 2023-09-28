@@ -17,13 +17,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_ACTIVITY_COND",
-          "param": [5087006, 1]
+          "param": [5087006, 1],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_COMPLETE_TALK",
-          "param": [7365101]
+          "param": [7365101, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],

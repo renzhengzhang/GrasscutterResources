@@ -15,26 +15,30 @@
       "failCondComb": "QUEST_HIDDEN",
       "acceptCondComb": "LOGIC_NONE",
       "showGuide": "QUEST_GUIDE_ITEM_DISABLE",
-      "finishCondComb": "LOGIC_NONE",
+      "finishCondComb": "LOGIC_OR",
       "failParentShow": "QUEST_HIDDEN",
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [1301118, 3]
+          "param": [1301118, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_LEAVE_SCENE_RANGE",
           "param": [3, 80],
-          "paramString": "Q1300905_N1058"
+          "param_str": "Q1300905_N1058"
         },
         {
-          "type": "QUEST_CONTENT_ANY_MANUAL_TRANSPORT"
+          "type": "QUEST_CONTENT_ANY_MANUAL_TRANSPORT",
+          "param": [0, 0],
+          "param_str": ""
         },
         {
           "type": "QUEST_CONTENT_QUEST_STATE_EQUAL",
-          "param": [7380021, 2]
+          "param": [7380021, 2],
+          "param_str": ""
         }
       ],
       "failCond": [],
@@ -54,13 +58,15 @@
       "acceptCond": [
         {
           "type": "QUEST_COND_STATE_EQUAL",
-          "param": [99902, 3]
+          "param": [99902, 3],
+          "param_str": ""
         }
       ],
       "finishCond": [
         {
           "type": "QUEST_CONTENT_FINISH_PLOT",
-          "param": [1301202]
+          "param": [1301202, 0],
+          "param_str": ""
         }
       ],
       "failCond": [],
